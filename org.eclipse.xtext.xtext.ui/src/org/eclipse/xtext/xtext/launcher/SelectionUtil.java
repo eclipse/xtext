@@ -11,7 +11,7 @@ package org.eclipse.xtext.xtext.launcher;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -56,8 +56,9 @@ public class SelectionUtil {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			Object firstElement = ssel.getFirstElement();
-			if (firstElement instanceof IAdaptable) {
-				return ((IAdaptable) firstElement).getAdapter(IFile.class);
+			IFile file = Adapters.adapt(firstElement, IFile.class);
+			if (file != null) {
+				return file;
 			}
 			else if (firstElement instanceof IOutlineNode) {
 				IOutlineNode outlineNode = (IOutlineNode) firstElement;

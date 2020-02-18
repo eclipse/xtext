@@ -13,6 +13,7 @@ import com.google.inject.Inject
 import java.io.ByteArrayOutputStream
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IWorkspace
+import org.eclipse.core.runtime.Adapters
 import org.eclipse.ltk.core.refactoring.Change
 import org.eclipse.ltk.core.refactoring.CompositeChange
 import org.eclipse.ltk.core.refactoring.TextFileChange
@@ -168,7 +169,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 					.activeWorkbenchWindow
 					.activePage
 					.editorReferences
-					.map[ getEditor(false) ]
+					.map[ Adapters.adapt(getEditor(false), ITextEditor) ]
 					.filter(ITextEditor)
 					.findFirst[ it.editorInput == editorInput ]
 			}

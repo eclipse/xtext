@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.trace;
 
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 
@@ -19,17 +18,7 @@ import org.eclipse.ui.IWorkbenchPage;
 public abstract class FileOpener {
 
 	protected <T> T adapt(Object object, Class<T> type) {
-		if (type.isInstance(object))
-			return type.cast(object);
-		if (object instanceof IAdaptable) {
-			Object result = ((IAdaptable) object).getAdapter(type);
-			if (type.isInstance(result))
-				return type.cast(result);
-		}
-		Object result = Platform.getAdapterManager().getAdapter(object, type);
-		if (type.isInstance(result))
-			return type.cast(object);
-		return null;
+		return Adapters.adapt(object, type);
 	}
 
 	public abstract ImageDescriptor getImageDescriptor();

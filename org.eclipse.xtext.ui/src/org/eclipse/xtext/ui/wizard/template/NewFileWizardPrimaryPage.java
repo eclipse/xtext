@@ -16,7 +16,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -130,19 +130,12 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 	}
 
 	private String getFolderFromSelection() {
-		Object element = selection.getFirstElement();
+		Object element = Adapters.adapt(selection.getFirstElement(), IResource.class);
 		IContainer container = null;
 		if (element instanceof IContainer) {
 			container = (IContainer) element;
 		} else if (element instanceof IResource) {
 			container = ((IResource) element).getParent();
-		} else if (element instanceof IAdaptable) {
-			IResource adapter = ((IAdaptable) element).getAdapter(IResource.class);
-			if (adapter instanceof IContainer) {
-				container = (IContainer) adapter;
-			} else if (adapter != null) {
-				container = adapter.getParent();
-			}
 		}
 		if (container != null) {
 			return getFolderStringFromContainer(container);

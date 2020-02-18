@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ui.editor.actions;
 
 import java.util.ResourceBundle;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
@@ -67,7 +68,7 @@ public class XbaseFoldingActionContributor extends FoldingActionContributor {
 
 		@Override
 		public void update() {
-			ITextOperationTarget target = getTextEditor().getAdapter(ITextOperationTarget.class);
+			ITextOperationTarget target = Adapters.adapt(getTextEditor(), ITextOperationTarget.class);
 			boolean isEnabled = (target instanceof ProjectionViewer);
 			setEnabled(isEnabled);
 		}

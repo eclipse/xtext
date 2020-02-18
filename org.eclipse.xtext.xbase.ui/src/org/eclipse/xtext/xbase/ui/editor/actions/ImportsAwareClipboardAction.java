@@ -23,6 +23,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -255,7 +256,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData, boolean withImports) {
-		IRewriteTarget target = getTextEditor().getAdapter(IRewriteTarget.class);
+		IRewriteTarget target = Adapters.adapt(getTextEditor(), IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
@@ -276,7 +277,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent, boolean withImports) {
-		IRewriteTarget target = getTextEditor().getAdapter(IRewriteTarget.class);
+		IRewriteTarget target = Adapters.adapt(getTextEditor(), IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
@@ -346,9 +347,9 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			setEnabled(false);
 			return;
 		}
-		ITextEditor editor = getTextEditor();
-		if (textOperationTarget == null && editor != null)
-			textOperationTarget = editor.getAdapter(ITextOperationTarget.class);
+		if (textOperationTarget == null) {
+			textOperationTarget = Adapters.adapt(getTextEditor(), ITextOperationTarget.class);
+		}
 		boolean isEnabled = (textOperationTarget != null && textOperationTarget.canDoOperation(getOperationCode()));
 		setEnabled(isEnabled);
 	}

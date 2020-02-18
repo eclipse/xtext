@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -30,7 +31,6 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.part.FileEditorInput;
@@ -266,14 +266,14 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         @Override
         protected ITextEditor run() throws Exception {
           final FileEditorInput editorInput = new FileEditorInput(file);
-          final Function1<IEditorReference, IEditorPart> _function = (IEditorReference it) -> {
-            return it.getEditor(false);
+          final Function1<IEditorReference, ITextEditor> _function = (IEditorReference it) -> {
+            return Adapters.<ITextEditor>adapt(it.getEditor(false), ITextEditor.class);
           };
           final Function1<ITextEditor, Boolean> _function_1 = (ITextEditor it) -> {
             IEditorInput _editorInput = it.getEditorInput();
             return Boolean.valueOf(Objects.equal(_editorInput, editorInput));
           };
-          return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, IEditorPart>map(((List<IEditorReference>)Conversions.doWrapArray(ChangeConverter.this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
+          return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, ITextEditor>map(((List<IEditorReference>)Conversions.doWrapArray(ChangeConverter.this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
         }
       }.syncExec();
     }

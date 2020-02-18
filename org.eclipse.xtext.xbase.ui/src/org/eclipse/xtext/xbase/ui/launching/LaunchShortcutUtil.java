@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.launching;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -26,8 +27,8 @@ public class LaunchShortcutUtil {
 			if (original == null || original instanceof IJavaElement || original instanceof JavaElementDelegate || !(original instanceof IAdaptable)) {
 				fakeSelection[i] = original;
 			} else {
-				IAdaptable adaptable = (IAdaptable) original;
-				JavaElementDelegate javaElementDelegate = adaptable.getAdapter(delegateType);
+				
+				JavaElementDelegate javaElementDelegate = Adapters.adapt(original, delegateType);
 				if (javaElementDelegate != null) {
 					fakeSelection[i] = javaElementDelegate;
 				} else {

@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.xtext.Constants;
 
 /**
@@ -24,13 +24,10 @@ public class XtextEditorPropertyTester extends PropertyTester {
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (receiver instanceof IAdaptable) {
-			IAdaptable adaptable = (IAdaptable) receiver;
-			XtextEditor xtextEditor = adaptable.getAdapter(XtextEditor.class);
+		if (Constants.LANGUAGE_NAME.equals(property)) {
+			XtextEditor xtextEditor = Adapters.adapt(receiver, XtextEditor.class);
 			if (xtextEditor != null) {
-				if (Constants.LANGUAGE_NAME.equals(property)) {
-					return xtextEditor.getLanguageName().equals(expectedValue);
-				}
+				return xtextEditor.getLanguageName().equals(expectedValue);
 			}
 		}
 		return false;

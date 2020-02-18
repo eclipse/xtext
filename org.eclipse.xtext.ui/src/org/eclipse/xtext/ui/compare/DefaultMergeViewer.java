@@ -20,8 +20,8 @@ import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
 import org.eclipse.compare.contentmergeviewer.TextMergeViewer;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.ITextViewer;
@@ -127,7 +127,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	}
 
 	private boolean supportsSharedDocuments(Object object) {
-		return object instanceof IAdaptable && ((IAdaptable) object).getAdapter(ISharedDocumentAdapter.class) != null;
+		return Adapters.adapt(object, ISharedDocumentAdapter.class) != null;
 	}
 
 	@Override

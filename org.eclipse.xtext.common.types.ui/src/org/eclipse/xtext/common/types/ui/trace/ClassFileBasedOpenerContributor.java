@@ -9,6 +9,7 @@
 package org.eclipse.xtext.common.types.ui.trace;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.ui.IEditorDescriptor;
@@ -39,7 +40,7 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 	@Override
 	public boolean collectGeneratedFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
 		if (editor instanceof XtextEditor && editor.getEditorInput() != null) {
-			if (editor.getEditorInput().getAdapter(IClassFile.class) != null) {
+			if (Adapters.adapt(editor.getEditorInput(), IClassFile.class) != null) {
 				acceptor.accept(createEditorOpener(editor.getEditorInput(), JavaUI.ID_CF_EDITOR));
 				return true;
 			}
@@ -51,7 +52,7 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 	public boolean collectSourceFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
 		if (!(editor instanceof XtextEditor) && editor.getEditorInput() != null) {
 			try {
-				IClassFile classFile = editor.getEditorInput().getAdapter(IClassFile.class);
+				IClassFile classFile = Adapters.adapt(editor, IClassFile.class);
 				if (classFile == null) {
 					return false;
 				}

@@ -11,7 +11,7 @@ package org.eclipse.xtext.builder.smap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -75,14 +75,9 @@ public class XbaseLineBreakpoint extends JavaStratumLineBreakpoint {
 		if (sourceElement == null) {
 			sourceElement = locator.getSourceElement(stackFrame);
 		}
-		if (!(sourceElement instanceof IJavaElement)
-				&& sourceElement instanceof IAdaptable) {
-			Object element = ((IAdaptable) sourceElement)
-					.getAdapter(IJavaElement.class);
-			if (element != null) {
-				sourceElement = element;
-			}
-		}
+		
+		sourceElement = Adapters.adapt(sourceElement, IJavaElement.class);
+		
 		if (sourceElement instanceof IJavaElement) {
 			return ((IJavaElement) sourceElement).getJavaProject();
 		} else if (sourceElement instanceof IResource) {

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -54,9 +55,9 @@ public class XbaseBreakpointUtil {
 	}
 
 	public IResource getBreakpointResource(IEditorInput input) throws CoreException {
-		Object adapter = input.getAdapter(IResource.class);
-		if (adapter != null)
-			return (IResource) adapter;
+		IResource resource = Adapters.adapt(input, IResource.class);
+		if (resource != null)
+			return resource;
 		if (input instanceof IStorageEditorInput) {
 			IStorage storage = ((IStorageEditorInput) input).getStorage();
 			if (storage instanceof IResource)
@@ -66,17 +67,19 @@ public class XbaseBreakpointUtil {
 				if (underlyingResource != null)
 					return underlyingResource;
 			}
-		} else if (input.getAdapter(IClassFile.class) != null) {
-			IClassFile classFile = input.getAdapter(IClassFile.class);
-			return getBreakpointResource(classFile.findPrimaryType());
+		} else {
+			IClassFile classFile = Adapters.adapt(input, IClassFile.class);
+			if (classFile != null) {
+				return getBreakpointResource(classFile.findPrimaryType());
+			}
 		}
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 
 	// this URI is only used for breakpoints on JARed files
 	public SourceRelativeURI getBreakpointURI(IEditorInput input) {
-		Object adapter = input.getAdapter(IResource.class);
-		if (adapter != null)
+		IResource resource = Adapters.adapt(input, IResource.class);
+		if (resource != null)
 			return null;
 		if (input instanceof IStorageEditorInput) {
 			IStorage storage;
@@ -100,14 +103,16 @@ public class XbaseBreakpointUtil {
 				logger.error("Error finding breakpoint URI", e);
 				return null;
 			}
-		} else if (input.getAdapter(IClassFile.class) != null) {
-			IClassFile classFile = input.getAdapter(IClassFile.class);
-			ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
-			if (traceToSource == null)
+		} else {
+			IClassFile classFile = Adapters.adapt(input, IClassFile.class);
+			if (classFile != null) {
+				ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
+				if (traceToSource == null)
+					return null;
+				for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
+					return loc.getSrcRelativeResourceURI();
 				return null;
-			for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
-				return loc.getSrcRelativeResourceURI();
-			return null;
+			}
 		}
 		return null;
 	}
