@@ -13,13 +13,13 @@ import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode
 import org.junit.Assert
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.lsp4j.DefinitionParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -132,7 +132,7 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     @Test
     def void testMissingInitialize() {
 	    	try {
-		    	languageServer.definition(new TextDocumentPositionParams => [
+		    	languageServer.definition(new DefinitionParams => [
 				textDocument = new TextDocumentIdentifier => [
 					uri = 'file:/home/test/workspace/mydoc.testlang'
 				]

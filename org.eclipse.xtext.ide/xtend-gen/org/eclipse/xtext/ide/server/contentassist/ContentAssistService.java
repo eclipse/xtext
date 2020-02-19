@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionItemKind;
 import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.CompletionParams;
 import org.eclipse.lsp4j.InsertTextFormat;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
@@ -69,7 +70,19 @@ public class ContentAssistService {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  /**
+   * @deprecated please override/call {@link #createCompletionList(Document, XtextResource, CompletionParams, CancelIndicator)} instead.
+   * This method is scheduled to be removed with 2.22.
+   */
+  @Deprecated
   public CompletionList createCompletionList(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+    if ((params instanceof CompletionParams)) {
+      return this.createCompletionList(document, resource, ((CompletionParams) params), cancelIndicator);
+    }
+    throw new IllegalArgumentException("params is not a CompletionParams");
+  }
+  
+  public CompletionList createCompletionList(final Document document, final XtextResource resource, final CompletionParams params, final CancelIndicator cancelIndicator) {
     try {
       final CompletionList result = new CompletionList();
       result.setIsIncomplete(true);

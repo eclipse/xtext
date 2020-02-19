@@ -12,13 +12,13 @@ import com.google.common.base.Throwables;
 import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.RenameCapabilities;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
@@ -102,8 +102,8 @@ public class RenamePositionTest extends AbstractLanguageServerTest {
     this.initialize();
     try {
       final TextDocumentIdentifier identifier = new TextDocumentIdentifier(modelFile);
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams(identifier, position);
-      final Either<Range, PrepareRenameResult> prepareRenameResult = this.languageServer.prepareRename(_textDocumentPositionParams).get();
+      PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
+      final Either<Range, PrepareRenameResult> prepareRenameResult = this.languageServer.prepareRename(_prepareRenameParams).get();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("expected null result got ");
       _builder.append(prepareRenameResult);
@@ -149,8 +149,8 @@ public class RenamePositionTest extends AbstractLanguageServerTest {
       };
       this.initialize(_function);
       final TextDocumentIdentifier identifier = new TextDocumentIdentifier(modelFile);
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams(identifier, position);
-      final Range range = this.languageServer.prepareRename(_textDocumentPositionParams).get().getLeft();
+      PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
+      final Range range = this.languageServer.prepareRename(_prepareRenameParams).get().getLeft();
       Assert.assertNotNull(range);
       this.assertEquals(new Document(Integer.valueOf(0), model).getSubstring(range), "Test");
       final RenameParams params = new RenameParams(identifier, position, "Tescht");

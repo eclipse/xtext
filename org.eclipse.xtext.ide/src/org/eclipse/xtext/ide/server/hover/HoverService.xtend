@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Hover
 import org.eclipse.lsp4j.MarkupContent
 import org.eclipse.lsp4j.Range
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
@@ -28,6 +27,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ITextRegion
 
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
+import org.eclipse.lsp4j.HoverParams
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -52,7 +52,7 @@ class HoverService implements IHoverService {
 	override Hover hover(
 		Document document, 
 		XtextResource resource, 
-		TextDocumentPositionParams params,
+		HoverParams params,
 		CancelIndicator cancelIndicator
 	) {
 		val offset = document.getOffSet(params.position)

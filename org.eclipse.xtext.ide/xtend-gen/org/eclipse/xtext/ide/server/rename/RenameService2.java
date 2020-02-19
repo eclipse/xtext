@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.RenameOptions;
@@ -102,11 +103,11 @@ public class RenameService2 implements IRenameService2 {
           String _uri = textDocument.getUri();
           final TextDocumentIdentifier identifier = new TextDocumentIdentifier(_uri);
           final Position position = options.getRenameParams().getPosition();
-          final TextDocumentPositionParams positionParams = new TextDocumentPositionParams(identifier, position);
+          final PrepareRenameParams positionParams = new PrepareRenameParams(identifier, position);
           final Resource resource = context.getResource();
           final Document document = context.getDocument();
           final CancelIndicator cancelIndicator = options.getCancelIndicator();
-          final Either<Range, PrepareRenameResult> prepareRenameResult = this.doPrepareRename(resource, document, positionParams, cancelIndicator);
+          final Either<Range, PrepareRenameResult> prepareRenameResult = this.doPrepareRename(resource, document, ((TextDocumentPositionParams) positionParams), cancelIndicator);
           boolean _mayPerformRename = this.mayPerformRename(prepareRenameResult, options.getRenameParams());
           boolean _not = (!_mayPerformRename);
           if (_not) {
@@ -225,9 +226,9 @@ public class RenameService2 implements IRenameService2 {
         }
         final Resource resource = context.getResource();
         final Document document = context.getDocument();
-        final TextDocumentPositionParams params = options.getParams();
+        final PrepareRenameParams params = options.getParams();
         final CancelIndicator cancelIndicator = options.getCancelIndicator();
-        return this.doPrepareRename(resource, document, params, cancelIndicator);
+        return this.doPrepareRename(resource, document, ((TextDocumentPositionParams) params), cancelIndicator);
       };
       final java.util.function.Function<Throwable, Either<Range, PrepareRenameResult>> _function_1 = (Throwable exception) -> {
         try {
@@ -248,7 +249,18 @@ public class RenameService2 implements IRenameService2 {
     }
   }
   
+  /**
+   * @deprecated please override/call {@link #doPrepareRename(Resource, Document, PrepareRenameParams, CancelIndicator)} instead.
+   */
+  @Deprecated
   protected Either<Range, PrepareRenameResult> doPrepareRename(final Resource resource, final Document document, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+    if ((params instanceof PrepareRenameParams)) {
+      return this.doPrepareRename(resource, document, ((PrepareRenameParams) params), cancelIndicator);
+    }
+    throw new IllegalArgumentException("params is not a PrepareRenameParams");
+  }
+  
+  protected Either<Range, PrepareRenameResult> doPrepareRename(final Resource resource, final Document document, final PrepareRenameParams params, final CancelIndicator cancelIndicator) {
     final String uri = params.getTextDocument().getUri();
     if ((resource instanceof XtextResource)) {
       IParseResult _parseResult = null;

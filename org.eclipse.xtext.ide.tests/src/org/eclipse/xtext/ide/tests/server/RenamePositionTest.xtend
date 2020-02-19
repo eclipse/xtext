@@ -11,11 +11,11 @@ package org.eclipse.xtext.ide.tests.server
 import com.google.common.base.Throwables
 import org.eclipse.lsp4j.ClientCapabilities
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PrepareRenameParams
 import org.eclipse.lsp4j.RenameCapabilities
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentClientCapabilities
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.testing.AbstractLanguageServerTest
@@ -79,7 +79,7 @@ class RenamePositionTest extends AbstractLanguageServerTest {
 		initialize
 		try {
 			val identifier = new TextDocumentIdentifier(modelFile)
-			val prepareRenameResult = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get
+			val prepareRenameResult = languageServer.prepareRename(new PrepareRenameParams(identifier, position)).get
 			assertNull('''expected null result got «prepareRenameResult» instead''', prepareRenameResult)
 			val renameParams = new RenameParams(new TextDocumentIdentifier(modelFile), position, 'Tescht')
 			languageServer.rename(renameParams).get
@@ -104,7 +104,7 @@ class RenamePositionTest extends AbstractLanguageServerTest {
 			]
 		]
 		val identifier = new TextDocumentIdentifier(modelFile)
-		val range = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get.getLeft
+		val range = languageServer.prepareRename(new PrepareRenameParams(identifier, position)).get.getLeft
 		assertNotNull(range)
 		assertEquals(new Document(0, model).getSubstring(range), 'Test')
 		val params = new RenameParams(identifier, position, 'Tescht')

@@ -36,8 +36,9 @@ public interface ISignatureHelpService {
 	
 	/**
 	 * @deprecated please override/call {@link #getSignatureHelp(Document, XtextResource, SignatureHelpParams, CancelIndicator)} instead.
+	 * This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated
+	@Deprecated//(since="2.21",forRemoval=true)
 	default SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
 		if (params instanceof SignatureHelpParams) {
 			return getSignatureHelp(document, resource, (SignatureHelpParams) params, cancelIndicator);
@@ -58,6 +59,8 @@ public interface ISignatureHelpService {
 	 *            the offset of the cursor in the resource.
 	 * 
 	 * @return a signature help instance.
+	 * 
+	 * @deprecated This method is scheduled to be removed with 2.22.
 	 */
 	@Deprecated
 	default SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
