@@ -21,6 +21,7 @@ import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,7 @@ import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
@@ -325,6 +327,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
         it.setProcessId(Integer.valueOf(1));
         it.setRootUri(this._uriExtensions.toUriString(this.root.toURI().normalize()));
+        String _rootUri = it.getRootUri();
+        WorkspaceFolder _workspaceFolder = new WorkspaceFolder(_rootUri, "");
+        it.setWorkspaceFolders(Collections.<WorkspaceFolder>unmodifiableList(CollectionLiterals.<WorkspaceFolder>newArrayList(_workspaceFolder)));
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {

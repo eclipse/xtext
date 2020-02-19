@@ -41,6 +41,7 @@ import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
 import org.eclipse.lsp4j.DidChangeTextDocumentParams;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.DidChangeWorkspaceFoldersParams;
 import org.eclipse.lsp4j.DidCloseTextDocumentParams;
 import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.DidSaveTextDocumentParams;
@@ -84,6 +85,9 @@ import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceFolder;
+import org.eclipse.lsp4j.WorkspaceFoldersOptions;
+import org.eclipse.lsp4j.WorkspaceServerCapabilities;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
@@ -219,7 +223,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		result.setCapabilities(createServerCapabilities(params));
 		access.addBuildListener(this);
 		return requestManager.runWrite(() -> {
-			workspaceManager.initialize(baseDir, this::publishDiagnostics, CancelIndicator.NullImpl);
+			if (workspaceManager.isSupportsWorkspaceFolders()) {
+				List<WorkspaceFolder> workspaceFolders = params.getWorkspaceFolders();
+				if (workspaceFolders == null)
+					workspaceFolders = Collections.emptyList();
+				workspaceManager.initialize(workspaceFolders, this::publishDiagnostics, CancelIndicator.NullImpl);
+			} else {
+				workspaceManager.initialize(baseDir, this::publishDiagnostics, CancelIndicator.NullImpl);
+			}
 			return result;
 		}, (cancelIndicator, it) -> it).thenApply(it -> initializeResult = it);
 	}
@@ -293,6 +304,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		ExecuteCommandCapabilities executeCommand = null;
 		if (workspace != null) {
 			executeCommand = workspace.getExecuteCommand();
+			if (workspace.getWorkspaceFolders() == Boolean.TRUE && workspaceManager.isSupportsWorkspaceFolders()) {
+				WorkspaceFoldersOptions workspaceFoldersOptions = new WorkspaceFoldersOptions();
+				workspaceFoldersOptions.setSupported(true);
+				workspaceFoldersOptions.setChangeNotifications(true);
+				serverCapabilities.setWorkspace(new WorkspaceServerCapabilities(workspaceFoldersOptions));
+			}
 		}
 		if (executeCommand != null) {
 			commandRegistry.initialize(allLanguages, clientCapabilities, client);
@@ -447,6 +464,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	public void didChangeConfiguration(DidChangeConfigurationParams params) {
 		requestManager.runWrite(() -> {
 			workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl);
+			return null;
+		}, (a, b) -> null);
+	}
+
+	/**
+	 * @since 2.21
+	 */
+	@Override
+	public void didChangeWorkspaceFolders(DidChangeWorkspaceFoldersParams params) {
+		requestManager.runWrite(() -> {
+			workspaceManager.didChangeWorkspaceFolders(params, CancelIndicator.NullImpl);
 			return null;
 		}, (a, b) -> null);
 	}

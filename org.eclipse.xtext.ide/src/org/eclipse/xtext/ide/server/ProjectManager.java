@@ -215,4 +215,15 @@ public class ProjectManager {
 	public IProjectConfig getProjectConfig() {
 		return projectConfig;
 	}
+	
+	/**
+	 * @since 2.21
+	 */
+	public void aboutToRemoveFromWorkspace() {
+		for (ISourceFolder srcFolder : projectConfig.getSourceFolders()) {
+			for (URI resourceURI: srcFolder.getAllResources(fileSystemScanner)) {
+				issueAcceptor.apply(resourceURI, Collections.emptyList());
+			}
+		}
+	}
 }

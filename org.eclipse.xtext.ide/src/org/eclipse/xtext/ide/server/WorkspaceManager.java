@@ -19,8 +19,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.DidChangeTextDocumentParams;
+import org.eclipse.lsp4j.DidChangeWorkspaceFoldersParams;
 import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceFolder;
+import org.eclipse.lsp4j.WorkspaceFoldersChangeEvent;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseError;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
@@ -60,10 +63,13 @@ public class WorkspaceManager {
 
 	@Inject
 	private IProjectDescriptionFactory projectDescriptionFactory;
+	
+	@Inject 
+	private UriExtensions uriExtensions;
 
 	private BuildManager buildManager;
 
-	private URI baseDir;
+	private List<WorkspaceFolder> workspaceFolders = Collections.emptyList();
 
 	private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
 
@@ -141,16 +147,73 @@ public class WorkspaceManager {
 	 */
 	public void initialize(URI baseDir, Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor,
 			CancelIndicator cancelIndicator) {
-		this.baseDir = baseDir;
+		WorkspaceFolder workspaceFolder = new WorkspaceFolder(uriExtensions.toUriString(baseDir), "");
+		initialize(Collections.singletonList(workspaceFolder), issueAcceptor, cancelIndicator);			
+	}
+
+	/**
+	 * Initialize a workspace with the given workspace folders.
+	 *
+	 * @param workspaceFolders
+	 *            the list of workspace root folders
+	 * @param issueAcceptor
+	 *            the issue acceptor
+	 * @param cancelIndicator
+	 *            allows to cancel the initialization
+	 * @since 2.21
+	 */
+	public void initialize(List<WorkspaceFolder> workspaceFolders, Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor,
+			CancelIndicator cancelIndicator) {
+		this.workspaceFolders = new ArrayList<>(workspaceFolders);
 		this.issueAcceptor = issueAcceptor;
 		refreshWorkspaceConfig(cancelIndicator);
 	}
 
 	/**
+	 * @return whether this workspace manager supports multiple workspace root folders.
+	 * @since 2.21
+	 */
+	public boolean isSupportsWorkspaceFolders() {
+		return workspaceConfigFactory instanceof IMultiRootWorkspaceConfigFactory;
+	}
+	
+	protected List<WorkspaceFolder> getWorkspaceFolders() {
+		return workspaceFolders;
+	}
+	
+	/**
+	 * Updates the workspace folders and refreshes the workspace.
+	 * 
+	 * @since 2.21
+	 */
+	public void didChangeWorkspaceFolders(DidChangeWorkspaceFoldersParams params, CancelIndicator cancelIndicator) {
+		WorkspaceFoldersChangeEvent event = params.getEvent();
+		Map<String, WorkspaceFolder> uri2workspaceFolder = new HashMap<>();
+		workspaceFolders.forEach(it -> uri2workspaceFolder.put(it.getUri(), it));
+		event.getRemoved().forEach(it -> uri2workspaceFolder.remove(it.getUri()));
+		event.getAdded().forEach(it -> {
+			if (!uri2workspaceFolder.containsKey(it.getUri())) 
+				uri2workspaceFolder.put(it.getUri(), it);
+		});
+		this.workspaceFolders = new ArrayList<>(uri2workspaceFolder.values());
+		refreshWorkspaceConfig(cancelIndicator);
+	}
+	
+	protected IWorkspaceConfig createWorkspaceConfig() {
+		if (isSupportsWorkspaceFolders()) 
+			return ((IMultiRootWorkspaceConfigFactory) workspaceConfigFactory).getWorkspaceConfig(workspaceFolders);
+		URI workspaceUri = (!workspaceFolders.isEmpty())
+				? uriExtensions.toUri(workspaceFolders.get(0).getUri())
+				: null;
+		return workspaceConfigFactory.getWorkspaceConfig(workspaceUri);
+	}
+	
+	/**
 	 * Refresh the workspace.
 	 */
 	protected void refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
-		setWorkspaceConfig(workspaceConfigFactory.getWorkspaceConfig(baseDir));
+		IWorkspaceConfig newWorkspaceConfig = createWorkspaceConfig();
+		setWorkspaceConfig(newWorkspaceConfig);
 		List<ProjectDescription> newProjects = new ArrayList<>();
 		Set<String> projectNames = projectName2ProjectManager.keySet();
 		Set<String> remainingProjectNames = new HashSet<>(projectNames);
@@ -167,7 +230,8 @@ public class WorkspaceManager {
 			}
 		}
 		for (String deletedProject : remainingProjectNames) {
-			projectName2ProjectManager.remove(deletedProject);
+			ProjectManager projectManager = projectName2ProjectManager.remove(deletedProject);
+			projectManager.aboutToRemoveFromWorkspace();
 			fullIndex.remove(deletedProject);
 		}
 		afterBuild(buildManager.doInitialBuild(newProjects, cancelIndicator));
