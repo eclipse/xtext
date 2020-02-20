@@ -17,7 +17,6 @@ import org.eclipse.lsp4j.RenameCapabilities
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentClientCapabilities
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.UriExtensions
@@ -25,6 +24,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import java.io.FileNotFoundException
+import org.eclipse.lsp4j.PrepareRenameParams
 
 class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
@@ -45,7 +45,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 		val uri = new File('''missing.«fileExtension»''').toURI.normalize.toUriString
 		initializeWithPrepareSupport()
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 5))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 5))
 		assertNull(languageServer.prepareRename(params).get)
 	}
 
@@ -54,7 +54,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 		val uri = new File('''missing.«fileExtension»''').toURI.normalize.toUriString
 		initialize()
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 5))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 5))
 		try {
 			assertNull(languageServer.prepareRename(params).get)
 			fail('Expected an error.')
@@ -140,7 +140,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
 		val uri = 'my-type-valid.testlang'.writeFile(model)
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 11))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 11))
 		assertNull(languageServer.prepareRename(params).get)
 	}
 
@@ -158,7 +158,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
 		val uri = 'my-type-valid.testlang'.writeFile(model)
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 12))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 12))
 		val range = languageServer.prepareRename(params).get.getLeft
 		assertEquals('MyType', new Document(0, model).getSubstring(range))
 	}
@@ -177,7 +177,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
 		val uri = 'my-type-valid.testlang'.writeFile(model)
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 14))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 14))
 		val range = languageServer.prepareRename(params).get.getLeft
 		assertEquals('MyType', new Document(0, model).getSubstring(range))
 	}
@@ -196,7 +196,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
 		val uri = 'my-type-valid.testlang'.writeFile(model)
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 18))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 18))
 		val range = languageServer.prepareRename(params).get.getLeft
 		assertEquals('MyType', new Document(0, model).getSubstring(range))
 	}
@@ -215,7 +215,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 
 		val uri = 'my-type-valid.testlang'.writeFile(model)
 
-		val params = new TextDocumentPositionParams(new TextDocumentIdentifier(uri), new Position(2, 18))
+		val params = new PrepareRenameParams(new TextDocumentIdentifier(uri), new Position(2, 18))
 		assertNull(languageServer.prepareRename(params).get)
 	}
 

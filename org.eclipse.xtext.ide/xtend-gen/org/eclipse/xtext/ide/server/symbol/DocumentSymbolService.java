@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.lsp4j.DefinitionParams;
 import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.Location;
@@ -102,7 +103,22 @@ public class DocumentSymbolService implements IDocumentSymbolService {
   @Inject
   private HierarchicalDocumentSymbolService hierarchicalDocumentSymbolService;
   
+  /**
+   * @deprecated please override/call {@link #getDefinitions(Document,XtextResource,DefinitionParams,IReferenceFinder.IResourceAccess,CancelIndicator)} instead.
+   * This method is scheduled to be removed with 2.22.
+   */
+  @Deprecated
   public List<? extends Location> getDefinitions(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
+    if ((params instanceof DefinitionParams)) {
+      return this.getDefinitions(document, resource, ((DefinitionParams) params), resourceAccess, cancelIndicator);
+    }
+    throw new IllegalArgumentException("params is not a DefinitionParams");
+  }
+  
+  /**
+   * @since 2.21
+   */
+  public List<? extends Location> getDefinitions(final Document document, final XtextResource resource, final DefinitionParams params, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getPosition());
     return this.getDefinitions(resource, offset, resourceAccess, cancelIndicator);
   }

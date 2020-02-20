@@ -13,9 +13,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.HoverParams;
 import org.eclipse.lsp4j.MarkupContent;
 import org.eclipse.lsp4j.Range;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
@@ -56,7 +56,7 @@ public class HoverService implements IHoverService {
   private IEObjectDocumentationProvider _iEObjectDocumentationProvider;
   
   @Override
-  public Hover hover(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+  public Hover hover(final Document document, final XtextResource resource, final HoverParams params, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getPosition());
     final HoverContext context = this.createContext(document, resource, offset);
     return this.hover(context);

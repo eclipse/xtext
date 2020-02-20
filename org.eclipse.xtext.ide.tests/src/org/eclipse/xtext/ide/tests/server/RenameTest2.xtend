@@ -10,11 +10,11 @@ package org.eclipse.xtext.ide.tests.server
 
 import org.eclipse.lsp4j.ClientCapabilities
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PrepareRenameParams
 import org.eclipse.lsp4j.RenameCapabilities
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentClientCapabilities
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.WorkspaceClientCapabilities
 import org.eclipse.lsp4j.WorkspaceEditCapabilities
 import org.eclipse.xtext.ide.server.Document
@@ -43,7 +43,7 @@ class RenameTest2 extends AbstractLanguageServerTest {
         initialize
         val identifier = new TextDocumentIdentifier(file)
         val position = new Position(2, 9)
-        val range = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get.getLeft
+        val range = languageServer.prepareRename(new PrepareRenameParams(identifier, position)).get.getLeft
         assertEquals('Foo', new Document(0, model).getSubstring(range))
         val params = new RenameParams(identifier, position, 'Bar')
         val workspaceEdit = languageServer.rename(params).get
@@ -73,7 +73,7 @@ class RenameTest2 extends AbstractLanguageServerTest {
 
         val identifier = new TextDocumentIdentifier(file)
         val position = new Position(2, 9)
-        val range = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get.getLeft
+        val range = languageServer.prepareRename(new PrepareRenameParams(identifier, position)).get.getLeft
         assertEquals('Foo', new Document(0, model).getSubstring(range))
         val params = new RenameParams(identifier, position, 'Baz')
         val workspaceEdit = languageServer.rename(params).get

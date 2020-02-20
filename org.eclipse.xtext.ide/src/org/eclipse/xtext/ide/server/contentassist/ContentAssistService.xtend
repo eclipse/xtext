@@ -17,6 +17,8 @@ import java.util.concurrent.ExecutorService
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionItemKind
 import org.eclipse.lsp4j.CompletionList
+import org.eclipse.lsp4j.CompletionParams
+import org.eclipse.lsp4j.InsertTextFormat
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.TextDocumentPositionParams
@@ -32,7 +34,6 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.TextRegion
-import org.eclipse.lsp4j.InsertTextFormat
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -55,8 +56,21 @@ class ContentAssistService {
 
     @Inject OperationCanceledManager operationCanceledManager
 
-    def CompletionList createCompletionList(Document document, XtextResource resource,
+	/**
+	 * @deprecated please override/call {@link #createCompletionList(Document, XtextResource, CompletionParams, CancelIndicator)} instead.
+	 * This method is scheduled to be removed with 2.22.
+	 */
+	@Deprecated//(since="2.21",forRemoval=true)
+	def CompletionList createCompletionList(Document document, XtextResource resource,
         TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+        if (params instanceof CompletionParams) {
+        	return createCompletionList(document, resource, params as CompletionParams, cancelIndicator)
+        }
+        throw new IllegalArgumentException("params is not a CompletionParams");
+    }
+
+    def CompletionList createCompletionList(Document document, XtextResource resource,
+        CompletionParams params, CancelIndicator cancelIndicator) {
         val result = new CompletionList
         // we set isInComplete to true, so we get asked always, which is the best match to the expected behavior in Xtext
         result.setIsIncomplete(true);

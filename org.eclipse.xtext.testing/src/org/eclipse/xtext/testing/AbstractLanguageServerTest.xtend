@@ -27,6 +27,7 @@ import org.eclipse.lsp4j.CodeLensParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionParams
+import org.eclipse.lsp4j.DefinitionParams
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.DidCloseTextDocumentParams
@@ -34,15 +35,18 @@ import org.eclipse.lsp4j.DidOpenTextDocumentParams
 import org.eclipse.lsp4j.DocumentFormattingParams
 import org.eclipse.lsp4j.DocumentHighlight
 import org.eclipse.lsp4j.DocumentHighlightKind
+import org.eclipse.lsp4j.DocumentHighlightParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
 import org.eclipse.lsp4j.DocumentSymbol
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
 import org.eclipse.lsp4j.Hover
+import org.eclipse.lsp4j.HoverParams
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.Location
+import org.eclipse.lsp4j.MarkupContent
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
@@ -51,11 +55,11 @@ import org.eclipse.lsp4j.ReferenceParams
 import org.eclipse.lsp4j.SemanticHighlightingInformation
 import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
+import org.eclipse.lsp4j.SignatureHelpParams
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.TextDocumentEdit
 import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.TextDocumentItem
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.eclipse.lsp4j.WorkspaceEdit
@@ -85,8 +89,6 @@ import org.junit.jupiter.api.BeforeEach
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
-import org.eclipse.lsp4j.SignatureHelpParams
-import org.eclipse.lsp4j.MarkupContent
 import org.eclipse.lsp4j.WorkspaceFolder
 
 /**
@@ -522,7 +524,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
 		val fileUri = initializeContext(configuration).uri
-		val definitionsFuture = languageServer.definition(new TextDocumentPositionParams => [
+		val definitionsFuture = languageServer.definition(new DefinitionParams => [
 			textDocument = new TextDocumentIdentifier(fileUri)
 			position = new Position(line, column)
 		])
@@ -541,7 +543,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		configurator.apply(configuration)
 		val fileUri = initializeContext(configuration).uri
 
-		val hoverFuture = languageServer.hover(new TextDocumentPositionParams => [
+		val hoverFuture = languageServer.hover(new HoverParams => [
 			textDocument = new TextDocumentIdentifier(fileUri)
 			position = new Position(line, column)
 		])
@@ -581,7 +583,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		configurator.apply(configuration);
 
 		val fileUri = initializeContext(configuration).uri;
-		val highlights = languageServer.documentHighlight(new TextDocumentPositionParams => [
+		val highlights = languageServer.documentHighlight(new DocumentHighlightParams => [
 			textDocument = new TextDocumentIdentifier(fileUri)
 			position = new Position(line, column)
 		]);

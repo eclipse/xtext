@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentHighlightKind;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.DocumentHighlightParams;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.IReferenceFinder.Acceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -92,7 +92,7 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 	private DocumentHighlightComparator comparator;
 
 	@Override
-	public List<? extends DocumentHighlight> getDocumentHighlights(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+	public List<? extends DocumentHighlight> getDocumentHighlights(Document document, XtextResource resource, DocumentHighlightParams params, CancelIndicator cancelIndicator) {
 		int offset = document.getOffSet(params.getPosition());
 		return getDocumentHighlights(resource, offset);
 	}
@@ -273,5 +273,7 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 		}
 
 	}
+
+	
 
 }

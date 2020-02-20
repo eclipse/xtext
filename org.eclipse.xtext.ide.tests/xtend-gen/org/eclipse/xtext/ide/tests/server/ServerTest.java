@@ -11,12 +11,12 @@ package org.eclipse.xtext.ide.tests.server;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import org.eclipse.lsp4j.DefinitionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.lsp4j.services.WorkspaceService;
@@ -175,8 +175,8 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
   public void testMissingInitialize() {
     try {
       try {
-        TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-        final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        DefinitionParams _definitionParams = new DefinitionParams();
+        final Procedure1<DefinitionParams> _function = (DefinitionParams it) -> {
           TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier();
           final Procedure1<TextDocumentIdentifier> _function_1 = (TextDocumentIdentifier it_1) -> {
             it_1.setUri("file:/home/test/workspace/mydoc.testlang");
@@ -184,7 +184,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
           TextDocumentIdentifier _doubleArrow = ObjectExtensions.<TextDocumentIdentifier>operator_doubleArrow(_textDocumentIdentifier, _function_1);
           it.setTextDocument(_doubleArrow);
         };
-        TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+        DefinitionParams _doubleArrow = ObjectExtensions.<DefinitionParams>operator_doubleArrow(_definitionParams, _function);
         this.languageServer.definition(_doubleArrow).get();
         Assert.fail("Expected a ResponseErrorException");
       } catch (final Throwable _t) {

@@ -40,6 +40,7 @@ import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.CompletionParams;
+import org.eclipse.lsp4j.DefinitionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.DidCloseTextDocumentParams;
@@ -47,6 +48,7 @@ import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentHighlightKind;
+import org.eclipse.lsp4j.DocumentHighlightParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolCapabilities;
@@ -54,6 +56,7 @@ import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.HoverParams;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
@@ -74,7 +77,6 @@ import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentEdit;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
@@ -1106,8 +1108,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final String fileUri = this.initializeContext(configuration).getUri();
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+      DefinitionParams _definitionParams = new DefinitionParams();
+      final Procedure1<DefinitionParams> _function = (DefinitionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
         it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
@@ -1115,7 +1117,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Position _position = new Position(_line, _column);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      DefinitionParams _doubleArrow = ObjectExtensions.<DefinitionParams>operator_doubleArrow(_definitionParams, _function);
       final CompletableFuture<Either<List<? extends Location>, List<? extends LocationLink>>> definitionsFuture = this.languageServer.definition(_doubleArrow);
       final Either<List<? extends Location>, List<? extends LocationLink>> definitions = definitionsFuture.get();
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
@@ -1138,8 +1140,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final String fileUri = this.initializeContext(configuration).getUri();
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+      HoverParams _hoverParams = new HoverParams();
+      final Procedure1<HoverParams> _function = (HoverParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
         it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
@@ -1147,7 +1149,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Position _position = new Position(_line, _column);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      HoverParams _doubleArrow = ObjectExtensions.<HoverParams>operator_doubleArrow(_hoverParams, _function);
       final CompletableFuture<Hover> hoverFuture = this.languageServer.hover(_doubleArrow);
       final Hover hover = hoverFuture.get();
       Procedure1<? super Hover> _assertHover = configuration.getAssertHover();
@@ -1208,8 +1210,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final DocumentHighlightConfiguration configuration = ObjectExtensions.<DocumentHighlightConfiguration>operator_doubleArrow(_documentHighlightConfiguration, _function);
       configurator.apply(configuration);
       final String fileUri = this.initializeContext(configuration).getUri();
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function_1 = (TextDocumentPositionParams it) -> {
+      DocumentHighlightParams _documentHighlightParams = new DocumentHighlightParams();
+      final Procedure1<DocumentHighlightParams> _function_1 = (DocumentHighlightParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
         it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
@@ -1217,7 +1219,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Position _position = new Position(_line, _column);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function_1);
+      DocumentHighlightParams _doubleArrow = ObjectExtensions.<DocumentHighlightParams>operator_doubleArrow(_documentHighlightParams, _function_1);
       final CompletableFuture<List<? extends DocumentHighlight>> highlights = this.languageServer.documentHighlight(_doubleArrow);
       final Function1<DocumentHighlight, String> _function_2 = (DocumentHighlight it) -> {
         return this.toExpectation(it);

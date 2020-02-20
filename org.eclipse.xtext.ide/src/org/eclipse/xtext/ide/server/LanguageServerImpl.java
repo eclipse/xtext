@@ -36,6 +36,7 @@ import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.CompletionOptions;
 import org.eclipse.lsp4j.CompletionParams;
+import org.eclipse.lsp4j.DefinitionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
@@ -47,6 +48,7 @@ import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.DidSaveTextDocumentParams;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightParams;
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbol;
@@ -57,12 +59,14 @@ import org.eclipse.lsp4j.ExecuteCommandOptions;
 import org.eclipse.lsp4j.ExecuteCommandParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.HoverParams;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.InitializedParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -555,7 +559,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		}
 		BufferedCancelIndicator cancelIndicator = new BufferedCancelIndicator(originalCancelIndicator);
 		return Either.forRight(workspaceManager.doRead(uri,
-				(doc, res) -> contentAssistService.createCompletionList(doc, res, params, cancelIndicator)));
+				(doc, res) -> contentAssistService.createCompletionList(doc, res, (TextDocumentPositionParams) params, cancelIndicator)));
 	}
 
 	/**
@@ -584,7 +588,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 	@Override
 	public CompletableFuture<Either<List<? extends Location>, List<? extends LocationLink>>> definition(
-			TextDocumentPositionParams params) {
+			DefinitionParams params) {
 		return requestManager.runRead(cancelIndicator -> definition(params, cancelIndicator));
 	}
 
@@ -593,21 +597,21 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * @since 2.20
 	 */
 	protected Either<List<? extends Location>, List<? extends LocationLink>> definition(
-			TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+			DefinitionParams params, CancelIndicator cancelIndicator) {
 		return Either.forLeft(definition(cancelIndicator, params));
 	}
 
 	/**
 	 * Compute the definition.
 	 */
-	protected List<? extends Location> definition(CancelIndicator cancelIndicator, TextDocumentPositionParams params) {
+	protected List<? extends Location> definition(CancelIndicator cancelIndicator, DefinitionParams params) {
 		URI uri = getURI(params);
 		DocumentSymbolService documentSymbolService = getService(uri, DocumentSymbolService.class);
 		if (documentSymbolService == null) {
 			return Collections.emptyList();
 		}
 		return workspaceManager.doRead(uri,
-				(doc, res) -> documentSymbolService.getDefinitions(doc, res, params, resourceAccess, cancelIndicator));
+				(doc, res) -> documentSymbolService.getDefinitions(doc, res, (TextDocumentPositionParams) params, resourceAccess, cancelIndicator));
 	}
 
 	@Override
@@ -703,7 +707,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	}
 
 	@Override
-	public CompletableFuture<Hover> hover(TextDocumentPositionParams params) {
+	public CompletableFuture<Hover> hover(HoverParams params) {
 		return requestManager.runRead((cancelIndicator) -> hover(params, cancelIndicator));
 	}
 
@@ -711,14 +715,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Compute the hover. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected Hover hover(TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+	protected Hover hover(HoverParams params, CancelIndicator cancelIndicator) {
 		URI uri = getURI(params);
 		IHoverService hoverService = getService(uri, IHoverService.class);
 		if (hoverService == null) {
 			return IHoverService.EMPTY_HOVER;
 		}
 		return workspaceManager.<Hover>doRead(uri,
-				(document, resource) -> hoverService.hover(document, resource, params, cancelIndicator));
+				(document, resource) -> hoverService.hover(document, resource, (TextDocumentPositionParams) params, cancelIndicator));
 	}
 
 	@Override
@@ -746,7 +750,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	}
 
 	@Override
-	public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(TextDocumentPositionParams params) {
+	public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(DocumentHighlightParams params) {
 		return requestManager.runRead((cancelIndicator) -> documentHighlight(params, cancelIndicator));
 	}
 
@@ -754,7 +758,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Compute the document highlights. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected List<? extends DocumentHighlight> documentHighlight(TextDocumentPositionParams params,
+	protected List<? extends DocumentHighlight> documentHighlight(DocumentHighlightParams params,
 			CancelIndicator cancelIndicator) {
 		URI uri = getURI(params);
 		IDocumentHighlightService service = getService(uri, IDocumentHighlightService.class);
@@ -762,7 +766,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			return Collections.emptyList();
 		}
 		return workspaceManager.doRead(uri,
-				(doc, resource) -> service.getDocumentHighlights(doc, resource, params, cancelIndicator));
+				(doc, resource) -> service.getDocumentHighlights(doc, resource, (TextDocumentPositionParams) params, cancelIndicator));
 	}
 
 	@Override
@@ -1012,7 +1016,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * @since 2.18
 	 */
 	@Override
-	public CompletableFuture<Either<Range, PrepareRenameResult>> prepareRename(TextDocumentPositionParams params) {
+	public CompletableFuture<Either<Range, PrepareRenameResult>> prepareRename(PrepareRenameParams params) {
 		return requestManager.runRead(cancelIndicator -> prepareRename(params, cancelIndicator));
 	}
 
@@ -1020,7 +1024,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Prepare the rename operation. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected Either<Range, PrepareRenameResult> prepareRename(TextDocumentPositionParams params,
+	protected Either<Range, PrepareRenameResult> prepareRename(PrepareRenameParams params,
 			CancelIndicator cancelIndicator) {
 		URI uri = getURI(params);
 		IRenameService2 renameService = getService(uri, IRenameService2.class);

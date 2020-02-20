@@ -16,6 +16,7 @@ import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.DefinitionParams
 import org.eclipse.lsp4j.DocumentSymbol
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.Location
@@ -80,11 +81,32 @@ class DocumentSymbolService implements IDocumentSymbolService {
 	
 	@Inject
 	HierarchicalDocumentSymbolService hierarchicalDocumentSymbolService
-
+	
+	/**
+	 * @deprecated please override/call {@link #getDefinitions(Document,XtextResource,DefinitionParams,IReferenceFinder.IResourceAccess,CancelIndicator)} instead.
+	 * This method is scheduled to be removed with 2.22.
+	 */
+	@Deprecated//(since="2.21",forRemoval=true)
 	def List<? extends Location> getDefinitions(
 		Document document,
 		XtextResource resource,
 		TextDocumentPositionParams params,
+		IResourceAccess resourceAccess,
+		CancelIndicator cancelIndicator
+	) {
+		if (params instanceof DefinitionParams) {
+			return getDefinitions(document, resource, params as DefinitionParams, resourceAccess, cancelIndicator)
+		}
+		throw new IllegalArgumentException("params is not a DefinitionParams");
+	}
+
+	/**
+	 * @since 2.21
+	 */
+	def List<? extends Location> getDefinitions(
+		Document document,
+		XtextResource resource,
+		DefinitionParams params,
 		IResourceAccess resourceAccess,
 		CancelIndicator cancelIndicator
 	) {

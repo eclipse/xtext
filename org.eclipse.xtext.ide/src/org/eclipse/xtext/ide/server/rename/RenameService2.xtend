@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PrepareRenameParams
 import org.eclipse.lsp4j.PrepareRenameResult
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.RenameParams
@@ -77,12 +78,12 @@ class RenameService2 implements IRenameService2 {
 			if (shouldPrepareRename) {
 				val identifier = new TextDocumentIdentifier(textDocument.uri)
 				val position = options.renameParams.position
-				val positionParams = new TextDocumentPositionParams(identifier, position)
+				val positionParams = new PrepareRenameParams(identifier, position)
 				val resource = context.resource
 				val document = context.document
 				val cancelIndicator = options.cancelIndicator
 
-				val prepareRenameResult = doPrepareRename(resource, document, positionParams, cancelIndicator)
+				val prepareRenameResult = doPrepareRename(resource, document, positionParams as TextDocumentPositionParams, cancelIndicator)
 				if (!mayPerformRename(prepareRenameResult, options.renameParams)) {
 					return null
 				}
@@ -165,7 +166,7 @@ class RenameService2 implements IRenameService2 {
 			val document = context.document
 			val params = options.params
 			val cancelIndicator = options.cancelIndicator
-			return doPrepareRename(resource, document, params, cancelIndicator)
+			return doPrepareRename(resource, document, params as TextDocumentPositionParams, cancelIndicator)
 		].exceptionally [ exception |
 			val rootCause = Throwables.getRootCause(exception)
 			if (rootCause instanceof FileNotFoundException) {
@@ -176,9 +177,21 @@ class RenameService2 implements IRenameService2 {
 			throw exception
 		].get
 	}
-
+	
+	/**
+	 * @deprecated please override/call {@link #doPrepareRename(Resource, Document, PrepareRenameParams, CancelIndicator)} instead.
+	 */
+	@Deprecated
 	protected def Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,
 		TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+		if (params instanceof PrepareRenameParams) {
+			return 	doPrepareRename(resource, document, params as PrepareRenameParams, cancelIndicator)
+		}
+		throw new IllegalArgumentException("params is not a PrepareRenameParams");
+	}
+
+	protected def Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,
+		PrepareRenameParams params, CancelIndicator cancelIndicator) {
 
 		val uri = params.textDocument.uri
 		if (resource instanceof XtextResource) {

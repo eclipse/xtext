@@ -16,12 +16,12 @@ import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.RenameCapabilities;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseError;
@@ -69,7 +69,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       this.initializeWithPrepareSupport();
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 5);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       Assert.assertNull(this.languageServer.prepareRename(params).get());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -85,7 +85,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
     this.initialize();
     TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
     Position _position = new Position(2, 5);
-    final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
     try {
       Assert.assertNull(this.languageServer.prepareRename(params).get());
       Assert.fail("Expected an error.");
@@ -242,7 +242,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       final String uri = this.writeFile("my-type-valid.testlang", model);
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 11);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       Assert.assertNull(this.languageServer.prepareRename(params).get());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -274,7 +274,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       final String uri = this.writeFile("my-type-valid.testlang", model);
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 12);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       final Range range = this.languageServer.prepareRename(params).get().getLeft();
       this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
     } catch (Throwable _e) {
@@ -307,7 +307,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       final String uri = this.writeFile("my-type-valid.testlang", model);
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 14);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       final Range range = this.languageServer.prepareRename(params).get().getLeft();
       this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
     } catch (Throwable _e) {
@@ -340,7 +340,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       final String uri = this.writeFile("my-type-valid.testlang", model);
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 18);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       final Range range = this.languageServer.prepareRename(params).get().getLeft();
       this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
     } catch (Throwable _e) {
@@ -373,7 +373,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
       final String uri = this.writeFile("my-type-valid.testlang", model);
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
       Position _position = new Position(2, 18);
-      final TextDocumentPositionParams params = new TextDocumentPositionParams(_textDocumentIdentifier, _position);
+      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
       Assert.assertNull(this.languageServer.prepareRename(params).get());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
