@@ -87,6 +87,7 @@ import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
 import org.eclipse.lsp4j.SignatureHelpParams
 import org.eclipse.lsp4j.MarkupContent
+import org.eclipse.lsp4j.WorkspaceFolder
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -190,6 +191,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val params = new InitializeParams => [
 			processId = 1
 			rootUri = root.toURI.normalize.toUriString
+			workspaceFolders = #[
+				new WorkspaceFolder(rootUri, '')
+			]
 		]
 		initializer?.apply(params)
 		hierarchicalDocumentSymbolSupport = params.capabilities?.textDocument?.documentSymbol?.

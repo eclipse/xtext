@@ -16,6 +16,7 @@ import org.eclipse.xtext.ide.server.DefaultProjectDescriptionFactory;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
+import org.eclipse.xtext.ide.server.MultiRootWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -34,6 +35,7 @@ public class ServerModule extends AbstractModule {
     this.<LanguageServer>bind(LanguageServer.class).to(LanguageServerImpl.class);
     this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class).toProvider(ResourceServiceProviderServiceLoader.class);
     this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class).to(ProjectWorkspaceConfigFactory.class);
+    this.<ProjectWorkspaceConfigFactory>bind(ProjectWorkspaceConfigFactory.class).to(MultiRootWorkspaceConfigFactory.class);
     this.<IProjectDescriptionFactory>bind(IProjectDescriptionFactory.class).to(DefaultProjectDescriptionFactory.class);
     this.<IContainer.Manager>bind(IContainer.Manager.class).to(ProjectDescriptionBasedContainerManager.class);
   }
