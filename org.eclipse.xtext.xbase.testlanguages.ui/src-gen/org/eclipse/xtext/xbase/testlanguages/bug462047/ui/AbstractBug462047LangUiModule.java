@@ -60,9 +60,9 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ide.contentassist.antlr.Bug462047LangParser;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ide.contentassist.antlr.internal.InternalBug462047LangLexer;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.contentassist.Bug462047LangProposalProvider;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.editor.Bug462047LangEditor;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
@@ -90,11 +90,6 @@ public abstract class AbstractBug462047LangUiModule extends DefaultXbaseUiModule
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
@@ -261,6 +256,11 @@ public abstract class AbstractBug462047LangUiModule extends DefaultXbaseUiModule
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
 		return JavaTypeQuickfixesNoImportSection.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends XtextEditor> bindXtextEditor() {
+		return Bug462047LangEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
