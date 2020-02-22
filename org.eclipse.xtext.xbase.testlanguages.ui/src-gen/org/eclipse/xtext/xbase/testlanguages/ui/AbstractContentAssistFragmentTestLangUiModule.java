@@ -54,9 +54,9 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr.ContentAssistFragmentTestLangParser;
 import org.eclipse.xtext.xbase.testlanguages.ide.contentassist.antlr.internal.InternalContentAssistFragmentTestLangLexer;
 import org.eclipse.xtext.xbase.testlanguages.ui.contentassist.ContentAssistFragmentTestLangProposalProvider;
+import org.eclipse.xtext.xbase.testlanguages.ui.editor.ContentAssistFragmentTestLangEditor;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
-import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
@@ -84,11 +84,6 @@ public abstract class AbstractContentAssistFragmentTestLangUiModule extends Defa
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
 	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Class<? extends XtextEditor> bindXtextEditor() {
-		return XbaseEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
@@ -238,6 +233,11 @@ public abstract class AbstractContentAssistFragmentTestLangUiModule extends Defa
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
 		return JavaTypeQuickfixesNoImportSection.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends XtextEditor> bindXtextEditor() {
+		return ContentAssistFragmentTestLangEditor.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2

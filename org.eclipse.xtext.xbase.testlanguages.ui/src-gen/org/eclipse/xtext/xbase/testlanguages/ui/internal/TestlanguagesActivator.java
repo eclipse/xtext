@@ -6,7 +6,6 @@ package org.eclipse.xtext.xbase.testlanguages.ui.internal;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -67,10 +66,10 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 	
 	protected Injector createInjector(String language) {
 		try {
-			Module runtimeModule = getRuntimeModule(language);
-			Module sharedStateModule = getSharedStateModule();
-			Module uiModule = getUiModule(language);
-			Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
+			com.google.inject.Module runtimeModule = getRuntimeModule(language);
+			com.google.inject.Module sharedStateModule = getSharedStateModule();
+			com.google.inject.Module uiModule = getUiModule(language);
+			com.google.inject.Module mergedModule = Modules2.mixin(runtimeModule, sharedStateModule, uiModule);
 			return Guice.createInjector(mergedModule);
 		} catch (Exception e) {
 			logger.error("Failed to create injector for " + language);
@@ -79,7 +78,7 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		}
 	}
 	
-	protected Module getRuntimeModule(String grammar) {
+	protected com.google.inject.Module getRuntimeModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG.equals(grammar)) {
 			return new XImportSectionTestLangRuntimeModule();
 		}
@@ -92,7 +91,7 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		throw new IllegalArgumentException(grammar);
 	}
 	
-	protected Module getUiModule(String grammar) {
+	protected com.google.inject.Module getUiModule(String grammar) {
 		if (ORG_ECLIPSE_XTEXT_XBASE_TESTLANGUAGES_XIMPORTSECTIONTESTLANG.equals(grammar)) {
 			return new XImportSectionTestLangUiModule(this);
 		}
@@ -105,7 +104,7 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		throw new IllegalArgumentException(grammar);
 	}
 	
-	protected Module getSharedStateModule() {
+	protected com.google.inject.Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 	
