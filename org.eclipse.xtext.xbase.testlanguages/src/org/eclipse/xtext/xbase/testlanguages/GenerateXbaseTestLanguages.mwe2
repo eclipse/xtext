@@ -82,7 +82,7 @@ Workflow {
     		fragment = ConditionalXtextGeneratorFragment {
     			enabled = generateEclipse
     			fragment = ui.contentAssist.ContentAssistFragment2 {
-    				generateXtendStub = true
+    				generateXtendStub = false
     			}
     		}
     	}
@@ -120,7 +120,7 @@ Workflow {
     		fragment = ConditionalXtextGeneratorFragment {
     			enabled = generateEclipse
     			fragment = ui.contentAssist.ContentAssistFragment2 {
-    				generateXtendStub = true
+    				generateXtendStub = false
     			}
     		}
     	}
@@ -159,7 +159,7 @@ Workflow {
     		fragment = ConditionalXtextGeneratorFragment {
     			enabled = generateEclipse
     			fragment = ui.contentAssist.ContentAssistFragment2 {
-    				generateXtendStub = true
+    				generateXtendStub = false
     			}
     		}
     	}
