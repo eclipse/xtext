@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  * @deprecated use {@link RenameService2} instead.
+ *             This class is scheduled to be removed with 2.22.
  */
 @Deprecated
 @SuppressWarnings("all")

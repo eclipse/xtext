@@ -123,6 +123,7 @@ public class FormattingService {
   
   /**
    * @deprecated use {@link #format(XtextResource, Document, int, int, FormattingOptions)} instead.
+   *             This method is scheduled to be removed with 2.22.
    */
   @Deprecated
   public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length) {

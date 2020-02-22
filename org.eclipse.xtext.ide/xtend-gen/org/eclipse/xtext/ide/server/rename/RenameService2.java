@@ -251,6 +251,7 @@ public class RenameService2 implements IRenameService2 {
   
   /**
    * @deprecated please override/call {@link #doPrepareRename(Resource, Document, PrepareRenameParams, CancelIndicator)} instead.
+   * This method is scheduled to be removed with 2.22.
    */
   @Deprecated
   protected Either<Range, PrepareRenameResult> doPrepareRename(final Resource resource, final Document document, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {

@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  * @deprecated use {@link ChangeConverter2} instead
+ *             This class is scheduled to be removed with 2.22.
  */
 @Deprecated
 @SuppressWarnings("all")

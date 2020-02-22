@@ -180,8 +180,9 @@ class RenameService2 implements IRenameService2 {
 	
 	/**
 	 * @deprecated please override/call {@link #doPrepareRename(Resource, Document, PrepareRenameParams, CancelIndicator)} instead.
+	 * This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated
+	@Deprecated//(forRemoval=true)
 	protected def Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,
 		TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
 		if (params instanceof PrepareRenameParams) {

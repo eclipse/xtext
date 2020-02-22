@@ -368,8 +368,9 @@ public class WorkspaceManager {
 	/**
 	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s. Use
 	 *             {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
+	 *             This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated
+	@Deprecated//(forRemoval=true)
 	public List<IResourceDescription.Delta> didChange(URI uri, Integer version, Iterable<TextEdit> changes,
 			CancelIndicator cancelIndicator) {
 		return didChange(uri, version, changes).build(cancelIndicator);
@@ -380,8 +381,9 @@ public class WorkspaceManager {
 	 *            unused
 	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s. Use
 	 *             {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
+	 *             This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated
+	@Deprecated//(forRemoval=true)
 	public BuildManager.Buildable didChange(URI uri, Integer version, Iterable<TextEdit> changes) {
 		Document contents = openDocuments.get(uri);
 		if (contents == null) {
@@ -433,9 +435,9 @@ public class WorkspaceManager {
 	}
 
 	/**
-	 * @deprecated this method is no longer called
+	 * @deprecated this method is no longer called. This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated
+	@Deprecated//(forRemoval=true)
 	public List<IResourceDescription.Delta> didClose(URI uri, CancelIndicator cancelIndicator) {
 		return didClose(uri).build(cancelIndicator);
 	}

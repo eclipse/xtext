@@ -27,6 +27,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author akos.kitta - Initial contribution and API
  * @deprecated use the {@link ISemanticHighlightingCalculator} and the {@link ISemanticHighlightingStyleToTokenMapper} instead.
+ * 			   This interface is scheduled to be removed with 2.22.
  */
 @Deprecated
 @ImplementedBy(IColoringService.Noop.class)
