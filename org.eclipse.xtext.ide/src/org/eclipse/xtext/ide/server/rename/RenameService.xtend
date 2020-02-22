@@ -29,8 +29,9 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  * @deprecated use {@link RenameService2} instead.
+ *             This class is scheduled to be removed with 2.22.
  */
-@Deprecated
+@Deprecated//(forRemoval=true)
 class RenameService implements IRenameService {
 	
 	@Inject extension EObjectAtOffsetHelper

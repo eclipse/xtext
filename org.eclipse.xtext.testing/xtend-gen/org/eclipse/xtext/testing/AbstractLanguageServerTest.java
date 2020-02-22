@@ -795,6 +795,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return sb.toString();
   }
   
+  /**
+   * @deprecated This method is scheduled to be removed with 2.22.
+   */
   @Deprecated
   protected String _toExpectation(final ColoringInformation it) {
     StringConcatenation _builder = new StringConcatenation();
@@ -1426,6 +1429,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  /**
+   * @deprecated This method is scheduled to be removed with 2.22.
+   */
   @Deprecated
   protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
     try {

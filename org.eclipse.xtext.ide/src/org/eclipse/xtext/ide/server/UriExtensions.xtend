@@ -36,16 +36,18 @@ class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
 	
 	/**
 	 * @deprecated use #toUriString(URI)
+	 * This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated()
+	@Deprecated//(forRemoval=true)
 	def String toPath(URI uri) {
 		return toUriString(uri)
 	}
 
 	/**
 	 * @deprecated use toUriString(URI)
+	 * This method is scheduled to be removed with 2.22.
 	 */
-	@Deprecated() 
+	@Deprecated//(forRemoval=true)
 	def String toPath(java.net.URI uri) {
 		return toUriString(uri)
 	}

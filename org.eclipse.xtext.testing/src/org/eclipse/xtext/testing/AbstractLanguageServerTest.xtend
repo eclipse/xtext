@@ -370,7 +370,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		return sb.toString;
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated This method is scheduled to be removed with 2.22.
+	 */
+	@Deprecated//(forRemoval=true)
 	protected dispatch def String toExpectation(org.eclipse.lsp4j.ColoringInformation it) {
 		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
 	}
@@ -715,7 +718,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		].get
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated This method is scheduled to be removed with 2.22.
+	 */
+	@Deprecated//(forRemoval=true)
 	protected def getColoringParams() {
 		languageServer.requestManager.runRead[
 			return notifications.map[value].filter(org.eclipse.lsp4j.ColoringParams).toMap([uri], [infos]);

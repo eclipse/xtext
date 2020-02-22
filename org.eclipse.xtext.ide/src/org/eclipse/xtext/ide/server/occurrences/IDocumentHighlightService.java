@@ -68,7 +68,7 @@ public interface IDocumentHighlightService {
 	 *         empty list but never returns with {@code null}.
 	 * @deprecated This method is scheduled to be removed with 2.22.        
 	 */
-	@Deprecated
+	@Deprecated//(forRemoval=true)
 	List<? extends DocumentHighlight> getDocumentHighlights(final XtextResource resource, final int offset);
 
 }

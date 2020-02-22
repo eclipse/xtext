@@ -28,8 +28,9 @@ import org.eclipse.xtext.util.IAcceptor
  * @author koehnlein - Initial contribution and API
  * @since 2.13
  * @deprecated use {@link ChangeConverter2} instead
+ *             This class is scheduled to be removed with 2.22.
  */
-@Deprecated
+@Deprecated//(forRemoval=true)
 class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 
 	static class Factory {
