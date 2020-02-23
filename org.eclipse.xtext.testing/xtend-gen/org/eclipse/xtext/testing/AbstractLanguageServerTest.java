@@ -67,6 +67,7 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.ResourceOperation;
 import org.eclipse.lsp4j.SemanticHighlightingInformation;
 import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.SignatureHelp;
@@ -919,22 +920,69 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append("changes :");
     _builder.newLine();
     {
-      Set<Map.Entry<String, List<TextEdit>>> _entrySet = it.getChanges().entrySet();
-      for(final Map.Entry<String, List<TextEdit>> entry : _entrySet) {
-        _builder.append("\t");
-        String _lastSegment = org.eclipse.emf.common.util.URI.createURI(entry.getKey()).lastSegment();
-        _builder.append(_lastSegment, "\t");
-        _builder.append(" : ");
-        String _expectation = this.toExpectation(entry.getValue());
-        _builder.append(_expectation, "\t");
-        _builder.newLineIfNotEmpty();
+      Map<String, List<TextEdit>> _changes = it.getChanges();
+      boolean _tripleNotEquals = (_changes != null);
+      if (_tripleNotEquals) {
+        {
+          Set<Map.Entry<String, List<TextEdit>>> _entrySet = it.getChanges().entrySet();
+          for(final Map.Entry<String, List<TextEdit>> entry : _entrySet) {
+            _builder.append("\t");
+            String _lastSegment = org.eclipse.emf.common.util.URI.createURI(entry.getKey()).lastSegment();
+            _builder.append(_lastSegment, "\t");
+            _builder.append(" : ");
+            String _expectation = this.toExpectation(entry.getValue());
+            _builder.append(_expectation, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     _builder.append("documentChanges : ");
     _builder.newLine();
-    _builder.append("\t");
-    String _expectation_1 = this.toExpectation(it.getDocumentChanges());
-    _builder.append(_expectation_1, "\t");
+    {
+      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(it.getDocumentChanges());
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        {
+          final Function1<Either<TextDocumentEdit, ResourceOperation>, Boolean> _function = (Either<TextDocumentEdit, ResourceOperation> it_1) -> {
+            return Boolean.valueOf(it_1.isLeft());
+          };
+          final Function1<Either<TextDocumentEdit, ResourceOperation>, TextDocumentEdit> _function_1 = (Either<TextDocumentEdit, ResourceOperation> it_1) -> {
+            return it_1.getLeft();
+          };
+          Iterable<TextDocumentEdit> _map = IterableExtensions.<Either<TextDocumentEdit, ResourceOperation>, TextDocumentEdit>map(IterableExtensions.<Either<TextDocumentEdit, ResourceOperation>>filter(it.getDocumentChanges(), _function), _function_1);
+          for(final TextDocumentEdit entry_1 : _map) {
+            _builder.append("\t");
+            String _expectation_1 = this.toExpectation(entry_1);
+            _builder.append(_expectation_1, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          final Function1<Either<TextDocumentEdit, ResourceOperation>, Boolean> _function_2 = (Either<TextDocumentEdit, ResourceOperation> it_1) -> {
+            return Boolean.valueOf(it_1.isRight());
+          };
+          final Function1<Either<TextDocumentEdit, ResourceOperation>, ResourceOperation> _function_3 = (Either<TextDocumentEdit, ResourceOperation> it_1) -> {
+            return it_1.getRight();
+          };
+          Iterable<ResourceOperation> _map_1 = IterableExtensions.<Either<TextDocumentEdit, ResourceOperation>, ResourceOperation>map(IterableExtensions.<Either<TextDocumentEdit, ResourceOperation>>filter(it.getDocumentChanges(), _function_2), _function_3);
+          for(final ResourceOperation entry_2 : _map_1) {
+            _builder.append("\t");
+            String _expectation_2 = this.toExpectation(entry_2);
+            _builder.append(_expectation_2, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final ResourceOperation it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("kind : ");
+    String _kind = it.getKind();
+    _builder.append(_kind);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -1514,6 +1562,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((Position)it);
     } else if (it instanceof Range) {
       return _toExpectation((Range)it);
+    } else if (it instanceof ResourceOperation) {
+      return _toExpectation((ResourceOperation)it);
     } else if (it instanceof SignatureHelp) {
       return _toExpectation((SignatureHelp)it);
     } else if (it instanceof SymbolInformation) {

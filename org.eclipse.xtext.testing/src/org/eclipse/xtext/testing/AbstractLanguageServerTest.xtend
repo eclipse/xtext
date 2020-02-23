@@ -52,6 +52,7 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.ResourceOperation
 import org.eclipse.lsp4j.SemanticHighlightingInformation
 import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
@@ -63,6 +64,7 @@ import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.eclipse.lsp4j.WorkspaceEdit
+import org.eclipse.lsp4j.WorkspaceFolder
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
@@ -89,7 +91,6 @@ import org.junit.jupiter.api.BeforeEach
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
-import org.eclipse.lsp4j.WorkspaceFolder
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -430,11 +431,24 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected dispatch def String toExpectation(WorkspaceEdit it) '''
 		changes :
-			«FOR entry : changes.entrySet»
-				«URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
-			«ENDFOR» 
+			«IF changes !== null»
+				«FOR entry : changes.entrySet»
+					«URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
+				«ENDFOR»
+			«ENDIF»
 		documentChanges : 
-			«documentChanges.toExpectation»
+			«IF !documentChanges.nullOrEmpty»
+				«FOR entry: documentChanges.filter[isLeft].map[getLeft]»
+					«entry.toExpectation»
+				«ENDFOR»
+				«FOR entry: documentChanges.filter[isRight].map[getRight]»
+					«entry.toExpectation»
+				«ENDFOR»
+			«ENDIF»
+	'''
+	
+	protected dispatch def String toExpectation(ResourceOperation it) '''
+		kind : «kind»
 	'''
 	
 	protected dispatch def String toExpectation(CodeAction it)  '''
