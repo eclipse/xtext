@@ -117,6 +117,8 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			}
 		}
 		final IDocument document = sourceViewer.getDocument();
+		if (document == null)
+			return new ICompletionProposal[0];
 		final IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
 		List<ICompletionProposal> result = Lists.newArrayList();
 		try {
