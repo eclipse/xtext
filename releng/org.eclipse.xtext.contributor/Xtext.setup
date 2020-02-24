@@ -177,7 +177,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.egit"
-      value="https://download.eclipse.org/egit/updates"/>
+      value="https://download.eclipse.org/egit/updates-nightly"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
