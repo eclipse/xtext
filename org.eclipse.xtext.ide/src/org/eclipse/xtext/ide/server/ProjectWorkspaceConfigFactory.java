@@ -18,7 +18,10 @@ import org.eclipse.xtext.workspace.WorkspaceConfig;
  *
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
+ * @deprecated use the {@link MultiRootWorkspaceConfigFactory} instead.
+ * 			   This class is scheduled to be removed with 2.22.
  */
+@Deprecated//(forRemoval=true)
 public class ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
 	@Override
 	public IWorkspaceConfig getWorkspaceConfig(URI workspaceBaseURI) {
