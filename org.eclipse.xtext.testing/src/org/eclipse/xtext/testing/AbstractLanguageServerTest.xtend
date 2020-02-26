@@ -53,6 +53,7 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.ResourceOperation
 import org.eclipse.lsp4j.SemanticHighlightingInformation
 import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
@@ -452,11 +453,24 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected dispatch def String toExpectation(WorkspaceEdit it) '''
 		changes :
-			«FOR entry : changes.entrySet»
-				«URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
-			«ENDFOR» 
+			«IF changes !== null»
+				«FOR entry : changes.entrySet»
+					«URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
+				«ENDFOR»
+			«ENDIF»
 		documentChanges : 
-			«documentChanges.toExpectation»
+			«IF !documentChanges.nullOrEmpty»
+				«FOR entry: documentChanges.filter[isLeft].map[getLeft]»
+					«entry.toExpectation»
+				«ENDFOR»
+				«FOR entry: documentChanges.filter[isRight].map[getRight]»
+					«entry.toExpectation»
+				«ENDFOR»
+			«ENDIF»
+	'''
+	
+	protected dispatch def String toExpectation(ResourceOperation it) '''
+		kind : «kind»
 	'''
 	
 	protected dispatch def String toExpectation(CodeAction it)  '''
