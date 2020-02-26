@@ -14,7 +14,10 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
+ * @deprecated use the {@link IMultiRootWorkspaceConfigFactory} instead.
+ * 			   This interface is scheduled to be removed with 2.22.
  */
+@Deprecated//(forRemoval=true)
 public interface IWorkspaceConfigFactory {
 	/**
 	 * Create a workspace config at the given location.
