@@ -27,6 +27,7 @@ import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.MarkupContent;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.ResourceOperation;
 import org.eclipse.lsp4j.SemanticHighlightingInformation;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SymbolInformation;
@@ -374,6 +375,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       return _toExpectation((Position)it);
     } else if (it instanceof Range) {
       return _toExpectation((Range)it);
+    } else if (it instanceof ResourceOperation) {
+      return _toExpectation((ResourceOperation)it);
     } else if (it instanceof SignatureHelp) {
       return _toExpectation((SignatureHelp)it);
     } else if (it instanceof SymbolInformation) {
