@@ -12,7 +12,6 @@ import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.wizard.Scope;
 
 public class ExternalDependency {
 	public static class MavenCoordinates {
