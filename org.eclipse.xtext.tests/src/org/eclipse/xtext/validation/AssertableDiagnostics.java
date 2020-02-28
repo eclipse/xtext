@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;

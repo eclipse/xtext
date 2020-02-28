@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
-import org.eclipse.xtext.validation.AbstractInjectableValidator;
-import org.eclipse.xtext.validation.EValidatorRegistrar;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
