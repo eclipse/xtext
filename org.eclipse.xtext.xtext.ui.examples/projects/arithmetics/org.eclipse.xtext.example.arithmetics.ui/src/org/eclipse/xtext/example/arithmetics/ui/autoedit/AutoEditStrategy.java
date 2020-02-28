@@ -11,7 +11,6 @@ package org.eclipse.xtext.example.arithmetics.ui.autoedit;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtext.example.arithmetics.ui.autoedit.InterpreterAutoEdit;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 

@@ -9,7 +9,6 @@
 package org.eclipse.xtext.builder.debug;
 
 import com.google.inject.ImplementedBy;
-import org.eclipse.xtext.builder.debug.XtextBuildConsole;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
