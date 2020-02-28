@@ -9,7 +9,6 @@
 package org.eclipse.xtext.web.server;
 
 import java.util.Set;
-import org.eclipse.xtext.web.server.ISession;
 
 /**
  * Provides the parameters and meta data of a service request.
