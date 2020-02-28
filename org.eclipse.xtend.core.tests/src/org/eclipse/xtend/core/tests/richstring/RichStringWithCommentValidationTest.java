@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.richstring;
 
 import java.util.List;
 
-import org.eclipse.xtend.core.tests.richstring.CommentInserter;
 import org.eclipse.xtend.core.tests.validation.RichStringValidationTest;
 
 import com.google.inject.Inject;

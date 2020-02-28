@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.richstring;
 
 import java.util.List;
 
-import org.eclipse.xtend.core.tests.richstring.CommentInserter;
 import org.eclipse.xtend.core.tests.richstring.RichStringCompilerTest;
 import org.junit.Ignore;
 import org.junit.Test;

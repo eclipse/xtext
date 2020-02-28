@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.linking;
 
-import org.eclipse.xtend.core.tests.linking.InheritedStaticMethodTest;
 import org.eclipse.xtend.core.tests.typesystem.BatchLinkingServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
