@@ -12,7 +12,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.java.JavaSourceLanguageRuntimeModule;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 public class JavaSourceLanguageSetup implements ISetup {
