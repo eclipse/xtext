@@ -11,7 +11,6 @@ package org.eclipse.xtext.builder.impl.javasupport;
 import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.impl.javasupport.UnconfirmedStructuralChangesDelta;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.notification.DeltaConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
