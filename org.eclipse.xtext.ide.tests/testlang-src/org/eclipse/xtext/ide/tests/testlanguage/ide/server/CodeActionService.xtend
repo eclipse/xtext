@@ -38,7 +38,7 @@ class CodeActionService implements ICodeActionService2 {
 	override getCodeActions(Options options) {
 		val actions = newArrayList
 		for (d : options.codeActionParams.context.diagnostics) {
-			switch d.code {
+			switch d.code.get {
 				case INVALID_NAME: actions += Either.forLeft(d.fixInvalidName(options))
 				case UNSORTED_MEMBERS: actions += Either.forRight(d.fixUnsortedMembers(options))
 			}

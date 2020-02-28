@@ -1024,10 +1024,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append("codes : ");
-        final Function1<Diagnostic, String> _function = (Diagnostic it_1) -> {
-          return it_1.getCode();
+        final Function1<Diagnostic, Object> _function = (Diagnostic it_1) -> {
+          return it_1.getCode().get();
         };
-        String _join = IterableExtensions.join(ListExtensions.<Diagnostic, String>map(it.getDiagnostics(), _function), ",");
+        String _join = IterableExtensions.join(ListExtensions.<Diagnostic, Object>map(it.getDiagnostics(), _function), ",");
         _builder.append(_join);
       }
     }

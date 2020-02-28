@@ -477,7 +477,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		title : «title»
 		kind : «kind»
 		command : «command»
-		«IF !diagnostics.nullOrEmpty»codes : «diagnostics.map[code].join(',')»«ENDIF»
+		«IF !diagnostics.nullOrEmpty»codes : «diagnostics.map[code.get].join(',')»«ENDIF»
 		edit : «edit.toExpectation»
 	'''
 	

@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide.server;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -57,17 +58,18 @@ public class CodeActionService implements ICodeActionService2 {
     final ArrayList<Either<Command, CodeAction>> actions = CollectionLiterals.<Either<Command, CodeAction>>newArrayList();
     List<Diagnostic> _diagnostics = options.getCodeActionParams().getContext().getDiagnostics();
     for (final Diagnostic d : _diagnostics) {
-      String _code = d.getCode();
-      if (_code != null) {
-        switch (_code) {
-          case TestLanguageValidator.INVALID_NAME:
-            Either<Command, CodeAction> _forLeft = Either.<Command, CodeAction>forLeft(this.fixInvalidName(d, options));
-            actions.add(_forLeft);
-            break;
-          case TestLanguageValidator.UNSORTED_MEMBERS:
-            Either<Command, CodeAction> _forRight = Either.<Command, CodeAction>forRight(this.fixUnsortedMembers(d, options));
-            actions.add(_forRight);
-            break;
+      Object _get = d.getCode().get();
+      boolean _matched = false;
+      if (Objects.equal(_get, TestLanguageValidator.INVALID_NAME)) {
+        _matched=true;
+        Either<Command, CodeAction> _forLeft = Either.<Command, CodeAction>forLeft(this.fixInvalidName(d, options));
+        actions.add(_forLeft);
+      }
+      if (!_matched) {
+        if (Objects.equal(_get, TestLanguageValidator.UNSORTED_MEMBERS)) {
+          _matched=true;
+          Either<Command, CodeAction> _forRight = Either.<Command, CodeAction>forRight(this.fixUnsortedMembers(d, options));
+          actions.add(_forRight);
         }
       }
     }
