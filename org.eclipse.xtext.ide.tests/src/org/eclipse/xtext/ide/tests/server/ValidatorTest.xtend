@@ -32,7 +32,7 @@ class ValidatorTest extends AbstractTestLangLanguageServerTest {
 		assertEquals("problems found:\n" + problems.join("\n"), 1, problems.size)
 		val problem = problems.head
 		assertEquals("Test Validation to mark the whole type", problem.message)
-		assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.code)
+		assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.code.get)
 		val range = problem.range
 		assertEquals(0, range.start.line)
 		assertEquals(0, range.start.character)
@@ -50,7 +50,7 @@ class ValidatorTest extends AbstractTestLangLanguageServerTest {
 		assertEquals("problems found:\n" + problems.join("\n"), 1, problems.size)
 		val problem = problems.head
 		assertEquals("Test Validation to mark the whole type", problem.message)
-		assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.code)
+		assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.code.get)
 		val range = problem.range
 		assertEquals(0, range.start.line)
 		assertEquals(0, range.start.character)
@@ -70,7 +70,7 @@ class ValidatorTest extends AbstractTestLangLanguageServerTest {
 		assertEquals("problems found:\n" + problems.join("\n"), 1, problems.size)
 		val problem = problems.head
 		assertEquals("Name should start with a capital", problem.message)
-		assertEquals(TestLanguageValidator.INVALID_NAME, problem.code)
+		assertEquals(TestLanguageValidator.INVALID_NAME, problem.code.get)
 		val range = problem.range
 		assertEquals(0, range.start.line)
 		assertEquals(5, range.start.character)
@@ -90,7 +90,7 @@ class ValidatorTest extends AbstractTestLangLanguageServerTest {
 		assertEquals("problems found:\n" + problems.join("\n"), 1, problems.size)
 		val problem = problems.head
 		assertEquals("mismatched input '<EOF>' expecting RULE_ID", problem.message)
-		assertEquals(Diagnostic.SYNTAX_DIAGNOSTIC, problem.code)
+		assertEquals(Diagnostic.SYNTAX_DIAGNOSTIC, problem.code.get)
 		val range = problem.range
 		assertEquals(0, range.start.line)
 		assertEquals(4, range.start.character)

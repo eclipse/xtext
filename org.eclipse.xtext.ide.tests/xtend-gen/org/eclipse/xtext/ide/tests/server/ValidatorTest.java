@@ -40,7 +40,7 @@ public class ValidatorTest extends AbstractTestLangLanguageServerTest {
     Assert.assertEquals(_plus, 1, problems.size());
     final Diagnostic problem = IterableExtensions.<Diagnostic>head(problems);
     this.assertEquals("Test Validation to mark the whole type", problem.getMessage());
-    this.assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.getCode());
+    Assert.assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.getCode().get());
     final Range range = problem.getRange();
     Assert.assertEquals(0, range.getStart().getLine());
     Assert.assertEquals(0, range.getStart().getCharacter());
@@ -63,7 +63,7 @@ public class ValidatorTest extends AbstractTestLangLanguageServerTest {
     Assert.assertEquals(_plus, 1, problems.size());
     final Diagnostic problem = IterableExtensions.<Diagnostic>head(problems);
     this.assertEquals("Test Validation to mark the whole type", problem.getMessage());
-    this.assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.getCode());
+    Assert.assertEquals(TestLanguageValidator.MULTILINE_PROBLEM, problem.getCode().get());
     final Range range = problem.getRange();
     Assert.assertEquals(0, range.getStart().getLine());
     Assert.assertEquals(0, range.getStart().getCharacter());
@@ -88,7 +88,7 @@ public class ValidatorTest extends AbstractTestLangLanguageServerTest {
     Assert.assertEquals(_plus, 1, problems.size());
     final Diagnostic problem = IterableExtensions.<Diagnostic>head(problems);
     this.assertEquals("Name should start with a capital", problem.getMessage());
-    this.assertEquals(TestLanguageValidator.INVALID_NAME, problem.getCode());
+    Assert.assertEquals(TestLanguageValidator.INVALID_NAME, problem.getCode().get());
     final Range range = problem.getRange();
     Assert.assertEquals(0, range.getStart().getLine());
     Assert.assertEquals(5, range.getStart().getCharacter());
@@ -109,7 +109,7 @@ public class ValidatorTest extends AbstractTestLangLanguageServerTest {
     Assert.assertEquals(_plus, 1, problems.size());
     final Diagnostic problem = IterableExtensions.<Diagnostic>head(problems);
     this.assertEquals("mismatched input \'<EOF>\' expecting RULE_ID", problem.getMessage());
-    this.assertEquals(org.eclipse.xtext.diagnostics.Diagnostic.SYNTAX_DIAGNOSTIC, problem.getCode());
+    Assert.assertEquals(org.eclipse.xtext.diagnostics.Diagnostic.SYNTAX_DIAGNOSTIC, problem.getCode().get());
     final Range range = problem.getRange();
     Assert.assertEquals(0, range.getStart().getLine());
     Assert.assertEquals(4, range.getStart().getCharacter());
