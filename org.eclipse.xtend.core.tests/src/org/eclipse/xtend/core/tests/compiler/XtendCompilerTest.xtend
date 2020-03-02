@@ -5044,6 +5044,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package annotation Foo {
 			}
 		''', '''
+			@SuppressWarnings("all")
 			@interface Foo {
 			}
 		''')

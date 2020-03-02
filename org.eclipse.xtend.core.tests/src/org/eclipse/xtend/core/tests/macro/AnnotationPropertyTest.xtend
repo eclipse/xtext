@@ -43,6 +43,7 @@ class AnnotationPropertyTest extends AbstractActiveAnnotationTest {
 			
 			File 2 : /myProject/xtend-gen/CAnno.java
 			
+			@SuppressWarnings("all")
 			public @interface CAnno {
 			  /**
 			   * Best building strategy game ever
@@ -73,6 +74,7 @@ class AnnotationPropertyTest extends AbstractActiveAnnotationTest {
 			
 			File 2 : /myProject/xtend-gen/CAnno.java
 			
+			@SuppressWarnings("all")
 			public @interface CAnno {
 			  /**
 			   * Best building strategy game ever

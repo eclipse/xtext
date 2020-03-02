@@ -218,6 +218,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -239,6 +241,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -260,6 +264,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -281,6 +287,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -302,6 +310,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -323,6 +333,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -344,6 +356,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -378,6 +392,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@Documented");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public @interface Bar {");
     _builder_1.newLine();
@@ -455,6 +471,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface bar {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -482,6 +500,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface MyAnnotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -518,6 +538,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface MyAnnotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -554,6 +576,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface annotation {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -690,6 +714,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface A {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -757,6 +783,8 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.lang.annotation.Annotation;");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public @interface MyAnno {");
     _builder_1.newLine();

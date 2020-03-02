@@ -11119,6 +11119,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("@interface Foo {");
     _builder_1.newLine();
     _builder_1.append("}");

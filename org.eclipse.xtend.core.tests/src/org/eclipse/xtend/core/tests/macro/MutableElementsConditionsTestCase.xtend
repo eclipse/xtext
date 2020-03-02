@@ -71,6 +71,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				
 				package foo;
 				
+				@SuppressWarnings("all")
 				public @interface Bar2 {
 				}
 				
