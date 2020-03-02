@@ -366,35 +366,6 @@ public class WorkspaceManager {
 	}
 
 	/**
-	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s. Use
-	 *             {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
-	 *             This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	public List<IResourceDescription.Delta> didChange(URI uri, Integer version, Iterable<TextEdit> changes,
-			CancelIndicator cancelIndicator) {
-		return didChange(uri, version, changes).build(cancelIndicator);
-	}
-
-	/**
-	 * @param version
-	 *            unused
-	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s. Use
-	 *             {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
-	 *             This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	public BuildManager.Buildable didChange(URI uri, Integer version, Iterable<TextEdit> changes) {
-		Document contents = openDocuments.get(uri);
-		if (contents == null) {
-			LOG.error("The document " + uri + " has not been opened.");
-			return Buildable.NO_BUILD;
-		}
-		openDocuments.put(uri, contents.applyChanges(changes));
-		return didChangeFiles(ImmutableList.of(uri), Collections.emptyList());
-	}
-
-	/**
 	 * As opposed to {@link TextEdit}[] the positions in the edits of a {@link DidChangeTextDocumentParams} refer to the
 	 * state after applying the preceding edits. See
 	 * https://microsoft.github.io/language-server-protocol/specification#textedit-1 and
@@ -432,14 +403,6 @@ public class WorkspaceManager {
 	public BuildManager.Buildable didOpen(URI uri, Integer version, String contents) {
 		openDocuments.put(uri, new Document(version, contents));
 		return didChangeFiles(ImmutableList.of(uri), Collections.emptyList());
-	}
-
-	/**
-	 * @deprecated this method is no longer called. This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	public List<IResourceDescription.Delta> didClose(URI uri, CancelIndicator cancelIndicator) {
-		return didClose(uri).build(cancelIndicator);
 	}
 
 	/**

@@ -32,11 +32,6 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
 		return SignatureHelpServiceImpl.class;
 	}
 
-	@Deprecated
-	public Class<? extends  org.eclipse.xtext.ide.server.coloring.IColoringService> bindIColoringService() {
-		return org.eclipse.xtext.ide.tests.testlanguage.coloring.ColoringServiceImpl.class;
-	}
-
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlightingCalculatorImpl.class;
 	}

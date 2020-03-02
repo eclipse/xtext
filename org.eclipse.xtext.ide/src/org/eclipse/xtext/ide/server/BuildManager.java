@@ -143,16 +143,6 @@ public class BuildManager {
 	}
 
 	/**
-	 * @deprecated this method is no longer used
-	 * This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	public List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles,
-			CancelIndicator cancelIndicator) {
-		return submit(dirtyFiles, deletedFiles).build(cancelIndicator);
-	}
-
-	/**
 	 * Update the contents of the given set.
 	 */
 	protected void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {

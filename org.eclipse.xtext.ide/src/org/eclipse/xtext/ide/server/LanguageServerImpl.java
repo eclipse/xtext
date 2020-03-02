@@ -29,8 +29,6 @@ import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensOptions;
 import org.eclipse.lsp4j.CodeLensParams;
-import org.eclipse.lsp4j.ColoringInformation;
-import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
@@ -100,18 +98,15 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
-import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.BuildManager.Buildable;
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
-import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
@@ -119,7 +114,6 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
-import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.rename.IRenameService2;
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
@@ -129,13 +123,11 @@ import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.BufferedCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.base.Objects;
@@ -152,7 +144,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@SuppressWarnings({ "deprecation" })
 public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware,
 		Endpoint, JsonRpcMethodProvider, ILanguageServerAccess.IBuildListener {
 
@@ -262,8 +253,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			serverCapabilities.setCodeLensProvider(codeLensOptions);
 		}
 		serverCapabilities.setCodeActionProvider(allLanguages.stream()
-				.anyMatch((serviceProvider) -> serviceProvider.get(ICodeActionService.class) != null
-						|| serviceProvider.get(ICodeActionService2.class) != null));
+				.anyMatch((serviceProvider) -> serviceProvider.get(ICodeActionService2.class) != null));
 
 		serverCapabilities.setSignatureHelpProvider(new SignatureHelpOptions(ImmutableList.of("(", ",")));
 		serverCapabilities.setTextDocumentSync(TextDocumentSyncKind.Incremental);
@@ -298,8 +288,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			serverCapabilities.setRenameProvider(Either.<Boolean, RenameOptions>forRight(renameOptions));
 		} else {
 			serverCapabilities.setRenameProvider(Either.forLeft(allLanguages.stream()
-					.anyMatch((serviceProvider) -> serviceProvider.get(IRenameService.class) != null
-							|| serviceProvider.get(IRenameService2.class) != null)));
+					.anyMatch((serviceProvider) -> serviceProvider.get(IRenameService2.class) != null)));
 		}
 		WorkspaceClientCapabilities workspace = null;
 		if (clientCapabilities != null) {
@@ -559,7 +548,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		}
 		BufferedCancelIndicator cancelIndicator = new BufferedCancelIndicator(originalCancelIndicator);
 		return Either.forRight(workspaceManager.doRead(uri,
-				(doc, res) -> contentAssistService.createCompletionList(doc, res, (TextDocumentPositionParams) params, cancelIndicator)));
+				(doc, res) -> contentAssistService.createCompletionList(doc, res, params, cancelIndicator)));
 	}
 
 	/**
@@ -611,7 +600,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			return Collections.emptyList();
 		}
 		return workspaceManager.doRead(uri,
-				(doc, res) -> documentSymbolService.getDefinitions(doc, res, (TextDocumentPositionParams) params, resourceAccess, cancelIndicator));
+				(doc, res) -> documentSymbolService.getDefinitions(doc, res, params, resourceAccess, cancelIndicator));
 	}
 
 	@Override
@@ -722,7 +711,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			return IHoverService.EMPTY_HOVER;
 		}
 		return workspaceManager.<Hover>doRead(uri,
-				(document, resource) -> hoverService.hover(document, resource, (TextDocumentPositionParams) params, cancelIndicator));
+				(document, resource) -> hoverService.hover(document, resource, params, cancelIndicator));
 	}
 
 	@Override
@@ -746,7 +735,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			return ISignatureHelpService.EMPTY;
 		}
 		return workspaceManager.doRead(uri,
-				(doc, resource) -> helper.getSignatureHelp(doc, resource, (TextDocumentPositionParams) params, cancelIndicator));
+				(doc, resource) -> helper.getSignatureHelp(doc, resource, params, cancelIndicator));
 	}
 
 	@Override
@@ -766,7 +755,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			return Collections.emptyList();
 		}
 		return workspaceManager.doRead(uri,
-				(doc, resource) -> service.getDocumentHighlights(doc, resource, (TextDocumentPositionParams) params, cancelIndicator));
+				(doc, resource) -> service.getDocumentHighlights(doc, resource, params, cancelIndicator));
 	}
 
 	@Override
@@ -781,20 +770,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	protected List<Either<Command, CodeAction>> codeAction(CodeActionParams params, CancelIndicator cancelIndicator) {
 		URI uri = getURI(params.getTextDocument());
 		IResourceServiceProvider serviceProvider = getResourceServiceProvider(uri);
-		ICodeActionService service = getService(serviceProvider, ICodeActionService.class);
 		ICodeActionService2 service2 = getService(serviceProvider, ICodeActionService2.class);
-		if (service == null && service2 == null) {
+		if (service2 == null) {
 			return Collections.emptyList();
 		}
 		return workspaceManager.doRead(uri, (doc, resource) -> {
 			List<Either<Command, CodeAction>> result = new ArrayList<>();
-			if (service != null) {
-				List<Either<Command, CodeAction>> actions = service.getCodeActions(doc, resource, params,
-						cancelIndicator);
-				if (actions != null) {
-					result.addAll(actions);
-				}
-			}
 			if (service2 != null) {
 				ICodeActionService2.Options options = new ICodeActionService2.Options();
 				options.setDocument(doc);
@@ -988,10 +969,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		URI uri = getURI(renameParams.getTextDocument());
 
 		IResourceServiceProvider resourceServiceProvider = getResourceServiceProvider(uri);
-		IRenameService renameServiceOld = getService(resourceServiceProvider, IRenameService.class);
-		if (renameServiceOld != null) {
-			return renameServiceOld.rename(workspaceManager, renameParams, cancelIndicator);
-		}
 		IRenameService2 renameService2 = getService(resourceServiceProvider, IRenameService2.class);
 		if (renameService2 != null) {
 			IRenameService2.Options options = new IRenameService2.Options();
@@ -1160,23 +1137,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		FluentIterable.from(deltas).filter(it -> it.getNew() != null).transform(it -> it.getUri().toString())
 				.forEach(it -> {
 					access.doRead(it, ctx -> {
-						if (ctx.isDocumentOpen()) {
-							if (ctx.getResource() instanceof XtextResource) {
-								XtextResource resource = (XtextResource) ctx.getResource();
-								IColoringService coloringService = resource.getResourceServiceProvider()
-										.get(IColoringService.class);
-								if (coloringService != null && client instanceof LanguageClientExtensions) {
-									Document doc = ctx.getDocument();
-									List<? extends ColoringInformation> coloringInfos = coloringService
-											.getColoring(resource, doc);
-									if (!IterableExtensions.isNullOrEmpty(coloringInfos)) {
-										String uri = resource.getURI().toString();
-										((LanguageClientExtensions) client)
-												.updateColoring(new ColoringParams(uri, coloringInfos));
-									}
-								}
-							}
-						}
 						semanticHighlightingRegistry.update(ctx);
 						return null;
 					});

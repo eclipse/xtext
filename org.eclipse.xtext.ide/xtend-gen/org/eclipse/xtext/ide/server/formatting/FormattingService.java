@@ -13,8 +13,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.FormattingOptions;
@@ -34,7 +32,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -49,42 +46,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class FormattingService {
-  private static class OverrideChecker {
-    private static final Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>();
-    
-    public static boolean hasFormatOverride(final Class<? extends FormattingService> formattingServiceClass) {
-      Boolean result = FormattingService.OverrideChecker.CLASSES_WITH_OVERRIDES.get(formattingServiceClass);
-      if ((result == null)) {
-        try {
-          result = Boolean.FALSE;
-          Class<?> theClass = formattingServiceClass;
-          while (((!(result).booleanValue()) && (theClass != FormattingService.class))) {
-            {
-              try {
-                theClass.getDeclaredMethod("format", XtextResource.class, Document.class, Integer.TYPE, Integer.TYPE);
-                result = Boolean.TRUE;
-              } catch (final Throwable _t) {
-                if (_t instanceof NoSuchMethodException) {
-                } else {
-                  throw Exceptions.sneakyThrow(_t);
-                }
-              }
-              theClass = theClass.getSuperclass();
-            }
-          }
-        } catch (final Throwable _t) {
-          if (_t instanceof Exception) {
-            result = Boolean.TRUE;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        FormattingService.OverrideChecker.CLASSES_WITH_OVERRIDES.put(formattingServiceClass, result);
-      }
-      return (result).booleanValue();
-    }
-  }
-  
   @Inject(optional = true)
   private Provider<IFormatter2> formatter2Provider;
   
@@ -103,10 +64,6 @@ public class FormattingService {
     if (((length == 0) || resource.getContents().isEmpty())) {
       return CollectionLiterals.<TextEdit>emptyList();
     }
-    boolean _hasFormatOverride = FormattingService.OverrideChecker.hasFormatOverride(this.getClass());
-    if (_hasFormatOverride) {
-      return this.format(resource, document, offset, length);
-    }
     return this.format(resource, document, offset, length, params.getOptions());
   }
   
@@ -114,20 +71,7 @@ public class FormattingService {
     final int offset = document.getOffSet(params.getRange().getStart());
     int _offSet = document.getOffSet(params.getRange().getEnd());
     final int length = (_offSet - offset);
-    boolean _hasFormatOverride = FormattingService.OverrideChecker.hasFormatOverride(this.getClass());
-    if (_hasFormatOverride) {
-      return this.format(resource, document, offset, length);
-    }
     return this.format(resource, document, offset, length, params.getOptions());
-  }
-  
-  /**
-   * @deprecated use {@link #format(XtextResource, Document, int, int, FormattingOptions)} instead.
-   *             This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length) {
-    return this.format(resource, document, offset, length, null);
   }
   
   /**

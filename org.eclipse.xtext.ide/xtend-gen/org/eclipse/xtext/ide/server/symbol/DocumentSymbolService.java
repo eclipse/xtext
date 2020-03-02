@@ -29,7 +29,6 @@ import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
@@ -102,18 +101,6 @@ public class DocumentSymbolService implements IDocumentSymbolService {
   
   @Inject
   private HierarchicalDocumentSymbolService hierarchicalDocumentSymbolService;
-  
-  /**
-   * @deprecated please override/call {@link #getDefinitions(Document,XtextResource,DefinitionParams,IReferenceFinder.IResourceAccess,CancelIndicator)} instead.
-   * This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  public List<? extends Location> getDefinitions(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
-    if ((params instanceof DefinitionParams)) {
-      return this.getDefinitions(document, resource, ((DefinitionParams) params), resourceAccess, cancelIndicator);
-    }
-    throw new IllegalArgumentException("params is not a DefinitionParams");
-  }
   
   /**
    * @since 2.21

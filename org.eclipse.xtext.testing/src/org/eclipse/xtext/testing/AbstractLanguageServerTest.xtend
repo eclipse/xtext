@@ -393,14 +393,6 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		return sb.toString;
 	}
 
-	/**
-	 * @deprecated This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	protected dispatch def String toExpectation(org.eclipse.lsp4j.ColoringInformation it) {
-		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
-	}
-
 	protected dispatch def String toExpectation(Pair<SemanticHighlightingInformation, List<List<String>>> it) {
 		val sb = new StringBuilder()
 		val tokens = SemanticHighlightingTokens.decode(key.tokens).sort;
@@ -751,16 +743,6 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 				result.put(diagnostic.uri, diagnostic.diagnostics)
 			}
 			return result 
-		].get
-	}
-
-	/**
-	 * @deprecated This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	protected def getColoringParams() {
-		languageServer.requestManager.runRead[
-			return notifications.map[value].filter(org.eclipse.lsp4j.ColoringParams).toMap([uri], [infos]);
 		].get
 	}
 

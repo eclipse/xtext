@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentHighlightParams;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -33,42 +32,10 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(DefaultDocumentHighlightService.class)
 public interface IDocumentHighlightService {
-	
-	/**
-	 * @deprecated please override/call {@link #getDocumentHighlights(Document, XtextResource, DocumentHighlightParams, CancelIndicator)} instead.
-	 * This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(since="2.21",forRemoval=true)
-	default List<? extends DocumentHighlight> getDocumentHighlights(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
-		if (params instanceof DocumentHighlightParams) {
-			return getDocumentHighlights(document, resource, (DocumentHighlightParams) params, cancelIndicator);
-		}
-		throw new IllegalArgumentException("params is not a DocumentHighlightParams");
-	}
 
 	/**
 	 * @since 2.21
 	 */
 	List<? extends DocumentHighlight> getDocumentHighlights(Document document, XtextResource resource, DocumentHighlightParams params, CancelIndicator cancelIndicator);
-	
-	/**
-	 * Returns with a list of {@link DocumentHighlight document highlight}
-	 * instances that matches with the given text from the resource at the given
-	 * offset.
-	 * 
-	 * @param resource
-	 *            the resource that represents the document where matching
-	 *            highlights have to be collected.
-	 * @param offset
-	 *            the offset used to identify the selected text from the
-	 *            resource.
-	 * 
-	 * @return a list of document highlight instances that matches with the
-	 *         selected text based on an arbitrary logic. Might return with an
-	 *         empty list but never returns with {@code null}.
-	 * @deprecated This method is scheduled to be removed with 2.22.        
-	 */
-	@Deprecated//(forRemoval=true)
-	List<? extends DocumentHighlight> getDocumentHighlights(final XtextResource resource, final int offset);
 
 }

@@ -8,28 +8,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.formatting
 
+import com.google.common.base.Strings
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
 import org.eclipse.lsp4j.DocumentFormattingParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
+import org.eclipse.lsp4j.FormattingOptions
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.xtext.formatting.IIndentationInformation
 import org.eclipse.xtext.formatting2.FormatterRequest
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.preferences.ITypedPreferenceValues
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues
-import com.google.common.base.Strings
-import org.eclipse.lsp4j.FormattingOptions
-import java.util.Map
-import java.util.concurrent.ConcurrentHashMap
-import org.eclipse.xtext.formatting.IIndentationInformation
 
 /**
  * Language Service Implementation for Formatting and Range-Formatting
@@ -58,9 +56,6 @@ class FormattingService {
 		if (length === 0 || resource.contents.isEmpty) {
 			return emptyList
 		}
-		if (OverrideChecker.hasFormatOverride(class)) {
-			return format(resource, document, offset, length)
-		}
 		return format(resource, document, offset, length, params.options)
 	}
 
@@ -72,19 +67,7 @@ class FormattingService {
 	) {
 		val offset = document.getOffSet(params.range.start)
 		val length = document.getOffSet(params.range.end) - offset
-		if (OverrideChecker.hasFormatOverride(class)) {
-			return format(resource, document, offset, length)
-		}
 		return format(resource, document, offset, length, params.options)
-	}
-	
-	/**
-	 * @deprecated use {@link #format(XtextResource, Document, int, int, FormattingOptions)} instead.
-	 *             This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length) {
-		format(resource, document, offset, length, null)
 	}
 
 	/**
@@ -135,30 +118,5 @@ class FormattingService {
 		val replacements = formatter2.format(request)
 		return replacements
 	}
-	
-	private static class OverrideChecker {
-		static val Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>()
-		def static boolean hasFormatOverride(Class<? extends FormattingService> formattingServiceClass) {
-			var Boolean result = CLASSES_WITH_OVERRIDES.get(formattingServiceClass)
-			if (result === null) {
-				try {
-					result = Boolean.FALSE
-					var Class<?> theClass = formattingServiceClass
-					while (!result && theClass !== FormattingService) {
-						try {
-							theClass.getDeclaredMethod("format", XtextResource, Document, Integer.TYPE, Integer.TYPE)
-							result = Boolean.TRUE
-						} catch (NoSuchMethodException noSuchMethodException) {
-						}
-						theClass = theClass.getSuperclass()
-					}
-				} catch (Exception exception) {
-					result = Boolean.TRUE
-				}
-				CLASSES_WITH_OVERRIDES.put(formattingServiceClass, result)
-			}
-			return result
-		}
-}
 
 }
