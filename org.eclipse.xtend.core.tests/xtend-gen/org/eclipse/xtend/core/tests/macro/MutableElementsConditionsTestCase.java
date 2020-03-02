@@ -74,6 +74,8 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface Bar2 {");
     _builder_1.newLine();
     _builder_1.append("}");

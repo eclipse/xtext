@@ -111,6 +111,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				String[] value
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public String[] value();
 			}
@@ -124,6 +125,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				String[] value = #[]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public String[] value() default {};
 			}
@@ -137,6 +139,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				String[] value = #[ 'abc', 'efg' ]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public String[] value() default { "abc", "efg" };
 			}
@@ -150,6 +153,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				int[] value = #[ 1, 2 ]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public int[] value() default { 1, 2 };
 			}
@@ -163,6 +167,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				boolean[] value = #[ true, true ]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public boolean[] value() default { true, true };
 			}
@@ -176,6 +181,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				long[] value = #[ 1l, 2l ]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public long[] value() default { 1l, 2l };
 			}
@@ -189,6 +195,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				Class<?>[] value = #[ typeof(String), typeof(CharSequence) ]
 			}
 		''', '''
+			@SuppressWarnings("all")
 			public @interface DependsOn {
 			  public Class<?>[] value() default { String.class, CharSequence.class };
 			}
@@ -210,6 +217,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			import java.lang.annotation.Documented;
 			
 			@Documented
+			@SuppressWarnings("all")
 			public @interface Bar {
 			  @Inject
 			  public String string();
@@ -246,6 +254,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			 */
 			package foo;
 			
+			@SuppressWarnings("all")
 			public @interface bar {
 			  public String name() default "foobar";
 			}
@@ -262,6 +271,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				Class<?>[] value;
 			}
 		''','''
+			@SuppressWarnings("all")
 			public @interface MyAnnotation {
 			  public String x();
 			  public int y();
@@ -281,6 +291,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				boolean flag = true
 			}
 		''','''
+			@SuppressWarnings("all")
 			public @interface MyAnnotation {
 			  public String x() default "foo";
 			  public int y() default 42;
@@ -300,6 +311,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				val inferredClass = typeof(StringBuilder)
 			}
 		''','''
+			@SuppressWarnings("all")
 			public @interface annotation {
 			  public String annotation() default "foo";
 			  public String inferred() default "bar";
@@ -366,6 +378,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 				B b
 			}
 		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
 			public @interface A {
 			  public enum B {
 			    C;
@@ -396,6 +409,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 		import java.lang.annotation.Annotation;
 		
+		@SuppressWarnings("all")
 		public @interface MyAnno {
 		  public interface MyIf extends MyAnno {
 		  }

@@ -50,6 +50,8 @@ public class AnnotationPropertyTest extends AbstractActiveAnnotationTest {
     _builder_1.append("File 2 : /myProject/xtend-gen/CAnno.java");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public @interface CAnno {");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -102,6 +104,8 @@ public class AnnotationPropertyTest extends AbstractActiveAnnotationTest {
     _builder_1.newLine();
     _builder_1.append("File 2 : /myProject/xtend-gen/CAnno.java");
     _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public @interface CAnno {");
     _builder_1.newLine();
