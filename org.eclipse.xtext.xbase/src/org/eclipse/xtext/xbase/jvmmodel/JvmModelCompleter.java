@@ -217,8 +217,7 @@ public class JvmModelCompleter {
 	protected void addAnnotations(JvmDeclaredType jvmType) {
 		if (jvmType.getDeclaringType() == null) {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(jvmType);
-			boolean generateSuppressWarnings = !(jvmType instanceof JvmAnnotationType)
-					&& generatorConfig.isGenerateSyntheticSuppressWarnings()
+			boolean generateSuppressWarnings = generatorConfig.isGenerateSyntheticSuppressWarnings()
 					&& annotationLookup.findAnnotation(jvmType, SuppressWarnings.class) == null
 					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType;
 			JvmType generatedJvmType = references.findDeclaredType(JAVAX_ANNOTATION_GENERATED, jvmType);
