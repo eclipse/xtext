@@ -21,7 +21,6 @@ import org.eclipse.lsp4j.CompletionParams
 import org.eclipse.lsp4j.InsertTextFormat
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.Range
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
@@ -55,19 +54,6 @@ class ContentAssistService {
     @Inject Provider<IdeContentProposalAcceptor> proposalAcceptorProvider
 
     @Inject OperationCanceledManager operationCanceledManager
-
-	/**
-	 * @deprecated please override/call {@link #createCompletionList(Document, XtextResource, CompletionParams, CancelIndicator)} instead.
-	 * This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(since="2.21",forRemoval=true)
-	def CompletionList createCompletionList(Document document, XtextResource resource,
-        TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
-        if (params instanceof CompletionParams) {
-        	return createCompletionList(document, resource, params as CompletionParams, cancelIndicator)
-        }
-        throw new IllegalArgumentException("params is not a CompletionParams");
-    }
 
     def CompletionList createCompletionList(Document document, XtextResource resource,
         CompletionParams params, CancelIndicator cancelIndicator) {

@@ -23,7 +23,6 @@ import org.eclipse.lsp4j.PrepareRenameResult
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -83,7 +82,7 @@ class RenameService2 implements IRenameService2 {
 				val document = context.document
 				val cancelIndicator = options.cancelIndicator
 
-				val prepareRenameResult = doPrepareRename(resource, document, positionParams as TextDocumentPositionParams, cancelIndicator)
+				val prepareRenameResult = doPrepareRename(resource, document, positionParams, cancelIndicator)
 				if (!mayPerformRename(prepareRenameResult, options.renameParams)) {
 					return null
 				}
@@ -166,7 +165,7 @@ class RenameService2 implements IRenameService2 {
 			val document = context.document
 			val params = options.params
 			val cancelIndicator = options.cancelIndicator
-			return doPrepareRename(resource, document, params as TextDocumentPositionParams, cancelIndicator)
+			return doPrepareRename(resource, document, params, cancelIndicator)
 		].exceptionally [ exception |
 			val rootCause = Throwables.getRootCause(exception)
 			if (rootCause instanceof FileNotFoundException) {
@@ -176,19 +175,6 @@ class RenameService2 implements IRenameService2 {
 			}
 			throw exception
 		].get
-	}
-	
-	/**
-	 * @deprecated please override/call {@link #doPrepareRename(Resource, Document, PrepareRenameParams, CancelIndicator)} instead.
-	 * This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(forRemoval=true)
-	protected def Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,
-		TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
-		if (params instanceof PrepareRenameParams) {
-			return 	doPrepareRename(resource, document, params as PrepareRenameParams, cancelIndicator)
-		}
-		throw new IllegalArgumentException("params is not a PrepareRenameParams");
 	}
 
 	protected def Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,

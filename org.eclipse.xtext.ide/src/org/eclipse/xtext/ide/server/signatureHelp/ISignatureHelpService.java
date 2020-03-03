@@ -12,7 +12,6 @@ import static java.util.Collections.*;
 
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpParams;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -34,38 +33,7 @@ public interface ISignatureHelpService {
 	 */
 	SignatureHelp EMPTY = new SignatureHelp(emptyList(), null, null);
 	
-	/**
-	 * @deprecated please override/call {@link #getSignatureHelp(Document, XtextResource, SignatureHelpParams, CancelIndicator)} instead.
-	 * This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated//(since="2.21",forRemoval=true)
-	default SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
-		if (params instanceof SignatureHelpParams) {
-			return getSignatureHelp(document, resource, (SignatureHelpParams) params, cancelIndicator);
-		}
-		throw new IllegalArgumentException("params is not a SignatureHelpParams");
-	}
-	
 	SignatureHelp getSignatureHelp(Document document, XtextResource resource, SignatureHelpParams params, CancelIndicator cancelIndicator);
-	
-	/**
-	 * Returns with a {@link SignatureHelp signature help} instance for a
-	 * resource at a given offset. This method never returns with {@code null}.
-	 * 
-	 * @param resource
-	 *            the resource to extract the help for a method/operation
-	 *            signature.
-	 * @param offset
-	 *            the offset of the cursor in the resource.
-	 * 
-	 * @return a signature help instance.
-	 * 
-	 * @deprecated This method is scheduled to be removed with 2.22.
-	 */
-	@Deprecated
-	default SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
-		return EMPTY;
-	}
 
 	/**
 	 * NOOP {@link ISignatureHelpService signature help service} implementation.

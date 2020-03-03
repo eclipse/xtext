@@ -34,8 +34,6 @@ import org.eclipse.lsp4j.CodeActionContext;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
-import org.eclipse.lsp4j.ColoringInformation;
-import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
@@ -814,21 +812,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return sb.toString();
   }
   
-  /**
-   * @deprecated This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  protected String _toExpectation(final ColoringInformation it) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _expectation = this.toExpectation(it.getRange());
-    _builder.append(_expectation);
-    _builder.append(" -> [");
-    String _join = IterableExtensions.join(it.getStyles(), ", ");
-    _builder.append(_join);
-    _builder.append("]");
-    return _builder.toString();
-  }
-  
   protected String _toExpectation(final Pair<SemanticHighlightingInformation, List<List<String>>> it) {
     final StringBuilder sb = new StringBuilder();
     final List<SemanticHighlightingTokens.Token> tokens = IterableExtensions.<SemanticHighlightingTokens.Token>sort(SemanticHighlightingTokens.decode(it.getKey().getTokens()));
@@ -1495,30 +1478,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  /**
-   * @deprecated This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
-    try {
-      final Function1<CancelIndicator, Map<String, List<? extends ColoringInformation>>> _function = (CancelIndicator it) -> {
-        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
-          return it_1.getValue();
-        };
-        final Function1<ColoringParams, String> _function_2 = (ColoringParams it_1) -> {
-          return it_1.getUri();
-        };
-        final Function1<ColoringParams, List<? extends ColoringInformation>> _function_3 = (ColoringParams it_1) -> {
-          return it_1.getInfos();
-        };
-        return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(Iterables.<ColoringParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), ColoringParams.class), _function_2, _function_3);
-      };
-      return this.languageServer.getRequestManager().<Map<String, List<? extends ColoringInformation>>>runRead(_function).get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
   protected Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>> getSemanticHighlightingParams() {
     try {
       final Function1<CancelIndicator, Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>> _function = (CancelIndicator it) -> {
@@ -1560,8 +1519,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((CodeAction)it);
     } else if (it instanceof CodeLens) {
       return _toExpectation((CodeLens)it);
-    } else if (it instanceof ColoringInformation) {
-      return _toExpectation((ColoringInformation)it);
     } else if (it instanceof Command) {
       return _toExpectation((Command)it);
     } else if (it instanceof CompletionItem) {

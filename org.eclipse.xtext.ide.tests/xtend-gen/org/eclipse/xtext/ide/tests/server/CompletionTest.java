@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeLens;
-import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionItemKind;
@@ -355,8 +354,6 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       return _toExpectation((CodeAction)it);
     } else if (it instanceof CodeLens) {
       return _toExpectation((CodeLens)it);
-    } else if (it instanceof ColoringInformation) {
-      return _toExpectation((ColoringInformation)it);
     } else if (it instanceof Command) {
       return _toExpectation((Command)it);
     } else if (it instanceof CompletionItem) {

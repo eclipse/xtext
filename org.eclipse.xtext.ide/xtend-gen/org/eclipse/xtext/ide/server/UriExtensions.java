@@ -33,22 +33,4 @@ public class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
   public String toUriString(final java.net.URI uri) {
     return this.toUriString(URI.createURI(uri.normalize().toString()));
   }
-  
-  /**
-   * @deprecated use #toUriString(URI)
-   * This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  public String toPath(final URI uri) {
-    return this.toUriString(uri);
-  }
-  
-  /**
-   * @deprecated use toUriString(URI)
-   * This method is scheduled to be removed with 2.22.
-   */
-  @Deprecated
-  public String toPath(final java.net.URI uri) {
-    return this.toUriString(uri);
-  }
 }

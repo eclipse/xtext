@@ -97,7 +97,6 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 		return getDocumentHighlights(resource, offset);
 	}
 
-	@Override
 	public List<DocumentHighlight> getDocumentHighlights(final XtextResource resource, final int offset) {
 		if (resource == null) {
 			if (LOGGER.isDebugEnabled()) {
