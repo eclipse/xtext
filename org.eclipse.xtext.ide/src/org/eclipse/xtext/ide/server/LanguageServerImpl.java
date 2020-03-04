@@ -1099,6 +1099,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		public void addBuildListener(ILanguageServerAccess.IBuildListener listener) {
 			workspaceManager.addBuildListener(listener);
 		}
+		
+		@Override
+		public void removeBuildListener(ILanguageServerAccess.IBuildListener listener) {
+			workspaceManager.removeBuildListener(listener);
+		}
 
 		@Override
 		public LanguageClient getLanguageClient() {

@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("all")
 public interface IExecutableCommandService {
   /**
    * Called on server initialize.
@@ -29,11 +28,11 @@ public interface IExecutableCommandService {
   /**
    * Called on server initialize, only if the client supported dynamicRegistration of commands.
    */
-  default void initializeDynamicRegistration(final Function1<? super String, ? extends IDisposable> register) {
+  default void initializeDynamicRegistration(Function1<? super String, ? extends IDisposable> register) {
   }
   
   /**
    * Called when the client wants to execute a registered command.
    */
-  Object execute(final ExecuteCommandParams params, final ILanguageServerAccess access, final CancelIndicator cancelIndicator);
+  Object execute(ExecuteCommandParams params, ILanguageServerAccess access, CancelIndicator cancelIndicator);
 }
