@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.wizard.template.FileTemplateProcessor;
 @Retention(RetentionPolicy.RUNTIME)
 @Active(FileTemplateProcessor.class)
 @Beta
+@SuppressWarnings("all")
 public @interface FileTemplate {
   /**
    * Label of the file template presented to the user in the list of templates. The label is written to a file

@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.wizard.template.ProjectTemplateProcessor;
 @Retention(RetentionPolicy.RUNTIME)
 @Active(ProjectTemplateProcessor.class)
 @Beta
+@SuppressWarnings("all")
 public @interface ProjectTemplate {
   /**
    * Label of the project template presented to the user in the list of templates. The label is written to a file
