@@ -21,18 +21,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCrossReferenceProposalTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'<-'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Object'", "'<-'", "'{'", "'}'", "'::'"
     };
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__15=15;
     public static final int RULE_INT=5;
     public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
     public static final int T__12=12;
     public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
 
     // delegates
@@ -131,7 +133,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_ID) ) {
+                if ( (LA1_0==RULE_ID||LA1_0==11||LA1_0==15) ) {
                     alt1=1;
                 }
 
@@ -230,65 +232,185 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "ruleClass"
-    // InternalCrossReferenceProposalTestLanguage.g:107:1: ruleClass returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )? ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= '}' ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:107:1: ruleClass returns [EObject current=null] : ( ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )? ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) ) otherlv_5= '{' otherlv_6= '}' ) ;
     public final EObject ruleClass() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_1=null;
-        Token lv_name_2_0=null;
         Token otherlv_3=null;
-        Token otherlv_4=null;
+        Token lv_name_4_1=null;
+        Token otherlv_5=null;
+        Token otherlv_6=null;
+        AntlrDatatypeRuleToken lv_name_4_2 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:113:2: ( ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )? ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= '}' ) )
-            // InternalCrossReferenceProposalTestLanguage.g:114:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )? ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= '}' )
+            // InternalCrossReferenceProposalTestLanguage.g:113:2: ( ( ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )? ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) ) otherlv_5= '{' otherlv_6= '}' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:114:2: ( ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )? ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) ) otherlv_5= '{' otherlv_6= '}' )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:114:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )? ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= '}' )
-            // InternalCrossReferenceProposalTestLanguage.g:115:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )? ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '{' otherlv_4= '}'
+            // InternalCrossReferenceProposalTestLanguage.g:114:2: ( ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )? ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) ) otherlv_5= '{' otherlv_6= '}' )
+            // InternalCrossReferenceProposalTestLanguage.g:115:3: ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )? ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) ) otherlv_5= '{' otherlv_6= '}'
             {
-            // InternalCrossReferenceProposalTestLanguage.g:115:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-' )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            // InternalCrossReferenceProposalTestLanguage.g:115:3: ( ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-' )?
+            int alt3=2;
+            switch ( input.LA(1) ) {
+                case 11:
+                    {
+                    alt3=1;
+                    }
+                    break;
+                case RULE_ID:
+                    {
+                    int LA3_2 = input.LA(2);
 
-            if ( (LA2_0==RULE_ID) ) {
-                int LA2_1 = input.LA(2);
+                    if ( (LA3_2==12) ) {
+                        alt3=1;
+                    }
+                    }
+                    break;
+                case 15:
+                    {
+                    int LA3_3 = input.LA(2);
 
-                if ( (LA2_1==11) ) {
-                    alt2=1;
-                }
+                    if ( (LA3_3==RULE_ID) ) {
+                        int LA3_5 = input.LA(3);
+
+                        if ( (LA3_5==12) ) {
+                            alt3=1;
+                        }
+                    }
+                    }
+                    break;
             }
-            switch (alt2) {
+
+            switch (alt3) {
                 case 1 :
-                    // InternalCrossReferenceProposalTestLanguage.g:116:4: ( (otherlv_0= RULE_ID ) ) otherlv_1= '<-'
+                    // InternalCrossReferenceProposalTestLanguage.g:116:4: ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) ) otherlv_3= '<-'
                     {
-                    // InternalCrossReferenceProposalTestLanguage.g:116:4: ( (otherlv_0= RULE_ID ) )
-                    // InternalCrossReferenceProposalTestLanguage.g:117:5: (otherlv_0= RULE_ID )
-                    {
-                    // InternalCrossReferenceProposalTestLanguage.g:117:5: (otherlv_0= RULE_ID )
-                    // InternalCrossReferenceProposalTestLanguage.g:118:6: otherlv_0= RULE_ID
-                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:116:4: ( ( (otherlv_0= 'Object' ) ) | ( (otherlv_1= RULE_ID ) ) | ( ( ruleComplexName ) ) )
+                    int alt2=3;
+                    switch ( input.LA(1) ) {
+                    case 11:
+                        {
+                        alt2=1;
+                        }
+                        break;
+                    case RULE_ID:
+                        {
+                        alt2=2;
+                        }
+                        break;
+                    case 15:
+                        {
+                        alt2=3;
+                        }
+                        break;
+                    default:
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 2, 0, input);
 
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getClassRule());
-                    						}
-                    					
-                    otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
+                        throw nvae;
+                    }
 
-                    						newLeafNode(otherlv_0, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0());
-                    					
+                    switch (alt2) {
+                        case 1 :
+                            // InternalCrossReferenceProposalTestLanguage.g:117:5: ( (otherlv_0= 'Object' ) )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:117:5: ( (otherlv_0= 'Object' ) )
+                            // InternalCrossReferenceProposalTestLanguage.g:118:6: (otherlv_0= 'Object' )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:118:6: (otherlv_0= 'Object' )
+                            // InternalCrossReferenceProposalTestLanguage.g:119:7: otherlv_0= 'Object'
+                            {
+
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getClassRule());
+                            							}
+                            						
+                            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
+
+                            							newLeafNode(otherlv_0, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0_0());
+                            						
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+                        case 2 :
+                            // InternalCrossReferenceProposalTestLanguage.g:131:5: ( (otherlv_1= RULE_ID ) )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:131:5: ( (otherlv_1= RULE_ID ) )
+                            // InternalCrossReferenceProposalTestLanguage.g:132:6: (otherlv_1= RULE_ID )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:132:6: (otherlv_1= RULE_ID )
+                            // InternalCrossReferenceProposalTestLanguage.g:133:7: otherlv_1= RULE_ID
+                            {
+
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getClassRule());
+                            							}
+                            						
+                            otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
+
+                            							newLeafNode(otherlv_1, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_1_0());
+                            						
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+                        case 3 :
+                            // InternalCrossReferenceProposalTestLanguage.g:145:5: ( ( ruleComplexName ) )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:145:5: ( ( ruleComplexName ) )
+                            // InternalCrossReferenceProposalTestLanguage.g:146:6: ( ruleComplexName )
+                            {
+                            // InternalCrossReferenceProposalTestLanguage.g:146:6: ( ruleComplexName )
+                            // InternalCrossReferenceProposalTestLanguage.g:147:7: ruleComplexName
+                            {
+
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getClassRule());
+                            							}
+                            						
+
+                            							newCompositeNode(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_2_0());
+                            						
+                            pushFollow(FollowSets000.FOLLOW_4);
+                            ruleComplexName();
+
+                            state._fsp--;
+
+
+                            							afterParserOrEnumRuleCall();
+                            						
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
+                    otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                    }
-
-                    otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_5); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1());
+                    				newLeafNode(otherlv_3, grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1());
                     			
 
                     }
@@ -296,39 +418,90 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            // InternalCrossReferenceProposalTestLanguage.g:134:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalCrossReferenceProposalTestLanguage.g:135:4: (lv_name_2_0= RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:167:3: ( ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:168:4: ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:135:4: (lv_name_2_0= RULE_ID )
-            // InternalCrossReferenceProposalTestLanguage.g:136:5: lv_name_2_0= RULE_ID
+            // InternalCrossReferenceProposalTestLanguage.g:168:4: ( (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName ) )
+            // InternalCrossReferenceProposalTestLanguage.g:169:5: (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName )
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
+            // InternalCrossReferenceProposalTestLanguage.g:169:5: (lv_name_4_1= RULE_ID | lv_name_4_2= ruleComplexName )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            					newLeafNode(lv_name_2_0, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0());
-            				
+            if ( (LA4_0==RULE_ID) ) {
+                alt4=1;
+            }
+            else if ( (LA4_0==15) ) {
+                alt4=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getClassRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"name",
-            						lv_name_2_0,
-            						"org.eclipse.xtext.common.Terminals.ID");
-            				
+                throw nvae;
+            }
+            switch (alt4) {
+                case 1 :
+                    // InternalCrossReferenceProposalTestLanguage.g:170:6: lv_name_4_1= RULE_ID
+                    {
+                    lv_name_4_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
+
+                    						newLeafNode(lv_name_4_1, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getClassRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"name",
+                    							lv_name_4_1,
+                    							"org.eclipse.xtext.common.Terminals.ID");
+                    					
+
+                    }
+                    break;
+                case 2 :
+                    // InternalCrossReferenceProposalTestLanguage.g:185:6: lv_name_4_2= ruleComplexName
+                    {
+
+                    						newCompositeNode(grammarAccess.getClassAccess().getNameComplexNameParserRuleCall_1_0_1());
+                    					
+                    pushFollow(FollowSets000.FOLLOW_6);
+                    lv_name_4_2=ruleComplexName();
+
+                    state._fsp--;
+
+
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getClassRule());
+                    						}
+                    						set(
+                    							current,
+                    							"name",
+                    							lv_name_4_2,
+                    							"org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.ComplexName");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+                    break;
 
             }
 
 
             }
 
-            otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_7); 
 
-            			newLeafNode(otherlv_3, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2());
+            }
+
+            otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_7); 
+
+            			newLeafNode(otherlv_5, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2());
             		
-            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_2); 
+            otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(otherlv_4, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3());
+            			newLeafNode(otherlv_6, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3());
             		
 
             }
@@ -351,6 +524,94 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     }
     // $ANTLR end "ruleClass"
 
+
+    // $ANTLR start "entryRuleComplexName"
+    // InternalCrossReferenceProposalTestLanguage.g:215:1: entryRuleComplexName returns [String current=null] : iv_ruleComplexName= ruleComplexName EOF ;
+    public final String entryRuleComplexName() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleComplexName = null;
+
+
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:215:51: (iv_ruleComplexName= ruleComplexName EOF )
+            // InternalCrossReferenceProposalTestLanguage.g:216:2: iv_ruleComplexName= ruleComplexName EOF
+            {
+             newCompositeNode(grammarAccess.getComplexNameRule()); 
+            pushFollow(FollowSets000.FOLLOW_1);
+            iv_ruleComplexName=ruleComplexName();
+
+            state._fsp--;
+
+             current =iv_ruleComplexName.getText(); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleComplexName"
+
+
+    // $ANTLR start "ruleComplexName"
+    // InternalCrossReferenceProposalTestLanguage.g:222:1: ruleComplexName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '::' this_ID_1= RULE_ID ) ;
+    public final AntlrDatatypeRuleToken ruleComplexName() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token kw=null;
+        Token this_ID_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:228:2: ( (kw= '::' this_ID_1= RULE_ID ) )
+            // InternalCrossReferenceProposalTestLanguage.g:229:2: (kw= '::' this_ID_1= RULE_ID )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:229:2: (kw= '::' this_ID_1= RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:230:3: kw= '::' this_ID_1= RULE_ID
+            {
+            kw=(Token)match(input,15,FollowSets000.FOLLOW_8); 
+
+            			current.merge(kw);
+            			newLeafNode(kw, grammarAccess.getComplexNameAccess().getColonColonKeyword_0());
+            		
+            this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            			current.merge(this_ID_1);
+            		
+
+            			newLeafNode(this_ID_1, grammarAccess.getComplexNameAccess().getIDTerminalRuleCall_1());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleComplexName"
+
     // Delegated rules
 
 
@@ -360,11 +621,12 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     private static class FollowSets000 {
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000008812L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000008810L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

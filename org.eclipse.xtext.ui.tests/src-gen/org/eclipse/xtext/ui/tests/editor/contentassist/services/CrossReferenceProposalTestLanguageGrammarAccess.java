@@ -6,6 +6,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
@@ -41,43 +42,78 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.Class");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Assignment cSuperClassAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
-		private final CrossReference cSuperClassClassCrossReference_0_0_0 = (CrossReference)cSuperClassAssignment_0_0.eContents().get(0);
-		private final RuleCall cSuperClassClassIDTerminalRuleCall_0_0_0_1 = (RuleCall)cSuperClassClassCrossReference_0_0_0.eContents().get(1);
+		private final Alternatives cAlternatives_0_0 = (Alternatives)cGroup_0.eContents().get(0);
+		private final Assignment cSuperClassAssignment_0_0_0 = (Assignment)cAlternatives_0_0.eContents().get(0);
+		private final CrossReference cSuperClassClassCrossReference_0_0_0_0 = (CrossReference)cSuperClassAssignment_0_0_0.eContents().get(0);
+		private final Keyword cSuperClassClassObjectKeyword_0_0_0_0_1 = (Keyword)cSuperClassClassCrossReference_0_0_0_0.eContents().get(1);
+		private final Assignment cSuperClassAssignment_0_0_1 = (Assignment)cAlternatives_0_0.eContents().get(1);
+		private final CrossReference cSuperClassClassCrossReference_0_0_1_0 = (CrossReference)cSuperClassAssignment_0_0_1.eContents().get(0);
+		private final RuleCall cSuperClassClassIDTerminalRuleCall_0_0_1_0_1 = (RuleCall)cSuperClassClassCrossReference_0_0_1_0.eContents().get(1);
+		private final Assignment cSuperClassAssignment_0_0_2 = (Assignment)cAlternatives_0_0.eContents().get(2);
+		private final CrossReference cSuperClassClassCrossReference_0_0_2_0 = (CrossReference)cSuperClassAssignment_0_0_2.eContents().get(0);
+		private final RuleCall cSuperClassClassComplexNameParserRuleCall_0_0_2_0_1 = (RuleCall)cSuperClassClassCrossReference_0_0_2_0.eContents().get(1);
 		private final Keyword cLessThanSignHyphenMinusKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
+		private final RuleCall cNameComplexNameParserRuleCall_1_0_1 = (RuleCall)cNameAlternatives_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Class:
-		//	(superClass=[Class] '<-')? name=ID '{'
-		//	'}';
+		//	((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(superClass=[Class] '<-')? name=ID '{' '}'
+		//((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(superClass=[Class] '<-')?
+		//((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')?
 		public Group getGroup_0() { return cGroup_0; }
 		
+		//(superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName])
+		public Alternatives getAlternatives_0_0() { return cAlternatives_0_0; }
+		
 		//superClass=[Class]
-		public Assignment getSuperClassAssignment_0_0() { return cSuperClassAssignment_0_0; }
+		public Assignment getSuperClassAssignment_0_0_0() { return cSuperClassAssignment_0_0_0; }
 		
 		//[Class]
-		public CrossReference getSuperClassClassCrossReference_0_0_0() { return cSuperClassClassCrossReference_0_0_0; }
+		public CrossReference getSuperClassClassCrossReference_0_0_0_0() { return cSuperClassClassCrossReference_0_0_0_0; }
+		
+		//'Object'
+		public Keyword getSuperClassClassObjectKeyword_0_0_0_0_1() { return cSuperClassClassObjectKeyword_0_0_0_0_1; }
+		
+		//superClass=[Class]
+		public Assignment getSuperClassAssignment_0_0_1() { return cSuperClassAssignment_0_0_1; }
+		
+		//[Class]
+		public CrossReference getSuperClassClassCrossReference_0_0_1_0() { return cSuperClassClassCrossReference_0_0_1_0; }
 		
 		//ID
-		public RuleCall getSuperClassClassIDTerminalRuleCall_0_0_0_1() { return cSuperClassClassIDTerminalRuleCall_0_0_0_1; }
+		public RuleCall getSuperClassClassIDTerminalRuleCall_0_0_1_0_1() { return cSuperClassClassIDTerminalRuleCall_0_0_1_0_1; }
+		
+		//superClass=[Class|ComplexName]
+		public Assignment getSuperClassAssignment_0_0_2() { return cSuperClassAssignment_0_0_2; }
+		
+		//[Class|ComplexName]
+		public CrossReference getSuperClassClassCrossReference_0_0_2_0() { return cSuperClassClassCrossReference_0_0_2_0; }
+		
+		//ComplexName
+		public RuleCall getSuperClassClassComplexNameParserRuleCall_0_0_2_0_1() { return cSuperClassClassComplexNameParserRuleCall_0_0_2_0_1; }
 		
 		//'<-'
 		public Keyword getLessThanSignHyphenMinusKeyword_0_1() { return cLessThanSignHyphenMinusKeyword_0_1; }
 		
-		//name=ID
+		//name=(ID | ComplexName)
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
+		//(ID | ComplexName)
+		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
+		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_1_0_0() { return cNameIDTerminalRuleCall_1_0_0; }
+		
+		//ComplexName
+		public RuleCall getNameComplexNameParserRuleCall_1_0_1() { return cNameComplexNameParserRuleCall_1_0_1; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
@@ -85,10 +121,30 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
+	public class ComplexNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.ComplexName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cColonColonKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//ComplexName:
+		//	'::' ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'::' ID
+		public Group getGroup() { return cGroup; }
+		
+		//'::'
+		public Keyword getColonColonKeyword_0() { return cColonColonKeyword_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+	}
 	
 	
 	private final ModelElements pModel;
 	private final ClassElements pClass;
+	private final ComplexNameElements pComplexName;
 	
 	private final Grammar grammar;
 	
@@ -101,6 +157,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pClass = new ClassElements();
+		this.pComplexName = new ComplexNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -141,14 +198,23 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	//Class:
-	//	(superClass=[Class] '<-')? name=ID '{'
-	//	'}';
+	//	((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}';
 	public ClassElements getClassAccess() {
 		return pClass;
 	}
 	
 	public ParserRule getClassRule() {
 		return getClassAccess().getRule();
+	}
+	
+	//ComplexName:
+	//	'::' ID;
+	public ComplexNameElements getComplexNameAccess() {
+		return pComplexName;
+	}
+	
+	public ParserRule getComplexNameRule() {
+		return getComplexNameAccess().getRule();
 	}
 	
 	//terminal ID:

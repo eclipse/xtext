@@ -90,10 +90,18 @@ public class CrossReferenceProposalTest extends AbstractXtextTests implements Re
 		return new ContentAssistProcessorTestBuilder(injector, this);
 	}
 	
+	@Test public void testKeywordsProposed() throws Exception {
+		newBuilder().append("^Object {} ").assertText("Object", "Name");
+	}
+	
+	@Test public void testDataTypesValuesProposed() throws Exception {
+		newBuilder().append("::Zonk {} ").assertText("::Zonk", "Name");
+	}
+	
 	@Test public void testBug276742_08() throws Exception {
 		newBuilder().append("Foo {}").assertText("Foo", "Name", "}");
 	}
-
+	
 	@Test public void testBug276742_08b() throws Exception {
 		String modelAsString = "Foo {}";
 		ContentAssistProcessorTestBuilder builder = newBuilder();
