@@ -844,16 +844,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
-    String _xifexpression = null;
-    boolean _isCombinedGrammar = this.isCombinedGrammar();
-    if (_isCombinedGrammar) {
-      String _antlrString = AntlrGrammarGenUtil.toAntlrString(it.getValue());
-      String _plus = ("\'" + _antlrString);
-      _xifexpression = (_plus + "\'");
-    } else {
-      _xifexpression = this.keywordHelper.getRuleName(it.getValue());
-    }
-    return _xifexpression;
+    return this.ebnf(it);
   }
   
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
@@ -934,7 +925,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     return "";
   }
   
-  protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
+  protected String ebnf(final Keyword it) {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
     if (_isCombinedGrammar) {
@@ -945,6 +936,10 @@ public abstract class AbstractAntlrGrammarGenerator {
       _xifexpression = this.keywordHelper.getRuleName(it.getValue());
     }
     return _xifexpression;
+  }
+  
+  protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
+    return this.ebnf(it);
   }
   
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
@@ -1002,6 +997,10 @@ public abstract class AbstractAntlrGrammarGenerator {
       _xblockexpression = this.crossrefEbnf(rule, it, ref, supportActions);
     }
     return _xblockexpression;
+  }
+  
+  protected String _crossrefEbnf(final Keyword it, final CrossReference ref, final boolean supportActions) {
+    return this.ebnf(it);
   }
   
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
@@ -1173,6 +1172,8 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
+    } else if (it instanceof Keyword) {
+      return _crossrefEbnf((Keyword)it, ref, supportActions);
     } else if (it instanceof RuleCall) {
       return _crossrefEbnf((RuleCall)it, ref, supportActions);
     } else if (it != null) {

@@ -47,6 +47,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="#//SingleCrossReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref3" eType="#//SingleCrossReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref4" eType="#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref5" eType="#//SingleCrossReference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanAlternative">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bool" eType="#//BooleanAlternativeLiteral"

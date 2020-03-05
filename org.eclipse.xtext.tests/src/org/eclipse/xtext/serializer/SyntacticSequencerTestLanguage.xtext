@@ -56,11 +56,12 @@ DatatypeID:
 	ID;
 
 SingleCrossReference:
-	"#5" name=(TERMINAL_ID | ID)
+	"#5" name=(TERMINAL_ID | ID | "kw5")
 	("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
 	("kw2" ref2=[SingleCrossReference|DatatypeID])?
 	("kw3" ref3=[SingleCrossReference|ID])?
-	("kw4" ref4=[SingleCrossReference])?;
+	("kw4" ref4=[SingleCrossReference])?
+	("kw5" ref5=[SingleCrossReference|"kw5"])?;
 
 BooleanAlternative:
 	"#6" bool=BooleanAlternativeLiteral;

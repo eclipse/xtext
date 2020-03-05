@@ -24,6 +24,7 @@ import org.eclipse.xtext.UnorderedGroup
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.Keyword
 
 class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	@Inject
@@ -375,6 +376,14 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 		(
 			{ before(grammarAccess.«originalElement.grammarElementAccess»); }
 			«rule.crossrefEbnf(it, ref, supportActions)»
+			{ after(grammarAccess.«originalElement.grammarElementAccess»); }
+		)
+	'''
+	
+	protected dispatch override crossrefEbnf(Keyword it, CrossReference ref, boolean supportActions) '''
+		(
+			{ before(grammarAccess.«originalElement.grammarElementAccess»); }
+			«super._crossrefEbnf(it, ref, supportActions)»
 			{ after(grammarAccess.«originalElement.grammarElementAccess»); }
 		)
 	'''

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef2 <em>Ref2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef3 <em>Ref3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef4 <em>Ref4</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef5 <em>Ref5</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getSingleCrossReference()
@@ -136,5 +137,27 @@ public interface SingleCrossReference extends EObject
    * @generated
    */
   void setRef4(SingleCrossReference value);
+
+  /**
+   * Returns the value of the '<em><b>Ref5</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ref5</em>' reference.
+   * @see #setRef5(SingleCrossReference)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getSingleCrossReference_Ref5()
+   * @model
+   * @generated
+   */
+  SingleCrossReference getRef5();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef5 <em>Ref5</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ref5</em>' reference.
+   * @see #getRef5()
+   * @generated
+   */
+  void setRef5(SingleCrossReference value);
 
 } // SingleCrossReference

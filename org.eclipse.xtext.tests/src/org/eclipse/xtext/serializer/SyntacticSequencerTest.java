@@ -303,6 +303,16 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	public void testCrossRef1_d() throws Exception {
 		testSequence("#5 someid kw4 someid");
 	}
+	
+	@Test
+	public void testCrossRef1_e_1() throws Exception {
+		testSequence("#5 ^kw5 kw5 kw5");
+	}
+	
+	@Test
+	public void testCrossRef1_e_2() throws Exception {
+		testSequence("#5 kw5 kw5 kw5");
+	}
 
 	@Test
 	public void testBooleanAlternative_a() throws Exception {

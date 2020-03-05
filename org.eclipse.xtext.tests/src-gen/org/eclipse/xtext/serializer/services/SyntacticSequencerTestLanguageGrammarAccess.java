@@ -549,6 +549,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cNameTERMINAL_IDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_1_0_1 = (RuleCall)cNameAlternatives_1_0.eContents().get(1);
+		private final Keyword cNameKw5Keyword_1_0_2 = (Keyword)cNameAlternatives_1_0.eContents().get(2);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cKw1Keyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cRef1Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -569,23 +570,30 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cRef4Assignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final CrossReference cRef4SingleCrossReferenceCrossReference_5_1_0 = (CrossReference)cRef4Assignment_5_1.eContents().get(0);
 		private final RuleCall cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1 = (RuleCall)cRef4SingleCrossReferenceCrossReference_5_1_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cKw5Keyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cRef5Assignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cRef5SingleCrossReferenceCrossReference_6_1_0 = (CrossReference)cRef5Assignment_6_1.eContents().get(0);
+		private final Keyword cRef5SingleCrossReferenceKw5Keyword_6_1_0_1 = (Keyword)cRef5SingleCrossReferenceCrossReference_6_1_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
+		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
+		//	("kw5" ref5=[SingleCrossReference])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
+		//("kw5" ref5=[SingleCrossReference])?
 		public Group getGroup() { return cGroup; }
 		
 		//"#5"
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 		
-		//name=(TERMINAL_ID | ID)
+		//name=(TERMINAL_ID | ID | "kw5")
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//(TERMINAL_ID | ID)
+		//(TERMINAL_ID | ID | "kw5")
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 		
 		//TERMINAL_ID
@@ -593,6 +601,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0_1() { return cNameIDTerminalRuleCall_1_0_1; }
+		
+		//"kw5"
+		public Keyword getNameKw5Keyword_1_0_2() { return cNameKw5Keyword_1_0_2; }
 		
 		//("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
 		public Group getGroup_2() { return cGroup_2; }
@@ -653,6 +664,21 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//ID
 		public RuleCall getRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1() { return cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1; }
+		
+		//("kw5" ref5=[SingleCrossReference])?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//"kw5"
+		public Keyword getKw5Keyword_6_0() { return cKw5Keyword_6_0; }
+		
+		//ref5=[SingleCrossReference]
+		public Assignment getRef5Assignment_6_1() { return cRef5Assignment_6_1; }
+		
+		//[SingleCrossReference]
+		public CrossReference getRef5SingleCrossReferenceCrossReference_6_1_0() { return cRef5SingleCrossReferenceCrossReference_6_1_0; }
+		
+		//"kw5"
+		public Keyword getRef5SingleCrossReferenceKw5Keyword_6_1_0_1() { return cRef5SingleCrossReferenceKw5Keyword_6_1_0_1; }
 	}
 	public class BooleanAlternativeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanAlternative");
@@ -1454,8 +1480,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//SingleCrossReference:
-	//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
+	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
+	//	("kw5" ref5=[SingleCrossReference])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return pSingleCrossReference;
 	}

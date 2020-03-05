@@ -39,6 +39,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref2"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref3"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref4"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref5"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//BooleanAlternative">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//BooleanAlternative/bool"/>
