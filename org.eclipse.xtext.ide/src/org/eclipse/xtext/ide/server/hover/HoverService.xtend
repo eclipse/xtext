@@ -13,10 +13,9 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Hover
+import org.eclipse.lsp4j.HoverParams
 import org.eclipse.lsp4j.MarkupContent
 import org.eclipse.lsp4j.Range
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.DocumentExtensions
@@ -24,10 +23,8 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.ITextRegion
 
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
-import org.eclipse.lsp4j.HoverParams
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -123,14 +120,4 @@ class HoverService implements IHoverService {
 		return documentation
 	}
 
-}
-
-@Accessors
-@FinalFieldsConstructor
-class HoverContext {
-	val Document document
-	val XtextResource resource
-	val int offset
-	val ITextRegion region
-	val EObject element
 }

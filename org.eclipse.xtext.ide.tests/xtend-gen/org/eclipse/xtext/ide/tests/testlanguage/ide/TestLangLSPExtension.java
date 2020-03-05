@@ -26,6 +26,7 @@ import org.eclipse.lsp4j.jsonrpc.services.JsonRequest;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
@@ -82,10 +83,12 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
     @Override
     public CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param) {
       final Function<ILanguageServerAccess.Context, TestLangLSPExtension.TextOfLineResult> _function = (ILanguageServerAccess.Context ctx) -> {
+        Document _document = ctx.getDocument();
         Position _position = new Position(param.line, 0);
-        final int start = ctx.getDocument().getOffSet(_position);
+        final int start = _document.getOffSet(_position);
+        Document _document_1 = ctx.getDocument();
         Position _position_1 = new Position((param.line + 1), 0);
-        int _offSet = ctx.getDocument().getOffSet(_position_1);
+        int _offSet = _document_1.getOffSet(_position_1);
         int _length = System.lineSeparator().length();
         final int end = (_offSet - _length);
         TestLangLSPExtension.TextOfLineResult _textOfLineResult = new TestLangLSPExtension.TextOfLineResult();
