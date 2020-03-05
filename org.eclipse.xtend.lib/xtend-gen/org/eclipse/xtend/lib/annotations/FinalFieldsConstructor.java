@@ -32,5 +32,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @Beta
 @Active(FinalFieldsConstructorProcessor.class)
 @Documented
+@SuppressWarnings("all")
 public @interface FinalFieldsConstructor {
 }

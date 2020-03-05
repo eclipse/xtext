@@ -20,5 +20,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @GwtCompatible
 @Target(ElementType.TYPE)
 @Active(EqualsHashCodeProcessor.class)
+@SuppressWarnings("all")
 public @interface EqualsHashCode {
 }

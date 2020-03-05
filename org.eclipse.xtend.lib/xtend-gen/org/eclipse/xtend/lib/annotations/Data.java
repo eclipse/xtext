@@ -26,5 +26,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @Active(DataProcessor.class)
 @Documented
 @GwtCompatible
+@SuppressWarnings("all")
 public @interface Data {
 }

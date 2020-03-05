@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Target(ElementType.TYPE)
 @Active(ToStringProcessor.class)
 @GwtCompatible
+@SuppressWarnings("all")
 public @interface ToString {
   /**
    * Fields with null values are not shown in the output.

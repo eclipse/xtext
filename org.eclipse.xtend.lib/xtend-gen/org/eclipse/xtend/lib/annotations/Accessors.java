@@ -39,6 +39,7 @@ import org.eclipse.xtend.lib.macro.Active;
 @Target({ ElementType.FIELD, ElementType.TYPE })
 @Active(AccessorsProcessor.class)
 @Documented
+@SuppressWarnings("all")
 public @interface Accessors {
   /**
    * Describes the access modifiers for generated accessors. Valid combinations
