@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.CheckMutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(CheckMutableEnumerationTypeDeclarationProcessor.class)
+@SuppressWarnings("all")
 public @interface CheckMutableEnumerationTypeDeclaration {
 }

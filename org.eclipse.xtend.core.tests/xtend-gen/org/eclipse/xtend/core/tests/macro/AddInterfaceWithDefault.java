@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.AddInterfaceWithDefaultProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(AddInterfaceWithDefaultProcessor.class)
+@SuppressWarnings("all")
 public @interface AddInterfaceWithDefault {
 }

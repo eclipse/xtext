@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.Bug456264Processor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(Bug456264Processor.class)
+@SuppressWarnings("all")
 public @interface Bug456264 {
 }

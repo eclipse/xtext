@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.compiler.batch._TESTDATA_InternalClassProces
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(_TESTDATA_InternalClassProcessor.class)
+@SuppressWarnings("all")
 public @interface _TESTDATA_InternalClassAnnotation {
 }

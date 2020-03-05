@@ -19,5 +19,6 @@ import org.eclipse.xtend.lib.macro.Active;
  */
 @Target(ElementType.TYPE)
 @Active(ObservableCompilationParticipant.class)
+@SuppressWarnings("all")
 public @interface Observable {
 }

@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.CheckMutableMethodDeclarationProcessor
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(CheckMutableMethodDeclarationProcessor.class)
+@SuppressWarnings("all")
 public @interface CheckMutableMethodDeclaration {
 }

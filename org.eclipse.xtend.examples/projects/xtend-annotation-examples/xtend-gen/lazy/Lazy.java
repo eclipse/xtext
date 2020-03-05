@@ -18,5 +18,6 @@ import org.eclipse.xtend.lib.macro.Active;
  */
 @Target(ElementType.FIELD)
 @Active(LazyProcessor.class)
+@SuppressWarnings("all")
 public @interface Lazy {
 }

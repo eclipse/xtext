@@ -10,6 +10,7 @@ import org.eclipse.xtend.lib.macro.Active;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Active(GetProcessor.class)
+@SuppressWarnings("all")
 public @interface Get {
   public String value();
 }

@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.InferredTypeReferencesCheckProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(InferredTypeReferencesCheckProcessor.class)
+@SuppressWarnings("all")
 public @interface InferredTypeReferencesCheck {
 }

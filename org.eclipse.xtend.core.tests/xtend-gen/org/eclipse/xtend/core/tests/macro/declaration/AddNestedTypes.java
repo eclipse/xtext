@@ -4,5 +4,6 @@ import org.eclipse.xtend.core.tests.macro.declaration.AddNestedTypesProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(AddNestedTypesProcessor.class)
+@SuppressWarnings("all")
 public @interface AddNestedTypes {
 }

@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.macro.Active;
 
 @Active(ToAnnoProcessor.class)
 @Target(ElementType.TYPE)
+@SuppressWarnings("all")
 public @interface ToAnno {
   public boolean defaultValue() default true;
 }
