@@ -30,6 +30,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils;
 import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -436,6 +437,9 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 			return (ParserRule) ge1;
 		} else if (ge1 instanceof Action) {
 			INode firstChild = root.getFirstChild();
+			while (firstChild.getGrammarElement() instanceof Action && firstChild instanceof CompositeNode) {
+				firstChild = ((CompositeNode)firstChild).getFirstChild();
+			}
 			EObject ge2 = firstChild.getGrammarElement();
 			if (ge2 instanceof ParserRule) {
 				return (ParserRule) ge2;

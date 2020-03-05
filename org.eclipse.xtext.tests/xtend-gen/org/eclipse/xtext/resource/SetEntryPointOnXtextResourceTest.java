@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io/) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io/) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,7 +14,9 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testlanguages.ActionTestLanguage3StandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.services.ActionTestLanguage3GrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
@@ -48,6 +50,42 @@ public class SetEntryPointOnXtextResourceTest extends AbstractXtextTests {
       resource.setEntryPoint(erwachsenerRule);
       resource.update(0, model.length(), "erwachsener (Peter 30)");
       Assert.assertEquals(erwachsenerRule, NodeModelUtils.getEntryParserRule(resource.getParseResult().getRootNode()));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test2() {
+    try {
+      this.with(ActionTestLanguage3StandaloneSetup.class);
+      final ParserRule rule = this.<ActionTestLanguage3GrammarAccess>get(ActionTestLanguage3GrammarAccess.class).getProductionRule1Rule();
+      final String model = "X \"Y\" 42";
+      final XtextResource resource = this.createResource();
+      resource.setEntryPoint(rule);
+      StringInputStream _stringInputStream = new StringInputStream(model);
+      resource.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
+      Assert.assertTrue(resource.getErrors().isEmpty());
+      final ParserRule entryRule = NodeModelUtils.getEntryParserRule(resource.getParseResult().getRootNode());
+      Assert.assertEquals(rule, entryRule);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test3() {
+    try {
+      this.with(ActionTestLanguage3StandaloneSetup.class);
+      final ParserRule rule = this.<ActionTestLanguage3GrammarAccess>get(ActionTestLanguage3GrammarAccess.class).getProductionRule2Rule();
+      final String model = "\"Y\" X42";
+      final XtextResource resource = this.createResource();
+      resource.setEntryPoint(rule);
+      StringInputStream _stringInputStream = new StringInputStream(model);
+      resource.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
+      Assert.assertTrue(resource.getErrors().isEmpty());
+      final ParserRule entryRule = NodeModelUtils.getEntryParserRule(resource.getParseResult().getRootNode());
+      Assert.assertEquals(rule, entryRule);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
