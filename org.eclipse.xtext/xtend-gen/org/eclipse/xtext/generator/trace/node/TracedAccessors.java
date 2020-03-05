@@ -16,6 +16,7 @@ import org.eclipse.xtext.generator.trace.node.TracedAccessorsProcessor;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Active(TracedAccessorsProcessor.class)
+@SuppressWarnings("all")
 public @interface TracedAccessors {
   public Class<? extends EFactory>[] value();
 }

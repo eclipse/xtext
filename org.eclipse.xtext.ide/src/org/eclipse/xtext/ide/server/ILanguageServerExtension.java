@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import org.eclipse.xtext.ide.server.ILanguageServerAccess;
-
 /**
  * Interface for language specific extensions to LSP. Implementors should use {@link JsonRpcNotification} and {@link
  * JsonRpcRequest} annotations.
