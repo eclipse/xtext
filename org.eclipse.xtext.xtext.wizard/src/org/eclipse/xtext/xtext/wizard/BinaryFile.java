@@ -9,9 +9,6 @@
 package org.eclipse.xtext.xtext.wizard;
 
 import java.net.URL;
-import org.eclipse.xtext.xtext.wizard.AbstractFile;
-import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 
 public class BinaryFile extends AbstractFile {
 	private final URL content;

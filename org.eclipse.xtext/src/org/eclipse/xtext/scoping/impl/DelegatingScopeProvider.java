@@ -12,9 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
-
 public interface ProjectsCreator {
 	void createProjects(WizardConfiguration config);
 }

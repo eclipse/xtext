@@ -13,8 +13,6 @@ import java.util.Stack;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
-import org.eclipse.xtext.parser.antlr.ITokenAcceptor;
 
 /**
  * Abstract implementation of a token source, that splits according to indentation levels

@@ -8,10 +8,6 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
-
 public class PlainTextFile extends TextFile {
 	private final CharSequence content;
 

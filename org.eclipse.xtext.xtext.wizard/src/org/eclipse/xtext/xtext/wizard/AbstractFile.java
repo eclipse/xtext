@@ -9,8 +9,6 @@
 package org.eclipse.xtext.xtext.wizard;
 
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 
 public abstract class AbstractFile {
 	private final Outlet outlet;
