@@ -517,6 +517,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
+			grammarUri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage3.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

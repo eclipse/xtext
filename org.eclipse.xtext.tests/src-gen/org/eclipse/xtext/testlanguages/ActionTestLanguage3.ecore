@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="actionLang3" nsURI="http://www.eclipse.org/2008/tmf/xtext/ActionLang3"
+    nsPrefix="actionLang3">
+  <eClassifiers xsi:type="ecore:EClass" name="ProductionRules"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProductionRule1" eSuperTypes="#//ProductionRules"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProductionRule2" eSuperTypes="#//ProductionRules"/>
+  <eClassifiers xsi:type="ecore:EClass" name="P1" eSuperTypes="#//ProductionRule1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="P2" eSuperTypes="#//ProductionRule1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="p" eType="#//P1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="P3" eSuperTypes="#//ProductionRule1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="p" eType="#//P2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//ProductionRule2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
