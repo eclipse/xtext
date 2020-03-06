@@ -52,6 +52,7 @@ import org.eclipse.xtend.lib.macro.Active;
 @Target({ ElementType.FIELD, ElementType.METHOD })
 @Active(DelegateProcessor.class)
 @Documented
+@SuppressWarnings("all")
 public @interface Delegate {
   /**
    * Optional list of interfaces that this delegate is restricted to.

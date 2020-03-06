@@ -20,5 +20,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @Active(PropertyProcessor.class)
 @Deprecated
 @Documented
+@SuppressWarnings("all")
 public @interface Property {
 }
