@@ -17,5 +17,6 @@ import org.eclipse.xtext.util.internal.LogProcessor;
 @Beta
 @Target(ElementType.TYPE)
 @Active(LogProcessor.class)
+@SuppressWarnings("all")
 public @interface Log {
 }
