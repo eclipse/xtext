@@ -8,11 +8,11 @@
  */
 package org.eclipse.xtext.ide.editor.bracketmatching;
 
-import com.google.inject.Singleton;
 import java.util.Collections;
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
-import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
+
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+
+import com.google.inject.Singleton;
 
 /**
  * @author kosyakov - Initial contribution and API

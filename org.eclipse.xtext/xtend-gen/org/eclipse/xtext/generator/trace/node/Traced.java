@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.trace.node.TracedProcessor;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Active(TracedProcessor.class)
+@SuppressWarnings("all")
 public @interface Traced {
   public String tracingSugarFieldName() default "_traceExtensions";
   public boolean useForDebugging() default false;
