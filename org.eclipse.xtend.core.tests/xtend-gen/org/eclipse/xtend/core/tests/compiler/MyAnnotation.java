@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.compiler.FileProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(FileProcessor.class)
+@SuppressWarnings("all")
 public @interface MyAnnotation {
 }

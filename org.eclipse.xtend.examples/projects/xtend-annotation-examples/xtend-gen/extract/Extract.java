@@ -18,5 +18,6 @@ import org.eclipse.xtend.lib.macro.Active;
  */
 @Target(ElementType.TYPE)
 @Active(ExtractProcessor.class)
+@SuppressWarnings("all")
 public @interface Extract {
 }

@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.__GeneratedSourceModifingAnnotationPro
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(__GeneratedSourceModifingAnnotationProcessor.class)
+@SuppressWarnings("all")
 public @interface __GeneratedSourceModifingAnnotation {
 }

@@ -12,5 +12,6 @@ import org.eclipse.xtend.core.tests.macro.CheckMutableInterfaceDeclarationProces
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(CheckMutableInterfaceDeclarationProcessor.class)
+@SuppressWarnings("all")
 public @interface CheckMutableInterfaceDeclaration {
 }

@@ -4,5 +4,6 @@ import org.eclipse.xtend.core.tests.macro.ArtificialMethodsProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(ArtificialMethodsProcessor.class)
+@SuppressWarnings("all")
 public @interface ArtificialMethods {
 }
