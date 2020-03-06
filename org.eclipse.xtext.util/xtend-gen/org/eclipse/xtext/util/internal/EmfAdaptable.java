@@ -15,5 +15,6 @@ import org.eclipse.xtext.util.internal.EmfAdaptableProcessor;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Active(EmfAdaptableProcessor.class)
+@SuppressWarnings("all")
 public @interface EmfAdaptable {
 }
