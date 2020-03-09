@@ -68,6 +68,11 @@
 									<classifier>${project.artifactId}-r201912</classifier>
 								</artifact>
 								<artifact>
+									<file>${project.artifactId}-r202003.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-r202003</classifier>
+								</artifact>
+								<artifact>
 									<file>${project.artifactId}-latest.target</file>
 									<type>target</type>
 									<classifier>${project.artifactId}-latest</classifier>
