@@ -900,6 +900,32 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   }
   
   @Override
+  protected String _crossrefEbnf(final Keyword it, final CrossReference ref, final boolean supportActions) {
+    String _xifexpression = null;
+    if ((!supportActions)) {
+      _xifexpression = super._crossrefEbnf(it, ref, supportActions);
+    } else {
+      StringConcatenation _builder = new StringConcatenation();
+      String _localVar = this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(ref));
+      _builder.append(_localVar);
+      _builder.append("=");
+      String __crossrefEbnf = super._crossrefEbnf(it, ref, supportActions);
+      _builder.append(__crossrefEbnf);
+      _builder.newLineIfNotEmpty();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      CharSequence _newLeafNode = this.newLeafNode(ref, this._grammarAccessExtensions.localVar(GrammarUtil.containingAssignment(ref)));
+      _builder.append(_newLeafNode, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xifexpression = _builder.toString();
+    }
+    return _xifexpression;
+  }
+  
+  @Override
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {

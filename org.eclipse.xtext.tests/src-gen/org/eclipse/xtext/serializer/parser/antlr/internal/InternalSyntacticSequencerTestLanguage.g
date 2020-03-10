@@ -1070,6 +1070,17 @@ ruleSingleCrossReference returns [EObject current=null]
 							lv_name_1_2,
 							"org.eclipse.xtext.common.Terminals.ID");
 					}
+					    |
+					lv_name_1_3='kw5'
+					{
+						newLeafNode(lv_name_1_3, grammarAccess.getSingleCrossReferenceAccess().getNameKw5Keyword_1_0_2());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+						}
+						setWithLastConsumed($current, "name", lv_name_1_3, null);
+					}
 				)
 			)
 		)
@@ -1148,6 +1159,25 @@ ruleSingleCrossReference returns [EObject current=null]
 					otherlv_9=RULE_ID
 					{
 						newLeafNode(otherlv_9, grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0());
+					}
+				)
+			)
+		)?
+		(
+			otherlv_10='kw5'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getSingleCrossReferenceAccess().getKw5Keyword_6_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+						}
+					}
+					otherlv_11='kw5'
+					{
+						newLeafNode(otherlv_11, grammarAccess.getSingleCrossReferenceAccess().getRef5SingleCrossReferenceCrossReference_6_1_0());
 					}
 				)
 			)

@@ -379,13 +379,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int SINGLE_CROSS_REFERENCE__REF4 = 4;
 
   /**
+   * The feature id for the '<em><b>Ref5</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__REF5 = 5;
+
+  /**
    * The number of structural features of the '<em>Single Cross Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SINGLE_CROSS_REFERENCE_FEATURE_COUNT = 5;
+  int SINGLE_CROSS_REFERENCE_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl <em>Boolean Alternative</em>}' class.
@@ -1380,6 +1389,17 @@ public interface SyntacticsequencertestPackage extends EPackage
   EReference getSingleCrossReference_Ref4();
 
   /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef5 <em>Ref5</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref5</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef5()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EReference getSingleCrossReference_Ref5();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative <em>Boolean Alternative</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2217,6 +2237,14 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EReference SINGLE_CROSS_REFERENCE__REF4 = eINSTANCE.getSingleCrossReference_Ref4();
+
+    /**
+     * The meta object literal for the '<em><b>Ref5</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_CROSS_REFERENCE__REF5 = eINSTANCE.getSingleCrossReference_Ref5();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl <em>Boolean Alternative</em>}' class.

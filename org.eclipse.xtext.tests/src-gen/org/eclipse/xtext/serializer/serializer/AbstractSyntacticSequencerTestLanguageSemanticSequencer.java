@@ -539,11 +539,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     (
-	 *         (name=TERMINAL_ID | name=ID) 
+	 *         (name=TERMINAL_ID | name=ID | name='kw5') 
 	 *         ref1=[SingleCrossReference|TERMINAL_ID]? 
 	 *         ref2=[SingleCrossReference|DatatypeID]? 
 	 *         ref3=[SingleCrossReference|ID]? 
-	 *         ref4=[SingleCrossReference|ID]?
+	 *         ref4=[SingleCrossReference|ID]? 
+	 *         ref5=[SingleCrossReference|'kw5']?
 	 *     )
 	 */
 	protected void sequence_SingleCrossReference(ISerializationContext context, SingleCrossReference semanticObject) {

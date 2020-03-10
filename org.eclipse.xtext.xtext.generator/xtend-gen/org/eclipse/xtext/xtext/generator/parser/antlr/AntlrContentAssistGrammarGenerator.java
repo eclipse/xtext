@@ -1208,6 +1208,32 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     return _builder.toString();
   }
   
+  @Override
+  protected String _crossrefEbnf(final Keyword it, final CrossReference ref, final boolean supportActions) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ before(grammarAccess.");
+    String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(AntlrGrammarGenUtil.<Keyword>getOriginalElement(it));
+    _builder.append(_grammarElementAccess, "\t");
+    _builder.append("); }");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    String __crossrefEbnf = super._crossrefEbnf(it, ref, supportActions);
+    _builder.append(__crossrefEbnf, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("{ after(grammarAccess.");
+    String _grammarElementAccess_1 = this._grammarAccessExtensions.grammarElementAccess(AntlrGrammarGenUtil.<Keyword>getOriginalElement(it));
+    _builder.append(_grammarElementAccess_1, "\t");
+    _builder.append("); }");
+    _builder.newLineIfNotEmpty();
+    _builder.append(")");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
   protected String _crossrefEbnf(final TerminalRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     return this._grammarAccessExtensions.ruleName(it);
   }
@@ -1331,6 +1357,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
+    } else if (it instanceof Keyword) {
+      return _crossrefEbnf((Keyword)it, ref, supportActions);
     } else if (it instanceof RuleCall) {
       return _crossrefEbnf((RuleCall)it, ref, supportActions);
     } else if (it != null) {

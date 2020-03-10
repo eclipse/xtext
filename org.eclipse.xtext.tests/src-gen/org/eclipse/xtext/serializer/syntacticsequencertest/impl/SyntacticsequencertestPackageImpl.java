@@ -624,6 +624,17 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * @generated
    */
   @Override
+  public EReference getSingleCrossReference_Ref5()
+  {
+    return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getBooleanAlternative()
   {
     return booleanAlternativeEClass;
@@ -1267,6 +1278,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF2);
     createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF3);
     createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF4);
+    createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF5);
 
     booleanAlternativeEClass = createEClass(BOOLEAN_ALTERNATIVE);
     createEReference(booleanAlternativeEClass, BOOLEAN_ALTERNATIVE__BOOL);
@@ -1417,6 +1429,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getSingleCrossReference_Ref2(), this.getSingleCrossReference(), null, "ref2", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSingleCrossReference_Ref3(), this.getSingleCrossReference(), null, "ref3", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSingleCrossReference_Ref4(), this.getSingleCrossReference(), null, "ref4", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleCrossReference_Ref5(), this.getSingleCrossReference(), null, "ref5", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(booleanAlternativeEClass, BooleanAlternative.class, "BooleanAlternative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBooleanAlternative_Bool(), this.getBooleanAlternativeLiteral(), null, "bool", null, 0, 1, BooleanAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

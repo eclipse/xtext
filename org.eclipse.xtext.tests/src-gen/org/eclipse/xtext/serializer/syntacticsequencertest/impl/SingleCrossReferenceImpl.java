@@ -27,6 +27,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef2 <em>Ref2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef3 <em>Ref3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef4 <em>Ref4</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl#getRef5 <em>Ref5</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,6 +93,16 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * @ordered
    */
   protected SingleCrossReference ref4;
+
+  /**
+   * The cached value of the '{@link #getRef5() <em>Ref5</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRef5()
+   * @generated
+   * @ordered
+   */
+  protected SingleCrossReference ref5;
 
   /**
    * <!-- begin-user-doc -->
@@ -325,6 +336,51 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * @generated
    */
   @Override
+  public SingleCrossReference getRef5()
+  {
+    if (ref5 != null && ref5.eIsProxy())
+    {
+      InternalEObject oldRef5 = (InternalEObject)ref5;
+      ref5 = (SingleCrossReference)eResolveProxy(oldRef5);
+      if (ref5 != oldRef5)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5, oldRef5, ref5));
+      }
+    }
+    return ref5;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SingleCrossReference basicGetRef5()
+  {
+    return ref5;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRef5(SingleCrossReference newRef5)
+  {
+    SingleCrossReference oldRef5 = ref5;
+    ref5 = newRef5;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5, oldRef5, ref5));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -343,6 +399,9 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF4:
         if (resolve) return getRef4();
         return basicGetRef4();
+      case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5:
+        if (resolve) return getRef5();
+        return basicGetRef5();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -371,6 +430,9 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
         return;
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF4:
         setRef4((SingleCrossReference)newValue);
+        return;
+      case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5:
+        setRef5((SingleCrossReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -401,6 +463,9 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF4:
         setRef4((SingleCrossReference)null);
         return;
+      case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5:
+        setRef5((SingleCrossReference)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -425,6 +490,8 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
         return ref3 != null;
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF4:
         return ref4 != null;
+      case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE__REF5:
+        return ref5 != null;
     }
     return super.eIsSet(featureID);
   }

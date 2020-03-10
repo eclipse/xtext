@@ -338,7 +338,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected dispatch def String dataTypeEbnf2(Keyword it, boolean supportActions) {
-		if (combinedGrammar) "'" + value.toAntlrString + "'" else keywordHelper.getRuleName(value)
+		it.ebnf
 	}
 	
 	protected dispatch def String dataTypeEbnf2(RuleCall it, boolean supportActions) {
@@ -367,8 +367,12 @@ abstract class AbstractAntlrGrammarGenerator {
 		''
 	}
 	
+	protected def String ebnf(Keyword it) {
+		if (combinedGrammar) "'" + value.toAntlrString + "'" else keywordHelper.getRuleName(value)
+	}
+	
 	protected dispatch def String ebnf2(Keyword it, AntlrOptions options, boolean supportActions) {
-		if (combinedGrammar) "'" + value.toAntlrString + "'" else keywordHelper.getRuleName(value) 
+		it.ebnf 
 	}
 	
 	protected dispatch def String ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
@@ -395,6 +399,10 @@ abstract class AbstractAntlrGrammarGenerator {
 			}
 		}
 		rule.crossrefEbnf(it, ref, supportActions)
+	}
+	
+	protected dispatch def String crossrefEbnf(Keyword it, CrossReference ref, boolean supportActions) {
+		it.ebnf
 	}
 	
 	protected def String crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {

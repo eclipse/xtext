@@ -331,6 +331,17 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 			super.crossrefEbnf(it, call, ref, supportActions)
 	}
 	
+	override protected _crossrefEbnf(Keyword it, CrossReference ref, boolean supportActions) {
+		if (!supportActions)
+			super._crossrefEbnf(it, ref, supportActions)
+		else '''
+			«ref.containingAssignment.localVar»=«super._crossrefEbnf(it, ref, supportActions)»
+			{
+				«ref.newLeafNode(ref.containingAssignment.localVar)»
+			}
+		'''
+	}
+	
 	override protected _assignmentEbnf(CrossReference it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions) '''
 			«IF options.backtrack»
