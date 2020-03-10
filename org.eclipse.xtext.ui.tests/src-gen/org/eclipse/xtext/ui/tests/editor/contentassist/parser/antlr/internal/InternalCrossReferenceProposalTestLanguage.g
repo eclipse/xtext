@@ -115,47 +115,129 @@ ruleClass returns [EObject current=null]
 		(
 			(
 				(
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getClassRule());
+					(
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getClassRule());
+							}
 						}
-					}
-					otherlv_0=RULE_ID
-					{
-						newLeafNode(otherlv_0, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0());
-					}
+						otherlv_0='Object'
+						{
+							newLeafNode(otherlv_0, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0_0());
+						}
+					)
+				)
+				    |
+				(
+					(
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getClassRule());
+							}
+						}
+						otherlv_1=RULE_ID
+						{
+							newLeafNode(otherlv_1, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_1_0());
+						}
+					)
+				)
+				    |
+				(
+					(
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getClassRule());
+							}
+						}
+						{
+							newCompositeNode(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_2_0());
+						}
+						ruleComplexName
+						{
+							afterParserOrEnumRuleCall();
+						}
+					)
 				)
 			)
-			otherlv_1='<-'
+			otherlv_3='<-'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1());
+				newLeafNode(otherlv_3, grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1());
 			}
 		)?
 		(
 			(
-				lv_name_2_0=RULE_ID
-				{
-					newLeafNode(lv_name_2_0, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getClassRule());
+				(
+					lv_name_4_1=RULE_ID
+					{
+						newLeafNode(lv_name_4_1, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_2_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getClassRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_4_1,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getClassAccess().getNameComplexNameParserRuleCall_1_0_1());
+					}
+					lv_name_4_2=ruleComplexName
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getClassRule());
+						}
+						set(
+							$current,
+							"name",
+							lv_name_4_2,
+							"org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.ComplexName");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
 		)
-		otherlv_3='{'
+		otherlv_5='{'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2());
+			newLeafNode(otherlv_5, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2());
 		}
-		otherlv_4='}'
+		otherlv_6='}'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3());
+			newLeafNode(otherlv_6, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleComplexName
+entryRuleComplexName returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getComplexNameRule()); }
+	iv_ruleComplexName=ruleComplexName
+	{ $current=$iv_ruleComplexName.current.getText(); }
+	EOF;
+
+// Rule ComplexName
+ruleComplexName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='::'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getComplexNameAccess().getColonColonKeyword_0());
+		}
+		this_ID_1=RULE_ID
+		{
+			$current.merge(this_ID_1);
+		}
+		{
+			newLeafNode(this_ID_1, grammarAccess.getComplexNameAccess().getIDTerminalRuleCall_1());
 		}
 	)
 ;

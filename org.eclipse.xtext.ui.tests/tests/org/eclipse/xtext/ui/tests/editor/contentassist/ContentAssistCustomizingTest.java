@@ -46,6 +46,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ContentAssistCustomizingTest extends AbstractXtextTests implements ResourceLoadHelper {
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {

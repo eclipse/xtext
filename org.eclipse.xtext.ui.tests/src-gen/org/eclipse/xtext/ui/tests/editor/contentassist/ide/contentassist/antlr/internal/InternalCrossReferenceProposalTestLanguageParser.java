@@ -22,18 +22,20 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCrossReferenceProposalTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'", "'<-'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'", "'<-'", "'::'", "'Object'"
     };
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__15=15;
     public static final int RULE_INT=5;
     public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
     public static final int T__12=12;
     public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
 
     // delegates
@@ -121,7 +123,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_ID) ) {
+                if ( (LA1_0==RULE_ID||(LA1_0>=14 && LA1_0<=15)) ) {
                     alt1=1;
                 }
 
@@ -243,15 +245,292 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end "ruleClass"
 
 
+    // $ANTLR start "entryRuleComplexName"
+    // InternalCrossReferenceProposalTestLanguage.g:103:1: entryRuleComplexName : ruleComplexName EOF ;
+    public final void entryRuleComplexName() throws RecognitionException {
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:104:1: ( ruleComplexName EOF )
+            // InternalCrossReferenceProposalTestLanguage.g:105:1: ruleComplexName EOF
+            {
+             before(grammarAccess.getComplexNameRule()); 
+            pushFollow(FollowSets000.FOLLOW_1);
+            ruleComplexName();
+
+            state._fsp--;
+
+             after(grammarAccess.getComplexNameRule()); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleComplexName"
+
+
+    // $ANTLR start "ruleComplexName"
+    // InternalCrossReferenceProposalTestLanguage.g:112:1: ruleComplexName : ( ( rule__ComplexName__Group__0 ) ) ;
+    public final void ruleComplexName() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:116:2: ( ( ( rule__ComplexName__Group__0 ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:117:2: ( ( rule__ComplexName__Group__0 ) )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:117:2: ( ( rule__ComplexName__Group__0 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:118:3: ( rule__ComplexName__Group__0 )
+            {
+             before(grammarAccess.getComplexNameAccess().getGroup()); 
+            // InternalCrossReferenceProposalTestLanguage.g:119:3: ( rule__ComplexName__Group__0 )
+            // InternalCrossReferenceProposalTestLanguage.g:119:4: rule__ComplexName__Group__0
+            {
+            pushFollow(FollowSets000.FOLLOW_2);
+            rule__ComplexName__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getComplexNameAccess().getGroup()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleComplexName"
+
+
+    // $ANTLR start "rule__Class__Alternatives_0_0"
+    // InternalCrossReferenceProposalTestLanguage.g:127:1: rule__Class__Alternatives_0_0 : ( ( ( rule__Class__SuperClassAssignment_0_0_0 ) ) | ( ( rule__Class__SuperClassAssignment_0_0_1 ) ) | ( ( rule__Class__SuperClassAssignment_0_0_2 ) ) );
+    public final void rule__Class__Alternatives_0_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:131:1: ( ( ( rule__Class__SuperClassAssignment_0_0_0 ) ) | ( ( rule__Class__SuperClassAssignment_0_0_1 ) ) | ( ( rule__Class__SuperClassAssignment_0_0_2 ) ) )
+            int alt2=3;
+            switch ( input.LA(1) ) {
+            case 15:
+                {
+                alt2=1;
+                }
+                break;
+            case RULE_ID:
+                {
+                alt2=2;
+                }
+                break;
+            case 14:
+                {
+                alt2=3;
+                }
+                break;
+            default:
+                NoViableAltException nvae =
+                    new NoViableAltException("", 2, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt2) {
+                case 1 :
+                    // InternalCrossReferenceProposalTestLanguage.g:132:2: ( ( rule__Class__SuperClassAssignment_0_0_0 ) )
+                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:132:2: ( ( rule__Class__SuperClassAssignment_0_0_0 ) )
+                    // InternalCrossReferenceProposalTestLanguage.g:133:3: ( rule__Class__SuperClassAssignment_0_0_0 )
+                    {
+                     before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_0()); 
+                    // InternalCrossReferenceProposalTestLanguage.g:134:3: ( rule__Class__SuperClassAssignment_0_0_0 )
+                    // InternalCrossReferenceProposalTestLanguage.g:134:4: rule__Class__SuperClassAssignment_0_0_0
+                    {
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    rule__Class__SuperClassAssignment_0_0_0();
+
+                    state._fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_0()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalCrossReferenceProposalTestLanguage.g:138:2: ( ( rule__Class__SuperClassAssignment_0_0_1 ) )
+                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:138:2: ( ( rule__Class__SuperClassAssignment_0_0_1 ) )
+                    // InternalCrossReferenceProposalTestLanguage.g:139:3: ( rule__Class__SuperClassAssignment_0_0_1 )
+                    {
+                     before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_1()); 
+                    // InternalCrossReferenceProposalTestLanguage.g:140:3: ( rule__Class__SuperClassAssignment_0_0_1 )
+                    // InternalCrossReferenceProposalTestLanguage.g:140:4: rule__Class__SuperClassAssignment_0_0_1
+                    {
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    rule__Class__SuperClassAssignment_0_0_1();
+
+                    state._fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_1()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalCrossReferenceProposalTestLanguage.g:144:2: ( ( rule__Class__SuperClassAssignment_0_0_2 ) )
+                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:144:2: ( ( rule__Class__SuperClassAssignment_0_0_2 ) )
+                    // InternalCrossReferenceProposalTestLanguage.g:145:3: ( rule__Class__SuperClassAssignment_0_0_2 )
+                    {
+                     before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_2()); 
+                    // InternalCrossReferenceProposalTestLanguage.g:146:3: ( rule__Class__SuperClassAssignment_0_0_2 )
+                    // InternalCrossReferenceProposalTestLanguage.g:146:4: rule__Class__SuperClassAssignment_0_0_2
+                    {
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    rule__Class__SuperClassAssignment_0_0_2();
+
+                    state._fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0_2()); 
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Class__Alternatives_0_0"
+
+
+    // $ANTLR start "rule__Class__NameAlternatives_1_0"
+    // InternalCrossReferenceProposalTestLanguage.g:154:1: rule__Class__NameAlternatives_1_0 : ( ( RULE_ID ) | ( ruleComplexName ) );
+    public final void rule__Class__NameAlternatives_1_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:158:1: ( ( RULE_ID ) | ( ruleComplexName ) )
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0==RULE_ID) ) {
+                alt3=1;
+            }
+            else if ( (LA3_0==14) ) {
+                alt3=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 3, 0, input);
+
+                throw nvae;
+            }
+            switch (alt3) {
+                case 1 :
+                    // InternalCrossReferenceProposalTestLanguage.g:159:2: ( RULE_ID )
+                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:159:2: ( RULE_ID )
+                    // InternalCrossReferenceProposalTestLanguage.g:160:3: RULE_ID
+                    {
+                     before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0_0()); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+                     after(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0_0()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalCrossReferenceProposalTestLanguage.g:165:2: ( ruleComplexName )
+                    {
+                    // InternalCrossReferenceProposalTestLanguage.g:165:2: ( ruleComplexName )
+                    // InternalCrossReferenceProposalTestLanguage.g:166:3: ruleComplexName
+                    {
+                     before(grammarAccess.getClassAccess().getNameComplexNameParserRuleCall_1_0_1()); 
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    ruleComplexName();
+
+                    state._fsp--;
+
+                     after(grammarAccess.getClassAccess().getNameComplexNameParserRuleCall_1_0_1()); 
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Class__NameAlternatives_1_0"
+
+
     // $ANTLR start "rule__Class__Group__0"
-    // InternalCrossReferenceProposalTestLanguage.g:102:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
+    // InternalCrossReferenceProposalTestLanguage.g:175:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
     public final void rule__Class__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:106:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
-            // InternalCrossReferenceProposalTestLanguage.g:107:2: rule__Class__Group__0__Impl rule__Class__Group__1
+            // InternalCrossReferenceProposalTestLanguage.g:179:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
+            // InternalCrossReferenceProposalTestLanguage.g:180:2: rule__Class__Group__0__Impl rule__Class__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_4);
             rule__Class__Group__0__Impl();
@@ -282,33 +561,54 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__0__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:114:1: rule__Class__Group__0__Impl : ( ( rule__Class__Group_0__0 )? ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:187:1: rule__Class__Group__0__Impl : ( ( rule__Class__Group_0__0 )? ) ;
     public final void rule__Class__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:118:1: ( ( ( rule__Class__Group_0__0 )? ) )
-            // InternalCrossReferenceProposalTestLanguage.g:119:1: ( ( rule__Class__Group_0__0 )? )
+            // InternalCrossReferenceProposalTestLanguage.g:191:1: ( ( ( rule__Class__Group_0__0 )? ) )
+            // InternalCrossReferenceProposalTestLanguage.g:192:1: ( ( rule__Class__Group_0__0 )? )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:119:1: ( ( rule__Class__Group_0__0 )? )
-            // InternalCrossReferenceProposalTestLanguage.g:120:2: ( rule__Class__Group_0__0 )?
+            // InternalCrossReferenceProposalTestLanguage.g:192:1: ( ( rule__Class__Group_0__0 )? )
+            // InternalCrossReferenceProposalTestLanguage.g:193:2: ( rule__Class__Group_0__0 )?
             {
              before(grammarAccess.getClassAccess().getGroup_0()); 
-            // InternalCrossReferenceProposalTestLanguage.g:121:2: ( rule__Class__Group_0__0 )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            // InternalCrossReferenceProposalTestLanguage.g:194:2: ( rule__Class__Group_0__0 )?
+            int alt4=2;
+            switch ( input.LA(1) ) {
+                case 15:
+                    {
+                    alt4=1;
+                    }
+                    break;
+                case RULE_ID:
+                    {
+                    int LA4_2 = input.LA(2);
 
-            if ( (LA2_0==RULE_ID) ) {
-                int LA2_1 = input.LA(2);
+                    if ( (LA4_2==13) ) {
+                        alt4=1;
+                    }
+                    }
+                    break;
+                case 14:
+                    {
+                    int LA4_3 = input.LA(2);
 
-                if ( (LA2_1==13) ) {
-                    alt2=1;
-                }
+                    if ( (LA4_3==RULE_ID) ) {
+                        int LA4_5 = input.LA(3);
+
+                        if ( (LA4_5==13) ) {
+                            alt4=1;
+                        }
+                    }
+                    }
+                    break;
             }
-            switch (alt2) {
+
+            switch (alt4) {
                 case 1 :
-                    // InternalCrossReferenceProposalTestLanguage.g:121:3: rule__Class__Group_0__0
+                    // InternalCrossReferenceProposalTestLanguage.g:194:3: rule__Class__Group_0__0
                     {
                     pushFollow(FollowSets000.FOLLOW_2);
                     rule__Class__Group_0__0();
@@ -344,14 +644,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__1"
-    // InternalCrossReferenceProposalTestLanguage.g:129:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
+    // InternalCrossReferenceProposalTestLanguage.g:202:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
     public final void rule__Class__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:133:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
-            // InternalCrossReferenceProposalTestLanguage.g:134:2: rule__Class__Group__1__Impl rule__Class__Group__2
+            // InternalCrossReferenceProposalTestLanguage.g:206:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
+            // InternalCrossReferenceProposalTestLanguage.g:207:2: rule__Class__Group__1__Impl rule__Class__Group__2
             {
             pushFollow(FollowSets000.FOLLOW_5);
             rule__Class__Group__1__Impl();
@@ -382,21 +682,21 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__1__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:141:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:214:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
     public final void rule__Class__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:145:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
-            // InternalCrossReferenceProposalTestLanguage.g:146:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:218:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:219:1: ( ( rule__Class__NameAssignment_1 ) )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:146:1: ( ( rule__Class__NameAssignment_1 ) )
-            // InternalCrossReferenceProposalTestLanguage.g:147:2: ( rule__Class__NameAssignment_1 )
+            // InternalCrossReferenceProposalTestLanguage.g:219:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:220:2: ( rule__Class__NameAssignment_1 )
             {
              before(grammarAccess.getClassAccess().getNameAssignment_1()); 
-            // InternalCrossReferenceProposalTestLanguage.g:148:2: ( rule__Class__NameAssignment_1 )
-            // InternalCrossReferenceProposalTestLanguage.g:148:3: rule__Class__NameAssignment_1
+            // InternalCrossReferenceProposalTestLanguage.g:221:2: ( rule__Class__NameAssignment_1 )
+            // InternalCrossReferenceProposalTestLanguage.g:221:3: rule__Class__NameAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__NameAssignment_1();
@@ -429,14 +729,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__2"
-    // InternalCrossReferenceProposalTestLanguage.g:156:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
+    // InternalCrossReferenceProposalTestLanguage.g:229:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
     public final void rule__Class__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:160:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
-            // InternalCrossReferenceProposalTestLanguage.g:161:2: rule__Class__Group__2__Impl rule__Class__Group__3
+            // InternalCrossReferenceProposalTestLanguage.g:233:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
+            // InternalCrossReferenceProposalTestLanguage.g:234:2: rule__Class__Group__2__Impl rule__Class__Group__3
             {
             pushFollow(FollowSets000.FOLLOW_6);
             rule__Class__Group__2__Impl();
@@ -467,17 +767,17 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__2__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:168:1: rule__Class__Group__2__Impl : ( '{' ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:241:1: rule__Class__Group__2__Impl : ( '{' ) ;
     public final void rule__Class__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:172:1: ( ( '{' ) )
-            // InternalCrossReferenceProposalTestLanguage.g:173:1: ( '{' )
+            // InternalCrossReferenceProposalTestLanguage.g:245:1: ( ( '{' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:246:1: ( '{' )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:173:1: ( '{' )
-            // InternalCrossReferenceProposalTestLanguage.g:174:2: '{'
+            // InternalCrossReferenceProposalTestLanguage.g:246:1: ( '{' )
+            // InternalCrossReferenceProposalTestLanguage.g:247:2: '{'
             {
              before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
             match(input,11,FollowSets000.FOLLOW_2); 
@@ -504,14 +804,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__3"
-    // InternalCrossReferenceProposalTestLanguage.g:183:1: rule__Class__Group__3 : rule__Class__Group__3__Impl ;
+    // InternalCrossReferenceProposalTestLanguage.g:256:1: rule__Class__Group__3 : rule__Class__Group__3__Impl ;
     public final void rule__Class__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:187:1: ( rule__Class__Group__3__Impl )
-            // InternalCrossReferenceProposalTestLanguage.g:188:2: rule__Class__Group__3__Impl
+            // InternalCrossReferenceProposalTestLanguage.g:260:1: ( rule__Class__Group__3__Impl )
+            // InternalCrossReferenceProposalTestLanguage.g:261:2: rule__Class__Group__3__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__3__Impl();
@@ -537,17 +837,17 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group__3__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:194:1: rule__Class__Group__3__Impl : ( '}' ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:267:1: rule__Class__Group__3__Impl : ( '}' ) ;
     public final void rule__Class__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:198:1: ( ( '}' ) )
-            // InternalCrossReferenceProposalTestLanguage.g:199:1: ( '}' )
+            // InternalCrossReferenceProposalTestLanguage.g:271:1: ( ( '}' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:272:1: ( '}' )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:199:1: ( '}' )
-            // InternalCrossReferenceProposalTestLanguage.g:200:2: '}'
+            // InternalCrossReferenceProposalTestLanguage.g:272:1: ( '}' )
+            // InternalCrossReferenceProposalTestLanguage.g:273:2: '}'
             {
              before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
             match(input,12,FollowSets000.FOLLOW_2); 
@@ -574,14 +874,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group_0__0"
-    // InternalCrossReferenceProposalTestLanguage.g:210:1: rule__Class__Group_0__0 : rule__Class__Group_0__0__Impl rule__Class__Group_0__1 ;
+    // InternalCrossReferenceProposalTestLanguage.g:283:1: rule__Class__Group_0__0 : rule__Class__Group_0__0__Impl rule__Class__Group_0__1 ;
     public final void rule__Class__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:214:1: ( rule__Class__Group_0__0__Impl rule__Class__Group_0__1 )
-            // InternalCrossReferenceProposalTestLanguage.g:215:2: rule__Class__Group_0__0__Impl rule__Class__Group_0__1
+            // InternalCrossReferenceProposalTestLanguage.g:287:1: ( rule__Class__Group_0__0__Impl rule__Class__Group_0__1 )
+            // InternalCrossReferenceProposalTestLanguage.g:288:2: rule__Class__Group_0__0__Impl rule__Class__Group_0__1
             {
             pushFollow(FollowSets000.FOLLOW_7);
             rule__Class__Group_0__0__Impl();
@@ -612,31 +912,31 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group_0__0__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:222:1: rule__Class__Group_0__0__Impl : ( ( rule__Class__SuperClassAssignment_0_0 ) ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:295:1: rule__Class__Group_0__0__Impl : ( ( rule__Class__Alternatives_0_0 ) ) ;
     public final void rule__Class__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:226:1: ( ( ( rule__Class__SuperClassAssignment_0_0 ) ) )
-            // InternalCrossReferenceProposalTestLanguage.g:227:1: ( ( rule__Class__SuperClassAssignment_0_0 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:299:1: ( ( ( rule__Class__Alternatives_0_0 ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:300:1: ( ( rule__Class__Alternatives_0_0 ) )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:227:1: ( ( rule__Class__SuperClassAssignment_0_0 ) )
-            // InternalCrossReferenceProposalTestLanguage.g:228:2: ( rule__Class__SuperClassAssignment_0_0 )
+            // InternalCrossReferenceProposalTestLanguage.g:300:1: ( ( rule__Class__Alternatives_0_0 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:301:2: ( rule__Class__Alternatives_0_0 )
             {
-             before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
-            // InternalCrossReferenceProposalTestLanguage.g:229:2: ( rule__Class__SuperClassAssignment_0_0 )
-            // InternalCrossReferenceProposalTestLanguage.g:229:3: rule__Class__SuperClassAssignment_0_0
+             before(grammarAccess.getClassAccess().getAlternatives_0_0()); 
+            // InternalCrossReferenceProposalTestLanguage.g:302:2: ( rule__Class__Alternatives_0_0 )
+            // InternalCrossReferenceProposalTestLanguage.g:302:3: rule__Class__Alternatives_0_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
-            rule__Class__SuperClassAssignment_0_0();
+            rule__Class__Alternatives_0_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
+             after(grammarAccess.getClassAccess().getAlternatives_0_0()); 
 
             }
 
@@ -659,14 +959,14 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group_0__1"
-    // InternalCrossReferenceProposalTestLanguage.g:237:1: rule__Class__Group_0__1 : rule__Class__Group_0__1__Impl ;
+    // InternalCrossReferenceProposalTestLanguage.g:310:1: rule__Class__Group_0__1 : rule__Class__Group_0__1__Impl ;
     public final void rule__Class__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:241:1: ( rule__Class__Group_0__1__Impl )
-            // InternalCrossReferenceProposalTestLanguage.g:242:2: rule__Class__Group_0__1__Impl
+            // InternalCrossReferenceProposalTestLanguage.g:314:1: ( rule__Class__Group_0__1__Impl )
+            // InternalCrossReferenceProposalTestLanguage.g:315:2: rule__Class__Group_0__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group_0__1__Impl();
@@ -692,17 +992,17 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start "rule__Class__Group_0__1__Impl"
-    // InternalCrossReferenceProposalTestLanguage.g:248:1: rule__Class__Group_0__1__Impl : ( '<-' ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:321:1: rule__Class__Group_0__1__Impl : ( '<-' ) ;
     public final void rule__Class__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:252:1: ( ( '<-' ) )
-            // InternalCrossReferenceProposalTestLanguage.g:253:1: ( '<-' )
+            // InternalCrossReferenceProposalTestLanguage.g:325:1: ( ( '<-' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:326:1: ( '<-' )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:253:1: ( '<-' )
-            // InternalCrossReferenceProposalTestLanguage.g:254:2: '<-'
+            // InternalCrossReferenceProposalTestLanguage.g:326:1: ( '<-' )
+            // InternalCrossReferenceProposalTestLanguage.g:327:2: '<-'
             {
              before(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
             match(input,13,FollowSets000.FOLLOW_2); 
@@ -728,18 +1028,163 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end "rule__Class__Group_0__1__Impl"
 
 
+    // $ANTLR start "rule__ComplexName__Group__0"
+    // InternalCrossReferenceProposalTestLanguage.g:337:1: rule__ComplexName__Group__0 : rule__ComplexName__Group__0__Impl rule__ComplexName__Group__1 ;
+    public final void rule__ComplexName__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:341:1: ( rule__ComplexName__Group__0__Impl rule__ComplexName__Group__1 )
+            // InternalCrossReferenceProposalTestLanguage.g:342:2: rule__ComplexName__Group__0__Impl rule__ComplexName__Group__1
+            {
+            pushFollow(FollowSets000.FOLLOW_8);
+            rule__ComplexName__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_2);
+            rule__ComplexName__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ComplexName__Group__0"
+
+
+    // $ANTLR start "rule__ComplexName__Group__0__Impl"
+    // InternalCrossReferenceProposalTestLanguage.g:349:1: rule__ComplexName__Group__0__Impl : ( '::' ) ;
+    public final void rule__ComplexName__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:353:1: ( ( '::' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:354:1: ( '::' )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:354:1: ( '::' )
+            // InternalCrossReferenceProposalTestLanguage.g:355:2: '::'
+            {
+             before(grammarAccess.getComplexNameAccess().getColonColonKeyword_0()); 
+            match(input,14,FollowSets000.FOLLOW_2); 
+             after(grammarAccess.getComplexNameAccess().getColonColonKeyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ComplexName__Group__0__Impl"
+
+
+    // $ANTLR start "rule__ComplexName__Group__1"
+    // InternalCrossReferenceProposalTestLanguage.g:364:1: rule__ComplexName__Group__1 : rule__ComplexName__Group__1__Impl ;
+    public final void rule__ComplexName__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:368:1: ( rule__ComplexName__Group__1__Impl )
+            // InternalCrossReferenceProposalTestLanguage.g:369:2: rule__ComplexName__Group__1__Impl
+            {
+            pushFollow(FollowSets000.FOLLOW_2);
+            rule__ComplexName__Group__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ComplexName__Group__1"
+
+
+    // $ANTLR start "rule__ComplexName__Group__1__Impl"
+    // InternalCrossReferenceProposalTestLanguage.g:375:1: rule__ComplexName__Group__1__Impl : ( RULE_ID ) ;
+    public final void rule__ComplexName__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:379:1: ( ( RULE_ID ) )
+            // InternalCrossReferenceProposalTestLanguage.g:380:1: ( RULE_ID )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:380:1: ( RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:381:2: RULE_ID
+            {
+             before(grammarAccess.getComplexNameAccess().getIDTerminalRuleCall_1()); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+             after(grammarAccess.getComplexNameAccess().getIDTerminalRuleCall_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ComplexName__Group__1__Impl"
+
+
     // $ANTLR start "rule__Model__ElementsAssignment"
-    // InternalCrossReferenceProposalTestLanguage.g:264:1: rule__Model__ElementsAssignment : ( ruleClass ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:391:1: rule__Model__ElementsAssignment : ( ruleClass ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:268:1: ( ( ruleClass ) )
-            // InternalCrossReferenceProposalTestLanguage.g:269:2: ( ruleClass )
+            // InternalCrossReferenceProposalTestLanguage.g:395:1: ( ( ruleClass ) )
+            // InternalCrossReferenceProposalTestLanguage.g:396:2: ( ruleClass )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:269:2: ( ruleClass )
-            // InternalCrossReferenceProposalTestLanguage.g:270:3: ruleClass
+            // InternalCrossReferenceProposalTestLanguage.g:396:2: ( ruleClass )
+            // InternalCrossReferenceProposalTestLanguage.g:397:3: ruleClass
             {
              before(grammarAccess.getModelAccess().getElementsClassParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_2);
@@ -769,30 +1214,30 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end "rule__Model__ElementsAssignment"
 
 
-    // $ANTLR start "rule__Class__SuperClassAssignment_0_0"
-    // InternalCrossReferenceProposalTestLanguage.g:279:1: rule__Class__SuperClassAssignment_0_0 : ( ( RULE_ID ) ) ;
-    public final void rule__Class__SuperClassAssignment_0_0() throws RecognitionException {
+    // $ANTLR start "rule__Class__SuperClassAssignment_0_0_0"
+    // InternalCrossReferenceProposalTestLanguage.g:406:1: rule__Class__SuperClassAssignment_0_0_0 : ( ( 'Object' ) ) ;
+    public final void rule__Class__SuperClassAssignment_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:283:1: ( ( ( RULE_ID ) ) )
-            // InternalCrossReferenceProposalTestLanguage.g:284:2: ( ( RULE_ID ) )
+            // InternalCrossReferenceProposalTestLanguage.g:410:1: ( ( ( 'Object' ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:411:2: ( ( 'Object' ) )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:284:2: ( ( RULE_ID ) )
-            // InternalCrossReferenceProposalTestLanguage.g:285:3: ( RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:411:2: ( ( 'Object' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:412:3: ( 'Object' )
             {
-             before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0()); 
-            // InternalCrossReferenceProposalTestLanguage.g:286:3: ( RULE_ID )
-            // InternalCrossReferenceProposalTestLanguage.g:287:4: RULE_ID
+             before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0_0()); 
+            // InternalCrossReferenceProposalTestLanguage.g:413:3: ( 'Object' )
+            // InternalCrossReferenceProposalTestLanguage.g:414:4: 'Object'
             {
-             before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
-             after(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
+             before(grammarAccess.getClassAccess().getSuperClassClassObjectKeyword_0_0_0_0_1()); 
+            match(input,15,FollowSets000.FOLLOW_2); 
+             after(grammarAccess.getClassAccess().getSuperClassClassObjectKeyword_0_0_0_0_1()); 
 
             }
 
-             after(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0()); 
+             after(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0_0()); 
 
             }
 
@@ -811,25 +1256,129 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
         }
         return ;
     }
-    // $ANTLR end "rule__Class__SuperClassAssignment_0_0"
+    // $ANTLR end "rule__Class__SuperClassAssignment_0_0_0"
+
+
+    // $ANTLR start "rule__Class__SuperClassAssignment_0_0_1"
+    // InternalCrossReferenceProposalTestLanguage.g:425:1: rule__Class__SuperClassAssignment_0_0_1 : ( ( RULE_ID ) ) ;
+    public final void rule__Class__SuperClassAssignment_0_0_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:429:1: ( ( ( RULE_ID ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:430:2: ( ( RULE_ID ) )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:430:2: ( ( RULE_ID ) )
+            // InternalCrossReferenceProposalTestLanguage.g:431:3: ( RULE_ID )
+            {
+             before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_1_0()); 
+            // InternalCrossReferenceProposalTestLanguage.g:432:3: ( RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:433:4: RULE_ID
+            {
+             before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_1_0_1()); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+             after(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_1_0_1()); 
+
+            }
+
+             after(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Class__SuperClassAssignment_0_0_1"
+
+
+    // $ANTLR start "rule__Class__SuperClassAssignment_0_0_2"
+    // InternalCrossReferenceProposalTestLanguage.g:444:1: rule__Class__SuperClassAssignment_0_0_2 : ( ( ruleComplexName ) ) ;
+    public final void rule__Class__SuperClassAssignment_0_0_2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCrossReferenceProposalTestLanguage.g:448:1: ( ( ( ruleComplexName ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:449:2: ( ( ruleComplexName ) )
+            {
+            // InternalCrossReferenceProposalTestLanguage.g:449:2: ( ( ruleComplexName ) )
+            // InternalCrossReferenceProposalTestLanguage.g:450:3: ( ruleComplexName )
+            {
+             before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_2_0()); 
+            // InternalCrossReferenceProposalTestLanguage.g:451:3: ( ruleComplexName )
+            // InternalCrossReferenceProposalTestLanguage.g:452:4: ruleComplexName
+            {
+             before(grammarAccess.getClassAccess().getSuperClassClassComplexNameParserRuleCall_0_0_2_0_1()); 
+            pushFollow(FollowSets000.FOLLOW_2);
+            ruleComplexName();
+
+            state._fsp--;
+
+             after(grammarAccess.getClassAccess().getSuperClassClassComplexNameParserRuleCall_0_0_2_0_1()); 
+
+            }
+
+             after(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_2_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Class__SuperClassAssignment_0_0_2"
 
 
     // $ANTLR start "rule__Class__NameAssignment_1"
-    // InternalCrossReferenceProposalTestLanguage.g:298:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalCrossReferenceProposalTestLanguage.g:463:1: rule__Class__NameAssignment_1 : ( ( rule__Class__NameAlternatives_1_0 ) ) ;
     public final void rule__Class__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCrossReferenceProposalTestLanguage.g:302:1: ( ( RULE_ID ) )
-            // InternalCrossReferenceProposalTestLanguage.g:303:2: ( RULE_ID )
+            // InternalCrossReferenceProposalTestLanguage.g:467:1: ( ( ( rule__Class__NameAlternatives_1_0 ) ) )
+            // InternalCrossReferenceProposalTestLanguage.g:468:2: ( ( rule__Class__NameAlternatives_1_0 ) )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:303:2: ( RULE_ID )
-            // InternalCrossReferenceProposalTestLanguage.g:304:3: RULE_ID
+            // InternalCrossReferenceProposalTestLanguage.g:468:2: ( ( rule__Class__NameAlternatives_1_0 ) )
+            // InternalCrossReferenceProposalTestLanguage.g:469:3: ( rule__Class__NameAlternatives_1_0 )
             {
-             before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
-             after(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
+             before(grammarAccess.getClassAccess().getNameAlternatives_1_0()); 
+            // InternalCrossReferenceProposalTestLanguage.g:470:3: ( rule__Class__NameAlternatives_1_0 )
+            // InternalCrossReferenceProposalTestLanguage.g:470:4: rule__Class__NameAlternatives_1_0
+            {
+            pushFollow(FollowSets000.FOLLOW_2);
+            rule__Class__NameAlternatives_1_0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getClassAccess().getNameAlternatives_1_0()); 
 
             }
 
@@ -859,11 +1408,12 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     private static class FollowSets000 {
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000000000000C012L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x000000000000C010L});
         public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000800L});
         public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000001000L});
         public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 
