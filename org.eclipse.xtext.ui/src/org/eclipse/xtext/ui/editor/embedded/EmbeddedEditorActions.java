@@ -121,6 +121,31 @@ public class EmbeddedEditorActions {
 	}
 	
 	protected void initialize() {
+		createFocusAndDisposeListeners();
+
+		createActions();
+
+		// create context menu
+		MenuManager manager = new MenuManager(null, null);
+		manager.setRemoveAllWhenShown(true);
+		manager.addMenuListener(new IMenuListener() {
+			@Override
+			public void menuAboutToShow(IMenuManager mgr) {
+				fillContextMenu(mgr);
+			}
+		});
+
+		StyledText text = viewer.getTextWidget();
+		Menu menu = manager.createContextMenu(text);
+		text.setMenu(menu);
+		
+		List<ActionActivationCode> activationCodes = Lists.newArrayList();
+		setActionActivationCode(activationCodes, ITextEditorActionConstants.SHIFT_RIGHT_TAB,'\t', -1, SWT.NONE);
+		setActionActivationCode(activationCodes, ITextEditorActionConstants.SHIFT_LEFT, '\t', -1, SWT.SHIFT);
+		viewer.getTextWidget().addVerifyKeyListener(new ActivationCodeTrigger(allActions, activationCodes));
+	}
+
+	protected void createFocusAndDisposeListeners() {
 		final List<IHandlerActivation> handlerActivations = Lists.newArrayListWithExpectedSize(3);
 		final IHandlerService handlerService = workbench.getAdapter(IHandlerService.class);
 		final IContextService contextService = workbench.getAdapter(IContextService.class);
@@ -151,27 +176,6 @@ public class EmbeddedEditorActions {
 			}
 			
 		});
-
-		createActions();
-
-		// create context menu
-		MenuManager manager = new MenuManager(null, null);
-		manager.setRemoveAllWhenShown(true);
-		manager.addMenuListener(new IMenuListener() {
-			@Override
-			public void menuAboutToShow(IMenuManager mgr) {
-				fillContextMenu(mgr);
-			}
-		});
-
-		StyledText text = viewer.getTextWidget();
-		Menu menu = manager.createContextMenu(text);
-		text.setMenu(menu);
-		
-		List<ActionActivationCode> activationCodes = Lists.newArrayList();
-		setActionActivationCode(activationCodes, ITextEditorActionConstants.SHIFT_RIGHT_TAB,'\t', -1, SWT.NONE);
-		setActionActivationCode(activationCodes, ITextEditorActionConstants.SHIFT_LEFT, '\t', -1, SWT.SHIFT);
-		viewer.getTextWidget().addVerifyKeyListener(new ActivationCodeTrigger(allActions, activationCodes));
 	}
 	
 	protected void fillContextMenu(IMenuManager menu) {

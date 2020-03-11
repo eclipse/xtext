@@ -12,6 +12,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateProposalProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleTemplateProposalConflictHelper;
+import org.eclipse.xtext.ui.codetemplates.ui.editor.embedded.CodetemplatesEmbeddedEditorActions;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleTemplateTokenDefProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesValidator;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorActions;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -122,6 +124,10 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 	public Provider<LanguageRegistry> provideLanguageRegistry() {
 		Injector injector = CodetemplatesActivator.getInstance().getInjector("org.eclipse.xtext.ui.codetemplates.Codetemplates");
 		return injector.getProvider(LanguageRegistry.class);
+	}
+	
+	public Class<? extends EmbeddedEditorActions.Factory> bindEmbeddedEditorActions$Factory() {
+		return CodetemplatesEmbeddedEditorActions.Factory.class;
 	}
 
 }
