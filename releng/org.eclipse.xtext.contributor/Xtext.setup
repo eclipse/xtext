@@ -1553,8 +1553,6 @@
       <requirement
           name="org.eclipse.egit.mylyn.feature.group"/>
       <repository
-          url="https://download.eclipse.org/egit/github/updates"/>
-      <repository
           url="https://download.eclipse.org/mylyn/releases/latest"/>
       <description>Task and build connector</description>
     </setupTask>
