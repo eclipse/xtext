@@ -20,7 +20,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.MultiProjectWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
@@ -90,7 +90,7 @@ public class MultiProjectTest {
     final Injector injector = Guice.createInjector(Modules2.mixin(_serverModule, new AbstractModule() {
       @Override
       protected void configure() {
-        this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class).to(MultiProjectWorkspaceConfigFactory.class);
+        this.<IMultiRootWorkspaceConfigFactory>bind(IMultiRootWorkspaceConfigFactory.class).to(MultiProjectWorkspaceConfigFactory.class);
       }
     }));
     injector.injectMembers(this);

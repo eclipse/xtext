@@ -17,7 +17,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.21
  */
-public interface IMultiRootWorkspaceConfigFactory extends IWorkspaceConfigFactory {
+public interface IMultiRootWorkspaceConfigFactory {
 	
 	/**
 	 * Create a workspace config at the given location.

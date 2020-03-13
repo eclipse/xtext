@@ -15,9 +15,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
+import org.eclipse.lsp4j.WorkspaceFolder;
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory;
+import org.eclipse.xtext.ide.server.MultiRootWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectManager;
-import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.util.IFileSystemScanner;
@@ -37,11 +38,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class SourceFolderCustomImplTest extends AbstractTestLangLanguageServerTest {
-  public static class CustomWorkspaceConfigFactory extends ProjectWorkspaceConfigFactory {
+  public static class CustomWorkspaceConfigFactory extends MultiRootWorkspaceConfigFactory {
     @Override
-    public void findProjects(final WorkspaceConfig workspaceConfig, final URI uri) {
-      if ((uri != null)) {
-        final SourceFolderCustomImplTest.CustomFileProjectConfig project = new SourceFolderCustomImplTest.CustomFileProjectConfig(uri, workspaceConfig);
+    public void addProjectsForWorkspaceFolder(final WorkspaceConfig workspaceConfig, final WorkspaceFolder workspaceFolder, final Set<String> existingNames) {
+      String _uri = null;
+      if (workspaceFolder!=null) {
+        _uri=workspaceFolder.getUri();
+      }
+      boolean _tripleNotEquals = (_uri != null);
+      if (_tripleNotEquals) {
+        URI _uri_1 = this.getUriExtensions().toUri(workspaceFolder.getUri());
+        final SourceFolderCustomImplTest.CustomFileProjectConfig project = new SourceFolderCustomImplTest.CustomFileProjectConfig(_uri_1, workspaceConfig);
         project.addSourceFolder(".");
         workspaceConfig.addProject(project);
       }
@@ -136,7 +143,7 @@ public class SourceFolderCustomImplTest extends AbstractTestLangLanguageServerTe
     final com.google.inject.Module customModule = new AbstractModule() {
       @Override
       protected void configure() {
-        this.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class).to(SourceFolderCustomImplTest.CustomWorkspaceConfigFactory.class);
+        this.<IMultiRootWorkspaceConfigFactory>bind(IMultiRootWorkspaceConfigFactory.class).to(SourceFolderCustomImplTest.CustomWorkspaceConfigFactory.class);
         this.<WorkspaceManager>bind(WorkspaceManager.class).in(Scopes.SINGLETON);
       }
     };

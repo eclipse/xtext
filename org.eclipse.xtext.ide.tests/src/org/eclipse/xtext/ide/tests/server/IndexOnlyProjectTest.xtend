@@ -8,21 +8,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import com.google.inject.Module
+import java.io.File
+import java.util.Set
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
+import org.eclipse.lsp4j.WorkspaceFolder
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory
+import org.eclipse.xtext.ide.server.MultiRootWorkspaceConfigFactory
+import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.workspace.FileProjectConfig
+import org.eclipse.xtext.workspace.WorkspaceConfig
 import org.junit.Test
 
 import static org.junit.Assert.*
-import com.google.inject.Module
-import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.ide.server.ServerModule
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory
-import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.workspace.WorkspaceConfig
-import org.eclipse.xtext.workspace.FileProjectConfig
-import java.io.File
 
 /**
  * Checks functionality of method IProjectConfig#isIndexOnly()
@@ -33,16 +34,14 @@ class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
 
 	override Module getServerModule() {
 		Modules2.mixin(new ServerModule, [
-			bind(IWorkspaceConfigFactory).toInstance(new ProjectWorkspaceConfigFactory() {
-
-				override findProjects(WorkspaceConfig workspaceConfig, URI location) {
-					if (location !== null) {
-						val FileProjectConfig project = new FileProjectConfig(location, workspaceConfig) {
+			bind(IMultiRootWorkspaceConfigFactory).toInstance(new MultiRootWorkspaceConfigFactory() {
+				override addProjectsForWorkspaceFolder(WorkspaceConfig workspaceConfig, WorkspaceFolder workspaceFolder, Set<String> existingNames) {
+					if (workspaceFolder?.uri !== null) {
+						val project = new FileProjectConfig(uriExtensions.toUri(workspaceFolder.uri), getUniqueProjectName(workspaceFolder.name, existingNames)) {
 							override boolean isIndexOnly() {
 								return true;
 							}
 						};
-
 						project.addSourceFolder(".");
 						workspaceConfig.addProject(project);
 					}

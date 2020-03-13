@@ -29,8 +29,7 @@ public class ServerModule extends AbstractModule {
 
 		bind(LanguageServer.class).to(LanguageServerImpl.class);
 		bind(IResourceServiceProvider.Registry.class).toProvider(ResourceServiceProviderServiceLoader.class);
-		bind(IWorkspaceConfigFactory.class).to(ProjectWorkspaceConfigFactory.class);
-		bind(ProjectWorkspaceConfigFactory.class).to(MultiRootWorkspaceConfigFactory.class);
+		bind(IMultiRootWorkspaceConfigFactory.class).to(MultiRootWorkspaceConfigFactory.class);
 		bind(IProjectDescriptionFactory.class).to(DefaultProjectDescriptionFactory.class);
 		bind(IContainer.Manager.class).to(ProjectDescriptionBasedContainerManager.class);
 	}
