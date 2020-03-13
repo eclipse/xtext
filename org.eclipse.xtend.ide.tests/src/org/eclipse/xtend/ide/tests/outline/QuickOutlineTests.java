@@ -77,23 +77,30 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(16);
-		sub.child(0, "baz : Number - Foo").numChildren(0).hasTextRegion(true);
-		sub.child(1, "SubOfFoo - Super").hasTextRegion(false);
-		sub.child(2, "bar : String - Super").numChildren(0).hasTextRegion(false);
-		sub.child(3, "foo : int - Super").numChildren(0).hasTextRegion(false);
-		sub.child(4, "registerNatives() : void - Object").hasTextRegion(false);
-		sub.child(5, "clone() : Object - Object").hasTextRegion(false);
-		sub.child(6, "equals(Object) : boolean - Object").hasTextRegion(false);
-		sub.child(7, "finalize() : void - Object").hasTextRegion(false);
-		sub.child(8, "getClass() : Class<?> - Object").hasTextRegion(false);
-		sub.child(9, "hashCode() : int - Object").hasTextRegion(false);
-		sub.child(10, "notify() : void - Object").hasTextRegion(false);
-		sub.child(11, "notifyAll() : void - Object").hasTextRegion(false);
-		sub.child(12, "toString() : String - Object").hasTextRegion(false);
-		sub.child(13, "wait() : void - Object").hasTextRegion(false);
-		sub.child(14, "wait(long) : void - Object").hasTextRegion(false);
-		sub.child(15, "wait(long, int) : void - Object").hasTextRegion(false);
+		int numChildren = 16;
+		if (isJava14OrLater()) {
+			numChildren = 15;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
+		int counter = 0;
+		sub.child(counter++, "baz : Number - Foo").numChildren(0).hasTextRegion(true);
+		sub.child(counter++, "SubOfFoo - Super").hasTextRegion(false);
+		sub.child(counter++, "bar : String - Super").numChildren(0).hasTextRegion(false);
+		sub.child(counter++, "foo : int - Super").numChildren(0).hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
+		}
+		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
+		sub.child(counter++, "equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.child(counter++, "finalize() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.child(counter++, "hashCode() : int - Object").hasTextRegion(false);
+		sub.child(counter++, "notify() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "notifyAll() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "toString() : String - Object").hasTextRegion(false);
+		sub.child(counter++, "wait() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long) : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long, int) : void - Object").hasTextRegion(false);
 	}
 
 	@Test
@@ -111,22 +118,29 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(15);
-		sub.child(0, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
-		sub.child(1, "bar() : String - Super").hasTextRegion(false);
-		sub.child(2, "foo(String) : int - Super").hasTextRegion(false);
-		sub.child(3, "registerNatives() : void - Object").hasTextRegion(false);
-		sub.child(4, "clone() : Object - Object").hasTextRegion(false);
-		sub.child(5, "equals(Object) : boolean - Object").hasTextRegion(false);
-		sub.child(6, "finalize() : void - Object").hasTextRegion(false);
-		sub.child(7, "getClass() : Class<?> - Object").hasTextRegion(false);
-		sub.child(8, "hashCode() : int - Object").hasTextRegion(false);
-		sub.child(9, "notify() : void - Object").hasTextRegion(false);
-		sub.child(10, "notifyAll() : void - Object").hasTextRegion(false);
-		sub.child(11, "toString() : String - Object").hasTextRegion(false);
-		sub.child(12, "wait() : void - Object").hasTextRegion(false);
-		sub.child(13, "wait(long) : void - Object").hasTextRegion(false);
-		sub.child(14, "wait(long, int) : void - Object").hasTextRegion(false);
+		int numChildren = 15;
+		if (isJava14OrLater()) {
+			numChildren = 14;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
+		int counter = 0;
+		sub.child(counter++, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
+		sub.child(counter++, "bar() : String - Super").hasTextRegion(false);
+		sub.child(counter++, "foo(String) : int - Super").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
+		}
+		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
+		sub.child(counter++, "equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.child(counter++, "finalize() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.child(counter++, "hashCode() : int - Object").hasTextRegion(false);
+		sub.child(counter++, "notify() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "notifyAll() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "toString() : String - Object").hasTextRegion(false);
+		sub.child(counter++, "wait() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long) : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long, int) : void - Object").hasTextRegion(false);
 	}
 	
 	@Test
@@ -139,20 +153,27 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "C - pack.name").numChildren(13);
-		sub.child(0, "E - C").hasTextRegion(true);
-		sub.child(1, "registerNatives() : void - Object").hasTextRegion(false);
-		sub.child(2, "clone() : Object - Object").hasTextRegion(false);
-		sub.child(3, "equals(Object) : boolean - Object").hasTextRegion(false);
-		sub.child(4, "finalize() : void - Object").hasTextRegion(false);
-		sub.child(5, "getClass() : Class<?> - Object").hasTextRegion(false);
-		sub.child(6, "hashCode() : int - Object").hasTextRegion(false);
-		sub.child(7, "notify() : void - Object").hasTextRegion(false);
-		sub.child(8, "notifyAll() : void - Object").hasTextRegion(false);
-		sub.child(9, "toString() : String - Object").hasTextRegion(false);
-		sub.child(10, "wait() : void - Object").hasTextRegion(false);
-		sub.child(11, "wait(long) : void - Object").hasTextRegion(false);
-		sub.child(12, "wait(long, int) : void - Object").hasTextRegion(false);
+		int numChildren = 13;
+		if (isJava14OrLater()) {
+			numChildren = 12;
+		}
+		sub = assertBuilder.child(1, "C - pack.name").numChildren(numChildren);
+		int counter = 0;
+		sub.child(counter++, "E - C").hasTextRegion(true);
+		if (!isJava14OrLater()) {
+			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
+		}
+		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
+		sub.child(counter++, "equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.child(counter++, "finalize() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.child(counter++, "hashCode() : int - Object").hasTextRegion(false);
+		sub.child(counter++, "notify() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "notifyAll() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "toString() : String - Object").hasTextRegion(false);
+		sub.child(counter++, "wait() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long) : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long, int) : void - Object").hasTextRegion(false);
 	}
 
 	@Test
@@ -169,23 +190,30 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(13).hasTextRegion(true);
+		int numChildren = 13;
+		if (isJava14OrLater()) {
+			numChildren = 12;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		AssertBuilder foo = sub.child(0, "foo(Serializable) : void - Foo").numChildren(2).hasTextRegion(true);
-		foo.child(0, "_foo(String) : void - Super").numChildren(0).hasTextRegion(false);
-		foo.child(1, "foo(Number) : void - Foo").numChildren(0).hasTextRegion(true);
-		
-		sub.child(1, "registerNatives() : void - Object").hasTextRegion(false);
-		sub.child(2, "clone() : Object - Object").hasTextRegion(false);
-		sub.child(3, "equals(Object) : boolean - Object").hasTextRegion(false);
-		sub.child(4, "finalize() : void - Object").hasTextRegion(false);
-		sub.child(5, "getClass() : Class<?> - Object").hasTextRegion(false);
-		sub.child(6, "hashCode() : int - Object").hasTextRegion(false);
-		sub.child(7, "notify() : void - Object").hasTextRegion(false);
-		sub.child(8, "notifyAll() : void - Object").hasTextRegion(false);
-		sub.child(9, "toString() : String - Object").hasTextRegion(false);
-		sub.child(10, "wait() : void - Object").hasTextRegion(false);
-		sub.child(11, "wait(long) : void - Object").hasTextRegion(false);
-		sub.child(12, "wait(long, int) : void - Object").hasTextRegion(false);
+		int counter = 0;
+		foo.child(counter++, "_foo(String) : void - Super").numChildren(0).hasTextRegion(false);
+		foo.child(counter++, "foo(Number) : void - Foo").numChildren(0).hasTextRegion(true);
+		counter = 1;
+		if (!isJava14OrLater()) {
+			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
+		}
+		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
+		sub.child(counter++, "equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.child(counter++, "finalize() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.child(counter++, "hashCode() : int - Object").hasTextRegion(false);
+		sub.child(counter++, "notify() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "notifyAll() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "toString() : String - Object").hasTextRegion(false);
+		sub.child(counter++, "wait() : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long) : void - Object").hasTextRegion(false);
+		sub.child(counter++, "wait(long, int) : void - Object").hasTextRegion(false);
 
 	}
 	
@@ -213,7 +241,11 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(18).hasTextRegion(true);
+		int numChildren = 18;
+		if (isJava14OrLater()) {
+			numChildren = 17;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		int i = 0;
 		sub.child(i++, "new() - Foo").hasTextRegion(true);
 		sub.child(i++, "a : String - Super<String>").hasTextRegion(false);
@@ -221,8 +253,9 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(i++, "c : Map<List<String>, String> - Super<String>").hasTextRegion(false);
 		sub.child(i++, "new(List<String>) - Super<String>").hasTextRegion(false);
 		sub.child(i++, "foo(List<String>) : String - Super<String>").hasTextRegion(false);
-		
-		sub.child(i++, "registerNatives() : void - Object").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.child(i++, "registerNatives() : void - Object").hasTextRegion(false);
+		}
 		sub.child(i++, "clone() : Object - Object").hasTextRegion(false);
 		sub.child(i++, "equals(Object) : boolean - Object").hasTextRegion(false);
 		sub.child(i++, "finalize() : void - Object").hasTextRegion(false);

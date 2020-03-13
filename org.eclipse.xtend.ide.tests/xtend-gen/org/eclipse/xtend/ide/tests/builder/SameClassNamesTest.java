@@ -169,7 +169,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
     final IProject result = projectFactory.createProject(_nullProgressMonitor, null);
     final IJavaProject javaProject = JavaCore.create(result);
-    WorkbenchTestHelper.makeCompliantFor(javaProject, JavaVersion.JAVA6);
+    WorkbenchTestHelper.makeCompliantFor(javaProject, JavaVersion.JAVA8);
     JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
     return result;
   }
