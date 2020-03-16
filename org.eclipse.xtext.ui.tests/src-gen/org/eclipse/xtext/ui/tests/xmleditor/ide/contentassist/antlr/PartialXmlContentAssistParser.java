@@ -8,10 +8,9 @@ import java.util.Collections;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
-public class PartialXmlContentAssistParser extends XmlParser implements IPartialEditingContentAssistParser {
+public class PartialXmlContentAssistParser extends XmlParser {
 
 	private AbstractRule rule;
 

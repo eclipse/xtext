@@ -13,10 +13,9 @@ import java.util.Collections;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
-public class PartialArithmeticsContentAssistParser extends ArithmeticsParser implements IPartialEditingContentAssistParser {
+public class PartialArithmeticsContentAssistParser extends ArithmeticsParser {
 
 	private AbstractRule rule;
 
