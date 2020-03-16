@@ -17,7 +17,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.diagnostics.Diagnostic
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory
 import org.eclipse.xtext.ide.server.MultiProjectWorkspaceConfigFactory
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.WorkspaceManager
@@ -71,7 +71,7 @@ class MultiProjectTest {
     def void setup() {
         val injector = Guice.createInjector(Modules2.mixin(new ServerModule, new AbstractModule() {
             override protected configure() {
-                bind(IWorkspaceConfigFactory).to(MultiProjectWorkspaceConfigFactory)
+                bind(IMultiRootWorkspaceConfigFactory).to(MultiProjectWorkspaceConfigFactory)
             }
         }))
         injector.injectMembers(this)

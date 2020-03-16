@@ -12,9 +12,11 @@ import com.google.inject.AbstractModule
 import com.google.inject.Inject
 import com.google.inject.Module
 import com.google.inject.Scopes
+import java.util.Set
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory
-import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory
+import org.eclipse.lsp4j.WorkspaceFolder
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory
+import org.eclipse.xtext.ide.server.MultiRootWorkspaceConfigFactory
 import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.util.IFileSystemScanner
 import org.eclipse.xtext.util.Modules2
@@ -53,13 +55,12 @@ class SourceFolderCustomImplTest extends AbstractTestLangLanguageServerTest {
 		assertEquals(allResources.size, 1);
 	}
 
-	static class CustomWorkspaceConfigFactory extends ProjectWorkspaceConfigFactory {
-
-		override findProjects(WorkspaceConfig workspaceConfig, URI uri) {
-			if (uri !== null) {
-				val project = new CustomFileProjectConfig(uri, workspaceConfig)
-				project.addSourceFolder('.')
-				workspaceConfig.addProject(project)
+	static class CustomWorkspaceConfigFactory extends MultiRootWorkspaceConfigFactory {
+		override addProjectsForWorkspaceFolder(WorkspaceConfig workspaceConfig, WorkspaceFolder workspaceFolder, Set<String> existingNames) {
+			if (workspaceFolder?.uri !== null) {
+				val project = new CustomFileProjectConfig(uriExtensions.toUri(workspaceFolder.uri), workspaceConfig)
+				project.addSourceFolder(".");
+				workspaceConfig.addProject(project);
 			}
 		}
 	}
@@ -107,7 +108,7 @@ class SourceFolderCustomImplTest extends AbstractTestLangLanguageServerTest {
 		val Module customModule = new AbstractModule() {
 			
 			override protected configure() {
-				bind(IWorkspaceConfigFactory).to(CustomWorkspaceConfigFactory)
+				bind(IMultiRootWorkspaceConfigFactory).to(CustomWorkspaceConfigFactory)
 				bind(WorkspaceManager).in(Scopes.SINGLETON);
 			}
 			

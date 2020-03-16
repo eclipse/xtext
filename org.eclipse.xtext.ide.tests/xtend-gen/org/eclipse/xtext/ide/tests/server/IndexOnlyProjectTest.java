@@ -12,14 +12,16 @@ import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.util.Collections;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
-import org.eclipse.xtext.ide.server.ProjectWorkspaceConfigFactory;
+import org.eclipse.xtext.ide.server.IMultiRootWorkspaceConfigFactory;
+import org.eclipse.xtext.ide.server.MultiRootWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.testing.ReferenceTestConfiguration;
@@ -43,12 +45,19 @@ public class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
   public com.google.inject.Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
     final com.google.inject.Module _function = (Binder it) -> {
-      AnnotatedBindingBuilder<IWorkspaceConfigFactory> _bind = it.<IWorkspaceConfigFactory>bind(IWorkspaceConfigFactory.class);
-      _bind.toInstance(new ProjectWorkspaceConfigFactory() {
+      AnnotatedBindingBuilder<IMultiRootWorkspaceConfigFactory> _bind = it.<IMultiRootWorkspaceConfigFactory>bind(IMultiRootWorkspaceConfigFactory.class);
+      _bind.toInstance(new MultiRootWorkspaceConfigFactory() {
         @Override
-        public void findProjects(final WorkspaceConfig workspaceConfig, final URI location) {
-          if ((location != null)) {
-            final FileProjectConfig project = new FileProjectConfig(location, workspaceConfig) {
+        public void addProjectsForWorkspaceFolder(final WorkspaceConfig workspaceConfig, final WorkspaceFolder workspaceFolder, final Set<String> existingNames) {
+          String _uri = null;
+          if (workspaceFolder!=null) {
+            _uri=workspaceFolder.getUri();
+          }
+          boolean _tripleNotEquals = (_uri != null);
+          if (_tripleNotEquals) {
+            URI _uri_1 = this.getUriExtensions().toUri(workspaceFolder.getUri());
+            String _uniqueProjectName = this.getUniqueProjectName(workspaceFolder.getName(), existingNames);
+            final FileProjectConfig project = new FileProjectConfig(_uri_1, _uniqueProjectName) {
               @Override
               public boolean isIndexOnly() {
                 return true;

@@ -9,8 +9,10 @@
 package org.eclipse.xtext.ide.server;
 
 import java.io.File;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.WorkspaceConfig;
 
@@ -18,8 +20,14 @@ import org.eclipse.xtext.workspace.WorkspaceConfig;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
-public class MultiProjectWorkspaceConfigFactory extends ProjectWorkspaceConfigFactory {
+public class MultiProjectWorkspaceConfigFactory extends MultiRootWorkspaceConfigFactory {
+
 	@Override
+	protected void addProjectsForWorkspaceFolder(WorkspaceConfig workspaceConfig, WorkspaceFolder workspaceFolder, Set<String> existingNames) {
+		if (workspaceFolder != null && workspaceFolder.getUri() != null)
+			findProjects(workspaceConfig, uriExtensions.toUri(workspaceFolder.getUri()));
+	}
+
 	public void findProjects(WorkspaceConfig workspaceConfig, URI uri) {
 		if (uri == null) {
 			return;

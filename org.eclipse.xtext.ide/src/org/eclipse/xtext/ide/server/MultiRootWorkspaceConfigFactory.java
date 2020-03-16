@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
@@ -26,23 +25,16 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.21
  */
-public class MultiRootWorkspaceConfigFactory extends ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory, IMultiRootWorkspaceConfigFactory {
+public class MultiRootWorkspaceConfigFactory implements IMultiRootWorkspaceConfigFactory {
 
 	@Inject UriExtensions uriExtensions;
-	
+
 	@Override
 	public IWorkspaceConfig getWorkspaceConfig(List<WorkspaceFolder> workspaceFolders) {
 		WorkspaceConfig workspaceConfig = new WorkspaceConfig();
 		Set<String> existingProjectNames = new HashSet<>();
 		for(WorkspaceFolder workspaceFolder: workspaceFolders) 
 			addProjectsForWorkspaceFolder(workspaceConfig, workspaceFolder, existingProjectNames);
-		return workspaceConfig;
-	}
-
-	@Override
-	public IWorkspaceConfig getWorkspaceConfig(URI workspaceBaseURI) {
-		WorkspaceConfig workspaceConfig = new WorkspaceConfig();
-		addProjectsForWorkspaceFolder(workspaceConfig, new WorkspaceFolder(uriExtensions.toUriString(workspaceBaseURI), "workspace"), new HashSet<>());
 		return workspaceConfig;
 	}
 
@@ -66,5 +58,12 @@ public class MultiRootWorkspaceConfigFactory extends ProjectWorkspaceConfigFacto
 					return proposal + count;
 			}
 		}
+	}
+	
+	/**
+	 * @since 2.20
+	 */
+	protected UriExtensions getUriExtensions() {
+		return uriExtensions;
 	}
 }

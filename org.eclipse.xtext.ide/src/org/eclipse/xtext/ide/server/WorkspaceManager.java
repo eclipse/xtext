@@ -59,7 +59,7 @@ public class WorkspaceManager {
 	private Provider<ProjectManager> projectManagerProvider;
 
 	@Inject
-	private IWorkspaceConfigFactory workspaceConfigFactory;
+	private IMultiRootWorkspaceConfigFactory workspaceConfigFactory;
 
 	@Inject
 	private IProjectDescriptionFactory projectDescriptionFactory;
@@ -174,7 +174,7 @@ public class WorkspaceManager {
 	 * @since 2.21
 	 */
 	public boolean isSupportsWorkspaceFolders() {
-		return workspaceConfigFactory instanceof IMultiRootWorkspaceConfigFactory;
+		return true;
 	}
 	
 	protected List<WorkspaceFolder> getWorkspaceFolders() {
@@ -200,12 +200,7 @@ public class WorkspaceManager {
 	}
 	
 	protected IWorkspaceConfig createWorkspaceConfig() {
-		if (isSupportsWorkspaceFolders()) 
-			return ((IMultiRootWorkspaceConfigFactory) workspaceConfigFactory).getWorkspaceConfig(workspaceFolders);
-		URI workspaceUri = (!workspaceFolders.isEmpty())
-				? uriExtensions.toUri(workspaceFolders.get(0).getUri())
-				: null;
-		return workspaceConfigFactory.getWorkspaceConfig(workspaceUri);
+		return workspaceConfigFactory.getWorkspaceConfig(workspaceFolders);	
 	}
 	
 	/**
