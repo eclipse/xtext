@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.ControlEnableState;
@@ -316,7 +317,7 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 
 	@Override
 	public void setElement(IAdaptable element) {
-		project = (IProject) element.getAdapter(IResource.class);
+		project = Adapters.adapt(element, IProject.class);
 	}
 
 	@SuppressWarnings("unchecked")

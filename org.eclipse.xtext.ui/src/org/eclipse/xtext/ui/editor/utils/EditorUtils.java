@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.internal.ui.javaeditor.JarEntryEditorInput;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -85,8 +86,8 @@ public class EditorUtils {
 		IEditorPart activeEditor = HandlerUtil.getActiveEditor(event);
 		if (activeEditor == null)
 			return null;
-		XtextEditor xtextEditor = activeEditor.getAdapter(XtextEditor.class);
-		return xtextEditor;
+		
+		return Adapters.adapt(activeEditor, XtextEditor.class);
 	}
 
 	public static XtextEditor getActiveXtextEditor() {
@@ -94,21 +95,20 @@ public class EditorUtils {
 		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
 		if (workbenchWindow == null) 
 			return null;
+		
 		IWorkbenchPage activePage = workbenchWindow.getActivePage();
 		if (activePage == null) 
 			return null;
+		
 		IEditorPart activeEditor = activePage.getActiveEditor();
 		if (activeEditor == null)
 			return null;
-		XtextEditor xtextEditor = activeEditor.getAdapter(XtextEditor.class);
-		return xtextEditor;
+		
+		return Adapters.adapt(activeEditor, XtextEditor.class);
 	}
 
 	public static XtextEditor getXtextEditor(IEditorPart openEditor) {
-		if (openEditor != null) {
-			return openEditor.getAdapter(XtextEditor.class);
-		}
-		return null;
+		return Adapters.adapt(openEditor, XtextEditor.class);
 	}
 	
 	/**

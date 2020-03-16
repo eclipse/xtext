@@ -16,8 +16,8 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -37,11 +37,7 @@ public class ToggleXtextNatureCommand extends AbstractHandler {
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof IStructuredSelection) {
 			for (Iterator<?> it = ((IStructuredSelection) selection).iterator(); it.hasNext();) {
-				Object element = it.next();
-				IProject project = null;
-				if (element instanceof IAdaptable) {
-					project = ((IAdaptable) element).getAdapter(IProject.class);
-				}
+				IProject project = Adapters.adapt(it.next(), IProject.class);
 				if (project != null) {
 					toggleNature(project);
 				}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -179,7 +180,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 				if (editor instanceof XtextEditor) {
 					result = (XtextEditor) editor;
 				} else if (editor != null) {
-					result = editor.getAdapter(XtextEditor.class);
+					result = Adapters.adapt(editor, XtextEditor.class);
 				}
 			} catch (PartInitException e) {
 				return null;
@@ -196,7 +197,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			if(editor instanceof XtextEditor) {
 				return (XtextEditor)editor;
 			} else if (editor != null) {
-				return editor.getAdapter(XtextEditor.class);
+				return Adapters.adapt(editor, XtextEditor.class);
 			}
 		}
 		return null;

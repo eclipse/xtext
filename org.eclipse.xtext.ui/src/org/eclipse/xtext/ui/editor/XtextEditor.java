@@ -20,6 +20,7 @@ import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -366,11 +367,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	}
 
 	public IResource getResource() {
-		Object adapter = getEditorInput().getAdapter(IResource.class);
-		if (adapter != null) {
-			return (IResource) adapter;
-		}
-		return null;
+		return Adapters.adapt(getEditorInput(), IResource.class);
 	}
 
 	@Override
@@ -492,7 +489,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 
 			protected IStatus validateEditorInputState(IAdaptable info, IStatus status) {
 				if (Status.OK_STATUS.equals(status) && info != null
-						&& info.getAdapter(ITextEditor.class) == XtextEditor.this) {
+						&& Adapters.adapt(info, ITextEditor.class) == XtextEditor.this) {
 					if (!XtextEditor.this.validateEditorInputState()) {
 						return Status.CANCEL_STATUS;
 					}
@@ -1471,11 +1468,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	 */
 	@Override
 	public void forceReconcile() {
-		IAdaptable iAdaptable = (IAdaptable) getInternalSourceViewer();
-		if (iAdaptable == null) {
-			return;
-		}
-		Object reconciler = iAdaptable.getAdapter(IReconciler.class);
+		IReconciler reconciler = Adapters.adapt(getInternalSourceViewer(), IReconciler.class);
 		if (reconciler instanceof XtextReconciler)
 			((XtextReconciler)reconciler).forceReconcile();
 	}

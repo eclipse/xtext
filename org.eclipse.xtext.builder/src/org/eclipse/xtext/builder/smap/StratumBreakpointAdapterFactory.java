@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.core.DebugPlugin;
@@ -121,8 +122,9 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					result.types = getClassNamePattern(state);
 					result.lang = provider.get(LanguageInfo.class);
 					result.sourceUri = state.getURI();
-					if (editorInput.getAdapter(IClassFile.class) != null) {
-						result.classHandle = editorInput.getAdapter(IClassFile.class).getHandleIdentifier();
+					IClassFile classFile = Adapters.adapt(editorInput, IClassFile.class);
+					if (classFile != null) {
+						result.classHandle = classFile.getHandleIdentifier();
 					}
 					return result;
 				}

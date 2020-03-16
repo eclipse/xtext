@@ -21,6 +21,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
@@ -88,7 +89,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	@Override
 	public void setElement(IAdaptable element) {
-		this.project = element.getAdapter(IProject.class);
+		this.project = Adapters.adapt(element, IProject.class);
 	}
 
 	@Override

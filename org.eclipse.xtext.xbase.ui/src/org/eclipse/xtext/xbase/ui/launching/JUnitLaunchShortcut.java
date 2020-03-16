@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.launching;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -28,7 +29,7 @@ public class JUnitLaunchShortcut extends org.eclipse.jdt.junit.launcher.JUnitLau
 	
 	@Override
 	public void launch(IEditorPart editor, String mode) {
-		JavaElementDelegate javaElementDelegate = editor.getAdapter(JavaElementDelegateJunitLaunch.class);
+		JavaElementDelegate javaElementDelegate = Adapters.adapt(editor, JavaElementDelegateJunitLaunch.class);
 		if (javaElementDelegate != null) {
 			launch(new StructuredSelection(javaElementDelegate), mode);
 		} else {

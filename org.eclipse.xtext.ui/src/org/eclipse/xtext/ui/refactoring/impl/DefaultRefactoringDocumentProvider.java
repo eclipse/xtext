@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -21,7 +22,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -84,12 +84,11 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 						protected ITextEditor run() throws Exception {
 							IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 							IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-							IEditorPart editor = activePage.findEditor(fileEditorInput);
-							if (editor instanceof ITextEditor) {
-								if (editor instanceof ITextEditorExtension
-										&& ((ITextEditorExtension) editor).isEditorInputReadOnly())
+							ITextEditor editor = Adapters.adapt(activePage.findEditor(fileEditorInput), ITextEditor.class);
+							if (editor != null) {
+								if (editor instanceof ITextEditorExtension && ((ITextEditorExtension) editor).isEditorInputReadOnly())
 									status.add(ERROR, "Editor for {0} is read only", fileEditorInput.getName());
-								return ((ITextEditor) editor);
+								return (editor);
 							}
 							return null;
 						}

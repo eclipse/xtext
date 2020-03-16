@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -285,7 +286,7 @@ public class ToggleSLCommentAction extends TextEditorAction {
 
 		ITextEditor editor= getTextEditor();
 		if (fOperationTarget == null && editor != null)
-			fOperationTarget= editor.getAdapter(ITextOperationTarget.class);
+			fOperationTarget= Adapters.adapt(editor, ITextOperationTarget.class);
 
 		boolean isEnabled= (fOperationTarget != null && fOperationTarget.canDoOperation(ITextOperationTarget.PREFIX) && fOperationTarget.canDoOperation(ITextOperationTarget.STRIP_PREFIX));
 		setEnabled(isEnabled);

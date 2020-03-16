@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.ecore;
 
 import java.util.Collections;
 
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -23,7 +24,7 @@ public class EcoreEditorOpener extends LanguageSpecificURIEditorOpener {
 	protected void selectAndReveal(IEditorPart openEditor, URI uri,
 			EReference crossReference, int indexInList, boolean select) {
 		if (uri.fragment() != null) {
-			EcoreEditor ecoreEditor = openEditor.getAdapter(EcoreEditor.class);
+			EcoreEditor ecoreEditor = Adapters.adapt(openEditor, EcoreEditor.class);
 			if (ecoreEditor != null) {
 				EObject eObject = ecoreEditor.getEditingDomain().getResourceSet().getEObject(uri, true);
 				ecoreEditor.setSelectionToViewer(Collections.singletonList(eObject));
