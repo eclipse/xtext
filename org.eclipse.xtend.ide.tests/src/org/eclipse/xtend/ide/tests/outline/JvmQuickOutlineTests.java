@@ -45,9 +45,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(3);
 
-		sub = assertBuilder.child(1, "Foo - test").numChildren(15);
+		sub = assertBuilder.child(1, "Foo - test").numChildren(isJava14OrLater() ? 14 : 15);
 		checkExtendedMethods(sub, "Foo");
-		sub2 = assertBuilder.child(2, "Foo2 - test").numChildren(15);
+		sub2 = assertBuilder.child(2, "Foo2 - test").numChildren(isJava14OrLater() ? 14 : 15);
 		checkExtendedMethods(sub2, "Foo2");
 	}
 
@@ -58,16 +58,27 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		super.testEnum();
 		setShowInherited(true);
 		AssertBuilder assertBuilder = newAssertBuilder("enum Foo { BAR, BAZ }");
-		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo - (default package)").numChildren(30);
+		int numChildren = 30;
+		if (isJava14OrLater()) {
+			numChildren = 32;
+		} else if (isJava13OrLater()) {
+			numChildren = 33;
+		}
+		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo - (default package)").numChildren(numChildren);
 		interfaze.child(0, "BAR - Foo").numChildren(0);
 		interfaze.child(1, "BAZ - Foo").numChildren(0);
-		
+		if (isJava13OrLater()) {
+			interfaze.nextChild("EnumDesc<E extends Enum<E>> - Enum").hasTextRegion(false);
+		}
 		interfaze.nextChild("valueOf(Class<T>, String) <T extends Enum<T>> : T - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("name : String - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("ordinal : int - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("new(String, int) - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("clone() : Object - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("compareTo(Foo) : int - Enum<Foo>").hasTextRegion(false);
+		if (isJava13OrLater()) {
+			interfaze.nextChild("describeConstable() : Optional<EnumDesc<Foo>> - Enum<Foo>").hasTextRegion(false);
+		}
 		interfaze.nextChild("equals(Object) : boolean - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("finalize() : void - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("getDeclaringClass() : Class<Foo> - Enum<Foo>").hasTextRegion(false);
@@ -78,9 +89,14 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		interfaze.nextChild("readObjectNoData() : void - Enum<Foo>").hasTextRegion(false);
 		interfaze.nextChild("toString() : String - Enum<Foo>").hasTextRegion(false);
 		
+		if (isJava13OrLater()) {
+			interfaze.nextChild("describeConstable() : Optional<? extends ConstantDesc> - Constable").hasTextRegion(false);
+		}
 		interfaze.nextChild("compareTo(Foo) : int - Comparable<Foo>").hasTextRegion(false);
 		
-		interfaze.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			interfaze.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		}
 		interfaze.nextChild("clone() : Object - Object").hasTextRegion(false);
 		interfaze.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
 		interfaze.nextChild("finalize() : void - Object").hasTextRegion(false);
@@ -98,7 +114,9 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		sub.child(0, "baz : Number - " + parentName).numChildren(0).hasTextRegion(true);
 		sub.nextChild("bar : String - Super").numChildren(0).hasTextRegion(false);
 		sub.nextChild("foo : int - Super").numChildren(0).hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		}
 		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
 		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
 		sub.nextChild("finalize() : void - Object").hasTextRegion(false);
@@ -130,12 +148,18 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(16);
+		int numChildren = 16;
+		if (isJava14OrLater()) {
+			numChildren = 15;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
 		sub.child(0, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
 		sub.nextChild("toString() : String - Foo").numChildren(0).hasTextRegion(true);
 		sub.nextChild("bar() : String - Super").hasTextRegion(false);
 		sub.nextChild("foo(String) : int - Super").hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		}
 		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
 		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
 		sub.nextChild("finalize() : void - Object").hasTextRegion(false);
@@ -164,11 +188,17 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo - test").numChildren(15).hasTextRegion(true);
+		int numChildren = 15;
+		if (isJava14OrLater()) {
+			numChildren = 14;
+		}
+		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
 		sub.nextChild("_foo(Number) : void - Foo").hasTextRegion(true);
 		sub.nextChild("foo(Serializable) : void - Foo");
 		sub.nextChild("_foo(String) : void - Super").numChildren(0).hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		if (!isJava14OrLater()) {
+			sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		}
 		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
 		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
 		sub.nextChild("finalize() : void - Object").hasTextRegion(false);

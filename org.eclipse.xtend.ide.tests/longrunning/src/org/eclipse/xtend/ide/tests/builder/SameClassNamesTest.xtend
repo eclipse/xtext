@@ -127,7 +127,7 @@ class SameClassNamesTest extends AbstractXtendUITestCase {
 		projectFactory.addExportedPackages(#['com.acme'])
 		val result = projectFactory.createProject(new NullProgressMonitor(), null);
 		val javaProject = JavaCore.create(result);
-		WorkbenchTestHelper.makeCompliantFor(javaProject, JavaVersion.JAVA6);
+		WorkbenchTestHelper.makeCompliantFor(javaProject, JavaVersion.JAVA8);
 		JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
 		return result;
 	}

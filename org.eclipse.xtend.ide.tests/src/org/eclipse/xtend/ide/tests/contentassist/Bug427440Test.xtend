@@ -39,6 +39,9 @@ class Bug427440Test extends AbstractXtendContentAssistBugTest {
 		proposals.next.assertContains("annotations")
 		proposals.next.assertContains("anonymousClass")
 		proposals.next.assertContains("array")
+		if (isJava13OrLater) {
+			proposals.next.assertContains("arrayType")
+		}
 		proposals.next.assertContains("asSubclass()")
 	}
 	

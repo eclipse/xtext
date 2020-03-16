@@ -11,6 +11,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -60,6 +61,10 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     this.assertContains(proposals.next(), "annotations");
     this.assertContains(proposals.next(), "anonymousClass");
     this.assertContains(proposals.next(), "array");
+    boolean _isJava13OrLater = AbstractXtendUITestCase.isJava13OrLater();
+    if (_isJava13OrLater) {
+      this.assertContains(proposals.next(), "arrayType");
+    }
     this.assertContains(proposals.next(), "asSubclass()");
   }
   
