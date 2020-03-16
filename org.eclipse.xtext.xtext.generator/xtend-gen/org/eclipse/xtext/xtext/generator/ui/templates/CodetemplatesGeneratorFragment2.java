@@ -136,9 +136,6 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
         _builder.append(" extends ");
         TypeReference _parserClass = CodetemplatesGeneratorFragment2.this.caNaming.getParserClass(CodetemplatesGeneratorFragment2.this.getGrammar());
         _builder.append(_parserClass);
-        _builder.append(" implements ");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");
-        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
