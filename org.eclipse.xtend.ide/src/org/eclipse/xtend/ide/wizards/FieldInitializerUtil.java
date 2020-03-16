@@ -11,7 +11,7 @@ package org.eclipse.xtend.ide.wizards;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -33,12 +33,9 @@ public class FieldInitializerUtil {
 		IJavaElement elem = null;
 		if(selection != null && !selection.isEmpty()){
 			Object o = selection.getFirstElement();
-			if(o instanceof IAdaptable) {
-				IAdaptable adaptable = (IAdaptable)o;
-				elem = adaptable.getAdapter(IJavaElement.class);
-				if(elem == null){
-					elem = getPackage(adaptable);
-				}
+			elem = Adapters.adapt(o, IJavaElement.class);
+			if(elem == null){
+				elem = getPackage(o);
 			}
 		}
 		if (elem == null) {
@@ -49,7 +46,7 @@ public class FieldInitializerUtil {
 			}
 			if (part instanceof XtextEditor) {
 				IXtextDocument doc = ((XtextEditor)part).getDocument();
-				IFile file = doc.getAdapter(IFile.class);
+				IFile file = Adapters.adapt(doc, IFile.class);
 				elem = getPackage(file);
 			}
 		}
@@ -66,13 +63,13 @@ public class FieldInitializerUtil {
 		return elem;
 	}
 
-	private IJavaElement getPackage(IAdaptable adaptable) {
+	private IJavaElement getPackage(Object o) {
 		IJavaElement elem = null;
-		IResource resource = adaptable.getAdapter(IResource.class);
+		IResource resource = Adapters.adapt(o, IResource.class);
 		if (resource != null && resource.getType() != IResource.ROOT) {
 			while(elem == null && resource.getType() != IResource.PROJECT){
 				resource = resource.getParent();
-				elem = resource.getAdapter(IJavaElement.class);
+				elem = Adapters.adapt(resource, IJavaElement.class);
 			}
 		}
 		if (elem == null) {
