@@ -96,8 +96,7 @@ class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	}
 	
 	private def StringConcatenationClient getGenPartialContentAssistParser() '''
-		public class «grammar.partialContentAssistParserClass.simpleName» extends «caNaming.getParserClass(grammar)» implements «
-				"org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser".typeRef()» {
+		public class «grammar.partialContentAssistParserClass.simpleName» extends «caNaming.getParserClass(grammar)» {
 		
 			private «AbstractRule» rule;
 		
