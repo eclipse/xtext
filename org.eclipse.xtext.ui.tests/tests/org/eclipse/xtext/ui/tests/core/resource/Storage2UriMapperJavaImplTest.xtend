@@ -56,7 +56,8 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		return switch(size) {
 			case 1: /* java8 */ true
 			case 63: /* java9 */ true
-			case 49: /* java10 + java11 */ true
+			case 49: /* java10 + java11 + java13 */ true
+			case 51: /* java14 */ true
 			default: false
 		}
 	}
@@ -215,7 +216,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		cachedPackageFragmentRootData.entrySet.forEach [
 			val java9OrNewer = value.associatedRoots.values.exists[ it.class.simpleName == 'JrtPackageFragmentRoot' ]
 			if (java9OrNewer) {
-				assertTrue(value.associatedRoots.size + ' / ' + key, #[44 /* java11 */, 49, 63 /* java9 */].contains(value.associatedRoots.size))
+				assertTrue(value.associatedRoots.size + ' / ' + key, #[44 /* java11 */, 49, 63 /* java9 */, 51 /* java14 */].contains(value.associatedRoots.size))
 			} else {
 				assertEquals(key, 1, value.associatedRoots.size)
 			}
