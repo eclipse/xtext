@@ -10,7 +10,7 @@ Xtext offers two levels on which you can configure your language: the language g
 
 ## A Short Introduction to MWE2 {#short-intro-to-mwe}
 
-MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the [MWE2 documentation](306_mwe2.html).
+MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the [MWE2 documentation](https://github.com/eclipse/mwe/blob/master/documentation/mwe2.md).
 
 Given the following simple Java class (POJO):
 
