@@ -78,6 +78,9 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       case 49:
         _switchResult = true;
         break;
+      case 51:
+        _switchResult = true;
+        break;
       default:
         _switchResult = false;
         break;
@@ -311,7 +314,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
         String _plus_1 = (Integer.valueOf(_size) + " / ");
         String _key = it.getKey();
         String _plus_2 = (_plus_1 + _key);
-        Assert.assertTrue(_plus_2, Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(44), Integer.valueOf(49), Integer.valueOf(63))).contains(Integer.valueOf(it.getValue().associatedRoots.size())));
+        Assert.assertTrue(_plus_2, Collections.<Integer>unmodifiableList(CollectionLiterals.<Integer>newArrayList(Integer.valueOf(44), Integer.valueOf(49), Integer.valueOf(63), Integer.valueOf(51))).contains(Integer.valueOf(it.getValue().associatedRoots.size())));
       } else {
         Assert.assertEquals(it.getKey(), 1, it.getValue().associatedRoots.size());
       }
