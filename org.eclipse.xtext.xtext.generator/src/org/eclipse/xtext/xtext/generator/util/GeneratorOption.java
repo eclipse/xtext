@@ -1,46 +1,50 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.util
+package org.eclipse.xtext.xtext.generator.util;
 
 /**
  * An object-valued option with default value for use in generator fragments.
  */
-class GeneratorOption <T> {
+public class GeneratorOption <T> {
 	
-	val T defaultValue
+	private final T defaultValue;
 	
-	T value
+	private T value;
 	
 	/**
 	 * Create an option with no default value.
 	 */
-	new() {
-		this.defaultValue = null
+	public GeneratorOption() {
+		this.defaultValue = null;
 	}
 	
 	/**
 	 * Create an option with a default value.
 	 */
-	new(T defaultValue) {
-		this.defaultValue = defaultValue
+	public GeneratorOption(T defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 	
-	def T get() {
-		value ?: defaultValue
+	public T get() {
+		if (value != null) {
+			return value;
+		} else {
+			return defaultValue;
+		}
 	}
 	
-	def void set(T value) {
-		this.value = value
+	public void set(T value) {
+		this.value = value;
 	}
 	
-	def boolean isSet() {
-		value !== null
+	public boolean isSet() {
+		return value != null;
 	}
 	
 }
