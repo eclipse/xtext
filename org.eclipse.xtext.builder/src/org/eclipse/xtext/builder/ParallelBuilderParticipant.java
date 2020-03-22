@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -226,7 +227,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			
 			ListenableFuture<List<Object>> generatorResult = Futures.successfulAsList(tasks);
 			
-			List<org.eclipse.xtext.xbase.lib.Pair<URI, Throwable>> exceptions = Lists.newArrayList();
+			List<SimpleEntry<URI, Throwable>> exceptions = Lists.newArrayList();
 			boolean interrupted = false;
 			try {
 				while (!requestQueue.isEmpty() || !generatorResult.isDone()) {
@@ -252,7 +253,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 							if (cause instanceof CoreException) {
 								cause = cause.getCause();
 							}
-							exceptions.add(org.eclipse.xtext.xbase.lib.Pair.of(request.getUri(), cause));
+							exceptions.add(new SimpleEntry<URI, Throwable>(request.getUri(), cause));
 						}
 					}
 				}
@@ -260,7 +261,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 				if (interrupted) {
 					Thread.currentThread().interrupt();
 				}
-				for (org.eclipse.xtext.xbase.lib.Pair<URI, Throwable> exception : exceptions) {
+				for (SimpleEntry<URI, Throwable> exception : exceptions) {
 					addMarkerAndLogError(exception.getKey(), exception.getValue());
 				}
 			}
