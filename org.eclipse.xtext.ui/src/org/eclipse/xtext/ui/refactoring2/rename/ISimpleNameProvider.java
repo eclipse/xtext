@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.ui.refactoring2.rename;
 
-import java.util.Objects;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
