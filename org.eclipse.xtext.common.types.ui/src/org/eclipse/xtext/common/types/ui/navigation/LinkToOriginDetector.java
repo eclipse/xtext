@@ -30,8 +30,8 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -84,7 +84,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 							if (traceToSource == null) {
 								return null;
 							}
-							ILocationInResource sourceInformation = IterableExtensions.head(traceToSource.getAllAssociatedLocations());
+							ILocationInResource sourceInformation = Iterables.getFirst(traceToSource.getAllAssociatedLocations(), null);
 							if(sourceInformation != null) {
 								try {
 									URI resourceURI = sourceInformation.getAbsoluteResourceURI().getURI();
