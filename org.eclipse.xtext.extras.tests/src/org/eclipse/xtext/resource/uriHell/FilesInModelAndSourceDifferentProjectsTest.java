@@ -10,7 +10,6 @@ package org.eclipse.xtext.resource.uriHell;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
-import org.eclipse.xtext.resource.uriHell.UnexpectedResourcesException;
 import org.junit.Test;
 
 /**
