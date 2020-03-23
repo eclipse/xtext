@@ -65,7 +65,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.debug.core;bundle-version="3.11.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.ui;bundle-version="3.12.50";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.debug;bundle-version="3.11.50";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtend.lib,
  org.eclipse.ui.console;bundle-version="3.7.1",
  org.eclipse.xtext.smap
 Bundle-ActivationPolicy: lazy
