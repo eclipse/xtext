@@ -33,8 +33,6 @@ public interface IXtextGeneratorLanguage {
 	
 	GuiceModuleAccess getEclipsePluginGenModule();
 	
-	GuiceModuleAccess getIdeaGenModule();
-	
 	GuiceModuleAccess getWebGenModule();
 	
 	ResourceSet getResourceSet();

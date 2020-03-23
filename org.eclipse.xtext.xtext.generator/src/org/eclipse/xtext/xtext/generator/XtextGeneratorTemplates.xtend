@@ -374,51 +374,6 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createIdeaModule(IXtextGeneratorLanguage langConfig) {
-		val it = langConfig.grammar
-		if (codeConfig.preferXtendStubs) {
-			return fileAccessFactory.createXtendFile(ideaModule,'''
-				/**
-				 * Use this class to register components to be used within IntelliJ IDEA.
-				 */
-				class «ideaModule.simpleName» extends «ideaGenModule» {
-				}
-			''')
-		} else {
-			return fileAccessFactory.createJavaFile(ideaModule,'''
-				/**
-				 * Use this class to register components to be used within IntelliJ IDEA.
-				 */
-				public class «ideaModule.simpleName» extends «ideaGenModule» {
-				}
-			''')
-		}
-	}
-	
-	def JavaFileAccess createIdeaGenModule(IXtextGeneratorLanguage langConfig) {
-		val it = langConfig.grammar
-		val superClass = langConfig.ideaGenModule.superClass ?: ideaDefaultModule
-		val file = fileAccessFactory.createGeneratedJavaFile(ideaGenModule)
-		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
-		
-		file.typeComment = '''
-			/**
-			 * Manual modifications go to {@link «ideaModule.simpleName»}.
-			 */
-		'''
-		file.annotations += new SuppressWarningsAnnotation
-		file.content = '''
-			public abstract class «ideaGenModule.simpleName» extends «superClass» {
-				
-				«FOR binding : langConfig.ideaGenModule.bindings»
-					«binding.createBindingMethod»
-					
-				«ENDFOR»
-			}
-		'''
-		return file
-	}
-	
 	def JavaFileAccess createWebModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		if (codeConfig.preferXtendStubs) {

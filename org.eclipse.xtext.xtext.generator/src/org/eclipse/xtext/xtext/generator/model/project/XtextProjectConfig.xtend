@@ -37,8 +37,6 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	
 	BundleProjectConfig eclipsePluginTest = new BundleProjectConfig
 	
-	SubProjectConfig ideaPlugin = new SubProjectConfig
-	
 	WebProjectConfig web = new WebProjectConfig
 	
 	@Inject CodeConfig codeConfig
@@ -55,7 +53,6 @@ class XtextProjectConfig implements IXtextProjectConfig {
 			genericIde,
 			eclipsePlugin,
 			eclipsePluginTest,
-			ideaPlugin,
 			web
 		]
 		allProjects
@@ -84,7 +81,7 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	
 	def setDefaults() {
 		runtime.enabled = true
-		if (#[eclipsePlugin, ideaPlugin, web].exists[enabled])
+		if (#[eclipsePlugin, web].exists[enabled])
 			genericIde.enabled = true
 	}
 	

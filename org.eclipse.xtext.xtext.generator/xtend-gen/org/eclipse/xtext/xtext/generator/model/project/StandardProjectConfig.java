@@ -184,13 +184,6 @@ public class StandardProjectConfig extends XtextProjectConfig {
       }
     }
     if (!_matched) {
-      SubProjectConfig _ideaPlugin = this.getIdeaPlugin();
-      if (Objects.equal(project, _ideaPlugin)) {
-        _matched=true;
-        _switchResult = (this.baseName + ".idea");
-      }
-    }
-    if (!_matched) {
       WebProjectConfig _web = this.getWeb();
       if (Objects.equal(project, _web)) {
         _matched=true;

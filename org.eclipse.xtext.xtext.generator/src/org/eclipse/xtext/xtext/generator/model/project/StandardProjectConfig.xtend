@@ -92,7 +92,6 @@ class StandardProjectConfig extends XtextProjectConfig {
 			case genericIde: baseName + '.ide'
 			case eclipsePlugin: baseName + '.ui'
 			case eclipsePluginTest: if (!mavenLayout) baseName + '.ui.tests' else baseName + '.ui'
-			case ideaPlugin: baseName + '.idea'
 			case web: baseName + '.web'
 		}
 	}

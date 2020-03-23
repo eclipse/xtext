@@ -95,9 +95,6 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	val eclipsePluginGenModule = new GuiceModuleAccess
 	
 	@Accessors
-	val ideaGenModule = new GuiceModuleAccess
-	
-	@Accessors
 	val webGenModule = new GuiceModuleAccess
 	
 	@Inject Provider<ResourceSet> resourceSetProvider

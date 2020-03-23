@@ -115,9 +115,6 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   private final GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess();
   
   @Accessors
-  private final GuiceModuleAccess ideaGenModule = new GuiceModuleAccess();
-  
-  @Accessors
   private final GuiceModuleAccess webGenModule = new GuiceModuleAccess();
   
   @Inject
@@ -446,11 +443,6 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   @Pure
   public GuiceModuleAccess getEclipsePluginGenModule() {
     return this.eclipsePluginGenModule;
-  }
-  
-  @Pure
-  public GuiceModuleAccess getIdeaGenModule() {
-    return this.ideaGenModule;
   }
   
   @Pure
