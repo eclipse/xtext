@@ -175,37 +175,6 @@ public class XtextGeneratorNaming {
     return _xblockexpression;
   }
   
-  public String getIdeaBasePackage(final Grammar grammar) {
-    String _namespace = GrammarUtil.getNamespace(grammar);
-    return (_namespace + ".idea");
-  }
-  
-  public TypeReference getIdeaModule(final Grammar grammar) {
-    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus = (_simpleName + "IdeaModule");
-    return new TypeReference(_ideaBasePackage, _plus);
-  }
-  
-  public TypeReference getIdeaDefaultModule(final Grammar grammar) {
-    return new TypeReference("org.eclipse.xtext.idea.DefaultIdeaModule");
-  }
-  
-  public TypeReference getIdeaGenModule(final Grammar grammar) {
-    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus = ("Abstract" + _simpleName);
-    String _plus_1 = (_plus + "IdeaModule");
-    return new TypeReference(_ideaBasePackage, _plus_1);
-  }
-  
-  public TypeReference getIdeaStandaloneSetup(final Grammar grammar) {
-    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus = (_simpleName + "StandaloneSetupIdea");
-    return new TypeReference(_ideaBasePackage, _plus);
-  }
-  
   public String getWebBasePackage(final Grammar grammar) {
     String _namespace = GrammarUtil.getNamespace(grammar);
     return (_namespace + ".web");

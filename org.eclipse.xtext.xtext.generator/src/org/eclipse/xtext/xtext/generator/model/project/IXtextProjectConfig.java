@@ -28,8 +28,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	
 	IBundleProjectConfig getEclipsePluginTest();
 	
-	ISubProjectConfig getIdeaPlugin();
-	
 	IWebProjectConfig getWeb();
 	
 	List<? extends ISubProjectConfig> getEnabledProjects();

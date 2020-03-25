@@ -116,12 +116,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	CompareFragment2 compareEditor = new CompareFragment2
 	
-	@Deprecated 
-	org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment ideaParser
-	
-	@Deprecated
-	org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator ideaPlugin
-	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
 	@Deprecated org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2 newProjectWizardForEclipse = new org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
@@ -182,12 +176,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		fragments += xtypeSupport
 		fragments += codeTemplates
 		fragments += compareEditor
-		if(ideaParser !== null) {
-			fragments += ideaParser	
-		}
-		if(ideaPlugin !== null) {
-			fragments += ideaPlugin
-		}
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
 		fragments += projectWizard

@@ -52,8 +52,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   
   private BundleProjectConfig eclipsePluginTest = new BundleProjectConfig();
   
-  private SubProjectConfig ideaPlugin = new SubProjectConfig();
-  
   private WebProjectConfig web = new WebProjectConfig();
   
   @Inject
@@ -70,7 +68,7 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     ArrayList<SubProjectConfig> _xblockexpression = null;
     {
       final ArrayList<SubProjectConfig> allProjects = CollectionLiterals.<SubProjectConfig>newArrayList();
-      Iterables.<SubProjectConfig>addAll(allProjects, Collections.<SubProjectConfig>unmodifiableList(CollectionLiterals.<SubProjectConfig>newArrayList(this.runtime, this.runtimeTest, this.genericIde, this.eclipsePlugin, this.eclipsePluginTest, this.ideaPlugin, this.web)));
+      Iterables.<SubProjectConfig>addAll(allProjects, Collections.<SubProjectConfig>unmodifiableList(CollectionLiterals.<SubProjectConfig>newArrayList(this.runtime, this.runtimeTest, this.genericIde, this.eclipsePlugin, this.eclipsePluginTest, this.web)));
       _xblockexpression = allProjects;
     }
     return _xblockexpression;
@@ -117,7 +115,7 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     final Function1<SubProjectConfig, Boolean> _function = (SubProjectConfig it) -> {
       return Boolean.valueOf(it.isEnabled());
     };
-    boolean _exists = IterableExtensions.exists(Collections.<SubProjectConfig>unmodifiableList(CollectionLiterals.<SubProjectConfig>newArrayList(this.eclipsePlugin, this.ideaPlugin, this.web)), _function);
+    boolean _exists = IterableExtensions.exists(Collections.<SubProjectConfig>unmodifiableList(CollectionLiterals.<SubProjectConfig>newArrayList(this.eclipsePlugin, this.web)), _function);
     if (_exists) {
       this.genericIde.setEnabled(true);
     }
@@ -182,15 +180,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   
   public void setEclipsePluginTest(final BundleProjectConfig eclipsePluginTest) {
     this.eclipsePluginTest = eclipsePluginTest;
-  }
-  
-  @Pure
-  public SubProjectConfig getIdeaPlugin() {
-    return this.ideaPlugin;
-  }
-  
-  public void setIdeaPlugin(final SubProjectConfig ideaPlugin) {
-    this.ideaPlugin = ideaPlugin;
   }
   
   @Pure

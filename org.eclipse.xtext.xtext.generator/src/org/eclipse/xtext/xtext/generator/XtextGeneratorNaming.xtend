@@ -132,26 +132,6 @@ class XtextGeneratorNaming {
 		new TypeReference(pluginName + '.internal', activatorName)
 	}
 	
-	def getIdeaBasePackage(Grammar grammar) {
-		return getNamespace(grammar) + ".idea"
-	}
-	
-	def getIdeaModule(Grammar grammar) {
-		new TypeReference(grammar.ideaBasePackage, getSimpleName(grammar) + 'IdeaModule')
-	}
-	
-	def getIdeaDefaultModule(Grammar grammar) {
-		new TypeReference('org.eclipse.xtext.idea.DefaultIdeaModule')
-	}
-	
-	def getIdeaGenModule(Grammar grammar) {
-		new TypeReference(grammar.ideaBasePackage, 'Abstract' + getSimpleName(grammar) + 'IdeaModule')
-	}
-	
-	def getIdeaStandaloneSetup(Grammar grammar) {
-		new TypeReference(grammar.ideaBasePackage, getSimpleName(grammar) + "StandaloneSetupIdea")
-	}
-	
 	def getWebBasePackage(Grammar grammar) {
 		return getNamespace(grammar) + ".web"
 	}

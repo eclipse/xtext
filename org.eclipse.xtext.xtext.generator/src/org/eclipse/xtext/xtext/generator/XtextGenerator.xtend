@@ -205,8 +205,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createIdeGenModule(language).writeTo(projectConfig.genericIde.srcGen)
 		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePlugin.srcGen)
 		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePlugin.src)
-		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPlugin.srcGen)
-		templates.createIdeaModule(language).writeTo(projectConfig.ideaPlugin.src)
 		templates.createWebGenModule(language).writeTo(projectConfig.web.srcGen)
 		templates.createWebModule(language).writeTo(projectConfig.web.src)
 	}

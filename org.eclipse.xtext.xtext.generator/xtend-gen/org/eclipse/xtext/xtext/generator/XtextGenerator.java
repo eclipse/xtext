@@ -281,8 +281,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     this.templates.createIdeGenModule(language).writeTo(this.projectConfig.getGenericIde().getSrcGen());
     this.templates.createEclipsePluginGenModule(language).writeTo(this.projectConfig.getEclipsePlugin().getSrcGen());
     this.templates.createEclipsePluginModule(language).writeTo(this.projectConfig.getEclipsePlugin().getSrc());
-    this.templates.createIdeaGenModule(language).writeTo(this.projectConfig.getIdeaPlugin().getSrcGen());
-    this.templates.createIdeaModule(language).writeTo(this.projectConfig.getIdeaPlugin().getSrc());
     this.templates.createWebGenModule(language).writeTo(this.projectConfig.getWeb().getSrcGen());
     this.templates.createWebModule(language).writeTo(this.projectConfig.getWeb().getSrc());
   }

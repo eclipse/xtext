@@ -27,8 +27,6 @@ import org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
-import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator;
-import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
 import org.eclipse.xtext.xtext.generator.junit.JUnitFragment;
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
@@ -129,12 +127,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private CompareFragment2 compareEditor = new CompareFragment2();
   
-  @Deprecated
-  private XtextAntlrIDEAGeneratorFragment ideaParser;
-  
-  @Deprecated
-  private IdeaPluginGenerator ideaPlugin;
-  
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
   
   @Deprecated
@@ -223,12 +215,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.xtypeSupport);
       this.operator_add(fragments, this.codeTemplates);
       this.operator_add(fragments, this.compareEditor);
-      if ((this.ideaParser != null)) {
-        this.operator_add(fragments, this.ideaParser);
-      }
-      if ((this.ideaPlugin != null)) {
-        this.operator_add(fragments, this.ideaPlugin);
-      }
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
       this.operator_add(fragments, this.projectWizard);
@@ -484,24 +470,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setCompareEditor(final CompareFragment2 compareEditor) {
     this.compareEditor = compareEditor;
-  }
-  
-  @Pure
-  protected XtextAntlrIDEAGeneratorFragment getIdeaParser() {
-    return this.ideaParser;
-  }
-  
-  public void setIdeaParser(final XtextAntlrIDEAGeneratorFragment ideaParser) {
-    this.ideaParser = ideaParser;
-  }
-  
-  @Pure
-  protected IdeaPluginGenerator getIdeaPlugin() {
-    return this.ideaPlugin;
-  }
-  
-  public void setIdeaPlugin(final IdeaPluginGenerator ideaPlugin) {
-    this.ideaPlugin = ideaPlugin;
   }
   
   @Pure
