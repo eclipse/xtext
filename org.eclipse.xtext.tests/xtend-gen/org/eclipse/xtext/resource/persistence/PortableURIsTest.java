@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,6 +22,7 @@ import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.PortableURIs;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
@@ -96,9 +97,10 @@ public class PortableURIsTest extends AbstractXtextTests {
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
       final ResourceStorageWritable writable = resourceA.getResourceStorageFacade().createResourceStorageWritable(bout);
       writable.writeResource(resourceA);
+      IResourceStorageFacade _resourceStorageFacade = resourceA.getResourceStorageFacade();
       byte[] _byteArray = bout.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-      final ResourceStorageLoadable loadable = resourceA.getResourceStorageFacade().createResourceStorageLoadable(_byteArrayInputStream);
+      final ResourceStorageLoadable loadable = _resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
       Resource _createResource_2 = resourceSet.createResource(URI.createURI("hubba:/bubba3.langatestlanguage"));
       final StorageAwareResource resourceC = ((StorageAwareResource) _createResource_2);
       resourceC.loadFromStorage(loadable);
@@ -120,7 +122,7 @@ public class PortableURIsTest extends AbstractXtextTests {
       this.checkFragmentBothDirections(EcorePackage.eINSTANCE.getEAnnotation_EModelElement(), EcorePackage.eINSTANCE.getEAttribute_EAttributeType());
       Assert.fail();
     } catch (final Throwable _t) {
-      if (_t instanceof IllegalStateException) {
+      if (_t instanceof IllegalArgumentException) {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

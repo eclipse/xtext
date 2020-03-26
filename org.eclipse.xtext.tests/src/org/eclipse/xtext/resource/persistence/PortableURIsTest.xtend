@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -84,7 +84,7 @@ class PortableURIsTest extends AbstractXtextTests {
 		try {
 			checkFragmentBothDirections(EcorePackage.eINSTANCE.EAnnotation_EModelElement, EcorePackage.eINSTANCE.EAttribute_EAttributeType)
 			Assert.fail();
-		} catch (IllegalStateException e) {
+		} catch (IllegalArgumentException e) {
 			// expected
 		}
 	}
