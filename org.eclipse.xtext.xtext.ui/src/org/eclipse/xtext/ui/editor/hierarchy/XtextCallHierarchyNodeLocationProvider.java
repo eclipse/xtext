@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -21,14 +21,14 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
  * @since 2.10
  */
 @Singleton
-@SuppressWarnings("all")
 public class XtextCallHierarchyNodeLocationProvider extends DefaultHierarchyNodeLocationProvider {
-  @Override
-  public ITextRegionWithLineInformation getTextRegion(final EObject owner, final EStructuralFeature feature, final int indexInList) {
-    final Assignment assignment = GrammarUtil.containingAssignment(owner);
-    if ((assignment != null)) {
-      return this.getTextRegion(assignment);
-    }
-    return super.getTextRegion(owner, feature, indexInList);
-  }
+
+	@Override
+	public ITextRegionWithLineInformation getTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
+		Assignment assignment = GrammarUtil.containingAssignment(owner);
+		if (assignment != null) {
+			return getTextRegion(assignment);
+		}
+		return super.getTextRegion(owner, feature, indexInList);
+	}
 }
