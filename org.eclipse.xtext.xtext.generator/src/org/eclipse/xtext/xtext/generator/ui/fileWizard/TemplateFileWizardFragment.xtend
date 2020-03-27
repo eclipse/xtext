@@ -58,7 +58,8 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 				"org.eclipse.core.resources",
 				"org.eclipse.ui",
 				"org.eclipse.ui.ide",
-				"org.eclipse.ui.forms"
+				"org.eclipse.ui.forms",
+				"org.eclipse.xtend.lib"
 			]
 			projectConfig.eclipsePlugin.manifest.exportedPackages += #[
 				grammar.getEclipsePluginBasePackage + ".wizard"
