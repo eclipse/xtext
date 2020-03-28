@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -137,8 +137,12 @@ abstract class TemplateProcessor extends AbstractClassProcessor {
 			if (!propertyContentMap.containsKey(propertyFile)) {
 				if (propertyFile.exists) {
 					var propertyContents = propertyFile.contents.toString
-					if (propertyContents.length > 0 && !propertyContents.endsWith(System.lineSeparator)) {
-						propertyContents += System.lineSeparator
+					if (propertyContents.length > 0) {
+						val endsWithWindowsLineSeparator = propertyContents.endsWith("\r\n")
+						val endsWithUnixLineSeparator = propertyContents.endsWith("\n")
+						if (!endsWithWindowsLineSeparator && !endsWithUnixLineSeparator) {
+							propertyContents += System.lineSeparator
+						}
 					}
 					propertyContentMap.put(propertyFile, propertyContents)
 				} else {

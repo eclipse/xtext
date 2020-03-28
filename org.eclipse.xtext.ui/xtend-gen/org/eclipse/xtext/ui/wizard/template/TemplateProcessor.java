@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -202,10 +202,16 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
           boolean _exists = context.exists(propertyFile);
           if (_exists) {
             String propertyContents = context.getContents(propertyFile).toString();
-            if (((propertyContents.length() > 0) && (!propertyContents.endsWith(System.lineSeparator())))) {
-              String _propertyContents = propertyContents;
-              String _lineSeparator = System.lineSeparator();
-              propertyContents = (_propertyContents + _lineSeparator);
+            int _length = propertyContents.length();
+            boolean _greaterThan = (_length > 0);
+            if (_greaterThan) {
+              final boolean endsWithWindowsLineSeparator = propertyContents.endsWith("\r\n");
+              final boolean endsWithUnixLineSeparator = propertyContents.endsWith("\n");
+              if (((!endsWithWindowsLineSeparator) && (!endsWithUnixLineSeparator))) {
+                String _propertyContents = propertyContents;
+                String _lineSeparator = System.lineSeparator();
+                propertyContents = (_propertyContents + _lineSeparator);
+              }
             }
             this.propertyContentMap.put(propertyFile, propertyContents);
           } else {
