@@ -6,13 +6,13 @@ part: Reference Documentation
 
 # {{page.title}} {#grammarLanguage}
 
-The [grammar language]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext) is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation &ndash; the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file. Of course the Xtext grammar language itself is implemented with Xtext, so you will find parts of its syntax described with its own means in this documentation.
+The [grammar language]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext) is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation &ndash; the semantic model. This model will be created by the parser on-the-fly when it consumes an input file. Of course the Xtext grammar language itself is implemented with Xtext, so you will find parts of its syntax described with its own means in this documentation.
 
 An example grammar is shown in the [15 Minutes Tutorial](102_domainmodelwalkthrough.html#write-your-own-grammar).
 
 ## The Syntax {#syntax}
 
-In the following the different concepts and syntactical constructs of the grammar language are explained. 
+In the following the different concepts and syntactical constructs of the grammar language are explained.
 
 ### Language Declaration
 
@@ -23,13 +23,13 @@ grammar org.example.domainmodel.Domainmodel
         with org.eclipse.xtext.common.Terminals
 ```
 
-The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be *SecretCompartments.xtext* and must be placed in a package *org.xtext.example* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
+The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The grammar file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be e.g. *Domainmodel.xtext* and must be placed in a package *org.example.domainmodel* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
 
 The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](301_grammarlanguage.html#grammar-mixins).
 
 ### EPackage Declarations {#package-declarations}
 
-Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are instances of [EMF](https://www.eclipse.org/modeling/emf/) Ecore models. An Ecore model basically consists of an EPackage containing EClasses, EDataTypes and EEnums (see the [section on EMF](308_emf_integration.html#model-metamodel) for more details) and describes the structure of the instantiated objects. Xtext can infer Ecore models from a grammar (see [Ecore model inference](301_grammarlanguage.html#metamodel-inference)) but it is also possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and infer some others from a single grammar. This allows for easy reuse of existing abstractions while still having the advantage of short turnarounds with derived Ecore models. 
+Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are instances of [EMF](https://www.eclipse.org/modeling/emf/) Ecore models. An Ecore model basically consists of an EPackage containing EClasses, EDataTypes and EEnums (see the [section on EMF](308_emf_integration.html#model-metamodel) for more details) and describes the structure of the instantiated objects. Xtext can infer Ecore models from a grammar (see [Ecore model inference](301_grammarlanguage.html#metamodel-inference)) but it is also possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and infer some others from a single grammar. This allows for easy reuse of existing abstractions while still having the advantage of short turnarounds with derived Ecore models.
 
 #### EPackage Generation
 
@@ -64,13 +64,13 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 When referring to a type somewhere in the grammar you need to qualify the reference using that alias (e.g. `another::SomeType`). Cases where such type references occur are explained below.
 
-It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) with the same name. In that case none of them can be referenced. It is even possible to `import` multiple and `generate` one Ecore model and declare all of them with the same alias. If you do so, for a reference to an [EClassifier]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) first the imported [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) are scanned before it is assumed that a type needs to be generated into the inferred package. 
+It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) with the same name. In that case none of them can be referenced. It is even possible to `import` multiple and `generate` one Ecore model and declare all of them with the same alias. If you do so, for a reference to an [EClassifier]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) first the imported [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) are scanned before it is assumed that a type needs to be generated into the inferred package.
 
 Note that using the same alias for multiple EPackages is not recommended, because it might cause problems that are hard to track down. For instance, a reference to `classA` could mistakenly be linked to a newly created EClass instead of an existing EClass `ClassA` because the latter is written with a capital letter.
 
 ### Terminal Rules {#terminal-rules}
 
-Basically parsing can be separated in the following phases: 
+Basically parsing can be separated in the following phases:
 
 1.  Lexing
 1.  Parsing
@@ -79,26 +79,26 @@ Basically parsing can be separated in the following phases:
 
 In the first stage called *lexing*, a sequence of characters (the text input) is transformed into a sequence of so-called *tokens*. In this context, a token is a sort of a strongly typed part or region of the input sequence. It consists of one or more characters and is matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as *token rules* or *lexer rules*. There is an informal naming convention that names of terminal rules are all upper-case.
 
-In the [entities example](102_domainmodelwalkthrough.html) there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (see [Common Terminals](#common-terminals)). Therein the *ID* rule is defined as follows:
+In the [domainmodel tutorial](102_domainmodelwalkthrough.html) there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (see [Common Terminals](#common-terminals)). Therein the *ID* rule is defined as follows:
 
 ```xtext
 terminal ID: 
-    ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
+    ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 ```
 
-It says that a token *ID* starts with an optional `'^'` character (caret), followed by a letter `('a'..'z'|'A'..'Z')` or underscore `'_'` followed by any number of letters, underscores and numbers `('0'..'9')`. 
+It says that a token *ID* starts with an optional `'^'` character (caret), followed by a letter `('a'..'z'|'A'..'Z')` or underscore `'_'` followed by any number of letters, underscores and numbers `('0'..'9')`.
 
-The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the *ID* rule's [ValueConverter](303_runtime_concepts.html#value-converter). 
+The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the *ID* rule's [ValueConverter](303_runtime_concepts.html#value-converter).
 
 This is the simplified formal definition of terminal rules:
 
 ```xtext
 TerminalRule:
-    'terminal' name=ID ('returns' type=TypeRef)? ':' 
+    'terminal' name=ID ('returns' type=TypeRef)? ':'
     alternatives=TerminalAlternatives ';';
 ```
 
-Note that *the order of the terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
+Note that *the order of the terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars.
 
 It's almost in any case recommended to use [data type rules](#datatype-rules) instead. Let's assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a data type rule instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.
 
@@ -109,11 +109,11 @@ Each terminal rule returns an atomic value (an [EDataType]({{site.src.emf}}/plug
 ```xtext
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 //...
-terminal INT returns ecore::EInt: 
+terminal INT returns ecore::EInt:
     ('0'..'9')+;
 ```
 
-This means that the terminal rule *INT* returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of [IValueConverterService]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (see [Value Converters](303_runtime_concepts.html#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary characters such as quotes from string literals or the caret `'^'` from identifiers.
+This means that the terminal rule *INT* returns instances of `ecore::EInt`. It is possible to define any kind of data type here, which just needs to be an instance of `ecore::EDataType`. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of the [IValueConverterService]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) (see [Value Converter](303_runtime_concepts.html#value-converter)). The value converter is also the service that allows to remove escape sequences or semantically unnecessary characters such as quotes from string literals or the caret symbol `'^'` from the identifiers.
 
 #### Extended Backus-Naur Form Expressions
 
@@ -188,7 +188,7 @@ terminal DOUBLE:
     INT '.' INT;
 ```
 
-Note: It is generally not a good idea to implement floating point literals with terminal rules. You should use data type rules instead due to possible shadowing problems explained above.
+Note: It is generally not a good idea to implement floating point literals with terminal rules. You should use [data type rules](#datatype-rules) instead due to possible shadowing problems explained above.
 
 ##### Alternatives {#alternatives}
 
@@ -234,18 +234,18 @@ The `EOF` token cannot be [negated](301_grammarlanguage.html#negated-tokens).
 
 ### Parser Rules {#parser-rules}
 
-The parser is fed with a sequence of terminals and walks through the so-called *parser rules*. Hence a parser rule &ndash; contrary to a terminal rule &ndash; does not produce a single atomic terminal token, but a tree of non-terminal and terminal tokens. They lead to a so-called *parse tree* (in Xtext it is also referred as *node model*). Furthermore, parser rules are handled as kind of a building plan for the creation of the [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) that form the semantic model (the linked *abstract syntax tree* or AST). Due to this fact, parser rules are also called production or EObject rules. Different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
+The parser is fed with a sequence of terminals and walks through the so-called *parser rules*. Hence a parser rule &ndash; contrary to a terminal rule &ndash; does not produce a single atomic terminal token, but a tree of non-terminal and terminal tokens. They lead to a so-called *parse tree* (in Xtext it is also referred as *node model*). Furthermore, parser rules are handled as kind of a building plan for the creation of the [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) that form the semantic model (the linked *abstract syntax tree* or AST). Due to this fact, parser rules are also called production or EObject rules. Different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly.
 
 #### Extended Backus-Naur Form Expressions
 
-Not all the expressions that are available in terminal rules can be used in parser rules. Character ranges, wildcards, the until token and the negation as well as the EOF token are only available for terminal rules. 
+Not all the expressions that are available in terminal rules can be used in parser rules. Character ranges, wildcards, the until token and the negation as well as the EOF token are only available for terminal rules.
 
 The elements that are available in parser rules as well as in terminal rules are
 
-1.  [Groups](301_grammarlanguage.html#groups), 
-1.  [Alternatives](301_grammarlanguage.html#alternatives), 
-1.  [Keywords](301_grammarlanguage.html#keywords), and 
-1.  [Rule Calls](301_grammarlanguage.html#rule-calls).
+1.  [Groups](301_grammarlanguage.html#groups)
+1.  [Alternatives](301_grammarlanguage.html#alternatives)
+1.  [Keywords](301_grammarlanguage.html#keywords)
+1.  [Rule Calls](301_grammarlanguage.html#rule-calls)
 
 In addition to these elements, there are some expressions used to direct how the AST is constructed. They are listed and explained in the following.
 
@@ -260,7 +260,7 @@ DataType:
     'datatype' name = ID;
 ```
 
-The syntactic declaration for datatypes starts with a keyword `datatype` followed by an assignment: `name = ID`. The left hand side refers to a feature *name* of the current object (which has the EClass *State* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](301_grammarlanguage.html#cross-references) or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an [EString]({{site.javadoc.java}}/java/lang/String.html) in this case, the feature *name* needs to be of type EString as well.
+The syntactic declaration for datatypes starts with a keyword `datatype` followed by an assignment: `name = ID`. The left hand side refers to a feature *name* of the current object (which has the EClass *DataType* in this case). The right hand side can be a rule call, a keyword, a [cross-reference](301_grammarlanguage.html#cross-references) or an alternative comprised by the former options. The type of the feature needs to be compatible with the type of the expression on the right. As *ID* returns an [EString]({{site.javadoc.java}}/java/lang/String.html) in this case, the feature *name* needs to be of type EString as well.
 
 There are three different assignment operators, each with different semantics.
 
@@ -268,20 +268,20 @@ There are three different assignment operators, each with different semantics.
 1.  The `+=` sign (the add operator) expects a multi-valued feature and adds the value on the right hand side to that feature, which is a list feature.
 1.  The `?=` sign (boolean assignment operator) expects a feature of type [EBoolean]({{site.javadoc.java}}/java/lang/Boolean.html) and sets it to true if the right hand side was consumed, independently from the concrete value of the right hand side.
 
-The used assignment operator does not influence the cardinality of the expected symbols on the right hand side. 
+The used assignment operator does not influence the cardinality of the expected symbols on the right hand side.
 
 ##### Cross-References {#cross-references}
 
-A unique feature of Xtext is the ability to declare cross-links in the grammar. In traditional compiler construction the cross-links are not established during parsing but in a later linking phase. This is the same in Xtext, but we allow to specify cross-link information in the grammar. This information is used by the [linker](303_runtime_concepts.html#linking).
+A unique feature of Xtext is the ability to declare cross-references in the grammar. In traditional compiler construction such cross-references are not established during parsing but in a later linking phase. This is the same in Xtext, but we allow to specify cross-reference information in the grammar. This information is used by the [linker](303_runtime_concepts.html#linking).
 
-The syntax for cross-links is:
+The syntax for cross-references is:
 
 ```xtext
 CrossReference:
     '[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? ']';
 ```
 
-For example, Features in the [entities example](102_domainmodelwalkthrough.html) contain a cross-reference pointing to a Type:
+For example, Features in the [domainmodel tutorial](102_domainmodelwalkthrough.html) contain a cross-reference pointing to a Type:
 
 ```xtext
 Feature:
@@ -290,7 +290,7 @@ Feature:
 
 It is important to understand that the text between the square brackets does not refer to another rule, but to an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) &ndash; which is a type and not a parser rule. This can be sometimes confusing because one usually uses the same name for the rules and for the returned types.
 
-Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by *CrossReferenceableTerminal*. This is the part describing the concrete text from which the cross-link should be established. If the terminal is omitted, it is expected to be the rule with the name *ID* &ndash; if one can be found. The terminal is mandatory for languages that do not define a rule with the name *ID*.
+Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by *CrossReferenceableTerminal*. This is the part describing the concrete text from which the cross-reference should be established. If the terminal is omitted, it is expected to be the rule with the name *ID* &ndash; if one can be found. The terminal is mandatory for languages that do not define a rule with the name *ID*.
 
 ##### Unordered Groups {#unordered-groups}
 
@@ -347,8 +347,8 @@ The object to be returned by a parser rule is usually created lazily on the firs
 
 With Actions however, the creation of returned [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) can be made explicit. Xtext supports two kinds of Actions:
 
-1. *Simple* Actions, and
-1. *Assigned* Actions.
+1. *Simple* Actions
+1. *Assigned* Actions
 
 If you want to enforce the creation of an instance with specific type you can use simple actions. In the following example *TypeB* must be a subtype of *TypeA*. An expression `A ident` should create an instance of *TypeA*, whereas `B ident` should instantiate *TypeB*.
 
@@ -363,7 +363,7 @@ MyOtherRule returns TypeB:
     "B" name = ID;
 ```
 
-Actions however allow to make this explicit. Thereby they can improve the readability of grammars. 
+Actions however allow to make this explicit. Thereby they can improve the readability of grammars.
 
 ```xtext
 MyRule returns TypeA:
@@ -373,7 +373,7 @@ MyRule returns TypeA:
 
 Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java). The notation `{TypeB}` will create an instance of *TypeB* and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.
 
-Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you'll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning for the parser rules in question.
+Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you'll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning (with a corresponding quickfix) for the parser rules in question.
 
 ##### Unassigned Rule Calls
 
@@ -388,7 +388,7 @@ AbstractToken:
     TokenC;
 ```
 
-As `AbstractToken` could possibly return an instance of *TokenA*, *TokenB* or *TokenC* its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.
+As `AbstractToken` could possibly return an instance of *TokenA*, *TokenB* or *TokenC*. Its type must be a super type for all these types. Since the return value of the called rule becomes the result of the current rule, it is possible to further change the state of the AST element by assigning additional features.
 
 Example:
 
@@ -478,27 +478,27 @@ It is sometimes not easily possible to define an `LL(*)` grammar for a given lan
 The classical example for ambiguous language parts is the *dangling else problem*. A conditional in a programming language usually looks like this:
 
 ```java
-if (isTrue()) 
-    doStuff(); 
+if (isTrue())
+    doStuff();
 else 
-    dontDoStuff(); 
+    dontDoStuff();
 ```
 
 The problems becomes obvious as soon as nested conditions are used:
 
 ```java
 if (isTrue())
-    if (isTrueAsWell())  
-        doStuff(); 
+    if (isTrueAsWell())
+        doStuff();
     else 
-        dontDoStuff(); 
+        dontDoStuff();
 ```
 
 Where does the `else` branch belong to? This question can be answered by a quick look into the language specification which tells that the `else` branch is part of the inner condition. However, the parser generator cannot be convinced that easily. We have to guide it to this decision point by means of syntactic predicates which are expressed by a leading `=>` operator.
 
 ```xtext
 Condition: 
-    'if' '(' condition=BooleanExpression ')' 
+    'if' '(' condition=BooleanExpression ')'
     then=Expression 
     (=>'else' else=Expression)?
 ```
@@ -513,7 +513,7 @@ Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an 
 
 ### Hidden Terminal Symbols {#hidden-terminals}
 
-Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the important parts of the input. Xtext introduces the concept of hidden tokens to handle semantically irrelevant things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
+Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the important parts of the input. Xtext introduces the concept of hidden tokens to handle semantically irrelevant things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model.
 
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [reusing a single grammar](301_grammarlanguage.html#grammar-mixins) its definition of hidden tokens is reused, too. The grammar `org.eclipse.xtext.common.Terminals` comes with a reasonable default and hides all comments and white spaces from the parser rules.
 
@@ -558,7 +558,7 @@ In addition, by defining the *QualifiedName* as a data type rule, it is allowed 
 Return types can be specified in the same way as for terminal rules:
 
 ```xtext
-QualifiedName returns ecore::EString: 
+QualifiedName returns ecore::EString:
     ID ('.' ID)*;
 ```
 
@@ -570,7 +570,7 @@ Note that rules that do not call other parser rules and do neither contain any a
 
 Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters. The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.
 
-If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore](http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html) with *ADD*, *MOVE* and *REMOVE* you could write:
+If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore](https://github.com/eclipse/emf/blob/master/plugins/org.eclipse.emf.ecore.change/model/Change.ecore) with *ADD*, *MOVE* and *REMOVE* you could write:
 
 ```xtext
 enum ChangeKind:
@@ -596,64 +596,64 @@ Element:
 with the input of `element Foo` the resulting instance *Foo* will hold the enum value with the internal representation of `0` (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation. You can overcome this by importing a meta model where the enum is defined and omitting some of its literals in the grammar.
 
 ### Grammar Annotations {#grammar-annotations}
-Parser Rules can be annotated with several useful annotations. In the following sections there is an overview. Please keep in mind that those annotations will only work on Parser Rules. You'll get an error if you try to use them on Terminal or Enum Rules. 
+Parser Rules can be annotated with several useful annotations. In the following sections there is an overview. Please keep in mind that those annotations will only work on Parser Rules. You'll get an error if you try to use them on Terminal or Enum Rules.
 
 #### Override
 Sometimes you want to override an existing Parser Rule of a given super grammar to customize it. To do that, you have to create a rule with the same name. It's clear for you that this is a customization, but for the reader of the grammar it's not. To make that more explicit `@Override` marks a rule as being a customization of an already existing rule in a super grammar. You'll get a warning if a rule is a customization and is not marked as Override and an error if it's not an customization and therefore must not be marked as Override.
 #### Final
-Overriding Parser Rules is a common thing but if you want to make sure that nobody overrides a special rule the `@Final` annotation gives support for that. 
+Overriding Parser Rules is a common thing but if you want to make sure that nobody overrides a special rule the `@Final` annotation gives support for that.
 #### Deprecated
 Language evolution is an important part of building serious DSLs. Adding something to a grammar is easy as long as the old instances of the grammar are still valid to the new grammar. It becomes hard if you want to remove something and you have to be very careful. Marking classes as deprecated is a good indicator for users to switch to the new API. With `@Deprecated` Xtext has support to mark Parser Rules to be deprecated. 
-This will generate validations and the possibility to change the severity through preferences. As a default users will get a warning when using these rules. Of course it's up to you to decide what the severity should be - this opens the possibility to safely remove parts of the grammar by informing in advance with an warning and raise the severity f to error.
+This will generate validations and the possibility to change the severity through preferences. As a default users will get a warning when using these rules. Of course it's up to you to decide what the severity should be - this opens the possibility to safely remove parts of the grammar by informing in advance with a warning and raise the severity to error afterwards.
 
 #### Exported
-As a default all elements that have a name are exposed through the index to be referenced from outside. As a start this might fit your needs, but soon or later you might run out of memory (big index) or you simply want to hide elements for the outside world. To do that you can write a custom version of the [IDefaultResourceDescriptionStrategy]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) or simply use the `@Exported` annotation. This will generate a custom strategy as soon as there is at least one `@Exported` annotation in your grammar. 
+As a default all elements that have a name that are exposed through the index to be referenced from outside. As a start this might fit your needs, but sooner or later you might run out of memory (big index) or you simply want to hide elements from the outside world. To do that you can write a custom version of the [IDefaultResourceDescriptionStrategy]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) or simply use the `@Exported` annotation. This will generate a custom strategy as soon as there is at least one `@Exported` annotation in your grammar.
 
 ---
 
 ## Ecore Model Inference {#metamodel-inference}
 
-The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
+The Ecore model (or meta-model) of a textual language describes the structure of its abstract syntax trees (AST).
 
-Xtext uses Ecore's EPackages to define Ecore models. Ecore models are declared to be either inferred from the grammar or imported. By using the `generate` directive, one tells Xtext to infer an EPackage from the grammar. 
+Xtext uses Ecore's EPackages to define Ecore models. Ecore models are declared to be either inferred from the grammar or imported. By using the `generate` directive, one tells Xtext to infer an EPackage from the grammar.
 
 ### Type and Package Generation
 
 Xtext creates
 
-* an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java)    
+* an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java)
   * for each `generate` declaration. The *name* of the EPackage is set to the first parameter of such a declaration, its *nsURI* to the second parameter. An optional alias as the third parameter allows to distinguish the generated EPackages later. Only one generated package declaration per alias is allowed.
-* an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java)    
+* an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java)
   * for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify multiple rules that return the same type, but only one EClass is generated for each type name.
   * for each type defined in an action or a cross-reference.
-* an [EEnum]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java)    
+* an [EEnum]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java)
   * for each return type of an enum rule.
-* an [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java)    
+* an [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java)
   * for each return type of a terminal rule or a data type rule.
 
 All EClasses, EEnums, and EDataTypes are added to the EPackage referred to by the alias provided in the type reference they were created from.
 
 ### Feature and Type Hierarchy Generation
 
-While walking through the grammar, the model inference algorithm keeps track of a set of the currently possible return types to add features to. 
+While walking through the grammar, the model inference algorithm keeps track of a set of the currently possible return types to add features to.
 
 * Entering a parser rule the set contains only the return type of the rule. 
-* Entering an element of an alternative the set is reset to the same state it was in when entering the first option of the alternative. 
+* Entering an element of an alternative the set is reset to the same state it was in when entering the first option of the alternative.
 * Leaving an alternative the set contains the union of all types at the end of each of its paths.
-* After an optional element, the set is reset to the same state it was before entering it. 
+* After an optional element, the set is reset to the same state it was before entering it.
 * After a non-optional unassigned rule call the set contains only the return type of the called rule. An optional rule call does not modify the set. A rule call is optional if its cardinality is `?` or `*`.
 * After an action the set contains only the type of the action.
 
-While traversing the parser rules Xtext creates 
+While traversing the parser rules Xtext creates
 
-* an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) in each current return type     
+* an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) in each current return type
   * of type [EBoolean]({{site.javadoc.java}}/java/lang/Boolean.html) for each feature assignment using the `?=` operator. No further EReferences or EAttributes are generated from such an assignment.
   * for each assignment with the `=` or `+=` operator calling a terminal rule or data type rule. Its type is the return type of the called rule.
-* an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) in each current return type     
+* an [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) in each current return type
   * for each assignment with the `=` or `+=` operator in a parser rule calling a parser rule. The type of the EReference is the return type of the called parser rule.
-  * for each assigned action. The type of the reference is the return type of the current rule containing the action. 
+  * for each assigned action. The type of the reference is the return type of the current rule containing the action.
 
-Each [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) or [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) takes its name from the assignment or action that caused it. Multiplicities are `0..1` for assignments with the `=` operator and `0..*` for assignments with the `+=` operator. 
+Each [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) or [EReference]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) takes its name from the assignment or action that caused it. Multiplicities are `0..1` for assignments with the `=` operator and `0..*` for assignments with the `+=` operator.
 
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules that are never called, e.g.
 
@@ -675,14 +675,14 @@ enum MyGeneratedEnum:
 
 ### Error Conditions
 
-The following conditions cause an error 
+The following conditions cause an error
 
 *   An EAttribute or EReference has two different types or different cardinalities.
 *   There is an EAttribute and an EReference with the same name in the same EClass.
 *   There is a cycle in the type hierarchy.
 *   A new EAttribute, EReference or super type is added to an imported type.
 *   An EClass is added to an imported EPackage.
-*   An undeclared alias is used. 
+*   An undeclared alias is used.
 *   An imported Ecore model cannot be loaded.
 
 ---
@@ -704,7 +704,7 @@ Greeting:
     'Hello' name=ID '!';
 ```
 
-To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language. If it is in a different plug-in, make sure to add a plug-in dependency in the `MANIFEST.MF`. 
+To reuse an existing grammar, make sure the grammar file is on the classpath of the inheriting language. If it is in a different plug-in, make sure to add a plug-in dependency in the `MANIFEST.MF`.
 
 Mixing another grammar into a language makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. Example:
 
@@ -725,6 +725,7 @@ import "http://my.org/super"
 Model: (ruleAs+=RuleA)*;
 
 // overrides my.SuperGrammar.RuleB
+@Override
 RuleB: '[' name=ID ']';
 ```
 
@@ -735,31 +736,31 @@ Declared terminal rules always get a higher priority than imported terminal rule
 Xtext ships with a default set of predefined, reasonable and often required terminal rules. The grammar for these common terminal rules is defined as follows:
 
 ```xtext
-grammar org.eclipse.xtext.common.Terminals 
+grammar org.eclipse.xtext.common.Terminals
     hidden(WS, ML_COMMENT, SL_COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-terminal ID: 
+terminal ID:
     '^'?('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-terminal INT returns ecore::EInt: 
+terminal INT returns ecore::EInt:
     ('0'..'9')+;
 
-terminal STRING: 
+terminal STRING:
     '"' ( '\\'('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
     "'" ( '\\'('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|"'") )* "'";
  
-terminal ML_COMMENT: 
+terminal ML_COMMENT:
     '/*' -> '*/';
 
-terminal SL_COMMENT: 
+terminal SL_COMMENT:
     '//' !('\n'|'\r')* ('\r'? '\n')?;
 
-terminal WS: 
+terminal WS:
     (' '|'\t'|'\r'|'\n')+;
 
-terminal ANY_OTHER: 
+terminal ANY_OTHER:
     .;
 ```
 

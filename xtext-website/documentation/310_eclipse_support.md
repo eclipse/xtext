@@ -6,19 +6,19 @@ part: Reference Documentation
 
 # {{page.title}} {#ide-concepts}
 
-For the following part we will refer to the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
+For the following part we will refer to the Xtext Examples shipped with the Xtext framework to describe the different aspects of Xtext's UI features.
 
 ## Label Provider {#label-provider}
 
-There are various places in the UI in which model elements have to be presented to the user: In the [outline view](#outline), in [hyperlinks](#hyperlinking), in [content proposals](#content-assist), find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of the [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) interface. 
+There are various places in the UI in which model elements have to be presented to the user: In the [outline view](#outline), in [hyperlinks](#hyperlinking), in [content proposals](#content-assist), find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of the [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) interface.
 
 An [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) has two methods: `getText(Object)` returns the text in an object's label, while `getImage(Object)` returns the icon. In addition, the Eclipse UI framework offers the [IStyledLabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/DelegatingStyledCellLabelProvider.IStyledLabelProvider.html), which returns a [StyledString]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/StyledString.html) (i.e. with custom fonts, colors etc.) in the `getStyledText(Object)` method.
 
-Almost all label providers in the Xtext framework inherit from the base class [AbstractLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java) which unifies both approaches. Subclasses can either return a styled string or a string in the `doGetText(Object)` method. The framework will automatically convert it to a styled text (with default styles) or to a plain text in the respective methods. 
+Almost all label providers in the Xtext framework inherit from the base class [AbstractLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java) which unifies both approaches. Subclasses can either return a styled string or a string in the `doGetText(Object)` method. The framework will automatically convert it to a styled text (with default styles) or to a plain text in the respective methods.
 
 Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. The [AbstractLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider.java) helps you managing the images: In your implementation of `doGetImage(Object)` you can as well return an [Image]({{site.javadoc.eclipse-platform}}/org/eclipse/swt/graphics/Image.html), an [ImageDescriptor]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/resource/ImageDescriptor.html) or a string, representing a path in the *icons/* folder of the containing plug-in. This path is actually configurable by Google Guice. Have a look at the [PluginImageHelper]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/PluginImageHelper.java) to learn about the customizing possibilities.
 
-If you have the [LabelProviderFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/labeling/LabelProviderFragment2.xtend) in the list of generator fragments in the MWE2 workflow for your language, it will automatically create stubs and bindings for an [`{MyLang}EObjectLabelProvider`](#eobject-label-provider) and an [`{MyLang}DescriptionLabelProvider`](#description-label-provider) which you can implement manually. 
+If you have the [LabelProviderFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/labeling/LabelProviderFragment2.xtend) in the list of generator fragments in the MWE2 workflow of your language, it will automatically create stubs and bindings for an [`{MyLang}EObjectLabelProvider`](#eobject-label-provider) and an [`{MyLang}DescriptionLabelProvider`](#description-label-provider) which you can implement manually.
 
 ### Label Providers For EObjects {#eobject-label-provider}
 
@@ -49,7 +49,7 @@ public class MyLabelProvider {
 The default implementation of the [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides an image filename or the text to be used to represent your model element. Have a look at the following example to get a more detailed idea about the [DefaultEObjectLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java).
 
 ```java
-public class SecretCompartmentsLabelProvider 
+public class StatemachineLabelProvider 
     extends DefaultLabelProvider {
 
   public String text(Event event) {
@@ -74,7 +74,7 @@ You can also customize error handling by overriding the methods `handleTextError
 
 Xtext maintains an index of all model elements to allow quick searching and linking without loading the referenced resource (see the chapter on [index-based scopes](303_runtime_concepts.html#index-based) for details). The elements from this index also appear in some UI contexts, e.g. in the *Find model elements* dialog or in the *Find references* view. For reasons of scalability, the UI should not automatically load resources, so we need another implementation of a label provider that works with the elements from the index, i.e. [IResourceDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), [IEObjectDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java), and [IReferenceDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IReferenceDescription.java).
 
-The default implementation of this service is the [DefaultDescriptionLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java). It employs the same polymorphic dispatch mechanism as the [DefaultEObjectLabelProvider](#default-eobject-label-provider). The default text of an [IEObjectDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) is its indexed name. The image is resolved by dispatching to `image(EClass)` with the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) of the described object. This is likely the only method you want to override. Instances of [IResourceDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) will be represented with their path and the icon registered for your language's editor. 
+The default implementation of this service is the [DefaultDescriptionLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java). It employs the same polymorphic dispatch mechanism as the [DefaultEObjectLabelProvider](#default-eobject-label-provider). The default text of an [IEObjectDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) is its indexed name. The image is resolved by dispatching to `image(EClass)` with the [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) of the described object. This is likely the only method you want to override. Instances of [IResourceDescription]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java) will be represented with their path and the icon registered for your language's editor.
 
 To have a custom description label provider, make sure it is bound in your UI module:
 
@@ -82,7 +82,7 @@ To have a custom description label provider, make sure it is bound in your UI mo
 public void configureResourceUIServiceLabelProvider(Binder binder) {
   binder.bind(ILabelProvider.class)
     .annotatedWith(ResourceServiceDescriptionLabelProvider.class)
-    .to(MyCustomDefaultDescriptionLabelProvider.class);
+    .to(StatemachineDescriptionLabelProvider.class);
 }
 ```
 
@@ -99,17 +99,17 @@ First we will investigate the generated `Abstract{MyLang}ProposalProvider` with 
 public void complete{TypeName}_{FeatureName}(
   EObject model, Assignment assignment, 
   ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-  // clients may override
+  // subclasses may override
 }
 
 public void complete_{RuleName}(
   EObject model, RuleCall ruleCall, 
   ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-  // clients may override
+  // subclasses may override
 }
 ```
 
-The snippet above indicates that the generated class contains a *complete\**-method for each assigned feature in the grammar and for each rule. The braces in the snippet are place-holders that should give a clue about the naming scheme used to create the various entry points for implementors. The generated proposal provider falls back to some default behavior for cross-references and keywords. Furthermore it inherits the logic that was introduced in grammars that were mixed into the current language. 
+The snippet above indicates that the generated class contains a *complete\**-method for each assigned feature in the grammar and for each rule. The braces in the snippet are place-holders that should give a clue about the naming scheme used to create the various entry points for implementors. The generated proposal provider falls back to some default behavior for cross-references and keywords. Furthermore it inherits the logic that was introduced in grammars that were mixed into the current language.
 
 Clients who want to customize the behavior may override the methods from the [AbstractJavaBasedContentProposalProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java) or introduce new methods with a specialized first parameter. The framework inspects the type of the model object and dispatches method calls to the most concrete implementation that can be found.
 
@@ -140,11 +140,11 @@ public void completeEvent_Code(
 
 For validations written using the [AbstractDeclarativeValidator](303_runtime_concepts.html#custom-validation) it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying *cause* of the diagnostic must be known (i.e. what actual problem does the diagnostic represent), otherwise the fix doesn't know what needs to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem specific *code* with the diagnostic.
 
-In the following example taken from the *DomainmodelJavaValidator* the diagnostic's *code* is given by the third argument to the `warning()` method and it is a reference to the static [String]({{site.javadoc.java}}/java/lang/String.html) field `INVALID_TYPE_NAME` in the validator class.
+In the following example taken from the *DomainmodelValidator* the diagnostic's *code* is given by the third argument to the `warning()` method and it is a reference to the static [String]({{site.javadoc.java}}/java/lang/String.html) field `INVALID_TYPE_NAME` in the `IssueCodes` interface.
 
 ```java
 warning("Name should start with a capital", 
-    DomainmodelPackage.TYPE__NAME, INVALID_TYPE_NAME, type.getName());
+    DomainmodelPackage.TYPE__NAME, IssueCodes.INVALID_TYPE_NAME, type.getName());
 ```
 
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. We start by adding the [QuickfixProviderFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/quickfix/QuickfixProviderFragment2.xtend) to our workflow and after regenerating the code we should find an empty class *MyDslQuickfixProvider* in our DSL's UI project and new entries in the *plugin.xml\_gen* file.
@@ -152,58 +152,46 @@ Now that the validation has a unique code identifying the problem we can registe
 Continuing with the `INVALID_TYPE_NAME` problem from the domain model example we add a method with which the problem can be fixed (have a look at the *DomainmodelQuickfixProvider* for details):
 
 ```java
-@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
-public void fixName(final Issue issue, 
-  IssueResolutionAcceptor acceptor) {
-  acceptor.accept(issue, 
+@Fix(IssueCodes.INVALID_TYPE_NAME)
+public void fixTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
+  acceptor.accept(issue,
     "Capitalize name", // quick fix label
-    "Capitalize name  of '" + issue.getData()[0] + "'", 
-                       // description
+    "Capitalize name  of '" + issue.getData()[0] + "'", // description
     "upcase.png",      // quick fix icon
-    new IModification() {
-      public void apply(IModificationContext context) 
-    throws BadLocationException {
-        IXtextDocument xtextDocument = context.getXtextDocument();
-        String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-        xtextDocument.replace(issue.getOffset(), 1, 
-                              Strings.toFirstUpper(firstLetter));
-      }
-    }
+    (IModificationContext context) -> {
+      IXtextDocument xtextDocument = context.getXtextDocument();
+      String firstLetter = xtextDocument.get(issue.getOffset(), 1);
+      xtextDocument.replace(issue.getOffset(), 1, Strings.toFirstUpper(firstLetter));
+    });
   );
 }
 ```
 
 By using the correct signature (see below) and annotating the method with the @[Fix]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/Fix.java) annotation referencing the previously specified issue code from the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
 
-The first three parameters given to the [IssueResolutionAcceptor]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java) define the UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name. The additional data is available as [Issue.getData()]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java). As it is persisted in markers, only strings are allowed. 
+The first three parameters given to the [IssueResolutionAcceptor]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java) define the UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name. The additional data is available as [Issue.getData()]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java). As it is persisted in markers, only strings are allowed.
 
-The actual model modification is implemented in the [IModification]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java). The [IModificationContext]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java) provides access to the erroneous document. In this case, we're using Eclipse's [IDocument]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/IDocument.html) API to replace a text region. 
+The actual model modification is implemented in the [IModification]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java). The [IModificationContext]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java) provides access to the erroneous document. In this case, we're using Eclipse's [IDocument]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/IDocument.html) API to replace a text region.
 
-If you prefer to implement the quick fix in terms of the semantic model use a [ISemanticModification]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java) instead. Its `apply(EObject, IModificationContext)` method will be invoked inside a modify-transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor's content will be updated accordingly. If the method fails (throws an exception) the change will not be committed. The following snippet shows a semantic quick fix for a similar problem.
+If you prefer to implement the quick fix in terms of the semantic model use an [ISemanticModification]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java) instead. Its `apply(EObject, IModificationContext)` method will be invoked inside a modify-transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor's content will be updated accordingly. If the method fails (throws an exception) the change will not be committed. The following snippet shows a semantic quick fix for a similar problem.
 
 ```java
-@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)
+@Fix(IssueCodes.INVALID_FEATURE_NAME)
 public void fixFeatureName(final Issue issue, 
                            IssueResolutionAcceptor acceptor) {
   acceptor.accept(issue, 
     "Uncapitalize name",    // label
     "Uncapitalize name of '" + issue.getData()[0] + "'", // description
     "upcase.png",           // icon 
-    new ISemanticModification() {
-      public void apply(EObject element, IModificationContext context) {
-        ((Feature) element).setName(
-            Strings.toFirstLower(issue.getData()[0]));
-      }
-    }
-  );
+    (EObject element, IModificationContext context) -> ((Feature) element).setName(Strings.toFirstLower(issue.getData()[0])));
 }
 ```
 
-The `@Fix` annotation is repeatable so you can specify it multiple times if a method offers a quickfix for multiple issue codes. 
+The `@Fix` annotation is repeatable so you can specify it multiple times if a method offers a quickfix for multiple issue codes.
 
 ```java
-@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
-@Fix(DomainmodelJavaValidator.OTHER_ISSUE)
+@Fix(IssueCodes.INVALID_TYPE_NAME)
+@Fix(IssueCodes.OTHER_ISSUE)
 public void fixName(final Issue issue, 
   IssueResolutionAcceptor acceptor) {
     ...
@@ -213,7 +201,7 @@ public void fixName(final Issue issue,
 Alternatively you can wrap it in a `@Fixes` container.
 
 ```java
-@Fixes(@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME),@Fix(DomainmodelJavaValidator.OTHER_ISSUE))
+@Fixes(@Fix(IssueCodes.INVALID_TYPE_NAME),@Fix(IssueCodes.OTHER_ISSUE))
 public void fixName(final Issue issue, 
   IssueResolutionAcceptor acceptor) {
     ...
@@ -222,26 +210,33 @@ public void fixName(final Issue issue,
 
 ### Quick Fixes for Linking Errors and Syntax Errors
 
-You can even define quick fixes for linking errors. The issue codes are assigned by the [ILinkingDiagnosticMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java). Have a look at the domain model example how to add quick fixes for these errors.
+You can even define quick fixes for linking errors. The issue codes are assigned by the [ILinkingDiagnosticMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java). Have a look at the domain model example how to add quick fixes for these errors:
+
+```java
+@Fix(IssueCodes.MISSING_TYPE)
+public void createReferenceType(Issue issue, IssueResolutionAcceptor acceptor) {
+	createLinkingIssueResolutions(issue, acceptor);
+}
+```
 
 Hence, there is the [ISyntaxErrorMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java) to assign issue codes to syntactical errors.
 
 ## Template Proposals {#templates}
 
-Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named *templates.xml* inside the *templates* directory of the generated UI-plug-in. This file contains templates in a format as described in the [Eclipse online help](http://help.eclipse.org/luna/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm) .
+Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named *templates.xml* inside the *templates* directory of the generated UI-plug-in. This file contains templates in a format as described in the [Eclipse online help](http://help.eclipse.org/luna/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm).
 
 ![](images/preferences_templates.png)
 
-By default Xtext registers *context types* that follow certain patterns. A context type will be created 
+By default Xtext registers *context types* that follow certain patterns. A context type will be created
 
 1.  for each rule (`{languageName}.{RuleName}`) and
 1.  for each keyword (`{languageName}.kw_{keyword}`).
 
-If you don't like these defaults you'll have to subclass [XtextTemplateContextTypeRegistry]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java) and configure it via [Guice](302_configuration.html#guicemodules). 
+If you don't like these defaults you'll have to subclass [XtextTemplateContextTypeRegistry]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java) and configure it via [Guice](302_configuration.html#guicemodules).
 
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) to resolve special variable types in templates. Besides the standard template variables available in [GlobalTemplateVariables]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/GlobalTemplateVariables.html) like `${user}`, `${date}`, `${time}`, `${cursor}`, etc., these [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) support the automatic resolution of cross references enumeration values. Both resolvers are explained in the following sections.
 
-It is best practice to edit the templates in the preferences page, export them into the *templates.xml*-file and put this one into the *templates* folder of your UI-plug-in. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an `id` attribute for each template element. Note that the attribute name is case sensitive. As always in eclipse plug-in development, if the folder *templates* did not exist before, you have to add it to the *bin.includes* in your *build.properties*. 
+It is best practice to edit the templates in the preferences page, export them into the *templates.xml* file and put the file into the *templates* folder of your UI-plug-in. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an `id` attribute for each template element. Note that the attribute name is case sensitive. As always in Eclipse Plug-In development, if the folder *templates* did not exist before, you have to add it to the *bin.includes* in the *build.properties* file.
 
 ### Cross Reference Template Variable Resolver
 
@@ -251,17 +246,16 @@ Xtext comes with a specific template variable resolver called [CrossReferenceTem
 
 Where "displayText" is the initial value that is shown in the editor. It is also the identifier for a place holder so that multiple place holders with the same name will be updated at once by the user using linked editing.
 
-This small example yields the text *event =\> state* and allows selecting any events and states using a drop down:
+This small example (taken from the Xtext Statemachine example) yields the text *event =\> state* and allows selecting any events and states using a drop down:
 
 ```xml
 <template 
-  name="transition" 
-  description="event transition" 
-  id="transition"
-    context="org.xtext.example.SecretCompartments.Transition" 
-    enabled="true">
-${event:CrossReference('Transition.event')} =>
-  ${state:CrossReference('Transition.state')}
+  name="Transition" 
+  description="Template for a Transition"
+  id="org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition"
+  context="org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition"
+  enabled="true"
+>${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')}</template>
 </template>
 ```
 
@@ -269,13 +263,13 @@ ${event:CrossReference('Transition.event')} =>
 
 ### Enumeration Template Variable Resolver
 
-The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the *Enum* template variable. 
+The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the *Enum* template variable.
 
-The syntax is as follows: 
+The syntax is as follows:
 
 `${<displayText>:Enum([<MyPackage>.]<EnumType>)}`
 
-For example the following template (taken from another example):
+For example the following template (taken from the Xtext Domainmodel example):
 
 ```domainexample
 <template 
@@ -290,7 +284,7 @@ ${public:Enum('Visibility')} entity ${Name} {
 </template>
 ```
 
-yields the text `public entity Name {}` where the text `public` is the default value of the `Visibility`. The editor provides a drop down that is populated with the other literal values as defined in the [EEnum]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java). 
+yields the text `public entity Name {}` where the text `public` is the default value of the `Visibility`. The editor provides a drop down that is populated with the other literal values as defined in the [EEnum]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java).
 
 ## Outline View {#outline}
 
@@ -308,7 +302,7 @@ Each node in the outline tree is an instance of [IOutlineNode]({{site.src.xtext_
 
 An [EObjectNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java) represents a model element. By default, Xtext creates an [EObjectNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java) for each model element in the node of its container. Nodes are created by calling the method `createNode(parentNode, modelElement)` which delegates to `createEObjectNode(..)` if not specified differently.
 
-To change the children of specific nodes, you have to implement the method 
+To change the children of specific nodes, you have to implement the method
 
 ```java
 _createChildren(parentNode,
@@ -335,10 +329,10 @@ protected boolean _isLeaf(Feature feature) {
 }
 ```
 
-Xtext provides a third type of node: [EStructuralFeatureNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java). It is used to represent a feature of a model element rather than the element itself. The following simplified snippet from Xtend2 illustrates how to use it: 
+Xtext provides a third type of node: [EStructuralFeatureNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java). It is used to represent a feature of a model element rather than the element itself. The following simplified snippet from Xtend2 illustrates how to use it:
 
 ```java
-protected void _createChildren(DocumentRootNode parentNode, 
+protected void _createChildren(DocumentRootNode parentNode,
                                XtendFile xtendFile) {
   // show a node for the attribute XtendFile.package
   createEStructuralFeatureNode(parentNode, 
@@ -352,20 +346,20 @@ protected void _createChildren(DocumentRootNode parentNode,
   createEStructuralFeatureNode(parentNode, 
     xtendFile, 
     Xtend2Package.Literals.XTEND_FILE__IMPORTS,
-    getImageForImportContainer(), 
-    "import declarations", 
+    getImageForImportContainer(),
+    "import declarations",
     false);
   createEObjectNode(parentNode, xtendFile.getXtendClass());
 }
 ```
 
-Of course you can add further custom types of nodes. For consistency, make sure to inherit from [AbstractOutlineNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/AbstractOutlineNode.java). To instantiate these, you have to implement `_createNode(parentNode, semanticElement)` with the appropriate parameter types. 
+Of course you can add further custom types of nodes. For consistency, make sure to inherit from [AbstractOutlineNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/AbstractOutlineNode.java). To instantiate these, you have to implement `_createNode(parentNode, semanticElement)` with the appropriate parameter types.
 
 ### Styling the outline
 
-You can also customize the icons and texts for an outline node. By default, Xtext uses the [label provider](#label-provider) of your language. If you want the labels to be specific to the outline, you can override the methods `_text(modelElement)` and `_image(modelElement)` in your [DefaultOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java). 
+You can also customize the icons and texts for an outline node. By default, Xtext uses the [label provider](#label-provider) of your language. If you want the labels to be specific to the outline, you can override the methods `_text(modelElement)` and `_image(modelElement)` in your [DefaultOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java).
 
-Note that the method `_text(modelElement)` can return a [String]({{site.javadoc.java}}/java/lang/String.html) or a [StyledString]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/StyledString.html). The [StylerFactory]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java) can be used to create [StyledStrings]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/StyledString.html), like in the following example: 
+Note that the method `_text(modelElement)` can return a [String]({{site.javadoc.java}}/java/lang/String.html) or a [StyledString]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/StyledString.html). The [StylerFactory]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java) can be used to create [StyledStrings]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/StyledString.html), like in the following example:
 
 ```java
 @Inject 
@@ -392,14 +386,14 @@ To access images we recommend to use the [PluginImageHelper]({{site.src.xtext_ec
 
 ### Filtering actions
 
-Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend [AbstractFilterOutlineContribution]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java) to ensure that the action toggle state is handled correctly. Here is an example from our domain model example:
+Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend [AbstractFilterOutlineContribution]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java) to ensure that the action toggle state is handled correctly. Here is an example from the Xtext Domainmodel example:
 
 ```java
-public class FilterOperationsContribution 
+public class FilterOperationsContribution
     extends AbstractFilterOutlineContribution {
 
-  public static final String PREFERENCE_KEY = 
-    "ui.outline.filterOperations";
+  public static final String PREFERENCE_KEY =
+    "ui.outline.filterEntities";
 
   @Inject
   private PluginImageHelper imageHelper;
@@ -421,19 +415,12 @@ public class FilterOperationsContribution
     action.setText("Hide operations");
     action.setDescription("Hide operations");
     action.setToolTipText("Hide operations");
-    action.setImageDescriptor(getImageDescriptor("Operation.gif"));
+    action.setImageDescriptor(imageHelper.getImageDescriptor("Operation.gif"));
   }
-
-  protected ImageDescriptor getImageDescriptor(String imagePath) {
-    return ImageDescriptor.createFromImage(
-      imageHelper.getImage(imagePath));
-  }
-
-  
 }
 ```
 
-The contribution must be bound in the *MyDslUiModule* like this
+The contribution must be bound in the *DomainmodelUiModule* like this
 
 ```java
 public void configureFilterOperationsContribution(Binder binder) {
@@ -446,7 +433,7 @@ public void configureFilterOperationsContribution(Binder binder) {
 
 ### Sorting actions
 
-Xtext already adds a sorting action to your outline. By default, nodes are sorted lexically by their text. You can change this behavior by binding your own [IComparator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/OutlineFilterAndSorter.java). 
+Xtext already adds a sorting action to your outline. By default, nodes are sorted lexically by their text. You can change this behavior by binding your own [IComparator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/OutlineFilterAndSorter.java).
 
 A very common use case is to group the children by categories first, e.g. show the imports before the types in a package declaration, and sort the categories separately. That is why the [DefaultComparator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/SortOutlineContribution.java) has a method `getCategory(IOutlineNode)` that allows to specify such categories. The example shows how to use such categories:
 
@@ -454,11 +441,11 @@ A very common use case is to group the children by categories first, e.g. show t
 public class MydslOutlineNodeComparator extends DefaultComparator {
   @Override
   public int getCategory(IOutlineNode node) {
-    if (node instanceof EObjectNode) 
+    if (node instanceof EObjectNode)
       switch((EObjectNode) node).getEClass().getClassifierID())) {
-      case MydslPackage.TYPE0:  
+      case MydslPackage.TYPE0:
         return -10;
-      case MydslPackage.TYPE1:  
+      case MydslPackage.TYPE1:
         return -20;
       }
     return Integer.MIN_VALUE;
@@ -470,7 +457,7 @@ As always, you have to declare a binding for your custom implementation in your 
 
 ```java
 @Override
-public Class<? extends IComparator> 
+public Class<? extends IComparator>
   bindOutlineFilterAndSorter$IComparator() {
     return MydslOutlineNodeComparator.class;
 }
@@ -489,8 +476,8 @@ The Xtext editor provides hyperlinking support for any tokens corresponding to c
 When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model element. Determining this text region is the responsibility of the [ILocationInFileProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java). The [default implementation]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java) implements a best effort strategy which can be summarized as:
 
 1.  If the model element's [type]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) declares a feature *name* then return the region of the corresponding token(s). As a fallback also check for a feature *id*. 
-1.  If the model element's node model contains any top-level tokens corresponding to invocations of the rule *ID* in the grammar then return a region spanning all those tokens. 
-1.  As a last resort return the region corresponding to the first keyword token of the referenced model element. 
+1.  If the model element's node model contains any top-level tokens corresponding to invocations of the rule *ID* in the grammar then return a region spanning all those tokens.
+1.  As a last resort return the region corresponding to the first keyword token of the referenced model element.
 
 The location service offers different methods to obtain the region of interest for special use cases. You can either obtain the complete region for an object or only the identifying string which is usually the name of the instance (see `getSignificantTextRegion(EObject)`). You can also query for the text region of a specific [EStructuralFeature]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) by means of `getFullTextRegion(EObject, EStructuralFeature, int)`.
 
@@ -510,7 +497,7 @@ Often the default strategy only needs some guidance (e.g. selecting the text cor
 
 ### Customizing Available Hyperlinks
 
-The hyperlinks are provided by the [HyperlinkHelper]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java) which will create links for cross-referenced objects by default. Clients may want to override `createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)` to provide additional links or supersede the default implementation. 
+The hyperlinks are provided by the [HyperlinkHelper]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java) which will create links for cross-referenced objects by default. Clients may want to override `createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)` to provide additional links or supersede the default implementation.
 
 ## Syntax Coloring {#highlighting}
 
@@ -526,12 +513,12 @@ When you introduce new highlighting styles, the preference page for your DSL is 
 
 ### Lexical Highlighting
 
-The lexical highlighting can be customized by providing implementations of the interface [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java) and the abstract class [AbstractTokenScanner]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java). The latter fulfills the interface [ITokenScanner]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/rules/ITokenScanner.html) from the underlying JFace Framework, which may be implemented by clients directly.
+The lexical highlighting can be customized by providing implementations of the interface [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java) and the abstract class [AbstractTokenScanner]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java). The latter fulfills the interface [ITokenScanner]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/rules/ITokenScanner.html) from the underlying JFace framework, which may be implemented by clients directly.
 
-The [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java) is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the [ITextAttributeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java), which in turn is the component that is used to obtain the actual settings for a style's id. An implementation will usually be very similar to the [DefaultHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java) and read like this: 
+The [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java) is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the [ITextAttributeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java), which in turn is the component that is used to obtain the actual settings for a style's id. An implementation will usually be very similar to the [DefaultHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java) and read like this:
 
 ```java
-public class DefaultHighlightingConfiguration 
+public class DefaultHighlightingConfiguration
     implements IHighlightingConfiguration {
 
   public static final String KEYWORD_ID = "keyword";
@@ -540,7 +527,7 @@ public class DefaultHighlightingConfiguration
   public void configure(IHighlightingConfigurationAcceptor acceptor) {
     acceptor.acceptDefaultHighlighting(
       KEYWORD_ID, "Keyword", keywordTextStyle());
-    acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", // ...
+    acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", commentTextStyle();
   }
   
   public TextStyle keywordTextStyle() {
@@ -558,12 +545,12 @@ Implementations of the [ITokenScanner]({{site.javadoc.eclipse-platform}}/org/ecl
 
 The semantic highlighting stage is executed asynchronously in the background and can be used to calculate highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.
 
-As for the lexical highlighting the interface to register the available styles is the [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java). The [ISemanticHighlightingCalculator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) is the primary hook to implement the logic that will compute the to-be-highlighted ranges based on the model elements. 
+As for the lexical highlighting the interface to register the available styles is the [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java). The [ISemanticHighlightingCalculator]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) is the primary hook to implement the logic that will compute the to-be-highlighted ranges based on the model elements.
 
-The framework will pass the current [XtextResource]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java) and an [IHighlightedPositionAcceptor]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java) to the calculator. It is ensured that the resource will not be altered externally until the called method `provideHighlightingFor()` returns. However, the resource may be `null` in case of errors in the model. The implementor's task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:
+The framework will pass the current [XtextResource]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java) and an [IHighlightedPositionAcceptor]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/IHighlightedPositionAcceptor.java) to the calculator. It is ensured that the resource will not be altered externally until the called method `provideHighlightingFor()` returns. However, the resource may be `null` in case of errors in the model. The implementor's task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:
 
 ```java
-public void provideHighlightingFor(XtextResource resource, 
+public void provideHighlightingFor(XtextResource resource,
     IHighlightedPositionAcceptor acceptor) {
   if (resource == null || resource.getParseResult() == null)
     return;
@@ -581,12 +568,12 @@ public void provideHighlightingFor(XtextResource resource,
 This example refers to an implementation of the [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java) that registers an own style for each cross-reference. It is pretty much the same implementation as for the previously mentioned sample of a lexical [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java).
 
 ```java
-public class HighlightingConfiguration 
+public class HighlightingConfiguration
     implements IHighlightingConfiguration {
   
   // lexical stuff goes here 
   // ..
-  public final static String CROSS_REF = "CrossReference"; 
+  public final static String CROSS_REF = "CrossReference";
 
   public void configure(IHighlightingConfigurationAcceptor acceptor) {
     // lexical stuff goes here 
@@ -603,7 +590,7 @@ public class HighlightingConfiguration
 }
 ```
 
-The implementor of an [ISemanticHighlightingCalculator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext's core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This speeds up the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.
+The implementor of an [ISemanticHighlightingCalculator]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext's core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This speeds up the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.
 
 ## Rename Refactoring {#refactoring}
 
@@ -618,19 +605,19 @@ To enable refactoring support make sure the [RefactorElementNameFragment2]({{sit
 
 ```mwe2
 // rename refactoring
-fragment = refactoring.RefactorElementNameFragment {}
+fragment = refactoring.RefactorElementNameFragment2 {}
 ```
 
-The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](305_xbase.html#xbase-inferred-type) (i.e. the domain model example or Xtend). 
+The fragment has an additional flag `useJdtRefactoring` which can be used to delegate to JDT's refactoring infrastructure for languages using [Xbase](305_xbase.html) and an [inferred JVM model](305_xbase.html#xbase-inferred-type) (i.e. the Xtext domain model example or Xtend).
 
-If you have stuck to the defaults with regard to naming, cross-referencing, and indexing rename refactoring should not need any customization. Give it a try. 
+If you have stuck to the defaults with regard to naming, cross-referencing, and indexing, the rename refactoring should not need any customization. Give it a try.
 
 ### Customizing
 
 The most likely component you want to customize is the [IRenameStrategy]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java). This component defines how the declaration of the target element is performed. It has two major responsibilities:
 
 *   Apply and revert the declaration change on the semantic model (methods `applyDeclarationChange` and `revertDeclarationChange`). The default is to look for an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) `name` on the target object and set its value using EMFs reflective API.
-*   Create the LTK [Change]({{site.javadoc.eclipse-platform}}/org/eclipse/ltk/core/refactoring/Change.html) objects of the declaration change. These changes will be aggregated, checked for overlaps, presented to you in the preview and finally executed if you apply the refactoring. The default is to use the [ILocationInFileProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java) to locate the text range representing the name and create a [ReplaceEdit]({{site.javadoc.eclipse-platform}}/org/eclipse/text/edits/ReplaceEdit.html) for it. 
+*   Create the LTK [Change]({{site.javadoc.eclipse-platform}}/org/eclipse/ltk/core/refactoring/Change.html) objects of the declaration change. These changes will be aggregated, checked for overlaps, presented to you in the preview and finally executed if you apply the refactoring. The default is to use the [ILocationInFileProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java) to locate the text range representing the name and create a [ReplaceEdit]({{site.javadoc.eclipse-platform}}/org/eclipse/text/edits/ReplaceEdit.html) for it.
 
 As the [IRenameStrategy]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java) is a stateful object, you have to bind a custom [Provider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/IRenameStrategy.java) to create it.
 
@@ -708,11 +695,11 @@ final class TestProject {
 }
 ```
 
-For more elaborate templates it is also possible to group parameters together, enable/disable parameters, have parameter values be changed in response of the change of a different parameter and add validations to the wizard if the selected parameters are correct. This can be done by implementing the provided methods `updateVariables` and `validate`. 
+For more elaborate templates it is also possible to group parameters together, enable/disable parameters, have parameter values be changed in response of the change of a different parameter and add validations to the wizard if the selected parameters are correct. This can be done by implementing the provided methods `updateVariables` and `validate`. The Xtext Statemachine example contains a more sophisticated implementation of the new project wizard.
 
 ## File Wizard
 
-Similar to the [Project Wizard](#projectwizard)  it is possible to generate a wizard for file generaten with the MWE2 workflow. The wizard will be generated in the `.ui` project. If the language was generated before the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
+Similar to the [Project Wizard](#projectwizard)  it is possible to generate a wizard for new dsl files with the MWE2 workflow. The wizard will be generated in the `.ui` project. If the language was generated before the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
 
 This must be explicitly specified in the MWE2 file in the `language` section as follows
 
@@ -722,11 +709,11 @@ fileWizard = {
 }
 ```
 
-The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point `org.eclipse.xtext.ui.projectTemplate` to register a [IFileTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java). To create instances of [AbstractFileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.xtend) one should use the active annotation [FileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.xtend).
+The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point `org.eclipse.xtext.ui.fileTemplate` to register a [IFileTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java). To create instances of [AbstractFileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.java) one should use the active annotation [FileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.xtend).
 
 An simple example template might look like this:
 
-```
+```xtend
 @FileTemplate(label="Hello World", icon="file_template.png", description="Create a hello world for MyDsl.")
 final class HelloWorldFile {
     val helloName = combo("Hello Name:", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to")
@@ -739,9 +726,11 @@ final class HelloWorldFile {
 }
 ```
 
+The Xtext Statemachine example contains a more sophisticated implementation of the new file wizard.
+
 ## Code Mining
 
-Code Mining shows inline annotations in the text editor that are not part of the text itself, but derived from its contents. It can be very helpful to leverage code minings for example to show inferred types, parameter names for literals and other kind of meta information. 
+Code Mining shows inline annotations in the text editor that are not part of the text itself, but derived from its contents. It can be very helpful to leverage code minings for example to show inferred types, parameter names for literals and other kind of meta information.
 
 Code minings come in two flavors: "header annotations" are printed in a separate line above the mined text, "inline annotations" are shown in-line. The following screenshot shows both flavors:
 
@@ -753,7 +742,7 @@ To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.Code
 fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
 ```
 
-With execution of the generator a stub class `<LanguageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+With execution of the generator a stub class `<LanguageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in the `plugin.xml`.
 
 The following class `MyDslCodeMiningProvider` shows a simple example:
 
@@ -775,7 +764,7 @@ Clients have to implement the `createCodeMinings()` method, compute text and pos
 
 The base class `AbstractXtextCodeMiningProvider` provides some factory methods for creating `ICodeMining` instances for convenience. Use `createNewLineHeaderCodeMining()` and `createNewLineContentCodeMining()` for that purpose.
 
-For an implementation reference, have a look at the Domainmodel Example.
+For an implementation reference, have a look at the Xtext Domainmodel example.
 
 ---
 

@@ -10,7 +10,7 @@ After you have developed your first own DSL, the question arises how the behavio
 
 ## Writing a Code Generator With Xtend {#tutorial-code-generation}
 
-As soon as you generate the Xtext artifacts for a grammar, a code generator stub is put into the runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator with Eclipse.
+As soon as you generate the Xtext artifacts from the grammar, a code generator stub is put into the runtime project of your language. Let's dive into Xtend and see how you can integrate your own code generator with Eclipse.
 
 In this lesson you will generate Java Beans for entities that are defined in the domain model DSL. For each *Entity*, a Java class is generated and each *Feature* will lead to a private field in that class including public getters and setters. For the sake of simplicity, we will use fully qualified names all over the generated code.
 
@@ -19,11 +19,11 @@ package my.company.blog;
 
 public class HasAuthor {
     private java.lang.String author;
-    
+
     public java.lang.String getAuthor() {
         return author;
     }
-    
+
     public void setAuthor(java.lang.String author) {
         this.author = author;
     }
@@ -32,8 +32,8 @@ public class HasAuthor {
 
 First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.example.domainmodel.generator*. This Xtend class is used to generate code for your models in the standalone scenario and in the interactive Eclipse environment. Let's make the implementation more meaningful and start writing the code generator. The strategy is to find all entities within a resource and trigger code generation for each one.
 
-1.  First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method `getAllContents()`. To use the resulting [TreeIterator]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java) in a `for` loop, we use the extension method `toIterable()` from the built-in library class [IteratorExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java).     
-    
+1.  First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method `getAllContents()`. To use the resulting [TreeIterator]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java) in a `for` loop, we use the extension method `toIterable()` from the built-in library class [IteratorExtensions]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java).
+
     ```xtend
     class DomainmodelGenerator extends AbstractGenerator {
         override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -44,14 +44,14 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     }
     ```
 
-1.  Now let's answer the question how we determine the file name of the Java class that each *Entity* should yield. This information should be derived from the qualified name of the *Entity* since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the [IQualifiedNameProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) into the generator.     
-    
+1.  Now let's answer the question how we determine the file name of the Java class that each *Entity* should yield. This information should be derived from the qualified name of the *Entity* since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the [IQualifiedNameProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) into the generator.
+
     ```xtend
       @Inject extension IQualifiedNameProvider
     ```
 
-    This allows to ask for the name of an entity. It is straightforward to convert the name into a file name:     
-    
+    This allows to ask for the name of an entity. It is straightforward to convert the name into a file name:
+
     ```xtend
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         for (e : resource.allContents.toIterable.filter(Entity)) {
@@ -62,8 +62,8 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     }
     ```
 
-1.  The next step is to write the actual template code for an entity. For now, the function `Entity.compile` does not exist, but it is easy to create it:     
-    
+1.  The next step is to write the actual template code for an entity. For now, the function `Entity.compile` does not exist, but it is easy to create it:
+
     ```xtend
     def compile(Entity e) '''
         package «e.eContainer.fullyQualifiedName»;
@@ -73,8 +73,8 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-1.  This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail if the *Entity* is not contained in a package. A small modification fixes this. The `package` declaration has to be wrapped in an `IF` expression:     
-    
+1.  This small template is basically the first shot at a Java-Beans generator. However, it is currently rather incomplete and will fail if the *Entity* is not contained in a package. A small modification fixes this. The `package` declaration has to be wrapped in an `IF` expression:
+
     ```xtend
     def compile(Entity e) '''
         «IF e.eContainer.fullyQualifiedName !== null»
@@ -86,8 +86,8 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-    Let's handle the *superType* of an *Entity* gracefully, too, by using another `IF` expression:     
-    
+    Let's handle the *superType* of an *Entity* gracefully, too, by using another `IF` expression:
+
     ```xtend
     def compile(Entity e) ''' 
         «IF e.eContainer.fullyQualifiedName !== null»
@@ -101,7 +101,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     ```
 
 1.  Even though the template will compile the *Entities* without any complaints, it still lacks support for the Java properties that each of the declared features should yield. For that purpose, you have to create another Xtend function that compiles a single feature to the respective Java code.
-    
+
     ```xtend
     def compile(Feature f) '''
         private «f.type.fullyQualifiedName» «f.name»;
@@ -116,8 +116,8 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure that the function is actually used.     
-    
+    As you can see, there is nothing fancy about this one. Last but not least, we have to make sure that the function is actually used.
+
     ```xtend
     def compile(Entity e) ''' 
         «IF e.eContainer.fullyQualifiedName !== null»
@@ -133,7 +133,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Eclipse will ask you to turn the Java project into an Xtext project then. Simply agree and create a new source folder *src-gen* in that project. Then you can see how the compiler will pick up your sample *Entities* and generate Java code for them. 
+The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Eclipse will ask you to turn the Java project into an Xtext project then. Simply agree and create a new source folder *src-gen* in that project. Then you can see how the compiler will pick up your sample *Entities* and generate Java code for them.
 
 ```xtend
 package org.example.domainmodel.generator
@@ -193,14 +193,14 @@ If you want to play around with Xtend, you can try to use the Xtend tutorial whi
 
 Automated tests are crucial for the maintanability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates two test projects for that purpose. These simplify the setup procedure for testing the basic language features and the Eclipse UI integration.
 
-This tutorial is about testing the parser and the linker for the *Domainmodel*. It leverages Xtend to write the test case.
+This tutorial is about testing the parser and the linker for the *Domainmodel*. It leverages Xtend to write the test cases.
 
 1.  The core of the test infrastructure is the [XtextRunner]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java) and the language-specific [IInjectorProvider]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java). Both have to be provided by means of class annotations. An example test class should have already been generated by the Xtext code generator, named *org.example.domainmodel.tests.DomainmodelParsingTest*:
     
     ```xtend
     @RunWith(XtextRunner)
     @InjectWith(DomainmodelInjectorProvider)
-    class DomainmodelParsingTest{
+    class DomainmodelParsingTest {
     
         @Inject
         ParseHelper<Domainmodel> parseHelper
@@ -211,6 +211,8 @@ This tutorial is about testing the parser and the linker for the *Domainmodel*. 
                 Hello Xtext!
             ''')
             Assert.assertNotNull(result)
+            val errors = result.eResource.errors
+            Assert.assertTrue('''Unexpected errors: «errors.join(", ")»''', errors.isEmpty)
         }
     
     }
@@ -220,9 +222,9 @@ This tutorial is about testing the parser and the linker for the *Domainmodel*. 
     
     ```xtend
     import static org.junit.Assert.*
-    
+
     ...
-    
+
         @Test 
         def void parseDomainmodel() {
             val model = parseHelper.parse(
@@ -234,7 +236,7 @@ This tutorial is about testing the parser and the linker for the *Domainmodel*. 
         }
     ```
 
-1.  After saving the Xtend file, it is time to run the test. Select *Run As &rarr; JUnit Test* from the editor's context menu. 
+1.  After saving the Xtend file, it is time to run the test. Select *Run As &rarr; JUnit Test* from the editor's context menu.
 
 ## Creating Custom Validation Rules {#tutorial-validation}
 

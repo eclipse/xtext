@@ -14,7 +14,7 @@ upsite:
 
 There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language that runs all tests and creates an Eclipse update site and other needed artifacts, and secondly you may want to have your language and its corresponding code generator integrated in your application builds. We will discuss both cases in this section along with a set of example projects, which you can clone, inspect or download from [github.com/xtext/maven-xtext-example](https://github.com/xtext/maven-xtext-example).
 
-To follow this section you need a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it. 
+To follow this section you need a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it.
 
 ## An overview of the example projects
 
@@ -26,9 +26,9 @@ Although the runtime aspects of an Xtext language is not dependent on Eclipse or
 
 ### The parent project (my.mavenized.herolanguage.parent)
 
-All of the projects are aggregated in a parent pom in the root directory. If you import the projects into eclipse the imported project is called `my.mavenized.herolanguage.parent`. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
+All of the projects are aggregated in a parent pom in the root directory. If you import the projects into Eclipse the imported project is called `my.mavenized.herolanguage.parent`. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
 
-*   The Xtend compiler plug-in will generate the Java source code for any Xtend files during the 'generate-sources' phase     
+*   The Xtend compiler plug-in will generate the Java source code for any Xtend files during the 'generate-sources' phase
     
     ```xml
     <pluginManagement>
@@ -60,7 +60,7 @@ All of the projects are aggregated in a parent pom in the root directory. If you
     </pluginManagement>
     ```
 
-*   The Tycho plug-in will pick up and use Eclipse plug-in specific configuration data from the projects in order to build Eclipse conformant OSGi bundles, features and an update site.     
+*   The Tycho plug-in will pick up and use Eclipse plug-in specific configuration data from the projects in order to build Eclipse conformant OSGi bundles, features and an update site.
     
     ```xml
     <plugins>
@@ -142,7 +142,7 @@ The `pom.xml` for the language project contains information about how Maven shou
 </plugin>
 ```
 
-The second used plug-in cleans the directories containing generated resources during the clean phase: 
+The second used plug-in cleans the directories containing generated resources during the clean phase:
 
 ```xml
 <plugin>
@@ -191,7 +191,7 @@ The second used plug-in cleans the directories containing generated resources du
 
 ### The ui language project (my.mavenized.herolanguage.ui)
 
-Here all code that is specific to eclipse is located. All the additions that you place for the UI of the language, all editors, wizards and preferences, are to be placed inside this project. Regarding the maven build the `pom.xml` is not very special.
+Here all code that is specific to Eclipse is located. All the additions that you place for the UI of the language, all editors, wizards and preferences, are to be placed inside this project. Regarding the maven build the `pom.xml` is not very special.
 
 ### The tests language project (my.mavenized.herolanguage.tests)
 
@@ -236,12 +236,12 @@ Now that we can build our language we need to be able to integrate our language 
 </plugin>
 ```
 
-You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences. 
+You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.
 
 ## Maven Tycho Hints
 
 Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the `pom.xml` using maven `<repositories>` section. The p2 repositories need to be marked with layout=p2.
-The second way is to use eclipse [target platform files](https://wiki.eclipse.org/Tycho/Target_Platform#Target_files). This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.
+The second way is to use Eclipse [target platform files](https://wiki.eclipse.org/Tycho/Target_Platform#Target_files). This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.
 
 To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project's repository or the huge [eclipse common]({{page.upsite.eclipse}}releases/photon/) composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.
 
