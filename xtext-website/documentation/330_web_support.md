@@ -6,7 +6,7 @@ part: Reference Documentation
 
 # {{page.title}} {#web-integration}
 
-Since version 2.9 Xtext offers an interface for integration of text editors in web applications. The text editors are implemented in JavaScript, and language-related services such as code completion are realized through HTTP requests to a server-side component.
+Since version 2.9 Xtext offers an interface for integration of text editors in web applications. The text editors are implemented in JavaScript, and the language-related services such as code completion are realized through HTTP requests to a server-side component.
 
 ## The Client {#client}
 
@@ -196,13 +196,13 @@ The text content is either loaded from the Xtext server or provided through Java
 
 #### Loading text from the server
 
-If you specify a value for the `resourceId` option, the language may be identified from the file extension included in that id. In this case it is not necessary to provide the `xtextLang` option. Another effect of using `resourceId` is that the server will try to load the respective resource from its persistence layer. The Xtext server does not define any default persistence, so you have to customize it as described in [Persistence](#persistence) in order to use this approach.
+If you specify a value for the `resourceId` option, the language may be identified from the file extension included in that id. In this case it is not necessary to provide the `xtextLang` option. Another effect of using `resourceId` is that the server will try to load the respective resource from its persistence layer. The Xtext server does not define any default persistence, so you have to customize it as described in the [Persistence](#persistence) section in order to use this approach.
 
 The `resourceId` string may contain whatever information you need to identify a specific text content on the server. Usually the [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) syntax is used, but this is not mandatory.
 
 #### Providing text through JavaScript
 
-The persistence layer of the Xtext server is totally optional, so you can use whatever means you like to fetch the content, e.g. generate it in the client or request it through your own service. If the DOM element into which the editor is created already contains some text, this text is used as initial content. Otherwise the editor is initially empty, and you can use the API of the chosen editor framework to change the content whenever you like.
+The persistence layer of the Xtext server is totally optional, so you can use whatever means you like to fetch the content, e.g. generate it in the client or request it through your own service. If the DOM element into which the editor is created already contains some text, this text is used as the initial content. Otherwise the editor is initially empty, and you can use the API of the chosen editor framework to change the content whenever you like.
 
 If you would like to specify a `resourceId` without using the persistence services shipped with Xtext, you can do so by setting the option `loadFromServer` to `false`.
 
@@ -238,7 +238,7 @@ $("#save-button").click(function() {
 The following functions are available, provided that the respective services are enabled and supported by the employed editor library. All functions return a _promise_ that is eventually resolved to the requested data. Furthermore, all these functions can be supplied with an `options` parameter to override some of the options declared when the editor was built.
 
  * `getContentAssist()`
-   Returns the content assist proposals in the format explained in Section [Content Assist](#content-assist).
+   Returns the content assist proposals in the format explained in the [Content Assist](#content-assist) section.
  * `validate()`
    Returns the validation result. The returned object has a property `issues`, which is an array of objects with the following properties:
     * `description`: A description to be displayed to the user.
@@ -248,11 +248,11 @@ The following functions are available, provided that the respective services are
     * `offset`: the character offset in the document (zero-based)
     * `length`: the length of the affected text region
  * `computeHighlighting()`
-   Returns the text styling data for semantic highlighting (see Section [Semantic Highlighting](#semantic-highlighting)).
+   Returns the text styling data for semantic highlighting (see the [Semantic Highlighting](#semantic-highlighting) section).
  * `getOccurrences()`
-   Returns the occurrences of the element at the current cursor position (see Section [Mark Occurrences](#mark-occurrences)).
+   Returns the occurrences of the element at the current cursor position (see the [Mark Occurrences](#mark-occurrences) section).
  * `getHoverInfo()`
-   Returns the hover information at the current cursor position (see Section [Hover Information](#hover-info)).
+   Returns the hover information at the current cursor position (see the [Hover Information](#hover-info) section).
  * `format()`
    Formats the current selection (or the whole document if the selection has zero length) and returns the formatted text.
  * `generate()`
@@ -321,7 +321,7 @@ The following functions are available, provided that the respective services are
  * `showErrorDialogs`
    Whether errors should be displayed in popup dialogs (default: `false`).
  * `syntaxDefinition`
-   A path to a JS file containing a syntax definition. Set this option to `'none'` to disable syntax highlighting. See [Syntax Highlighting](#syntax-highlighting) for more details.
+   A path to a JS file containing a syntax definition. Set this option to `'none'` to disable syntax highlighting. See the [Syntax Highlighting](#syntax-highlighting) section for more details.
  * `textUpdateDelay`
    The number of milliseconds to wait after a text change before Xtext services are invoked (default: 500).
  * `xtextLang`
@@ -331,9 +331,9 @@ The following functions are available, provided that the respective services are
 
 The language-specific resources are provided through HTTP requests which are processed by the [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend). This class is also responsible for managing the lifecycle of the language [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) (see [Dependency Injection](302_configuration.html#dependency-injection)). The default approach is to create an injector when the servlet is started and to register it in the [IResourceServiceProvider.Registry]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). In order to override the default behavior, you can change or add bindings in the `<LanguageName>WebModule` or `<LanguageName>IdeModule` of your language.
 
-The usual way to include the Xtext servlet in a server application is to create a subclass of [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend), override `init()` and `destroy()` to manage the runtime resources, and add a [WebServlet]({{site.javadoc.javaee}}/javax/servlet/annotation/WebServlet.html) annotation with `urlPatterns = "/xtext-service/*"` as parameter. See [MyXtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.example.jetty/src/main/java/org/eclipse/xtext/web/example/jetty/MyXtextServlet.xtend) for an example.
+The usual way to include the Xtext servlet in a server application is to create a subclass of [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend), override `init()` and `destroy()` to manage the runtime resources, and add a [WebServlet]({{site.javadoc.javaee}}/javax/servlet/annotation/WebServlet.html) annotation with `urlPatterns = "/xtext-service/*"` as parameter. See [MyXtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.example.jetty/src/main/java/org/eclipse/xtext/web/example/jetty/MyXtextServlet.java) for an example.
 
-If you want to implement your own communication channel to provide the language-specific services without using XtextServlet, you can do so by injecting an instance of [XtextServiceDispatcher]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) and calling `getService(IServiceContext)`. The input to this method is an [IServiceContext]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/IServiceContext.xtend), which must be implemented to provide the request parameters and the client session. The return value is a descriptor that can be used to invoke the actual service. Furthermore, [XtextServiceDispatcher]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) can be subclassed in order to add custom services with access to the document AST and all related Xtext APIs.
+If you want to implement your own communication channel to provide the language-specific services without using XtextServlet, you can do so by injecting an instance of [XtextServiceDispatcher]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) and calling `getService(IServiceContext)`. The input to this method is an [IServiceContext]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/IServiceContext.java), which must be implemented to provide the request parameters and the client session. The return value is a descriptor that can be used to invoke the actual service. Furthermore, [XtextServiceDispatcher]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) can be subclassed in order to add custom services with access to the document AST and all related Xtext APIs.
 
 The following sections describe how to customize the standard services for web editors.
 
@@ -347,7 +347,7 @@ The typical customization point for [IdeCrossrefProposalProvider]({{site.src.xte
 
 ### Semantic Highlighting {#semantic-highlighting}
 
-The default behavior of Xtext editors is to have no semantic highlighting (syntactic highlighting, e.g. for keywords and strings, is done on the client side as described in [Syntax Highlighting](#syntax-highlighting)). In order to add styling to your text, create a subclass of [DefaultSemanticHighlightingCalculator]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java) and override `highlightElement(...)`. Here you can mark text regions with CSS classes by submitting a text offset, a length, and the CSS class name to the given acceptor. You can specify the actual text style in a CSS file that is included by the web page containing the Xtext editor. 
+The default behavior of Xtext editors is to have no semantic highlighting (syntactic highlighting, e.g. for keywords and strings, is done on the client side as described in [Syntax Highlighting](#syntax-highlighting)). In order to add styling to your text, create a subclass of [DefaultSemanticHighlightingCalculator]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java) and override `highlightElement(...)`. Here you can mark text regions with CSS classes by submitting a text offset, a length, and the CSS class name to the given acceptor. You can specify the actual text style in a CSS file that is included by the web page containing the Xtext editor.
 
 ### Mark Occurrences {#mark-occurrences}
 
@@ -357,13 +357,13 @@ The service for marking occurrences of a selected element is handled by [Occurre
 
 The information displayed for mouse hover popups is created in HTML format and consists of two parts: a title and a description.
 
-The title is composed of a text label and an image. The label is computed by [INameLabelProvider]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/INameLabelProvider.xtend), and the default is the value of the `name` property of an element, if it exists. The image is determined by an implementation of [IImageDescriptionProvider]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/IImageDescriptionProvider.xtend). The default behavior is to generate a `<div>` and annotate it with a CSS class of the form `<class>-icon`, where `<class>` is the name of the EClass of the corresponding element. The actual images can be assigned to these classes in a CSS file using the `background-image` CSS property.
+The title is composed of a text label and an image. The label is computed by the [INameLabelProvider]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/INameLabelProvider.xtend), and the default is the value of the `name` property of an element, if it exists. The image is determined by an implementation of [IImageDescriptionProvider]({{site.src.xtext_core}}/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/IImageDescriptionProvider.xtend). The default behavior is to generate a `<div>` and annotate it with a CSS class of the form `<class>-icon`, where `<class>` is the name of the EClass of the corresponding element. The actual images can be assigned to these classes in a CSS file using the `background-image` CSS property.
 
 The description part of the hover popup is determined by the [IEObjectDocumentationProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/documentation/IEObjectDocumentationProvider.java). For this part the default content is fetched from the comments in the document: if the definition of the element is preceded by a multi-line comment (e.g. `/* ... */`), the content of that comment is used as description.
 
 ### Persistence {#persistence}
 
-Without further adaptation the Xtext server does not provide any persistence functionality. As described in [Getting the Text Content](#getting-text-content), there are multiple ways to fill the web editor with text. If you would like to use the persistence service included in the Xtext server, you need to implement [IServerResourceHandler]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/IServerResourceHandler.xtend). The `get` and `put` operations declared in that interface should delegate to the persistence layer you would like to connect. For a simple example see [FileResourceHandler]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/FileResourceHandler.xtend).
+Without further adaptation the Xtext server does not provide any persistence functionality. As described in the [Getting the Text Content](#getting-text-content) section, there are multiple ways to fill the web editor with text. If you would like to use the persistence service included in the Xtext server, you need to implement [IServerResourceHandler]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/IServerResourceHandler.java). The `get` and `put` operations declared in that interface should delegate to the persistence layer you would like to connect. For a simple example see [FileResourceHandler]({{site.src.xtext_web}}/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/FileResourceHandler.xtend).
 
 ---
 
