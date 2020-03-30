@@ -13,7 +13,7 @@ public class ClassFileDebugSourceExtractor {
 
 	protected static class Visitor extends ClassVisitor {
 		public Visitor() {
-			super(Opcodes.ASM7);
+			super(Opcodes.ASM8);
 		}
 
 		protected String source;
