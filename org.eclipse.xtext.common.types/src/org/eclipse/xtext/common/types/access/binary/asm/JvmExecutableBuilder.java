@@ -55,7 +55,7 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
         final String signature,
         final String[] exceptions)
     {
-    	super(Opcodes.ASM7);
+    	super(Opcodes.ASM8);
     	this.proxies = proxies;
 		this.declarator = declarator;
 		final StringBuilder fqName;
