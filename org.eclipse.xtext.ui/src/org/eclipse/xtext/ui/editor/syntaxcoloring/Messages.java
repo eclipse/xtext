@@ -16,6 +16,14 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.editor.syntaxcoloring.messages"; //$NON-NLS-1$
 	public static String SyntaxColoringPreferencePage_tokenStyles;
+	public static String TokenTypeDefDetailsPart_BackgroundColorField;
+	public static String TokenTypeDefDetailsPart_BoldFontStyle;
+	public static String TokenTypeDefDetailsPart_ColorField;
+	public static String TokenTypeDefDetailsPart_FontField;
+	public static String TokenTypeDefDetailsPart_FontStyleGroupField;
+	public static String TokenTypeDefDetailsPart_ItalicFontStyle;
+	public static String TokenTypeDefDetailsPart_StrikeTroughFontStyle;
+	public static String TokenTypeDefDetailsPart_UnderlineFontStyle;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
