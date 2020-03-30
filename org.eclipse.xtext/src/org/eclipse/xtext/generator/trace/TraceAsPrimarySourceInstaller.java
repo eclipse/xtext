@@ -36,7 +36,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		private final int[] target2source;
 
 		public XtextClassAdapter(ClassVisitor cv, String sourceFile, int[] target2source, boolean hideSyntheticVariables) {
-			super(Opcodes.ASM7, cv);
+			super(Opcodes.ASM8, cv);
 			this.sourceFile = sourceFile;
 			this.target2source = target2source;
 			this.hideSyntheticVariables = hideSyntheticVariables;
@@ -70,7 +70,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		private XtextClassAdapter context;
 
 		public XtextMethodAdapter(XtextClassAdapter context, MethodVisitor delegate) {
-			super(Opcodes.ASM7, delegate);
+			super(Opcodes.ASM8, delegate);
 			this.context = context;
 		}
 
