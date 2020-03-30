@@ -130,7 +130,7 @@ public class ClosedProjectsQueue {
 	 * @param toBeBuilt
 	 *            their contents.
 	 */
-	protected void enqueue(Set<String> projectNames, ToBeBuilt toBeBuilt) {
+	public void enqueue(Set<String> projectNames, ToBeBuilt toBeBuilt) {
 		internalQueue.addLast(new Task(ImmutableSet.copyOf(projectNames), toBeBuilt));
 	}
 
@@ -146,7 +146,7 @@ public class ClosedProjectsQueue {
 	 * 
 	 * @since 2.18
 	 */
-	protected void insert(Set<String> projectNames, ToBeBuilt toBeBuilt, int attempt) {
+	public void insert(Set<String> projectNames, ToBeBuilt toBeBuilt, int attempt) {
 		internalQueue.addFirst(new Task(ImmutableSet.copyOf(projectNames), toBeBuilt, attempt));
 	}
 	
@@ -158,7 +158,7 @@ public class ClosedProjectsQueue {
 	 * @param toBeBuilt
 	 *            their contents.
 	 */
-	protected void insert(Set<String> projectNames, ToBeBuilt toBeBuilt) {
+	public void insert(Set<String> projectNames, ToBeBuilt toBeBuilt) {
 		internalQueue.addFirst(new Task(ImmutableSet.copyOf(projectNames), toBeBuilt));
 	}
 
@@ -167,7 +167,7 @@ public class ClosedProjectsQueue {
 	 *
 	 * @return the normalized task that has all the stuff that is to be done.
 	 */
-	protected Task exhaust() {
+	public Task exhaust() {
 		Set<String> projectNames = new LinkedHashSet<>();
 		ToBeBuilt toBeBuilt = new ToBeBuilt();
 		Set<URI> toBeDeleted = toBeBuilt.getToBeDeleted();
