@@ -477,8 +477,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	protected void clean(IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		try {
-			pollQueuedBuildData();
-			
 			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.split(2));
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
