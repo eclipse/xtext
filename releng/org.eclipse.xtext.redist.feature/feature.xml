@@ -30,7 +30,7 @@ SPDX-License-Identifier: EPL-2.0
    <requires>
       <import plugin="com.google.guava" version="27.1.0" match="compatible"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
-      <import plugin="org.objectweb.asm" version="7.2.0" match="compatible"/>
+      <import plugin="org.objectweb.asm" version="8.0.1" match="compatible"/>
       <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="io.github.classgraph" version="4.8.35" match="compatible"/>
    </requires>
