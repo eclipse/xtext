@@ -6,17 +6,17 @@ part: Reference Documentation
 
 # {{page.title}} {#xbase}
 
-The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four stages: First, you will learn how to refer to existing Java elements from within your language. Then you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase expressions and execute it. 
+The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four stages: First, you will learn how to refer to existing Java elements from within your language. Then you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase expressions and execute it.
 
-Throughout this chapter, we will step by step improve the [domain model example from the tutorial](103_domainmodelnextsteps.html). 
+Throughout this chapter, we will step by step improve the [domain model example from the tutorial](103_domainmodelnextsteps.html).
 
 ## Referring to Java Elements using JVM Types {#jvmtypes}
 
-A common case when developing languages is the requirement to refer to existing concepts of other languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful to have access to the available types of the Java Virtual Machine as well. The JVM types Ecore model enables clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their fields and methods. Basically every information about the structural concepts of the Java type system is available via the JVM types. This includes annotations and their specific values and enumeration literals, too.
+A common case when developing languages is the requirement to refer to existing concepts of other languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful to have access to the available types of the Java Virtual Machine as well. The [JVM types Ecore model]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore) enables clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their fields and methods. Basically every information about the structural concepts of the Java type system is available via the JVM types. This includes annotations and their specific values and enumeration literals, too.
 
-The implementation will be selected transparently depending on how the client code is executed. If the environment is a plain stand-alone Java or OSGi environment, the *java.lang.reflect* API will be used to deduce the necessary data. On the contrary, the type-model will be created from the live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients behind the scenes via different implementations that are bound to specific interfaces by means of Google Guice. 
+The implementation will be selected transparently depending on how the client code is executed. If the environment is a plain stand-alone Java or OSGi environment, the *java.lang.reflect* API will be used to deduce the necessary data. On the contrary, the type-model will be created from the live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients behind the scenes via different implementations that are bound to specific interfaces by means of Google Guice.
 
-Using the JVM types model is very simple. First of all, the grammar has to import the *JavaVMTypes* Ecore model. Thanks to content assist this is easy to spot in the list of proposals. 
+Using the JVM types model is very simple. First of all, the grammar has to import the *JavaVMTypes* Ecore model. Thanks to content assist this is easy to spot in the list of proposals.
 
 ```xtext
 grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xtype
@@ -39,7 +39,7 @@ After regenerating your language, it will be allowed to define a type `Date` tha
   datatype Date mapped-to java.util.Date
 ```
 
-These two steps will provide a nice integration into the Eclipse JDT. There is *Find References* on Java methods, fields and types that will reveal results in your language files. *Go To Declaration* works as expected and content assist will propose the list of available types. Even the *import* statements will also apply for Java types. 
+These two steps will provide a nice integration into the Eclipse JDT. There is *Find References* on Java methods, fields and types that will reveal results in your language files. *Go To Declaration* works as expected and content assist will propose the list of available types. Even the *import* statements will also apply for Java types.
 
 ### Customization Points
 
@@ -49,20 +49,20 @@ The [AbstractTypeScopeProvider]({{site.src.xtext_extras}}/org.eclipse.xtext.comm
 
 As the Java VM types expose a lot of information about visibility, parameter types and return types, generics, available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 
-The [ITypesProposalProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java) can be used to provide optimized proposals based on various filter criteria. The most common selector can be used directly via `createSubTypeProposals(..)`. The implementation is optimized and uses the JDT Index directly to minimize the effort for object instantiation. The class [TypeMatchFilters]({{site.src.xtext_eclipse}}/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java) provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals to a smaller number of valid entries. 
+The [ITypesProposalProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java) can be used to provide optimized proposals based on various filter criteria. The most common selector can be used directly via `createSubTypeProposals(..)`. The implementation is optimized and uses the JDT Index directly to minimize the effort for object instantiation. The class [TypeMatchFilters]({{site.src.xtext_eclipse}}/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java) provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals to a smaller number of valid entries.
 
 ## Referring to Java Types Using Xbase {#xbase-java-references}
 
-While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough to express neither the syntax nor the structure of such a type reference. 
+While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough to express neither the syntax nor the structure of such a type reference.
 
 Xbase offers a parser rule *JvmTypeReference* which supports the full syntax of a Java type reference and instantiates a JVM element of type [JvmTypeReference]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java). So let us start by inheriting from Xbase:
 
 ```xtext
-grammar org.eclipse.xtext.example.Domainmodel 
+grammar org.eclipse.xtext.example.Domainmodel
    with org.eclipse.xtext.xbase.Xbase
 ```
 
-Because we can express all kinds of Java type references directly now, an indirection for *DataTypes* as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](103_domainmodelnextsteps.html) again, we have to replace all cross-references to *Types* by calls to the production rule *JvmTypeReference*. The rules *DataType*, *Type*, and *QualifiedName* become obsolete (the latter is already defined in Xbase), and the *Type* in *AbstractEntity* must be changed to *Entity*. As we now have all kinds of generic Java collections at hand, *Feature.many* is obsolete, too. The whole grammar now reads concisely:
+Because we can express all kinds of Java type references directly now, an indirection for *DataTypes* as in the previous section is no longer necessary. If we start from the [domain model example in the tutorial](103_domainmodelnextsteps.html) again, we have to replace all cross-references to *Types* by calls to the production rule *JvmTypeReference*. The rules *DataType*, *Type*, and *QualifiedName* become obsolete (the latter is already defined in Xbase). As we now have all kinds of generic Java collections at hand, *Feature.many* is obsolete, too. The whole grammar now reads concisely:
 
 ```xtext
 grammar org.eclipse.xtext.example.Domainmodel with
@@ -102,11 +102,11 @@ As we changed the grammar, we have to regenerate the language now.
 
 Being able to parse a Java type reference is already nice, but we also have to write them back to their string representation when we generate Java code. Unfortunately, a generic type reference with fully qualified class names can become a bit bulky. Therefore, the [ImportManager]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java) shortens fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize [JvmTypeReferences]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java) by means of the [TypeReferenceSerializer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java). This utility encapsulates how type references may be serialized depending on the concrete context in the output.
 
-The following snippet shows our code generator using an [ImportManager]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java) in conjunction with as [TypeReferenceSerializer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java). We create a new instance and pass it through the generation functions, collecting types on the way. As the import section in a Java file precedes the class body, we create the body into a String variable and assemble the whole file's content in a second step.
+The following snippet shows our code generator using an [ImportManager]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java) in conjunction with a [TypeReferenceSerializer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java). We create a new instance and pass it through the generation functions, collecting types on the way. As the import section in a Java file precedes the class body, we create the body into a String variable and assemble the whole file's content in a second step.
 
 ```xtend
 class DomainmodelGenerator implements IGenerator {
-  
+
   @Inject extension IQualifiedNameProvider
   @Inject extension TypeReferenceSerializer 
 
@@ -117,7 +117,7 @@ class DomainmodelGenerator implements IGenerator {
         e.compile)
     }
   }
-  
+
   def compile(Entity it) '''
     «val importManager = new ImportManager(true)» 
     «val body = body(importManager)»
@@ -131,7 +131,7 @@ class DomainmodelGenerator implements IGenerator {
     
     «body»
   '''
-  
+
   def body(Entity it, ImportManager importManager) '''
     public class «name» «IF superType != null»
       extends «superType.shortName(importManager)» «ENDIF»{
@@ -140,7 +140,7 @@ class DomainmodelGenerator implements IGenerator {
       «ENDFOR»
     }
   '''
-    
+
   def compile(Feature it, ImportManager importManager) '''
     private «type.shortName(importManager)» «name»;
     
@@ -148,13 +148,13 @@ class DomainmodelGenerator implements IGenerator {
       get«name.toFirstUpper»() {
       return «name»;
     }
-    
+
     public void set«name.toFirstUpper»(
       «type.shortName(importManager)» «name») {
       this.«name» = «name»;
     }
   '''
-  
+
   def shortName(JvmTypeReference ref, 
           ImportManager importManager) {
     val result = new StringBuilderBasedAppendable(importManager)
@@ -164,7 +164,7 @@ class DomainmodelGenerator implements IGenerator {
 }
 ```
 
-Please note that when *org.eclipse.xtext.xbase.Xbase* is used the default binding for the interface [IGenerator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java) is [JvmModelGenerator]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend). To use a custom one we have to bind our own implementation in *org.example.domainmodel.DomainmodelRuntimeModule* like this: 
+Please note that when *org.eclipse.xtext.xbase.Xbase* is used the default binding for the interface [IGenerator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java) is [JvmModelGenerator]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend). To use a custom one we have to bind our own implementation in *org.example.domainmodel.DomainmodelRuntimeModule* like this:
 
 ```java
 public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
@@ -176,7 +176,7 @@ public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDo
 
 ## Inferring a JVM Model {#xbase-inferred-type}
 
-In many cases, you will want your DSLs concepts to be usable as Java elements, e.g. an *Entity* will become a Java class and should be usable as such. In the domain model example, you can write 
+In many cases, you will want your DSLs concepts to be usable as Java elements, e.g. an *Entity* will become a Java class and should be usable as such. In the domain model example, you can write
 
 ```domainexample
 entity Employee extends Person {
@@ -188,23 +188,23 @@ entity Person {
 ...
 ```
 
-You can use entities instead of Java types or even mix Java types as [List]({{site.javadoc.java}}/java/util/List.html) with entities such as *Person*. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let *Entity* inherit from [JvmGenericType]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This *inferred JVM model* is the representation of your concepts in the type system of Xbase. 
+You can use entities instead of Java types or even mix Java types as [List]({{site.javadoc.java}}/java/util/List.html) with entities such as *Person*. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let *Entity* inherit from [JvmGenericType]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java). But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This *inferred JVM model* is the representation of your concepts in the type system of Xbase.
 
-The main component for the inferred JVM model is the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). It has a single method that takes the root model element as an argument and produces a number of [JvmDeclaredTypes]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java). As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected [JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) to create a hierarchy of JVM elements. The [builder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) in Xtend. It becomes even simpler if you inherit from the [AbstractModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) which traverses the input model and dispatches to its contents until you decide which elements to handle. 
+The main component for the inferred JVM model is the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java). It has a single method that takes the root model element as an argument and produces a number of [JvmDeclaredTypes]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java). As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected [JvmTypesBuilder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) to create a hierarchy of JVM elements. The [builder]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java) helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) in Xtend. It becomes even simpler if you inherit from the [AbstractModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java) which traverses the input model and dispatches to its contents until you decide which elements to handle.
 
-The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use `acceptor.accept(JvmDeclaredType, Procedure1<JvmDeclaredType>)` and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function *infer* for *Entities* to transform them into a [JvmGenericType]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java) in the first phase. In the second phase, we add a [JvmField]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java) and corresponding accessors for each *Property*. The final *DomainmodelJvmModelInferrer* looks like this:
+The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use `acceptor.accept(JvmDeclaredType, Procedure1<JvmDeclaredType>)` and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function *infer* for *Entities* to transform them into [JvmGenericTypes]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java) in the first phase. In the second phase, we add a [JvmField]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java) and corresponding accessors for each *Property*. The final *DomainmodelJvmModelInferrer* looks like this:
 
 ```xtend
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
   @Inject extension JvmTypesBuilder
-  
+
   @Inject extension IQualifiedNameProvider
-  
+
   def dispatch void infer(Entity element, 
                 IJvmDeclaredTypeAcceptor acceptor, 
                 boolean isPrelinkingPhase) {
-    
+
     acceptor.accept(element.toClass(element.fullyQualifiedName)) [
       documentation = element.documentation
       for (feature : element.features) {
@@ -229,13 +229,13 @@ By default, the inferred model is [indexed](303_runtime_concepts.html#global-sco
 
 ## Using Xbase Expressions {#xbase-expressions}
 
-Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java, but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details on this expression language, please consult the [reference documentation](#xbase-language-ref-introduction) and the Xbase tutorial *(File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xbase Tutorial)*. 
+Xbase is an expression language that can be embedded into Xtext languages. Its syntax is close to Java, but it additionally offers type inference, lambda expressions, a powerful switch expression and a lot more. For details on this expression language, please consult the [reference documentation](#xbase-language-ref-introduction) and the Xbase tutorial *(File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xbase Tutorial)*.
 
-Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add behavior to your DSLs and make them executable. As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as part of a Java application. 
+Xbase ships with an interpreter and a compiler that produces Java code. Thus, it is easy to add behavior to your DSLs and make them executable. As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as part of a Java application.
 
 ### Making Your Grammar Refer To Xbase
 
-To use Xbase expressions let your Grammar extend the Xbase grammar.
+To use Xbase expressions let your grammar extend the Xbase grammar.
 
 ```xtext
 grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase
@@ -252,7 +252,7 @@ Now identify the location in your grammar where you want references to Java type
 ```xtext
 Operation:
   'op' name=ValidID '(' 
-  (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' 
+  (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')'
   ':' type=JvmTypeReference 
     body=XBlockExpression;
 ```
@@ -271,11 +271,11 @@ Property:
 ;
 ```
 
-Note: You will have to adapt the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) to these changes, i.e. rename *Feature* to *Property* and create a [JvmOperation]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) for each *Operation*. We leave that as an exercise :-) 
+Note: You will have to adapt the [IJvmModelInferrer]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java) to these changes, i.e. rename *Feature* to *Property* and create a [JvmOperation]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) for each *Operation*. We leave that as an exercise :-)
 
 If you are done with that, everything will work out of the box. Since each expression is now logically contained in an [operation]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java), all the scoping rules and visibility constraints are implied from that context. The framework will take care that the operation's parameters are visible inside the operation's body and that the declared return types are validated against the actual expression types.
 
-There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts such as [types]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmType.java) and [operations]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) were already derived from the model, a generator can be used to serialize that information to Java code. There is no need to write a code generator on top of that. The [JvmModelGenerator]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend) knows how to generate operation bodies properly. 
+There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts such as [types]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmType.java) and [operations]({{site.src.xtext_extras}}/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java) were already derived from the model, a generator can be used to serialize that information to Java code. There is no need to write a code generator on top of that. The [JvmModelGenerator]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend) knows how to generate operation bodies properly.
 
 ### Using the Xbase Interpreter
 
@@ -285,8 +285,8 @@ An interpreter is essentially an external visitor, that recursively processes a 
 
 ```java
 protected Object _doEvaluate(XBlockExpression literal,
-							IEvaluationContext context,
-							CancelIndicator indicator)
+                             IEvaluationContext context,
+                             CancelIndicator indicator)
 ```
 
 The [IEvaluationContext]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/IEvaluationContext.java) keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be *fork*ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the [XbaseInterpreter]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java):
@@ -302,7 +302,7 @@ public Object evaluate(XExpression expression, Object thisElement) {
   // provide initial context and implicit variables
   evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
   
-  IEvaluationResult result = xbaseInterpreter.evaluate(expression,   
+  IEvaluationResult result = xbaseInterpreter.evaluate(expression,
     evaluationContext, CancelIndicator.NullImpl);
   if (result.getException() != null) {
     // handle exception
@@ -313,15 +313,15 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 ## Xbase Language Reference {#xbase-language-ref-introduction}
 
-This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development framework covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse. 
+This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendible language development framework covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.
 
 Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, which is usually specified using so called *expressions*. Expressions are the heart of every programming language and are not easy to get right. On the other hand, expressions are well understood and many programming languages share a common set and understanding of expressions.
 
 That is why most people do not add support for expressions in their DSL but try to solve this differently. The most often used workaround is to define only the structural information in the DSL and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels and languages. Also, modifying the generated source code comes with a lot of additional problems. This has long time been the preferred solution since adding support for expressions (and a corresponding execution environment) for your language has been hard - even with Xtext.
 
-Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It consists of an Xtext grammar, as well as reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer. In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It consists of an Xtext grammar, as well as reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer. In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, hovering, folding and navigation can be easily integrated and reused within any Xtext based language.
 
-Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few differences: 
+Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few differences:
 
 *   No checked exceptions
 *   Everything is an expression, there are no statements
@@ -339,7 +339,7 @@ Xbase comes with a small set of terminal rules, which can be overridden and henc
 
 #### Identifiers {#xbase-syntax-identifiers}
 
-Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases while having less ambiguities. They start with a letter *a*-*z*, *A*-*Z* or an underscore followed by more of these characters or any digit *0*-*9*. 
+Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default identifier-syntax from Xtext - compared to Java, they are slightly simplified to match the common cases while having less ambiguities. They start with a letter *a*-*z*, *A*-*Z* or an underscore/dollar symbol followed by more of these characters or any digit *0*-*9*.
 
 ##### Escaped Identifiers {#xbase-syntax-escaped-identifiers}
 
@@ -369,11 +369,11 @@ Xbase comes with two different kinds of comments: Single-line comments and multi
 
 #### White Space {#xbase-syntax-whitespace}
 
-The white space characters `' '`, `'\t'`, `'\n'`, and `'\r'` are allowed to occur anywhere between the other syntactic elements. 
+The white space characters `' '`, `'\t'`, `'\n'`, and `'\r'` are allowed to occur anywhere between the other syntactic elements.
 
 #### Reserved Keywords {#xbase-syntax-keywords}
 
-The following list of words are reserved keywords, thus reducing the set of possible identifiers: 
+The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 
 1.  `as`
 1.  `case`
@@ -403,13 +403,13 @@ The following list of words are reserved keywords, thus reducing the set of poss
 1.  `var`
 1.  `while`
 
-The four keywords `extends, static, import, extension` can be used when invoking operations. In case some of the other keywords have to be used as identifiers, the escape character for [identifiers](#xbase-syntax-escaped-identifiers) comes in handy. 
+The four keywords `extends, static, import, extension` can be used when invoking operations. In case some of the other keywords have to be used as identifiers, the escape character for [identifiers](#xbase-syntax-escaped-identifiers) comes in handy.
 
 ---
 
 ### Types {#xbase-language-ref-types}
 
-Basically all kinds of JVM types are available and referable. 
+Basically all kinds of JVM types are available and referable.
 
 #### Simple Type References {#xbase-types-type-references}
 
@@ -467,13 +467,13 @@ Type conformance rules are used in order to find out whether some expression can
 
 As Xbase implements the type system of Java it also fully supports the conformance rules defined in the [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-5.html).
 
-Some types in Xbase can be used synonymously even if they do not conform to each other in Java. An example for this are arrays and lists or function types with compatible function parameters. Objects of these types are implicitly converted by Xbase on demand. 
+Some types in Xbase can be used synonymously even if they do not conform to each other in Java. An example for this are arrays and lists or function types with compatible function parameters. Objects of these types are implicitly converted by Xbase on demand.
 
 #### Common Super Type {#xbase-types-common-super-type}
 
-Because of type inference Xbase sometimes needs to compute the most common super type of a given set of types. 
+Because of type inference Xbase sometimes needs to compute the most common super type of a given set of types.
 
-For a set *\[T1,T2,...Tn\]* of types the common super type is computed by using the linear type inheritance sequence of *T1* and is iterated until one type conforms to each *T2,..,Tn*. The linear type inheritance sequence of *T1* is computed by ordering all types which are part in the type hierarchy of *T1* by their specificity. A type *T1* is considered more specific than *T2* if *T1* is a subtype of *T2*. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. *CharSequence* has distance 2 to *StringBuilder* because the super type *AbstractStringBuilder* implements the interface, too. Even if *StringBuilder* implements *CharSequence* directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
+For a set *\[T1,T2,...Tn\]* of types the common super type is computed by using the linear type inheritance sequence of *T1* and is iterated until one type conforms to each *T2,..,Tn*. The linear type inheritance sequence of *T1* is computed by ordering all types which are part in the type hierarchy of *T1* by their specificity. A type *T1* is considered more specific than *T2* if *T1* is a subtype of *T2*. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. *CharSequence* has distance 2 to *StringBuilder* because the super type *AbstractStringBuilder* implements the interface, too. Even if *StringBuilder* implements *CharSequence* directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results.
 
 ---
 
@@ -487,7 +487,7 @@ A literal denotes a fixed unchangeable value. Literals for strings, numbers, boo
 
 ##### String Literals {#xbase-expressions-string-literal}
 
-String literals can either use `'single quotes'` or `"double quotes"` as their terminating characters. When using double quotes all literals allowed by Java string literals are supported. In addition new line characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single quotes the only difference is that single quotes within the literal have to be escaped and double quotes do not.
+String literals can either use `'single quotes'` or `"double quotes"` as their enclosing characters. When using double quotes all literals allowed by Java string literals are supported. In addition new line characters are allowed, i.e. in Xbase string literals can span multiple lines. When using single quotes the only difference is that single quotes within the literal have to be escaped while double quotes do not.
 
 See [§ 3.10.5 String Literals](http://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.5)
 
@@ -521,7 +521,7 @@ Xbase supports roughly the same number literals as Java with a few notable diffe
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 ```
 
-A floating-point literal creates a `double` (suffix `D` or omitted), a `float` (suffix `F`) or a [BigDecimal]({{site.javadoc.java}}/java/math/BigDecimal.html) (suffix `BD`). If you use a `.` sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals. 
+A floating-point literal creates a `double` (suffix `D` or omitted), a `float` (suffix `F`) or a [BigDecimal]({{site.javadoc.java}}/java/math/BigDecimal.html) (suffix `BD`). If you use a `.` sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals.
 
 ```xbase
   42d     // double
@@ -533,7 +533,7 @@ A floating-point literal creates a `double` (suffix `D` or omitted), a `float` (
 
 ##### Boolean Literals {#xbase-expressions-boolean-literal}
 
-There are two boolean literals, `true` and `false` which correspond to their Java counterpart of type *boolean*. 
+There are two boolean literals, `true` and `false` which correspond to their Java counterpart of type *boolean*.
 
 *   `true`
 *   `false`
@@ -617,11 +617,11 @@ There are a couple of common predefined infix operators. In contrast to Java, th
 |`- e1`|`e1.operator_minus()`|
 |`+ e1`|`e1.operator_plus()`|
 
-The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. The assignment operator `+=` is right-to-left associative in the same way as the plain assignment operator `=` is. Consequently, `a = b = c` is executed as `a = (b = c)`. All other operators are left-to-right associative. Parentheses can be used to adjust the default precedence and associativity. 
+The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. The assignment operator `+=` is right-to-left associative in the same way as the plain assignment operator `=` is. Consequently, `a = b = c` is executed as `a = (b = c)`. All other operators are left-to-right associative. Parentheses can be used to adjust the default precedence and associativity.
 
 ##### Short-Circuit Boolean Operators
 
-If the operators `||` and `&&` are used in a context where the left hand operand is of type boolean, the operation is evaluated in short circuit mode, which means that the right hand operand is not evaluated at all in the following cases: 
+If the operators `||` and `&&` are used in a context where the left hand operand is of type boolean, the operation is evaluated in short circuit mode, which means that the right hand operand is not evaluated at all in the following cases:
 
 1.  in the case of `||` the operand on the right hand side is not evaluated if the left operand evaluates to `true`.
 1.  in the case of `&&` the operand on the right hand side is not evaluated if the left operand evaluates to `false`.
@@ -683,7 +683,7 @@ The *with* operator `=>` executes the [lambda expression](#xbase-expressions-lam
 
 #### Assignments {#xbase-expressions-property-assignment}
 
-[Local variables](#xbase-expressions-variable-declaration) can be reassigned using the `=` operator. Also properties can be set using that operator: Given the expression 
+[Local variables](#xbase-expressions-variable-declaration) can be reassigned using the `=` operator. Also properties can be set using that operator: Given the expression
 
 ```xbase
   myObj.myProperty = "foo"
@@ -697,7 +697,7 @@ The compiler first looks for an accessible Java Field called `myProperty` on the
 
 Remember, in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding Java expression, which is the assigned value.
 
-If there is no accessible field on the left operand's type, a method called `setMyProperty(OneArg)` (JavaBeans setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value of the assignment will be the return value of the setter method (which is usually of type `void` and therefore the value `null`). As a result the compiler translates to :
+If there is no accessible field on the left operand's type, a method called `setMyProperty(OneArg)` (JavaBeans setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value of the assignment will be the return value of the setter method (which is usually of type `void` and therefore the value `null`). As a result the compiler translates to:
 
 ```java
   myObj.setMyProperty("foo")
@@ -705,7 +705,7 @@ If there is no accessible field on the left operand's type, a method called `set
 
 #### Feature Calls {#xbase-expressions-feature-calls}
 
-A feature call is used to access members of objects, such as fields and methods, but it can also refer to local variables and parameters, which are made available by the current expression's scope. 
+A feature call is used to access members of objects, such as fields and methods, but it can also refer to local variables and parameters, which are made available by the current expression's scope.
 
 ##### Property Access {#xbase-expressions-property-access}
 
@@ -721,7 +721,7 @@ the compiler first looks for an accessible field `myProperty` in the type of `my
 
 Checking for null references can make code very unreadable. In many situations it is ok for an expression to return `null` if a receiver was `null`. Xbase supports the safe navigation operator `?.` to make such code more readable.
 
-Instead of writing 
+Instead of writing
 
 ```java
   if ( myRef != null ) myRef.doStuff()
@@ -745,30 +745,24 @@ Static feature calls use the same notation as in Java, e.g. it is possible to wr
    java.util.Collections.emptyList
 ```
 
-Prior to Xbase 2.4.2, this more verbose variant was the only supported syntax to invoke static methods:
-
-```xbase
-   java::util::Collections::emptyList
-```
-
 #### Implicit variables 'this' and 'it' {#xbase-expressions-implicit-this}
 
-If the current scope contains a variable named `this` or `it`, the compiler will make all its members available implicitly. That is if one of 
+If the current scope contains a variable named `this` or `it`, the compiler will make all its members available implicitly. That is if one of
 
 ```xbase
   it.myProperty
   this.myProperty
 ```
 
-is a valid expression 
+is a valid expression
 
 ```xbase
   myProperty
 ```
 
-is valid as well. It resolves to the same feature as long as there is no local variable `myProperty` declared, which would have higher precedence. 
+is valid as well. It resolves to the same feature as long as there is no local variable `myProperty` declared, which would have higher precedence.
 
-As `this` is bound to the surrounding object in Java, `it` can be used in finer-grained constructs such as function parameters. That is why `it.myProperty` has higher precedence than `this.myProperty`. `it` is also the [default parameter name in lambda expressions](#xbase-expressions-implicit-parameter). 
+As `this` is bound to the surrounding object in Java, `it` can be used in finer-grained constructs such as function parameters. That is why `it.myProperty` has higher precedence than `this.myProperty`. `it` is also the [default parameter name in lambda expressions](#xbase-expressions-implicit-parameter).
 
 #### Constructor Call {#xbase-expressions-constructor-call}
 
@@ -798,7 +792,7 @@ Lambda expressions are surrounded by square brackets (\`[]`):
   myList.findFirst([ e | e.name==null ])
 ```
 
-When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parentheses: 
+When a function object is expected to be the last parameter of a feature call, you may declare the lambda expression after the parentheses:
 
 ```xbase
   myList.findFirst() [ e | e.name==null ]
@@ -810,7 +804,7 @@ Since in Xbase parentheses are optional for method calls, the same can be writte
   myList.findFirst[ e | e.name==null ]
 ```
 
-This example can be further simplified since the lambda's parameter is available as the implicit variable `it`, if the parameter is not declared explicitly: 
+This example can be further simplified since the lambda's parameter is available as the implicit variable `it`, if the parameter is not declared explicitly:
 
 ```xbase
   myList.findFirst[ it.name==null ]
@@ -832,19 +826,19 @@ Another use case for lambda expressions is to store function objects in variable
 
 Lambda expressions produce function objects. The type is a [function type](#xbase-types-function-types), parameterized with the types of the lambda's parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. The parameter types can be inferred if the lambda expression is used in a context where this is possible.
 
-For instance, given the following Java method signature: 
+For instance, given the following Java method signature:
 
 ```java
-  public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
+  public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate)
 ```
 
-the type of the parameter can be inferred. Which allows users to write: 
+the type of the parameter can be inferred. Which allows users to write:
 
 ```xbase
   newArrayList( "Foo", "Bar" ).findFirst[ e | e == "Bar" ]
 ```
 
-instead of 
+instead of
 
 ```xbase
   newArrayList( "Foo", "Bar" ).findFirst[ String e | e == "Bar" ]
@@ -852,21 +846,21 @@ instead of
 
 ##### Function Mapping {#xbase-expressions-function-mapping}
 
-An Xbase lambda expression is a Java object of one of the *Function* interfaces that are part of the runtime library of Xbase. There is an interface for each number of parameters (up to six parameters). The names of the interfaces are 
+An Xbase lambda expression is a Java object of one of the *Function* interfaces that are part of the runtime library of Xbase. There is an interface for each number of parameters (up to six parameters). The names of the interfaces are
 
-*   [Function0\<ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for zero parameters, 
-*   [Function1\<Param1Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for one parameters, 
-*   [Function2\<Param1Type, Param2Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for two parameters, 
+*   [Function0\<ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for zero parameters,
+*   [Function1\<Param1Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for one parameters,
+*   [Function2\<Param1Type, Param2Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for two parameters,
 *   ... 
-*   [Function6\<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for six parameters, 
+*   [Function6\<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java) for six parameters,
 
 or 
 
-*   [Procedure0]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for zero parameters, 
-*   [Procedure1\<Param1Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for one parameters, 
-*   [Procedure2\<Param1Type, Param2Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for two parameters, 
+*   [Procedure0]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for zero parameters,
+*   [Procedure1\<Param1Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for one parameters,
+*   [Procedure2\<Param1Type, Param2Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for two parameters,
 *   ... 
-*   [Procedure6\<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for six parameters, 
+*   [Procedure6\<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type\>]({{site.src.xtext_lib}}/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java) for six parameters,
 
 if the return type is `void`.
 
@@ -888,10 +882,10 @@ newArrayList( 'aaa', 'bb', 'c' ).sort [
 
 ##### Implicit Parameter *it* {#xbase-expressions-implicit-parameter}
 
-If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can be omitted. Use `it` to refer to the parameter inside the lambda expression's body. 
+If a lambda expression has a single parameter whose type can be inferred, the declaration of the parameter can be omitted. Use `it` to refer to the parameter inside the lambda expression's body.
 
 ```xbase
-val (String s)=>String function = [ toUpperCase ] 
+val (String s)=>String function = [ toUpperCase ]
   // equivalent to [it | it.toUpperCase]
 ```
 
@@ -903,24 +897,24 @@ val (String s)=>String function = [ toUpperCase ]
 
 ##### Refering the current function {#xbase-lambda-self}
 
-If a lambda expression implements an abstract SAM type that offers additional methods, those can be accessed on the receiver `self`: 
+If a lambda expression implements an abstract SAM type that offers additional methods, those can be accessed on the receiver `self`:
 
 ```xbase
 val AbstractIterator<String> emptyIterator = [
 	return self.endOfData
-] 
+]
 ```
 
 #### If Expression {#xbase-expressions-if-expression}
 
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves like Java's ternary operator (`predicate ? thenPart : elsePart`), i.e. it is an expression that returns a value. Consequently, you can use if expressions deeply nested within other expressions.
 
-An expression `if (p) e1 else e2` results in either the value `e1` or `e2` depending on whether the predicate `p` evaluates to `true` or `false`. The else part is optional which is a shorthand for a default value, e.g `else null` if the type of the `if` expression is a reference type. If the type is a primitive type, its default value is assumed accordingly, e.g. `else false` for `boolean` or `else 1` for numbers. 
+An expression `if (p) e1 else e2` results in either the value `e1` or `e2` depending on whether the predicate `p` evaluates to `true` or `false`. The else part is optional which is a shorthand for a default value, e.g `else null` if the type of the `if` expression is a reference type. If the type is a primitive type, its default value is assumed accordingly, e.g. `else false` for `boolean` or `else 1` for numbers.
 
-That means 
+That means
 
 ```xbase
-  if (foo) x 
+  if (foo) x
 ```
 
 is the a short hand for
@@ -941,7 +935,7 @@ The type of an `if` expression is calculated from the types `T1` and `T2` of the
 
 #### Switch Expression {#xbase-expressions-switch-expression}
 
-The switch expression is a bit different from Java's, as the use of switch is not limited to certain values but can be used for any object reference instead. For a switch expression 
+The switch expression is a bit different from Java's, as the use of switch is not limited to certain values but can be used for any object reference instead. For a switch expression
 
 ```xbase
 switch e {
@@ -957,7 +951,7 @@ the main expression `e` is evaluated first and then each case sequentially. If t
 
 The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to `true`. Then the right hand expression of the case evaluated and the result is returned.
 
-If none of the guards matches the default expression is evaluated and returned. If no default expression is specified the expression evaluates to the default value of the common type of all available case expressions. 
+If none of the guards matches the default expression is evaluated and returned. If no default expression is specified the expression evaluates to the default value of the common type of all available case expressions.
 
 Example:
 
@@ -971,7 +965,7 @@ switch myString {
 
 ##### Type guards
 
-In addition to the case guards one can add a so called *Type Guard* which is syntactically just a [type reference](#xbase-types-type-references) preceding the optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example: 
+In addition to the case guards one can add a so called *Type Guard* which is syntactically just a [type reference](#xbase-types-type-references) preceding the optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example:
 
 ```xbase
 var Object x = ...;
@@ -1030,7 +1024,7 @@ Variable declarations are only allowed within [blocks](#xbase-expressions-blocks
 
 A variable declaration starting with the keyword `val` denotes an unchangeable value, which is essentially a final variable. In rare cases, one needs to update the value of a reference. In such situations the variable needs to be declared with the keyword `var`, which stands for variable.
 
-A typical example for using `var` is a counter in a loop. 
+A typical example for using `var` is a counter in a loop.
 
 ```xbase
 {
@@ -1047,18 +1041,18 @@ Variables declared outside a lambda expression using the `var` keyword are not a
 
 ##### Typing
 
-The type of a variable declaration expression is always `void`. The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression. Here is an example for an explicitly declared type: 
+The type of a variable declaration expression is always `void`. The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression. Here is an example for an explicitly declared type:
 
 ```xbase
   var List<String> strings = new ArrayList<String>(); 
 ```
 
-In such cases, the right hand expression's type must [conform](#xbase-types-conformance-rules) to the type on the left hand side. 
+In such cases, the right hand expression's type must [conform](#xbase-types-conformance-rules) to the type on the left hand side.
 
-Alternatively the type can be left out and will be inferred from the initialization expression: 
+Alternatively the type can be left out and will be inferred from the initialization expression:
 
 ```xbase
-  var strings = new ArrayList<String> // -> strings is of type ArrayList<String>  
+  var strings = new ArrayList<String> // -> strings is of type ArrayList<String>
 ```
 
 #### Blocks {#xbase-expressions-blocks}
@@ -1089,7 +1083,7 @@ A block expression is surrounded by curly braces and contains at least one expre
 
 #### For Loop {#xbase-expressions-for-loop}
 
-The for loop `for (T1 variable : iterableOfT1) expression` is used to execute a certain expression for each element of an array of an instance of [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html). The local `variable` is final, hence cannot be updated. 
+The for loop `for (T1 variable : iterableOfT1) expression` is used to execute a certain expression for each element of an array of an instance of [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html). The local `variable` is final, hence cannot be updated.
 
 The type of a for loop is `void`. The type of the local variable can optionally be inferred from the type of the array or the element type of the [Iterable]({{site.javadoc.java}}/java/lang/Iterable.html) returned by the iterable expression.
 
@@ -1110,7 +1104,7 @@ The type of a for loop is `void`. The type of the local variable can optionally 
 
 #### Basic For Loop {#xbase-expressions-basic-for-loop}
 
-The traditional for loop is very similar to the one known from Java, or even C. 
+The traditional for loop is very similar to the one known from Java, or even C.
 
 ```xtend
   for (<init-expression> ;  <predicate> ; <update-expression>) body-expression
@@ -1226,13 +1220,13 @@ The synchonized expression does the same as it does in Java (see [Java Language 
 
 ### Extension Methods {#xbase-language-ref-library-extension}
 
-Languages extending Xbase might want to contribute to the feature scope. Besides that, one can of course change the whole implementation as it seems fit. There is a special hook, which can be used to add so-called extension methods to existing types. 
+Languages extending Xbase might want to contribute to the feature scope. Besides that, one can of course change the whole implementation as it seems fit. There is a special hook, which can be used to add so-called extension methods to existing types.
 
 Xbase itself comes with a standard library of such extension methods adding support for various operators for the common types, such as [String]({{site.javadoc.java}}/java/lang/String.html), [List]({{site.javadoc.java}}/java/util/List.html), etc.
 
 These extension methods are declared in separate Java classes. There are various ways how extension methods can be added. In the simplest case the language designer predefines which extension methods are available. Language users cannot add additional library functions using this mechanism.
 
-Another alternative is to have them looked up by a certain naming convention. Also for more general languages it is possible to let users add extension methods using imports or similar mechanisms. This approach can be seen in the language [Xtend](http://www.xtend-lang.org), where extension methods are lexically imported through static imports and/or dependency injection.
+Another alternative is to have them looked up by a certain naming convention. Also for more general languages it is possible to let users add extension methods using imports or similar mechanisms. This approach can be seen in the language [Xtend](https://www.eclipse.org/xtend/), where extension methods are lexically imported through static imports or dependency injection.
 
 The precedence of extension methods is always lower than real member methods, i.e. you cannot override member features. Also the extension methods are not invoked polymorphic. If you have two extension methods on the scope (`foo(Object)` and `foo(String)`) the expression `(foo as Object).foo` would bind and invoke `foo(Object)`.
 
@@ -1248,7 +1242,7 @@ The precedence of extension methods is always lower than real member methods, i.
 If the last argument of a method call is a lambda expression, it can be appended to the method call. Thus,
 
 ```xbase
-foo(42) [ String s | s.toUpperCase ]   
+foo(42) [ String s | s.toUpperCase ]
 ```
 
 will call a Java method with the signature
@@ -1257,7 +1251,7 @@ will call a Java method with the signature
 void foo(int, Function1<String, String>)
 ```
 
-Used in combination with the [implicit parameter name in lambda expressions](#xbase-expressions-implicit-parameter) you can write [extension libraries](#xbase-language-ref-library-extension) to create and initialize graphs of objects in a concise builder syntax like in Groovy. Consider you have a set of library methods 
+Used in combination with the [implicit parameter name in lambda expressions](#xbase-expressions-implicit-parameter) you can write [extension libraries](#xbase-language-ref-library-extension) to create and initialize graphs of objects in a concise builder syntax like in Groovy. Consider you have a set of library methods
 
 ```java
 HtmlNode html(Function1<HtmlNode, Void> initializer)
@@ -1275,7 +1269,7 @@ html([ html |
 ] )
 ```
 
-Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields 
+Appending the lambda expression parameters and prepending the parent parameters using extension syntax yields
 
 ```xbase
 html() [ html |
@@ -1285,7 +1279,7 @@ html() [ html |
 ] 
 ```
 
-Using implicit parameter `it` and skipping empty parentheses you can simplify this to 
+Using implicit parameter `it` and skipping empty parentheses you can simplify this to
 
 ```xbase
 html [ 

@@ -8,7 +8,7 @@ part: Reference Documentation
 
 ## Case Insensitive Languages {#case-insensitive-languages}
 
-In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](302_configuration.html#generator-fragment) for this purpose. 
+In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](302_configuration.html#generator-fragment) for this purpose.
 
 For case insensitive keywords, open your MWE workflow and enable the ignoreCase property: 
 
@@ -22,6 +22,7 @@ For case insensitive keywords, open your MWE workflow and enable the ignoreCase 
       }
     }
  }
+```
 
 For case insensitive element names, use the *ignoreCase* option in the scoping, too :
 
@@ -33,7 +34,7 @@ For case insensitive element names, use the *ignoreCase* option in the scoping, 
 
 ## Whitespace-Aware Languages {#whitespace-aware-languages}
 
-Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces `{ ... }`, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is [Python](https://www.python.org). Another well-known example is the *Home Automation* language shipped with Xtext (since version 2.8), available through *File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xtext Home Automation Example*.
+Some language designers prefer to use indentation to structure code blocks instead of surrounding them with braces `{ ... }`, which are really hard to type with certain kinds of keyboards. A well-known example of such a language is [Python](https://www.python.org). Another well-known example is the *Home Automation* language shipped with Xtext, available through *File &rarr; New &rarr; Example &rarr; Xtext Examples &rarr; Xtext Home Automation Example*.
 
 ```ruleengine
 Device Window can be open, closed
@@ -64,25 +65,26 @@ terminal BEGIN: 'synthetic:BEGIN';
 terminal END: 'synthetic:END';
 ```
 
-These terminals can be used to mark the boundaries of code blocks. The Home Automation example inherits expressions from [Xbase](305_xbase.html) and redefines the syntax of block expressions:
+These terminals can be used to mark the boundaries of code blocks. The Xtext Home Automation example inherits expressions from [Xbase](305_xbase.html) and redefines the syntax of block expressions:
 
 ```xtext
-XBlockExpression returns xbase::XExpression: 
+@Override
+XBlockExpression returns xbase::XExpression:
     {xbase::XBlockExpression}
     BEGIN
         (expressions+=XExpressionOrVarDeclaration ';'?)*
     END;
 ```
 
-After running the workflow, a stub implementation of `AbstractIndentationTokenSource` is generated in the subpackage `parser.antlr`, e.g. `RuleEngineTokenSource`. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the `WS` (whitespace) rule is selected, which brings the indentation awareness as seen above.
+After running the workflow, a stub implementation of `AbstractIndentationTokenSource` is generated in the `parser.antlr` subpackage, e.g. [RuleEngineTokenSource]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/homeautomation/org.eclipse.xtext.example.homeautomation/src/org/eclipse/xtext/example/homeautomation/parser/antlr/RuleEngineTokenSource.java). Here you can specify which terminal rule should be applied to your synthetic tokens. For the Xtext Home Automation language the `WS` (whitespace) rule is selected, which brings the indentation awareness as seen above.
 
-In case of a whitespace-aware language, the [formatter](303_runtime_concepts.html#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. See how we customized the formatter in the homeautomation example.
+In case of a whitespace-aware language, the [formatter](303_runtime_concepts.html#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. See how we [customized the formatter]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/homeautomation/org.eclipse.xtext.example.homeautomation/src/org/eclipse/xtext/example/homeautomation/formatting2/RuleEngineFormatter.xtend) in the Xtext Home Automation example.
 
 ## Languages Independent of JDT {#java-independent-languages}
 
 The following section describes how you make your language independent of Eclipse's Java Development Toolkit (JDT).
 
-In the *UIModule* of your language you have to overwrite two bindings. First, remove the bindings to components with support for the *'classpath:'* URI protocol, i.e. 
+In the *UIModule* of your language you have to overwrite two bindings. First, remove the bindings to components with support for the *'classpath:'* URI protocol, i.e.
 
 ```java
 @Override
@@ -97,7 +99,7 @@ public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 }
 ```
 
-Second, configure the global scope provider to scan project root folders instead of the class path of Java projects. 
+Second, configure the global scope provider to scan project root folders instead of the class path of Java projects.
 
 ```java
 @Override
@@ -106,9 +108,9 @@ public Provider<IAllContainersState> provideIAllContainersState() {
 }
 ```
 
-The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated *IProjectCreator* in the *src/* folder of the *ui* project and apply the necessary changes there. First, remove the JDT project configuration by overriding *configureProject* with an empty body. 
+The remaining steps show you how to adapt the project wizard for your language, if you have generated one. The best way to do this is to create a new subclass of the generated *IProjectCreator* in the *src/* folder of the *ui* project and apply the necessary changes there. First, remove the JDT project configuration by overriding *configureProject* with an empty body.
 
-The next thing is to redefine the project natures and builders that should be applied to you language projects.
+The next thing is to redefine the project natures and builders that should be applied to your language projects.
 
 In in this case just remove the JDT stuff in this way:
 
@@ -156,7 +158,7 @@ Expression :
   INT;
 ```
 
-This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the Expression rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, you would still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.
+This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the *Expression* rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, you would still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.
 
 In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means you get rid of left recursion by applying a certain idiom, which is described in the following.
 
@@ -173,9 +175,9 @@ NumberLiteral:
   INT;
 ```
 
-As you can see the main difference is that it uses three rules instead of one, and if you look a bit closer you see that there's a certain delegation pattern involved. The rule Addition doesn't call itself but calls Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule is called the higher is its precedence. This is at least the case for the first two rules which are of a left recursive nature (but we've left-factored them now). The last rule is not left recursive which is why you can implement it without applying this pattern.
+As you can see the main difference is that it uses three rules instead of one, and if you look a bit closer you see that there's a certain delegation pattern involved. The rule *Addition* doesn't call itself but calls *Multiplication* instead. The operator precedence is defined by the order of delegation. The later the rule is called the higher is its precedence. This is at least the case for the first two rules which are of a left recursive nature (but we've left-factored them now). The last rule is not left recursive which is why you can implement it without applying this pattern.
 
-The next task is to allow users to explicitly adjust precedence by adding parentheses, e.g. write something like `(2 + 20) * 2`. So let's add support for that (note that the grammar is still not working with Xtext):
+The next task is to allow users to explicitly adjust precedence by adding parentheses, e.g. write something like `(2 + 20) * 2`. So let's add support for that (note that the grammar is still not yet working with Xtext):
 
 ```xtext
 Addition :
@@ -227,7 +229,7 @@ NumberLiteral:
   INT;
 ```
 
-The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Assignments and actions have to be added to store all the important information in the AST and to create reasonable subtypes for the additive and multiplicative expressions. The fully working Xtext grammar is this:
+The AST type inference mechanism of Xtext will infer two types: *Expression* and *NumberLiteral*. Assignments and actions have to be added to store all the important information in the AST and to create reasonable subtypes for the additive and multiplicative expressions. The fully working Xtext grammar is:
 
 ```xtext
 Addition returns Expression:
@@ -250,11 +252,11 @@ This is how the parser processes the following expression:
 (1 + 20) * 2
 ```
 
-It always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling NumberLiteral which consists only of one assignment to a feature called 'value'. The type of 'value' has to be compatible to the return type of the INT rule.
+It always starts with the first rule *Addition*. Therein the first element is an unassigned rule call to *Multiplication* which in turn calls *Primary*. *Primary* now has two alternatives. The first one is calling *NumberLiteral* which consists only of one assignment to a feature called 'value'. The type of 'value' has to be compatible to the return type of the *INT* rule.
 
-But as the first token in the sample expression is an opening parenthesis '(' the parser will take the second alternative in Primary: it consumes the '(' and calls the rule Addition. Now the value '1' is the lookahead token and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first alternative because '1' was consumed by the INT rule.
+But as the first token in the sample expression is an opening parenthesis '(', the parser will take the second alternative in *Primary*: it consumes the '(' and calls the rule *Addition*. Now the value '1' is the lookahead token and again *Addition* calls *Multiplication* and *Multiplication* calls *Primary*. This time the parser takes the first alternative because '1' was consumed by the *INT* rule.
 
-As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. Otherwise it will create one based on the return type of the current rule, which is NumberLiteral. The Xtext generator created the EClass 'NumberLiteral' before which can now be instantiated. That type will also have a property called value of type int , which will get the value '1' set. This is what the Java equivalent looks like:
+As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. Otherwise it will create one based on the return type of the current rule, which is *NumberLiteral*. The Xtext generator created the EClass 'NumberLiteral' before which can now be instantiated. That type will also have a property called value of type int, which will get the value '1' set. This is what the Java equivalent looks like:
 
 ```java
 // value=INT
@@ -264,9 +266,9 @@ current.setValue(ruleINT());
 ...
 ```
 
-Now that the rule has been completed the produced EObject is returned to the calling rule Primary, which in turn returns the object unchanged to its own caller. Within Multiplication the rule Primary has been successfully parsed and returned an instance of NumberLiteral. The remainder of the rule (everything within the parentheses) is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this group is the multiplication operator '\*'. Unfortunately in the current input the next token to accept is the plus sign '+', so the group is not consumed at all and the rule returns the NumberLiteral that was returned from the previous unassigned rule call.
+Now that the rule has been completed the produced EObject is returned to the calling rule *Primary*, which in turn returns the object unchanged to its own caller. Within *Multiplication* the rule *Primary* has been successfully parsed and returned an instance of *NumberLiteral*. The remainder of the rule (everything within the parentheses) is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this group is the multiplication operator '\*'. Unfortunately in the current input the next token to accept is the plus sign '+', so the group is not consumed at all and the rule returns the *NumberLiteral* that was returned from the previous unassigned rule call.
 
-In rule Addition there is a similar group but this time it expects the correct operator. The parser steps into the group. The first element in the group is an assigned action. It will create a new instance of type Addition and assigns what was the to-be-returned object to the feature 'left'. In Java this would have been something like:
+In rule *Addition* there is a similar group but this time it expects the correct operator. The parser steps into the group. The first element in the group is an assigned action. It will create a new instance of type *Addition* and assigns what was the to-be-returned object to the feature 'left'. In Java this would have been something like:
 
 ```java
 // Multiplication rule call
@@ -278,19 +280,17 @@ current = temp;
 ...
 ```
 
-As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. Next up the parser consumes the '+' operator. The operator itself is not stored in the AST because there is an explicit Addition type. It implicitly contains this information. The assignment `right=Multiplication` calls the rule Multiplication another time and assigns its result object (a NumberLiteral of value=20) to the property `right`. The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.
+As a result the rule would now return an instance of *Addition* which has a *NumberLiteral* set to its property left. Next up the parser consumes the '+' operator. The operator itself is not stored in the AST because there is an explicit Addition type. It implicitly contains this information. The assignment `right=Multiplication` calls the rule *Multiplication* another time and assigns its result object (a NumberLiteral of value=20) to the property `right`. The closing parenthesis is matched afterwards, consumed and the parser stack is reduced once more.
 
-The parser is now in the rule Multiplication and has the multiplication operator '\*' on the lookahead. It steps into the group and applies the action. Finally it calls the Primary rule, produces another instance of NumberLiteral (value=2), assigns it as the 'right' operand of the Multiplication and returns the Multiplication to the rule Addition which in turn returns the very same object as there's nothing left to parse.
+The parser is now in the rule *Multiplication* and has the multiplication operator '\*' on the lookahead. It steps into the group and applies the action. Finally it calls the *Primary* rule, produces another instance of *NumberLiteral* (value=2), assigns it as the 'right' operand of the *Multiplication* and returns the *Multiplication* to the rule *Addition* which in turn returns the very same object as there's nothing left to parse.
 
 The resulting AST looks like this:
 
 ![](images/expression-ast.png)
 
-visualizes and explains the details.
-
 ### Associativity
 
-There is still one topic worth to mention, which is associativity. There is left and right associativity as well as non-associativity. The example implemented left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
+There is still one topic worth to mention, which is associativity. There is left and right associativity as well as non-associativity. The example above implements left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
 
 Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as (a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, or it might have some special meaning. The most common variant is left associativity:
 

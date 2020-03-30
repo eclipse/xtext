@@ -21,7 +21,7 @@ public class Person {
 
   private String name;
 
-  public void setName(String name) { 
+  public void setName(String name) {
     this.name = name;
   }
 
@@ -49,7 +49,7 @@ Person {
 }
 ```
 
-These few lines will, when interpreted by MWE2, result in an object tree consisting of three instances of *com.mycompany.Person*. The interpreter will basically do the same as the following *main* method: 
+These few lines will, when interpreted by MWE2, result in an object tree consisting of three instances of *com.mycompany.Person*. The interpreter will basically do the same as the following *main* method:
 
 ```java
 package com.mycompany;
@@ -92,7 +92,7 @@ Person {
 
 Although arbitrary Java classes can be used, the standard root element for MWE2 files is [Workflow]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java), which is part of the very slim runtime model shipped with MWE2. It accepts *beans* and *components*.
 
-* The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, [StandaloneSetup]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java) can be used to initialize global EMF metadata such as the [Epackage.Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java).
+* The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, [StandaloneSetup]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java) can be used to initialize global EMF metadata such as the [EPackage.Registry]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java).
 
 * The method Workflow.addComponent(..) accepts instances of [IWorkflowComponent]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java), which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.
 
@@ -106,7 +106,7 @@ This documentation is about the new generator infrastructure introduced with Xte
 
 The entry point for Xtext code generation is [XtextGenerator]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend), which is composed of a *general configuration* and a set of *language configurations*. The general configuration describes the structure of your project as well as general settings for generating code. Each language configuration corresponds to a specific grammar file and allows to configure the generated code for the respective language. The actual code generation is performed by *generator fragments* contained in a language configuration.
 
-In the following we see an exemplary language generator configuration written in MWE2: 
+In the following we see an exemplary language generator configuration written in MWE2:
 
 ```mwe2
 module org.example.domainmodel.GenerateDomainmodel
@@ -254,7 +254,7 @@ language = XtextGeneratorLanguage {
     fragment = ui.outline.OutlineTreeProviderFragment2 {}
     fragment = ui.quickfix.QuickfixProviderFragment2 {}
     fragment = ui.contentAssist.ContentAssistFragment2 {}
-    fragment = junit.Junit4Fragment2 {}
+    fragment = junit.JunitFragment {}
     fragment = ui.refactoring.RefactorElementNameFragment2 {}
     fragment = types.TypesGeneratorFragment2 {}
     fragment = xbase.XtypeGeneratorFragment2 {}
@@ -271,7 +271,7 @@ language = XtextGeneratorLanguage {
 
 ### Importing Existing Metamodels {#importing-metamodels}
 
-As explained in the [grammar language reference](301_grammarlanguage.html#epackage-import) it is possible to import existing metamodels into your language definition. 
+As explained in the [grammar language reference](301_grammarlanguage.html#epackage-import) it is possible to import existing metamodels into your language definition.
 
 You can use namespace URIs in your grammar file in order to import existing EPackages. This is generally preferable, and other URI schemes are considered deprecated. With a namespace URI the package will be read from the Xtext index and therefore your grammar is independent from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained in a project that is managed by Xtext. Therefore the project has to have the Xtext project nature attached. Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if the referencing project itself is an Xtext project.
 
@@ -305,7 +305,7 @@ bean = StandaloneSetup {
 
 All Xtext components are assembled by means of dependency injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather than stating how to resolve it, i.e. obtaining that component.
 
-For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and adds the [Inject]({{site.javadoc.guice}}/com/google/inject/Inject.html) annotation: 
+For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and adds the [Inject]({{site.javadoc.guice}}/com/google/inject/Inject.html) annotation:
 
 ```java
 public class MyLanguageLinker extends Linker {
@@ -318,7 +318,7 @@ public class MyLanguageLinker extends Linker {
 
 It is not the duty of the client code to care about where the [IScopeProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) implementation comes from or how it is created. When the above class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter. This of course only works if the object itself is created by Guice. In Xtext almost every instance is created that way and therefore the whole dependency net is controlled and configured by the means of Guice.
 
-Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so-called [Modules]({{site.javadoc.guice}}/com/google/inject/Module.html). A [Module]({{site.javadoc.guice}}/com/google/inject/Module.html) defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here's an example:
+Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so-called Modules. A [Module]({{site.javadoc.guice}}/com/google/inject/Module.html) defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here's an example:
 
 ```java
 public class MyDslRuntimeModule implements Module {
@@ -336,7 +336,7 @@ With plain Guice modules one implements a method called configure and gets a [Bi
 
 ### The Module API {#guicemodules}
 
-After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named *Domainmodel* we would have a *DomainmodelRuntimeModule*, a *DomainmodelUiModule* (for the Eclipse integration), a *DomainmodelIdeModule* (IDE independent UI services), and a *DomainmodelWebModule*. The bindings from the runtime module are shared by all integration projects.
+After running the Xtext generator you get several different modules for your language: one for the base project, one for the generic ide project, and one for each platform integration project. For instance, for a language named *Domainmodel* we would have a *DomainmodelRuntimeModule*, a *DomainmodelIdeModule* (IDE independent UI services), a *DomainmodelUiModule* (for the Eclipse integration), and a *DomainmodelWebModule*. The bindings from the runtime module are shared by all integration projects.
 
 Xtext comes with a slightly enhanced module API. The abstract base class [AbstractGenericModule]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java) looks reflectively for certain methods in order to find declared bindings. The most common kind of method is
 
