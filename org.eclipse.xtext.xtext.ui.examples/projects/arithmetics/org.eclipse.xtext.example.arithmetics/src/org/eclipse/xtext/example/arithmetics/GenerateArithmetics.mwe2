@@ -50,9 +50,7 @@ Workflow {
 			name = "org.eclipse.xtext.example.arithmetics.Arithmetics"
 			fileExtensions = "calc"
 
-			generator = {
-				generateStub = false
-			}
+			generator = null
 			serializer = {
 				generateStub = false
 			}

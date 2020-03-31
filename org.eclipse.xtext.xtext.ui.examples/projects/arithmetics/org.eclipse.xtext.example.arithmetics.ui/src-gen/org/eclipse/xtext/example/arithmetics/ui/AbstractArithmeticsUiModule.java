@@ -12,19 +12,14 @@ import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
 import org.eclipse.compare.IViewerCreator;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.text.codemining.ICodeMiningProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
-import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.ArithmeticsParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.PartialArithmeticsContentAssistParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer;
@@ -175,23 +170,6 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 	public Class<? extends DocumentBasedDirtyResource> bindDocumentBasedDirtyResource() {
 		return PersistentDataAwareDirtyResource.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
-		return BuilderParticipant.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public IWorkspaceRoot bindIWorkspaceRootToInstance() {
-		return ResourcesPlugin.getWorkspace().getRoot();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public void configureBuilderPreferenceStoreInitializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class)
-			.annotatedWith(Names.named("builderPreferenceInitializer"))
-			.to(BuilderPreferenceAccess.Initializer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
