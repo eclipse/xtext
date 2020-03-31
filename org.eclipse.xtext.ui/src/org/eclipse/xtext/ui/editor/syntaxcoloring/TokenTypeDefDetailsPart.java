@@ -31,17 +31,17 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 	protected void createFieldEditors() {
 		{
 			// Foreground
-			addField(new ColorFieldEditor(CommonPreferenceConstants.COLOR_SUFFIX, "Color", getFieldEditorParent()));
+			addField(new ColorFieldEditor(CommonPreferenceConstants.COLOR_SUFFIX, Messages.TokenTypeDefDetailsPart_ColorField, getFieldEditorParent()));
 
 			// Background
-			addField(new ColorFieldEditor(CommonPreferenceConstants.BACKGROUNDCOLOR_SUFFIX, "Background",
+			addField(new ColorFieldEditor(CommonPreferenceConstants.BACKGROUNDCOLOR_SUFFIX, Messages.TokenTypeDefDetailsPart_BackgroundColorField,
 					getFieldEditorParent()));
 			// Style
 			// TODO extract a FontStyleCheckBoxGroupFieldEditor
-			addField(new CheckBoxGroupFieldEditor(CommonPreferenceConstants.STYLE_SUFFIX, "Style", 2, new String[][] {
-					{ "Italic", String.valueOf(SWT.ITALIC) }, { "Bold", String.valueOf(SWT.BOLD) },
-					{ "Underline", String.valueOf(TextAttribute.UNDERLINE) },
-					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) }, }, getFieldEditorParent(), true) {
+			addField(new CheckBoxGroupFieldEditor(CommonPreferenceConstants.STYLE_SUFFIX, Messages.TokenTypeDefDetailsPart_FontStyleGroupField, 2, new String[][] {
+					{ Messages.TokenTypeDefDetailsPart_ItalicFontStyle, String.valueOf(SWT.ITALIC) }, { Messages.TokenTypeDefDetailsPart_BoldFontStyle, String.valueOf(SWT.BOLD) },
+					{ Messages.TokenTypeDefDetailsPart_UnderlineFontStyle, String.valueOf(TextAttribute.UNDERLINE) },
+					{ Messages.TokenTypeDefDetailsPart_StrikeTroughFontStyle, String.valueOf(TextAttribute.STRIKETHROUGH) }, }, getFieldEditorParent(), true) {
 				@Override
 				protected String calculateResult(String[][] settings) {
 					int result = SWT.NORMAL;
@@ -68,19 +68,19 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 					}
 					if (value == SWT.NORMAL)
 						return false;
-					if (fieldName.equals("Italic"))
+					if (fieldName.equals(Messages.TokenTypeDefDetailsPart_ItalicFontStyle))
 						return (value & SWT.ITALIC) == SWT.ITALIC;
-					else if (fieldName.equals("Bold"))
+					else if (fieldName.equals(Messages.TokenTypeDefDetailsPart_BoldFontStyle))
 						return (value & SWT.BOLD) == SWT.BOLD;
-					else if (fieldName.equals("Underline"))
+					else if (fieldName.equals(Messages.TokenTypeDefDetailsPart_UnderlineFontStyle))
 						return (value & TextAttribute.UNDERLINE) == TextAttribute.UNDERLINE;
-					else if (fieldName.equals("Strike through"))
+					else if (fieldName.equals(Messages.TokenTypeDefDetailsPart_StrikeTroughFontStyle))
 						return (value & TextAttribute.STRIKETHROUGH) == TextAttribute.STRIKETHROUGH;
 					return false;
 				}
 			});
 			// Font
-			addField(new FontFieldEditor(CommonPreferenceConstants.FONT_SUFFIX, "Font", getFieldEditorParent()));
+			addField(new FontFieldEditor(CommonPreferenceConstants.FONT_SUFFIX, Messages.TokenTypeDefDetailsPart_FontField, getFieldEditorParent()));
 		}
 	}
 }
