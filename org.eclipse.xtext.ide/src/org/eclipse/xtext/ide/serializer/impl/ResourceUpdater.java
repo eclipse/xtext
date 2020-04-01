@@ -14,6 +14,8 @@ import org.eclipse.xtext.util.IAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public abstract class ResourceUpdater {
 

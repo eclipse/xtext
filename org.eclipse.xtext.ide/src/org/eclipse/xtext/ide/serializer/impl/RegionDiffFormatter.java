@@ -29,6 +29,8 @@ import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class RegionDiffFormatter {
 

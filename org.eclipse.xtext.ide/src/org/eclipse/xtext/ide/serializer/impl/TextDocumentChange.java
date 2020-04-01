@@ -19,6 +19,8 @@ import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class TextDocumentChange implements ITextDocumentChange {
 

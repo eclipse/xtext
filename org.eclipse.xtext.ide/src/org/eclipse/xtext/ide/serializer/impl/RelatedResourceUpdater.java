@@ -14,6 +14,8 @@ import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedRes
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public abstract class RelatedResourceUpdater extends ResourceUpdater {
 

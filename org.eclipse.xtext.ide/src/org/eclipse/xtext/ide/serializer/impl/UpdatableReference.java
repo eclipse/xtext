@@ -18,6 +18,8 @@ import com.google.common.base.Preconditions;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class UpdatableReference implements IUpdatableReference {
 	private final CrossReference crossref;

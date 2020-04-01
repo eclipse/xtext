@@ -35,6 +35,8 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class ChangeTreeProvider {
 

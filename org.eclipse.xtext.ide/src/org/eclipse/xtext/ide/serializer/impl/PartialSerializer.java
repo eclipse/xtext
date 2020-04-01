@@ -74,6 +74,8 @@ import com.google.inject.name.Named;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class PartialSerializer {
 	@Inject

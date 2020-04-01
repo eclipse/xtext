@@ -22,6 +22,8 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class TextDocumentChangeToString {
 

@@ -34,6 +34,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13
  */
 public class InsertionPointFinder {
 

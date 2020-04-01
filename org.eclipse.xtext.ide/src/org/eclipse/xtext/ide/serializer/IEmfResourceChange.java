@@ -22,6 +22,8 @@ import org.eclipse.xtext.resource.XtextResource;
  * 
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
+ * 
+ * @since 2.13
  */
 public interface IEmfResourceChange {
 

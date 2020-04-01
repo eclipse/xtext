@@ -18,6 +18,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * 
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
+ *
+ * @since 2.13
  */
 public interface IEObjectSnapshot {
 

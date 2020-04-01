@@ -20,6 +20,8 @@ import com.google.common.base.Throwables;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ *
+ * @since 2.13 
  */
 public class EmfResourceChange implements IEmfResourceChange {
 
