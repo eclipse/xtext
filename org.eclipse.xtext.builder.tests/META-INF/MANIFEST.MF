@@ -6,7 +6,6 @@ Bundle-Version: 2.22.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.20.0",
