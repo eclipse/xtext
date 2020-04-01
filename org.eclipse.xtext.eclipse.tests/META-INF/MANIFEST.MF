@@ -19,7 +19,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.lib,
  org.eclipse.ui.workbench;bundle-version="3.110.1";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.xtext.xtext.generator,
  org.eclipse.xtext.xtext.wizard
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
