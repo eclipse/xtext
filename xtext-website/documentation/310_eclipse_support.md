@@ -208,6 +208,21 @@ public void fixName(final Issue issue,
 }
 ```
 
+### Multi-Quickfixes
+Xtext also provides a Quickfix API for the definition of multi-quickfixes. Its implementation is similar to the quick fix above, but you need to call `acceptor.acceptMulti()` instead of `acceptor.accept()`.
+```java
+@Fix(IssueCodes.INVALID_FEATURE_NAME)
+public void fixFeatureName(Issue issue,
+                           IssueResolutionAcceptor acceptor) {
+  acceptor.acceptMulti(issue,
+    "Uncapitalize name", // label
+    "Uncapitalize name", // description
+    "upcase.png", // icon
+    (EObject element) -> ((Feature) element).setName(Strings.toFirstLower(issue.getData()[0])));
+}
+```
+In such cases, you can select all the `Invalid Feature Name` warnings on the Problems view and use the Quick Fix dialog (either via the context menu or the keyboard shortcut `Ctrl + 1`) to convert all uppercase feature names into lowercase at once in a single quickfix action.
+
 ### Quick Fixes for Linking Errors and Syntax Errors
 
 You can even define quick fixes for linking errors. The issue codes are assigned by the [ILinkingDiagnosticMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java). Have a look at the domain model example how to add quick fixes for these errors:
