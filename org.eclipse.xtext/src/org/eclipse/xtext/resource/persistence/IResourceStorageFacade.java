@@ -22,37 +22,34 @@ import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
  * @since 2.8
  */
 public interface IResourceStorageFacade {
-  /**
-   * @return whether the given resource should and can be loaded from stored resource state
-   */
-  boolean shouldLoadFromStorage(StorageAwareResource resource);
-  
-  /**
-   * @return whether storage data exists for the given URI
-   */
-  boolean hasStorageFor(URI uri);
-  
-  /**
-   * Finds or creates a ResourceStorageLoadable for the given resource.
-   * Clients should first call shouldLoadFromStorage to check whether there exists a storage version
-   * of the given resource.
-   * 
-   * @return an IResourceStorageLoadable
-   */
-  ResourceStorageLoadable getOrCreateResourceStorageLoadable(StorageAwareResource resource);
-  
-  /**
-   * Saves the resource using the given file system access.
-   */
-  void saveResource(StorageAwareResource resource, IFileSystemAccessExtension3 fsa);
-  
-  /**
-   * Creates a fresh ResourceStorageWritable wrapping the given OutputStream
-   */
-  ResourceStorageWritable createResourceStorageWritable(OutputStream outputStream);
-  
-  /**
-   * Creates a fresh ResourceStorageLoadable wrapping the given InputStream
-   */
-  ResourceStorageLoadable createResourceStorageLoadable(InputStream inputStream);
+	/**
+	 * @return whether the given {@link StorageAwareResource resource} should and can be loaded from stored resource state
+	 */
+	boolean shouldLoadFromStorage(StorageAwareResource resource);
+
+	/**
+	 * @return whether storage data exists for the given {@link URI}
+	 */
+	boolean hasStorageFor(URI uri);
+
+	/**
+	 * Finds or creates a {@link ResourceStorageLoadable} for the given resource. Clients should first call
+	 * {@link #shouldLoadFromStorage(StorageAwareResource)} to check whether there exists a storage version of the given resource.
+	 */
+	ResourceStorageLoadable getOrCreateResourceStorageLoadable(StorageAwareResource resource);
+
+	/**
+	 * Saves the resource using the given file system access.
+	 */
+	void saveResource(StorageAwareResource resource, IFileSystemAccessExtension3 fsa);
+
+	/**
+	 * Creates a fresh {@link ResourceStorageWritable} wrapping the given {@link OutputStream}
+	 */
+	ResourceStorageWritable createResourceStorageWritable(OutputStream outputStream);
+
+	/**
+	 * Creates a fresh {@link ResourceStorageLoadable} wrapping the given {@link InputStream}
+	 */
+	ResourceStorageLoadable createResourceStorageLoadable(InputStream inputStream);
 }
