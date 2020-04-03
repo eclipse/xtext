@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBooleanLiteral
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.interpreter.ConstantOperators
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
@@ -45,9 +47,6 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard
-import org.eclipse.xtext.resource.persistence.StorageAwareResource
-import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
-import org.eclipse.xtext.xbase.XbasePackage
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -543,22 +542,6 @@ package class EvaluationResult implements IConstantEvaluationResult<Object> {
 	private def dispatch Object equalValue(ThisReference myValue, XTypeLiteral otherType) {
 		return false
 	}
-}
-
-/**
- * Represents a result of the {@link ConstantExpressionValidator}.
- * It carries the information if the result is a constant expression and 
- * it may also have information about the computed value of an expression.
- * The value may be null, which indicates that it could not be computed. Or it may be 
- * {@link Optional#absent()} if it was computed to be the literal value {@code null}. 
- */
-interface IConstantEvaluationResult<T> {
-	/**
-	 * Returns the optional computation result. If the result is null, no value could be
-	 * computed.
-	 */
-	def Optional<T> getValue()
-	def boolean isCompileTimeConstant()
 }
 
 @Data
