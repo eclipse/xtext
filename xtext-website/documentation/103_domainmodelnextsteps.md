@@ -230,6 +230,15 @@ public void checkFeatureNameIsUnique(Feature feature) {
 
 The sibling features that are defined in the same entity are automatically validated by the Xtext framework, thus they do not have to be checked twice. Note that this implementation is not optimal in terms of execution time because the iteration over the features is done for all features of each entity.
 
+You can determine when the `@Check`-annotated methods will be executed with the help of the [CheckType]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/CheckType.java) enum. The default value is `FAST`, i.e. the checks will be executed on editing, saving/building or on request; also available are `NORMAL` (executed on build/save or on request) and `EXPENSIVE` (executed only on request). 
+
+```java
+@Check(CheckType.NORMAL)
+public void checkFeatureNameIsUnique(Feature feature) {
+    ...
+}
+```
+
 ## Unit Testing the Language {#tutorial-unit-tests}
 
 Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates two test projects for that purpose. These simplify the setup procedure for testing the basic language features and the Eclipse UI integration.
