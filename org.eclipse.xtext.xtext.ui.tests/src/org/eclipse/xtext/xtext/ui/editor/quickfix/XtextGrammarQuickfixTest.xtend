@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 RCP Vision s.r.l. (http://www.rcp-vision.com) and others.
+ * Copyright (c) 2019, 2020 RCP Vision s.r.l. (http://www.rcp-vision.com) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,7 +25,31 @@ import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.SPACES_IN_KEYW
 @RunWith(XtextRunner)
 @InjectWith(XtextGrammarQuickfixTest.InjectorProvider)
 class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
-	
+
+	@Test def test_fix_missing_rule() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			
+			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+			
+			Model:
+				greetings+=Greeting*;
+		'''
+		.testQuickfixesOn("org.eclipse.xtext.grammar.UnresolvedRule", new Quickfix("Create rule 'Greeting'", "Create rule 'Greeting'", '''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			
+			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+			
+			Model:
+				greetings+=Greeting*;
+			
+			Greeting:
+				
+			;
+			''')
+		);
+	}
+
 	@Test def test_fix_empty_keyword() {
 		'''
 			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
@@ -76,11 +100,11 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 			Model: 'model' a=ID;
 		''')
 	}
-	
+
 	private def removeEmptyKeywordQuickfix(String result) {
 		new Quickfix("Remove empty keyword", "Remove empty keyword", result)
 	}
-	
+
 	private def replaceEmptyKeywordWithRuleNameQuickfix(String result) {
 		new Quickfix("Replace empty keyword with rule name", "Replace empty keyword with rule name", result)
 	}

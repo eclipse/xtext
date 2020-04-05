@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 Michael Clay and others.
+ * Copyright (c) 2010, 2020 Michael Clay and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -144,10 +144,11 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
 						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
 						int offset = node.getEndOffset();
-						StringBuilder builder = new StringBuilder("\n\n");
+						String nl = System.lineSeparator();
+						StringBuilder builder = new StringBuilder(nl+nl);
 						if (abstractRule instanceof TerminalRule)
 							builder.append("terminal ");
-						String newRule = builder.append(ruleName).append(":\n\t\n;").toString();
+						String newRule = builder.append(ruleName).append(":" + nl + "\t" + nl + ";").toString();
 						context.getXtextDocument().replace(offset, 0, newRule);
 					}
 				});
