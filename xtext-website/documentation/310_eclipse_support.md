@@ -781,6 +781,22 @@ The base class `AbstractXtextCodeMiningProvider` provides some factory methods f
 
 For an implementation reference, have a look at the Xtext Domainmodel example.
 
+## UI Testing {#ui-testing}
+
+Automated UI tests are crucial for the maintainability and the quality of a software product. That's why it is strongly recommended to write not only automated unit tests for your language, but also automated UI tests for your language editor. The `org.eclipse.xtext.ui.testing` package contains some base classes that come in handy when implementing automated UI tests: 
+
+*	[AbstractAutoEditTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractAutoEditTest.java): base class for testing the auto editing functionality
+*	[AbstractContentAssistTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractContentAssistTest.xtend): base class for testing the content assistant and template proposals
+*	[AbstractFoldingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractFoldingTest.xtend): base class for testing the folding capabilities
+*	[AbstractHighlightingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.xtend): base class for testing the syntactical and semantic coloring
+*	[AbstractHoverTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHoverTest.xtend): base class for testing the hovering functionality
+*	[AbstractHyperlinkingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.xtend): base class for testing the hyperlinking functionality
+*	[AbstractOutlineTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractOutlineTest.java): base class for testing the structure of the outline view
+*	[AbstractQuickfixTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.xtend): base class for testing the quick fixes
+*	...
+
+The Xtext example projects (*File &rarr; New &rarr; Example &rarr; Xtext Examples*) contain UI test cases that make use of these framework classes. Feel free to study the corresponding `org.eclipse.xtext.example.<language>.ui.tests` projects to get some inspirations on how to implement automated UI test cases for your Xtext-based language editor.
+
 ---
 
 **[Next Chapter: Web Editor Support](330_web_support.html)**
