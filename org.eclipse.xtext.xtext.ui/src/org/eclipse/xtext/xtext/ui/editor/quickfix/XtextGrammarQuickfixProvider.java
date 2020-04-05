@@ -144,7 +144,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
 						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
 						int offset = node.getEndOffset();
-						String nl = System.lineSeparator();
+						String nl = context.getXtextDocument().getLineDelimiter(0);
 						StringBuilder builder = new StringBuilder(nl+nl);
 						if (abstractRule instanceof TerminalRule)
 							builder.append("terminal ");
