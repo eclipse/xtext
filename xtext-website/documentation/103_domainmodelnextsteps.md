@@ -339,7 +339,39 @@ This tutorial is about testing the parser, the linker and the validator for the 
     }
     ```
 
-3.  After saving the Xtend file, it is time to run the test. Select *Run As &rarr; JUnit Test* from the editor's context menu.
+3. The [CompilationTestHelper]({{site.src.xtext_extras}}/org.eclipse.xtext.xbase.testing/src/org/eclipse/xtext/xbase/testing/CompilationTestHelper.java) utility class comes in handy while unit testing the custom generator implementations:
+
+	```xtend
+	@Inject extension CompilationTestHelper
+
+	@Test def test() {
+		'''
+			datatype String
+			
+			package my.company.blog {
+				entity Blog {
+					title: String
+				}
+			}
+		'''.assertCompilesTo('''
+			package my.company.blog;
+
+			public class Blog {
+				private String title;
+				
+				public String getTitle() {
+					return title;
+				}
+				
+				public void setTitle(String title) {
+					this.title = title;
+				}
+			}
+		''')
+		}
+```
+
+4.  After saving the Xtend file, it is time to run the tests. Select *Run As &rarr; JUnit Test* from the editor's context menu.
 
 These tests serve only as a starting point and can be extended to cover the different features of the language. As a small exercise, you could implement e.g. test cases for the `checkFeatureNameIsUnique` validation rule. You can find more examples in the example projects shipped with the Xtext Framework. Simply go to *File &rarr; New &rarr; Example &rarr; Xtext Examples*.
 
