@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -68,7 +69,7 @@ public class OutdatedStateManager {
 			}
 			return work.exec(param);
 		} catch (Throwable e) {
-			throw new RuntimeException(e);
+			return Exceptions.throwUncheckedException(e);
 		} finally {
 			cancelationAllowed.set(wasCancelationAllowed);
 		}
