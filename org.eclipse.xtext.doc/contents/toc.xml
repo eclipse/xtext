@@ -16,9 +16,9 @@
 		<topic href="contents/103_domainmodelnextsteps.html" label="15 Minutes Tutorial - Extended">
 			<topic href="contents/103_domainmodelnextsteps.html#tutorial-code-generation" label="Writing a Code Generator With Xtend">
 			</topic>
-			<topic href="contents/103_domainmodelnextsteps.html#tutorial-unit-tests" label="Unit Testing the Language">
-			</topic>
 			<topic href="contents/103_domainmodelnextsteps.html#tutorial-validation" label="Creating Custom Validation Rules">
+			</topic>
+			<topic href="contents/103_domainmodelnextsteps.html#tutorial-unit-tests" label="Unit Testing the Language">
 			</topic>
 		</topic>
 		<topic href="contents/104_jvmdomainmodel.html" label="Five simple steps to your JVM language">
@@ -189,44 +189,6 @@
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/306_mwe2.html" label="MWE 2">
-			<topic href="contents/306_mwe2.html#mwe2-exampe" label="Examples">
-				<topic href="contents/306_mwe2.html#mwe2-hello-world" label="The Simplest Workflow">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-simple-transformation" label="A Simple Transformation">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-stopwatch" label="A Stop-Watch">
-				</topic>
-			</topic>
-			<topic href="contents/306_mwe2.html#mwe2-language-reference" label="Language Reference">
-				<topic href="contents/306_mwe2.html#mwe2-java-references" label="Mapping to Java Classes">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-module" label="Module">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-properties" label="Properties">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-mandatory" label="Mandatory Properties">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-named-components" label="Named Components">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-auto-inject" label="Auto Injection">
-				</topic>
-			</topic>
-			<topic href="contents/306_mwe2.html#mwe2-syntax-reference" label="Syntax Reference">
-				<topic href="contents/306_mwe2.html#mwe2-module-syntax" label="Module">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-property-syntax" label="Property">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-component-syntax" label="Component">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-string-literals-syntax" label="String Literals">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-boolean-literals" label="Boolean Literals">
-				</topic>
-				<topic href="contents/306_mwe2.html#mwe2-references" label="References">
-				</topic>
-			</topic>
-		</topic>
 		<topic href="contents/307_special_languages.html" label="Typical Language Configurations">
 			<topic href="contents/307_special_languages.html#case-insensitive-languages" label="Case Insensitive Languages">
 			</topic>
@@ -269,6 +231,8 @@
 			<topic href="contents/310_eclipse_support.html#content-assist" label="Content Assist">
 			</topic>
 			<topic href="contents/310_eclipse_support.html#quick-fixes" label="Quick Fixes">
+				<topic href="contents/310_eclipse_support.html#multi-quickfixes" label="Multi-Quickfixes">
+				</topic>
 				<topic href="contents/310_eclipse_support.html#quick-fixes-for-linking-errors-and-syntax-errors" label="Quick Fixes for Linking Errors and Syntax Errors">
 				</topic>
 			</topic>
@@ -313,6 +277,8 @@
 			<topic href="contents/310_eclipse_support.html#file-wizard" label="File Wizard">
 			</topic>
 			<topic href="contents/310_eclipse_support.html#code-mining" label="Code Mining">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#ui-testing" label="UI Testing">
 			</topic>
 		</topic>
 		<topic href="contents/330_web_support.html" label="Web Editor Support">

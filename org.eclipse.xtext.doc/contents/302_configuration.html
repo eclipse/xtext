@@ -14,7 +14,7 @@
 
 <h2 id="short-intro-to-mwe">A Short Introduction to MWE2</h2>
 
-<p>MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the <a href="306_mwe2.html">MWE2 documentation</a>.</p>
+<p>MWE2 (Modeling Workflow Engine) allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as known from Java Beans encapsulation principles. More in-depth information can be found in the <a href="https://github.com/eclipse/mwe/blob/master/documentation/mwe2.md">MWE2 documentation</a>.</p>
 
 <p>Given the following simple Java class (POJO):</p>
 
@@ -24,7 +24,7 @@ public class Person {
 
   private String name;
 
-  public void setName(String name) { 
+  public void setName(String name) {
     this.name = name;
   }
 
@@ -94,7 +94,7 @@ Person {
 
 <ul>
   <li>
-    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">Epackage.Registry</a>.</p>
+    <p>The method Workflow.addBean(Object) provides a means to apply global side-effects, which unfortunately is required sometimes. For instance, <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> can be used to initialize global EMF metadata such as the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage.Registry</a>.</p>
   </li>
   <li>
     <p>The method Workflow.addComponent(..) accepts instances of <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a>, which is the primary concept of the workflow model of MWE2. The language generator component itself is an instance of IWorkflowComponent and can therefore be used within MWE2 workflows.</p>
@@ -262,7 +262,7 @@ Workflow {
     fragment = ui.outline.OutlineTreeProviderFragment2 {}
     fragment = ui.quickfix.QuickfixProviderFragment2 {}
     fragment = ui.contentAssist.ContentAssistFragment2 {}
-    fragment = junit.Junit4Fragment2 {}
+    fragment = junit.JunitFragment {}
     fragment = ui.refactoring.RefactorElementNameFragment2 {}
     fragment = types.TypesGeneratorFragment2 {}
     fragment = xbase.XtypeGeneratorFragment2 {}
@@ -323,7 +323,7 @@ Workflow {
 
 <p>It is not the duty of the client code to care about where the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> implementation comes from or how it is created. When the above class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter. This of course only works if the object itself is created by Guice. In Xtext almost every instance is created that way and therefore the whole dependency net is controlled and configured by the means of Guice.</p>
 
-<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so-called <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Modules</a>. A <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Module</a> defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here’s an example:</p>
+<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so-called Modules. A <a href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html">Module</a> defines a set of mappings from types to either existing instances, instance providers or concrete classes. Modules are implemented in Java. Here’s an example:</p>
 
 <pre><code class="language-java">public class MyDslRuntimeModule implements Module {
   
@@ -340,7 +340,7 @@ Workflow {
 
 <h3 id="guicemodules">The Module API</h3>
 
-<p>After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named <em>Domainmodel</em> we would have a <em>DomainmodelRuntimeModule</em>, a <em>DomainmodelUiModule</em> (for the Eclipse integration), a <em>DomainmodelIdeModule</em> (IDE independent UI services), and a <em>DomainmodelWebModule</em>. The bindings from the runtime module are shared by all integration projects.</p>
+<p>After running the Xtext generator you get several different modules for your language: one for the base project, one for the generic ide project, and one for each platform integration project. For instance, for a language named <em>Domainmodel</em> we would have a <em>DomainmodelRuntimeModule</em>, a <em>DomainmodelIdeModule</em> (IDE independent UI services), a <em>DomainmodelUiModule</em> (for the Eclipse integration), and a <em>DomainmodelWebModule</em>. The bindings from the runtime module are shared by all integration projects.</p>
 
 <p>Xtext comes with a slightly enhanced module API. The abstract base class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java">AbstractGenericModule</a> looks reflectively for certain methods in order to find declared bindings. The most common kind of method is</p>
 

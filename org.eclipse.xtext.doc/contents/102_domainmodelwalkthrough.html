@@ -55,7 +55,7 @@ entity Comment extends HasAuthor {
       <td>org.example.domainmodel.Domainmodel</td>
     </tr>
     <tr>
-      <td><strong>Language extensions:</strong></td>
+      <td><strong>DSL-File extensions:</strong></td>
       <td>dmodel</td>
     </tr>
   </tbody>
@@ -119,18 +119,18 @@ generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel :
     (elements+=Type)*;
-  
+
 Type:
     DataType | Entity;
-  
+
 DataType:
     'datatype' name=ID;
- 
+
 Entity:
     'entity' name=ID ('extends' superType=[Entity])? '{'
         (features+=Feature)*
     '}';
- 
+
 Feature:
     (many?='many')? name=ID ':' type=[Type];
 </code></pre>
@@ -197,7 +197,7 @@ Feature:
 
 <h2 id="run-generated-plugin">Run the Generated Eclipse Plug-in</h2>
 
-<p>We are now able to test the Eclipse IDE integration. If you right-click the project <code>org.example.domainmodel</code> in the Package Explorer and select <em>Run As → Eclipse Application</em>, a new run configuration is created and launched that starts a second instance of Eclipse including your new language plug-ins. In the new instance, create a new project of your choice, e.g. <em>File → New → Project… → Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, the outline view, find references etc.</p>
+<p>We are now able to test the Eclipse IDE integration. If you right-click the project <code>org.example.domainmodel</code> in the Package Explorer and select <em>Run As → Eclipse Application</em>, a new run configuration is created and launched that starts a second instance of Eclipse including your new language plug-ins. In the new instance, create a new project of your choice, e.g. <em>File → New → Project… → Java Project</em> and therein a new file with the file extension you chose in the beginning (<em>*.dmodel</em>). This will open the generated entity editor. Try it and discover the default functionality for code completion, syntax highlighting, syntactic validation, linking errors, formatting, (quick) outline view, hyperlinking, find references, folding, rename refactoring etc.</p>
 
 <p><img src="images/30min_editor.png" alt="" /></p>
 
@@ -205,7 +205,7 @@ Feature:
 
 <p>After you have created your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The entities language should support the notion of <em>Packages</em> in order to avoid name clashes and to better fit with the target environment Java. A <em>Package</em> may contain <em>Types</em> and other packages. In order to allow for names in references, we will also add a way to declare imports.</p>
 
-<p>In the end we want to be able to split the previously used model into to distinct files :</p>
+<p>In the end we want to be able to split the previously used model into distinct files :</p>
 
 <pre><code class="language-domainexample">// datatypes.dmodel
 
@@ -215,7 +215,7 @@ datatype String
 <pre><code class="language-domainexample">// commons.dmodel
 
 package my.company.common {
-  
+
     entity HasAuthor {
         author: String
     }
@@ -225,20 +225,20 @@ package my.company.common {
 <pre><code class="language-domainexample">// blogs.dmodel
 
 package my.company.blog {
-  
+
     import my.company.common.*
-    
+
     entity Blog {
         title: String
         many posts: Post
     }
-    
+
     entity Post extends my.company.common.HasAuthor {
         title: String
         content: String
         many comments: Comment
     }
-    
+
     entity Comment extends HasAuthor {
         content: String
     }
@@ -249,11 +249,11 @@ package my.company.blog {
 
 <ol>
   <li>
-    <p>Since a <em>Domainmodel</em> no longer contains types but also packages, the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em> should be introduced: the <em>AbstractElement</em>.</p>
+    <p>Since a <em>Domainmodel</em> no longer contains types but also packages, the entry rule has to be modified. Furthermore, a common super type for <em>PackageDeclarations</em> and <em>Types</em> should be introduced: the <em>AbstractElement</em>.</p>
 
     <pre><code class="language-xtext">Domainmodel:
     (elements+=AbstractElement)*;
-    
+
 AbstractElement:
     PackageDeclaration | Type;
 </code></pre>
@@ -265,7 +265,7 @@ AbstractElement:
     'package' name=QualifiedName '{'
         (elements+=AbstractElement)*
     '}';
-    
+
 AbstractElement:
     PackageDeclaration | Type | Import;
     
@@ -280,7 +280,7 @@ QualifiedName:
 
     <pre><code class="language-xtext">Import:
     'import' importedNamespace=QualifiedNameWithWildcard;
-    
+
 QualifiedNameWithWildcard:
     QualifiedName '.*'?;
 </code></pre>
@@ -294,7 +294,7 @@ QualifiedNameWithWildcard:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
         (features+=Feature)*
     '}';
-     
+
 Feature:
     (many?='many')? name=ID ':' type=[Type|QualifiedName];
 </code></pre>
@@ -326,21 +326,21 @@ QualifiedName:
 
 Import:
     'import' importedNamespace=QualifiedNameWithWildcard;
-  
+
 QualifiedNameWithWildcard:
     QualifiedName '.*'?;
-  
+
 Type:
     DataType | Entity;
-  
+
 DataType:
     'datatype' name=ID;
- 
+
 Entity:
     'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
         (features+=Feature)*
     '}';
- 
+
 Feature:
     (many?='many')? name=ID ':' type=[Type|QualifiedName];
 </code></pre>
