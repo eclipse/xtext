@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -91,7 +91,7 @@ public class JvmAnnotationReferencePrinter {
 	protected String _internalToString(JvmAnnotationReference reference) {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("@");
-		buffer.append(createLinkWithLabel(reference.getAnnotation(), reference.getAnnotation().getSimpleName()));
+		buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(reference.getAnnotation()), reference.getAnnotation().getSimpleName()));
 
 		List<JvmAnnotationValue> explicitValues = reference.getExplicitValues();
 		boolean needsExplicitProperties = explicitValues.size() > 1 //
@@ -118,7 +118,7 @@ public class JvmAnnotationReferencePrinter {
 	protected String _internalToString(XAnnotation reference) {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("@");
-		buffer.append(createLinkWithLabel(reference.getAnnotationType(), reference.getAnnotationType().getSimpleName()));
+		buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(reference.getAnnotationType()), reference.getAnnotationType().getSimpleName()));
 		if (reference.getValue() != null) {
 			buffer.append("(");
 			buffer.append(reference.getValue());
@@ -157,7 +157,7 @@ public class JvmAnnotationReferencePrinter {
 	}
 
 	protected String _internalToString(XTypeLiteral typeLiteral) {
-		String text = createLinkWithLabel(typeLiteral.getType(), typeLiteral.getType().getSimpleName());
+		String text = createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(typeLiteral.getType()), typeLiteral.getType().getSimpleName());
 		return text + String.join("", typeLiteral.getArrayDimensions());
 	}
 
@@ -197,7 +197,7 @@ public class JvmAnnotationReferencePrinter {
 	protected String internalHandleAbstractFeatureCall(String prefix, XAbstractFeatureCall abstractFeatureCall) {
 		final String postfix;
 		if (abstractFeatureCall.getFeature() != null && !abstractFeatureCall.getFeature().eIsProxy()) {
-			postfix = createLinkWithLabel(abstractFeatureCall.getFeature(), abstractFeatureCall.getConcreteSyntaxFeatureName());
+			postfix = createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(abstractFeatureCall.getFeature()), abstractFeatureCall.getConcreteSyntaxFeatureName());
 		} else {
 			postfix = abstractFeatureCall.getConcreteSyntaxFeatureName();
 		}
@@ -213,11 +213,11 @@ public class JvmAnnotationReferencePrinter {
 		JvmOperation operation = toOperation != null //
 				? toOperation //
 				: Iterables.tryFind(declaredOperations, o -> "value".equals(o.getSimpleName())).orNull();
-		return createLinkWithLabel(operation, operation.getSimpleName());
+		return createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(operation), operation.getSimpleName());
 	}
 
-	protected String createLinkWithLabel(JvmIdentifiableElement element, String label) {
-		return HoverLinkHelper.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(element), label);
+	protected String createLinkWithLabel(String scheme, URI uri, String label) {
+		return HoverLinkHelper.createLinkWithLabel(scheme, uri, label);
 	}
 
 }
