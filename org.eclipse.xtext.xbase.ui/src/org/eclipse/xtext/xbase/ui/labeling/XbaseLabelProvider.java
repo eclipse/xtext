@@ -101,9 +101,12 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 			return _imageDescriptor((XImportSection) obj);
 		} else if (obj instanceof IResolvedField) {
 			return _imageDescriptor((IResolvedField) obj);
-		} else {
-			return null;
 		}
+		return _imageDescriptor(obj);
+	}
+
+	protected ImageDescriptor _imageDescriptor(Object element) {
+		return null;
 	}
 
 	protected ImageDescriptor _imageDescriptor(XImportSection importSection) {
