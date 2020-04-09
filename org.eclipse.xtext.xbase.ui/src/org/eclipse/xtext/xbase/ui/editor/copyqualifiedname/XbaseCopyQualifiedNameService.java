@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.FluentIterable;
 import com.google.inject.Inject;
 
 /**
