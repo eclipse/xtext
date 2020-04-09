@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-  id 'org.ajoberstar.grgit' version '4.0.1'
+  id 'org.ajoberstar.grgit' version '4.0.2'
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
