@@ -6,7 +6,7 @@ part: Getting Started
 
 # {{page.title}} {#domain-model-walkthrough}
 
-In this tutorial we will implement a small domain-specific language to model entities and properties similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
+In this tutorial we will implement a small domain-specific language to model entities and properties similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive:
 
 ```domainexample
 datatype String
@@ -54,10 +54,10 @@ After you have successfully finished the wizard, you will find five new projects
 
 |:---|:---|
 |org.example.domainmodel|The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.)|
-|org.example.domainmodel.tests|Unit tests for the language|
 |org.example.domainmodel.ide|Platform-independent IDE functionality (e.g. services for content assist)|
+|org.example.domainmodel.tests|Unit tests for the language|
 |org.example.domainmodel.ui|The Eclipse editor and other workbench related functionality|
-|org.example.domainmodel.ui.tests|Unit tests for the Eclipse editor|
+|org.example.domainmodel.ui.tests|UI tests for the Eclipse editor|
 
 ![](images/30min_initialprojectlayout.png)
 
@@ -86,7 +86,7 @@ grammar org.example.domainmodel.Domainmodel with
 
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
-Domainmodel :
+Domainmodel:
     (elements+=Type)*;
 
 Type:
@@ -109,7 +109,7 @@ Let's have a more detailed look at what the different grammar rules mean:
 1.  The first rule in a grammar is always used as the start rule.
     
     ```xtext
-    Domainmodel :
+    Domainmodel:
         (elements+=Type)*;
     ```
 
@@ -167,9 +167,9 @@ We are now able to test the Eclipse IDE integration. If you right-click the proj
 
 ## Second Iteration: Adding Packages and Imports {#add-imports}
 
-After you have created your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The entities language should support the notion of *Packages* in order to avoid name clashes and to better fit with the target environment Java. A *Package* may contain *Types* and other packages. In order to allow for names in references, we will also add a way to declare imports.
+After you have created your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The domainmodel language should support the notion of *Packages* in order to avoid name clashes and to better fit with the target environment Java. A *Package* may contain *Types* and other packages. In order to allow for names in references, we will also add a way to declare imports.
 
-In the end we want to be able to split the previously used model into distinct files :
+In the end we want to be able to split the previously used model into distinct files:
 
 ```domainexample
 // datatypes.dmodel
@@ -250,7 +250,7 @@ Let's start enhancing the grammar.
         QualifiedName '.*'?;
     ```
 
-    Similar to the rule `QualifiedName`, `QualifiedNameWithWildcard` returns a plain string. 
+    Similar to the rule `QualifiedName`, `QualifiedNameWithWildcard` returns a plain string.
 1.  The last step is to allow fully qualified names in cross-references, too. Otherwise one could not refer to an entity without adding an import statement.
 
     ```xtext
