@@ -7,7 +7,6 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="src-gen">
 		<attributes>
 			<attribute name="ignore_optional_problems" value="true"/>
