@@ -171,7 +171,7 @@ public class JvmAnnotationReferencePrinter {
 	}
 
 	protected String _internalToString(XStringLiteral stringLiteral) {
-		return "\" + stringLiteral.getValue() + \"";
+		return "\"" + stringLiteral.getValue() + "\"";
 	}
 
 	protected String _internalToString(XNumberLiteral numberLiteral) {
