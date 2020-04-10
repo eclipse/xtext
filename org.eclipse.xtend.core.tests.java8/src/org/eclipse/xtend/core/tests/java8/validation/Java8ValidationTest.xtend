@@ -246,6 +246,99 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			"The non-abstract method m() inherited from I conflicts with the method m() inherited from J.")
 	}
 	
+	@Test 
+	def void testNoConflictWithStaticMethods_01() throws Exception {
+		val file = file('''
+			interface IX {
+				def static int getTheNumber() {
+					return 42;
+				}
+			}
+			interface IY {
+				def static int getTheNumber() {
+					return 24;
+				}
+			}
+			class Both implements IX, IY {}
+		''');
+		file.assertNoErrors()
+	}
+	
+	@Test 
+	def void testNoConflictWithStaticMethods_02() throws Exception {
+		val file = file('''
+			interface IX {
+				def int getTheNumber() {
+					return 42;
+				}
+			}
+			interface IY {
+				def static int getTheNumber() {
+					return 24;
+				}
+			}
+			class Both implements IX, IY {}
+		''');
+		file.assertNoErrors()
+	}
+	
+	@Test 
+	def void testNoConflictWithStaticMethods_03() throws Exception {
+		val file = file('''
+			interface IX {
+				def static int getTheNumber() {
+					return 42;
+				}
+			}
+			interface IY extends IX {
+				def int getTheNumber() {
+					return 24;
+				}
+			}
+			class Both implements IX, IY {}
+		''');
+		file.assertNoErrors()
+	}
+	
+	@Test 
+	def void testNoConflictWithStaticMethods_04() throws Exception {
+		val file = file('''
+			interface IX {
+				def int getTheNumber() {
+					return 42;
+				}
+			}
+			interface IY extends IX {
+				def static int getTheNumber() {
+					return 24;
+				}
+			}
+		''');
+		file.assertError(XTEND_FUNCTION, DUPLICATE_METHOD,
+			"The static method getTheNumber() cannot hide the instance method getTheNumber() of type IX.")
+	}
+	
+	@Test 
+	def void testNoConflictWithStaticMethods_05() throws Exception {
+		val file = file('''
+			interface IX<P extends Number, R extends CharSequence> {
+				def R getTheNumber(P p) {
+					return null;
+				}
+			}
+			interface IY extends IX<Number, CharSequence> {
+				def static CharSequence getTheNumber(Number n) {
+					return "";
+				}
+			}
+		''');
+		file.assertError(XTEND_FUNCTION, DUPLICATE_METHOD,
+			// The error message could be more helpful, e.g. say 'hide the instance method getTheNumber(P) of type IX<P>
+			// Instead we currently replace the type parameter P with Number in the description. Unfortunately there is
+			// no API to obtain the operation signature in the correct context.
+			"The static method getTheNumber(Number) cannot hide the instance method getTheNumber(Number) of type IX.")
+	}
+	
 	@Test
 	def void testMissingImplementation_01() {
 		file('''

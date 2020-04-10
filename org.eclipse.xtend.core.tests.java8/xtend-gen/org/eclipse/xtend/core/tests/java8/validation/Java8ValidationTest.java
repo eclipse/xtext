@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -460,6 +461,179 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testNoConflictWithStaticMethods_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 42;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IY {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 24;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Both implements IX, IY {}");
+    _builder.newLine();
+    final XtendFile file = this.file(_builder.toString());
+    this._validationTestHelper.assertNoErrors(file);
+  }
+  
+  @Test
+  public void testNoConflictWithStaticMethods_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 42;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IY {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 24;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Both implements IX, IY {}");
+    _builder.newLine();
+    final XtendFile file = this.file(_builder.toString());
+    this._validationTestHelper.assertNoErrors(file);
+  }
+  
+  @Test
+  public void testNoConflictWithStaticMethods_03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 42;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IY extends IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 24;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Both implements IX, IY {}");
+    _builder.newLine();
+    final XtendFile file = this.file(_builder.toString());
+    this._validationTestHelper.assertNoErrors(file);
+  }
+  
+  @Test
+  public void testNoConflictWithStaticMethods_04() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 42;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IY extends IX {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static int getTheNumber() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 24;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.file(_builder.toString());
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
+      "The static method getTheNumber() cannot hide the instance method getTheNumber() of type IX.");
+  }
+  
+  @Test
+  public void testNoConflictWithStaticMethods_05() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface IX<P extends Number, R extends CharSequence> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def R getTheNumber(P p) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IY extends IX<Number, CharSequence> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static CharSequence getTheNumber(Number n) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return \"\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.file(_builder.toString());
+    this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
+      "The static method getTheNumber(Number) cannot hide the instance method getTheNumber(Number) of type IX.");
   }
   
   @Test

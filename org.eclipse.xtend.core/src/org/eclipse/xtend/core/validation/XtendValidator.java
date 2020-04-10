@@ -886,8 +886,8 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			return null;
 	}
 	
-	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType,
-			ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType, ResolvedFeatures resolvedFeatures,
+			Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
 		if (doCheckAbstract) {
@@ -903,52 +903,57 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				}
 				if (visibilityHelper.isVisible(operation.getDeclaration())) {
 					String erasureSignature = operation.getResolvedErasureSignature();
-					List<IResolvedOperation> declaredOperationsWithSameErasure = 
-							resolvedFeatures.getDeclaredOperations(erasureSignature);
-					for (IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
+					List<IResolvedOperation> declaredOperationsWithSameErasure = resolvedFeatures.getDeclaredOperations(erasureSignature);
+					for (IResolvedOperation localOperation : declaredOperationsWithSameErasure) {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							EObject source = findPrimarySourceElement(localOperation);
-							if (flaggedOperations.add(source)) {
-								if (operation.getDeclaration().isStatic() && !localOperation.getDeclaration().isStatic()) {
-									error("The instance method "
+							if (operation.getDeclaration().isStatic() && !localOperation.getDeclaration().isStatic()) {
+								if (!isInterface(operationDeclaringType)) {
+									if (flaggedOperations.add(source)) {
+										error("The instance method "
+												+ localOperation.getSimpleSignature()
+												+ " cannot override the static method "
+												+ operation.getSimpleSignature() + " of type "
+												+ getDeclaratorName(operation.getDeclaration()) + ".",
+												source, nameFeature(source), DUPLICATE_METHOD);
+									}
+								}
+							} else if (!operation.getDeclaration().isStatic() && localOperation.getDeclaration().isStatic()) {
+								if (flaggedOperations.add(source)) {
+									error("The static method "
 											+ localOperation.getSimpleSignature()
-											+ " cannot override the static method "
+											+ " cannot hide the instance method "
 											+ operation.getSimpleSignature() + " of type "
 											+ getDeclaratorName(operation.getDeclaration()) + ".",
 											source, nameFeature(source), DUPLICATE_METHOD);
-								} else {
-									error("Name clash: The method "
-											+ localOperation.getSimpleSignature() + " of type "
-											+ inferredType.getSimpleName()
-											+ " has the same erasure as "
-											+
-											// use source with other operations parameters to avoid confusion
-											// due to name transformations in JVM model inference
-											operation.getSimpleSignature() + " of type "
-											+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
-											source, nameFeature(source), DUPLICATE_METHOD);
 								}
+							} else if (flaggedOperations.add(source)) {
+								error("Name clash: The method "
+										+ localOperation.getSimpleSignature() + " of type "
+										+ inferredType.getSimpleName()
+										+ " has the same erasure as "
+										+ operation.getSimpleSignature() + " of type "
+										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
+										source, nameFeature(source), DUPLICATE_METHOD);
 							}
 						}
 					}
 					if (operation instanceof ConflictingDefaultOperation
-							&& contributesToConflict(inferredType, (ConflictingDefaultOperation) operation)
-							&& !flaggedType) {
-						IResolvedOperation conflictingOperation = ((ConflictingDefaultOperation) operation).getConflictingOperations().get(0);
+							&& contributesToConflict(inferredType, (ConflictingDefaultOperation) operation) && !flaggedType) {
+						IResolvedOperation conflictingOperation = ((ConflictingDefaultOperation) operation).getConflictingOperations()
+								.get(0);
 						// Include the declaring class in the issue code in order to give better quick fixes
 						String[] uris = new String[] {
 								getDeclaratorName(operation.getDeclaration()) + "|"
 										+ EcoreUtil.getURI(operation.getDeclaration()).toString(),
 								getDeclaratorName(conflictingOperation.getDeclaration()) + "|"
-										+ EcoreUtil.getURI(conflictingOperation.getDeclaration()).toString()
-							};
+										+ EcoreUtil.getURI(conflictingOperation.getDeclaration()).toString() };
 						if (!operation.getDeclaration().isAbstract() && !conflictingOperation.getDeclaration().isAbstract()) {
-							error("The type " + inferredType.getSimpleName()
-									+ " inherits multiple implementations of the method " + conflictingOperation.getSimpleSignature()
-									+ " from " + getDeclaratorName(conflictingOperation.getDeclaration())
-									+ " and " + getDeclaratorName(operation.getDeclaration()) + ".",
-									xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME,
-									CONFLICTING_DEFAULT_METHODS, uris);
+							error("The type " + inferredType.getSimpleName() + " inherits multiple implementations of the method "
+									+ conflictingOperation.getSimpleSignature() + " from "
+									+ getDeclaratorName(conflictingOperation.getDeclaration()) + " and "
+									+ getDeclaratorName(operation.getDeclaration()) + ".", xtendType,
+									XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CONFLICTING_DEFAULT_METHODS, uris);
 						} else {
 							// At least one of the operations is non-abstract
 							IResolvedOperation abstractOp, nonabstractOp;
@@ -959,12 +964,11 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 								abstractOp = conflictingOperation;
 								nonabstractOp = operation;
 							}
-							error("The non-abstract method " + nonabstractOp.getSimpleSignature()
-									+ " inherited from " + getDeclaratorName(nonabstractOp.getDeclaration())
-									+ " conflicts with the method " + abstractOp.getSimpleSignature()
-									+ " inherited from " + getDeclaratorName(abstractOp.getDeclaration()) + ".",
-									xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME,
-									CONFLICTING_DEFAULT_METHODS, uris);
+							error("The non-abstract method " + nonabstractOp.getSimpleSignature() + " inherited from "
+									+ getDeclaratorName(nonabstractOp.getDeclaration()) + " conflicts with the method "
+									+ abstractOp.getSimpleSignature() + " inherited from " + getDeclaratorName(abstractOp.getDeclaration())
+									+ ".", xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CONFLICTING_DEFAULT_METHODS,
+									uris);
 						}
 						flaggedType = true;
 					}
