@@ -257,7 +257,13 @@ public class OverrideTester {
 	
 	protected boolean isConflictingDefaultImplementation(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
 		JvmOperation ridingDecl = overriding.getDeclaration();
+		if (ridingDecl.isStatic()) {
+			return false;
+		}
 		JvmOperation riddenDecl = overridden.getDeclaration();
+		if (riddenDecl.isStatic()) {
+			return false;
+		}
 		if (isInterface(ridingDecl.getDeclaringType()) && isInterface(riddenDecl.getDeclaringType())
 				&& (!ridingDecl.isAbstract() || !riddenDecl.isAbstract())) {
 			LightweightTypeReference ridingTypeRef = overriding.getResolvedDeclarator();
