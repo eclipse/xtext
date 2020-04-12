@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,12 +26,9 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
-import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
-import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -50,23 +47,15 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	public List<OutlineMode> getOutlineModes() {
 		return MODES;
 	}
-	
-	@Inject
-	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
-	@Inject
-	private StylerFactory stylerFactory;
-	
 	private Set<AbstractRule> calledRules = Sets.newHashSet();
 	
 	protected Object _text(AbstractRule rule) {
 		StyledString ruleText = null;
 		if (!calledRules.isEmpty() && !calledRules.contains(rule))
-			ruleText = new StyledString(safeName(rule.getName()),
-					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
+			ruleText = new StyledString(safeName(rule.getName()), StyledString.createColorRegistryStyler("128,128,128", null));
 		else if (GrammarUtil.isDatatypeRule(rule))
-			ruleText = new StyledString(safeName(rule.getName()),
-					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.dataTypeRule()));
+			ruleText = new StyledString(safeName(rule.getName()),StyledString.createColorRegistryStyler("0,0,192", null));
 		else
 			ruleText = new StyledString(safeName(rule.getName()));
 		return ruleText;
@@ -84,8 +73,7 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		} else {
 			typeName.append(safeName(rule.getName()));
 		}
-		StyledString styledType = new StyledString(typeName.toString(),
-				stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.typeReference()));
+		StyledString styledType = new StyledString(typeName.toString(), StyledString.DECORATIONS_STYLER);
 		return styledType;
 	}
 
