@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,19 +15,18 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("all")
 public class NewLineKey extends BooleanKey implements Procedure1<IHiddenRegionFormatter> {
-  public NewLineKey(final String name, final Boolean defaultValue) {
-    super(name, defaultValue);
-  }
-  
-  @Override
-  public void apply(final IHiddenRegionFormatter it) {
-    final Boolean newLine = it.getRequest().getPreferences().<Boolean>getPreference(this);
-    if ((newLine).booleanValue()) {
-      it.setNewLines(1);
-    } else {
-      it.oneSpace();
-    }
-  }
+	public NewLineKey(String name, Boolean defaultValue) {
+		super(name, defaultValue);
+	}
+
+	@Override
+	public void apply(IHiddenRegionFormatter formatter) {
+		Boolean newLine = formatter.getRequest().getPreferences().getPreference(this);
+		if (newLine.booleanValue()) {
+			formatter.setNewLines(1);
+		} else {
+			formatter.oneSpace();
+		}
+	}
 }
