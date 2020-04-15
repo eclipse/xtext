@@ -10,7 +10,7 @@
 
 <h1 id="domain-model-walkthrough">15 Minutes Tutorial</h1>
 
-<p>In this tutorial we will implement a small domain-specific language to model entities and properties similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :</p>
+<p>In this tutorial we will implement a small domain-specific language to model entities and properties similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive:</p>
 
 <pre><code class="language-domainexample">datatype String
 
@@ -74,12 +74,12 @@ entity Comment extends HasAuthor {
       <td>The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.)</td>
     </tr>
     <tr>
-      <td>org.example.domainmodel.tests</td>
-      <td>Unit tests for the language</td>
-    </tr>
-    <tr>
       <td>org.example.domainmodel.ide</td>
       <td>Platform-independent IDE functionality (e.g. services for content assist)</td>
+    </tr>
+    <tr>
+      <td>org.example.domainmodel.tests</td>
+      <td>Unit tests for the language</td>
     </tr>
     <tr>
       <td>org.example.domainmodel.ui</td>
@@ -87,7 +87,7 @@ entity Comment extends HasAuthor {
     </tr>
     <tr>
       <td>org.example.domainmodel.ui.tests</td>
-      <td>Unit tests for the Eclipse editor</td>
+      <td>UI tests for the Eclipse editor</td>
     </tr>
   </tbody>
 </table>
@@ -117,7 +117,7 @@ Greeting:
 
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
-Domainmodel :
+Domainmodel:
     (elements+=Type)*;
 
 Type:
@@ -141,7 +141,7 @@ Feature:
   <li>
     <p>The first rule in a grammar is always used as the start rule.</p>
 
-    <pre><code class="language-xtext">Domainmodel :
+    <pre><code class="language-xtext">Domainmodel:
     (elements+=Type)*;
 </code></pre>
 
@@ -203,9 +203,9 @@ Feature:
 
 <h2 id="add-imports">Second Iteration: Adding Packages and Imports</h2>
 
-<p>After you have created your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The entities language should support the notion of <em>Packages</em> in order to avoid name clashes and to better fit with the target environment Java. A <em>Package</em> may contain <em>Types</em> and other packages. In order to allow for names in references, we will also add a way to declare imports.</p>
+<p>After you have created your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The domainmodel language should support the notion of <em>Packages</em> in order to avoid name clashes and to better fit with the target environment Java. A <em>Package</em> may contain <em>Types</em> and other packages. In order to allow for names in references, we will also add a way to declare imports.</p>
 
-<p>In the end we want to be able to split the previously used model into distinct files :</p>
+<p>In the end we want to be able to split the previously used model into distinct files:</p>
 
 <pre><code class="language-domainexample">// datatypes.dmodel
 
