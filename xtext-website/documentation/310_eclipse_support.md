@@ -489,6 +489,61 @@ public Class<? extends IComparator>
 
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline, you have to put the [QuickOutlineFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/QuickOutlineFragment2.xtend) into your workflow.
 
+## Folding {#folding}
+
+Xtext calculates the editor folding regions based on the grammar out-of-the-box. Althought it comes with good defaults, sometimes they do not satisfy the needs and have to be customized.
+
+Considering e.g the Xtext Statemachine example, the framework provides folding capabilities for the `state` regions:
+
+![](images/folding_default.png)
+
+In order to make `events`, `resetEvents` and `commands` foldable, too, a custom implementation of the [DefaultFoldingRegionProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/folding/DefaultFoldingRegionProvider.java) is necessary:
+
+```java
+public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
+
+	@Override
+	protected void computeObjectFolding(EObject o, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		if (o instanceof Statemachine) {
+			XtextResource res = (XtextResource) o.eResource();
+			computeEventsFolding(res, foldingRegionAcceptor);
+			computeResetEventsFolding(res, foldingRegionAcceptor);
+			computeCommandsFolding(res, foldingRegionAcceptor);
+		} else {
+			super.computeObjectFolding(o, foldingRegionAcceptor);
+		}
+	}
+
+	private void computeEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		...
+	}
+
+	private void computeResetEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		...
+	}
+
+	private void computeCommandsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+		...
+	}
+	...
+}
+```
+
+Additionally, the [StatemachineFoldingRegionProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/folding/StatemachineFoldingRegionProvider.java) class has to be bound in the [StatemachineUiModule]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/StatemachineUiModule.java):
+```java
+public class StatemachineUiModule extends AbstractStatemachineUiModule {
+
+	...
+
+	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+		return StatemachineFoldingRegionProvider.class;
+	}
+}
+```
+
+As a result, not only the `state`, but also the `events`, `resetEvents` and `commands` regions become foldable:
+![](images/folding_customized.png)
+
 ## Hyperlinking {#hyperlinking}
 
 The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your grammar definition. You can either *CTRL-click* on any of these tokens or hit *F3* while the cursor position is at the token in question and this will take you to the referenced model element. As you'd expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.
