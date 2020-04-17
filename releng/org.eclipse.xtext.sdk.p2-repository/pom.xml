@@ -47,7 +47,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.1</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<phase>install</phase>
@@ -55,7 +55,7 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<tasks>
+							<target>
 								<copy todir="${basedir}/../../build/p2-repository/">
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
@@ -63,7 +63,7 @@
 									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.22.0-SNAPSHOT.zip"
 									tofile="${basedir}/../../build/org.eclipse.xtext.sdk.p2-repository-2.22.0-SNAPSHOT.zip">
 								</copy>
-							</tasks>
+							</target>
 						</configuration>
 					</execution>
 				</executions>
