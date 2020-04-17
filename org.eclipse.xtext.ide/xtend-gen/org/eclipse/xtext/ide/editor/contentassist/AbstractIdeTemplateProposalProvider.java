@@ -114,9 +114,10 @@ public abstract class AbstractIdeTemplateProposalProvider {
         int _offset = this.context.getReplaceRegion().getOffset();
         int _currentOffset = this.getCurrentOffset();
         final int offset = (_offset + _currentOffset);
+        List<TextRegion> _editPositions = this.entry.getEditPositions();
         int _length = varName.length();
         TextRegion _textRegion = new TextRegion(offset, _length);
-        this.entry.getEditPositions().add(_textRegion);
+        _editPositions.add(_textRegion);
         return varName;
       } else {
         if ((object instanceof AbstractIdeTemplateProposalProvider.Cursor)) {

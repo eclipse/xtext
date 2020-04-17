@@ -13,9 +13,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -128,7 +128,7 @@ public class IdeContentProposalProvider {
             String _name_1 = rule.getName();
             boolean _equals_1 = Objects.equal(_name_1, "STRING");
             if (_equals_1) {
-              ArrayList<TextRegion> _editPositions = it.getEditPositions();
+              List<TextRegion> _editPositions = it.getEditPositions();
               int _offset = context.getOffset();
               int _plus_1 = (_offset + 1);
               int _length = proposal.length();
@@ -137,7 +137,7 @@ public class IdeContentProposalProvider {
               _editPositions.add(_textRegion);
               it.setKind(ContentAssistEntry.KIND_TEXT);
             } else {
-              ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
+              List<TextRegion> _editPositions_1 = it.getEditPositions();
               int _offset_1 = context.getOffset();
               int _length_1 = proposal.length();
               TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
