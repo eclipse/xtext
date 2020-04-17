@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
@@ -9,6 +17,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.AccessorsDeprecationPolicy;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
@@ -115,6 +124,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return ((!this.hasGetter(it)) && (this.getGetterType(it) != AccessorType.NONE));
     }
     
+    @SuppressWarnings("unchecked")
     public AccessorType getGetterType(final FieldDeclaration it) {
       AnnotationReference _elvis = null;
       AnnotationReference _accessorsAnnotation = this.getAccessorsAnnotation(it);
@@ -147,6 +157,14 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     
     public AnnotationReference getAccessorsAnnotation(final AnnotationTarget it) {
       return it.findAnnotation(this.context.findTypeGlobally(Accessors.class));
+    }
+    
+    public AnnotationReference getDeprecatedAnnotation(final AnnotationTarget it) {
+      return it.findAnnotation(this.context.findTypeGlobally(Deprecated.class));
+    }
+    
+    public AccessorsDeprecationPolicy getDeprecationPolicyAsEnum(final AnnotationReference annot) {
+      return AccessorsDeprecationPolicy.valueOf(annot.getEnumValue("deprecationPolicy").getSimpleName());
     }
     
     public Object validateGetter(final MutableFieldDeclaration field) {
@@ -182,12 +200,66 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return ((!it.isInferred()) && Objects.equal(it, this.context.getPrimitiveBoolean()));
     }
     
+    @SuppressWarnings("unchecked")
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateGetter(field);
       field.markAsRead();
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(field));
         it.addAnnotation(this.context.newAnnotationReference(Pure.class));
+        final Iterable<? extends MethodDeclaration> superGetters = it.getOverriddenOrImplementedMethods();
+        boolean _isEmpty = IterableExtensions.isEmpty(superGetters);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          final Function1<MethodDeclaration, Boolean> _function_1 = (MethodDeclaration it_1) -> {
+            return Boolean.valueOf(it_1.isFinal());
+          };
+          boolean _exists = IterableExtensions.exists(superGetters, _function_1);
+          if (_exists) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Adding a getter to the field ");
+            String _simpleName = field.getSimpleName();
+            _builder.append(_simpleName);
+            _builder.append(" would override a final method.");
+            this.context.addError(field, _builder.toString());
+          } else {
+            it.addAnnotation(this.context.newAnnotationReference(Override.class));
+          }
+        }
+        final AnnotationReference annot = this.getAccessorsAnnotation(field);
+        if ((annot != null)) {
+          AccessorsDeprecationPolicy _deprecationPolicyAsEnum = this.getDeprecationPolicyAsEnum(annot);
+          if (_deprecationPolicyAsEnum != null) {
+            switch (_deprecationPolicyAsEnum) {
+              case ALWAYS:
+              case ONLY_GETTER:
+                it.addAnnotation(this.context.newAnnotationReference(Deprecated.class));
+                break;
+              case SAME_AS_FIELD:
+                AnnotationReference _deprecatedAnnotation = this.getDeprecatedAnnotation(field);
+                boolean _tripleNotEquals = (_deprecatedAnnotation != null);
+                if (_tripleNotEquals) {
+                  it.addAnnotation(this.context.newAnnotationReference(Deprecated.class));
+                }
+                break;
+              case ONLY_SETTER:
+              case NEVER:
+                break;
+              default:
+                StringConcatenation _builder_1 = new StringConcatenation();
+                _builder_1.append("Cannot determine deprecation policy for field ");
+                String _simpleName_1 = field.getSimpleName();
+                _builder_1.append(_simpleName_1);
+                throw new IllegalArgumentException(_builder_1.toString());
+            }
+          } else {
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("Cannot determine deprecation policy for field ");
+            String _simpleName_1 = field.getSimpleName();
+            _builder_1.append(_simpleName_1);
+            throw new IllegalArgumentException(_builder_1.toString());
+          }
+        }
         it.setReturnType(this.orObject(field.getType()));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -208,6 +280,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       field.getDeclaringType().addMethod(this.getGetterName(field), _function);
     }
     
+    @SuppressWarnings("unchecked")
     public AccessorType getSetterType(final FieldDeclaration it) {
       AnnotationReference _elvis = null;
       AnnotationReference _accessorsAnnotation = this.getAccessorsAnnotation(it);
@@ -274,11 +347,65 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
     }
     
+    @SuppressWarnings("unchecked")
     public void addSetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateSetter(field);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(field));
         it.setReturnType(this.context.getPrimitiveVoid());
+        final Iterable<? extends MethodDeclaration> superSetters = it.getOverriddenOrImplementedMethods();
+        boolean _isEmpty = IterableExtensions.isEmpty(superSetters);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          final Function1<MethodDeclaration, Boolean> _function_1 = (MethodDeclaration it_1) -> {
+            return Boolean.valueOf(it_1.isFinal());
+          };
+          boolean _exists = IterableExtensions.exists(superSetters, _function_1);
+          if (_exists) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Adding a setter to the field ");
+            String _simpleName = field.getSimpleName();
+            _builder.append(_simpleName);
+            _builder.append(" would override a final method.");
+            this.context.addError(field, _builder.toString());
+          } else {
+            it.addAnnotation(this.context.newAnnotationReference(Override.class));
+          }
+        }
+        final AnnotationReference annot = this.getAccessorsAnnotation(field);
+        if ((annot != null)) {
+          AccessorsDeprecationPolicy _deprecationPolicyAsEnum = this.getDeprecationPolicyAsEnum(annot);
+          if (_deprecationPolicyAsEnum != null) {
+            switch (_deprecationPolicyAsEnum) {
+              case ALWAYS:
+              case ONLY_SETTER:
+                it.addAnnotation(this.context.newAnnotationReference(Deprecated.class));
+                break;
+              case SAME_AS_FIELD:
+                AnnotationReference _deprecatedAnnotation = this.getDeprecatedAnnotation(field);
+                boolean _tripleNotEquals = (_deprecatedAnnotation != null);
+                if (_tripleNotEquals) {
+                  it.addAnnotation(this.context.newAnnotationReference(Deprecated.class));
+                }
+                break;
+              case ONLY_GETTER:
+              case NEVER:
+                break;
+              default:
+                StringConcatenation _builder_1 = new StringConcatenation();
+                _builder_1.append("Cannot determine deprecation policy for field ");
+                String _simpleName_1 = field.getSimpleName();
+                _builder_1.append(_simpleName_1);
+                throw new IllegalArgumentException(_builder_1.toString());
+            }
+          } else {
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("Cannot determine deprecation policy for field ");
+            String _simpleName_1 = field.getSimpleName();
+            _builder_1.append(_simpleName_1);
+            throw new IllegalArgumentException(_builder_1.toString());
+          }
+        }
         final MutableParameterDeclaration param = it.addParameter(field.getSimpleName(), this.orObject(field.getType()));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -323,13 +450,42 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
   protected void _transform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final AccessorsProcessor.Util util = new AccessorsProcessor.Util(context);
+    final AnnotationReference annot = util.getAccessorsAnnotation(it);
     boolean _shouldAddGetter = util.shouldAddGetter(it);
     if (_shouldAddGetter) {
       util.addGetter(it, util.toVisibility(util.getGetterType(it)));
+    } else {
+      if (((annot != null) && (util.getDeprecationPolicyAsEnum(annot) == AccessorsDeprecationPolicy.ONLY_GETTER))) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Field ");
+        String _simpleName = it.getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" needs no getter, but deprecationPolicy is ONLY_GETTER.");
+        _builder.newLineIfNotEmpty();
+        _builder.append("Explicitly setting it has no effect, as no getter will be generated.");
+        _builder.newLine();
+        _builder.append("Use deprecation policy NEVER to disable accessors deprecation and remove this warning.");
+        _builder.newLine();
+        context.addWarning(it, _builder.toString());
+      }
     }
     boolean _shouldAddSetter = util.shouldAddSetter(it);
     if (_shouldAddSetter) {
       util.addSetter(it, util.toVisibility(util.getSetterType(it)));
+    } else {
+      if (((annot != null) && (util.getDeprecationPolicyAsEnum(annot) == AccessorsDeprecationPolicy.ONLY_SETTER))) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Field ");
+        String _simpleName_1 = it.getSimpleName();
+        _builder_1.append(_simpleName_1);
+        _builder_1.append(" needs no setter, but deprecationPolicy is ONLY_SETTER.");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("Explicitly setting it has no effect, as no setter will be generated.");
+        _builder_1.newLine();
+        _builder_1.append("Use deprecation policy NEVER to disable accessors deprecation and remove this warning.");
+        _builder_1.newLine();
+        context.addWarning(it, _builder_1.toString());
+      }
     }
   }
   

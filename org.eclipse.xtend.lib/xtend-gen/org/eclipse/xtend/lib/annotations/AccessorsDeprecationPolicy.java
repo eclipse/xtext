@@ -12,28 +12,19 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
 /**
- * @since 2.7
- * @noreference
+ * @since 2.23
  */
 @Beta
 @GwtCompatible
 @SuppressWarnings("all")
-public enum AccessorType {
-  PUBLIC_GETTER,
+public enum AccessorsDeprecationPolicy {
+  SAME_AS_FIELD,
   
-  PROTECTED_GETTER,
+  ONLY_GETTER,
   
-  PACKAGE_GETTER,
+  ONLY_SETTER,
   
-  PRIVATE_GETTER,
+  ALWAYS,
   
-  PUBLIC_SETTER,
-  
-  PROTECTED_SETTER,
-  
-  PACKAGE_SETTER,
-  
-  PRIVATE_SETTER,
-  
-  NONE;
+  NEVER;
 }
