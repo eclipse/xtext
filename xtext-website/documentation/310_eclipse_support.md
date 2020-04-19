@@ -521,6 +521,34 @@ Often the default strategy only needs some guidance (e.g. selecting the text cor
 
 The hyperlinks are provided by the [HyperlinkHelper]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java) which will create links for cross-referenced objects by default. Clients may want to override `createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)` to provide additional links or supersede the default implementation.
 
+## Hovering {#hovering}
+Similar to [hyperlinking](#hyperlinking), Xtext-based editors provide hovering support on certain tokens: e.g. hovering over a cross-reference token, the Xtext framework shows the documentation of the element the cross-reference is referring to. Considering the Xtext Simple Arithmetics example, when hovering over a function call, a popup window displays the documentation of the called function:
+
+![](images/hovering.png)
+
+This functionality is implemented in the [DefaultEObjectHoverProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hover/html/DefaultEObjectHoverProvider.java) that delegates to the [MultiLineCommentDocumentationProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/documentation/impl/MultiLineCommentDocumentationProvider.java) class via the [IEObjectDocumentationProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/documentation/IEObjectDocumentationProvider.java) interface by default. Customization can happen e.g. by extending the `DefaultEObjectHoverProvider` class, overriding the `getHoverInfoAsHtml(EObject o)` method and binding the custom implementation in the corresponding UI module:
+
+```java
+public class MyDslHoverProvider extends DefaultEObjectHoverProvider {
+
+	@Override
+	protected String getHoverInfoAsHtml(EObject o) {
+		...
+	}
+
+}
+```
+
+```java
+public class MyDslUiModule extends AbstractMyDslUiModule {
+	
+	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return MyDslHoverProvider.class;
+	}
+
+}
+```
+
 ## Syntax Coloring {#highlighting}
 
 Besides the already mentioned advanced features like [content assist](#content-assist) and [code formatting](303_runtime_concepts.html#formatting) the powerful editor for your DSL is capable to mark up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some unintrusive colors for large blocks of comments while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating markup does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.
