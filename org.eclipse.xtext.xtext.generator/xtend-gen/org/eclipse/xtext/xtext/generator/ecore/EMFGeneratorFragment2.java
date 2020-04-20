@@ -569,6 +569,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
             genPackage.getClassPackageName(), 
             genPackage.getUtilitiesPackageName());
         }
+        List<StringConcatenationClient> _registrations = this.getLanguage().getRuntimeGenSetup().getRegistrations();
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -594,7 +595,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
             _builder.newLine();
           }
         };
-        this.getLanguage().getRuntimeGenSetup().getRegistrations().add(_client);
+        _registrations.add(_client);
       }
     }
   }
