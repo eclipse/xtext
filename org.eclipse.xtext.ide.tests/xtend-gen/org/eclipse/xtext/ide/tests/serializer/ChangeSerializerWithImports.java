@@ -55,7 +55,7 @@ public class ChangeSerializerWithImports {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.pstl", _builder_1.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Node _get = model.getChildren().get(0);

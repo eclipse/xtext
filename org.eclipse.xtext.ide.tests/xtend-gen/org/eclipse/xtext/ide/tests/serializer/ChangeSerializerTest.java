@@ -71,7 +71,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final MandatoryValue model = this._changeSerializerTestHelper.<MandatoryValue>contents(rs, "inmemory:/file1.pstl", MandatoryValue.class);
+    final MandatoryValue model = this._changeSerializerTestHelper.<MandatoryValue>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", MandatoryValue.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       model.setName("bar");
@@ -98,7 +98,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Node _get = model.getChildren().get(0);
@@ -130,7 +130,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EList<Node> _children = model.getChildren().get(0).getChildren();
@@ -172,7 +172,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EList<Node> _children = model.getChildren();
@@ -213,7 +213,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EList<Node> _children = model.getChildren().get(0).getChildren();
@@ -253,7 +253,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EcoreUtil.remove(model.getChildren().get(0).getChildren().get(0));
@@ -280,7 +280,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EcoreUtil.remove(model.getChildren().get(1));
@@ -310,7 +310,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Node _get = model.getChildren().get(0);
@@ -344,7 +344,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.pstl", _builder_1.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       model.setName("newroot");
@@ -389,7 +389,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Node _head = IterableExtensions.<Node>head(IterableExtensions.<Node>head(IterableExtensions.<Node>head(model.getChildren()).getChildren()).getChildren());
@@ -443,7 +443,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/file1.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Node _head = IterableExtensions.<Node>head(IterableExtensions.<Node>head(IterableExtensions.<Node>head(model.getChildren()).getChildren()).getChildren());
@@ -488,7 +488,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/f.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Node model = this._changeSerializerTestHelper.<Node>contents(rs, "inmemory:/f.pstl", Node.class);
+    final Node model = this._changeSerializerTestHelper.<Node>findFirstOfTypeInFile(rs, "inmemory:/f.pstl", Node.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       Resource _eResource = model.eResource();
@@ -528,7 +528,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file-move.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>contents(rs, "inmemory:/file-move.pstl", TwoChildLists.class);
+    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>findFirstOfTypeInFile(rs, "inmemory:/file-move.pstl", TwoChildLists.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EList<MandatoryValue> _directChildren = model.getDirectChildren();
@@ -589,7 +589,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file-move1.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>contents(rs, "inmemory:/file-move1.pstl", TwoChildLists.class);
+    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>findFirstOfTypeInFile(rs, "inmemory:/file-move1.pstl", TwoChildLists.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       final Function1<MandatoryValue, Boolean> _function_1 = (MandatoryValue it_1) -> {
@@ -650,7 +650,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file-move.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>contents(rs, "inmemory:/file-move.pstl", TwoChildLists.class);
+    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>findFirstOfTypeInFile(rs, "inmemory:/file-move.pstl", TwoChildLists.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       final Function1<MandatoryValue, Boolean> _function_1 = (MandatoryValue it_1) -> {
@@ -712,7 +712,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file-move2a.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>contents(rs, "inmemory:/file-move2a.pstl", TwoChildLists.class);
+    final TwoChildLists model = this._changeSerializerTestHelper.<TwoChildLists>findFirstOfTypeInFile(rs, "inmemory:/file-move2a.pstl", TwoChildLists.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       final Function1<MandatoryValue, Boolean> _function_1 = (MandatoryValue it_1) -> {
@@ -763,7 +763,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file-move3.pstl", _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final TwoChilds model = this._changeSerializerTestHelper.<TwoChilds>contents(rs, "inmemory:/file-move3.pstl", TwoChilds.class);
+    final TwoChilds model = this._changeSerializerTestHelper.<TwoChilds>findFirstOfTypeInFile(rs, "inmemory:/file-move3.pstl", TwoChilds.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       model.setDirectChild(model.getOptChild().getChild());
@@ -796,7 +796,7 @@ public class ChangeSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of(uri, _builder.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final ChildWithSubChilds model = this._changeSerializerTestHelper.<ChildWithSubChilds>contents(rs, uri, ChildWithSubChilds.class);
+    final ChildWithSubChilds model = this._changeSerializerTestHelper.<ChildWithSubChilds>findFirstOfTypeInFile(rs, uri, ChildWithSubChilds.class);
     final IChangeSerializer serializer = this._changeSerializerTestHelper.newChangeSerializer();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EList<ChildWithSubChild> _children = model.getChildren();

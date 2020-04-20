@@ -1163,7 +1163,7 @@ public class PartialSerializerTest {
     Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _string);
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final T model = this._changeSerializerTestHelper.<T>contents(rs, "inmemory:/file1.pstl", modelType);
+    final T model = this._changeSerializerTestHelper.<T>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", modelType);
     final ChangeSerializer serializer = this.serializerProvider.get();
     serializer.<T>addModification(model, modification);
     return this._changeSerializerTestHelper.endRecordChangesToTextRegions(serializer);
