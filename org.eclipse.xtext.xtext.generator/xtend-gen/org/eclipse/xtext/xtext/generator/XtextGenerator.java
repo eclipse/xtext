@@ -373,9 +373,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       if (_isModified) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         merge.write(out);
+        String _path = manifest.getPath();
         byte[] _byteArray = out.toByteArray();
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-        metaInf.generateFile(manifest.getPath(), _byteArrayInputStream);
+        metaInf.generateFile(_path, _byteArrayInputStream);
       }
     } finally {
       if ((in != null)) {

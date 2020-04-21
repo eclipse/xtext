@@ -270,9 +270,10 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         mergeableManifest.setLineDelimiter(this.lineDelimiter);
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         mergeableManifest.write(bout);
+        String _path = this.getPath();
         byte[] _byteArray = bout.toByteArray();
         ByteArrayInputStream _byteArrayInputStream_1 = new ByteArrayInputStream(_byteArray);
-        fileSystemAccess.generateFile(this.getPath(), _byteArrayInputStream_1);
+        fileSystemAccess.generateFile(_path, _byteArrayInputStream_1);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

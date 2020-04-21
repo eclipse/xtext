@@ -38,6 +38,7 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
   
   @Override
   public void generate() {
+    List<StringConcatenationClient> _registrations = this.getLanguage().getRuntimeGenSetup().getRegistrations();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -69,7 +70,7 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
         }
       }
     };
-    this.getLanguage().getRuntimeGenSetup().getRegistrations().add(_client);
+    _registrations.add(_client);
     IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
     PluginXmlAccess _pluginXml = null;
     if (_eclipsePlugin!=null) {
