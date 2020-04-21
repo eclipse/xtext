@@ -13,8 +13,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -174,7 +174,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
       int _length = importSectionRegion.getLength();
       final int insertionOffset = (_offset + _length);
       final String declaration = ("\nimport " + qualifiedName);
-      ArrayList<ReplaceRegion> _textReplacements = entry.getTextReplacements();
+      List<ReplaceRegion> _textReplacements = entry.getTextReplacements();
       ReplaceRegion _replaceRegion = new ReplaceRegion(insertionOffset, 0, declaration);
       _xblockexpression = _textReplacements.add(_replaceRegion);
     }

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ide.contentassist;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -103,7 +102,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         if ((bracketInfo.selectionOffset != 0)) {
           int _offset_1 = offset;
           offset = (_offset_1 + bracketInfo.selectionOffset);
-          ArrayList<TextRegion> _editPositions = result.getEditPositions();
+          List<TextRegion> _editPositions = result.getEditPositions();
           TextRegion _textRegion = new TextRegion(offset, bracketInfo.selectionLength);
           _editPositions.add(_textRegion);
         }
