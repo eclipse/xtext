@@ -145,6 +145,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
       }
       Output _output = ctx.getOutput();
       final StringConcatenation result = ((StringConcatOutputImpl) _output).getStringOutlet();
+      List<StringConcatenationClient> _registrations = config2.getRuntimeGenSetup().getRegistrations();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -152,7 +153,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
           _builder.append(_decreaseIndentation);
         }
       };
-      config2.getRuntimeGenSetup().getRegistrations().add(_client);
+      _registrations.add(_client);
       Set<TypeReference> _imports = config2.getRuntimeGenSetup().getImports();
       TypeReference _typeReference = new TypeReference("org.eclipse.emf.ecore.EPackage");
       _imports.add(_typeReference);
