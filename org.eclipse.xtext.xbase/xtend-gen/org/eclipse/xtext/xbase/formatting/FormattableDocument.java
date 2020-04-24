@@ -539,18 +539,19 @@ public class FormattableDocument {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
           int _offset = edit.getOffset();
+          int _offset_1 = edit.getOffset();
           int _length = edit.getLength();
-          int _plus = (_offset + _length);
-          String _substring = this.document.substring(edit.getOffset(), _plus);
+          int _plus = (_offset_1 + _length);
+          String _substring = this.document.substring(_offset, _plus);
           _builder.append(_substring);
           _builder.append("|");
           String _text = edit.getText();
           _builder.append(_text);
           _builder.append("]");
           debugTrace.append(_builder);
-          int _offset_1 = edit.getOffset();
+          int _offset_2 = edit.getOffset();
           int _length_1 = edit.getLength();
-          int _plus_1 = (_offset_1 + _length_1);
+          int _plus_1 = (_offset_2 + _length_1);
           lastOffset = _plus_1;
         }
       }
