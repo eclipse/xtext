@@ -20,7 +20,6 @@ import java.io.PrintStream
 import java.io.PrintWriter
 import org.eclipse.lsp4j.jsonrpc.Launcher
 import org.eclipse.lsp4j.services.LanguageClient
-import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -129,12 +128,4 @@ class ServerLauncher {
 		new ByteArrayInputStream(newByteArrayOfSize(0))
 	}
 
-}
-
-@Accessors
-class LaunchArgs {
-	InputStream in
-	OutputStream out
-	PrintWriter trace
-	boolean validate
 }
