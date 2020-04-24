@@ -46,9 +46,9 @@ public class NavigationService {
 		if (selection instanceof IStructuredSelection) {
 			Iterator<?> iterator = ((IStructuredSelection) selection).iterator();
 			while (iterator.hasNext()) {
-				IStructuredSelection structuredSelection = (IStructuredSelection) iterator.next();
-				if (structuredSelection instanceof INavigatable) {
-					open((INavigatable) structuredSelection, select);
+				Object element = iterator.next();
+				if (element instanceof INavigatable) {
+					open((INavigatable) element, select);
 				}
 			}
 		}
