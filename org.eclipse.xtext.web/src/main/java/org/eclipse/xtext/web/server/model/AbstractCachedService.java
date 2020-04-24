@@ -10,8 +10,6 @@ package org.eclipse.xtext.web.server.model;
 
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.IServiceResult;
-import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 
 /**
  * Superclass for services that support caching their results in the document. Such a service is
