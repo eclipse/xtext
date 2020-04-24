@@ -237,7 +237,7 @@ public void createReferenceType(Issue issue, IssueResolutionAcceptor acceptor) {
 Hence, there is the [ISyntaxErrorMessageProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java) to assign issue codes to syntactical errors.
 
 ## Auto Editing {#autoediting}
-Xtext-based editors automatically assist the user by inserting/deleting certain text on typing. E.g. inserting/removing closing single quotes, double quotes, parenthesis, square brackets or curly braces when the user inserts/removes the opening ones. Moreover, the auto-indentation functionality ensures the indentation-awareness of new lines: after hitting the `ENTER` key e.g. in a block enclosed by curly braces the cursor is automatically placed on the indented position in the subsequent new line.
+Xtext-based editors automatically assist the user by inserting/deleting certain text at typetime, e.g. inserting/removing closing single quotes, double quotes, parenthesis, square brackets or curly braces when the user inserts/removes the opening ones. Moreover, the auto-indentation functionality ensures the indentation-awareness of new lines: after hitting the `ENTER` key e.g. in a block enclosed by curly braces the cursor is automatically placed on the indented position in the subsequent new line.
 
 This default behaviour can be customized by extending the [DefaultAutoEditStrategyProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java) class. The Xtext Simple Arithmetics example provides an interactive interpreter as an auto editing strategy by binding the customized [AutoEditStrategy]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/arithmetics/org.eclipse.xtext.example.arithmetics.ui/src/org/eclipse/xtext/example/arithmetics/ui/autoedit/AutoEditStrategy.java) class in the [ArithmeticsUiModule]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/arithmetics/org.eclipse.xtext.example.arithmetics.ui/src/org/eclipse/xtext/example/arithmetics/ui/ArithmeticsUiModule.java).
 
@@ -491,13 +491,13 @@ Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the
 
 ## Folding {#folding}
 
-Xtext calculates the editor folding regions based on the grammar out-of-the-box. Althought it comes with good defaults, sometimes they do not satisfy the needs and have to be customized.
+Xtext calculates the editor folding regions based on the grammar out-of-the-box. Although it comes with good defaults, sometimes they do not satisfy the needs and have to be customized.
 
 Considering e.g the Xtext Statemachine example, the framework provides folding capabilities for the `state` regions:
 
 ![](images/folding_default.png)
 
-In order to make `events`, `resetEvents` and `commands` foldable, too, a custom implementation of the [DefaultFoldingRegionProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/folding/DefaultFoldingRegionProvider.java) is necessary:
+In order to make `events`, `resetEvents` and `commands` foldable too, a custom implementation of the [DefaultFoldingRegionProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/folding/DefaultFoldingRegionProvider.java) is necessary:
 
 ```java
 public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
