@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,7 +24,7 @@ import static extension org.eclipse.xtext.util.Strings.*
  */
 class ProgressReportingTest extends AbstractResourceRelocationTest {
 	@Test 
-	def void testProgressReportOfRenameCommonDir() {
+	def void testProgressReportOfRenameCommonDir() throws Exception {
 		val x = file('foo/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -68,7 +68,7 @@ class ProgressReportingTest extends AbstractResourceRelocationTest {
 		''')
 	}
 	
-	protected def performRename(IResource theResource, String theNewName, IProgressMonitor monitor) {
+	protected def performRename(IResource theResource, String theNewName, IProgressMonitor monitor) throws Exception {
 		performRefactoring(new RenameResourceDescriptor() => [
 			resourcePath = theResource.fullPath
 			newName = theNewName

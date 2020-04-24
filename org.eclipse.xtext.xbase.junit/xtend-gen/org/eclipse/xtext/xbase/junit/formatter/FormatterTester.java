@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtext.xbase.junit.formatter;
 
 import com.google.common.collect.Iterables;
@@ -193,18 +201,19 @@ public class FormatterTester {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
           int _offset = edit.getOffset();
+          int _offset_1 = edit.getOffset();
           int _length = edit.getLength();
-          int _plus = (_offset + _length);
-          String _substring = oldDocument.substring(edit.getOffset(), _plus);
+          int _plus = (_offset_1 + _length);
+          String _substring = oldDocument.substring(_offset, _plus);
           _builder.append(_substring);
           _builder.append("|");
           String _text = edit.getText();
           _builder.append(_text);
           _builder.append("]");
           debugTrace.append(_builder);
-          int _offset_1 = edit.getOffset();
+          int _offset_2 = edit.getOffset();
           int _length_1 = edit.getLength();
-          int _plus_1 = (_offset_1 + _length_1);
+          int _plus_1 = (_offset_2 + _length_1);
           lastOffset = _plus_1;
         }
       }

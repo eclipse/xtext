@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.tests.util
 
 import org.junit.Test
 import static org.junit.Assert.*
-import org.eclipse.xtext.ui.util.PluginProjectFactory
 import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform
 
 /**
@@ -41,12 +40,4 @@ class PluginProjectFactoryTest {
 		      entry2,\
 		      entry3'''.toString, toPlatform(content.toString))
 	}
-}
-
-class TestablePluginProjectFactory extends PluginProjectFactory {
-
-	override addToBuildProperties(StringBuilder content, Iterable<String> entries, String entryName) {
-		super.addToBuildProperties(content, entries, entryName)
-	}
-
 }

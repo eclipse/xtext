@@ -26,7 +26,6 @@ import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JavaVersion
 
@@ -213,12 +212,4 @@ class InMemoryJavaCompiler {
 		}
 	}
 
-}
-
-/**
- * @since 2.9
- */
-@Data class JavaSource {
-	String fileName
-	String code
 }
