@@ -115,7 +115,7 @@ Operation:
 
 Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102_domainmodelwalkthrough.html), but other parts are different.
 
-1.
+1. 
 
     ```xtext
     grammar org.example.domainmodel.Domainmodel with
@@ -123,9 +123,9 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
     ```
 
     The first thing to note is that instead of inheriting from the usual *org.eclipse.xtext.common.Terminals* grammar, we make use of *org.eclipse.xtext.xbase.Xbase*. Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
-    
-1.      
-    
+
+1. 
+
     ```xtext
     Domainmodel:
         importSection=XImportSection?
@@ -133,8 +133,8 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
     ```
 
     A *Domainmodel* contains an optional import section and an arbitrary number of *AbstractElements*. The concept of *XImportSection* is part of *org.eclipse.xtext.xbase.Xbase* and comes with tool support and syntax like you know it from Java.
-1.
-    
+1. 
+
     ```xtext
     AbstractElement:
         PackageDeclaration | Entity;
@@ -142,7 +142,7 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
 
     The rule *AbstractElement* delegates to either the rule *PackageDeclaration* or the rule *Entity*.
 1. 
-    
+
     ```xtext
     PackageDeclaration:
         'package' name=QualifiedName '{'
@@ -152,7 +152,7 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
 
     A *PackageDeclaration* is used to declare a name space which can again contain any number of *AbstractElement*s. Xtext has built-in support for qualified names and scoping based on the hierarchy of the produced model. The default implementation will add the package names as the prefix to contained entities and nested packages. The qualified name of an *Entity* 'Baz' which is contained in a *PackageDeclaration* 'foo.bar' will be 'foo.bar.Baz'. In case you do not like the default behavior you will need to use a different implementation of [IQualifiedNameProvider]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java).
 1. 
-    
+
     ```xtext
     Entity:
         'entity' name=ValidID ('extends' superType=JvmTypeReference)? '{'
@@ -178,7 +178,7 @@ Some parts of this grammar are equal to the one in the [15 Minutes Tutorial](102
 
     A *Property* has a name and makes again use of the inherited rule *JvmTypeReference*.
 1. 
-    
+
     ```xtext
     Operation:
         'op' name=ValidID 
