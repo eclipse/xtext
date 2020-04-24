@@ -236,6 +236,8 @@
 				<topic href="contents/310_eclipse_support.html#quick-fixes-for-linking-errors-and-syntax-errors" label="Quick Fixes for Linking Errors and Syntax Errors">
 				</topic>
 			</topic>
+			<topic href="contents/310_eclipse_support.html#autoediting" label="Auto Editing">
+			</topic>
 			<topic href="contents/310_eclipse_support.html#templates" label="Template Proposals">
 				<topic href="contents/310_eclipse_support.html#cross-reference-template-variable-resolver" label="Cross Reference Template Variable Resolver">
 				</topic>
@@ -254,11 +256,15 @@
 				<topic href="contents/310_eclipse_support.html#quick-outline" label="Quick Outline">
 				</topic>
 			</topic>
+			<topic href="contents/310_eclipse_support.html#folding" label="Folding">
+			</topic>
 			<topic href="contents/310_eclipse_support.html#hyperlinking" label="Hyperlinking">
 				<topic href="contents/310_eclipse_support.html#location-provider" label="Location Provider">
 				</topic>
 				<topic href="contents/310_eclipse_support.html#customizing-available-hyperlinks" label="Customizing Available Hyperlinks">
 				</topic>
+			</topic>
+			<topic href="contents/310_eclipse_support.html#hovering" label="Hovering">
 			</topic>
 			<topic href="contents/310_eclipse_support.html#highlighting" label="Syntax Coloring">
 				<topic href="contents/310_eclipse_support.html#lexical-highlighting" label="Lexical Highlighting">

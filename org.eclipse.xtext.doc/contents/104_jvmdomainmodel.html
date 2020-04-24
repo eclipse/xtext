@@ -147,17 +147,15 @@ Operation:
 
 <p>Some parts of this grammar are equal to the one in the <a href="102_domainmodelwalkthrough.html">15 Minutes Tutorial</a>, but other parts are different.</p>
 
-<p>1.</p>
+<ol>
+  <li>
 
-<pre><code>```xtext
-grammar org.example.domainmodel.Domainmodel with
+    <pre><code class="language-xtext">grammar org.example.domainmodel.Domainmodel with
               org.eclipse.xtext.xbase.Xbase
-```
-
-The first thing to note is that instead of inheriting from the usual *org.eclipse.xtext.common.Terminals* grammar, we make use of *org.eclipse.xtext.xbase.Xbase*. Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.
 </code></pre>
 
-<ol>
+    <p>The first thing to note is that instead of inheriting from the usual <em>org.eclipse.xtext.common.Terminals</em> grammar, we make use of <em>org.eclipse.xtext.xbase.Xbase</em>. Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.</p>
+  </li>
   <li>
 
     <pre><code class="language-xtext">Domainmodel:
@@ -165,8 +163,9 @@ The first thing to note is that instead of inheriting from the usual *org.eclips
     elements+=AbstractElement*;
 </code></pre>
 
-    <p>A <em>Domainmodel</em> contains an optional import section and an arbitrary number of <em>AbstractElements</em>. The concept of <em>XImportSection</em> is part of <em>org.eclipse.xtext.xbase.Xbase</em> and comes with tool support and syntax like you know it from Java.<br />
-1.</p>
+    <p>A <em>Domainmodel</em> contains an optional import section and an arbitrary number of <em>AbstractElements</em>. The concept of <em>XImportSection</em> is part of <em>org.eclipse.xtext.xbase.Xbase</em> and comes with tool support and syntax like you know it from Java.</p>
+  </li>
+  <li>
 
     <pre><code class="language-xtext">AbstractElement:
     PackageDeclaration | Entity;
