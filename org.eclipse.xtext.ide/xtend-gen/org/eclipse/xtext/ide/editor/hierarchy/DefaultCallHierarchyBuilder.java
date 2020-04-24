@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -103,6 +105,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     final IUnitOfWork<Object, EObject> _function = (EObject sourceDeclaration) -> {
       Object _xblockexpression = null;
       {
+        IReferenceFinder _referenceFinder = this.getReferenceFinder();
         IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
         final IAcceptor<IReferenceDescription> _function_1 = (IReferenceDescription reference) -> {
           boolean _filterReference = this.filterReference(reference);
@@ -116,7 +119,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
           }
         };
         ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function_1);
-        this.getReferenceFinder().findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
+        _referenceFinder.findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
         _xblockexpression = null;
       }
       return _xblockexpression;
@@ -126,6 +129,9 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   
   protected void findSourceDeclarations(final URI targetDeclarationURI, final IProgressMonitor monitor, final Procedure2<? super IEObjectDescription, ? super IReferenceDescription> acceptor) {
     final TargetURIs targetURIs = this.collectTargetURIs(targetDeclarationURI);
+    IReferenceFinder _referenceFinder = this.getReferenceFinder();
+    IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
+    IResourceDescriptions _indexData = this.getIndexData();
     IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
     final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
       boolean _filterReference = this.filterReference(reference);
@@ -139,9 +145,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
       }
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function);
-    this.getReferenceFinder().findAllReferences(targetURIs, 
-      this.getResourceAccess(), 
-      this.getIndexData(), _referenceAcceptor, monitor);
+    _referenceFinder.findAllReferences(targetURIs, _resourceAccess, _indexData, _referenceAcceptor, monitor);
   }
   
   protected TargetURIs collectTargetURIs(final URI targetURI) {
