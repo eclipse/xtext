@@ -8,14 +8,12 @@
  */
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
-import com.google.inject.Injector;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest;
 import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,16 +21,9 @@ import org.junit.runner.RunWith;
  * @author loradd - Initial contribution and API
  */
 @RunWith(XtextRunner.class)
-@InjectWith(XtextGrammarQuickfixTest.InjectorProvider.class)
+@InjectWith(XtextUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
-  public static class InjectorProvider implements IInjectorProvider {
-    @Override
-    public Injector getInjector() {
-      return Activator.getDefault().getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT);
-    }
-  }
-  
   @Test
   public void test_fix_missing_rule() {
     StringConcatenation _builder = new StringConcatenation();

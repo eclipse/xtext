@@ -8,11 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix
 
-import org.eclipse.xtext.testing.IInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest
-import org.eclipse.xtext.xtext.ui.Activator
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -23,7 +22,7 @@ import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.SPACES_IN_KEYW
  * @author loradd - Initial contribution and API
  */
 @RunWith(XtextRunner)
-@InjectWith(XtextGrammarQuickfixTest.InjectorProvider)
+@InjectWith(XtextUiInjectorProvider)
 class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 
 	@Test def test_fix_missing_rule() {
@@ -116,11 +115,4 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 
 		input.testQuickfixesOn(issueCode, new Quickfix(label, description, result))
 	}
-
-	static class InjectorProvider implements IInjectorProvider {
-		override getInjector() {
-			Activator.getDefault().getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT)
-		}
-	}
-
 }
