@@ -229,6 +229,13 @@ public void createReferenceType(Issue issue, IssueResolutionAcceptor acceptor) {
 
 <p>Hence, there is the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java">ISyntaxErrorMessageProvider</a> to assign issue codes to syntactical errors.</p>
 
+<h2 id="autoediting">Auto Editing</h2>
+<p>Xtext-based editors automatically assist the user by inserting/deleting certain text at typetime, e.g. inserting/removing closing single quotes, double quotes, parenthesis, square brackets or curly braces when the user inserts/removes the opening ones. Moreover, the auto-indentation functionality ensures the indentation-awareness of new lines: after hitting the <code>ENTER</code> key e.g. in a block enclosed by curly braces the cursor is automatically placed on the indented position in the subsequent new line.</p>
+
+<p>This default behaviour can be customized by extending the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/autoedit/DefaultAutoEditStrategyProvider.java">DefaultAutoEditStrategyProvider</a> class. The Xtext Simple Arithmetics example provides an interactive interpreter as an auto editing strategy by binding the customized <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/arithmetics/org.eclipse.xtext.example.arithmetics.ui/src/org/eclipse/xtext/example/arithmetics/ui/autoedit/AutoEditStrategy.java">AutoEditStrategy</a> class in the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/arithmetics/org.eclipse.xtext.example.arithmetics.ui/src/org/eclipse/xtext/example/arithmetics/ui/ArithmeticsUiModule.java">ArithmeticsUiModule</a>.</p>
+
+<p><img src="images/autoediting.gif" alt="" /></p>
+
 <h2 id="templates">Template Proposals</h2>
 
 <p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named <em>templates.xml</em> inside the <em>templates</em> directory of the generated UI-plug-in. This file contains templates in a format as described in the <a href="http://help.eclipse.org/luna/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm">Eclipse online help</a>.</p>
@@ -466,6 +473,59 @@ public Class&lt;? extends IComparator&gt;
 
 <p>Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline, you have to put the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/QuickOutlineFragment2.xtend">QuickOutlineFragment2</a> into your workflow.</p>
 
+<h2 id="folding">Folding</h2>
+
+<p>Xtext calculates the editor folding regions based on the grammar out-of-the-box. Although it comes with good defaults, sometimes they do not satisfy the needs and have to be customized.</p>
+
+<p>Considering e.g the Xtext Statemachine example, the framework provides folding capabilities for the <code>state</code> regions:</p>
+
+<p><img src="images/folding_default.png" alt="" /></p>
+
+<p>In order to make <code>events</code>, <code>resetEvents</code> and <code>commands</code> foldable too, a custom implementation of the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/folding/DefaultFoldingRegionProvider.java">DefaultFoldingRegionProvider</a> is necessary:</p>
+
+<pre><code class="language-java">public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
+
+	@Override
+	protected void computeObjectFolding(EObject o, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+		if (o instanceof Statemachine) {
+			XtextResource res = (XtextResource) o.eResource();
+			computeEventsFolding(res, foldingRegionAcceptor);
+			computeResetEventsFolding(res, foldingRegionAcceptor);
+			computeCommandsFolding(res, foldingRegionAcceptor);
+		} else {
+			super.computeObjectFolding(o, foldingRegionAcceptor);
+		}
+	}
+
+	private void computeEventsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+		...
+	}
+
+	private void computeResetEventsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+		...
+	}
+
+	private void computeCommandsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+		...
+	}
+	...
+}
+</code></pre>
+
+<p>Additionally, the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/folding/StatemachineFoldingRegionProvider.java">StatemachineFoldingRegionProvider</a> class has to be bound in the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/StatemachineUiModule.java">StatemachineUiModule</a>:</p>
+<pre><code class="language-java">public class StatemachineUiModule extends AbstractStatemachineUiModule {
+
+	...
+
+	public Class&lt;? extends IFoldingRegionProvider&gt; bindIFoldingRegionProvider() {
+		return StatemachineFoldingRegionProvider.class;
+	}
+}
+</code></pre>
+
+<p>As a result, not only the <code>state</code>, but also the <code>events</code>, <code>resetEvents</code> and <code>commands</code> regions become foldable:<br />
+<img src="images/folding_customized.png" alt="" /></p>
+
 <h2 id="hyperlinking">Hyperlinking</h2>
 
 <p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your grammar definition. You can either <em>CTRL-click</em> on any of these tokens or hit <em>F3</em> while the cursor position is at the token in question and this will take you to the referenced model element. As you’d expect this works for references to elements in the same resource as well as for references to elements in other resources. In the latter case the referenced resource will first be opened using the corresponding editor.</p>
@@ -498,6 +558,32 @@ public Class&lt;? extends IComparator&gt;
 <h3 id="customizing-available-hyperlinks">Customizing Available Hyperlinks</h3>
 
 <p>The hyperlinks are provided by the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java">HyperlinkHelper</a> which will create links for cross-referenced objects by default. Clients may want to override <code>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)</code> to provide additional links or supersede the default implementation.</p>
+
+<h2 id="hovering">Hovering</h2>
+<p>Similar to <a href="#hyperlinking">hyperlinking</a>, Xtext-based editors provide hovering support on certain tokens: e.g. hovering over a cross-reference token, the Xtext framework shows the documentation of the element the cross-reference is referring to. Considering the Xtext Simple Arithmetics example, when hovering over a function call, a popup window displays the documentation of the called function:</p>
+
+<p><img src="images/hovering.png" alt="" /></p>
+
+<p>This functionality is implemented in the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hover/html/DefaultEObjectHoverProvider.java">DefaultEObjectHoverProvider</a> that delegates to the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/documentation/impl/MultiLineCommentDocumentationProvider.java">MultiLineCommentDocumentationProvider</a> class via the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/documentation/IEObjectDocumentationProvider.java">IEObjectDocumentationProvider</a> interface by default. Customization can happen e.g. by extending the <code>DefaultEObjectHoverProvider</code> class, overriding the <code>getHoverInfoAsHtml(EObject o)</code> method and binding the custom implementation in the corresponding UI module:</p>
+
+<pre><code class="language-java">public class MyDslHoverProvider extends DefaultEObjectHoverProvider {
+
+	@Override
+	protected String getHoverInfoAsHtml(EObject o) {
+		...
+	}
+
+}
+</code></pre>
+
+<pre><code class="language-java">public class MyDslUiModule extends AbstractMyDslUiModule {
+	
+	public Class&lt;? extends IEObjectHoverProvider&gt; bindIEObjectHoverProvider() {
+		return MyDslHoverProvider.class;
+	}
+
+}
+</code></pre>
 
 <h2 id="highlighting">Syntax Coloring</h2>
 
