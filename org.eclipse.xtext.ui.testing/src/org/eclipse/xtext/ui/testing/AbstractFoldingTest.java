@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.testing;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.BadLocationException;
@@ -57,7 +56,7 @@ public abstract class AbstractFoldingTest extends AbstractEditorTest {
 	 *            The DSL text where the expected folding regions are enclosed by the {@link #b() b} and {@link #e() e} symbols.
 	 */
 	public void testFoldingRegions(CharSequence charSequence) {
-		IFile file = dslFile(getProjectName(), getFileName(), getFileExtension(), charSequence);
+		IFile file = dslFile(getProjectName(), getFileName(), getFileExtension(), getContent(charSequence));
 		foldingRegionsArePresent(openInEditor(file), charSequence);
 	}
 
