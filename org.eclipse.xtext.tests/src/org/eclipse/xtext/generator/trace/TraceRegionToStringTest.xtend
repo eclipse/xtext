@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,15 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace
 
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.trace.TraceRegionToStringTester.Location
 import org.eclipse.xtext.generator.trace.TraceRegionToStringTester.Region
-import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
 import org.junit.Assert
 import org.junit.Test
-import java.util.Collection
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -180,62 +176,6 @@ class TraceRegionToStringTest {
 	def void ===(TraceRegionToStringTester actual, CharSequence expectation) {
 		val rendered = actual.toString
 		Assert.assertEquals(expectation.toString.trim, rendered)
-	}
-
-}
-
-@Accessors class TraceRegionToStringTester extends AbstractTraceRegionToString {
-
-	static class Location extends LocationData {
-
-		new(int offset, int length, SourceRelativeURI path) {
-			super(offset, length, 0, 0, path)
-		}
-
-		new(int offset, int length) {
-			this(offset, length, null)
-		}
-
-	}
-
-	static class Region extends TraceRegion {
-		
-		new(int myOffset, int myLength, Collection<ILocationData> allLocationData, AbstractTraceRegion parent) {
-			super(myOffset, myLength, 0, 0, true, allLocationData, parent)
-		}
-		
-		new(int myOffset, int myLength, Collection<ILocationData> allLocationData) {
-			super(myOffset, myLength, 0, 0, true, allLocationData, null)
-		}
-
-		def Region addChild(int myOffset, int myLength, List<ILocationData> allLocationData) {
-			val child = new Region(myOffset, myLength, allLocationData, this)
-			return child
-		}
-
-	}
-
-	val uri1 = new SourceRelativeURI("remote1")
-	val uri2 = new SourceRelativeURI("remote2")
-	String localText
-	String remote1
-	String remote2
-	ITextRegion localFrame
-	Region trace
-
-	new() {
-		showLegend = false
-	}
-
-	override protected getRemoteText(SourceRelativeURI uri) {
-		switch uri {
-			case uri1: remote1
-			case uri2: remote2
-		}
-	}
-
-	override protected getLocalTitle() {
-		"local1"
 	}
 
 }

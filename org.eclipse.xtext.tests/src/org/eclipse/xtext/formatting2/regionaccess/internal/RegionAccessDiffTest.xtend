@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -30,7 +30,7 @@ class RegionAccessDiffTest {
 	@Inject extension RegionAccessTestHelper
 	@Inject Serializer serializer
 
-	@Test def void testEmptyModification() {
+	@Test def void testEmptyModification() throws Exception {
 		val access = '''
 			1 foo
 		'''.toTextRegionAccess
@@ -55,7 +55,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 
-	@Test def void testSingleSemanticToken() {
+	@Test def void testSingleSemanticToken() throws Exception {
 		val access = '''
 			1 foo
 		'''.toTextRegionAccess
@@ -77,7 +77,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 
-	@Test def void testSerializeChildObject() {
+	@Test def void testSerializeChildObject() throws Exception {
 		val access = '''
 			2 foo
 		'''.toTextRegionAccess
@@ -104,7 +104,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 
-	@Test def void testSerializeRootObject() {
+	@Test def void testSerializeRootObject() throws Exception {
 		val access = '''
 			3 foo
 		'''.toTextRegionAccess
@@ -131,7 +131,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 
-	@Test def void testDeleteOne() {
+	@Test def void testDeleteOne() throws Exception {
 		val access = '''
 			4/*1*/prefix/*2*/foo
 		'''.toTextRegionAccess
@@ -158,7 +158,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 
-	@Test def void testDeleteTwo() {
+	@Test def void testDeleteTwo() throws Exception {
 		val access = '''
 			4/*1*/prefix/*2*/foo/*3*/
 		'''.toTextRegionAccess
@@ -184,7 +184,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 	
-	@Test def void testInsertInsertReplace() {
+	@Test def void testInsertInsertReplace() throws Exception {
 		val access = '''
 			8 a
 		'''.toTextRegionAccess
@@ -215,7 +215,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 	
-	@Test def void testInsertReplaceReplace() {
+	@Test def void testInsertReplaceReplace() throws Exception {
 		val access = '''
 			8 a
 		'''.toTextRegionAccess
@@ -238,7 +238,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 	
-	@Test def void testInsertBeforeComment() {
+	@Test def void testInsertBeforeComment() throws Exception {
 		val access = '''
 			8
 			/**/
@@ -270,7 +270,7 @@ class RegionAccessDiffTest {
 		'''
 	}
 	
-	@Test def void testMove() {
+	@Test def void testMove() throws Exception {
 		val access = '''
 			8 a b c
 		'''.toTextRegionAccess
