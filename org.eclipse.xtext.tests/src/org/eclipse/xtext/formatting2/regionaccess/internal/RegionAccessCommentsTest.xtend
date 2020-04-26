@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 class RegionAccessCommentsTest {
 	@Inject extension RegionAccessTestHelper
 
-	@Test def void testDeleteFirstRegion1() {
+	@Test def void testDeleteFirstRegion1() throws Exception {
 		val access = '''
 			/*h*/
 			
@@ -58,7 +58,7 @@ class RegionAccessCommentsTest {
 		'''
 	}
 	
-	@Test def void testDeleteFirstRegion2() {
+	@Test def void testDeleteFirstRegion2() throws Exception {
 		val access = '''
 			/*h*/
 			
@@ -95,7 +95,7 @@ class RegionAccessCommentsTest {
 		'''
 	}
 	
-	@Test def void testDeleteFirstRegion3() {
+	@Test def void testDeleteFirstRegion3() throws Exception {
 		val access = '''
 			/*h*/
 			/*81*/
@@ -134,7 +134,7 @@ class RegionAccessCommentsTest {
 		'''
 	}
 	
-	@Test def void testDeleteFirstRegion4() {
+	@Test def void testDeleteFirstRegion4() throws Exception {
 		val access = '''
 			/*h*/
 			/*81*/
@@ -175,7 +175,7 @@ class RegionAccessCommentsTest {
 		'''
 	}
 	
-	@Test def void testDeleteMiddleRegion() {
+	@Test def void testDeleteMiddleRegion() throws Exception {
 		val access = '''
 			8
 			a /*a*/ //a
@@ -212,7 +212,7 @@ class RegionAccessCommentsTest {
 		'''
 	}
 
-	@Test def void testMove() {
+	@Test def void testMove() throws Exception {
 		val access = '''
 			8//8
 			/*a*/

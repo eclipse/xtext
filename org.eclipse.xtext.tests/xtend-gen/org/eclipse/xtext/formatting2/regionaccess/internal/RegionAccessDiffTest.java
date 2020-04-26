@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -47,7 +47,7 @@ public class RegionAccessDiffTest {
   private Serializer serializer;
   
   @Test
-  public void testEmptyModification() {
+  public void testEmptyModification() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("1 foo");
     _builder.newLine();
@@ -94,7 +94,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testSingleSemanticToken() {
+  public void testSingleSemanticToken() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("1 foo");
     _builder.newLine();
@@ -132,7 +132,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testSerializeChildObject() {
+  public void testSerializeChildObject() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("2 foo");
     _builder.newLine();
@@ -181,7 +181,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testSerializeRootObject() {
+  public void testSerializeRootObject() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("3 foo");
     _builder.newLine();
@@ -228,7 +228,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testDeleteOne() {
+  public void testDeleteOne() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("4/*1*/prefix/*2*/foo");
     _builder.newLine();
@@ -285,7 +285,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testDeleteTwo() {
+  public void testDeleteTwo() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("4/*1*/prefix/*2*/foo/*3*/");
     _builder.newLine();
@@ -337,7 +337,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testInsertInsertReplace() {
+  public void testInsertInsertReplace() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8 a");
     _builder.newLine();
@@ -403,7 +403,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testInsertReplaceReplace() {
+  public void testInsertReplaceReplace() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8 a");
     _builder.newLine();
@@ -443,7 +443,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testInsertBeforeComment() {
+  public void testInsertBeforeComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8");
     _builder.newLine();
@@ -512,7 +512,7 @@ public class RegionAccessDiffTest {
   }
   
   @Test
-  public void testMove() {
+  public void testMove() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8 a b c");
     _builder.newLine();

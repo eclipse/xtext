@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -37,7 +37,7 @@ public class RegionAccessCommentsTest {
   private RegionAccessTestHelper _regionAccessTestHelper;
   
   @Test
-  public void testDeleteFirstRegion1() {
+  public void testDeleteFirstRegion1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*h*/");
     _builder.newLine();
@@ -110,7 +110,7 @@ public class RegionAccessCommentsTest {
   }
   
   @Test
-  public void testDeleteFirstRegion2() {
+  public void testDeleteFirstRegion2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*h*/");
     _builder.newLine();
@@ -191,7 +191,7 @@ public class RegionAccessCommentsTest {
   }
   
   @Test
-  public void testDeleteFirstRegion3() {
+  public void testDeleteFirstRegion3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*h*/");
     _builder.newLine();
@@ -278,7 +278,7 @@ public class RegionAccessCommentsTest {
   }
   
   @Test
-  public void testDeleteFirstRegion4() {
+  public void testDeleteFirstRegion4() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*h*/");
     _builder.newLine();
@@ -371,7 +371,7 @@ public class RegionAccessCommentsTest {
   }
   
   @Test
-  public void testDeleteMiddleRegion() {
+  public void testDeleteMiddleRegion() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8");
     _builder.newLine();
@@ -457,7 +457,7 @@ public class RegionAccessCommentsTest {
   }
   
   @Test
-  public void testMove() {
+  public void testMove() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("8//8");
     _builder.newLine();
