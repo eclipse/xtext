@@ -19,7 +19,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+
+import com.google.common.collect.ImmutableList;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,7 +45,7 @@ public class UnexpectedProxiesException extends RuntimeException {
 	public static List<URI> getURIs(EStructuralFeature.Setting setting) {
 		Object it = setting.get(false);
 		if (it instanceof EObject) {
-			return CollectionLiterals.newImmutableList(EcoreUtil.getURI(((EObject) it)));
+			return ImmutableList.of(EcoreUtil.getURI(((EObject) it)));
 		}
 		if (it instanceof List) {
 			List<URI> result = new ArrayList<>();

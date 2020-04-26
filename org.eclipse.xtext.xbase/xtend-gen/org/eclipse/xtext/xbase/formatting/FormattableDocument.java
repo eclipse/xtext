@@ -95,9 +95,10 @@ public class FormattableDocument {
         boolean _greaterThan = (_length_1 > 0);
         if (_greaterThan) {
           int _offset = data.getOffset();
+          int _offset_1 = data.getOffset();
           int _length_2 = data.getLength();
-          int _plus = (_offset + _length_2);
-          final String oldText = this.document.substring(data.getOffset(), _plus);
+          int _plus = (_offset_1 + _length_2);
+          final String oldText = this.document.substring(_offset, _plus);
           boolean _isWhitespace = this.isWhitespace(oldText);
           boolean _not = (!_isWhitespace);
           if (_not) {

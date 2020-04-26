@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,13 +11,9 @@
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationReference
-import org.eclipse.xtext.common.types.JvmCompoundTypeReference
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference
-import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
@@ -144,32 +140,4 @@ class ErrorSafeExtensions {
 			}
 		}
 	}
-}
-
-/**
- * A visitor that detects broken type references. Returns <code>true</code> if a broken reference
- * was detected.
- */
-class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
-	
-	override protected handleNullReference() {
-		true
-	}
-	
-	override doVisitTypeReference(JvmTypeReference it) {
-		type===null || type.eIsProxy
-	}
-	
-	override doVisitCompoundTypeReference(JvmCompoundTypeReference it) {
-		doVisitTypeReference || references.exists[visit]
-	}
-	
-	override doVisitParameterizedTypeReference(JvmParameterizedTypeReference it) {
-		doVisitTypeReference || arguments.exists[visit]
-	}
-	
-	override doVisitWildcardTypeReference(JvmWildcardTypeReference it) {
-		constraints.exists[typeReference.visit]
-	}
-	
 }

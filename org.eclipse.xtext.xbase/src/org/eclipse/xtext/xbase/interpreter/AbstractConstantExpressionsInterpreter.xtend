@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,17 +9,14 @@
 package org.eclipse.xtext.xbase.interpreter
 
 import com.google.inject.Inject
-import java.util.Map
-import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtext.common.types.access.impl.ClassFinder
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XCastedExpression
@@ -28,10 +25,7 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
-import org.eclipse.xtext.naming.QualifiedName
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -160,58 +154,4 @@ abstract class AbstractConstantExpressionsInterpreter {
 		NodeModelUtils.getNode(expression).text
 	}
 
-}
-
-@Data class Context {
-	JvmTypeReference expectedType
-	ClassFinder classFinder
-	Map<String, JvmIdentifiableElement> visibleFeatures
-	Set<XExpression> alreadyEvaluating
-	
-	def cloneWithExpectation(JvmTypeReference newExpectation) {
-		return new Context(newExpectation, classFinder, visibleFeatures, alreadyEvaluating)
-	}
-	
-}
-
-/**
- * Indicates a problem during evaluation
- */
-class ConstantExpressionEvaluationException extends RuntimeException {
-
-	XExpression expression
-	
-	new(String message) {
-		super(message)
-	}
-	
-	new(String message, XExpression expression) {
-		this(message)
-		this.expression = expression
-	}
-	
-	new(String message, XExpression expression, Throwable cause) {
-		super(message, cause)
-		this.expression = expression
-	}
-
-	def getExpression() {
-		expression
-	}
-}
-
-class UnresolvableFeatureException extends ConstantExpressionEvaluationException {
-	
-	new(String message, XExpression expression) {
-		super(message, expression)
-	}
-	
-}
-
-class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
-	
-	new(XExpression expression, JvmField field, ConstantExpressionEvaluationException cause) {
-		super('''Error during call to «field.simpleName» : «cause.message»''', expression, cause)
-	}
-	
 }

@@ -411,11 +411,6 @@ class EvaluationContext {
 }
 
 @Data
-class ThisReference {
-	JvmType type
-}
-
-@Data
 package class EvaluationResult implements IConstantEvaluationResult<Object> {
 	
 	protected static final EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
@@ -541,16 +536,5 @@ package class EvaluationResult implements IConstantEvaluationResult<Object> {
 	}
 	private def dispatch Object equalValue(ThisReference myValue, XTypeLiteral otherType) {
 		return false
-	}
-}
-
-@Data
-class BooleanResult implements IConstantEvaluationResult<Boolean> {
-	@Accessors(NONE)
-	Boolean value
-	boolean compileTimeConstant
-	
-	override Optional<Boolean> getValue() {
-		return Optional.fromNullable(value)
 	}
 }

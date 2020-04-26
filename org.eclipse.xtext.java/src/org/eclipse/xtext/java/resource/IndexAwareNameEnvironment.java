@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -44,7 +44,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
 
 	private final ClassFileCache classFileCache;
 
-	private Map<QualifiedName, NameEnvironmentAnswer> nameToAnswerCache = CollectionLiterals.newHashMap();
+	private Map<QualifiedName, NameEnvironmentAnswer> nameToAnswerCache = new HashMap<>();
 
 	@Override
 	public void cleanup() {
