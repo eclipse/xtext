@@ -43,7 +43,7 @@ public class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerW
 
 	@Test(expected = UnexpectedProxiesException.class)
 	@Override
-	public void testLoadResourceWithPackagedURIs() {
+	public void testLoadResourceWithPackagedURIs() throws Exception {
 		super.testLoadResourceWithPackagedURIs();
 	}
 }

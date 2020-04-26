@@ -38,7 +38,7 @@ public class FilesInSourceAndModelSameProjectTest extends AbstractURIHandlerWith
 
 	@Test(expected = UnexpectedResourcesException.class)
 	@Override
-	public void testLoadResourceWithPackagedURIs() {
+	public void testLoadResourceWithPackagedURIs() throws Exception {
 		super.testLoadResourceWithPackagedURIs();
 	}
 }
