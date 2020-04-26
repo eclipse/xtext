@@ -8,18 +8,19 @@
  */
 package org.eclipse.xtext.generator.parser;
 
-import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.eclipse.xtend.lib.annotations.Accessors;
+
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
+
+import com.google.common.base.Objects;
 
 /**
  * Compares two charSequences of ANTLR grammars token by token.
@@ -39,10 +40,8 @@ public class AntlrGrammarComparator {
   }
   
   public static final class ErrorContext {
-    @Accessors
     private AntlrGrammarComparator.MatchState testedGrammar = new AntlrGrammarComparator.MatchState();
     
-    @Accessors
     private AntlrGrammarComparator.MatchState referenceGrammar = new AntlrGrammarComparator.MatchState();
     
     public AntlrGrammarComparator.MatchState reset() {
@@ -76,18 +75,14 @@ public class AntlrGrammarComparator {
   }
   
   public static final class MatchState {
-    @Accessors
     private String absoluteFileName;
     
-    @Accessors
     private int lineNumber = 1;
     
     private int position = 0;
     
-    @Accessors
     private String previousToken;
     
-    @Accessors
     private String currentToken;
     
     @Pure

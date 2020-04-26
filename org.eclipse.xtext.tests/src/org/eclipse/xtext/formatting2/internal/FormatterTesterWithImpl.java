@@ -9,7 +9,6 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.formatting2.internal.GenericFormatterTestRequest;
 import org.eclipse.xtext.testing.formatter.FormatterTestHelper;
 import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 

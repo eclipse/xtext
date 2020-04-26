@@ -9,14 +9,12 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class GenericFormatterTestRequest extends FormatterTestRequest {
-	@Accessors
 	private GenericFormatter<? extends EObject> formatter;
 
 	public GenericFormatter<? extends EObject> getFormatter() {

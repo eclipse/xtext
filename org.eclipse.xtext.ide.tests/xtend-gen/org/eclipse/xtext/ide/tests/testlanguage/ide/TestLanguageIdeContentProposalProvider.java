@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,6 +16,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -35,6 +36,7 @@ public class TestLanguageIdeContentProposalProvider extends IdeContentProposalPr
     ParserRule _typeDeclarationRule = this._testLanguageGrammarAccess.getTypeDeclarationRule();
     boolean _equals = Objects.equal(_rule, _typeDeclarationRule);
     if (_equals) {
+      IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type ${1|A,B,C|} {");
       _builder.newLine();
@@ -42,7 +44,7 @@ public class TestLanguageIdeContentProposalProvider extends IdeContentProposalPr
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("}");
-      acceptor.accept(this.getProposalCreator().createSnippet(_builder.toString(), "Sample Snippet", context), 0);
+      acceptor.accept(_proposalCreator.createSnippet(_builder.toString(), "Sample Snippet", context), 0);
     }
     super._createProposals(ruleCall, context, acceptor);
   }

@@ -8,9 +8,6 @@
  */
 package org.eclipse.xtext.parser.fragments;
 
-import org.eclipse.xtext.parser.fragments.AbstractFragmentsPlainParsingTest;
-import org.eclipse.xtext.parser.fragments.FragmentTestLanguageStandaloneSetup;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

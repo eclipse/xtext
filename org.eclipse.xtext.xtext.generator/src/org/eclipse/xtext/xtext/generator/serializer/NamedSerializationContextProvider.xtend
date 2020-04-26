@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.generator.serializer
 
 import java.util.List
 import java.util.Map
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ParserRule
@@ -73,13 +71,5 @@ class NamedSerializationContextProvider {
 		}
 		return "unknown"
 	}
-
-}
-
-@Accessors class NamedSerializationContexts<T> {
-	val String name
-	val EClass type
-	val List<ISerializationContext> contexts
-	val T value
 
 }
