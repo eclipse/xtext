@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -98,7 +98,7 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
   }
   
   @Test
-  public void testProgressReportOfRenameCommonDir() {
+  public void testProgressReportOfRenameCommonDir() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar");
     _builder.newLine();
@@ -171,7 +171,7 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
     monitor.assertLogged(_builder_2.toString());
   }
   
-  protected void performRename(final IResource theResource, final String theNewName, final IProgressMonitor monitor) {
+  protected void performRename(final IResource theResource, final String theNewName, final IProgressMonitor monitor) throws Exception {
     RenameResourceDescriptor _renameResourceDescriptor = new RenameResourceDescriptor();
     final Procedure1<RenameResourceDescriptor> _function = (RenameResourceDescriptor it) -> {
       it.setResourcePath(theResource.getFullPath());

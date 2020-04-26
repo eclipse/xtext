@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.formatter
 
 import com.google.inject.Inject
@@ -10,8 +18,6 @@ import org.eclipse.xtext.xbase.formatting.AbstractFormatter
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter
 import org.eclipse.xtext.xbase.formatting.TextReplacement
 import org.junit.Assert
-import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues
-import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @deprecated use org.eclipse.xtext.junit4.formatter.FormatterTester
@@ -110,17 +116,4 @@ class FormatterTester {
 			}
 		result
 	}
-}
-
-@Accessors
-class AssertingFormatterData {
-	MapBasedPreferenceValues config
-	def getCfg() {
-		return new FormattingPreferenceValues(config);
-	}
-	CharSequence expectation
-	CharSequence toBeFormatted
-	String prefix
-	String postfix
-	boolean allowErrors
 }
