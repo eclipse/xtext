@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 Michael Clay and others.
+ * Copyright (c) 2010, 2020 Michael Clay and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,13 +31,14 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtext.junit4.internal.InternalBuilderTest;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest;
@@ -50,18 +51,20 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
  * @author Arne Deutsch - New test cases for fixAddAction and some refactoring
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XtextUiInjectorProvider.class)
 public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "org.eclipse.xtext.ui.editor.quickfix";
@@ -205,7 +208,6 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	private void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount, String resolutionLabel,
 			boolean isCleanAfterApply) {
-		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
 		IXtextDocument document = xtextEditor.getDocument();
 		List<Issue> issues = getIssues(document);
 		assertFalse(issues.toString(), issues.isEmpty());
@@ -213,7 +215,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 		assertEquals(issueCode, issue.getCode());
 		assertNotNull(issue.getData());
 		assertEquals(issueDataCount, issue.getData().length);
-		List<IssueResolution> resolutions = quickfixProvider.getResolutions(issue);
+		List<IssueResolution> resolutions = _issueResolutionProvider.getResolutions(issue);
 
 		assertEquals(1, resolutions.size());
 		IssueResolution resolution = resolutions.iterator().next();
@@ -230,7 +232,6 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	private void assertAndApplyAllResolutions(XtextEditor xtextEditor, String issueCode, int issueDataCount, int issueCount,
 			String resolutionLabel) throws CoreException {
-		final Injector injector = createInjector();
 		InternalBuilderTest.setAutoBuild(true);
 		if (xtextEditor.isDirty()) {
 			xtextEditor.doSave(new NullProgressMonitor());
@@ -329,9 +330,4 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 			}
 		});
 	}
-
-	private static Injector createInjector() {
-		return Activator.getDefault().getInjector(org.eclipse.xtext.xtext.ui.internal.Activator.ORG_ECLIPSE_XTEXT_XTEXT);
-	}
-
 }
