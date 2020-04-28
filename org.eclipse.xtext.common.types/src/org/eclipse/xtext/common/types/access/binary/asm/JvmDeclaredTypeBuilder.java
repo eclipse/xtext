@@ -54,7 +54,7 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
 	}
     
     protected JvmDeclaredTypeBuilder(BinaryClass binaryClass, ClassFileBytesAccess bytesAccess, ClassLoader classLoader, Map<String, JvmTypeParameter> typeParameters, Proxies proxies) {
-    	super(Opcodes.ASM7);
+    	super(Opcodes.ASM8);
     	this.proxies = proxies;
 		this.binaryClass = binaryClass;
 		this.bytesAccess = bytesAccess;

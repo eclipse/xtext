@@ -51,7 +51,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	 */
 	private final ClassFileBytesAccess bytesAccess;
 	
-	private static final boolean ASM_AVAILABLE = isAsm7Available();
+	private static final boolean ASM_AVAILABLE = isAsm8Available();
 	
 	private final boolean useASM;
 
@@ -66,9 +66,9 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		this.useASM = useASM;
 	}
 
-	private static boolean isAsm7Available() {
+	private static boolean isAsm8Available() {
 		try {
-			if(Opcodes.class.getDeclaredField("ASM7") != null) 
+			if(Opcodes.class.getDeclaredField("ASM8") != null) 
 				return true;
 		} catch(NoClassDefFoundError e) {
 			logger.warn("--- xtext.common.types ---------------------------------------------------");

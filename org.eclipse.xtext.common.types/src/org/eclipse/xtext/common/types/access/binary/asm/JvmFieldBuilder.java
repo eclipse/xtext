@@ -41,7 +41,7 @@ public class JvmFieldBuilder extends FieldVisitor implements Opcodes {
         final String signature,
         final Object value)
     {
-		super(Opcodes.ASM7);
+		super(Opcodes.ASM8);
 		this.proxies = proxies;
 		this.declarator = declarator;
         if ((access & ACC_ENUM) != 0) {
