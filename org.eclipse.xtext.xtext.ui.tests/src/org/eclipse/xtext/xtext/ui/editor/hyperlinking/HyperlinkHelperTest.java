@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,37 +15,30 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.XtextRuntimeModule;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XtextUiInjectorProvider.class)
 public class HyperlinkHelperTest extends AbstractXtextTests {
 
-	private ISetup getSetup() {
-		return new XtextStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(), new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
-			}
-		};
-	}
-
+	@Inject
 	private IHyperlinkHelper helper;
+
 	private XtextResource resource;
 	private Grammar grammar;
 	private Grammar terminalGrammar;
@@ -54,8 +47,6 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		with(getSetup());
-		helper = get(IHyperlinkHelper.class);
 		model = "grammar org.eclipse.xtext.ui.HyperlinkTest with org.eclipse.xtext.common.Terminals\n" +
 				"generate hyperlinkTest 'http://www.eclipse.org/Xtext/2008/HyperlinkTest'\n" +
 				"import '" + EcorePackage.eINSTANCE.getNsURI() + "' as ecore\n" +
@@ -197,4 +188,10 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertEquals(terminalGrammar, obj);
 	}
 
+	@Inject
+	@Override
+	protected void setInjector(Injector injector) {
+		super.setInjector(injector);
+	}
+	
 }

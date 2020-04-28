@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -37,6 +37,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -46,20 +48,22 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("restriction")
+@RunWith(XtextRunner.class)
+@InjectWith(XtextUiInjectorProvider.class)
 public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditingIntegrationTest {
 
 	private static final String REFACTOREDCLASSIFIERNAME = "Greeting123";
@@ -88,7 +92,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	@Inject
 	private Provider<ResourceSet> resourceSetProvider;
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -96,8 +99,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		Injector injector = Activator.getInstance().getInjector(getEditorId());
-		injector.injectMembers(this);
 		grammar = "grammar org.xtext.example.mydsl.MyDsl\n hidden(WS) generate myDsl\n 'http://testrefactoring'\n import 'http://www.eclipse.org/emf/2002/Ecore'\n as ecore \nModel: greetings+="
 				+ CLASSIFIERNAME
 				+ "*; \n"
@@ -311,10 +312,5 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	public void tearDown() throws Exception {
 		super.tearDown();
 		EcoreRefactoringParticipant.setDisableWarning(false);
-	}
-
-	@Override
-	protected String getEditorId() {
-		return "org.eclipse.xtext.Xtext";
 	}
 }

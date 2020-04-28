@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,40 +11,37 @@ package org.eclipse.xtext.xtext.ui.editor;
 import java.util.Set;
 
 import org.eclipse.jface.text.TypedRegion;
-import org.eclipse.xtext.XtextRuntimeModule;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
-import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.Sets;
-import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XtextUiInjectorProvider.class)
 public class SemanticHighlightingTest extends AbstractXtextTests implements IHighlightedPositionAcceptor {
-	
+
+	@Inject
+	private ISemanticHighlightingCalculator calculator;
+
 	private Set<TypedRegion> expectedRegions;
-	
+
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		with(new XtextStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),new XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
-			}
-		});
 		expectedRegions = Sets.newLinkedHashSet();
 	}
 
@@ -53,7 +50,6 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore'\n" +
 				"terminal fragment FOO returns EString: 'a';", 1);
-		ISemanticHighlightingCalculator calculator = get(ISemanticHighlightingCalculator.class);
 		calculator.provideHighlightingFor(resource, new IHighlightedPositionAcceptor() {
 			@Override
 			public void addPosition(int offset, int length, String... id) {
@@ -94,7 +90,6 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 	protected void highlight(String grammar) {
 		try {
 			XtextResource resource = getResourceFromString(grammar);
-			ISemanticHighlightingCalculator calculator = get(ISemanticHighlightingCalculator.class);
 			calculator.provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
@@ -112,6 +107,12 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		TypedRegion region = new TypedRegion(offset, length, id[0]);
 		assertFalse(region.toString(), expectedRegions.isEmpty());
 		assertTrue("expected: " + expectedRegions.toString() + " but was: " + region, expectedRegions.remove(region));
+	}
+	
+	@Inject
+	@Override
+	protected void setInjector(Injector injector) {
+		super.setInjector(injector);
 	}
 
 }

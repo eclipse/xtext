@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,24 +14,32 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtext.xtext.ui.internal.Activator;
+import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XtextUiInjectorProvider.class)
 public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTest {
+
+	@Inject
+	private PluginProjectFactory projectFactory;
+
 	private static final String SAMPLE_HEADER = "grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\ngenerate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n";
 	private static final String TESTPROJECT_NAME = "autoedit";
 	private IProject autoEditTestProject;
@@ -39,11 +47,6 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	@Override
 	protected String getFileExtension() {
 		return "xtext";
-	}
-
-	@Override
-	protected String getEditorId() {
-		return "org.eclipse.xtext.Xtext";
 	}
 	
 	@Override
@@ -311,9 +314,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 			createPluginProject(TESTPROJECT_NAME);
 	}
 
-	protected IProject createPluginProject(String name) throws CoreException {
-		Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.Xtext");
-		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
+	protected IProject createPluginProject(String name) {
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));
