@@ -115,8 +115,8 @@
 		<unit id="com.google.inject" version="0.0.0"/>
 		<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="7.2.0.v20191010-1910"/>
-		<unit id="org.objectweb.asm.tree" version="7.2.0.v20191010-1910"/>
+		<unit id="org.objectweb.asm" version="8.0.1.v20200420-1007"/>
+		<unit id="org.objectweb.asm.tree" version="8.0.1.v20200420-1007"/>
 		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
 		<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-06"/>
 	</location>
