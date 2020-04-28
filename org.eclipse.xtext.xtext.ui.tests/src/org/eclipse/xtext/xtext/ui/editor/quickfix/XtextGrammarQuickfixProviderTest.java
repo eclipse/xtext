@@ -215,7 +215,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 		assertEquals(issueCode, issue.getCode());
 		assertNotNull(issue.getData());
 		assertEquals(issueDataCount, issue.getData().length);
-		List<IssueResolution> resolutions = _issueResolutionProvider.getResolutions(issue);
+		List<IssueResolution> resolutions = issueResolutionProvider.getResolutions(issue);
 
 		assertEquals(1, resolutions.size());
 		IssueResolution resolution = resolutions.iterator().next();
