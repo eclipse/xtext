@@ -33,7 +33,7 @@ public class XmlContentAssistLexerTests extends AbstractXmlLexerTest {
   }
   
   @Override
-  public void test022() {
+  public void test022() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"/>");
     _builder.newLine();

@@ -9,11 +9,9 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import java.util.List;
+
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -92,7 +90,7 @@ public class Bug350007Test extends AbstractXbaseContentAssistBugTest {
 		} catch (Exception e) {
 			throw new AssertionError("Could not calculate proposals.", e);
 		}
-		Assert.assertTrue(proposalStrings.toString(), proposalStrings.contains("java.util.ArrayList"));
+		assertTrue(proposalStrings.toString(), proposalStrings.contains("java.util.ArrayList"));
 	}
 
 	private List<String> getProposals(String input) throws Exception {

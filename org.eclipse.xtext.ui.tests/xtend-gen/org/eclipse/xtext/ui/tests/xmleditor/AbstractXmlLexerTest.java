@@ -12,14 +12,14 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   public final Timeout timeout = Timeout.seconds(2);
   
   @Test
-  public void test001() {
+  public void test001() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     StringConcatenation _builder_1 = new StringConcatenation();
     this.assertLexing(_builder, _builder_1);
   }
   
   @Test
-  public void test002() {
+  public void test002() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a/>");
     _builder.newLine();
@@ -34,7 +34,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test003() {
+  public void test003() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"\"/>");
     _builder.newLine();
@@ -57,7 +57,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test004() {
+  public void test004() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\"/>");
     _builder.newLine();
@@ -80,7 +80,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test005() {
+  public void test005() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\'c\'/>");
     _builder.newLine();
@@ -103,7 +103,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test006() {
+  public void test006() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\" d=\'e\'/>");
     _builder.newLine();
@@ -134,7 +134,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test007() {
+  public void test007() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\'c\' d=\"e\"/>");
     _builder.newLine();
@@ -165,7 +165,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test008() {
+  public void test008() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a></a>");
     _builder.newLine();
@@ -186,7 +186,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test009() {
+  public void test009() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\"></a>");
     _builder.newLine();
@@ -215,7 +215,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test010() {
+  public void test010() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\'c\'></a>");
     _builder.newLine();
@@ -244,7 +244,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test011() {
+  public void test011() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\'c\' d=\"e\"></a>");
     _builder.newLine();
@@ -281,7 +281,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test012() {
+  public void test012() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\" d=\'e\'></a>");
     _builder.newLine();
@@ -318,7 +318,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test013() {
+  public void test013() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>text</a>");
     _builder.newLine();
@@ -341,7 +341,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test014() {
+  public void test014() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\">text</a>");
     _builder.newLine();
@@ -372,7 +372,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test015() {
+  public void test015() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -421,7 +421,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test016() {
+  public void test016() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -462,7 +462,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test017() {
+  public void test017() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"c\">");
     _builder.newLine();
@@ -519,7 +519,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test018() {
+  public void test018() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -604,7 +604,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test019() {
+  public void test019() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -695,7 +695,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test020() {
+  public void test020() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -786,7 +786,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test021() {
+  public void test021() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a>");
     _builder.newLine();
@@ -907,7 +907,7 @@ public abstract class AbstractXmlLexerTest extends AbstractLexerTest {
   }
   
   @Test
-  public void test022() {
+  public void test022() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<a b=\"/>");
     _builder.newLine();

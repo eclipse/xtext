@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,7 +18,6 @@ import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,31 +32,27 @@ public class ModelTest {
   private ParseHelper<Model> _parseHelper;
   
   @Test
-  public void testParsing() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Device Window can be open, closed");
-      _builder.newLine();
-      _builder.append("Device Heater can be on, off");
-      _builder.newLine();
-      _builder.append("Rule \"Save energy\" when Window.open then");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("fire(Heater.off)");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("println(\'Another penny to the piggy bank!\')");
-      _builder.newLine();
-      final Model model = this._parseHelper.parse(_builder);
-      Declaration _get = model.getDeclarations().get(0);
-      final Device device = ((Device) _get);
-      Assert.assertEquals("Window", device.getName());
-      Declaration _get_1 = model.getDeclarations().get(2);
-      final Rule rule = ((Rule) _get_1);
-      Assert.assertEquals("Save energy", rule.getDescription());
-      Assert.assertEquals("open", rule.getDeviceState().getName());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testParsing() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off");
+    _builder.newLine();
+    _builder.append("Rule \"Save energy\" when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\'Another penny to the piggy bank!\')");
+    _builder.newLine();
+    final Model model = this._parseHelper.parse(_builder);
+    Declaration _get = model.getDeclarations().get(0);
+    final Device device = ((Device) _get);
+    Assert.assertEquals("Window", device.getName());
+    Declaration _get_1 = model.getDeclarations().get(2);
+    final Rule rule = ((Rule) _get_1);
+    Assert.assertEquals("Save energy", rule.getDescription());
+    Assert.assertEquals("open", rule.getDeviceState().getName());
   }
 }

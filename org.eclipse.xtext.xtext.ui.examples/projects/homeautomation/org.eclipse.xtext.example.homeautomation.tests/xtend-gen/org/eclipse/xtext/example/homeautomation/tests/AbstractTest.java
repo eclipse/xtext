@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,10 +19,10 @@ import org.junit.runner.RunWith;
 @InjectWith(RuleEngineInjectorProvider.class)
 @SuppressWarnings("all")
 public abstract class AbstractTest {
-  protected abstract void test(final CharSequence document);
+  protected abstract void test(final CharSequence document) throws Exception;
   
   @Test
-  public void test1() {
+  public void test1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -40,7 +40,7 @@ public abstract class AbstractTest {
   }
   
   @Test
-  public void test2() {
+  public void test2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -64,7 +64,7 @@ public abstract class AbstractTest {
   }
   
   @Test
-  public void test3() {
+  public void test3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
