@@ -65,9 +65,9 @@ dependencies {
         api "org.eclipse.xtext:xtext-antlr-generator:2.1.1"
         api "org.junit.jupiter:junit-jupiter-api:5.6.0"
         api "org.junit.jupiter:junit-jupiter-engine:5.6.0"
-        api "org.ow2.asm:asm-commons:7.2"
-        api "org.ow2.asm:asm-tree:7.2"
-        api "org.ow2.asm:asm:7.2"
+        api "org.ow2.asm:asm-commons:8.0.1"
+        api "org.ow2.asm:asm-tree:8.0.1"
+        api "org.ow2.asm:asm:8.0.1"
     }
 }
 
