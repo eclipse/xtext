@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -29,7 +28,6 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API TODO JavaDoc
  */
 @Singleton
-@Accessors
 public class CommonTypeComputationServices {
 	@Inject
 	private OperatorMapping operatorMapping;

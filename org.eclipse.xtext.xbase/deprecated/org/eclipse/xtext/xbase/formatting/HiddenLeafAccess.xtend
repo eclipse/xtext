@@ -1,14 +1,12 @@
 package org.eclipse.xtext.xbase.formatting
 
-
 import com.google.inject.Inject
-import org.eclipse.xtext.nodemodel.INode
 import java.util.List
-import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
-import org.eclipse.xtext.nodemodel.ICompositeNode
-import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
+import org.eclipse.xtext.nodemodel.ICompositeNode
+import org.eclipse.xtext.nodemodel.ILeafNode
+import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 
 /**
  * @deprecated use {@link ITextRegionAccess}
@@ -114,79 +112,4 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 		result.reverse
 	}
 	
-}
-
-@Deprecated
-@Data class HiddenLeafs {
-	int offset
-	List<LeafInfo> leafs = newArrayList
-	
-	def boolean isSingleWhitespace() {
-		leafs.empty || (leafs.size == 1 && leafs.head instanceof WhitespaceInfo)
-	}
-	
-	def int getLenght() {
-		leafs.fold(0, [x, i | x + i.node?.length])
-	}
-	
-	def int getNewLines() {
-		leafs.fold(0, [x, i | x + i.newLines])
-	}
-	
-	def int getNewLinesInComments() {
-		leafs.filter(CommentInfo).fold(0, [x, i | x + i.newLines])
-	}
-
-	def containsComment(){
-		leafs.filter(CommentInfo).size > 0
-	}
-}
-
-@Deprecated
-@Data abstract class LeafInfo {
-	HiddenLeafs container
-	ILeafNode node
-	int newLines
-}
-
-@Deprecated
-@Data class WhitespaceInfo extends LeafInfo {
-	int offset
-	
-	def getLength() {
-		node?.length
-	}
-	
-	def leadingComment() {
-		val i = container.leafs.indexOf(this) - 1
-		if(i >= 0) 
-			container.leafs.get(i) as CommentInfo
-	}
-	
-	def trailingComment() {
-		val i = container.leafs.indexOf(this) + 1
-		if(i < container.leafs.size) 
-			container.leafs.get(i) as CommentInfo
-	}
-	
-	override toString() '''
-		WS: "«node?.text»"
-	'''
-}
-
-@Deprecated
-@Data class CommentInfo extends LeafInfo {
-	boolean trailing // true if this comment is in the first line of its HiddenLeafs
-	
-	def endsWithNewLine() {
-		node.text.endsWith("\n")
-	}
-	
-	def isMultiline() {
-		!endsWithNewLine && node.text.contains("\n")
-	}
-	
-	override toString() '''
-		Comment: "«node.text»"
-	'''
 }

@@ -4,11 +4,9 @@ import java.util.List
 import java.util.TreeMap
 import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.formatting2.IFormattableDocument
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
-import org.eclipse.xtext.formatting2.IFormattableDocument
-import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 
 /**
  * @deprecated use {@link IFormattableDocument}
@@ -297,42 +295,4 @@ class FormattableDocument {
 			""
 	}
 	
-}
-
-/**
- * @deprecated use {@link IHiddenRegionFormatter}
- */
-@Deprecated @Data abstract class FormattingData {
-	int offset
-	int length
-	int increaseIndentationChange
-	int decreaseIndentationChange
-	Throwable trace
-	def boolean isEmpty() 
-
-	def getIndentationChange(){
-		increaseIndentationChange + decreaseIndentationChange
-	}
-}
-
-/**
- * @deprecated use {@link IHiddenRegionFormatter}
- */
-@Deprecated @Data class WhitespaceData extends FormattingData {
-	String space
-
-	override isEmpty() {
-		space === null
-	}
-}
-
-/**
- * @deprecated use {@link IHiddenRegionFormatter}
- */
-@Deprecated @Data class NewLineData extends FormattingData {
-	Integer newLines
-	
-	override isEmpty() {
-		newLines === null
-	}
 }

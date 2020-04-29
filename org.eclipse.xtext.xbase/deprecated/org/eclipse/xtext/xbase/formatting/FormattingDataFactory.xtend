@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.preferences.PreferenceKey
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
@@ -206,44 +205,5 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			}
 			result
 		]
-	}
-}
-
-/**
- * @deprecated use {@link IHiddenRegionFormatter}
- */
-@Deprecated class FormattingDataInit {
-	public String space = null
-	public Integer newLines = null
-	public int increaseIndentationChange = 0
-	public int decreaseIndentationChange = 0
-	public PreferenceKey key = null
-
-	def void cfg(PreferenceKey key) {
-		this.key = key
-	}
-
-	def void newLine() {
-		newLines = 1
-	}
-
-	def void noSpace() {
-		space = ""
-	}
-
-	def void oneSpace() {
-		space = " "
-	}
-
-	def void increaseIndentation() {
-		increaseIndentationChange = increaseIndentationChange + 1
-	}
-
-	def void decreaseIndentation() {
-		decreaseIndentationChange = decreaseIndentationChange - 1
-	}
-
-	override String toString() {
-		new ToStringBuilder(this).addAllFields.toString()
 	}
 }

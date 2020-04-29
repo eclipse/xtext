@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,7 +13,6 @@ import java.util.Iterator
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -113,88 +112,6 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 		} else {
 			"empty"
 		}
-	}
-
-}
-
-/**
- * @author Moritz Eysholdt - Initial implementation and API
- */
-@Accessors abstract class Entry<T, R extends ITextSegment> {
-	protected Entry<T, R> next
-	protected Entry<T, R> previous
-
-	def abstract ObjectEntry<T, R> getLeadingObject()
-
-	def abstract ObjectEntry<T, R> getTrailingObject()
-
-	def abstract SeparatorEntry<T, R> getLeadingSeparator()
-
-	def abstract SeparatorEntry<T, R> getTrailingSeparator()
-}
-
-/**
- * @author Moritz Eysholdt - Initial implementation and API
- */
-@FinalFieldsConstructor @Accessors class ObjectEntry<T, R extends ITextSegment> extends Entry<T, R> {
-	val SeparatorRegions<T, R> list
-	T object
-
-	def ITextSegment getRegion() {
-		val prev = leadingSeparator
-		val trail = trailingSeparator
-		val offset = if(prev !== null) prev.separator.endOffset else list.root.offset
-		val endOffset = if(trail !== null) trail.separator.offset else list.root.endOffset
-		return new TextSegment(list.root.textRegionAccess, offset, endOffset - offset)
-	}
-
-	override getLeadingObject() {
-		previous?.previous as ObjectEntry<T, R>
-	}
-
-	override getTrailingObject() {
-		next?.next as ObjectEntry<T, R>
-	}
-
-	override getLeadingSeparator() {
-		previous as SeparatorEntry<T, R>
-	}
-
-	override getTrailingSeparator() {
-		next as SeparatorEntry<T, R>
-	}
-
-	override toString() {
-		val reg = region
-		'''"«reg.text»" at offset=«reg.offset» lenght=«reg.length» («object.class.simpleName»)'''
-	}
-
-}
-
-/**
- * @author Moritz Eysholdt - Initial implementation and API
- */
-@Accessors class SeparatorEntry<T, R extends ITextSegment> extends Entry<T, R> {
-	R separator
-
-	override getLeadingObject() {
-		previous as ObjectEntry<T, R>
-	}
-
-	override getTrailingObject() {
-		next as ObjectEntry<T, R>
-	}
-
-	override getLeadingSeparator() {
-		previous?.previous as SeparatorEntry<T, R>
-	}
-
-	override getTrailingSeparator() {
-		next?.next as SeparatorEntry<T, R>
-	}
-
-	override toString() {
-		'''"«separator.text»" at offset=«separator.offset» lenght=«separator.length»'''
 	}
 
 }
