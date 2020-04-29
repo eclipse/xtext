@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.parser.fragments;
 
-import org.eclipse.xtext.parser.fragments.AbstractFragmentsTest;
-import org.eclipse.xtext.parser.fragments.FragmentsEagerLinkingInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.runner.RunWith;

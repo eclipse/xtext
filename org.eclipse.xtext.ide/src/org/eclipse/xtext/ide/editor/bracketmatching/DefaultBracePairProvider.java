@@ -11,8 +11,7 @@ package org.eclipse.xtext.ide.editor.bracketmatching;
 import java.util.Collections;
 import java.util.Set;
 
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-
+import com.google.common.collect.Sets;
 import com.google.inject.Singleton;
 
 /**
@@ -23,7 +22,7 @@ public class DefaultBracePairProvider implements IBracePairProvider {
 	private final Set<BracePair> pairs;
 
 	public DefaultBracePairProvider() {
-		this(Collections.unmodifiableSet(CollectionLiterals.newHashSet(new BracePair("(", ")", true),
+		this(Collections.unmodifiableSet(Sets.newHashSet(new BracePair("(", ")", true),
 				new BracePair("{", "}", true), new BracePair("[", "]", true))));
 	}
 

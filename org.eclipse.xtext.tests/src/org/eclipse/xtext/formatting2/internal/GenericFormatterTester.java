@@ -8,11 +8,10 @@
  */
 package org.eclipse.xtext.formatting2.internal;
 
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.eclipse.xtext.formatting2.internal.FormatterTesterWithImpl;
-import org.eclipse.xtext.formatting2.internal.GenericFormatterTestRequest;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

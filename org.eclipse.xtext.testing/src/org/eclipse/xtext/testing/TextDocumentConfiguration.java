@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.testing;
 
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.lsp4j.InitializeParams;
@@ -15,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public class TextDocumentConfiguration {
-	private Map<String, CharSequence> filesInScope = CollectionLiterals.<String, CharSequence>emptyMap();
+	private Map<String, CharSequence> filesInScope = Collections.emptyMap();
 
 	private String model;
 

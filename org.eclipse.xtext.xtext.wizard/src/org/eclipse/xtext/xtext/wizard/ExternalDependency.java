@@ -8,8 +8,9 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
+import java.util.HashSet;
 import java.util.Set;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -83,7 +84,7 @@ public class ExternalDependency {
 
 		private String version;
 
-		private Set<String> packages = CollectionLiterals.newHashSet();
+		private Set<String> packages = new HashSet<>();
 
 		@Pure
 		public String getBundleId() {
