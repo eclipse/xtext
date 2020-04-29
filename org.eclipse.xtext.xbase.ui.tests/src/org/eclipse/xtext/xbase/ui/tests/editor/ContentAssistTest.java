@@ -32,26 +32,26 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest {
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";
 
 	private IProject demandCreateProject;
-	
+
 	private static IProject staticProject;
-	
+
 	@BeforeClass
 	public static void createTestProject() throws Exception {
 		TargetPlatformUtil.setTargetPlatform(ContentAssistTest.class);
 		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
 		doInitFeatures(JavaCore.create(staticProject));
 	}
-	
+
 	@AfterClass
 	public static void deleteTestProject() throws Exception {
 		deleteProject(staticProject);
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return XbaseActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 	}
-	
+
 	@Override
 	public void tearDown() throws Exception {
 		if (demandCreateProject != null)
@@ -63,7 +63,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest {
 	protected boolean doCleanWorkspace() {
 		return false;
 	}
-	
+
 	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
@@ -77,5 +77,5 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest {
 		}
 		return javaProject;
 	}
-	
+
 }

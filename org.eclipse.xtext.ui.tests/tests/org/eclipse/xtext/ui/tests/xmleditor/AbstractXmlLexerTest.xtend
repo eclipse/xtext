@@ -8,11 +8,11 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 
 	@Rule public val timeout = Timeout.seconds(2)
 
-	@Test def test001() {
+	@Test def test001() throws Exception {
 		''''''.assertLexing('''''')
 	}
 
-	@Test def test002() {
+	@Test def test002() throws Exception {
 		'''
 			<a/>
 		'''
@@ -23,7 +23,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test003() {
+	@Test def test003() throws Exception {
 		'''
 			<a b=""/>
 		'''
@@ -38,7 +38,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test004() {
+	@Test def test004() throws Exception {
 		'''
 			<a b="c"/>
 		'''
@@ -53,7 +53,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test005() {
+	@Test def test005() throws Exception {
 		'''
 			<a b='c'/>
 		'''
@@ -68,7 +68,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test006() {
+	@Test def test006() throws Exception {
 		'''
 			<a b="c" d='e'/>
 		'''
@@ -87,7 +87,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test007() {
+	@Test def test007() throws Exception {
 		'''
 			<a b='c' d="e"/>
 		'''
@@ -106,7 +106,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test008() {
+	@Test def test008() throws Exception {
 		'''
 			<a></a>
 		'''
@@ -120,7 +120,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test009() {
+	@Test def test009() throws Exception {
 		'''
 			<a b="c"></a>
 		'''
@@ -138,7 +138,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test010() {
+	@Test def test010() throws Exception {
 		'''
 			<a b='c'></a>
 		'''
@@ -156,7 +156,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test011() {
+	@Test def test011() throws Exception {
 		'''
 			<a b='c' d="e"></a>
 		'''
@@ -178,7 +178,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test012() {
+	@Test def test012() throws Exception {
 		'''
 			<a b="c" d='e'></a>
 		'''
@@ -200,7 +200,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test013() {
+	@Test def test013() throws Exception {
 		'''
 			<a>text</a>
 		'''
@@ -215,7 +215,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test014() {
+	@Test def test014() throws Exception {
 		'''
 			<a b="c">text</a>
 		'''
@@ -234,7 +234,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test015() {
+	@Test def test015() throws Exception {
 		'''
 			<a>
 				<b>text</b>
@@ -260,7 +260,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test016() {
+	@Test def test016() throws Exception {
 		'''
 			<a>
 				<b/>
@@ -282,7 +282,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test017() {
+	@Test def test017() throws Exception {
 		'''
 			<a b="c">
 				<d e="f"/>
@@ -312,7 +312,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test018() {
+	@Test def test018() throws Exception {
 		'''
 			<a>
 				<b>c</b>
@@ -354,7 +354,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test019() {
+	@Test def test019() throws Exception {
 		'''
 			<a>
 				<b>
@@ -398,7 +398,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test020() {
+	@Test def test020() throws Exception {
 		'''
 			<a>
 				<b>
@@ -442,7 +442,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test021() {
+	@Test def test021() throws Exception {
 		'''
 			<a>
 				<b>
@@ -500,7 +500,7 @@ abstract class AbstractXmlLexerTest extends AbstractLexerTest {
 		''')
 	}
 
-	@Test def test022() {
+	@Test def test022() throws Exception {
 		'''
 			<a b="/>
 		'''

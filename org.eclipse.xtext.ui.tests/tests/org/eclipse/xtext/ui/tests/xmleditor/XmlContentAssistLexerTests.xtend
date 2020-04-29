@@ -27,7 +27,7 @@ class XmlContentAssistLexerTests extends AbstractXmlLexerTest {
 		lexer
 	}
 
-	override test022() {
+	override test022() throws Exception {
 		'''
 			<a b="/>
 		'''
