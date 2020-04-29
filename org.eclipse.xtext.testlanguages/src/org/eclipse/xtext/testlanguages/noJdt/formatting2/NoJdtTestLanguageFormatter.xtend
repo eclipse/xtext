@@ -11,11 +11,12 @@ import org.eclipse.xtext.testlanguages.noJdt.noJdt.Model
 class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
 	
 	def dispatch void format(Model model, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		for (Greeting greeting : model.getGreetings()) {
 			greeting.format;
 		}
 	}
-	
-	// TODO: implement for 
+
+	def dispatch void format(Greeting greeting, extension IFormattableDocument document) {
+		greeting.append[setNewLines(1, 1, 2)]
+	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -23,6 +23,8 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
@@ -43,6 +45,7 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
+import com.google.common.base.CharMatcher;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -210,7 +213,60 @@ public class Serializer implements ISerializer {
 			throw new IllegalStateException("Cannot replace an obj that has no associated node");
 		}
 		String text = serialize(obj, options);
-		return new ReplaceRegion(node.getTotalOffset(), node.getTotalLength(), text);
+		int replaceRegionLength = calculateReplaceRegionLength(node, text);
+		return new ReplaceRegion(node.getTotalOffset(), replaceRegionLength, text);
 	}
 
+	/**
+	 * @since 2.22
+	 */
+	protected int calculateReplaceRegionLength(ICompositeNode node, String text) {
+		int oldTextLength = node.getTotalLength();
+		int newTextLength = text.length();
+
+		if (newTextLength > oldTextLength) {
+			String remainingText = text.substring(oldTextLength);
+			if (isWhitespace(remainingText) && hiddenNodeFollows(node)) {
+				return newTextLength;
+			}
+		}
+		return oldTextLength;
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected boolean hiddenNodeFollows(ICompositeNode node) {
+		INode followingNode = getFollowingNode(node);
+		if (followingNode instanceof ILeafNode) {
+			return ((ILeafNode)followingNode).isHidden();
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns the node that follows the <i>node</i>, independently, if they have the same parent.
+	 * @since 2.22
+	 */
+	protected INode getFollowingNode(ICompositeNode node) {
+		if (node != null) {
+			if (node.hasNextSibling()) {
+				INode nextSibling = node.getNextSibling();
+				Iterator<ILeafNode> nextSiblingLeafNodes = nextSibling.getLeafNodes().iterator();
+				if (nextSiblingLeafNodes.hasNext()) {
+					return nextSiblingLeafNodes.next();
+				} else {
+					return getFollowingNode(node.getParent());
+				}	
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected boolean isWhitespace(String text) {
+		return CharMatcher.whitespace().matchesAllOf(text);
+	}
 }

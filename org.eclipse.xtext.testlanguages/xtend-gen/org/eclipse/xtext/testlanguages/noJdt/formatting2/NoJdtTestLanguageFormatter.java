@@ -8,10 +8,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Model;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
@@ -22,25 +24,35 @@ public class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
     }
   }
   
-  public void format(final Object model, final IFormattableDocument document) {
-    if (model instanceof XtextResource) {
-      _format((XtextResource)model, document);
+  protected void _format(final Greeting greeting, @Extension final IFormattableDocument document) {
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.setNewLines(1, 1, 2);
+    };
+    document.<Greeting>append(greeting, _function);
+  }
+  
+  public void format(final Object greeting, final IFormattableDocument document) {
+    if (greeting instanceof XtextResource) {
+      _format((XtextResource)greeting, document);
       return;
-    } else if (model instanceof Model) {
-      _format((Model)model, document);
+    } else if (greeting instanceof Greeting) {
+      _format((Greeting)greeting, document);
       return;
-    } else if (model instanceof EObject) {
-      _format((EObject)model, document);
+    } else if (greeting instanceof Model) {
+      _format((Model)greeting, document);
       return;
-    } else if (model == null) {
+    } else if (greeting instanceof EObject) {
+      _format((EObject)greeting, document);
+      return;
+    } else if (greeting == null) {
       _format((Void)null, document);
       return;
-    } else if (model != null) {
-      _format(model, document);
+    } else if (greeting != null) {
+      _format(greeting, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(model, document).toString());
+        Arrays.<Object>asList(greeting, document).toString());
     }
   }
 }
