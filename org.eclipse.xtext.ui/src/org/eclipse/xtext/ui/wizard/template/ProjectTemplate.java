@@ -8,13 +8,14 @@
  */
 package org.eclipse.xtext.ui.wizard.template;
 
-import com.google.common.annotations.Beta;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import org.eclipse.xtend.lib.macro.Active;
-import org.eclipse.xtext.ui.wizard.template.ProjectTemplateProcessor;
+
+import com.google.common.annotations.Beta;
 
 /**
  * Annotation to define a project template that is selected by the user in the new project wizard and declared in a language specific

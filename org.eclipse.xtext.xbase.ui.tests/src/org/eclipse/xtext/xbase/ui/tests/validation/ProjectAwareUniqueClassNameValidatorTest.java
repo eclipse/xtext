@@ -8,12 +8,8 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.validation;
 
-import java.util.Collections;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.ui.tests.validation.MockedFile;
-import org.eclipse.xtext.xbase.ui.tests.validation.MockedProjectAwareUniqueClassNameValidator;
 import org.junit.Assert;
 import org.junit.Test;
 

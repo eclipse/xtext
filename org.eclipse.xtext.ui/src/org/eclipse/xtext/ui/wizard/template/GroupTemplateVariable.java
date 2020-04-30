@@ -12,8 +12,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
-import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
 
 public class GroupTemplateVariable extends ContainerTemplateVariable {
 	private Group group;
