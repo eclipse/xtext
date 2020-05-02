@@ -502,30 +502,39 @@ In order to make `events`, `resetEvents` and `commands` foldable too, a custom i
 ```java
 public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
 
-	@Override
-	protected void computeObjectFolding(EObject o, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		if (o instanceof Statemachine) {
-			XtextResource res = (XtextResource) o.eResource();
-			computeEventsFolding(res, foldingRegionAcceptor);
-			computeResetEventsFolding(res, foldingRegionAcceptor);
-			computeCommandsFolding(res, foldingRegionAcceptor);
-		} else {
-			super.computeObjectFolding(o, foldingRegionAcceptor);
-		}
-	}
+  @Override
+  protected void computeObjectFolding(
+    EObject o,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
 
-	private void computeEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
+    if (o instanceof Statemachine) {
+      XtextResource res = (XtextResource) o.eResource();
+      computeEventsFolding(res, foldingRegionAcceptor);
+      computeResetEventsFolding(res, foldingRegionAcceptor);
+      computeCommandsFolding(res, foldingRegionAcceptor);
+    } else {
+      super.computeObjectFolding(o, foldingRegionAcceptor);
+    }
+  }
 
-	private void computeResetEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
+  private void computeEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
 
-	private void computeCommandsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
-	...
+  private void computeResetEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
+
+  private void computeCommandsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
+  ...
 }
 ```
 
@@ -533,11 +542,11 @@ Additionally, the [StatemachineFoldingRegionProvider]({{site.src.xtext_eclipse}}
 ```java
 public class StatemachineUiModule extends AbstractStatemachineUiModule {
 
-	...
+  ...
 
-	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
-		return StatemachineFoldingRegionProvider.class;
-	}
+  public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+    return StatemachineFoldingRegionProvider.class;
+  }
 }
 ```
 
@@ -603,6 +612,36 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 
 }
 ```
+
+## Mark Occurrences {#maroccurrences}
+Xtext-based editors are able to highlight all occurrences of a certain element in the opened DSL file. Once the user selects an element while the `Toggle Mark Occurrences` button is enabled, all occurrences are highlighted with corresponding markers on the right side of the editor.
+
+![](images/mark_occurrences.png)
+
+Customization can happen by either extending the [DefaultOccurrenceComputer]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/DefaultOccurrenceComputer.java) class or even providing a complete implementation of the [IOccurrenceComputer]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/IOccurrenceComputer.java) interface.
+
+```java
+public class MyDslOccurrenceComputer extends DefaultOccurrenceComputer {
+	...
+}
+```
+
+```java
+public class MyDslUiModule extends AbstractMyDslUiModule {
+	
+	public Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
+		return MyDslOccurrenceComputer.class;
+	}
+
+}
+```
+
+## Find References {#findreferences}
+Xtext-based editors are able to locate all references in the entire workspace where a certain element is referred to. Invoking the `Find References` context menu or using the keyboard shortcut `Ctlr+Shift+G` (`Cmd+Shift+G` on Mac) on the selected element lists all the references in the `Search` view.
+
+![](images/find_references.gif)
+
+The [org.eclipse.xtext.findReferences.IReferenceFinder]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/IReferenceFinder.java) and the [org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java) interfaces are responsible for this functionality. These interfaces are implemented by the [ReferenceFinder]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/ReferenceFinder.java) and the [DelegatingReferenceFinder]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/DelegatingReferenceFinder.java) classes. As almost everything in the Xtext framework, these components can also be customized if the default implementations do not satisfy your needs.
 
 ## Syntax Coloring {#highlighting}
 
