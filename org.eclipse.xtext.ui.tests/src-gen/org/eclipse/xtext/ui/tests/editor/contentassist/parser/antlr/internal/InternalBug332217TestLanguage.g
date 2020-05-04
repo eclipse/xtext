@@ -141,7 +141,7 @@ ruleTypeDescription returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getTypeDescriptionRule());
 					}
-					setWithLastConsumed($current, "many", true, "[]");
+					setWithLastConsumed($current, "many", lv_many_1_0 != null, "[]");
 				}
 			)
 		)?

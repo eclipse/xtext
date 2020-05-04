@@ -318,7 +318,7 @@ ruleSimpleModel returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getSimpleModelRule());
 										}
-										setWithLastConsumed($current, "static", true, "static");
+										setWithLastConsumed($current, "static", lv_static_2_0 != null, "static");
 									}
 								)
 								))
@@ -341,7 +341,7 @@ ruleSimpleModel returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getSimpleModelRule());
 										}
-										setWithLastConsumed($current, "synchronized", true, "synchronized");
+										setWithLastConsumed($current, "synchronized", lv_synchronized_3_0 != null, "synchronized");
 									}
 								)
 								))
@@ -365,7 +365,7 @@ ruleSimpleModel returns [EObject current=null]
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getSimpleModelRule());
 											}
-											setWithLastConsumed($current, "abstract", true, "abstract");
+											setWithLastConsumed($current, "abstract", lv_abstract_4_0 != null, "abstract");
 										}
 									)
 								)
@@ -380,7 +380,7 @@ ruleSimpleModel returns [EObject current=null]
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getSimpleModelRule());
 											}
-											setWithLastConsumed($current, "final", true, "final");
+											setWithLastConsumed($current, "final", lv_final_5_0 != null, "final");
 										}
 									)
 								)
@@ -514,7 +514,7 @@ ruleMandatoryModel returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getMandatoryModelRule());
 										}
-										setWithLastConsumed($current, "static", true, "static");
+										setWithLastConsumed($current, "static", lv_static_2_0 != null, "static");
 									}
 								)
 								))
@@ -537,7 +537,7 @@ ruleMandatoryModel returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getMandatoryModelRule());
 										}
-										setWithLastConsumed($current, "synchronized", true, "synchronized");
+										setWithLastConsumed($current, "synchronized", lv_synchronized_3_0 != null, "synchronized");
 									}
 								)
 								))
@@ -561,7 +561,7 @@ ruleMandatoryModel returns [EObject current=null]
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getMandatoryModelRule());
 											}
-											setWithLastConsumed($current, "abstract", true, "abstract");
+											setWithLastConsumed($current, "abstract", lv_abstract_4_0 != null, "abstract");
 										}
 									)
 								)
@@ -576,7 +576,7 @@ ruleMandatoryModel returns [EObject current=null]
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getMandatoryModelRule());
 											}
-											setWithLastConsumed($current, "final", true, "final");
+											setWithLastConsumed($current, "final", lv_final_5_0 != null, "final");
 										}
 									)
 								)
@@ -1344,7 +1344,7 @@ ruleBug304681Model returns [EObject current=null]
 											if ($current==null) {
 												$current = createModelElement(grammarAccess.getBug304681ModelRule());
 											}
-											setWithLastConsumed($current, "flag", true, "flag");
+											setWithLastConsumed($current, "flag", lv_flag_12_0 != null, "flag");
 										}
 									)
 								)

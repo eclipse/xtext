@@ -1688,7 +1688,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild1_1Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -1882,7 +1882,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild1_2Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -2076,7 +2076,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild1_3Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -4008,7 +4008,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_1Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -4235,7 +4235,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_2Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -4462,7 +4462,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_3Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -4689,7 +4689,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_4Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -4928,7 +4928,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_5Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }
@@ -5167,7 +5167,7 @@ public class InternalBug348427TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getChild2_6Rule());
                     						}
-                    						setWithLastConsumed(current, "bool", true, "bool");
+                    						setWithLastConsumed(current, "bool", lv_bool_2_0 != null, "bool");
                     					
 
                     }

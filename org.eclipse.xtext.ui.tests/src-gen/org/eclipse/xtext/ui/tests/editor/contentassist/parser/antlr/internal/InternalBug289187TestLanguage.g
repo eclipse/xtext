@@ -123,7 +123,7 @@ ruleClass returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getClassRule());
 					}
-					setWithLastConsumed($current, "abstract", true, "abstract");
+					setWithLastConsumed($current, "abstract", lv_abstract_0_0 != null, "abstract");
 				}
 			)
 		)?
@@ -137,7 +137,7 @@ ruleClass returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getClassRule());
 					}
-					setWithLastConsumed($current, "transient", true, "transient");
+					setWithLastConsumed($current, "transient", lv_transient_1_0 != null, "transient");
 				}
 			)
 		)?

@@ -638,7 +638,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       						if (current==null) {
                       							current = createModelElement(grammarAccess.getObjectRule());
                       						}
-                      						setWithLastConsumed(current, "enabled", true, "enabled");
+                      						setWithLastConsumed(current, "enabled", lv_enabled_0_0 != null, "enabled");
                       					
                     }
 
@@ -670,7 +670,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       						if (current==null) {
                       							current = createModelElement(grammarAccess.getObjectRule());
                       						}
-                      						setWithLastConsumed(current, "abstract", true, "abstract");
+                      						setWithLastConsumed(current, "abstract", lv_abstract_1_0 != null, "abstract");
                       					
                     }
 
@@ -1083,7 +1083,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      											if (current==null) {
             	      												current = createModelElement(grammarAccess.getObjectRule());
             	      											}
-            	      											setWithLastConsumed(current, "cloneable", true, "cloneable");
+            	      											setWithLastConsumed(current, "cloneable", lv_cloneable_17_0 != null, "cloneable");
             	      										
             	    }
 
@@ -2018,7 +2018,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       					if (current==null) {
                       						current = createModelElement(grammarAccess.getReferenceRule());
                       					}
-                      					setWithLastConsumed(current, "many", true, "*");
+                      					setWithLastConsumed(current, "many", lv_many_2_0 != null, "*");
                       				
                     }
 
@@ -2666,7 +2666,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       						if (current==null) {
                       							current = createModelElement(grammarAccess.getObject2Rule());
                       						}
-                      						setWithLastConsumed(current, "enabled", true, "enabled");
+                      						setWithLastConsumed(current, "enabled", lv_enabled_0_0 != null, "enabled");
                       					
                     }
 
@@ -2698,7 +2698,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       						if (current==null) {
                       							current = createModelElement(grammarAccess.getObject2Rule());
                       						}
-                      						setWithLastConsumed(current, "abstract", true, "abstract");
+                      						setWithLastConsumed(current, "abstract", lv_abstract_1_0 != null, "abstract");
                       					
                     }
 
@@ -3132,7 +3132,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	      											if (current==null) {
             	      												current = createModelElement(grammarAccess.getObject2Rule());
             	      											}
-            	      											setWithLastConsumed(current, "cloneable", true, "cloneable");
+            	      											setWithLastConsumed(current, "cloneable", lv_cloneable_17_0 != null, "cloneable");
             	      										
             	    }
 
@@ -3992,7 +3992,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      													if (current==null) {
                     	      														current = createModelElement(grammarAccess.getAttribute2Rule());
                     	      													}
-                    	      													setWithLastConsumed(current, "required", true, "required");
+                    	      													setWithLastConsumed(current, "required", lv_required_12_0 != null, "required");
                     	      												
                     	    }
 
@@ -4064,7 +4064,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	      													if (current==null) {
                     	      														current = createModelElement(grammarAccess.getAttribute2Rule());
                     	      													}
-                    	      													setWithLastConsumed(current, "technical", true, "technical");
+                    	      													setWithLastConsumed(current, "technical", lv_technical_14_0 != null, "technical");
                     	      												
                     	    }
 
@@ -4306,7 +4306,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                       					if (current==null) {
                       						current = createModelElement(grammarAccess.getReference2Rule());
                       					}
-                      					setWithLastConsumed(current, "many", true, "*");
+                      					setWithLastConsumed(current, "many", lv_many_2_0 != null, "*");
                       				
                     }
 

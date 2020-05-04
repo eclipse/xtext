@@ -350,7 +350,7 @@ ruleFunctionImpl[EObject in_current]  returns [EObject current=in_current]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getFunctionImplRule());
 							}
-							setWithLastConsumed($current, "generator", true, "*");
+							setWithLastConsumed($current, "generator", lv_generator_1_0 != null, "*");
 						}
 					)
 				)
@@ -432,7 +432,7 @@ norm3_FunctionImpl[EObject in_current]  returns [EObject current=in_current]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getFunctionImplRule());
 							}
-							setWithLastConsumed($current, "generator", true, "*");
+							setWithLastConsumed($current, "generator", lv_generator_1_0 != null, "*");
 						}
 					)
 				)
@@ -2625,7 +2625,7 @@ ruleYieldExpression returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getYieldExpressionRule());
 					}
-					setWithLastConsumed($current, "many", true, "*");
+					setWithLastConsumed($current, "many", lv_many_2_0 != null, "*");
 				}
 			)
 		)?
@@ -2687,7 +2687,7 @@ norm1_YieldExpression returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getYieldExpressionRule());
 					}
-					setWithLastConsumed($current, "many", true, "*");
+					setWithLastConsumed($current, "many", lv_many_2_0 != null, "*");
 				}
 			)
 		)?

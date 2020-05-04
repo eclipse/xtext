@@ -419,7 +419,7 @@ ruleDefinition returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getDefinitionRule());
 					}
-					setWithLastConsumed($current, "static", true, "static");
+					setWithLastConsumed($current, "static", lv_static_0_0 != null, "static");
 				}
 			)
 		)?
@@ -3452,7 +3452,7 @@ ruleBooleanLiteralExp returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getBooleanLiteralExpRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "true");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_1_0 != null, "true");
 					}
 				)
 			)
@@ -4909,7 +4909,7 @@ ruleRoundBracketExp returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getRoundBracketExpRule());
 						}
-						setWithLastConsumed($current, "pre", true, "pre");
+						setWithLastConsumed($current, "pre", lv_pre_2_0 != null, "pre");
 					}
 				)
 			)
@@ -5151,7 +5151,7 @@ ruleSquareBracketExp returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getSquareBracketExpRule());
 						}
-						setWithLastConsumed($current, "pre", true, "pre");
+						setWithLastConsumed($current, "pre", lv_pre_7_0 != null, "pre");
 					}
 				)
 			)

@@ -958,7 +958,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getFromEntryRule());
                     					}
-                    					setWithLastConsumed(current, "withoutsubtypes", true, "withoutsubtypes");
+                    					setWithLastConsumed(current, "withoutsubtypes", lv_withoutsubtypes_1_0 != null, "withoutsubtypes");
                     				
 
                     }
@@ -1141,7 +1141,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getScopeClauseRule());
                     					}
-                    					setWithLastConsumed(current, "notIn", true, "not");
+                    					setWithLastConsumed(current, "notIn", lv_notIn_0_0 != null, "not");
                     				
 
                     }
@@ -3534,7 +3534,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getBooleanAttributeWhereEntryRule());
                     						}
-                    						setWithLastConsumed(current, "isTrue", true, "true");
+                    						setWithLastConsumed(current, "isTrue", lv_isTrue_4_0 != null, "true");
                     					
 
                     }
@@ -4020,7 +4020,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getSubselectWhereEntryRule());
                     					}
-                    					setWithLastConsumed(current, "notIn", true, "not");
+                    					setWithLastConsumed(current, "notIn", lv_notIn_3_0 != null, "not");
                     				
 
                     }

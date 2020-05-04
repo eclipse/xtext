@@ -734,7 +734,7 @@ ruleChild1_1 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild1_1Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -822,7 +822,7 @@ ruleChild1_2 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild1_2Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -910,7 +910,7 @@ ruleChild1_3 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild1_3Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -1730,7 +1730,7 @@ ruleChild2_1 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_1Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -1826,7 +1826,7 @@ ruleChild2_2 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_2Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -1922,7 +1922,7 @@ ruleChild2_3 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_3Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -2018,7 +2018,7 @@ ruleChild2_4 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_4Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -2118,7 +2118,7 @@ ruleChild2_5 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_5Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)
@@ -2218,7 +2218,7 @@ ruleChild2_6 returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getChild2_6Rule());
 						}
-						setWithLastConsumed($current, "bool", true, "bool");
+						setWithLastConsumed($current, "bool", lv_bool_2_0 != null, "bool");
 					}
 				)
 			)

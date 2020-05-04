@@ -177,7 +177,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getStateRule());
                     						}
-                    						setWithLastConsumed(current, "isInitial", true, "init");
+                    						setWithLastConsumed(current, "isInitial", lv_isInitial_1_0 != null, "init");
                     					
 
                     }
@@ -205,7 +205,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getStateRule());
                     						}
-                    						setWithLastConsumed(current, "isFinal", true, "final");
+                    						setWithLastConsumed(current, "isFinal", lv_isFinal_2_0 != null, "final");
                     					
 
                     }
@@ -273,7 +273,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getStateRule());
                     							}
-                    							setWithLastConsumed(current, "isInitial", true, "init");
+                    							setWithLastConsumed(current, "isInitial", lv_isInitial_4_0 != null, "init");
                     						
 
                     }
@@ -338,7 +338,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getStateRule());
                     							}
-                    							setWithLastConsumed(current, "isInitial", true, "init");
+                    							setWithLastConsumed(current, "isInitial", lv_isInitial_6_0 != null, "init");
                     						
 
                     }
@@ -391,7 +391,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getStateRule());
                     							}
-                    							setWithLastConsumed(current, "isFinal", true, "final");
+                    							setWithLastConsumed(current, "isFinal", lv_isFinal_8_0 != null, "final");
                     						
 
                     }

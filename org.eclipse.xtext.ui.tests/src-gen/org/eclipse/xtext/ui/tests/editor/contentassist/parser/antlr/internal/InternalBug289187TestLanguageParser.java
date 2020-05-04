@@ -309,7 +309,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getClassRule());
                     					}
-                    					setWithLastConsumed(current, "abstract", true, "abstract");
+                    					setWithLastConsumed(current, "abstract", lv_abstract_0_0 != null, "abstract");
                     				
 
                     }
@@ -342,7 +342,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getClassRule());
                     					}
-                    					setWithLastConsumed(current, "transient", true, "transient");
+                    					setWithLastConsumed(current, "transient", lv_transient_1_0 != null, "transient");
                     				
 
                     }

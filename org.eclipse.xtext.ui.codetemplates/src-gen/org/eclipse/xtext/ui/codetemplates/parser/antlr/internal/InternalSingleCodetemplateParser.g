@@ -569,7 +569,7 @@ ruleVariable returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getVariableRule());
 								}
-								setWithLastConsumed($current, "expectingParameters", true, "(");
+								setWithLastConsumed($current, "expectingParameters", lv_expectingParameters_9_0 != null, "(");
 							}
 						)
 					)
@@ -887,7 +887,7 @@ ruleDollar returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getDollarRule());
 						}
-						setWithLastConsumed($current, "escaped", true, "\$\$");
+						setWithLastConsumed($current, "escaped", lv_escaped_1_0 != null, "\$\$");
 					}
 				)
 			)

@@ -357,7 +357,7 @@ ruleAlternativeClassModifiers returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getAlternativeClassModifiersRule());
 						}
-						setWithLastConsumed($current, "final", true, "final");
+						setWithLastConsumed($current, "final", lv_final_1_0 != null, "final");
 					}
 				)
 			)
@@ -372,7 +372,7 @@ ruleAlternativeClassModifiers returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getAlternativeClassModifiersRule());
 						}
-						setWithLastConsumed($current, "abstract", true, "abstract");
+						setWithLastConsumed($current, "abstract", lv_abstract_2_0 != null, "abstract");
 					}
 				)
 			)
@@ -387,7 +387,7 @@ ruleAlternativeClassModifiers returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getAlternativeClassModifiersRule());
 						}
-						setWithLastConsumed($current, "extern", true, "extern");
+						setWithLastConsumed($current, "extern", lv_extern_3_0 != null, "extern");
 					}
 				)
 			)
@@ -675,7 +675,7 @@ ruleUnorderedModifiers returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedModifiersRule());
 										}
-										setWithLastConsumed($current, "final", true, "final");
+										setWithLastConsumed($current, "final", lv_final_2_0 != null, "final");
 									}
 								)
 								))
@@ -698,7 +698,7 @@ ruleUnorderedModifiers returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedModifiersRule());
 										}
-										setWithLastConsumed($current, "abstract", true, "abstract");
+										setWithLastConsumed($current, "abstract", lv_abstract_3_0 != null, "abstract");
 									}
 								)
 								))
@@ -721,7 +721,7 @@ ruleUnorderedModifiers returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedModifiersRule());
 										}
-										setWithLastConsumed($current, "extern", true, "extern");
+										setWithLastConsumed($current, "extern", lv_extern_4_0 != null, "extern");
 									}
 								)
 								))
