@@ -485,41 +485,50 @@ public Class&lt;? extends IComparator&gt;
 
 <pre><code class="language-java">public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
 
-	@Override
-	protected void computeObjectFolding(EObject o, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
-		if (o instanceof Statemachine) {
-			XtextResource res = (XtextResource) o.eResource();
-			computeEventsFolding(res, foldingRegionAcceptor);
-			computeResetEventsFolding(res, foldingRegionAcceptor);
-			computeCommandsFolding(res, foldingRegionAcceptor);
-		} else {
-			super.computeObjectFolding(o, foldingRegionAcceptor);
-		}
-	}
+  @Override
+  protected void computeObjectFolding(
+    EObject o,
+    IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
 
-	private void computeEventsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
-		...
-	}
+    if (o instanceof Statemachine) {
+      XtextResource res = (XtextResource) o.eResource();
+      computeEventsFolding(res, foldingRegionAcceptor);
+      computeResetEventsFolding(res, foldingRegionAcceptor);
+      computeCommandsFolding(res, foldingRegionAcceptor);
+    } else {
+      super.computeObjectFolding(o, foldingRegionAcceptor);
+    }
+  }
 
-	private void computeResetEventsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
-		...
-	}
+  private void computeEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+    ...
+  }
 
-	private void computeCommandsFolding(XtextResource res, IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
-		...
-	}
-	...
+  private void computeResetEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+    ...
+  }
+
+  private void computeCommandsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor&lt;ITextRegion&gt; foldingRegionAcceptor) {
+    ...
+  }
+  ...
 }
 </code></pre>
 
 <p>Additionally, the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/folding/StatemachineFoldingRegionProvider.java">StatemachineFoldingRegionProvider</a> class has to be bound in the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl.ui/src/org/eclipse/xtext/example/fowlerdsl/ui/StatemachineUiModule.java">StatemachineUiModule</a>:</p>
 <pre><code class="language-java">public class StatemachineUiModule extends AbstractStatemachineUiModule {
 
-	...
+  ...
 
-	public Class&lt;? extends IFoldingRegionProvider&gt; bindIFoldingRegionProvider() {
-		return StatemachineFoldingRegionProvider.class;
-	}
+  public Class&lt;? extends IFoldingRegionProvider&gt; bindIFoldingRegionProvider() {
+    return StatemachineFoldingRegionProvider.class;
+  }
 }
 </code></pre>
 
@@ -584,6 +593,34 @@ public Class&lt;? extends IComparator&gt;
 
 }
 </code></pre>
+
+<h2 id="maroccurrences">Mark Occurrences</h2>
+<p>Xtext-based editors are able to highlight all occurrences of a certain element in the opened DSL file. Once the user selects an element while the <code>Toggle Mark Occurrences</code> button is enabled, all occurrences are highlighted with corresponding markers on the right side of the editor.</p>
+
+<p><img src="images/mark_occurrences.png" alt="" /></p>
+
+<p>Customization can happen by either extending the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/DefaultOccurrenceComputer.java">DefaultOccurrenceComputer</a> class or even providing a complete implementation of the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/IOccurrenceComputer.java">IOccurrenceComputer</a> interface.</p>
+
+<pre><code class="language-java">public class MyDslOccurrenceComputer extends DefaultOccurrenceComputer {
+	...
+}
+</code></pre>
+
+<pre><code class="language-java">public class MyDslUiModule extends AbstractMyDslUiModule {
+	
+	public Class&lt;? extends IOccurrenceComputer&gt; bindIOccurrenceComputer() {
+		return MyDslOccurrenceComputer.class;
+	}
+
+}
+</code></pre>
+
+<h2 id="findreferences">Find References</h2>
+<p>Xtext-based editors are able to locate all references in the entire workspace where a certain element is referred to. Invoking the <code>Find References</code> context menu or using the keyboard shortcut <code>Ctlr+Shift+G</code> (<code>Cmd+Shift+G</code> on Mac) on the selected element lists all the references in the <code>Search</code> view.</p>
+
+<p><img src="images/find_references.gif" alt="" /></p>
+
+<p>The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/IReferenceFinder.java">org.eclipse.xtext.findReferences.IReferenceFinder</a> and the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java">org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder</a> interfaces are responsible for this functionality. These interfaces are implemented by the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/ReferenceFinder.java">ReferenceFinder</a> and the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/DelegatingReferenceFinder.java">DelegatingReferenceFinder</a> classes. As almost everything in the Xtext framework, these components can also be customized if the default implementations do not satisfy your needs.</p>
 
 <h2 id="highlighting">Syntax Coloring</h2>
 
@@ -738,7 +775,7 @@ fragment = refactoring.RefactorElementNameFragment2 {}
 
 <p>The templates are contributed to the wizard by the extension point <code>org.eclipse.xtext.ui.projectTemplate</code>. An implementor of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IProjectTemplateProvider.java">IProjectTemplateProvider</a> is registered for the language it provides templates to. The method of this interface returns instances of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractProjectTemplate.java">AbstractProjectTemplate</a>. Each of these instances defines one template.</p>
 
-<p>To create a subclass of <code>AbstractProjectTemplate</code> it is advisable to annotate a class with the active annotation <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/ProjectTemplate.xtend">ProjectTemplate</a>. With this annotation the name and description can be defined and will be made available to the user interface. Also the extension of <code>AbstractProjectTemplate</code> will be done for you.</p>
+<p>To create a subclass of <code>AbstractProjectTemplate</code> it is advisable to annotate a class with the active annotation <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/ProjectTemplate.java">ProjectTemplate</a>. With this annotation the name and description can be defined and will be made available to the user interface. Also the extension of <code>AbstractProjectTemplate</code> will be done for you.</p>
 
 <p>In a project template the method <code>generateProjects(IProjectGenerator)</code> needs to be overridden. The parameter instance offers a single <code>generate</code> method that takes an instance of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/util/ProjectFactory.java">ProjectFactory</a>. Using this class, or available subclasses, all kind of projects can be generated by the template. The following illustrates a simple example to generate a plugin project with a template:</p>
 
@@ -790,7 +827,7 @@ final class TestProject {
 }
 </code></pre>
 
-<p>The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point <code>org.eclipse.xtext.ui.fileTemplate</code> to register a <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java">IFileTemplateProvider</a>. To create instances of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.java">AbstractFileTemplate</a> one should use the active annotation <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.xtend">FileTemplate</a>.</p>
+<p>The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point <code>org.eclipse.xtext.ui.fileTemplate</code> to register a <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java">IFileTemplateProvider</a>. To create instances of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.java">AbstractFileTemplate</a> one should use the active annotation <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.java">FileTemplate</a>.</p>
 
 <p>An simple example template might look like this:</p>
 
@@ -850,13 +887,13 @@ final class HelloWorldFile {
 
 <ul>
   <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractAutoEditTest.java">AbstractAutoEditTest</a>: base class for testing the auto editing functionality</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractContentAssistTest.xtend">AbstractContentAssistTest</a>: base class for testing the content assistant and template proposals</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractFoldingTest.xtend">AbstractFoldingTest</a>: base class for testing the folding capabilities</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.xtend">AbstractHighlightingTest</a>: base class for testing the syntactical and semantic coloring</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHoverTest.xtend">AbstractHoverTest</a>: base class for testing the hovering functionality</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.xtend">AbstractHyperlinkingTest</a>: base class for testing the hyperlinking functionality</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractContentAssistTest.java">AbstractContentAssistTest</a>: base class for testing the content assistant and template proposals</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractFoldingTest.java">AbstractFoldingTest</a>: base class for testing the folding capabilities</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.java">AbstractHighlightingTest</a>: base class for testing the syntactical and semantic coloring</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHoverTest.java">AbstractHoverTest</a>: base class for testing the hovering functionality</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.java">AbstractHyperlinkingTest</a>: base class for testing the hyperlinking functionality</li>
   <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractOutlineTest.java">AbstractOutlineTest</a>: base class for testing the structure of the outline view</li>
-  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.xtend">AbstractQuickfixTest</a>: base class for testing the quick fixes</li>
+  <li><a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.java">AbstractQuickfixTest</a>: base class for testing the quick fixes</li>
   <li>…</li>
 </ul>
 

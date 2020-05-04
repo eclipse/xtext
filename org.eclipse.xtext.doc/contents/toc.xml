@@ -155,7 +155,7 @@
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#testing-the-parser" label="Testing the Parser">
 				</topic>
-				<topic href="contents/303_runtime_concepts.html#test-validators" label="Testing Validators">
+				<topic href="contents/303_runtime_concepts.html#test-validators" label="Testing the Validator">
 				</topic>
 				<topic href="contents/303_runtime_concepts.html#testing-multiple-languages" label="Testing Multiple Languages">
 				</topic>
@@ -265,6 +265,10 @@
 				</topic>
 			</topic>
 			<topic href="contents/310_eclipse_support.html#hovering" label="Hovering">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#maroccurrences" label="Mark Occurrences">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#findreferences" label="Find References">
 			</topic>
 			<topic href="contents/310_eclipse_support.html#highlighting" label="Syntax Coloring">
 				<topic href="contents/310_eclipse_support.html#lexical-highlighting" label="Lexical Highlighting">
