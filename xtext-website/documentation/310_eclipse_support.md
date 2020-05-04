@@ -502,30 +502,39 @@ In order to make `events`, `resetEvents` and `commands` foldable too, a custom i
 ```java
 public class StatemachineFoldingRegionProvider extends DefaultFoldingRegionProvider {
 
-	@Override
-	protected void computeObjectFolding(EObject o, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		if (o instanceof Statemachine) {
-			XtextResource res = (XtextResource) o.eResource();
-			computeEventsFolding(res, foldingRegionAcceptor);
-			computeResetEventsFolding(res, foldingRegionAcceptor);
-			computeCommandsFolding(res, foldingRegionAcceptor);
-		} else {
-			super.computeObjectFolding(o, foldingRegionAcceptor);
-		}
-	}
+  @Override
+  protected void computeObjectFolding(
+    EObject o,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
 
-	private void computeEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
+    if (o instanceof Statemachine) {
+      XtextResource res = (XtextResource) o.eResource();
+      computeEventsFolding(res, foldingRegionAcceptor);
+      computeResetEventsFolding(res, foldingRegionAcceptor);
+      computeCommandsFolding(res, foldingRegionAcceptor);
+    } else {
+      super.computeObjectFolding(o, foldingRegionAcceptor);
+    }
+  }
 
-	private void computeResetEventsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
+  private void computeEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
 
-	private void computeCommandsFolding(XtextResource res, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		...
-	}
-	...
+  private void computeResetEventsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
+
+  private void computeCommandsFolding(
+    XtextResource res,
+    IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
+    ...
+  }
+  ...
 }
 ```
 
@@ -533,11 +542,11 @@ Additionally, the [StatemachineFoldingRegionProvider]({{site.src.xtext_eclipse}}
 ```java
 public class StatemachineUiModule extends AbstractStatemachineUiModule {
 
-	...
+  ...
 
-	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
-		return StatemachineFoldingRegionProvider.class;
-	}
+  public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+    return StatemachineFoldingRegionProvider.class;
+  }
 }
 ```
 
@@ -603,6 +612,36 @@ public class MyDslUiModule extends AbstractMyDslUiModule {
 
 }
 ```
+
+## Mark Occurrences {#maroccurrences}
+Xtext-based editors are able to highlight all occurrences of a certain element in the opened DSL file. Once the user selects an element while the `Toggle Mark Occurrences` button is enabled, all occurrences are highlighted with corresponding markers on the right side of the editor.
+
+![](images/mark_occurrences.png)
+
+Customization can happen by either extending the [DefaultOccurrenceComputer]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/DefaultOccurrenceComputer.java) class or even providing a complete implementation of the [IOccurrenceComputer]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/occurrences/IOccurrenceComputer.java) interface.
+
+```java
+public class MyDslOccurrenceComputer extends DefaultOccurrenceComputer {
+	...
+}
+```
+
+```java
+public class MyDslUiModule extends AbstractMyDslUiModule {
+	
+	public Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
+		return MyDslOccurrenceComputer.class;
+	}
+
+}
+```
+
+## Find References {#findreferences}
+Xtext-based editors are able to locate all references in the entire workspace where a certain element is referred to. Invoking the `Find References` context menu or using the keyboard shortcut `Ctlr+Shift+G` (`Cmd+Shift+G` on Mac) on the selected element lists all the references in the `Search` view.
+
+![](images/find_references.gif)
+
+The [org.eclipse.xtext.findReferences.IReferenceFinder]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/IReferenceFinder.java) and the [org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java) interfaces are responsible for this functionality. These interfaces are implemented by the [ReferenceFinder]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/findReferences/ReferenceFinder.java) and the [DelegatingReferenceFinder]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/findrefs/DelegatingReferenceFinder.java) classes. As almost everything in the Xtext framework, these components can also be customized if the default implementations do not satisfy your needs.
 
 ## Syntax Coloring {#highlighting}
 
@@ -759,7 +798,7 @@ The templates define two things. On the one hand they define how the template is
 
 The templates are contributed to the wizard by the extension point `org.eclipse.xtext.ui.projectTemplate`. An implementor of [IProjectTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IProjectTemplateProvider.java) is registered for the language it provides templates to. The method of this interface returns instances of [AbstractProjectTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractProjectTemplate.java). Each of these instances defines one template.
 
-To create a subclass of `AbstractProjectTemplate` it is advisable to annotate a class with the active annotation [ProjectTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/ProjectTemplate.xtend). With this annotation the name and description can be defined and will be made available to the user interface. Also the extension of `AbstractProjectTemplate` will be done for you.
+To create a subclass of `AbstractProjectTemplate` it is advisable to annotate a class with the active annotation [ProjectTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/ProjectTemplate.java). With this annotation the name and description can be defined and will be made available to the user interface. Also the extension of `AbstractProjectTemplate` will be done for you.
 
 In a project template the method `generateProjects(IProjectGenerator)` needs to be overridden. The parameter instance offers a single `generate` method that takes an instance of [ProjectFactory]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/util/ProjectFactory.java). Using this class, or available subclasses, all kind of projects can be generated by the template. The following illustrates a simple example to generate a plugin project with a template:
 
@@ -814,7 +853,7 @@ fileWizard = {
 }
 ```
 
-The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point `org.eclipse.xtext.ui.fileTemplate` to register a [IFileTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java). To create instances of [AbstractFileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.java) one should use the active annotation [FileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.xtend).
+The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point `org.eclipse.xtext.ui.fileTemplate` to register a [IFileTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java). To create instances of [AbstractFileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.java) one should use the active annotation [FileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.java).
 
 An simple example template might look like this:
 
@@ -878,11 +917,11 @@ Automated UI tests are crucial for the maintainability and the quality of a soft
 *	[AbstractAutoEditTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractAutoEditTest.java): base class for testing the auto editing functionality
 *	[AbstractContentAssistTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractContentAssistTest.java): base class for testing the content assistant and template proposals
 *	[AbstractFoldingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractFoldingTest.java): base class for testing the folding capabilities
-*	[AbstractHighlightingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.xtend): base class for testing the syntactical and semantic coloring
+*	[AbstractHighlightingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.java): base class for testing the syntactical and semantic coloring
 *	[AbstractHoverTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHoverTest.java): base class for testing the hovering functionality
-*	[AbstractHyperlinkingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.xtend): base class for testing the hyperlinking functionality
+*	[AbstractHyperlinkingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.java): base class for testing the hyperlinking functionality
 *	[AbstractOutlineTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractOutlineTest.java): base class for testing the structure of the outline view
-*	[AbstractQuickfixTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.xtend): base class for testing the quick fixes
+*	[AbstractQuickfixTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.java): base class for testing the quick fixes
 *	...
 
 The Xtext example projects (*File &rarr; New &rarr; Example &rarr; Xtext Examples*) contain UI test cases that make use of these framework classes. Feel free to study the corresponding `org.eclipse.xtext.example.<language>.ui.tests` projects to get some inspirations on how to implement automated UI test cases for your Xtext-based language editor.

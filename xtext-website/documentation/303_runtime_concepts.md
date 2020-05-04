@@ -740,7 +740,7 @@ import org.example.domainmodel.DomainmodelInjectorProvider
 @InjectWith(DomainmodelInjectorProvider)
 @RunWith(XtextRunner)
 class ParserTest {
-    @Test void simple() {
+    @Test def void simple() {
         assertTrue(true)
     }
 }
@@ -753,7 +753,7 @@ A test class for JUnit 5 looks quite similar. Instead of runners JUnit 5 has a n
 ```xtend
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
-import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.^extension.ExtendWith
 import org.junit.jupiter.api.Test
 import static org.junit.jupiter.api.Assertions.*
 import org.example.domainmodel.DomainmodelInjectorProvider
@@ -761,7 +761,7 @@ import org.example.domainmodel.DomainmodelInjectorProvider
 @InjectWith(DomainmodelInjectorProvider)
 @ExtendWith(InjectionExtension)
 class ParserTest {
-    @Test void simple() {
+    @Test def void simple() {
         assertTrue(true)
     }
 }
@@ -789,7 +789,7 @@ def void parseDomainmodel() {
 }
 ```
 
-### Testing Validators {#test-validators}
+### Testing the Validator {#test-validators}
 
 Testing your validation is very simple with the [ValidationTestHelper]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/validation/ValidationTestHelper.java):
 
@@ -849,6 +849,8 @@ public class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerate
 ```
 
 This only applies to referencing dependencies to imported Ecore models and languages based on them which may be used in the test. The inherited dependencies from mixed-in grammars are automatically listed in the generated super class already, and nothing needs to be done for those.
+
+The Xtext example projects (*File &rarr; New &rarr; Example &rarr; Xtext Examples*) contain further unit test cases, e.g. testing the formatter, serializer, compiler, ...etc . Feel free to study the corresponding `org.eclipse.xtext.example.<language>.tests` projects to get some inspirations on how to implement automated unit test cases for your Xtext-based language.
 
 ---
 
