@@ -138,6 +138,34 @@ ruleAlts returns [EObject current=null]
 			$current = $this_LookAhead3_2.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		(
+			((
+				(
+				)
+				'zonk'
+				'a'
+				'b'
+			)
+			)=>
+			{
+				newCompositeNode(grammarAccess.getAltsAccess().getLookAheadPredicateParserRuleCall_3());
+			}
+			this_LookAheadPredicate_3=ruleLookAheadPredicate
+			{
+				$current = $this_LookAheadPredicate_3.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
+		    |
+		{
+			newCompositeNode(grammarAccess.getAltsAccess().getLookBeyondParserRuleCall_4());
+		}
+		this_LookBeyond_4=ruleLookBeyond
+		{
+			$current = $this_LookBeyond_4.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -404,6 +432,225 @@ ruleLookAhead4 returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getLookAhead4Rule());
 					}
 					setWithLastConsumed($current, "x", lv_x_1_0, "d");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleLookAheadPredicate
+entryRuleLookAheadPredicate returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getLookAheadPredicateRule()); }
+	iv_ruleLookAheadPredicate=ruleLookAheadPredicate
+	{ $current=$iv_ruleLookAheadPredicate.current; }
+	EOF;
+
+// Rule LookAheadPredicate
+ruleLookAheadPredicate returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			((
+				(
+				)
+				'zonk'
+				'a'
+				'b'
+			)
+			)=>
+			(
+				(
+					{
+						$current = forceCreateModelElement(
+							grammarAccess.getLookAheadPredicateAccess().getLookAheadPredicateAction_0_0_0(),
+							$current);
+					}
+				)
+				otherlv_1='zonk'
+				{
+					newLeafNode(otherlv_1, grammarAccess.getLookAheadPredicateAccess().getZonkKeyword_0_0_1());
+				}
+				otherlv_2='a'
+				{
+					newLeafNode(otherlv_2, grammarAccess.getLookAheadPredicateAccess().getAKeyword_0_0_2());
+				}
+				otherlv_3='b'
+				{
+					newLeafNode(otherlv_3, grammarAccess.getLookAheadPredicateAccess().getBKeyword_0_0_3());
+				}
+			)
+		)
+		otherlv_4='d'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getLookAheadPredicateAccess().getDKeyword_1());
+		}
+	)
+;
+
+// Entry rule entryRuleLookBeyond
+entryRuleLookBeyond returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getLookBeyondRule()); }
+	iv_ruleLookBeyond=ruleLookBeyond
+	{ $current=$iv_ruleLookBeyond.current; }
+	EOF;
+
+// Rule LookBeyond
+ruleLookBeyond returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getLookBeyondAccess().getLeftLookAheadStringsParserRuleCall_0_0());
+				}
+				lv_left_0_0=ruleLookAheadStrings
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getLookBeyondRule());
+					}
+					set(
+						$current,
+						"left",
+						lv_left_0_0,
+						"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAheadStrings");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getLookBeyondAccess().getRightFewerLookAheadStringsParserRuleCall_1_0());
+				}
+				lv_right_1_0=ruleFewerLookAheadStrings
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getLookBeyondRule());
+					}
+					set(
+						$current,
+						"right",
+						lv_right_1_0,
+						"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.FewerLookAheadStrings");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleLookAheadStrings
+entryRuleLookAheadStrings returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getLookAheadStringsRule()); }
+	iv_ruleLookAheadStrings=ruleLookAheadStrings
+	{ $current=$iv_ruleLookAheadStrings.current; }
+	EOF;
+
+// Rule LookAheadStrings
+ruleLookAheadStrings returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_values_0_0=RULE_STRING
+			{
+				newLeafNode(lv_values_0_0, grammarAccess.getLookAheadStringsAccess().getValuesSTRINGTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getLookAheadStringsRule());
+				}
+				addWithLastConsumed(
+					$current,
+					"values",
+					lv_values_0_0,
+					"org.eclipse.xtext.common.Terminals.STRING");
+			}
+		)
+	)+
+;
+
+// Entry rule entryRuleFewerLookAheadStrings
+entryRuleFewerLookAheadStrings returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getFewerLookAheadStringsRule()); }
+	iv_ruleFewerLookAheadStrings=ruleFewerLookAheadStrings
+	{ $current=$iv_ruleFewerLookAheadStrings.current; }
+	EOF;
+
+// Rule FewerLookAheadStrings
+ruleFewerLookAheadStrings returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_values_0_0=RULE_STRING
+				{
+					newLeafNode(lv_values_0_0, grammarAccess.getFewerLookAheadStringsAccess().getValuesSTRINGTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFewerLookAheadStringsRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"values",
+						lv_values_0_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		(
+			(
+				lv_values_1_0=RULE_STRING
+				{
+					newLeafNode(lv_values_1_0, grammarAccess.getFewerLookAheadStringsAccess().getValuesSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFewerLookAheadStringsRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"values",
+						lv_values_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		(
+			(
+				lv_values_2_0=RULE_ID
+				{
+					newLeafNode(lv_values_2_0, grammarAccess.getFewerLookAheadStringsAccess().getValuesIDTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFewerLookAheadStringsRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"values",
+						lv_values_2_0,
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)

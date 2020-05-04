@@ -15,11 +15,15 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.lookaheadLang.Entry;
+import org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead2;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead3;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead4;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
@@ -40,6 +44,9 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 			case LookaheadLangPackage.ENTRY:
 				sequence_Entry(context, (Entry) semanticObject); 
 				return; 
+			case LookaheadLangPackage.FEWER_LOOK_AHEAD_STRINGS:
+				sequence_FewerLookAheadStrings(context, (FewerLookAheadStrings) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD0:
 				sequence_LookAhead0(context, (LookAhead0) semanticObject); 
 				return; 
@@ -54,6 +61,15 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case LookaheadLangPackage.LOOK_AHEAD4:
 				sequence_LookAhead4(context, (LookAhead4) semanticObject); 
+				return; 
+			case LookaheadLangPackage.LOOK_AHEAD_PREDICATE:
+				sequence_LookAheadPredicate(context, (LookAheadPredicate) semanticObject); 
+				return; 
+			case LookaheadLangPackage.LOOK_AHEAD_STRINGS:
+				sequence_LookAheadStrings(context, (LookAheadStrings) semanticObject); 
+				return; 
+			case LookaheadLangPackage.LOOK_BEYOND:
+				sequence_LookBeyond(context, (LookBeyond) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -74,6 +90,18 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	/**
 	 * Contexts:
+	 *     FewerLookAheadStrings returns FewerLookAheadStrings
+	 *
+	 * Constraint:
+	 *     (values+=STRING values+=STRING values+=ID)
+	 */
+	protected void sequence_FewerLookAheadStrings(ISerializationContext context, FewerLookAheadStrings semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Alts returns LookAhead0
 	 *     LookAhead0 returns LookAhead0
 	 *
@@ -82,8 +110,8 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 */
 	protected void sequence_LookAhead0(ISerializationContext context, LookAhead0 semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD0__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD0__X));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), semanticObject.getX());
@@ -103,8 +131,8 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y));
-			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__X));
 			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z));
 		}
@@ -138,8 +166,8 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 */
 	protected void sequence_LookAhead3(ISerializationContext context, LookAhead3 semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__X));
 			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__Z) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__Z));
 		}
@@ -158,6 +186,44 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     (x='c' | x='d')
 	 */
 	protected void sequence_LookAhead4(ISerializationContext context, LookAhead4 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Alts returns LookAheadPredicate
+	 *     LookAheadPredicate returns LookAheadPredicate
+	 *
+	 * Constraint:
+	 *     {LookAheadPredicate}
+	 */
+	protected void sequence_LookAheadPredicate(ISerializationContext context, LookAheadPredicate semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     LookAheadStrings returns LookAheadStrings
+	 *
+	 * Constraint:
+	 *     values+=STRING+
+	 */
+	protected void sequence_LookAheadStrings(ISerializationContext context, LookAheadStrings semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Alts returns LookBeyond
+	 *     LookBeyond returns LookBeyond
+	 *
+	 * Constraint:
+	 *     (left=LookAheadStrings? right=FewerLookAheadStrings)
+	 */
+	protected void sequence_LookBeyond(ISerializationContext context, LookBeyond semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

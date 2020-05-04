@@ -23,6 +23,7 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead3Impl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead3Impl#getZ <em>Z</em>}</li>
  * </ul>
  *
@@ -30,6 +31,26 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  */
 public class LookAhead3Impl extends AltsImpl implements LookAhead3
 {
+  /**
+   * The default value of the '{@link #getX() <em>X</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX()
+   * @generated
+   * @ordered
+   */
+  protected static final String X_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getX() <em>X</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX()
+   * @generated
+   * @ordered
+   */
+  protected String x = X_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getZ() <em>Z</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -59,6 +80,31 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
   protected EClass eStaticClass()
   {
     return LookaheadLangPackage.Literals.LOOK_AHEAD3;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getX()
+  {
+    return x;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setX(String newX)
+  {
+    String oldX = x;
+    x = newX;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LookaheadLangPackage.LOOK_AHEAD3__X, oldX, x));
   }
 
   /**
@@ -137,6 +183,8 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
   {
     switch (featureID)
     {
+      case LookaheadLangPackage.LOOK_AHEAD3__X:
+        return getX();
       case LookaheadLangPackage.LOOK_AHEAD3__Z:
         return getZ();
     }
@@ -153,6 +201,9 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
   {
     switch (featureID)
     {
+      case LookaheadLangPackage.LOOK_AHEAD3__X:
+        setX((String)newValue);
+        return;
       case LookaheadLangPackage.LOOK_AHEAD3__Z:
         setZ((LookAhead4)newValue);
         return;
@@ -170,6 +221,9 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
   {
     switch (featureID)
     {
+      case LookaheadLangPackage.LOOK_AHEAD3__X:
+        setX(X_EDEFAULT);
+        return;
       case LookaheadLangPackage.LOOK_AHEAD3__Z:
         setZ((LookAhead4)null);
         return;
@@ -187,10 +241,29 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
   {
     switch (featureID)
     {
+      case LookaheadLangPackage.LOOK_AHEAD3__X:
+        return X_EDEFAULT == null ? x != null : !X_EDEFAULT.equals(x);
       case LookaheadLangPackage.LOOK_AHEAD3__Z:
         return z != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (x: ");
+    result.append(x);
+    result.append(')');
+    return result.toString();
   }
 
 } //LookAhead3Impl

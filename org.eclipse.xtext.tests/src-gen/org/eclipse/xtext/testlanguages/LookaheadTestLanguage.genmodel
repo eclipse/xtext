@@ -9,22 +9,35 @@
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Entry">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//Entry/contents"/>
     </genClasses>
-    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Alts">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//Alts/x"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Alts"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead0">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead0/x"/>
     </genClasses>
-    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead0"/>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead1">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookAhead1/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead1/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead1/z"/>
     </genClasses>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead2">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead2/z"/>
     </genClasses>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead3/x"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookAhead3/z"/>
     </genClasses>
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAhead4">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAhead4/x"/>
+    </genClasses>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAheadPredicate"/>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookBeyond">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookBeyond/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//LookBeyond/right"/>
+    </genClasses>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//LookAheadStrings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//LookAheadStrings/values"/>
+    </genClasses>
+    <genClasses ecoreClass="LookaheadTestLanguage.ecore#//FewerLookAheadStrings">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LookaheadTestLanguage.ecore#//FewerLookAheadStrings/values"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -27,6 +27,7 @@ import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.LookAheadInfo;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
@@ -289,8 +290,11 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 
 	protected void checkNodeModel(XtextResource resource) {
 		IParseResult parseResult = resource.getParseResult();
-		if(parseResult != null)
-			getInvariantChecker().checkInvariant(parseResult.getRootNode());
+		if(parseResult != null) {
+			ICompositeNode rootNode = parseResult.getRootNode();
+			getInvariantChecker().checkInvariant(rootNode);
+			new LookAheadInfo(rootNode).checkConsistency();
+		}
 	}
 
 	protected boolean shouldTestSerializer(XtextResource resource) {

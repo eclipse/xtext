@@ -13,11 +13,15 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.testlanguages.lookaheadLang.Alts;
 import org.eclipse.xtext.testlanguages.lookaheadLang.Entry;
+import org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead2;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead3;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead4;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangFactory;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
 
@@ -77,6 +81,34 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * @generated
    */
   private EClass lookAhead4EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass lookAheadPredicateEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass lookBeyondEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass lookAheadStringsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fewerLookAheadStringsEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -183,9 +215,9 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * @generated
    */
   @Override
-  public EAttribute getAlts_X()
+  public EClass getLookAhead0()
   {
-    return (EAttribute)altsEClass.getEStructuralFeatures().get(0);
+    return lookAhead0EClass;
   }
 
   /**
@@ -194,9 +226,9 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * @generated
    */
   @Override
-  public EClass getLookAhead0()
+  public EAttribute getLookAhead0_X()
   {
-    return lookAhead0EClass;
+    return (EAttribute)lookAhead0EClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -227,9 +259,20 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * @generated
    */
   @Override
-  public EAttribute getLookAhead1_Z()
+  public EAttribute getLookAhead1_X()
   {
     return (EAttribute)lookAhead1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLookAhead1_Z()
+  {
+    return (EAttribute)lookAhead1EClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -271,9 +314,20 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * @generated
    */
   @Override
+  public EAttribute getLookAhead3_X()
+  {
+    return (EAttribute)lookAhead3EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getLookAhead3_Z()
   {
-    return (EReference)lookAhead3EClass.getEStructuralFeatures().get(0);
+    return (EReference)lookAhead3EClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -296,6 +350,94 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
   public EAttribute getLookAhead4_X()
   {
     return (EAttribute)lookAhead4EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLookAheadPredicate()
+  {
+    return lookAheadPredicateEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLookBeyond()
+  {
+    return lookBeyondEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getLookBeyond_Left()
+  {
+    return (EReference)lookBeyondEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getLookBeyond_Right()
+  {
+    return (EReference)lookBeyondEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLookAheadStrings()
+  {
+    return lookAheadStringsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLookAheadStrings_Values()
+  {
+    return (EAttribute)lookAheadStringsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getFewerLookAheadStrings()
+  {
+    return fewerLookAheadStringsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFewerLookAheadStrings_Values()
+  {
+    return (EAttribute)fewerLookAheadStringsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -333,22 +475,36 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     createEReference(entryEClass, ENTRY__CONTENTS);
 
     altsEClass = createEClass(ALTS);
-    createEAttribute(altsEClass, ALTS__X);
 
     lookAhead0EClass = createEClass(LOOK_AHEAD0);
+    createEAttribute(lookAhead0EClass, LOOK_AHEAD0__X);
 
     lookAhead1EClass = createEClass(LOOK_AHEAD1);
     createEReference(lookAhead1EClass, LOOK_AHEAD1__Y);
+    createEAttribute(lookAhead1EClass, LOOK_AHEAD1__X);
     createEAttribute(lookAhead1EClass, LOOK_AHEAD1__Z);
 
     lookAhead2EClass = createEClass(LOOK_AHEAD2);
     createEAttribute(lookAhead2EClass, LOOK_AHEAD2__Z);
 
     lookAhead3EClass = createEClass(LOOK_AHEAD3);
+    createEAttribute(lookAhead3EClass, LOOK_AHEAD3__X);
     createEReference(lookAhead3EClass, LOOK_AHEAD3__Z);
 
     lookAhead4EClass = createEClass(LOOK_AHEAD4);
     createEAttribute(lookAhead4EClass, LOOK_AHEAD4__X);
+
+    lookAheadPredicateEClass = createEClass(LOOK_AHEAD_PREDICATE);
+
+    lookBeyondEClass = createEClass(LOOK_BEYOND);
+    createEReference(lookBeyondEClass, LOOK_BEYOND__LEFT);
+    createEReference(lookBeyondEClass, LOOK_BEYOND__RIGHT);
+
+    lookAheadStringsEClass = createEClass(LOOK_AHEAD_STRINGS);
+    createEAttribute(lookAheadStringsEClass, LOOK_AHEAD_STRINGS__VALUES);
+
+    fewerLookAheadStringsEClass = createEClass(FEWER_LOOK_AHEAD_STRINGS);
+    createEAttribute(fewerLookAheadStringsEClass, FEWER_LOOK_AHEAD_STRINGS__VALUES);
   }
 
   /**
@@ -386,28 +542,44 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     lookAhead0EClass.getESuperTypes().add(this.getAlts());
     lookAhead1EClass.getESuperTypes().add(this.getAlts());
     lookAhead3EClass.getESuperTypes().add(this.getAlts());
+    lookAheadPredicateEClass.getESuperTypes().add(this.getAlts());
+    lookBeyondEClass.getESuperTypes().add(this.getAlts());
 
     // Initialize classes and features; add operations and parameters
     initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntry_Contents(), this.getAlts(), null, "contents", null, 0, -1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(altsEClass, Alts.class, "Alts", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAlts_X(), theEcorePackage.getEString(), "x", null, 0, 1, Alts.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead0EClass, LookAhead0.class, "LookAhead0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLookAhead0_X(), theEcorePackage.getEString(), "x", null, 0, 1, LookAhead0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead1EClass, LookAhead1.class, "LookAhead1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLookAhead1_Y(), this.getLookAhead2(), null, "y", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLookAhead1_X(), theEcorePackage.getEString(), "x", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLookAhead1_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead2EClass, LookAhead2.class, "LookAhead2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLookAhead2_Z(), theEcorePackage.getEString(), "z", null, 0, 1, LookAhead2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead3EClass, LookAhead3.class, "LookAhead3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLookAhead3_X(), theEcorePackage.getEString(), "x", null, 0, 1, LookAhead3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLookAhead3_Z(), this.getLookAhead4(), null, "z", null, 0, 1, LookAhead3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(lookAhead4EClass, LookAhead4.class, "LookAhead4", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLookAhead4_X(), theEcorePackage.getEString(), "x", null, 0, 1, LookAhead4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(lookAheadPredicateEClass, LookAheadPredicate.class, "LookAheadPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(lookBeyondEClass, LookBeyond.class, "LookBeyond", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLookBeyond_Left(), this.getLookAheadStrings(), null, "left", null, 0, 1, LookBeyond.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLookBeyond_Right(), this.getFewerLookAheadStrings(), null, "right", null, 0, 1, LookBeyond.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(lookAheadStringsEClass, LookAheadStrings.class, "LookAheadStrings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLookAheadStrings_Values(), theEcorePackage.getEString(), "values", null, 0, -1, LookAheadStrings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fewerLookAheadStringsEClass, FewerLookAheadStrings.class, "FewerLookAheadStrings", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFewerLookAheadStrings_Values(), theEcorePackage.getEString(), "values", null, 0, -1, FewerLookAheadStrings.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

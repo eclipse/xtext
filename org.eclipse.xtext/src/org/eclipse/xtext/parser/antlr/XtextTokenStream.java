@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008-2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,12 +25,33 @@ import org.antlr.runtime.TokenSource;
  * A token stream that is aware of the current lookahead.
  * 
  * @author Jan Köhnlein - Initial contribution and API
- * @author Sebastian Zarnekow - Support for dynamic hidden tokens,
- *   reworked lookahead algorithm
+ * @author Sebastian Zarnekow - Support for dynamic hidden tokens, reworked lookahead algorithm
  */
 public class XtextTokenStream extends CommonTokenStream {
 
+	/**
+	 * The lookAhead marks a position relative to the current position
+	 * in the token list. The lookahead is sensitive to hidden tokens
+	 * e.g. a lookahead of 1 may point 10 tokens into the future if there are 9 hidden tokens before the next 
+	 * non-hidden token.
+	 */ 
 	private int currentLookAhead;
+	
+	/** The maximum, absolute position p that was considered by the parser so far. */
+	private int indexOfLookAhead;
+	
+	/**
+	 * markerCount indicates the number of markers that are currently set on this stream.
+	 * If it is greater than 0, the parser is predicting, otherwise it is consuming.
+	 */ 
+	private int markerCount = 0;
+	
+	/**
+	 * The position of the firts marker that was set, e.g. where the parser started its prediction.
+	 * {@code -1} indicates that no marker is set right now. 
+	 */
+	@Deprecated
+	private int firstMarker = -1;
 	
 	private Map<String, Integer> rulenameToTokenType;
 	
@@ -168,37 +189,48 @@ public class XtextTokenStream extends CommonTokenStream {
 		
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.antlr.runtime.CommonTokenStream#LA(int)
-	 */
 	@Override
 	public int LA(int i) {
 		Token lookaheadToken = LT(i);
-		if (firstMarker != -1) {
-			int currentLookAheadIsRelativeTo = Math.min(firstMarker, p);
-			int totalLA = p + i - currentLookAheadIsRelativeTo;
-			currentLookAhead = Math.max(totalLA, currentLookAhead);
-		} else {
-			currentLookAhead = Math.max(i, currentLookAhead);
+		if (markerCount > 0) { // predicting with a marker
+			int laTokenIndex = getTokenIndex(lookaheadToken);
+			if (indexOfLookAhead < laTokenIndex) {
+				indexOfLookAhead = laTokenIndex;
+				currentLookAhead++;
+			}
+		} else if (i > currentLookAhead) {
+			currentLookAhead = i;
 		}
-		// return super.LA(i); // inlined
 		return lookaheadToken.getType();
 	}
 	
-	private int firstMarker = -1;
+	/**
+	 * @since 2.22
+	 */
+	protected int getTokenIndex(Token tok) {
+		if (tok == Token.EOF_TOKEN) {
+			return size();
+		}
+		return tok.getTokenIndex();
+	}
 	
 	@Override
 	public void consume() {
-		if (firstMarker != -1) { // predicting
-			int currentLookAheadIsRelativeTo = Math.min(firstMarker, p);
-			currentLookAhead = Math.max(currentLookAhead, p - currentLookAheadIsRelativeTo);
-			super.consume();
+		if (markerCount > 0) { // predicting
+			basicConsume();
 		} else { // producing
-			super.consume();
+			basicConsume();
 			currentLookAhead--;
 		}
+	}
+
+	/**
+	 * Make super-impl of {@link #consume()} accessible to subtypes.
+	 * 
+	 * @since 2.22
+	 */
+	protected void basicConsume() {
+		super.consume();
 	}
 	
 	/**
@@ -210,19 +242,44 @@ public class XtextTokenStream extends CommonTokenStream {
 	
 	@Override
 	public int mark() {
-		int result = super.mark();
-		if (firstMarker == -1)
+		int result = basicMark();
+		if (markerCount == 0) {
+			if (indexOfLookAhead < p) {
+				indexOfLookAhead = p;
+			}
 			firstMarker = result;
+		}
+		markerCount++;
 		return result;
 	}
-	
-	@Override
-	public void seek(int index) {
-		if (index == firstMarker)
-			firstMarker = -1;
-		super.seek(index);
+
+	/**
+	 * Make super-impl of {@link #mark()} accessible to subtypes.
+	 * 
+	 * @since 2.22
+	 */
+	protected int basicMark() {
+		return super.mark();
 	}
-	
+
+	@Override
+	public void rewind(int marker) {
+		markerCount--;
+		if (markerCount == 0) {
+			firstMarker = -1;
+		}
+		basicRewind(marker);
+	}
+
+	/**
+	 * Make super-impl of {@link #rewind()} accessible to subtypes.
+	 * 
+	 * @since 2.22
+	 */
+	protected void basicRewind(int marker) {
+		super.rewind(marker);
+	}
+
 	/**
 	 * Same as {@link CommonTokenStream#LT(int)} except that we skip
 	 * hidden tokens even for <code>k == 1<code>.

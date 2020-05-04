@@ -111,6 +111,26 @@ public class LookaheadLangAdapterFactory extends AdapterFactoryImpl
         return createLookAhead4Adapter();
       }
       @Override
+      public Adapter caseLookAheadPredicate(LookAheadPredicate object)
+      {
+        return createLookAheadPredicateAdapter();
+      }
+      @Override
+      public Adapter caseLookBeyond(LookBeyond object)
+      {
+        return createLookBeyondAdapter();
+      }
+      @Override
+      public Adapter caseLookAheadStrings(LookAheadStrings object)
+      {
+        return createLookAheadStringsAdapter();
+      }
+      @Override
+      public Adapter caseFewerLookAheadStrings(FewerLookAheadStrings object)
+      {
+        return createFewerLookAheadStringsAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -233,6 +253,66 @@ public class LookaheadLangAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLookAhead4Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate <em>Look Ahead Predicate</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate
+   * @generated
+   */
+  public Adapter createLookAheadPredicateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond <em>Look Beyond</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond
+   * @generated
+   */
+  public Adapter createLookBeyondAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings <em>Look Ahead Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings
+   * @generated
+   */
+  public Adapter createLookAheadStringsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings <em>Fewer Look Ahead Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings
+   * @generated
+   */
+  public Adapter createFewerLookAheadStringsAdapter()
   {
     return null;
   }

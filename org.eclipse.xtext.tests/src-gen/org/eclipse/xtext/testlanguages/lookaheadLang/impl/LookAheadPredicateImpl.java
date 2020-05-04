@@ -5,26 +5,24 @@ package org.eclipse.xtext.testlanguages.lookaheadLang.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.xtext.testlanguages.lookaheadLang.Alts;
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Alts</b></em>'.
+ * An implementation of the model object '<em><b>Look Ahead Predicate</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
+public class LookAheadPredicateImpl extends AltsImpl implements LookAheadPredicate
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AltsImpl()
+  protected LookAheadPredicateImpl()
   {
     super();
   }
@@ -37,7 +35,7 @@ public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
   @Override
   protected EClass eStaticClass()
   {
-    return LookaheadLangPackage.Literals.ALTS;
+    return LookaheadLangPackage.Literals.LOOK_AHEAD_PREDICATE;
   }
 
-} //AltsImpl
+} //LookAheadPredicateImpl

@@ -10,12 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Alts</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.Alts#getX <em>X</em>}</li>
- * </ul>
  *
  * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage#getAlts()
  * @model
@@ -23,26 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Alts extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>X</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>X</em>' attribute.
-   * @see #setX(String)
-   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage#getAlts_X()
-   * @model
-   * @generated
-   */
-  String getX();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.Alts#getX <em>X</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>X</em>' attribute.
-   * @see #getX()
-   * @generated
-   */
-  void setX(String value);
-
 } // Alts

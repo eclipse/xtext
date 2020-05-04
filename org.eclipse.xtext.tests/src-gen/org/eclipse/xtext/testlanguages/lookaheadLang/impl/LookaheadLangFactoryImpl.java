@@ -72,6 +72,10 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
       case LookaheadLangPackage.LOOK_AHEAD2: return createLookAhead2();
       case LookaheadLangPackage.LOOK_AHEAD3: return createLookAhead3();
       case LookaheadLangPackage.LOOK_AHEAD4: return createLookAhead4();
+      case LookaheadLangPackage.LOOK_AHEAD_PREDICATE: return createLookAheadPredicate();
+      case LookaheadLangPackage.LOOK_BEYOND: return createLookBeyond();
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS: return createLookAheadStrings();
+      case LookaheadLangPackage.FEWER_LOOK_AHEAD_STRINGS: return createFewerLookAheadStrings();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -159,6 +163,54 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
   {
     LookAhead4Impl lookAhead4 = new LookAhead4Impl();
     return lookAhead4;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LookAheadPredicate createLookAheadPredicate()
+  {
+    LookAheadPredicateImpl lookAheadPredicate = new LookAheadPredicateImpl();
+    return lookAheadPredicate;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LookBeyond createLookBeyond()
+  {
+    LookBeyondImpl lookBeyond = new LookBeyondImpl();
+    return lookBeyond;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LookAheadStrings createLookAheadStrings()
+  {
+    LookAheadStringsImpl lookAheadStrings = new LookAheadStringsImpl();
+    return lookAheadStrings;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FewerLookAheadStrings createFewerLookAheadStrings()
+  {
+    FewerLookAheadStringsImpl fewerLookAheadStrings = new FewerLookAheadStringsImpl();
+    return fewerLookAheadStrings;
   }
 
   /**

@@ -125,6 +125,36 @@ public class LookaheadLangSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case LookaheadLangPackage.LOOK_AHEAD_PREDICATE:
+      {
+        LookAheadPredicate lookAheadPredicate = (LookAheadPredicate)theEObject;
+        T result = caseLookAheadPredicate(lookAheadPredicate);
+        if (result == null) result = caseAlts(lookAheadPredicate);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LookaheadLangPackage.LOOK_BEYOND:
+      {
+        LookBeyond lookBeyond = (LookBeyond)theEObject;
+        T result = caseLookBeyond(lookBeyond);
+        if (result == null) result = caseAlts(lookBeyond);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS:
+      {
+        LookAheadStrings lookAheadStrings = (LookAheadStrings)theEObject;
+        T result = caseLookAheadStrings(lookAheadStrings);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LookaheadLangPackage.FEWER_LOOK_AHEAD_STRINGS:
+      {
+        FewerLookAheadStrings fewerLookAheadStrings = (FewerLookAheadStrings)theEObject;
+        T result = caseFewerLookAheadStrings(fewerLookAheadStrings);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -237,6 +267,70 @@ public class LookaheadLangSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseLookAhead4(LookAhead4 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Look Ahead Predicate</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Look Ahead Predicate</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLookAheadPredicate(LookAheadPredicate object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Look Beyond</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Look Beyond</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLookBeyond(LookBeyond object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Look Ahead Strings</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Look Ahead Strings</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLookAheadStrings(LookAheadStrings object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Fewer Look Ahead Strings</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Fewer Look Ahead Strings</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFewerLookAheadStrings(FewerLookAheadStrings object)
   {
     return null;
   }

@@ -87,6 +87,42 @@ public interface LookaheadLangFactory extends EFactory
   LookAhead4 createLookAhead4();
 
   /**
+   * Returns a new object of class '<em>Look Ahead Predicate</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Look Ahead Predicate</em>'.
+   * @generated
+   */
+  LookAheadPredicate createLookAheadPredicate();
+
+  /**
+   * Returns a new object of class '<em>Look Beyond</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Look Beyond</em>'.
+   * @generated
+   */
+  LookBeyond createLookBeyond();
+
+  /**
+   * Returns a new object of class '<em>Look Ahead Strings</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Look Ahead Strings</em>'.
+   * @generated
+   */
+  LookAheadStrings createLookAheadStrings();
+
+  /**
+   * Returns a new object of class '<em>Fewer Look Ahead Strings</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Fewer Look Ahead Strings</em>'.
+   * @generated
+   */
+  FewerLookAheadStrings createFewerLookAheadStrings();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

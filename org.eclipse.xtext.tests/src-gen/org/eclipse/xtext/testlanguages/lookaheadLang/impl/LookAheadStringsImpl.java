@@ -3,56 +3,50 @@
  */
 package org.eclipse.xtext.testlanguages.lookaheadLang.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
+
+import org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Look Ahead0</b></em>'.
+ * An implementation of the model object '<em><b>Look Ahead Strings</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead0Impl#getX <em>X</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadStringsImpl#getValues <em>Values</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LookAhead0Impl extends AltsImpl implements LookAhead0
+public class LookAheadStringsImpl extends MinimalEObjectImpl.Container implements LookAheadStrings
 {
   /**
-   * The default value of the '{@link #getX() <em>X</em>}' attribute.
+   * The cached value of the '{@link #getValues() <em>Values</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getX()
+   * @see #getValues()
    * @generated
    * @ordered
    */
-  protected static final String X_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getX() <em>X</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getX()
-   * @generated
-   * @ordered
-   */
-  protected String x = X_EDEFAULT;
+  protected EList<String> values;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LookAhead0Impl()
+  protected LookAheadStringsImpl()
   {
     super();
   }
@@ -65,7 +59,7 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
   @Override
   protected EClass eStaticClass()
   {
-    return LookaheadLangPackage.Literals.LOOK_AHEAD0;
+    return LookaheadLangPackage.Literals.LOOK_AHEAD_STRINGS;
   }
 
   /**
@@ -74,23 +68,13 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
    * @generated
    */
   @Override
-  public String getX()
+  public EList<String> getValues()
   {
-    return x;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setX(String newX)
-  {
-    String oldX = x;
-    x = newX;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LookaheadLangPackage.LOOK_AHEAD0__X, oldX, x));
+    if (values == null)
+    {
+      values = new EDataTypeEList<String>(String.class, this, LookaheadLangPackage.LOOK_AHEAD_STRINGS__VALUES);
+    }
+    return values;
   }
 
   /**
@@ -103,8 +87,8 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
   {
     switch (featureID)
     {
-      case LookaheadLangPackage.LOOK_AHEAD0__X:
-        return getX();
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS__VALUES:
+        return getValues();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -114,13 +98,15 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case LookaheadLangPackage.LOOK_AHEAD0__X:
-        setX((String)newValue);
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS__VALUES:
+        getValues().clear();
+        getValues().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +122,8 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
   {
     switch (featureID)
     {
-      case LookaheadLangPackage.LOOK_AHEAD0__X:
-        setX(X_EDEFAULT);
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS__VALUES:
+        getValues().clear();
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +139,8 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
   {
     switch (featureID)
     {
-      case LookaheadLangPackage.LOOK_AHEAD0__X:
-        return X_EDEFAULT == null ? x != null : !X_EDEFAULT.equals(x);
+      case LookaheadLangPackage.LOOK_AHEAD_STRINGS__VALUES:
+        return values != null && !values.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +156,10 @@ public class LookAhead0Impl extends AltsImpl implements LookAhead0
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (x: ");
-    result.append(x);
+    result.append(" (values: ");
+    result.append(values);
     result.append(')');
     return result.toString();
   }
 
-} //LookAhead0Impl
+} //LookAheadStringsImpl

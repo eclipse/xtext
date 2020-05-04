@@ -96,22 +96,13 @@ public interface LookaheadLangPackage extends EPackage
   int ALTS = 1;
 
   /**
-   * The feature id for the '<em><b>X</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ALTS__X = 0;
-
-  /**
    * The number of structural features of the '<em>Alts</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ALTS_FEATURE_COUNT = 1;
+  int ALTS_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead0Impl <em>Look Ahead0</em>}' class.
@@ -130,7 +121,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD0__X = ALTS__X;
+  int LOOK_AHEAD0__X = ALTS_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Look Ahead0</em>' class.
@@ -139,7 +130,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD0_FEATURE_COUNT = ALTS_FEATURE_COUNT + 0;
+  int LOOK_AHEAD0_FEATURE_COUNT = ALTS_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl <em>Look Ahead1</em>}' class.
@@ -152,15 +143,6 @@ public interface LookaheadLangPackage extends EPackage
   int LOOK_AHEAD1 = 3;
 
   /**
-   * The feature id for the '<em><b>X</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOOK_AHEAD1__X = ALTS__X;
-
-  /**
    * The feature id for the '<em><b>Y</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -170,13 +152,22 @@ public interface LookaheadLangPackage extends EPackage
   int LOOK_AHEAD1__Y = ALTS_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>X</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_AHEAD1__X = ALTS_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Z</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD1__Z = ALTS_FEATURE_COUNT + 1;
+  int LOOK_AHEAD1__Z = ALTS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Look Ahead1</em>' class.
@@ -185,7 +176,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD1_FEATURE_COUNT = ALTS_FEATURE_COUNT + 2;
+  int LOOK_AHEAD1_FEATURE_COUNT = ALTS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead2Impl <em>Look Ahead2</em>}' class.
@@ -232,7 +223,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD3__X = ALTS__X;
+  int LOOK_AHEAD3__X = ALTS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Z</b></em>' containment reference.
@@ -241,7 +232,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD3__Z = ALTS_FEATURE_COUNT + 0;
+  int LOOK_AHEAD3__Z = ALTS_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Look Ahead3</em>' class.
@@ -250,7 +241,7 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LOOK_AHEAD3_FEATURE_COUNT = ALTS_FEATURE_COUNT + 1;
+  int LOOK_AHEAD3_FEATURE_COUNT = ALTS_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead4Impl <em>Look Ahead4</em>}' class.
@@ -279,6 +270,118 @@ public interface LookaheadLangPackage extends EPackage
    * @ordered
    */
   int LOOK_AHEAD4_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadPredicateImpl <em>Look Ahead Predicate</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadPredicateImpl
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookAheadPredicate()
+   * @generated
+   */
+  int LOOK_AHEAD_PREDICATE = 7;
+
+  /**
+   * The number of structural features of the '<em>Look Ahead Predicate</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_AHEAD_PREDICATE_FEATURE_COUNT = ALTS_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookBeyondImpl <em>Look Beyond</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookBeyondImpl
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookBeyond()
+   * @generated
+   */
+  int LOOK_BEYOND = 8;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_BEYOND__LEFT = ALTS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_BEYOND__RIGHT = ALTS_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Look Beyond</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_BEYOND_FEATURE_COUNT = ALTS_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadStringsImpl <em>Look Ahead Strings</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadStringsImpl
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookAheadStrings()
+   * @generated
+   */
+  int LOOK_AHEAD_STRINGS = 9;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_AHEAD_STRINGS__VALUES = 0;
+
+  /**
+   * The number of structural features of the '<em>Look Ahead Strings</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOK_AHEAD_STRINGS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.FewerLookAheadStringsImpl <em>Fewer Look Ahead Strings</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.FewerLookAheadStringsImpl
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getFewerLookAheadStrings()
+   * @generated
+   */
+  int FEWER_LOOK_AHEAD_STRINGS = 10;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FEWER_LOOK_AHEAD_STRINGS__VALUES = 0;
+
+  /**
+   * The number of structural features of the '<em>Fewer Look Ahead Strings</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FEWER_LOOK_AHEAD_STRINGS_FEATURE_COUNT = 1;
 
 
   /**
@@ -313,17 +416,6 @@ public interface LookaheadLangPackage extends EPackage
   EClass getAlts();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.Alts#getX <em>X</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>X</em>'.
-   * @see org.eclipse.xtext.testlanguages.lookaheadLang.Alts#getX()
-   * @see #getAlts()
-   * @generated
-   */
-  EAttribute getAlts_X();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0 <em>Look Ahead0</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -332,6 +424,17 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    */
   EClass getLookAhead0();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0#getX <em>X</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>X</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0#getX()
+   * @see #getLookAhead0()
+   * @generated
+   */
+  EAttribute getLookAhead0_X();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1 <em>Look Ahead1</em>}'.
@@ -353,6 +456,17 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    */
   EReference getLookAhead1_Y();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getX <em>X</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>X</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getX()
+   * @see #getLookAhead1()
+   * @generated
+   */
+  EAttribute getLookAhead1_X();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ <em>Z</em>}'.
@@ -397,6 +511,17 @@ public interface LookaheadLangPackage extends EPackage
   EClass getLookAhead3();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead3#getX <em>X</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>X</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead3#getX()
+   * @see #getLookAhead3()
+   * @generated
+   */
+  EAttribute getLookAhead3_X();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead3#getZ <em>Z</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -427,6 +552,90 @@ public interface LookaheadLangPackage extends EPackage
    * @generated
    */
   EAttribute getLookAhead4_X();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate <em>Look Ahead Predicate</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Look Ahead Predicate</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadPredicate
+   * @generated
+   */
+  EClass getLookAheadPredicate();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond <em>Look Beyond</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Look Beyond</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond
+   * @generated
+   */
+  EClass getLookBeyond();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond#getLeft()
+   * @see #getLookBeyond()
+   * @generated
+   */
+  EReference getLookBeyond_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookBeyond#getRight()
+   * @see #getLookBeyond()
+   * @generated
+   */
+  EReference getLookBeyond_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings <em>Look Ahead Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Look Ahead Strings</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings
+   * @generated
+   */
+  EClass getLookAheadStrings();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings#getValues <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Values</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookAheadStrings#getValues()
+   * @see #getLookAheadStrings()
+   * @generated
+   */
+  EAttribute getLookAheadStrings_Values();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings <em>Fewer Look Ahead Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fewer Look Ahead Strings</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings
+   * @generated
+   */
+  EClass getFewerLookAheadStrings();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings#getValues <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Values</em>'.
+   * @see org.eclipse.xtext.testlanguages.lookaheadLang.FewerLookAheadStrings#getValues()
+   * @see #getFewerLookAheadStrings()
+   * @generated
+   */
+  EAttribute getFewerLookAheadStrings_Values();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -480,14 +689,6 @@ public interface LookaheadLangPackage extends EPackage
     EClass ALTS = eINSTANCE.getAlts();
 
     /**
-     * The meta object literal for the '<em><b>X</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ALTS__X = eINSTANCE.getAlts_X();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead0Impl <em>Look Ahead0</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -496,6 +697,14 @@ public interface LookaheadLangPackage extends EPackage
      * @generated
      */
     EClass LOOK_AHEAD0 = eINSTANCE.getLookAhead0();
+
+    /**
+     * The meta object literal for the '<em><b>X</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOK_AHEAD0__X = eINSTANCE.getLookAhead0_X();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl <em>Look Ahead1</em>}' class.
@@ -514,6 +723,14 @@ public interface LookaheadLangPackage extends EPackage
      * @generated
      */
     EReference LOOK_AHEAD1__Y = eINSTANCE.getLookAhead1_Y();
+
+    /**
+     * The meta object literal for the '<em><b>X</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOK_AHEAD1__X = eINSTANCE.getLookAhead1_X();
 
     /**
      * The meta object literal for the '<em><b>Z</b></em>' attribute feature.
@@ -552,6 +769,14 @@ public interface LookaheadLangPackage extends EPackage
     EClass LOOK_AHEAD3 = eINSTANCE.getLookAhead3();
 
     /**
+     * The meta object literal for the '<em><b>X</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOK_AHEAD3__X = eINSTANCE.getLookAhead3_X();
+
+    /**
      * The meta object literal for the '<em><b>Z</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -576,6 +801,78 @@ public interface LookaheadLangPackage extends EPackage
      * @generated
      */
     EAttribute LOOK_AHEAD4__X = eINSTANCE.getLookAhead4_X();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadPredicateImpl <em>Look Ahead Predicate</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadPredicateImpl
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookAheadPredicate()
+     * @generated
+     */
+    EClass LOOK_AHEAD_PREDICATE = eINSTANCE.getLookAheadPredicate();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookBeyondImpl <em>Look Beyond</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookBeyondImpl
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookBeyond()
+     * @generated
+     */
+    EClass LOOK_BEYOND = eINSTANCE.getLookBeyond();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LOOK_BEYOND__LEFT = eINSTANCE.getLookBeyond_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LOOK_BEYOND__RIGHT = eINSTANCE.getLookBeyond_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadStringsImpl <em>Look Ahead Strings</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAheadStringsImpl
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getLookAheadStrings()
+     * @generated
+     */
+    EClass LOOK_AHEAD_STRINGS = eINSTANCE.getLookAheadStrings();
+
+    /**
+     * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOK_AHEAD_STRINGS__VALUES = eINSTANCE.getLookAheadStrings_Values();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.FewerLookAheadStringsImpl <em>Fewer Look Ahead Strings</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.FewerLookAheadStringsImpl
+     * @see org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookaheadLangPackageImpl#getFewerLookAheadStrings()
+     * @generated
+     */
+    EClass FEWER_LOOK_AHEAD_STRINGS = eINSTANCE.getFewerLookAheadStrings();
+
+    /**
+     * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FEWER_LOOK_AHEAD_STRINGS__VALUES = eINSTANCE.getFewerLookAheadStrings_Values();
 
   }
 

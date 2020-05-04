@@ -15,7 +15,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.LookAheadInfo;
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Inject;
 
@@ -28,6 +33,9 @@ public class ParseHelper<T extends EObject> {
 
 	@Inject
 	private ResourceHelper resourceHelper;
+	
+	@Inject
+	private InvariantChecker invariantChecker;
 
 	public String fileExtension;
 	
@@ -40,7 +48,16 @@ public class ParseHelper<T extends EObject> {
 	public T parse(InputStream in, URI uriToUse, Map<?, ?> options, ResourceSet resourceSet) {
 		resourceHelper.setFileExtension(fileExtension);
 		Resource resource = resourceHelper.resource(in, uriToUse, options, resourceSet);
-		final T root = (T) (resource.getContents().isEmpty() ? null : resource.getContents().get(0));
+		if (resource instanceof XtextResource) {
+			IParseResult parseResult = ((XtextResource) resource).getParseResult();
+			if (parseResult != null) {
+				ICompositeNode rootNode = parseResult.getRootNode();
+				if (rootNode != null) {
+					checkNodeModel(rootNode);
+				}
+			}
+		}
+		T root = (T) (resource.getContents().isEmpty() ? null : resource.getContents().get(0));
 		return root;
 	}
 
@@ -64,4 +81,18 @@ public class ParseHelper<T extends EObject> {
 		return resourceHelper.getAsStream(text);
 	}
 
+	/**
+	 * @since 2.22
+	 */
+	protected InvariantChecker getInvariantChecker() {
+		return invariantChecker;
+	}
+	
+	/**
+	 * @since 2.22
+	 */
+	protected void checkNodeModel(ICompositeNode rootNode) {
+		getInvariantChecker().checkInvariant(rootNode);
+		new LookAheadInfo(rootNode).checkConsistency();
+	}
 }
