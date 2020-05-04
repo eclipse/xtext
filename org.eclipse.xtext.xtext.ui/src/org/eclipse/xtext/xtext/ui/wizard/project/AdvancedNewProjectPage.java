@@ -287,10 +287,11 @@ public class AdvancedNewProjectPage extends WizardPage {
 			addIssue(INFORMATION, Messages.AdvancedNewProjectPage_p2AndSdkInfo);
 		}
 
-		Object source = null;
-		if (e != null) {
-			source = e.getSource();
-		} 
+		if (e == null) {
+			return;
+		}
+
+		Object source = e.getSource();
 
 		if (createUiProject.getSelection() && !isSelected(sourceLayout, SourceLayout.PLAIN)) {
 			if (createUiProject == source) {
