@@ -217,7 +217,7 @@ ruleHiddenClause[EObject in_current]  returns [EObject current=in_current]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getHiddenClauseRule());
 					}
-					setWithLastConsumed($current, "definesHiddenTokens", true, "hidden");
+					setWithLastConsumed($current, "definesHiddenTokens", lv_definesHiddenTokens_0_0 != null, "hidden");
 				}
 			)
 		)
@@ -553,7 +553,7 @@ ruleParserRule returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getParserRuleRule());
 							}
-							setWithLastConsumed($current, "fragment", true, "fragment");
+							setWithLastConsumed($current, "fragment", lv_fragment_0_0 != null, "fragment");
 						}
 					)
 				)
@@ -579,7 +579,7 @@ ruleParserRule returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getParserRuleRule());
 								}
-								setWithLastConsumed($current, "wildcard", true, "*");
+								setWithLastConsumed($current, "wildcard", lv_wildcard_2_0 != null, "*");
 							}
 						)
 					)
@@ -2035,7 +2035,7 @@ rulePredicate[EObject in_current]  returns [EObject current=in_current]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getPredicateRule());
 					}
-					setWithLastConsumed($current, "predicated", true, "=>");
+					setWithLastConsumed($current, "predicated", lv_predicated_0_0 != null, "=>");
 				}
 			)
 		)
@@ -2050,7 +2050,7 @@ rulePredicate[EObject in_current]  returns [EObject current=in_current]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getPredicateRule());
 					}
-					setWithLastConsumed($current, "firstSetPredicated", true, "->");
+					setWithLastConsumed($current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
 				}
 			)
 		)
@@ -2438,7 +2438,7 @@ ruleTerminalRule returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getTerminalRuleRule());
 							}
-							setWithLastConsumed($current, "fragment", true, "fragment");
+							setWithLastConsumed($current, "fragment", lv_fragment_1_0 != null, "fragment");
 						}
 					)
 				)

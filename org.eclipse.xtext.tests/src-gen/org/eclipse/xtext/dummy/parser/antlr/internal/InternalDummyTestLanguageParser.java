@@ -272,7 +272,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getElementRule());
                     					}
-                    					setWithLastConsumed(current, "optional", true, "optional");
+                    					setWithLastConsumed(current, "optional", lv_optional_0_0 != null, "optional");
                     				
 
                     }

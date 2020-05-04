@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * Copyright (c) 2020 Sebastian Zarnekow and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.antlr.GH1462TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate gh1462Test "http://eclipse.org/xtext/GH1462TestTestLanguage"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+Root:
+      '#1' element=Rule1 
+    | '#2' element=Rule2
+    | '#3' element=Rule3
+    | '#4' element=Rule4
+    | '#5' element=Rule5
+    | '#6' element=Rule6
+    | '#7' element=Rule7
+    | '#8' element=Rule8
+    | '#9' element=Rule9
+    | '#10' element=Rule10
+    | '#11' element=Rule11
+    | '#12' element=Rule12
+;
+
+Rule1:
+	left=INT right=INT unit='s'
+;
+
+Rule2:
+	INT value=INT unit='s'
+;
+
+Rule3:
+	left=ID right=STRING unit='s'
+;
+
+Rule4:
+	left=STRING right=ID unit='s'
+;
+
+Rule5:
+	left=INT right=Integer unit='s'
+;
+
+Rule6:
+	left=INT right=Wrapper unit='s'
+;
+
+Rule7:
+	left=INT right?=INT unit='s'
+;
+
+Rule8:
+	left=INT right?='#1' unit='s'
+;
+
+Rule9:
+	left=INT right=MaybeEmpty unit='s'
+;
+
+Rule10:
+	left=INT right?=MaybeEmpty unit='s'
+;
+
+Rule11:
+	left=INT right?=Integer unit='s'
+;
+
+Rule12:
+	left=INT right?=Wrapper unit='s'
+;
+
+Integer returns EInt:
+	INT
+;
+
+MaybeEmpty:
+	INT?
+;
+
+Wrapper:
+	value=INT
+;

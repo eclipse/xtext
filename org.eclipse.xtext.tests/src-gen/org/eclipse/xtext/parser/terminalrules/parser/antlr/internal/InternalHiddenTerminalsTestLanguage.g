@@ -193,7 +193,7 @@ ruleWithoutHiddens returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getWithoutHiddensRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_4_0 != null, ";");
 				}
 			)
 		)
@@ -240,7 +240,7 @@ ruleWithHiddens returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getWithHiddensRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_2_0 != null, ";");
 				}
 			)
 		)
@@ -317,7 +317,7 @@ ruleOverridingHiddens returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getOverridingHiddensRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_5_0 != null, ";");
 				}
 			)
 		)
@@ -381,7 +381,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getOverridingHiddensCallRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_2_0 != null, ";");
 				}
 			)
 		)
@@ -480,7 +480,7 @@ ruleInheritingHiddens returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getInheritingHiddensRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_6_0 != null, ";");
 				}
 			)
 		)
@@ -523,7 +523,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 					set(
 						$current,
 						"valid",
-						true,
+						lv_valid_1_0 != null,
 						"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.DatatypeRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -669,7 +669,7 @@ ruleInheritingHiddensCall returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getInheritingHiddensCallRule());
 					}
-					setWithLastConsumed($current, "valid", true, ";");
+					setWithLastConsumed($current, "valid", lv_valid_1_0 != null, ";");
 				}
 			)
 		)

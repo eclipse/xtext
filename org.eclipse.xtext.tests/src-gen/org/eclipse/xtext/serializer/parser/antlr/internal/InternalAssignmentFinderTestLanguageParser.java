@@ -1313,7 +1313,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getKeywordBoolRule());
                     					}
-                    					setWithLastConsumed(current, "kw", true, "kw1");
+                    					setWithLastConsumed(current, "kw", lv_kw_0_0 != null, "kw1");
                     				
 
                     }
@@ -1341,7 +1341,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getKeywordBoolRule());
                     					}
-                    					setWithLastConsumed(current, "kw", true, "kw2");
+                    					setWithLastConsumed(current, "kw", lv_kw_1_0 != null, "kw2");
                     				
 
                     }
@@ -1472,7 +1472,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					setWithLastConsumed(
                     						current,
                     						"term",
-                    						true,
+                    						lv_term_0_0 != null,
                     						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
                     				
 
@@ -1504,7 +1504,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					setWithLastConsumed(
                     						current,
                     						"term",
-                    						true,
+                    						lv_term_1_0 != null,
                     						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
                     				
 
@@ -1533,7 +1533,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getTerminalBoolRule());
                     					}
-                    					setWithLastConsumed(current, "term", true, "%foo");
+                    					setWithLastConsumed(current, "term", lv_term_2_0 != null, "%foo");
                     				
 
                     }
@@ -1660,7 +1660,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					set(
                     						current,
                     						"en",
-                    						true,
+                    						lv_en_0_0 != null,
                     						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
                     					afterParserOrEnumRuleCall();
                     				
@@ -1697,7 +1697,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					set(
                     						current,
                     						"en",
-                    						true,
+                    						lv_en_1_0 != null,
                     						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
                     					afterParserOrEnumRuleCall();
                     				
@@ -1818,7 +1818,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getMixedBoolRule());
                     					}
-                    					setWithLastConsumed(current, "val", true, "kw1");
+                    					setWithLastConsumed(current, "val", lv_val_0_0 != null, "kw1");
                     				
 
                     }

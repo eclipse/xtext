@@ -999,13 +999,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       String _feature = assignment.getFeature();
       _builder.append(_feature, "\t");
       _builder.append("\", ");
+      String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
+      _builder.append(_localVar_1, "\t");
       {
         boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
         if (_isBooleanAssignment) {
-          _builder.append("true");
-        } else {
-          String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
-          _builder.append(_localVar_1, "\t");
+          _builder.append(" != null");
         }
       }
       _builder.append(", ");
@@ -1082,13 +1081,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         _builder.append("\",");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
+        String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
+        _builder.append(_localVar_1, "\t\t");
         {
           boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
           if (_isBooleanAssignment) {
-            _builder.append("true");
-          } else {
-            String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
-            _builder.append(_localVar_1, "\t\t");
+            _builder.append(" != null");
           }
         }
         _builder.append(",");
@@ -1152,13 +1150,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
           _builder_1.append("\",");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("\t\t");
+          String _localVar_3 = this._grammarAccessExtensions.localVar(assignment, it);
+          _builder_1.append(_localVar_3, "\t\t");
           {
             boolean _isBooleanAssignment_1 = GrammarUtil.isBooleanAssignment(assignment);
             if (_isBooleanAssignment_1) {
-              _builder_1.append("true");
-            } else {
-              String _localVar_3 = this._grammarAccessExtensions.localVar(assignment, it);
-              _builder_1.append(_localVar_3, "\t\t");
+              _builder_1.append(" != null");
             }
           }
           _builder_1.append(",");

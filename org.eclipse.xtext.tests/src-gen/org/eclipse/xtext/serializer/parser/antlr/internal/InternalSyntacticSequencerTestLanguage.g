@@ -1266,7 +1266,7 @@ ruleBooleanAlternativeLiteral returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getBooleanAlternativeLiteralRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "kw2");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_2_0 != null, "kw2");
 					}
 				)
 			)
@@ -1629,7 +1629,7 @@ ruleBooleanValues returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getBooleanValuesRule());
 					}
-					setWithLastConsumed($current, "val1", true, "kw1");
+					setWithLastConsumed($current, "val1", lv_val1_2_0 != null, "kw1");
 				}
 			)
 		)?
@@ -1646,7 +1646,7 @@ ruleBooleanValues returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"val2",
-						true,
+						lv_val2_3_0 != null,
 						"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BOOLEAN_TERMINAL_ID");
 				}
 			)
@@ -1664,7 +1664,7 @@ ruleBooleanValues returns [EObject current=null]
 					set(
 						$current,
 						"val3",
-						true,
+						lv_val3_4_0 != null,
 						"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanDatatypeID");
 					afterParserOrEnumRuleCall();
 				}

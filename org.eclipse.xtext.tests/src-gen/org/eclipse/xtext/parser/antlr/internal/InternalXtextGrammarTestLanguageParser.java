@@ -502,7 +502,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             					if (current==null) {
             						current = createModelElement(grammarAccess.getHiddenClauseRule());
             					}
-            					setWithLastConsumed(current, "definesHiddenTokens", true, "hidden");
+            					setWithLastConsumed(current, "definesHiddenTokens", lv_definesHiddenTokens_0_0 != null, "hidden");
             				
 
             }
@@ -1465,7 +1465,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getParserRuleRule());
                     							}
-                    							setWithLastConsumed(current, "fragment", true, "fragment");
+                    							setWithLastConsumed(current, "fragment", lv_fragment_0_0 != null, "fragment");
                     						
 
                     }
@@ -1522,7 +1522,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                             								if (current==null) {
                             									current = createModelElement(grammarAccess.getParserRuleRule());
                             								}
-                            								setWithLastConsumed(current, "wildcard", true, "*");
+                            								setWithLastConsumed(current, "wildcard", lv_wildcard_2_0 != null, "*");
                             							
 
                             }
@@ -5566,7 +5566,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getPredicateRule());
                     					}
-                    					setWithLastConsumed(current, "predicated", true, "=>");
+                    					setWithLastConsumed(current, "predicated", lv_predicated_0_0 != null, "=>");
                     				
 
                     }
@@ -5594,7 +5594,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getPredicateRule());
                     					}
-                    					setWithLastConsumed(current, "firstSetPredicated", true, "->");
+                    					setWithLastConsumed(current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
                     				
 
                     }
@@ -6725,7 +6725,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     							if (current==null) {
                     								current = createModelElement(grammarAccess.getTerminalRuleRule());
                     							}
-                    							setWithLastConsumed(current, "fragment", true, "fragment");
+                    							setWithLastConsumed(current, "fragment", lv_fragment_1_0 != null, "fragment");
                     						
 
                     }

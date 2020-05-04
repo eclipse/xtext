@@ -402,7 +402,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getChoiceRuleRule());
                     					}
-                    					setWithLastConsumed(current, "optionalKeyword", true, "optional");
+                    					setWithLastConsumed(current, "optionalKeyword", lv_optionalKeyword_1_0 != null, "optional");
                     				
 
                     }

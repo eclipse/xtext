@@ -334,7 +334,7 @@ public class InternalXtextTerminalsTestLanguageParser extends AbstractInternalAn
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getGrammarRule());
                     						}
-                    						setWithLastConsumed(current, "definesHiddenTokens", true, "hidden");
+                    						setWithLastConsumed(current, "definesHiddenTokens", lv_definesHiddenTokens_6_0 != null, "hidden");
                     					
 
                     }
@@ -1469,7 +1469,7 @@ public class InternalXtextTerminalsTestLanguageParser extends AbstractInternalAn
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getParserRuleRule());
                     						}
-                    						setWithLastConsumed(current, "definesHiddenTokens", true, "hidden");
+                    						setWithLastConsumed(current, "definesHiddenTokens", lv_definesHiddenTokens_3_0 != null, "hidden");
                     					
 
                     }

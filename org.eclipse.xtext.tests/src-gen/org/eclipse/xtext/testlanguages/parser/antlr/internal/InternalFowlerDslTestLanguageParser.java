@@ -404,7 +404,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getEventRule());
                     					}
-                    					setWithLastConsumed(current, "resetting", true, "resetting");
+                    					setWithLastConsumed(current, "resetting", lv_resetting_0_0 != null, "resetting");
                     				
 
                     }

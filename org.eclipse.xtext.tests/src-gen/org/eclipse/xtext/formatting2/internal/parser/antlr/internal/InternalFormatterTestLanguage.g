@@ -181,7 +181,7 @@ ruleKWList returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKWListRule());
 					}
-					setWithLastConsumed($current, "kw1", true, "kw1");
+					setWithLastConsumed($current, "kw1", lv_kw1_2_0 != null, "kw1");
 				}
 			)
 		)?
@@ -195,7 +195,7 @@ ruleKWList returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKWListRule());
 					}
-					setWithLastConsumed($current, "kw2", true, "kw2");
+					setWithLastConsumed($current, "kw2", lv_kw2_3_0 != null, "kw2");
 				}
 			)
 		)?
@@ -209,7 +209,7 @@ ruleKWList returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKWListRule());
 					}
-					setWithLastConsumed($current, "kw3", true, "kw3");
+					setWithLastConsumed($current, "kw3", lv_kw3_4_0 != null, "kw3");
 				}
 			)
 		)?
@@ -223,7 +223,7 @@ ruleKWList returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKWListRule());
 					}
-					setWithLastConsumed($current, "kw4", true, "kw4");
+					setWithLastConsumed($current, "kw4", lv_kw4_5_0 != null, "kw4");
 				}
 			)
 		)?
@@ -237,7 +237,7 @@ ruleKWList returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKWListRule());
 					}
-					setWithLastConsumed($current, "kw5", true, "kw5");
+					setWithLastConsumed($current, "kw5", lv_kw5_6_0 != null, "kw5");
 				}
 			)
 		)?

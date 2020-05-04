@@ -284,7 +284,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getElementRule());
                     					}
-                    					setWithLastConsumed(current, "a", true, "a");
+                    					setWithLastConsumed(current, "a", lv_a_1_0 != null, "a");
                     				
 
                     }

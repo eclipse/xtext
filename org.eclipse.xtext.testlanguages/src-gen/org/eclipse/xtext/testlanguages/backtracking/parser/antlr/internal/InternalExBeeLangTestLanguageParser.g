@@ -945,7 +945,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 												if ($current==null) {
 													$current = createModelElement(grammarAccess.getAliasedRequiredCapabilityRule());
 												}
-												setWithLastConsumed($current, "greedy", true, "greedy");
+												setWithLastConsumed($current, "greedy", lv_greedy_11_0 != null, "greedy");
 											}
 										)
 									)
@@ -1248,7 +1248,7 @@ ruleRequiredCapability returns [EObject current=null]
 												if ($current==null) {
 													$current = createModelElement(grammarAccess.getRequiredCapabilityRule());
 												}
-												setWithLastConsumed($current, "greedy", true, "greedy");
+												setWithLastConsumed($current, "greedy", lv_greedy_10_0 != null, "greedy");
 											}
 										)
 									)
@@ -1777,7 +1777,7 @@ ruleFunction returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getFunctionRule());
 					}
-					setWithLastConsumed($current, "final", true, "final");
+					setWithLastConsumed($current, "final", lv_final_2_0 != null, "final");
 				}
 			)
 		)?
@@ -1888,7 +1888,7 @@ ruleFunction returns [EObject current=null]
 									if ($current==null) {
 										$current = createModelElement(grammarAccess.getFunctionRule());
 									}
-									setWithLastConsumed($current, "varArgs", true, "...");
+									setWithLastConsumed($current, "varArgs", lv_varArgs_11_0 != null, "...");
 								}
 							)
 						)
@@ -1925,7 +1925,7 @@ ruleFunction returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getFunctionRule());
 								}
-								setWithLastConsumed($current, "varArgs", true, "...");
+								setWithLastConsumed($current, "varArgs", lv_varArgs_13_0 != null, "...");
 							}
 						)
 					)
@@ -2426,7 +2426,7 @@ ruleVarDeclaration returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getVarDeclarationRule());
 					}
-					setWithLastConsumed($current, "final", true, "final");
+					setWithLastConsumed($current, "final", lv_final_1_0 != null, "final");
 				}
 			)
 		)?
@@ -2540,7 +2540,7 @@ ruleValDeclaration returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getValDeclarationRule());
 					}
-					setWithLastConsumed($current, "final", true, "final");
+					setWithLastConsumed($current, "final", lv_final_1_0 != null, "final");
 				}
 			)
 		)?
@@ -2554,7 +2554,7 @@ ruleValDeclaration returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getValDeclarationRule());
 					}
-					setWithLastConsumed($current, "immutable", true, "val");
+					setWithLastConsumed($current, "immutable", lv_immutable_2_0 != null, "val");
 				}
 			)
 		)
@@ -2831,7 +2831,7 @@ ruleClosureTypeRef returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getClosureTypeRefRule());
 								}
-								setWithLastConsumed($current, "varArgs", true, "...");
+								setWithLastConsumed($current, "varArgs", lv_varArgs_5_0 != null, "...");
 							}
 						)
 					)
@@ -2867,7 +2867,7 @@ ruleClosureTypeRef returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getClosureTypeRefRule());
 							}
-							setWithLastConsumed($current, "varArgs", true, "...");
+							setWithLastConsumed($current, "varArgs", lv_varArgs_7_0 != null, "...");
 						}
 					)
 				)
@@ -5143,7 +5143,7 @@ ruleClosureExpression returns [EObject current=null]
 									if ($current==null) {
 										$current = createModelElement(grammarAccess.getClosureExpressionRule());
 									}
-									setWithLastConsumed($current, "varArgs", true, "...");
+									setWithLastConsumed($current, "varArgs", lv_varArgs_9_0 != null, "...");
 								}
 							)
 						)
@@ -5181,7 +5181,7 @@ ruleClosureExpression returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getClosureExpressionRule());
 							}
-							setWithLastConsumed($current, "varArgs", true, "...");
+							setWithLastConsumed($current, "varArgs", lv_varArgs_11_0 != null, "...");
 						}
 					)
 				)

@@ -154,7 +154,7 @@ ruleGrammar returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getGrammarRule());
 						}
-						setWithLastConsumed($current, "definesHiddenTokens", true, "hidden");
+						setWithLastConsumed($current, "definesHiddenTokens", lv_definesHiddenTokens_6_0 != null, "hidden");
 					}
 				)
 			)
@@ -571,7 +571,7 @@ ruleParserRule returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getParserRuleRule());
 						}
-						setWithLastConsumed($current, "definesHiddenTokens", true, "hidden");
+						setWithLastConsumed($current, "definesHiddenTokens", lv_definesHiddenTokens_3_0 != null, "hidden");
 					}
 				)
 			)

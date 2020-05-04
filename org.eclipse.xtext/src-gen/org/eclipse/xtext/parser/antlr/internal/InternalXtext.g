@@ -154,7 +154,7 @@ ruleGrammar returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getGrammarRule());
 						}
-						setWithLastConsumed($current, "definesHiddenTokens", true, "hidden");
+						setWithLastConsumed($current, "definesHiddenTokens", lv_definesHiddenTokens_6_0 != null, "hidden");
 					}
 				)
 			)
@@ -604,7 +604,7 @@ ruleParserRule returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getParserRuleRule());
 							}
-							setWithLastConsumed($current, "fragment", true, "fragment");
+							setWithLastConsumed($current, "fragment", lv_fragment_1_0 != null, "fragment");
 						}
 					)
 				)
@@ -630,7 +630,7 @@ ruleParserRule returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getParserRuleRule());
 								}
-								setWithLastConsumed($current, "wildcard", true, "*");
+								setWithLastConsumed($current, "wildcard", lv_wildcard_3_0 != null, "*");
 							}
 						)
 					)
@@ -713,7 +713,7 @@ ruleParserRule returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getParserRuleRule());
 						}
-						setWithLastConsumed($current, "definesHiddenTokens", true, "hidden");
+						setWithLastConsumed($current, "definesHiddenTokens", lv_definesHiddenTokens_9_0 != null, "hidden");
 					}
 				)
 			)
@@ -1680,7 +1680,7 @@ ruleNamedArgument returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getNamedArgumentRule());
 						}
-						setWithLastConsumed($current, "calledByName", true, "=");
+						setWithLastConsumed($current, "calledByName", lv_calledByName_1_0 != null, "=");
 					}
 				)
 			)
@@ -1741,7 +1741,7 @@ ruleLiteralCondition returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getLiteralConditionRule());
 						}
-						setWithLastConsumed($current, "true", true, "true");
+						setWithLastConsumed($current, "true", lv_true_1_0 != null, "true");
 					}
 				)
 			)
@@ -2186,7 +2186,7 @@ rulePredicatedKeyword returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedKeywordRule());
 						}
-						setWithLastConsumed($current, "predicated", true, "=>");
+						setWithLastConsumed($current, "predicated", lv_predicated_0_0 != null, "=>");
 					}
 				)
 			)
@@ -2201,7 +2201,7 @@ rulePredicatedKeyword returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedKeywordRule());
 						}
-						setWithLastConsumed($current, "firstSetPredicated", true, "->");
+						setWithLastConsumed($current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
 					}
 				)
 			)
@@ -2254,7 +2254,7 @@ rulePredicatedRuleCall returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
 						}
-						setWithLastConsumed($current, "predicated", true, "=>");
+						setWithLastConsumed($current, "predicated", lv_predicated_0_0 != null, "=>");
 					}
 				)
 			)
@@ -2269,7 +2269,7 @@ rulePredicatedRuleCall returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
 						}
-						setWithLastConsumed($current, "firstSetPredicated", true, "->");
+						setWithLastConsumed($current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
 					}
 				)
 			)
@@ -2374,7 +2374,7 @@ ruleAssignment returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getAssignmentRule());
 						}
-						setWithLastConsumed($current, "predicated", true, "=>");
+						setWithLastConsumed($current, "predicated", lv_predicated_0_0 != null, "=>");
 					}
 				)
 			)
@@ -2389,7 +2389,7 @@ ruleAssignment returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getAssignmentRule());
 						}
-						setWithLastConsumed($current, "firstSetPredicated", true, "->");
+						setWithLastConsumed($current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
 					}
 				)
 			)
@@ -2792,7 +2792,7 @@ rulePredicatedGroup returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedGroupRule());
 						}
-						setWithLastConsumed($current, "predicated", true, "=>");
+						setWithLastConsumed($current, "predicated", lv_predicated_0_0 != null, "=>");
 					}
 				)
 			)
@@ -2807,7 +2807,7 @@ rulePredicatedGroup returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getPredicatedGroupRule());
 						}
-						setWithLastConsumed($current, "firstSetPredicated", true, "->");
+						setWithLastConsumed($current, "firstSetPredicated", lv_firstSetPredicated_1_0 != null, "->");
 					}
 				)
 			)
@@ -2893,7 +2893,7 @@ ruleTerminalRule returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getTerminalRuleRule());
 							}
-							setWithLastConsumed($current, "fragment", true, "fragment");
+							setWithLastConsumed($current, "fragment", lv_fragment_2_0 != null, "fragment");
 						}
 					)
 				)

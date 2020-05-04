@@ -778,7 +778,7 @@ ruleTestIndentation returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getTestIndentationRule());
 					}
-					setWithLastConsumed($current, "semi", true, ";");
+					setWithLastConsumed($current, "semi", lv_semi_5_0 != null, ";");
 				}
 			)
 		)?

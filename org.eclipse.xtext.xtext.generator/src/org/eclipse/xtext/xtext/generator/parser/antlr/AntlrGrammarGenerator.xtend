@@ -367,9 +367,8 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					$current = «assignment.createModelElement»;
 				}
 				«assignment.setOrAdd»WithLastConsumed($current, "«assignment.feature»", «
-	        		IF assignment.isBooleanAssignment»true«
-	        		ELSE»«assignment.localVar(it)»«
-	        		ENDIF», «assignment.terminal.toStringLiteral»);
+	        		assignment.localVar(it)»«IF assignment.isBooleanAssignment» != null«ENDIF
+	        		», «assignment.terminal.toStringLiteral»);
 			}
 		'''
 		else
@@ -392,7 +391,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 						«assignment.setOrAdd»(
 							$current,
 							"«assignment.feature»",
-							«IF assignment.isBooleanAssignment»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«assignment.localVar(it)»«IF assignment.isBooleanAssignment» != null«ENDIF»,
 							«toStringLiteral»);
 						afterParserOrEnumRuleCall();
 					}
@@ -409,7 +408,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 						«assignment.setOrAdd»WithLastConsumed(
 							$current,
 							"«assignment.feature»",
-							«IF assignment.isBooleanAssignment»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«assignment.localVar(it)»«IF assignment.isBooleanAssignment» != null«ENDIF»,
 							«toStringLiteral»);
 					}
 				'''

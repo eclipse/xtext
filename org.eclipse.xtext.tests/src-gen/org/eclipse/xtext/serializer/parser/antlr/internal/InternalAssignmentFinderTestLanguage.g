@@ -542,7 +542,7 @@ ruleKeywordBool returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKeywordBoolRule());
 					}
-					setWithLastConsumed($current, "kw", true, "kw1");
+					setWithLastConsumed($current, "kw", lv_kw_0_0 != null, "kw1");
 				}
 			)
 		)
@@ -557,7 +557,7 @@ ruleKeywordBool returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getKeywordBoolRule());
 					}
-					setWithLastConsumed($current, "kw", true, "kw2");
+					setWithLastConsumed($current, "kw", lv_kw_1_0 != null, "kw2");
 				}
 			)
 		)
@@ -593,7 +593,7 @@ ruleTerminalBool returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"term",
-						true,
+						lv_term_0_0 != null,
 						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
 				}
 			)
@@ -612,7 +612,7 @@ ruleTerminalBool returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"term",
-						true,
+						lv_term_1_0 != null,
 						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
 				}
 			)
@@ -628,7 +628,7 @@ ruleTerminalBool returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getTerminalBoolRule());
 					}
-					setWithLastConsumed($current, "term", true, "\%foo");
+					setWithLastConsumed($current, "term", lv_term_2_0 != null, "\%foo");
 				}
 			)
 		)
@@ -664,7 +664,7 @@ ruleEnumBool returns [EObject current=null]
 					set(
 						$current,
 						"en",
-						true,
+						lv_en_0_0 != null,
 						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
 					afterParserOrEnumRuleCall();
 				}
@@ -684,7 +684,7 @@ ruleEnumBool returns [EObject current=null]
 					set(
 						$current,
 						"en",
-						true,
+						lv_en_1_0 != null,
 						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
 					afterParserOrEnumRuleCall();
 				}
@@ -719,7 +719,7 @@ ruleMixedBool returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getMixedBoolRule());
 					}
-					setWithLastConsumed($current, "val", true, "kw1");
+					setWithLastConsumed($current, "val", lv_val_0_0 != null, "kw1");
 				}
 			)
 		)

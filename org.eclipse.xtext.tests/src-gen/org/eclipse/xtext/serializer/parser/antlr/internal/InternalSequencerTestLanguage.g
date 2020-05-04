@@ -2590,7 +2590,7 @@ ruleDependentAlternative1 returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getDependentAlternative1Rule());
 							}
-							setWithLastConsumed($current, "flag", true, "kw1");
+							setWithLastConsumed($current, "flag", lv_flag_3_0 != null, "kw1");
 						}
 					)
 				)
@@ -2688,7 +2688,7 @@ ruleDependentAlternative2 returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getDependentAlternative2Rule());
 							}
-							setWithLastConsumed($current, "flag", true, "kw1");
+							setWithLastConsumed($current, "flag", lv_flag_4_0 != null, "kw1");
 						}
 					)
 				)
@@ -3472,7 +3472,7 @@ ruleUnorderedGroupBoolean returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedGroupBooleanRule());
 										}
-										setWithLastConsumed($current, "val1", true, "kw1");
+										setWithLastConsumed($current, "val1", lv_val1_3_0 != null, "kw1");
 									}
 								)
 								))
@@ -3495,7 +3495,7 @@ ruleUnorderedGroupBoolean returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedGroupBooleanRule());
 										}
-										setWithLastConsumed($current, "val2", true, "kw2");
+										setWithLastConsumed($current, "val2", lv_val2_4_0 != null, "kw2");
 									}
 								)
 								))
@@ -3518,7 +3518,7 @@ ruleUnorderedGroupBoolean returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getUnorderedGroupBooleanRule());
 										}
-										setWithLastConsumed($current, "val3", true, "kw3");
+										setWithLastConsumed($current, "val3", lv_val3_5_0 != null, "kw3");
 									}
 								)
 								))
