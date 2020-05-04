@@ -8,9 +8,12 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import org.eclipse.lsp4j.jsonrpc.services.JsonNotification;
+import org.eclipse.lsp4j.jsonrpc.services.JsonRequest;
+
 /**
- * Interface for language specific extensions to LSP. Implementors should use {@link JsonRpcNotification} and {@link
- * JsonRpcRequest} annotations.
+ * Interface for language specific extensions to LSP. Implementors should use {@link JsonNotification} and {@link
+ * JsonRequest} annotations.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
