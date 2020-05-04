@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.ide;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,7 +17,6 @@ import java.util.concurrent.Executors;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.util.IDisposable;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -25,15 +26,18 @@ import com.google.inject.Singleton;
  * <p>
  * In some situations it is necessary to use multiple instances of executor services in order to avoid deadlocks. That
  * can be achieved with the {@link #get(String)} method, which will return a different instance for each key.
+ * </p>
  */
 @Singleton
 public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisposable {
+
+	private final Map<String, ExecutorService> instanceCache = Collections
+			.synchronizedMap(new HashMap<String, ExecutorService>());
+
 	@Inject
 	public void registerTo(DisposableRegistry disposableRegistry) {
 		disposableRegistry.register(this);
 	}
-
-	private final Map<String, ExecutorService> instanceCache = Maps.newHashMapWithExpectedSize(3);
 
 	@Override
 	public ExecutorService get() {
@@ -41,17 +45,7 @@ public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisp
 	}
 
 	public ExecutorService get(String key) {
-		ExecutorService result = instanceCache.get(key);
-		if (result == null) {
-			synchronized (instanceCache) {
-				result = instanceCache.get(key);
-				if (result == null) {
-					result = createInstance(key);
-					instanceCache.put(key, result);
-				}
-			}
-		}
-		return result;
+		return instanceCache.computeIfAbsent(key, this::createInstance);
 	}
 
 	protected ExecutorService createInstance(String key) {
@@ -60,9 +54,11 @@ public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisp
 
 	@Override
 	public void dispose() {
-		for (ExecutorService executorService : instanceCache.values()) {
-			executorService.shutdown();
+		synchronized (instanceCache) {
+			for (ExecutorService executorService : instanceCache.values()) {
+				executorService.shutdown();
+			}
+			instanceCache.clear();
 		}
-		instanceCache.clear();
 	}
 }
