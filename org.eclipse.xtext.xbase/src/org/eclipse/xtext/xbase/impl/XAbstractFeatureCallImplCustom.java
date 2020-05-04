@@ -142,6 +142,7 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	}
 	
 	@Override
+	@Deprecated
 	public String getInvalidFeatureIssueCode() {
 		ensureFeatureLinked();
 		return super.getInvalidFeatureIssueCode();

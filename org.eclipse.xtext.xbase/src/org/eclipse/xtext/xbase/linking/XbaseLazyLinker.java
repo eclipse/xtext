@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  */
 public class XbaseLazyLinker extends LazyLinker {
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
 		super.clearReference(obj, ref);
