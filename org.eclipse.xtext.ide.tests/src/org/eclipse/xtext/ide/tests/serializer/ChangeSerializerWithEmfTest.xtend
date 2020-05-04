@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,19 +11,17 @@ package org.eclipse.xtext.ide.tests.serializer
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.EClassRef
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Model
-import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
-import org.eclipse.xtext.testlanguages.ecore.EcoreSupport
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.emf.ecore.EPackage
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -133,16 +131,6 @@ class ChangeSerializerWithEmfTest {
 			</ecore:EPackage>
 			--------------------------------------------------------------------------------
 		'''
-	}
-
-}
-
-class PartialSerializationTestLanguageInjectorProviderWithEmf extends PartialSerializationTestLanguageInjectorProvider {
-
-	override protected internalCreateInjector() {
-		val result = super.internalCreateInjector()
-		new EcoreSupport().createInjectorAndDoEMFRegistration()
-		return result
 	}
 
 }
