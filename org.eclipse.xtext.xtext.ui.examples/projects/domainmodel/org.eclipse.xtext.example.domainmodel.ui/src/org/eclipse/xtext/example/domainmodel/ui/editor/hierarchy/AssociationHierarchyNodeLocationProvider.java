@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -21,15 +21,14 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
  * @author kosyakov - Initial contribution and API
  */
 @Singleton
-@SuppressWarnings("all")
 public class AssociationHierarchyNodeLocationProvider extends DefaultHierarchyNodeLocationProvider {
-  @Override
-  public ITextRegionWithLineInformation getTextRegion(final EObject owner, final EStructuralFeature feature, final int indexInList) {
-    final Property property = EcoreUtil2.<Property>getContainerOfType(owner, Property.class);
-    if ((property != null)) {
-      final ITextRegion textRegion = this.locationInFileProvider.getFullTextRegion(property);
-      return this.toTextRegionWithLineInformation(property, textRegion);
-    }
-    return super.getTextRegion(owner, feature, indexInList);
-  }
+	@Override
+	public ITextRegionWithLineInformation getTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
+		Property property = EcoreUtil2.getContainerOfType(owner, Property.class);
+		if (property != null) {
+			ITextRegion textRegion = locationInFileProvider.getFullTextRegion(property);
+			return toTextRegionWithLineInformation(property, textRegion);
+		}
+		return super.getTextRegion(owner, feature, indexInList);
+	}
 }
