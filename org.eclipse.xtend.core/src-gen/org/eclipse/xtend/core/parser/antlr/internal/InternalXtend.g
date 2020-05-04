@@ -952,7 +952,7 @@ ruleXFunctionSuperTypeRef returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getXFunctionSuperTypeRefRule());
 						}
-						setWithLastConsumed($current, "instanceContext", true, "(");
+						setWithLastConsumed($current, "instanceContext", lv_instanceContext_0_0 != null, "(");
 					}
 				)
 			)
@@ -4756,7 +4756,7 @@ ruleParameter returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getParameterRule());
 						}
-						setWithLastConsumed($current, "extension", true, "extension");
+						setWithLastConsumed($current, "extension", lv_extension_1_0 != null, "extension");
 					}
 				)
 			)
@@ -4809,7 +4809,7 @@ ruleParameter returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getParameterRule());
 					}
-					setWithLastConsumed($current, "varArg", true, "...");
+					setWithLastConsumed($current, "varArg", lv_varArg_4_0 != null, "...");
 				}
 			)
 		)?
@@ -5019,7 +5019,7 @@ ruleXConditionalExpression returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getXConditionalExpressionRule());
 								}
-								setWithLastConsumed($current, "conditionalExpression", true, "?");
+								setWithLastConsumed($current, "conditionalExpression", lv_conditionalExpression_2_0 != null, "?");
 							}
 						)
 					)
@@ -5676,7 +5676,7 @@ ruleVariableModifier[EObject in_current]  returns [EObject current=in_current]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getVariableModifierRule());
 							}
-							setWithLastConsumed($current, "writeable", true, "var");
+							setWithLastConsumed($current, "writeable", lv_writeable_0_0 != null, "var");
 						}
 					)
 				)
@@ -5696,7 +5696,7 @@ ruleVariableModifier[EObject in_current]  returns [EObject current=in_current]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getVariableModifierRule());
 						}
-						setWithLastConsumed($current, "extension", true, "extension");
+						setWithLastConsumed($current, "extension", lv_extension_2_0 != null, "extension");
 					}
 				)
 			)?
@@ -5713,7 +5713,7 @@ ruleVariableModifier[EObject in_current]  returns [EObject current=in_current]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getVariableModifierRule());
 						}
-						setWithLastConsumed($current, "extension", true, "extension");
+						setWithLastConsumed($current, "extension", lv_extension_3_0 != null, "extension");
 					}
 				)
 			)
@@ -5728,7 +5728,7 @@ ruleVariableModifier[EObject in_current]  returns [EObject current=in_current]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getVariableModifierRule());
 							}
-							setWithLastConsumed($current, "writeable", true, "var");
+							setWithLastConsumed($current, "writeable", lv_writeable_4_0 != null, "var");
 						}
 					)
 				)
@@ -5930,7 +5930,7 @@ ruleXbaseConstructorCall returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getXbaseConstructorCallRule());
 						}
-						setWithLastConsumed($current, "explicitConstructorCall", true, "(");
+						setWithLastConsumed($current, "explicitConstructorCall", lv_explicitConstructorCall_8_0 != null, "(");
 					}
 				)
 			)
@@ -6086,7 +6086,7 @@ ruleJvmFormalParameter returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getJvmFormalParameterRule());
 					}
-					setWithLastConsumed($current, "extension", true, "extension");
+					setWithLastConsumed($current, "extension", lv_extension_0_0 != null, "extension");
 				}
 			)
 		)?
@@ -6157,7 +6157,7 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElement(grammarAccess.getFullJvmFormalParameterRule());
 					}
-					setWithLastConsumed($current, "extension", true, "extension");
+					setWithLastConsumed($current, "extension", lv_extension_0_0 != null, "extension");
 				}
 			)
 		)?
@@ -6615,7 +6615,7 @@ ruleXCasePart returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getXCasePartRule());
 						}
-						setWithLastConsumed($current, "fallThrough", true, ",");
+						setWithLastConsumed($current, "fallThrough", lv_fallThrough_6_0 != null, ",");
 					}
 				)
 			)
@@ -9515,7 +9515,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 										}
-										setWithLastConsumed($current, "explicitStatic", true, "::");
+										setWithLastConsumed($current, "explicitStatic", lv_explicitStatic_3_0 != null, "::");
 									}
 								)
 							)
@@ -9612,7 +9612,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 										}
-										setWithLastConsumed($current, "nullSafe", true, "?.");
+										setWithLastConsumed($current, "nullSafe", lv_nullSafe_9_0 != null, "?.");
 									}
 								)
 							)
@@ -9627,7 +9627,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 										if ($current==null) {
 											$current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 										}
-										setWithLastConsumed($current, "explicitStatic", true, "::");
+										setWithLastConsumed($current, "explicitStatic", lv_explicitStatic_10_0 != null, "::");
 									}
 								)
 							)
@@ -9719,7 +9719,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 								}
-								setWithLastConsumed($current, "explicitOperationCall", true, "(");
+								setWithLastConsumed($current, "explicitOperationCall", lv_explicitOperationCall_17_0 != null, "(");
 							}
 						)
 					)
@@ -10439,7 +10439,7 @@ ruleXClosure returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getXClosureRule());
 							}
-							setWithLastConsumed($current, "explicitSyntax", true, "|");
+							setWithLastConsumed($current, "explicitSyntax", lv_explicitSyntax_5_0 != null, "|");
 						}
 					)
 				)
@@ -10630,7 +10630,7 @@ ruleXShortClosure returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getXShortClosureRule());
 							}
-							setWithLastConsumed($current, "explicitSyntax", true, "|");
+							setWithLastConsumed($current, "explicitSyntax", lv_explicitSyntax_4_0 != null, "|");
 						}
 					)
 				)
@@ -11458,7 +11458,7 @@ ruleXFeatureCall returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getXFeatureCallRule());
 						}
-						setWithLastConsumed($current, "explicitOperationCall", true, "(");
+						setWithLastConsumed($current, "explicitOperationCall", lv_explicitOperationCall_7_0 != null, "(");
 					}
 				)
 			)
@@ -11662,7 +11662,7 @@ ruleXBooleanLiteral returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getXBooleanLiteralRule());
 						}
-						setWithLastConsumed($current, "isTrue", true, "true");
+						setWithLastConsumed($current, "isTrue", lv_isTrue_2_0 != null, "true");
 					}
 				)
 			)
@@ -13083,7 +13083,7 @@ ruleXImportDeclaration returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getXImportDeclarationRule());
 							}
-							setWithLastConsumed($current, "static", true, "static");
+							setWithLastConsumed($current, "static", lv_static_1_0 != null, "static");
 						}
 					)
 				)
@@ -13097,7 +13097,7 @@ ruleXImportDeclaration returns [EObject current=null]
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getXImportDeclarationRule());
 							}
-							setWithLastConsumed($current, "extension", true, "extension");
+							setWithLastConsumed($current, "extension", lv_extension_2_0 != null, "extension");
 						}
 					)
 				)?
@@ -13128,7 +13128,7 @@ ruleXImportDeclaration returns [EObject current=null]
 								if ($current==null) {
 									$current = createModelElement(grammarAccess.getXImportDeclarationRule());
 								}
-								setWithLastConsumed($current, "wildcard", true, "*");
+								setWithLastConsumed($current, "wildcard", lv_wildcard_4_0 != null, "*");
 							}
 						)
 					)
