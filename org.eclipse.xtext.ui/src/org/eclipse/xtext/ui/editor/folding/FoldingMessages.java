@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Michael Clay and others.
+ * Copyright (c) 2010, 2020 Michael Clay and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,10 +9,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.folding;
 
+import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import com.ibm.icu.text.MessageFormat;
 
 /**
  * Class that gives access to the folding messages resource bundle.

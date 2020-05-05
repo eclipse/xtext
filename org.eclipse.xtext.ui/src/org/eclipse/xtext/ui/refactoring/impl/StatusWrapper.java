@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,6 +11,8 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
+
+import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -31,7 +33,6 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
-import com.ibm.icu.text.MessageFormat;
 
 /**
  * Convenience class to create refactoring issues with an {@link RefactoringStatusContext}.
