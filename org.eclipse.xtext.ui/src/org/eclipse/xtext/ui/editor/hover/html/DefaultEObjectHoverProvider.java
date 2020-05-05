@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 Christoph Kulla
+ * Copyright (c) 2010, 2020 Christoph Kulla
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -56,7 +57,6 @@ import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.ibm.icu.text.MessageFormat;
 
 /**
  * Returns a html string as documentation. Delegates to another IEObjectDocumentationProvider and adds
@@ -156,7 +156,6 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	private static String fgStyleSheet;
 
 	private IInformationControlCreator hoverControlCreator;
-
 	private IInformationControlCreator presenterControlCreator;
 
 	protected static final class BackAction extends Action {
