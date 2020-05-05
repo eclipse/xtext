@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,13 +8,11 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import com.google.inject.Inject
-import com.google.inject.Provider
 import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.ReassigningStackedResolvedTypes
@@ -25,32 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
-import org.eclipse.xtext.util.CancelIndicator
-
-/**
- * @author Sebastian Zarnekow
- */
-class ValidatingBatchTypeResolver extends DefaultBatchTypeResolver {
-
-	@Inject
-	Provider<ValidatingReentrantTypeResolver> resolverProvider;
-
-	override createResolver() {
-		resolverProvider.get
-	}
-
-}
-
-/**
- * @author Sebastian Zarnekow
- */
-class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
-	
-	override createResolvedTypes(CancelIndicator monitor) {
-		return new ValidatingRootResolvedTypes(this, monitor)
-	}
-	
-}
 
 /**
  * @author Sebastian Zarnekow
