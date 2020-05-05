@@ -21,12 +21,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Model");
@@ -2476,7 +2475,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public RuleCall getRc2DelegationParserRuleCall_1_2_1_0() { return cRc2DelegationParserRuleCall_1_2_1_0; }
 	}
 	
-	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
+	public class DefEnum1Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum1");
 		private final EnumLiteralDeclaration cKw1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw1Kw1Keyword_0 = (Keyword)cKw1EnumLiteralDeclaration.eContents().get(0);
@@ -2491,7 +2490,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw1"
 		public Keyword getKw1Kw1Keyword_0() { return cKw1Kw1Keyword_0; }
 	}
-	public class DefEnum2Elements extends AbstractEnumRuleElementFinder {
+	public class DefEnum2Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum2");
 		private final EnumLiteralDeclaration cKw2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw2Kw2Keyword_0 = (Keyword)cKw2EnumLiteralDeclaration.eContents().get(0);
@@ -2506,7 +2505,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw2"
 		public Keyword getKw2Kw2Keyword_0() { return cKw2Kw2Keyword_0; }
 	}
-	public class DefEnum3Elements extends AbstractEnumRuleElementFinder {
+	public class DefEnum3Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum3");
 		private final EnumLiteralDeclaration cKw3EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw3Kw3Keyword_0 = (Keyword)cKw3EnumLiteralDeclaration.eContents().get(0);

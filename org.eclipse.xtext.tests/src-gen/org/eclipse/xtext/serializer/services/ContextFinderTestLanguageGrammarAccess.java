@@ -20,12 +20,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.ContextFinderTestLanguage.Model");
@@ -763,7 +762,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		public RuleCall getRefModelSTRINGTerminalRuleCall_0_1() { return cRefModelSTRINGTerminalRuleCall_0_1; }
 	}
 	
-	public class ValueExclusionTestEn0Elements extends AbstractEnumRuleElementFinder {
+	public class ValueExclusionTestEn0Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTestEn0");
 		private final EnumLiteralDeclaration cLit0EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit0Lit0Keyword_0 = (Keyword)cLit0EnumLiteralDeclaration.eContents().get(0);
@@ -778,7 +777,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"lit0"
 		public Keyword getLit0Lit0Keyword_0() { return cLit0Lit0Keyword_0; }
 	}
-	public class ValueExclusionTestEn1Elements extends AbstractEnumRuleElementFinder {
+	public class ValueExclusionTestEn1Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTestEn1");
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
@@ -793,7 +792,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"lit1"
 		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
 	}
-	public class ValueExclusionTestEn2Elements extends AbstractEnumRuleElementFinder {
+	public class ValueExclusionTestEn2Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTestEn2");
 		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);

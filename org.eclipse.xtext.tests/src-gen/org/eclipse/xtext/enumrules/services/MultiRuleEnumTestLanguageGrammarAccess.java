@@ -18,12 +18,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.Model");
@@ -65,7 +64,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		public RuleCall getCEnumRuleCEnumRuleCall_3_0() { return cCEnumRuleCEnumRuleCall_3_0; }
 	}
 	
-	public class EnumRuleAElements extends AbstractEnumRuleElementFinder {
+	public class EnumRuleAElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleA");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cAEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -100,7 +99,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"C"
 		public Keyword getCCKeyword_2_0() { return cCCKeyword_2_0; }
 	}
-	public class EnumRuleBElements extends AbstractEnumRuleElementFinder {
+	public class EnumRuleBElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleB");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cCEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -135,7 +134,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"E"
 		public Keyword getEEKeyword_2_0() { return cEEKeyword_2_0; }
 	}
-	public class EnumRuleCElements extends AbstractEnumRuleElementFinder {
+	public class EnumRuleCElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleC");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cAEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);

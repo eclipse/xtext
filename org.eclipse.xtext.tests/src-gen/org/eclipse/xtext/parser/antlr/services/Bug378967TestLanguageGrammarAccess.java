@@ -18,12 +18,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Root");
@@ -277,7 +276,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getSKeyword() { return cSKeyword; }
 	}
 	
-	public class FirstEnumElements extends AbstractEnumRuleElementFinder {
+	public class FirstEnumElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.FirstEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
@@ -292,7 +291,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'after'
 		public Keyword getValueAfterKeyword_0() { return cValueAfterKeyword_0; }
 	}
-	public class SecondEnumElements extends AbstractEnumRuleElementFinder {
+	public class SecondEnumElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SecondEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
