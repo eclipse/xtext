@@ -21,12 +21,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Model");
@@ -944,7 +943,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public RuleCall getUrlScalarExpressionParserRuleCall_0() { return cUrlScalarExpressionParserRuleCall_0; }
 	}
 	
-	public class TableViewStyleElements extends AbstractEnumRuleElementFinder {
+	public class TableViewStyleElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TableViewStyle");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cPlainEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -971,7 +970,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"Grouped"
 		public Keyword getGroupedGroupedKeyword_1_0() { return cGroupedGroupedKeyword_1_0; }
 	}
-	public class CellTypeElements extends AbstractEnumRuleElementFinder {
+	public class CellTypeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cDefaultEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -1017,7 +1016,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'Subtitle'
 		public Keyword getSubtitleSubtitleKeyword_3_0() { return cSubtitleSubtitleKeyword_3_0; }
 	}
-	public class CellAccessoryElements extends AbstractEnumRuleElementFinder {
+	public class CellAccessoryElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellAccessory");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cNoneEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);

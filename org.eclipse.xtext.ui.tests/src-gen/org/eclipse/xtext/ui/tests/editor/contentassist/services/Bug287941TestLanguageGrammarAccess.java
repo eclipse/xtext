@@ -19,12 +19,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Model");
@@ -1101,7 +1100,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public RuleCall getRightAliasFromEntryIDTerminalRuleCall_2_0_1() { return cRightAliasFromEntryIDTerminalRuleCall_2_0_1; }
 	}
 	
-	public class NumericOperatorElements extends AbstractEnumRuleElementFinder {
+	public class NumericOperatorElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLessThenEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -1160,7 +1159,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"!="
 		public Keyword getNotEqualExclamationMarkEqualsSignKeyword_5_0() { return cNotEqualExclamationMarkEqualsSignKeyword_5_0; }
 	}
-	public class StringOperatorElements extends AbstractEnumRuleElementFinder {
+	public class StringOperatorElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.StringOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
@@ -1203,7 +1202,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"notlike"
 		public Keyword getNotLikeNotlikeKeyword_3_0() { return cNotLikeNotlikeKeyword_3_0; }
 	}
-	public class BooleanOperatorElements extends AbstractEnumRuleElementFinder {
+	public class BooleanOperatorElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
