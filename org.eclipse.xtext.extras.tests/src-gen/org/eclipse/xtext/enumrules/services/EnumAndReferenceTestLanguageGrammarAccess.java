@@ -19,12 +19,11 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	public class EntityWithEnumAndReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage.EntityWithEnumAndReference");
@@ -70,7 +69,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		public RuleCall getRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1() { return cRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1; }
 	}
 	
-	public class KindOfKeywordElements extends AbstractEnumRuleElementFinder {
+	public class KindOfKeywordElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage.KindOfKeyword");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cKindOfKeywordEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
