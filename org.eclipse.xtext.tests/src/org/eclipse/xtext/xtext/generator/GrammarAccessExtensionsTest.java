@@ -29,6 +29,7 @@ public class GrammarAccessExtensionsTest {
 		Assert.assertEquals("CommercialAtApostrophe", grammarAccessExtensions.toJavaIdentifier("@\'", false));
 		Assert.assertEquals("Grün", grammarAccessExtensions.toJavaIdentifier("Grün", true));
 		Assert.assertEquals("DollarSign", grammarAccessExtensions.toJavaIdentifier("$", true));
+		Assert.assertEquals("ColonExclamationMarkQuestionMark", grammarAccessExtensions.toJavaIdentifier(":!?", true));
 		Assert.assertEquals("_", grammarAccessExtensions.toJavaIdentifier("_", true));
 	}
 
