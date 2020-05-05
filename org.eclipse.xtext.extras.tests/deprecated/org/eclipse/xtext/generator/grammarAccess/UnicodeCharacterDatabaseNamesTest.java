@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -23,13 +23,17 @@ public class UnicodeCharacterDatabaseNamesTest extends Assert {
 		assertEquals("LATIN SMALL LETTER U WITH DIAERESIS",getCharacterName('ü'));
 		assertEquals("LATIN SMALL LETTER A WITH DIAERESIS",getCharacterName('ä'));
 		assertEquals("DIGIT NINE",getCharacterName('9'));
-		assertEquals("CJK UNIFIED IDEOGRAPH-4711",getCharacterName('\u4711'));
+		assertEquals("CJK UNIFIED IDEOGRAPHS EXTENSION A 4711",getCharacterName('\u4711'));
 	}
 	
 	@Test public void testSmoke() throws Exception {
 		for (int i = 0; i < 8000; i++) {
 			String characterName = getCharacterName((char)i);
-			assertNotNull("Character : "+((char)i),characterName);
+			if (Character.getType(i) == Character.UNASSIGNED) {
+				assertNull(characterName);
+			} else {
+				assertNotNull(i + " - Character : "+((char)i),characterName);
+			};
 		}
 	}
 	

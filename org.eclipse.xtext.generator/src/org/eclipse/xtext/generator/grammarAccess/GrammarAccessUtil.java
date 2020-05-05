@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -243,7 +243,7 @@ public class GrammarAccessUtil {
 			return r;
 		StringBuffer b = new StringBuffer();
 		for (char c : text.toCharArray()) {
-			String n = UnicodeCharacterDatabaseNames.getCharacterName(c);
+			String n = Character.getName(c);
 			if (n != null)
 				b.append(n + " ");
 		}
