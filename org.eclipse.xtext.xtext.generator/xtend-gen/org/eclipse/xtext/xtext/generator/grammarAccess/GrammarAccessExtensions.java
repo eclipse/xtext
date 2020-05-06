@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,7 +15,6 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.ibm.icu.text.Transliterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,8 +94,6 @@ public class GrammarAccessExtensions {
   private static Map<String, String> SPECIAL_CHARS = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("\b", "backspace"), Pair.<String, String>of("\f", "formFeed"), Pair.<String, String>of("\n", "lineFeed"), Pair.<String, String>of("\r", "carriageReturn"), Pair.<String, String>of("\t", "tab"), Pair.<String, String>of("\\", "backslash")));
   
   private final Map<String, ISerializer> xtextSerializerByLineDelimiter = Maps.<String, ISerializer>newHashMapWithExpectedSize(2);
-  
-  private final Transliterator transliterator = Transliterator.getInstance("Any-Name");
   
   @Inject
   private CodeConfig codeConfig;
@@ -201,12 +198,7 @@ public class GrammarAccessExtensions {
    * Returns the Unicode string name for a character.
    */
   public String getUnicodeName(final char character) {
-    final String transliterated = this.transliterator.transliterate(String.valueOf(character));
-    int _length = "\\N{".length();
-    int _length_1 = transliterated.length();
-    int _length_2 = "}".length();
-    int _minus = (_length_1 - _length_2);
-    return transliterated.substring(_length, _minus);
+    return Character.getName(character);
   }
   
   private String toJavaIdentifierSegmentInt(final String text, final boolean isFirst, final boolean uppercaseFirst) {
