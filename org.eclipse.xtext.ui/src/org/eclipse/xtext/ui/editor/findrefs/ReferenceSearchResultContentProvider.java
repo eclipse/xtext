@@ -1,5 +1,6 @@
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,9 +26,7 @@ import org.eclipse.xtext.ui.editor.StatefulResourceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultEvents.Added;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultEvents.Reset;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -48,8 +47,15 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 	@Inject
 	public ReferenceSearchResultContentProvider(IResourceDescriptions resourceDescriptions) {
-		batchedSearchResultEvents = Lists.newArrayList();
+		batchedSearchResultEvents = new ArrayList<>();
 		this.resourceDescriptions = resourceDescriptions;
+		attachListenerToIndex(resourceDescriptions);
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected void attachListenerToIndex(IResourceDescriptions resourceDescriptions) {
 		if (resourceDescriptions instanceof IResourceDescription.Event.Source) {
 			((IResourceDescription.Event.Source) resourceDescriptions).addListener(this);
 		}
@@ -58,8 +64,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ReferenceSearchViewTreeNode) {
-			return Iterables.toArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(),
-					ReferenceSearchViewTreeNode.class);
+			return ((ReferenceSearchViewTreeNode) parentElement).getChildren().toArray(new ReferenceSearchViewTreeNode[0]);
 		}
 		return null;
 	}
@@ -85,16 +90,30 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		if (rootNodes == null || rootNodes.isEmpty()) {
 			return new Object[0];
 		}
-		return Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class);
+		return rootNodes.toArray(new ReferenceSearchViewTreeNode[0]);
 	}
 
 	@Override
 	public void dispose() {
+		detachListenerFromIndex();
 		rootNodes = null;
+		synchronized (batchedSearchResultEvents) {
+			batchedSearchResultEvents.clear();
+		}
+		ITreeContentProvider.super.dispose();
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected void detachListenerFromIndex() {
+		if (resourceDescriptions instanceof IResourceDescription.Event.Source) {
+			((IResourceDescription.Event.Source) resourceDescriptions).removeListener(this);
+		}
 	}
 
 	@Override
-	public void inputChanged(final Viewer viewer, Object oldInput, Object newInput) {
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		synchronized (viewer) {
 			if (rootNodes != null) {
 				rootNodes.clear();
@@ -136,7 +155,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 	private ReferenceSearchViewTreeNode resourceNode(IResourceDescription resourceDescription, boolean isUpdateViewer) {
 		if (rootNodes == null) {
-			rootNodes = Lists.newArrayList();
+			rootNodes = new ArrayList<>();
 		}
 		for (ReferenceSearchViewTreeNode node : rootNodes) {
 			Object nodeDescription = node.getDescription();
@@ -178,7 +197,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			isUIUpdateScheduled = false;
 			List<SearchResultEvent> events;
 			synchronized (batchedSearchResultEvents) {
-				events = Lists.newArrayList(batchedSearchResultEvents);
+				events = new ArrayList<>(batchedSearchResultEvents);
 				batchedSearchResultEvents.clear();
 			}
 			for (SearchResultEvent event : events) {
@@ -205,8 +224,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 	private void expandToFirstChild() {
 		if (rootNodes != null && !rootNodes.isEmpty()){
-			ReferenceSearchViewTreeNode[] rootNodesArray = Iterables.toArray(
-					rootNodes, ReferenceSearchViewTreeNode.class);
+			ReferenceSearchViewTreeNode[] rootNodesArray = rootNodes.toArray(new ReferenceSearchViewTreeNode[0]);
 			//find the top element
 			viewer.getComparator().sort(viewer, rootNodesArray);
 			
@@ -238,18 +256,11 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 									} else {
 										Iterable<IReferenceDescription> newReferenceDescriptions = delta.getNew()
 												.getReferenceDescriptions();
-										List<ReferenceSearchViewTreeNode> removedReferenceNodes = Lists.newArrayList();
+										List<ReferenceSearchViewTreeNode> removedReferenceNodes = new ArrayList<>();
 										for (ReferenceSearchViewTreeNode referenceNode : rootNode.getChildren()) {
-											final URI referenceSourceURI = ((IReferenceDescription) referenceNode
+											URI referenceSourceURI = ((IReferenceDescription) referenceNode
 													.getDescription()).getSourceEObjectUri();
-											if (!Iterables.any(newReferenceDescriptions,
-													new Predicate<IReferenceDescription>() {
-														@Override
-														public boolean apply(IReferenceDescription input) {
-															return input.getSourceEObjectUri().equals(
-																	referenceSourceURI);
-														}
-													})) {
+											if (!Iterables.any(newReferenceDescriptions, input -> input.getSourceEObjectUri().equals(referenceSourceURI))) {
 												removedReferenceNodes.add(referenceNode);
 											}
 										}
@@ -261,8 +272,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 											viewer.remove(rootNode);
 											break;
 										} else {
-											viewer.remove(rootNode, Iterables.toArray(removedReferenceNodes,
-													ReferenceSearchViewTreeNode.class));
+											viewer.remove(rootNode, removedReferenceNodes.toArray());
 										}
 									}
 								}
