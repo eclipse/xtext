@@ -29,6 +29,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Module;
+import com.google.inject.Stage;
 import com.google.inject.util.Modules;
 
 /**
@@ -75,7 +76,7 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 			public void configure(Binder binder) {
 				for(Binding<?> binding: bindings.values()) {
 					Type typeLiteral = binding.getKey().getTypeLiteral().getType();
-					if (!Injector.class.equals(typeLiteral) && !Logger.class.equals(typeLiteral)) {
+					if (!Injector.class.equals(typeLiteral) && !Logger.class.equals(typeLiteral) && !Stage.class.equals(typeLiteral)) {
 						binding.applyTo(binder);
 					}
 				}
