@@ -26,8 +26,7 @@ Require-Bundle: org.eclipse.xtext,
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/simple.jar,
  .
-Import-Package: com.ibm.icu.text;version="4.0.0",
- org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
  org.junit;version="4.12.0",
  org.junit.rules;version="4.12.0",

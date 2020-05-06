@@ -7,7 +7,6 @@ dependencies {
 	compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
 	compile 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
 	compile 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
-	compile 'com.ibm.icu:icu4j'
 	compile 'org.eclipse.platform:org.eclipse.equinox.common'
 	optional 'org.eclipse.platform:org.eclipse.core.runtime'
 	optional 'org.eclipse.jdt:org.eclipse.jdt.core'

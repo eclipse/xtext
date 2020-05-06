@@ -181,8 +181,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       "org.eclipse.emf.mwe2.lib", 
       "org.objectweb.asm", 
       "org.apache.commons.logging", 
-      "org.apache.log4j", 
-      "com.ibm.icu");
+      "org.apache.log4j");
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
     if (_isFromExistingEcoreModels) {
       final Function1<EPackageInfo, Boolean> _function = (EPackageInfo it) -> {
