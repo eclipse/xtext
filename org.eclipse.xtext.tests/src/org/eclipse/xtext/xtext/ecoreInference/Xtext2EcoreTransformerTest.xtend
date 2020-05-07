@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -54,6 +54,7 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	 * @author Dennis Hübner - Initial contribution and API
 	 */
 	@FinalFieldsConstructor
+	@Deprecated
 	private static final class MockedXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
 		int called = 0
 		val GeneratedMetamodel testMetamodel
@@ -1283,7 +1284,7 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertTrue(resource.errors.isEmpty)
 	}
 
-	@Test def void testPostProcessorHook() throws Exception {
+	@Deprecated @Test def void testPostProcessorHook() throws Exception {
 		val xtextGrammar = '''grammar test with org.eclipse.xtext.common.Terminals import 'http://www.eclipse.org/emf/2002/Ecore' as ecore  generate test 'http://test' MyRule: myFeature=INT;'''
 		val grammar = getModel(xtextGrammar) as Grammar
 		val transformer = new Xtext2EcoreTransformer(grammar)
