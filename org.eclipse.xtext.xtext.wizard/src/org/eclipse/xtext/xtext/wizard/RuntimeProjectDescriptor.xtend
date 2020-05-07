@@ -115,8 +115,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			"org.eclipse.emf.mwe2.lib",
 			"org.objectweb.asm",
 			"org.apache.commons.logging", 
-			"org.apache.log4j",
-			"com.ibm.icu"
+			"org.apache.log4j"
 		)
 		if (isFromExistingEcoreModels) {
 			if (config.ecore2Xtext.EPackageInfos.exists[genmodelURI.fileExtension == "xcore"]) {
