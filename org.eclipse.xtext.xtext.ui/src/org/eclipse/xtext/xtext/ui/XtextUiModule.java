@@ -33,8 +33,6 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
-import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
-import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.FilterTerminalRulesContribution;
@@ -132,10 +130,12 @@ public class XtextUiModule extends AbstractXtextUiModule {
 				.to(FilterTerminalRulesContribution.class);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
 		try {
 			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
-			binder.bind(IXtext2EcorePostProcessor.class).to(ProjectAwareXtendXtext2EcorePostProcessor.class);
+			binder.bind(org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor.class)
+				.to(org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor.class);
 		} catch (ClassNotFoundException e) {
 		}
 	}

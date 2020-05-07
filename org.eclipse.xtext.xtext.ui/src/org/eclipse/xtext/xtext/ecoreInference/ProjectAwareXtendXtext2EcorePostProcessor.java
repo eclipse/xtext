@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Michael Clay and others.
+ * Copyright (c) 2008, 2020 Michael Clay and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -44,8 +44,10 @@ import com.google.common.collect.Lists;
  * 
  * @author szarnekow
  * @author Dennis Huebner
+ * @deprecated This class depends on Xpand/Xtend(1) which is dead as a mouse. So don't use this post processor. Switch to a manually maintained metamodel instead.
  */
 @SuppressWarnings("restriction")
+@Deprecated
 public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcorePostProcessor implements
 		IResourceChangeListener {
 
