@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -73,7 +73,6 @@ public abstract class AbstractPluginProjectCreator extends AbstractProjectCreato
      */
 	protected List<String> getRequiredBundles() {
 		return Lists.newArrayList(
-			"com.ibm.icu",
 			"org.eclipse.xtext", 
 			"org.eclipse.xtext.xtext.generator",
 			"de.itemis.xtext.antlr;resolution:=optional",
