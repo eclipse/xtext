@@ -81,6 +81,7 @@ public class Xtext2EcoreTransformer {
 	private Map<String, EPackage> generatedEPackages;
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
+	@SuppressWarnings("deprecation")
 	private IXtext2EcorePostProcessor postProcessor;
 
 	public Xtext2EcoreTransformer(Grammar grammar) {
@@ -102,6 +103,7 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
+	@Deprecated
 	public void setPostProcessor(IXtext2EcorePostProcessor postProcessor) {
 		this.postProcessor = postProcessor;
 	}
@@ -1072,6 +1074,7 @@ public class Xtext2EcoreTransformer {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void postProcessGeneratedPackages() {
 		if (postProcessor != null) {
 			final Iterable<GeneratedMetamodel> generatedMetamodels = Iterables.filter(grammar

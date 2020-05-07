@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -39,7 +39,10 @@ import org.eclipse.xtext.util.Strings;
  * 
  * @author Knut Wannheden - Initial contribution and API
  * @author Michael Clay
+ * 
+ * @deprecated This class depends on Xpand/Xtend(1) which is dead as a mouse. So don't use this post processor. Switch to a manually maintained metamodel instead.
  */
+@Deprecated
 public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
 
 	private static final Logger logger = Logger.getLogger(XtendXtext2EcorePostProcessor.class);
