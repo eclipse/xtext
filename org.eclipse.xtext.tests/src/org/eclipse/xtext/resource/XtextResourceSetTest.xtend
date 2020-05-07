@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,72 +9,11 @@
 package org.eclipse.xtext.resource
 
 import java.io.File
-import java.io.IOException
-import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.ResourceLocator
-
-/**
- * @author Sven Efftinge - Initial contribution and API
- */
-abstract class AbstractResourceSetTest {
-	
-	def protected ResourceSetImpl createEmptyResourceSet()
-	
-	@Test
-	def void testDemandLoadedResourcesAreInMap() {
-		val rs = createEmptyResourceSet
-		val Resource.Factory nullFactory = [ uri | 
-			val result = new NullResource
-			result.URI = uri
-			result
-		]
-		rs.resourceFactoryRegistry.extensionToFactoryMap.put('xmi', nullFactory)
-		assertEquals(0, rs.URIResourceMap.size)
-		val uri = URI.createURI('file:/does/not/exist.xmi')
-		val demandLoaded = rs.getResource(uri, true)
-		assertNotNull(demandLoaded)
-		val second = rs.getResource(uri, true)
-		assertSame(demandLoaded, second)
-		
-		assertEquals(1, rs.URIResourceMap.size)
-	}
-	
-	@Test
-	def void testResourceLocatorIsUsed() {
-		val rs = createEmptyResourceSet
-		
-		val resource = new XtextResource
-		resource.URI = URI.createFileURI(new File('foo').absolutePath)
-		
-		// resource locators register themselves on the resource set as a side effect in their constructor
-		new ResourceLocator(rs) {
-			override getResource(URI uri, boolean loadOnDemand) {
-				if (uri == resource.URI) {
-					return resource;
-				}
-				throw new IllegalArgumentException(uri.toString)
-			}
-		}
-		assertSame(resource, rs.getResource(resource.URI, true))
-		assertTrue(rs.resources.isEmpty)
-		assertNull(resource.resourceSet)
-		
-		try {
-			rs.getResource(resource.URI.appendSegment("doesNotExist"), true)
-			fail()
-		} catch(IllegalArgumentException e) {
-			assertTrue(e.message.endsWith("doesNotExist"))
-		}
-	}
-	
-}
 
 abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 	
@@ -318,30 +257,6 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertTrue(resource.eAdapters.empty)
 		assertEquals(0, rs.URIResourceMap.size)
 	}
-}
-
-class NullResource extends ResourceImpl {
-	
-	override load(Map<? extends Object,? extends Object> options) throws IOException {
-		// don't try to load me
-	}
-	
-}
-
-class ResourceSetTest extends AbstractResourceSetTest {
-	
-	override protected createEmptyResourceSet() {
-		return new ResourceSetImpl => [ URIResourceMap = newHashMap ]
-	}
-	
-}
-
-class XtextResourceSetTest extends AbstractXtextResourceSetTest {
-	
-	override protected createEmptyResourceSet() {
-		new XtextResourceSet
-	}
-	
 }
 
 class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,8 +24,8 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 				package -> package [[0, 0] .. [0, 0]]
 				type -> type [[0, 0] .. [0, 0]]
 				Sample Snippet -> type ${1|A,B,C|} {
-				                
-				            } [[0, 0] .. [0, 0]]
+				    
+				} [[0, 0] .. [0, 0]]
 			'''
 		]
 	}
@@ -124,8 +124,8 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
                (Keyword) package -> package [[1, 0] .. [1, 0]]
                (Keyword) type -> type [[1, 0] .. [1, 0]]
                (Snippet|Snippet) Sample Snippet -> type ${1|A,B,C|} {
-                               
-                           } [[1, 0] .. [1, 0]]
+                   
+               } [[1, 0] .. [1, 0]]
             '''
         ]
         withKind = false

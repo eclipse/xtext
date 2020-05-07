@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -62,9 +62,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       _builder.append("Sample Snippet -> type ${1|A,B,C|} {");
       _builder.newLine();
-      _builder.append("                ");
+      _builder.append("    ");
       _builder.newLine();
-      _builder.append("            ");
       _builder.append("} [[0, 0] .. [0, 0]]");
       _builder.newLine();
       it.setExpectedCompletionItems(_builder.toString());
@@ -212,9 +211,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("(Snippet|Snippet) Sample Snippet -> type ${1|A,B,C|} {");
       _builder_1.newLine();
-      _builder_1.append("                ");
+      _builder_1.append("    ");
       _builder_1.newLine();
-      _builder_1.append("            ");
       _builder_1.append("} [[1, 0] .. [1, 0]]");
       _builder_1.newLine();
       it.setExpectedCompletionItems(_builder_1.toString());
