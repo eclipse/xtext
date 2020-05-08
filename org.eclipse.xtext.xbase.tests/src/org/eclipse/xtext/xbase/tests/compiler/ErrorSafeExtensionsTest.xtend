@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler
 
 import com.google.inject.Inject
@@ -29,7 +37,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	@Inject extension ErrorSafeExtensions 
 
 	@Test
-	def testAppendForEachSafely() {
+	def testAppendForEachSafely() throws Exception {
 		val e = validatedExpression('{ val x=42 val y=42 }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertFalse(e.expressions.get(0).hasErrors())
@@ -39,7 +47,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testAppendForEachSafely_0() {
+	def testAppendForEachSafely_0() throws Exception {
 		val e = validatedExpression('{ error val x=42 val y=42 }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertTrue(e.expressions.get(0).hasErrors())
@@ -50,7 +58,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testAppendForEachSafely_1() {
+	def testAppendForEachSafely_1() throws Exception {
 		val e = validatedExpression('{ val x=42 error val y=42 }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertFalse(e.expressions.get(0).hasErrors())
@@ -61,7 +69,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testAppendForEachSafely_2() {
+	def testAppendForEachSafely_2() throws Exception {
 		val e = validatedExpression('{ val x=42 val y=42 error }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertFalse(e.expressions.get(0).hasErrors())
@@ -72,7 +80,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testAppendForEachSafely_3() {
+	def testAppendForEachSafely_3() throws Exception {
 		val e = validatedExpression('{ error }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertTrue(e.expressions.get(0).hasErrors())
@@ -81,7 +89,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testAppendForEachSafely_4() {
+	def testAppendForEachSafely_4() throws Exception {
 		val e = validatedExpression('{ error1 error2 }') as XBlockExpression
 		val app = createTreeAppendable(e)
 		assertTrue(e.expressions.get(0).hasErrors())
@@ -91,7 +99,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testSerializeSafely() {
+	def testSerializeSafely() throws Exception {
 		val e = validatedExpression('null as Unresolved') as XCastedExpression
 		val app = createTreeAppendable(e)
 		assertTrue(e.hasErrors())
@@ -100,7 +108,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testSerializeSafely_1() {
+	def testSerializeSafely_1() throws Exception {
 		val e = validatedExpression('null as Unresolved') as XCastedExpression
 		val app = createTreeAppendable(e)
 		assertTrue(e.hasErrors())
@@ -109,7 +117,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def testSerializeSafely_2() {
+	def testSerializeSafely_2() throws Exception {
 		val e = validatedExpression('null as String') as XCastedExpression
 		val app = createTreeAppendable(e)
 		assertFalse(e.hasErrors())
@@ -118,7 +126,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	
-	def protected validatedExpression(CharSequence model) {
+	def protected validatedExpression(CharSequence model) throws Exception {
 		val expression = expression(model, false)
 		issueProviderFactory.attachData(expression.eResource)
 		expression

@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import com.google.inject.Inject;
@@ -15,7 +23,6 @@ import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -42,7 +49,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   private ErrorSafeExtensions _errorSafeExtensions;
   
   @Test
-  public void testAppendForEachSafely() {
+  public void testAppendForEachSafely() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -56,7 +63,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAppendForEachSafely_0() {
+  public void testAppendForEachSafely_0() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ error val x=42 val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -71,7 +78,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAppendForEachSafely_1() {
+  public void testAppendForEachSafely_1() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 error val y=42 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -86,7 +93,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAppendForEachSafely_2() {
+  public void testAppendForEachSafely_2() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ val x=42 val y=42 error }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -101,7 +108,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAppendForEachSafely_3() {
+  public void testAppendForEachSafely_3() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ error }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -114,7 +121,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testAppendForEachSafely_4() {
+  public void testAppendForEachSafely_4() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("{ error1 error2 }");
     final XBlockExpression e = ((XBlockExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -128,7 +135,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testSerializeSafely() {
+  public void testSerializeSafely() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("null as Unresolved");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -138,7 +145,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testSerializeSafely_1() {
+  public void testSerializeSafely_1() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("null as Unresolved");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -148,7 +155,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testSerializeSafely_2() {
+  public void testSerializeSafely_2() throws Exception {
     XExpression _validatedExpression = this.validatedExpression("null as String");
     final XCastedExpression e = ((XCastedExpression) _validatedExpression);
     final TreeAppendable app = this.createTreeAppendable(e);
@@ -157,18 +164,14 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     Assert.assertEquals("String", app.getContent());
   }
   
-  protected XExpression validatedExpression(final CharSequence model) {
-    try {
-      XExpression _xblockexpression = null;
-      {
-        final XExpression expression = this.expression(model, false);
-        this.issueProviderFactory.attachData(expression.eResource());
-        _xblockexpression = expression;
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  protected XExpression validatedExpression(final CharSequence model) throws Exception {
+    XExpression _xblockexpression = null;
+    {
+      final XExpression expression = this.expression(model, false);
+      this.issueProviderFactory.attachData(expression.eResource());
+      _xblockexpression = expression;
     }
+    return _xblockexpression;
   }
   
   protected TreeAppendable createTreeAppendable(final EObject source) {

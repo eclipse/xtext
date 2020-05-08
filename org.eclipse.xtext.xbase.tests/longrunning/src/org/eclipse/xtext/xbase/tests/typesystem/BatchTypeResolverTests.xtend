@@ -128,20 +128,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 /**
  * @author Sebastian Zarnekow
  */
-class BatchTypeResolverTest extends AbstractBatchTypeResolverTest {
-	
-	@Inject
-	IBatchTypeResolver typeResolver;
-	
-	override getTypeResolver() {
-		typeResolver
-	}
-	
-}
-
-/**
- * @author Sebastian Zarnekow
- */
 class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 	
 	@Inject
