@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -68,7 +68,6 @@ public class QuickfixTest extends AbstractQuickfixTest {
     _builder_1.append("\t");
     _builder_1.append("title : String");
     _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
     AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Uncapitalize name", "Uncapitalize name of \'Title\'", _builder_1.toString());
@@ -96,7 +95,6 @@ public class QuickfixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("op setTitle(String title) {}");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

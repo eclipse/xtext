@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -54,7 +54,6 @@ class QuickfixTest extends AbstractQuickfixTest {
 		'''.testQuickfixesOn(INVALID_FEATURE_NAME, new Quickfix("Uncapitalize name", "Uncapitalize name of 'Title'", '''
 			entity Blog {
 				title : String
-			
 			}
 		'''))
 	}
@@ -69,7 +68,6 @@ class QuickfixTest extends AbstractQuickfixTest {
 			entity Blog {
 				title : String
 				op setTitle(String title) {}
-			
 			}
 		'''))
 	}
