@@ -41,9 +41,9 @@ h3 {
 .container {
 	display: block;
 	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
 	width: 640px;
 	margin: 20px;
 }
@@ -51,9 +51,9 @@ h3 {
 .container-left {
 	display: block;
 	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
 	width: 450px;
 	margin: 20px;
 }
@@ -61,9 +61,9 @@ h3 {
 .container-right {
 	display: block;
 	position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 480px;
+	top: 0;
+	bottom: 0;
+	left: 480px;
 	width: 450px;
 	margin: 20px;
 }
@@ -71,10 +71,10 @@ h3 {
 .xtext-editor {
 	display: block;
 	position: absolute;
-    top: 0;
-    bottom: 30px;
-    left: 0;
-    right: 0;
+	top: 0;
+	bottom: 30px;
+	left: 0;
+	right: 0;
 	padding: 4px;
 	border: 1px solid #aaa;
 }
@@ -91,10 +91,10 @@ h3 {
 
 .status-wrapper {
 	display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	height: 20px;
 	margin-top: 10px;
 }
@@ -111,9 +111,9 @@ h3 {
 #generator-result {
 	display: block;
 	position: absolute;
-    top: 20px;
-    bottom: 50px;
-    left: 680px;
+	top: 20px;
+	bottom: 50px;
+	left: 680px;
 	right: 20px;
 }
 
