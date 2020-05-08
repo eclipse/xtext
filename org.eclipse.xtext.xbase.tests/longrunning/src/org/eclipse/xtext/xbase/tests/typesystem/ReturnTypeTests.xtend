@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XClosure
@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.junit.Test
-import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -397,20 +396,6 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		val typeResolution = typeResolver.resolveTypes(proxy)
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
-	}
-	
-}
-
-/**
- * @author Sebastian Zarnekow
- */
-class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
-	
-	@Inject
-	IBatchTypeResolver typeResolver;
-	
-	override getTypeResolver() {
-		typeResolver
 	}
 	
 }
