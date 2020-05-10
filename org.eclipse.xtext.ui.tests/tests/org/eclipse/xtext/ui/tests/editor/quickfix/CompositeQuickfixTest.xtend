@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,19 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix
 
-import org.junit.Test
 import org.eclipse.core.resources.IMarker
-import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.ui.ide.IDE
+import org.eclipse.xtext.ui.editor.XtextEditor
+import org.junit.Test
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 class CompositeQuickfixTest extends AbstractQuickfixTest {
-	
+
 	@Test
 	def void testSimpleFixMultipleMarkers() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
@@ -47,10 +47,10 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			(no markers found)
 		''')
 	}
-	
+
 	@Test
 	def void testSimpleSingleMarker() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
@@ -77,15 +77,16 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			0: message=multiFixableIssue2
 		''')
 	}
-	
+
 	@Test
 	def void testSimpleQuickAssist() throws Exception {
-		val editor = createGeneralXtextProject("myProject").newXtextEditor("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
 			Bor { }
 		''')
+		val editor = resource.openEditor
 		val proposals = computeQuickAssistProposals(editor, 1)
 		assertEquals('''Multi fix 2'''.toString, proposals.map[displayString].join("\n"))
 		proposals.head.apply(editor.document)
@@ -96,11 +97,10 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			Bor { }
 		'''.toString, editor.document.get)
 	}
-	
-	
+
 	@Test
 	def void testMultiFixMultipleMarkers() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 			b {	badname { baz {} } }
@@ -128,7 +128,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testMultiFixSingleMarker() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 		''')
@@ -149,13 +149,14 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			0: message=badNameInSubelements
 		''')
 	}
-	
+
 	@Test
 	def void testMultiQuickAssist() throws Exception {
-		val editor = createGeneralXtextProject("myProject").newXtextEditor("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 		''')
+		val editor = resource.openEditor
 		val proposals = computeQuickAssistProposals(editor, 1)
 		assertEquals('''Fix Bad Names'''.toString, proposals.map[displayString].join("\n"))
 		proposals.head.apply(editor.document)
@@ -164,13 +165,14 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			a {	badname { bar {} } }
 		'''.toString, editor.document.get)
 	}
-	
+
 	@Test
 	def void testNoCrossRef() throws Exception {
-		val editor = createGeneralXtextProject("myProject").newXtextEditor("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			fixable_a {	ref fixable_b }
 			fixable_b {	ref fixable_a }
 		''')
+		val editor = resource.openEditor
 		val proposals = computeQuickAssistProposals(editor, 1)
 		assertEquals('''rename fixable'''.toString, proposals.map[displayString].join("\n"))
 		proposals.head.apply(editor.document)
@@ -179,13 +181,13 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			fixable_b {	ref fixable_a }
 		'''.toString, editor.document.get)
 	}
-	
+
 	@Test
 	def void testTextualMultiModification() {
 		// we test two things here:
 		// - TextualMultiModifications actually work
 		// - TextualMultiModificationWorkbenchMarkerResolutionAdapter sorts correctly
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			lowercase_a {}
 			lowercase_b {}
 			lowercase_c {}

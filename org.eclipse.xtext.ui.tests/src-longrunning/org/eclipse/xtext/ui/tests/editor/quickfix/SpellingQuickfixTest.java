@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import static com.google.common.collect.Iterables.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
@@ -33,7 +34,7 @@ import com.google.common.base.Predicate;
 public class SpellingQuickfixTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "spellingquickfixtest";
-	private static final String MODEL_FILE = "spelling.quickfixcrossreftestlanguage";
+	private static final String MODEL_FILE = "spelling";
 
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT = "Foo {  } \n // Single Line Komment Spelling Error";
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_ML_COLMMENT = "Foo {  } \n /* Multi Line \n Komment Spelling Error */";
@@ -44,7 +45,8 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
+		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
+		xtextEditor = openEditor(dslFile);
 	}
 
 	@Test

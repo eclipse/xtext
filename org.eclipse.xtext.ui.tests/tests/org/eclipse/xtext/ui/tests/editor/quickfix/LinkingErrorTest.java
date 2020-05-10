@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -31,14 +32,13 @@ import org.junit.Test;
 public class LinkingErrorTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "quickfixtest";
-	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
+	private static final String MODEL_FILE = "test";
 	private static final String MODEL_WITH_LINKING_ERROR = "Foo { ref Bor }\n" + "Bar { }\n Bar1{} Bar2{} Bar3{} Bar4{} Bar5{}";
 	private static final String MODEL_WITH_LINKING_ERROR_361509 = "^ref { ref raf }\n";
 	
-	private XtextEditor xtextEditor;
-
 	@Test public void testQuickfixTurnaround() throws Exception {
-		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		XtextEditor xtextEditor = openEditor(dslFile);
 		IXtextDocument document = xtextEditor.getDocument();
 
 		List<Issue> issues = getIssues(document);
@@ -57,7 +57,8 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	}
 	
 	@Test public void testBug361509() throws Exception {
-		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR_361509);
+		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR_361509);
+		XtextEditor xtextEditor = openEditor(dslFile);
 		IXtextDocument document = xtextEditor.getDocument();
 
 		List<Issue> issues = getIssues(document);
@@ -77,7 +78,8 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	}
 
 	@Test public void testSemanticIssueResolution() throws Exception {
-		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		XtextEditor xtextEditor = openEditor(dslFile);
 		URI uriToProblem = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
 			@Override
 			public URI exec(XtextResource state) throws Exception {
@@ -99,6 +101,4 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 		List<Issue> issues = getIssues(xtextEditor.getDocument());
 		assertTrue(issues.isEmpty());
 	}
-
-	
 }

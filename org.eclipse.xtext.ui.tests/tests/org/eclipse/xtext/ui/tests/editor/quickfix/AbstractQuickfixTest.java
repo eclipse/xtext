@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,40 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
 import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
-import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
+import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -57,7 +51,7 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
+public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 
 	private static boolean WAS_AUTOBUILD;
 
@@ -70,48 +64,27 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	public static void afterClass() throws Exception {
 		IResourcesSetupUtil.setAutobuild(WAS_AUTOBUILD);
 	}
-
-	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException, PartInitException {
-		IJavaProject javaProject = JavaProjectSetupUtil.createJavaProject(projectName);
-		IFile file = createFile(javaProject.getProject(), modelFile, model);
-		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
-		return xtextEditor;
-	}
-
-	protected XtextEditor newXtextEditor(IProject project, String modelFile, String model) throws CoreException, PartInitException {
-		IFile file = createFile(project, modelFile, model);
-		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
-		return xtextEditor;
-	}
-
-	protected IFile createFile(IProject project, String modelFile, String model) throws CoreException {
-		IFile file = project.getFile(modelFile);
-		if (file.exists()) {
-			file.delete(true, null);
-		}
-		file.create(new StringInputStream(model), true, null);
-		file.refreshLocal(IResource.DEPTH_ONE, null);
-		return file;
-	}
-
-	protected IProject createGeneralXtextProject(String name) {
-		IProject project;
-		try {
-			project = IResourcesSetupUtil.createProject(name);
-			IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
-			IResourcesSetupUtil.addBuilder(project, XtextProjectHelper.BUILDER_ID);
-			return project;
-		} catch (InvocationTargetException | CoreException | InterruptedException e) {
-			Exceptions.sneakyThrow(e);
-			return null;
-		}
-	}
 	
+	protected IFile dslFile(String projectName, String fileName, CharSequence content) {
+		return dslFile(projectName, fileName, getFileExtension(), content);
+	}
+
+	@Override
+	protected String getEditorId() {
+		XtextEditorInfo editorInfo = getInjector().getInstance(XtextEditorInfo.class);
+		return editorInfo.getEditorId();
+	}
+
+	protected String getFileExtension() {
+		FileExtensionProvider fileExtensionProvider = getInjector().getInstance(FileExtensionProvider.class);
+		return fileExtensionProvider.getPrimaryFileExtension();
+	}
+
 	protected ICompletionProposal[] computeQuickAssistProposals(XtextEditor editor, String text) {
 		int idx = editor.getDocument().get().indexOf(text);
 		return computeQuickAssistProposals(editor, idx);
 	}
-	
+
 	protected ICompletionProposal[] computeQuickAssistProposals(XtextEditor editor, int offset) {
 		IResourcesSetupUtil.waitForBuild();
 		XtextSourceViewer sourceViewer = (XtextSourceViewer) editor.getInternalSourceViewer();

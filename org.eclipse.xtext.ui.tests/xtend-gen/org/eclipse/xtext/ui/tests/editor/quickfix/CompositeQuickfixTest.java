@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ide.IDE;
@@ -34,7 +33,6 @@ import org.junit.Test;
 public class CompositeQuickfixTest extends AbstractQuickfixTest {
   @Test
   public void testSimpleFixMultipleMarkers() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"bad doc\"");
     _builder.newLine();
@@ -44,7 +42,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"bad doc\">0>");
@@ -81,7 +79,6 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testSimpleSingleMarker() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"bad doc\"");
     _builder.newLine();
@@ -91,7 +88,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"bad doc\">0>");
@@ -137,7 +134,6 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testSimpleQuickAssist() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"bad doc\"");
     _builder.newLine();
@@ -147,7 +143,8 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final XtextEditor editor = this.newXtextEditor(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Multi fix 2");
@@ -170,7 +167,6 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testMultiFixMultipleMarkers() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("c {\tbadname { foo {} } }");
     _builder.newLine();
@@ -178,7 +174,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("b {\tbadname { baz {} } }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<c>0> {\tbadname { foo {} } }");
@@ -213,13 +209,12 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testMultiFixSingleMarker() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("c {\tbadname { foo {} } }");
     _builder.newLine();
     _builder.append("a {\tbadname { bar {} } }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<c>0> {\tbadname { foo {} } }");
@@ -257,13 +252,13 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testMultiQuickAssist() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("c {\tbadname { foo {} } }");
     _builder.newLine();
     _builder.append("a {\tbadname { bar {} } }");
     _builder.newLine();
-    final XtextEditor editor = this.newXtextEditor(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Fix Bad Names");
@@ -282,13 +277,13 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   
   @Test
   public void testNoCrossRef() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("fixable_a {\tref fixable_b }");
     _builder.newLine();
     _builder.append("fixable_b {\tref fixable_a }");
     _builder.newLine();
-    final XtextEditor editor = this.newXtextEditor(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("rename fixable");
@@ -308,7 +303,6 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
   @Test
   public void testTextualMultiModification() {
     try {
-      IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("lowercase_a {}");
       _builder.newLine();
@@ -322,7 +316,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
       _builder.newLine();
       _builder.append("lowercase_f {}");
       _builder.newLine();
-      final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+      final IFile resource = this.dslFile("myProject", "test", _builder);
       IEditorPart _openEditor = IDE.openEditor(AbstractWorkbenchTest.getActivePage(), resource);
       final XtextEditor xtextEditor = ((XtextEditor) _openEditor);
       final IMarker[] markers = this.getMarkers(resource);

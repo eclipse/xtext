@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,7 +18,7 @@ class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testFixMultipleMarkers() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
@@ -45,7 +45,7 @@ class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testFixSingleMarker() throws Exception {
-		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+		val resource = dslFile("myProject", "test", '''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
@@ -72,11 +72,12 @@ class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testQuickAssist() throws Exception {
-		val editor = createGeneralXtextProject("myProject").newXtextEditor("test.quickfixcrossreftestlanguage", '''
+		val dslFile = dslFile("myProject", "test", '''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
 		''')
+		val editor = dslFile.openEditor
 		val proposals = computeQuickAssistProposals(editor, 1)
 		assertEquals('''Multi fix'''.toString, proposals.map[displayString].join("\n"))
 		proposals.head.apply(editor.document)

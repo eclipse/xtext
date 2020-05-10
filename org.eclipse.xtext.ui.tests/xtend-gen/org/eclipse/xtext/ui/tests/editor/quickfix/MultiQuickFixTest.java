@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -31,7 +30,6 @@ import org.junit.Test;
 public class MultiQuickFixTest extends AbstractQuickfixTest {
   @Test
   public void testFixMultipleMarkers() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"no doc\"");
     _builder.newLine();
@@ -39,7 +37,7 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"no doc\">0>");
@@ -72,7 +70,6 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
   
   @Test
   public void testFixSingleMarker() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"no doc\"");
     _builder.newLine();
@@ -80,7 +77,7 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile resource = this.dslFile("myProject", "test", _builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"no doc\">0>");
@@ -122,7 +119,6 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
   
   @Test
   public void testQuickAssist() throws Exception {
-    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"no doc\"");
     _builder.newLine();
@@ -130,7 +126,8 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final XtextEditor editor = this.newXtextEditor(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final IFile dslFile = this.dslFile("myProject", "test", _builder);
+    final XtextEditor editor = this.openEditor(dslFile);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Multi fix");

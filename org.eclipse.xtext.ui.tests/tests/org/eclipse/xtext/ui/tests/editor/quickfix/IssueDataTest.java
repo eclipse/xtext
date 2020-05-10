@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -40,13 +41,13 @@ import com.google.common.collect.Lists;
 public class IssueDataTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "quickfixtest";
-	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
+	private static final String MODEL_FILE = "test";
 	private static final String PREFIX = "//irrelevant\n\t\t";
 	private static final String MODEL_WITH_LINKING_ERROR = PREFIX + QuickfixCrossrefTestLanguageValidator.TRIGGER_VALIDATION_ISSUE + "{}";
 
-
 	@Test public void testIssueData() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
+		XtextEditor xtextEditor = openEditor(dslFile);
 		IXtextDocument document = xtextEditor.getDocument();
 		IResource file = xtextEditor.getResource();
 		List<Issue> issues = getIssues(document);
