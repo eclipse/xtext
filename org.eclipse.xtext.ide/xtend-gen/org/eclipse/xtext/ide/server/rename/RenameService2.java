@@ -39,6 +39,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.RenameChange;
@@ -88,6 +89,9 @@ public class RenameService2 implements IRenameService2 {
   @Inject
   private TokenUtil tokenUtil;
   
+  @Inject
+  private IValueConverterService valueConverterService;
+  
   private Function<EObject, String> attributeResolver = SimpleAttributeResolver.<EObject, String>newResolver(String.class, "name");
   
   @Override
@@ -133,11 +137,11 @@ public class RenameService2 implements IRenameService2 {
             }
           }
           if (((element == null) || element.eIsProxy())) {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("No element found at ");
-            String _positionFragment = this.toPositionFragment(position_1, uri);
-            _builder.append(_positionFragment);
-            issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
+            StringConcatenation _builder_1 = new StringConcatenation();
+            _builder_1.append("No element found at ");
+            String _positionFragment_1 = this.toPositionFragment(position_1, uri);
+            _builder_1.append(_positionFragment_1);
+            issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, _builder_1.toString());
           } else {
             final IResourceServiceProvider services = this.serviceProviderRegistry.getResourceServiceProvider(element.eResource().getURI());
             final IChangeSerializer changeSerializer = services.<IChangeSerializer>get(IChangeSerializer.class);
@@ -279,14 +283,11 @@ public class RenameService2 implements IRenameService2 {
             if (((element != null) && (!element.eIsProxy()))) {
               final ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset);
               if (((leaf != null) && this.isIdentifier(leaf))) {
-                final String leafText = NodeModelUtils.getTokenText(leaf);
+                final String leafText = this.getConvertedValue(leaf.getGrammarElement(), leaf);
                 final String elementName = this.getElementName(element);
                 if ((((!StringExtensions.isNullOrEmpty(leafText)) && (!StringExtensions.isNullOrEmpty(elementName))) && Objects.equal(leafText, elementName))) {
                   final Position start = document.getPosition(leaf.getOffset());
-                  int _offset = leaf.getOffset();
-                  int _length = elementName.length();
-                  int _plus = (_offset + _length);
-                  final Position end = document.getPosition(_plus);
+                  final Position end = document.getPosition(leaf.getEndOffset());
                   Range _range = new Range(start, end);
                   return Either.<Range, PrepareRenameResult>forLeft(_range);
                 }
@@ -307,19 +308,38 @@ public class RenameService2 implements IRenameService2 {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("No element found at ");
-      String _positionFragment = this.toPositionFragment(caretPosition, uri);
-      _builder_1.append(_positionFragment);
-      RenameService2.LOG.trace(_builder_1);
-    } else {
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("Loaded resource is not an XtextResource. URI: ");
-      URI _uRI = resource.getURI();
-      _builder_2.append(_uRI);
+      _builder_2.append("No element found at ");
+      String _positionFragment_1 = this.toPositionFragment(caretPosition, uri);
+      _builder_2.append(_positionFragment_1);
       RenameService2.LOG.trace(_builder_2);
+    } else {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Loaded resource is not an XtextResource. URI: ");
+      URI _uRI = resource.getURI();
+      _builder_3.append(_uRI);
+      RenameService2.LOG.trace(_builder_3);
     }
     return null;
+  }
+  
+  protected String getConvertedValue(final EObject grammarElement, final ILeafNode leaf) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (grammarElement instanceof RuleCall) {
+      _matched=true;
+      _switchResult = this.valueConverterService.toValue(leaf.getText(), ((RuleCall)grammarElement).getRule().getName(), leaf).toString();
+    }
+    if (!_matched) {
+      if (grammarElement instanceof CrossReference) {
+        _matched=true;
+        _switchResult = this.getConvertedValue(((CrossReference)grammarElement).getTerminal(), leaf);
+      }
+    }
+    if (!_matched) {
+      _switchResult = leaf.getText();
+    }
+    return _switchResult;
   }
   
   /**
@@ -409,6 +429,11 @@ public class RenameService2 implements IRenameService2 {
   @Pure
   protected TokenUtil getTokenUtil() {
     return this.tokenUtil;
+  }
+  
+  @Pure
+  protected IValueConverterService getValueConverterService() {
+    return this.valueConverterService;
   }
   
   @Pure

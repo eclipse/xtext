@@ -28,6 +28,7 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy2
 import org.eclipse.xtext.ide.refactoring.RenameChange
 import org.eclipse.xtext.ide.refactoring.RenameContext
@@ -65,6 +66,8 @@ class RenameService2 implements IRenameService2 {
 
 	@Inject TokenUtil tokenUtil
 
+	@Inject IValueConverterService valueConverterService 
+	
 	Function<EObject, String> attributeResolver = SimpleAttributeResolver.newResolver(String, 'name')
 
 	override rename(Options options) {
@@ -197,11 +200,11 @@ class RenameService2 implements IRenameService2 {
 					if (element !== null && !element.eIsProxy) {
 						val leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset)
 						if (leaf !== null && leaf.isIdentifier) {
-							val leafText = NodeModelUtils.getTokenText(leaf)
+							val leafText = getConvertedValue(leaf.grammarElement, leaf)
 							val elementName = element.elementName
 							if (!leafText.nullOrEmpty && !elementName.nullOrEmpty && leafText == elementName) {
 								val start = document.getPosition(leaf.offset)
-								val end = document.getPosition(leaf.offset + elementName.length)
+								val end = document.getPosition(leaf.endOffset)
 								return Either.forLeft(new Range(start, end))
 							}
 						}
@@ -217,6 +220,14 @@ class RenameService2 implements IRenameService2 {
 			LOG.trace('''Loaded resource is not an XtextResource. URI: «resource.URI»''')
 		}
 		return null
+	}
+
+	protected def String getConvertedValue(EObject grammarElement, ILeafNode leaf) {
+		switch (grammarElement) {
+			RuleCall: valueConverterService.toValue(leaf.text, grammarElement.rule.name, leaf).toString()
+			CrossReference: getConvertedValue(grammarElement.terminal, leaf)
+			default: leaf.text
+		} 
 	}
 
 	/**
