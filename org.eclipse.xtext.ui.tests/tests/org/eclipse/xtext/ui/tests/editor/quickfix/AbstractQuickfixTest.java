@@ -22,36 +22,34 @@ import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
 import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.ui.IMarkerResolution;
-import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractQuickfixTest extends AbstractEditorTest {
+
+	@Inject
+	protected MarkerResolutionGenerator markerResolutionGenerator;
+
+	@Inject
+	protected FileExtensionProvider fileExtensionProvider;
 
 	private static boolean WAS_AUTOBUILD;
 
@@ -64,19 +62,20 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	public static void afterClass() throws Exception {
 		IResourcesSetupUtil.setAutobuild(WAS_AUTOBUILD);
 	}
-	
-	protected IFile dslFile(String projectName, String fileName, CharSequence content) {
-		return dslFile(projectName, fileName, getFileExtension(), content);
+
+	protected IFile dslFile(CharSequence content) {
+		return dslFile(getProjectName(), getFileName(), getFileExtension(), content);
 	}
 
-	@Override
-	protected String getEditorId() {
-		XtextEditorInfo editorInfo = getInjector().getInstance(XtextEditorInfo.class);
-		return editorInfo.getEditorId();
+	protected String getProjectName() {
+		return "QuickfixTestProject";
+	}
+
+	protected String getFileName() {
+		return "quickfix";
 	}
 
 	protected String getFileExtension() {
-		FileExtensionProvider fileExtensionProvider = getInjector().getInstance(FileExtensionProvider.class);
 		return fileExtensionProvider.getPrimaryFileExtension();
 	}
 
@@ -93,19 +92,6 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		ICompletionProposal[] quickAssistProposals = quickAssistProcessor
 				.computeQuickAssistProposals(new TextInvocationContext(sourceViewer, offset, -1));
 		return quickAssistProposals;
-	}
-
-	protected Injector getInjector() {
-		return TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
-	}
-
-	protected List<Issue> getIssues(IXtextDocument document) {
-		return document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
-			@Override
-			public List<Issue> exec(XtextResource state) throws Exception {
-				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL, null);
-			}
-		});
 	}
 
 	protected IMarker[] getMarkers(IFile file) {
@@ -129,9 +115,8 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	protected void applyQuickfixOnMultipleMarkers(IMarker[] markers) {
-		MarkerResolutionGenerator generator = getInjector().getInstance(MarkerResolutionGenerator.class);
 		IMarker primaryMarker = markers[0];
-		IMarkerResolution[] resolutions = generator.getResolutions(primaryMarker);
+		IMarkerResolution[] resolutions = markerResolutionGenerator.getResolutions(primaryMarker);
 		Assert.assertEquals(1, resolutions.length);
 		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolution);
 		WorkbenchMarkerResolution resolution = (WorkbenchMarkerResolution) resolutions[0];
@@ -147,8 +132,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	protected void applyQuickfixOnSingleMarkers(IMarker marker) {
-		IMarkerResolutionGenerator2 generator = getInjector().getInstance(MarkerResolutionGenerator.class);
-		IMarkerResolution[] resolutions = generator.getResolutions(marker);
+		IMarkerResolution[] resolutions = markerResolutionGenerator.getResolutions(marker);
 		Assert.assertEquals(1, resolutions.length);
 		IMarkerResolution resolution = resolutions[0];
 		resolution.run(marker);

@@ -13,8 +13,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.tests.editor.quickfix.AbstractQuickfixTest;
+import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -22,10 +25,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class MultiQuickFixTest extends AbstractQuickfixTest {
   @Test
@@ -37,7 +43,7 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"no doc\">0>");
@@ -77,7 +83,7 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"no doc\">0>");
@@ -126,7 +132,7 @@ public class MultiQuickFixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("\"no doc\" Bor { }");
     _builder.newLine();
-    final IFile dslFile = this.dslFile("myProject", "test", _builder);
+    final IFile dslFile = this.dslFile(_builder);
     final XtextEditor editor = this.openEditor(dslFile);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();

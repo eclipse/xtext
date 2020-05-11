@@ -10,17 +10,23 @@ package org.eclipse.xtext.ui.tests.editor.quickfix
 
 import org.eclipse.core.resources.IMarker
 import org.eclipse.ui.ide.IDE
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@RunWith(XtextRunner)
+@InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider)
 class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testSimpleFixMultipleMarkers() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
@@ -50,7 +56,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testSimpleSingleMarker() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
@@ -80,7 +86,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testSimpleQuickAssist() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			"bad doc"
 			Foo { ref Bor }
 			"bad doc"
@@ -100,7 +106,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testMultiFixMultipleMarkers() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 			b {	badname { baz {} } }
@@ -128,7 +134,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testMultiFixSingleMarker() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 		''')
@@ -152,7 +158,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testMultiQuickAssist() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			c {	badname { foo {} } }
 			a {	badname { bar {} } }
 		''')
@@ -168,7 +174,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testNoCrossRef() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			fixable_a {	ref fixable_b }
 			fixable_b {	ref fixable_a }
 		''')
@@ -187,7 +193,7 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 		// we test two things here:
 		// - TextualMultiModifications actually work
 		// - TextualMultiModificationWorkbenchMarkerResolutionAdapter sorts correctly
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			lowercase_a {}
 			lowercase_b {}
 			lowercase_c {}

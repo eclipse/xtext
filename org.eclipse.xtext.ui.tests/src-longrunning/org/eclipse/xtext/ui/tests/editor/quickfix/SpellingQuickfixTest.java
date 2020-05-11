@@ -21,20 +21,23 @@ import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.TextInvocationContext;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
+import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Predicate;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider.class)
 public class SpellingQuickfixTest extends AbstractQuickfixTest {
-
-	private static final String PROJECT_NAME = "spellingquickfixtest";
-	private static final String MODEL_FILE = "spelling";
 
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT = "Foo {  } \n // Single Line Komment Spelling Error";
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_ML_COLMMENT = "Foo {  } \n /* Multi Line \n Komment Spelling Error */";
@@ -45,7 +48,7 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		IFile dslFile = dslFile(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
+		IFile dslFile = dslFile(MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
 		xtextEditor = openEditor(dslFile);
 	}
 

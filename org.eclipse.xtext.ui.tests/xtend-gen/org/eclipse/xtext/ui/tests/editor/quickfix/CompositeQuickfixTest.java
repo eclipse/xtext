@@ -15,9 +15,12 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.tests.editor.quickfix.AbstractQuickfixTest;
+import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -25,10 +28,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompositeQuickfixTest extends AbstractQuickfixTest {
   @Test
@@ -42,7 +48,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"bad doc\">0>");
@@ -88,7 +94,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<\"bad doc\">0>");
@@ -143,7 +149,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("Bor { }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -174,7 +180,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("b {\tbadname { baz {} } }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<c>0> {\tbadname { foo {} } }");
@@ -214,7 +220,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("a {\tbadname { bar {} } }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final IMarker[] markers = this.getMarkers(resource);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("<0<c>0> {\tbadname { foo {} } }");
@@ -257,7 +263,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("a {\tbadname { bar {} } }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -282,7 +288,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder.newLine();
     _builder.append("fixable_b {\tref fixable_a }");
     _builder.newLine();
-    final IFile resource = this.dslFile("myProject", "test", _builder);
+    final IFile resource = this.dslFile(_builder);
     final XtextEditor editor = this.openEditor(resource);
     final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -316,7 +322,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
       _builder.newLine();
       _builder.append("lowercase_f {}");
       _builder.newLine();
-      final IFile resource = this.dslFile("myProject", "test", _builder);
+      final IFile resource = this.dslFile(_builder);
       IEditorPart _openEditor = IDE.openEditor(AbstractWorkbenchTest.getActivePage(), resource);
       final XtextEditor xtextEditor = ((XtextEditor) _openEditor);
       final IMarker[] markers = this.getMarkers(resource);

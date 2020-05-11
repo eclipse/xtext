@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -225,6 +226,18 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 				.collect(Collectors.toList());
 		assertEquals("There should be one '" + issueCode + "' validation issue!", 1, issueCandidates.size());
 		return issueCandidates.get(0);
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected List<Issue> getAllValidationIssues(IXtextDocument document) {
+		return document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
+			@Override
+			public List<Issue> exec(XtextResource state) throws Exception {
+				return resourceValidator.validate(state, CheckMode.ALL, null);
+			}
+		});
 	}
 
 	protected void assertIssueResolutionResult(String expectedResult, IssueResolution actualIssueResolution, String originalText) {

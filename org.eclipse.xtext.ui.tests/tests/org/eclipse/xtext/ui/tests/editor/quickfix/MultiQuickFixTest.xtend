@@ -9,16 +9,22 @@
 package org.eclipse.xtext.ui.tests.editor.quickfix
 
 import org.eclipse.core.resources.IMarker
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * @author dhuebner - Initial contribution and API
  */
+@RunWith(XtextRunner)
+@InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider)
 class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testFixMultipleMarkers() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
@@ -45,7 +51,7 @@ class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testFixSingleMarker() throws Exception {
-		val resource = dslFile("myProject", "test", '''
+		val resource = dslFile('''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
@@ -72,7 +78,7 @@ class MultiQuickFixTest extends AbstractQuickfixTest {
 
 	@Test
 	def void testQuickAssist() throws Exception {
-		val dslFile = dslFile("myProject", "test", '''
+		val dslFile = dslFile('''
 			"no doc"
 			Foo { ref Bor }
 			"no doc" Bor { }
