@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -52,6 +52,10 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
   private boolean skipXbaseTestingPackage;
   
   private JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
+  
+  public JUnitFragment() {
+    this.setGenerateXtendStub(true);
+  }
   
   public void setJunitVersion(final String version) {
     this.junitVersion = JUnitVersion.fromString(version);
@@ -144,7 +148,12 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     this.generateInjectorProvider().writeTo(this.getProjectConfig().getRuntimeTest().getSrcGen());
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      this.generateExampleRuntimeTest().writeTo(this.getProjectConfig().getRuntimeTest().getSrc());
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
+        this.generateExampleRuntimeTest().writeTo(this.getProjectConfig().getRuntimeTest().getSrc());
+      } else {
+        this.generateJavaExampleRuntimeTest().writeTo(this.getProjectConfig().getRuntimeTest().getSrc());
+      }
     }
     IXtextGeneratorFileSystemAccess _srcGen = this.getProjectConfig().getEclipsePlugin().getSrcGen();
     boolean _tripleNotEquals_3 = (_srcGen != null);
@@ -312,6 +321,158 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
       }
     };
     return this.fileAccessFactory.createXtendFile(_exampleRuntimeTest, _client);
+  }
+  
+  protected JavaFileAccess generateJavaExampleRuntimeTest() {
+    String _testingPackage = this.getTestingPackage();
+    String _plus = (_testingPackage + ".XtextRunner");
+    final TypeReference xtextRunner = new TypeReference(_plus);
+    final TypeReference runWith = new TypeReference("org.junit.runner.RunWith");
+    final TypeReference extendWith = new TypeReference("org.junit.jupiter.api.extension.ExtendWith");
+    final TypeReference injectionExtension = new TypeReference("org.eclipse.xtext.testing.extensions.InjectionExtension");
+    String _testingPackage_1 = this.getTestingPackage();
+    String _plus_1 = (_testingPackage_1 + ".InjectWith");
+    final TypeReference injectWith = new TypeReference(_plus_1);
+    String _testingPackage_2 = this.getTestingPackage();
+    String _plus_2 = (_testingPackage_2 + ".util.ParseHelper");
+    final TypeReference parseHelper = new TypeReference(_plus_2);
+    TypeReference _switchResult = null;
+    final JUnitVersion junitVersion = this.junitVersion;
+    if (junitVersion != null) {
+      switch (junitVersion) {
+        case JUNIT_4:
+          _switchResult = new TypeReference("org.junit.Test");
+          break;
+        case JUNIT_5:
+          _switchResult = new TypeReference("org.junit.jupiter.api.Test");
+          break;
+        default:
+          break;
+      }
+    }
+    final TypeReference test = _switchResult;
+    TypeReference _switchResult_1 = null;
+    final JUnitVersion junitVersion_1 = this.junitVersion;
+    if (junitVersion_1 != null) {
+      switch (junitVersion_1) {
+        case JUNIT_4:
+          _switchResult_1 = new TypeReference("org.junit.Assert");
+          break;
+        case JUNIT_5:
+          _switchResult_1 = new TypeReference("org.junit.jupiter.api.Assertions");
+          break;
+        default:
+          break;
+      }
+    }
+    final TypeReference assert_ = _switchResult_1;
+    EClassifier _classifier = IterableExtensions.<AbstractRule>head(this.getGrammar().getRules()).getType().getClassifier();
+    ResourceSet _resourceSet = this.getGrammar().eResource().getResourceSet();
+    final TypeReference rootType = new TypeReference(((EClass) _classifier), _resourceSet);
+    final TypeReference list = new TypeReference("java.util.List");
+    final TypeReference diagnostic = new TypeReference("org.eclipse.emf.ecore.resource", "Resource.Diagnostic");
+    final TypeReference iterableExtensions = new TypeReference("org.eclipse.xtext.xbase.lib.IterableExtensions");
+    TypeReference _exampleRuntimeTest = this.exampleRuntimeTest();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _equals = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          if (_equals) {
+            _builder.append("@");
+            _builder.append(runWith);
+            _builder.append("(");
+            _builder.append(xtextRunner);
+            _builder.append(".class)");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          boolean _equals_1 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          if (_equals_1) {
+            _builder.append("@");
+            _builder.append(extendWith);
+            _builder.append("(");
+            _builder.append(injectionExtension);
+            _builder.append(".class)");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("@");
+        _builder.append(injectWith);
+        _builder.append("(");
+        TypeReference _injectorProvider = JUnitFragment.this.injectorProvider();
+        _builder.append(_injectorProvider);
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("public class ");
+        TypeReference _exampleRuntimeTest = JUnitFragment.this.exampleRuntimeTest();
+        _builder.append(_exampleRuntimeTest);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(Inject.class, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("private ");
+        _builder.append(parseHelper, "\t");
+        _builder.append("<");
+        _builder.append(rootType, "\t");
+        _builder.append("> parseHelper;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@");
+        _builder.append(test, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("public void loadModel() throws Exception {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("Model result = parseHelper.parse(\"Hello Xtext!\");");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append(assert_, "\t\t");
+        _builder.append(".assertNotNull(result);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append(list, "\t\t");
+        _builder.append("<");
+        _builder.append(diagnostic, "\t\t");
+        _builder.append("> errors = result.eResource().getErrors();");
+        _builder.newLineIfNotEmpty();
+        {
+          boolean _equals_2 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_4);
+          if (_equals_2) {
+            _builder.append("\t\t");
+            _builder.append(assert_, "\t\t");
+            _builder.append(".assertTrue(\"Unexpected errors: \" + ");
+            _builder.append(iterableExtensions, "\t\t");
+            _builder.append(".join(errors, \", \"), errors.isEmpty());");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          boolean _equals_3 = Objects.equal(JUnitFragment.this.junitVersion, JUnitVersion.JUNIT_5);
+          if (_equals_3) {
+            _builder.append("\t\t");
+            _builder.append(assert_, "\t\t");
+            _builder.append(".assertTrue(errors.isEmpty(), \"Unexpected errors: \" + ");
+            _builder.append(iterableExtensions, "\t\t");
+            _builder.append(".join(errors, \", \"));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    return this.fileAccessFactory.createJavaFile(_exampleRuntimeTest, _client);
   }
   
   protected TypeReference exampleRuntimeTest() {

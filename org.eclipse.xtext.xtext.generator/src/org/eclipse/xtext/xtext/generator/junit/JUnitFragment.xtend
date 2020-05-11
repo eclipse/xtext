@@ -1,9 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- *
+ * 
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.junit
@@ -25,33 +25,41 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  * @since 2.14
  */
 class JUnitFragment extends AbstractStubGeneratingFragment {
-	
+
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
-	
+
 	@Accessors(PUBLIC_SETTER)
 	boolean useDeprecatedClasses
-	
+
 	@Accessors(PUBLIC_SETTER)
 	boolean skipXbaseTestingPackage
-	
+
 	JUnitVersion junitVersion = JUnitVersion.JUNIT_4
-	
-	def void setJunitVersion (String version) {
+
+	new() {
+		/**
+		 * The old implementation generated JUnit stub by default. 
+		 * We set the value of generateXtendStub to true to remain backward compatible.
+		 */
+		generateXtendStub = true
+	}
+
+	def void setJunitVersion(String version) {
 		junitVersion = JUnitVersion.fromString(version)
 	}
-	
+
 	def protected getTestingPackage() {
 		if (useDeprecatedClasses)
 			getUiTestingPackage()
 		else
 			"org.eclipse.xtext.testing"
 	}
-	
+
 	protected def String getUiTestingPackage() {
 		"org.eclipse.xtext.ui.testing"
 	}
-	
+
 	def protected getXbaseTestingPackage() {
 		if (skipXbaseTestingPackage)
 			return ""
@@ -60,13 +68,13 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 		else
 			"org.eclipse.xtext.xbase.testing"
 	}
-	
+
 	protected def String getXbaseUiTestingPackage() {
 		if (skipXbaseTestingPackage)
 			return ""
 		"org.eclipse.xtext.xbase.junit"
 	}
-	
+
 	override generate() {
 		if (projectConfig.runtimeTest.manifest !== null) {
 			projectConfig.runtimeTest.manifest => [
@@ -75,7 +83,7 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 					xbaseTestingPackage,
 					'org.eclipse.xtext.xbase.lib;bundle-version="'+projectConfig.runtime.xbaseLibVersionLowerBound+'"'
 				)
-				exportedPackages.add(grammar.runtimeTestBasePackage+";x-internal=true")
+				exportedPackages.add(grammar.runtimeTestBasePackage + ";x-internal=true")
 			]
 		}
 		if (projectConfig.eclipsePluginTest.manifest !== null) {
@@ -88,26 +96,31 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 					"org.eclipse.core.runtime",
 					"org.eclipse.ui.workbench;resolution:=optional"
 				)
-				exportedPackages.add(grammar.eclipsePluginTestBasePackage+";x-internal=true")
+				exportedPackages.add(grammar.eclipsePluginTestBasePackage + ";x-internal=true")
 			]
 		}
 		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.exportedPackages.add(eclipsePluginActivator.packageName)
 		}
-		
+
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
-		if (isGenerateStub)
-			generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
+		if (isGenerateStub) {
+			if (generateXtendStub) {
+				generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
+			} else {
+				generateJavaExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
+			}
+		}
 		if (projectConfig.eclipsePlugin.srcGen !== null)
 			generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
-	
+
 	def protected JavaFileAccess generateExampleRuntimeTest() {
 		val xtextRunner = new TypeReference(testingPackage + ".XtextRunner")
 		val runWith = new TypeReference("org.junit.runner.RunWith")
 		val injectWith = new TypeReference(testingPackage + ".InjectWith")
 		val extendWith = new TypeReference("org.junit.jupiter.api.^extension.ExtendWith")
-		val injectionExtension = new TypeReference("org.eclipse.xtext.testing.extensions.InjectionExtension") 
+		val injectionExtension = new TypeReference("org.eclipse.xtext.testing.extensions.InjectionExtension")
 		val parseHelper = new TypeReference(testingPackage + ".util.ParseHelper")
 		val test = switch (junitVersion) {
 			case JUnitVersion.JUNIT_4: new TypeReference("org.junit.Test")
@@ -147,7 +160,54 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 			}
 		''')
 	}
-	
+
+	def protected JavaFileAccess generateJavaExampleRuntimeTest() {
+		val xtextRunner = new TypeReference(testingPackage + ".XtextRunner")
+		val runWith = new TypeReference("org.junit.runner.RunWith")
+		val extendWith = new TypeReference("org.junit.jupiter.api.extension.ExtendWith")
+		val injectionExtension = new TypeReference("org.eclipse.xtext.testing.extensions.InjectionExtension")
+		val injectWith = new TypeReference(testingPackage + ".InjectWith")
+		val parseHelper = new TypeReference(testingPackage + ".util.ParseHelper")
+		val test = switch (junitVersion) {
+			case JUnitVersion.JUNIT_4: new TypeReference("org.junit.Test")
+			case JUnitVersion.JUNIT_5: new TypeReference("org.junit.jupiter.api.Test")
+		}
+		val assert = switch (junitVersion) {
+			case JUnitVersion.JUNIT_4: new TypeReference("org.junit.Assert")
+			case JUnitVersion.JUNIT_5: new TypeReference("org.junit.jupiter.api.Assertions")
+		}
+		val rootType = new TypeReference(grammar.rules.head.type.classifier as EClass, grammar.eResource.resourceSet)
+		val list = new TypeReference("java.util.List")
+		val diagnostic = new TypeReference("org.eclipse.emf.ecore.resource", "Resource.Diagnostic")
+		val iterableExtensions = new TypeReference("org.eclipse.xtext.xbase.lib.IterableExtensions")
+		return fileAccessFactory.createJavaFile(exampleRuntimeTest, '''
+			«IF junitVersion==JUnitVersion.JUNIT_4»
+				@«runWith»(«xtextRunner».class)
+			«ENDIF»
+			«IF junitVersion==JUnitVersion.JUNIT_5»
+				@«extendWith»(«injectionExtension».class)
+			«ENDIF»
+			@«injectWith»(«injectorProvider».class)
+			public class «exampleRuntimeTest» {
+				@«Inject»
+				private «parseHelper»<«rootType»> parseHelper;
+				
+				@«test»
+				public void loadModel() throws Exception {
+					Model result = parseHelper.parse("Hello Xtext!");
+					«assert».assertNotNull(result);
+					«list»<«diagnostic»> errors = result.eResource().getErrors();
+					«IF junitVersion==JUnitVersion.JUNIT_4»
+						«assert».assertTrue("Unexpected errors: " + «iterableExtensions».join(errors, ", "), errors.isEmpty());
+					«ENDIF»
+					«IF junitVersion==JUnitVersion.JUNIT_5»
+						«assert».assertTrue(errors.isEmpty(), "Unexpected errors: " + «iterableExtensions».join(errors, ", "));
+					«ENDIF»
+				}
+			}
+		''')
+	}
+
 	def protected exampleRuntimeTest() {
 		new TypeReference(grammar.runtimeTestBasePackage, grammar.simpleName + "ParsingTest")
 	}
@@ -218,7 +278,7 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 		'''
 		file
 	}
-	
+
 	def protected TypeReference iInjectorProvider() {
 		new TypeReference(testingPackage + ".IInjectorProvider")
 	}
