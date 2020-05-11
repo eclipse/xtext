@@ -8,29 +8,27 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.inject.Inject;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractExpectationTest;
-import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTestingTypeComputer;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("all")
 public class ExpectationTest extends AbstractExpectationTest {
-  @Inject
-  private ExpectationTestingTypeComputer typeComputer;
-  
-  @Inject
-  private PublicReentrantTypeResolver resolver;
-  
-  @Override
-  public ExpectationTestingTypeComputer getTypeComputer() {
-    return this.typeComputer;
-  }
-  
-  @Override
-  public PublicReentrantTypeResolver getResolver() {
-    return this.resolver;
-  }
+	@Inject
+	private ExpectationTestingTypeComputer typeComputer;
+
+	@Inject
+	private PublicReentrantTypeResolver resolver;
+
+	@Override
+	public ExpectationTestingTypeComputer getTypeComputer() {
+		return typeComputer;
+	}
+
+	@Override
+	public PublicReentrantTypeResolver getResolver() {
+		return resolver;
+	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import com.google.inject.Inject
 import java.util.List
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
-import org.eclipse.xtext.xbase.XNullLiteral
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
@@ -21,13 +20,10 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
-import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -353,39 +349,3 @@ abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 	
 }
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class ExpectationTest extends AbstractExpectationTest {
-	@Inject ExpectationTestingTypeComputer typeComputer
-	
-	@Inject PublicReentrantTypeResolver resolver
-	
-	override getTypeComputer() {
-		typeComputer
-	}
-	
-	override getResolver() {
-		resolver
-	}
-	
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class ExpectationTestingTypeComputer extends XbaseTypeComputer {
-	
-	@Accessors
-	AbstractExpectationTest test
-	
-	@Accessors() (XExpression)=>boolean predicate = [ it instanceof XNullLiteral ]
-	
-	override computeTypes(XExpression expression, ITypeComputationState state) {
-		if (predicate.apply(expression)) {
-			test.recordExpectation(expression, state)
-		}
-		super.computeTypes(expression, state)
-	}
-	
-}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,45 +10,25 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.common.base.Joiner
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.util.List
 import java.util.Map
 import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate
+import org.eclipse.xtext.xbase.typesystem.computation.IClosureCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate
+import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitReceiver
-import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
+import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Assert
-import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
-import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
-import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
-import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate
-import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate
-import org.eclipse.xtext.xbase.typesystem.computation.IClosureCandidate
-import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtend.lib.annotations.Accessors
-
-/**
- * @author Sebastian Zarnekow
- */
-class RecomputingBatchTypeResolver extends DefaultBatchTypeResolver {
-
-	@Inject
-	Provider<RecomputingReentrantTypeResolver> resolverProvider;
-
-	override createResolver() {
-		resolverProvider.get
-	}
-	
-}
 
 /**
  * @author Sebastian Zarnekow
@@ -240,25 +220,6 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 	
 	def <T> T invokeAndCast(ILinkingCandidate receiver, String getter) {
 		receiver.invoke(getter) as T
-	}
-	
-}
-
-/**
- * @author Sebastian Zarnekow
- */
-class RecordingRootResolvedTypes extends RootResolvedTypes {
-	
-	@Accessors
-	Map<XExpression, IApplicableCandidate> resolvedProxies
-	
-	new(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
-		super(resolver, monitor)
-	}
-	
-	override resolveProxies() {
-		resolvedProxies = basicGetLinkingMap
-		super.resolveProxies()
 	}
 	
 }
