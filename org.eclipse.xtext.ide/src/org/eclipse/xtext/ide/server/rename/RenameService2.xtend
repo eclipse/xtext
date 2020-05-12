@@ -35,6 +35,7 @@ import org.eclipse.xtext.ide.refactoring.RenameContext
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.ILanguageServerAccess
+import org.eclipse.xtext.linking.impl.LinkingHelper
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil
@@ -67,7 +68,9 @@ class RenameService2 implements IRenameService2 {
 	@Inject TokenUtil tokenUtil
 
 	@Inject IValueConverterService valueConverterService 
-	
+
+	@Inject LinkingHelper linkingHelper 
+
 	Function<EObject, String> attributeResolver = SimpleAttributeResolver.newResolver(String, 'name')
 
 	override rename(Options options) {
@@ -200,9 +203,9 @@ class RenameService2 implements IRenameService2 {
 					if (element !== null && !element.eIsProxy) {
 						val leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset)
 						if (leaf !== null && leaf.isIdentifier) {
-							val leafText = getConvertedValue(leaf.grammarElement, leaf)
+							val convertedNameValue = getConvertedValue(leaf.grammarElement, leaf)
 							val elementName = element.elementName
-							if (!leafText.nullOrEmpty && !elementName.nullOrEmpty && leafText == elementName) {
+							if (!convertedNameValue.nullOrEmpty && !elementName.nullOrEmpty && convertedNameValue == elementName) {
 								val start = document.getPosition(leaf.offset)
 								val end = document.getPosition(leaf.endOffset)
 								return Either.forLeft(new Range(start, end))
@@ -223,11 +226,16 @@ class RenameService2 implements IRenameService2 {
 	}
 
 	protected def String getConvertedValue(EObject grammarElement, ILeafNode leaf) {
-		switch (grammarElement) {
-			RuleCall: valueConverterService.toValue(leaf.text, grammarElement.rule.name, leaf).toString()
-			CrossReference: getConvertedValue(grammarElement.terminal, leaf)
-			default: leaf.text
-		} 
+		try {			
+			switch (grammarElement) {
+				RuleCall: return valueConverterService.toValue(leaf.text, grammarElement.rule.name, leaf).toString()
+				CrossReference: return linkingHelper.getCrossRefNodeAsString(leaf, true)
+			} 
+		} catch (Exception exc) {
+			// The current name text cannot be converted to a value.
+			// Rename could be used to fix this.
+		}
+		return leaf.text
 	}
 
 	/**

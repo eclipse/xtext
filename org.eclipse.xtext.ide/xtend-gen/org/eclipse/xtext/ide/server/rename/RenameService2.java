@@ -50,6 +50,7 @@ import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.rename.ChangeConverter2;
 import org.eclipse.xtext.ide.server.rename.IRenameService2;
 import org.eclipse.xtext.ide.server.rename.ServerRefactoringIssueAcceptor;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -91,6 +92,9 @@ public class RenameService2 implements IRenameService2 {
   
   @Inject
   private IValueConverterService valueConverterService;
+  
+  @Inject
+  private LinkingHelper linkingHelper;
   
   private Function<EObject, String> attributeResolver = SimpleAttributeResolver.<EObject, String>newResolver(String.class, "name");
   
@@ -283,9 +287,9 @@ public class RenameService2 implements IRenameService2 {
             if (((element != null) && (!element.eIsProxy()))) {
               final ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset);
               if (((leaf != null) && this.isIdentifier(leaf))) {
-                final String leafText = this.getConvertedValue(leaf.getGrammarElement(), leaf);
+                final String convertedNameValue = this.getConvertedValue(leaf.getGrammarElement(), leaf);
                 final String elementName = this.getElementName(element);
-                if ((((!StringExtensions.isNullOrEmpty(leafText)) && (!StringExtensions.isNullOrEmpty(elementName))) && Objects.equal(leafText, elementName))) {
+                if ((((!StringExtensions.isNullOrEmpty(convertedNameValue)) && (!StringExtensions.isNullOrEmpty(elementName))) && Objects.equal(convertedNameValue, elementName))) {
                   final Position start = document.getPosition(leaf.getOffset());
                   final Position end = document.getPosition(leaf.getEndOffset());
                   Range _range = new Range(start, end);
@@ -324,22 +328,25 @@ public class RenameService2 implements IRenameService2 {
   }
   
   protected String getConvertedValue(final EObject grammarElement, final ILeafNode leaf) {
-    String _switchResult = null;
-    boolean _matched = false;
-    if (grammarElement instanceof RuleCall) {
-      _matched=true;
-      _switchResult = this.valueConverterService.toValue(leaf.getText(), ((RuleCall)grammarElement).getRule().getName(), leaf).toString();
-    }
-    if (!_matched) {
-      if (grammarElement instanceof CrossReference) {
+    try {
+      boolean _matched = false;
+      if (grammarElement instanceof RuleCall) {
         _matched=true;
-        _switchResult = this.getConvertedValue(((CrossReference)grammarElement).getTerminal(), leaf);
+        return this.valueConverterService.toValue(leaf.getText(), ((RuleCall)grammarElement).getRule().getName(), leaf).toString();
+      }
+      if (!_matched) {
+        if (grammarElement instanceof CrossReference) {
+          _matched=true;
+          return this.linkingHelper.getCrossRefNodeAsString(leaf, true);
+        }
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
     }
-    if (!_matched) {
-      _switchResult = leaf.getText();
-    }
-    return _switchResult;
+    return leaf.getText();
   }
   
   /**
@@ -434,6 +441,11 @@ public class RenameService2 implements IRenameService2 {
   @Pure
   protected IValueConverterService getValueConverterService() {
     return this.valueConverterService;
+  }
+  
+  @Pure
+  protected LinkingHelper getLinkingHelper() {
+    return this.linkingHelper;
   }
   
   @Pure
