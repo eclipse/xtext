@@ -37,7 +37,7 @@ import com.google.common.base.Predicate;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider.class)
-public class SpellingQuickfixTest extends AbstractQuickfixTest {
+public class SpellingQuickfixTest extends AbstractMultiQuickfixTest {
 
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT = "Foo {  } \n // Single Line Komment Spelling Error";
 	private static final String MODEL_WITH_SPELLING_QUICKFIX_IN_ML_COLMMENT = "Foo {  } \n /* Multi Line \n Komment Spelling Error */";

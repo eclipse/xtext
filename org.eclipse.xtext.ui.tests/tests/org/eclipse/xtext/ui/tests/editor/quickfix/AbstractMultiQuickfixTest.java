@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractQuickfixTest extends AbstractEditorTest {
+public abstract class AbstractMultiQuickfixTest extends AbstractEditorTest {
 
 	@Inject
 	protected MarkerResolutionGenerator markerResolutionGenerator;
@@ -68,11 +68,11 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	protected String getProjectName() {
-		return "QuickfixTestProject";
+		return "MultiQuickfixTestProject";
 	}
 
 	protected String getFileName() {
-		return "quickfix";
+		return "multiquickfix";
 	}
 
 	protected String getFileExtension() {

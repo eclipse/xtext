@@ -19,7 +19,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
-import org.eclipse.xtext.ui.tests.editor.quickfix.AbstractQuickfixTest;
+import org.eclipse.xtext.ui.tests.editor.quickfix.AbstractMultiQuickfixTest;
 import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider.class)
 @SuppressWarnings("all")
-public class CompositeQuickfixTest extends AbstractQuickfixTest {
+public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
   @Test
   public void testSimpleFixMultipleMarkers() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

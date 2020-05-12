@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(XtextRunner)
 @InjectWith(QuickfixCrossrefTestLanguageUiInjectorProvider)
-class CompositeQuickfixTest extends AbstractQuickfixTest {
+class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 
 	@Test
 	def void testSimpleFixMultipleMarkers() throws Exception {
