@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -494,9 +494,9 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 				&& hiddenTokenHelper.isWhitespace((AbstractRule) grammarElement);
 		if (isWhitespace || cfg.getWhitespaceRule() == grammarElement) {
 			if (preservedWS == null)
-				preservedWS = value;
+				preservedWS = harmonizeLineSeparator(value);
 			else
-				preservedWS += value;
+				preservedWS += harmonizeLineSeparator(value);
 		} else
 			addLineEntry(grammarElement, value, true);
 	}
@@ -504,5 +504,15 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	@Override
 	public void writeSemantic(EObject grammarElement, String value) throws IOException {
 		addLineEntry(grammarElement, value, false);
+	}
+
+	/**
+	 * @since 2.22
+	 */
+	protected String harmonizeLineSeparator(String value) {
+		if (value != null) {
+			return value.replaceAll("\r?\n", getLineSeparator());
+		}
+		return null;
 	}
 }
