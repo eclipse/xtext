@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class LineSeparatorHarminizerTest extends AbstractXtextTests {
+public class LineSeparatorHarmonizerTest extends AbstractXtextTests {
 
 	@Test
 	public void testHarmonizeLineBreaks() {
