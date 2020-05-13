@@ -28,12 +28,14 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy2
 import org.eclipse.xtext.ide.refactoring.RenameChange
 import org.eclipse.xtext.ide.refactoring.RenameContext
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.ILanguageServerAccess
+import org.eclipse.xtext.linking.impl.LinkingHelper
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil
@@ -64,6 +66,10 @@ class RenameService2 implements IRenameService2 {
 	@Inject IResourceServiceProvider.Registry serviceProviderRegistry
 
 	@Inject TokenUtil tokenUtil
+
+	@Inject IValueConverterService valueConverterService 
+
+	@Inject LinkingHelper linkingHelper 
 
 	Function<EObject, String> attributeResolver = SimpleAttributeResolver.newResolver(String, 'name')
 
@@ -197,11 +203,11 @@ class RenameService2 implements IRenameService2 {
 					if (element !== null && !element.eIsProxy) {
 						val leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset)
 						if (leaf !== null && leaf.isIdentifier) {
-							val leafText = NodeModelUtils.getTokenText(leaf)
+							val convertedNameValue = getConvertedValue(leaf.grammarElement, leaf)
 							val elementName = element.elementName
-							if (!leafText.nullOrEmpty && !elementName.nullOrEmpty && leafText == elementName) {
+							if (!convertedNameValue.nullOrEmpty && !elementName.nullOrEmpty && convertedNameValue == elementName) {
 								val start = document.getPosition(leaf.offset)
-								val end = document.getPosition(leaf.offset + elementName.length)
+								val end = document.getPosition(leaf.endOffset)
 								return Either.forLeft(new Range(start, end))
 							}
 						}
@@ -217,6 +223,19 @@ class RenameService2 implements IRenameService2 {
 			LOG.trace('''Loaded resource is not an XtextResource. URI: «resource.URI»''')
 		}
 		return null
+	}
+
+	protected def String getConvertedValue(EObject grammarElement, ILeafNode leaf) {
+		try {			
+			switch (grammarElement) {
+				RuleCall: return valueConverterService.toValue(leaf.text, grammarElement.rule.name, leaf).toString()
+				CrossReference: return linkingHelper.getCrossRefNodeAsString(leaf, true)
+			} 
+		} catch (Exception exc) {
+			// The current name text cannot be converted to a value.
+			// Rename could be used to fix this.
+		}
+		return leaf.text
 	}
 
 	/**
