@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,6 +25,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
+import com.google.common.annotations.Beta;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -52,6 +54,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	@Inject
 	private DescriptionUtils descriptionUtils;
+	
+	@Inject(optional = true)
+	private ImmutableList<IsAffectedExtension> isAffectedExtensions = ImmutableList.of(); 
 	
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
@@ -113,44 +118,63 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		}
 	}
 	
-    @Override
+	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
-        Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
-        if (!outgoingReferences.isEmpty()) {
-	        for (IResourceDescription.Delta delta : deltas)
-	            if (hasChanges(delta, candidate) && outgoingReferences.contains(delta.getUri()))
-	                return true;
-        }
-        // this is a tradeoff - we could either check whether a given delta uri is contained
-        // in a reachable container and check for intersecting names afterwards, or we can do
-        // the other way round
-        // unfortunately there is no way to decide reliably which algorithm scales better
-        // note that this method is called for each description so we have something like a 
-        // number of deltas x number of resources which is not really nice
-        List<IContainer> containers = null;
-        Collection<QualifiedName> importedNames = getImportedNames(candidate);
-        for (IResourceDescription.Delta delta : deltas) {
-			if (hasChanges(delta, candidate)) {
-				// not a java resource - delta's resource should be contained in a visible container
-				// as long as we did not delete the resource
-				URI uri = delta.getUri();
-				if ((uri.isPlatform() || uri.isArchive()) && delta.getNew() != null) { 
-					if (containers == null)
-						containers = containerManager.getVisibleContainers(candidate, context);
-					boolean descriptionIsContained = false;
-					for(int i = 0; i < containers.size() && !descriptionIsContained; i++) {
-						descriptionIsContained = containers.get(i).hasResourceDescription(uri);
-					}
-					if (!descriptionIsContained)
-						return false;
-				}
-				if (isAffected(importedNames, delta.getNew()) || isAffected(importedNames, delta.getOld())) {
+		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
+		if (!outgoingReferences.isEmpty()) {
+			for (IResourceDescription.Delta delta : deltas)
+				if (hasChanges(delta, candidate) && outgoingReferences.contains(delta.getUri()))
 					return true;
+		}
+		// this is a tradeoff - we could either check whether a given delta uri is contained
+		// in a reachable container and check for intersecting names afterwards, or we can do
+		// the other way round
+		// unfortunately there is no way to decide reliably which algorithm scales better
+		// note that this method is called for each description so we have something like a
+		// number of deltas x number of resources which is not really nice
+		List<IContainer> containers = null;
+		Collection<QualifiedName> importedNames = getImportedNames(candidate);
+		if (!importedNames.isEmpty()) {
+			for (IResourceDescription.Delta delta : deltas) {
+				if (hasChanges(delta, candidate)) {
+					// not a java resource - delta's resource should be contained in a visible container
+					// as long as we did not delete the resource
+					URI uri = delta.getUri();
+					if ((uri.isPlatform() || uri.isArchive()) && delta.getNew() != null) {
+						if (containers == null)
+							containers = containerManager.getVisibleContainers(candidate, context);
+						boolean descriptionIsContained = false;
+						for (int i = 0; i < containers.size() && !descriptionIsContained; i++) {
+							descriptionIsContained = containers.get(i).hasResourceDescription(uri);
+						}
+						if (!descriptionIsContained) {
+							return isAffectedByExtensions(deltas, candidate, context);
+						}
+					}
+					if (isAffected(importedNames, delta.getNew()) || isAffected(importedNames, delta.getOld())) {
+						return true;
+					}
 				}
 			}
-        }
-        return false;
-    }
+		}
+		return isAffectedByExtensions(deltas, candidate, context);
+	}
+
+	/**
+	 * Query all registered extensions.
+	 * 
+	 * @since 2.22
+	 */
+	@Beta
+	protected boolean isAffectedByExtensions(Collection<Delta> deltas, IResourceDescription candidate,
+			IResourceDescriptions context) {
+		for (int i = 0; i < isAffectedExtensions.size(); i++) {
+			if (isAffectedExtensions.get(i).isAffected(deltas, candidate, context)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Whether the given delta is considered to have changed from the candidate's perspective. By default this will just call
@@ -164,9 +188,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 
 	protected boolean isAffected(Collection<QualifiedName> importedNames, IResourceDescription description) {
 		if (description != null) {
-		    for (IEObjectDescription desc : description.getExportedObjects())
-		        if (importedNames.contains(desc.getName().toLowerCase()))
-		            return true;
+			for (IEObjectDescription desc : description.getExportedObjects())
+				if (importedNames.contains(desc.getName().toLowerCase()))
+					return true;
 		}
 		return false;
 	}

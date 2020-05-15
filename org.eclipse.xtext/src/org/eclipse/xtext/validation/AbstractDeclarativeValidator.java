@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -293,6 +294,23 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	protected Map<Object, Object> getContext() {
 		return state.get().context;
+	}
+	
+	/**
+	 * Obtain a cancel indicator that is valid for the current validation run. 
+	 * 
+	 * @since 2.22
+	 */
+	protected CancelIndicator getCancelIndicator() {
+		Map<Object, Object> context = getContext();
+		if (context == null) {
+			return CancelIndicator.NullImpl;
+		}
+		CancelIndicator result = (CancelIndicator) context.get(CancelableDiagnostician.CANCEL_INDICATOR);
+		if (result == null) {
+			return CancelIndicator.NullImpl;
+		}
+		return result;
 	}
 
 	@Override
