@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -546,6 +546,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 							else 
 								state = State.CLEAN;
 						}
+						IResourceDescription oldDescription = dirtyResource.getDescription();
 						dirtyResource.copyState(newDescription);
 						if (resoureStorageFacade != null && (resource instanceof StorageAwareResource)) {
 							try {
@@ -573,7 +574,11 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 								LOG.warn("Cannot persist storage for " + resource.getURI(), e);
 							}
 						}
-						dirtyStateManager.announceDirtyStateChanged(clientAwareResource);
+						if (dirtyStateManager instanceof DirtyStateManager) {
+							((DirtyStateManager)dirtyStateManager).announceDirtyStateChanged(oldDescription, clientAwareResource);
+						} else {
+							dirtyStateManager.announceDirtyStateChanged(clientAwareResource);
+						}
 					}
 				}
 			}

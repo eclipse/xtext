@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,7 +32,6 @@ import com.google.common.collect.MapMaker;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-// TODO: batch events according to the contract of IDirtyStateManager
 public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSource implements IDirtyStateManager, IDirtyStateManagerExtension {
 
 	private ConcurrentMap<URI, IDirtyResource> managedResources;
@@ -48,12 +47,50 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 			notifyListeners(dirtyResource, true);
 		}
 	}
+	
+	/**
+	 * @since 2.22
+	 */
+	protected void announceDirtyStateChanged(IResourceDescription prevDirtyDescription, IDirtyResource dirtyResource) {
+		// avoid putting a dirtyResource into the map that wasn't managed before
+		if (managedResources.replace(dirtyResource.getURI(), dirtyResource) != null) {
+			notifyListeners(prevDirtyDescription, dirtyResource);
+		}
+	}
 
 	@Override
 	public void discardDirtyState(IDirtyResource dirtyResource) {
 		if (managedResources.remove(dirtyResource.getURI(), dirtyResource)) {
 			notifyListeners(dirtyResource, false);
 		}
+	}
+	
+	/**
+	 * @since 2.22
+	 */
+	protected void notifyListeners(IResourceDescription prevDirtyDescription, IDirtyResource dirtyResource) {
+		IResourceDescription.Delta delta = new IResourceDescription.Delta() {
+			@Override
+			public boolean haveEObjectDescriptionsChanged() {
+				return true;
+			}
+			
+			@Override
+			public IResourceDescription getOld() {
+				return prevDirtyDescription;
+			}
+			
+			@Override
+			public IResourceDescription getNew() {
+				return dirtyResource.getDescription();
+			}
+
+			@Override
+			public URI getUri() {
+				return dirtyResource.getURI();
+			}
+		};
+		notifyListeners(new ResourceDescriptionChangeEvent(Collections.singletonList(delta)));
 	}
 
 	protected void notifyListeners(final IDirtyResource dirtyResource, boolean managed) {
