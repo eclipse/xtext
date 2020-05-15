@@ -55,7 +55,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	/**
 	 * Create Java Source Code that is compatible to this Java version.
 	 * 
-	 * Supported values: 1.5, 1.6, 1.7, 1.8, 9 and 10
+	 * Supported values: 1.5, 1.6, 1.7, 1.8, 9, 10, 11, 12, 13 and so forth
 	 */
 	@Parameter(property="maven.compiler.source", defaultValue="1.6")
 	private String javaSourceVersion;
@@ -113,6 +113,12 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 */
 	@Parameter
 	private String generatedAnnotationComment;
+	
+	/**
+	 * Additional Java compiler arguments for the internal pre-built step of the XtendBatchCompiler.
+	 */
+	@Parameter(defaultValue="-proc:none")
+	private String additionalPreCompileArgs;
 
 	@Inject
 	private Provider<XtendBatchCompiler> xtendBatchCompilerProvider;
@@ -161,6 +167,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		compiler.setFileEncoding(encoding);
 		log.debug("Set writeTraceFiles: " + writeTraceFiles);
 		compiler.setWriteTraceFiles(writeTraceFiles);
+		log.debug("Set additional precompile args: " + additionalPreCompileArgs);
+		compiler.setAdditionalPreCompileArgs(additionalPreCompileArgs);
 		if (!compiler.compile()) {
 			String dir = concat(File.pathSeparator, newArrayList(filtered));
 			throw new MojoExecutionException("Error compiling xtend sources in '" + dir + "'.");

@@ -167,6 +167,12 @@ public class XtendBatchCompiler {
 	protected boolean writeStorageFiles = false;
 	private GeneratorConfig generatorConfig = new GeneratorConfig();
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
+	/**
+	 * Additional arguments to the Eclipse batch compiler for the precompile step.
+	 * Defaults to '-proc:none' to disable annotation processing. Clients may override.
+	 * @since 2.22
+	 */
+	protected String additionalPreCompileArgs = "-proc:none";
 
 	private URI baseURI;
 
@@ -214,6 +220,20 @@ public class XtendBatchCompiler {
 	 */
 	public void setWriteStorageFiles(boolean writeStorageFiles) {
 		this.writeStorageFiles = writeStorageFiles;
+	}
+	
+	/**
+	 * @since 2.22
+	 */
+	public void setAdditionalPreCompileArgs(String additionalPreCompileArgs) {
+		this.additionalPreCompileArgs = additionalPreCompileArgs;
+	}
+	
+	/**
+	 * @since 2.22
+	 */
+	public String getAdditionalPreCompileArgs() {
+		return additionalPreCompileArgs;
 	}
 	
 	@Inject
@@ -654,6 +674,9 @@ public class XtendBatchCompiler {
 		commandLine.add("-proceedOnError");
 		if (encodingProvider.getDefaultEncoding() != null) {
 			commandLine.add("-encoding \"" + encodingProvider.getDefaultEncoding() + "\"");
+		}
+		if (additionalPreCompileArgs != null) {
+			commandLine.add(additionalPreCompileArgs);
 		}
 		List<String> sourceDirectories = newArrayList(sourcePathDirectories);
 		commandLine.add(concat(" ", transform(sourceDirectories, new Function<String, String>() {
