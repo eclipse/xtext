@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,7 +12,6 @@ import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -39,11 +38,11 @@ import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 
@@ -102,11 +101,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 
 	@Test public void testFileFileRename() throws Exception {
 		doRename();
-		assertEquals(initialModel0.replaceAll("B", "C"), readFile(testFile0));
-		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
+		assertEquals(initialModel0.replaceAll("B", "C"), fileToString(testFile0));
+		assertEquals(initialModel1.replaceAll("B", "C"), fileToString(testFile1));
 		undoRename();
-		assertEquals(initialModel0, readFile(testFile0));
-		assertEquals(initialModel1, readFile(testFile1));
+		assertEquals(initialModel0, fileToString(testFile0));
+		assertEquals(initialModel1, fileToString(testFile1));
 	}
 
 	@Test public void testEditorFileRename() throws Exception {
@@ -115,10 +114,10 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		testFile0.refreshLocal(-1, null);
 		waitForBuild();
 		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());
-		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
+		assertEquals(initialModel1.replaceAll("B", "C"), fileToString(testFile1));
 		undoRename();
 		assertEquals(initialModel0, editor.getDocument().get());
-		assertEquals(initialModel1, readFile(testFile1));
+		assertEquals(initialModel1, fileToString(testFile1));
 	}
 
 	@Test public void testEditorEditorRename() throws Exception {
@@ -150,10 +149,10 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	@Test public void testFileEditorRename() throws Exception {
 		XtextEditor editor1 = openEditor(testFile1);
 		doRename();
-		assertEquals(initialModel0.replaceAll("B", "C"), readFile(testFile0));
+		assertEquals(initialModel0.replaceAll("B", "C"), fileToString(testFile0));
 		assertEquals(initialModel1.replaceAll("B", "C"), editor1.getDocument().get());
 		undoRename();
-		assertEquals(initialModel0, readFile(testFile0));
+		assertEquals(initialModel0, fileToString(testFile0));
 		assertEquals(initialModel1, editor1.getDocument().get());
 	}
 
@@ -173,7 +172,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		IFile otherLanguageFile = IResourcesSetupUtil.createFile(TEST_PROJECT
 				+ "/otherLanguageFile.referringtestlanguage", initialModel);
 		doRename();
-		assertEquals(initialModel.replaceAll("B", "C"), readFile(otherLanguageFile));
+		assertEquals(initialModel.replaceAll("B", "C"), fileToString(otherLanguageFile));
 	}
 	
 	@Test public void testRefFromOtherXtextLanguage2() throws Exception {
@@ -181,7 +180,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		IFile otherLanguageFile = IResourcesSetupUtil.createFile(TEST_PROJECT
 				+ "/otherLanguageFile.referringtestlanguage", initialModel);
 		doRename();
-		assertEquals(initialModel.replaceAll("B", "C"), readFile(otherLanguageFile));
+		assertEquals(initialModel.replaceAll("B", "C"), fileToString(otherLanguageFile));
 	}
 
 	@Test public void testRefFromOtherNonXtextLanguage() throws Exception {
@@ -196,9 +195,9 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		referringResource.save(null);
 		project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		IFile referringXmiFile = project.getFile(xmiFileName);
-		String originalContent = readFile(referringXmiFile);
+		String originalContent = fileToString(referringXmiFile);
 		doRename();
-		assertEquals(originalContent.replaceAll("#B", "#C"), readFile(referringXmiFile));
+		assertEquals(originalContent.replaceAll("#B", "#C"), fileToString(referringXmiFile));
 	}
 
 	@Test public void testClusteringReferenceUpdater() throws Exception {
@@ -211,13 +210,13 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		waitForBuild();
 		int i = 0;
 		for (IFile file : referringFiles) {
-			assertEquals("foo" + i++ + " {ref C}", readFile(file));
+			assertEquals("foo" + i++ + " {ref C}", fileToString(file));
 		}
 		undoRename();
 		waitForBuild();
 		i = 0;
 		for (IFile file : referringFiles) {
-			assertEquals("foo" + i++ + " {ref B}", readFile(file));
+			assertEquals("foo" + i++ + " {ref B}", fileToString(file));
 		}
 	}
 
@@ -256,23 +255,6 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		final Change change = processor.createChange(new NullProgressMonitor());
 		assertNotNull("RenameElementProcessor created changes", change);
 		return change;
-	}
-
-	protected String readFile(IFile file) throws Exception {
-		InputStream inputStream = file.getContents();
-		try {
-			byte[] buffer = new byte[2048];
-			int bytesRead = 0;
-			StringBuffer b = new StringBuffer();
-			do {
-				bytesRead = inputStream.read(buffer);
-				if (bytesRead != -1)
-					b.append(new String(buffer, 0, bytesRead));
-			} while (bytesRead != -1);
-			return b.toString();
-		} finally {
-			inputStream.close();
-		}
 	}
 
 	protected void waitForReconciler(XtextEditor editor) {
