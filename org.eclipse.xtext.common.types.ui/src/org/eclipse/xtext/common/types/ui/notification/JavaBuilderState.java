@@ -11,6 +11,7 @@ package org.eclipse.xtext.common.types.ui.notification;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -43,7 +44,7 @@ public class JavaBuilderState {
 
 	private Integer buildNumber;
 
-	private SimpleLookupTable references;
+	private Object references;
 
 	private Long lastStructuralBuildTime;
 
@@ -130,7 +131,7 @@ public class JavaBuilderState {
 	protected TypeNames _getQualifiedTypeNames(IPackageFragment packageFragment) {
 		TypeNames qualifiedTypeNames = new TypeNames(packageFragment.getJavaProject());
 
-		SimpleLookupTable references = getReferences();
+		Object references = getReferences();
 		if (references == null) {
 			return qualifiedTypeNames;
 		}
@@ -143,7 +144,13 @@ public class JavaBuilderState {
 		String packageName = packageFragment.getElementName();
 		IPath packagePath = resource.getProjectRelativePath();
 		int srcPathSegmentCount = getPackageFragmentRoot(packageFragment).getResource().getProjectRelativePath().segmentCount();
-		for (Object typeLocator : references.keyTable) {
+		Iterable<?> keys;
+		if (references instanceof Map) {
+			keys = ((Map<?,?>) references).keySet();
+		} else {
+			keys = Arrays.asList(((SimpleLookupTable)references).keyTable);
+		}
+		for (Object typeLocator : keys) {
 			if (typeLocator instanceof String) {
 				IPath typeLocatorPath = packageFragment.getJavaProject().getProject().getFile((String) typeLocator)
 						.getProjectRelativePath();
@@ -158,7 +165,6 @@ public class JavaBuilderState {
 				}
 			}
 		}
-
 		return qualifiedTypeNames;
 	}
 
@@ -223,7 +229,7 @@ public class JavaBuilderState {
 		return elementName.substring(0, elementName.lastIndexOf("."));
 	}
 
-	private SimpleLookupTable getReferences() {
+	private Object getReferences() {
 		if (references != null) {
 			return references;
 		}
@@ -233,8 +239,12 @@ public class JavaBuilderState {
 		}
 
 		Object readReferences = readField(state, "references", null);
-		if (readReferences instanceof SimpleLookupTable) {
-			references = (SimpleLookupTable) readReferences;
+		if (readReferences instanceof Map) {
+			// used in 4.16 and later
+			references = readReferences;
+		} else if (readReferences instanceof SimpleLookupTable) {
+			// used in 4.15 and earlier
+			references = readReferences;
 		}
 		return references;
 	}
