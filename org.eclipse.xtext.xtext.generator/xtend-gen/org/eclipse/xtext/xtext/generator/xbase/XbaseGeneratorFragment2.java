@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -321,16 +321,16 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* <p>Infers a JVM model from the source model.</p> ");
+        _builder.append("* <p>Infers a JVM model from the source model.</p>");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* <p>The JVM model should contain all elements that would appear in the Java code ");
+        _builder.append("* <p>The JVM model should contain all elements that would appear in the Java code");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* which is generated from the source model. Other models link against the JVM model rather than the source model.</p>     ");
+        _builder.append("* which is generated from the source model. Other models link against the JVM model rather than the source model.</p>");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*/");
@@ -371,7 +371,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("* given element\'s type that is contained in a resource.");
         _builder.newLine();
         _builder.append("\t ");
-        _builder.append("* ");
+        _builder.append("*");
         _builder.newLine();
         _builder.append("\t ");
         _builder.append("* @param element");
@@ -446,13 +446,13 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("\t\t");
         _builder.append("// An implementation for the initial hello world example could look like this:");
         _builder.newLine();
-        _builder.append("// \t\tacceptor.accept(element.toClass(\"my.company.greeting.MyGreetings\")) [");
+        _builder.append("//\t\tacceptor.accept(element.toClass(\"my.company.greeting.MyGreetings\")) [");
         _builder.newLine();
-        _builder.append("// \t\t\tfor (greeting : element.greetings) {");
+        _builder.append("//\t\t\tfor (greeting : element.greetings) {");
         _builder.newLine();
-        _builder.append("// \t\t\t\tmembers += greeting.toMethod(\"hello\" + greeting.name, typeRef(String)) [");
+        _builder.append("//\t\t\t\tmembers += greeting.toMethod(\"hello\" + greeting.name, typeRef(String)) [");
         _builder.newLine();
-        _builder.append("// \t\t\t\t\tbody = ");
+        _builder.append("//\t\t\t\t\tbody = ");
         _builder.append("\'\'\'");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\t\treturn \"Hello ");
@@ -492,7 +492,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("<extension point=\"org.eclipse.ui.handlers\">");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<handler ");
+        _builder.append("<handler");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("class=\"");
@@ -524,7 +524,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("</handler>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<handler ");
+        _builder.append("<handler");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("class=\"");
@@ -736,7 +736,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder_1.append("<extension point=\"org.eclipse.ui.handlers\">");
         _builder_1.newLine();
         _builder_1.append("\t");
-        _builder_1.append("<handler ");
+        _builder_1.append("<handler");
         _builder_1.newLine();
         _builder_1.append("\t\t");
         _builder_1.append("class=\"");
@@ -827,7 +827,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append("<adapter type=\"org.eclipse.debug.ui.actions.IToggleBreakpointsTarget\"/>");
       _builder_2.newLine();
       _builder_2.append("\t");
-      _builder_2.append("</factory> ");
+      _builder_2.append("</factory>");
       _builder_2.newLine();
       _builder_2.append("</extension>");
       _builder_2.newLine();
@@ -836,7 +836,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append("\t");
       _builder_2.append("<editorContribution targetID=\"");
       _builder_2.append(name, "\t");
-      _builder_2.append("\" ");
+      _builder_2.append("\"");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t");
       _builder_2.append("id=\"");
@@ -849,10 +849,10 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append("\t\t\t");
       _builder_2.append("label=\"Not Used\"");
       _builder_2.newLine();
-      _builder_2.append(" \t\t\t");
+      _builder_2.append("\t\t\t");
       _builder_2.append("class=\"");
       TypeReference _eclipsePluginExecutableExtensionFactory_5 = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
-      _builder_2.append(_eclipsePluginExecutableExtensionFactory_5, " \t\t\t");
+      _builder_2.append(_eclipsePluginExecutableExtensionFactory_5, "\t\t\t");
       _builder_2.append(":org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate\"");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t\t");
@@ -968,7 +968,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _builder_2.append("<extension point=\"org.eclipse.ui.handlers\">");
       _builder_2.newLine();
       _builder_2.append("\t");
-      _builder_2.append("<handler ");
+      _builder_2.append("<handler");
       _builder_2.newLine();
       _builder_2.append("\t\t");
       _builder_2.append("class=\"");
