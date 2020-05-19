@@ -317,10 +317,10 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 					«IF language.grammar.usesXImportSection»
 						<menuContribution
 							locationURI="popup:#TextEditorContext?after=group.edit">
-							 <command
-								 commandId="org.eclipse.xtext.xbase.ui.organizeImports"
-								 style="push"
-								 tooltip="Organize Imports">
+							<command
+								commandId="org.eclipse.xtext.xbase.ui.organizeImports"
+								style="push"
+								tooltip="Organize Imports">
 								<visibleWhen checkEnabled="false">
 									<reference
 										definitionId="«name».Editor.opened">
