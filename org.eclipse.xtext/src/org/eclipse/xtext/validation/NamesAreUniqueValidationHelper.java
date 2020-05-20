@@ -57,7 +57,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 
 	/**
 	 * @deprecated Since Xtext 2.22 implementations should adhere to the context provided via
-	 *             {@link #checkUniqueNames(Iterable, Context, ValidationMessageAcceptor)}.
+	 *             {@link #checkUniqueNames(org.eclipse.xtext.validation.INamesAreUniqueValidationHelper.Context, ValidationMessageAcceptor)}.
 	 */
 	@Deprecated
 	@Override
@@ -73,7 +73,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	 * about its canceled state.
 	 * 
 	 * @deprecated Since Xtext 2.22 implementations should adhere to the context provided via
-	 *             {@link #checkUniqueNames(Iterable, Context, ValidationMessageAcceptor)}.
+	 *             {@link #checkUniqueNames(org.eclipse.xtext.validation.INamesAreUniqueValidationHelper.Context, ValidationMessageAcceptor)}.
 	 */
 	@Deprecated
 	@Override

@@ -14,6 +14,7 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
 import org.eclipse.xtext.util.formallang.Nfa;
 

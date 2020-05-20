@@ -101,7 +101,7 @@ public interface INamesAreUniqueValidationHelper {
 		ISelectable getValidationScope(IEObjectDescription description, EClass clusterType);
 		
 		/**
-		 * Returns the objects that should be checked for uniqueness in the context of their {@link #getValidationScope(EClass)}.
+		 * Returns the objects that should be checked for uniqueness in the context of their {@link #getValidationScope(IEObjectDescription, EClass)}.
 		 */
 		Iterable<IEObjectDescription> getObjectsToValidate();
 		
@@ -135,7 +135,7 @@ public interface INamesAreUniqueValidationHelper {
 	 * the same cluster will not get any errors.
 	 * @see INamesAreUniqueValidationHelper#checkUniqueNames(Iterable, CancelIndicator, ValidationMessageAcceptor)
 	 * 
-	 * @deprecated Implementations should adhere to the context provided via {@link #checkUniqueNames(Iterable, Context, ValidationMessageAcceptor)}
+	 * @deprecated Implementations should adhere to the context provided via {@link #checkUniqueNames(Context, ValidationMessageAcceptor)}
 	 */
 	@Deprecated
 	default void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
@@ -147,7 +147,7 @@ public interface INamesAreUniqueValidationHelper {
 	 * the same cluster will not get any errors. The cancel indicator may be used to abort 
 	 * the validation.
 	 * 
-	 * @deprecated Implementations should adhere to the context provided via {@link #checkUniqueNames(Iterable, Context, ValidationMessageAcceptor)}
+	 * @deprecated Implementations should adhere to the context provided via {@link #checkUniqueNames(Context, ValidationMessageAcceptor)}
 	 */
 	@Deprecated
 	void checkUniqueNames(Iterable<IEObjectDescription> descriptions, CancelIndicator cancelIndicator, ValidationMessageAcceptor acceptor);

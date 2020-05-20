@@ -69,7 +69,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 	 * Tries to obtain the FQN of the given object from the {@link #cache}. If it is absent,
 	 * it computes a new name.
 	 * 
-	 * @see #computeFullyQualifiedName(EObject).
+	 * @see #computeFullyQualifiedName(EObject)
 	 * @since 2.15
 	 */
 	protected QualifiedName getOrComputeFullyQualifiedName(final EObject obj) {

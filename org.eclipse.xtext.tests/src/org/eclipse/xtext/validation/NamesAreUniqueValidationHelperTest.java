@@ -41,6 +41,8 @@ import com.google.common.collect.Lists;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessageAcceptingTestCase implements CancelIndicator {
 	
+	private static final int MANY = 10_000;
+	
 	private NamesAreUniqueValidationHelper helper;
 	private int callCount;
 	private int maxCallCount;
@@ -363,7 +365,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	@SuppressWarnings("deprecation")
 	@Test public void testManyUnique() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0; i < 1_000_000; i++) {
+		for(int i = 0; i < MANY; i++) {
 			EClass c = createEClass();
 			c.setName("i" + i);
 			elements.add(c);
@@ -376,7 +378,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	
 	@Test public void testManyUnique_context() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0; i < 1_000_000; i++) {
+		for(int i = 0; i < MANY; i++) {
 			EClass c = createEClass();
 			c.setName("i" + i);
 			elements.add(c);
@@ -389,9 +391,9 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	@SuppressWarnings("deprecation")
 	@Test public void testManyOneDup() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0; i < 100_000; i++) {
+		for(int i = 0; i < MANY; i++) {
 			EClass c = createEClass();
-			if (i == 99_999) {
+			if (i == MANY - 1) {
 				c.setName("i1234");
 			} else {
 				c.setName("i" + i);
@@ -400,7 +402,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		}
 		maxCallCount = 0;
 		expected.add(elements.get(1_234));
-		expected.add(elements.get(99_999));
+		expected.add(elements.get(MANY - 1));
 		helper.checkUniqueNames(
 				Scopes.scopedElementsFor(elements), 
 				this, this);
@@ -408,9 +410,9 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	
 	@Test public void testManyOneDup_context() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0; i < 100_000; i++) {
+		for(int i = 0; i < MANY; i++) {
 			EClass c = createEClass();
-			if (i == 99_999) {
+			if (i == MANY - 1) {
 				c.setName("i1234");
 			} else {
 				c.setName("i" + i);
@@ -419,7 +421,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		}
 		maxCallCount = 0;
 		expected.add(elements.get(1_234));
-		expected.add(elements.get(99_999));
+		expected.add(elements.get(MANY - 1));
 		helper.checkUniqueNames(
 				new LocalUniqueNameContext(elements, this), this);
 	}
@@ -427,7 +429,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	@SuppressWarnings("deprecation")
 	@Test public void testManyManyDup() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0, j = 0; i < 100_000; i++) {
+		for(int i = 0, j = 0; i < MANY; i++) {
 			if (i % 100 == 0) {
 				j++;
 			}
@@ -444,7 +446,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 	
 	@Test public void testManyManyDup_context() {
 		List<ENamedElement> elements = new ArrayList<>();
-		for(int i = 0, j = 0; i < 100_000; i++) {
+		for(int i = 0, j = 0; i < MANY; i++) {
 			if (i % 100 == 0) {
 				j++;
 			}
