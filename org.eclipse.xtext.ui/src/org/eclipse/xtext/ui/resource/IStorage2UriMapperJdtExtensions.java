@@ -30,7 +30,6 @@ public interface IStorage2UriMapperJdtExtensions {
 
 	/**
 	 * @return the {@link URI} mapping for the given {@link IPackageFragmentRoot}. The first entry in the pair is the possibly logical URI, the second the physical one.
-	 * @throws JavaModelException 
 	 */
 	public Pair<URI,URI> getURIMapping(IPackageFragmentRoot root) throws JavaModelException;
 }

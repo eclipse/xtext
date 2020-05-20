@@ -32,7 +32,7 @@ public interface IHighlightedPositionAcceptor extends org.eclipse.xtext.ide.edit
 	 * Small helper to convert a new IHighlightedPositionAcceptor to an instance that fulfils the deprecated old API. 
 	 * 
 	 * @since 2.9
-	 * @deprecated
+	 * @deprecated This should not be used directly as it only adapts to deprecated API.
 	 */
 	@Deprecated
 	class DeprecationHelper implements IHighlightedPositionAcceptor {

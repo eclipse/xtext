@@ -106,13 +106,11 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	}
 
 	/**
-	 * @param object
 	 * @return Identifier for given Object
 	 */
 	protected abstract String identifier(Object object);
 
 	/**
-	 * @param object
 	 * @return Label for given Object
 	 */
 	protected abstract String label(Object object);

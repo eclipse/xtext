@@ -81,7 +81,6 @@ public class TextViewerJoinLinesAction extends TextViewerAction {
 	 * is highlighted.
 	 * <p>
 	 * Subclasses may re-implement this method.</p>
-	 * @param viewer 
 	 *
 	 * @param offset the offset of the range which at least should be highlighted
 	 * @param length the length of the range which at least should be highlighted

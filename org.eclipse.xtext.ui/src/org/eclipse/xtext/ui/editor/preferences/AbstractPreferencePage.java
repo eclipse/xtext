@@ -288,8 +288,6 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 * Loads values of all field editors using current search scopes in the preference store. Also updates fields
 	 * enabled status. (The effect is that fields show project specific values when enabled, and instance scoped/default
 	 * values when disabled).
-	 * 
-	 * @param enabled
 	 */
 	protected void updateFieldEditors(boolean enabled) {
 		Composite parent = getFieldEditorParent();
@@ -321,8 +319,6 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 * Saves the 'use project settings' as a preference in the store using the
 	 * {@link #useProjectSettingsPreferenceName()} as the key. If not project specific, all affected keys are removed
 	 * from the project preferences.
-	 * 
-	 * @throws IOException
 	 */
 	private void saveUseProjectSettings(boolean isProjectSpecific) throws IOException {
 		final FixedScopedPreferenceStore store = (FixedScopedPreferenceStore) getPreferenceStore();

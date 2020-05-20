@@ -39,7 +39,6 @@ public class XtextUIMessages extends NLS {
 	}
 
 	/**
-	 * @param key
 	 * @return the string for the given key
 	 */
 	public static String getString(String key) {
@@ -59,8 +58,6 @@ public class XtextUIMessages extends NLS {
 	}
 
 	/**
-	 * @param key
-	 * @param args
 	 * @return Formatted message
 	 */
 	public static String getFormattedString(String key, Object... args) {

@@ -36,7 +36,6 @@ import com.google.common.base.Preconditions;
 public class ResourceUtil {
 	
 	/**
-	 * @throws CoreException 
 	 * @since 2.9
 	 */
 	public static void sync(IResource resource, int depth, IProgressMonitor progressMonitor) throws CoreException {

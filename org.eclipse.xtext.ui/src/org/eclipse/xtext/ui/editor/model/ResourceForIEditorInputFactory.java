@@ -133,7 +133,6 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	}
 
 	/**
-	 * @param uri 
 	 * @since 2.5
 	 */
 	protected boolean isValidationDisabled(URI uri, IStorage storage) {

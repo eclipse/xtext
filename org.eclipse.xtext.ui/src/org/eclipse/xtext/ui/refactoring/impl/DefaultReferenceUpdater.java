@@ -149,7 +149,6 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	
 	/**
 	 * Return null if it is not possible to resolve a name conflict; otherwise a name which should be used.
-	 * @param updateAcceptor 
 	 * @since 2.6
 	 */
 	protected String resolveNameConflict(EObject referringElement, EReference reference, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {

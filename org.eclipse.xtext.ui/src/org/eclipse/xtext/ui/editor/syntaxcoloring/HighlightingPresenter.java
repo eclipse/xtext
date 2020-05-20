@@ -791,14 +791,15 @@ public class HighlightingPresenter implements ITextPresentationListener, ITextIn
 	}
 
 	/**
-	 * Add a position with the given range and highlighting unconditionally, only from UI thread. The position will also
-	 * be registered on the document. The text presentation is not invalidated.
+	 * Add a position with the given range and highlighting unconditionally, only from UI thread. The position will also be registered on
+	 * the document. The text presentation is not invalidated.
 	 * 
 	 * @param offset
 	 *            The range offset
 	 * @param length
 	 *            The range length
 	 * @param highlighting
+	 *            The highlighting attribute.
 	 */
 	private void addPositionFromUI(int offset, int length, TextAttribute highlighting) {
 		AttributedPosition position = createHighlightedPosition(offset, length, highlighting);
