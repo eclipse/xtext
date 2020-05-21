@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,7 +32,7 @@ class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
 				<!-- Quick Outline -->
 				<extension
 					point="org.eclipse.ui.handlers">
-					<handler 
+					<handler
 						class="«grammar.getEclipsePluginExecutableExtensionFactory
 							»:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 						commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
