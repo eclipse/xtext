@@ -9,11 +9,11 @@ import java.util.List;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
-public class TerminalsGrammarAccess extends AbstractGrammarElementFinder {
+public class TerminalsGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
 	
 	
