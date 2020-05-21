@@ -4,7 +4,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
 
 var rootPath = ".."
-var generateEclipse = false
+var generateEclipse = true
 
 Workflow {
 	bean = StandaloneSetup {
