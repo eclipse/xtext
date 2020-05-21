@@ -118,9 +118,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-
-<!-- adding resource factories -->
-
+	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser

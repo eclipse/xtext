@@ -464,7 +464,7 @@
 	</extension>
 	<!-- Call Hierachy -->
 	<extension point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 			<activeWhen>
@@ -490,14 +490,14 @@
 		<factory class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
 			adaptableType="org.eclipse.xtext.xbase.ui.editor.XbaseEditor">
 			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
-		</factory> 
+		</factory>
 	</extension>
 	<extension point="org.eclipse.ui.editorActions">
-		<editorContribution targetID="org.eclipse.xtext.xbase.Xbase" 
+		<editorContribution targetID="org.eclipse.xtext.xbase.Xbase"
 			id="org.eclipse.xtext.xbase.Xbase.rulerActions">
 			<action
 				label="Not Used"
-	 			class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
 				style="push"
 				actionID="RulerDoubleClick"
 				id="org.eclipse.xtext.xbase.Xbase.doubleClickBreakpointAction"/>
@@ -530,7 +530,7 @@
 	</extension>
 	<!-- Introduce Local Variable Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
 			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
 			<activeWhen>
@@ -856,7 +856,7 @@
 	</extension>
 	<!-- Call Hierachy -->
 	<extension point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierachyHandler"
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 			<activeWhen>
@@ -882,14 +882,14 @@
 		<factory class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory"
 			adaptableType="org.eclipse.xtext.xbase.annotations.ui.editor.XbaseWithAnnotationsEditor">
 			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget"/>
-		</factory> 
+		</factory>
 	</extension>
 	<extension point="org.eclipse.ui.editorActions">
-		<editorContribution targetID="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations" 
+		<editorContribution targetID="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations"
 			id="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.rulerActions">
 			<action
 				label="Not Used"
-	 			class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
 				style="push"
 				actionID="RulerDoubleClick"
 				id="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.doubleClickBreakpointAction"/>
@@ -922,7 +922,7 @@
 	</extension>
 	<!-- Introduce Local Variable Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
-		<handler 
+		<handler
 			class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableHandler"
 			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
 			<activeWhen>
