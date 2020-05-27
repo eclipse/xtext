@@ -9,7 +9,6 @@ kind: Pod
 spec:
   containers:
   - name: jnlp
-    image: 'eclipsecbi/jenkins-jnlp-agent'
     args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
     resources:
       limits:
