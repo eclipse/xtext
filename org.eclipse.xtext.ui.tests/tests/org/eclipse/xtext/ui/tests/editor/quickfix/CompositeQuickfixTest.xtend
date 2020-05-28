@@ -13,6 +13,7 @@ import org.eclipse.ui.ide.IDE
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
 import org.eclipse.xtext.ui.tests.quickfix.ui.tests.QuickfixCrossrefTestLanguageUiInjectorProvider
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor.quickfix;
+package org.eclipse.xtext.ui.testing;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
-import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.Strings;
@@ -37,12 +36,15 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @since 2.23
  */
+@Beta
 public abstract class AbstractMultiQuickfixTest extends AbstractEditorTest {
 
 	@Inject
