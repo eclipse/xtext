@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -695,7 +695,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 								new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
 							]
 							setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar')
-							setInitParameter("org.mortbay.jetty.servlet.Default.useFileMappedBuffer", "false")
+							setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false")
 						]
 						val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 						try {
@@ -739,7 +739,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 						});
 						ctx.setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN,
 							".*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar");
-						ctx.setInitParameter("org.mortbay.jetty.servlet.Default.useFileMappedBuffer", "false");
+						ctx.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 						server.setHandler(ctx);
 						«'org.eclipse.jetty.util.log.Slf4jLog'.typeRef» log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».class.getName());
 						try {
