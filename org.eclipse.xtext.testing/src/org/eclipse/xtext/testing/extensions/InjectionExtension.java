@@ -13,9 +13,12 @@ import static org.eclipse.xtext.util.Exceptions.throwUncheckedException;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.eclipse.xtext.testing.InjectWith;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionConfigurationException;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.TestInstances;
 
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
@@ -27,6 +30,9 @@ import com.google.inject.Injector;
  * <p>
  * The extension retrieves an {@link Injector} to inject members in the instance
  * under test before best execution and resets registries after execution.
+ * </p>
+ * It takes care about JUnit5 {@link Nested nested} test classes. They are inner classes that might
+ * be annotated as well and must be handled for injection.
  * </p>
  * 
  * @author Karsten Thoms - Initial contribution and API
@@ -51,11 +57,17 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 		}
 		if (injectorProvider != null) {
 			Injector injector = injectorProvider.getInjector();
-			if (injector != null)
-				injector.injectMembers(context.getRequiredTestInstance());
+			if (injector != null) {
+				Object testInstance = context.getRequiredTestInstance();
+				TestInstances requiredTestInstances = context.getRequiredTestInstances();
+				injector.injectMembers(testInstance);
+				for (Object o : requiredTestInstances.getEnclosingInstances()) {
+					injector.injectMembers(o);
+				}
+			}
 		}
 	}
-
+	
 	@Override
 	public void afterEach(ExtensionContext context) throws Exception {
 		IInjectorProvider injectorProvider = getOrCreateInjectorProvider(context);
@@ -66,8 +78,26 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 	}
 
 
+	private static InjectWith getInjectWith(Class<?> cls) {
+		InjectWith result = null;
+		Class<?> firstClassMatched = null;
+		while (cls != null) {
+			InjectWith iw = cls.getAnnotation(InjectWith.class);
+			if (iw != null) {
+				if(result != null) {
+					throw new ExtensionConfigurationException(String.format("Multiple @InjectWith annotations are found (%s and %s). Only a single one is supported.",
+							firstClassMatched.getName(), cls.getName()));
+				}
+				result = iw;
+				firstClassMatched = cls;
+			}
+			cls = cls.getEnclosingClass();
+		}
+		return result;
+	}
+
 	private static IInjectorProvider getOrCreateInjectorProvider(ExtensionContext context) {
-		InjectWith injectWith = context.getRequiredTestClass().getAnnotation(InjectWith.class);
+		InjectWith injectWith = getInjectWith(context.getRequiredTestClass());
 		if (injectWith != null) {
 			Class<? extends IInjectorProvider> klass = injectWith.value();
 			IInjectorProvider injectorProvider = injectorProviderClassCache.get(klass);
