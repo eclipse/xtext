@@ -136,6 +136,12 @@ After everything above has run smoothly, it is finally time for some manual step
    * It will take some hours until the artifacts are mirrored to Maven Central.
 3. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
    * Merge the [open Gerrit change](https://git.eclipse.org/r/#/q/project:simrel/org.eclipse.simrel.build+owner:xtext-bot%2540eclipse.org+status:open) for the `simrel/org.eclipse.simrel.build` repository
+4. Release Notes (Only on final release)
+   * Create and review release notes
+   * Update committer stats
+     * Run [committer-activity-count job](https://ci.eclipse.org/xtext/job/releng/job/committer-activity-count/)
+     * Parameters are release tags (last one and current)
+     * Look into the build artifact `committer-activity-xtext.txt` and put stats into the release post
 4. Publish websites (Only on final release)
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
