@@ -138,14 +138,18 @@ After everything above has run smoothly, it is finally time for some manual step
    * Merge the [open Gerrit change](https://git.eclipse.org/r/#/q/project:simrel/org.eclipse.simrel.build+owner:xtext-bot%2540eclipse.org+status:open) for the `simrel/org.eclipse.simrel.build` repository
 4. Release Notes (Only on final release)
    * Create and review release notes
-   * Update committer stats
+   * Update committer stats for Xtext (without Xtend)
      * Run [committer-activity-count job](https://ci.eclipse.org/xtext/job/releng/job/committer-activity-count/)
      * Parameters are release tags (last one and current)
      * Look into the build artifact `committer-activity-xtext.txt` and put stats into the release post
-4. Publish websites (Only on final release)
+     * Mark first-time contributors (look at older release notes if they appear, or run the 
+       [committer-activity-count job](https://ci.eclipse.org/xtext/job/releng/job/committer-activity-count/) with an old tag as FROM_VERSION param)
+   * Update committer stats for Xtend
+     * Run `git shortlog -s -n -e v<PREV_RELEASE>..v<NEW_RELEASE>` in the xtext-xtend repo
+5. Publish websites (Only on final release)
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
-5. Update Marketplace entries (Only on final release)
+6. Update Marketplace entries (Only on final release)
    * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext/edit)
    * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend/edit)
    * For each update the properties:
@@ -154,17 +158,17 @@ After everything above has run smoothly, it is finally time for some manual step
    * Update Composite Repository for Eclipse Marketplace
      * Edit repository composite site descriptors at path `updates/composite/marketplace` from https://github.com/xtext/xtext-p2-orbit
      * Run https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/
-6. As soon as Maven Central is updated - send notifications
+7. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
    * Gitter
    * Twitter
    * Blog (for releases)
-7. Add / Update xtext-reference-projects (Only on final release)
-8. Adjust the bootstrap version to use the newly produced milestone / release
+8. Add / Update xtext-reference-projects (Only on final release)
+9. Adjust the bootstrap version to use the newly produced milestone / release
    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
-9.  xtext-apidiff (Only on final release)
+10. xtext-apidiff (Only on final release)
    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
