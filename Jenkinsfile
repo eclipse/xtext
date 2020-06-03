@@ -60,7 +60,7 @@ spec:
   }
 
   parameters {
-    choice(name: 'target_platform', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'latest' ], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'latest' ], description: 'Which Target Platform should be used?')
     booleanParam(
       name: 'TRIGGER_DOWNSTREAM_BUILD', 
       defaultValue: (env.BRANCH_NAME.startsWith('milestone')||env.BRANCH_NAME.startsWith('release')), 
@@ -85,6 +85,8 @@ spec:
         
         script {
           if (params.target_platform == 'latest') {
+            currentBuild.displayName = "#${BUILD_NUMBER}(4.17)"
+          } else if (params.target_platform == 'r202006') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.16)"
           } else if (params.target_platform == 'r202003') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.15)"
