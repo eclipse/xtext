@@ -505,8 +505,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		result.setSeverity(toDiagnosticSeverity(issue.getSeverity()));
 
 		// line and column numbers in LSP are 0-based
-		Position start = new Position(issue.getLineNumber() - 1, issue.getColumn() - 1);
-		Position end = new Position(issue.getLineNumberEnd() - 1, issue.getColumnEnd() - 1);
+		Position start = new Position(Math.max(0, issue.getLineNumber() - 1), Math.max(0, issue.getColumn() - 1));
+		Position end = new Position(Math.max(0, issue.getLineNumberEnd() - 1), Math.max(0, issue.getColumnEnd() - 1));
 		result.setRange(new Range(start, end));
 		return result;
 	}
