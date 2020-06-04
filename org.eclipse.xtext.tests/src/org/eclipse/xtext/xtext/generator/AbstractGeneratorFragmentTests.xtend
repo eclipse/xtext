@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,6 @@ import org.eclipse.xtext.testing.GlobalRegistries
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento
 import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
@@ -108,7 +107,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 			}
 		}
 	}
-	@Log
+
 	static class FakeEMFGeneratorFragment2 extends EMFGeneratorFragment2 {
 	
 		// To access the method

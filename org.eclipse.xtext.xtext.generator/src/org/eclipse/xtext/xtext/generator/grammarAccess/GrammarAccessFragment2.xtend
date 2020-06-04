@@ -14,6 +14,7 @@ import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ContentHandler
@@ -37,7 +38,6 @@ import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFi
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder
 import org.eclipse.xtext.service.GrammarProvider
 import org.eclipse.xtext.util.Wrapper
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -48,8 +48,9 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotat
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
-@Log
 class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
+	
+	static val Logger LOG = Logger.getLogger(GrammarAccessFragment2)
 	
 	@Inject FileAccessFactory fileAccessFactory
 	

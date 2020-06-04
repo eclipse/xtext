@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,7 +32,6 @@ import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -50,9 +49,10 @@ import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
-@Log
 @SuppressWarnings("all")
 public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
+  private static final Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
+  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -331,6 +331,4 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   protected String getGetAccessor(final EStructuralFeature feature) {
     return GenModelUtil2.getGenFeature(feature, this.getLanguage().getResourceSet()).getName();
   }
-  
-  private static final Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
 }

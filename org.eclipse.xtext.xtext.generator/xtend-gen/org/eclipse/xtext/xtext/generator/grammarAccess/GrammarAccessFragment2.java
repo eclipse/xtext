@@ -45,7 +45,6 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.util.Wrapper;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -65,9 +64,10 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotation;
 
-@Log
 @SuppressWarnings("all")
 public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
+  private static final Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
+  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -1072,8 +1072,6 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Arrays.<Object>asList(rule).toString());
     }
   }
-  
-  private static final Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
   
   public void setXmlVersion(final String xmlVersion) {
     this.xmlVersion = xmlVersion;

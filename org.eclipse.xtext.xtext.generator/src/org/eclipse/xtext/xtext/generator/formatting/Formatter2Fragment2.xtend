@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import java.util.Collection
 import java.util.Set
+import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EReference
@@ -37,9 +38,10 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtext.util.internal.Log
 
-@Log class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
+class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
+	
+	static val Logger LOG = Logger.getLogger(Formatter2Fragment2)
 	
 	@Inject FileAccessFactory fileAccessFactory
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,7 +14,6 @@ import com.google.inject.Injector;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.InputStream;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
@@ -112,7 +110,6 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     }
   }
   
-  @Log
   public static class FakeEMFGeneratorFragment2 extends EMFGeneratorFragment2 {
     @Override
     protected GenModel getSaveAndReconcileGenModel(final Grammar grammar, final List<EPackage> packs, final ResourceSet rs) {
@@ -122,8 +119,6 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     @Override
     protected void saveResource(final Resource resource) {
     }
-    
-    private static final Logger LOG = Logger.getLogger(FakeEMFGeneratorFragment2.class);
   }
   
   private GlobalRegistries.GlobalStateMemento globalStateMemento;

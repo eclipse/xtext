@@ -13,6 +13,7 @@ import com.google.common.collect.BiMap
 import com.google.common.collect.ImmutableBiMap
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMultimap
+import com.google.common.collect.Maps
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.lsp4j.ClientCapabilities
@@ -32,10 +33,8 @@ import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.internal.Log
 
 import static extension org.eclipse.lsp4j.util.SemanticHighlightingTokens.encode
-import com.google.common.collect.Maps
 
 /**
  * Shared semantic highlighting manager per language server.
@@ -43,7 +42,6 @@ import com.google.common.collect.Maps
  * {@code base64} encoded token string.
  * 
  */
-@Log
 class SemanticHighlightingRegistry {
 
 	/**

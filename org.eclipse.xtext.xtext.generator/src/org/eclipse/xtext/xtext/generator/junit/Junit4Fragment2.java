@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.xtext.generator.junit;
 
-import org.eclipse.xtext.xtext.generator.junit.JUnitFragment;
-
 /**
  * @deprecated Use JUnitFragment instead
  */

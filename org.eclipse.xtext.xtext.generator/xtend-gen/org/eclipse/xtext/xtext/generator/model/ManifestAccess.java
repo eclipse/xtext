@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -21,7 +21,6 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -35,10 +34,11 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 /**
  * Configuration object for MANIFEST.MF files for use in Eclipse.
  */
-@Log
 @Accessors
 @SuppressWarnings("all")
 public class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
+  private static final Logger LOG = Logger.getLogger(ManifestAccess.class);
+  
   private String bundleName;
   
   private String symbolicName;
@@ -284,8 +284,6 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
   }
-  
-  private static final Logger LOG = Logger.getLogger(ManifestAccess.class);
   
   @Pure
   public String getBundleName() {

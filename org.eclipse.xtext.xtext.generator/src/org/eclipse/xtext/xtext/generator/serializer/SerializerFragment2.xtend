@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,6 +15,7 @@ import com.google.inject.Inject
 import java.util.List
 import java.util.Map
 import java.util.Set
+import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
@@ -56,7 +57,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
@@ -70,7 +70,9 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
-@Log class SerializerFragment2 extends AbstractStubGeneratingFragment {
+class SerializerFragment2 extends AbstractStubGeneratingFragment {
+	
+	static val Logger LOG = Logger.getLogger(SerializerFragment2)
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap

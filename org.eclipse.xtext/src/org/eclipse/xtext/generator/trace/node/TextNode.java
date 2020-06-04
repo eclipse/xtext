@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
-import org.eclipse.xtext.generator.trace.node.IGeneratorNode;
 import org.eclipse.xtext.util.Strings;
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -31,9 +30,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * Initializes a resource set in order to load the grammar of a language. The resources to include are specified
  * via {@link XtextGeneratorLanguage#addReferencedResource(String)}.
  */
-@Log
 @SuppressWarnings("all")
 public class XtextGeneratorResourceSetInitializer {
+  private static final Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
+  
   public void initialize(final ResourceSet resourceSet, final List<String> referencedResources) {
     final StandaloneSetup delegate = new StandaloneSetup();
     delegate.setResourceSet(resourceSet);
@@ -171,6 +171,4 @@ public class XtextGeneratorResourceSetInitializer {
       }
     }
   }
-  
-  private static final Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
 }

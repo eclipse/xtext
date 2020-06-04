@@ -12,7 +12,6 @@ import com.google.inject.Injector;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 public class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess implements IXtextGeneratorFileSystemAccess {
 	public XtextGeneratorFileSystemAccess(String path, boolean overwrite) {

@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.generator.model.project;
 
 import com.google.inject.Injector;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
 
 /**
  * Configuration of the web project.

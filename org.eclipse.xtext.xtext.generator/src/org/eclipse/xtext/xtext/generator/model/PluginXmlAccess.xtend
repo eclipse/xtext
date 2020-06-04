@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,18 +12,19 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 import com.google.inject.Injector
+import org.apache.log4j.Logger
 
 /**
  * Configuration object for plugin.xml files for use in Eclipse.
  */
-@Log
 @Accessors
 class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
+	
+	static val Logger LOG = Logger.getLogger(PluginXmlAccess)
 	
 	@Inject CodeConfig codeConfig
 	

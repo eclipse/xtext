@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.generator.model.annotations;
 import com.google.inject.Singleton;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 /**
  * A class annotation configuration for the <code>@Singleton</code> annotation.

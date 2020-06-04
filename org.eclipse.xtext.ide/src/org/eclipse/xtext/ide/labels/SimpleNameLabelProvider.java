@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ide.labels;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ide.labels.INameLabelProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.SimpleAttributeResolver;

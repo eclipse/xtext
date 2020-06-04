@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -39,7 +39,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -92,9 +91,10 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  * 
  * @noextend This class should not be extended by clients.
  */
-@Log
 @SuppressWarnings("all")
 public class XtextGenerator extends AbstractWorkflowComponent2 {
+  private static final Logger LOG = Logger.getLogger(XtextGenerator.class);
+  
   @Accessors
   private DefaultGeneratorModule configuration = new DefaultGeneratorModule();
   
@@ -481,8 +481,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       }
     }
   }
-  
-  private static final Logger LOG = Logger.getLogger(XtextGenerator.class);
   
   @Pure
   public DefaultGeneratorModule getConfiguration() {
