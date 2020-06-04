@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ide.contentassist;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
