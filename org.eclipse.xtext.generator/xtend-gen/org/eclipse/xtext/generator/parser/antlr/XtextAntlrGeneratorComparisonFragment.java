@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -39,7 +39,6 @@ import org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGenerat
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper;
 import org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment;
 import org.eclipse.xtext.util.StopWatch;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -68,7 +67,6 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
  * 
  * @deprecated This class should be no longer used. We are confident in the new ANTLR generator.
  */
-@Log
 @Deprecated
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
@@ -165,6 +163,8 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       return this.caNaming.getLexerGrammar(g).getName();
     }
   }
+  
+  private static final Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment.class);
   
   private static final String ENCODING = Charsets.ISO_8859_1.name();
   
@@ -524,8 +524,6 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
-  private static final Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment.class);
   
   @Pure
   protected GrammarNaming getProductionNaming() {
