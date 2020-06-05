@@ -11,7 +11,6 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
-import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.junit.Assert;
 import org.junit.Test;
 

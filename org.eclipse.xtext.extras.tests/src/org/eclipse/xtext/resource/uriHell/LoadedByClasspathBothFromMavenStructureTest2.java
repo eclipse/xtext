@@ -9,7 +9,6 @@
 package org.eclipse.xtext.resource.uriHell;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.uriHell.LoadedByClasspathBothFromMavenStructureTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
