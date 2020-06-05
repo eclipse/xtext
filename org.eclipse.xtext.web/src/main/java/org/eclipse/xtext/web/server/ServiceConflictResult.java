@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.web.server;
 
-import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
