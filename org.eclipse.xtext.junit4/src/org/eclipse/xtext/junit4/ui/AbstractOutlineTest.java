@@ -14,7 +14,6 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.createJavaPr
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;

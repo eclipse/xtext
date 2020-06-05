@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist;
 
-import org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.AbstractOutlineTestLanguageProposalProvider;
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.

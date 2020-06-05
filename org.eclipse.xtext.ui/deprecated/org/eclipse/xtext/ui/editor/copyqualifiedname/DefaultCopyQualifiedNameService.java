@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.ui.editor.copyqualifiedname;
 
-import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
-
 /**
  * @author Anton Kosyakov - Initial contribution and API
  * @author Arne Deutsch - Deprecated class by moving base class to core
