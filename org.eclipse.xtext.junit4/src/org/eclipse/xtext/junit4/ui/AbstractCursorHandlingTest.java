@@ -17,7 +17,6 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.junit.After;
 import org.junit.Before;
 

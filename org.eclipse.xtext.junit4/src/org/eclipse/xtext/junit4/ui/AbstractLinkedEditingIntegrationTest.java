@@ -14,7 +14,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**

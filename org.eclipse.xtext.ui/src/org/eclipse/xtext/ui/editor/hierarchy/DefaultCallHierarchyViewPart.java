@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.editor.hierarchy;
 import com.google.inject.Inject;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.xtext.ui.editor.hierarchy.AbstractCallHierarchyViewPart;
 
 /**
  * @author kosyakov - Initial contribution and API

@@ -14,7 +14,6 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.LexerUIBindings;
-import org.eclipse.xtext.ui.tests.xmleditor.AbstractXmlLexerTest;
 import org.eclipse.xtext.ui.tests.xmleditor.ui.tests.XmlUiInjectorProvider;
 import org.junit.runner.RunWith;
 

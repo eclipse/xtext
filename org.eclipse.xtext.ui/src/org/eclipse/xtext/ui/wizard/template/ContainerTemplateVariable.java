@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.wizard.template;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtext.ui.wizard.template.TemplateVariable;
 
 public abstract class ContainerTemplateVariable extends TemplateVariable {
 	public ContainerTemplateVariable(String label, String description, ContainerTemplateVariable container) {
