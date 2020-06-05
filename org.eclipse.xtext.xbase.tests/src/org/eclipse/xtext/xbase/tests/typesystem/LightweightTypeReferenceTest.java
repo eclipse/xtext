@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.io.Serializable;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTest;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;

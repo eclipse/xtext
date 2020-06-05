@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xbase.interpreter;
 
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 
 public class UnresolvableFeatureException extends ConstantExpressionEvaluationException {
 	private static final long serialVersionUID = -8117667783967691078L;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import java.io.File
 import java.nio.charset.Charset
 import java.util.List
+import org.apache.log4j.Logger
 import org.eclipse.xpand2.XpandExecutionContextImpl
 import org.eclipse.xpand2.XpandFacade
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -26,7 +27,6 @@ import org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGenerat
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper
 import org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
 import org.eclipse.xtext.util.StopWatch
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess
 import org.eclipse.xtext.xtext.RuleFilter
 import org.eclipse.xtext.xtext.RuleNames
@@ -47,9 +47,9 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  * 
  * @deprecated This class should be no longer used. We are confident in the new ANTLR generator.
  */
- @Log @Deprecated
+@Deprecated
 class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
-
+	static val Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment)
 	static val ENCODING = Charsets.ISO_8859_1.name
 	
 	@Inject

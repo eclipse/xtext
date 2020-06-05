@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.interpreter;
 
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 
 public class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
 	private static final long serialVersionUID = -2953402800966199007L;

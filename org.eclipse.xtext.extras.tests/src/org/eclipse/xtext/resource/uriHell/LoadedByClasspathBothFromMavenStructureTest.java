@@ -9,8 +9,8 @@
 package org.eclipse.xtext.resource.uriHell;
 
 import java.net.URL;
+
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

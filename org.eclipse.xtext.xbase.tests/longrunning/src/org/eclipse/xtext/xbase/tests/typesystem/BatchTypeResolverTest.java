@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractBatchTypeResolverTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 /**
