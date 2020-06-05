@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.parser.indentation;
 
-import org.eclipse.xtext.parser.indentation.IndentationAwareLanguageSuite;
 import org.eclipse.xtext.testing.smoketest.ProcessedBy;
 import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor;

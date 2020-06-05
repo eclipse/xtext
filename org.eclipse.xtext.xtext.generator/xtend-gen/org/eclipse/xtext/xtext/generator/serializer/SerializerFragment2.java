@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -66,7 +66,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -92,9 +91,10 @@ import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerExtensions
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
-@Log
 @SuppressWarnings("all")
 public class SerializerFragment2 extends AbstractStubGeneratingFragment {
+  private static final Logger LOG = Logger.getLogger(SerializerFragment2.class);
+  
   private static <K extends Object, V extends Object> Map<K, V> toMap(final Iterable<Pair<K, V>> items) {
     LinkedHashMap<K, V> _xblockexpression = null;
     {
@@ -1750,8 +1750,6 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createTextFile(_grammarConstraintsPath, _client).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
-  
-  private static final Logger LOG = Logger.getLogger(SerializerFragment2.class);
   
   @Pure
   public boolean isGenerateDebugData() {

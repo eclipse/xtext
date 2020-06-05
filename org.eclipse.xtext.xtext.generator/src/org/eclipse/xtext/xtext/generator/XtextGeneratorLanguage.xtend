@@ -18,6 +18,7 @@ import java.io.File
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.DiagnosticChain
 import org.eclipse.emf.common.util.URI
@@ -34,7 +35,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.RuleNames
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
@@ -55,8 +55,9 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * 
  * @noextend This class should not be extended by clients.
  */
-@Log
 class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXtextGeneratorLanguage {
+	
+	static val Logger LOG = Logger.getLogger(XtextGeneratorLanguage)
 	
 	String grammarUri
 	

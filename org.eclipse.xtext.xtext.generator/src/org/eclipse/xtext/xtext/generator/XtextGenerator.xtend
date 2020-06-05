@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,8 +18,10 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.HashMap
 import java.util.List
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
+import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.emf.mwe.utils.StandaloneSetup
@@ -31,7 +33,6 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.MergeableManifest2
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
@@ -63,9 +64,10 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * 
  * @noextend This class should not be extended by clients.
  */
-@Log
 class XtextGenerator extends AbstractWorkflowComponent2 {
-
+	
+	static val Logger LOG = Logger.getLogger(XtextGenerator)
+	
 	@Accessors
 	DefaultGeneratorModule configuration = new DefaultGeneratorModule
 	
@@ -102,7 +104,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		this.languageConfigs.add(language)
 	}
 	
-	override protected checkConfigurationInternal(org.eclipse.emf.mwe.core.issues.Issues issues) {
+	override protected checkConfigurationInternal(Issues issues) {
 		initialize
 		val generatorIssues = new MweIssues(this, issues)
 		configuration.checkConfiguration(generatorIssues)
@@ -158,7 +160,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		parent.createChildInjector(new LanguageModule(language))
 	}
 	
-	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
+	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		initialize
 		try {
 			cleaner.clean
@@ -183,7 +185,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 	}
 	
-	private def void handleException(Exception ex, org.eclipse.emf.mwe.core.issues.Issues issues) {
+	private def void handleException(Exception ex, Issues issues) {
 		if (ex instanceof CompositeGeneratorException) {
 			ex.exceptions.forEach[handleException(issues)]
 		} else {

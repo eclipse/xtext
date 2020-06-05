@@ -24,6 +24,7 @@ import java.util.List
 import java.util.Map
 import java.util.Properties
 import java.util.Set
+import org.apache.log4j.Logger
 import org.eclipse.emf.codegen.ecore.generator.Generator
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
@@ -65,7 +66,6 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -76,8 +76,9 @@ import static org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
-@Log
 class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
+	
+	static val Logger LOG = Logger.getLogger(EMFGeneratorFragment2)
 	
 	@Inject CodeConfig codeConfig
 	

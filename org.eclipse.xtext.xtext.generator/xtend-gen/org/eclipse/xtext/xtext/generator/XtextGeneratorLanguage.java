@@ -43,7 +43,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -74,9 +73,10 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  * 
  * @noextend This class should not be extended by clients.
  */
-@Log
 @SuppressWarnings("all")
 public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXtextGeneratorLanguage {
+  private static final Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
+  
   private String grammarUri;
   
   private String name;
@@ -389,8 +389,6 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     final String msg = ((((("The EPackage " + refName) + " in grammar ") + grammarName) + " could not be found. ") + "You might want to register that EPackage in your workflow file.");
     throw new IllegalStateException(msg);
   }
-  
-  private static final Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
   
   @Pure
   public Grammar getGrammar() {

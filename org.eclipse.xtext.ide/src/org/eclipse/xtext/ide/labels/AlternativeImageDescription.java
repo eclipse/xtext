@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.labels;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.eclipse.xtext.ide.labels.IImageDescription;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 public class AlternativeImageDescription implements IImageDescription {

@@ -80,7 +80,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -95,9 +94,10 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
-@Log
 @SuppressWarnings("all")
 public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
+  private static final Logger LOG = Logger.getLogger(EMFGeneratorFragment2.class);
+  
   @Inject
   private CodeConfig codeConfig;
   
@@ -1102,8 +1102,6 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
-  private static final Logger LOG = Logger.getLogger(EMFGeneratorFragment2.class);
   
   public void setBasePackage(final String basePackage) {
     this.basePackage = basePackage;

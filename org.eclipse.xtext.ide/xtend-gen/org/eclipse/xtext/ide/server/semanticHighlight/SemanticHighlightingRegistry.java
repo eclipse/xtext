@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.Position;
@@ -48,7 +47,6 @@ import org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyle
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
@@ -67,7 +65,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * Responsible for converting the semantic highlighted ranges into the LSP standard by producing a compact,
  * {@code base64} encoded token string.
  */
-@Log
 @SuppressWarnings("all")
 public class SemanticHighlightingRegistry {
   /**
@@ -386,6 +383,4 @@ public class SemanticHighlightingRegistry {
   protected boolean isNullOrUnknown(final List<String> nullable) {
     return ((nullable == null) || Objects.equal(nullable, SemanticHighlightingRegistry.UNKNOWN_SCOPES));
   }
-  
-  private static final Logger LOG = Logger.getLogger(SemanticHighlightingRegistry.class);
 }

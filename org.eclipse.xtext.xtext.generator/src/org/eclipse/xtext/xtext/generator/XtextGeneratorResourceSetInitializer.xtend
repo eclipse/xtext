@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,24 +9,25 @@
 package org.eclipse.xtext.xtext.generator
 
 import java.util.List
+import org.apache.log4j.Logger
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.utils.GenModelHelper
 import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.util.internal.Log
-import org.eclipse.emf.ecore.EcorePackage
 
 /**
  * Initializes a resource set in order to load the grammar of a language. The resources to include are specified
  * via {@link XtextGeneratorLanguage#addReferencedResource(String)}.
  */
-@Log
 class XtextGeneratorResourceSetInitializer {
+	
+	static val Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer)
 	
 	def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
 		val delegate = new StandaloneSetup

@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import com.google.inject.Singleton;
 import java.util.regex.Pattern;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 
 /**
  * @author Anton Kosyakov

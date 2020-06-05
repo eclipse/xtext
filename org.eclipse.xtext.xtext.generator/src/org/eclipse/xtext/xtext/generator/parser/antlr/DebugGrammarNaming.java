@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.parser.antlr;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 public class DebugGrammarNaming extends GrammarNaming {
 	@Override
