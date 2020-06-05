@@ -16,7 +16,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
 
 /**
  * Service class for semantic highlighting. The syntactic highlighting is
