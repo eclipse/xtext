@@ -107,7 +107,6 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			throws Exception {
 		if (referenceOwner instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall call = (XAbstractFeatureCall) referenceOwner;
-			
 			String newMemberName = (issue.getData() != null && issue.getData().length > 0) ? issue.getData()[0] : null;
 			if(newMemberName != null) {
 				if (call instanceof XMemberFeatureCall) {
@@ -116,11 +115,10 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
 					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-					
 				} else if(call instanceof XFeatureCall) {
 					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
 						if(logicalContainerProvider.getNearestLogicalContainer(call) instanceof JvmExecutable)
-							newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+							newLocalVariableQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
@@ -130,7 +128,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
 					XAssignment assigment = (XAssignment) call;
 					if(assigment.getAssignable() == null) {
-						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newLocalVariableQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 					} else if (isThis(assigment)) {
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
@@ -251,15 +249,21 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return null;
 	}
 	
-	protected void newLocalVariableQuickfix(final String variableName, XAbstractFeatureCall call, Issue issue,
+	protected void newLocalVariableQuickfixes(final String variableName, XAbstractFeatureCall call, Issue issue,
+			IssueResolutionAcceptor issueResolutionAcceptor) {
+		newLocalVariableQuickfix(variableName, false, call, issue, issueResolutionAcceptor);
+		newLocalVariableQuickfix(variableName, true, call, issue, issueResolutionAcceptor);
+	}
+	
+	protected void newLocalVariableQuickfix(final String variableName, boolean isImmutable, XAbstractFeatureCall call, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		LightweightTypeReference variableType = getNewMemberType(call);
 		final StringBuilderBasedAppendable localVarDescriptionBuilder = new StringBuilderBasedAppendable();
 		localVarDescriptionBuilder.append("...").newLine();
 		final String defaultValueLiteral = getDefaultValueLiteral(variableType);
-		localVarDescriptionBuilder.append("val ").append(variableName).append(" = ").append(defaultValueLiteral);
+		localVarDescriptionBuilder.append(isImmutable ? "val " : "var ").append(variableName).append(" = ").append(defaultValueLiteral);
 		localVarDescriptionBuilder.newLine().append("...");
-		issueResolutionAcceptor.accept(issue, "Create local variable '" + variableName + "'",
+		issueResolutionAcceptor.accept(issue, "Create local " + (isImmutable ? "value" : "variable") + " '" + variableName + "'",
 				localVarDescriptionBuilder.toString(), "fix_local_var.png",
 				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 					@Override
@@ -274,7 +278,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 											(XtextResource) element.eResource(), offset, 0, new OptionalParameters() {{ 
 												baseIndentationLevel = 1;	
 											}});
-									appendable.increaseIndentation().newLine().append("val ").append(variableName).append(" = ")
+									appendable.increaseIndentation().newLine().append(isImmutable ? "val " : "var ").append(variableName).append(" = ")
 											.append(defaultValueLiteral);
 									appendable.commitChanges();
 								}
@@ -282,6 +286,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 						}
 					}
 				}));
+		
 	}
 	
 	protected void newMethodQuickfixes(String newMemberName, XAbstractFeatureCall call, 

@@ -427,7 +427,12 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'bar()'", "Create method 'getBar()'")
+		.assertResolutionLabels(
+			"Create field 'bar'", 
+			"Create local variable 'bar'",
+			"Create local value 'bar'", 
+			"Create method 'bar()'",
+			"Create method 'getBar()'")
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
 				
@@ -439,6 +444,14 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertModelAfterQuickfix("Create local variable 'bar'", '''
+			class Foo {
+				def foo() {
+					var bar = null
+					bar
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create local value 'bar'", '''
 			class Foo {
 				def foo() {
 					val bar = null
@@ -484,7 +497,12 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'bar()'", "Create method 'getBar()'")
+		.assertResolutionLabels(
+			"Create field 'bar'", 
+			"Create local variable 'bar'",
+			"Create local value 'bar'", 
+			"Create method 'bar()'", 
+			"Create method 'getBar()'")
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
 				static class Bar {
@@ -512,7 +530,11 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'setBar(int)'")
+		.assertResolutionLabels(
+			"Create field 'bar'", 
+			"Create local variable 'bar'",
+			"Create local value 'bar'", 
+			"Create method 'setBar(int)'")
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
 				private static class Bar {
@@ -987,7 +1009,12 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create local variable 'bar'", "Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
+		.assertResolutionLabels(
+			"Create local variable 'bar'",
+			"Create local value 'bar'", 
+			"Create static method 'bar()'", 
+			"Create static method 'getBar()'", 
+			"Create static field 'bar'")
 		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
 			class Foo {
 				def static foo() {
