@@ -852,49 +852,120 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Test 
-	def void missingStaticMemberOtherClass() {
+	@Test
+	def void missingStaticMemberInSameClass() {
 		create('Foo.xtend', '''
-			class Foo {}
-			
-			class Bar {
-				def bar() {
-					Foo.foo|
+			class Foo {
+				def foo() {
+					Foo.bar|
 				}
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create static method 'foo()' in 'Foo'", "Create static method 'getFoo()' in 'Foo'")
-		.assertModelAfterQuickfix("Create static method 'foo()' in 'Foo'", '''
+		.assertResolutionLabels(
+			"Create static field 'bar'",
+			"Create static method 'bar()'",
+			"Create static method 'getBar()'"
+		)
+		.assertModelAfterQuickfix("Create static field 'bar'", '''
 			class Foo {
 				
-				def static foo() {
-					«defaultBody»
-				}
+				static Object bar
 				
-				}
-			
-			class Bar {
-				def bar() {
-					Foo.foo
+				def foo() {
+					Foo.bar
 				}
 			}
 		''')
-		.assertModelAfterQuickfix("Create static method 'getFoo()' in 'Foo'", '''
+		.assertModelAfterQuickfix("Create static method 'bar()'", '''
 			class Foo {
+				def foo() {
+					Foo.bar
+				}
 				
-				def static getFoo() {
+				def static bar() {
 					«defaultBody»
 				}
 				
-				}
-			
-			class Bar {
-				def bar() {
-					Foo.foo
-				}
 			}
 		''')
+		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
+			class Foo {
+				def foo() {
+					Foo.bar
+				}
+				
+				def static getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingStaticMemberInOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Bar.bar|
+				}
+			}
+			
+			class Bar {
+				
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels(
+			"Create static field 'bar' in 'Bar'",
+			"Create static method 'bar()' in 'Bar'",
+			"Create static method 'getBar()' in 'Bar'"
+		)
+		.assertModelAfterQuickfix("Create static field 'bar' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar
+				}
+			}
+			
+			class Bar {
+				
+				static Object bar
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'bar()' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar
+				}
+			}
+			
+			class Bar {
+				
+				def static bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'getBar()' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar
+				}
+			}
+			
+			class Bar {
+				
+				def static getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	
 	}
 	
 	@Test 
@@ -968,33 +1039,231 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Test 
-	def void missingStaticMethodOtherClass() {
+	@Test
+	def void missingStaticMethodInSameClass() {
 		create('Foo.xtend', '''
 			class Foo {
-			}
-			
-			class Bar {
-				def bar() {
-					Foo.foo|()
+				def foo() {
+					Foo.bar|()
 				}
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create static method 'foo()' in 'Foo'")
-		.assertModelAfterQuickfix('''
+		.assertResolutionLabels("Create static method 'bar()'")
+		.assertModelAfterQuickfix("Create static method 'bar()'", '''
 			class Foo {
+				def foo() {
+					Foo.bar()
+				}
 				
-				def static foo() {
+				def static bar() {
 					«defaultBody»
 				}
 				
 			}
+		''')
+	}
+	
+	@Test
+	def void missingStaticMethodInOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Bar.bar|()
+				}
+			}
 			
 			class Bar {
-				def bar() {
-					Foo.foo()
+				
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels("Create static method 'bar()' in 'Bar'")
+		.assertModelAfterQuickfix("Create static method 'bar()' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar()
 				}
+			}
+			
+			class Bar {
+				
+				def static bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test
+	def void missingStaticMethodWithArgumentsInSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Foo.bar|(0L)
+				}
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels("Create static method 'bar(long)'")
+		.assertModelAfterQuickfix("Create static method 'bar(long)'", '''
+			class Foo {
+				def foo() {
+					Foo.bar(0L)
+				}
+				
+				def static bar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test
+	def void missingStaticMethodWithArgumentsInOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Bar.bar|(0L)
+				}
+			}
+			
+			class Bar {
+				
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels("Create static method 'bar(long)' in 'Bar'")
+		.assertModelAfterQuickfix("Create static method 'bar(long)' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar(0L)
+				}
+			}
+			
+			class Bar {
+				
+				def static bar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test
+	def void missingStaticMethodWithAssignmentInSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Foo.bar| = 0L
+				}
+			}
+		''')
+		.assertFeatureCallLinkingIssue
+		.assertResolutionLabels(
+			"Create static field 'bar'",
+			"Create static method 'bar(long)'",
+			"Create static method 'setBar(long)'"
+		)
+		.assertModelAfterQuickfix("Create static field 'bar'", '''
+			class Foo {
+				
+				static long bar
+				
+				def foo() {
+					Foo.bar = 0L
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'bar(long)'", '''
+			class Foo {
+				def foo() {
+					Foo.bar = 0L
+				}
+				
+				def static bar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'setBar(long)'", '''
+			class Foo {
+				def foo() {
+					Foo.bar = 0L
+				}
+				
+				def static setBar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		
+	}
+	
+	@Test
+	def void missingStaticMethodWithAssignmentInOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Bar.bar| = 0L
+				}
+			}
+			
+			class Bar {
+				
+			}
+		''')	
+		.assertFeatureCallLinkingIssue()
+		.assertResolutionLabels(
+			"Create static field 'bar' in 'Bar'",
+			"Create static method 'bar(long)' in 'Bar'",
+			"Create static method 'setBar(long)' in 'Bar'")
+		.assertModelAfterQuickfix("Create static field 'bar' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar = 0L
+				}
+			}
+			
+			class Bar {
+				
+				static long bar
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'bar(long)' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar = 0L
+				}
+			}
+			
+			class Bar {
+				
+				def static bar(long l) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'setBar(long)' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar = 0L
+				}
+			}
+			
+			class Bar {
+				
+				def static setBar(long l) {
+					«defaultBody»
+				}
+				
 			}
 		''')
 	}

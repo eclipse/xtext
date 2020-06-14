@@ -123,7 +123,6 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
 					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-					
 				} else if (call instanceof XAssignment) {
 					newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
 					XAssignment assigment = (XAssignment) call;
@@ -131,6 +130,9 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 						newLocalVariableQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 					} else if (isThis(assigment)) {
+						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+					} else if (isStaticAccess(assigment)) {
+						newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 					}
 				}
@@ -165,7 +167,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected String getAccessorMethodName(String prefix, String fieldName) {
 		return prefix + fieldName.substring(0,1).toUpperCase() + fieldName.substring(1);
 	}
-
+	
 	protected boolean isStaticAccess(XAbstractFeatureCall call) {
 		if (call instanceof XMemberFeatureCall) {
 			XMemberFeatureCall featureCall = (XMemberFeatureCall) call;
@@ -178,6 +180,13 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					return true;
 				}
 			}
+		} else if (call instanceof XAssignment) {
+			XExpression assignable = ((XAssignment) call).getAssignable();
+			if (!(assignable instanceof XAbstractFeatureCall)) {
+				return false;
+			}
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) assignable;
+			return featureCall.isTypeLiteral();
 		}
 		return isStatic(logicalContainerProvider.getNearestLogicalContainer(call)); 
 	}
@@ -376,12 +385,20 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		JvmDeclaredType callersType = getCallersType(call);
 		LightweightTypeReference receiverType = getReceiverType(call);
 		LightweightTypeReference fieldType = getNewMemberType(call);
-		if(callersType != null && receiverType != null && callersType == receiverType.getType()) 
-			newFieldQuickfix(callersType, name, fieldType, isStaticAccess(call), call, issue, issueResolutionAcceptor);
+		
+		if (callersType != null && receiverType != null) {
+			final boolean isStatic = isStaticAccess(call);
+			final boolean isLocal = callersType == receiverType.getType();
+			if (isLocal) {
+				newFieldQuickfix(callersType, name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
+			} else if (isStatic && receiverType.getType() instanceof JvmDeclaredType) {
+				newFieldQuickfix((JvmDeclaredType) receiverType.getType(), name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
+			}
+		}
 	}
 
 	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, /* @Nullable */ LightweightTypeReference fieldType,
-			boolean isStatic, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+			boolean isStatic, boolean isLocal, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
 		fieldBuilder.setFieldName(name);
 		fieldBuilder.setFieldType(fieldType);
@@ -392,6 +409,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		if(isStatic) 
 			label.append("static ");
 		label.append("field '").append(name).append("'");
+		if(!isLocal)
+			label.append(" in '" + containerType.getSimpleName() + "'");
 		quickfixFactory.addQuickfix(fieldBuilder, label.toString(), issue, issueResolutionAcceptor);
 	}
 	
