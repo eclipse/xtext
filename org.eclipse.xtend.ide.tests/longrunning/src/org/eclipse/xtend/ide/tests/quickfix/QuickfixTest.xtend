@@ -428,11 +428,22 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertFeatureCallLinkingIssue
 		.assertResolutionLabels(
+			"Create constant 'bar'",
 			"Create field 'bar'", 
 			"Create local variable 'bar'",
 			"Create local value 'bar'", 
 			"Create method 'bar()'",
 			"Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				val Object bar = null
+				
+				def foo() {
+					bar
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
 				
@@ -498,11 +509,24 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertFeatureCallLinkingIssue
 		.assertResolutionLabels(
+			"Create constant 'bar'",
 			"Create field 'bar'", 
 			"Create local variable 'bar'",
 			"Create local value 'bar'", 
 			"Create method 'bar()'", 
 			"Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				static class Bar {
+					
+					val Object bar = null
+					
+					def foo() {
+						bar
+					}
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
 				static class Bar {
@@ -669,7 +693,21 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertResolutionLabels("Create method 'bar()'", "Create field 'bar'", "Create method 'getBar()'")
+		.assertResolutionLabels(
+			"Create constant 'bar'",
+			"Create method 'bar()'", 
+			"Create field 'bar'", 
+			"Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				val Object bar = null
+				
+				def foo() {
+					this.bar
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
 				def foo() {
@@ -741,7 +779,21 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create method 'bar()'", "Create field 'bar'", "Create method 'getBar()'")
+		.assertResolutionLabels(
+			"Create constant 'bar'",
+			"Create method 'bar()'", 
+			"Create field 'bar'", 
+			"Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				val Object bar = null
+				
+				def foo(Foo foo) {
+					foo.bar
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
 				def foo(Foo foo) {
@@ -781,7 +833,9 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test 
 	def void missingMemberOtherClass() {
 		create('Foo.xtend', '''
-			class Foo {}
+			class Foo {
+				
+			}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -790,8 +844,39 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create method 'foo()' in 'Foo'", "Create method 'getFoo()' in 'Foo'", 
-				"Create extension method 'foo(Foo)'", "Create extension method 'getFoo(Foo)'")
+		.assertResolutionLabels(
+			"Create constant 'foo' in 'Foo'",
+			"Create field 'foo' in 'Foo'",
+			"Create method 'foo()' in 'Foo'", 
+			"Create method 'getFoo()' in 'Foo'", 
+			"Create extension method 'foo(Foo)'", 
+			"Create extension method 'getFoo(Foo)'")
+		.assertModelAfterQuickfix("Create constant 'foo' in 'Foo'", '''
+			class Foo {
+				
+				val Object foo = null
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+			}
+		''') 
+		.assertModelAfterQuickfix("Create field 'foo' in 'Foo'", '''
+			class Foo {
+				
+				Object foo
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create method 'foo()' in 'Foo'", '''
 			class Foo {
 				
@@ -799,7 +884,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
-				}
+			}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -814,7 +899,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
-				}
+			}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -823,7 +908,9 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertModelAfterQuickfix("Create extension method 'foo(Foo)'", '''
-			class Foo {}
+			class Foo {
+				
+			}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -837,7 +924,9 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertModelAfterQuickfix("Create extension method 'getFoo(Foo)'", '''
-			class Foo {}
+			class Foo {
+				
+			}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -863,10 +952,21 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertFeatureCallLinkingIssue
 		.assertResolutionLabels(
+			"Create constant 'bar'",
 			"Create static field 'bar'",
 			"Create static method 'bar()'",
 			"Create static method 'getBar()'"
 		)
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				static val Object bar = null
+				
+				def foo() {
+					Foo.bar
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create static field 'bar'", '''
 			class Foo {
 				
@@ -918,10 +1018,24 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertFeatureCallLinkingIssue
 		.assertResolutionLabels(
+			"Create constant 'bar' in 'Bar'",
 			"Create static field 'bar' in 'Bar'",
 			"Create static method 'bar()' in 'Bar'",
 			"Create static method 'getBar()' in 'Bar'"
 		)
+		.assertModelAfterQuickfix("Create constant 'bar' in 'Bar'", '''
+			class Foo {
+				def foo() {
+					Bar.bar
+				}
+			}
+			
+			class Bar {
+				
+				static val Object bar = null
+				
+			}
+		''')
 		.assertModelAfterQuickfix("Create static field 'bar' in 'Bar'", '''
 			class Foo {
 				def foo() {
@@ -1279,11 +1393,22 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertFeatureCallLinkingIssue
 		.assertResolutionLabels(
+			"Create constant 'bar'",
 			"Create local variable 'bar'",
 			"Create local value 'bar'", 
 			"Create static method 'bar()'", 
 			"Create static method 'getBar()'", 
 			"Create static field 'bar'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				static val Object bar = null
+				
+				def static foo() {
+					bar
+				}
+			}
+		''')
 		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
 			class Foo {
 				def static foo() {
@@ -1328,7 +1453,19 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
+		.assertResolutionLabels(
+			"Create constant 'bar'",
+			"Create static method 'bar()'", 
+			"Create static method 'getBar()'", 
+			"Create static field 'bar'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				static val Object bar = null
+				
+				static Object foo = bar
+			}
+		''')
 		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
 			class Foo {
 				static Object foo = bar
@@ -1367,7 +1504,19 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertFeatureCallLinkingIssue
-		.assertResolutionLabels("Create method 'bar()'", "Create method 'getBar()'", "Create field 'bar'")
+		.assertResolutionLabels(
+			"Create constant 'bar'",
+			"Create method 'bar()'", 
+			"Create method 'getBar()'", 
+			"Create field 'bar'")
+		.assertModelAfterQuickfix("Create constant 'bar'", '''
+			class Foo {
+				
+				val Object bar = null
+				
+				Object foo = bar
+			}
+		''')
 		.assertModelAfterQuickfix("Create method 'getBar()'", '''
 			class Foo {
 				Object foo = bar

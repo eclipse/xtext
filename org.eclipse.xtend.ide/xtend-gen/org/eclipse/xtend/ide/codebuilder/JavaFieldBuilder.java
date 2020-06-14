@@ -12,6 +12,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 /**
@@ -33,7 +34,16 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
       if (_isStaticFlag) {
         appendable.append("static ");
       }
-      _xblockexpression = this.appendType(appendable, this.getFieldType(), "Object").append(" ").append(this.getFieldName()).append(";");
+      boolean _isFinalFlag = this.isFinalFlag();
+      if (_isFinalFlag) {
+        appendable.append("final ");
+      }
+      this.appendType(appendable, this.getFieldType(), "Object").append(" ").append(this.getFieldName());
+      boolean _isFinalFlag_1 = this.isFinalFlag();
+      if (_isFinalFlag_1) {
+        this.appendDefaultValueLiteral(appendable.append(" = "), this.getFieldType(), "null");
+      }
+      _xblockexpression = appendable.append(";");
     }
     return _xblockexpression;
   }
@@ -42,5 +52,27 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);
+  }
+  
+  @Override
+  public String getPrimitiveKindRepresentation(final Primitives.Primitive primitiveKind) {
+    String _switchResult = null;
+    if (primitiveKind != null) {
+      switch (primitiveKind) {
+        case Boolean:
+          _switchResult = "false";
+          break;
+        default:
+          String _simpleName = this.getFieldType().getSimpleName();
+          String _plus = ("(" + _simpleName);
+          _switchResult = (_plus + " 0");
+          break;
+      }
+    } else {
+      String _simpleName = this.getFieldType().getSimpleName();
+      String _plus = ("(" + _simpleName);
+      _switchResult = (_plus + " 0");
+    }
+    return _switchResult;
   }
 }

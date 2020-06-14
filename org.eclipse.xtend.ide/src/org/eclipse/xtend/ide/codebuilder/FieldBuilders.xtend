@@ -11,12 +11,15 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.common.types.JvmPrimitiveType
+import org.eclipse.xtext.common.types.util.Primitives
+import org.eclipse.xtext.common.types.util.Primitives.Primitive
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Jan Koehnlein
@@ -26,6 +29,9 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	@Accessors String fieldName
 	@Accessors LightweightTypeReference fieldType
 	@Accessors boolean staticFlag
+	@Accessors boolean finalFlag
+	
+	@Inject Primitives primitives
 	
 	override getImage() {
 		switch visibility {
@@ -35,6 +41,20 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 			default: 'field_default_obj.gif'
 		}
 	}
+	
+	def protected appendDefaultValueLiteral(ISourceAppender appendable, LightweightTypeReference typeRef, String surrogate) {
+		if (typeRef !== null && typeRef.primitive) {
+			appendable.append(primitives
+				.primitiveKind(typeRef.type as JvmPrimitiveType)
+				.primitiveKindRepresentation)
+		} else { 
+			appendable.append(surrogate)
+		}
+		appendable 
+	}
+	
+	def abstract String getPrimitiveKindRepresentation(Primitive primitiveKind)
+	
 }
 
 /**
@@ -52,7 +72,12 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 		appendable.appendVisibility(visibility, PRIVATE)
 		if(staticFlag)
 			appendable.append('static ')
+		if (finalFlag)
+			appendable.append('val ')
 		appendable.appendType(fieldType, "Object").append(' ').append(fieldName)
+		if (finalFlag)
+			appendable.append(' = ').appendDefaultValueLiteral(fieldType, "null")
+		appendable
 	}
 
 	override getInsertOffset(XtextResource resource) {
@@ -66,6 +91,14 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 	override getXtendType() {
 		ownerSource as XtendTypeDeclaration
 	}
+	
+	override getPrimitiveKindRepresentation(Primitive primitiveKind) {
+		switch (primitiveKind) {
+			case Primitive.Boolean: "false"
+			default: "0 as " + fieldType.simpleName
+		}
+	}
+ 
 }
 
 /**
@@ -81,10 +114,24 @@ class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java
 		appendable.appendVisibility(visibility, DEFAULT)
 		if(staticFlag)
 			appendable.append('static ')
-		appendable.appendType(fieldType, "Object").append(' ').append(fieldName).append(';')
+		if (finalFlag)
+			appendable.append('final ')
+		appendable.appendType(fieldType, "Object").append(' ').append(fieldName)
+		if (finalFlag)
+			appendable.append(' = ').appendDefaultValueLiteral(fieldType, "null")
+		appendable.append(";")
 	}
 
 	override getIType() {
 		ownerSource as IType
 	}
+	
+	
+	override getPrimitiveKindRepresentation(Primitive primitiveKind) {
+		switch (primitiveKind) {
+			case Primitive.Boolean: "false"
+			default: "(" + fieldType.simpleName + " 0"
+		}	
+	}
+	
 }

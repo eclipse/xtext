@@ -8,9 +8,14 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.inject.Inject;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -27,6 +32,12 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   
   @Accessors
   private boolean staticFlag;
+  
+  @Accessors
+  private boolean finalFlag;
+  
+  @Inject
+  private Primitives primitives;
   
   @Override
   public String getImage() {
@@ -53,6 +64,23 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     return _switchResult;
   }
   
+  protected ISourceAppender appendDefaultValueLiteral(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
+    ISourceAppender _xblockexpression = null;
+    {
+      if (((typeRef != null) && typeRef.isPrimitive())) {
+        JvmType _type = typeRef.getType();
+        appendable.append(
+          this.getPrimitiveKindRepresentation(this.primitives.primitiveKind(((JvmPrimitiveType) _type))));
+      } else {
+        appendable.append(surrogate);
+      }
+      _xblockexpression = appendable;
+    }
+    return _xblockexpression;
+  }
+  
+  public abstract String getPrimitiveKindRepresentation(final Primitives.Primitive primitiveKind);
+  
   @Pure
   public String getFieldName() {
     return this.fieldName;
@@ -78,5 +106,14 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   
   public void setStaticFlag(final boolean staticFlag) {
     this.staticFlag = staticFlag;
+  }
+  
+  @Pure
+  public boolean isFinalFlag() {
+    return this.finalFlag;
+  }
+  
+  public void setFinalFlag(final boolean finalFlag) {
+    this.finalFlag = finalFlag;
   }
 }

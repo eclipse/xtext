@@ -111,6 +111,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			if(newMemberName != null) {
 				if (call instanceof XMemberFeatureCall) {
 					if(!call.isExplicitOperationCallOrBuilderSyntax()) { 
+						newConstantQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
@@ -119,6 +120,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
 						if(logicalContainerProvider.getNearestLogicalContainer(call) instanceof JvmExecutable)
 							newLocalVariableQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+						newConstantQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
 						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
@@ -264,15 +266,15 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		newLocalVariableQuickfix(variableName, true, call, issue, issueResolutionAcceptor);
 	}
 	
-	protected void newLocalVariableQuickfix(final String variableName, boolean isImmutable, XAbstractFeatureCall call, Issue issue,
+	protected void newLocalVariableQuickfix(final String variableName, boolean isFinal, XAbstractFeatureCall call, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		LightweightTypeReference variableType = getNewMemberType(call);
 		final StringBuilderBasedAppendable localVarDescriptionBuilder = new StringBuilderBasedAppendable();
 		localVarDescriptionBuilder.append("...").newLine();
 		final String defaultValueLiteral = getDefaultValueLiteral(variableType);
-		localVarDescriptionBuilder.append(isImmutable ? "val " : "var ").append(variableName).append(" = ").append(defaultValueLiteral);
+		localVarDescriptionBuilder.append(isFinal ? "val " : "var ").append(variableName).append(" = ").append(defaultValueLiteral);
 		localVarDescriptionBuilder.newLine().append("...");
-		issueResolutionAcceptor.accept(issue, "Create local " + (isImmutable ? "value" : "variable") + " '" + variableName + "'",
+		issueResolutionAcceptor.accept(issue, "Create local " + (isFinal ? "value" : "variable") + " '" + variableName + "'",
 				localVarDescriptionBuilder.toString(), "fix_local_var.png",
 				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
 					@Override
@@ -287,7 +289,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 											(XtextResource) element.eResource(), offset, 0, new OptionalParameters() {{ 
 												baseIndentationLevel = 1;	
 											}});
-									appendable.increaseIndentation().newLine().append(isImmutable ? "val " : "var ").append(variableName).append(" = ")
+									appendable.increaseIndentation().newLine().append(isFinal ? "val " : "var ").append(variableName).append(" = ")
 											.append(defaultValueLiteral);
 									appendable.commitChanges();
 								}
@@ -379,24 +381,54 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					callersType, issue, issueResolutionAcceptor);
 		}
 	}
-
+	
+	protected void newConstantQuickfix(String name, XAbstractFeatureCall call, 
+			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		JvmDeclaredType callersType = getCallersType(call);
+		LightweightTypeReference receiverType = getReceiverType(call);
+		LightweightTypeReference fieldType = getNewMemberType(call);
+		if (callersType != null && receiverType != null) {
+			final boolean isStatic = isStaticAccess(call);
+			final boolean isLocal = callersType == receiverType.getType();
+			if (isLocal) {
+				newConstantQuickfix(callersType, name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
+			} else if (receiverType.getType() instanceof JvmDeclaredType) {
+				newConstantQuickfix((JvmDeclaredType) receiverType.getType(), name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
+			}
+		}
+	}
+	
 	protected void newFieldQuickfix(String name, XAbstractFeatureCall call, 
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		JvmDeclaredType callersType = getCallersType(call);
 		LightweightTypeReference receiverType = getReceiverType(call);
 		LightweightTypeReference fieldType = getNewMemberType(call);
-		
 		if (callersType != null && receiverType != null) {
 			final boolean isStatic = isStaticAccess(call);
 			final boolean isLocal = callersType == receiverType.getType();
 			if (isLocal) {
 				newFieldQuickfix(callersType, name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
-			} else if (isStatic && receiverType.getType() instanceof JvmDeclaredType) {
+			} else if (receiverType.getType() instanceof JvmDeclaredType) {
 				newFieldQuickfix((JvmDeclaredType) receiverType.getType(), name, fieldType, isStatic, isLocal, call, issue, issueResolutionAcceptor);
 			}
 		}
 	}
 
+	protected void newConstantQuickfix(JvmDeclaredType containerType, String name, /* @Nullable */ LightweightTypeReference fieldType,
+			boolean isStatic, boolean isLocal, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
+		fieldBuilder.setFieldName(name);
+		fieldBuilder.setFieldType(fieldType);
+		fieldBuilder.setContext(call);
+		fieldBuilder.setVisibility(JvmVisibility.PRIVATE);
+		fieldBuilder.setStaticFlag(isStatic);
+		fieldBuilder.setFinalFlag(true);
+		StringBuilder label = new StringBuilder("Create constant '" + name + "'");
+		if(!isLocal)
+			label.append(" in '" + containerType.getSimpleName() + "'");
+		quickfixFactory.addQuickfix(fieldBuilder, label.toString(), issue, issueResolutionAcceptor);
+	}
+	
 	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, /* @Nullable */ LightweightTypeReference fieldType,
 			boolean isStatic, boolean isLocal, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);

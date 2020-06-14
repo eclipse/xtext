@@ -739,6 +739,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
       "Create field \'bar\'", 
       "Create local variable \'bar\'", 
       "Create local value \'bar\'", 
@@ -750,7 +751,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("Object bar");
+    _builder_1.append("val Object bar = null");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
@@ -765,15 +766,19 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create field \'bar\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def foo() {");
     _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append("var bar = null");
+    _builder_2.append("\t");
+    _builder_2.append("Object bar");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def foo() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append("bar");
@@ -783,7 +788,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create local variable \'bar\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
     _builder_3.newLine();
@@ -791,7 +796,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("def foo() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
-    _builder_3.append("val bar = null");
+    _builder_3.append("var bar = null");
     _builder_3.newLine();
     _builder_3.append("\t\t");
     _builder_3.append("bar");
@@ -801,7 +806,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create local value \'bar\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create local variable \'bar\'", _builder_3);
     StringConcatenation _builder_4 = new StringConcatenation();
     _builder_4.append("class Foo {");
     _builder_4.newLine();
@@ -809,27 +814,17 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_4.append("def foo() {");
     _builder_4.newLine();
     _builder_4.append("\t\t");
+    _builder_4.append("val bar = null");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
     _builder_4.append("bar");
     _builder_4.newLine();
     _builder_4.append("\t");
     _builder_4.append("}");
     _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.append("def bar() {");
-    _builder_4.newLine();
-    _builder_4.append("\t\t");
-    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_4.newLineIfNotEmpty();
-    _builder_4.append("\t");
     _builder_4.append("}");
     _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.newLine();
-    _builder_4.append("}");
-    _builder_4.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_3 = _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create method \'bar()\'", _builder_4);
+    QuickfixTestBuilder _assertModelAfterQuickfix_3 = _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create local value \'bar\'", _builder_4);
     StringConcatenation _builder_5 = new StringConcatenation();
     _builder_5.append("class Foo {");
     _builder_5.newLine();
@@ -845,7 +840,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_5.append("\t");
     _builder_5.newLine();
     _builder_5.append("\t");
-    _builder_5.append("def getBar() {");
+    _builder_5.append("def bar() {");
     _builder_5.newLine();
     _builder_5.append("\t\t");
     _builder_5.append(QuickfixTest.defaultBody, "\t\t");
@@ -857,7 +852,35 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_5.newLine();
     _builder_5.append("}");
     _builder_5.newLine();
-    _assertModelAfterQuickfix_3.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_5);
+    QuickfixTestBuilder _assertModelAfterQuickfix_4 = _assertModelAfterQuickfix_3.assertModelAfterQuickfix("Create method \'bar()\'", _builder_5);
+    StringConcatenation _builder_6 = new StringConcatenation();
+    _builder_6.append("class Foo {");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("def foo() {");
+    _builder_6.newLine();
+    _builder_6.append("\t\t");
+    _builder_6.append("bar");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("def getBar() {");
+    _builder_6.newLine();
+    _builder_6.append("\t\t");
+    _builder_6.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_6.newLineIfNotEmpty();
+    _builder_6.append("\t");
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.newLine();
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _assertModelAfterQuickfix_4.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_6);
   }
   
   @Test
@@ -883,6 +906,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
       "Create field \'bar\'", 
       "Create local variable \'bar\'", 
       "Create local value \'bar\'", 
@@ -897,7 +921,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("Object bar");
+    _builder_1.append("val Object bar = null");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.newLine();
@@ -915,7 +939,35 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _assertResolutionLabels.assertModelAfterQuickfix("Create field \'bar\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("static class Bar {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("Object bar");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("def foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("bar");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
   }
   
   @Test
@@ -1199,9 +1251,20 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertResolutionLabels(
+      "Create constant \'bar\'", 
+      "Create method \'bar()\'", 
+      "Create field \'bar\'", 
+      "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val Object bar = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def foo() {");
@@ -1212,31 +1275,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'bar()\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.append("Object bar");
-    _builder_2.newLine();
-    _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("def foo() {");
@@ -1247,11 +1290,31 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def bar() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_2.newLineIfNotEmpty();
+    _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'bar()\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("Object bar");
+    _builder_3.newLine();
+    _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("\t");
     _builder_3.append("def foo() {");
@@ -1262,22 +1325,37 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("def getBar() {");
-    _builder_3.newLine();
-    _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_3.newLineIfNotEmpty();
-    _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("}");
-    _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create field \'bar\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def foo() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append("this.bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def getBar() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_4.newLineIfNotEmpty();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_4);
   }
   
   @Test
@@ -1343,9 +1421,20 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
+      "Create method \'bar()\'", 
+      "Create field \'bar\'", 
+      "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val Object bar = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def foo(Foo foo) {");
@@ -1356,31 +1445,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def bar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'bar()\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.append("Object bar");
-    _builder_2.newLine();
-    _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("def foo(Foo foo) {");
@@ -1391,11 +1460,31 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def bar() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_2.newLineIfNotEmpty();
+    _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'bar()\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("Object bar");
+    _builder_3.newLine();
+    _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("\t");
     _builder_3.append("def foo(Foo foo) {");
@@ -1406,28 +1495,47 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("def getBar() {");
-    _builder_3.newLine();
-    _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_3.newLineIfNotEmpty();
-    _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("}");
-    _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create field \'bar\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def foo(Foo foo) {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append("foo.bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def getBar() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_4.newLineIfNotEmpty();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_4);
   }
   
   @Test
   public void missingMemberOtherClass() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {}");
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("class Bar {");
@@ -1443,25 +1551,23 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create method \'getFoo()\' in \'Foo\'", 
-      "Create extension method \'foo(Foo)\'", "Create extension method \'getFoo(Foo)\'");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'foo\' in \'Foo\'", 
+      "Create field \'foo\' in \'Foo\'", 
+      "Create method \'foo()\' in \'Foo\'", 
+      "Create method \'getFoo()\' in \'Foo\'", 
+      "Create extension method \'foo(Foo)\'", 
+      "Create extension method \'getFoo(Foo)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("def foo() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
-    _builder_1.append("}");
+    _builder_1.append("val Object foo = null");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -1478,24 +1584,17 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'foo()\' in \'Foo\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'foo\' in \'Foo\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def getFoo() {");
-    _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_2.newLineIfNotEmpty();
-    _builder_2.append("\t");
-    _builder_2.append("}");
+    _builder_2.append("Object foo");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.newLine();
-    _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
     _builder_2.newLine();
@@ -1512,9 +1611,24 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'getFoo()\' in \'Foo\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'foo\' in \'Foo\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
-    _builder_3.append("class Foo {}");
+    _builder_3.append("class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("def foo() {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_3.newLineIfNotEmpty();
+    _builder_3.append("\t");
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("}");
     _builder_3.newLine();
     _builder_3.newLine();
     _builder_3.append("class Bar {");
@@ -1528,24 +1642,26 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("def foo(Foo foo) {");
-    _builder_3.newLine();
-    _builder_3.append("\t\t");
-    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_3.newLineIfNotEmpty();
-    _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("}");
-    _builder_3.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create extension method \'foo(Foo)\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create method \'foo()\' in \'Foo\'", _builder_3);
     StringConcatenation _builder_4 = new StringConcatenation();
-    _builder_4.append("class Foo {}");
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def getFoo() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_4.newLineIfNotEmpty();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("}");
     _builder_4.newLine();
     _builder_4.newLine();
     _builder_4.append("class Bar {");
@@ -1559,22 +1675,79 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_4.append("\t");
     _builder_4.append("}");
     _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.append("def getFoo(Foo foo) {");
-    _builder_4.newLine();
-    _builder_4.append("\t\t");
-    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_4.newLineIfNotEmpty();
-    _builder_4.append("\t");
     _builder_4.append("}");
     _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.newLine();
-    _builder_4.append("}");
-    _builder_4.newLine();
-    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create extension method \'getFoo(Foo)\'", _builder_4);
+    QuickfixTestBuilder _assertModelAfterQuickfix_3 = _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create method \'getFoo()\' in \'Foo\'", _builder_4);
+    StringConcatenation _builder_5 = new StringConcatenation();
+    _builder_5.append("class Foo {");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.newLine();
+    _builder_5.append("}");
+    _builder_5.newLine();
+    _builder_5.newLine();
+    _builder_5.append("class Bar {");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.append("def bar(Foo foo) {");
+    _builder_5.newLine();
+    _builder_5.append("\t\t");
+    _builder_5.append("foo.foo");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.append("}");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.append("def foo(Foo foo) {");
+    _builder_5.newLine();
+    _builder_5.append("\t\t");
+    _builder_5.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_5.newLineIfNotEmpty();
+    _builder_5.append("\t");
+    _builder_5.append("}");
+    _builder_5.newLine();
+    _builder_5.append("\t");
+    _builder_5.newLine();
+    _builder_5.append("}");
+    _builder_5.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix_4 = _assertModelAfterQuickfix_3.assertModelAfterQuickfix("Create extension method \'foo(Foo)\'", _builder_5);
+    StringConcatenation _builder_6 = new StringConcatenation();
+    _builder_6.append("class Foo {");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.newLine();
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _builder_6.newLine();
+    _builder_6.append("class Bar {");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("def bar(Foo foo) {");
+    _builder_6.newLine();
+    _builder_6.append("\t\t");
+    _builder_6.append("foo.foo");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.append("def getFoo(Foo foo) {");
+    _builder_6.newLine();
+    _builder_6.append("\t\t");
+    _builder_6.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_6.newLineIfNotEmpty();
+    _builder_6.append("\t");
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _builder_6.append("\t");
+    _builder_6.newLine();
+    _builder_6.append("}");
+    _builder_6.newLine();
+    _assertModelAfterQuickfix_4.assertModelAfterQuickfix("Create extension method \'getFoo(Foo)\'", _builder_6);
   }
   
   @Test
@@ -1594,6 +1767,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
       "Create static field \'bar\'", 
       "Create static method \'bar()\'", 
       "Create static method \'getBar()\'");
@@ -1603,7 +1777,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("static Object bar");
+    _builder_1.append("static val Object bar = null");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
@@ -1618,9 +1792,16 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create static field \'bar\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("static Object bar");
+    _builder_2.newLine();
+    _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("def foo() {");
@@ -1631,22 +1812,9 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.append("def static bar() {");
-    _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_2.newLineIfNotEmpty();
-    _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.newLine();
-    _builder_2.append("}");
-    _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static field \'bar\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
     _builder_3.newLine();
@@ -1662,7 +1830,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("\t");
-    _builder_3.append("def static getBar() {");
+    _builder_3.append("def static bar() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
     _builder_3.append(QuickfixTest.defaultBody, "\t\t");
@@ -1674,7 +1842,35 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def foo() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append("Foo.bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def static getBar() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_4.newLineIfNotEmpty();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_4);
   }
   
   @Test
@@ -1701,6 +1897,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\' in \'Bar\'", 
       "Create static field \'bar\' in \'Bar\'", 
       "Create static method \'bar()\' in \'Bar\'", 
       "Create static method \'getBar()\' in \'Bar\'");
@@ -1724,13 +1921,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("static Object bar");
+    _builder_1.append("static val Object bar = null");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create static field \'bar\' in \'Bar\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\' in \'Bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
@@ -1751,19 +1948,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def static bar() {");
-    _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_2.newLineIfNotEmpty();
-    _builder_2.append("\t");
-    _builder_2.append("}");
+    _builder_2.append("static Object bar");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'bar()\' in \'Bar\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static field \'bar\' in \'Bar\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
     _builder_3.newLine();
@@ -1784,7 +1975,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("\t");
-    _builder_3.append("def static getBar() {");
+    _builder_3.append("def static bar() {");
     _builder_3.newLine();
     _builder_3.append("\t\t");
     _builder_3.append(QuickfixTest.defaultBody, "\t\t");
@@ -1796,7 +1987,40 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'getBar()\' in \'Bar\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'bar()\' in \'Bar\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def foo() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append("Bar.bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.newLine();
+    _builder_4.append("class Bar {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def static getBar() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_4.newLineIfNotEmpty();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create static method \'getBar()\' in \'Bar\'", _builder_4);
   }
   
   @Test
@@ -2387,6 +2611,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
       "Create local variable \'bar\'", 
       "Create local value \'bar\'", 
       "Create static method \'bar()\'", 
@@ -2394,6 +2619,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
       "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static val Object bar = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def static foo() {");
@@ -2404,22 +2636,9 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def static getBar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
@@ -2435,7 +2654,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def static bar() {");
+    _builder_2.append("def static getBar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append(QuickfixTest.defaultBody, "\t\t");
@@ -2447,16 +2666,9 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("static Object bar");
-    _builder_3.newLine();
-    _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("\t");
     _builder_3.append("def static foo() {");
@@ -2467,9 +2679,44 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("def static bar() {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_3.newLineIfNotEmpty();
+    _builder_3.append("\t");
     _builder_3.append("}");
     _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static field \'bar\'", _builder_3);
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("}");
+    _builder_3.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("static Object bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("def static foo() {");
+    _builder_4.newLine();
+    _builder_4.append("\t\t");
+    _builder_4.append("bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create static field \'bar\'", _builder_4);
   }
   
   @Test
@@ -2482,29 +2729,27 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels("Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
+      "Create static method \'bar()\'", 
+      "Create static method \'getBar()\'", 
+      "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("static val Object bar = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.append("static Object foo = bar");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def static getBar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
@@ -2514,7 +2759,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def static bar() {");
+    _builder_2.append("def static getBar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append(QuickfixTest.defaultBody, "\t\t");
@@ -2526,23 +2771,45 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create static method \'getBar()\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
     _builder_3.newLine();
     _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("static Object bar");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
     _builder_3.append("static Object foo = bar");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("def static bar() {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_3.newLineIfNotEmpty();
+    _builder_3.append("\t");
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static field \'bar\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create static method \'bar()\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("static Object bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("static Object foo = bar");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create static field \'bar\'", _builder_4);
   }
   
   @Test
@@ -2555,29 +2822,27 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels("Create method \'bar()\'", "Create method \'getBar()\'", "Create field \'bar\'");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertFeatureCallLinkingIssue().assertResolutionLabels(
+      "Create constant \'bar\'", 
+      "Create method \'bar()\'", 
+      "Create method \'getBar()\'", 
+      "Create field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val Object bar = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.append("Object foo = bar");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("def getBar() {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append(QuickfixTest.defaultBody, "\t\t");
-    _builder_1.newLineIfNotEmpty();
-    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create constant \'bar\'", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("class Foo {");
     _builder_2.newLine();
@@ -2587,7 +2852,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("def bar() {");
+    _builder_2.append("def getBar() {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append(QuickfixTest.defaultBody, "\t\t");
@@ -2599,23 +2864,45 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'bar()\'", _builder_2);
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'getBar()\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
     _builder_3.append("class Foo {");
     _builder_3.newLine();
     _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.append("Object bar");
-    _builder_3.newLine();
-    _builder_3.append("\t");
-    _builder_3.newLine();
-    _builder_3.append("\t");
     _builder_3.append("Object foo = bar");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("def bar() {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_3.newLineIfNotEmpty();
+    _builder_3.append("\t");
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _builder_3.append("\t");
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create field \'bar\'", _builder_3);
+    QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create method \'bar()\'", _builder_3);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("class Foo {");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("Object bar");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.newLine();
+    _builder_4.append("\t");
+    _builder_4.append("Object foo = bar");
+    _builder_4.newLine();
+    _builder_4.append("}");
+    _builder_4.newLine();
+    _assertModelAfterQuickfix_2.assertModelAfterQuickfix("Create field \'bar\'", _builder_4);
   }
   
   @Test
