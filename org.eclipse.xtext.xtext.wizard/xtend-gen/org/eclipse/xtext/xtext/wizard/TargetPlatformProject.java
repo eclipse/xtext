@@ -216,7 +216,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.35.v20190528-1517\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2020-06\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2020-09\"/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</location>");
