@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.fowlerdsl.formatting2
 
+import com.google.common.base.Strings
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.example.fowlerdsl.services.StatemachineGrammarAccess
@@ -20,8 +21,6 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 
 import static org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.Literals.*
-
-import static extension com.google.common.base.Strings.repeat
 
 class StatemachineFormatter extends AbstractFormatter2 {
 
@@ -157,7 +156,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 	}
 
 	private def additionalSpaces(List<String> it, String name) {
-		" ".repeat(longestName.length - name.length + 1)
+		Strings.repeat(" ", longestName.length - name.length + 1)
 	}
 
 	private def getLongestName(List<String> it) {
