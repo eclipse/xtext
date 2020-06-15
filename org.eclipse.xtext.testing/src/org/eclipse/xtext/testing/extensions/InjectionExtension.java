@@ -10,6 +10,8 @@ package org.eclipse.xtext.testing.extensions;
 
 import static org.eclipse.xtext.util.Exceptions.throwUncheckedException;
 
+import java.lang.reflect.Modifier;
+
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.eclipse.xtext.testing.InjectWith;
@@ -59,10 +61,19 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 			Injector injector = injectorProvider.getInjector();
 			if (injector != null) {
 				Object testInstance = context.getRequiredTestInstance();
-				TestInstances requiredTestInstances = context.getRequiredTestInstances();
 				injector.injectMembers(testInstance);
-				for (Object o : requiredTestInstances.getEnclosingInstances()) {
-					injector.injectMembers(o);
+				try {
+					TestInstances requiredTestInstances = context.getRequiredTestInstances();
+					for (Object o : requiredTestInstances.getEnclosingInstances()) {
+						injector.injectMembers(o);
+					}
+				} catch (NoSuchMethodError e) {
+					if (!Modifier.isStatic(testInstance.getClass().getModifiers())) {
+						if (testInstance.getClass().getDeclaringClass() != null) {
+							throw new ExtensionConfigurationException("Injection of nested classes needs Junit5 >= 5.4", e);
+						}
+					}
+					// OK, getRequiredTestInstances is not there in Junit5 < 5.4
 				}
 			}
 		}
