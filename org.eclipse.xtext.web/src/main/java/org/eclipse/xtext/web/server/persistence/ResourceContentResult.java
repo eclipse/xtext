@@ -22,7 +22,6 @@ public class ResourceContentResult implements IServiceResult {
 	private final boolean dirty;
 
 	public ResourceContentResult(String fullText, String stateId, boolean dirty) {
-		super();
 		this.fullText = fullText;
 		this.stateId = stateId;
 		this.dirty = dirty;
