@@ -69,6 +69,8 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 				throw new OperationCanceledException();
 			participant.build(buildContext, progress.split(1));
 		}
+		if (progress.isCanceled())
+			throw new OperationCanceledException();
 	}
 
 	public ImmutableList<IXtextBuilderParticipant> getParticipants() {
