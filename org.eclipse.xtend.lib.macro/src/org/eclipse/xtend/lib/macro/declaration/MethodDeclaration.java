@@ -16,6 +16,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import java.util.Collections;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -67,6 +69,9 @@ public interface MethodDeclaration extends ExecutableDeclaration {
 	
 	/**
 	 * @return the overridden or implemented methods
+	 * @since 2.23
 	 */
-	Iterable<? extends MethodDeclaration> getOverriddenOrImplementedMethods();
+	default Iterable<? extends MethodDeclaration> getOverriddenOrImplementedMethods() {
+		return Collections.emptyList();
+	}
 }
