@@ -59,10 +59,14 @@ public interface MethodDeclaration extends ExecutableDeclaration {
 	 * @return whether this method is declared <code>native</code>
 	 */
 	boolean isNative();
-
 	
 	/**
 	 * @return the return type of this method
 	 */
 	TypeReference getReturnType();
+	
+	/**
+	 * @return the overridden or implemented methods
+	 */
+	Iterable<? extends MethodDeclaration> getOverriddenOrImplementedMethods();
 }

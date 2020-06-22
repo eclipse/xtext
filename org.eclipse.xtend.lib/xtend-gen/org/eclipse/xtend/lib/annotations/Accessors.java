@@ -1,10 +1,20 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtend.lib.annotations;
 
+import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.AccessorsDeprecationPolicy;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
@@ -18,6 +28,8 @@ import org.eclipse.xtend.lib.macro.Active;
  * <li>By default the accessors are public</li>
  * <li>If the {@link AccessorType}[] argument is given, only the listed
  * accessors with the specified visibility will be generated</li>
+ * <li>By default the accessors will be deprecated if the field is annotated as such.
+ * This can be changed by explicitly providing {@link Accessors#deprecationPolicy deprecationPolicy}</li>
  * </ul>
  * </p>
  * <p>
@@ -47,4 +59,11 @@ public @interface Accessors {
    * Accessors may be suppressed by passing {@link AccessorType#NONE}.
    */
   public AccessorType[] value() default { AccessorType.PUBLIC_GETTER, AccessorType.PUBLIC_SETTER };
+  /**
+   * Describes when {@code @Deprecated} will be added to generated accessors.<br>
+   * If it is not wanted or needed, pass {@link AccessorsDeprecationPolicy#NEVER} to prevent the annotation from being added.
+   * @since 2.23
+   */
+  @Beta
+  public AccessorsDeprecationPolicy deprecationPolicy() default AccessorsDeprecationPolicy.SAME_AS_FIELD;
 }

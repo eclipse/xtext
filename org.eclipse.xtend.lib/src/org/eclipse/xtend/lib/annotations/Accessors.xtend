@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtend.lib.annotations
 
 import com.google.common.annotations.Beta
@@ -8,6 +16,7 @@ import java.util.List
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.TransformationParticipant
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
@@ -27,6 +36,8 @@ import java.lang.annotation.Documented
  * <li>By default the accessors are public</li>
  * <li>If the {@link AccessorType}[] argument is given, only the listed
  * accessors with the specified visibility will be generated</li>
+ * <li>By default the accessors will be deprecated if the field is annotated as such.
+ * This can be changed by explicitly providing {@link Accessors#deprecationPolicy deprecationPolicy}</li>
  * </ul>
  * </p>
  * <p>
@@ -55,6 +66,13 @@ annotation Accessors {
 	 * Accessors may be suppressed by passing {@link AccessorType#NONE}.
 	 */
 	AccessorType[] value = #[AccessorType.PUBLIC_GETTER, AccessorType.PUBLIC_SETTER]
+	/**
+	 * Describes when {@code @Deprecated} will be added to generated accessors.<br>
+	 * If it is not wanted or needed, pass {@link AccessorsDeprecationPolicy#NEVER} to prevent the annotation from being added.
+	 * @since 2.23
+	 */
+	@Beta
+	AccessorsDeprecationPolicy deprecationPolicy = AccessorsDeprecationPolicy.SAME_AS_FIELD
 }
 
 /**
@@ -76,6 +94,19 @@ enum AccessorType {
 }
 
 /**
+ * @since 2.23
+ */
+@Beta
+@GwtCompatible
+enum AccessorsDeprecationPolicy {
+	SAME_AS_FIELD,
+	ONLY_GETTER,
+	ONLY_SETTER,
+	ALWAYS,
+	NEVER
+}
+
+/**
  * @since 2.7
  * @noextend
  * @noreference
@@ -89,11 +120,32 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 
 	def dispatch void transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new AccessorsProcessor.Util(context)
+		val annot = accessorsAnnotation
+
 		if (shouldAddGetter) {
 			addGetter(getterType.toVisibility)
 		}
+		else if (annot !== null && annot.deprecationPolicyAsEnum === AccessorsDeprecationPolicy.ONLY_GETTER){
+			it.addWarning(
+					'''
+					Field «simpleName» needs no getter, but deprecationPolicy is ONLY_GETTER.
+					Explicitly setting it has no effect, as no getter will be generated.
+					Use deprecation policy NEVER to disable accessors deprecation and remove this warning.
+					'''
+				)
+		}
+
 		if (shouldAddSetter) {
 			addSetter(setterType.toVisibility)
+		}
+		else if(annot !== null && annot.deprecationPolicyAsEnum === AccessorsDeprecationPolicy.ONLY_SETTER){
+			it.addWarning(
+				'''
+				Field «simpleName» needs no setter, but deprecationPolicy is ONLY_SETTER.
+				Explicitly setting it has no effect, as no setter will be generated.
+				Use deprecation policy NEVER to disable accessors deprecation and remove this warning.
+				'''
+			)
 		}
 	}
 
@@ -143,6 +195,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			!hasGetter && getterType !== AccessorType.NONE
 		}
 
+		@SuppressWarnings('unchecked')
 		def getGetterType(FieldDeclaration it) {
 			val annotation = accessorsAnnotation ?: declaringType.accessorsAnnotation
 			if (annotation !== null) {
@@ -154,6 +207,14 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 
 		def getAccessorsAnnotation(AnnotationTarget it) {
 			findAnnotation(Accessors.findTypeGlobally)
+		}
+
+		def getDeprecatedAnnotation(AnnotationTarget it) {
+			findAnnotation(Deprecated.findTypeGlobally)
+		}
+
+		def getDeprecationPolicyAsEnum(AnnotationReference annot){
+			AccessorsDeprecationPolicy.valueOf(annot.getEnumValue('deprecationPolicy').simpleName) 
 		}
 
 		def validateGetter(MutableFieldDeclaration field) {
@@ -177,12 +238,41 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			!inferred && it == primitiveBoolean
 		}
 
+		@SuppressWarnings('unchecked')
 		def void addGetter(MutableFieldDeclaration field, Visibility visibility) {
 			field.validateGetter
 			field.markAsRead
 			field.declaringType.addMethod(field.getterName) [
 				primarySourceElement = field.primarySourceElement
 				addAnnotation(newAnnotationReference(Pure))
+				
+				// Generate Override if not overriding a final method
+				val superGetters = overriddenOrImplementedMethods
+				if(!superGetters.empty){
+					if(superGetters.exists[final]) {
+						field.addError('''Adding a getter to the field «field.simpleName» would override a final method.''')
+					}
+					else {
+						addAnnotation(newAnnotationReference(Override))
+					}
+				}
+				
+				val annot = field.accessorsAnnotation
+				if(annot !== null) {
+					// Enforce deprecation policy for getter
+					switch annot.deprecationPolicyAsEnum {
+					case ALWAYS,
+					case ONLY_GETTER:
+						addAnnotation(newAnnotationReference(Deprecated))
+					case SAME_AS_FIELD:
+						if(field.deprecatedAnnotation !== null)
+							addAnnotation(newAnnotationReference(Deprecated))
+					case ONLY_SETTER,
+					case NEVER: {} // No-op
+					default: throw new IllegalArgumentException('''Cannot determine deprecation policy for field «field.simpleName»''')
+					}
+				} // if(annot !== null)
+
 				returnType = field.type.orObject
 				body = '''return «field.fieldOwner».«field.simpleName»;'''
 				static = field.static
@@ -190,6 +280,7 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			]
 		}
 
+		@SuppressWarnings('unchecked')
 		def getSetterType(FieldDeclaration it) {
 			val annotation = accessorsAnnotation ?: declaringType.accessorsAnnotation
 			if (annotation !== null) {
@@ -225,11 +316,40 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			}
 		}
 
+		@SuppressWarnings('unchecked')
 		def void addSetter(MutableFieldDeclaration field, Visibility visibility) {
 			field.validateSetter
 			field.declaringType.addMethod(field.setterName) [
 				primarySourceElement = field.primarySourceElement
 				returnType = primitiveVoid
+				
+				// Generate Override if not overriding a final method
+				val superSetters = overriddenOrImplementedMethods
+				if(!superSetters.empty){
+					if(superSetters.exists[final]) {
+						field.addError('''Adding a setter to the field «field.simpleName» would override a final method.''')
+					}
+					else {
+						addAnnotation(newAnnotationReference(Override))
+					}
+				}
+
+				val annot = field.accessorsAnnotation
+				if(annot !== null) {
+					// Enforce deprecation policy for setter
+					switch annot.deprecationPolicyAsEnum {
+					case ALWAYS,
+					case ONLY_SETTER:
+						addAnnotation(newAnnotationReference(Deprecated))
+					case SAME_AS_FIELD:
+						if(field.deprecatedAnnotation !== null)
+							addAnnotation(newAnnotationReference(Deprecated))
+					case ONLY_GETTER,
+					case NEVER: {} // No-op
+					default: throw new IllegalArgumentException('''Cannot determine deprecation policy for field «field.simpleName»''')
+					}
+				} // if(annot !== null)
+
 				val param = addParameter(field.simpleName, field.type.orObject)
 				body = '''«field.fieldOwner».«field.simpleName» = «param.simpleName»;'''
 				static = field.static
