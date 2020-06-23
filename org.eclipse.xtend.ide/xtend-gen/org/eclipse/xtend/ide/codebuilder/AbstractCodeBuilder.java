@@ -207,6 +207,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   }
   
   @Pure
+  @Override
   public Object getOwnerSource() {
     return this.ownerSource;
   }
@@ -216,6 +217,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   }
   
   @Pure
+  @Override
   public JvmDeclaredType getOwner() {
     return this.owner;
   }
@@ -225,6 +227,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   }
   
   @Pure
+  @Override
   public JvmVisibility getVisibility() {
     return this.visibility;
   }

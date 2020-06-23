@@ -71,11 +71,13 @@ public class ResolvedParameterImpl implements ResolvedParameter {
   }
   
   @Pure
+  @Override
   public ParameterDeclaration getDeclaration() {
     return this.declaration;
   }
   
   @Pure
+  @Override
   public TypeReference getResolvedType() {
     return this.resolvedType;
   }

@@ -285,18 +285,21 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override isSynchronized() {
+		// not supported in interfaces
 		false
 	}
 
 	override isDefault() {
-		false
+		!delegate.isStatic && delegate.expression !== null && declaringType instanceof InterfaceDeclaration
 	}
 	
 	override isStrictFloatingPoint() {
-		false	
+		// not supported in Xtend interfaces
+		false
 	}
 	
 	override isNative() {
+		// not supported in Xtend interfaces
 		false	
 	}
 	
@@ -335,7 +338,14 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override getOverriddenOrImplementedMethods() {
-		emptyList
+		if (delegate.isOverride) {
+			val jvmOperation = compilationUnit.jvmModelAssociations.getDirectlyInferredOperation(delegate)
+			val resolvedFeatures = compilationUnit.overrideHelper.getResolvedFeatures(jvmOperation.declaringType)
+			val resolvedOperation = resolvedFeatures.getResolvedOperation(jvmOperation)
+			val overriddenOrImplemented = resolvedOperation.overriddenAndImplementedMethods
+			return overriddenOrImplemented.map[compilationUnit.toMemberDeclaration(it.declaration)].filter(MethodDeclaration)
+		}
+		return emptyList
 	}
 	
 }

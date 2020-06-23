@@ -336,6 +336,44 @@ public class DeclarationsTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testOverriddenMethodFromSource() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("abstract class C extends java.util.AbstractList<String> implements I {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override add(String s);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface I {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def boolean add(String s)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
+      Assert.assertEquals("p", it.getPackageName());
+      TypeDeclaration _head = IterableExtensions.head(it.getSourceTypeDeclarations());
+      final ClassDeclaration clazz = ((ClassDeclaration) _head);
+      Assert.assertEquals("p.C", clazz.getQualifiedName());
+      final MethodDeclaration add = IterableExtensions.head(clazz.getDeclaredMethods());
+      final Iterable<? extends MethodDeclaration> allOverridden = add.getOverriddenOrImplementedMethods();
+      Assert.assertEquals(2, IterableExtensions.size(allOverridden));
+      final MethodDeclaration listAdd = IterableExtensions.head(allOverridden);
+      Assert.assertEquals("add", listAdd.getSimpleName());
+      Assert.assertEquals("E", IterableExtensions.head(listAdd.getParameters()).getType().getSimpleName());
+      final MethodDeclaration intfAdd = IterableExtensions.last(allOverridden);
+      Assert.assertEquals("add", intfAdd.getSimpleName());
+      Assert.assertEquals("String", IterableExtensions.head(intfAdd.getParameters()).getType().getSimpleName());
+    };
+    this.asCompilationUnit(this.validFile(_builder), _function);
+  }
+  
+  @Test
   public void testMutableClassDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

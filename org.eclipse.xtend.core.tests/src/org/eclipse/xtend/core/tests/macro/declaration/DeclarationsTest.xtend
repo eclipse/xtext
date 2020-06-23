@@ -235,6 +235,38 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test def testOverriddenMethodFromSource() {
+		validFile('''
+			package p
+			
+			abstract class C extends java.util.AbstractList<String> implements I {
+				override add(String s);
+			}
+			interface I {
+				def boolean add(String s)
+			}
+		''').asCompilationUnit [
+			assertEquals('p', packageName)
+			val clazz = sourceTypeDeclarations.head as ClassDeclaration
+			
+			assertEquals('p.C', clazz.qualifiedName)
+			
+			
+			val add = clazz.declaredMethods.head
+			val allOverridden = add.overriddenOrImplementedMethods
+			
+			assertEquals(2, allOverridden.size)
+			
+			val listAdd = allOverridden.head
+			assertEquals("add", listAdd.simpleName)
+			assertEquals("E", listAdd.parameters.head.type.simpleName)
+			
+			val intfAdd = allOverridden.last
+			assertEquals("add", intfAdd.simpleName)
+			assertEquals("String", intfAdd.parameters.head.type.simpleName)
+		]
+	}
+	
 	@Test def testMutableClassDeclaration() {
 		validFile('''
 		package foo

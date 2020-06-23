@@ -33,6 +33,7 @@ public abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
   }
   
   @Pure
+  @Override
   public String getImage() {
     return this.image;
   }
