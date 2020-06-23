@@ -75,3 +75,11 @@ war {
        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: ["xtext-version-placeholder": project.version])
     }
 }
+
+eclipse {
+	project {
+		file.whenMerged {
+			natures.remove('org.eclipse.wst.common.modulecore.ModuleCoreNature')
+		}
+	}
+}
