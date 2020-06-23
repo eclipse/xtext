@@ -104,8 +104,11 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 		if (event.getSource() instanceof FieldEditor) {
 			FieldEditor fe = (FieldEditor) event.getSource();
 			internalStore.setValue(fe.getPreferenceName(), fe.getPreferenceStore().getDefaultString(fe.getPreferenceName()));
+			// store changed value in internalStore
 			fe.setPreferenceStore(internalStore);
 			fe.store();
+			// reset preference store of fieldEditor to chained store, so it also works for other token styles.
+			fe.setPreferenceStore(getPreferenceStore());
 		}
 		super.propertyChange(event);
 	}
