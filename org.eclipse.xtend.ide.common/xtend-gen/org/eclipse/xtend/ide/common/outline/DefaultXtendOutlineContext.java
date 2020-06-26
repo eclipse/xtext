@@ -130,6 +130,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
   }
   
   @Pure
+  @Override
   public int getInheritanceDepth() {
     return this.inheritanceDepth;
   }
@@ -139,6 +140,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
   }
   
   @Pure
+  @Override
   public boolean isShowInherited() {
     return this.showInherited;
   }

@@ -82,11 +82,13 @@ public class UnknownType implements Type {
   }
   
   @Pure
+  @Override
   public CompilationUnit getCompilationUnit() {
     return this.compilationUnit;
   }
   
   @Pure
+  @Override
   public String getQualifiedName() {
     return this.qualifiedName;
   }
