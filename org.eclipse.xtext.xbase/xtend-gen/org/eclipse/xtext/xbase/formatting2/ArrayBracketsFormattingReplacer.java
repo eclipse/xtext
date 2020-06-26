@@ -38,6 +38,7 @@ public class ArrayBracketsFormattingReplacer implements ITextReplacer {
   }
   
   @Pure
+  @Override
   public ISemanticRegion getRegion() {
     return this.region;
   }

@@ -381,6 +381,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   }
   
   @Pure
+  @Override
   public boolean isInheritImplementation() {
     return this.inheritImplementation;
   }
@@ -390,6 +391,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   }
   
   @Pure
+  @Override
   public boolean isGenerateStub() {
     return this.generateStub;
   }

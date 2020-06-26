@@ -169,6 +169,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   @Pure
+  @Override
   public boolean isInheritImplementation() {
     return this.inheritImplementation;
   }
@@ -178,6 +179,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   @Pure
+  @Override
   public boolean isGenerateStub() {
     return this.generateStub;
   }

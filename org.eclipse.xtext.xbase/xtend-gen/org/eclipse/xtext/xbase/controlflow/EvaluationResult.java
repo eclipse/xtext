@@ -339,6 +339,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
   
   @Pure
+  @Override
   public boolean isCompileTimeConstant() {
     return this.compileTimeConstant;
   }
