@@ -391,6 +391,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Pure
+  @Override
   public Grammar getGrammar() {
     return this.grammar;
   }
@@ -406,6 +407,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Pure
+  @Override
   public ResourceSet getResourceSet() {
     return this.resourceSet;
   }
@@ -424,26 +426,31 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Pure
+  @Override
   public StandaloneSetupAccess getRuntimeGenSetup() {
     return this.runtimeGenSetup;
   }
   
   @Pure
+  @Override
   public GuiceModuleAccess getRuntimeGenModule() {
     return this.runtimeGenModule;
   }
   
   @Pure
+  @Override
   public GuiceModuleAccess getIdeGenModule() {
     return this.ideGenModule;
   }
   
   @Pure
+  @Override
   public GuiceModuleAccess getEclipsePluginGenModule() {
     return this.eclipsePluginGenModule;
   }
   
   @Pure
+  @Override
   public GuiceModuleAccess getWebGenModule() {
     return this.webGenModule;
   }

@@ -88,6 +88,7 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
   }
   
   @Pure
+  @Override
   public IXtextGeneratorFileSystemAccess getEcoreModel() {
     return this.ecoreModel;
   }
