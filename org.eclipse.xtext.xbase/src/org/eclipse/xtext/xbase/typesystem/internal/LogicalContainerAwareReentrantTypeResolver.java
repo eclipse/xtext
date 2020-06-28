@@ -915,6 +915,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (thisType.isStatic()) {
 				childSession = childSession.dropLocalElements();
 			} else {
+				if (!thisType.isLocal()) {
+					childSession = childSession.toInstanceContext();
+				}
 				childSession = childSession.captureLocalElements();
 			}
 		}
