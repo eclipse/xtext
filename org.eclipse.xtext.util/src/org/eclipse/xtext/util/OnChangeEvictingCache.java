@@ -103,7 +103,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	}
 	
 	/**
-	 * Returns the cache adapter that is associated with the resource. The lifecycle of the cache
+	 * Returns the cache adapter that is associated with the resource. The life cycle of the cache
 	 * is strongly connected to the resource and its change notifications. Will not return <code>null</code>.
 	 * @param resource the resource. May not be <code>null</code>.
 	 * @return the cache adapter for the given resource. Never <code>null</code>.
@@ -111,11 +111,18 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	public CacheAdapter getOrCreate(Resource resource) {
 		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
 		if (adapter == null) {
-			adapter = new CacheAdapter();
+			adapter = createCacheAdapter();
 			resource.eAdapters().add(adapter);
 			adapter.setResource(resource);
 		}
 		return adapter;
+	}
+
+	/**
+	 * @since 2.23
+	 */
+	protected CacheAdapter createCacheAdapter() {
+		return new CacheAdapter();
 	}
 	
 	/**
@@ -184,9 +191,6 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		private final Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
 
 		private final Collection<Listener> listeners = Sets.newLinkedHashSet();
-		
-		@Deprecated
-		private volatile boolean ignoreNotifications = false;
 		
 		private final AtomicInteger ignoreNotificationCounter = new AtomicInteger(0);
 		
@@ -267,7 +271,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (ignoreNotificationCounter.get() == 0 && !ignoreNotifications && isSemanticStateChange(notification)) {
+			if (ignoreNotificationCounter.get() == 0 && isSemanticStateChange(notification)) {
 				clearValues();
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
@@ -292,13 +296,29 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			}
 		}
 
-		private boolean isSemanticStateChange(Notification notification) {
-			return !notification.isTouch() && !(notification.getNewValue() instanceof Diagnostic) && !(notification.getOldValue() instanceof Diagnostic);
+		/**
+		 * @since 2.23
+		 */
+		protected boolean isSemanticStateChange(Notification notification) {
+			if (notification.isTouch()) {
+				return false;
+			}
+			if (notification.getNotifier() instanceof Resource) {
+				switch(notification.getFeatureID(Resource.class)) {
+				case Resource.RESOURCE__IS_MODIFIED:
+				case Resource.RESOURCE__IS_TRACKING_MODIFICATION:
+				case Resource.RESOURCE__TIME_STAMP:
+				case Resource.RESOURCE__ERRORS:
+				case Resource.RESOURCE__WARNINGS:
+					return false;
+				}
+			}
+			return true;
 		}
 
 		@Override
 		public boolean isAdapterForType(Object type) {
-			return type == getClass();
+			return type == getClass() || type == OnChangeEvictingCache.class || type == CacheAdapter.class;
 		}
 		
 		/**
@@ -306,11 +326,15 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		 */
 		@Deprecated
 		public void setIgnoreNotifications(boolean ignoreNotifications) {
-			this.ignoreNotifications = ignoreNotifications;
+			if (ignoreNotifications) {
+				ignoreNotifications();
+			} else {
+				listenToNotifications();
+			}
 		}
 
 		public boolean isIgnoreNotifications() {
-			return ignoreNotificationCounter.get() > 0 || ignoreNotifications;
+			return ignoreNotificationCounter.get() > 0;
 		}
 		
 		private IgnoreValuesMemento ignoreNewValues() {

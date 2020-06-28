@@ -8,10 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.List;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
 import org.junit.Assert;
@@ -39,6 +44,37 @@ public class OnChangeEvictingCacheAdapterTest extends Assert {
 		attribute.setName("Foo");
 		assertIsNull(ca);
 		setValue(ca);
+	}
+	
+	@Test
+	public void testCacheSurvivesChangeToDiagnostics() throws Exception {
+		EcoreFactory factory = EcoreFactory.eINSTANCE;
+		EClass eClass = factory.createEClass();
+		Resource resource = new ResourceImpl();
+		resource.getContents().add(eClass);
+		CacheAdapter ca = new OnChangeEvictingCache().getOrCreate(resource);
+		setValue(ca);
+		List<Diagnostic> errors = resource.getErrors();
+		assertIsSet(ca);
+		errors.clear();
+		assertIsSet(ca);
+	}
+	
+	@Test
+	public void testCacheSurvivesChangesToAdapters() throws Exception {
+		EcoreFactory factory = EcoreFactory.eINSTANCE;
+		EClass eClass = factory.createEClass();
+		Resource resource = new ResourceImpl();
+		resource.getContents().add(eClass);
+		CacheAdapter ca = new OnChangeEvictingCache().getOrCreate(resource);
+		setValue(ca);
+		List<Adapter> adapters = resource.eAdapters();
+		assertIsSet(ca);
+		AdapterImpl adapter = new AdapterImpl();
+		adapters.add(adapter);
+		assertIsSet(ca);
+		adapters.remove(adapter);
+		assertIsSet(ca);
 	}
 	
 	private void assertIsSet(CacheAdapter ca) {
