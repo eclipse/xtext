@@ -1,69 +1,33 @@
 pipeline {
+  agent {
+    kubernetes {
+      label 'centos-7'
+    }
+  }
+
   environment {
     npm_config_cache=".npm"
     NPM_CONFIG_USERCONFIG=".config"
     NO_UPDATE_NOTIFIER="true"
+    GRADLE_USER_HOME = "$WORKSPACE/.gradle" // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564559
   }
-  agent {
-    kubernetes {
-      label 'xtext-web-' + (env.BRANCH_NAME.replace('/','_')) + '-' + env.BUILD_NUMBER
-      defaultContainer 'xtext-buildenv'
-      yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
-    resources:
-      limits:
-        memory: "0.4Gi"
-        cpu: "0.2"
-      requests:
-        memory: "0.4Gi"
-        cpu: "0.2"
-    volumeMounts:
-    - mountPath: /home/jenkins/.ssh
-      name: volume-known-hosts
-  - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.7
-    tty: true
-    resources:
-      limits:
-        memory: "3.6Gi"
-        cpu: "1.0"
-      requests:
-        memory: "3.6Gi"
-        cpu: "1.0"
-    volumeMounts:
-    - name: settings-xml
-      mountPath: /home/jenkins/.m2/settings.xml
-      subPath: settings.xml
-      readOnly: true
-    - name: m2-repo
-      mountPath: /home/jenkins/.m2/repository
-    - name: volume-known-hosts
-      mountPath: /home/jenkins/.ssh
-  volumes:
-  - name: volume-known-hosts
-    configMap:
-      name: known-hosts
-  - name: settings-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings.xml
-        path: settings.xml
-  - name: m2-repo
-    emptyDir: {}
-    '''
-    }
+
+  parameters {
+    // see https://wiki.eclipse.org/Jenkins#JDK
+    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
+       'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-latest'
+    ])
   }
 
   options {
     buildDiscarder(logRotator(numToKeepStr:'5'))
     disableConcurrentBuilds()
     timeout(time: 90, unit: 'MINUTES')
+  }
+
+  tools {
+     maven "apache-maven-latest"
+     jdk "${params.JDK_VERSION}"
   }
 
   // Build stages
