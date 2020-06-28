@@ -28,3 +28,11 @@ test {
 tasks.withType(Javadoc) {
 	enabled = false
 }
+
+eclipse {
+	project {
+		file.whenMerged {
+			natures.remove('org.eclipse.wst.common.modulecore.ModuleCoreNature')
+		}
+	}
+}
