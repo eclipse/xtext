@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,7 +13,6 @@ import java.util.Collection
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -21,8 +20,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmTypeConstraint
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
-import org.eclipse.xtext.formatting2.ITextReplacer
-import org.eclipse.xtext.formatting2.ITextReplacerContext
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
@@ -656,20 +653,4 @@ class XbaseFormatter extends XtypeFormatter {
 		obj !== null && (obj.multiline || obj.previousHiddenRegion.multiline)
 	}
 
-}
-
-/**
- * @author Moritz Eysholdt - Initial implementation and API
- */
-@FinalFieldsConstructor class ArrayBracketsFormattingReplacer implements ITextReplacer {
-	@Accessors val ISemanticRegion region
-
-	override createReplacements(ITextReplacerContext it) {
-		val t = region.text
-		val offset = region.offset
-		for (var i = 0; i < t.length; i++)
-			if (Character.isWhitespace(t.charAt(i)))
-				addReplacement(region.textRegionAccess.rewriter.createReplacement(offset + i, 1, ""))
-		return it
-	}
 }
