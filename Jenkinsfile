@@ -69,6 +69,10 @@ pipeline {
           }
         }
         sh '''
+            if [ -f "/sys/fs/cgroup/memory/memory.limit_in_bytes" ]; then
+                echo "Available memory: $(cat /sys/fs/cgroup/memory/memory.limit_in_bytes | numfmt --to iec --format '%f')"
+            fi
+            
             sed_inplace() {
                 if [[ "$OSTYPE" == "darwin"* ]]; then
                     sed -i '' "$@"

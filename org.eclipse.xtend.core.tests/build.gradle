@@ -15,6 +15,8 @@ sourceSets.test {
 }
 
 test {
-	maxHeapSize = "2G"
+	maxHeapSize = "1500m"
+	maxParallelForks = 1
+	forkEvery = 100
 	exclude '**/*Suite.class'
 }
