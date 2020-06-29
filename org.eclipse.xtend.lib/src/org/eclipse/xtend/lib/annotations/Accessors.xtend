@@ -238,7 +238,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			!inferred && it == primitiveBoolean
 		}
 
-		@SuppressWarnings('unchecked')
 		def void addGetter(MutableFieldDeclaration field, Visibility visibility) {
 			field.validateGetter
 			field.markAsRead
@@ -316,7 +315,6 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			}
 		}
 
-		@SuppressWarnings('unchecked')
 		def void addSetter(MutableFieldDeclaration field, Visibility visibility) {
 			field.validateSetter
 			field.declaringType.addMethod(field.setterName) [

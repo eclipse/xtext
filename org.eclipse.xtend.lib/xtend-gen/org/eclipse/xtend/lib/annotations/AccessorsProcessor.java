@@ -200,7 +200,6 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return ((!it.isInferred()) && Objects.equal(it, this.context.getPrimitiveBoolean()));
     }
     
-    @SuppressWarnings("unchecked")
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateGetter(field);
       field.markAsRead();
@@ -347,7 +346,6 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
     }
     
-    @SuppressWarnings("unchecked")
     public void addSetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateSetter(field);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
