@@ -509,6 +509,17 @@ public class LazyLinkingResource extends XtextResource {
 	private ArrayList<Triple<EObject, EReference, INode>> proxyInformation = newArrayList();
 	
 	/**
+	 * Returns the list of installed lazy linking proxies encoded as a {@link Triple} of the owning object,
+	 * the reference and the node that holds the raw text for the link.
+	 * 
+	 * @since 2.23
+	 */
+	protected List<Triple<EObject, EReference, INode>> getLazyProxyInformation() {
+		// Make the list available to sub-types in a modifiable way such that they can work with it more efficiently
+		return proxyInformation;
+	}
+	
+	/**
 	 * @since 2.7
 	 */
 	public int addLazyProxyInformation(EObject obj, EReference ref, INode node) {
