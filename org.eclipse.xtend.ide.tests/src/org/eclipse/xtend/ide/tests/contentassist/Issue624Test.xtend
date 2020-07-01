@@ -17,22 +17,22 @@ class Issue624Test extends AbstractXtendContentAssistBugTest {
 
 	@Test def void testMembersOfEnclosingTypeAreProposed() throws Exception {
 		newBuilder().append("class Outer {
-			int inOuter = 1;
+			int xxxOuter = 1;
 			static class StaticInner {
-				int inStaticInner = 2;
+				int xxxStaticInner = 2;
 				class Inner {
-					int inInner = in").assertText(
-				'inInner', 'inStaticInner', 'instanceof - type test and autocast', 'internalArrayEquals()' /* from static import favorites in org.junit.Assert */);
+					int xxxInner = xxx").assertText(
+				'xxxInner', 'xxxStaticInner');
 	}
 	
 	@Test def void testNoInstanceMembersProposedInStaticLocalClass() throws Exception {
 		newBuilder().append("class Outer {
-			static int inOuter = 1;
-			int instanceInOuter = 2
+			static int xxxOuter = 1;
+			int xxxInstanceInOuter = 2
 			static def m() {
 				new Object() {
-					int inLocal = in").assertText(
-				'inOuter', 'inLocal', 'instanceof - type test and autocast', 'internalArrayEquals()' /* from static import favorites in org.junit.Assert */);
+					int xxxLocal = xxx").assertText(
+				'xxxOuter', 'xxxLocal');
 	}
 	
 }

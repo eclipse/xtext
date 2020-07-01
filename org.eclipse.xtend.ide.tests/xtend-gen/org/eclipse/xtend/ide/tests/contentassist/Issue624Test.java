@@ -18,13 +18,13 @@ import org.junit.Test;
 public class Issue624Test extends AbstractXtendContentAssistBugTest {
   @Test
   public void testMembersOfEnclosingTypeAreProposed() throws Exception {
-    this.newBuilder().append("class Outer {\n\t\t\tint inOuter = 1;\n\t\t\tstatic class StaticInner {\n\t\t\t\tint inStaticInner = 2;\n\t\t\t\tclass Inner {\n\t\t\t\t\tint inInner = in").assertText(
-      "inInner", "inStaticInner", "instanceof - type test and autocast", "internalArrayEquals()");
+    this.newBuilder().append("class Outer {\n\t\t\tint xxxOuter = 1;\n\t\t\tstatic class StaticInner {\n\t\t\t\tint xxxStaticInner = 2;\n\t\t\t\tclass Inner {\n\t\t\t\t\tint xxxInner = xxx").assertText(
+      "xxxInner", "xxxStaticInner");
   }
   
   @Test
   public void testNoInstanceMembersProposedInStaticLocalClass() throws Exception {
-    this.newBuilder().append("class Outer {\n\t\t\tstatic int inOuter = 1;\n\t\t\tint instanceInOuter = 2\n\t\t\tstatic def m() {\n\t\t\t\tnew Object() {\n\t\t\t\t\tint inLocal = in").assertText(
-      "inOuter", "inLocal", "instanceof - type test and autocast", "internalArrayEquals()");
+    this.newBuilder().append("class Outer {\n\t\t\tstatic int xxxOuter = 1;\n\t\t\tint xxxInstanceInOuter = 2\n\t\t\tstatic def m() {\n\t\t\t\tnew Object() {\n\t\t\t\t\tint xxxLocal = xxx").assertText(
+      "xxxOuter", "xxxLocal");
   }
 }
