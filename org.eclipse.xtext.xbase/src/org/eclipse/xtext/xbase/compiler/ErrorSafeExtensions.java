@@ -8,9 +8,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
@@ -18,16 +15,16 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
-import org.eclipse.xtext.xbase.compiler.LoopParams;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein
