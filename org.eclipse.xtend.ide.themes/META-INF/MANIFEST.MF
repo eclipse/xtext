@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.xtend.core.Xtend;singleton:=true
+Bundle-Version: 2.23.0.qualifier
+Bundle-Vendor: %providerName
+Automatic-Module-Name: org.eclipse.xtend.core.Xtend
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.e4.ui.css.swt.theme
