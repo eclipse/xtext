@@ -65,6 +65,29 @@ public abstract class AbstractMultiQuickfixTest extends AbstractEditorTest {
 		IResourcesSetupUtil.setAutobuild(WAS_AUTOBUILD);
 	}
 
+	/**
+	 * Test that the multi-quickfixes work as expected.
+	 * 
+	 * @param initialText
+	 *            the initial DSL text.
+	 * @param initialTextWithMarkers
+	 *            the initial DSL text enhanced by the recognized marker information.
+	 * @param resultTextWithMarkers
+	 *            the result DSL text enhanced by the recognized marker information after applying all the quickfixes.
+	 */
+	public void testMultiQuickfix(CharSequence initialText, CharSequence initialTextWithMarkers, CharSequence resultTextWithMarkers) {
+		// Given
+		IFile file = dslFile(initialText);
+		IMarker[] markers = getMarkers(file);
+		assertContentsAndMarkers(file, markers, initialTextWithMarkers);
+		
+		// When
+		applyQuickfixOnMultipleMarkers(markers);
+		
+		// Then
+		assertContentsAndMarkers(file, resultTextWithMarkers);
+	}
+
 	protected IFile dslFile(CharSequence content) {
 		return dslFile(getProjectName(), getFileName(), getFileExtension(), content);
 	}
