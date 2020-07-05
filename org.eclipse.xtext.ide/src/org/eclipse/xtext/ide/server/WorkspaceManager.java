@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -77,7 +78,7 @@ public class WorkspaceManager {
 
 	private final Map<String, ProjectManager> projectName2ProjectManager = new HashMap<>();
 	
-	private final List<ILanguageServerAccess.IBuildListener> buildListeners = new ArrayList<>();
+	private final List<ILanguageServerAccess.IBuildListener> buildListeners = new CopyOnWriteArrayList<>();
 
 	private final Map<String, ResourceDescriptionsData> fullIndex = new HashMap<>();
 
