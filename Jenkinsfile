@@ -32,9 +32,13 @@ pipeline {
 
   // Build stages
   stages {
-    stage('Checkout') {
+    stage('Initialize') {
       steps {
         checkout scm
+
+        script {
+          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion(JDK_VERSION))
+        }
       }
     }
 
@@ -85,5 +89,13 @@ pipeline {
         }
       }
     }
+  }
+}
+
+def javaVersion(String version) {
+  if (!version.contains('-jdk')) {
+    return 'jdk15'
+  } else {
+    return version.replaceAll(".*-(jdk\\d+).*", "\$1")
   }
 }
