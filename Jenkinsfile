@@ -11,7 +11,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'target_platform', choices: ['oxygen', 'photon', 'r201812', 'r201809', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
        'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-latest'
@@ -24,7 +24,7 @@ pipeline {
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %target_platform=latest;JDK_VERSION=adoptopenjdk-hotspot-jdk11-latest' : '')
+    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=adoptopenjdk-hotspot-jdk11-latest' : '')
   }
 
   options {
@@ -44,29 +44,7 @@ pipeline {
         checkout scm
         
         script {
-          if (params.target_platform == 'latest') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.17)"
-          } else if (params.target_platform == 'r202006') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.16)"
-          } else if (params.target_platform == 'r202003') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.15)"
-          } else if (params.target_platform == 'r201912') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.14)"
-          } else if (params.target_platform == 'r201909') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.13)"
-          }  else if (params.target_platform == 'r201906') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
-          } else if (params.target_platform == 'r201903') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
-          } else if (params.target_platform == 'r201812') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.10)"
-          } else if (params.target_platform == 'r201809') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.9)"
-          } else if (params.target_platform == 'photon') {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.8)"
-          } else {
-            currentBuild.displayName = "#${BUILD_NUMBER}(4.7)"
-          }
+          currentBuild.displayName = String.format("#%s(%s,%s)", BUILD_NUMBER, eclipseVersion(params.TARGET_PLATFORM), javaVersion(JDK_VERSION))
         }
         sh '''
             if [ -f "/sys/fs/cgroup/memory/memory.limit_in_bytes" ]; then
@@ -110,7 +88,8 @@ pipeline {
           steps {
             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
             sh """
-              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.target_platform} --local-repository=/home/jenkins/.m2/repository
+              export MAVEN_OPTS=-Xmx1500m 
+              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.TARGET_PLATFORM} --local-repository=/home/jenkins/.m2/repository
             """
             }
           }// END steps
@@ -173,5 +152,29 @@ pipeline {
         }
       }
     }
+  }
+}
+
+def eclipseVersion(String targetPlatform) {
+  if (targetPlatform == 'latest') {
+    return "4.17"
+  } else if (targetPlatform == 'photon') {
+    return "4.8"
+  } else if (targetPlatform == 'oxygen') {
+    return "4.7"
+  } else {
+    def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
+    def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
+    def targetDate = java.time.LocalDate.parse(targetPlatform.substring(1)+"01", df)
+    long monthsBetween = java.time.temporal.ChronoUnit.MONTHS.between(baseDate, targetDate);
+    return "4."+ (8+(monthsBetween/3))
+  } 
+}
+
+def javaVersion(String version) {
+  if (!version.contains('-jdk')) {
+    return 'jdk15'
+  } else {
+    return version.replaceAll(".*-(jdk\\d+).*", "\$1")
   }
 }
