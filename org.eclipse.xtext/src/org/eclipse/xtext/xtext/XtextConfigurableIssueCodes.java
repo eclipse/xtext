@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -44,6 +44,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String BIDIRECTIONAL_REFERENCE = ISSUE_CODE_PREFIX + "BidirectionalReference";
 	public static final String CROSS_REFERENCE_IN_ALTERNATIVES = ISSUE_CODE_PREFIX + "CrossReferenceInAlternatives";
 	public static final String INVALID_FRAGMENT_AS_FIRST_RULE = ISSUE_CODE_PREFIX + "InvalidFragmentFirstRule";
+	public static final String INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE = ISSUE_CODE_PREFIX + "InvalidTerminalFragmentRuleReference";
 	
 	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
 	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
@@ -61,6 +62,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_INHERITED, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(CROSS_REFERENCE_IN_ALTERNATIVES, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_FRAGMENT_AS_FIRST_RULE, SeverityConverter.SEVERITY_ERROR));
+		acceptor.accept(create(INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE, SeverityConverter.SEVERITY_ERROR));
 		
 		acceptor.accept(create(INVALID_METAMODEL_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_EXTERNAL, SeverityConverter.SEVERITY_WARNING));
