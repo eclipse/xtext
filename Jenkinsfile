@@ -30,13 +30,14 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
+    stage('Initialize') {
       steps {
         script {
           properties([
             [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/eclipse/xtext-core/'],
             [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false]
           ])
+          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion(JDK_VERSION))
         }
 
         sh '''
@@ -149,5 +150,13 @@ def getReleaseType () {
     return env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('.')+1)
   } else {
     return "Integration"
+  }
+}
+
+def javaVersion(String version) {
+  if (!version.contains('-jdk')) {
+    return 'jdk15'
+  } else {
+    return version.replaceAll(".*-(jdk\\d+).*", "\$1")
   }
 }
