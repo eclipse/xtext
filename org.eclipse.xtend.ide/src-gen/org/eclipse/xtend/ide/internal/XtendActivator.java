@@ -8,18 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.internal;
 
-import com.google.common.collect.Maps;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.css.swt.theme.IThemeEngine;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.themes.IThemeManager;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.ide.XtendUiModule;
+import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
+import org.osgi.service.event.EventHandler;
+
+import com.google.common.collect.Maps;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -40,6 +51,22 @@ public class XtendActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
+		if (PlatformUI.isWorkbenchRunning()) {
+			IWorkbench workbench = PlatformUI.getWorkbench();
+			IEventBroker eventBroker = workbench.getService(IEventBroker.class);
+			if (eventBroker != null) {
+				EventHandler eventHandler = evt -> initTheme();
+				eventBroker.subscribe("org/eclipse/e4/ui/LifeCycle/themeChanged", eventHandler);
+				eventBroker.subscribe("org/eclipse/e4/ui/css/swt/theme/ThemeManager/themeChanged", eventHandler);
+				initTheme();
+			}
+		}
+	}
+
+	private void initTheme() {
+		IThemeEngine themeEngine = PlatformUI.getWorkbench().getService(IThemeEngine.class);
+		IEclipsePreferences preferences = InstanceScope.INSTANCE.getNode(ORG_ECLIPSE_XTEND_CORE_XTEND);
+		themeEngine.applyStyles(preferences, false);
 	}
 	
 	@Override
