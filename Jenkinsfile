@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'centos-7'
+      label 'centos-7-6gb'
     }
   }
   
@@ -71,7 +71,10 @@ pipeline {
 
     stage('Gradle Build') {
       steps {
-        sh "./1-gradle-build.sh"
+        sh '''
+          JAVA_OPTS="-Xmx1500m"
+          ./1-gradle-build.sh
+        '''
       }
     }
 
@@ -79,9 +82,10 @@ pipeline {
       stages { // TODO use of parallel { here kills Tycho process with OOM
         stage('Maven Plugin Build') {
           steps {
-            sh """
+            sh '''
+              export MAVEN_OPTS="-Xmx1500m"
               ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
-            """
+            '''
           } // END steps
         } // END stage
         stage('Maven Tycho Build') {
