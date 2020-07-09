@@ -192,7 +192,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
 					return true; // filter out working copies
 				}
 				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(documentPath));
-				if (!isDerived(file)) {
+				if (!isDerived(file) && file.exists()) {
 					addIssue(type, file.getName());
 					return false;
 				}
