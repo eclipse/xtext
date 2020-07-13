@@ -213,12 +213,20 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		return getTypeComputationServices().getFunctionTypes().findImplementingOperation(closureType);
 	}
 	
-	private void doCastConversion(final LightweightTypeReference castTo, final ITreeAppendable b, final Later expression) {
-		b.append("((");
-		b.append(castTo);
-		b.append(")");
-		expression.exec(b);
-		b.append(")");
+	/**
+	 * Invoked to generate the Java cast operation to the given buffer.
+	 * 
+	 * @param castTo is the expected type of the cast expression.
+	 * @param buffer is the receiver of the Java expression.
+	 * @param expression is the expression that has to be casted.
+	 * @since 2.23
+	 */
+	protected void doCastConversion(final LightweightTypeReference castTo, final ITreeAppendable buffer, final Later expression) {
+		buffer.append("((");
+		buffer.append(castTo);
+		buffer.append(")");
+		expression.exec(buffer);
+		buffer.append(")");
 	}
 	
 	private boolean isFunction(LightweightTypeReference typeReference) {
