@@ -13,10 +13,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.ArrayList
 import java.util.List
-import java.util.Map
-import java.util.Stack
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
@@ -43,10 +39,7 @@ import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.interpreter.ConstantOperators
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
-import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -371,43 +364,6 @@ class ConstantConditionsInterpreter {
 		return new EvaluationResult(it, false)
 	}
 
-}
-
-/**
- * @author Sebastian Zarnekow - Initial API and implementation
- */
-class EvaluationContext {
-	@Inject IBatchTypeResolver typeResolver
-	RecursionGuard<EObject> visiting = new RecursionGuard
-	Map<Resource, IResolvedTypes> resolvedTypesPerResource = newHashMap
-	Stack<IResolvedTypes> resolvedTypesStack = new Stack
-	def tryNext(XExpression expression) {
-		if (visiting.tryNext(expression)) {
-			expression.resolveTypes
-			return true
-		}
-		return false
-	}
-	def void addResolvedTypes(Resource resource, IResolvedTypes resolvedTypes) {
-		resolvedTypesPerResource.put(resource, resolvedTypes)
-	}
-	private def void resolveTypes(XExpression expression) {
-		val resource = expression.eResource
-		var resolvedTypes = resolvedTypesPerResource.get(resource)
-		if (resolvedTypes === null) {
-			resolvedTypes = typeResolver.resolveTypes(expression)
-			resolvedTypesPerResource.put(resource, resolvedTypes)
-		}
-		resolvedTypesStack.push(resolvedTypes)
-	}
-	def getResolvedTypes() {
-		resolvedTypesStack.peek
-	}
-	def void done(XExpression expression) {
-		resolvedTypesStack.pop
-		visiting.done(expression)
-	}
-	
 }
 
 @Data
