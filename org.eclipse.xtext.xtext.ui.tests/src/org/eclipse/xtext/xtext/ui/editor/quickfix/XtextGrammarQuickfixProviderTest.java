@@ -15,6 +15,8 @@ import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -184,6 +186,49 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 				"Add actions to ensure object creation");
 	}
 
+	@Test
+	public void testConvertTerminalFragmentToTerminalRule() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model: abc=ABC;", "terminal fragment ABC: 'a';"),
+				INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE, 0, "Convert terminal fragment to terminal rule");
+	}
+	
+	@Test
+	public void testConvertTerminalFragmentWithInlineCommentToTerminalRule() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model: abc=ABC;", "terminal fragment/*comment*/ABC: 'a';"),
+				INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE, 0, "Convert terminal fragment to terminal rule");
+	}
+	
+	@Test
+	public void testFixInvalidHiddenToken() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model hidden(ABC): a=ID;", "terminal fragment ABC: 'a';"),
+				INVALID_HIDDEN_TOKEN_FRAGMENT, 1, "Remove hidden token definition");
+	}
+	
+	@Test
+	public void testFixInvalidHiddenTokenInGrammarDefinition() throws Exception {
+		String model = Strings.concat("\n",
+				Arrays.asList("grammar org.xtext.example.mydsl.MyDsl hidden(ABC)",
+						"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
+						"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore",
+						"Model: pqr=PQR;", "terminal fragment ABC: 'a';", "terminal PQR: 'p';"));
+
+		XtextEditor xtextEditor = openInEditor(model);
+		assertAndApplySingleResolution(xtextEditor, INVALID_HIDDEN_TOKEN_FRAGMENT, 1,
+				"Remove hidden token definition");
+	}
+	
+	@Test
+	public void testFixInvalidEnumRuleHiddenToken() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model hidden(ABC): a=ID;", "enum ABC: A|B|C;"), INVALID_HIDDEN_TOKEN, 1,
+				"Remove hidden token definition");
+	}
+
+	@Test
+	public void testFixInvalidParserRuleHiddenToken() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model hidden(Greeting): a=ID;", "Greeting: name=ID;"), INVALID_HIDDEN_TOKEN, 1,
+				"Remove hidden token definition");
+	}
+	
 	private void assertCleanAfterResolution(String issueCode, String resolutionLabel, List<String> grammarBodyContent)
 			throws PartInitException, CoreException {
 		assertAndApplySingleResolution(editorForGrammar(grammarBodyContent.toArray(new String[0])), issueCode, 0, resolutionLabel);
@@ -198,13 +243,13 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 		IXtextDocument document = xtextEditor.getDocument();
 		List<Issue> issues = getIssues(document);
 		assertFalse(issues.toString(), issues.isEmpty());
-		Issue issue = issues.iterator().next();
-		assertEquals(issueCode, issue.getCode());
-		assertNotNull(issue.getData());
-		assertEquals(issueDataCount, issue.getData().length);
-		List<IssueResolution> resolutions = issueResolutionProvider.getResolutions(issue);
-
-		assertEquals(1, resolutions.size());
+		Optional<Issue> issue = issues.stream().filter(i -> issueCode.equals(i.getCode())).findFirst();
+		assertTrue(issue.isPresent());
+		assertNotNull(issue.get().getData());
+		assertEquals(issueDataCount, issue.get().getData().length);
+		List<IssueResolution> resolutions = issueResolutionProvider.getResolutions(issue.get());
+		resolutions = resolutions.stream().filter(resolution -> resolutionLabel.equals(resolution.getLabel())).collect(Collectors.toList());
+		assertFalse(resolutions.isEmpty());
 		IssueResolution resolution = resolutions.iterator().next();
 		assertEquals(resolutionLabel, resolution.getLabel());
 		try {

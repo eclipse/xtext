@@ -55,6 +55,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -73,6 +74,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -86,6 +88,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.util.internal.Nullable;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
+import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 
 import com.google.common.base.CaseFormat;
@@ -134,24 +137,39 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private ILineSeparatorInformation separatorInfo;
 	
+	@Inject
+	private XtextGrammarAccess grammarAccess;
+	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
 		final String ruleName = issue.getData()[0];
-		acceptor.accept(issue, "Create rule '" + ruleName + "'", "Create rule '" + ruleName + "'", NULL_QUICKFIX_IMAGE,
-				new ISemanticModification() {
-					@Override
-					public void apply(final EObject element, IModificationContext context) throws BadLocationException {
-						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
-						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
-						int offset = node.getEndOffset();
-						String nl = context.getXtextDocument().getLineDelimiter(0);
-						StringBuilder builder = new StringBuilder(nl+nl);
-						if (abstractRule instanceof TerminalRule)
-							builder.append("terminal ");
-						String newRule = builder.append(ruleName).append(":" + nl + "\t" + nl + ";").toString();
-						context.getXtextDocument().replace(offset, 0, newRule);
-					}
-				});
+		acceptor.accept(issue, // 
+				"Create rule '" + ruleName + "'", //
+				"Create rule '" + ruleName + "'", //
+				NULL_QUICKFIX_IMAGE, //
+				createNewRule(ruleName, false));
+		createLinkingIssueResolutions(issue, acceptor);
+	}
+
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
+	public void fixUnresolvedTerminalRule(final Issue issue, IssueResolutionAcceptor acceptor) {
+		final String ruleName = issue.getData()[0];
+		acceptor.accept(issue, //
+				"Create terminal '" + ruleName + "'", // 
+				"Create terminal '" + ruleName + "'", //
+				NULL_QUICKFIX_IMAGE, //
+				createNewRule(ruleName, false));
+		createLinkingIssueResolutions(issue, acceptor);
+	}
+	
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
+	public void fixUnresolvedTerminalFragmentRule(final Issue issue, IssueResolutionAcceptor acceptor) {
+		final String ruleName = issue.getData()[0];
+		acceptor.accept(issue, //
+				"Create terminal fragment '" + ruleName + "'", // 
+				"Create terminal fragment '" + ruleName + "'", //
+				NULL_QUICKFIX_IMAGE, //
+				createNewRule(ruleName, true));
 		createLinkingIssueResolutions(issue, acceptor);
 	}
 
@@ -598,6 +616,93 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						}
 					}
 				});
+	}
+	
+	@Fix(INVALID_HIDDEN_TOKEN_FRAGMENT)
+	@Fix(INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE)
+	public void fixConvertTerminalFragmentToTerminalRule(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, //
+				"Convert terminal fragment to terminal rule", //
+				"Convert terminal fragment to terminal rule", //
+				NULL_QUICKFIX_IMAGE, //
+				(context) -> {
+					IXtextDocument xtextDocument = context.getXtextDocument();
+					xtextDocument.modify(new IUnitOfWork.Void<XtextResource>() {
+
+						@Override
+						public void process(XtextResource state) throws Exception {
+							if (state == null) {
+								return;
+							}
+							
+							EObject eObject = state.getEObject(issue.getUriToProblem().fragment());
+							AbstractRule rule = null;
+							if (eObject instanceof Grammar) {
+								rule = ((Grammar) eObject).getHiddenTokens().get(Integer.valueOf(issue.getData()[0]).intValue());
+							} else if (eObject instanceof RuleCall) {
+								RuleCall ruleCall = (RuleCall) state.getEObject(issue.getUriToProblem().fragment());
+								rule = ruleCall.getRule();
+							}
+							
+							if (rule != null) {
+								ICompositeNode ruleNode = NodeModelUtils.findActualNodeFor(rule);
+								for (INode node : ruleNode.getAsTreeIterable()) {
+									if (node.getGrammarElement() != null && node.getGrammarElement() == grammarAccess.getTerminalRuleAccess()
+											.getFragmentFragmentKeyword_2_0_0_0()) {
+										ITextRegion fragmentRegion = node.getTextRegion();
+										ICompositeNode compositeNode = (ICompositeNode) node.getNextSibling();
+										if(compositeNode.getFirstChild().getGrammarElement() == grammarAccess.getWSRule()) {
+											xtextDocument.replace(fragmentRegion.getOffset(), fragmentRegion.getLength() + 1, "");
+										} else {
+											xtextDocument.replace(fragmentRegion.getOffset(), fragmentRegion.getLength(), "");
+										}
+										
+										break;
+									}
+								}
+							}
+						}
+					});
+				});
+	}	
+	
+	@Fix(INVALID_HIDDEN_TOKEN_FRAGMENT)
+	@Fix(INVALID_HIDDEN_TOKEN)
+	public void fixInvalidHiddenToken(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, //
+				"Remove hidden token definition", // 
+				"Remove hidden token definition", //
+				NULL_QUICKFIX_IMAGE, //
+				(element, context) -> {
+					if (element instanceof Grammar) {
+						Grammar grammar = (Grammar) element;
+						if (issue.getData().length > 0) {
+							grammar.getHiddenTokens().remove(Integer.valueOf(issue.getData()[0]).intValue());
+						}
+					} else {
+						ParserRule parserRule = (ParserRule) element;
+						if (issue.getData().length > 0) {
+							parserRule.getHiddenTokens().remove(Integer.valueOf(issue.getData()[0]).intValue());
+						}
+					}					
+				});
+	}
+
+	private ISemanticModification createNewRule(String ruleName, boolean isFragment) {
+		return (element, context) -> {
+			AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
+			ICompositeNode node = NodeModelUtils.getNode(abstractRule);
+			String nl = context.getXtextDocument().getLineDelimiter(0);
+			StringBuilder builder = new StringBuilder(nl + nl);
+			if (abstractRule instanceof TerminalRule) {
+				builder.append("terminal ");
+				if (isFragment) {
+					builder.append("fragment ");
+				}
+			}
+			String newRule = builder.append(ruleName).append(":" + nl + "\t" + nl + ";").toString();
+			context.getXtextDocument().replace(node.getEndOffset(), 0, newRule);
+		};
 	}
 
 }
