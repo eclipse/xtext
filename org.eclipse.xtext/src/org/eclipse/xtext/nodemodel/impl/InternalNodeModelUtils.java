@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.LineAndColumn;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 /**
@@ -57,9 +58,8 @@ public class InternalNodeModelUtils {
 	 * that point to the very first char in each line.
 	 */
 	protected static LineAndColumn getLineAndColumn(String text, int[] lineBreaks, int offset) {
-		if (offset > text.length() || offset < 0) {
-			throw new IndexOutOfBoundsException();
-		}
+		Preconditions.checkPositionIndex(offset, text.length());
+
 		int idx = Arrays.binarySearch(lineBreaks, offset);
 		if (idx >= 0) {
 			/*
