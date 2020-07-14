@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -810,7 +810,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 							call, 
 							XtextPackage.Literals.RULE_CALL__RULE,
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							null);
+							INVALID_TERMINAL_FRAGMENT_RULE_REFERENCE);
 				}
 			}
 		}
