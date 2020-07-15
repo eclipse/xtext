@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    kubernetes {
-      label 'migration'
-    }
-  }
+  agent any
 
   parameters {
     choice(name: 'RELEASE_TYPE', choices: ['M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
@@ -60,7 +56,7 @@ pipeline {
         dir('simrel') {
           sh '''
             # get the value of the first 'label' attribute in simrel.aggr
-            SIMREL_LABEL=$(grep -m 1 -Pio 'label="\\K[^"]*' simrel.aggr)
+            SIMREL_LABEL=$(grep -m 1 -o 'label="[^"]*' simrel.aggr |sed -e 's/label="//')
             XTEXT_REPOSITORY_URL=$(echo $XTEXT_REPOSITORY_URL | tr -d '\n')
             sed -i -e "s|<repositories location=\\"\\([^\\"]*\\)|<repositories location=\\"$XTEXT_REPOSITORY_URL|" tmf-xtext.aggrcon
             sed -i -e "s|versionRange=\\"\\([^\\"]*\\)|versionRange=\\"[$XTEXT_VERSION]|" tmf-xtext.aggrcon
