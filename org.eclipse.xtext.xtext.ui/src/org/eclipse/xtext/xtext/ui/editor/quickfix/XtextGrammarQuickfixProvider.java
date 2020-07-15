@@ -88,7 +88,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.util.internal.Nullable;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
-import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 
 import com.google.common.base.CaseFormat;
