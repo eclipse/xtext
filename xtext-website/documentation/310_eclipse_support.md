@@ -920,6 +920,7 @@ Automated UI tests are crucial for the maintainability and the quality of a soft
 *	[AbstractHighlightingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.java): base class for testing the syntactical and semantic coloring
 *	[AbstractHoverTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHoverTest.java): base class for testing the hovering functionality
 *	[AbstractHyperlinkingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHyperlinkingTest.java): base class for testing the hyperlinking functionality
+*	[AbstractMultiQuickfixTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractMultiQuickfixTest.java): base class for testing the multi quick fixes
 *	[AbstractOutlineTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractOutlineTest.java): base class for testing the structure of the outline view
 *	[AbstractQuickfixTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractQuickfixTest.java): base class for testing the quick fixes
 *	...
