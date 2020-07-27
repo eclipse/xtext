@@ -21,7 +21,7 @@ spec:
     - mountPath: /home/jenkins/.ssh
       name: volume-known-hosts
   - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.7
+    image: docker.io/christiandietrich/xtext-buildenv:latest
     tty: true
     resources:
       limits:
@@ -143,8 +143,12 @@ spec:
           } // END steps
         } // END stage
         stage('Maven Tycho Build') {
+            environment {
+              JAVA_HOME = get_JAVA_HOME(params.target_platform)
+            }
           steps {
             sh """
+              echo "$JAVA_HOME"
               /home/vnc/.vnc/xstartup.sh
               ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.target_platform} --local-repository=/home/jenkins/.m2/repository
             """
@@ -207,3 +211,11 @@ spec:
     }
   }
 }
+
+def get_JAVA_HOME(String param) {
+  if ('latest' == param) {
+    return  "/usr/lib/jvm/java-11-openjdk-11.0.7.10-1.fc31.x86_64"
+  }
+  return "/usr/lib/jvm/java-1.8.0-openjdk"
+}
+
