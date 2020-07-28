@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.ILock;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -68,6 +70,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	private WorkspaceLockAccess workspaceLockAccess;
 
 	private volatile boolean isLoaded = false;
+	
+	final ILock loadLock = Job.getJobManager().newLock();
 
 	public void load() {
 		if (!isLoaded) {
@@ -75,10 +79,17 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					if (!isLoaded) {
-						resourceDescriptionData = new ResourceDescriptionsData(persister.load());
-						if(storage2UriMapper instanceof IStorage2UriMapperExtension)
-							((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
-						isLoaded = true;
+						try {
+							loadLock.acquire();
+							if (!isLoaded) {
+								resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+								if(storage2UriMapper instanceof IStorage2UriMapperExtension)
+									((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
+								isLoaded = true;
+							}
+						} finally {
+							loadLock.release();
+						}
 					}
 				}
 			};
