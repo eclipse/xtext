@@ -71,7 +71,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	private volatile boolean isLoaded = false;
 	
-	final ILock loadLock = Job.getJobManager().newLock();
+	private final ILock loadLock = Job.getJobManager().newLock();
 
 	public void load() {
 		if (!isLoaded) {
