@@ -167,7 +167,7 @@
 		<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-09"/>
 	</location>
 	
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
@@ -182,17 +182,17 @@
 		<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.20"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/"/>
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
 		<repository location="https://download.eclipse.org/cbi/updates/license/"/>
 	</location>
