@@ -82,7 +82,7 @@
 		<repository location="https://ci.eclipse.org/xtext/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
@@ -90,24 +90,24 @@
 		<repository location="https://download.eclipse.org/eclipse/updates/4.17-I-builds"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/2020-09"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/nightly/latest"/>
 	</location>
 
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.3/"/>
 	</location>
 	
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.swtbot.eclipse.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/technology/swtbot/releases/2.6.0/"/>
