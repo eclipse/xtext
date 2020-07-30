@@ -6,7 +6,7 @@
 			<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-09"/>
 			<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
 			<repository location="https://download.eclipse.org/cbi/updates/license/"/>
 		</location>
