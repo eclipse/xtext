@@ -1,10 +1,11 @@
-/** 
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+/*******************************************************************************
+ * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
+ * 
  * SPDX-License-Identifier: EPL-2.0
- */
+ *******************************************************************************/
 package org.eclipse.xtend.ide.tests.quickfix
 
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
@@ -24,25 +25,7 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPl
 @InjectWith(XtendIDEInjectorProvider)
 class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 
-	override String getFileName() {
-		return "Foo"
-	}
-
-	override dslFile(CharSequence content) {
-		super.dslFile(projectName, "src/equalsnull/" + fileName, fileExtension, content);
-	}
-
-	override void setUp() throws Exception {
-		super.setUp()
-
-		projectName.createPluginProject()
-	}
-
-	@Test
-	def void testEqualsNullQuickfixInExpression() {
-
-		// Use Xtend style API...
-		
+	@Test def equals_with_null_in_expression() {
 		'''
 			package equalsnull
 			class Foo {
@@ -60,7 +43,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			---------------------------------------------------------------------
 			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
 			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
-		''', '''
+		''','''
 			package equalsnull
 			class Foo {
 				def m(Object a, Object b, Object c) {
@@ -70,15 +53,10 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			-----------------------------------------------------------
 			(no markers found)
 		''')
-
 	}
 
-	@Test
-	def void testEqualsNullQuickfixInSwitch() {
-
-		// Use Java style API...
-		
-		val content = '''
+	@Test def equals_with_null_in_switch() {
+		val model = '''
 			package equalsnull
 			class Foo {
 				def m(Object a, Object b, Object c) {
@@ -92,14 +70,26 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 			}
 		'''
 
-		val xtextEditor = openEditor(dslFile(content))
+		val xtextEditor = model.dslFile.openEditor
 
-		val offset = content.indexOf("==") + 1
-		val proposals = computeQuickAssistProposals(xtextEditor, offset)
+		val offset = model.indexOf("==") + 1
+		val proposals = xtextEditor.computeQuickAssistProposals(offset)
 
-		assertEquals(1, proposals.size())
-		assertEquals(1, proposals.filter[it instanceof QuickAssistCompletionProposal].size())
-		assertEquals("Replace '==' with '===' and '!=' with '!=='", proposals.get(0).displayString)
+		assertEquals(1, proposals.size)
+		assertEquals(1, proposals.filter(QuickAssistCompletionProposal).size)
+		assertEquals("Replace '==' with '===' and '!=' with '!=='", proposals.head.displayString)
 	}
 
+	override setUp() {
+		super.setUp
+		projectName.createPluginProject
+	}
+
+	override getFileName() {
+		"Foo"
+	}
+
+	override dslFile(CharSequence content) {
+		super.dslFile(projectName, "src/equalsnull/" + fileName, fileExtension, content)
+	}
 }

@@ -1,12 +1,14 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
+ * 
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtend.ide.tests.quickfix;
 
+import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -20,7 +22,6 @@ import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,27 +34,8 @@ import org.junit.runner.RunWith;
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
-  @Override
-  public String getFileName() {
-    return "Foo";
-  }
-  
-  @Override
-  public IFile dslFile(final CharSequence content) {
-    String _projectName = this.getProjectName();
-    String _fileName = this.getFileName();
-    String _plus = ("src/equalsnull/" + _fileName);
-    return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
-  }
-  
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    WorkbenchTestHelper.createPluginProject(this.getProjectName());
-  }
-  
   @Test
-  public void testEqualsNullQuickfixInExpression() {
+  public void equals_with_null_in_expression() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package equalsnull");
     _builder.newLine();
@@ -116,7 +98,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   }
   
   @Test
-  public void testEqualsNullQuickfixInSwitch() {
+  public void equals_with_null_in_switch() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package equalsnull");
@@ -149,19 +131,39 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final String content = _builder.toString();
-      final XtextEditor xtextEditor = this.openEditor(this.dslFile(content));
-      int _indexOf = content.indexOf("==");
+      final String model = _builder.toString();
+      final XtextEditor xtextEditor = this.openEditor(this.dslFile(model));
+      int _indexOf = model.indexOf("==");
       final int offset = (_indexOf + 1);
       final ICompletionProposal[] proposals = this.computeQuickAssistProposals(xtextEditor, offset);
       Assert.assertEquals(1, ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size());
-      final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal it) -> {
-        return Boolean.valueOf((it instanceof QuickAssistCompletionProposal));
-      };
-      Assert.assertEquals(1, IterableExtensions.size(IterableExtensions.<ICompletionProposal>filter(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function)));
-      Assert.assertEquals("Replace \'==\' with \'===\' and \'!=\' with \'!==\'", (proposals[0]).getDisplayString());
+      Assert.assertEquals(1, IterableExtensions.size(Iterables.<QuickAssistCompletionProposal>filter(((Iterable<?>)Conversions.doWrapArray(proposals)), QuickAssistCompletionProposal.class)));
+      Assert.assertEquals("Replace \'==\' with \'===\' and \'!=\' with \'!==\'", IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).getDisplayString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  public void setUp() {
+    try {
+      super.setUp();
+      WorkbenchTestHelper.createPluginProject(this.getProjectName());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Override
+  public String getFileName() {
+    return "Foo";
+  }
+  
+  @Override
+  public IFile dslFile(final CharSequence content) {
+    String _projectName = this.getProjectName();
+    String _fileName = this.getFileName();
+    String _plus = ("src/equalsnull/" + _fileName);
+    return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
   }
 }
