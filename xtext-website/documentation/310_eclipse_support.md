@@ -915,6 +915,7 @@ For an implementation reference, have a look at the Xtext Domainmodel example.
 Automated UI tests are crucial for the maintainability and the quality of a software product. That's why it is strongly recommended to write not only automated unit tests for your language, but also automated UI tests for your language editor. The `org.eclipse.xtext.ui.testing` package contains some base classes that come in handy when implementing automated UI tests: 
 
 *	[AbstractAutoEditTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractAutoEditTest.java): base class for testing the auto editing functionality
+*	[AbstractCodeMiningTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractCodeMiningTest.java): base class for testing the code mining capabilities
 *	[AbstractContentAssistTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractContentAssistTest.java): base class for testing the content assistant and template proposals
 *	[AbstractFoldingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractFoldingTest.java): base class for testing the folding capabilities
 *	[AbstractHighlightingTest]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui.testing/src/org/eclipse/xtext/ui/testing/AbstractHighlightingTest.java): base class for testing the syntactical and semantic coloring
