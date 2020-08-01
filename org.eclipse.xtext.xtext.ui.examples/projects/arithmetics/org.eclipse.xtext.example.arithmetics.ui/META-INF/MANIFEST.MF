@@ -22,6 +22,7 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.arithmetics.ui;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.autoedit;x-internal:=true,
+ org.eclipse.xtext.example.arithmetics.ui.codemining;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.contentassist;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.editor.hierarchy;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.internal;x-internal:=true,

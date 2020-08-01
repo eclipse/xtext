@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.arithmetics.ui.tests;x-internal=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.autoedit;x-internal:=true,
+ org.eclipse.xtext.example.arithmetics.ui.tests.codemining;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.folding;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.hover;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.hyperlinking;x-internal:=true,
