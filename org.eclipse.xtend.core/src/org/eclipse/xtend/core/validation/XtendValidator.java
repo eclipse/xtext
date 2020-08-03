@@ -1592,10 +1592,14 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 					addIssue("Non-dispatch method has same name and number of parameters as dispatch method", function,
 							XTEND_FUNCTION__NAME,
 							DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
-				for (JvmOperation operation : dispatchMethods.get(dispatchSignature))
-					addIssue("Dispatch method has same name and number of parameters as non-dispatch method", associations.getXtendFunction(operation),
-							XTEND_FUNCTION__NAME,
-							DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
+				for (JvmOperation operation : dispatchMethods.get(dispatchSignature)) {
+					XtendFunction function = associations.getXtendFunction(operation);
+					if (function.eResource() == clazz.eResource()) {
+						addIssue("Dispatch method has same name and number of parameters as non-dispatch method", function,
+								XTEND_FUNCTION__NAME,
+								DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
+					}
+				}
 			}
 		}
 	}
