@@ -166,6 +166,7 @@ After everything above has run smoothly, it is finally time for some manual step
    * Blog (for releases)
 8. Add / Update xtext-reference-projects (Only on final release)
 9. Adjust the bootstrap version to use the newly produced milestone / release
+   * Note: The builds will fail if the newly promoted artifacts are not available on maven central yet.
    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
 10. xtext-apidiff (Only on final release)
