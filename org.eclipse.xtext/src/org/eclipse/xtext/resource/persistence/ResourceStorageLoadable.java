@@ -83,9 +83,8 @@ public class ResourceStorageLoadable {
 		}.loadResource(resource);
 	}
 
-	protected Object handleLoadEObject(InternalEObject loaded, BinaryResourceImpl.EObjectInputStream input)
+	protected void handleLoadEObject(InternalEObject loaded, BinaryResourceImpl.EObjectInputStream input)
 			throws IOException {
-		return null;
 	}
 
 	protected void readResourceDescription(StorageAwareResource resource, InputStream inputStream) throws IOException {

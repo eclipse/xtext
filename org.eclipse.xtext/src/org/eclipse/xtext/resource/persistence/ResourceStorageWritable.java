@@ -104,9 +104,8 @@ public class ResourceStorageWritable {
 		}
 	}
 
-	protected Object beforeSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream writable)
+	protected void beforeSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream writable)
 			throws IOException {
-		return null;
 	}
 
 	protected void handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out)
