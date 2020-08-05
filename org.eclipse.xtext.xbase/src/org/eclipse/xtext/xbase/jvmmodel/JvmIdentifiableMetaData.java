@@ -20,6 +20,16 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 public class JvmIdentifiableMetaData extends AdapterImpl {
 	private boolean synthetic;
 
+	/**
+	 * @since 2.23
+	 */
+	public JvmIdentifiableMetaData(boolean synthetic) {
+		this.synthetic = synthetic;
+	}
+	
+	public JvmIdentifiableMetaData() {
+	}
+	
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return JvmIdentifiableMetaData.class == type;

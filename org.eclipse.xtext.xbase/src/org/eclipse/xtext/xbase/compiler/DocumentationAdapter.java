@@ -16,6 +16,16 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 public class DocumentationAdapter extends AdapterImpl {
 
 	private String documentation;
+	
+	/**
+	 * @since 2.23
+	 */
+	public DocumentationAdapter(String documentation) {
+		this.documentation = documentation;
+	}
+	
+	public DocumentationAdapter() {
+	}
 
 	public String getDocumentation() {
 		return documentation;

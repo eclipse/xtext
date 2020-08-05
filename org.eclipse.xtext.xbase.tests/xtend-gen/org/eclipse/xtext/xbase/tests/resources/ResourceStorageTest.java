@@ -18,18 +18,19 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
-import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.testing.InjectWith;
@@ -37,11 +38,11 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,15 +55,15 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(ResourceStorageTest.XbaseWithResourceStorageFacadeInjectorProvider.class)
 @SuppressWarnings("all")
-public class ResourceStorageTest extends AbstractXbaseTestCase {
-  public static class XbaseWithResourceStorageFacadeInjectorProvider extends XbaseInjectorProvider {
+public class ResourceStorageTest extends AbstractJvmModelTest {
+  public static class XbaseWithResourceStorageFacadeInjectorProvider extends AbstractJvmModelTest.SimpleJvmModelTestInjectorProvider {
     @Override
     protected Injector internalCreateInjector() {
       return new ResourceStorageTest.XbaseTestWithResourceStorageFacadeStandaloneSetup().createInjectorAndDoEMFRegistration();
     }
   }
   
-  public static class XbaseTestWithResourceStorageFacadeStandaloneSetup extends XbaseInjectorProvider.XbaseTestStandaloneSetup {
+  public static class XbaseTestWithResourceStorageFacadeStandaloneSetup extends AbstractJvmModelTest.SimpleJvmModelTestInjectorProvider.SimpleJvmModelTestStandaloneSetup {
     @Override
     public Injector createInjector() {
       ResourceStorageTest.XbaseTestWithResourceStorageFacadeRuntimeModule _xbaseTestWithResourceStorageFacadeRuntimeModule = new ResourceStorageTest.XbaseTestWithResourceStorageFacadeRuntimeModule();
@@ -70,7 +71,7 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
     }
   }
   
-  public static class XbaseTestWithResourceStorageFacadeRuntimeModule extends XbaseInjectorProvider.XbaseTestRuntimeModule {
+  public static class XbaseTestWithResourceStorageFacadeRuntimeModule extends AbstractJvmModelTest.SimpleJvmModelInferrerRuntimeModule {
     public Class<? extends IResourceStorageFacade> bindIResourceStorageFacade() {
       return BatchLinkableResourceStorageFacade.class;
     }
@@ -107,7 +108,7 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
   }
   
   @Inject
-  private IResourceStorageFacade resourceStorageFacade;
+  private BatchLinkableResourceStorageFacade resourceStorageFacade;
   
   @Test
   public void testWriteAndLoad() {
@@ -146,10 +147,13 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
       _builder.newLine();
       final String contents = _builder.toString();
       final XExpression file = this.expression(contents);
-      final ByteArrayOutputStream bout = new ByteArrayOutputStream();
-      ((ResourceStorageFacade) this.resourceStorageFacade).setStoreNodeModel(true);
       Resource _eResource = file.eResource();
-      this.resourceStorageFacade.createResourceStorageWritable(bout).writeResource(((StorageAwareResource) _eResource));
+      final StorageAwareResource originalResource = ((StorageAwareResource) _eResource);
+      Adapter _existingAdapter = EcoreUtil.getExistingAdapter(originalResource, JvmModelAssociator.Adapter.class);
+      final JvmModelAssociator.Adapter originalAdapter = ((JvmModelAssociator.Adapter) _existingAdapter);
+      final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+      this.resourceStorageFacade.setStoreNodeModel(true);
+      this.resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource);
       byte[] _byteArray = bout.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
       final ResourceStorageLoadable in = this.resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
@@ -192,6 +196,11 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
         }
       }
       Assert.assertFalse(originalNodes.hasNext());
+      Adapter _existingAdapter_1 = EcoreUtil.getExistingAdapter(resource, JvmModelAssociator.Adapter.class);
+      final JvmModelAssociator.Adapter restoredAdapter = ((JvmModelAssociator.Adapter) _existingAdapter_1);
+      Assert.assertEquals(originalAdapter.logicalContainerMap.size(), restoredAdapter.logicalContainerMap.size());
+      Assert.assertEquals(originalAdapter.sourceToTargetMap.size(), restoredAdapter.sourceToTargetMap.size());
+      Assert.assertEquals(originalAdapter.targetToSourceMap.size(), restoredAdapter.targetToSourceMap.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

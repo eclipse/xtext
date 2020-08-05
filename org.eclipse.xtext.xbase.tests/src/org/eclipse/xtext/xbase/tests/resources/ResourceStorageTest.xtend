@@ -18,20 +18,19 @@ import java.util.HashMap
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
-import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider.XbaseTestRuntimeModule
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider.XbaseTestStandaloneSetup
+import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest
+import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest.SimpleJvmModelTestInjectorProvider.SimpleJvmModelTestStandaloneSetup
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -42,9 +41,9 @@ import org.junit.runner.RunWith
  */
 @RunWith(XtextRunner)
 @InjectWith(XbaseWithResourceStorageFacadeInjectorProvider)
-class ResourceStorageTest extends AbstractXbaseTestCase {
+class ResourceStorageTest extends AbstractJvmModelTest {
 	
-	static class XbaseWithResourceStorageFacadeInjectorProvider extends XbaseInjectorProvider {
+	static class XbaseWithResourceStorageFacadeInjectorProvider extends SimpleJvmModelTestInjectorProvider {
 		
 		override protected internalCreateInjector() {
 			return new XbaseTestWithResourceStorageFacadeStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -52,7 +51,7 @@ class ResourceStorageTest extends AbstractXbaseTestCase {
 		
 	}
 	
-	static class XbaseTestWithResourceStorageFacadeStandaloneSetup extends XbaseTestStandaloneSetup {
+	static class XbaseTestWithResourceStorageFacadeStandaloneSetup extends SimpleJvmModelTestStandaloneSetup {
 		
 		override createInjector() {
 			return Guice.createInjector(new XbaseTestWithResourceStorageFacadeRuntimeModule())
@@ -60,7 +59,7 @@ class ResourceStorageTest extends AbstractXbaseTestCase {
 		
 	}
 	
-	static class XbaseTestWithResourceStorageFacadeRuntimeModule extends XbaseTestRuntimeModule {
+	static class XbaseTestWithResourceStorageFacadeRuntimeModule extends SimpleJvmModelInferrerRuntimeModule {
 		
 		def Class<? extends IResourceStorageFacade> bindIResourceStorageFacade() {
 			return BatchLinkableResourceStorageFacade
@@ -90,27 +89,30 @@ class ResourceStorageTest extends AbstractXbaseTestCase {
 		}
 	}
 	
-	@Inject IResourceStorageFacade resourceStorageFacade
+	@Inject BatchLinkableResourceStorageFacade resourceStorageFacade
 	
 	@Test def void testWriteAndLoad() {
 		val contents = '''
-		{
-			var x = "Hello"
-			var y = ""
-			val it = x
-			y = length.toString
-			println(x)
-			y = length.toString
-			println(x)
-			y = length.toString
-			println(x)
-		}
+			{
+				var x = "Hello"
+				var y = ""
+				val it = x
+				y = length.toString
+				println(x)
+				y = length.toString
+				println(x)
+				y = length.toString
+				println(x)
+			}
 		'''
 		val file = expression(contents)
+		val originalResource = file.eResource as StorageAwareResource
+		
+		val originalAdapter = EcoreUtil.getExistingAdapter(originalResource, JvmModelAssociator.Adapter) as JvmModelAssociator.Adapter
 		
 		val bout = new ByteArrayOutputStream;
-		(resourceStorageFacade as ResourceStorageFacade).storeNodeModel = true
-		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(file.eResource as StorageAwareResource)
+		resourceStorageFacade.storeNodeModel = true
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource)
 		
 		val in = resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
 		
@@ -149,13 +151,18 @@ class ResourceStorageTest extends AbstractXbaseTestCase {
 			
 			assertTrue(orig.semanticElement !== null && rest.semanticElement !== null || orig.semanticElement === null && rest.semanticElement === null)
 			if (orig.semanticElement !== null) {
-				assertEquals(file.eResource.getURIFragment(orig.semanticElement),resource.getURIFragment(rest.semanticElement))
+				assertEquals(file.eResource.getURIFragment(orig.semanticElement), resource.getURIFragment(rest.semanticElement))
 			}
 			
 			assertEquals(orig.text, rest.text)
 		}
 		
 		assertFalse(originalNodes.hasNext)
+		
+		val restoredAdapter = EcoreUtil.getExistingAdapter(resource, JvmModelAssociator.Adapter) as JvmModelAssociator.Adapter
+		assertEquals(originalAdapter.logicalContainerMap.size, restoredAdapter.logicalContainerMap.size);
+		assertEquals(originalAdapter.sourceToTargetMap.size, restoredAdapter.sourceToTargetMap.size);
+		assertEquals(originalAdapter.targetToSourceMap.size, restoredAdapter.targetToSourceMap.size);
 	}
 	
 }
