@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable
 import org.junit.Test
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,28 +38,31 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 	
 	@Test def void testWriteAndLoad() {
 		val contents = '''
-		package foo
-		
-		class Bar {
-			def dispatch myMethod(String s) {}
-			/**
-			 * Hello myMethod 
-			 */
-			def dispatch myMethod(CharSequence cs) {}
-		}
-		class Foo {
-			def dispatch other(String it) {
-				var x = ""
-				x = length.toString
-				println(x)
+			package foo
+			
+			class Bar {
+				def dispatch myMethod(String s) {}
+				/**
+				 * Hello myMethod
+				 */
+				def dispatch myMethod(CharSequence cs) {}
 			}
-		}
+			class Foo {
+				def dispatch other(String it) {
+					var x = ""
+					x = length.toString
+					println(x)
+				}
+			}
 		'''
 		val file = file(contents)
+		val originalResource = file.eResource as StorageAwareResource
+		
+		val originalAdapter = EcoreUtil.getExistingAdapter(originalResource, JvmModelAssociator.Adapter) as JvmModelAssociator.Adapter
 		
 		val bout = new ByteArrayOutputStream;
 		(resourceStorageFacade as ResourceStorageFacade).storeNodeModel = true
-		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(file.eResource as StorageAwareResource)
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource)
 		
 		val in = resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
 		
@@ -107,6 +111,11 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		}
 		
 		assertFalse(originalNodes.hasNext)
+		
+		val restoredAdapter = EcoreUtil.getExistingAdapter(resource, JvmModelAssociator.Adapter) as JvmModelAssociator.Adapter
+		assertEquals(originalAdapter.logicalContainerMap.size, restoredAdapter.logicalContainerMap.size);
+		assertEquals(originalAdapter.sourceToTargetMap.size, restoredAdapter.sourceToTargetMap.size);
+		assertEquals(originalAdapter.targetToSourceMap.size, restoredAdapter.targetToSourceMap.size);
 	}
 	
 	@Test(expected=IOException) def void testFailedWrite() throws Exception {

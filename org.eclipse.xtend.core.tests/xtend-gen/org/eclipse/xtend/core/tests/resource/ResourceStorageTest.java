@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.util.InMemoryURIConverter;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -72,7 +73,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       _builder.append("/**");
       _builder.newLine();
       _builder.append("\t ");
-      _builder.append("* Hello myMethod ");
+      _builder.append("* Hello myMethod");
       _builder.newLine();
       _builder.append("\t ");
       _builder.append("*/");
@@ -103,10 +104,13 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       _builder.newLine();
       final String contents = _builder.toString();
       final XtendFile file = this.file(contents);
+      Resource _eResource = file.eResource();
+      final StorageAwareResource originalResource = ((StorageAwareResource) _eResource);
+      Adapter _existingAdapter = EcoreUtil.getExistingAdapter(originalResource, JvmModelAssociator.Adapter.class);
+      final JvmModelAssociator.Adapter originalAdapter = ((JvmModelAssociator.Adapter) _existingAdapter);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
       ((ResourceStorageFacade) this.resourceStorageFacade).setStoreNodeModel(true);
-      Resource _eResource = file.eResource();
-      this.resourceStorageFacade.createResourceStorageWritable(bout).writeResource(((StorageAwareResource) _eResource));
+      this.resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource);
       byte[] _byteArray = bout.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
       final ResourceStorageLoadable in = this.resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
@@ -149,6 +153,11 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
         }
       }
       Assert.assertFalse(originalNodes.hasNext());
+      Adapter _existingAdapter_1 = EcoreUtil.getExistingAdapter(resource, JvmModelAssociator.Adapter.class);
+      final JvmModelAssociator.Adapter restoredAdapter = ((JvmModelAssociator.Adapter) _existingAdapter_1);
+      Assert.assertEquals(originalAdapter.logicalContainerMap.size(), restoredAdapter.logicalContainerMap.size());
+      Assert.assertEquals(originalAdapter.sourceToTargetMap.size(), restoredAdapter.sourceToTargetMap.size());
+      Assert.assertEquals(originalAdapter.targetToSourceMap.size(), restoredAdapter.targetToSourceMap.size());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
