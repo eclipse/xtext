@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.trace.node;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -18,6 +19,7 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
@@ -30,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 
 public class TracedAccessorsProcessor extends AbstractClassProcessor {
@@ -48,15 +51,14 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
 			return;
 		for (InterfaceDeclaration f : Iterables.filter(ListExtensions.map(Arrays.asList(factories), it -> it.getType()),
 				InterfaceDeclaration.class)) {
-			for (TypeReference t : IterableExtensions.map(
-					IterableExtensions
-							.filter(f.getDeclaredMethods(),
-									it -> it.getSimpleName().startsWith("create")
-											&& IterableExtensions.isEmpty(it.getParameters())),
-					it -> it.getReturnType())) {
-				for (ResolvedMethod getter : IterableExtensions.filter(
-						IterableExtensions.filter(t.getAllResolvedMethods(), it -> isSupportedGetter(it)),
-						it -> !iterableType.isAssignableFrom(it.getDeclaration().getReturnType()))) {
+			for (TypeReference t : FluentIterable.from(f.getDeclaredMethods())
+					.filter(it -> it.getSimpleName().startsWith("create") && Iterables.isEmpty(it.getParameters()))
+					.transform(MethodDeclaration::getReturnType)
+					.toSortedList(Comparator.comparing(TypeReference::getSimpleName))) {
+				for (ResolvedMethod getter : FluentIterable.from(t.getAllResolvedMethods())
+						.filter(it -> isSupportedGetter(it))
+						.filter(it -> !iterableType.isAssignableFrom(it.getDeclaration().getReturnType()))
+						.toSortedList(Comparator.comparing(ResolvedMethod::getSimpleSignature))) {
 					TypeReference rt = getter.getResolvedReturnType();
 					if (TracedAccessorsProcessor.TYPES_WITH_GOOD_TO_STRING
 							.contains(rt.getType().getSimpleName().toLowerCase())) {
