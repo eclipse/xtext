@@ -26,7 +26,7 @@ class XtextGeneratorTask extends JavaExec {
 		classpath = project.sourceSets.mwe2.runtimeClasspath
 	}
 	def setWorkflow(File workflowFile) {
-		args = [workflowFile.path, "-p", "rootPath=${project.rootDir}", "-p", "askBeforeDownload=false"]
+		args = [workflowFile.toURI().toString(), "-p", "rootPath=${project.rootDir}", "-p", "askBeforeDownload=false"]
 		inputs.file workflowFile
 		description "Execute the MWE2 workflow ${workflowFile.name}"
 	}
