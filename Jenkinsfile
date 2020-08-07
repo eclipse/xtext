@@ -157,9 +157,9 @@ spec:
   post {
     always {
       junit testResults: '**/target/surefire-reports/*.xml, **/build/test-results/test/*.xml'
+      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     success {
-      archiveArtifacts artifacts: 'build/**'
       script {
         if (params.TRIGGER_DOWNSTREAM_BUILD==true) {
           DOWNSTREAM_JOBS.split(',').each {
@@ -171,9 +171,6 @@ spec:
           }
         }
       }
-    }
-    failure {
-      archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {
