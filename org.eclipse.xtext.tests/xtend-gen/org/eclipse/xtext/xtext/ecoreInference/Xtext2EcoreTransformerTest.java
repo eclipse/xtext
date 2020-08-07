@@ -2906,4 +2906,1063 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testTypeAfterAction_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\') aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\' | {ChildC} \'ChildC\') aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    this.errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
+      "Cannot find compatible feature aString in sealed EClass ChildC from imported package http://multiinheritancetest: The type \'ChildC\' does not have a feature \'aString\'.", TestErrorAcceptor.ANY_EOBJECT);
+    this.getEPackagesFromGrammar(grammar, 1);
+  }
+  
+  @Test
+  public void testTypeAfterAction_03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\')? aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    this.errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
+      "Cannot find compatible feature aString in sealed EClass ParentA from imported package http://multiinheritancetest: The type \'ParentA\' does not have a feature \'aString\'.", TestErrorAcceptor.ANY_EOBJECT);
+    this.getEPackagesFromGrammar(grammar, 1);
+  }
+  
+  @Test
+  public void testTypeAfterAction_04() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("{ChildA} \'ChildA\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("| {ChildB} \'ChildB\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_05() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("( {ChildA} \'ChildA\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("| {ChildB} \'ChildB\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(") {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_06() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("( {ChildA} \'ChildA\' | {ChildB} \'ChildB\' ) {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_07() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' {ChildC.someContainment=current} \'ChildC\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_08() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildC.someContainment=current} \'ChildC\')+ {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_09() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildC.someContainment=current} \'ChildC\')? {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_10() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' {ChildB.someContainment=current} \'ChildB\' aString=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_11() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildB.someContainment=current} \'ChildB\')? aString=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_12() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildC} \'ChildC\') parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_13() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ChildC} \'ChildC\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA.someContainment=current} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB.someContainment=current} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_14() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ChildC} \'ChildC\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA.someContainment=current} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB.someContainment=current} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(")* parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_15() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\') aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_16() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\' | {ChildC} \'ChildC\') aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_17() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ({ChildA} \'ChildA\' | {ChildB} \'ChildB\')? aString=ID;");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_18() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("{ChildA} \'ChildA\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("| {ChildB} \'ChildB\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_19() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("( {ChildA} \'ChildA\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("| {ChildB} \'ChildB\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(") {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_20() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("( {ChildA} \'ChildA\' | {ChildB} \'ChildB\' ) {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_21() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' {ChildC.someContainment=current} \'ChildC\' {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_22() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildC.someContainment=current} \'ChildC\')+ {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_23() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildC.someContainment=current} \'ChildC\')? {ChildC.someContainment=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_24() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' {ChildB.someContainment=current} \'ChildB\' aString=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_25() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA: ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("{ChildA} \'ChildA\' ({ChildB.someContainment=current} \'ChildB\')? aString=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_26() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildC} \'ChildC\') parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_27() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ChildC} \'ChildC\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA.someContainment=current} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB.someContainment=current} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(") parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testTypeAfterAction_28() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("SomeChild returns ParentA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{ChildC} \'ChildC\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("( {ChildA.someContainment=current} \'ChildA\' ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("| {ChildB.someContainment=current} \'ChildB\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(")* parent=ChildA");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testAssignObjectAlternative_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("ChildA_ returns ChildA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("someContainment=(ChildA|ChildB)");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("ChildA: {ChildA} \'ChildA\';");
+    _builder.newLine();
+    _builder.append("ChildB: {ChildB} \'ChildB\';");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
+  
+  @Test
+  public void testAssignObjectAlternative_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate multiinheritancetest \'multiinheritancetest\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("DeclParentA returns ParentA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;");
+    _builder.newLine();
+    _builder.append("DeclParentB returns ParentB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildA returns ChildA:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentA;");
+    _builder.newLine();
+    _builder.append("DeclChildB returns ChildB:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("aString=ID parent=DeclParentB;");
+    _builder.newLine();
+    _builder.append("DeclChildC returns ChildC:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("parent=DeclChildA;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("ChildA:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("someContainment=(DeclChildA|DeclChildB)");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammar = _builder.toString();
+    final XtextResource resource = this.getResourceFromString(grammar);
+    Assert.assertTrue(resource.getErrors().isEmpty());
+  }
 }

@@ -9,6 +9,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -32,7 +33,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Function<AbstractElement, EClassifier>{
+final class ElementTypeCalculator extends XtextSwitch<Set<EClassifier>> implements Function<AbstractElement, Set<EClassifier>>{
 
 	private final EClassifierInfos classifierInfos;
 
@@ -41,16 +42,16 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	}
 
 	@Override
-	public EClassifier caseKeyword(Keyword object) {
+	public Set<EClassifier> caseKeyword(Keyword object) {
 		EDataType eString = GrammarUtil.findEString(GrammarUtil.getGrammar(object));
 		if (eString != null)
-			return eString;
+			return Collections.singleton(eString);
 		// nowhere imported - use the instance from the registry
-		return EcorePackage.Literals.ESTRING;
+		return Collections.singleton(EcorePackage.Literals.ESTRING);
 	}
 
 	@Override
-	public EClassifier caseTypeRef(TypeRef object) {
+	public Set<EClassifier> caseTypeRef(TypeRef object) {
 		if (object.getClassifier() == null) {
 			if (object.getMetamodel() == null || object.getMetamodel().getEPackage() == null)
 				return null;
@@ -61,18 +62,18 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 			if (info != null)
 				object.setClassifier(info.getEClassifier());
 		}
-		return object.getClassifier();
+		return Collections.singleton(object.getClassifier());
 	}
 
 	@Override
-	public EClassifier caseAbstractRule(AbstractRule object) {
+	public Set<EClassifier> caseAbstractRule(AbstractRule object) {
 		if (object.getType() != null)
 			return doSwitch(object.getType());
 		return null;
 	}
 
 	@Override
-	public EClassifier caseCompoundElement(CompoundElement object) {
+	public Set<EClassifier> caseCompoundElement(CompoundElement object) {
 		// since we do not allow unassigned rule calls and
 		// actions, it is safe to use the same logic for
 		// unordered groups as for groups
@@ -82,31 +83,27 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	}
 	
 	@Override
-	public EClassifier caseRuleCall(RuleCall ruleCall) {
+	public Set<EClassifier> caseRuleCall(RuleCall ruleCall) {
 		if (ruleCall.getRule() != null)
 			return doSwitch(ruleCall.getRule());
 		return null;
 	}
 
 	@Override
-	public EClassifier caseAlternatives(Alternatives object) {
-		final Set<EClassifier> types = Sets.newLinkedHashSet();
+	public Set<EClassifier> caseAlternatives(Alternatives object) {
+		Set<EClassifier> types = Sets.newLinkedHashSet();
 		for (AbstractElement group : object.getElements())
-			types.add(doSwitch(group));
-		try {
-			return classifierInfos.getCompatibleTypeNameOf(types, true);
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
+			types.addAll(doSwitch(group));
+		return types;
 	}
 
 	@Override
-	public EClassifier caseCrossReference(CrossReference object) {
+	public Set<EClassifier> caseCrossReference(CrossReference object) {
 		return doSwitch(object.getType());
 	}
 
 	@Override
-	public EClassifier apply(AbstractElement param) {
+	public Set<EClassifier> apply(AbstractElement param) {
 		return doSwitch(param);
 	}
 }

@@ -9,7 +9,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -32,6 +35,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -70,7 +76,7 @@ public abstract class EClassifierInfo {
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
 
-	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+	public abstract boolean addFeature(String featureName, EClassifierInfoAccess featureTypeInfo, boolean isMultivalue,
 			boolean isContainment, AbstractElement parserElement) throws TransformationException;
 	
 	public static class EClassInfo extends EClassifierInfo {
@@ -156,10 +162,11 @@ public abstract class EClassifierInfo {
 		}
 
 		@Override
-		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+		public boolean addFeature(String featureName, EClassifierInfoAccess featureTypeInfo, boolean isMultivalue,
 				boolean isContainment, AbstractElement parserElement) throws TransformationException {
-			EClassifier featureClassifier = featureType.getEClassifier();
-			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
+			ImmutableList<EClassifier> featureClassifiers = FluentIterable.from(featureTypeInfo.getCurrentTypes()).transform(EClassifierInfo::getEClassifier).toList();
+			EClassifier compatibleType = featureTypeInfo.getCurrentCompatibleType().getEClassifier();
+			return addFeature(featureName, featureClassifiers, compatibleType, isMultivalue, isContainment, parserElement);
 		}
 
 		public boolean addFeature(EStructuralFeature prototype) {
@@ -169,7 +176,7 @@ public abstract class EClassifierInfo {
 					EReference reference = (EReference) prototype;
 					isContainment = reference.isContainment();
 				}
-				boolean result = addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), isContainment, null);
+				boolean result = addFeature(prototype.getName(), Arrays.asList(prototype.getEType()), prototype.getEType(), prototype.isMany(), isContainment, null);
 				if (result) {
 					EStructuralFeature newFeature = getEClass().getEStructuralFeature(prototype.getName());
 					SourceAdapter oldAdapter = SourceAdapter.find(prototype);
@@ -279,7 +286,7 @@ public abstract class EClassifierInfo {
 						&& left.getEPackage().getNsURI().equals(right.getEPackage().getNsURI())) {
 					return true;
 				}
-				// Check all supertypes of the right class
+				// Check all super-types of the right class
 				for (EClass superClass : right.getEAllSuperTypes()) {
 					if (left.getClassifierID() == superClass.getClassifierID()
 							&& superClass.getEPackage() != null
@@ -299,14 +306,26 @@ public abstract class EClassifierInfo {
 			return result;
 		}
 
-		public boolean isFeatureSemanticallyEqualTo(EStructuralFeature f1, EStructuralFeature f2) {
+		private boolean isFeatureSemanticallyEqualTo(EStructuralFeature f1, EStructuralFeature f2, Set<EClassifier> f2Types) {
+			if (f1 == f2) {
+				return true;
+			}
 			boolean result = isFeatureSemanticallyEqualApartFromType(f1, f2);
 			if (f1 instanceof EReference && f2 instanceof EReference) {
-				EClass f1Type = (EClass) f1.getEType();
-				EClass f2Type = (EClass) f2.getEType();
-				result &= f1Type.isSuperTypeOf(f2Type);
+				EClass f1Type = ((EReference)f1).getEReferenceType();
 				result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 				result &= ((EReference) f1).isContainer() == ((EReference) f2).isContainer();
+				if (result) {
+					for(EClassifier f2Type: f2Types) {
+						if (f2Type instanceof EClass) {
+							if (!f1Type.isSuperTypeOf((EClass) f2Type)) {
+								return false;
+							}
+						} else {
+							return false;
+						}
+					}
+				}
 			} else {
 				result &= f1.getEType().equals(EcoreUtil2.getCompatibleType(f1.getEType(), f2.getEType()));
 			}
@@ -327,32 +346,47 @@ public abstract class EClassifierInfo {
 		}
 
 		public FindResult containsSemanticallyEqualFeature(EStructuralFeature feature) {
-			return containsSemanticallyEqualFeature(getEClass().getEAllStructuralFeatures(), feature);
+			return containsSemanticallyEqualFeature(feature, Collections.singleton(feature.getEType()));
+		}
+		
+		public FindResult containsSemanticallyEqualFeature(EStructuralFeature feature, Set<EClassifier> toBeAssignedTypes) {
+			return containsSemanticallyEqualFeature(getEClass().getEAllStructuralFeatures(), feature, toBeAssignedTypes);
 		}
 
 		public FindResult containsSemanticallyEqualFeature(Collection<EStructuralFeature> features,
 				EStructuralFeature feature) {
+			return containsSemanticallyEqualFeature(features, feature, Collections.singleton(feature.getEType()));
+		}
+		
+		public FindResult containsSemanticallyEqualFeature(Collection<EStructuralFeature> features,
+				EStructuralFeature feature, Set<EClassifier> toBeAssignedTypes) {
 			EStructuralFeature potentiallyEqualFeature = findFeatureByName(features, feature.getName());
 			if (potentiallyEqualFeature == null)
 				return FindResult.FeatureDoesNotExist;
-			else if (isFeatureSemanticallyEqualTo(potentiallyEqualFeature, feature))
+			else if (isFeatureSemanticallyEqualTo(potentiallyEqualFeature, feature, toBeAssignedTypes))
 				return FindResult.FeatureExists;
 			else
 				return FindResult.DifferentFeatureWithSameNameExists;
 		}
 
-		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
+		private boolean addFeature(
+				String featureName,
+				List<EClassifier> featureTypes,
+				EClassifier compatibleSuperType,
+				boolean isMultivalue,
 				boolean isContainment, AbstractElement grammarElement) throws TransformationException {
 			if (!isGenerated()) {
 				StringBuilder errorMessage = new StringBuilder();
-				if (!containsCompatibleFeature(featureName, isMultivalue, isContainment, featureClassifier, errorMessage)) {
-					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
-							"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+": " + errorMessage.toString(), 
-							grammarElement);
+				for(EClassifier featureType: featureTypes) {
+	 				if (!containsCompatibleFeature(featureName, isMultivalue, isContainment, featureType, errorMessage)) {
+						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
+								"Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+": " + errorMessage.toString(), 
+								grammarElement);
+					}
 				}
 				return true;
 			}
-			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
+			EStructuralFeature newFeature = createFeatureWith(featureName, compatibleSuperType, isMultivalue,
 					isContainment);
 
 			FindResult containsSemanticallyEqualFeature = containsSemanticallyEqualFeature(newFeature);
@@ -443,7 +477,7 @@ public abstract class EClassifierInfo {
 		}
 
 		@Override
-		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+		public boolean addFeature(String featureName, EClassifierInfoAccess featureType, boolean isMultivalue,
 				boolean isContainment, AbstractElement parserElement) throws TransformationException {
 			throw new UnsupportedOperationException("Cannot add feature " + featureName + " to simple datatype "
 					+ Strings.emptyIfNull(this.getEClassifier().getName()));

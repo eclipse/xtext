@@ -2141,5 +2141,582 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			"Cannot create datatype BAR. If this is supposed to return EString, make sure you have imported 'http://www.eclipse.org/emf/2002/Ecore'", TestErrorAcceptor.ANY_EOBJECT)
 		getEPackageFromGrammar(grammar, 1)
 	}
+	
+	@Test def void testTypeAfterAction_01() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB') aString=ID;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_02() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB' | {ChildC} 'ChildC') aString=ID;
+		'''
+		errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
+			"Cannot find compatible feature aString in sealed EClass ChildC from imported package http://multiinheritancetest: The type 'ChildC' does not have a feature 'aString'.", TestErrorAcceptor.ANY_EOBJECT)
+		getEPackagesFromGrammar(grammar, 1)
+	}
+	
+	@Test def void testTypeAfterAction_03() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB')? aString=ID;
+		'''
+		errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
+			"Cannot find compatible feature aString in sealed EClass ParentA from imported package http://multiinheritancetest: The type 'ParentA' does not have a feature 'aString'.", TestErrorAcceptor.ANY_EOBJECT)
+		getEPackagesFromGrammar(grammar, 1)
+	}
+	
+	@Test def void testTypeAfterAction_04() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			    {ChildA} 'ChildA' {ChildC.someContainment=current}
+			  | {ChildB} 'ChildB' {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_05() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  ( {ChildA} 'ChildA' {ChildC.someContainment=current}
+			  | {ChildB} 'ChildB' {ChildC.someContainment=current}
+			  ) {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_06() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  ( {ChildA} 'ChildA' | {ChildB} 'ChildB' ) {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_07() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' {ChildC.someContainment=current} 'ChildC' {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_08() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildC.someContainment=current} 'ChildC')+ {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_09() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildC.someContainment=current} 'ChildC')? {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
 
+	@Test def void testTypeAfterAction_10() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' {ChildB.someContainment=current} 'ChildB' aString=ID
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_11() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildB.someContainment=current} 'ChildB')? aString=ID
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_12() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA:
+				( {ChildA} 'ChildA' 
+				| {ChildB} 'ChildB'
+				| {ChildC} 'ChildC') parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_13() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA:
+				{ChildC} 'ChildC'
+				( {ChildA.someContainment=current} 'ChildA' 
+				| {ChildB.someContainment=current} 'ChildB'
+				) parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_14() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			SomeChild returns ParentA:
+				{ChildC} 'ChildC'
+				( {ChildA.someContainment=current} 'ChildA' 
+				| {ChildB.someContainment=current} 'ChildB'
+				)* parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_15() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB') aString=ID;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_16() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB' | {ChildC} 'ChildC') aString=ID;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_17() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: ({ChildA} 'ChildA' | {ChildB} 'ChildB')? aString=ID;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_18() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			    {ChildA} 'ChildA' {ChildC.someContainment=current}
+			  | {ChildB} 'ChildB' {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_19() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  ( {ChildA} 'ChildA' {ChildC.someContainment=current}
+			  | {ChildB} 'ChildB' {ChildC.someContainment=current}
+			  ) {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_20() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  ( {ChildA} 'ChildA' | {ChildB} 'ChildB' ) {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_21() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' {ChildC.someContainment=current} 'ChildC' {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_22() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildC.someContainment=current} 'ChildC')+ {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_23() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildC.someContainment=current} 'ChildC')? {ChildC.someContainment=current}
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+
+	@Test def void testTypeAfterAction_24() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' {ChildB.someContainment=current} 'ChildB' aString=ID
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_25() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA: 
+			  {ChildA} 'ChildA' ({ChildB.someContainment=current} 'ChildB')? aString=ID
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_26() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA:
+				( {ChildA} 'ChildA' 
+				| {ChildB} 'ChildB'
+				| {ChildC} 'ChildC') parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_27() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA:
+				{ChildC} 'ChildC'
+				( {ChildA.someContainment=current} 'ChildA' 
+				| {ChildB.someContainment=current} 'ChildB'
+				) parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testTypeAfterAction_28() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+						
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			SomeChild returns ParentA:
+				{ChildC} 'ChildC'
+				( {ChildA.someContainment=current} 'ChildA' 
+				| {ChildB.someContainment=current} 'ChildB'
+				)* parent=ChildA
+			;
+			ChildA: {ChildA} 'ChildA';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	
+	@Test def void testAssignObjectAlternative_01() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/multiinheritancetest.ecore'
+			
+			ChildA_ returns ChildA:
+				someContainment=(ChildA|ChildB)
+			;
+			ChildA: {ChildA} 'ChildA';
+			ChildB: {ChildB} 'ChildB';
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
+	@Test def void testAssignObjectAlternative_02() throws Exception {
+		var String grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate multiinheritancetest 'multiinheritancetest'
+			
+			DeclParentA returns ParentA:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentA} attributeInParentA=ID;
+			DeclParentB returns ParentB:
+			  DeclChildA | DeclChildB | DeclChildC | {ParentB} someContainment=DeclParentA;
+			DeclChildA returns ChildA:
+			  aString=ID parent=DeclParentA;
+			DeclChildB returns ChildB:
+			  aString=ID parent=DeclParentB;
+			DeclChildC returns ChildC:
+			  parent=DeclChildA;
+			
+			
+			ChildA:
+				someContainment=(DeclChildA|DeclChildB)
+			;
+		'''
+		val resource = getResourceFromString(grammar)
+		assertTrue(resource.errors.isEmpty)
+	}
+	
 }

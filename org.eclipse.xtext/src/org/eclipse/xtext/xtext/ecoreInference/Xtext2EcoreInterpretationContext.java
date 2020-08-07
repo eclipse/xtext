@@ -9,8 +9,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -32,14 +34,16 @@ import com.google.common.collect.Sets;
  * <a href="https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference">documentation</a>
  * for details.
  * 
+ * 
+ * 
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class Xtext2EcoreInterpretationContext {
+public class Xtext2EcoreInterpretationContext implements EClassifierInfoAccess {
 
 	private final EClassifierInfos eClassifierInfos;
 
-	private final Function<AbstractElement, EClassifier> classifierCalculator;
+	private final Function<AbstractElement, Set<EClassifier>> classifierCalculator;
 
 	private final Collection<EClassifierInfo> currentTypes = Sets.newLinkedHashSet();
 
@@ -76,12 +80,13 @@ public class Xtext2EcoreInterpretationContext {
 		final String featureName = assignment.getFeature();
 		boolean isMultivalue = GrammarUtil.isMultipleAssignment(assignment);
 		boolean isContainment = true;
-		EClassifierInfo featureTypeInfo;
+		EClassifierInfoAccess featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
 			checkNoFragmentRuleCall(assignment.getTerminal());
 			EDataType eBoolean = GrammarUtil.findEBoolean(GrammarUtil.getGrammar(assignment));
-			featureTypeInfo = getEClassifierInfoOrThrowException(eBoolean, assignment);
+			EClassifierInfo classifierInfo = getEClassifierInfoOrThrowException(eBoolean, assignment);
+			featureTypeInfo = ()->classifierInfo;
 			isMultivalue = false;
 		}
 		else {
@@ -90,13 +95,30 @@ public class Xtext2EcoreInterpretationContext {
 				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot derive type from incomplete assignment.", assignment);
 			}
 			checkNoFragmentRuleCall(terminal);
-			EClassifier type = getTerminalType(terminal);
+			List<EClassifierInfo> classifierInfos = new ArrayList<>();
+			for(EClassifier type: getTerminalTypes(terminal)) {
+				classifierInfos.add(getEClassifierInfoOrThrowException(type, assignment));
+			}
 			isContainment = isContainmentAssignment(assignment);
-			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
+			featureTypeInfo = new EClassifierInfoAccess() {
+
+				@Override
+				public Collection<EClassifierInfo> getCurrentTypes() {
+					return classifierInfos;
+				}
+				@Override
+				public EClassifierInfo getCurrentCompatibleType() {
+					try {
+						return eClassifierInfos.getCompatibleTypeOf(classifierInfos);
+					} catch(IllegalArgumentException e) {
+						return null;
+					}
+				}
+			};
 		}
 		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
 	}
-
+	
 	private void checkNoFragmentRuleCall(AbstractElement terminal) throws TransformationException {
 		if (GrammarUtil.isEObjectFragmentRuleCall(terminal)) {
 			throw new TransformationException(TransformationErrorCode.InvalidFragmentCall, "Cannot call a fragment from an assignment", terminal);
@@ -133,14 +155,14 @@ public class Xtext2EcoreInterpretationContext {
 		}.doSwitch(assignment.getTerminal());
 	}
 
-	public void addFeature(String featureName, EClassifierInfo featureTypeInfo, boolean isMultivalue,
+	public void addFeature(String featureName, EClassifierInfoAccess featureTypeInfo, boolean isMultivalue,
 			boolean isContainment, AbstractElement parserElement) throws TransformationException {
 		for (EClassifierInfo type : currentTypes)
 			type.addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, parserElement);
 	}
 	
-	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
-		final EClassifier result = classifierCalculator.apply(terminal);
+	private Set<EClassifier> getTerminalTypes(AbstractElement terminal) throws TransformationException {
+		Set<EClassifier> result = classifierCalculator.apply(terminal);
 		if (result == null) {
 			final ICompositeNode node = NodeModelUtils.getNode(terminal);
 			if (node != null) {
@@ -190,8 +212,16 @@ public class Xtext2EcoreInterpretationContext {
 		return result;
 	}
 
+	public Collection<EClassifierInfo> getCurrentTypes() {
+		return currentTypes;
+	}
+	
 	public EClassifierInfo getCurrentCompatibleType() {
-		return eClassifierInfos.getCompatibleTypeOf(currentTypes);
+		try {
+			return eClassifierInfos.getCompatibleTypeOf(currentTypes);
+		} catch(IllegalArgumentException e) {
+			return null;
+		}
 	}
 
 	public Xtext2EcoreInterpretationContext spawnContextWithReferencedType(EClassifierInfo referencedType, EObject parserElement) {

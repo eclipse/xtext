@@ -34,7 +34,6 @@ import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
@@ -165,22 +164,10 @@ public class EClassifierInfos {
 		while (i.hasNext())
 			result = getCompatibleType(result, i.next());
 
-		return result;
-	}
-
-	public EClassifier getCompatibleTypeNameOf(Collection<EClassifier> classifiers, boolean useParent) {
-		final Collection<EClassifierInfo> types = Sets.newLinkedHashSet();
-		for (EClassifier classifier : classifiers) {
-			final EClassifierInfo info = getInfoOrNull(classifier);
-			if (info == null)
-				return null;
-			types.add(info);
+		if (result == null) {
+			return getInfoOrNull(GrammarUtil.findEObject(grammar));
 		}
-
-		final EClassifierInfo compatibleType = getCompatibleTypeOf(types);
-		if (compatibleType != null)
-			return compatibleType.getEClassifier();
-		return GrammarUtil.findEObject(grammar);
+		return result;
 	}
 
 	public List<EClassInfo> getAllEClassInfos() {
