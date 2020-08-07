@@ -895,13 +895,12 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 			@Override
 			public Boolean caseParserRule(ParserRule object) {
-				isNull = GrammarUtil.isDatatypeRule(object);
+				isNull &= GrammarUtil.isDatatypeRule(object);
 				return isNull;
 			}
 
 			@Override
 			public Boolean caseTerminalRule(TerminalRule object) {
-				isNull = true;
 				return isNull;
 			}
 
@@ -977,7 +976,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				public Boolean caseAction(Action object) {
 					if (object == action) {
 						if (!assignedActionAllowed) {
-							error("An action is not allowed in fragments and when the current may still be unassigned.", null);
+							error("An action is not allowed in fragments and when the current may still be unassigned.", object, null);
 							checkDone();
 						}
 					}

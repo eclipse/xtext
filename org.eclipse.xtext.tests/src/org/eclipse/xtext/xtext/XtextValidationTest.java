@@ -66,7 +66,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -956,22 +955,6 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
 				"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
 				"@Override\n" +
-				"ParserRule returns xtext::ParserRule: name = ID;");
-		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
-
-		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-		assertNotNull("diag", diag);
-		assertEquals(diag.getSeverity(), Diagnostic.OK);
-		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
-	}
-	
-	@Test
-	@Ignore("TODO this one should yield a warning, because two different instances of a package (ecore itself) might be referenced.")
-	public void testBug_280413_03() throws Exception {
-		XtextResource resource = getResourceFromString(
-				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
 				"ParserRule returns xtext::ParserRule: name = ID;");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -1936,6 +1919,55 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testRuleCallAllowed_13_481700() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: val1=Obj Data {SubModel};\n" + 
+			"Obj: {Obj};\n" + 
+			"Data: 'data';";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		RuleCall ruleCall = (RuleCall) ((Group) rule.getAlternatives()).getElements().get(1);
+		Action action = (Action) ((Group) rule.getAlternatives()).getElements().get(2);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		try {
+			validator.checkUnassignedActionAfterAssignment(action);
+			fail();
+		} catch(RuntimeException e) {
+			assertEquals("org.eclipse.xtext.validation.GuardException", e.getClass().getName());
+		}
+		messageAcceptor.validate();
+	}
+	
+	@Test public void testRuleCallAllowed_14_481700() throws Exception {
+		String grammarAsText =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: val1=Obj ID {SubModel};\n" + 
+			"Obj: {Obj};";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		RuleCall ruleCall = (RuleCall) ((Group) rule.getAlternatives()).getElements().get(1);
+		Action action = (Action) ((Group) rule.getAlternatives()).getElements().get(2);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkUnassignedRuleCallAllowed(ruleCall);
+		try {
+			validator.checkUnassignedActionAfterAssignment(action);
+			fail();
+		} catch(RuntimeException e) {
+			assertEquals("org.eclipse.xtext.validation.GuardException", e.getClass().getName());
+		}
+		messageAcceptor.validate();
+	}
+	
 	@Test public void testActionAllowed_01() throws Exception {
 		String grammarAsText =
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
@@ -1972,6 +2004,29 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkAssignedActionAfterAssignment(action);
+		messageAcceptor.validate();
+	}
+	
+	@Test public void testActionAllowed_03() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +
+				"Model: Data {Sub.sub=current};\n" + 
+				"Data returns ecore::EString: 'data';";
+	
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		Action action = (Action) ((Group) rule.getAlternatives()).getElements().get(1);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		try {
+			validator.checkAssignedActionAfterAssignment(action);
+			fail();
+		} catch(RuntimeException e) {
+			assertEquals("org.eclipse.xtext.validation.GuardException", e.getClass().getName());
+		}
 		messageAcceptor.validate();
 	}
 	
