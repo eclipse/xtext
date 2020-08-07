@@ -56,7 +56,7 @@ Workflow {
 			exclude = "AbstractStatemachineWebModule.java"
 		}
 		language = {
-			grammarUri = "${rootPath}/org.eclipse.xtext.web.example.entities/src/org/eclipse/xtext/web/example/entities/Entities.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/web/example/entities/Entities.xtext"
 			fileExtensions = "entities"
 			referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 
