@@ -60,7 +60,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
@@ -146,29 +145,50 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				"Create rule '" + ruleName + "'", //
 				"Create rule '" + ruleName + "'", //
 				NULL_QUICKFIX_IMAGE, //
-				createNewRule(ruleName, false));
-		createLinkingIssueResolutions(issue, acceptor);
+				createNewRule(ruleName, null));
 	}
 
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
+	public void fixUnresolvedEnumRule(final Issue issue, IssueResolutionAcceptor acceptor) {
+		final String ruleName = issue.getData()[0];
+		String ruleType = "enum ";
+		acceptor.accept(issue, // 
+				"Create enum rule '" + ruleName + "'", //
+				"Create enum rule '" + ruleName + "'", //
+				NULL_QUICKFIX_IMAGE, //
+				createNewRule(ruleName, ruleType));
+	}
+	
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
 	public void fixUnresolvedTerminalRule(final Issue issue, IssueResolutionAcceptor acceptor) {
-		final String ruleName = issue.getData()[0];
+		String ruleName = issue.getData()[0];
+		String ruleType = "terminal ";
 		acceptor.accept(issue, //
 				"Create terminal '" + ruleName + "'", // 
 				"Create terminal '" + ruleName + "'", //
 				NULL_QUICKFIX_IMAGE, //
-				createNewRule(ruleName, false));
-		createLinkingIssueResolutions(issue, acceptor);
+				createNewRule(ruleName, ruleType));
 	}
-	
+
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
 	public void fixUnresolvedTerminalFragmentRule(final Issue issue, IssueResolutionAcceptor acceptor) {
-		final String ruleName = issue.getData()[0];
+		String ruleName = issue.getData()[0];
+		String ruleType = "terminal fragment ";
 		acceptor.accept(issue, //
 				"Create terminal fragment '" + ruleName + "'", // 
 				"Create terminal fragment '" + ruleName + "'", //
 				NULL_QUICKFIX_IMAGE, //
-				createNewRule(ruleName, true));
+				createNewRule(ruleName, ruleType));
+	}
+	
+	/**
+	 * This method avoids the duplicate 'Change to' quick-fix if there are multiple/different fixes for an issue.
+	 */
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
+	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
+	public void createChangeToIssueResolution(final Issue issue, IssueResolutionAcceptor acceptor) {
 		createLinkingIssueResolutions(issue, acceptor);
 	}
 
@@ -638,6 +658,8 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 							AbstractRule rule = null;
 							if (eObject instanceof Grammar) {
 								rule = ((Grammar) eObject).getHiddenTokens().get(Integer.valueOf(issue.getData()[0]).intValue());
+							} else if (eObject instanceof ParserRule) {
+								rule = ((ParserRule) eObject).getHiddenTokens().get(Integer.valueOf(issue.getData()[0]).intValue());
 							} else if (eObject instanceof RuleCall) {
 								RuleCall ruleCall = (RuleCall) state.getEObject(issue.getUriToProblem().fragment());
 								rule = ruleCall.getRule();
@@ -687,17 +709,14 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 
-	private ISemanticModification createNewRule(String ruleName, boolean isFragment) {
+	private ISemanticModification createNewRule(String ruleName, String ruleType) {
 		return (element, context) -> {
 			AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
 			ICompositeNode node = NodeModelUtils.getNode(abstractRule);
 			String nl = context.getXtextDocument().getLineDelimiter(0);
 			StringBuilder builder = new StringBuilder(nl + nl);
-			if (abstractRule instanceof TerminalRule) {
-				builder.append("terminal ");
-				if (isFragment) {
-					builder.append("fragment ");
-				}
+			if (ruleType != null) {
+				builder.append(ruleType);
 			}
 			String newRule = builder.append(ruleName).append(":" + nl + "\t" + nl + ";").toString();
 			context.getXtextDocument().replace(node.getEndOffset(), 0, newRule);
