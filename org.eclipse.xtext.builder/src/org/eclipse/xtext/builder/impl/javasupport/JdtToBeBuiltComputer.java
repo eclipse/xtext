@@ -155,8 +155,9 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 
 	/**
 	 * Handle all fragment roots that are on the classpath and not a source folder.
+	 * @since 2.23
 	 */
-	private boolean shouldHandle(IPackageFragmentRoot root) {
+	protected boolean shouldHandle(IPackageFragmentRoot root) {
 		try {
 			boolean result = !JavaRuntime.newDefaultJREContainerPath().isPrefixOf(root.getRawClasspathEntry().getPath());
 			result &= (root.isArchive() || root.isExternal()); 
