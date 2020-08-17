@@ -55,14 +55,14 @@ public class DefaultEObjectLabelProviderTest extends Assert {
 			}
 		};
 		assertEquals("foo", lp.getText("foo"));
-		assertEquals("89", lp.getText(new Integer(89)));
+		assertEquals("89", lp.getText(Integer.valueOf(89)));
 
 		assertTrue(calls.isEmpty());
 		lp.getImage(true);
 		assertTrue(calls.isEmpty());
 		lp.getImage("String");
 		assertTrue(calls.contains("String"));
-		lp.getImage(new Integer(45));
+		lp.getImage(Integer.valueOf(45));
 		assertTrue(calls.contains("45"));
 		assertTrue(calls.size() == 2);
 	}
@@ -178,7 +178,7 @@ public class DefaultEObjectLabelProviderTest extends Assert {
 		assertEquals(DEFAULT_TEXT, defaultLabelProvider.getText("foo"));
 		assertEquals(1, calls.size());
 		try {
-			assertEquals("89", defaultLabelProvider.getText(new Integer(89)));
+			assertEquals("89", defaultLabelProvider.getText(Integer.valueOf(89)));
 			fail();
 		} catch (RuntimeException e) {
 			assertTrue(e instanceof IllegalArgumentException);
@@ -188,7 +188,7 @@ public class DefaultEObjectLabelProviderTest extends Assert {
 		assertNull(defaultLabelProvider.getImage("String"));
 		assertEquals(3, calls.size());
 		try {
-			defaultLabelProvider.getImage(new Integer(45));
+			defaultLabelProvider.getImage(Integer.valueOf(45));
 			fail();
 		} catch (RuntimeException e) {
 			assertTrue(e instanceof IllegalArgumentException);

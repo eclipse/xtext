@@ -174,12 +174,12 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		final int length= code.length();
 	    int pos= 0;
 		List<Integer> positions= new ArrayList<Integer>();
-		positions.add(new Integer(-1));
+		positions.add(Integer.valueOf(-1));
 		while (pos < length && pos != -1) {
 			char ch= code.charAt(pos);
 			switch (ch) {
 	            case ',':
-		            positions.add(new Integer(pos));
+		            positions.add(Integer.valueOf(pos));
 		            break;
 	            case '<':
 	            	pos = advance(code, length, pos, '<', '>');
@@ -196,7 +196,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 			if (pos != -1)
 				pos++;
 		}
-		positions.add(new Integer(length));
+		positions.add(Integer.valueOf(length));
 
 		int[] fields= new int[positions.size()];
 		for (int i= 0; i < fields.length; i++)
