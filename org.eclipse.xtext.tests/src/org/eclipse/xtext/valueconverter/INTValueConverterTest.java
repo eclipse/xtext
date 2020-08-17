@@ -33,14 +33,14 @@ public class INTValueConverterTest extends AbstractXtextTests {
 	@Test public void testSimple() throws Exception {
 		String s = "42";
 		Integer value = valueConverter.toValue(s, null);
-		assertEquals(new Integer(42), value);
+		assertEquals(Integer.valueOf(42), value);
 		assertEquals(s, valueConverter.toString(value));
 	}
 
 	@Test public void testZero() throws Exception {
 		String s = "0";
 		Integer value = valueConverter.toValue(s, null);
-		assertEquals(new Integer(0), value);
+		assertEquals(Integer.valueOf(0), value);
 		assertEquals(s, valueConverter.toString(value));
 	}
 
