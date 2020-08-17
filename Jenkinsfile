@@ -101,5 +101,5 @@ pipeline {
 }
 
 def javaVersion(String version) {
-  return version.replaceAll(".*-(jdk\\d+).*", "\$1")
+  return version.replaceAll(".*-(jdk\\d+).*", "\$1").toUpperCase()
 }
