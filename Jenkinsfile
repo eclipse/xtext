@@ -19,7 +19,7 @@ pipeline {
   }
   
   tools {
-     maven "apache-maven-latest"
+     maven "apache-maven-3.6.3"
      jdk "${params.JDK_VERSION}"
   }
 
