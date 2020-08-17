@@ -150,9 +150,5 @@ def eclipseVersion(String targetPlatform) {
 }
 
 def javaVersion(String version) {
-  if (!version.contains('-jdk')) {
-    return 'jdk15'
-  } else {
-    return version.replaceAll(".*-(jdk\\d+).*", "\$1")
-  }
+  return version.replaceAll(".*-(jdk\\d+).*", "\$1")
 }
