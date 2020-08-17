@@ -135,20 +135,20 @@ pipeline {
 
 def eclipseVersion(String targetPlatform) {
   if (targetPlatform == 'latest') {
-    return "4.17"
+    return "Eclipse4.17"
   } else if (targetPlatform == 'photon') {
-    return "4.8"
+    return "Eclipse4.8"
   } else if (targetPlatform == 'oxygen') {
-    return "4.7"
+    return "Eclipse4.7"
   } else {
     def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
     def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
     def targetDate = java.time.LocalDate.parse(targetPlatform.substring(1)+"01", df)
     long monthsBetween = java.time.temporal.ChronoUnit.MONTHS.between(baseDate, targetDate);
-    return "4."+ (8+(monthsBetween/3))
+    return "Eclipse4."+ (8+(monthsBetween/3))
   } 
 }
 
 def javaVersion(String version) {
-  return version.replaceAll(".*-(jdk\\d+).*", "\$1")
+  return version.replaceAll(".*-(jdk\\d+).*", "\$1").toUpperCase()
 }
