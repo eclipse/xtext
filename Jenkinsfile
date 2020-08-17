@@ -4,7 +4,7 @@ pipeline {
       label 'centos-7'
     }
   }
-   
+  
   environment {
     DOWNSTREAM_JOBS = 'xtext-core'
     GRADLE_USER_HOME = "$WORKSPACE/.gradle" // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564559
@@ -33,13 +33,14 @@ pipeline {
      jdk "${params.JDK_VERSION}"
   }
 
+  // Build stages
   stages {
     stage('Initialize') {
       steps {
         checkout scm
-
+        
         script {
-          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion(JDK_VERSION))
+          currentBuild.displayName = String.format("#%s(JDK%s)", BUILD_NUMBER, javaVersion())
         }
       }
     }
@@ -111,6 +112,8 @@ pipeline {
   }
 }
 
-def javaVersion(String version) {
-  return version.replaceAll(".*-(jdk\\d+).*", "\$1")
+/** return the Java version as Integer (8, 11, ...) */
+def javaVersion() {
+  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
 }
+
