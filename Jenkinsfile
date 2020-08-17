@@ -39,13 +39,14 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
+    stage('Initialize') {
       steps {
         checkout scm
         
         script {
-          currentBuild.displayName = String.format("#%s(%s,%s)", BUILD_NUMBER, eclipseVersion(params.TARGET_PLATFORM), javaVersion(JDK_VERSION))
+          currentBuild.displayName = String.format("#%s(JDK%s,Eclipse%s)", BUILD_NUMBER, javaVersion(), eclipseVersion())
         }
+        
         sh '''
             if [ -f "/sys/fs/cgroup/memory/memory.limit_in_bytes" ]; then
                 echo "Available memory: $(cat /sys/fs/cgroup/memory/memory.limit_in_bytes | numfmt --to iec --format '%f')"
@@ -55,8 +56,8 @@ pipeline {
                 if [[ "$OSTYPE" == "darwin"* ]]; then
                     sed -i '' "$@"
                 else
-                    sed -i "$@" 
-                fi    
+                    sed -i "$@"
+                fi
             }
             
             targetfiles="$(find releng -type f -iname '*.target')"
@@ -159,7 +160,22 @@ pipeline {
   }
 }
 
-def eclipseVersion(String targetPlatform) {
+/** return the Java version as Integer (8, 11, ...) */
+def javaVersion() {
+  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
+}
+
+/** returns true when this build was triggered by an upstream build */
+def isTriggeredByUpstream() {
+  return !"[]".equals(currentBuild.getBuildCauses('hudson.model.Cause$UpstreamCause').toString())
+}
+
+/**
+ * Returns the Eclipse version dependent on the selected target platform.
+ * Result: '4.XX'
+ */
+def eclipseVersion() {
+  def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
     return "4.17"
   } else if (targetPlatform == 'photon') {
@@ -175,6 +191,21 @@ def eclipseVersion(String targetPlatform) {
   } 
 }
 
-def javaVersion(String version) {
-  return version.replaceAll(".*-(jdk\\d+).*", "\$1")
+/**
+ * The target platform is primarily defined by the build parameter TARGET_PLATFORM.
+ * But when the build is triggered by upstream with at least Java version 11, 'latest'
+ * is returned.
+ */
+def selectedTargetPlatform() {
+    def tp = params.TARGET_PLATFORM
+    def isUpstream = isTriggeredByUpstream()
+    def javaVersion = javaVersion()
+    
+    if (isTriggeredByUpstream() && javaVersion>=11) {
+        println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'latest'
+    } else {
+        return tp
+    }
 }
+
