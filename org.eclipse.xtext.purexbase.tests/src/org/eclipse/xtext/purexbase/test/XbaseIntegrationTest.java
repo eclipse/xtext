@@ -39,7 +39,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 			public void accept(Result t) {
 				try {
 					final Class<?> compiledClass = t.getCompiledClass();
-					Object instance = compiledClass.newInstance();
+					Object instance = compiledClass.getDeclaredConstructor().newInstance();
 					final Method method = compiledClass.getDeclaredMethod("myMethod");
 					result[0] = method.invoke(instance);
 				} catch (InvocationTargetException e) {

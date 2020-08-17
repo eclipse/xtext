@@ -1,6 +1,7 @@
 package org.eclipse.xtext.purexbase.test.data;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Amount {
 	
@@ -18,7 +19,7 @@ public class Amount {
 	
 	@Override
 	public String toString() {
-		return value.setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		return value.setScale(2, RoundingMode.HALF_UP).toString();
 	}
 	
 	public Amount operator_plus(Amount other) {
