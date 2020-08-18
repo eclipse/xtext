@@ -43,9 +43,9 @@ pipeline {
         checkout scm
         
         script {
-          currentBuild.displayName = String.format("#%s(%s,%s)", BUILD_NUMBER, eclipseVersion(params.TARGET_PLATFORM), javaVersion(JDK_VERSION))
+          currentBuild.displayName = String.format("#%s(JDK%s,Eclipse%s)", BUILD_NUMBER, javaVersion(), eclipseVersion())
         }
-
+        
         sh '''
             sed_inplace() {
                 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -69,7 +69,7 @@ pipeline {
       steps {
           wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
           sh """
-            ./1-maven-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.TARGET_PLATFORM} --local-repository=/home/jenkins/.m2/repository
+            ./1-maven-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
           """
           }
       }
@@ -133,22 +133,52 @@ pipeline {
   }
 }
 
-def eclipseVersion(String targetPlatform) {
+/** return the Java version as Integer (8, 11, ...) */
+def javaVersion() {
+  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
+}
+
+/** returns true when this build was triggered by an upstream build */
+def isTriggeredByUpstream() {
+  return !"[]".equals(currentBuild.getBuildCauses('hudson.model.Cause$UpstreamCause').toString())
+}
+
+/**
+ * Returns the Eclipse version dependent on the selected target platform.
+ * Result: '4.XX'
+ */
+def eclipseVersion() {
+  def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "Eclipse4.17"
+    return "4.17"
   } else if (targetPlatform == 'photon') {
-    return "Eclipse4.8"
+    return "4.8"
   } else if (targetPlatform == 'oxygen') {
-    return "Eclipse4.7"
+    return "4.7"
   } else {
     def baseDate = java.time.LocalDate.parse("2018-06-01") // 4.8 Photon
     def df = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")
     def targetDate = java.time.LocalDate.parse(targetPlatform.substring(1)+"01", df)
     long monthsBetween = java.time.temporal.ChronoUnit.MONTHS.between(baseDate, targetDate);
-    return "Eclipse4."+ (8+(monthsBetween/3))
+    return "4."+ (8+(monthsBetween/3))
   } 
 }
 
-def javaVersion(String version) {
-  return version.replaceAll(".*-(jdk\\d+).*", "\$1").toUpperCase()
+/**
+ * The target platform is primarily defined by the build parameter TARGET_PLATFORM.
+ * But when the build is triggered by upstream with at least Java version 11, 'latest'
+ * is returned.
+ */
+def selectedTargetPlatform() {
+    def tp = params.TARGET_PLATFORM
+    def isUpstream = isTriggeredByUpstream()
+    def javaVersion = javaVersion()
+    
+    if (isTriggeredByUpstream() && javaVersion>=11) {
+        println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'latest'
+    } else {
+        return tp
+    }
 }
+
