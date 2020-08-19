@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtext.generator.ui.contentAssist
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
+import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
@@ -127,17 +129,29 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
-
 	// generation of the 'Abstract...ProposalProvider'
 	
-	protected def generateGenJavaProposalProvider() {
+	protected def void generateGenJavaProposalProvider() {
 		// excluded features are those that stem from inherited grammars,
-		//  they are handled by the super grammars' proposal provider
+		// they are handled by the super grammars' proposal provider
 		val excludedFqnFeatureNames = grammar.getFQFeatureNamesToExclude
 		val processedNames = newHashSet()
+		
+		val assignments = getAssignments(processedNames, excludedFqnFeatureNames)
+		val remainingRules = getRules(processedNames, excludedFqnFeatureNames)
+		
+		// take the non-abstract class signature for the src-gen class in case of !generateStub
+		//  as proposalProviders of sub languages refer to 'grammar.proposalProviderClass',
+		//  see 'getGenProposalProviderSuperClass(...)'
+		generateGenJavaProposalProvider(assignments, remainingRules)
+	}
 
+	/**
+	 * @since 2.23
+	 */
+	protected def List<Assignment> getAssignments(Set<String> processedNames, Set<String> excludedFqnFeatureNames) {
 		// determine all assignments within the grammar that are not excluded and not handled yet
-		val assignments = grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
+		grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
 			val fqFeatureName = assignment.FQFeatureName
 			if (!processedNames.contains(fqFeatureName) && !excludedFqnFeatureNames.contains(fqFeatureName)) {
 				processedNames += fqFeatureName;
@@ -145,9 +159,14 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			}
 			candidates
 		]
-		
+	}
+
+	/**
+	 * @since 2.23
+	 */	
+	protected def List<AbstractRule> getRules(Set<String> processedNames, Set<String> excludedFqnFeatureNames) {
 		// determine the (remaining) rules that are not excluded and not handled yet
-		val remainingRules = grammar.rules.fold(<AbstractRule>newArrayList()) [candidates, rule |
+		grammar.rules.fold(<AbstractRule>newArrayList()) [candidates, rule |
 			val fqnFeatureName = rule.FQFeatureName
 			if (!processedNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)) {
 				processedNames += fqnFeatureName
@@ -155,15 +174,24 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			}
 			candidates
 		]
-		
-		// take the non-abstract class signature for the src-gen class in case of !generateStub
-		//  as proposalProviders of sub languages refer to 'grammar.proposalProviderClass',
-		//  see 'getGenProposalProviderSuperClass(...)'
+	}
+
+	/**
+	 * @since 2.23
+	 */
+	protected def void generateGenJavaProposalProvider(List<Assignment> assignments, List<AbstractRule> rules) {
 		val genClass =
 			if (isGenerateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
 		
+		val superClass = grammar.genProposalProviderSuperClass
+		generateGenJavaProposalProvider(assignments, rules, genClass, superClass)
+	}
+
+	/**
+	 * @since 2.23
+	 */
+	protected def void generateGenJavaProposalProvider(List<Assignment> assignments, List<AbstractRule> rules, TypeReference genClass, TypeReference superClass) {
 		fileAccessFactory.createGeneratedJavaFile(genClass) => [
-			val superClass = grammar.genProposalProviderSuperClass
 
 			typeComment = '''
 				/**
@@ -182,7 +210,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 						«ENDFOR»
 
 					«ENDIF»
-					«FOR rule : remainingRules»
+					«FOR rule : rules»
 						public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
 								contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
 							// subclasses may override
@@ -217,7 +245,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			}
 		'''
 	}
-	
+
 	private def StringConcatenationClient handleAssignmentOptions(Iterable<AbstractElement> terminals) {
 		val processedTerminals = newHashSet();
 		

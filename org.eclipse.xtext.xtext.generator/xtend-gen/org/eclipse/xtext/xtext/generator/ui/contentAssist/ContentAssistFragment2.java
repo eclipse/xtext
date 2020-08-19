@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -210,140 +210,164 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     this.fileAccessFactory.createJavaFile(_proposalProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
-  protected GeneratedJavaFileAccess generateGenJavaProposalProvider() {
-    GeneratedJavaFileAccess _xblockexpression = null;
-    {
-      final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(this.getGrammar());
-      final HashSet<String> processedNames = CollectionLiterals.<String>newHashSet();
-      final Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>> _function = (ArrayList<Assignment> candidates, Assignment assignment) -> {
-        ArrayList<Assignment> _xblockexpression_1 = null;
-        {
-          final String fqFeatureName = this.getFQFeatureName(assignment);
-          if (((!processedNames.contains(fqFeatureName)) && (!excludedFqnFeatureNames.contains(fqFeatureName)))) {
-            processedNames.add(fqFeatureName);
-            candidates.add(assignment);
-          }
-          _xblockexpression_1 = candidates;
+  protected void generateGenJavaProposalProvider() {
+    final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(this.getGrammar());
+    final HashSet<String> processedNames = CollectionLiterals.<String>newHashSet();
+    final List<Assignment> assignments = this.getAssignments(processedNames, excludedFqnFeatureNames);
+    final List<AbstractRule> remainingRules = this.getRules(processedNames, excludedFqnFeatureNames);
+    this.generateGenJavaProposalProvider(assignments, remainingRules);
+  }
+  
+  /**
+   * @since 2.23
+   */
+  protected List<Assignment> getAssignments(final Set<String> processedNames, final Set<String> excludedFqnFeatureNames) {
+    final Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>> _function = (ArrayList<Assignment> candidates, Assignment assignment) -> {
+      ArrayList<Assignment> _xblockexpression = null;
+      {
+        final String fqFeatureName = this.getFQFeatureName(assignment);
+        if (((!processedNames.contains(fqFeatureName)) && (!excludedFqnFeatureNames.contains(fqFeatureName)))) {
+          processedNames.add(fqFeatureName);
+          candidates.add(assignment);
         }
-        return _xblockexpression_1;
-      };
-      final ArrayList<Assignment> assignments = IterableExtensions.<Assignment, ArrayList<Assignment>>fold(GrammarUtil.containedAssignments(this.getGrammar()), CollectionLiterals.<Assignment>newArrayList(), _function);
-      final Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>> _function_1 = (ArrayList<AbstractRule> candidates, AbstractRule rule) -> {
-        ArrayList<AbstractRule> _xblockexpression_1 = null;
-        {
-          final String fqnFeatureName = this.getFQFeatureName(rule);
-          if (((!processedNames.contains(fqnFeatureName)) && (!excludedFqnFeatureNames.contains(fqnFeatureName)))) {
-            processedNames.add(fqnFeatureName);
-            candidates.add(rule);
-          }
-          _xblockexpression_1 = candidates;
-        }
-        return _xblockexpression_1;
-      };
-      final ArrayList<AbstractRule> remainingRules = IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(this.getGrammar().getRules(), CollectionLiterals.<AbstractRule>newArrayList(), _function_1);
-      TypeReference _xifexpression = null;
-      boolean _isGenerateStub = this.isGenerateStub();
-      if (_isGenerateStub) {
-        _xifexpression = this.getGenProposalProviderClass(this.getGrammar());
-      } else {
-        _xifexpression = this.getProposalProviderClass(this.getGrammar());
+        _xblockexpression = candidates;
       }
-      final TypeReference genClass = _xifexpression;
-      GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
-      final Procedure1<GeneratedJavaFileAccess> _function_2 = (GeneratedJavaFileAccess it) -> {
-        final TypeReference superClass = this.getGenProposalProviderSuperClass(this.getGrammar());
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("/**");
-            _builder.newLine();
-            _builder.append(" ");
-            _builder.append("* Represents a generated, default implementation of superclass {@link ");
-            _builder.append(superClass, " ");
-            _builder.append("}.");
-            _builder.newLineIfNotEmpty();
-            _builder.append(" ");
-            _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
-            _builder.newLine();
-            _builder.append(" ");
-            _builder.append("* with a more concrete subtype. ");
-            _builder.newLine();
-            _builder.append(" ");
-            _builder.append("*/");
-            _builder.newLine();
-          }
-        };
-        it.setTypeComment(_client);
-        StringConcatenationClient _client_1 = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("public ");
-            {
-              boolean _isGenerateStub = ContentAssistFragment2.this.isGenerateStub();
-              if (_isGenerateStub) {
-                _builder.append("abstract ");
-              }
-            }
-            _builder.append("class ");
-            String _simpleName = genClass.getSimpleName();
-            _builder.append(_simpleName);
-            _builder.append(" extends ");
-            _builder.append(superClass);
-            _builder.append(" {");
-            _builder.newLineIfNotEmpty();
-            _builder.newLine();
-            {
-              boolean _isEmpty = assignments.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                {
-                  for(final Assignment assignment : assignments) {
-                    _builder.append("\t");
-                    StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
-                    _builder.append(_handleAssignment, "\t");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
-                _builder.newLine();
-              }
-            }
-            {
-              for(final AbstractRule rule : remainingRules) {
-                _builder.append("\t");
-                _builder.append("public void complete");
-                String _fQFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
-                _builder.append(_fQFeatureName, "\t");
-                _builder.append("(");
-                _builder.append(EObject.class, "\t");
-                _builder.append(" model, ");
-                _builder.append(RuleCall.class, "\t");
-                _builder.append(" ruleCall, ");
-                TypeReference _contentAssistContextClass = ContentAssistFragment2.this.getContentAssistContextClass();
-                _builder.append(_contentAssistContextClass, "\t");
-                _builder.append(" context, ");
-                TypeReference _iCompletionProposalAcceptorClass = ContentAssistFragment2.this.getICompletionProposalAcceptorClass();
-                _builder.append(_iCompletionProposalAcceptorClass, "\t");
-                _builder.append(" acceptor) {");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("// subclasses may override");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
-            _builder.append("}");
-            _builder.newLine();
-          }
-        };
-        it.setContent(_client_1);
-        it.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
-      };
-      _xblockexpression = ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function_2);
+      return _xblockexpression;
+    };
+    return IterableExtensions.<Assignment, ArrayList<Assignment>>fold(GrammarUtil.containedAssignments(this.getGrammar()), CollectionLiterals.<Assignment>newArrayList(), _function);
+  }
+  
+  /**
+   * @since 2.23
+   */
+  protected List<AbstractRule> getRules(final Set<String> processedNames, final Set<String> excludedFqnFeatureNames) {
+    final Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>> _function = (ArrayList<AbstractRule> candidates, AbstractRule rule) -> {
+      ArrayList<AbstractRule> _xblockexpression = null;
+      {
+        final String fqnFeatureName = this.getFQFeatureName(rule);
+        if (((!processedNames.contains(fqnFeatureName)) && (!excludedFqnFeatureNames.contains(fqnFeatureName)))) {
+          processedNames.add(fqnFeatureName);
+          candidates.add(rule);
+        }
+        _xblockexpression = candidates;
+      }
+      return _xblockexpression;
+    };
+    return IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(this.getGrammar().getRules(), CollectionLiterals.<AbstractRule>newArrayList(), _function);
+  }
+  
+  /**
+   * @since 2.23
+   */
+  protected void generateGenJavaProposalProvider(final List<Assignment> assignments, final List<AbstractRule> rules) {
+    TypeReference _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      _xifexpression = this.getGenProposalProviderClass(this.getGrammar());
+    } else {
+      _xifexpression = this.getProposalProviderClass(this.getGrammar());
     }
-    return _xblockexpression;
+    final TypeReference genClass = _xifexpression;
+    final TypeReference superClass = this.getGenProposalProviderSuperClass(this.getGrammar());
+    this.generateGenJavaProposalProvider(assignments, rules, genClass, superClass);
+  }
+  
+  /**
+   * @since 2.23
+   */
+  protected void generateGenJavaProposalProvider(final List<Assignment> assignments, final List<AbstractRule> rules, final TypeReference genClass, final TypeReference superClass) {
+    GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
+    final Procedure1<GeneratedJavaFileAccess> _function = (GeneratedJavaFileAccess it) -> {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("/**");
+          _builder.newLine();
+          _builder.append(" ");
+          _builder.append("* Represents a generated, default implementation of superclass {@link ");
+          _builder.append(superClass, " ");
+          _builder.append("}.");
+          _builder.newLineIfNotEmpty();
+          _builder.append(" ");
+          _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
+          _builder.newLine();
+          _builder.append(" ");
+          _builder.append("* with a more concrete subtype. ");
+          _builder.newLine();
+          _builder.append(" ");
+          _builder.append("*/");
+          _builder.newLine();
+        }
+      };
+      it.setTypeComment(_client);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public ");
+          {
+            boolean _isGenerateStub = ContentAssistFragment2.this.isGenerateStub();
+            if (_isGenerateStub) {
+              _builder.append("abstract ");
+            }
+          }
+          _builder.append("class ");
+          String _simpleName = genClass.getSimpleName();
+          _builder.append(_simpleName);
+          _builder.append(" extends ");
+          _builder.append(superClass);
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          {
+            boolean _isEmpty = assignments.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              {
+                for(final Assignment assignment : assignments) {
+                  _builder.append("\t");
+                  StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
+                  _builder.append(_handleAssignment, "\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.newLine();
+            }
+          }
+          {
+            for(final AbstractRule rule : rules) {
+              _builder.append("\t");
+              _builder.append("public void complete");
+              String _fQFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
+              _builder.append(_fQFeatureName, "\t");
+              _builder.append("(");
+              _builder.append(EObject.class, "\t");
+              _builder.append(" model, ");
+              _builder.append(RuleCall.class, "\t");
+              _builder.append(" ruleCall, ");
+              TypeReference _contentAssistContextClass = ContentAssistFragment2.this.getContentAssistContextClass();
+              _builder.append(_contentAssistContextClass, "\t");
+              _builder.append(" context, ");
+              TypeReference _iCompletionProposalAcceptorClass = ContentAssistFragment2.this.getICompletionProposalAcceptorClass();
+              _builder.append(_iCompletionProposalAcceptorClass, "\t");
+              _builder.append(" acceptor) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("// subclasses may override");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      it.setContent(_client_1);
+      it.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
+    };
+    ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function);
   }
   
   private StringConcatenationClient handleAssignment(final Assignment assignment) {
