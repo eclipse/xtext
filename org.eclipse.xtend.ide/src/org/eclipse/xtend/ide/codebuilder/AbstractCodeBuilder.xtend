@@ -11,22 +11,22 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference
+import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.common.types.JvmUpperBound
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
-import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 /** 
  * @author Jan Koehnlein
@@ -124,5 +124,6 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 			default: false
 		}
 	}
+	
 }
 
