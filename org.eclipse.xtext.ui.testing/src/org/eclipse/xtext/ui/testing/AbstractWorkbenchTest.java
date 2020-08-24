@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -53,8 +53,17 @@ public abstract class AbstractWorkbenchTest extends Assert {
 		closeEditors();
 		cleanWorkspace();
 		waitForBuild();
+		waitForEventProcessing();
 	}
-	
+
+	/**
+	 * @since 2.23
+	 */
+	protected void waitForEventProcessing() {
+		while (Display.getDefault().readAndDispatch()) {
+		}
+	}
+
 	protected static void closeEditors() {
 		getActivePage().closeAllEditors(false);
 	}

@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -110,14 +109,6 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
 			return editor.getInternalSourceViewer().getTextWidget();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * @since 2.18
-	 */
-	protected void waitForEventProcessing() {
-		while (Display.getDefault().readAndDispatch()) {
 		}
 	}
 
