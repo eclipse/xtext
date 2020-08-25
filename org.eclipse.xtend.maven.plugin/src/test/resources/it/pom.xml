@@ -26,13 +26,17 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>org.eclipse.xtend.lib</artifactId>
+				<version>${xtextVersion}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
-			<version>${xtextVersion}</version>
 		</dependency>
 	</dependencies>
 	<pluginRepositories>
