@@ -9,8 +9,10 @@
 package org.eclipse.xtext.formatting2.internal
 
 import com.google.inject.Inject
+import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
@@ -23,7 +25,12 @@ import org.junit.runner.RunWith
 @InjectWith(FormatterTestLanguageInjectorProvider)
 class CommentFormatterTest {
 	@Inject extension GenericFormatterTester
-	//@Inject extension FormatterTestLanguageGrammarAccess
+
+	static class CustomFormatter extends GenericFormatter<IDList> {
+		override format(IDList model, ITextRegionExtensions regionAccess, extension IFormattableDocument document) {
+			model.regionFor.keyword("idlist").append[oneSpace]
+		}
+	}
 
 	@Test def void SL_inline() {
 		assertFormatted[
@@ -31,9 +38,7 @@ class CommentFormatterTest {
 				idlist  //x
 				a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist //x
 				a
@@ -51,9 +56,7 @@ class CommentFormatterTest {
 				
 				a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist //x
 				a
@@ -66,11 +69,21 @@ class CommentFormatterTest {
 			toBeFormatted = '''
 				idlist  /*x*/  a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist /*x*/ a
+			'''
+		]
+	}
+
+	@Test def void MLSL_double_inline() {
+		assertFormatted[
+			toBeFormatted = '''
+				idlist  /*x*//*y*/  a
+			'''
+			formatter = new CustomFormatter()
+			expectation = '''
+				idlist /*x*/ /*y*/ a
 			'''
 		]
 	}
@@ -86,9 +99,7 @@ class CommentFormatterTest {
 				
 				a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist /*x*/
 				a
@@ -103,9 +114,7 @@ class CommentFormatterTest {
 				x
 				*/  a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist
 				/*
@@ -129,9 +138,7 @@ class CommentFormatterTest {
 				
 				a
 			'''
-			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.keyword("idlist").append[oneSpace]
-			]
+			formatter = new CustomFormatter()
 			expectation = '''
 				idlist
 				
@@ -143,6 +150,4 @@ class CommentFormatterTest {
 			'''
 		]
 	}
-
-
 }

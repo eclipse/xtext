@@ -38,14 +38,26 @@ public class HiddenRegionReplacer implements ITextReplacer {
 	}
 
 	/**
-	 * This method is when we have multiple TextReplacers for this HiddenRegion because the HiddenRegion contains
+	 * This method is called when we have multiple TextReplacers for this HiddenRegion because the HiddenRegion contains
 	 * comments. It applies the formatting configuration from {@link #formatting} to the {@link WhitespaceReplacer} that
-	 * surround the comment.
+	 * surrounds the comment.
 	 */
 	protected void applyHiddenRegionFormatting(List<ITextReplacer> replacers) {
 		IHiddenRegionFormatting separator = findWhitespaceThatSeparatesSemanticRegions(replacers).getFormatting();
 
-		// 1. apply indentation 
+		applyIndentation(replacers, separator);
+
+		applySeparatorConfiguration(separator);
+
+		applyPriorityAndDefaultFormatting(replacers, separator);
+
+		introduceNewlinesAroundMLComments(replacers);
+	}
+
+	/**
+	 * @since 2.23
+	 */
+	protected void applyIndentation(List<ITextReplacer> replacers, IHiddenRegionFormatting separator) {
 		Integer inc = formatting.getIndentationIncrease();
 		Integer dec = formatting.getIndentationDecrease();
 		if (inc != null && dec != null) {
@@ -56,26 +68,52 @@ public class HiddenRegionReplacer implements ITextReplacer {
 		} else if (dec != null) {
 			separator.setIndentationDecrease(dec);
 		}
+	}
 
-		// 2. apply NewLine and space configuration to the first whitespace region that follows or contains a linewrap.  
+	/**
+	 * Apply newline and space configuration to the first whitespace region that follows or contains a linewrap.
+	 * @since 2.23
+	 */
+	protected void applySeparatorConfiguration(IHiddenRegionFormatting separator) {
 		separator.setNewLinesDefault(formatting.getNewLineDefault());
 		separator.setNewLinesMax(formatting.getNewLineMax());
 		separator.setNewLinesMin(formatting.getNewLineMin());
 		separator.setSpace(formatting.getSpace());
+	}
 
-		// 3. apply the 'priority' configuration for all and set a default formatting
-		for (ITextReplacer replacer : replacers)
+	/**
+	 * @since 2.23
+	 */
+	protected void applyPriorityAndDefaultFormatting(List<ITextReplacer> replacers, IHiddenRegionFormatting separator) {
+		for (int i = 0; i < replacers.size(); i++) {
+			ITextReplacer replacer = replacers.get(i);
 			if (replacer instanceof WhitespaceReplacer) {
 				IHiddenRegionFormatting formatting2 = ((WhitespaceReplacer) replacer).getFormatting();
 				formatting2.setPriority(formatting.getPriority());
 				if (formatting2 != separator) {
-					formatting2.setSpace(replacer.getRegion().getOffset() > 0 ? " " : "");
+					ITextReplacer previous = (i == 0) ? null : replacers.get(i - 1);
+					ITextReplacer next = (i + 1 >= replacers.size()) ? null : replacers.get(i + 1);
+					// Don't add single spaces after comments
+					if (previous == null || !(previous instanceof CommentReplacer)) {
+						// Don't add spaces before ML comments because in the next step
+						// a newline will be added in front of ML comments.
+						// You don't want to end up with a ML comment on a newline that
+						// starts with a space
+						if (next == null || !(next instanceof MultilineCommentReplacer)) {
+							formatting2.setSpace(replacer.getRegion().getOffset() > 0 ? " " : "");
+						}
+					}
 					formatting2.setNewLinesMin(0);
 					formatting2.setNewLinesMax(1);
 				}
 			}
+		}
+	}
 
-		// 4. make sure whitespace before and after multiline comments introduce a NewLine 
+	/**
+	 * @since 2.23
+	 */
+	protected void introduceNewlinesAroundMLComments(List<ITextReplacer> replacers) {
 		for (int i = 0; i < replacers.size(); i++) {
 			ITextReplacer replacer = replacers.get(i);
 			if (replacer instanceof CommentReplacer) {

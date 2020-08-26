@@ -32,6 +32,16 @@ import org.junit.runner.RunWith;
 @InjectWith(FormatterTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class CommentFormatterTest {
+  public static class CustomFormatter extends GenericFormatter<IDList> {
+    @Override
+    public void format(final IDList model, final ITextRegionExtensions regionAccess, @Extension final IFormattableDocument document) {
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.oneSpace();
+      };
+      document.append(this.textRegionExtensions.regionFor(model).keyword("idlist"), _function);
+    }
+  }
+  
   @Inject
   @Extension
   private GenericFormatterTester _genericFormatterTester;
@@ -45,16 +55,8 @@ public class CommentFormatterTest {
       _builder.append("a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist //x");
       _builder_1.newLine();
@@ -79,16 +81,8 @@ public class CommentFormatterTest {
       _builder.append("a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist //x");
       _builder_1.newLine();
@@ -106,18 +100,27 @@ public class CommentFormatterTest {
       _builder.append("idlist  /*x*/  a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist /*x*/ a");
+      _builder_1.newLine();
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void MLSL_double_inline() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("idlist  /*x*//*y*/  a");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("idlist /*x*/ /*y*/ a");
       _builder_1.newLine();
       it.setExpectation(_builder_1);
     };
@@ -139,16 +142,8 @@ public class CommentFormatterTest {
       _builder.append("a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist /*x*/");
       _builder_1.newLine();
@@ -170,16 +165,8 @@ public class CommentFormatterTest {
       _builder.append("*/  a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist");
       _builder_1.newLine();
@@ -217,16 +204,8 @@ public class CommentFormatterTest {
       _builder.append("a");
       _builder.newLine();
       it.setToBeFormatted(_builder);
-      final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
-        @Override
-        protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
-          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-            it_1.oneSpace();
-          };
-          document.append(regions.regionFor(model).keyword("idlist"), _function);
-        }
-      };
-      it.setFormatter(_function_1);
+      CommentFormatterTest.CustomFormatter _customFormatter = new CommentFormatterTest.CustomFormatter();
+      it.setFormatter(_customFormatter);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("idlist");
       _builder_1.newLine();

@@ -36,8 +36,12 @@ public class MultilineCommentReplacer extends CommentReplacer {
 			enforceNewLine(leading);
 			enforceNewLine(trailing);
 		} else {
-			enforceSingleSpace(leading);
-			enforceSingleSpace(trailing);
+			if (!leading.getRegion().isMultiline()) {
+				enforceSingleSpace(leading);
+			}
+			if (!trailing.getRegion().isMultiline()) {
+				enforceSingleSpace(trailing);
+			}
 		}
 	}
 
