@@ -54,6 +54,9 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 
 	public void stop(IWorkbenchPartSite site) {
 		site.getWorkbenchWindow().getPartService().removePartListener(this);
+		if (lastActiveDocument != null) {
+			lastActiveDocument.removeModelListener(this);
+		}
 		lastActiveDocument = null;
 	}
 
