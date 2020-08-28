@@ -24,6 +24,98 @@ import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.SPACES_IN_KEYW
 @RunWith(XtextRunner)
 @InjectWith(XtextUiInjectorProvider)
 class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
+	
+	@Test def test_convert_terminal_fragment_to_terminal_rule() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			
+			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+			
+			Model hidden(ABC):
+				a = ID;
+			
+			terminal fragment ABC:
+				'a';
+		'''.testQuickfixesOn(
+			"org.eclipse.xtext.grammar.InvalidHiddenTokenFragment",
+			new Quickfix("Convert terminal fragment to terminal rule", "Convert terminal fragment to terminal rule", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model hidden(ABC):
+					a = ID;
+				
+				terminal ABC:
+					'a';
+			'''),
+			new Quickfix("Remove hidden token definition", "Remove hidden token definition", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model hidden():
+					a = ID;
+				
+				terminal fragment ABC:
+					'a';
+			''')
+		);
+	}
+	
+	@Test def test_convert_terminal_fragment_to_terminal_rule_01() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			
+			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+			
+			Model:
+				a = ABC;
+			
+			terminal fragment ABC:
+				'a';
+		'''.testQuickfixesOn(
+			"org.eclipse.xtext.grammar.InvalidTerminalFragmentRuleReference",
+			new Quickfix("Convert terminal fragment to terminal rule", "Convert terminal fragment to terminal rule", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model:
+					a = ABC;
+				
+				terminal ABC:
+					'a';
+			''')
+		);
+	}
+
+	@Test def test_fix_invalid_hidden_token() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			
+			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+			
+			Model hidden(AnotherModel):
+				a = ID;
+			
+			AnotherModel:
+				b = ID;
+		'''.testQuickfixesOn(
+			"org.eclipse.xtext.grammar.InvalidHiddenToken",
+			new Quickfix("Remove hidden token definition", "Remove hidden token definition", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model hidden():
+					a = ID;
+				
+				AnotherModel:
+					b = ID;
+			''')
+		);
+	}
 
 	@Test def test_fix_missing_rule() {
 		'''
@@ -33,18 +125,55 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 			
 			Model:
 				greetings+=Greeting*;
-		'''
-		.testQuickfixesOn("org.eclipse.xtext.grammar.UnresolvedRule", new Quickfix("Create rule 'Greeting'", "Create rule 'Greeting'", '''
-			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
-			
-			generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
-			
-			Model:
-				greetings+=Greeting*;
-			
-			Greeting:
+		'''.testQuickfixesOn(
+			"org.eclipse.xtext.grammar.UnresolvedRule",
+			new Quickfix("Create rule 'Greeting'", "Create rule 'Greeting'", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 				
-			;
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model:
+					greetings+=Greeting*;
+				
+				Greeting:
+					
+				;
+			'''),
+			new Quickfix("Create enum rule 'Greeting'", "Create enum rule 'Greeting'", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model:
+					greetings+=Greeting*;
+				
+				enum Greeting:
+					
+				;
+			'''),
+			new Quickfix("Create terminal 'Greeting'", "Create terminal 'Greeting'", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model:
+					greetings+=Greeting*;
+				
+				terminal Greeting:
+					
+				;
+			'''),
+			new Quickfix("Create terminal fragment 'Greeting'", "Create terminal fragment 'Greeting'", '''
+				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+				
+				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+				
+				Model:
+					greetings+=Greeting*;
+				
+				terminal fragment Greeting:
+					
+				;
 			''')
 		);
 	}
