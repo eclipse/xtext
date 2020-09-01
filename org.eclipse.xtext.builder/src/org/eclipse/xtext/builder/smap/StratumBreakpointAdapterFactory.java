@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
+import org.eclipse.jdt.debug.core.JDIDebugModel;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
@@ -110,7 +111,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final SourceRelativeURI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
 			final int offset = ((ITextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
-			
+
 			Data data = xtextEditor.getDocument().tryReadOnly(new IUnitOfWork<Data, XtextResource>() {
 				@Override
 				public Data exec(XtextResource state) throws Exception {
@@ -130,7 +131,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				}
 			});
 
-			if (data == null) return;
+			if (data == null)
+				return;
 
 			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(breakpointResource, breakpointUri, line);
 
@@ -159,7 +161,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			if (data.classHandle != null)
 				attributes.put(ORG_ECLIPSE_XTEXT_XBASE_CLASS_HANDLE, data.classHandle);
 
-			final IJavaStratumLineBreakpoint breakpoint = new XbaseLineBreakpoint(breakpointResource, shortName, data.types, line, charStart, charEnd, attributes);
+			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(breakpointResource, shortName, null, null,
+					data.types, line, charStart, charEnd, 0, true, attributes);
 
 			// make sure the class name pattern gets updated on change
 			final IMarker marker = breakpoint.getMarker();
@@ -197,8 +200,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 	}
 
-	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, SourceRelativeURI uri, final int line)
-			throws CoreException {
+	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, SourceRelativeURI uri, int line) throws CoreException {
 		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint[] breakpoints = manager.getBreakpoints();
 		if (uri == null) {
