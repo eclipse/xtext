@@ -52,7 +52,7 @@ public class ValueConverterTest extends AbstractXbaseTestCase {
 	@Test public void testSimple() throws Exception {
 		String s = "42";
 		Integer value = (Integer) valueConverterService.toValue(s, "INT", null);
-		assertEquals(new Integer(42), value);
+		assertEquals(Integer.valueOf(42), value);
 		assertEquals(s, valueConverterService.toString(value, "INT"));
 	}
 

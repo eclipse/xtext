@@ -645,7 +645,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 
 	@Test public void testUnaryOperator_00() throws Exception {
-		assertEvaluatesTo(new Integer(-19),"-19");
+		assertEvaluatesTo(Integer.valueOf(-19),"-19");
 	}
 	
 	@Test public void testUnaryOperator_01() throws Exception {
@@ -665,7 +665,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testUpToOperator() throws Exception {
-		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
+		assertEvaluatesTo(Integer.valueOf(9),"(9..13).iterator().next()");
 	}
 	
 	@Test public void testExclusiveRangeOperator_0() throws Exception {
@@ -735,103 +735,103 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testAddOnIntegers() throws Exception {
-		assertEvaluatesTo(new Integer(3), "1+2");
+		assertEvaluatesTo(Integer.valueOf(3), "1+2");
 	}
 
 	@Test public void testSubtractionOnIntegers() throws Exception {
-		assertEvaluatesTo(new Integer(1), "2-1");
+		assertEvaluatesTo(Integer.valueOf(1), "2-1");
 	}
 
 	@Test public void testMultiplicationOnIntegers() throws Exception {
-		assertEvaluatesTo(new Integer(42), "6*7");
+		assertEvaluatesTo(Integer.valueOf(42), "6*7");
 	}
 
 	@Test public void testDivisionOnIntegers_01() throws Exception {
-		assertEvaluatesTo(new Integer(2), "6/3");
+		assertEvaluatesTo(Integer.valueOf(2), "6/3");
 	}
 
 	@Test public void testDivisionOnIntegers_02() throws Exception {
-		assertEvaluatesTo(new Integer(2), "7/3");
+		assertEvaluatesTo(Integer.valueOf(2), "7/3");
 	}
 
 	@Test public void testModuloOnIntegers() throws Exception {
-		assertEvaluatesTo(new Integer(1), "7%3");
+		assertEvaluatesTo(Integer.valueOf(1), "7%3");
 	}
 
 	@Test public void testPowerOnIntegers() throws Exception {
-		assertEvaluatesTo(new Double(8), "2**3");
+		assertEvaluatesTo(Double.valueOf(8), "2**3");
 	}
 
 	@Test public void testLessThanOnIntegers_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "3<4");
+		assertEvaluatesTo(Boolean.valueOf(true), "3<4");
 	}
 
 	@Test public void testLessThanOnIntegers_02() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "4<3");
+		assertEvaluatesTo(Boolean.valueOf(false), "4<3");
 	}
 
 	@Test public void testGreaterThanOnIntegers_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "4>3");
+		assertEvaluatesTo(Boolean.valueOf(true), "4>3");
 	}
 
 	@Test public void testGreaterThanOnIntegers_02() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "3>4");
+		assertEvaluatesTo(Boolean.valueOf(false), "3>4");
 	}
 
 	@Test public void testLessEqualsThanOnIntegers_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "3<=3");
+		assertEvaluatesTo(Boolean.valueOf(true), "3<=3");
 	}
 
 	@Test public void testLessEqualsThanOnIntegers_02() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "3<=4");
+		assertEvaluatesTo(Boolean.valueOf(true), "3<=4");
 	}
 
 	@Test public void testLessEqualsThanOnIntegers_03() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "4<=3");
+		assertEvaluatesTo(Boolean.valueOf(false), "4<=3");
 	}
 
 	@Test public void testGreaterEqualsThanOnIntegers_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "3>=3");
+		assertEvaluatesTo(Boolean.valueOf(true), "3>=3");
 	}
 
 	@Test public void testGreaterEqualsThanOnIntegers_02() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "4>=3");
+		assertEvaluatesTo(Boolean.valueOf(true), "4>=3");
 	}
 
 	@Test public void testGreaterEqualsThanOnIntegers_03() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "3>=4");
+		assertEvaluatesTo(Boolean.valueOf(false), "3>=4");
 	}
 
 	@Test public void testOrOnBooleans_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "true||false");
+		assertEvaluatesTo(Boolean.valueOf(true), "true||false");
 	}
 
 	@Test public void testOrOnBooleans_02() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "false||true");
+		assertEvaluatesTo(Boolean.valueOf(true), "false||true");
 	}
 
 	@Test public void testOrOnBooleans_03() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "true||true");
+		assertEvaluatesTo(Boolean.valueOf(true), "true||true");
 	}
 
 	@Test public void testOrOnBooleans_04() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "false||false");
+		assertEvaluatesTo(Boolean.valueOf(false), "false||false");
 	}
 
 	@Test public void testAndOnBooleans_01() throws Exception {
-		assertEvaluatesTo(new Boolean(true), "true&&true");
+		assertEvaluatesTo(Boolean.valueOf(true), "true&&true");
 	}
 
 	@Test public void testAndOnBooleans_02() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "false&&true");
+		assertEvaluatesTo(Boolean.valueOf(false), "false&&true");
 	}
 
 	@Test public void testAndOnBooleans_03() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "true&&false");
+		assertEvaluatesTo(Boolean.valueOf(false), "true&&false");
 	}
 
 	@Test public void testAndOnBooleans_04() throws Exception {
-		assertEvaluatesTo(new Boolean(false), "false&&false");
+		assertEvaluatesTo(Boolean.valueOf(false), "false&&false");
 	}
 
 	@Test public void testNull() throws Exception {
@@ -1168,25 +1168,25 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testFeatureCall_02() throws Exception {
-		assertEvaluatesTo(new Character('a'), "'a'.toCharArray.iterator.next");
+		assertEvaluatesTo(Character.valueOf('a'), "'a'.toCharArray.iterator.next");
 	}
 	
 	@Test public void testFeatureCall_03() throws Exception {
 		assertEvaluatesTo(newArrayList(
-				new Character('a'), 
-				new Character('b'),
-				new Character('c')), "{ var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() x }");
+				Character.valueOf('a'), 
+				Character.valueOf('b'),
+				Character.valueOf('c')), "{ var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() x }");
 	}
 	
 	@Test public void testFeatureCall_03_2() throws Exception {
 		assertEvaluatesTo(newArrayList(
-				new Character('a'), 
-				new Character('b'),
-				new Character('c')), "{ var java.util.List<Character> x = 'abc'.toCharArray x }");
+				Character.valueOf('a'), 
+				Character.valueOf('b'),
+				Character.valueOf('c')), "{ var java.util.List<Character> x = 'abc'.toCharArray x }");
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
-		assertEvaluatesTo(new Integer("literal".length()), "{ var x = 'literal' x.length }");
+		assertEvaluatesTo(Integer.valueOf("literal".length()), "{ var x = 'literal' x.length }");
 	}
 	
 	@Test public void testConstructorCall_00() throws Exception {
@@ -1616,7 +1616,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(x: 'abc'.toCharArray) result = x\n" +
@@ -1625,7 +1625,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_02() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(x: 'aba'.toCharArray) if (result == null) result = x\n" +
@@ -1684,7 +1684,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_08() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(char x: 'abc'.toCharArray) result = x\n" +
@@ -1693,7 +1693,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_09() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(char x: 'abc'.toCharArray) if (result == null) result = x\n" +
@@ -1702,7 +1702,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_10() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var char result\n" +
 				"  for(Character x: 'abc'.toCharArray) result = x\n" +
@@ -1742,7 +1742,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_14() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(char x: 'abc'.toCharArray.toList) result = x\n" +
@@ -1751,7 +1751,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_15() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(x: 'abc'.toCharArray.toList) if (result == null) result = x\n" +
@@ -1760,7 +1760,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testForLoop_16() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  for(int i: 'abc'.toCharArray) if (result == null) result = i as char\n" +
@@ -1986,7 +1986,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.6
 	 */
 	@Test public void testXBasicForLoopExpression_10() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  val abc = 'abc'.toCharArray\n" +
@@ -2001,7 +2001,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.6
 	 */
 	@Test public void testXBasicForLoopExpression_11() throws Exception {
-		assertEvaluatesTo(new Character('c'), 
+		assertEvaluatesTo(Character.valueOf('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  val abc = 'abc'.toCharArray\n" +
@@ -2014,7 +2014,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.6
 	 */
 	@Test public void testXBasicForLoopExpression_12() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  val abc = 'abc'.toCharArray\n" +
@@ -2031,7 +2031,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 * @since 2.6
 	 */
 	@Test public void testXBasicForLoopExpression_13() throws Exception {
-		assertEvaluatesTo(new Character('a'), 
+		assertEvaluatesTo(Character.valueOf('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
 				"  val abc = 'abc'.toCharArray\n" +
@@ -2664,7 +2664,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testConstructor_02() throws Exception {
-		assertEvaluatesTo(new Character('a'), "new Character('abc'.charAt(0))");
+		assertEvaluatesTo(Character.valueOf('a'), "new Character('abc'.charAt(0))");
 	}
 	
 	@Test public void testConstructor_03() throws Exception {
@@ -3169,7 +3169,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_03() throws Exception {
-		assertEvaluatesTo(new Integer(42), 
+		assertEvaluatesTo(Integer.valueOf(42), 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
@@ -3180,7 +3180,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_04() throws Exception {
-		assertEvaluatesTo(new Integer(17), 
+		assertEvaluatesTo(Integer.valueOf(17), 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
@@ -4265,7 +4265,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412642
 	public void testMapLiteral_6() throws Exception {
 		HashMap<Object, Object> map = newHashMap();
-		map.put("Apple", new Integer(1));
+		map.put("Apple", Integer.valueOf(1));
 		assertEvaluatesTo(map, "{\n" +
 									"val pair = 'Apple' -> 1\n" +
 									"#{pair}\n" +
@@ -4276,7 +4276,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412642
 	public void testMapLiteral_7() throws Exception {
 		HashMap<Object, Object> map = newHashMap();
-		map.put("Apple", new Integer(1));
+		map.put("Apple", Integer.valueOf(1));
 		assertEvaluatesTo(map, "{\n" +
 									"#{ if (true) 'Apple' -> 1 else 'Banana' -> 2 }" +
 								"} ");
