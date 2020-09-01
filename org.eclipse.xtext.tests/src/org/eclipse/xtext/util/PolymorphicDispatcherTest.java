@@ -99,8 +99,8 @@ public class PolymorphicDispatcherTest extends Assert {
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first,
 				second));
 
-		assertEquals("Integer_first_3", dispatcher.invoke(new Integer(3)));
-		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
+		assertEquals("Integer_first_3", dispatcher.invoke(Integer.valueOf(3)));
+		assertEquals("Number_from_superclass_3", dispatcher.invoke(Long.valueOf(3)));
 		assertEquals("BigInteger_3", dispatcher.invoke(BigInteger.valueOf(3)));
 		assertEquals("Object_foo", dispatcher.invoke("foo"));
 	}
@@ -138,7 +138,7 @@ public class PolymorphicDispatcherTest extends Assert {
 		};
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
 
-		assertEquals("Integer_3", dispatcher.invoke(new Integer(3)));
+		assertEquals("Integer_3", dispatcher.invoke(Integer.valueOf(3)));
 	}
 
 	@Test public void testDifferentParamLength() throws Exception {
@@ -162,9 +162,9 @@ public class PolymorphicDispatcherTest extends Assert {
 						return null;
 					}
 				});
-		assertEquals("Object_3", dispatcher.invoke(new Integer(3)));
-		assertNull("Integer_3_4", dispatcher.invoke(new Long(3), 4));
-		assertEquals("Integer_3_4", dispatcher.invoke(new Integer(3), 4));
+		assertEquals("Object_3", dispatcher.invoke(Integer.valueOf(3)));
+		assertNull("Integer_3_4", dispatcher.invoke(Long.valueOf(3), 4));
+		assertEquals("Integer_3_4", dispatcher.invoke(Integer.valueOf(3), 4));
 		assertEquals("Object_3", dispatcher.invoke(BigInteger.valueOf(3)));
 		assertEquals("Number_3_foo", dispatcher.invoke(BigInteger.valueOf(3), "foo"));
 	}
@@ -274,7 +274,7 @@ public class PolymorphicDispatcherTest extends Assert {
 			}
 		};
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
-		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
+		assertEquals("Integer_17", dispatcher.invoke(Integer.valueOf(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
 
@@ -302,7 +302,7 @@ public class PolymorphicDispatcherTest extends Assert {
 					}
 				});
 
-		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
+		assertEquals("Integer_17", dispatcher.invoke(Integer.valueOf(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
 
