@@ -170,6 +170,21 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		assertNull(eObjectAtOffsetHelper.getCrossReferenceNode(resource, new TextRegion(firstPart.length()+1, 9)));
 	}
 
+	@Test public void testBeforeCommentAtOffset0ReturnsRoot() throws Exception {
+		XtextResource resource = getResourceFromString("// test\nfoo foo0");
+		assertSame(resource.getParseResult().getRootASTElement(), eObjectAtOffsetHelper.resolveElementAt(resource, 0));
+	}
+
+	@Test public void testInsideCommentAtOffset0ReturnsFollowingElement() throws Exception {
+		XtextResource resource = getResourceFromString("// test\nfoo foo0");
+		assertSame(resource.getParseResult().getRootASTElement().eContents().get(0), eObjectAtOffsetHelper.resolveElementAt(resource, 1));
+	}
+	
+	@Test public void testInsideCommentAtOffset0ButWithoutFollowingElementReturnsRoot() throws Exception {
+		XtextResource resource = getResourceFromString("// test");
+		assertSame(resource.getParseResult().getRootASTElement(), eObjectAtOffsetHelper.resolveElementAt(resource, 1));
+	}
+	
 	private void checkContainedOrReferencedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
 		int index = model.indexOf(substring);
 		for (int i = index; i < index + substring.length(); ++i) {

@@ -128,6 +128,7 @@ public class EObjectAtOffsetHelper {
 			if (leaf != null) {
 				return NodeModelUtils.findActualSemanticObjectFor(leaf);
 			}
+			return parseResult.getRootASTElement();
 		}
 		return null;
 	}
