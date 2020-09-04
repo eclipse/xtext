@@ -57,6 +57,9 @@
 			<id>r202006</id>
 		</profile>
 		<profile>
+			<id>r202009</id>
+		</profile>
+		<profile>
 			<id>latest</id>
 		</profile>
 	</profiles>
