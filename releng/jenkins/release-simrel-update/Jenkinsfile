@@ -78,7 +78,7 @@ pipeline {
             git diff
             git commit --signoff -m "Xtext $XTEXT_VERSION_LABEL contribution to SimRel $SIMREL_LABEL"
           '''
-          withMaven(maven: 'apache-maven-latest') {
+          withMaven(maven: 'apache-maven-3.6.3') {
             sh '''
               mvn -Pvalidate clean test -B
             '''

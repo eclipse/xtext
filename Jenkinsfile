@@ -1,58 +1,15 @@
 pipeline {
   agent {
     kubernetes {
-      label 'xtext-umbrella-' + (env.BRANCH_NAME.replace('/','_')) + '-' + env.BUILD_NUMBER
-      defaultContainer 'xtext-buildenv'
-      yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
-    resources:
-      limits:
-        memory: "0.4Gi"
-        cpu: "0.2"
-      requests:
-        memory: "0.4Gi"
-        cpu: "0.2"
-    volumeMounts:
-    - mountPath: /home/jenkins/.ssh
-      name: volume-known-hosts
-  - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.7
-    tty: true
-    resources:
-      limits:
-        memory: "3.6Gi"
-        cpu: "1.0"
-      requests:
-        memory: "3.6Gi"
-        cpu: "1.0"
-    volumeMounts:
-    - name: settings-xml
-      mountPath: /home/jenkins/.m2/settings.xml
-      subPath: settings.xml
-      readOnly: true
-    - name: m2-repo
-      mountPath: /home/jenkins/.m2/repository
-    - name: volume-known-hosts
-      mountPath: /home/jenkins/.ssh
-  volumes:
-  - name: volume-known-hosts
-    configMap:
-      name: known-hosts
-  - name: settings-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings.xml
-        path: settings.xml
-  - name: m2-repo
-    emptyDir: {}
-    '''
+      label 'centos-7'
     }
+  }
+
+  parameters {
+    // see https://wiki.eclipse.org/Jenkins#JDK
+    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
+       'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-latest'
+    ])
   }
 
   options {
@@ -67,14 +24,20 @@ spec:
     githubPush()
   }
   
+  tools {
+     maven "apache-maven-3.6.3"
+     jdk "${params.JDK_VERSION}"
+  }
+
   stages {
-    stage('Checkout') {
+    stage('Initialize') {
       steps {
         script {
           properties([
             [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/eclipse/xtext-core/'],
             [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false]
           ])
+          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion(JDK_VERSION))
         }
 
         sh '''
@@ -187,5 +150,13 @@ def getReleaseType () {
     return env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('.')+1)
   } else {
     return "Integration"
+  }
+}
+
+def javaVersion(String version) {
+  if (!version.contains('-jdk')) {
+    return 'jdk15'
+  } else {
+    return version.replaceAll(".*-(jdk\\d+).*", "\$1")
   }
 }
