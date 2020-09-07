@@ -1,65 +1,20 @@
 pipeline {
   agent {
     kubernetes {
-      label 'xtext-core-' + (env.BRANCH_NAME.replace('/','_')) + '-' + env.BUILD_NUMBER
-      defaultContainer 'xtext-buildenv'
-      yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
-    resources:
-      limits:
-        memory: "0.4Gi"
-        cpu: "0.2"
-      requests:
-        memory: "0.4Gi"
-        cpu: "0.2"
-    volumeMounts:
-    - mountPath: /home/jenkins/.ssh
-      name: volume-known-hosts
-  - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.7
-    tty: true
-    resources:
-      limits:
-        memory: "3.6Gi"
-        cpu: "1.0"
-      requests:
-        memory: "3.6Gi"
-        cpu: "1.0"
-    volumeMounts:
-    - name: settings-xml
-      mountPath: /home/jenkins/.m2/settings.xml
-      subPath: settings.xml
-      readOnly: true
-    - name: m2-repo
-      mountPath: /home/jenkins/.m2/repository
-    - name: volume-known-hosts
-      mountPath: /home/jenkins/.ssh
-  volumes:
-  - name: volume-known-hosts
-    configMap:
-      name: known-hosts
-  - name: settings-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings.xml
-        path: settings.xml
-  - name: m2-repo
-    emptyDir: {}
-    '''
+      label 'centos-7'
     }
   }
   
   environment {
     DOWNSTREAM_JOBS = 'xtext-extras'
+    GRADLE_USER_HOME = "$WORKSPACE/.gradle" // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564559
   }
 
   parameters {
+    // see https://wiki.eclipse.org/Jenkins#JDK
+    choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
+       'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-latest'
+    ])
     booleanParam(
       name: 'TRIGGER_DOWNSTREAM_BUILD', 
       defaultValue: (env.BRANCH_NAME.startsWith('milestone')||env.BRANCH_NAME.startsWith('release')), 
@@ -73,11 +28,20 @@ spec:
     timeout(time: 120, unit: 'MINUTES')
   }
 
+  tools {
+     maven "apache-maven-3.6.3"
+     jdk "${params.JDK_VERSION}"
+  }
+
   // Build stages
   stages {
-    stage('Checkout') {
+    stage('Initialize') {
       steps {
         checkout scm
+        
+        script {
+          currentBuild.displayName = String.format("#%s(JDK%s)", BUILD_NUMBER, javaVersion())
+        }
       }
     }
 
@@ -106,7 +70,7 @@ spec:
             def downstreamUrl = new URL("${env.JENKINS_URL}/job/$it/job/${env.BRANCH_NAME}")
             def boolean downstreamJobExists = sh(script: "curl -L -s -o /dev/null -I -w '%{http_code}' ${downstreamUrl}", returnStdout: true) == "200"
             if (downstreamJobExists) {
-              build job: "$it/${env.BRANCH_NAME}", wait: false, parameters: [booleanParam(name: 'TRIGGER_DOWNSTREAM_BUILD', value: "${params.TRIGGER_DOWNSTREAM_BUILD}")]
+              build job: "$it/${env.BRANCH_NAME}", wait: false, parameters: [booleanParam(name: 'TRIGGER_DOWNSTREAM_BUILD', value: "${params.TRIGGER_DOWNSTREAM_BUILD}"), string(name: 'JDK_VERSION', value: "${JDK_VERSION}")]
             }
           }
         }
@@ -147,3 +111,9 @@ spec:
     }
   }
 }
+
+/** return the Java version as Integer (8, 11, ...) */
+def javaVersion() {
+  return Integer.parseInt(params.JDK_VERSION.replaceAll(".*-jdk(\\d+).*", "\$1"))
+}
+
