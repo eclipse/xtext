@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 /**
- * Internal base class for node model utils with access to implementation details
+ * Internal base class for node model utilities with access to implementation details
  * of the node model.
  * 
  * It is intentional that the methods here are available to clients only with some
@@ -32,8 +32,13 @@ import com.google.common.collect.Lists;
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class InternalNodeModelUtils {
-	/* All methods in this class are supposed to be protected or private
-	 * and access should be provided via {@link NodeModelUtils}.
+	/* 
+	 * All methods in this class are supposed to be protected or private
+	 * and access (to a subset of these) 
+	 * should be provided via {@link NodeModelUtils}.
+	 * 
+	 * Clients that do want to access other methods of this class can extend
+	 * it to use the protected members (at their own risk, no API guarantees are made).
 	 */
 	
 	protected InternalNodeModelUtils() {
@@ -51,6 +56,36 @@ public class InternalNodeModelUtils {
 		return getLineAndColumn(document, lineBreaks, documentOffset);
 	}
 	
+	/**
+	 * Obtain the parent node of the given node. Does not unfold {@link SyntheticCompositeNode synthetic}
+	 * nodes. May return {@code null}.
+	 * 
+	 * @since 2.24
+	 */
+	protected static CompositeNode basicGetParent(AbstractNode node) {
+		return node.basicGetParent();
+	}
+	
+	/**
+	 * Obtain the first child node of the given node. Does not unfold {@link SyntheticCompositeNode synthetic}
+	 * nodes. May return {@code null}.
+	 * 
+	 * @since 2.24
+	 */
+	protected static AbstractNode basicGetFirstChild(CompositeNode node) {
+		return node.basicGetFirstChild();
+	}
+	
+	/**
+	 * Obtain the last child node of the given node. Does not unfold {@link SyntheticCompositeNode synthetic}
+	 * nodes. May return {@code null}.
+	 * 
+	 * @since 2.24
+	 */
+	protected static AbstractNode basicGetLastChild(CompositeNode node) {
+		return node.basicGetLastChild();
+	}
+	
 	/*
 	 * TODO This should better be made available in org.eclipse.xtext.util.Strings but the contract of the given lineBreaks is too special
 	 * for general purpose application of this logic.
@@ -64,7 +99,7 @@ public class InternalNodeModelUtils {
 		if (idx >= 0) {
 			/*
 			 * We found an entry in the array. The offset is a line break.
-			 * The line number is the idx in the array, the column needs to be
+			 * The line number is the index in the array, the column needs to be
 			 * adjusted.
 			 */
 			return getLineAndColumnOfLineBreak(text, lineBreaks, idx, offset);
@@ -89,7 +124,7 @@ public class InternalNodeModelUtils {
 			if (leftLineBreak + 1 == offset) {
 				// offset is immediately after an existing line break
 				if (text.charAt(leftLineBreak) == '\r' && text.charAt(offset) == '\n') {
-					// windows line break, the offset belongs to the prev line
+					// windows line break, the offset belongs to the previous line
 					line = insertionPoint;
 					if (lineBreakIdx > 0) {
 						int prevLineBreak = lineBreaks[lineBreakIdx - 1];
@@ -154,14 +189,14 @@ public class InternalNodeModelUtils {
 	 * This implementation was heavily adapted from <code>org.eclipse.jface.text.DefaultLineTracker</code>.
 	 * It follows the semantics of {@link LineNumberReader}.
 	 * 
-	 * The offsets in the returned array are the offset of the line break itself. If the linebreak contains
+	 * The offsets in the returned array are the offset of the line break itself. If the line-break contains
 	 * of two characters ('\r\n'), it's the offset of the first char ('\r').
 	 * 
 	 * @param text the text whose line-breaks should be computed. May not be <code>null</code>.
 	 * @return the array of line-break offsets in the given text. May be empty but is never <code>null</code>.
 	 */
 	protected static int[] computeLineBreaks(String text) {
-		// initially we assume an avg of 20 chars per line
+		// initially we assume an average of 20 chars per line
 		List<Integer> list = Lists.newArrayListWithExpectedSize(text.length() / 20 + 1);
 		char ch;
 		int length= text.length();

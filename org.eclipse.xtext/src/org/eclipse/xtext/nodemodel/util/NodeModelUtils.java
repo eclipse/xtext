@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -43,7 +43,7 @@ import com.google.common.collect.Lists;
  * The NodeModelUtils are a collection of useful methods when dealing with the node model directly. They encapsulate the
  * default construction semantics of the node model as it is created by the parser.
  * 
- * This API is quite low level and internal functionality of the framework relies on the implemened contracts.
+ * This API is quite low level and internal functionality of the framework relies on the implemented contracts.
  * Clients should rather use the language specific APIs that provide almost the same functionality, e.g.
  * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to to access the region
  * of a {@link EObject semantic object}.
