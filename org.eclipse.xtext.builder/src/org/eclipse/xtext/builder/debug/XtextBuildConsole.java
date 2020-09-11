@@ -47,7 +47,11 @@ public class XtextBuildConsole extends IOConsole {
 				delegate.log(obj);
 			}
 
-			IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+			ConsolePlugin consolePlugin = ConsolePlugin.getDefault();
+			if(consolePlugin == null){
+				return;
+			}
+			IConsoleManager consoleManager = consolePlugin.getConsoleManager();
 			XtextBuildConsole console = null;
 			for (IConsole c : consoleManager.getConsoles()) {
 				if (c instanceof XtextBuildConsole) {
