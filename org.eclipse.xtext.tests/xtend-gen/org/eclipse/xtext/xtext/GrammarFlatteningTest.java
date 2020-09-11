@@ -59,7 +59,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule: name=ID;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -125,7 +124,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("Rule: name=ID;");
     _builder.newLine();
     _builder.append("terminal ID: super;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -195,7 +193,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A, B>: <A> name=ID | <!B> name=ID | name=STRING;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -277,7 +274,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID child=Rule<A>?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -347,7 +343,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID (<A>child=Rule<A>|<!A>child=Rule<true>+)?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -417,7 +412,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID (<A>child=Rule<!A>)?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString());
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -487,7 +481,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID (<A>child=Rule<!A>)?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -551,7 +544,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID =>(<A> ->child=Rule<!A> | <!A> ->\'keyword\')?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -615,7 +607,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID ->(<A> =>child=Rule<!A> | <!A> =>\'keyword\')?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -727,7 +718,7 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("\t");
     _builder.append("<Param> first=ID");
     _builder.newLine();
-    _builder.append("  ");
+    _builder.append("\t ");
     _builder.append("| <!Param> second=ID");
     _builder.newLine();
     _builder.append(";");
@@ -769,7 +760,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("| ID");
     _builder.newLine();
     _builder.append(";");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -906,7 +896,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule<A>: name=ID =>(<A> ->child=Rule<!A> | <!A> ->(\'a\' \'b\'))?;");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -970,7 +959,6 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder.append("generate myPack \'http://myURI\'");
     _builder.newLine();
     _builder.append("Rule: =>(name+=ID*);");
-    _builder.newLine();
     Grammar flattened = this.getModel(_builder.toString(), true);
     String serialized = this.getSerializer().serialize(flattened);
     StringConcatenation _builder_1 = new StringConcatenation();
