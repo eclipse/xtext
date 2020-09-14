@@ -298,7 +298,7 @@ pipeline {
               sh """
               for f in \$(find . -name *.target -type f); 
               do
-                sed -i -e 's|location="\\.*/orbit/.*"|${params.UPDATE_VALUE}"|' $f
+                sed -i -e 's|location="\\.*/orbit/.*"|${params.UPDATE_VALUE}"|' \$f
               done
               """
             } // dir
