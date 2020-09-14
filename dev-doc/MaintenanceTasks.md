@@ -63,6 +63,7 @@ Wait for the builds of the branches, review and merge PRs.
 
 Additional manual step:
 * Adapt Oomph Setup `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
+* Adapt `TargetPlatformProject.(xtend|java)` in `xtext-core`
 
 ## Update Oomph Setup for new SimRel
 
