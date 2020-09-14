@@ -180,7 +180,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 	private LanguageClient client;
 
-	private Map<String, JsonRpcMethod> supportedMethods;
+	private volatile Map<String, JsonRpcMethod> supportedMethods;
 	
 	private final CompletableFuture<InitializedParams> initialized = new CompletableFuture<>();
 
