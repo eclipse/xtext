@@ -164,7 +164,7 @@
 		<unit id="org.objectweb.asm.tree.source" version="8.0.1.v20200420-1007"/>
 		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
 		<unit id="io.github.classgraph.source" version="4.8.35.v20190528-1517"/>
-		<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-09"/>
+		<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-12"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
