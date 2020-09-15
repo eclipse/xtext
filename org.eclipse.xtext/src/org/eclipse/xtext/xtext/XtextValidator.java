@@ -1062,9 +1062,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check
-	public void checkForOverriddenValue(final ParserRule rule) {
+	public void checkForOverriddenValue(final Grammar grammar) {
 		OverriddenValueInspector inspector = new OverriddenValueInspector(this);
-		inspector.inspect(rule);
+		for(AbstractRule rule: grammar.getRules()) {
+			if (rule instanceof ParserRule) {
+				inspector.inspect((ParserRule) rule);
+			}
+		}
 	}
 	
 	@Check

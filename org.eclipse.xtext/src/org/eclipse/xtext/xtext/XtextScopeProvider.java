@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,6 +48,7 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -73,7 +73,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 				if (metaModel != null) {
 					EPackage pack = metaModel.getEPackage();
 					if (pack != null)
-						return createClassifierScope(pack.getEClassifiers());
+						return createClassifierScope(Collections.singletonList(pack));
 				} else {
 					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
@@ -123,31 +123,50 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope createEnumLiteralsScope(EEnum eEnum) {
-		return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
-							@Override
-							public IEObjectDescription apply(EEnumLiteral param) {
-								return EObjectDescription.create(QualifiedName.create(param.getName()), param);
-							}
-						}));
+		return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
+			@Override
+			public IEObjectDescription apply(EEnumLiteral param) {
+				return EObjectDescription.create(QualifiedName.create(param.getName()), param);
+			}
+		}));
 	}
 
-	protected IScope createClassifierScope(Iterable<EClassifier> classifiers) {
+	protected IScope createClassifierScope(List<EPackage> packages) {
 		return new SimpleScope(
-				IScope.NULLSCOPE,Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
-					@Override
-					public IEObjectDescription apply(EClassifier param) {
-						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
+				IScope.NULLSCOPE, 
+				FluentIterable.from(packages)
+					.transformAndConcat(EPackage::getEClassifiers)
+					.transform(classifier->EObjectDescription.create(QualifiedName.create(classifier.getName()), classifier))) {
+			
+			@Override
+			protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
+				if (name.getSegmentCount() == 1) {
+					EClassifier candidate = null;
+					for(EPackage pack: packages) {
+						EClassifier classifier = pack.getEClassifier(name.getFirstSegment());
+						if (classifier != null) {
+							if (candidate != null) {
+								return null;
+							}
+							candidate = classifier;
+						}
 					}
-				}));
+					if (candidate != null) {
+						return EObjectDescription.create(name, candidate);
+					}
+				}
+				return null;
+			}
+		};
 	}
 
 	protected IScope createReferencedPackagesScope(Grammar g) {
-		final Collection<EClassifier> allClassifiers = new ArrayList<EClassifier>();
+		List<EPackage> allPackages = new ArrayList<EPackage>();
 		for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
 			if (decl.getEPackage() != null)
-				allClassifiers.addAll(decl.getEPackage().getEClassifiers());
+				allPackages.add(decl.getEPackage());
 		}
-		return createClassifierScope(allClassifiers);
+		return createClassifierScope(allPackages);
 	}
 
 	protected IScope createScope(Resource resource, EClass type, IScope parent) {
@@ -164,7 +183,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 		if (EcorePackage.Literals.EPACKAGE == type) {
 			return createEPackageScope(grammar);
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-			return new SimpleScope(IScope.NULLSCOPE,Iterables.transform(grammar.getMetamodelDeclarations(),
+			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
 							new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
 								@Override
 								public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
