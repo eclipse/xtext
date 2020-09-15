@@ -298,8 +298,15 @@ pipeline {
               sh """
               for f in \$(find . -name *.target -type f); 
               do
-                sed -i -e 's|location="\\.*/orbit/.*"|${params.UPDATE_VALUE}"|' \$f
+                sed -i -e 's|location=".*/orbit/.*"|location="${params.UPDATE_VALUE}"|' \$f
               done
+              """
+            } // dir
+          } // for each repository
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh """
+                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
               """
             } // dir
           } // for each repository
