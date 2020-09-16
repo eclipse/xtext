@@ -29,7 +29,7 @@ pipeline {
         checkout scm
         
         script {
-          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion(JDK_VERSION))
+          currentBuild.displayName = String.format("#%s(%s)", BUILD_NUMBER, javaVersion("${params.JDK_VERSION}"))
         }
       }
     }
