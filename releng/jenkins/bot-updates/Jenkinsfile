@@ -32,7 +32,7 @@ pipeline {
           <li><code>xtext_gradle_plugin</code></li>
           </ul>
         </li>
-        <li><b>ORBIT_URL:</b> Set SimRel Orbit repository used for target platform.</li>
+        <li><b>ORBIT_URL:</b> Set SimRel Orbit repository URL in .target files and project wizard.</li>
         <li><b>TYCHO_VERSION:</b> Set Eclipse Tycho version.</li>
         <li><b>GENERATE_XTEXT_LANGUAGE:</b> Regenerate the Xtext grammar language</li>
         <li><b>GENERATE_TEST_LANGUAGES:</b> Regenerate the Xtext test languages in xtext-core</li>
@@ -132,10 +132,8 @@ pipeline {
           }
           
           // We have the source version now, so display the update in the build's label
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (${env.SOURCE_XTEXT_VERSION}->${params.UPDATE_VALUE})";
-          }
-
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (${env.SOURCE_XTEXT_VERSION}->${params.UPDATE_VALUE})";
+          
           // set pull request title message
           env.PR_TITLE="[releng] Update Xtext version to ${params.UPDATE_VALUE}"
           // This change is for the new version, update the env var
@@ -147,15 +145,10 @@ pipeline {
               sh """
                 # Perform version updates by external script
                 $SCRIPTS/fixVersions.sh -f ${env.SOURCE_XTEXT_VERSION} -t $UPDATE_VALUE -b StoS
-
-                # Avoid commit when no change has happened. This would make the pipeline fail.
-                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
-
-                # show diff of last commit VERBOSE
-                # git diff HEAD^ HEAD
               """
             } // dir
           } // for each repo
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
     } // stage
@@ -169,9 +162,7 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Bootstrap against ${params.UPDATE_VALUE}"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Bootstrap ${params.UPDATE_VALUE})";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Bootstrap ${params.UPDATE_VALUE})";
 
           REPOSITORY_NAMES.split(',').each {
             dir (it) {
@@ -195,13 +186,8 @@ pipeline {
               sed -i -e "s|<xtextBOMVersion>.*</xtextBOMVersion>|<xtextBOMVersion>${params.UPDATE_VALUE}</xtextBOMVersion>|"  org.eclipse.xtend.maven.plugin/src/test/resources/it/pom.xml
             """
           }}
-          REPOSITORY_NAMES.split(',').each {
-            dir (it) {
-              sh """
-                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
-              """
-            }
-          }
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
     } // stage 'Update Xtext bootstrap version'
@@ -215,9 +201,7 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Update Gradle Wrapper to ${params.UPDATE_VALUE}"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Gradle Wrapper ${params.UPDATE_VALUE})";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Gradle Wrapper ${params.UPDATE_VALUE})";
 
           REPOSITORY_NAMES.split(',').each {
             dir (it) { if (fileExists('gradlew')) {
@@ -240,11 +224,7 @@ pipeline {
             """
           }}
           
-          REPOSITORY_NAMES.split(',').each {
-            dir (it) {
-              sh """git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"""
-            }
-          }
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
     } // stage 'Update Gradle Wrapper'
@@ -260,9 +240,7 @@ pipeline {
           env.PROP_VALUE = "${params.UPDATE_VALUE.split(':')[1]}"
           env.PR_TITLE="[releng] Bump ${env.PROP_NAME} to ${env.PROP_VALUE}"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Bump ${env.PROP_VALUE})";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Bump ${env.PROP_VALUE})";
 
           REPOSITORY_NAMES.split(',').each {
             dir (it) {
@@ -270,11 +248,11 @@ pipeline {
                 if [ -f "gradle/versions.gradle" ]; then
                   sed -i -e "s|'${env.PROP_VALUE}': '[^']*'|'${env.PROP_VALUE}': '${env.PROP_VALUE}'|" gradle/versions.gradle
                 fi
-
-                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
               """
             } // dir
           } // for each repository
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
     } // stage 'Bump versions.gradle value'
@@ -289,30 +267,36 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Update Orbit URL to ${params.UPDATE_VALUE}"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Orbit URL)";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Orbit URL)";
 
           REPOSITORY_NAMES.split(',').each {
             dir (it) {
               sh """
               for f in \$(find . -name *.target -type f); 
               do
-                sed -i -e 's|location=".*/orbit/.*"|location="${params.UPDATE_VALUE}"|' \$f
+                sed -i -e 's|https://.*/orbit/[^"]*"|${params.UPDATE_VALUE}|' \$f
               done
               """
             } // dir
           } // for each repository
-          REPOSITORY_NAMES.split(',').each {
-            dir (it) {
-              sh """
-                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
-              """
-            } // dir
-          } // for each repository
+          if (fileExists('xtext-core')) { // for the case that we test without xtext-core repo; would fail otherwise
+          dir ('xtext-core') {
+            sh """
+              sed -i -e 's|https://.*/orbit/[^"]*|${params.UPDATE_VALUE}|' org.eclipse.xtext.xtext.wizard/src/org/eclipse/xtext/xtext/wizard/TargetPlatformProject.xtend
+              sed -i -e 's|https://.*/orbit/[^\\]*|${params.UPDATE_VALUE}|' org.eclipse.xtext.xtext.wizard/xtend-gen/org/eclipse/xtext/xtext/wizard/TargetPlatformProject.java
+            """
+          }}
+          if (fileExists('xtext-eclipse')) {
+          dir ('xtext-eclipse') {
+            sh """
+              sed -i -e 's|https://.*/orbit/[^"]*|${params.UPDATE_VALUE}|' releng/org.eclipse.xtext.contributor/Xtext.setup
+            """
+          }}
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
-    } // stage 'Bump versions.gradle value'
+    } // stage 'Update Orbit URL'
 
     stage('Update Tycho Version') {
       when {
@@ -323,9 +307,7 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Update Tycho to ${params.UPDATE_VALUE}"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Tycho ${params.UPDATE_VALUE})";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Tycho ${params.UPDATE_VALUE})";
 
           REPOSITORY_NAMES.split(',').each {
             dir (it) {
@@ -337,9 +319,11 @@ pipeline {
               """
             } // dir
           } // for each repository
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
-    } // stage 'Bump versions.gradle value'
+    } // stage 'Update Tycho Version'
 
     stage('Generate Xtext Language') {
       when {
@@ -350,18 +334,18 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Regenerate Xtext Language"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Xtext Language)";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Xtext Language)";
 
           dir ('xtext-core') {
             sh """
               ./gradlew generateTestLanguages
             """
           } // dir
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
-    } // stage 'Bump versions.gradle value'
+    } // stage 'Generate Xtext Language'
 
     stage('Generate Test Languages') {
       when {
@@ -372,18 +356,18 @@ pipeline {
           // set pull request title message
           env.PR_TITLE="[releng] Regenerate Test Languages"
 
-          script {
-            currentBuild.displayName = "#${env.BUILD_NUMBER} (Test Languages)";
-          }
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Test Languages)";
 
           dir ('xtext-core') {
             sh """
               ./gradlew generateTestLanguages
             """
           } // dir
+          
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
-    } // stage 'Bump versions.gradle value'
+    } // stage 'Generate Test Languages'
 
     stage('Adjust Pipelines') {
       when {
@@ -393,6 +377,11 @@ pipeline {
         script {
           // create 'locations.properties' file in xtext-umbrella and call adjustPipelines.sh then
           println ("Adjusting upstream pipeline for target and parent pom.xml")
+          // set pull request title message
+          env.PR_TITLE="[releng] Adjust pipelines to branch ${params.TARGET_BRANCH}"
+          
+          currentBuild.displayName = "#${env.BUILD_NUMBER} (Adjust Pipelines)";
+          
           // adjustPipelines has to be invoked within xtext-umbrella
           dir ('xtext-umbrella') {
             REPOSITORY_NAMES.split(',').each {
@@ -400,15 +389,11 @@ pipeline {
             }
             // call script
             sh "bash ./adjustPipelines.sh ${params.TARGET_BRANCH}"
-            REPOSITORY_NAMES.split(',').each {
-              sh """
-                git diff-index --quiet HEAD || git commit --signoff -a -m "[releng] Adjust pipelines to branch ${params.TARGET_BRANCH}"
-              """
-            }
           }
+          commitChanges(env.PR_TITLE)
         } // script
       } // steps
-    } // stage
+    } // stage 'Adjust Pipelines'
 
     stage('Publish') {
       when {
@@ -476,3 +461,25 @@ pipeline {
     } // stage
   } // stages
 } // pipeline
+
+
+/**
+ * On all repositories: Commit pending changes, if any.
+ * When performing a DRY_RUN then print the diff.
+ */
+def commitChanges (String commitMessage) {
+  REPOSITORY_NAMES.split(',').each {
+    dir (it) {
+      // Avoid commit when no change has happened. This would make the pipeline fail.
+      sh """git diff-index --quiet HEAD || git commit --signoff -a -m '${commitMessage}' """
+    }
+  }
+  if (params.DRY_RUN) {
+    REPOSITORY_NAMES.split(',').each {
+      dir (it) {
+        sh "git diff ${params.SOURCE_BRANCH}..${env.TARGET_BRANCH}"
+      }
+    }
+  }
+}
+
