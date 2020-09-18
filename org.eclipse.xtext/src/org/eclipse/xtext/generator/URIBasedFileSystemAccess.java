@@ -138,9 +138,9 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	@Override
 	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
-		try {
-			return CharStreams.toString(new InputStreamReader(readBinaryFile(fileName, outputCfgName),
-					getEncoding(getURI(fileName, outputCfgName))));
+		try (InputStreamReader reader = new InputStreamReader(readBinaryFile(fileName, outputCfgName),
+					getEncoding(getURI(fileName, outputCfgName)))) {
+			return CharStreams.toString(reader);
 		} catch (RuntimeIOException t) {
 			throw t;
 		} catch (IOException t) {

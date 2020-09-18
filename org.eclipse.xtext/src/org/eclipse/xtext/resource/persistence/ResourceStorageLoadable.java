@@ -106,14 +106,15 @@ public class ResourceStorageLoadable {
 			LOG.info("Skipping loading node model for synthetic resource " + resource.getURI());
 			return;
 		}
-		String completeContent = CharStreams.toString(
-				new InputStreamReader(resource.getResourceSet().getURIConverter().createInputStream(resource.getURI()),
-						resource.getEncoding()));
-		DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource,
-				completeContent);
-		serializableNodeModel.readObjectData(new DataInputStream(inputStream), deserializationContext);
-		resource.setParseResult(new ParseResult(head(resource.getContents()), serializableNodeModel.root,
-				deserializationContext.hasErrors()));
+		try (InputStreamReader reader = new InputStreamReader(resource.getResourceSet().getURIConverter().createInputStream(resource.getURI()),
+				resource.getEncoding())) {
+			String completeContent = CharStreams.toString(reader);
+			DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource,
+					completeContent);
+			serializableNodeModel.readObjectData(new DataInputStream(inputStream), deserializationContext);
+			resource.setParseResult(new ParseResult(head(resource.getContents()), serializableNodeModel.root,
+					deserializationContext.hasErrors()));
+		}
 	}
 
 }

@@ -522,8 +522,8 @@ public abstract class AbstractTrace implements ITrace {
 
 			@Override
 			protected String getRemoteText(SourceRelativeURI uri) {
-				try {
-					return CharStreams.toString(getContentsAsText(uri));
+				try (Reader reader = getContentsAsText(uri)) {
+					return CharStreams.toString(reader);
 				} catch (IOException e) {
 					Exceptions.sneakyThrow(e);
 				}
@@ -532,8 +532,8 @@ public abstract class AbstractTrace implements ITrace {
 
 			@Override
 			protected String getLocalText() {
-				try {
-					return CharStreams.toString(getLocalContentsAsText());
+				try (Reader reader = getLocalContentsAsText()) {
+					return CharStreams.toString(reader);
 				} catch (IOException e) {
 					Exceptions.sneakyThrow(e);
 				}
