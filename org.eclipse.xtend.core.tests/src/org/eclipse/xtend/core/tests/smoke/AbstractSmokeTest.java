@@ -76,10 +76,11 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 				resource = getClass().getClassLoader().getResource("/" + location);
 			if (resource == null)
 				break;
-			final InputStream resourceAsStream = resource.openStream();
-			String string = Files.readStreamIntoString(resourceAsStream);
-			smokeTestModels.add(string);
-			i++;
+			try (InputStream resourceAsStream = resource.openStream()) {
+				String string = Files.readStreamIntoString(resourceAsStream);
+				smokeTestModels.add(string);
+				i++;
+			}
 		}
 	}
 	

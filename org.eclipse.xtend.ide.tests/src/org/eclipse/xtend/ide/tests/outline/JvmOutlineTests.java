@@ -151,33 +151,34 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 
 	@Test
 	public void testActiveAnnotation() throws Exception {
-		InputStream inputStream = JvmOutlineTests.class.getResourceAsStream("TestAA.txt");
-		String model = Files.readStreamIntoString(inputStream);
-		XtendFile aaXtendFile = getWorkbenchTestHelper().xtendFile("aatest/TestAA.xtend", model);
-		WorkbenchTestHelper.addExportedPackages(getWorkbenchTestHelper().getProject(), "aatest");
-		AssertBuilder aaFile = newAssertBuilder(aaXtendFile).numChildren(4);
-		aaFile.child(0, "aatest");
-		aaFile.child(1, "import declarations");
-		aaFile.child(2, "TestAAnnotation");
-		aaFile.child(3, "TestAAProcessor");
-		List<String> deps = newArrayList(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES);
-		deps.add(WorkbenchTestHelper.TESTPROJECT_NAME);
-		final IProject clientProj = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME
-				+ "-client", Iterables.toArray(deps, String.class));
-
-		IResourcesSetupUtil.waitForBuild();
-
-		XtendFile xtendFile = getWorkbenchTestHelper().xtendFile(clientProj, "clienttest/TestAAClient.xtend",
-				"package clienttest @aatest.TestAAnnotation class AAOutlineTest { override void myPublicMethod() {}}");
-		AssertBuilder clientAAFile = newAssertBuilder(xtendFile).numChildren(3);
-		clientAAFile.leaf(0, "clienttest");
-		clientAAFile.child(1, "AAOutlineTest").leaf(0, "myPublicMethod() : void");
-		StyledString styledString = new StyledString("AAOutlineTestInterface - clienttest.test",
-				StyledString.QUALIFIER_STYLER);
-		AssertBuilder createdtype = clientAAFile.child(2, styledString).numChildren(1);
-		createdtype.child(0, new StyledString("myPublicMethod()", StyledString.QUALIFIER_STYLER).append(" : void",
-				StyledString.DECORATIONS_STYLER));
-		WorkbenchTestHelper.deleteProject(clientProj);
+		try (InputStream inputStream = JvmOutlineTests.class.getResourceAsStream("TestAA.txt")) {
+			String model = Files.readStreamIntoString(inputStream);
+			XtendFile aaXtendFile = getWorkbenchTestHelper().xtendFile("aatest/TestAA.xtend", model);
+			WorkbenchTestHelper.addExportedPackages(getWorkbenchTestHelper().getProject(), "aatest");
+			AssertBuilder aaFile = newAssertBuilder(aaXtendFile).numChildren(4);
+			aaFile.child(0, "aatest");
+			aaFile.child(1, "import declarations");
+			aaFile.child(2, "TestAAnnotation");
+			aaFile.child(3, "TestAAProcessor");
+			List<String> deps = newArrayList(WorkbenchTestHelper.DEFAULT_REQ_BUNDLES);
+			deps.add(WorkbenchTestHelper.TESTPROJECT_NAME);
+			final IProject clientProj = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME
+					+ "-client", Iterables.toArray(deps, String.class));
+	
+			IResourcesSetupUtil.waitForBuild();
+	
+			XtendFile xtendFile = getWorkbenchTestHelper().xtendFile(clientProj, "clienttest/TestAAClient.xtend",
+					"package clienttest @aatest.TestAAnnotation class AAOutlineTest { override void myPublicMethod() {}}");
+			AssertBuilder clientAAFile = newAssertBuilder(xtendFile).numChildren(3);
+			clientAAFile.leaf(0, "clienttest");
+			clientAAFile.child(1, "AAOutlineTest").leaf(0, "myPublicMethod() : void");
+			StyledString styledString = new StyledString("AAOutlineTestInterface - clienttest.test",
+					StyledString.QUALIFIER_STYLER);
+			AssertBuilder createdtype = clientAAFile.child(2, styledString).numChildren(1);
+			createdtype.child(0, new StyledString("myPublicMethod()", StyledString.QUALIFIER_STYLER).append(" : void",
+					StyledString.DECORATIONS_STYLER));
+			WorkbenchTestHelper.deleteProject(clientProj);
+		}
 	}
 
 	@Override

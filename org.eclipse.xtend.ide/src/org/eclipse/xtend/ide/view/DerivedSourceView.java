@@ -12,6 +12,8 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.jface.resource.JFaceResources.*;
 import static org.eclipse.ui.editors.text.EditorsUI.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -292,9 +294,11 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 				file.refreshLocal(1, new NullProgressMonitor());
 				if (file.exists()) {
 					openEditorAction.setInputFile(file);
-					return Files.readStreamIntoString(file.getContents());
+					try (InputStream contents = file.getContents()) {
+						return Files.readStreamIntoString(contents);
+					}
 				}
-			} catch (CoreException e) {
+			} catch (CoreException | IOException e) {
 				throw new WrappedRuntimeException(e);
 			}
 		}
