@@ -47,29 +47,30 @@ public class XtextResourcesServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			String resourceURI = "META-INF/resources" + request.getServletPath() + request.getPathInfo();
-			InputStream inputStream = getResourceAsStream(resourceURI);
-			if (inputStream != null) {
-				String[] tokens = resourceURI.split("/");
-				String fileName = tokens[tokens.length - 1];
-				if (!disableCache && tokens.length > 4) {
-					String version = tokens[3];
-					response.setHeader("ETag", fileName + "_" + version);
-					response.setDateHeader("Expires",
-							System.currentTimeMillis() + XtextResourcesServlet.DEFAULT_EXPIRE_TIME_MS);
-					response.addHeader("Cache-Control",
-							("private, max-age=" + XtextResourcesServlet.DEFAULT_EXPIRE_TIME_S));
-				}
-				String mimeType = getServletContext().getMimeType(fileName);
-				String contentType = null;
-				if (mimeType != null) {
-					contentType = mimeType;
+			try (InputStream inputStream = getResourceAsStream(resourceURI)) {
+				if (inputStream != null) {
+					String[] tokens = resourceURI.split("/");
+					String fileName = tokens[tokens.length - 1];
+					if (!disableCache && tokens.length > 4) {
+						String version = tokens[3];
+						response.setHeader("ETag", fileName + "_" + version);
+						response.setDateHeader("Expires",
+								System.currentTimeMillis() + XtextResourcesServlet.DEFAULT_EXPIRE_TIME_MS);
+						response.addHeader("Cache-Control",
+								("private, max-age=" + XtextResourcesServlet.DEFAULT_EXPIRE_TIME_S));
+					}
+					String mimeType = getServletContext().getMimeType(fileName);
+					String contentType = null;
+					if (mimeType != null) {
+						contentType = mimeType;
+					} else {
+						contentType = "application/octet-stream";
+					}
+					response.setContentType(contentType);
+					ByteStreams.copy(inputStream, response.getOutputStream());
 				} else {
-					contentType = "application/octet-stream";
+					response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				}
-				response.setContentType(contentType);
-				ByteStreams.copy(inputStream, response.getOutputStream());
-			} else {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (IOException e) {
 			throw Exceptions.sneakyThrow(e);
