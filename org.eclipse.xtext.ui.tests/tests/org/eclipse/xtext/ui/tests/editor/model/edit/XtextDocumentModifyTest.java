@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Provider;
 
 /**
@@ -43,11 +44,11 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 	}
 
-	@Test public void testProcess() throws Exception {
-		String grammar = "grammar foo.Foo " + "generate foo \"foo://foo/42\" " + "Foo: \"foo\" | \"bar\" | \"baz\"; "
-				+ "Bar: foo=Foo;";
+	@Test
+	public void testProcess() throws Exception {
+		String grammar = "grammar foo.Foo " + "generate foo \"foo://foo/42\" " + "Foo: \"foo\" | \"bar\" | \"baz\"; " + "Bar: foo=Foo;";
 		IXtextDocument document = createDocument(grammar);
-		
+
 		final Object expected = resource.getContents().get(0);
 		Object result = document.modify(new IUnitOfWork<Object, XtextResource>() {
 			@Override
@@ -63,15 +64,19 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		assertEquals(grammar.replaceFirst("foo\\.Foo", "foo.Bar"), document.get());
 	}
 
-	@Test public void testCommentsNotDuplicated() throws Exception {
-		String grammar = "grammar foo.Foo\n" 
-			+ "generate foo \"http://foo.net/foo\"\n" 
-			+ "Foo: // comment in Foo \n"
-			+ "// comment before Assignment\n"
-			+ "  bars+=/* comment in assignment */Bar // comment after assignment\n"
-			+ "// comment before keywod\n"
-			+ "'foo';\n" 
-			+ "Bar: 'bar';";
+	@Test
+	public void testCommentsNotDuplicated() throws Exception {
+		// @formatter:off
+		String grammar = text(
+			"grammar foo.Foo", 
+			"generate foo \"http://foo.net/foo\"", 
+			"Foo: // comment in Foo ",
+			"// comment before Assignment",
+			"  bars+=/* comment in assignment */Bar // comment after assignment",
+			"// comment before keywod",
+			"'foo';", 
+			"Bar: 'bar';");
+		// @formatter:on
 		IXtextDocument document = createDocument(grammar);
 		document.modify(new IUnitOfWork<Object, XtextResource>() {
 			@Override
@@ -86,12 +91,16 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		});
 		assertEquals(grammar.replace("bars", "foobars"), document.get());
 	}
-	
+
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
-	@Test public void testSemanticModification() throws Exception {
-		String grammar = "grammar foo.Foo\n" 
-				+ "generate foo \"http://foo.net/foo\"\n"
-				+ "Foo: 'foo';"; 
+	@Test
+	public void testSemanticModification() throws Exception {
+		// @formatter:off
+		String grammar = text(
+				"grammar foo.Foo", 
+				"generate foo \"http://foo.net/foo\"",
+				"Foo: 'foo';"); 
+		// @formatter:on
 		IXtextDocument document = createDocument(grammar);
 		document.modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -102,12 +111,16 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		});
 		assertEquals(grammar.replace("foo.Foo", "foo.Bar"), document.get());
 	}
-	
+
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
-	@Test public void testTextualModification() throws Exception {
-		final String grammar = "grammar foo.Foo\n" 
-				+ "generate foo \"http://foo.net/foo\"\n"
-				+ "Foo: 'foo';"; 
+	@Test
+	public void testTextualModification() throws Exception {
+		// @formatter:off
+		final String grammar = text(
+				"grammar foo.Foo", 
+				"generate foo \"http://foo.net/foo\"",
+				"Foo: 'foo';"); 
+		// @formatter:on
 		final IXtextDocument document = createDocument(grammar);
 		document.modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
@@ -117,12 +130,16 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		});
 		assertEquals(grammar.replace("foo.Foo", "foo.Bar"), document.get());
 	}
-	
+
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
-	@Test public void testSemanticAndTextualModification() throws Exception {
-		final String grammar = "grammar foo.Foo\n" 
-				+ "generate foo \"http://foo.net/foo\"\n"
-				+ "Foo: 'foo';"; 
+	@Test
+	public void testSemanticAndTextualModification() throws Exception {
+		// @formatter:off
+		final String grammar = text(
+				"grammar foo.Foo", 
+				"generate foo \"http://foo.net/foo\"",
+				"Foo: 'foo';"); 
+		// @formatter:on
 		final IXtextDocument document = createDocument(grammar);
 		try {
 			document.modify(new IUnitOfWork.Void<XtextResource>() {
@@ -134,33 +151,38 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 				}
 			});
 			fail("Expected exception");
-		} catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			assertTrue(e.getMessage().contains("Cannot modify document textually and semantically"));
 			assertEquals(grammar, document.get());
 		}
 	}
-	
+
 	private IXtextDocument createDocument(String model) throws Exception {
 		resource = getResource(new StringInputStream(model));
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
-		tokenSource.setLexer(new Provider<Lexer>(){
+		tokenSource.setLexer(new Provider<Lexer>() {
 			@Override
 			public Lexer get() {
 				return new InternalXtextLexer();
-			}});
-		
-		final XtextDocument document = new XtextDocument(tokenSource, get(ITextEditComposer.class), new OutdatedStateManager(), new OperationCanceledManager()) {
+			}
+		});
+
+		final XtextDocument document = new XtextDocument(tokenSource, get(ITextEditComposer.class), new OutdatedStateManager(),
+				new OperationCanceledManager()) {
 			@Override
 			public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
 				try {
 					return work.exec((XtextResource) resource);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
 			}
 		};
 		document.set(model);
 		return document;
+	}
+
+	private String text(String... lines) {
+		return Joiner.on(System.lineSeparator()).join(lines);
 	}
 }
