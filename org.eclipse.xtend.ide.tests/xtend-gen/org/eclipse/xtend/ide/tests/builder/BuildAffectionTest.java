@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
@@ -1067,7 +1068,7 @@ public class BuildAffectionTest {
     };
     ((XtextBuildConsole.Logger) this.logger).registerDelegate(_function);
     this.autoBuild();
-    Assert.assertTrue(logs.toString().trim(), logs.toString().trim().matches(expected.toString().trim()));
+    Assert.assertTrue(logs.toString().trim(), logs.toString().trim().matches(Strings.toUnixLineSeparator(expected.toString()).trim()));
   }
   
   private void autoBuild() {
