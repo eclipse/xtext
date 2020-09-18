@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -122,23 +123,25 @@ public class SourceBasedJdtTypeProviderTest extends AbstractJdtTypeProviderTest 
 		String typeName = EmptyAbstractClass.class.getName();
 		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));
 		assertNotNull(javaFile);
-		String content = Files.readStreamIntoString(javaFile.getContents());
-		try {
-			String newContent = content.replace(
-					"public abstract ", 
-					"@SimpleAnnotation( type = DoesNotExist.class ) public abstract ");
-			javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
-			
-			JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
-			List<JvmAnnotationReference> annotations = type.getAnnotations();
-			assertEquals(1, annotations.size());
-			JvmAnnotationReference annotation = annotations.get(0);
-			assertEquals(1, annotation.getExplicitValues().size());
-			JvmAnnotationValue value = annotation.getExplicitValues().get(0);
-			assertTrue(value instanceof JvmTypeAnnotationValue);
-			assertTrue(((JvmTypeAnnotationValue) value).getValues().isEmpty());
-		} finally {
-			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+		try (InputStream contents = javaFile.getContents()) {
+			String content = Files.readStreamIntoString(contents);
+			try {
+				String newContent = content.replace(
+						"public abstract ", 
+						"@SimpleAnnotation( type = DoesNotExist.class ) public abstract ");
+				javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
+				
+				JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+				List<JvmAnnotationReference> annotations = type.getAnnotations();
+				assertEquals(1, annotations.size());
+				JvmAnnotationReference annotation = annotations.get(0);
+				assertEquals(1, annotation.getExplicitValues().size());
+				JvmAnnotationValue value = annotation.getExplicitValues().get(0);
+				assertTrue(value instanceof JvmTypeAnnotationValue);
+				assertTrue(((JvmTypeAnnotationValue) value).getValues().isEmpty());
+			} finally {
+				javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+			}
 		}
 	}
 	
@@ -147,24 +150,26 @@ public class SourceBasedJdtTypeProviderTest extends AbstractJdtTypeProviderTest 
 		String typeName = EmptyAbstractClass.class.getName();
 		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));
 		assertNotNull(javaFile);
-		String content = Files.readStreamIntoString(javaFile.getContents());
-		try {
-			String newContent = content.replace(
-					"public abstract ", 
-					"@TestAnnotation( classArray = { String.class, DoesNotExist.class, String.class } ) public abstract ");
-			javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
-			
-			JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
-			List<JvmAnnotationReference> annotations = type.getAnnotations();
-			assertEquals(1, annotations.size());
-			JvmAnnotationReference annotation = annotations.get(0);
-			assertEquals(1, annotation.getExplicitValues().size());
-			JvmAnnotationValue value = annotation.getExplicitValues().get(0);
-			assertTrue(value instanceof JvmTypeAnnotationValue);
-			List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
-			assertEquals(2, typeLiterals.size());
-		} finally {
-			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+		try (InputStream contents = javaFile.getContents()) {
+			String content = Files.readStreamIntoString(contents);
+			try {
+				String newContent = content.replace(
+						"public abstract ", 
+						"@TestAnnotation( classArray = { String.class, DoesNotExist.class, String.class } ) public abstract ");
+				javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
+				
+				JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+				List<JvmAnnotationReference> annotations = type.getAnnotations();
+				assertEquals(1, annotations.size());
+				JvmAnnotationReference annotation = annotations.get(0);
+				assertEquals(1, annotation.getExplicitValues().size());
+				JvmAnnotationValue value = annotation.getExplicitValues().get(0);
+				assertTrue(value instanceof JvmTypeAnnotationValue);
+				List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
+				assertEquals(2, typeLiterals.size());
+			} finally {
+				javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+			}
 		}
 	}
 	
@@ -173,24 +178,26 @@ public class SourceBasedJdtTypeProviderTest extends AbstractJdtTypeProviderTest 
 		String typeName = EmptyAbstractClass.class.getName();
 		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));
 		assertNotNull(javaFile);
-		String content = Files.readStreamIntoString(javaFile.getContents());
-		try {
-			String newContent = content.replace(
-					"public abstract ", 
-					"@TestAnnotation( classArray = ) public abstract ");
-			javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
-			
-			JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
-			List<JvmAnnotationReference> annotations = type.getAnnotations();
-			assertEquals(1, annotations.size());
-			JvmAnnotationReference annotation = annotations.get(0);
-			assertEquals(1, annotation.getExplicitValues().size());
-			JvmAnnotationValue value = annotation.getExplicitValues().get(0);
-			assertTrue(value instanceof JvmTypeAnnotationValue);
-			List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
-			assertEquals(0, typeLiterals.size());
-		} finally {
-			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+		try (InputStream contents = javaFile.getContents()) {
+			String content = Files.readStreamIntoString(contents);
+			try {
+				String newContent = content.replace(
+						"public abstract ", 
+						"@TestAnnotation( classArray = ) public abstract ");
+				javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
+				
+				JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+				List<JvmAnnotationReference> annotations = type.getAnnotations();
+				assertEquals(1, annotations.size());
+				JvmAnnotationReference annotation = annotations.get(0);
+				assertEquals(1, annotation.getExplicitValues().size());
+				JvmAnnotationValue value = annotation.getExplicitValues().get(0);
+				assertTrue(value instanceof JvmTypeAnnotationValue);
+				List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
+				assertEquals(0, typeLiterals.size());
+			} finally {
+				javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+			}
 		}
 	}
 	

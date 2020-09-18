@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -194,11 +196,10 @@ public class XbaseEditor extends XtextEditor {
 							if (!(javaResource instanceof IStorage)) {
 								return XbaseEditor.super.getDocumentProvider().getDocument(element);
 							}
-							try {
-								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
-								final Document document = new Document(string);
-								return document;
-							} catch (CoreException e) {
+							try (InputStream contents = ((IStorage) javaResource).getContents()) {
+								String string = Files.readStreamIntoString(contents);
+								return new Document(string);
+							} catch (CoreException | IOException e) {
 								return XbaseEditor.super.getDocumentProvider().getDocument(element);
 							}
 						}
@@ -231,8 +232,8 @@ public class XbaseEditor extends XtextEditor {
 						IResource javaResource = typeRoot.getResource();
 						if (expectLineSelection && javaResource instanceof IStorage) {
 							if (isCompiledWithJSR45()) {
-								try {
-									String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+								try (InputStream contents = ((IStorage) javaResource).getContents()) {
+									String string = Files.readStreamIntoString(contents);
 									Document javaDocument = new Document(string);
 									int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
 									if (line != -1) {
@@ -241,13 +242,11 @@ public class XbaseEditor extends XtextEditor {
 											ILocationInResource bestSelection = traceToSource
 													.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
 											if (bestSelection != null) {
-												final ITextRegionWithLineInformation textRegion = bestSelection
-														.getTextRegion();
+												final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
 												if (textRegion != null) {
 													int lineToSelect = textRegion.getLineNumber();
 													try {
-														IRegion lineInfo = getDocument().getLineInformation(
-																lineToSelect);
+														IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
 														super.selectAndReveal(lineInfo.getOffset(),
 																lineInfo.getLength(), lineInfo.getOffset(),
 																lineInfo.getLength());
@@ -259,9 +258,7 @@ public class XbaseEditor extends XtextEditor {
 											}
 										}
 									}
-								} catch (BadLocationException e) {
-									// do nothing
-								} catch (CoreException e) {
+								} catch (BadLocationException | CoreException | IOException e) {
 									// do nothing
 								}
 							}

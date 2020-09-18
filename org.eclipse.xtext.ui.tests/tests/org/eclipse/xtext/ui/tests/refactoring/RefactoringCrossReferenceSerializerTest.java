@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.tests.refactoring;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.CrossReference;
@@ -70,30 +72,32 @@ public class RefactoringCrossReferenceSerializerTest extends AbstractXtextTests 
 		String model = "bar { ref foo } foo";
 		String wsRelativePath = "test/test."+getCurrentFileExtension();
 		IFile file = createFile(wsRelativePath, model);
-		Main main = (Main) getModel(file.getContents());
-		XtextResource resource = (XtextResource) main.eResource();
-		resource.setURI(URI.createPlatformResourceURI(wsRelativePath, true));
-		
-		Element bar = (Element) main.getElements().get(0);
-		Element foo = bar.getReferenced().get(0);
-		assertEquals("foo", foo.getName());
-		
-		CrossReference crossref = GrammarUtil.containedCrossReferences(grammarAccess.getElementRule()).get(0);
-		TextRegion linkTextRegion = new TextRegion(model.lastIndexOf("foo"), 3);
-		String linkText = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
-		assertEquals(linkText, "foo");
-		assertTrue(status.getRefactoringStatus().isOK());
-		
-		foo.setName("fooBar");
-		resource.getCache().clear(resource);
-		String linkText1 = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
-		assertEquals(linkText1, "fooBar");
-		assertTrue(status.getRefactoringStatus().isOK());
-
-		assertEquals(foo, ((Main) resource.getContents().get(0)).getElements().get(1));
-		foo.setName("bar");
-		resource.getCache().clear(resource);
-		assertNull(facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status));
+		try (InputStream contents = file.getContents()) {
+			Main main = (Main) getModel(contents);
+			XtextResource resource = (XtextResource) main.eResource();
+			resource.setURI(URI.createPlatformResourceURI(wsRelativePath, true));
+			
+			Element bar = (Element) main.getElements().get(0);
+			Element foo = bar.getReferenced().get(0);
+			assertEquals("foo", foo.getName());
+			
+			CrossReference crossref = GrammarUtil.containedCrossReferences(grammarAccess.getElementRule()).get(0);
+			TextRegion linkTextRegion = new TextRegion(model.lastIndexOf("foo"), 3);
+			String linkText = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
+			assertEquals(linkText, "foo");
+			assertTrue(status.getRefactoringStatus().isOK());
+			
+			foo.setName("fooBar");
+			resource.getCache().clear(resource);
+			String linkText1 = facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
+			assertEquals(linkText1, "fooBar");
+			assertTrue(status.getRefactoringStatus().isOK());
+	
+			assertEquals(foo, ((Main) resource.getContents().get(0)).getElements().get(1));
+			foo.setName("bar");
+			resource.getCache().clear(resource);
+			assertNull(facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status));
+		}
 	}
 
 }
