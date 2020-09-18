@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,6 +9,7 @@
 package org.eclipse.xtend.ide.tests.buildpath
 
 import com.google.inject.Inject
+import java.io.InputStream
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.Path
@@ -70,10 +71,12 @@ abstract class AbstractJunitLibClasspathAdderTestCase {
     }
 
     def protected assertRequireBundles(String[] expectedBundleIds) {
-        val manifest = new MergeableManifest2(project.getFile(new Path('META-INF/MANIFEST.MF')).contents)
-        val requireBunbles = manifest.mainAttributes.get(MergeableManifest2.REQUIRE_BUNDLE)
-        for (bundleId : expectedBundleIds)
-            assertTrue('''require bundle entry «bundleId» is present''', requireBunbles.contains(bundleId))
+    	try (val InputStream contents = project.getFile(new Path('META-INF/MANIFEST.MF')).contents) {
+	        val manifest = new MergeableManifest2(contents)
+	        val requireBunbles = manifest.mainAttributes.get(MergeableManifest2.REQUIRE_BUNDLE)
+	        for (bundleId : expectedBundleIds)
+	            assertTrue('''require bundle entry «bundleId» is present''', requireBunbles.contains(bundleId))
+	    }
     }
     
 }

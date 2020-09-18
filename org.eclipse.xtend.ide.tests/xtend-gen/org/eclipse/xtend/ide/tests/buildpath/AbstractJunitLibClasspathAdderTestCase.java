@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.AfterClass;
@@ -99,17 +100,27 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
   
   protected void assertRequireBundles(final String[] expectedBundleIds) {
     try {
-      IProject _project = this.workbenchHelper.getProject();
-      Path _path = new Path("META-INF/MANIFEST.MF");
-      InputStream _contents = _project.getFile(_path).getContents();
-      final MergeableManifest2 manifest = new MergeableManifest2(_contents);
-      final String requireBunbles = manifest.getMainAttributes().get(MergeableManifest2.REQUIRE_BUNDLE);
-      for (final String bundleId : expectedBundleIds) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("require bundle entry ");
-        _builder.append(bundleId);
-        _builder.append(" is present");
-        Assert.assertTrue(_builder.toString(), requireBunbles.contains(bundleId));
+      try (final InputStream contents = new Function0<InputStream>() {
+        @Override
+        public InputStream apply() {
+          try {
+            IProject _project = AbstractJunitLibClasspathAdderTestCase.this.workbenchHelper.getProject();
+            Path _path = new Path("META-INF/MANIFEST.MF");
+            return _project.getFile(_path).getContents();
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      }.apply()) {
+        final MergeableManifest2 manifest = new MergeableManifest2(contents);
+        final String requireBunbles = manifest.getMainAttributes().get(MergeableManifest2.REQUIRE_BUNDLE);
+        for (final String bundleId : expectedBundleIds) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("require bundle entry ");
+          _builder.append(bundleId);
+          _builder.append(" is present");
+          Assert.assertTrue(_builder.toString(), requireBunbles.contains(bundleId));
+        }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

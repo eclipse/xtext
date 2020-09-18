@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,6 +31,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.util.Strings.*
 import static org.junit.Assert.*
 
 /**
@@ -661,7 +662,7 @@ class BuildAffectionTest {
 			logs.append(toString.trim + '\n')
 		]
 		autoBuild
-		assertTrue(logs.toString.trim, logs.toString.trim.matches(expected.toString.trim))
+		assertTrue(logs.toString.trim, logs.toString.trim.matches(expected.toString.toUnixLineSeparator.trim))
 	}
 	
 	private def autoBuild() {
