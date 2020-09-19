@@ -94,7 +94,7 @@ pipeline {
             wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
             sh """
               export MAVEN_OPTS=-Xmx1500m 
-              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.TARGET_PLATFORM} --local-repository=/home/jenkins/.m2/repository
+              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${selectedTargetPlatform()} --local-repository=/home/jenkins/.m2/repository
             """
             }
           }// END steps
