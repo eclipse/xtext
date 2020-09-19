@@ -24,7 +24,7 @@ import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest
  */
 abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase {
 	
-	def Reference resolvesTo(String expression, String type)
+	def Reference resolvesTo(String expression, String type) throws Exception
 	
 	def void isFunctionAndEquivalentTo(Reference reference, String type)
 	
@@ -312,7 +312,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList().map[42]".resolvesTo("List<Integer>")
 	}
 	
-	@Test def void testListLiteral_00() {
+	@Test def void testListLiteral_00() throws Exception {
 		"#[]".resolvesTo("List<Object>")
 	}
 	
@@ -378,7 +378,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList(#['foo'], #{})".resolvesTo("ArrayList<Collection<String>>")
 	}
 
-	@Test def void testSetLiteral_00() {
+	@Test def void testSetLiteral_00() throws Exception {
 		"#{}".resolvesTo("Set<Object>")
 	}
 	
