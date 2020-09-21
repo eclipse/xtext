@@ -30,7 +30,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractTypeResolverTest<Reference extends Object> extends AbstractXbaseTestCase {
-  public abstract Reference resolvesTo(final String expression, final String type);
+  public abstract Reference resolvesTo(final String expression, final String type) throws Exception;
   
   public abstract void isFunctionAndEquivalentTo(final Reference reference, final String type);
   
@@ -366,7 +366,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testListLiteral_00() {
+  public void testListLiteral_00() throws Exception {
     this.resolvesTo("#[]", "List<Object>");
   }
   
@@ -446,7 +446,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testSetLiteral_00() {
+  public void testSetLiteral_00() throws Exception {
     this.resolvesTo("#{}", "Set<Object>");
   }
   
