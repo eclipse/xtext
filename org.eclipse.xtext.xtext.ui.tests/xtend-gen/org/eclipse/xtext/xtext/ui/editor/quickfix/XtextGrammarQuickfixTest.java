@@ -246,28 +246,8 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
     _builder_3.append(";");
     _builder_3.newLine();
     AbstractQuickfixTest.Quickfix _quickfix_2 = new AbstractQuickfixTest.Quickfix("Create terminal \'Greeting\'", "Create terminal \'Greeting\'", _builder_3.toString());
-    StringConcatenation _builder_4 = new StringConcatenation();
-    _builder_4.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
-    _builder_4.newLine();
-    _builder_4.newLine();
-    _builder_4.append("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
-    _builder_4.newLine();
-    _builder_4.newLine();
-    _builder_4.append("Model:");
-    _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.append("greetings+=Greeting*;");
-    _builder_4.newLine();
-    _builder_4.newLine();
-    _builder_4.append("terminal fragment Greeting:");
-    _builder_4.newLine();
-    _builder_4.append("\t");
-    _builder_4.newLine();
-    _builder_4.append(";");
-    _builder_4.newLine();
-    AbstractQuickfixTest.Quickfix _quickfix_3 = new AbstractQuickfixTest.Quickfix("Create terminal fragment \'Greeting\'", "Create terminal fragment \'Greeting\'", _builder_4.toString());
     this.testQuickfixesOn(_builder, 
-      "org.eclipse.xtext.grammar.UnresolvedRule", _quickfix, _quickfix_1, _quickfix_2, _quickfix_3);
+      "org.eclipse.xtext.grammar.UnresolvedRule", _quickfix, _quickfix_1, _quickfix_2);
   }
   
   @Test

@@ -162,18 +162,6 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 				terminal Greeting:
 					
 				;
-			'''),
-			new Quickfix("Create terminal fragment 'Greeting'", "Create terminal fragment 'Greeting'", '''
-				grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
-				
-				generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
-				
-				Model:
-					greetings+=Greeting*;
-				
-				terminal fragment Greeting:
-					
-				;
 			''')
 		);
 	}
