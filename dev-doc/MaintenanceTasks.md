@@ -61,9 +61,6 @@ Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.e
 
 Wait for the builds of the branches, review and merge PRs.
 
-Additional manual step:
-* Adapt Oomph Setup `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
-
 ## Update Oomph Setup for new SimRel
 
 * Open `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`
