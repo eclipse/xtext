@@ -158,18 +158,23 @@ After everything above has run smoothly, it is finally time for some manual step
    * Update Composite Repository for Eclipse Marketplace
      * Edit repository composite site descriptors at path `updates/composite/marketplace` from https://github.com/xtext/xtext-p2-orbit
      * Run https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/
-7. As soon as Maven Central is updated - send notifications
+7. Update Marketplace composite site (Only on final release)
+   * In repository https://github.com/xtext/xtext-p2-orbit update files
+     * [`updates/composite/marketplace/compositeArtifacts.xml`](https://github.com/xtext/xtext-p2-orbit/blob/master/updates/composite/marketplace/compositeArtifacts.xml)
+     * [`updates/composite/marketplace/compositeContent.xml`](https://github.com/xtext/xtext-p2-orbit/blob/master/updates/composite/marketplace/compositeContent.xml)
+   * Run job [update-composite-sites](https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/)
+8. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
    * Gitter
    * Twitter
    * Blog (for releases)
-8. Add / Update xtext-reference-projects (Only on final release)
-9. Adjust the bootstrap version to use the newly produced milestone / release
+9. Add / Update xtext-reference-projects (Only on final release)
+10. Adjust the bootstrap version to use the newly produced milestone / release
    * Note: The builds will fail if the newly promoted artifacts are not available on maven central yet.
    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
-10. xtext-apidiff (Only on final release)
+11. xtext-apidiff (Only on final release)
    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
