@@ -96,6 +96,8 @@
 		<unit id="org.junit.jupiter.api" version="0.0.0"/>
 		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
 		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.suite.api" version="0.0.0"/>
+		<unit id="org.junit.platform.runner" version="0.0.0"/>
 		<unit id="org.junit.platform.commons" version="0.0.0"/>
 		<unit id="org.junit.platform.engine" version="0.0.0"/>
 		<unit id="org.opentest4j" version="0.0.0"/>

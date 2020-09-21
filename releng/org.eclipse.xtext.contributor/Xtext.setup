@@ -785,6 +785,9 @@
             name="org.junit.platform.runner"
             versionRange="[1.1.0,1.7.0)"/>
         <requirement
+            name="org.junit.platform.suite.api"
+            versionRange="[1.1.0,1.7.0)"/>
+        <requirement
             name="org.opentest4j"
             versionRange="[1.0.0,1.3.0)"/>
         <requirement
