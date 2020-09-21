@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.testing.tests;
+package org.eclipse.xtext.testing.tests.junit5;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,34 +19,25 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * Test for {@link InjectionExtension}.
  * Injection working for nested test classes.
- * Here the @InjectWith is attached to the outer class.
+ * Here the @InjectWith is attached to the inner class.
  * 
  * @author Frank Benoit - Initial contribution and API
  */
 @ExtendWith(InjectionExtension.class)
-@InjectWith(InjectionExtensionNestedTest.MyInjectorProvider.class)
-public class InjectionExtensionNestedTest {
+public class InjectionExtensionNested2Test {
 	
 	public static class MyInjectorProvider implements IRegistryConfigurator, IInjectorProvider {
 
 		@Override
 		public Injector getInjector() {
-			return Guice.createInjector(new Module(){
-				@Override
-				public void configure(Binder binder) {
-					binder.bind(String.class)
-					.toInstance(INJECTED);
-				}
-			});
+			return Guice.createInjector(binder -> binder.bind(String.class).toInstance(INJECTED));
 		}
 
 		@Override
@@ -64,17 +55,13 @@ public class InjectionExtensionNestedTest {
 	@Inject 
 	String testValue1 = NOT_INJECTED;
 	
-	@BeforeEach
-	public void setUp () {
-		assertEquals(INJECTED, testValue1);
-	}
-	
 	@Test
 	void outerTest() {
-		assertEquals(INJECTED, testValue1);
+		assertEquals(NOT_INJECTED, testValue1);
 	}
 	
 	@Nested
+	@InjectWith(InjectionExtensionNested2Test.MyInjectorProvider.class)
 	class NestedClass {
 		
 		@Inject 
@@ -82,14 +69,15 @@ public class InjectionExtensionNestedTest {
 
 		@BeforeEach
 		public void setUp () {
-			assertEquals(INJECTED, testValue1);
+			assertEquals(NOT_INJECTED, testValue1);
 			assertEquals(INJECTED, testValue2);
 		}
 		
 		@Test
 		void innerTest() {
-			assertEquals(INJECTED, testValue1);
+			assertEquals(NOT_INJECTED, testValue1);
 			assertEquals(INJECTED, testValue2);
 		}
 	}
 }
+

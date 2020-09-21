@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import com.google.inject.Binder;
@@ -32,7 +34,7 @@ import com.google.inject.Module;
  * @author Sebastian Benz - Initial contribution and API
  * @author Karsten Thoms - Initial contribution and API
  */
-public class AbstractJUnitIntegrationTest {
+public abstract class AbstractJUnitIntegrationTest {
 	private static boolean injectorCreated = false;
 	private static boolean registrySaved = false;
 	private static boolean registryRestored = false;
@@ -65,6 +67,14 @@ public class AbstractJUnitIntegrationTest {
 			assertTrue(registrySaved);
 			registryRestored = true;
 		}
+	}
+	
+	@AfterAll
+	@AfterClass
+	public static void resetStaticBooleans() {
+		injectorCreated = false;
+		registrySaved = false;
+		registryRestored = false;
 	}
 	
 	@Before

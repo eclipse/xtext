@@ -8,6 +8,12 @@ dependencies {
 	optional 'junit:junit'
 	optional 'org.junit.jupiter:junit-jupiter-api'
 	optional 'org.junit.jupiter:junit-jupiter-engine'
+	// optional for the utilities but mandatory to run the tests
+	testImplementation 'junit:junit'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation 'org.junit.platform:junit-platform-suite-api'
+	testImplementation 'org.junit.platform:junit-platform-runner'
 }
 
 sourceSets.test.java.srcDir 'tests'

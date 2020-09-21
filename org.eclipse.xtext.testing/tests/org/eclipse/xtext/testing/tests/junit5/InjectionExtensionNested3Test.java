@@ -6,12 +6,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.testing.tests;
+package org.eclipse.xtext.testing.tests.junit5;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.xtext.testing.IInjectorProvider;
-import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,11 +18,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * Test for {@link InjectionExtension}.
@@ -33,43 +30,38 @@ import com.google.inject.Module;
  * @author Frank Benoit - Initial contribution and API
  */
 @ExtendWith(InjectionExtension.class)
-public class InjectionExtensionNested2Test {
+@InjectWith(InjectionExtensionNested3Test.MyInjectorProvider.class)
+public class InjectionExtensionNested3Test {
 	
-	public static class MyInjectorProvider implements IRegistryConfigurator, IInjectorProvider {
-
+	public static class MyInjectorProvider implements IInjectorProvider {
 		@Override
 		public Injector getInjector() {
-			return Guice.createInjector(new Module(){
-				@Override
-				public void configure(Binder binder) {
-					binder.bind(String.class)
-					.toInstance(INJECTED);
-				}
-			});
+			return Guice.createInjector(binder -> binder.bind(String.class).toInstance("OUTER"));
 		}
-
+	}
+	
+	public static class MyNestedInjectorProvider implements IInjectorProvider {
 		@Override
-		public void setupRegistry() {
-		}
-
-		@Override
-		public void restoreRegistry() {
+		public Injector getInjector() {
+			return Guice.createInjector(binder -> binder.bind(String.class).toInstance("NESTED"));
 		}
 	}
 
-	private static final String NOT_INJECTED = "not-injected";
-	private static final String INJECTED = "injected";
-	
 	@Inject 
-	String testValue1 = NOT_INJECTED;
+	String testValue1;
+	
+	@BeforeEach
+	public void setUp () {
+		assertEquals("OUTER", testValue1);
+	}
 	
 	@Test
 	void outerTest() {
-		assertEquals(NOT_INJECTED, testValue1);
+		assertEquals("OUTER", testValue1);
 	}
 	
 	@Nested
-	@InjectWith(InjectionExtensionNested2Test.MyInjectorProvider.class)
+	@InjectWith(InjectionExtensionNested3Test.MyNestedInjectorProvider.class)
 	class NestedClass {
 		
 		@Inject 
@@ -77,14 +69,15 @@ public class InjectionExtensionNested2Test {
 
 		@BeforeEach
 		public void setUp () {
-			assertEquals(INJECTED, testValue1);
-			assertEquals(INJECTED, testValue2);
+			assertEquals("OUTER", testValue1);
+			assertEquals("NESTED", testValue2);
 		}
 		
 		@Test
 		void innerTest() {
-			assertEquals(INJECTED, testValue1);
-			assertEquals(INJECTED, testValue2);
+			assertEquals("OUTER", testValue1);
+			assertEquals("NESTED", testValue2);
 		}
 	}
 }
+
