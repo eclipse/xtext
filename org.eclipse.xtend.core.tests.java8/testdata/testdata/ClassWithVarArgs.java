@@ -48,10 +48,12 @@ public class ClassWithVarArgs {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> List<T> toList(T... args) {
 		return Lists.newArrayList(args);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T extends Number> List<T> toNumberList(T... args) {
 		return Lists.newArrayList(args);
 	}
