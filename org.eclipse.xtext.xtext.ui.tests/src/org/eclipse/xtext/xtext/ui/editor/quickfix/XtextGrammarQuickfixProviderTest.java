@@ -79,7 +79,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	@Test
 	public void testFixInvalidMetaModelName() throws Exception {
-		String model = Strings.concat("\n", Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+		String model = Strings.concat(System.lineSeparator(), Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 				"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", "Model: a=ID;"));
 		XtextEditor xtextEditor = openInEditor(model);
 		assertAndApplySingleResolution(xtextEditor, INVALID_METAMODEL_NAME, 1, "Fix metamodel name 'MYDSL'");
@@ -177,7 +177,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	@Test
 	public void fixAddActionForGrammarWithAlias() throws Exception {
-		String model = Strings.concat("\n",
+		String model = Strings.concat(System.lineSeparator(),
 				Arrays.asList("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 						"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\" as my",
 						"Model returns my::Greeting: greetings+=Greeting*;", "Greeting returns my::Greeting: 'Hello' name=ID? '!';"));
@@ -206,7 +206,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 	
 	@Test
 	public void testFixInvalidHiddenTokenInGrammarDefinition() throws Exception {
-		String model = Strings.concat("\n",
+		String model = Strings.concat(System.lineSeparator(),
 				Arrays.asList("grammar org.xtext.example.mydsl.MyDsl hidden(ABC)",
 						"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
 						"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore",
@@ -333,7 +333,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 		list.add("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
 		list.add("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
 		list.addAll(Arrays.asList(bodyContent));
-		return Strings.concat("\n", list);
+		return Strings.concat(System.lineSeparator(), list);
 	}
 
 	private List<Issue> getIssues(IXtextDocument document) {
