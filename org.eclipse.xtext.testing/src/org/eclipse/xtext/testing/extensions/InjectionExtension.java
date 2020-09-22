@@ -57,18 +57,26 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 	 * @since 2.24
 	 */
 	protected static class RegistryReset implements CloseableResource {
-		protected IRegistryConfigurator resetter;
+		protected final IRegistryConfigurator resetter;
+		protected boolean didSetup = false;
 
 		public RegistryReset(IRegistryConfigurator resetter) {
 			this.resetter = resetter;
 			resetter.setupRegistry();
 		}
+		
+		public void setup() {
+			if (!didSetup) {
+				didSetup = true;
+				resetter.setupRegistry();
+			}
+		}
 
 		@Override
 		public void close() throws Throwable {
-			if (resetter != null) {
+			if (didSetup) {
 				resetter.restoreRegistry();
-				resetter = null;
+				didSetup = false;
 			}
 		}
 	}
@@ -94,7 +102,7 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 	protected void setupRegistry(IInjectorProvider injectorProvider, ExtensionContext context) {
 		if (injectorProvider instanceof IRegistryConfigurator) {
 			IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
-			context.getStore(Namespace.create(this)).getOrComputeIfAbsent(registryConfigurator, RegistryReset::new, RegistryReset.class);
+			context.getStore(Namespace.create(this)).getOrComputeIfAbsent(registryConfigurator, RegistryReset::new, RegistryReset.class).setup();
 		}
 	}
 

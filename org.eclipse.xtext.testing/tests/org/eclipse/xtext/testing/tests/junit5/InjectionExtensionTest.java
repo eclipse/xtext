@@ -54,11 +54,19 @@ public class InjectionExtensionTest extends AbstractJUnitIntegrationTest {
 		Assertions.assertNotNull(injector);
 	}
 	
+	/**
+	 * Need to override to add proper {@code @Test}, otherwise no tests are found in Gradle build
+	 */
+	@Test
+	@Override
+	public void shouldSaveRegistriesBeforeCreatingAnInjector() {
+		// tests are performed in MyInjectorProvider
+	}
+	
 	@Test
 	public void didUseRegisteredExtension() {
 		Assertions.assertNotNull(registeredExtension);
 		Assertions.assertTrue(registeredExtension.didCallBeforeEach);
 	}
-	
 	
 }

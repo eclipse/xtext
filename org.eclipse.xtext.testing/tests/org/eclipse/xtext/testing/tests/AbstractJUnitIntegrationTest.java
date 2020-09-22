@@ -17,7 +17,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -59,13 +60,18 @@ public abstract class AbstractJUnitIntegrationTest {
 		@Override
 		public void setupRegistry() {
 			registrySaved = true;
-			assertFalse(injectorCreated);
+			if (!registryRestored) {
+				assertFalse(injectorCreated);
+			} else {
+				registryRestored = false;
+			}
 		}
 
 		@Override
 		public void restoreRegistry() {
 			assertTrue(registrySaved);
 			registryRestored = true;
+			registrySaved = false;
 		}
 	}
 	
@@ -78,19 +84,18 @@ public abstract class AbstractJUnitIntegrationTest {
 	}
 	
 	@Before
-	public void beforeShouldBeExecutedAfterTheRegistriesAreInitialized(){
+	@BeforeEach
+	public final void beforeShouldBeExecutedAfterTheRegistriesAreInitialized(){
 		assertTrue(registrySaved);
 		assertTrue(injectorCreated);
 		assertTrue(fieldsInjected);
 	}
 	
-	@Test
-	public void shouldSaveRegistriesBeforeCreatingAnInjector() {
-		// tests are performed in MyInjectorProvider
-	}
+	public abstract void shouldSaveRegistriesBeforeCreatingAnInjector();
 	
 	@After
-	public void afterShouldBeExecutedBeforeTheRegistriesAreRestored(){
+	@AfterEach
+	public final void afterShouldBeExecutedBeforeTheRegistriesAreRestored(){
 		assertFalse(registryRestored);
 	}
 }
