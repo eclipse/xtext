@@ -2273,27 +2273,27 @@ public class XtextGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEnumLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cEnumLiteralEEnumLiteralCrossReference_0_0 = (CrossReference)cEnumLiteralAssignment_0.eContents().get(0);
-		private final RuleCall cEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1 = (RuleCall)cEnumLiteralEEnumLiteralCrossReference_0_0.eContents().get(1);
+		private final RuleCall cEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1 = (RuleCall)cEnumLiteralEEnumLiteralCrossReference_0_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cLiteralAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cLiteralKeywordParserRuleCall_1_1_0 = (RuleCall)cLiteralAssignment_1_1.eContents().get(0);
 		
 		//EnumLiteralDeclaration:
-		//	enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?;
+		//	enumLiteral=[ecore::EEnumLiteral|ValidID] ('=' literal=Keyword)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?
+		//enumLiteral=[ecore::EEnumLiteral|ValidID] ('=' literal=Keyword)?
 		public Group getGroup() { return cGroup; }
 		
-		//enumLiteral=[ecore::EEnumLiteral]
+		//enumLiteral=[ecore::EEnumLiteral|ValidID]
 		public Assignment getEnumLiteralAssignment_0() { return cEnumLiteralAssignment_0; }
 		
-		//[ecore::EEnumLiteral]
+		//[ecore::EEnumLiteral|ValidID]
 		public CrossReference getEnumLiteralEEnumLiteralCrossReference_0_0() { return cEnumLiteralEEnumLiteralCrossReference_0_0; }
 		
-		//ID
-		public RuleCall getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1() { return cEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1; }
+		//ValidID
+		public RuleCall getEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1() { return cEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1; }
 		
 		//('=' literal=Keyword)?
 		public Group getGroup_1() { return cGroup_1; }
@@ -3049,7 +3049,7 @@ public class XtextGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//EnumLiteralDeclaration:
-	//	enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?;
+	//	enumLiteral=[ecore::EEnumLiteral|ValidID] ('=' literal=Keyword)?;
 	public EnumLiteralDeclarationElements getEnumLiteralDeclarationAccess() {
 		return pEnumLiteralDeclaration;
 	}

@@ -343,7 +343,7 @@ public class Xtext2EcoreTransformer {
 						if (nodes.size() > 1)
 							throw new IllegalStateException("Unexpected nodes found: " + nodes);
 						INode node = nodes.get(0);
-						String text = node.getText();
+						String text = node.getText().trim().replace("^", "");
 						EEnumLiteral literal = null;
 						if (rule.getType().getMetamodel() instanceof ReferencedMetamodel) {
 							literal = returnType.getEEnumLiteral(text);

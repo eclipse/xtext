@@ -25048,7 +25048,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             // InternalXtext.g:8036:1: ( rule__EnumRule__Group__4__Impl rule__EnumRule__Group__5 )
             // InternalXtext.g:8037:2: rule__EnumRule__Group__4__Impl rule__EnumRule__Group__5
             {
-            pushFollow(FollowSets000.FOLLOW_15);
+            pushFollow(FollowSets000.FOLLOW_3);
             rule__EnumRule__Group__4__Impl();
 
             state._fsp--;
@@ -25801,7 +25801,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             // InternalXtext.g:8286:1: ( rule__EnumLiterals__Group_1_1__0__Impl rule__EnumLiterals__Group_1_1__1 )
             // InternalXtext.g:8287:2: rule__EnumLiterals__Group_1_1__0__Impl rule__EnumLiterals__Group_1_1__1
             {
-            pushFollow(FollowSets000.FOLLOW_15);
+            pushFollow(FollowSets000.FOLLOW_3);
             rule__EnumLiterals__Group_1_1__0__Impl();
 
             state._fsp--;
@@ -30009,25 +30009,29 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumLiteralDeclaration__EnumLiteralAssignment_0"
-    // InternalXtext.g:9869:1: rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 : ( ( RULE_ID ) ) ;
+    // InternalXtext.g:9869:1: rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 : ( ( ruleValidID ) ) ;
     public final void rule__EnumLiteralDeclaration__EnumLiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalXtext.g:9873:1: ( ( ( RULE_ID ) ) )
-            // InternalXtext.g:9874:2: ( ( RULE_ID ) )
+            // InternalXtext.g:9873:1: ( ( ( ruleValidID ) ) )
+            // InternalXtext.g:9874:2: ( ( ruleValidID ) )
             {
-            // InternalXtext.g:9874:2: ( ( RULE_ID ) )
-            // InternalXtext.g:9875:3: ( RULE_ID )
+            // InternalXtext.g:9874:2: ( ( ruleValidID ) )
+            // InternalXtext.g:9875:3: ( ruleValidID )
             {
              before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0()); 
-            // InternalXtext.g:9876:3: ( RULE_ID )
-            // InternalXtext.g:9877:4: RULE_ID
+            // InternalXtext.g:9876:3: ( ruleValidID )
+            // InternalXtext.g:9877:4: ruleValidID
             {
-             before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
-             after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); 
+             before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1()); 
+            pushFollow(FollowSets000.FOLLOW_2);
+            ruleValidID();
+
+            state._fsp--;
+
+             after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1()); 
 
             }
 
