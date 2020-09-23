@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,27 +31,38 @@ public abstract class AbstractWorkbenchTest extends Assert {
 
 	@Before
 	public void setUp() throws Exception {
+		waitForEventProcessing();
 		closeWelcomePage();
 		closeEditors();
 		cleanWorkspace();
 		waitForBuild();
+		waitForEventProcessing();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
+		waitForEventProcessing();
 		closeEditors();
 		cleanWorkspace();
 		waitForBuild();
+		waitForEventProcessing();
 	}
-	
+
+	/**
+	 * @since 2.24
+	 */
+	protected void waitForEventProcessing() {
+		while (Display.getDefault().readAndDispatch()) {
+		}
+	}
+
 	protected void closeEditors() {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 	}
 
 	protected void closeWelcomePage() throws InterruptedException {
 		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
-			PlatformUI.getWorkbench().getIntroManager().closeIntro(
-					PlatformUI.getWorkbench().getIntroManager().getIntro());
+			PlatformUI.getWorkbench().getIntroManager().closeIntro(PlatformUI.getWorkbench().getIntroManager().getIntro());
 		}
 	}
 

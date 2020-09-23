@@ -44,12 +44,15 @@ public abstract class AbstractWorkbenchTest extends Assert {
 	
 	@Before @BeforeEach
 	public void setUp() throws Exception {
+		waitForEventProcessing();
 		cleanWorkspace();
 		waitForBuild();
+		waitForEventProcessing();
 	}
 	
 	@After @AfterEach
 	public void tearDown() throws Exception {
+		waitForEventProcessing();
 		closeEditors();
 		cleanWorkspace();
 		waitForBuild();
