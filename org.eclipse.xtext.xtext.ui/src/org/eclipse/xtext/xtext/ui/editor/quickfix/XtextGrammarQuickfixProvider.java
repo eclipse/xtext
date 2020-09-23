@@ -64,6 +64,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -137,6 +138,9 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject
 	private XtextGrammarAccess grammarAccess;
+	
+	@Inject
+	private IIndentationInformation indentationInformation;
 	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -718,7 +722,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 			if (ruleType != null) {
 				builder.append(ruleType);
 			}
-			String newRule = builder.append(ruleName).append(":" + nl + "\t" + nl + ";").toString();
+			String newRule = builder.append(ruleName).append(":" + nl + indentationInformation.getIndentString() + nl + ";").toString();
 			context.getXtextDocument().replace(node.getEndOffset(), 0, newRule);
 		};
 	}
