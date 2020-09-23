@@ -123,6 +123,13 @@
 		<unit id="com.google.inject" version="0.0.0"/>
 		<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
+		<unit id="org.apiguardian" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="8.0.1.v20200420-1007"/>
 		<unit id="org.objectweb.asm.tree" version="8.0.1.v20200420-1007"/>
 		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
