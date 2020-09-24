@@ -175,7 +175,6 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				createNewRule(ruleName, ruleType));
 	}
 
-	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_TERMINAL_RULE)
 	public void fixUnresolvedTerminalFragmentRule(final Issue issue, IssueResolutionAcceptor acceptor) {
 		String ruleName = issue.getData()[0];
