@@ -72,7 +72,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 			"generate foo \"http://foo.net/foo\"", 
 			"Foo: // comment in Foo ",
 			"// comment before Assignment",
-			"  bars+=/* comment in assignment */Bar // comment after assignment",
+			"  bars+= /* comment in assignment */ Bar // comment after assignment",
 			"// comment before keywod",
 			"'foo';", 
 			"Bar: 'bar';");
