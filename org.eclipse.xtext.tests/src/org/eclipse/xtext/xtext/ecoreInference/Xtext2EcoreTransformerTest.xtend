@@ -43,6 +43,9 @@ import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
+import org.eclipse.xtext.EnumRule
+import org.eclipse.xtext.EnumLiteralDeclaration
+import org.eclipse.xtext.Alternatives
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -1562,6 +1565,26 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			createdType.feature("otherEnumFeature").
 				EType)
 	}
+	
+	@Test def void testEclipseIssue1547() throws Exception {
+		var String grammarAsString = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate myDsl 'uri'
+			Model: element=Element;
+			enum Element : ^false='false' | true='true';
+		'''
+		var XtextResource resource = getResourceFromString(grammarAsString)
+		var Grammar g = (resource.getContents().get(0) as Grammar)
+		var EnumRule enumRule = (g.getRules().get(1) as EnumRule)
+		var EnumLiteralDeclaration eld1 = (((enumRule.getAlternatives() as Alternatives)).getElements().
+			get(0) as EnumLiteralDeclaration)
+		var EnumLiteralDeclaration eld2 = (((enumRule.getAlternatives() as Alternatives)).getElements().
+			get(1) as EnumLiteralDeclaration)
+		assertEquals("false", eld1.getEnumLiteral().getName())
+		assertEquals("true", eld2.getEnumLiteral().getName())
+	}
+	
+	
 
 	@Test def void testBug310122() throws Exception {
 		val grammarAsString = '''

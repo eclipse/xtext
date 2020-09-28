@@ -378,10 +378,10 @@ public class Ecore2XtextGrammarCreator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         final Function1<EEnumLiteral, String> _function = (EEnumLiteral it_1) -> {
+          String _quoteIfNeccesary_1 = Ecore2XtextExtensions.quoteIfNeccesary(it_1.getName());
+          String _plus = (_quoteIfNeccesary_1 + " = \'");
           String _name = it_1.getName();
-          String _plus = (_name + " = \'");
-          String _name_1 = it_1.getName();
-          String _plus_1 = (_plus + _name_1);
+          String _plus_1 = (_plus + _name);
           return (_plus_1 + "\'");
         };
         String _join = IterableExtensions.join(ListExtensions.<EEnumLiteral, String>map(((EEnum)it).getELiterals(), _function), " | ");

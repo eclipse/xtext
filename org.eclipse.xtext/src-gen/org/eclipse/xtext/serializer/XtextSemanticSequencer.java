@@ -764,7 +764,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     EnumLiteralDeclaration returns EnumLiteralDeclaration
 	 *
 	 * Constraint:
-	 *     (enumLiteral=[EEnumLiteral|ID] literal=Keyword?)
+	 *     (enumLiteral=[EEnumLiteral|ValidID] literal=Keyword?)
 	 */
 	protected void sequence_EnumLiteralDeclaration(ISerializationContext context, EnumLiteralDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

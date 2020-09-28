@@ -3719,9 +3719,12 @@ ruleEnumLiteralDeclaration returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getEnumLiteralDeclarationRule());
 					}
 				}
-				otherlv_0=RULE_ID
 				{
-					newLeafNode(otherlv_0, grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0());
+					newCompositeNode(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0());
+				}
+				ruleValidID
+				{
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)

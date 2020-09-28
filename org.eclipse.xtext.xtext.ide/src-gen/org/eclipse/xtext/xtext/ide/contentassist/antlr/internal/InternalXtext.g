@@ -9874,9 +9874,9 @@ rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
 	(
 		{ before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0()); }
 		(
-			{ before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); }
-			RULE_ID
-			{ after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); }
+			{ before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1()); }
+			ruleValidID
+			{ after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralValidIDParserRuleCall_0_0_1()); }
 		)
 		{ after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0()); }
 	)

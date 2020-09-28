@@ -25,8 +25,12 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -2089,6 +2093,33 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClass createdType = ((EClass) _type);
     Assert.assertEquals(this.<EStructuralFeature>feature(createdType, "enumFeature").getEType(), 
       this.<EStructuralFeature>feature(createdType, "otherEnumFeature").getEType());
+  }
+  
+  @Test
+  public void testEclipseIssue1547() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar test with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate myDsl \'uri\'");
+    _builder.newLine();
+    _builder.append("Model: element=Element;");
+    _builder.newLine();
+    _builder.append("enum Element : ^false=\'false\' | true=\'true\';");
+    _builder.newLine();
+    String grammarAsString = _builder.toString();
+    XtextResource resource = this.getResourceFromString(grammarAsString);
+    EObject _get = resource.getContents().get(0);
+    Grammar g = ((Grammar) _get);
+    AbstractRule _get_1 = g.getRules().get(1);
+    EnumRule enumRule = ((EnumRule) _get_1);
+    AbstractElement _alternatives = enumRule.getAlternatives();
+    AbstractElement _get_2 = ((Alternatives) _alternatives).getElements().get(0);
+    EnumLiteralDeclaration eld1 = ((EnumLiteralDeclaration) _get_2);
+    AbstractElement _alternatives_1 = enumRule.getAlternatives();
+    AbstractElement _get_3 = ((Alternatives) _alternatives_1).getElements().get(1);
+    EnumLiteralDeclaration eld2 = ((EnumLiteralDeclaration) _get_3);
+    Assert.assertEquals("false", eld1.getEnumLiteral().getName());
+    Assert.assertEquals("true", eld2.getEnumLiteral().getName());
   }
   
   @Test

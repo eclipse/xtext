@@ -269,5 +269,5 @@ EnumLiterals returns AbstractElement:
 ;
 
 EnumLiteralDeclaration:
-	enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?
+	enumLiteral=[ecore::EEnumLiteral|ValidID] ('=' literal=Keyword)?
 ;

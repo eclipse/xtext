@@ -130,7 +130,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 				'''
 			EEnum:
 				'''enum «name.quoteIfNeccesary» returns «fqn»:
-				«it.ELiterals.map([name+" = '"+name+"'"]).join(' | ')»;'''
+				«it.ELiterals.map([name.quoteIfNeccesary+" = '"+name+"'"]).join(' | ')»;'''
 			EDataType:
 				if (it.serializable) {
 				'''
