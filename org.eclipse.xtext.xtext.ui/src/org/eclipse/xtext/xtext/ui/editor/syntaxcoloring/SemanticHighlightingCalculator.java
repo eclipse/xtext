@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -31,6 +31,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -88,9 +89,13 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 					}
 				}
 			} else if(current instanceof Assignment) {
-				if(SPECIAL_ATTRIBUTES.contains(((Assignment) current).getFeature())) {
+				String feature = ((Assignment) current).getFeature();
+				if(SPECIAL_ATTRIBUTES.contains(feature)) {
 					INode featureNode = getFirstFeatureNode(current, XtextPackage.Literals.ASSIGNMENT__FEATURE);
 					highlightNode(acceptor, featureNode, SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
+				} else if ("true".equals(feature) || "false".equals(feature)) {
+					INode featureNode = getFirstFeatureNode(current, XtextPackage.Literals.ASSIGNMENT__FEATURE);
+					highlightNode(acceptor, featureNode, DefaultHighlightingConfiguration.DEFAULT_ID);
 				}
 			}
 		}
@@ -104,4 +109,5 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 			return nodes.get(0);
 		return null;
 	}
+	
 }

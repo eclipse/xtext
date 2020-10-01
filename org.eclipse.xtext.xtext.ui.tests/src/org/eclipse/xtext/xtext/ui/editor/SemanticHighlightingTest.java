@@ -17,6 +17,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xtext.ui.XtextUiInjectorProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -84,6 +85,26 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		expect(testGrammar.lastIndexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
 		expect(testGrammar.indexOf("Identifier:"), "Identifier".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 		expect(testGrammar.indexOf("Unused:"), "Unused".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
+		highlight(testGrammar);
+	}
+	
+	@Test 
+	public void testKeywordFeatureHighlighting() {
+		String testGrammar = "grammar org.xtext.example.mydsl1.MyDsl with org.eclipse.xtext.common.Terminals\n" + 
+				"\n" + 
+				"generate myDsl \"http://www.xtext.org/example/mydsl1/MyDsl\"\n" + 
+				"\n" + 
+				"Model:\n" + 
+				"	greetings+=Greeting*;\n" + 
+				"	\n" + 
+				"Greeting:\n" + 
+				"	'Hello' name=ID true=\"true\" false=\"false\";";
+		expect(testGrammar.indexOf("Model"), "Model".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
+		expect(testGrammar.indexOf("Greeting:"), "Greeting".length(), SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
+		expect(testGrammar.indexOf("name"), "name".length(), SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
+		
+		expect(testGrammar.indexOf("true"), "true".length(), DefaultHighlightingConfiguration.DEFAULT_ID);
+		expect(testGrammar.indexOf("false"), "false".length(), DefaultHighlightingConfiguration.DEFAULT_ID);
 		highlight(testGrammar);
 	}
 	
