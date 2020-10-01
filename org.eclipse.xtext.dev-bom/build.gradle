@@ -68,9 +68,9 @@ dependencies {
         api "org.junit.jupiter:junit-jupiter-engine:5.6.0"
         api "org.junit.platform:junit-platform-suite-api:1.6.0"
         api "org.junit.platform:junit-platform-runner:1.6.0"
-        api "org.ow2.asm:asm-commons:8.0.1"
-        api "org.ow2.asm:asm-tree:8.0.1"
-        api "org.ow2.asm:asm:8.0.1"
+        api "org.ow2.asm:asm-commons:9.0"
+        api "org.ow2.asm:asm-tree:9.0"
+        api "org.ow2.asm:asm:9.0"
     }
 }
 
