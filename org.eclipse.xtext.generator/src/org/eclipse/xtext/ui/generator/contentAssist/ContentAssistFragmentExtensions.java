@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
- * Created for {@linkplain https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434}
+ * Created for <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434">https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434</a>
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  * @since 2.8
