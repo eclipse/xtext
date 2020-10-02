@@ -70,7 +70,7 @@ pipeline {
 
   post {
     always {
-      junit testResults: '**/build/test-results/test/*.xml'
+      junit testResults: '**/build/test-results/test/*.xml, **/build/test-results/longrunningTest/*.xml'
     }
     success {
       archiveArtifacts artifacts: 'build/**'
