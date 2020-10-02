@@ -53,7 +53,6 @@ import org.eclipse.xtend.ide.editor.copyqualifiedname.XtendCopyQualifiedNameServ
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtend.ide.formatting.preferences.FormatterResourceProvider;
 import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
-import org.eclipse.xtend.ide.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.ide.highlighting.XtendSyntaxColoringPreferencePage;
@@ -149,6 +148,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
