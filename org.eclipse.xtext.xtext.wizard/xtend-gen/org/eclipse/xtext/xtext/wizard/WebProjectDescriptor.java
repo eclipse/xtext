@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class WebProjectDescriptor extends ProjectDescriptor {
   private static final String REQUIREJS_VERSION = "2.3.6";
   
-  private static final String JQUERY_VERSION = "3.4.1";
+  private static final String JQUERY_VERSION = "3.5.1";
   
   private static final String JETTY_VERSION = "9.4.22.v20191022";
   
