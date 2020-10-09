@@ -29,7 +29,7 @@ def orionZip = file("$buildDir/orion/built-codeEdit.zip")
  * Since version 18 the ContentAssist ist broken. We issued bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=543541
  * If this bug is resolved we could update orion.
  */
-def orionUrl = 'http://www.eclipse.org/downloads/download.php?file=/orion/drops/R-17.0-201801111044/built-codeEdit.zip&r=1'
+def orionUrl = 'https://www.eclipse.org/downloads/download.php?file=/orion/drops/R-17.0-201801111044/built-codeEdit.zip&r=1'
 
 task downloadOrion {
 	onlyIf {!orionZip.exists()}
