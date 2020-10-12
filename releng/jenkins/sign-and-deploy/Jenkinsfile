@@ -124,11 +124,11 @@ spec:
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
           container ('jnlp') {
             sh '''
-              // Remove old milestones from update site
-              // Intentionally leave composite*.xml files, as they will be updated at the end.
-              // Intentionally leave p2.index file so that we don't have to recreate it.
+              # Remove old milestones from update site
+              # Intentionally leave composite*.xml files, as they will be updated at the end.
+              # Intentionally leave p2.index file so that we don't have to recreate it.
               ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/S*"
-              // Remove old milestones from drop location
+              # Remove old milestones from drop location
               ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops/*/S*"
             '''
           }
