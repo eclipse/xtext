@@ -234,7 +234,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 		}
 		StyledText hint = new StyledText(popup, SWT.READ_ONLY | SWT.SINGLE);
 		String enterKeyName = getEnterBinding();
-		String hintTemplate = "Enter new name, press {0} to refactor";
+		String hintTemplate = RefactoringUIMessages.RefactoringHintTemplate_0;
 		hint.setText(Messages.format(hintTemplate, enterKeyName));
 		hint.setForeground(foreground);
 		hint.setStyleRange(new StyleRange(hintTemplate.indexOf("{0}"), enterKeyName.length(), null, null, SWT.BOLD)); //$NON-NLS-1$
