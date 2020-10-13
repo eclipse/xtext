@@ -19,6 +19,7 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +40,11 @@ public class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspat
   public void setUpProject() throws Exception {
     this.workbenchHelper.closeAllEditors(false);
     super.setUpProject();
+  }
+  
+  @After
+  public void tearDown() {
+    this.workbenchHelper.closeAllEditors(false);
   }
   
   @Test

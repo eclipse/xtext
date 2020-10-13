@@ -2,6 +2,7 @@ package org.eclipse.xtend.ide.tests.macros
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.nio.charset.StandardCharsets
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
@@ -13,15 +14,17 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtend.ide.tests.StopwatchRule
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
@@ -36,8 +39,6 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import java.nio.charset.StandardCharsets
-import org.eclipse.xtext.util.JavaVersion
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -47,6 +48,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	extension IEObjectHoverDocumentationProvider documentationProvider
 	
 	@Inject IResourceValidator validator
+	
+	@Inject WorkbenchTestHelper workbenchTestHelper
 
 	@Test
 	def void testDocumentationProvider() {
@@ -134,6 +137,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 
 	@After
 	def void tearDown() throws Exception {
+		workbenchTestHelper.closeAllEditors(false)
 		clientFile.delete(true, null)
 		macroFile.delete(true, null)
 		if ("myannotation" != exportedPackage)

@@ -16,6 +16,7 @@ import org.eclipse.xtend.ide.tests.buildpath.AbstractJunitLibClasspathAdderTestC
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,6 +34,11 @@ class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspathAdderT
     override void setUpProject() throws Exception {
         closeAllEditors(false)
         super.setUpProject
+    }
+
+    @After
+    def void tearDown() {
+        closeAllEditors(false)
     }
 
     @Test

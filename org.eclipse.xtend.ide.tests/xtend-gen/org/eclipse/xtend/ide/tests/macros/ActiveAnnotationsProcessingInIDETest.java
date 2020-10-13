@@ -60,6 +60,9 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Inject
   private IResourceValidator validator;
   
+  @Inject
+  private WorkbenchTestHelper workbenchTestHelper;
+  
   @Test
   public void testDocumentationProvider() {
     StringConcatenation _builder = new StringConcatenation();
@@ -211,6 +214,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   
   @After
   public void tearDown() throws Exception {
+    this.workbenchTestHelper.closeAllEditors(false);
     this.clientFile.delete(true, null);
     this.macroFile.delete(true, null);
     boolean _notEquals = (!Objects.equal("myannotation", this.exportedPackage));
