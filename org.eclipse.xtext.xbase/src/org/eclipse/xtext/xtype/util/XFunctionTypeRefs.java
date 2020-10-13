@@ -8,6 +8,9 @@
  */
 package org.eclipse.xtext.xtype.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -19,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
@@ -26,6 +30,26 @@ import org.eclipse.xtext.xbase.lib.Procedures;
  * @author Anton Kosyakov - Initial contribution and API
  */
 public class XFunctionTypeRefs {
+
+	private static final ClassURIHelper classURIHelper = new ClassURIHelper();
+
+	private static final List<String> procedureURIs = new ArrayList<>();
+
+	private static final List<String> functionURIs = new ArrayList<>();
+
+	private static final String procedureURI = URIHelperConstants.PROTOCOL + ":" + URIHelperConstants.OBJECTS
+			+ Procedures.class.getCanonicalName() + "#" + Procedures.class.getCanonicalName() + "$Procedure";
+
+	private static final String functionURI = URIHelperConstants.PROTOCOL + ":" + URIHelperConstants.OBJECTS
+			+ Functions.class.getCanonicalName() + "#" + Functions.class.getCanonicalName() + "$Function";
+
+	static {
+		for (int index = 0; index <= 6; index++) {
+			procedureURIs.add(procedureURI + index);
+			functionURIs.add(functionURI + index);
+		}
+	}
+
 	public static URI computeTypeUri(boolean procedure, int functionParamCount) {
 		return URI.createURI(buildUri(procedure, functionParamCount));
 	}
@@ -33,15 +57,13 @@ public class XFunctionTypeRefs {
 	public static String buildUri(boolean procedure, int functionParamCount) {
 		int paramCount = Math.min(6, functionParamCount);
 		if (procedure) {
-			return "java:/Objects/" + Procedures.class.getCanonicalName() + "#" + Procedures.class.getCanonicalName()
-					+ "$Procedure" + Integer.valueOf(paramCount);
+			return procedureURIs.get(paramCount);
 		}
-		return "java:/Objects/" + Functions.class.getCanonicalName() + "#" + Functions.class.getCanonicalName()
-				+ "$Function" + Integer.valueOf(paramCount);
+		return functionURIs.get(paramCount);
 	}
 
 	public static URI computeTypeUri(Class<?> topLevelClass) {
-		return new ClassURIHelper().getFullURI(topLevelClass);
+		return classURIHelper.getFullURI(topLevelClass);
 	}
 
 	public static JvmTypeReference wrapIfNecessary(JvmTypeReference reference, JvmType type) {
