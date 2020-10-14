@@ -19,7 +19,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +38,7 @@ public class ValidationTest {
   private ValidationTestHelper _validationTestHelper = new ValidationTestHelper(ValidationTestHelper.Mode.EXACT);
   
   @Test
-  public void testDeviceWithNoStates() {
+  public void testDeviceWithNoStates() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be");
     _builder.newLine();
@@ -48,7 +47,7 @@ public class ValidationTest {
   }
   
   @Test
-  public void testStatesWithSameName() {
+  public void testStatesWithSameName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, open");
     _builder.newLine();
@@ -57,7 +56,7 @@ public class ValidationTest {
   }
   
   @Test
-  public void testTwoDevicesWithSameName() {
+  public void testTwoDevicesWithSameName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open");
     _builder.newLine();
@@ -68,7 +67,7 @@ public class ValidationTest {
   }
   
   @Test
-  public void testTwoRulesWithSameDescription() {
+  public void testTwoRulesWithSameDescription() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -89,7 +88,7 @@ public class ValidationTest {
   }
   
   @Test
-  public void testRuleWithEmptyDescription() {
+  public void testRuleWithEmptyDescription() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -103,7 +102,7 @@ public class ValidationTest {
   }
   
   @Test
-  public void testRecursiveRule() {
+  public void testRecursiveRule() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open");
     _builder.newLine();
@@ -117,19 +116,11 @@ public class ValidationTest {
       "Firing the same device state that triggers the rule \"Recursive rule\" may lead to endless recursion.");
   }
   
-  private void assertWarning(final CharSequence text, final EClass objectType, final String message) {
-    try {
-      this._validationTestHelper.assertWarning(this._parseHelper.parse(text), objectType, null, message);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void assertWarning(final CharSequence text, final EClass objectType, final String message) throws Exception {
+    this._validationTestHelper.assertWarning(this._parseHelper.parse(text), objectType, null, message);
   }
   
-  private void assertError(final CharSequence text, final EClass objectType, final String message) {
-    try {
-      this._validationTestHelper.assertError(this._parseHelper.parse(text), objectType, null, message);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void assertError(final CharSequence text, final EClass objectType, final String message) throws Exception {
+    this._validationTestHelper.assertError(this._parseHelper.parse(text), objectType, null, message);
   }
 }

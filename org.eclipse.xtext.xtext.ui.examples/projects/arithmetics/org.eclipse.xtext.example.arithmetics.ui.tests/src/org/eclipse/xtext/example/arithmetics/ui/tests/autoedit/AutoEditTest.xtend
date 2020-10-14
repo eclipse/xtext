@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
 @InjectWith(ArithmeticsUiInjectorProvider)
 class AutoEditTest extends AbstractAutoEditTest {
 
-	@Test def void testCalculatorAutoEdit() {
+	@Test def void testCalculatorAutoEdit() throws Exception {
 		openEditor('''
 			module MyModule
 			

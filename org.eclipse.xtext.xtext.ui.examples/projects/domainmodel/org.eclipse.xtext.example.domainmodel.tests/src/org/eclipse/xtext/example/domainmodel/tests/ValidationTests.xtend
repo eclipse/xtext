@@ -37,14 +37,14 @@ class ValidationTests {
 
 	@Inject extension ValidationTestHelper
 
-	@Test def testImportUnused() {
+	@Test def testImportUnused() throws Exception {
 		'''
 			import java.util.List
 			entity X {}
 		'''.parse.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED)
 	}
 
-	@Test def testImportUnused_1() {
+	@Test def testImportUnused_1() throws Exception {
 		'''
 			import java.util.List
 			entity X {
@@ -53,7 +53,7 @@ class ValidationTests {
 		'''.parse.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED)
 	}
 
-	@Test def testImportUnused_2() {
+	@Test def testImportUnused_2() throws Exception {
 		'''
 			import java.util.List
 			entity X {
@@ -65,7 +65,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportUnused_3() {
+	@Test def testImportUnused_3() throws Exception {
 		'''
 			import java.util.Map$Entry
 			entity X {
@@ -77,7 +77,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportUnused_4() {
+	@Test def testImportUnused_4() throws Exception {
 		'''
 			import java.util.Map
 			entity X { 
@@ -89,7 +89,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportUnused_5() {
+	@Test def testImportUnused_5() throws Exception {
 		'''
 			import java.util.Map$Entry
 			entity X {
@@ -101,7 +101,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportUnused_6() {
+	@Test def testImportUnused_6() throws Exception {
 		'''
 			import java.awt.Label
 			/** {@link Label} */ 
@@ -109,7 +109,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportUnused_7() {
+	@Test def testImportUnused_7() throws Exception {
 		'''
 			import java.awt.Label
 			/** @see Label */
@@ -117,7 +117,7 @@ class ValidationTests {
 		'''.parse.assertNoIssues
 	}
 
-	@Test def testImportDuplicate() {
+	@Test def testImportDuplicate() throws Exception {
 		'''
 			import java.util.List
 			import java.util.List
@@ -130,7 +130,7 @@ class ValidationTests {
 		'''.parse.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED)
 	}
 
-	@Test def testImportCollision() {
+	@Test def testImportCollision() throws Exception {
 		'''
 			import java.util.List
 			import java.awt.List
@@ -143,7 +143,7 @@ class ValidationTests {
 		'''.parse.assertError(XIMPORT_DECLARATION, IMPORT_COLLISION)
 	}
 
-	@Test def testImportWildcard() {
+	@Test def testImportWildcard() throws Exception {
 		'''
 			import java.util.*
 			import java.util.List
@@ -156,7 +156,7 @@ class ValidationTests {
 		'''.parse.assertWarning(XIMPORT_DECLARATION, IMPORT_WILDCARD_DEPRECATED)
 	}
 
-	@Test def testImportConflictWithTypeInSameFile() {
+	@Test def testImportConflictWithTypeInSameFile() throws Exception {
 		'''
 			import java.util.List 
 			entity List {
@@ -165,7 +165,7 @@ class ValidationTests {
 		'''.parse.assertError(XIMPORT_DECLARATION, IMPORT_CONFLICT)
 	}
 
-	@Test def testImportNoConflictWithTypeInSameFile() {
+	@Test def testImportNoConflictWithTypeInSameFile() throws Exception {
 		'''
 			import java.util.List
 			entity List2 {
@@ -173,7 +173,7 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def void testDuplicatedProperty() {
+	@Test def void testDuplicatedProperty() throws Exception {
 		val model = '''
 			entity E {
 				p : String
@@ -187,7 +187,7 @@ class ValidationTests {
 		]
 	}
 
-	@Test def void testDuplicatedOperation() {
+	@Test def void testDuplicatedOperation() throws Exception {
 		val model = '''
 			entity E {
 				op foo() {}
@@ -201,7 +201,7 @@ class ValidationTests {
 		]
 	}
 
-	@Test def void testDuplicatedOperationWithDifferentSignatureIsAllowed() {
+	@Test def void testDuplicatedOperationWithDifferentSignatureIsAllowed() throws Exception {
 		'''
 			entity E {
 				op m(int i) {}
@@ -210,7 +210,7 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def void testFeatureAndOperationWithSameNameIsAllowed() {
+	@Test def void testFeatureAndOperationWithSameNameIsAllowed() throws Exception {
 		'''
 			entity E {
 				m : String
@@ -219,7 +219,7 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def void testExplicitGetterReplacesTheGeneratedOne() {
+	@Test def void testExplicitGetterReplacesTheGeneratedOne() throws Exception {
 		'''
 			entity E {
 				name : String
@@ -230,7 +230,7 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def void testExplicitSetterReplacesTheGeneratedOne() {
+	@Test def void testExplicitSetterReplacesTheGeneratedOne() throws Exception {
 		'''
 			entity E {
 				name : String
@@ -242,7 +242,7 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() {
+	@Test def void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() throws Exception {
 		val model = '''
 			entity E {
 				op m(java.util.List<String> l1) {}

@@ -15,7 +15,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractHighlightingTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.Before;
@@ -34,12 +33,8 @@ public class HighlightingTest extends AbstractHighlightingTest {
   private XbaseHighlightingConfiguration _xbaseHighlightingConfiguration;
   
   @Before
-  public void setup() {
-    try {
-      JavaProjectSetupUtil.createJavaProject(this.getProjectName());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void setup() throws Exception {
+    JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
   
   @Test

@@ -28,7 +28,7 @@ class RuleEngineHighlightingTest extends AbstractHighlightingTest {
 
 	@Inject extension XbaseHighlightingConfiguration
 
-	@Before def void setup() {
+	@Before def void setup() throws Exception {
 		/*
 		 * Xbase-based languages require java project
 		 */

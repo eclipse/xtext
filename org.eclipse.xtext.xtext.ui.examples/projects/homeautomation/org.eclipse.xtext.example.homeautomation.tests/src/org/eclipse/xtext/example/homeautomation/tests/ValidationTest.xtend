@@ -32,21 +32,21 @@ class ValidationTest {
 
 	extension ValidationTestHelper = new ValidationTestHelper(ValidationTestHelper.Mode.EXACT)
 
-	@Test def testDeviceWithNoStates() {
+	@Test def testDeviceWithNoStates() throws Exception {
 		'''
 		Device Window can be
 		
 		'''.assertError(DEVICE, 'The device "Window" must have at least one state.')
 	}
 
-	@Test def testStatesWithSameName() {
+	@Test def testStatesWithSameName() throws Exception {
 		'''
 		Device Window can be open, open
 		
 		'''.assertError(STATE, 'State names must be unique.')
 	}
 
-	@Test def testTwoDevicesWithSameName() {
+	@Test def testTwoDevicesWithSameName() throws Exception {
 		'''
 		Device Window can be open
 		Device Window can be open, closed
@@ -54,7 +54,7 @@ class ValidationTest {
 		'''.assertError(DEVICE, "Device names must be unique.")
 	}
 
-	@Test def testTwoRulesWithSameDescription() {
+	@Test def testTwoRulesWithSameDescription() throws Exception {
 		'''
 		Device Window can be open, closed
 		
@@ -66,7 +66,7 @@ class ValidationTest {
 		'''.assertError(RULE, "Rule descriptions must be unique.")
 	}
 
-	@Test def testRuleWithEmptyDescription() {
+	@Test def testRuleWithEmptyDescription() throws Exception {
 		'''
 		Device Window can be open, closed
 		
@@ -75,7 +75,7 @@ class ValidationTest {
 		'''.assertError(RULE, "A rule description must not be empty.")
 	}
 
-	@Test def testRecursiveRule() {
+	@Test def testRecursiveRule() throws Exception {
 		'''
 		Device Window can be open
 		
@@ -85,11 +85,11 @@ class ValidationTest {
 			'Firing the same device state that triggers the rule "Recursive rule" may lead to endless recursion.')
 	}
 
-	private def assertWarning(CharSequence text, EClass objectType, String message) {
+	private def assertWarning(CharSequence text, EClass objectType, String message) throws Exception {
 		text.parse.assertWarning(objectType, null, message)
 	}
 
-	private def assertError(CharSequence text, EClass objectType, String message) {
+	private def assertError(CharSequence text, EClass objectType, String message) throws Exception {
 		text.parse.assertError(objectType, null, message)
 	}
 }

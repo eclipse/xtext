@@ -17,7 +17,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +38,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
   }.apply();
   
   @Test
-  public void empty() {
+  public void empty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this.c);
     _builder.newLineIfNotEmpty();
@@ -51,7 +50,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void rule_device_state() {
+  public void rule_device_state() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -74,7 +73,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void rule_device_state_with_prefix() {
+  public void rule_device_state_with_prefix() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -97,7 +96,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void rule_then_part() {
+  public void rule_then_part() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -125,7 +124,7 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void rule_then_part_with_prefix() {
+  public void rule_then_part_with_prefix() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");
     _builder.newLine();
@@ -154,13 +153,9 @@ public class RuleEngineContentAssistTest extends AbstractContentAssistTest {
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("on", "off")), "off", _builder_1.toString());
   }
   
-  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) {
-    try {
-      final int cursorPosition = text.toString().indexOf(this.c);
-      final String content = text.toString().replace(this.c, "");
-      this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
+    final int cursorPosition = text.toString().indexOf(this.c);
+    final String content = text.toString().replace(this.c, "");
+    this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
   }
 }

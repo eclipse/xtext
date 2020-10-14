@@ -29,7 +29,7 @@ class CompilerTest {
 	@Inject extension CompilationTestHelper
 	@Inject extension ReflectExtensions
 
-	@Test def void testGeneratedJava() {
+	@Test def void testGeneratedJava() throws Exception {
 		'''
 			entity Foo {
 				name : String
@@ -44,7 +44,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void testGeneratedJavaFromSeveralInputs() {
+	@Test def void testGeneratedJavaFromSeveralInputs() throws Exception {
 		#[
 		'''
 			entity Foo {
@@ -68,7 +68,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void compareGeneratedJava() {
+	@Test def void compareGeneratedJava() throws Exception {
 		'''
 			entity Foo {
 				name : String
@@ -106,7 +106,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void testGeneratedJavaWithOverloadedMethods() {
+	@Test def void testGeneratedJavaWithOverloadedMethods() throws Exception {
 		'''
 			entity Foo {
 				op doStuff(String x) : String {
@@ -123,7 +123,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void testExplicitGetterReplacesGeneratedOne() {
+	@Test def void testExplicitGetterReplacesGeneratedOne() throws Exception {
 		'''
 			entity Foo {
 				name : String
@@ -175,7 +175,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void testExplicitSetterReplacesGeneratedOne() {
+	@Test def void testExplicitSetterReplacesGeneratedOne() throws Exception {
 		'''
 			entity Foo {
 				name : String
@@ -229,7 +229,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test def void testExplicitGetterSetterReplaceGeneratedOnes() {
+	@Test def void testExplicitGetterSetterReplaceGeneratedOnes() throws Exception {
 		'''
 			entity Foo {
 				name : String

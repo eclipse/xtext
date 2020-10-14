@@ -24,7 +24,7 @@ class RuleEngineParsingTest{
 
 	@Inject extension ParseHelper<Model>
 
-	@Test def void loadModel() {
+	@Test def void loadModel() throws Exception {
 		'''
 			Device Window can be open, closed
 			

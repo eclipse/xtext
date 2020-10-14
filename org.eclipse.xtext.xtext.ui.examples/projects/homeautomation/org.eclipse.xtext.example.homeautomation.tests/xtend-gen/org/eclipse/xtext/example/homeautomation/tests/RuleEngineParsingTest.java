@@ -15,7 +15,6 @@ import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,26 +29,22 @@ public class RuleEngineParsingTest {
   private ParseHelper<Model> _parseHelper;
   
   @Test
-  public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Device Window can be open, closed");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("Device Heater can be on, off, error");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("Rule \'Save energy\' when Window.open then");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("fire(Heater.off)");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("println(\'Another penny to the piggy bank!\')");
-      _builder.newLine();
-      Assert.assertNotNull(this._parseHelper.parse(_builder));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void loadModel() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off, error");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \'Save energy\' when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(\'Another penny to the piggy bank!\')");
+    _builder.newLine();
+    Assert.assertNotNull(this._parseHelper.parse(_builder));
   }
 }
