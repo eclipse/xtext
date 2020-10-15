@@ -8,11 +8,10 @@
  */
 package org.eclipse.xtext.web.server.model;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
-
+import java.util.concurrent.CopyOnWriteArraySet;
 import org.eclipse.xtext.web.server.IServiceResult;
-
 import com.google.inject.Singleton;
 
 /**
@@ -27,24 +26,21 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class PrecomputedServiceRegistry {
-	private final Set<AbstractCachedService<? extends IServiceResult>> precomputedServices = new HashSet<>();
+
+	private final Set<AbstractCachedService<? extends IServiceResult>> precomputedServices = new CopyOnWriteArraySet<>();
 
 	/**
 	 * Register a service to be precomputed after each document change.
 	 */
 	public boolean addPrecomputedService(AbstractCachedService<? extends IServiceResult> service) {
-		synchronized (precomputedServices) {
-			return precomputedServices.add(service);
-		}
+		return precomputedServices.add(service);
 	}
 
 	/**
 	 * Remove a service from the registry.
 	 */
 	public boolean removePrecomputedService(AbstractCachedService<? extends IServiceResult> service) {
-		synchronized (precomputedServices) {
-			return precomputedServices.remove(service);
-		}
+		return precomputedServices.remove(service);
 	}
 
 	/**
@@ -52,6 +48,6 @@ public class PrecomputedServiceRegistry {
 	 * document is changed.
 	 */
 	public Iterable<AbstractCachedService<? extends IServiceResult>> getPrecomputedServices() {
-		return precomputedServices;
+		return Collections.unmodifiableSet(precomputedServices);
 	}
 }
