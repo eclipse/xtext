@@ -231,7 +231,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   /**
    * Sets the BaseClass for the EClasses in the inferred GenModel.
-   * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container}.
+   * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container}.
    * 
    * @since 2.16
    */
