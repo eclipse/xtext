@@ -151,7 +151,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	protected void diagnose(Diagnostic diagnostic) {
 		if (diagnostic.getChildren().isEmpty()) {
-			assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity() == Diagnostic.OK);
+			assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity(), Diagnostic.OK);
 		} else {
 			for (Diagnostic child : diagnostic.getChildren()) {
 				diagnose(child);
@@ -183,7 +183,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 						return;
 					}
 				}
-				assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity() == Diagnostic.OK);
+				assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity(), Diagnostic.OK);
 			}
 		} else {
 			for (Diagnostic child : diagnostic.getChildren()) {
