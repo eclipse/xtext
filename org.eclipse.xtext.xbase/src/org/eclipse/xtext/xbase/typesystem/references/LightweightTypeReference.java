@@ -306,8 +306,8 @@ public abstract class LightweightTypeReference {
 	
 	/**
 	 * Returns the constraint type of this reference. The constraint of a type parameter is its declared super type.
-	 * <code>T extends CharSequence & Serializable</code> has a compound constraint substitute of the form
-	 * <code>CharSequence & Serializable</code>.
+	 * <code>T extends CharSequence &amp; Serializable</code> has a compound constraint substitute of the form
+	 * <code>CharSequence &amp; Serializable</code>.
 	 */
 	public LightweightTypeReference getConstraintSubstitute() {
 		return this;

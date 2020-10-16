@@ -44,7 +44,7 @@ public interface IResolvedTypes {
 	 * It's cumbersome to use Issues since they only know about URIs 
 	 * so we probably want to use Diagnostics?
 	 * 
-	 * TODO do we really need this on the resolved types API? probably not
+	 * TODO do we	 really need this on the resolved types API? probably not
 	 */
 	Collection<AbstractDiagnostic> getQueuedDiagnostics();
 	
@@ -70,7 +70,7 @@ public interface IResolvedTypes {
 	 * Returns the actually inferred return type for the given expression or <code>null</code> if none.
 	 * Returns the actual expression type, if no explicit return type exists.
 	 * 
-	 * Shorthand for {{@link #getReturnType(XExpression, false)}}
+	 * Shorthand for {@link #getReturnType(XExpression, boolean) getReturnType(expression, false)}
 	 * 
 	 * @param expression expression whose return type is queried.
 	 */
