@@ -25,7 +25,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 	// cursor position marker
 	val c = '''<|>'''
 
-	@Test def empty() {
+	@Test def empty() throws Exception {
 		'''
 			«c»
 		'''.testContentAssistant(#[
@@ -36,7 +36,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def rule_device_state() {
+	@Test def rule_device_state() throws Exception {
 		'''
 			Device Window can be open, closed
 			Device Heater can be on, off, error
@@ -56,7 +56,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def rule_device_state_with_prefix() {
+	@Test def rule_device_state_with_prefix() throws Exception {
 		'''
 			Device Window can be open, closed
 			Device Heater can be on, off, error
@@ -73,7 +73,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def rule_then_part() {
+	@Test def rule_then_part() throws Exception {
 		'''
 			Device Window can be open, closed
 			Device Heater can be on, off, error
@@ -106,7 +106,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def rule_then_part_with_prefix() {
+	@Test def rule_then_part_with_prefix() throws Exception {
 		'''
 			Device Window can be open, closed
 			Device Heater can be on, off, error
@@ -126,7 +126,7 @@ class RuleEngineContentAssistTest extends AbstractContentAssistTest {
 	}
 
 	private def void testContentAssistant(CharSequence text, List<String> expectedProposals,
-		String proposalToApply, String expectedContent) {
+		String proposalToApply, String expectedContent) throws Exception {
 		
 		val cursorPosition = text.toString.indexOf(c)
 		val content = text.toString.replace(c, "")

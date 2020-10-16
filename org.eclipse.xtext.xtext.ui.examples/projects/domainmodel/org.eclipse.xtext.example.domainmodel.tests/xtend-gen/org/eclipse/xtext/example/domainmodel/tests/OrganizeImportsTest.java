@@ -20,7 +20,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -43,41 +42,37 @@ public class OrganizeImportsTest {
   @Inject
   private ImportOrganizer importOrganizer;
   
-  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
-    try {
-      final DomainModel domainModel = this._parseHelper.parse(model.toString());
-      Resource _eResource = domainModel.eResource();
-      final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
-      final StringBuilder builder = new StringBuilder(model);
-      final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
-        return Integer.valueOf(it.getOffset());
-      };
-      final List<ReplaceRegion> sortedChanges = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
-      ReplaceRegion lastChange = null;
-      for (final ReplaceRegion it : sortedChanges) {
-        {
-          if (((lastChange != null) && (lastChange.getEndOffset() > it.getOffset()))) {
-            Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
-          }
-          lastChange = it;
+  protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) throws Exception {
+    final DomainModel domainModel = this._parseHelper.parse(model.toString());
+    Resource _eResource = domainModel.eResource();
+    final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
+    final StringBuilder builder = new StringBuilder(model);
+    final Function1<ReplaceRegion, Integer> _function = (ReplaceRegion it) -> {
+      return Integer.valueOf(it.getOffset());
+    };
+    final List<ReplaceRegion> sortedChanges = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
+    ReplaceRegion lastChange = null;
+    for (final ReplaceRegion it : sortedChanges) {
+      {
+        if (((lastChange != null) && (lastChange.getEndOffset() > it.getOffset()))) {
+          Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
         }
+        lastChange = it;
       }
-      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(sortedChanges);
-      for (final ReplaceRegion it_1 : _reverse) {
-        int _offset = it_1.getOffset();
-        int _offset_1 = it_1.getOffset();
-        int _length = it_1.getLength();
-        int _plus = (_offset_1 + _length);
-        builder.replace(_offset, _plus, it_1.getText());
-      }
-      Assert.assertEquals(expected.toString(), builder.toString());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
+    List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(sortedChanges);
+    for (final ReplaceRegion it_1 : _reverse) {
+      int _offset = it_1.getOffset();
+      int _offset_1 = it_1.getOffset();
+      int _length = it_1.getLength();
+      int _plus = (_offset_1 + _length);
+      builder.replace(_offset, _plus, it_1.getText());
+    }
+    Assert.assertEquals(expected.toString(), builder.toString());
   }
   
   @Test
-  public void testSimple() {
+  public void testSimple() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo {");
     _builder.newLine();
@@ -101,7 +96,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testDefaultPackage() {
+  public void testDefaultPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo extends java.io.Serializable {}");
     _builder.newLine();
@@ -115,7 +110,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testDefaultPackageLeadingWhitespace() {
+  public void testDefaultPackageLeadingWhitespace() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("   \t");
@@ -132,7 +127,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testDefaultPackageWithJavaDoc() {
+  public void testDefaultPackageWithJavaDoc() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -162,7 +157,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testGetOrganizedImportSection_01() {
+  public void testGetOrganizedImportSection_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.lang.String");
     _builder.newLine();
@@ -191,7 +186,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testGetOrganizedImportSection_02() {
+  public void testGetOrganizedImportSection_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.lang.String");
     _builder.newLine();
@@ -226,7 +221,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testGetOrganizedImportSection_03() {
+  public void testGetOrganizedImportSection_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");
     _builder.newLine();
@@ -273,7 +268,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testGetOrganizedImportSection_04() {
+  public void testGetOrganizedImportSection_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*");
     _builder.newLine();
@@ -320,7 +315,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClasses_01() {
+  public void testInnerClasses_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -344,7 +339,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClasses_02() {
+  public void testInnerClasses_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource");
     _builder.newLine();
@@ -393,7 +388,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClasses_03() {
+  public void testInnerClasses_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -429,7 +424,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClasses_04() {
+  public void testInnerClasses_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource");
     _builder.newLine();
@@ -472,7 +467,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClasses_05() {
+  public void testInnerClasses_05() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Registry");
     _builder.newLine();
@@ -511,7 +506,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashSameFileWins_1() {
+  public void testNameClashSameFileWins_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo {");
     _builder.newLine();
@@ -552,7 +547,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashSameFileWins() {
+  public void testNameClashSameFileWins() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo {");
     _builder.newLine();
@@ -581,7 +576,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashOrder_01() {
+  public void testNameClashOrder_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -617,7 +612,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashOrder_02() {
+  public void testNameClashOrder_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -653,7 +648,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashMoreCommon() {
+  public void testNameClashMoreCommon() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -695,7 +690,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashInnerClasses() {
+  public void testNameClashInnerClasses() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.xbase.XbasePackage");
     _builder.newLine();
@@ -732,7 +727,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testNameClashInnerClassesWithPreference() {
+  public void testNameClashInnerClassesWithPreference() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.xbase.XbasePackage$Literals");
     _builder.newLine();
@@ -769,7 +764,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testStaticImport_01() {
+  public void testStaticImport_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static java.util.Collections.*");
     _builder.newLine();
@@ -810,7 +805,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testStaticImport_02() {
+  public void testStaticImport_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension java.util.Collections.*");
     _builder.newLine();
@@ -851,7 +846,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testImplicitExtensions() {
+  public void testImplicitExtensions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {");
     _builder.newLine();
@@ -887,7 +882,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testStaticExtensions() {
+  public void testStaticExtensions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension java.util.Collections.*");
     _builder.newLine();
@@ -928,7 +923,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_01() {
+  public void testInnerClassImport_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map$Entry");
     _builder.newLine();
@@ -979,7 +974,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_02() {
+  public void testInnerClassImport_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map");
     _builder.newLine();
@@ -1030,7 +1025,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_03() {
+  public void testInnerClassImport_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map$Entry");
     _builder.newLine();
@@ -1081,7 +1076,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_04() {
+  public void testInnerClassImport_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource");
     _builder.newLine();
@@ -1132,7 +1127,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_05() {
+  public void testInnerClassImport_05() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor");
     _builder.newLine();
@@ -1183,7 +1178,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testInnerClassImport_06() {
+  public void testInnerClassImport_06() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor");
     _builder.newLine();
@@ -1234,7 +1229,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testFunctionTypes_afterResolve() {
+  public void testFunctionTypes_afterResolve() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map$Entry");
     _builder.newLine();
@@ -1285,7 +1280,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testImport_PairOf() {
+  public void testImport_PairOf() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static org.eclipse.xtext.xbase.lib.Pair.*");
     _builder.newLine();
@@ -1336,7 +1331,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testArrayType() {
+  public void testArrayType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.Serializable");
     _builder.newLine();
@@ -1387,7 +1382,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testClassWithSameName() {
+  public void testClassWithSameName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar {");
     _builder.newLine();
@@ -1420,7 +1415,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testJavaDoc() {
+  public void testJavaDoc() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1450,7 +1445,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testLocalNameClash() {
+  public void testLocalNameClash() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo {");
     _builder.newLine();
@@ -1549,7 +1544,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testSamePackage() {
+  public void testSamePackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package bar {");
     _builder.newLine();
@@ -1588,7 +1583,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testSuperPackage() {
+  public void testSuperPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package bar {");
     _builder.newLine();
@@ -1642,7 +1637,7 @@ public class OrganizeImportsTest {
   }
   
   @Test
-  public void testSubPackage() {
+  public void testSubPackage() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import bar.Foo");
     _builder.newLine();

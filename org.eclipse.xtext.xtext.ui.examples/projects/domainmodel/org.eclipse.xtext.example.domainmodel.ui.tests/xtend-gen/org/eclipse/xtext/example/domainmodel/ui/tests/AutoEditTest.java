@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractAutoEditTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,17 +34,13 @@ public class AutoEditTest extends AbstractAutoEditTest {
   private FileExtensionProvider _fileExtensionProvider;
   
   @Override
-  public void setUp() {
-    try {
-      super.setUp();
-      this.createTestProjectWithXtextNature();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void setUp() throws Exception {
+    super.setUp();
+    this.createTestProjectWithXtextNature();
   }
   
   @Test
-  public void fantasting_autoedit() {
+  public void fantasting_autoedit() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Xtex|");
     _builder.newLine();
@@ -135,41 +130,29 @@ public class AutoEditTest extends AbstractAutoEditTest {
     this.testAutoEdit(_builder, 't', _builder_1);
   }
   
-  private void testAutoEdit(final CharSequence it, final char key, final CharSequence newContent) {
+  private void testAutoEdit(final CharSequence it, final char key, final CharSequence newContent) throws Exception {
     this.dslFileHasContent(this.press(this.dslFile(it), key), newContent);
   }
   
-  private XtextEditor dslFile(final CharSequence it) {
-    try {
-      return this.openEditor(it.toString());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private XtextEditor dslFile(final CharSequence it) throws Exception {
+    return this.openEditor(it.toString());
   }
   
-  private XtextEditor press(final XtextEditor it, final char c) {
-    try {
-      XtextEditor _xblockexpression = null;
-      {
-        this.pressKey(it, c);
-        _xblockexpression = it;
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  private XtextEditor press(final XtextEditor it, final char c) throws Exception {
+    XtextEditor _xblockexpression = null;
+    {
+      this.pressKey(it, c);
+      _xblockexpression = it;
     }
+    return _xblockexpression;
   }
   
   private void dslFileHasContent(final XtextEditor editor, final CharSequence it) {
     this.assertState(it.toString(), editor);
   }
   
-  private void createTestProjectWithXtextNature() {
-    try {
-      IResourcesSetupUtil.addNature(IResourcesSetupUtil.createProject("foo"), XtextProjectHelper.NATURE_ID);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void createTestProjectWithXtextNature() throws Exception {
+    IResourcesSetupUtil.addNature(IResourcesSetupUtil.createProject("foo"), XtextProjectHelper.NATURE_ID);
   }
   
   @Override

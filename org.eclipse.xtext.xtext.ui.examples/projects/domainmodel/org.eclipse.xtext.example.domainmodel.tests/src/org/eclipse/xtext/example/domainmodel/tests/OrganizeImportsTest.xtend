@@ -31,7 +31,7 @@ class OrganizeImportsTest {
 	@Inject extension ParseHelper<DomainModel>
 	@Inject ImportOrganizer importOrganizer
 
-	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
+	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) throws Exception {
 		val domainModel = parse(model.toString)
 		val changes = importOrganizer.getOrganizedImportChanges(domainModel.eResource as XtextResource)
 		val builder = new StringBuilder(model)
@@ -47,7 +47,7 @@ class OrganizeImportsTest {
 		assertEquals(expected.toString, builder.toString)
 	}
 
-	@Test def testSimple() {
+	@Test def testSimple() throws Exception {
 		'''
 			package foo {
 				entity Foo extends java.io.Serializable {}
@@ -61,7 +61,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testDefaultPackage() {
+	@Test def testDefaultPackage() throws Exception {
 		'''
 			entity Foo extends java.io.Serializable {}
 		'''.assertIsOrganizedTo('''
@@ -71,7 +71,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testDefaultPackageLeadingWhitespace() {
+	@Test def testDefaultPackageLeadingWhitespace() throws Exception {
 		'''
 			«»
 			   	
@@ -83,7 +83,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testDefaultPackageWithJavaDoc() {
+	@Test def testDefaultPackageWithJavaDoc() throws Exception {
 		'''
 			/**
 			 * some doc
@@ -99,7 +99,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testGetOrganizedImportSection_01() {
+	@Test def testGetOrganizedImportSection_01() throws Exception {
 		'''
 			import java.lang.String
 			import java.util.List
@@ -116,7 +116,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testGetOrganizedImportSection_02() {
+	@Test def testGetOrganizedImportSection_02() throws Exception {
 		'''
 			import java.lang.String
 			import java.util.List
@@ -136,7 +136,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testGetOrganizedImportSection_03() {
+	@Test def testGetOrganizedImportSection_03() throws Exception {
 		'''
 			import java.util.*
 
@@ -159,7 +159,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testGetOrganizedImportSection_04() {
+	@Test def testGetOrganizedImportSection_04() throws Exception {
 		'''
 			import java.util.*
 			import java.io.*
@@ -183,7 +183,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClasses_01() {
+	@Test def testInnerClasses_01() throws Exception {
 		'''
 			entity Foo {
 			  op test(org.eclipse.emf.ecore.resource.Resource$Factory a, org.eclipse.emf.ecore.resource.Resource$Factory$Registry b) : void {}
@@ -197,7 +197,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClasses_02() {
+	@Test def testInnerClasses_02() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource
 			import org.eclipse.emf.ecore.EPackage
@@ -221,7 +221,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClasses_03() {
+	@Test def testInnerClasses_03() throws Exception {
 		'''
 			entity Foo {
 			  op test() : boolean {
@@ -239,7 +239,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClasses_04() {
+	@Test def testInnerClasses_04() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource
 			import org.eclipse.emf.ecore.EPackage
@@ -261,7 +261,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClasses_05() {
+	@Test def testInnerClasses_05() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource$Factory$Registry
 
@@ -281,7 +281,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashSameFileWins_1() {
+	@Test def testNameClashSameFileWins_1() throws Exception {
 		'''
 			package foo {
 				entity Foo {
@@ -301,7 +301,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashSameFileWins() {
+	@Test def testNameClashSameFileWins() throws Exception {
 		'''
 			package foo {
 				entity Foo extends java.io.Serializable{}
@@ -317,7 +317,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashOrder_01() {
+	@Test def testNameClashOrder_01() throws Exception {
 		'''
 			entity Foo {
 			  op test(java.util.List<String> s) : java.awt.List {
@@ -335,7 +335,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashOrder_02() {
+	@Test def testNameClashOrder_02() throws Exception {
 		'''
 			entity Foo {
 			  op test(java.awt.List<String> s) : java.util.List  {
@@ -353,7 +353,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashMoreCommon() {
+	@Test def testNameClashMoreCommon() throws Exception {
 		'''
 			entity Foo {
 			  op test(java.awt.List s) : java.util.List<String> {
@@ -373,7 +373,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashInnerClasses() {
+	@Test def testNameClashInnerClasses() throws Exception {
 		'''
 			import org.eclipse.xtext.xbase.XbasePackage
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
@@ -393,7 +393,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testNameClashInnerClassesWithPreference() {
+	@Test def testNameClashInnerClassesWithPreference() throws Exception {
 		'''
 			import org.eclipse.xtext.xbase.XbasePackage$Literals
 			import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
@@ -413,7 +413,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testStaticImport_01() {
+	@Test def testStaticImport_01() throws Exception {
 		'''
 			import static java.util.Collections.*
 			entity Foo {
@@ -434,7 +434,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testStaticImport_02() {
+	@Test def testStaticImport_02() throws Exception {
 		'''
 			import static extension java.util.Collections.*
 			entity Foo {
@@ -455,7 +455,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testImplicitExtensions() {
+	@Test def testImplicitExtensions() throws Exception {
 		'''
 			entity Foo {
 			  op test(java.util.List<String> s) : void {
@@ -473,7 +473,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testStaticExtensions() {
+	@Test def testStaticExtensions() throws Exception {
 		'''
 			import static extension java.util.Collections.*
 			entity Foo {
@@ -494,7 +494,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_01() {
+	@Test def testInnerClassImport_01() throws Exception {
 		'''
 			import java.util.Map$Entry
 			
@@ -518,7 +518,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_02() {
+	@Test def testInnerClassImport_02() throws Exception {
 		'''
 			import java.util.Map
 			
@@ -542,7 +542,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_03() {
+	@Test def testInnerClassImport_03() throws Exception {
 		'''
 			import java.util.Map$Entry
 
@@ -566,7 +566,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_04() {
+	@Test def testInnerClassImport_04() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource
 
@@ -590,7 +590,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_05() {
+	@Test def testInnerClassImport_05() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor
 
@@ -614,7 +614,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testInnerClassImport_06() {
+	@Test def testInnerClassImport_06() throws Exception {
 		'''
 			import org.eclipse.emf.ecore.resource.Resource$Factory$Descriptor
 
@@ -638,7 +638,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testFunctionTypes_afterResolve() {
+	@Test def testFunctionTypes_afterResolve() throws Exception {
 		'''
 			import java.util.Map$Entry
 
@@ -662,7 +662,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testImport_PairOf() {
+	@Test def testImport_PairOf() throws Exception {
 		'''
 			import static org.eclipse.xtext.xbase.lib.Pair.*
 
@@ -686,7 +686,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testArrayType() {
+	@Test def testArrayType() throws Exception {
 		'''
 			import java.io.Serializable
 
@@ -710,7 +710,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testClassWithSameName() {
+	@Test def testClassWithSameName() throws Exception {
 		'''
 			package foo.bar {
 				entity Serializable {
@@ -726,7 +726,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testJavaDoc() {
+	@Test def testJavaDoc() throws Exception {
 		'''
 			/**
 			 * {@link java.util.List}
@@ -742,7 +742,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testLocalNameClash() {
+	@Test def testLocalNameClash() throws Exception {
 		'''
 			package foo {
 				entity Referrer {
@@ -780,7 +780,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testSamePackage() {
+	@Test def testSamePackage() throws Exception {
 		'''
 			package bar {
 				entity Foo {}
@@ -798,7 +798,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testSuperPackage() {
+	@Test def testSuperPackage() throws Exception {
 		'''
 			package bar {
 				entity Foo {}
@@ -822,7 +822,7 @@ class OrganizeImportsTest {
 		''')
 	}
 
-	@Test def testSubPackage() {
+	@Test def testSubPackage() throws Exception {
 		'''
 			import bar.Foo
 			

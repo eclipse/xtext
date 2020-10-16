@@ -28,7 +28,7 @@ class CalculatorTest {
 	@Inject extension ParseHelper<Module>
 	@Inject extension Calculator
 
-	@Test def void testSimple() {
+	@Test def void testSimple() throws Exception {
 		"1 + 2 + 3".evaluatesTo(6)
 		"1 + 2 - 3".evaluatesTo(0)
 		"1 * 2 + 3".evaluatesTo(5)
@@ -36,14 +36,14 @@ class CalculatorTest {
 		"1 / 2 * 3".evaluatesTo(1.5)
 	}
 
-	@Test def void testFunction() {
+	@Test def void testFunction() throws Exception {
 		'''
 			multiply(2,multiply(2, 3));
 			def multiply(a, b) : a * b;
 		'''.evaluatesTo(12.0)
 	}
 
-	private def evaluatesTo(CharSequence content, double expected) {
+	private def evaluatesTo(CharSequence content, double expected) throws Exception {
 		val module = '''module test «content»'''.parse
 		val expression = module.statements.head.eContents.filter(Expression).head
 		val result = expression.evaluate

@@ -14,7 +14,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractHoverTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,12 +26,8 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class HoverTest extends AbstractHoverTest {
   @Before
-  public void setup() {
-    try {
-      JavaProjectSetupUtil.createJavaProject(this.getProjectName());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void setup() throws Exception {
+    JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
   
   @Test

@@ -17,7 +17,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +38,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }.apply();
   
   @Test
-  public void empty() {
+  public void empty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this.c);
     _builder.newLineIfNotEmpty();
@@ -51,7 +50,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void statemachine_resetEvents() {
+  public void statemachine_resetEvents() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("events");
     _builder.newLine();
@@ -113,7 +112,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void state_actions() {
+  public void state_actions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("commands");
     _builder.newLine();
@@ -171,7 +170,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void transition_event() {
+  public void transition_event() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("events");
     _builder.newLine();
@@ -289,7 +288,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void transition_state() {
+  public void transition_state() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("events");
     _builder.newLine();
@@ -484,7 +483,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void transition_template() {
+  public void transition_template() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("events");
     _builder.newLine();
@@ -555,13 +554,9 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "actions", "end", "Transition - Template for a Transition")), "Transition - Template for a Transition", _builder_1.toString());
   }
   
-  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) {
-    try {
-      final int cursorPosition = text.toString().indexOf(this.c);
-      final String content = text.toString().replace(this.c, "");
-      this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
+    final int cursorPosition = text.toString().indexOf(this.c);
+    final String content = text.toString().replace(this.c, "");
+    this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
   }
 }

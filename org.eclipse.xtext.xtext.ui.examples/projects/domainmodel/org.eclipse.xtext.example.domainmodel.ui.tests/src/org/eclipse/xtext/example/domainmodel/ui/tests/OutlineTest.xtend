@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 @InjectWith(DomainmodelUiInjectorProvider)
 class OutlineTest extends AbstractOutlineTest {
 
-	@Test def void testOutline() {
+	@Test def void testOutline() throws Exception {
 		'''
 			entity Foo {
 				name : String
@@ -38,7 +38,7 @@ class OutlineTest extends AbstractOutlineTest {
 		)
 	}
 
-	@Test def void testOutlineWithPackage() {
+	@Test def void testOutlineWithPackage() throws Exception {
 		'''
 			package mypackage {
 				entity Foo {
@@ -58,7 +58,7 @@ class OutlineTest extends AbstractOutlineTest {
 		)
 	}
 
-	@Test def void testOutlineWithInheritance() {
+	@Test def void testOutlineWithInheritance() throws Exception {
 		'''
 			entity A {}
 			entity B extends A {}

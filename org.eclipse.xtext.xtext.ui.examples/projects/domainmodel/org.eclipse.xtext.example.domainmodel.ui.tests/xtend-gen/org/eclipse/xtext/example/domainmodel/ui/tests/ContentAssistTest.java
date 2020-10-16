@@ -18,7 +18,6 @@ import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,66 +39,46 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   }.apply();
   
   @Test
-  public void testImportCompletion() {
-    try {
-      this.newBuilder().append("import java.util.Da").assertText("java.util.Date");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testImportCompletion() throws Exception {
+    this.newBuilder().append("import java.util.Da").assertText("java.util.Date");
   }
   
   @Test
-  public void testImportCompletion_1() {
-    try {
-      this.newBuilder().append("import LinkedHashSet").assertText("java.util.LinkedHashSet");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testImportCompletion_1() throws Exception {
+    this.newBuilder().append("import LinkedHashSet").assertText("java.util.LinkedHashSet");
   }
   
   @Test
-  public void testTypeCompletion() {
-    try {
-      this.newBuilder().append("entity Foo { bar: LinkedHashSet").assertText("java.util.LinkedHashSet");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testTypeCompletion() throws Exception {
+    this.newBuilder().append("entity Foo { bar: LinkedHashSet").assertText("java.util.LinkedHashSet");
   }
   
   @Test
-  public void testEntityTemplateProposal() {
-    try {
-      ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Entity - template for an Entity");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("entity name {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("}");
-      _applyProposal.expectContent(_builder.toString());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testEntityTemplateProposal() throws Exception {
+    ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Entity - template for an Entity");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity name {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _applyProposal.expectContent(_builder.toString());
   }
   
   @Test
-  public void testPackageTemplateProposal() {
-    try {
-      ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Package - template for a Package");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package name {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("}");
-      _applyProposal.expectContent(_builder.toString());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPackageTemplateProposal() throws Exception {
+    ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Package - template for a Package");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package name {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _applyProposal.expectContent(_builder.toString());
   }
   
   @Test
-  public void testPropertyTemplateProposal() {
+  public void testPropertyTemplateProposal() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity E {");
     _builder.newLine();
@@ -121,7 +100,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void testOperationTemplateProposal() {
+  public void testOperationTemplateProposal() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity E {");
     _builder.newLine();
@@ -147,13 +126,9 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Operation - template for an Operation", "Property - template for a Property", "op")), "Operation - template for an Operation", _builder_1.toString());
   }
   
-  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) {
-    try {
-      final int cursorPosition = text.toString().indexOf(this.c);
-      final String content = text.toString().replace(this.c, "");
-      this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
+    final int cursorPosition = text.toString().indexOf(this.c);
+    final String content = text.toString().replace(this.c, "");
+    this.newBuilder().append(content).assertTextAtCursorPosition(cursorPosition, ((String[])Conversions.unwrapArray(expectedProposals, String.class))).applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent);
   }
 }

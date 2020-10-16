@@ -30,12 +30,12 @@ class AutoEditTest extends AbstractAutoEditTest {
 
 	@Inject extension FileExtensionProvider
 
-	override setUp() {
+	override setUp() throws Exception {
 		super.setUp
 		createTestProjectWithXtextNature
 	}
 
-	@Test def fantasting_autoedit() {
+	@Test def fantasting_autoedit() throws Exception {
 		'''
 			Xtex|
 		'''.testAutoEdit('t', '''
@@ -72,7 +72,7 @@ class AutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
-	private def testAutoEdit(CharSequence it, char key, CharSequence newContent) {
+	private def testAutoEdit(CharSequence it, char key, CharSequence newContent) throws Exception {
 		// given
 		dslFile.
 		// when
@@ -81,11 +81,11 @@ class AutoEditTest extends AbstractAutoEditTest {
 		dslFileHasContent(newContent)
 	}
 
-	private def dslFile(CharSequence it) {
+	private def dslFile(CharSequence it) throws Exception {
 		toString.openEditor
 	}
 
-	private def press(XtextEditor it, char c) {
+	private def press(XtextEditor it, char c) throws Exception {
 		pressKey(c)
 		it
 	}
@@ -94,7 +94,7 @@ class AutoEditTest extends AbstractAutoEditTest {
 		toString.assertState(editor)
 	}
 
-	private def createTestProjectWithXtextNature() {
+	private def createTestProjectWithXtextNature() throws Exception {
 		"foo".createProject.addNature(XtextProjectHelper.NATURE_ID)
 	}
 

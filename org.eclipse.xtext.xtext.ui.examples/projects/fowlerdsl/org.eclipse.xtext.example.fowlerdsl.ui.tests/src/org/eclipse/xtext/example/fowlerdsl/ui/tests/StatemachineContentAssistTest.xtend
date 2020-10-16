@@ -25,7 +25,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 	// cursor position marker
 	val c = '''<|>'''
 
-	@Test def empty() {
+	@Test def empty() throws Exception {
 		'''
 			«c»
 		'''.testContentAssistant(#[
@@ -38,7 +38,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def statemachine_resetEvents() {
+	@Test def statemachine_resetEvents() throws Exception {
 		'''
 			events
 				doorClosed   D1CL
@@ -72,7 +72,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def state_actions() {
+	@Test def state_actions() throws Exception {
 		'''
 			commands
 				unlockPanel PNUL
@@ -104,7 +104,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def transition_event() {
+	@Test def transition_event() throws Exception {
 		'''
 			events
 				doorClosed   D1CL
@@ -164,7 +164,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def transition_state() {
+	@Test def transition_state() throws Exception {
 		'''
 			events
 				doorClosed   D1CL
@@ -258,7 +258,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def transition_template() {
+	@Test def transition_template() throws Exception {
 		'''
 			events
 				doorClosed   D1CL
@@ -302,7 +302,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 	}
 
 	private def void testContentAssistant(CharSequence text, List<String> expectedProposals,
-		String proposalToApply, String expectedContent) {
+		String proposalToApply, String expectedContent) throws Exception {
 		
 		val cursorPosition = text.toString.indexOf(c)
 		val content = text.toString.replace(c, "")

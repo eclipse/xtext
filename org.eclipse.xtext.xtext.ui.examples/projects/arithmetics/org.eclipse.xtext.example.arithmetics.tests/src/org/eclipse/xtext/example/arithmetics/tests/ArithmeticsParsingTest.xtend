@@ -24,7 +24,7 @@ class ArithmeticsParsingTest{
 	@Inject extension ParseHelper<Module>
 	@Inject extension ValidationTestHelper
 
-	@Test def void loadModel() {
+	@Test def void loadModel() throws Exception {
 		'''
 			module test
 			def fun(a,b) : a * b;

@@ -19,7 +19,6 @@ import org.eclipse.xtext.example.arithmetics.tests.ArithmeticsInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -39,7 +38,7 @@ public class CalculatorTest {
   private Calculator _calculator;
   
   @Test
-  public void testSimple() {
+  public void testSimple() throws Exception {
     this.evaluatesTo("1 + 2 + 3", 6);
     this.evaluatesTo("1 + 2 - 3", 0);
     this.evaluatesTo("1 * 2 + 3", 5);
@@ -48,7 +47,7 @@ public class CalculatorTest {
   }
   
   @Test
-  public void testFunction() {
+  public void testFunction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("multiply(2,multiply(2, 3));");
     _builder.newLine();
@@ -57,17 +56,13 @@ public class CalculatorTest {
     this.evaluatesTo(_builder, 12.0);
   }
   
-  private void evaluatesTo(final CharSequence content, final double expected) {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module test ");
-      _builder.append(content);
-      final org.eclipse.xtext.example.arithmetics.arithmetics.Module module = this._parseHelper.parse(_builder);
-      final Expression expression = IterableExtensions.<Expression>head(Iterables.<Expression>filter(IterableExtensions.<Statement>head(module.getStatements()).eContents(), Expression.class));
-      final BigDecimal result = this._calculator.evaluate(expression);
-      Assert.assertEquals(expected, result.doubleValue(), 0.0001);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private void evaluatesTo(final CharSequence content, final double expected) throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("module test ");
+    _builder.append(content);
+    final org.eclipse.xtext.example.arithmetics.arithmetics.Module module = this._parseHelper.parse(_builder);
+    final Expression expression = IterableExtensions.<Expression>head(Iterables.<Expression>filter(IterableExtensions.<Statement>head(module.getStatements()).eContents(), Expression.class));
+    final BigDecimal result = this._calculator.evaluate(expression);
+    Assert.assertEquals(expected, result.doubleValue(), 0.0001);
   }
 }

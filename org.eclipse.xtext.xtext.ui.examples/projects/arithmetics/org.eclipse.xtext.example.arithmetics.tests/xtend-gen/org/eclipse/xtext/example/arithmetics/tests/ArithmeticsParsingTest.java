@@ -15,7 +15,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,18 +32,14 @@ public class ArithmeticsParsingTest {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
-  public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module test");
-      _builder.newLine();
-      _builder.append("def fun(a,b) : a * b;");
-      _builder.newLine();
-      _builder.append("fun(2, fun(3,4));");
-      _builder.newLine();
-      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void loadModel() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("module test");
+    _builder.newLine();
+    _builder.append("def fun(a,b) : a * b;");
+    _builder.newLine();
+    _builder.append("fun(2, fun(3,4));");
+    _builder.newLine();
+    this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
 }

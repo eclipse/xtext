@@ -24,7 +24,7 @@ import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.c
 @InjectWith(DomainmodelUiInjectorProvider)
 class HyperlinkingTest extends AbstractHyperlinkingTest {
 
-	@Before def void setup() {
+	@Before def void setup() throws Exception {
 		/*
 		 * Xbase-based languages require java project
 		 */

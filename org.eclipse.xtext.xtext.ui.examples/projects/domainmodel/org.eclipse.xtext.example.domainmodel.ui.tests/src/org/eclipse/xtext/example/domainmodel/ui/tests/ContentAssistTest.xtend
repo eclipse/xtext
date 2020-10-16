@@ -25,33 +25,33 @@ class ContentAssistTest extends AbstractContentAssistTest {
 	// cursor position marker
 	val c = '''<|>'''
 
-	@Test def void testImportCompletion() {
+	@Test def void testImportCompletion() throws Exception {
 		newBuilder.append('import java.util.Da').assertText('java.util.Date')
 	}
 
-	@Test def void testImportCompletion_1() {
+	@Test def void testImportCompletion_1() throws Exception {
 		newBuilder.append('import LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
 
-	@Test def void testTypeCompletion() {
+	@Test def void testTypeCompletion() throws Exception {
 		newBuilder.append('entity Foo { bar: LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
 
-	@Test def void testEntityTemplateProposal() {
+	@Test def void testEntityTemplateProposal() throws Exception {
 		newBuilder.applyProposal("Entity - template for an Entity").expectContent('''
 		entity name {
 			
 		}''')
 	}
 
-	@Test def void testPackageTemplateProposal() {
+	@Test def void testPackageTemplateProposal() throws Exception {
 		newBuilder.applyProposal("Package - template for a Package").expectContent('''
 		package name {
 			
 		}''')
 	}
 
-	@Test def testPropertyTemplateProposal() {
+	@Test def testPropertyTemplateProposal() throws Exception {
 		'''
 			entity E {
 				«c»
@@ -67,7 +67,7 @@ class ContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	@Test def testOperationTemplateProposal() {
+	@Test def testOperationTemplateProposal() throws Exception {
 		'''
 			entity E {
 				«c»
@@ -85,7 +85,7 @@ class ContentAssistTest extends AbstractContentAssistTest {
 		''')
 	}
 
-	private def void testContentAssistant(CharSequence text, List<String> expectedProposals, String proposalToApply, String expectedContent) {
+	private def void testContentAssistant(CharSequence text, List<String> expectedProposals, String proposalToApply, String expectedContent) throws Exception {
 
 		val cursorPosition = text.toString.indexOf(c)
 		val content = text.toString.replace(c, "")

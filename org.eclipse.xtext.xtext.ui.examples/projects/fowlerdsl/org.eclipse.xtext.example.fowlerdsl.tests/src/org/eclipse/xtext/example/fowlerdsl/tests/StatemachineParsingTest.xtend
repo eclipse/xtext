@@ -27,7 +27,7 @@ class StatemachineParsingTest {
 	@Inject extension ParseHelper<Statemachine>
 	@Inject extension ValidationTestHelper
 
-	@Test def loadModel() {
+	@Test def loadModel() throws Exception {
 		'''
 		events
 			doorClosed		D1CL
