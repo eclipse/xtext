@@ -160,7 +160,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 			appendHiddenRegion(false);
 		}
 		updateEObjectRegions();
-		if (diffFirstOriginal != null && diffFirstCopy != null && diffFirstCopy != null) {
+		if (diffFirstOriginal != null && diffFirstCopy != null) {
 			IHiddenRegion orig = result.getOriginalTextRegionAccess().regionForRootEObject().getNextHiddenRegion();
 			result.append(new SequentialRegionDiff(diffFirstOriginal, orig, diffFirstCopy, this.last));
 			diffFirstCopy = null;
