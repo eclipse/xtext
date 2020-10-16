@@ -68,7 +68,7 @@
 					<dependency>
 						<groupId>org.osgi</groupId>
 						<artifactId>org.osgi.core</artifactId>
-						<version>4.3.1</version>
+						<version>${osgi-osgi-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.platform</groupId>
@@ -98,32 +98,32 @@
 					<dependency>
 						<groupId>org.eclipse.jdt</groupId>
 						<artifactId>org.eclipse.jdt.core</artifactId>
-						<version>3.16.0</version>
+						<version>${jdt-core-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.jdt</groupId>
 						<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-						<version>1.3.400</version>
+						<version>${jdt-compiler-apt-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.ecore</artifactId>
-						<version>2.20.0</version>
+						<version>${emf-ecore-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.common</artifactId>
-						<version>2.17.0</version>
+						<version>${emf-common-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-						<version>2.20.0</version>
+						<version>${emf-codegen-ecore-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.codegen</artifactId>
-						<version>2.19.0</version>
+						<version>${emf-codegen-version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
