@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -137,7 +137,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(AbstractUIPlugin.class).toInstance(plugin);
-		binder.bind(IDialogSettings.class).toInstance(plugin.getDialogSettings());
+		@SuppressWarnings("deprecation")
+		IDialogSettings dialogSettings = plugin.getDialogSettings();
+		binder.bind(IDialogSettings.class).toInstance(dialogSettings);
 	}
 
 	public void configureBracketMatchingAction(Binder binder) {
