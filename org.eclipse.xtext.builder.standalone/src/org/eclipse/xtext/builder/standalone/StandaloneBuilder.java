@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -55,7 +56,6 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -75,7 +75,7 @@ public class StandaloneBuilder {
 
 	private Iterable<String> classPathEntries;
 
-	private File tempDir = Files.createTempDir();
+	private File tempDir = null;
 
 	private String encoding;
 
@@ -114,6 +114,14 @@ public class StandaloneBuilder {
 
 	@Inject
 	private IJavaCompiler compiler;
+	
+	public StandaloneBuilder() {
+		try {
+			tempDir = Files.createTempDirectory("StandaloneBuilder").toFile();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public void setTempDir(String pathAsString) {
 		if (pathAsString != null) {
