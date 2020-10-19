@@ -11,10 +11,10 @@ package org.eclipse.xtext.junit4;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
 
 import org.junit.rules.ExternalResource;
 
-import com.google.common.io.Files;
 import com.google.inject.Singleton;
 
 /**
@@ -75,7 +75,7 @@ public class TemporaryFolder extends ExternalResource {
 	 * for testing purposes only.  Do not use.
 	 */
 	public void create() throws IOException {
-		folder = Files.createTempDir();
+		folder = Files.createTempDirectory("junit").toFile();
 	}
 	
 	/**
