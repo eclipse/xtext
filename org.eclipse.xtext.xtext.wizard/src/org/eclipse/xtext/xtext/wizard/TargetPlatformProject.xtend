@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JUnitVersion
+import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class TargetPlatformProject extends ProjectDescriptor {
@@ -60,7 +61,12 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-					<repository location="https://download.eclipse.org/releases/2020-12"/>
+					«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
+						<repository location="https://download.eclipse.org/releases/2020-12"/>
+					«ELSE»
+						<!-- newer Eclipse versions need Java 11 to run the Maven Tycho build -->
+						<repository location="https://download.eclipse.org/releases/2020-06"/>
+					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>

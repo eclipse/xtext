@@ -140,7 +140,7 @@ public class CliWizardIntegrationTest {
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.mavenTychoJ9");
+				project.setBaseName("org.xtext.example.mavenTychoJ11");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -149,7 +149,7 @@ public class CliWizardIntegrationTest {
 				project.getUiProject().getTestProject().setEnabled(true);
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
-				project.setJavaVersion(JavaVersion.JAVA9);
+				project.setJavaVersion(JavaVersion.JAVA11);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
 				project.setBaseName("org.xtext.example.gradle");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
