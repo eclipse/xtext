@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.validation.ValidationResult
+import org.hamcrest.MatcherAssert
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
@@ -102,7 +103,7 @@ class ValidationTest extends AbstractWebServerTest {
 			})
 		assertTrue(validate.hasConflict)
 		val result = validate.service.apply()
-		assertThat(result, instanceOf(ServiceConflictResult))
+		MatcherAssert.assertThat(result, instanceOf(ServiceConflictResult))
 		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	

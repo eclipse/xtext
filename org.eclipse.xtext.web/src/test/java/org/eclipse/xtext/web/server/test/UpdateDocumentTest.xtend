@@ -22,7 +22,7 @@ import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.model.DocumentStateResult
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult
-import org.eclipse.xtext.web.server.test.UpdateDocumentTest.TestResourceValidator
+import org.hamcrest.MatcherAssert
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
@@ -134,7 +134,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 			})
 		assertTrue(update.hasConflict)
 		val result = update.service.apply()
-		assertThat(result, instanceOf(ServiceConflictResult))
+		MatcherAssert.assertThat(result, instanceOf(ServiceConflictResult))
 		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	
@@ -169,7 +169,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 			}, session)
 		update2.service.apply()
 		val result = update3.service.apply()
-		assertThat(result, instanceOf(ServiceConflictResult))
+		MatcherAssert.assertThat(result, instanceOf(ServiceConflictResult))
 		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	
@@ -198,7 +198,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		val XtextWebDocument document = session.get(XtextWebDocument -> file.name)
 		document.resource.modificationStamp = 1234
 		val result = update.service.apply()
-		assertThat(result, instanceOf(ServiceConflictResult))
+		MatcherAssert.assertThat(result, instanceOf(ServiceConflictResult))
 		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, session)
 		val loadResult = load.service.apply() as ResourceContentResult
 		assertEquals('input signal x state bar end', loadResult.fullText)
