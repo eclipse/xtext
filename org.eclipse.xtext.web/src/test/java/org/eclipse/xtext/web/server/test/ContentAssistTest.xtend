@@ -12,6 +12,7 @@ import org.eclipse.xtext.web.example.statemachine.ide.StatemachineIdeModule
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineTemplateProposalProvider
 import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
+import org.hamcrest.MatcherAssert
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
@@ -505,7 +506,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			})
 		assertTrue(contentAssist.hasConflict)
 		val result = contentAssist.service.apply()
-		assertThat(result, instanceOf(ServiceConflictResult))
+		MatcherAssert.assertThat(result, instanceOf(ServiceConflictResult))
 		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	
