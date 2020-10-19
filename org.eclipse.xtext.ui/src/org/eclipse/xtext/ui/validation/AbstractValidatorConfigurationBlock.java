@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -99,7 +99,7 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 
 	/**
 	 * This implementation returns Dialog settings which were bind in {@link org.eclipse.xtext.ui.DefaultUiModule}
-	 * normally {@link org.eclipse.ui.plugin.AbstractUIPlugin#getDialogSettings()}<br>
+	 * normally {@code org.eclipse.ui.plugin.AbstractUIPlugin.getDialogSettings()}<br>
 	 * Subclasses should override to get special section settings. Here is an example:<br>
 	 * 
 	 * <pre>
