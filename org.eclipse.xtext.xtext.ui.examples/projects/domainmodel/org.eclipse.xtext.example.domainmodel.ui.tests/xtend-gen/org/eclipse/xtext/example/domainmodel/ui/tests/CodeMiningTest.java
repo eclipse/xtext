@@ -37,6 +37,8 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("1 property | 1 operation");
+    _builder_1.newLine();
     _builder_1.append("entity E {");
     _builder_1.newLine();
     _builder_1.append("\t");
@@ -64,6 +66,8 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("1 property | 1 operation");
+    _builder_1.newLine();
     _builder_1.append("entity E {");
     _builder_1.newLine();
     _builder_1.append("\t");
@@ -71,6 +75,62 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("op getS() : String { s }");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.testCodeMining(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void several_entities_001() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity E1 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("entity E2 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("0 properties | 0 operations");
+    _builder_1.newLine();
+    _builder_1.append("entity E1 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("0 properties | 0 operations");
+    _builder_1.newLine();
+    _builder_1.append("entity E2 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.testCodeMining(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void several_entities_002() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity E1 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("entity E2 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("0 properties | 0 operations");
+    _builder_1.newLine();
+    _builder_1.append("entity E1 {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("0 properties | 0 operations");
+    _builder_1.newLine();
+    _builder_1.append("entity E2 {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

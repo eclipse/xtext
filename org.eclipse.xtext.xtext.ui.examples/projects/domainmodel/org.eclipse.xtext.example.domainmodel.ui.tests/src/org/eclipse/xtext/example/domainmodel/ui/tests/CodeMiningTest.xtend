@@ -28,6 +28,7 @@ class CodeMiningTest extends AbstractCodeMiningTest {
 				op getS() { s }
 			}
 		'''.testCodeMining('''
+			1 property | 1 operation
 			entity E {
 				s: String
 				op getS() : String { s }
@@ -42,6 +43,7 @@ class CodeMiningTest extends AbstractCodeMiningTest {
 				op getS() : String { s }
 			}
 		'''.testCodeMining('''
+			1 property | 1 operation
 			entity E {
 				s: String
 				op getS() : String { s }
@@ -49,4 +51,37 @@ class CodeMiningTest extends AbstractCodeMiningTest {
 		''')
 	}
 
+	@Test def several_entities_001() {
+		'''
+			entity E1 {
+			}
+			entity E2 {
+			}
+		'''.testCodeMining('''
+			0 properties | 0 operations
+			entity E1 {
+			}
+			0 properties | 0 operations
+			entity E2 {
+			}
+		''')
+	}
+
+	@Test def several_entities_002() {
+		'''
+			entity E1 {
+			}
+			
+			entity E2 {
+			}
+		'''.testCodeMining('''
+			0 properties | 0 operations
+			entity E1 {
+			}
+			
+			0 properties | 0 operations
+			entity E2 {
+			}
+		''')
+	}
 }
