@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.SortedMap;
@@ -18,9 +19,12 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.annotations.Beta;
@@ -29,6 +33,7 @@ import com.google.common.annotations.Beta;
  * Implementation of {@link IFileGenerator} to create the files from the template inside the eclipse workspace.
  * 
  * @author Arne Deutsch - Initial contribution and API
+ * @author Hannes Niederhausen - encoding fix in execute method
  * @since 2.14
  */
 @Beta
@@ -49,12 +54,15 @@ public class WorkspaceFileGenerator extends WorkspaceModifyOperation implements 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			for (Map.Entry<String, CharSequence> fileEntry : files.entrySet()) {
 				IFile file = workspace.getRoot().getFile(new Path(fileEntry.getKey()));
-				file.create(new StringInputStream(fileEntry.getValue().toString()), true, subMonitor);
+				file.create(new StringInputStream(fileEntry.getValue().toString(), file.getCharset()), true, subMonitor);
 				if (firstFile == null) {
 					firstFile = file;
 				}
 				subMonitor.worked(1);
 			}
+		} catch (UnsupportedEncodingException e) {
+			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, e.getMessage(), e);
+			throw new CoreException(status);
 		} finally {
 			subMonitor.done();
 		}
