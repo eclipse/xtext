@@ -34,18 +34,24 @@ import com.google.inject.name.Named;
 public class XtextTemplateStore extends TemplateStore {
 
 	private final static Logger log = Logger.getLogger(XtextTemplateStore.class);
-	private final URL res;
+	private final URL resource;
 
 	@Inject
 	public XtextTemplateStore(ContextTypeRegistry registry, IPreferenceStore store, @Named(Constants.LANGUAGE_NAME) String key,
 			AbstractUIPlugin plugin) {
 		super(registry, store, key + ".templates");
-		res = getTemplateFileURL(plugin);
+		resource = getTemplateFileURL(plugin);
 		try {
 			load();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
+	}
+	/**
+	 * @since 2.24
+	 */
+	protected URL getResource() {
+		return resource;
 	}
 
 	protected URL getTemplateFileURL(AbstractUIPlugin plugin) {
@@ -54,12 +60,12 @@ public class XtextTemplateStore extends TemplateStore {
 
 	@Override
 	protected void loadContributedTemplates() throws IOException {
-		if (res==null)
+		if (resource==null)
 			return;
 		TemplateReaderWriter reader = new TemplateReaderWriter();
 		InputStream openStream = null;
 		try {
-			openStream = res.openStream();
+			openStream = resource.openStream();
 			try {
 				TemplatePersistenceData[] read = reader.read(openStream, null);
 				for (TemplatePersistenceData templatePersistenceData : read) {
