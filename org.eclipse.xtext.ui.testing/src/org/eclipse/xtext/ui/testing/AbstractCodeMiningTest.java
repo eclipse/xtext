@@ -8,12 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.codemining.ICodeMining;
 import org.eclipse.jface.text.codemining.ICodeMiningProvider;
 import org.eclipse.jface.text.codemining.LineHeaderCodeMining;
@@ -22,6 +25,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.google.common.annotations.Beta;
+import com.google.common.util.concurrent.Futures;
 import com.google.inject.Inject;
 
 /**
@@ -74,61 +78,29 @@ public class AbstractCodeMiningTest extends AbstractEditorTest {
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 
 		String text = editor.getDocument().get();
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(text);
 
 		List<? extends ICodeMining> codeMinings;
-		try {
-			codeMinings = codeMiningProvider.provideCodeMinings(viewer, new NullProgressMonitor()).get();
-		} catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException(e);
-		}
+		codeMinings = Futures.getUnchecked(codeMiningProvider.provideCodeMinings(viewer, new NullProgressMonitor()));
 
 		for (ICodeMining codeMining : codeMinings) {
-			try {
-				codeMining.resolve(viewer, new NullProgressMonitor()).get();
-			} catch (InterruptedException | ExecutionException e) {
-				throw new RuntimeException(e);
-			}
+			Futures.getUnchecked(codeMining.resolve(viewer, new NullProgressMonitor()));
 			assertTrue("CodeMining is not resolved!", codeMining.isResolved());
 		}
 
-		codeMinings.sort((ICodeMining cm1, ICodeMining cm2) -> cm1.getPosition().getOffset() - cm2.getPosition().getOffset());
+		codeMinings.sort((ICodeMining cm1, ICodeMining cm2) -> cm2.getPosition().getOffset() - cm1.getPosition().getOffset());
 
-		int currentOffset = 0;
-		for (int i = 0; i < codeMinings.size(); i++) {
-
-			ICodeMining codeMining = codeMinings.get(i);
-
-			int codeMiningOffset = codeMining.getPosition().getOffset();
-
-			List<ICodeMining> codeMiningsOnTheSameOffset = getCodeMiningsByOffset(codeMinings, codeMiningOffset);
-
-			String codeMiningsText = getCodeMiningsText(codeMiningsOnTheSameOffset);
-
-			sb.append(text.substring(currentOffset, codeMiningOffset) + codeMiningsText);
-
-			currentOffset = codeMiningOffset;
-			if (containsLineHeaderCodeMining(codeMiningsOnTheSameOffset)) {
-				sb.append(System.lineSeparator());
-				currentOffset--;
+		Map<Integer, List<ICodeMining>> byPos = codeMinings.stream().collect(Collectors.groupingBy(e -> e.getPosition().getOffset(), LinkedHashMap::new, Collectors.toList()));
+		for (Entry<Integer, List<ICodeMining>> e : byPos.entrySet()) {
+			int codeMiningOffset = e.getKey();
+			List<ICodeMining> miningsAtOffset = e.getValue();
+			String codeMiningsText = getCodeMiningsText(miningsAtOffset);
+			if (containsLineHeaderCodeMining(miningsAtOffset)) {
+				sb.insert(codeMiningOffset,  ((IDocumentExtension4)editor.getDocument()).getDefaultLineDelimiter());
 			}
-
-			i = getLastCodeMiningOnOffset(codeMinings, codeMiningOffset);
+			sb.insert(codeMiningOffset, codeMiningsText);
 		}
-
-		sb.append(text.substring(currentOffset));
 		return sb.toString();
-	}
-
-	protected List<ICodeMining> getCodeMiningsByOffset(List<? extends ICodeMining> codeMinings, int offset) {
-		List<ICodeMining> result = new ArrayList<ICodeMining>();
-		for (ICodeMining codeMining : codeMinings) {
-			int codeMiningOffset = codeMining.getPosition().getOffset();
-			if (codeMiningOffset == offset) {
-				result.add(codeMining);
-			}
-		}
-		return result;
 	}
 
 	protected String getCodeMiningsText(List<? extends ICodeMining> codeMinings) {
@@ -155,17 +127,6 @@ public class AbstractCodeMiningTest extends AbstractEditorTest {
 			}
 		}
 		return false;
-	}
-
-	protected int getLastCodeMiningOnOffset(List<? extends ICodeMining> codeMinings, int offset) {
-		int i = 0;
-		for (; i < codeMinings.size(); i++) {
-			ICodeMining codeMining = codeMinings.get(i);
-			if (codeMining.getPosition().getOffset() > offset) {
-				return i - 1;
-			}
-		}
-		return codeMinings.size();
 	}
 
 	protected IFile dslFile(CharSequence content) {
