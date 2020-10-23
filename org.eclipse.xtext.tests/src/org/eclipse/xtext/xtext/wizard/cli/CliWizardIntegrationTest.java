@@ -20,6 +20,7 @@ import java.util.TreeSet;
 
 import org.eclipse.xtext.tests.LineDelimiters;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -122,7 +123,7 @@ public class CliWizardIntegrationTest {
 
 	private static ArrayList<WizardConfiguration> projectConfigs = Lists
 			.newArrayList(CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.plainMaven");
+				project.setBaseName("plainMaven");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.MAVEN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -130,7 +131,7 @@ public class CliWizardIntegrationTest {
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.mavenTycho");
+				project.setBaseName("mavenTycho");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -140,7 +141,7 @@ public class CliWizardIntegrationTest {
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.mavenTychoJ11");
+				project.setBaseName("mavenTychoJ11");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -151,15 +152,16 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(true);
 				project.setJavaVersion(JavaVersion.JAVA11);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.gradle");
+				project.setBaseName("gradle");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
 				project.setSourceLayout(SourceLayout.MAVEN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
 				project.getRuntimeProject().getTestProject().setEnabled(true);
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
+				project.setJunitVersion(JUnitVersion.JUNIT_5);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.eclipsePlugin");
+				project.setBaseName("eclipsePlugin");
 				project.setPreferredBuildSystem(BuildSystem.NONE);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.FLAT);
@@ -168,7 +170,7 @@ public class CliWizardIntegrationTest {
 				project.getUiProject().setEnabled(true);
 				project.getUiProject().getTestProject().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.eclipsePluginP2");
+				project.setBaseName("eclipsePluginP2");
 				project.setPreferredBuildSystem(BuildSystem.NONE);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.FLAT);
@@ -178,7 +180,7 @@ public class CliWizardIntegrationTest {
 				project.getUiProject().getTestProject().setEnabled(true);
 				project.getP2Project().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.mavenTychoP2");
+				project.setBaseName("mavenTychoP2");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -189,7 +191,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(true);
 				project.getP2Project().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.full");
+				project.setBaseName("full");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -200,7 +202,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(true);
 				project.getP2Project().setEnabled(true);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsMavenFatjar");
+				project.setBaseName("lsMavenFatjar");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -211,7 +213,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(false);
 				project.setLanguageServer(LanguageServer.FATJAR);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsMavenTychoFatjar");
+				project.setBaseName("lsMavenTychoFatjar");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -222,7 +224,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(false);
 				project.setLanguageServer(LanguageServer.FATJAR);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsGradleFatjar");
+				project.setBaseName("lsGradleFatjar");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -233,7 +235,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(false);
 				project.setLanguageServer(LanguageServer.FATJAR);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsMavenApp");
+				project.setBaseName("lsMavenApp");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -244,7 +246,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(false);
 				project.setLanguageServer(LanguageServer.APP);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsMavenTychoApp");
+				project.setBaseName("lsMavenTychoApp");
 				project.setPreferredBuildSystem(BuildSystem.MAVEN);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -255,7 +257,7 @@ public class CliWizardIntegrationTest {
 				project.getWebProject().setEnabled(false);
 				project.setLanguageServer(LanguageServer.APP);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
-				project.setBaseName("org.xtext.example.lsGradleApp");
+				project.setBaseName("lsGradleApp");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
 				project.setSourceLayout(SourceLayout.PLAIN);
 				project.setProjectLayout(ProjectLayout.HIERARCHICAL);
@@ -278,7 +280,7 @@ public class CliWizardIntegrationTest {
 		result.setXtextVersion(new XtextVersion("unspecified"));
 		result.setEncoding(Charsets.UTF_8);
 		result.setLineDelimiter(LineDelimiter.UNIX.getValue());
-		result.getLanguage().setName("org.xtext.example.mydsl.MyDsl");
+		result.getLanguage().setName("mydsl.MyDsl");
 		result.getLanguage().setFileExtensions(LanguageDescriptor.FileExtensions.fromString("mydsl"));
 		block.apply(result);
 		return result;
