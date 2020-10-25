@@ -25,77 +25,77 @@ class XmlParsingTest {
 	@Inject extension ParseHelper<XmlDocument>
 	@Inject extension ValidationTestHelper
 
-	@Test def test001() {
+	@Test def test001() throws Exception {
 		''''''
 		.parse.assertNoErrors
 	}
 
-	@Test def test002() {
+	@Test def test002() throws Exception {
 		'''<a/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test003() {
+	@Test def test003() throws Exception {
 		'''<a b=""/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test004() {
+	@Test def test004() throws Exception {
 		'''<a b="c"/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test005() {
+	@Test def test005() throws Exception {
 		'''<a b='c'/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test006() {
+	@Test def test006() throws Exception {
 		'''<a b="c" d='e'/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test007() {
+	@Test def test007() throws Exception {
 		'''<a b='c' d="e"/>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test008() {
+	@Test def test008() throws Exception {
 		'''<a></a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test009() {
+	@Test def test009() throws Exception {
 		'''<a b="c"></a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test010() {
+	@Test def test010() throws Exception {
 		'''<a b='c'></a>'''
 		.parse.assertNoErrors
 	}
 	
-	@Test def test011() {
+	@Test def test011() throws Exception {
 		'''<a b='c' d="e"></a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test012() {
+	@Test def test012() throws Exception {
 		'''<a b="c" d='e'></a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test013() {
+	@Test def test013() throws Exception {
 		'''<a>text</a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test014() {
+	@Test def test014() throws Exception {
 		'''<a b="c">text</a>'''
 		.parse.assertNoErrors
 	}
 
-	@Test def test015() {
+	@Test def test015() throws Exception {
 		'''
 			<a>
 				<b>text</b>
@@ -103,7 +103,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test016() {
+	@Test def test016() throws Exception {
 		'''
 			<a>
 				<b/>
@@ -111,7 +111,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test017() {
+	@Test def test017() throws Exception {
 		'''
 			<a b="c">
 				<d e="f"/>
@@ -119,7 +119,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test018() {
+	@Test def test018() throws Exception {
 		'''
 			<a>
 				<b>c</b>
@@ -129,7 +129,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test019() {
+	@Test def test019() throws Exception {
 		'''
 			<a>
 				<b>
@@ -140,7 +140,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test020() {
+	@Test def test020() throws Exception {
 		'''
 			<a>
 				<b>
@@ -151,7 +151,7 @@ class XmlParsingTest {
 		'''.parse.assertNoErrors
 	}
 
-	@Test def test021() {
+	@Test def test021() throws Exception {
 		'''
 			<a>
 				<b>
