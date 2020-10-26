@@ -9,7 +9,6 @@
 package org.eclipse.xtext.resource.impl;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -104,7 +103,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable
 
 	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		return concat(map(chunk2resourceDescriptions.values(), it -> it.getAllResourceDescriptions()));
+		return concat(transform(chunk2resourceDescriptions.values(), it -> it.getAllResourceDescriptions()));
 	}
 
 	@Override
@@ -149,7 +148,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable
 		out.writeInt(copy.entrySet().size());
 		for (Entry<String, ResourceDescriptionsData> entry : copy.entrySet()) {
 			out.writeUTF(entry.getKey());
-			Iterable<Object> descriptions = map(entry.getValue().getAllResourceDescriptions(),
+			Iterable<Object> descriptions = transform(entry.getValue().getAllResourceDescriptions(),
 					d -> d instanceof Serializable ? d : SerializableResourceDescription.createCopy(d));
 			out.writeInt(IterableExtensions.size(descriptions));
 			for (Object d : descriptions)

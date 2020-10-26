@@ -10,9 +10,9 @@ package org.eclipse.xtext.xtext.wizard;
 
 import java.util.Iterator;
 
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 
 public class LanguageDescriptor {
@@ -37,7 +37,7 @@ public class LanguageDescriptor {
 
 		@Override
 		public String toString() {
-			return IterableExtensions.join(fileExtensions, ",");
+			return Joiner.on(",").join(fileExtensions);
 		}
 	}
 

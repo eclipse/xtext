@@ -1,8 +1,7 @@
 package org.eclipse.xtext.testlanguages.fileAware.ide.refactoring;
 
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.filter;
+import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.head;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.map;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.toMap;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.toSet;
 
@@ -36,7 +35,7 @@ public class FileAwareTestLanguageReferenceUpdater extends ReferenceUpdater {
 		QualifiedName pkgName = names.getFullyQualifiedName(pkg);
 		Map<Element, Import> actual = toMap(pkg.getImports(), imp -> imp.getElement());
 		Iterable<Element> targets = filter(
-				map(context.getUpdatableReferences(), ur -> ur.getTargetEObject()),
+				transform(context.getUpdatableReferences(), ur -> ur.getTargetEObject()),
 				Element.class);
 		Set<Element> expected = toSet(filter(targets, e -> !names.getFullyQualifiedName(e).startsWith(pkgName)));
 		Set<Element> toAdd = toSet(filter(expected, it -> !actual.containsKey(it)));

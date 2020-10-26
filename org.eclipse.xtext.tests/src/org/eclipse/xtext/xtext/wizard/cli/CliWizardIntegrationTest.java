@@ -23,8 +23,6 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -334,8 +332,9 @@ public class CliWizardIntegrationTest {
 		Comparator<GeneratedFile> sortByPath = (GeneratedFile $0, GeneratedFile $1) -> {
 			return $0.relativePath.compareTo($1.relativePath);
 		};
-		return CollectionLiterals.newTreeSet(sortByPath,
-				((GeneratedFile[]) Conversions.unwrapArray(generatedFiles, GeneratedFile.class)));
+		TreeSet<GeneratedFile> result = new TreeSet<>(sortByPath);
+		result.addAll(generatedFiles);
+		return result;
 	}
 
 	private void collectAllFiles(File root, List<File> children) {

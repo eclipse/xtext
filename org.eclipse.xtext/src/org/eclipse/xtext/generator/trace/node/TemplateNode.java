@@ -8,13 +8,13 @@
  */
 package org.eclipse.xtext.generator.trace.node;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
@@ -88,7 +88,7 @@ public class TemplateNode extends CompositeGeneratorNode
 
 	@Override
 	public void appendImmediate(Object object, String indentation) {
-		List<IGeneratorNode> removed = Lists.<IGeneratorNode>newArrayList();
+		List<IGeneratorNode> removed = new ArrayList<>();
 		for (int i = currentParent.getChildren().size() - 1; i >= 0; i--) {
 			IGeneratorNode node = currentParent.getChildren().get(i);
 			if (node instanceof TextNode && !TemplateNode.hasContent(((TextNode) node).getText())) {
@@ -98,7 +98,7 @@ public class TemplateNode extends CompositeGeneratorNode
 					removed.add(currentParent.getChildren().remove(i));
 				} else {
 					append(object, indentation);
-					ListExtensions.reverse(removed).forEach(it -> append(it, indentation));
+					Lists.reverse(removed).forEach(it -> append(it, indentation));
 					return;
 				}
 			}

@@ -31,7 +31,6 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator;
 import org.eclipse.xtext.util.CollectionBasedAcceptor;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 import com.google.common.collect.Iterables;
@@ -99,7 +98,7 @@ public class CodeActionService implements ICodeActionService2 {
 		serializer.applyModifications(CollectionBasedAcceptor.of(documentchanges));
 		WorkspaceEdit workspaceEdit = new WorkspaceEdit();
 		for (ITextDocumentChange documentchange : Iterables.filter(documentchanges, ITextDocumentChange.class)) {
-			List<TextEdit> edits = ListExtensions.map(documentchange.getReplacements(),
+			List<TextEdit> edits = Lists.transform(documentchange.getReplacements(),
 					(ITextReplacement replacement) -> {
 						TextEdit textEdit = new TextEdit();
 						textEdit.setNewText(replacement.getReplacementText());

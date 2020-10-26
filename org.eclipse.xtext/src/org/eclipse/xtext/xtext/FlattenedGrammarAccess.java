@@ -41,11 +41,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
@@ -88,7 +88,7 @@ public class FlattenedGrammarAccess {
 			return;
 		}
 		copy.setDefinesHiddenTokens(true);
-		addAll(copy.getHiddenTokens(), ListExtensions.map(orig.getHiddenTokens(),
+		addAll(copy.getHiddenTokens(), Lists.transform(orig.getHiddenTokens(),
 				hidden -> origToCopy.get(new RuleWithParameterValues(hidden))));
 	}
 
@@ -125,7 +125,7 @@ public class FlattenedGrammarAccess {
 				Set<Parameter> getParameterConfig(RuleCall origRuleCall, RuleCall copyRuleCall) {
 					if (origRuleCall.getArguments().isEmpty())
 						return Collections.emptySet();
-					return toSet(map(filter(origRuleCall.getArguments(), it -> evaluate(it.getValue())),
+					return toSet(transform(filter(origRuleCall.getArguments(), it -> evaluate(it.getValue())),
 							it -> it.getParameter()));
 				}
 

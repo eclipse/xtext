@@ -29,10 +29,10 @@ import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -95,7 +95,7 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
 		public void afterBuild(List<IResourceDescription.Delta> deltas) {
 			BuildNotification buildNotification = new BuildNotification();
 			buildNotification.message = "Built "
-					+ Joiner.on(", ").join(ListExtensions.map(deltas, d -> d.getUri().toString()), ", ");
+					+ Joiner.on(", ").join(Lists.transform(deltas, d -> d.getUri().toString()), ", ");
 			client.buildHappened(buildNotification);
 		}
 
