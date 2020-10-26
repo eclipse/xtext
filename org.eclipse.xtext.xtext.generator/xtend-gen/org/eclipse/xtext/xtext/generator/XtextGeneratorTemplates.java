@@ -47,6 +47,8 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * Templates for generating the common language infrastructure.
@@ -1385,18 +1387,18 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        TypeReference _typeRef_1 = TypeReference.typeRef("org.osgi.framework.Bundle");
+        TypeReference _typeRef_1 = TypeReference.typeRef(Bundle.class);
         _builder.append(_typeRef_1, "\t");
         _builder.append(" getBundle() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.core.runtime.Platform");
+        TypeReference _typeRef_2 = TypeReference.typeRef(FrameworkUtil.class);
         _builder.append(_typeRef_2, "\t\t");
         _builder.append(".getBundle(");
         TypeReference _eclipsePluginActivator = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator, "\t\t");
-        _builder.append(".PLUGIN_ID);");
+        _builder.append(".class);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");

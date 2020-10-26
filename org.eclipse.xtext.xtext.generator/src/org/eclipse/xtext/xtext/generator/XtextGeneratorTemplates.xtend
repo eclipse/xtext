@@ -39,6 +39,8 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
+import org.osgi.framework.Bundle
+import org.osgi.framework.FrameworkUtil
 
 /**
  * Templates for generating the common language infrastructure.
@@ -465,8 +467,8 @@ class XtextGeneratorTemplates {
 			public class «grammar.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
-				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «'org.eclipse.core.runtime.Platform'.typeRef».getBundle(«eclipsePluginActivator».PLUGIN_ID);
+				protected «Bundle.typeRef» getBundle() {
+					return «FrameworkUtil.typeRef».getBundle(«eclipsePluginActivator».class);
 				}
 				
 				@Override
