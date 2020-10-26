@@ -3,11 +3,12 @@
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.ui;
 
-import com.google.inject.Injector;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.xtext.ui.tests.internal.TestsActivator;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+
+import com.google.inject.Injector;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -17,7 +18,7 @@ public class Ecore2XtextTestExecutableExtensionFactory extends AbstractGuiceAwar
 
 	@Override
 	protected Bundle getBundle() {
-		return Platform.getBundle(TestsActivator.PLUGIN_ID);
+		return FrameworkUtil.getBundle(TestsActivator.class);
 	}
 	
 	@Override

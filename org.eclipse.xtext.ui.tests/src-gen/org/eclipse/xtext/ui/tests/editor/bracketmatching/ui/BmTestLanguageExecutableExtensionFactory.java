@@ -4,10 +4,10 @@
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ui;
 
 import com.google.inject.Injector;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -17,7 +17,7 @@ public class BmTestLanguageExecutableExtensionFactory extends AbstractGuiceAware
 
 	@Override
 	protected Bundle getBundle() {
-		return Platform.getBundle(TestsActivator.PLUGIN_ID);
+		return FrameworkUtil.getBundle(TestsActivator.class);
 	}
 	
 	@Override
