@@ -22,6 +22,8 @@ import java.util.List
 import java.util.Map
 import java.util.Properties
 import org.apache.log4j.Logger
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Constants
@@ -31,16 +33,17 @@ import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
+import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
-
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 import org.osgi.framework.Bundle
+import org.osgi.framework.BundleContext
 import org.osgi.framework.FrameworkUtil
+
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 /**
  * Templates for generating the common language infrastructure.
@@ -107,17 +110,17 @@ class XtextGeneratorTemplates {
 					«ENDFOR»
 					«IF langConfig.grammar.usedGrammars.isEmpty»
 						// register default ePackages
-						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
-							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+						if (!«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+							«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 								"ecore", new «'org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl'.typeRef»());
-						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+						if (!«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+							«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 								"xmi", new «'org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl'.typeRef»());
-						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
-							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+						if (!«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
+							«Resource.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 								"xtextbin", new «BinaryGrammarResourceFactoryImpl»());
-						if (!«'org.eclipse.emf.ecore.EPackage'.typeRef».Registry.INSTANCE.containsKey(«XtextPackage».eNS_URI))
-							«'org.eclipse.emf.ecore.EPackage'.typeRef».Registry.INSTANCE.put(«XtextPackage».eNS_URI, «XtextPackage».eINSTANCE);
+						if (!«EPackage.typeRef».Registry.INSTANCE.containsKey(«XtextPackage».eNS_URI))
+							«EPackage.typeRef».Registry.INSTANCE.put(«XtextPackage».eNS_URI, «XtextPackage».eINSTANCE);
 					«ENDIF»
 			
 					«Injector» injector = createInjector();
@@ -507,13 +510,13 @@ class XtextGeneratorTemplates {
 				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
 				
 				@Override
-				public void start(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
+				public void start(«BundleContext.typeRef» context) throws Exception {
 					super.start(context);
 					INSTANCE = this;
 				}
 				
 				@Override
-				public void stop(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
+				public void stop(«BundleContext.typeRef» context) throws Exception {
 					injectors.clear();
 					INSTANCE = null;
 					super.stop(context);
