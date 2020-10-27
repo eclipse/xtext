@@ -24,6 +24,7 @@ import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 /**
@@ -34,7 +35,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 	@Before
 	public void doNotRunOnOxygen() {
 		//FIXME workaround for https://github.com/eclipse/xtext-xtend/issues/767
-		Version version = Platform.getBundle("org.eclipse.core.runtime").getVersion();
+		Version version = FrameworkUtil.getBundle(Platform.class).getVersion();
 		// in case it was not obvious: 3.13 == Oxygen
 		Assume.assumeFalse(version.getMajor() == 3 && version.getMinor() == 13);
 	}
