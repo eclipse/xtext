@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui;
 
+import com.google.inject.Injector;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
-import com.google.inject.Injector;
 
 /**
  * This class was generated. Customizations should only happen in a newly
