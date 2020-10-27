@@ -32,3 +32,5 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
 Automatic-Module-Name: org.eclipse.xtext.xbase.ui.tests
+Export-Package: org.eclipse.xtext.xbase.testlanguages.ui.tests;x-internal=true,
+ org.eclipse.xtext.xbase.testlanguages.bug462047.ui.tests;x-internal=true

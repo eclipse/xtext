@@ -983,10 +983,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSubtitleSubtitleKeyword_3_0 = (Keyword)cSubtitleEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum CellType:
-		//	default='Default' |
-		//	value1='Value1' |
-		//	value2='Value2' |
-		//	subtitle='Subtitle';
+		//	default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle';
 		public EnumRule getRule() { return rule; }
 		
 		//default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle'
@@ -1362,10 +1359,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum CellType:
-	//	default='Default' |
-	//	value1='Value1' |
-	//	value2='Value2' |
-	//	subtitle='Subtitle';
+	//	default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle';
 	public CellTypeElements getCellTypeAccess() {
 		return eCellType;
 	}

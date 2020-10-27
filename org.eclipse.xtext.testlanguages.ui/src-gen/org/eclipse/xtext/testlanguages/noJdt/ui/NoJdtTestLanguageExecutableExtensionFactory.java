@@ -4,10 +4,10 @@
 package org.eclipse.xtext.testlanguages.noJdt.ui;
 
 import com.google.inject.Injector;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -17,7 +17,7 @@ public class NoJdtTestLanguageExecutableExtensionFactory extends AbstractGuiceAw
 
 	@Override
 	protected Bundle getBundle() {
-		return Platform.getBundle(TestlanguagesActivator.PLUGIN_ID);
+		return FrameworkUtil.getBundle(TestlanguagesActivator.class);
 	}
 	
 	@Override
