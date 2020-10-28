@@ -26,11 +26,15 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.osgi.util.ManifestElement;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
+import org.eclipse.xtext.ide.DefaultIdeModule;
+import org.eclipse.xtext.ui.DefaultUiModule;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.Constants;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
@@ -108,10 +112,10 @@ public class Activator extends Plugin {
 	 * @since 2.13
 	 */
 	protected void handleGuiceInitializationError(Throwable t) throws CoreException {
-		Bundle bundleXtextRuntime = Platform.getBundle(PLUGIN_ID_XTEXT_RT);
-		Bundle bundleXtextIde = Platform.getBundle("org.eclipse.xtext.ide");
-		Bundle bundleXtextUi = Platform.getBundle(PLUGIN_ID_XTEXT_UI);
-		Bundle bundleXtextUiShared = Platform.getBundle(PLUGIN_ID);
+		Bundle bundleXtextRuntime = FrameworkUtil.getBundle(XtextRuntimeModule.class);
+		Bundle bundleXtextIde = FrameworkUtil.getBundle(DefaultIdeModule.class);
+		Bundle bundleXtextUi = FrameworkUtil.getBundle(DefaultUiModule.class);
+		Bundle bundleXtextUiShared = FrameworkUtil.getBundle(SharedModule.class);
 
 		StringBuilder msg = new StringBuilder();
 		msg.append("Xtext configuration error!\n");

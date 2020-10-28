@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -39,7 +40,7 @@ public class EclipseLogAppender extends AppenderSkeleton {
 			if (!Platform.isRunning()) {
 				LOGGER.warn("You appear to be running outside Eclipse; you might want to remove the jar org.eclipse.xtext.logging*.jar from your classpath and supply your own log4j.properties.");
 			} else {
-				log = Platform.getLog(Platform.getBundle(LOG4J_BUNDLE_NAME));
+				log = Platform.getLog(FrameworkUtil.getBundle(Logger.class));
 			}
 			initialized = true;
 		}

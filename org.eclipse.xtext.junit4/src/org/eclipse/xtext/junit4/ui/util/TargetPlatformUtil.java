@@ -54,7 +54,7 @@ public class TargetPlatformUtil {
 		ITargetPlatformService tpService = TargetPlatformService.getDefault();
 		ITargetDefinition targetDef = tpService.newTarget();
 		targetDef.setName("Tycho platform");
-		Bundle[] bundles = Platform.getBundle("org.eclipse.core.runtime").getBundleContext().getBundles();
+		Bundle[] bundles = FrameworkUtil.getBundle(Platform.class).getBundleContext().getBundles();
 		List<ITargetLocation> bundleContainers = new ArrayList<ITargetLocation>();
 		Set<File> dirs = new HashSet<File>();
 		for (Bundle bundle : bundles) {
