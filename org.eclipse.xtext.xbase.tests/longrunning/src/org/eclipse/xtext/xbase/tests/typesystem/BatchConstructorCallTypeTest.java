@@ -32,7 +32,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
 	}
 
 	@Override
-	public void resolvesConstructorCallsTo(String expression, String... types) {
+	public void resolvesConstructorCallsTo(String expression, String... types) throws Exception {
 		String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
 		List<XConstructorCall> featureCalls = findConstructorCalls(expressionWithQualifiedNames);
 		Assert.assertFalse(featureCalls.isEmpty());

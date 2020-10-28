@@ -41,7 +41,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	public ErrorCollector collector = new ErrorCollector();
 
 	@Override
-	public List<Object> resolvesClosuresTo(String expression, String... types) {
+	public List<Object> resolvesClosuresTo(String expression, String... types) throws Exception {
 		List<XClosure> closures = findClosures(expression);
 		Assert.assertFalse(closures.isEmpty());
 		Assert.assertEquals(types.length, closures.size());

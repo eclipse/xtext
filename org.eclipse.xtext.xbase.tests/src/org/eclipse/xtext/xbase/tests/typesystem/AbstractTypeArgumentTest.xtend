@@ -32,7 +32,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
  */
 abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	
-	def Iterator<XExpression> bindTypeArgumentsTo(String expression, String... typeArguments) {
+	def Iterator<XExpression> bindTypeArgumentsTo(String expression, String... typeArguments) throws Exception {
 		val expressions = expression.findExpressionWithTypeArguments
 		return and(expressions.iterator, typeArguments)
 	}
@@ -86,7 +86,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	
 	def protected void resolveTypes(XExpression expression)
 	
-	def protected findExpressionWithTypeArguments(CharSequence expression) {
+	def protected findExpressionWithTypeArguments(CharSequence expression) throws Exception {
 		val xExpression = expression(expression, false)
 		xExpression.resolveTypes
 		val result = EcoreUtil2::eAll(xExpression).filter(typeof(XExpression)).filter [ it |

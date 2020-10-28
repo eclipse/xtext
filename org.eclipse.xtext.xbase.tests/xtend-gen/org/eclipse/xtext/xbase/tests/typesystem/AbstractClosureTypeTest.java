@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -32,7 +31,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
-  public abstract List<Object> resolvesClosuresTo(final String expression, final String... types);
+  public abstract List<Object> resolvesClosuresTo(final String expression, final String... types) throws Exception;
   
   public abstract void withEquivalents(final List<Object> references, final String... type);
   
@@ -48,18 +47,14 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     AbstractClosureTypeTest.seenExpressions = null;
   }
   
-  protected List<XClosure> findClosures(final CharSequence expression) {
-    try {
-      final String expressionAsString = expression.toString().replace("ClosureTypeResolutionTestData", "org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData").replace("$$", "org::eclipse::xtext::xbase::lib::");
-      final XExpression xExpression = this.expression(expressionAsString, false);
-      final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(Iterators.<XClosure>filter(EcoreUtil2.eAll(xExpression), XClosure.class));
-      final Function1<XClosure, Integer> _function = (XClosure it) -> {
-        return Integer.valueOf(NodeModelUtils.findActualNodeFor(it).getOffset());
-      };
-      return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  protected List<XClosure> findClosures(final CharSequence expression) throws Exception {
+    final String expressionAsString = expression.toString().replace("ClosureTypeResolutionTestData", "org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData").replace("$$", "org::eclipse::xtext::xbase::lib::");
+    final XExpression xExpression = this.expression(expressionAsString, false);
+    final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(Iterators.<XClosure>filter(EcoreUtil2.eAll(xExpression), XClosure.class));
+    final Function1<XClosure, Integer> _function = (XClosure it) -> {
+      return Integer.valueOf(NodeModelUtils.findActualNodeFor(it).getOffset());
+    };
+    return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
   }
   
   @Override
