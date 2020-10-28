@@ -151,6 +151,7 @@ public class CliWizardIntegrationTest {
 				project.getIdeProject().setEnabled(true);
 				project.getWebProject().setEnabled(true);
 				project.setJavaVersion(JavaVersion.JAVA11);
+				project.setJunitVersion(JUnitVersion.JUNIT_5);
 			}), CliWizardIntegrationTest.newProjectConfig(project -> {
 				project.setBaseName("gradle");
 				project.setPreferredBuildSystem(BuildSystem.GRADLE);
