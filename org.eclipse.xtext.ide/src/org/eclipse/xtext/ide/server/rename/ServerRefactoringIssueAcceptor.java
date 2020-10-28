@@ -21,7 +21,9 @@ import org.eclipse.lsp4j.jsonrpc.messages.ResponseErrorCode;
 import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -95,8 +97,8 @@ public class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor 
 		responseError.setMessage(getMessageBySeverity(maxSeverity));
 		responseError.setCode(getCodeBySeverity(maxSeverity));
 		List<Issue> bySeverity = IterableExtensions.sortBy(issues, (i) -> i.severity);
-		List<String> messages = ListExtensions.map(ListExtensions.reverse(bySeverity), (i) -> i.message);
-		responseError.setData(IterableExtensions.join(messages, "\n"));
+		List<String> messages = Lists.transform(Lists.reverse(bySeverity), (i) -> i.message);
+		responseError.setData(Joiner.on("\n").join(messages));
 		return responseError;
 	}
 

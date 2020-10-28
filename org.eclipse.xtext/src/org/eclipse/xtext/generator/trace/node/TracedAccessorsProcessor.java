@@ -26,19 +26,19 @@ import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class TracedAccessorsProcessor extends AbstractClassProcessor {
 
 	private static final Set<String> TYPES_WITH_GOOD_TO_STRING = Collections
-			.unmodifiableSet(CollectionLiterals.newHashSet("string", "boolean", "int", "long", "integer"));
+			.unmodifiableSet(Sets.newHashSet("string", "boolean", "int", "long", "integer"));
 
 	@Override
 	public void doTransform(MutableClassDeclaration annotatedClass, @Extension TransformationContext context) {
@@ -49,7 +49,7 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
 		TypeReference[] factories = annotation == null ? null : annotation.getClassArrayValue("value");
 		if (factories == null)
 			return;
-		for (InterfaceDeclaration f : Iterables.filter(ListExtensions.map(Arrays.asList(factories), it -> it.getType()),
+		for (InterfaceDeclaration f : Iterables.filter(Lists.transform(Arrays.asList(factories), it -> it.getType()),
 				InterfaceDeclaration.class)) {
 			for (TypeReference t : FluentIterable.from(f.getDeclaredMethods())
 					.filter(it -> it.getSimpleName().startsWith("create") && Iterables.isEmpty(it.getParameters()))

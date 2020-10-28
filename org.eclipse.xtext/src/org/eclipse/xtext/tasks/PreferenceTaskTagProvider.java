@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.preferences.IPreferenceValues;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.PreferenceKey;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -36,7 +36,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
 	public static final PreferenceKey CASE_SENSITIVE_KEY = new PreferenceKey("task.caseSensitive", "true");
 
 	public static final List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(
-			CollectionLiterals.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY,
+			Lists.newArrayList(PreferenceTaskTagProvider.TAGS_KEY,
 					PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
 
 	public static List<TaskTag> parseTags(String names, String priorities) {

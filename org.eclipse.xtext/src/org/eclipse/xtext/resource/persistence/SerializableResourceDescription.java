@@ -9,7 +9,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import static org.eclipse.xtext.resource.persistence.SerializationExtensions.*;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
+import static com.google.common.collect.Iterables.*;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -132,9 +132,9 @@ public class SerializableResourceDescription extends AbstractResourceDescription
 		SerializableResourceDescription description = new SerializableResourceDescription();
 		description.setURI(desc.getURI());
 		description.descriptions = Lists.newArrayList(
-				map(desc.getExportedObjects(), SerializableResourceDescription::createCopy));
+				transform(desc.getExportedObjects(), SerializableResourceDescription::createCopy));
 		description.references = Lists.newArrayList(
-				map(desc.getReferenceDescriptions(), SerializableResourceDescription::createCopy));
+				transform(desc.getReferenceDescriptions(), SerializableResourceDescription::createCopy));
 		description.importedNames = Lists.newArrayList(desc.getImportedNames());
 		return description;
 	}

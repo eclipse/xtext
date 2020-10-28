@@ -11,7 +11,6 @@ package org.eclipse.xtext.resource.containers;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.size;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 
 import java.util.Collections;
 import java.util.Set;
@@ -106,14 +105,14 @@ public class LiveShadowedChunkedContainer implements IContainer {
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		Set<URI> localURIs = getExistingOrRenamedResourceURIs();
-		return concat(concat(map(getContainedLocalDescriptions(), it -> it.getExportedObjects())),
+		return concat(concat(transform(getContainedLocalDescriptions(), it -> it.getExportedObjects())),
 				filter(getChunk().getExportedObjects(), it -> !localURIs.contains(it.getEObjectURI().trimFragment())));
 	}
 
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		Set<URI> localURIs = getExistingOrRenamedResourceURIs();
-		return concat(concat(map(getContainedLocalDescriptions(), it -> it.getExportedObjects(type, name, ignoreCase))),
+		return concat(concat(transform(getContainedLocalDescriptions(), it -> it.getExportedObjects(type, name, ignoreCase))),
 				filter(getChunk().getExportedObjects(type, name, ignoreCase),
 						it -> !localURIs.contains(it.getEObjectURI().trimFragment())));
 	}
@@ -121,7 +120,7 @@ public class LiveShadowedChunkedContainer implements IContainer {
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
 		Set<URI> localURIs = getExistingOrRenamedResourceURIs();
-		return concat(concat(map(getContainedLocalDescriptions(), it -> it.getExportedObjectsByObject(object))),
+		return concat(concat(transform(getContainedLocalDescriptions(), it -> it.getExportedObjectsByObject(object))),
 				filter(getChunk().getExportedObjectsByObject(object),
 						it -> !localURIs.contains(it.getEObjectURI().trimFragment())));
 	}
@@ -129,7 +128,7 @@ public class LiveShadowedChunkedContainer implements IContainer {
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		Set<URI> localURIs = getExistingOrRenamedResourceURIs();
-		return concat(concat(map(getContainedLocalDescriptions(), it -> it.getExportedObjectsByType(type))),
+		return concat(concat(transform(getContainedLocalDescriptions(), it -> it.getExportedObjectsByType(type))),
 				filter(getChunk().getExportedObjectsByType(type),
 						it -> !localURIs.contains(it.getEObjectURI().trimFragment())));
 	}

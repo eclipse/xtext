@@ -159,7 +159,7 @@ public class TypeReference {
 				throw new IllegalArgumentException("Cannot determine the package name of '" + qualifiedName
 						+ "'. Please use the TypeReference(packageName, className) constructor");
 			}
-			return IterableExtensions.join(packageSegments, ".");
+			return Joiner.on(".").join(packageSegments);
 		} else {
 			List<String> packageSegments = segments.subList(0, segments.size() - 1);
 			while (!packageSegments.isEmpty()) {

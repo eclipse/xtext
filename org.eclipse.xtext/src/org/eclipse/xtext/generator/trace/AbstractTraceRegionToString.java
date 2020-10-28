@@ -242,8 +242,8 @@ public abstract class AbstractTraceRegionToString {
 	}
 
 	protected String render(Collection<AbstractTraceRegionToString.Insert> inserts, int width) {
-		String opens = join(map(sortBy(filter(inserts, i -> i.open), i -> sortKey(i)), i -> render(i, width)), ",");
-		String closes = join(map(sortBy(filter(inserts, i -> !i.open), i -> -sortKey(i)), i -> render(i, width)), ",");
+		String opens = join(transform(sortBy(filter(inserts, i -> i.open), i -> sortKey(i)), i -> render(i, width)), ",");
+		String closes = join(transform(sortBy(filter(inserts, i -> !i.open), i -> -sortKey(i)), i -> render(i, width)), ",");
 		String s1 = opens.isEmpty() ? "" : ("[" + opens + "[");
 		String s2 = closes.isEmpty() ? "" : ("]" + closes + "]");
 		return (s2 + s1);
@@ -311,7 +311,7 @@ public abstract class AbstractTraceRegionToString {
 		String length = Strings.padStart(Integer.toString(region.region.getMyLength()), lengthW, '0');
 		String space = Strings.repeat(" ", indent);
 		String name = region.region.getClass().getSimpleName();
-		String locations = join(map(region.locations, it -> render(it)), ", ");
+		String locations = join(transform(region.locations, it -> render(it)), ", ");
 		String loc = debug + " " + offset + "-" + length + space;
 		String header = id + ": " + loc + name + " -> " + locations;
 		if (region.children.isEmpty()) {
@@ -335,17 +335,17 @@ public abstract class AbstractTraceRegionToString {
 		for (File file : remoteFiles.values()) {
 			addAll(file.lines, render(file, idwidth));
 		}
-		int localWidth = Math.max(max(map(localFile.lines, (String it) -> Integer.valueOf(it.length()))),
+		int localWidth = Math.max(max(transform(localFile.lines, (String it) -> Integer.valueOf(it.length()))),
 				getLocalTitle().length() + 2);
-		int remoteWidth = max(map(remoteFiles.values(),
-				(File it) -> Math.max(max(map(it.lines, (String it_1) -> Integer.valueOf(it_1.length()))),
+		int remoteWidth = max(transform(remoteFiles.values(),
+				(File it) -> Math.max(max(transform(it.lines, (String it_1) -> Integer.valueOf(it_1.length()))),
 						getRemoteTitle(it.uri).length() + 2)));
 		localFile.lines.add(0, title(null, localWidth));
 		for (File file : remoteFiles.values()) {
 			file.lines.add(0, title(file.uri, remoteWidth));
 		}
 		List<String> left = localFile.lines;
-		List<String> right = toList(concat(map(remoteFiles.values(), it -> it.lines)));
+		List<String> right = toList(concat(transform(remoteFiles.values(), it -> it.lines)));
 		ArrayList<String> result = new ArrayList<>();
 		if (showLegend) {
 			result.add(
@@ -362,12 +362,12 @@ public abstract class AbstractTraceRegionToString {
 				result.add(
 						"<N>: <isDebug> <offset>-<length> <RegionJavaClass> -> <LocationJavaClass>[<offset>,<length>,<uri>]");
 			}
-			Iterable<RegionHandle> allhandles = concat(map(roothandles, it -> collect(it, it_1 -> it_1.children)));
+			Iterable<RegionHandle> allhandles = concat(transform(roothandles, it -> collect(it, it_1 -> it_1.children)));
 			int offsetWidth = String
-					.valueOf(max(map(allhandles, (RegionHandle it) -> Integer.valueOf(it.region.getMyOffset()))))
+					.valueOf(max(transform(allhandles, (RegionHandle it) -> Integer.valueOf(it.region.getMyOffset()))))
 					.length();
 			int lengthWidth = String
-					.valueOf(max(map(allhandles, (RegionHandle it) -> Integer.valueOf(it.region.getMyLength()))))
+					.valueOf(max(transform(allhandles, (RegionHandle it) -> Integer.valueOf(it.region.getMyLength()))))
 					.length();
 			for (RegionHandle handle : roothandles) {
 				render(handle, idwidth, offsetWidth, lengthWidth, 1, result);

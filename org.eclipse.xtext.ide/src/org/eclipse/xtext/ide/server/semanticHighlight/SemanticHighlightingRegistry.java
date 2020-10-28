@@ -38,7 +38,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 import com.google.common.base.Preconditions;
@@ -47,6 +46,7 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Streams;
 import com.google.inject.Inject;
@@ -149,8 +149,8 @@ public class SemanticHighlightingRegistry {
 		Document document = context.getDocument();
 		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(calculator);
 		calculator.provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl);
-		Iterable<SemanticHighlightingRegistry.HighlightedRange> ranges = Iterables.concat(ListExtensions
-				.map(acceptor.getPositions(), position -> ListExtensions.map(Arrays.asList(position.getIds()), id -> {
+		Iterable<SemanticHighlightingRegistry.HighlightedRange> ranges = Iterables.concat(Lists.transform(
+				acceptor.getPositions(), position -> Lists.transform(Arrays.asList(position.getIds()), id -> {
 					Position start = document.getPosition(position.getOffset());
 					Position end = document.getPosition(position.getOffset() + position.getLength());
 					int scope = getIndex(mapper.toScopes(id));
@@ -191,8 +191,8 @@ public class SemanticHighlightingRegistry {
 				builder.put(endLine, new Token(0, it.getEnd().getCharacter(), it.scope));
 			}
 		});
-		return appendEmptyLineTokens(IterableExtensions.toList(IterableExtensions
-				.map(builder.build().asMap().entrySet(), it -> new SemanticHighlightingInformation(it.getKey(),
+		return appendEmptyLineTokens(IterableExtensions.toList(Iterables
+				.transform(builder.build().asMap().entrySet(), it -> new SemanticHighlightingInformation(it.getKey(),
 						SemanticHighlightingTokens.encode(it.getValue())))),
 				document);
 	}

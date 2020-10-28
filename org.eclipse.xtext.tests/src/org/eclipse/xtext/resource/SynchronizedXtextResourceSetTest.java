@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -42,7 +41,7 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
 		List<Thread> threads = new ArrayList<>();
 		new IntegerRange(1, 10).forEach((Integer i) -> {
 			threads.add(new Thread(() -> {
-				List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+				List<Resource> resources = new ArrayList<>();
 				for (int j = 0; j < 5000; j++) {
 					Resource resource = resourceSet.createResource(URI.createURI(i + " " + j + ".xmi"));
 					Assert.assertNotNull(resource);
