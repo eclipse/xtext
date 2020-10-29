@@ -49,9 +49,6 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
 
 /**
  * Templates for generating the common language infrastructure.
@@ -1390,13 +1387,13 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
-        TypeReference _typeRef_1 = TypeReference.typeRef(Bundle.class);
+        TypeReference _typeRef_1 = TypeReference.typeRef("org.osgi.framework.Bundle");
         _builder.append(_typeRef_1, "\t");
         _builder.append(" getBundle() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _typeRef_2 = TypeReference.typeRef(FrameworkUtil.class);
+        TypeReference _typeRef_2 = TypeReference.typeRef("org.osgi.framework.FrameworkUtil");
         _builder.append(_typeRef_2, "\t\t");
         _builder.append(".getBundle(");
         TypeReference _eclipsePluginActivator = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
@@ -1538,7 +1535,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public void start(");
-        TypeReference _typeRef_1 = TypeReference.typeRef(BundleContext.class);
+        TypeReference _typeRef_1 = TypeReference.typeRef("org.osgi.framework.BundleContext");
         _builder.append(_typeRef_1, "\t");
         _builder.append(" context) throws Exception {");
         _builder.newLineIfNotEmpty();
@@ -1558,7 +1555,7 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public void stop(");
-        TypeReference _typeRef_2 = TypeReference.typeRef(BundleContext.class);
+        TypeReference _typeRef_2 = TypeReference.typeRef("org.osgi.framework.BundleContext");
         _builder.append(_typeRef_2, "\t");
         _builder.append(" context) throws Exception {");
         _builder.newLineIfNotEmpty();
