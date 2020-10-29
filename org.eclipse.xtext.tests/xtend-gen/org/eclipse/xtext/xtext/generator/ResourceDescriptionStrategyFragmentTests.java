@@ -57,7 +57,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
   }
   
   @Test
-  public void testGenerateNothing() {
+  public void testGenerateNothing() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -74,7 +74,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
   }
   
   @Test
-  public void testGenerateNothing_1() {
+  public void testGenerateNothing_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -94,7 +94,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
   }
   
   @Test
-  public void testGenerate() {
+  public void testGenerate() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -166,7 +166,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
   }
   
   @Test
-  public void testGenerate_NoStubs() {
+  public void testGenerate_NoStubs() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();

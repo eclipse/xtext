@@ -32,31 +32,31 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 		}
 	}
 
-	@Test def void testVarNameWithEClass() {
+	@Test def void testVarNameWithEClass() throws Exception {
 		"eClass".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass))
 	}
 
-	@Test def void testVarNameWithMultiReference() {
+	@Test def void testVarNameWithMultiReference() throws Exception {
 		"eOperation".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_EAllOperations))
 	}
 
-	@Test def void testVarNameWithSingleReference() {
+	@Test def void testVarNameWithSingleReference() throws Exception {
 		"name".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.ENamedElement_Name))
 	}
 
-	@Test def void testVarNameConflictingWithXtendKeyword() {
+	@Test def void testVarNameConflictingWithXtendKeyword() throws Exception {
 		"_abstract".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_Abstract))
 	}
 
-	@Test def void testVarNameConflictingWithParam() {
+	@Test def void testVarNameConflictingWithParam() throws Exception {
 		"_xxx".assertEquals(fragment.toVarName(EcoreFactory.eINSTANCE.createEAttribute=>[name="xxx"]),"xxx")
 	}
 
-	@Test def void testVarNameConflictingWithXtendKeywordAndParam() {
+	@Test def void testVarNameConflictingWithXtendKeywordAndParam() throws Exception {
 		"__abstract".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_Abstract, "_abstract"))
 	}
 	
-	@Test def void testFormatMethodGeneration01() {
+	@Test def void testFormatMethodGeneration01() throws Exception {
 		fragment = TestableFormatter2Fragment2.initializeFragmentWithGrammarFromString('''
 		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 		generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
@@ -93,7 +93,7 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 		expected.assertEquals(actual)
 	}
 	
-	@Test def void testFormatMethodGeneration02() {
+	@Test def void testFormatMethodGeneration02() throws Exception {
 		fragment = TestableFormatter2Fragment2.initializeFragmentWithGrammarFromString('''
 		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 		generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"

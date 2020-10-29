@@ -1,7 +1,3 @@
-//outlet.DEFAULT_OUTPUT.sourceFolder.generator/src.directory=generator/xtend-gen
-//outlet.DEFAULT_OUTPUT.sourceFolder.generator/src.ignore=
-//outlet.DEFAULT_OUTPUT.sourceFolder.generator/xtend-gen.directory=
-//outlet.DEFAULT_OUTPUT.sourceFolder.generator/xtend-gen.ignore=true
 BuilderConfiguration.is_project_specific=true
 autobuilding=true
 eclipse.preferences.version=1

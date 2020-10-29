@@ -52,7 +52,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateNoValidation() {
+  public void testGenerateNoValidation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -106,7 +106,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateValidation() {
+  public void testGenerateValidation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -185,7 +185,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateConfigurableIssueProvider() {
+  public void testGenerateConfigurableIssueProvider() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -249,7 +249,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateConfigurableIssueProviderWithoutDeprecation() {
+  public void testGenerateConfigurableIssueProviderWithoutDeprecation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -305,7 +305,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateConfigurableIssueProvideXbase() {
+  public void testGenerateConfigurableIssueProvideXbase() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase");
     _builder.newLine();
@@ -369,7 +369,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateConfigurableIssueProvideXbaseWithoutDeprecation() {
+  public void testGenerateConfigurableIssueProvideXbaseWithoutDeprecation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase");
     _builder.newLine();
@@ -425,7 +425,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateValidationConfigurationBlock() {
+  public void testGenerateValidationConfigurationBlock() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -525,7 +525,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateValidationConfigurationBlockWithoutDeprecation() {
+  public void testGenerateValidationConfigurationBlockWithoutDeprecation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -622,7 +622,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateValidationConfigurationBlockXbase() {
+  public void testGenerateValidationConfigurationBlockXbase() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase");
     _builder.newLine();

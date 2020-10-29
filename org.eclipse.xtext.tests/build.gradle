@@ -24,11 +24,6 @@ sourceSets.test {
 
 sourceSets.mwe2 {
 	java.srcDirs = ['generator/src', 'emf-gen']
-	if (findProperty('compileXtend') == 'true') {
-		xtendOutputDir = 'generator/xtend-gen'
-	} else {
-		java.srcDir 'generator/xtend-gen'
-	}
 	runtimeClasspath += processTestResources.outputs.files
 }
 jar.from sourceSets.mwe2.output

@@ -152,21 +152,22 @@ public abstract class AbstractIncrementalBuilderTest {
 	protected URI uri(String path) {
 		return URI.createURI(InMemoryURIHandler.SCHEME + ":/" + path);
 	}
+	
+	/**
+	 * @since 2.24
+	 */
+	protected URI newFile(String path, String content) {
+		return operator_minus(path, content);
+	}
 
 	protected URI operator_minus(String path, String content) {
-		try {
-			URI uri = uri(path);
-			OutputStream outputStream = inMemoryURIHandler.createOutputStream(uri, Collections.emptyMap());
-			try {
-				outputStream.write(content.getBytes());
-				outputStream.close();
-			} catch (IOException e) {
-				throw Exceptions.sneakyThrow(e);
-			}
-			return uri;
+		URI uri = uri(path);
+		try (OutputStream outputStream = inMemoryURIHandler.createOutputStream(uri, Collections.emptyMap())) {
+			outputStream.write(content.getBytes());
 		} catch (IOException e) {
 			throw Exceptions.sneakyThrow(e);
 		}
+		return uri;
 	}
 
 	protected boolean containsSuffix(Iterable<? extends URI> uris, String... suffixes) {
