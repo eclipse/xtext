@@ -139,11 +139,12 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			getContext().put(RestrictionKind.class, validationContext);
 		}
 		RestrictionKind restriction = null;
+		String javaProjectName = null;
 		Pair<RestrictionKind,String> cached = validationContext.get(typeToCheck);
 		if (cached != null) {
 			restriction = cached.getKey();
+			javaProjectName = cached.getValue();
 		}
-		String javaProjectName = null;
 		if (restriction == null) {
 			final IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
 			if(javaElement == null || !(javaElement instanceof IType)) {
@@ -157,10 +158,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			restriction = computeRestriction(projectProvider.getJavaProject(context.eResource().getResourceSet()), 
 					(IType) javaElement);
 			validationContext.put(typeToCheck, Pair.of(restriction, javaProjectName));
-		} else {
-			if (cached != null) {
-				javaProjectName = cached.getValue();
-			}
 		}
 		
 		if (restriction == RestrictionKind.FORBIDDEN) {
