@@ -39,9 +39,6 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
-import org.osgi.framework.Bundle
-import org.osgi.framework.BundleContext
-import org.osgi.framework.FrameworkUtil
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
@@ -470,8 +467,8 @@ class XtextGeneratorTemplates {
 			public class «grammar.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
-				protected «Bundle.typeRef» getBundle() {
-					return «FrameworkUtil.typeRef».getBundle(«eclipsePluginActivator».class);
+				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
+					return «'org.osgi.framework.FrameworkUtil'.typeRef».getBundle(«eclipsePluginActivator».class);
 				}
 				
 				@Override
@@ -510,13 +507,13 @@ class XtextGeneratorTemplates {
 				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
 				
 				@Override
-				public void start(«BundleContext.typeRef» context) throws Exception {
+				public void start(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					super.start(context);
 					INSTANCE = this;
 				}
 				
 				@Override
-				public void stop(«BundleContext.typeRef» context) throws Exception {
+				public void stop(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					injectors.clear();
 					INSTANCE = null;
 					super.stop(context);
