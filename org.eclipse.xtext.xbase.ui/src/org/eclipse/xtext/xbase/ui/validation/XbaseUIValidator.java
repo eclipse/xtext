@@ -29,6 +29,7 @@ import org.eclipse.jdt.internal.core.ClasspathAccessRule;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -37,8 +38,11 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -85,6 +89,24 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check
+	public void checkRestrictedType(XAbstractFeatureCall featureCall) {
+		if (isRestrictionCheckIgnored())
+			return;
+		if (!featureCall.isTypeLiteral())
+			return;
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature instanceof JvmDeclaredType) {
+			JvmDeclaredType referencedType = (JvmDeclaredType) feature;
+			if (featureCall instanceof XMemberFeatureCall) {
+				checkRestrictedType(featureCall, null, referencedType); // mark everything
+			} else {
+				checkRestrictedType(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, referencedType);
+			}
+			
+		}
+	}
+
+	@Check
 	public void checkRestrictedType(JvmTypeReference typeReference) {
 		if (isRestrictionCheckIgnored())
 			return;
@@ -111,39 +133,58 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	protected void checkRestrictedType(final EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
 		@SuppressWarnings("unchecked")
-		Map<JvmDeclaredType, RestrictionKind> validationContext = (Map<JvmDeclaredType, RestrictionKind>) getContext().get(RestrictionKind.class);
+		Map<JvmDeclaredType, Pair<RestrictionKind,String>> validationContext = (Map<JvmDeclaredType, Pair<RestrictionKind,String>>) getContext().get(RestrictionKind.class);
 		if (validationContext == null) {
 			validationContext = Maps.newHashMap();
 			getContext().put(RestrictionKind.class, validationContext);
 		}
-		RestrictionKind restriction = validationContext.get(typeToCheck);
-		IJavaProject javaProject = null;
+		RestrictionKind restriction = null;
+		Pair<RestrictionKind,String> cached = validationContext.get(typeToCheck);
+		if (cached != null) {
+			restriction = cached.getKey();
+		}
+		String javaProjectName = null;
 		if (restriction == null) {
 			final IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
 			if(javaElement == null || !(javaElement instanceof IType)) {
-				validationContext.put(typeToCheck, RestrictionKind.VALID);
+				validationContext.put(typeToCheck, Pair.of(RestrictionKind.VALID, null));
 				return;
 			}
-			javaProject = javaElement.getJavaProject();
+			IJavaProject javaProject = javaElement.getJavaProject();
+			if (javaProject != null) {
+				javaProjectName = javaProject.getElementName();
+			}
 			restriction = computeRestriction(projectProvider.getJavaProject(context.eResource().getResourceSet()), 
 					(IType) javaElement);
-			validationContext.put(typeToCheck, restriction);
+			validationContext.put(typeToCheck, Pair.of(restriction, javaProjectName));
+		} else {
+			if (cached != null) {
+				javaProjectName = cached.getValue();
+			}
 		}
 		
 		if (restriction == RestrictionKind.FORBIDDEN) {
-			if (javaProject == null) 
-				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
+			if (javaProjectName == null) {
+				IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
+				if (javaProject != null) {
+					javaProjectName = javaProject.getElementName();
+				}
+			}
 			
 			addIssue("Access restriction: The type " + typeToCheck.getSimpleName()
 					+ " is not accessible due to restriction on required project "
-					+ javaProject.getElementName(), context,
+					+ javaProjectName, context,
 					feature, IssueCodes.FORBIDDEN_REFERENCE);
 		} else if (restriction == RestrictionKind.DISCOURAGED) {
-			if (javaProject == null) 
-				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
+			if (javaProjectName == null) {
+				IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
+				if (javaProject != null) {
+					javaProjectName = javaProject.getElementName();
+				}
+			}
 			addIssue("Discouraged access: The type " + typeToCheck.getSimpleName()
 					+ " is not accessible due to restriction on required project "
-					+ javaProject.getElementName(),
+					+ javaProjectName,
 					context,
 					feature, IssueCodes.DISCOURAGED_REFERENCE);
 		}
