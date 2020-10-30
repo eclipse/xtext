@@ -52,7 +52,7 @@ public class XtextVersion {
 	 * @noreference
 	 */
 	public String getMweVersion() {
-		return "2.11.3";
+		return "2.12.0.M2";
 	}
 
 	public String getAntlrGeneratorVersion() {

@@ -49,7 +49,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 	override getSourceFolders() {
 		#{}
 	}
-
+	
 	def target() '''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde version="3.8"?>
@@ -70,7 +70,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-					<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/«config.xtextVersion.mweVersion»/"/>
+					<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S202010292115/"/>
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
