@@ -9,8 +9,10 @@
 package org.eclipse.xtend.ide.tests.builder
 
 import com.google.inject.Inject
+import java.util.concurrent.atomic.AtomicBoolean
 import org.eclipse.jdt.core.ElementChangedEvent
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.swt.widgets.Display
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 
@@ -86,19 +88,24 @@ class JavaEditorExtension {
 		if (VERBOSE) {
 			println('''start waiting for an element changed event: «eventMask»''')
 		}
-		val changed = newArrayList(false)
+		val changed = new AtomicBoolean(false)
 		JavaCore.addElementChangedListener(
 			[
 				JavaCore.removeElementChangedListener(self)
-				if (!changed.head) {
-					changed.set(0, true)
+				if (!changed.get) {
+					changed.set(true)
 					if (VERBOSE) {
 						println(it)
 					}
 				}
 			], eventMask)
 		producer.apply
-		while (!changed.head) {
+		while (!changed.get) {
+			if (Display.getCurrent() !== null) {
+				while (Display.getDefault().readAndDispatch()) {
+					// process queued ui events
+				}
+			}
 		}
 		if (VERBOSE) {
 			println('''end waiting for an element changed event: «eventMask»''')

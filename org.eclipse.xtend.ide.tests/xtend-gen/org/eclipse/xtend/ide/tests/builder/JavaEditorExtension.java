@@ -9,20 +9,19 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import com.google.inject.Inject;
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.junit.Assert;
 
@@ -118,15 +117,15 @@ public class JavaEditorExtension {
         _builder.append(eventMask);
         InputOutput.<String>println(_builder.toString());
       }
-      final ArrayList<Boolean> changed = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(false));
+      final AtomicBoolean changed = new AtomicBoolean(false);
       final IElementChangedListener _function = new IElementChangedListener() {
         @Override
         public void elementChanged(final ElementChangedEvent it) {
           JavaCore.removeElementChangedListener(this);
-          Boolean _head = IterableExtensions.<Boolean>head(changed);
-          boolean _not = (!(_head).booleanValue());
+          boolean _get = changed.get();
+          boolean _not = (!_get);
           if (_not) {
-            changed.set(0, Boolean.valueOf(true));
+            changed.set(true);
             if ((JavaEditorExtension.VERBOSE).booleanValue()) {
               InputOutput.<ElementChangedEvent>println(it);
             }
@@ -135,7 +134,13 @@ public class JavaEditorExtension {
       };
       JavaCore.addElementChangedListener(_function, eventMask);
       producer.apply();
-      while ((!(IterableExtensions.<Boolean>head(changed)).booleanValue())) {
+      while ((!changed.get())) {
+        Display _current = Display.getCurrent();
+        boolean _tripleNotEquals = (_current != null);
+        if (_tripleNotEquals) {
+          while (Display.getDefault().readAndDispatch()) {
+          }
+        }
       }
       String _xifexpression = null;
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {
