@@ -38,7 +38,7 @@ class ChangeSerializerWithImports {
 		fs += "inmemory:/file2.pstl" -> '''#1 import root1.child1 refs child1;'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = serializerProvider.get()
 		serializer.addModification(model.eResource) [

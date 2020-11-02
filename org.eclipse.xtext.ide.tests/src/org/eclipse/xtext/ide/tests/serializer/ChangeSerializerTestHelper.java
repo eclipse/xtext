@@ -93,7 +93,7 @@ public class ChangeSerializerTestHelper {
 		return r;
 	}
 
-	public <T extends Object> T contents(ResourceSet rs, String fileName, Class<T> type) {
+	public <T extends Object> T findFirstOfTypeInFile(ResourceSet rs, String fileName, Class<T> type) {
 		T result = Iterables
 				.getFirst(Iterables.filter(rs.getResource(URI.createURI(fileName), true).getContents(), type), null);
 		Preconditions.checkNotNull(result);

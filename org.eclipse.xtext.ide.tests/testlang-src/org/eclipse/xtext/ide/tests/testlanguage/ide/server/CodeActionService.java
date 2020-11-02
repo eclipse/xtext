@@ -26,6 +26,7 @@ import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
+import org.eclipse.xtext.ide.server.codeActions.QuickFixCodeActionService;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
@@ -40,13 +41,13 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CodeActionService implements ICodeActionService2 {
+public class CodeActionService extends QuickFixCodeActionService {
 	@Inject
 	private IChangeSerializer serializer;
 
 	@Override
 	public List<Either<Command, CodeAction>> getCodeActions(ICodeActionService2.Options options) {
-		List<Either<Command, CodeAction>> actions = new ArrayList<>();
+		List<Either<Command, CodeAction>> actions = super.getCodeActions(options);
 		for (Diagnostic d : options.getCodeActionParams().getContext().getDiagnostics()) {
 			Object code = d.getCode().get();
 			if (TestLanguageValidator.INVALID_NAME.equals(code)) {
@@ -62,7 +63,7 @@ public class CodeActionService implements ICodeActionService2 {
 		String string = options.getDocument().getSubstring(d.getRange());
 		Command command = new Command();
 		command.setCommand("my.textedit.command");
-		command.setTitle("Make '" + string + "' upper case");
+		command.setTitle("Make '" + string + "' upper case (Command)");
 		WorkspaceEdit workspaceEdit = new WorkspaceEdit();
 		TextEdit textEdit = new TextEdit();
 		textEdit.setNewText(StringExtensions.toFirstUpper(string));

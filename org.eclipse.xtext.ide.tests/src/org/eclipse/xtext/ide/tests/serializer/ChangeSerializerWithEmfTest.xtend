@@ -47,7 +47,7 @@ class ChangeSerializerWithEmfTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", EClassRef)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", EClassRef)
 
 		val serializer = serializerProvider.get()
 		serializer.addModification(model) [
@@ -74,7 +74,7 @@ class ChangeSerializerWithEmfTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file2.ecore", EPackage)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file2.ecore", EPackage)
 
 		val serializer = serializerProvider.get()
 		serializer.addModification(model) [
@@ -109,7 +109,7 @@ class ChangeSerializerWithEmfTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Model)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Model)
 
 		val serializer = serializerProvider.get()
 		serializer.addModification(model.eResource) [

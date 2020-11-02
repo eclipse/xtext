@@ -23,9 +23,17 @@ class CodeActionTest extends AbstractTestLangLanguageServerTest {
 					
 				}
 			'''
+			// contains quickfix and edit command
 			expectedCodeActions = '''
+				title : Change element name to first upper
+				kind : quickfix
+				command : 
+				codes : invalidName
+				edit : changes :
+				    MyModel.testlang : Foo [[0, 5] .. [0, 8]]
+				documentChanges : 
 				command : my.textedit.command
-				title : Make 'foo' upper case
+				title : Make 'foo' upper case (Command)
 				args : 
 				    changes :
 				        MyModel.testlang : Foo [[0, 5] .. [0, 8]]

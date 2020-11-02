@@ -47,7 +47,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#2 foo'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", MandatoryValue)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", MandatoryValue)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -67,7 +67,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { foo1; foo2; }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -89,7 +89,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { child1 { foo1; } }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -114,7 +114,7 @@ class ChangeSerializerTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -137,7 +137,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { child1 { foo1; } }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -158,7 +158,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { child1 { foo1; } }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -178,7 +178,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { child1; child2; }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -200,7 +200,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file1.pstl" -> '''#1 root { foo1; foo2 { ref foo1 } }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -222,7 +222,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/file2.pstl" -> '''#1 root2 { ref root1 }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -252,7 +252,7 @@ class ChangeSerializerTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -285,7 +285,7 @@ class ChangeSerializerTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -313,7 +313,7 @@ class ChangeSerializerTest {
 		fs += "inmemory:/f.pstl" -> '''#1 root { }'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/f.pstl", Node)
+		val model = rs.findFirstOfTypeInFile("inmemory:/f.pstl", Node)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -339,7 +339,7 @@ class ChangeSerializerTest {
 		}'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file-move.pstl", TwoChildLists)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file-move.pstl", TwoChildLists)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -371,7 +371,7 @@ class ChangeSerializerTest {
 		}'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file-move1.pstl", TwoChildLists)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file-move1.pstl", TwoChildLists)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -404,7 +404,7 @@ class ChangeSerializerTest {
 		}'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file-move.pstl", TwoChildLists)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file-move.pstl", TwoChildLists)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -437,7 +437,7 @@ class ChangeSerializerTest {
 		}'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file-move2a.pstl", TwoChildLists)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file-move2a.pstl", TwoChildLists)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -466,7 +466,7 @@ class ChangeSerializerTest {
 		'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file-move3.pstl", TwoChilds)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file-move3.pstl", TwoChilds)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [
@@ -490,7 +490,7 @@ class ChangeSerializerTest {
 		#23'''
 
 		val rs = fs.createResourceSet
-		val model = rs.contents(uri, ChildWithSubChilds)
+		val model = rs.findFirstOfTypeInFile(uri, ChildWithSubChilds)
 
 		val serializer = newChangeSerializer()
 		serializer.addModification(model.eResource) [

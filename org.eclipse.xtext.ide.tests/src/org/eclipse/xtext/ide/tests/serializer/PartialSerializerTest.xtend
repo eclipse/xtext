@@ -566,7 +566,7 @@ class PartialSerializerTest {
 		fs += "inmemory:/file1.pstl" -> modelText.toString
 
 		val rs = fs.createResourceSet
-		val model = rs.contents("inmemory:/file1.pstl", modelType)
+		val model = rs.findFirstOfTypeInFile("inmemory:/file1.pstl", modelType)
 
 		val serializer = serializerProvider.get()
 		serializer.addModification(model, modification)

@@ -17,16 +17,18 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class FileAwareTestLanguageRuntimeModule extends AbstractFileAwareTestLanguageRuntimeModule {
-	
+
+	@Override
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class)
-			.annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
-			.to(LiveShadowedResourceDescriptions.class);
+				.annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
+				.to(LiveShadowedResourceDescriptions.class);
 	}
 
+	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class)
-			.annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-			.to(FileAwareTestLanguageImportScopeProvider.class);
+				.annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(FileAwareTestLanguageImportScopeProvider.class);
 	}
 }

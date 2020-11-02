@@ -78,7 +78,7 @@ public class ChangeSerializerWithEmfTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.ecore", _builder_1.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final EClassRef model = this._changeSerializerTestHelper.<EClassRef>contents(rs, "inmemory:/file1.pstl", EClassRef.class);
+    final EClassRef model = this._changeSerializerTestHelper.<EClassRef>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", EClassRef.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
     final IChangeSerializer.IModification<EClassRef> _function = (EClassRef it) -> {
       EClassifier _get = model.getRef().getEPackage().getEClassifiers().get(1);
@@ -121,7 +121,7 @@ public class ChangeSerializerWithEmfTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.ecore", _builder_1.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final EPackage model = this._changeSerializerTestHelper.<EPackage>contents(rs, "inmemory:/file2.ecore", EPackage.class);
+    final EPackage model = this._changeSerializerTestHelper.<EPackage>findFirstOfTypeInFile(rs, "inmemory:/file2.ecore", EPackage.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
     final IChangeSerializer.IModification<EPackage> _function = (EPackage it) -> {
       EClassifier _head = IterableExtensions.<EClassifier>head(model.getEClassifiers());
@@ -180,7 +180,7 @@ public class ChangeSerializerWithEmfTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.ecore", _builder_1.toString());
     this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
     final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
-    final Model model = this._changeSerializerTestHelper.<Model>contents(rs, "inmemory:/file1.pstl", Model.class);
+    final Model model = this._changeSerializerTestHelper.<Model>findFirstOfTypeInFile(rs, "inmemory:/file1.pstl", Model.class);
     final ChangeSerializer serializer = this.serializerProvider.get();
     final IChangeSerializer.IModification<Resource> _function = (Resource it) -> {
       EClass _get = model.getClazz().get(0);

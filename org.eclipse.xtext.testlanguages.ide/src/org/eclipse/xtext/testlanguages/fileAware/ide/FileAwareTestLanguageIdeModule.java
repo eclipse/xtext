@@ -12,7 +12,7 @@ import org.eclipse.xtext.testlanguages.fileAware.ide.refactoring.FileAwareTestLa
  * Use this class to register ide components.
  */
 public class FileAwareTestLanguageIdeModule extends AbstractFileAwareTestLanguageIdeModule {
-	
+
 	public Class<? extends IResourceRelocationStrategy> bindIResourceRelocationStrategy() {
 		return FileAwareTestLanguageResourceRelocationStrategy.class;
 	}
@@ -20,4 +20,5 @@ public class FileAwareTestLanguageIdeModule extends AbstractFileAwareTestLanguag
 	public Class<? extends IReferenceUpdater> bindReferenceUpdater() {
 		return FileAwareTestLanguageReferenceUpdater.class;
 	}
+
 }
