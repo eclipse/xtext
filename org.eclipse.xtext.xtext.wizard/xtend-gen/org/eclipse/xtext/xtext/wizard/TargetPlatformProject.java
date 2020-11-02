@@ -140,9 +140,24 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S202010292115/\"/>");
-    _builder.newLine();
+    {
+      boolean _matches = this.getConfig().getXtextVersion().getMweVersion().matches("\\d+\\.\\d+(\\.\\d+)+");
+      if (_matches) {
+        _builder.append("\t\t\t");
+        _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/releases/");
+        String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
+        _builder.append(_mweVersion, "\t\t\t");
+        _builder.append("/\"/>");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("\t\t\t");
+        _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/milestones/");
+        String _mweBuildNumber = this.getConfig().getXtextVersion().getMweBuildNumber();
+        _builder.append(_mweBuildNumber, "\t\t\t");
+        _builder.append("/\"/>");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();

@@ -70,7 +70,11 @@ class TargetPlatformProject extends ProjectDescriptor {
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-					<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S202010292115/"/>
+					«IF config.xtextVersion.mweVersion.matches("\\d+\\.\\d+(\\.\\d+)+")»
+						<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/«config.xtextVersion.mweVersion»/"/>
+					«ELSE»
+						<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/«config.xtextVersion.mweBuildNumber»/"/>
+					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>

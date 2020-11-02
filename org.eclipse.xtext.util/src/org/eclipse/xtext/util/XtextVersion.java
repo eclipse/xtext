@@ -54,6 +54,13 @@ public class XtextVersion {
 	public String getMweVersion() {
 		return "2.12.0.M2";
 	}
+	
+	/**
+	 * @noreference
+	 */
+	public String getMweBuildNumber() {
+		return "S202010292115";
+	}
 
 	public String getAntlrGeneratorVersion() {
 		return "2.1.1";
