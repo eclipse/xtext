@@ -230,7 +230,14 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			List<SimpleEntry<URI, Throwable>> exceptions = Lists.newArrayList();
 			boolean interrupted = false;
 			try {
-				while (!requestQueue.isEmpty() || !generatorResult.isDone()) {
+				/*
+				 * it is important to check generatorResult and requestQueue second
+				 * as it can happen that if you use !requestQueue.isEmpty() || !generatorResult.isDone()
+				 * that the generatorResult.isDone() becomes true after requestQueue.isEmpty() was checked
+				 * and thus requestQueue.isEmpty() changes back to false
+				 * but we stop the while loop anyway and thus miss generated files.
+				 */
+				while (!generatorResult.isDone() || !requestQueue.isEmpty()) {
 					if (subMonitor.isCanceled()) {
 						cancelProcessing(requestQueue, afterGenerateQueue, generatorResult);
 						throw new OperationCanceledException();
