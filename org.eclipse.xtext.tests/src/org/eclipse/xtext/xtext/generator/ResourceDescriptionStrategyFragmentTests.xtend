@@ -47,7 +47,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 	}
 	
 	@Test
-	def testGenerateNothing() {
+	def testGenerateNothing() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -60,7 +60,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 	}
 
 	@Test
-	def testGenerateNothing_1() {
+	def testGenerateNothing_1() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -75,7 +75,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 	}
 
 	@Test
-	def testGenerate() {
+	def testGenerate() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -115,7 +115,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 	}
 
 	@Test
-	def testGenerate_NoStubs() {
+	def testGenerate_NoStubs() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"

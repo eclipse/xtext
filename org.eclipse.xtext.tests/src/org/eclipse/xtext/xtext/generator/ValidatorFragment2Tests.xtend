@@ -42,7 +42,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 
 	@Test
-	def testGenerateNoValidation() {
+	def testGenerateNoValidation() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -72,7 +72,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 
 	@Test
-	def testGenerateValidation() {
+	def testGenerateValidation() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -113,7 +113,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 
 	@Test
-	def testGenerateConfigurableIssueProvider() {
+	def testGenerateConfigurableIssueProvider() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -148,7 +148,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateConfigurableIssueProviderWithoutDeprecation() {
+	def testGenerateConfigurableIssueProviderWithoutDeprecation() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -180,7 +180,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateConfigurableIssueProvideXbase() {
+	def testGenerateConfigurableIssueProvideXbase() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromStringWithXbase(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase
 			generate foo "http://org.xtext/foo"
@@ -215,7 +215,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateConfigurableIssueProvideXbaseWithoutDeprecation() {
+	def testGenerateConfigurableIssueProvideXbaseWithoutDeprecation() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromStringWithXbase(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase
 			generate foo "http://org.xtext/foo"
@@ -247,7 +247,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateValidationConfigurationBlock() {
+	def testGenerateValidationConfigurationBlock() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -295,7 +295,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateValidationConfigurationBlockWithoutDeprecation() {
+	def testGenerateValidationConfigurationBlockWithoutDeprecation() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
@@ -342,7 +342,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateValidationConfigurationBlockXbase() {
+	def testGenerateValidationConfigurationBlockXbase() throws Exception {
 		val fragment = initializeFragmentWithGrammarFromStringWithXbase(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase
 			generate foo "http://org.xtext/foo"

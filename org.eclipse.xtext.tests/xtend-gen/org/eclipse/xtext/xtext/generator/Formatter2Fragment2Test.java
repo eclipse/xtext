@@ -41,27 +41,27 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
   private Formatter2Fragment2Test.TestableFormatter2Fragment2 fragment = new Formatter2Fragment2Test.TestableFormatter2Fragment2();
   
   @Test
-  public void testVarNameWithEClass() {
+  public void testVarNameWithEClass() throws Exception {
     Assert.assertEquals("eClass", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass()));
   }
   
   @Test
-  public void testVarNameWithMultiReference() {
+  public void testVarNameWithMultiReference() throws Exception {
     Assert.assertEquals("eOperation", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_EAllOperations()));
   }
   
   @Test
-  public void testVarNameWithSingleReference() {
+  public void testVarNameWithSingleReference() throws Exception {
     Assert.assertEquals("name", this.fragment.toVarName(EcorePackage.eINSTANCE.getENamedElement_Name()));
   }
   
   @Test
-  public void testVarNameConflictingWithXtendKeyword() {
+  public void testVarNameConflictingWithXtendKeyword() throws Exception {
     Assert.assertEquals("_abstract", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_Abstract()));
   }
   
   @Test
-  public void testVarNameConflictingWithParam() {
+  public void testVarNameConflictingWithParam() throws Exception {
     EAttribute _createEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
     final Procedure1<EAttribute> _function = (EAttribute it) -> {
       it.setName("xxx");
@@ -71,12 +71,12 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testVarNameConflictingWithXtendKeywordAndParam() {
+  public void testVarNameConflictingWithXtendKeywordAndParam() throws Exception {
     Assert.assertEquals("__abstract", this.fragment.toVarName(EcorePackage.eINSTANCE.getEClass_Abstract(), "_abstract"));
   }
   
   @Test
-  public void testFormatMethodGeneration01() {
+  public void testFormatMethodGeneration01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
@@ -147,7 +147,7 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testFormatMethodGeneration02() {
+  public void testFormatMethodGeneration02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
