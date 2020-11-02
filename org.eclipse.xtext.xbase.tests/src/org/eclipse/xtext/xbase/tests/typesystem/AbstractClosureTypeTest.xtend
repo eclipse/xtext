@@ -24,7 +24,7 @@ import org.junit.Ignore
  */
 abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	
-	def List<Object> resolvesClosuresTo(String expression, String... types)
+	def List<Object> resolvesClosuresTo(String expression, String... types) throws Exception
 	
 	def void withEquivalents(List<Object> references, String... type)
 	
@@ -40,7 +40,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		seenExpressions = null
 	}
 	
-	def protected findClosures(CharSequence expression) {
+	def protected findClosures(CharSequence expression) throws Exception {
 		val expressionAsString = expression.toString
 			.replace('ClosureTypeResolutionTestData', 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeResolutionTestData')
 			.replace('$$', 'org::eclipse::xtext::xbase::lib::')

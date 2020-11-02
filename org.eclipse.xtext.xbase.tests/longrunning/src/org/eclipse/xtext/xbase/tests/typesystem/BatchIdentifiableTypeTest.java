@@ -32,21 +32,17 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	}
 
 	@Override
-	public void resolvesIdentifiablesTo(String expression, String... types) {
-		try {
+	public void resolvesIdentifiablesTo(String expression, String... types) throws Exception {
 			String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
-			XExpression xExpression = expression(expressionWithQualifiedNames, false);
-			IResolvedTypes resolvedTypes = getTypeResolver().resolveTypes(xExpression);
-			List<JvmIdentifiableElement> identifiables = findIdentifiables(xExpression);
-			Assert.assertFalse(identifiables.isEmpty());
-			Assert.assertEquals(types.length, identifiables.size());
-			IterableExtensions.forEach(identifiables, (JvmIdentifiableElement identifiable, Integer index) -> {
-				LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
-				Assert.assertNotNull(type);
-				Assert.assertEquals("failed for identifiable at " + index, types[index], type.getSimpleName());
+		XExpression xExpression = expression(expressionWithQualifiedNames, false);
+		IResolvedTypes resolvedTypes = getTypeResolver().resolveTypes(xExpression);
+		List<JvmIdentifiableElement> identifiables = findIdentifiables(xExpression);
+		Assert.assertFalse(identifiables.isEmpty());
+		Assert.assertEquals(types.length, identifiables.size());
+		IterableExtensions.forEach(identifiables, (JvmIdentifiableElement identifiable, Integer index) -> {
+			LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
+			Assert.assertNotNull(type);
+			Assert.assertEquals("failed for identifiable at " + index, types[index], type.getSimpleName());
 			});
-		} catch (Exception e) {
-			throw new AssertionError(e);
-		}
 	}
 }

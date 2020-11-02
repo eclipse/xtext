@@ -34,7 +34,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 	}
 
 	@Override
-	public void resolvesFeatureCallsTo(String expression, String... types) {
+	public void resolvesFeatureCallsTo(String expression, String... types) throws Exception {
 		String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
 		List<XAbstractFeatureCall> featureCalls = findFeatureCalls(expressionWithQualifiedNames);
 		IResolvedTypes resolvedTypes = getTypeResolver().resolveTypes(Iterables.getFirst(featureCalls, null));

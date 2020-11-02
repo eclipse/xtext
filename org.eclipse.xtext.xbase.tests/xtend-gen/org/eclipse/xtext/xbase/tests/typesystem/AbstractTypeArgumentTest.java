@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -42,7 +41,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
-  public Iterator<XExpression> bindTypeArgumentsTo(final String expression, final String... typeArguments) {
+  public Iterator<XExpression> bindTypeArgumentsTo(final String expression, final String... typeArguments) throws Exception {
     final List<XExpression> expressions = this.findExpressionWithTypeArguments(expression);
     return this.and(expressions.iterator(), typeArguments);
   }
@@ -102,76 +101,72 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   protected abstract void resolveTypes(final XExpression expression);
   
-  protected List<XExpression> findExpressionWithTypeArguments(final CharSequence expression) {
-    try {
-      final XExpression xExpression = this.expression(expression, false);
-      this.resolveTypes(xExpression);
-      final Function1<XExpression, Boolean> _function = (XExpression it) -> {
-        boolean _switchResult = false;
-        boolean _matched = false;
-        if (it instanceof XAbstractFeatureCall) {
-          _matched=true;
-          boolean _and = false;
-          if (!((!((XAbstractFeatureCall)it).isTypeLiteral()) && (!((XAbstractFeatureCall)it).isPackageFragment()))) {
-            _and = false;
+  protected List<XExpression> findExpressionWithTypeArguments(final CharSequence expression) throws Exception {
+    final XExpression xExpression = this.expression(expression, false);
+    this.resolveTypes(xExpression);
+    final Function1<XExpression, Boolean> _function = (XExpression it) -> {
+      boolean _switchResult = false;
+      boolean _matched = false;
+      if (it instanceof XAbstractFeatureCall) {
+        _matched=true;
+        boolean _and = false;
+        if (!((!((XAbstractFeatureCall)it).isTypeLiteral()) && (!((XAbstractFeatureCall)it).isPackageFragment()))) {
+          _and = false;
+        } else {
+          boolean _or = false;
+          boolean _isEmpty = ((XAbstractFeatureCall)it).getTypeArguments().isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _or = true;
           } else {
-            boolean _or = false;
-            boolean _isEmpty = ((XAbstractFeatureCall)it).getTypeArguments().isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              _or = true;
-            } else {
-              boolean _switchResult_1 = false;
-              JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
-              final JvmIdentifiableElement feature = _feature;
-              boolean _matched_1 = false;
-              if (feature instanceof JvmTypeParameterDeclarator) {
-                _matched_1=true;
-                boolean _isEmpty_1 = ((JvmTypeParameterDeclarator)feature).getTypeParameters().isEmpty();
-                _switchResult_1 = (!_isEmpty_1);
-              }
-              if (!_matched_1) {
-                _switchResult_1 = false;
-              }
-              _or = _switchResult_1;
+            boolean _switchResult_1 = false;
+            JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
+            final JvmIdentifiableElement feature = _feature;
+            boolean _matched_1 = false;
+            if (feature instanceof JvmTypeParameterDeclarator) {
+              _matched_1=true;
+              boolean _isEmpty_1 = ((JvmTypeParameterDeclarator)feature).getTypeParameters().isEmpty();
+              _switchResult_1 = (!_isEmpty_1);
             }
-            _and = _or;
+            if (!_matched_1) {
+              _switchResult_1 = false;
+            }
+            _or = _switchResult_1;
           }
-          _switchResult = _and;
+          _and = _or;
         }
-        if (!_matched) {
-          if (it instanceof XConstructorCall) {
-            _matched=true;
-            _switchResult = ((!((XConstructorCall)it).getTypeArguments().isEmpty()) || 
-              (!((JvmGenericType) ((XConstructorCall)it).getConstructor().getDeclaringType()).getTypeParameters().isEmpty()));
-          }
-        }
-        if (!_matched) {
-          _switchResult = false;
-        }
-        return Boolean.valueOf(_switchResult);
-      };
-      final List<XExpression> result = IteratorExtensions.<XExpression>toList(IteratorExtensions.<XExpression>filter(Iterators.<XExpression>filter(EcoreUtil2.eAll(xExpression), XExpression.class), _function));
-      final Function1<XExpression, Integer> _function_1 = (XExpression it) -> {
-        EReference _switchResult = null;
-        boolean _matched = false;
-        if (it instanceof XAbstractFeatureCall) {
+        _switchResult = _and;
+      }
+      if (!_matched) {
+        if (it instanceof XConstructorCall) {
           _matched=true;
-          _switchResult = XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+          _switchResult = ((!((XConstructorCall)it).getTypeArguments().isEmpty()) || 
+            (!((JvmGenericType) ((XConstructorCall)it).getConstructor().getDeclaringType()).getTypeParameters().isEmpty()));
         }
-        if (!_matched) {
-          if (it instanceof XConstructorCall) {
-            _matched=true;
-            _switchResult = XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
-          }
+      }
+      if (!_matched) {
+        _switchResult = false;
+      }
+      return Boolean.valueOf(_switchResult);
+    };
+    final List<XExpression> result = IteratorExtensions.<XExpression>toList(IteratorExtensions.<XExpression>filter(Iterators.<XExpression>filter(EcoreUtil2.eAll(xExpression), XExpression.class), _function));
+    final Function1<XExpression, Integer> _function_1 = (XExpression it) -> {
+      EReference _switchResult = null;
+      boolean _matched = false;
+      if (it instanceof XAbstractFeatureCall) {
+        _matched=true;
+        _switchResult = XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+      }
+      if (!_matched) {
+        if (it instanceof XConstructorCall) {
+          _matched=true;
+          _switchResult = XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
         }
-        final EReference structuralFeature = _switchResult;
-        return Integer.valueOf(IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(it, structuralFeature)).getOffset());
-      };
-      return IterableExtensions.<XExpression, Integer>sortBy(result, _function_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      }
+      final EReference structuralFeature = _switchResult;
+      return Integer.valueOf(IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(it, structuralFeature)).getOffset());
+    };
+    return IterableExtensions.<XExpression, Integer>sortBy(result, _function_1);
   }
   
   @Test
