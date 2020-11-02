@@ -77,7 +77,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
 			}
 		}
 		EClass referenceType = context.getReference().getEReferenceType();
-		String msg = linkText + " cannot be resolved "+ getTypeName(referenceType, context.getReference()) + ".";
+		String msg = linkText + " cannot be resolved"+ getTypeName(referenceType, context.getReference()) + ".";
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText);
 	}
 
@@ -136,7 +136,8 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
 	}
 
 	/**
-	 * @Nullable
+	 * Returns a part of the message that describes the nature of the requested object, including a leading space.
+	 * The result is either empty or of the shape {@code " to <article> <type>"}.
 	 */
 	protected String getTypeName(EClass c, EStructuralFeature referingFeature) {
 		if (referingFeature == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
