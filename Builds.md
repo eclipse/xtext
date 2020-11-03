@@ -135,6 +135,7 @@ After everything above has run smoothly, it is finally time for some manual step
    * Select both repositories again the perform the _Release_ toolbar action
    * It will take some hours until the artifacts are mirrored to Maven Central.
 3. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+   * Make sure the commit message is correct! (Correct SimRel Target etc)
    * Merge the [open Gerrit change](https://git.eclipse.org/r/#/q/project:simrel/org.eclipse.simrel.build+owner:xtext-bot%2540eclipse.org+status:open) for the `simrel/org.eclipse.simrel.build` repository
 4. Release Notes (Only on final release)
    * Create and review release notes
