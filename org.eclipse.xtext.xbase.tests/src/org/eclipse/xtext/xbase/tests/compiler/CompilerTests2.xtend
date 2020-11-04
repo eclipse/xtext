@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -434,7 +434,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testSwitchScopes_Bug470586_01() {
+	@Test def void testSwitchScopes_Bug470586_01() throws Exception {
 		// make sure that scopes are closed correctly during the compilation
 		// so that the variables created for lambdas do not have the same name
 		// see https://github.com/eclipse/xtext/pull/987#issuecomment-206718312
@@ -473,7 +473,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testSwitchScopes_Bug470586_02() {
+	@Test def void testSwitchScopes_Bug470586_02() throws Exception {
 		'''
 			{
 				val list = #["1", "2"]
@@ -513,7 +513,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-		@Test def void testSwitchScopes_Bug470586_03() {
+		@Test def void testSwitchScopes_Bug470586_03() throws Exception {
 		'''
 			{
 				val list = #["1", "2"]
@@ -560,7 +560,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testFallThroughSwitch() {
+	@Test def void testFallThroughSwitch() throws Exception {
 		'''
 			{
 				switch x : 1 {
@@ -584,7 +584,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_2() {
+	@Test def void testFallThroughSwitch_2() throws Exception {
 		'''
 			{
 				switch x : 'lalala' {
@@ -620,7 +620,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_3() {
+	@Test def void testFallThroughSwitch_3() throws Exception {
 		'''
 			{
 				switch x : 1 {
@@ -646,7 +646,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_4() {
+	@Test def void testFallThroughSwitch_4() throws Exception {
 		'''
 			{
 				switch x : 'lalala' {
@@ -680,7 +680,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_5() {
+	@Test def void testFallThroughSwitch_5() throws Exception {
 		'''
 			{
 				switch x : 1 {
@@ -709,7 +709,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_6() {
+	@Test def void testFallThroughSwitch_6() throws Exception {
 		'''
 			{
 				switch x : new Object {
@@ -756,7 +756,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_7() {
+	@Test def void testFallThroughSwitch_7() throws Exception {
 		'''
 			{
 				switch x : 'lalala' as Object { 
@@ -796,7 +796,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testFallThroughSwitch_8() {
+	@Test def void testFallThroughSwitch_8() throws Exception {
 		'''
 			{
 				switch x : 1 as Object {
@@ -826,7 +826,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch() {
+	@Test def void testEmptySwitch() throws Exception {
 		'''
 			{
 				switch 1 {
@@ -843,7 +843,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_2() {
+	@Test def void testEmptySwitch_2() throws Exception {
 		'''
 			{
 				switch 1 {
@@ -865,7 +865,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_3() {
+	@Test def void testEmptySwitch_3() throws Exception {
 		'''
 			{
 				switch Object {
@@ -881,7 +881,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_4() {
+	@Test def void testEmptySwitch_4() throws Exception {
 		'''
 			{
 				switch Object {
@@ -902,7 +902,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_5() {
+	@Test def void testEmptySwitch_5() throws Exception {
 		'''
 			{
 				switch Thread.State.NEW {
@@ -923,7 +923,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_6() {
+	@Test def void testEmptySwitch_6() throws Exception {
 		'''
 			{
 				switch Thread.State.NEW {
@@ -949,7 +949,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_7() {
+	@Test def void testEmptySwitch_7() throws Exception {
 		'''
 			{
 				switch Thread.State x : Thread.State.NEW {
@@ -975,7 +975,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_8() {
+	@Test def void testEmptySwitch_8() throws Exception {
 		'''
 			{
 				switch (Thread.State x : Thread.State.NEW) {
@@ -1001,7 +1001,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_9() {
+	@Test def void testEmptySwitch_9() throws Exception {
 		'''
 			{
 				switch Object x : Thread.State.NEW {
@@ -1022,7 +1022,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_10() {
+	@Test def void testEmptySwitch_10() throws Exception {
 		'''
 			{
 				switch (Object x : Thread.State.NEW) {
@@ -1043,7 +1043,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testEmptySwitch_11() {
+	@Test def void testEmptySwitch_11() throws Exception {
 		'''
 			{
 				val String x = null
@@ -1067,7 +1067,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_0() {
+	@Test def void testBasicForLoop_0() throws Exception {
 		'''
 			{
 				for (var i = 0; i < 10; i = i + 1) {
@@ -1081,7 +1081,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_toJavaWhile_0() {
+	@Test def void testBasicForLoop_toJavaWhile_0() throws Exception {
 		'''
 			{
 				for (var i = if (true) { 1 }; i < 10; i = i + 1) {
@@ -1103,7 +1103,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_1() {
+	@Test def void testBasicForLoop_1() throws Exception {
 		'''
 			{
 				for (;;) {
@@ -1117,7 +1117,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_toJavaWhile_1() {
+	@Test def void testBasicForLoop_toJavaWhile_1() throws Exception {
 		'''
 			{
 				for (for (;;) {};;) {
@@ -1135,7 +1135,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_2() {
+	@Test def void testBasicForLoop_2() throws Exception {
 		'''
 			{
 				for (val i = 0; i < 10;) {
@@ -1155,7 +1155,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_toJavaWhile_2() {
+	@Test def void testBasicForLoop_toJavaWhile_2() throws Exception {
 		'''
 			{
 				for (val i = #[if(true) {1} else {2}]; i.head < 10;) {
@@ -1191,7 +1191,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_3() {
+	@Test def void testBasicForLoop_3() throws Exception {
 		'''
 			{
 				for (val i = 0; i < 10;) {
@@ -1207,7 +1207,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_4() {
+	@Test def void testBasicForLoop_4() throws Exception {
 		'''
 			{
 				for (var i = 1; i < 10;) {}
@@ -1223,7 +1223,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_5() {
+	@Test def void testBasicForLoop_5() throws Exception {
 		'''
 			{
 				{
@@ -1243,7 +1243,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_6() {
+	@Test def void testBasicForLoop_6() throws Exception {
 		'''
 			{
 				if (true) {
@@ -1260,7 +1260,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_7() {
+	@Test def void testBasicForLoop_7() throws Exception {
 		'''
 			{
 				try {
@@ -1279,7 +1279,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_8() {
+	@Test def void testBasicForLoop_8() throws Exception {
 		'''
 			{
 				[| for (;;) {} ]
@@ -1297,7 +1297,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_9() {
+	@Test def void testBasicForLoop_9() throws Exception {
 		'''
 			{
 				{
@@ -1316,7 +1316,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_10() {
+	@Test def void testBasicForLoop_10() throws Exception {
 		'''
 			{
 				val i = 0
@@ -1341,7 +1341,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_11() {
+	@Test def void testBasicForLoop_11() throws Exception {
 		'''
 			{
 				for (val i = 0, val j = 0; i < 10;) {
@@ -1360,7 +1360,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testBasicForLoop_12() {
+	@Test def void testBasicForLoop_12() throws Exception {
 		'''
 			{
 				for (var i = 0; i != 10; i += 1) {
@@ -1380,7 +1380,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testWhileLoopWithConstantCondition_01() {
+	@Test def void testWhileLoopWithConstantCondition_01() throws Exception {
 		'''
 			while (newArrayList('').empty || 2 == (1 << 1)) {
 				return ''
@@ -1395,7 +1395,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testWhileLoopWithConstantCondition_02() {
+	@Test def void testWhileLoopWithConstantCondition_02() throws Exception {
 		'''
 			while (2 == (1 << 1)) {
 				return ''
@@ -1409,7 +1409,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testSynchronizedBlock_1() {
+	@Test def void testSynchronizedBlock_1() throws Exception {
 		'''
 			{
 				val x = new Integer(1)
@@ -1431,7 +1431,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testSynchronizedBlock_2() {
+	@Test def void testSynchronizedBlock_2() throws Exception {
 		'''
 			{
 				val x = new Integer(1)
@@ -1449,7 +1449,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
-	@Test def void testSynchronizedBlock_3() {
+	@Test def void testSynchronizedBlock_3() throws Exception {
 		'''
 			{
 				val x = new Integer(1)
@@ -1494,7 +1494,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug434224_01() {
+	@Test def void testBug434224_01() throws Exception {
 		'''
 			{
 				val bar = new Object
@@ -1516,7 +1516,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug434224_02() {
+	@Test def void testBug434224_02() throws Exception {
 		'''
 			{
 				switch bar : new Object {
@@ -1536,7 +1536,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_01() {
+	@Test def void testBug433573_01() throws Exception {
 		'''
 			{
 				val Number element = null
@@ -1552,7 +1552,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_02() {
+	@Test def void testBug433573_02() throws Exception {
 		'''
 			{
 				val Number element = null
@@ -1572,7 +1572,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_03() {
+	@Test def void testBug433573_03() throws Exception {
 		'''
 			{
 				val Number element = null
@@ -1588,7 +1588,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_04() {
+	@Test def void testBug433573_04() throws Exception {
 		'''
 			{
 				val Number element = null
@@ -1608,7 +1608,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_05() {
+	@Test def void testBug433573_05() throws Exception {
 		'''
 			{
 				val Object element = null
@@ -1624,7 +1624,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_06() {
+	@Test def void testBug433573_06() throws Exception {
 		'''
 			{
 				val Object element = null
@@ -1644,7 +1644,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_07() {
+	@Test def void testBug433573_07() throws Exception {
 		'''
 			{
 				val Object element = null
@@ -1660,7 +1660,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug433573_08() {
+	@Test def void testBug433573_08() throws Exception {
 		'''
 			{
 				val Object element = null
@@ -1680,7 +1680,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_01() {
+	@Test def void testBug466974_01() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1703,7 +1703,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_02() {
+	@Test def void testBug466974_02() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1725,7 +1725,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_03() {
+	@Test def void testBug466974_03() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1748,7 +1748,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_04() {
+	@Test def void testBug466974_04() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1770,7 +1770,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_05() {
+	@Test def void testBug466974_05() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1793,7 +1793,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_06() {
+	@Test def void testBug466974_06() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1815,7 +1815,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_07() {
+	@Test def void testBug466974_07() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1838,7 +1838,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_08() {
+	@Test def void testBug466974_08() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1860,7 +1860,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_09() {
+	@Test def void testBug466974_09() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1876,7 +1876,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testBug466974_10() {
+	@Test def void testBug466974_10() throws Exception {
 		'''
 			{
 				var i = 0
@@ -1892,7 +1892,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBug489037_NestedAssignment_1() {
+	@Test def void testBug489037_NestedAssignment_1() throws Exception {
 		// this does not require argument preparation
 		'''
 			{
@@ -1911,7 +1911,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBug489037_NestedAssignment_2() {
+	@Test def void testBug489037_NestedAssignment_2() throws Exception {
 		// this requires argument preparation
 		'''
 			{
@@ -1937,7 +1937,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBug489037_NestedAssignment_3() {
+	@Test def void testBug489037_NestedAssignment_3() throws Exception {
 		// this requires argument preparation
 		'''
 			{
@@ -1965,7 +1965,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void test406762_NestedReturn() {
+	@Test def void test406762_NestedReturn() throws Exception {
 		'''
 			{
 				return return 0
@@ -1976,7 +1976,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_NestedReturn2() {
+	@Test def void test406762_NestedReturn2() throws Exception {
 		'''
 			{
 				return { 
@@ -1989,7 +1989,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_NestedReturn3() {
+	@Test def void test406762_NestedReturn3() throws Exception {
 		'''
 			{
 				return { 
@@ -2007,7 +2007,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_NestedReturn4() {
+	@Test def void test406762_NestedReturn4() throws Exception {
 		'''
 			{
 				return 
@@ -2024,7 +2024,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_ReturnInThrow() {
+	@Test def void test406762_ReturnInThrow() throws Exception {
 		'''
 			{
 				throw return
@@ -2039,7 +2039,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_ReturnInThrow2() {
+	@Test def void test406762_ReturnInThrow2() throws Exception {
 		'''
 			{
 				throw {
@@ -2056,7 +2056,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_ReturnThrow() {
+	@Test def void test406762_ReturnThrow() throws Exception {
 		'''
 			{
 				return throw new Exception()
@@ -2071,7 +2071,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_ValidThrowInSingleIfBranch() {
+	@Test def void test406762_ValidThrowInSingleIfBranch() throws Exception {
 		'''
 			{
 				val b = true
@@ -2089,7 +2089,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void test406762_ValidThrowInSingleIfBranch_1() {
+	@Test def void test406762_ValidThrowInSingleIfBranch_1() throws Exception {
 		'''
 			{
 				val b = true
@@ -2107,7 +2107,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void test406762_InvalidThrowInBothIfBranches() {
+	@Test def void test406762_InvalidThrowInBothIfBranches() throws Exception {
 		'''
 			{
 				val b = true
@@ -2125,7 +2125,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
-	@Test def void test406762_ValidReturnInLambdaContainedInThrow() {
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow() throws Exception {
 		'''
 			throw {
 				val foo = [|return "foo"]
@@ -2151,7 +2151,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void test406762_ValidReturnInLambdaContainedInThrow_1() {
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow_1() throws Exception {
 		'''
 			throw {
 				val ()=>Exception foo = [|return new Exception]
@@ -2176,7 +2176,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testObjectEqualNull () {
+	@Test def void testObjectEqualNull() throws Exception {
 		'''
 			"Foo" == null
 		'''.compilesTo ('''
@@ -2185,7 +2185,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testObjectNotEqualNull () {
+	@Test def void testObjectNotEqualNull() throws Exception {
 		'''
 			"Foo" != null
 		'''.compilesTo ('''
@@ -2194,7 +2194,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testObjectIdenticalNull () {
+	@Test def void testObjectIdenticalNull() throws Exception {
 		'''
 			"Foo" === null
 		'''.compilesTo ('''
@@ -2202,7 +2202,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testObjectNotIdenticalNull () {
+	@Test def void testObjectNotIdenticalNull() throws Exception {
 		'''
 			"Foo" !== null
 		'''.compilesTo ('''
@@ -2210,7 +2210,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBigIntegerLiteral01 () {
+	@Test def void testBigIntegerLiteral01() throws Exception {
 		'''
 			1bi
 		'''.compilesTo ('''
@@ -2218,7 +2218,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBigIntegerLiteral02 () {
+	@Test def void testBigIntegerLiteral02() throws Exception {
 		'''
 			1.0bi
 		'''.compilesTo ('''
@@ -2226,7 +2226,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBigIntegerLiteral03 () {
+	@Test def void testBigIntegerLiteral03() throws Exception {
 		'''
 			1e23bi
 		'''.compilesTo ('''
@@ -2234,7 +2234,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testBigIntegerLiteral04 () {
+	@Test def void testBigIntegerLiteral04() throws Exception {
 		'''
 			1.23e45bi
 		'''.compilesTo ('''
@@ -2242,7 +2242,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testExtrasIssue394() {
+	@Test def void testExtrasIssue394() throws Exception {
 		'''
 			newArrayOfSize(1).get(0)
 		'''.compilesTo ('''
@@ -2251,7 +2251,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
-	@Test def void testExtrasIssue394_2() {
+	@Test def void testExtrasIssue394_2() throws Exception {
 		'''
 			newArrayOfSize(1)
 		'''.compilesTo ('''
@@ -2260,7 +2260,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
-	@Test def void testLibIssue60() {
+	@Test def void testLibIssue60() throws Exception {
 		'''
 			{
 				val a = <String>newArrayOfSize(1)
