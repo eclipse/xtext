@@ -30,7 +30,7 @@ class ContentAssistContextFactoryTest {
 	@Inject ContentAssistContextFactory factory
 	@Inject TestLanguageGrammarAccess grammar
 
-	@Test def void testSimple1() {
+	@Test def void testSimple1() throws Exception {
 		document = '''
 			type Foo <|>{
 				int bar
@@ -44,7 +44,7 @@ class ContentAssistContextFactoryTest {
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)
 	}
 
-	@Test def void testSimple2() {
+	@Test def void testSimple2() throws Exception {
 		document = '''
 			type Foo {
 				<|>int bar
@@ -72,7 +72,7 @@ class ContentAssistContextFactoryTest {
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)
 	}
 
-	@Test def void testBeginning() {
+	@Test def void testBeginning() throws Exception {
 		document = '''
 			<|>type Foo {
 				int bar
@@ -91,7 +91,7 @@ class ContentAssistContextFactoryTest {
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)
 	}
 
-	@Test def void testCustomEntryPoint() {
+	@Test def void testCustomEntryPoint() throws Exception {
 		entryPoint = grammar.propertyRule
 		document = '''
 			int <|>bar
@@ -106,7 +106,7 @@ class ContentAssistContextFactoryTest {
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)
 	}
 
-	@Test def void testCustomEntryPointBeginning() {
+	@Test def void testCustomEntryPointBeginning() throws Exception {
 		entryPoint = grammar.propertyRule
 		document = '''
 			<|>int bar

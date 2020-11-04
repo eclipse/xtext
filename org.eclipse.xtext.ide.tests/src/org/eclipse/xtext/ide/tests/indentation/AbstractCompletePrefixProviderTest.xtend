@@ -32,15 +32,15 @@ abstract class AbstractCompletePrefixProviderTest {
 	
 	@Inject ParseHelper<Tree> parseHelper;
 	
-	@Test def void testInputToParse_01() {
+	@Test def void testInputToParse_01() throws Exception {
 		assertEquals("abc", testee.getInputToParse("abcdefg", 3, 7 /* do not care about this */))
 	}
 	
-	@Test def void testInputToParse_02() {
+	@Test def void testInputToParse_02() throws Exception {
 		assertEquals("abc", testee.getInputToParse("abc   defg", 3, 7 /* do not care about this */))
 	}
 	
-	@Test def void testWholeNodeModel() {
+	@Test def void testWholeNodeModel() throws Exception {
 		'''
 			parent1
 				child1
@@ -78,7 +78,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_0_0() {
+	@Test def void testLastCompleteNode_0_0() throws Exception {
 		'''
 			<|>parent1
 				child1
@@ -91,7 +91,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_0_2() {
+	@Test def void testLastCompleteNode_0_2() throws Exception {
 		'''
 			pa<|>rent1
 				child1
@@ -100,7 +100,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_1_0() {
+	@Test def void testLastCompleteNode_1_0() throws Exception {
 		'''
 			parent1
 			<|>	child1
@@ -109,7 +109,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_1_1() {
+	@Test def void testLastCompleteNode_1_1() throws Exception {
 		'''
 			parent1
 				<|>child1
@@ -118,7 +118,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_1_2() {
+	@Test def void testLastCompleteNode_1_2() throws Exception {
 		'''
 			parent1
 				c<|>hild1
@@ -129,7 +129,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_2_0() {
+	@Test def void testLastCompleteNode_2_0() throws Exception {
 		'''
 			parent1
 				child1
@@ -141,7 +141,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_2_1() {
+	@Test def void testLastCompleteNode_2_1() throws Exception {
 		'''
 			parent1
 				child1
@@ -153,7 +153,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_2_2() {
+	@Test def void testLastCompleteNode_2_2() throws Exception {
 		'''
 			parent1
 				child1
@@ -165,7 +165,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_3_1() {
+	@Test def void testLastCompleteNode_3_1() throws Exception {
 		'''
 			c
 				d
@@ -180,7 +180,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_3_2() {
+	@Test def void testLastCompleteNode_3_2() throws Exception {
 		'''
 			parent1
 				child1
@@ -195,7 +195,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_2() {
+	@Test def void testLastCompleteNode_4_2() throws Exception {
 		'''
 			parent1
 				child1
@@ -212,7 +212,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_1() {
+	@Test def void testLastCompleteNode_4_1() throws Exception {
 		'''
 			parent1
 				child1
@@ -229,7 +229,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_0() {
+	@Test def void testLastCompleteNode_4_0() throws Exception {
 		'''
 			parent1
 				child1
@@ -244,7 +244,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_2b() {
+	@Test def void testLastCompleteNode_4_2b() throws Exception {
 		'''
 			parent1
 				child1
@@ -260,7 +260,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_1b() {
+	@Test def void testLastCompleteNode_4_1b() throws Exception {
 		'''
 			parent1
 				child1
@@ -276,7 +276,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_0b() {
+	@Test def void testLastCompleteNode_4_0b() throws Exception {
 		'''
 			parent1
 				child1
@@ -292,7 +292,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_2c() {
+	@Test def void testLastCompleteNode_4_2c() throws Exception {
 		'''
 			parent1
 				child1
@@ -309,7 +309,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_1c() {
+	@Test def void testLastCompleteNode_4_1c() throws Exception {
 		'''
 			parent1
 				child1
@@ -326,7 +326,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_0c() {
+	@Test def void testLastCompleteNode_4_0c() throws Exception {
 		'''
 			parent1
 				child1
@@ -342,7 +342,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_2d() {
+	@Test def void testLastCompleteNode_4_2d() throws Exception {
 		'''
 			parent1
 				child1
@@ -360,7 +360,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_1d() {
+	@Test def void testLastCompleteNode_4_1d() throws Exception {
 		'''
 			parent1
 				child1
@@ -378,7 +378,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_4_0d() {
+	@Test def void testLastCompleteNode_4_0d() throws Exception {
 		'''
 			parent1
 				child1
@@ -394,7 +394,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_0() {
+	@Test def void testLastCompleteNode_6_0() throws Exception {
 		'''
 			a
 			b
@@ -414,7 +414,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_0b() {
+	@Test def void testLastCompleteNode_6_0b() throws Exception {
 		'''
 			a
 			b
@@ -435,7 +435,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_1b() {
+	@Test def void testLastCompleteNode_6_1b() throws Exception {
 		'''
 			a
 			b
@@ -458,7 +458,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_5_1() {
+	@Test def void testLastCompleteNode_5_1() throws Exception {
 		'''
 			a
 				b
@@ -477,7 +477,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_3() {
+	@Test def void testLastCompleteNode_6_3() throws Exception {
 		'''
 			a
 			b
@@ -498,7 +498,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_3b() {
+	@Test def void testLastCompleteNode_6_3b() throws Exception {
 		'''
 			a
 			b
@@ -518,7 +518,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_3c() {
+	@Test def void testLastCompleteNode_6_3c() throws Exception {
 		'''
 			a
 			b
@@ -538,7 +538,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_6_3d() {
+	@Test def void testLastCompleteNode_6_3d() throws Exception {
 		'''
 			a
 			b
@@ -558,7 +558,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_7_0() {
+	@Test def void testLastCompleteNode_7_0() throws Exception {
 		'''
 			a
 			b
@@ -580,7 +580,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_7_1() {
+	@Test def void testLastCompleteNode_7_1() throws Exception {
 		'''
 			a
 			b
@@ -603,7 +603,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_1() {
+	@Test def void testLastCompleteNode_8_1() throws Exception {
 		'''
 			a
 			b
@@ -630,7 +630,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_2() {
+	@Test def void testLastCompleteNode_8_2() throws Exception {
 		'''
 			a
 			b
@@ -659,7 +659,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_2b() {
+	@Test def void testLastCompleteNode_8_2b() throws Exception {
 		'''
 			a
 			b
@@ -687,7 +687,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_2c() {
+	@Test def void testLastCompleteNode_8_2c() throws Exception {
 		'''
 			a
 			b
@@ -716,7 +716,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_3() {
+	@Test def void testLastCompleteNode_8_3() throws Exception {
 		'''
 			a
 			b
@@ -745,7 +745,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_3b() {
+	@Test def void testLastCompleteNode_8_3b() throws Exception {
 		'''
 			a
 			b
@@ -773,7 +773,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_3c() {
+	@Test def void testLastCompleteNode_8_3c() throws Exception {
 		'''
 			a
 			b
@@ -802,7 +802,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_4() {
+	@Test def void testLastCompleteNode_8_4() throws Exception {
 		'''
 			a
 			b
@@ -831,7 +831,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_4b() {
+	@Test def void testLastCompleteNode_8_4b() throws Exception {
 		'''
 			a
 			b
@@ -859,7 +859,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	@Test def void testLastCompleteNode_8_4c() {
+	@Test def void testLastCompleteNode_8_4c() throws Exception {
 		'''
 			a
 			b
@@ -888,7 +888,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		''')
 	}
 	
-	protected def void assertLastCompleteNode(CharSequence model, String expectation) {
+	protected def void assertLastCompleteNode(CharSequence model, String expectation) throws Exception {
 		val modelAsString = model.toString.replaceAll("\r\n","\n")
 		modelAsString.assertLastCompleteNode(expectation);
 		val withStringLiterals = modelAsString.replaceAll("(\\w+(<\\|>\\w+)?)", "\"$1\"")
@@ -896,7 +896,7 @@ abstract class AbstractCompletePrefixProviderTest {
 		withStringLiterals.assertLastCompleteNode(expectationWithLiterals);
 	}
 	
-	private def void assertLastCompleteNode(String model, String expectation) {
+	private def void assertLastCompleteNode(String model, String expectation) throws Exception {
 		var offset = model.indexOf('<|>')
 		if (offset === -1) {
 			offset = model.length

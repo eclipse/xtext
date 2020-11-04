@@ -43,41 +43,33 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
   private UriExtensions _uriExtensions;
   
   @Test
-  public void testRenameFqn_missing_file_null() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("missing.");
-      _builder.append(this.fileExtension);
-      final String uri = this._uriExtensions.toUriString(new File(_builder.toString()).toURI().normalize());
-      this.initializeWithPrepareSupport();
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 5);
-      final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "Does not matter");
-      Assert.assertNull(this.languageServer.rename(params).get());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testRenameFqn_missing_file_null() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("missing.");
+    _builder.append(this.fileExtension);
+    final String uri = this._uriExtensions.toUriString(new File(_builder.toString()).toURI().normalize());
+    this.initializeWithPrepareSupport();
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 5);
+    final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "Does not matter");
+    Assert.assertNull(this.languageServer.rename(params).get());
   }
   
   @Test
-  public void testPrepareRenameFqn_missing_file_null() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("missing.");
-      _builder.append(this.fileExtension);
-      final String uri = this._uriExtensions.toUriString(new File(_builder.toString()).toURI().normalize());
-      this.initializeWithPrepareSupport();
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 5);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      Assert.assertNull(this.languageServer.prepareRename(params).get());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_missing_file_null() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("missing.");
+    _builder.append(this.fileExtension);
+    final String uri = this._uriExtensions.toUriString(new File(_builder.toString()).toURI().normalize());
+    this.initializeWithPrepareSupport();
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 5);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    Assert.assertNull(this.languageServer.prepareRename(params).get());
   }
   
   @Test
-  public void testPrepareRenameFqn_missing_file_exception() {
+  public void testPrepareRenameFqn_missing_file_exception() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("missing.");
     _builder.append(this.fileExtension);
@@ -101,7 +93,7 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
-  public void testRenameFqn_invalid_error() {
+  public void testRenameFqn_invalid_error() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar {");
     _builder.newLine();
@@ -144,240 +136,212 @@ public class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
-  public void testRenameFqn_invalid_null() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String uri = this.writeFile("my-type-invalid.testlang", _builder);
-      this.initializeWithPrepareSupport();
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 5);
-      final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "Does not matter");
-      Assert.assertNull(this.languageServer.rename(params).get());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testRenameFqn_invalid_null() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String uri = this.writeFile("my-type-invalid.testlang", _builder);
+    this.initializeWithPrepareSupport();
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 5);
+    final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "Does not matter");
+    Assert.assertNull(this.languageServer.rename(params).get());
   }
   
   @Test
-  public void testRenameFqn_before_ok() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String uri = this.writeFile("my-type-valid.testlang", _builder);
-      this.initializeWithPrepareSupport();
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 13);
-      final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "YourType");
-      final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("changes :");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("my-type-valid.testlang : foo.bar.YourType [[2, 4] .. [2, 18]]");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("YourType [[4, 7] .. [4, 13]]");
-      _builder_1.newLine();
-      _builder_1.append("documentChanges : ");
-      _builder_1.newLine();
-      this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testRenameFqn_before_ok() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String uri = this.writeFile("my-type-valid.testlang", _builder);
+    this.initializeWithPrepareSupport();
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 13);
+    final RenameParams params = new RenameParams(_textDocumentIdentifier, _position, "YourType");
+    final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("changes :");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("my-type-valid.testlang : foo.bar.YourType [[2, 4] .. [2, 18]]");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("YourType [[4, 7] .. [4, 13]]");
+    _builder_1.newLine();
+    _builder_1.append("documentChanges : ");
+    _builder_1.newLine();
+    this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
   }
   
   @Test
-  public void testPrepareRenameFqn_before_nok() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      this.initializeWithPrepareSupport();
-      final String uri = this.writeFile("my-type-valid.testlang", model);
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 11);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      Assert.assertNull(this.languageServer.prepareRename(params).get());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_before_nok() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    this.initializeWithPrepareSupport();
+    final String uri = this.writeFile("my-type-valid.testlang", model);
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 11);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    Assert.assertNull(this.languageServer.prepareRename(params).get());
   }
   
   @Test
-  public void testPrepareRenameFqn_start_ok() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      this.initializeWithPrepareSupport();
-      final String uri = this.writeFile("my-type-valid.testlang", model);
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 12);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      final Range range = this.languageServer.prepareRename(params).get().getLeft();
-      this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_start_ok() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    this.initializeWithPrepareSupport();
+    final String uri = this.writeFile("my-type-valid.testlang", model);
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 12);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    final Range range = this.languageServer.prepareRename(params).get().getLeft();
+    this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
   }
   
   @Test
-  public void testPrepareRenameFqn_in_ok() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      this.initializeWithPrepareSupport();
-      final String uri = this.writeFile("my-type-valid.testlang", model);
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 14);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      final Range range = this.languageServer.prepareRename(params).get().getLeft();
-      this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_in_ok() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    this.initializeWithPrepareSupport();
+    final String uri = this.writeFile("my-type-valid.testlang", model);
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 14);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    final Range range = this.languageServer.prepareRename(params).get().getLeft();
+    this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
   }
   
   @Test
-  public void testPrepareRenameFqn_end_ok() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      this.initializeWithPrepareSupport();
-      final String uri = this.writeFile("my-type-valid.testlang", model);
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 18);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      final Range range = this.languageServer.prepareRename(params).get().getLeft();
-      this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_end_ok() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    this.initializeWithPrepareSupport();
+    final String uri = this.writeFile("my-type-valid.testlang", model);
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 18);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    final Range range = this.languageServer.prepareRename(params).get().getLeft();
+    this.assertEquals("MyType", new Document(Integer.valueOf(0), model).getSubstring(range));
   }
   
   @Test
-  public void testPrepareRenameFqn_end_null() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo.bar {");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type A {");
-      _builder.newLine();
-      _builder.append("    ");
-      _builder.append("foo.bar.MyType bar");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("type MyType { }");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      this.initialize();
-      final String uri = this.writeFile("my-type-valid.testlang", model);
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
-      Position _position = new Position(2, 18);
-      final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
-      Assert.assertNull(this.languageServer.prepareRename(params).get());
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testPrepareRenameFqn_end_null() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo.bar {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type A {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("foo.bar.MyType bar");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("type MyType { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    this.initialize();
+    final String uri = this.writeFile("my-type-valid.testlang", model);
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
+    Position _position = new Position(2, 18);
+    final PrepareRenameParams params = new PrepareRenameParams(_textDocumentIdentifier, _position);
+    Assert.assertNull(this.languageServer.prepareRename(params).get());
   }
   
   private InitializeResult initializeWithPrepareSupport() {

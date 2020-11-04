@@ -14,7 +14,6 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,69 +52,65 @@ public class RenameTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
-  public void testRenameBeforeDeclaration() {
+  public void testRenameBeforeDeclaration() throws Exception {
     Position _position = new Position(0, 5);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
-  public void testRenameOnDeclaration() {
+  public void testRenameOnDeclaration() throws Exception {
     Position _position = new Position(0, 6);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
-  public void testRenameAfterDeclaration() {
+  public void testRenameAfterDeclaration() throws Exception {
     Position _position = new Position(0, 8);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
-  public void testRenameOnReference() {
+  public void testRenameOnReference() throws Exception {
     Position _position = new Position(1, 5);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
-  public void testRenameAfterReference() {
+  public void testRenameAfterReference() throws Exception {
     Position _position = new Position(1, 8);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
-  public void testRenameOnReferenceInOtherFile() {
+  public void testRenameOnReferenceInOtherFile() throws Exception {
     Position _position = new Position(1, 5);
     this.doTest(this.secondFile, _position);
   }
   
   @Test
-  public void testRenameAfterReferenceInOtherFile() {
+  public void testRenameAfterReferenceInOtherFile() throws Exception {
     Position _position = new Position(1, 8);
     this.doTest(this.secondFile, _position);
   }
   
-  protected void doTest(final String fileName, final Position position) {
-    try {
-      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileName);
-      final RenameParams params = new RenameParams(_textDocumentIdentifier, position, "Tescht");
-      final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("changes :");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("MyType1.testlang : Tescht [[0, 5] .. [0, 9]]");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("Tescht [[1, 4] .. [1, 8]]");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("MyType2.testlang : Tescht [[1, 4] .. [1, 8]]");
-      _builder.newLine();
-      _builder.append("documentChanges : ");
-      _builder.newLine();
-      this.assertEquals(_builder.toString(), this.toExpectation(workspaceEdit));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  protected void doTest(final String fileName, final Position position) throws Exception {
+    TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileName);
+    final RenameParams params = new RenameParams(_textDocumentIdentifier, position, "Tescht");
+    final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("changes :");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("MyType1.testlang : Tescht [[0, 5] .. [0, 9]]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Tescht [[1, 4] .. [1, 8]]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("MyType2.testlang : Tescht [[1, 4] .. [1, 8]]");
+    _builder.newLine();
+    _builder.append("documentChanges : ");
+    _builder.newLine();
+    this.assertEquals(_builder.toString(), this.toExpectation(workspaceEdit));
   }
 }

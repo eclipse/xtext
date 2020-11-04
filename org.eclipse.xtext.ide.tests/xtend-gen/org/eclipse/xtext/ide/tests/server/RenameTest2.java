@@ -24,7 +24,6 @@ import org.eclipse.lsp4j.WorkspaceEditCapabilities;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.testing.AbstractLanguageServerTest;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -39,100 +38,92 @@ public class RenameTest2 extends AbstractLanguageServerTest {
   }
   
   @Test
-  public void testRenameSelfRef() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("element Foo {");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("ref Foo");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      final String file = this.writeFile("foo/Foo.fileawaretestlanguage", model);
-      this.initialize();
-      final TextDocumentIdentifier identifier = new TextDocumentIdentifier(file);
-      final Position position = new Position(2, 9);
-      PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
-      final Range range = this.languageServer.prepareRename(_prepareRenameParams).get().getLeft();
-      this.assertEquals("Foo", new Document(Integer.valueOf(0), model).getSubstring(range));
-      final RenameParams params = new RenameParams(identifier, position, "Bar");
-      final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("changes :");
-      _builder_1.newLine();
-      _builder_1.append("documentChanges : ");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Foo.fileawaretestlanguage <1> : Bar [[2, 8] .. [2, 11]]");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Bar [[3, 5] .. [3, 8]]");
-      _builder_1.newLine();
-      this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testRenameSelfRef() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("element Foo {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("ref Foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    final String file = this.writeFile("foo/Foo.fileawaretestlanguage", model);
+    this.initialize();
+    final TextDocumentIdentifier identifier = new TextDocumentIdentifier(file);
+    final Position position = new Position(2, 9);
+    PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
+    final Range range = this.languageServer.prepareRename(_prepareRenameParams).get().getLeft();
+    this.assertEquals("Foo", new Document(Integer.valueOf(0), model).getSubstring(range));
+    final RenameParams params = new RenameParams(identifier, position, "Bar");
+    final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("changes :");
+    _builder_1.newLine();
+    _builder_1.append("documentChanges : ");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Foo.fileawaretestlanguage <1> : Bar [[2, 8] .. [2, 11]]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Bar [[3, 5] .. [3, 8]]");
+    _builder_1.newLine();
+    this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
   }
   
   @Test
-  public void testRenameContainer() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package foo");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("element Foo {");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("element Bar {");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("ref foo.Foo.Bar");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("ref Foo.Bar");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append("ref Bar");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String model = _builder.toString();
-      final String file = this.writeFile("foo/Foo.fileawaretestlanguage", model);
-      this.initialize();
-      final TextDocumentIdentifier identifier = new TextDocumentIdentifier(file);
-      final Position position = new Position(2, 9);
-      PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
-      final Range range = this.languageServer.prepareRename(_prepareRenameParams).get().getLeft();
-      this.assertEquals("Foo", new Document(Integer.valueOf(0), model).getSubstring(range));
-      final RenameParams params = new RenameParams(identifier, position, "Baz");
-      final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("changes :");
-      _builder_1.newLine();
-      _builder_1.append("documentChanges : ");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Foo.fileawaretestlanguage <1> : Baz [[2, 8] .. [2, 11]]");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Bar [[5, 5] .. [5, 16]]");
-      _builder_1.newLine();
-      _builder_1.append("    ");
-      _builder_1.append("Bar [[6, 5] .. [6, 12]]");
-      _builder_1.newLine();
-      this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testRenameContainer() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("element Foo {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("element Bar {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("ref foo.Foo.Bar");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("ref Foo.Bar");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("ref Bar");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    final String file = this.writeFile("foo/Foo.fileawaretestlanguage", model);
+    this.initialize();
+    final TextDocumentIdentifier identifier = new TextDocumentIdentifier(file);
+    final Position position = new Position(2, 9);
+    PrepareRenameParams _prepareRenameParams = new PrepareRenameParams(identifier, position);
+    final Range range = this.languageServer.prepareRename(_prepareRenameParams).get().getLeft();
+    this.assertEquals("Foo", new Document(Integer.valueOf(0), model).getSubstring(range));
+    final RenameParams params = new RenameParams(identifier, position, "Baz");
+    final WorkspaceEdit workspaceEdit = this.languageServer.rename(params).get();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("changes :");
+    _builder_1.newLine();
+    _builder_1.append("documentChanges : ");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Foo.fileawaretestlanguage <1> : Baz [[2, 8] .. [2, 11]]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Bar [[5, 5] .. [5, 16]]");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Bar [[6, 5] .. [6, 12]]");
+    _builder_1.newLine();
+    this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
   }
   
   @Override

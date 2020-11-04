@@ -36,7 +36,7 @@ class ContentAssistContextTestHelper {
 	@Accessors ParserRule entryPoint
 	@Accessors String cursor = "<|>"
 
-	def private XtextResource parse(String doc) {
+	def private XtextResource parse(String doc) throws Exception {
 		val uri = URI.createURI("dummy." + fileExtension.primaryFileExtension)
 		val res = resFactory.createResource(uri) as XtextResource
 		new XtextResourceSet().resources += res
@@ -48,7 +48,7 @@ class ContentAssistContextTestHelper {
 		return res
 	}
 
-	def String firstSetGrammarElementsToString(ContentAssistContextFactory factory) {
+	def String firstSetGrammarElementsToString(ContentAssistContextFactory factory) throws Exception {
 		val offset = document.indexOf(cursor)
 		Preconditions.checkArgument(offset >= 0, "you forgot to provide a cursor")
 		val doc = document.replace(cursor, "")

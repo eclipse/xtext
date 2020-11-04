@@ -23,7 +23,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testing.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -40,17 +39,17 @@ public abstract class AbstractCompletePrefixProviderTest {
   private ParseHelper<Tree> parseHelper;
   
   @Test
-  public void testInputToParse_01() {
+  public void testInputToParse_01() throws Exception {
     Assert.assertEquals("abc", this.getTestee().getInputToParse("abcdefg", 3, 7));
   }
   
   @Test
-  public void testInputToParse_02() {
+  public void testInputToParse_02() throws Exception {
     Assert.assertEquals("abc", this.getTestee().getInputToParse("abc   defg", 3, 7));
   }
   
   @Test
-  public void testWholeNodeModel() {
+  public void testWholeNodeModel() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -128,7 +127,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_0_0() {
+  public void testLastCompleteNode_0_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<|>parent1");
     _builder.newLine();
@@ -149,7 +148,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_0_2() {
+  public void testLastCompleteNode_0_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("pa<|>rent1");
     _builder.newLine();
@@ -163,7 +162,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_1_0() {
+  public void testLastCompleteNode_1_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -176,7 +175,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_1_1() {
+  public void testLastCompleteNode_1_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -190,7 +189,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_1_2() {
+  public void testLastCompleteNode_1_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -208,7 +207,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_2_0() {
+  public void testLastCompleteNode_2_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -228,7 +227,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_2_1() {
+  public void testLastCompleteNode_2_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -249,7 +248,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_2_2() {
+  public void testLastCompleteNode_2_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -270,7 +269,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_3_1() {
+  public void testLastCompleteNode_3_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("c");
     _builder.newLine();
@@ -298,7 +297,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_3_2() {
+  public void testLastCompleteNode_3_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -326,7 +325,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_2() {
+  public void testLastCompleteNode_4_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -358,7 +357,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_1() {
+  public void testLastCompleteNode_4_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -390,7 +389,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_0() {
+  public void testLastCompleteNode_4_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -417,7 +416,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_2b() {
+  public void testLastCompleteNode_4_2b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -448,7 +447,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_1b() {
+  public void testLastCompleteNode_4_1b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -479,7 +478,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_0b() {
+  public void testLastCompleteNode_4_0b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -509,7 +508,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_2c() {
+  public void testLastCompleteNode_4_2c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -542,7 +541,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_1c() {
+  public void testLastCompleteNode_4_1c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -575,7 +574,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_0c() {
+  public void testLastCompleteNode_4_0c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -605,7 +604,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_2d() {
+  public void testLastCompleteNode_4_2d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -639,7 +638,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_1d() {
+  public void testLastCompleteNode_4_1d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -673,7 +672,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_4_0d() {
+  public void testLastCompleteNode_4_0d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -702,7 +701,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_0() {
+  public void testLastCompleteNode_6_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -740,7 +739,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_0b() {
+  public void testLastCompleteNode_6_0b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -781,7 +780,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_1b() {
+  public void testLastCompleteNode_6_1b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -827,7 +826,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_5_1() {
+  public void testLastCompleteNode_5_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -865,7 +864,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_3() {
+  public void testLastCompleteNode_6_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -905,7 +904,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_3b() {
+  public void testLastCompleteNode_6_3b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -944,7 +943,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_3c() {
+  public void testLastCompleteNode_6_3c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -983,7 +982,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_6_3d() {
+  public void testLastCompleteNode_6_3d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1022,7 +1021,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_7_0() {
+  public void testLastCompleteNode_7_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1064,7 +1063,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_7_1() {
+  public void testLastCompleteNode_7_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1109,7 +1108,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_1() {
+  public void testLastCompleteNode_8_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1163,7 +1162,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_2() {
+  public void testLastCompleteNode_8_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1222,7 +1221,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_2b() {
+  public void testLastCompleteNode_8_2b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1280,7 +1279,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_2c() {
+  public void testLastCompleteNode_8_2c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1340,7 +1339,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_3() {
+  public void testLastCompleteNode_8_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1399,7 +1398,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_3b() {
+  public void testLastCompleteNode_8_3b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1457,7 +1456,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_3c() {
+  public void testLastCompleteNode_8_3c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1517,7 +1516,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_4() {
+  public void testLastCompleteNode_8_4() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1576,7 +1575,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_4b() {
+  public void testLastCompleteNode_8_4b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1634,7 +1633,7 @@ public abstract class AbstractCompletePrefixProviderTest {
   }
   
   @Test
-  public void testLastCompleteNode_8_4c() {
+  public void testLastCompleteNode_8_4c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1693,7 +1692,7 @@ public abstract class AbstractCompletePrefixProviderTest {
     this.assertLastCompleteNode(_builder, _builder_1.toString());
   }
   
-  protected void assertLastCompleteNode(final CharSequence model, final String expectation) {
+  protected void assertLastCompleteNode(final CharSequence model, final String expectation) throws Exception {
     final String modelAsString = model.toString().replaceAll("\r\n", "\n");
     this.assertLastCompleteNode(modelAsString, expectation);
     final String withStringLiterals = modelAsString.replaceAll("(\\w+(<\\|>\\w+)?)", "\"$1\"");
@@ -1701,23 +1700,19 @@ public abstract class AbstractCompletePrefixProviderTest {
     this.assertLastCompleteNode(withStringLiterals, expectationWithLiterals);
   }
   
-  private void assertLastCompleteNode(final String model, final String expectation) {
-    try {
-      int offset = model.indexOf("<|>");
-      if ((offset == (-1))) {
-        offset = model.length();
-      }
-      int completionOffset = model.indexOf("<|>", offset);
-      if ((completionOffset == (-1))) {
-        completionOffset = offset;
-      }
-      final Tree tree = this.parseHelper.parse(model.replace("<|>", ""));
-      final ICompositeNode nodeModel = NodeModelUtils.findActualNodeFor(tree);
-      final INode completeNode = this.getTestee().getLastCompleteNodeByOffset(nodeModel, offset, completionOffset);
-      this.assertNodeModel(expectation, completeNode);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  private void assertLastCompleteNode(final String model, final String expectation) throws Exception {
+    int offset = model.indexOf("<|>");
+    if ((offset == (-1))) {
+      offset = model.length();
     }
+    int completionOffset = model.indexOf("<|>", offset);
+    if ((completionOffset == (-1))) {
+      completionOffset = offset;
+    }
+    final Tree tree = this.parseHelper.parse(model.replace("<|>", ""));
+    final ICompositeNode nodeModel = NodeModelUtils.findActualNodeFor(tree);
+    final INode completeNode = this.getTestee().getLastCompleteNodeByOffset(nodeModel, offset, completionOffset);
+    this.assertNodeModel(expectation, completeNode);
   }
   
   private void assertNodeModel(final String expectation, final INode node) {
