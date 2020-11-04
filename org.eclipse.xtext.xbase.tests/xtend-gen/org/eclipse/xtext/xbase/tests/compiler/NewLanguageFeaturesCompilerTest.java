@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.tests.compiler.AbstractOutputComparingCompilerTests;
 import org.junit.Test;
@@ -161,75 +160,67 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
   }
   
   @Test
-  public void testBasicForLoop_8() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("[| for (;;) {} ]");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = () -> {");
-      _builder_1.newLine();
-      _builder_1.append("  ");
-      _builder_1.append("for (;;) {");
-      _builder_1.newLine();
-      _builder_1.append("  ");
-      _builder_1.append("}");
-      _builder_1.newLine();
-      _builder_1.append("};");
-      _builder_1.newLine();
-      _builder_1.append("return _function;");
-      _builder_1.newLine();
-      this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testBasicForLoop_8() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("[| for (;;) {} ]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = () -> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("for (;;) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("return _function;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
   }
   
   @Test
-  public void testBasicForLoop_10() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("val i = 0");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("for ([| i ].apply, [| i ].apply; i < 10;) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("final int i = 0;");
-      _builder_1.newLine();
-      _builder_1.append("for (((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {");
-      _builder_1.newLine();
-      _builder_1.append("  ");
-      _builder_1.append("return Integer.valueOf(i);");
-      _builder_1.newLine();
-      _builder_1.append("}).apply(), ((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {");
-      _builder_1.newLine();
-      _builder_1.append("  ");
-      _builder_1.append("return Integer.valueOf(i);");
-      _builder_1.newLine();
-      _builder_1.append("}).apply(); (i < 10);) {");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public void testBasicForLoop_10() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val i = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for ([| i ].apply, [| i ].apply; i < 10;) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final int i = 0;");
+    _builder_1.newLine();
+    _builder_1.append("for (((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("return Integer.valueOf(i);");
+    _builder_1.newLine();
+    _builder_1.append("}).apply(), ((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("return Integer.valueOf(i);");
+    _builder_1.newLine();
+    _builder_1.append("}).apply(); (i < 10);) {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
   }
   
   @Test

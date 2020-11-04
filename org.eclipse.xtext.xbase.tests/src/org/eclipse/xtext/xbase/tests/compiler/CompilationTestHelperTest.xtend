@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -30,7 +30,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 	@Inject GeneratorConfigProvider generatorConfigProvider
 	@Inject FileExtensionProvider extensionProvider;
 
-	@Test def void testSwitchJavaVersion6() {
+	@Test def void testSwitchJavaVersion6() throws Exception {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA6
 		'''
 		{
@@ -69,7 +69,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 		]
 	}
 
-	@Test def void testSwitchJavaVersion7() {
+	@Test def void testSwitchJavaVersion7() throws Exception {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA7
 		'''
 		{
@@ -110,7 +110,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 		]
 	}
 
-	@Test def void testLambdaJavaVersion6() {
+	@Test def void testLambdaJavaVersion6() throws Exception {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA6
 		'''
 		{
@@ -138,7 +138,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 		]
 	}
 
-	@Test def void testLambdaJavaVersion8() {
+	@Test def void testLambdaJavaVersion8() throws Exception {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA8
 		'''
 		{
@@ -163,7 +163,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 		]
 	}
 
-	@Test def void testCustomConfigIsNotLost() {
+	@Test def void testCustomConfigIsNotLost() throws Exception {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA8
 		val resourceSet = resourceSet(
 			#[

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -84,7 +84,7 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		''', JAVA8)
 	}
 	
-	@Test def void testBasicForLoop_8() {
+	@Test def void testBasicForLoop_8() throws Exception {
 		'''
 			{
 				[| for (;;) {} ]
@@ -98,7 +98,7 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		''', JAVA8)
 	}
 	
-	@Test def void testBasicForLoop_10() {
+	@Test def void testBasicForLoop_10() throws Exception {
 		'''
 			{
 				val i = 0
