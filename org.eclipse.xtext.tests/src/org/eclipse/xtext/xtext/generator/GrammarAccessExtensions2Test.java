@@ -55,6 +55,7 @@ public class GrammarAccessExtensions2Test {
 
 	@Test
 	public void testGrammarFragmentToString() throws Exception {
+		String NL = System.lineSeparator();
 		String grammar = "grammar org.xtext.example.mydsl.MyDsl\n" +
 				"generate myDsl 'http://www.xtext.org/example/mydsl/MyDsl'\n" +
 				"OpOther:\n" +
@@ -68,14 +69,14 @@ public class GrammarAccessExtensions2Test {
 				"	| '<>'\n" +
 				"	| '?:';\n";
 		String expected = 
-				"//OpOther:\n" +
-				"//	'->'\n" +
-				"//	| '..<'\n" +
-				"//	| '>' '..'\n" +
-				"//	| '..'\n" +
-				"//	| '=>'\n" +
-				"//	| '>' (=> ('>' '>') | '>') | '<' (=> ('<' '<') | '<' | '=>') | '<>'\n" +
-				"//	| '?:';\n";
+				"//OpOther:" + NL +
+				"//	'->'" + NL +
+				"//	| '..<'" + NL +
+				"//	| '>' '..'" + NL +
+				"//	| '..'" + NL +
+				"//	| '=>'" + NL +
+				"//	| '>' (=> ('>' '>') | '>') | '<' (=> ('<' '<') | '<' | '=>') | '<>'" + NL +
+				"//	| '?:';";
 		firstRuleIsConvertedTo(
 				grammar,
 				expected);
