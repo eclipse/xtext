@@ -1,10 +1,50 @@
 pipeline {
-  agent any
-
+  agent {
+    kubernetes {
+      label 'xtext-build-pod'
+      defaultContainer 'jnlp'
+      yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: 'eclipsecbi/jenkins-jnlp-agent'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    volumeMounts:
+    - mountPath: /home/jenkins/.ssh
+      name: volume-known-hosts
+  - name: xtext-buildenv
+    image: docker.io/smoht/xtext-buildenv:0.7
+    tty: true
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1"
+      requests:
+        memory: "2Gi"
+        cpu: "1"
+    volumeMounts:
+    - name: volume-known-hosts
+      mountPath: /home/jenkins/.ssh
+  volumes:
+  - name: volume-known-hosts
+    configMap:
+      name: known-hosts
+    '''
+    }
+  }
+  
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'3'))
+    disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
+  }
+  
   stages {
     stage ('Checkout') {
       steps {
-          sshagent(['29d79994-c415-4a38-9ab4-7463971ba682']) { // 
+          sshagent(['git.eclipse.org-bot-ssh']) { // 
             sh '''
               rm -rf deploy-xtext-git-repo
               rm -rf deploy-xtend-git-repo
@@ -16,18 +56,20 @@ pipeline {
     }
     stage('Generate site') {
       steps {
+        container('xtext-buildenv') {
         echo 'Building..'
         dir ('git-repo/xtext-website') {
           sh '''
             # generate things in _site
-            ~/.rvm/gems/ruby-2.2.0/wrappers/jekyll build
+            bundle exec jekyll build
           '''
         }
         dir ('git-repo/xtend-website') {
           sh '''
             # generate things in _site
-            ~/.rvm/gems/ruby-2.2.0/wrappers/jekyll build
+            bundle exec jekyll build
           '''
+        }
         }
       }
     }
@@ -59,14 +101,14 @@ pipeline {
       steps {
         echo 'Deploying....'
         dir ('deploy-xtext-git-repo') {
-          sshagent(['29d79994-c415-4a38-9ab4-7463971ba682']) { // 
+          sshagent(['git.eclipse.org-bot-ssh']) { // 
             sh '''
               git push origin master
             '''
           }
         }
         dir ('deploy-xtend-git-repo') {
-          sshagent(['29d79994-c415-4a38-9ab4-7463971ba682']) { // 
+          sshagent(['git.eclipse.org-bot-ssh']) { // 
             sh '''
               git push origin master
             '''
