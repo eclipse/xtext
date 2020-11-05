@@ -76,40 +76,46 @@ public class ContentAssistContextTestHelper {
   }
   
   public String firstSetGrammarElementsToString(final ContentAssistContextFactory factory) throws Exception {
-    final int offset = this.document.indexOf(this.cursor);
-    Preconditions.checkArgument((offset >= 0), "you forgot to provide a cursor");
-    final String doc = this.document.replace(this.cursor, "");
-    final XtextResource res = this.parse(doc);
-    factory.setPool(Executors.newCachedThreadPool());
-    TextRegion _textRegion = new TextRegion(0, 0);
-    final ContentAssistContext[] ctxs = factory.create(doc, _textRegion, offset, res);
-    final GrammarElementTitleSwitch f = new GrammarElementTitleSwitch().showAssignments().showQualified().showRule();
-    StringConcatenation _builder = new StringConcatenation();
+    String _xblockexpression = null;
     {
-      Iterable<Pair<Integer, ContentAssistContext>> _indexed = IterableExtensions.<ContentAssistContext>indexed(((Iterable<? extends ContentAssistContext>)Conversions.doWrapArray(ctxs)));
-      for(final Pair<Integer, ContentAssistContext> ctx : _indexed) {
-        _builder.append("context");
-        Integer _key = ctx.getKey();
-        _builder.append(_key);
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        {
-          ImmutableList<AbstractElement> _firstSetGrammarElements = ctx.getValue().getFirstSetGrammarElements();
-          for(final AbstractElement ele : _firstSetGrammarElements) {
-            _builder.append("\t");
-            String _name = ele.eClass().getName();
-            _builder.append(_name, "\t");
-            _builder.append(": ");
-            String _apply = f.apply(ele);
-            _builder.append(_apply, "\t");
-            _builder.newLineIfNotEmpty();
+      final int offset = this.document.indexOf(this.cursor);
+      Preconditions.checkArgument((offset >= 0), "you forgot to provide a cursor");
+      final String doc = this.document.replace(this.cursor, "");
+      final XtextResource res = this.parse(doc);
+      factory.setPool(Executors.newCachedThreadPool());
+      TextRegion _textRegion = new TextRegion(0, 0);
+      final ContentAssistContext[] ctxs = factory.create(doc, _textRegion, offset, res);
+      final GrammarElementTitleSwitch f = new GrammarElementTitleSwitch().showAssignments().showQualified().showRule();
+      final StringConcatenation result = new StringConcatenation("\n");
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        Iterable<Pair<Integer, ContentAssistContext>> _indexed = IterableExtensions.<ContentAssistContext>indexed(((Iterable<? extends ContentAssistContext>)Conversions.doWrapArray(ctxs)));
+        for(final Pair<Integer, ContentAssistContext> ctx : _indexed) {
+          _builder.append("context");
+          Integer _key = ctx.getKey();
+          _builder.append(_key);
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          {
+            ImmutableList<AbstractElement> _firstSetGrammarElements = ctx.getValue().getFirstSetGrammarElements();
+            for(final AbstractElement ele : _firstSetGrammarElements) {
+              _builder.append("\t");
+              String _name = ele.eClass().getName();
+              _builder.append(_name, "\t");
+              _builder.append(": ");
+              String _apply = f.apply(ele);
+              _builder.append(_apply, "\t");
+              _builder.newLineIfNotEmpty();
+            }
           }
+          _builder.append("}");
+          _builder.newLine();
         }
-        _builder.append("}");
-        _builder.newLine();
       }
+      result.append(_builder);
+      _xblockexpression = result.toString();
     }
-    return _builder.toString();
+    return _xblockexpression;
   }
   
   @Pure
