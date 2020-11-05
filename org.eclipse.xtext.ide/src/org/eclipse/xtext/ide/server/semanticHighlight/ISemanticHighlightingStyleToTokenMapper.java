@@ -25,9 +25,10 @@ import com.google.inject.Singleton;
  * 
  * @see IHighlightedPositionAcceptor#addPosition
  * @see LightweightPosition#getIds
- * 
+ * @deprecated LSP4J will remove the underlying feature, so will we
  */
 @ImplementedBy(ISemanticHighlightingStyleToTokenMapper.Noop.class)
+@Deprecated
 public interface ISemanticHighlightingStyleToTokenMapper {
 
 	/**

@@ -54,7 +54,10 @@ import com.google.inject.Inject;
 /**
  * Shared semantic highlighting manager per language server. Responsible for converting the semantic highlighted ranges
  * into the LSP standard by producing a compact, {@code base64} encoded token string.
+ * 
+ * @deprecated LSP4J will remove the underlying feature, so will we
  */
+@Deprecated
 public class SemanticHighlightingRegistry {
 	/**
 	 * Reserved TextMate scope identifier for styles that cannot be handled.

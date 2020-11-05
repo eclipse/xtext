@@ -28,7 +28,6 @@ import org.eclipse.lsp4j.MessageParams;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Registration;
 import org.eclipse.lsp4j.RegistrationParams;
-import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.ShowMessageRequestParams;
 import org.eclipse.lsp4j.Unregistration;
 import org.eclipse.lsp4j.UnregistrationParams;
@@ -177,7 +176,8 @@ public class CommandRegistryTest implements IResourceServiceProvider, IExecutabl
 		noImpl3.publishDiagnostics(diagnostics);
 	}
 
-	public void semanticHighlighting(SemanticHighlightingParams params) {
+	@Deprecated
+	public void semanticHighlighting(org.eclipse.lsp4j.SemanticHighlightingParams params) {
 		noImpl3.semanticHighlighting(params);
 	}
 

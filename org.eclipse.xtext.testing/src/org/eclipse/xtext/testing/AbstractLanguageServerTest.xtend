@@ -54,8 +54,6 @@ import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
 import org.eclipse.lsp4j.ResourceOperation
-import org.eclipse.lsp4j.SemanticHighlightingInformation
-import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
 import org.eclipse.lsp4j.SignatureHelpParams
 import org.eclipse.lsp4j.SymbolInformation
@@ -393,7 +391,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		return sb.toString;
 	}
 
-	protected dispatch def String toExpectation(Pair<SemanticHighlightingInformation, List<List<String>>> it) {
+	@Deprecated
+	protected dispatch def String toExpectation(Pair<org.eclipse.lsp4j.SemanticHighlightingInformation, List<List<String>>> it) {
 		val sb = new StringBuilder()
 		val tokens = SemanticHighlightingTokens.decode(key.tokens).sort;
 		for (token : tokens) {
@@ -746,9 +745,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		].get
 	}
 
+	@Deprecated
 	protected def getSemanticHighlightingParams() {
 		languageServer.requestManager.runRead[
-			return notifications.map[value].filter(SemanticHighlightingParams).toMap([textDocument], [lines]);
+			return notifications.map[value].filter(org.eclipse.lsp4j.SemanticHighlightingParams).toMap([textDocument], [lines]);
 		].get
 	}
 }
