@@ -37,13 +37,13 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testInputToParse_02() {
+  public void testInputToParse_02() throws Exception {
     Assert.assertEquals("abc  ", this.testee.getInputToParse("abc   defg", 3, 5));
   }
   
   @Test
   @Override
-  public void testLastCompleteNode_1_1() {
+  public void testLastCompleteNode_1_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -90,7 +90,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_2_2() {
+  public void testLastCompleteNode_2_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -141,7 +141,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_3_1() {
+  public void testLastCompleteNode_3_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("c");
     _builder.newLine();
@@ -168,7 +168,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_2() {
+  public void testLastCompleteNode_4_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -197,7 +197,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_1() {
+  public void testLastCompleteNode_4_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -228,7 +228,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_1b() {
+  public void testLastCompleteNode_4_1b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -264,7 +264,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_0() {
+  public void testLastCompleteNode_4_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -296,7 +296,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_0c() {
+  public void testLastCompleteNode_4_0c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -329,7 +329,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_0d() {
+  public void testLastCompleteNode_4_0d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -363,7 +363,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_1d() {
+  public void testLastCompleteNode_4_1d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -396,7 +396,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_2c() {
+  public void testLastCompleteNode_4_2c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -428,7 +428,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_4_2d() {
+  public void testLastCompleteNode_4_2d() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("parent1");
     _builder.newLine();
@@ -459,7 +459,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_6_0() {
+  public void testLastCompleteNode_6_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -504,7 +504,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_6_0b() {
+  public void testLastCompleteNode_6_0b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -550,7 +550,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_5_1() {
+  public void testLastCompleteNode_5_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -595,7 +595,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_7_0() {
+  public void testLastCompleteNode_7_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -640,7 +640,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_7_1() {
+  public void testLastCompleteNode_7_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -684,7 +684,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_1() {
+  public void testLastCompleteNode_8_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -737,7 +737,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_2() {
+  public void testLastCompleteNode_8_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -793,7 +793,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_2b() {
+  public void testLastCompleteNode_8_2b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -852,7 +852,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_2c() {
+  public void testLastCompleteNode_8_2c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -911,7 +911,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_3() {
+  public void testLastCompleteNode_8_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -967,7 +967,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_3b() {
+  public void testLastCompleteNode_8_3b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1026,7 +1026,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_3c() {
+  public void testLastCompleteNode_8_3c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1085,7 +1085,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_4() {
+  public void testLastCompleteNode_8_4() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1141,7 +1141,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_4b() {
+  public void testLastCompleteNode_8_4b() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();
@@ -1200,7 +1200,7 @@ public class IndentationAwareCompletionPrefixProviderTest extends AbstractComple
   
   @Test
   @Override
-  public void testLastCompleteNode_8_4c() {
+  public void testLastCompleteNode_8_4c() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("a");
     _builder.newLine();

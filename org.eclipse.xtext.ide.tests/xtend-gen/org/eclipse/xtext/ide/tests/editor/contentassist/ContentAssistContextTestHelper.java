@@ -31,7 +31,6 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -59,28 +58,24 @@ public class ContentAssistContextTestHelper {
   @Accessors
   private String cursor = "<|>";
   
-  private XtextResource parse(final String doc) {
-    try {
-      String _primaryFileExtension = this.fileExtension.getPrimaryFileExtension();
-      String _plus = ("dummy." + _primaryFileExtension);
-      final URI uri = URI.createURI(_plus);
-      Resource _createResource = this.resFactory.createResource(uri);
-      final XtextResource res = ((XtextResource) _createResource);
-      EList<Resource> _resources = new XtextResourceSet().getResources();
-      _resources.add(res);
-      if ((this.entryPoint != null)) {
-        res.setEntryPoint(this.entryPoint);
-      }
-      StringInputStream _stringInputStream = new StringInputStream(doc);
-      res.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
-      this.validator.assertNoErrors(res);
-      return res;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  private XtextResource parse(final String doc) throws Exception {
+    String _primaryFileExtension = this.fileExtension.getPrimaryFileExtension();
+    String _plus = ("dummy." + _primaryFileExtension);
+    final URI uri = URI.createURI(_plus);
+    Resource _createResource = this.resFactory.createResource(uri);
+    final XtextResource res = ((XtextResource) _createResource);
+    EList<Resource> _resources = new XtextResourceSet().getResources();
+    _resources.add(res);
+    if ((this.entryPoint != null)) {
+      res.setEntryPoint(this.entryPoint);
     }
+    StringInputStream _stringInputStream = new StringInputStream(doc);
+    res.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
+    this.validator.assertNoErrors(res);
+    return res;
   }
   
-  public String firstSetGrammarElementsToString(final ContentAssistContextFactory factory) {
+  public String firstSetGrammarElementsToString(final ContentAssistContextFactory factory) throws Exception {
     final int offset = this.document.indexOf(this.cursor);
     Preconditions.checkArgument((offset >= 0), "you forgot to provide a cursor");
     final String doc = this.document.replace(this.cursor, "");

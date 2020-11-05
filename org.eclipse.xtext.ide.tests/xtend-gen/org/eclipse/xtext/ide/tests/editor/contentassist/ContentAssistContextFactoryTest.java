@@ -39,7 +39,7 @@ public class ContentAssistContextFactoryTest {
   private TestLanguageGrammarAccess grammar;
   
   @Test
-  public void testSimple1() {
+  public void testSimple1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("type Foo <|>{");
     _builder.newLine();
@@ -64,7 +64,7 @@ public class ContentAssistContextFactoryTest {
   }
   
   @Test
-  public void testSimple2() {
+  public void testSimple2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("type Foo {");
     _builder.newLine();
@@ -131,7 +131,7 @@ public class ContentAssistContextFactoryTest {
   }
   
   @Test
-  public void testBeginning() {
+  public void testBeginning() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<|>type Foo {");
     _builder.newLine();
@@ -171,7 +171,7 @@ public class ContentAssistContextFactoryTest {
   }
   
   @Test
-  public void testCustomEntryPoint() {
+  public void testCustomEntryPoint() throws Exception {
     this._contentAssistContextTestHelper.setEntryPoint(this.grammar.getPropertyRule());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("int <|>bar");
@@ -198,7 +198,7 @@ public class ContentAssistContextFactoryTest {
   }
   
   @Test
-  public void testCustomEntryPointBeginning() {
+  public void testCustomEntryPointBeginning() throws Exception {
     this._contentAssistContextTestHelper.setEntryPoint(this.grammar.getPropertyRule());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<|>int bar");

@@ -31,7 +31,7 @@ class RenameTest3 extends AbstractLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameAutoQuote() {
+	def void testRenameAutoQuote() throws Exception {
 		val model = '''
 			type Foo {
 			}
@@ -53,7 +53,7 @@ class RenameTest3 extends AbstractLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameQuoted() {
+	def void testRenameQuoted() throws Exception {
 		val model = '''
 			type ^type {
 			}
@@ -75,7 +75,7 @@ class RenameTest3 extends AbstractLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameAutoQuoteRef() {
+	def void testRenameAutoQuoteRef() throws Exception {
 		val model = '''
 			type Foo {
 			}
@@ -101,7 +101,7 @@ class RenameTest3 extends AbstractLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameQuotedRef() {
+	def void testRenameQuotedRef() throws Exception {
 		val model = '''
 			type ^type {
 			}

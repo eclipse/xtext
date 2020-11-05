@@ -31,11 +31,11 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		return testee
 	}
 	
-	@Test override void testInputToParse_02() {
+	@Test override void testInputToParse_02() throws Exception {
 		assertEquals("abc  ", testee.getInputToParse("abc   defg", 3, 5))
 	}
 	
-	@Test override void testLastCompleteNode_1_1() {
+	@Test override void testLastCompleteNode_1_1() throws Exception {
 		'''
 			parent1
 				<|>child1
@@ -57,7 +57,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_2_2() {
+	@Test override void testLastCompleteNode_2_2() throws Exception {
 		'''
 			parent1
 				child1
@@ -81,7 +81,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_3_1() {
+	@Test override void testLastCompleteNode_3_1() throws Exception {
 		'''
 			c
 				d
@@ -95,7 +95,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_2() {
+	@Test override void testLastCompleteNode_4_2() throws Exception {
 		'''
 			parent1
 				child1
@@ -110,7 +110,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_1() {
+	@Test override void testLastCompleteNode_4_1() throws Exception {
 		'''
 			parent1
 				child1
@@ -126,7 +126,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_1b() {
+	@Test override void testLastCompleteNode_4_1b() throws Exception {
 		'''
 			parent1
 				child1
@@ -144,7 +144,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_0() {
+	@Test override void testLastCompleteNode_4_0() throws Exception {
 		'''
 			parent1
 				child1
@@ -161,7 +161,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_0c() {
+	@Test override void testLastCompleteNode_4_0c() throws Exception {
 		'''
 			parent1
 				child1
@@ -178,7 +178,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_0d() {
+	@Test override void testLastCompleteNode_4_0d() throws Exception {
 		'''
 			parent1
 				child1
@@ -196,7 +196,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_1d() {
+	@Test override void testLastCompleteNode_4_1d() throws Exception {
 		'''
 			parent1
 				child1
@@ -213,7 +213,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_2c() {
+	@Test override void testLastCompleteNode_4_2c() throws Exception {
 		'''
 			parent1
 				child1
@@ -229,7 +229,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_4_2d() {
+	@Test override void testLastCompleteNode_4_2d() throws Exception {
 		'''
 			parent1
 				child1
@@ -245,7 +245,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_6_0() {
+	@Test override void testLastCompleteNode_6_0() throws Exception {
 		'''
 			a
 			b
@@ -268,7 +268,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_6_0b() {
+	@Test override void testLastCompleteNode_6_0b() throws Exception {
 		'''
 			a
 			b
@@ -291,7 +291,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_5_1() {
+	@Test override void testLastCompleteNode_5_1() throws Exception {
 		'''
 			a
 				b
@@ -313,7 +313,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_7_0() {
+	@Test override void testLastCompleteNode_7_0() throws Exception {
 		'''
 			a
 			b
@@ -336,7 +336,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_7_1() {
+	@Test override void testLastCompleteNode_7_1() throws Exception {
 		'''
 			a
 			b
@@ -358,7 +358,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_1() {
+	@Test override void testLastCompleteNode_8_1() throws Exception {
 		'''
 			a
 			b
@@ -384,7 +384,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_2() {
+	@Test override void testLastCompleteNode_8_2() throws Exception {
 		'''
 			a
 			b
@@ -411,7 +411,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_2b() {
+	@Test override void testLastCompleteNode_8_2b() throws Exception {
 		'''
 			a
 			b
@@ -439,7 +439,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_2c() {
+	@Test override void testLastCompleteNode_8_2c() throws Exception {
 		'''
 			a
 			b
@@ -467,7 +467,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_3() {
+	@Test override void testLastCompleteNode_8_3() throws Exception {
 		'''
 			a
 			b
@@ -494,7 +494,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_3b() {
+	@Test override void testLastCompleteNode_8_3b() throws Exception {
 		'''
 			a
 			b
@@ -522,7 +522,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_3c() {
+	@Test override void testLastCompleteNode_8_3c() throws Exception {
 		'''
 			a
 			b
@@ -550,7 +550,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_4() {
+	@Test override void testLastCompleteNode_8_4() throws Exception {
 		'''
 			a
 			b
@@ -577,7 +577,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_4b() {
+	@Test override void testLastCompleteNode_8_4b() throws Exception {
 		'''
 			a
 			b
@@ -605,7 +605,7 @@ class IndentationAwareCompletionPrefixProviderTest extends AbstractCompletePrefi
 		''')
 	}
 	
-	@Test override void testLastCompleteNode_8_4c() {
+	@Test override void testLastCompleteNode_8_4c() throws Exception {
 		'''
 			a
 			b

@@ -32,7 +32,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	extension UriExtensions
 
 	@Test
-	def void testRenameFqn_missing_file_null() {
+	def void testRenameFqn_missing_file_null() throws Exception {
 		val uri = new File('''missing.«fileExtension»''').toURI.normalize.toUriString
 		initializeWithPrepareSupport()
 
@@ -41,7 +41,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_missing_file_null() {
+	def void testPrepareRenameFqn_missing_file_null() throws Exception {
 		val uri = new File('''missing.«fileExtension»''').toURI.normalize.toUriString
 		initializeWithPrepareSupport()
 
@@ -50,7 +50,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_missing_file_exception() {
+	def void testPrepareRenameFqn_missing_file_exception() throws Exception {
 		val uri = new File('''missing.«fileExtension»''').toURI.normalize.toUriString
 		initialize()
 
@@ -65,7 +65,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameFqn_invalid_error() {
+	def void testRenameFqn_invalid_error() throws Exception {
 		val uri = 'my-type-invalid.testlang'.writeFile('''
 			package foo.bar {
 			  type A {
@@ -89,7 +89,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameFqn_invalid_null() {
+	def void testRenameFqn_invalid_null() throws Exception {
 		val uri = 'my-type-invalid.testlang'.writeFile('''
 			package foo.bar {
 			  type A {
@@ -105,7 +105,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testRenameFqn_before_ok() {
+	def void testRenameFqn_before_ok() throws Exception {
 		val uri = 'my-type-valid.testlang'.writeFile('''
 			package foo.bar {
 			  type A {
@@ -127,7 +127,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_before_nok() {
+	def void testPrepareRenameFqn_before_nok() throws Exception {
 		val model = '''
 			package foo.bar {
 			  type A {
@@ -145,7 +145,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_start_ok() {
+	def void testPrepareRenameFqn_start_ok() throws Exception {
 		val model = '''
 			package foo.bar {
 			  type A {
@@ -164,7 +164,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_in_ok() {
+	def void testPrepareRenameFqn_in_ok() throws Exception {
 		val model = '''
 			package foo.bar {
 			  type A {
@@ -183,7 +183,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_end_ok() {
+	def void testPrepareRenameFqn_end_ok() throws Exception {
 		val model = '''
 			package foo.bar {
 			  type A {
@@ -202,7 +202,7 @@ class PrepareRenameTest extends AbstractTestLangLanguageServerTest {
 	}
 
 	@Test
-	def void testPrepareRenameFqn_end_null() {
+	def void testPrepareRenameFqn_end_null() throws Exception {
 		val model = '''
 			package foo.bar {
 			  type A {

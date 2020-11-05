@@ -31,7 +31,7 @@ class RenameTest2 extends AbstractLanguageServerTest {
 	}
 		
 	@Test
-	def void testRenameSelfRef() {
+	def void testRenameSelfRef() throws Exception {
 		val model = '''
 			package foo
 			
@@ -56,7 +56,7 @@ class RenameTest2 extends AbstractLanguageServerTest {
 	}
 	
 	@Test
-	def void testRenameContainer() {
+	def void testRenameContainer() throws Exception {
 		val model = '''
 			package foo
 			

@@ -40,41 +40,41 @@ class RenameTest extends AbstractTestLangLanguageServerTest {
 	}
 	
 	@Test
-	def void testRenameBeforeDeclaration() {
+	def void testRenameBeforeDeclaration() throws Exception {
 		doTest(firstFile, new Position(0, 5))
 	}
 
 	@Test
-	def void testRenameOnDeclaration() {
+	def void testRenameOnDeclaration() throws Exception {
 		doTest(firstFile, new Position(0, 6))
 	}
 
 	@Test
-	def void testRenameAfterDeclaration() {
+	def void testRenameAfterDeclaration() throws Exception {
 		doTest(firstFile, new Position(0, 8))
 	}
 
 	@Test
-	def void testRenameOnReference() {
+	def void testRenameOnReference() throws Exception {
 		doTest(firstFile, new Position(1, 5))
 	}
 	
 	@Test
-	def void testRenameAfterReference() {
+	def void testRenameAfterReference() throws Exception {
 		doTest(firstFile, new Position(1, 8))
 	}
 	
 	@Test
-	def void testRenameOnReferenceInOtherFile() {
+	def void testRenameOnReferenceInOtherFile() throws Exception {
 		doTest(secondFile, new Position(1, 5))
 	}
 
 	@Test
-	def void testRenameAfterReferenceInOtherFile() {
+	def void testRenameAfterReferenceInOtherFile() throws Exception {
 		doTest(secondFile, new Position(1,8))
 	}
 	
-	protected def doTest(String fileName, Position position) {
+	protected def doTest(String fileName, Position position) throws Exception {
         val params = new RenameParams(new TextDocumentIdentifier(fileName), position, 'Tescht')
         val workspaceEdit = languageServer.rename(params).get
         assertEquals('''
