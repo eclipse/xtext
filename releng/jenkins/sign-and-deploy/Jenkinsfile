@@ -101,7 +101,7 @@ spec:
   
   environment {
     DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
-    KEYRING = credentials('252495d7-34e5-49de-8db4-bce7afae2da4')
+    KEYRING = credentials('secret-subkeys.asc')
     SCRIPTS = "$WORKSPACE/umbrella/releng/jenkins/sign-and-deploy/scripts"
   }
 
@@ -319,7 +319,7 @@ spec:
         }
       }
       steps {
-        sshagent(['a7dd6ae8-486e-4175-b0ef-b7bc82dc14a8']) {
+        sshagent(['github-bot-ssh']) {
           // Need to be in any git dir for this to work
           dir('umbrella') {
             sh '''

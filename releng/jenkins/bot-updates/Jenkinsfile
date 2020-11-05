@@ -71,8 +71,8 @@ pipeline {
     // For debugging purpose limit to single repositories
     // REPOSITORY_NAMES = 'xtext-eclipse'
     SCRIPTS = "$WORKSPACE/build-tools/releng/jenkins/bot-updates"
-    GENIE_XTEXT_CREDENTIALS = 'a7dd6ae8-486e-4175-b0ef-b7bc82dc14a8'
-    GITHUB_API_CREDENTIALS_ID = '542a1af6-afef-4452-8612-73771238a0bc'
+    GENIE_XTEXT_CREDENTIALS = 'github-bot-ssh'
+    GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
     TARGET_BRANCH = "${params.TARGET_BRANCH.trim() ? params.TARGET_BRANCH.trim() : 'bot_update_'+params.UPDATE_TYPE.toLowerCase()}"
     UPDATE_VALUE_REQUIRED = "${params.UPDATE_TYPE != 'GENERATE_XTEXT_LANGUAGE' && params.UPDATE_TYPE != 'GENERATE_TEST_LANGUAGES'}"
   }
