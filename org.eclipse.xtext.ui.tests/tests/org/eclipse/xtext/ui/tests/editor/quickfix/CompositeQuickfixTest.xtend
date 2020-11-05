@@ -190,7 +190,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 	}
 
 	@Test
-	def void testTextualMultiModification() {
+	def void testTextualMultiModification() throws Exception {
 		// we test two things here:
 		// - TextualMultiModifications actually work
 		// - TextualMultiModificationWorkbenchMarkerResolutionAdapter sorts correctly

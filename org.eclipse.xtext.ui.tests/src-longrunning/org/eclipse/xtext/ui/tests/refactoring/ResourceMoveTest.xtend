@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,7 +28,7 @@ import static org.junit.Assert.*
 class ResourceMoveTest extends AbstractResourceRelocationTest {
 	
 	@Test 
-	def void testMoveFile() {
+	def void testMoveFile() throws Exception {
 		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -58,7 +58,7 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testMoveFile_2() {
+	def void testMoveFile_2() throws Exception {
  		file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -88,7 +88,7 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testMoveFiles() {
+	def void testMoveFiles() throws Exception {
  		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -118,7 +118,7 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testMoveDirectory() {
+	def void testMoveDirectory() throws Exception {
  		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -147,8 +147,8 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 		''')	
 	}
 	
-	@Test@Ignore
-	def void testMoveDirectoryToRoot() {
+	@Test @Ignore
+	def void testMoveDirectoryToRoot() throws Exception {
  		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -177,7 +177,7 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 		''')	
 	}
 	
-	protected def performMove(IContainer theDestination, IResource... theResources) {
+	protected def performMove(IContainer theDestination, IResource... theResources) throws Exception {
 		performRefactoring(new MoveResourcesDescriptor() => [
 			resourcePathsToMove = theResources.map[fullPath]
 			destinationPath = theDestination.fullPath 

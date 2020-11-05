@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,7 @@ import static org.junit.Assert.*
 class ResourceRenameTest extends AbstractResourceRelocationTest {
 	
 	@Test 
-	def void testRenameDir() {
+	def void testRenameDir() throws Exception {
 		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -56,7 +56,7 @@ class ResourceRenameTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testRenameDir_2() {
+	def void testRenameDir_2() throws Exception {
 		file('foo/X.fileawaretestlanguage', '''
 			package foo
 			element X {
@@ -86,7 +86,7 @@ class ResourceRenameTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testRenameCommonDir() {
+	def void testRenameCommonDir() throws Exception {
 		val x = file('foo/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -117,7 +117,7 @@ class ResourceRenameTest extends AbstractResourceRelocationTest {
 	}
 	
 	@Test 
-	def void testRenameCommonDir_2() {
+	def void testRenameCommonDir_2() throws Exception {
 		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar
 			element X {
@@ -147,7 +147,7 @@ class ResourceRenameTest extends AbstractResourceRelocationTest {
 		''')
 	}
 	
-	protected def performRename(IResource theResource, String theNewName) {
+	protected def performRename(IResource theResource, String theNewName) throws Exception {
 		performRefactoring(new RenameResourceDescriptor() => [
 			resourcePath = theResource.fullPath
 			newName = theNewName
