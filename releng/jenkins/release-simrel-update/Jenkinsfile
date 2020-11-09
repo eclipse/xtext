@@ -17,6 +17,7 @@ pipeline {
       name: 'XTEXT_VERSION',
       description: 'The Xtext version including build qualifier'
     )
+    booleanParam(name: 'DRY_RUN', defaultValue: false, description: 'Dry run mode. When set no changes are pushed to GitHub (skips "Publish" stage).')
   }
 
   options {
@@ -32,6 +33,11 @@ pipeline {
     XTEXT_VERSION="${params.XTEXT_VERSION.trim()}"
     GIT_USER_NAME="xtext-bot"
     GIT_USER_EMAIL="xtext-bot@eclipse.org"
+  }
+
+  tools {
+     maven "apache-maven-3.6.3"
+     jdk "adoptopenjdk-hotspot-jdk11-latest"
   }
 
   stages {
@@ -77,17 +83,17 @@ pipeline {
             esac
             git diff
             git commit --signoff -m "Xtext $XTEXT_VERSION_LABEL contribution to SimRel $SIMREL_LABEL"
+            
+            mvn -Pvalidate clean test -B
           '''
-          withMaven(maven: 'apache-maven-3.6.3') {
-            sh '''
-              mvn -Pvalidate clean test -B
-            '''
-          }
         } // dir
       } // steps
     } // stage
     
     stage ('Publish') {
+      when {
+        expression { !params.DRY_RUN }
+      }
       steps {
         dir('simrel') {
           sshagent(["${GENIE_XTEXT_CREDENTIALS}"]) {
