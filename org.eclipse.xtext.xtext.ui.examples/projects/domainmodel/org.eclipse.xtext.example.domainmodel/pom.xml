@@ -9,6 +9,10 @@
 	</parent>
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
 	<packaging>eclipse-plugin</packaging>
+	
+	<properties>
+		<mwe2Version>2.12.0.M2</mwe2Version>
+	</properties>
 
 	<build>
 		<plugins>
@@ -40,7 +44,7 @@
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-						<version>2.12.0.M2</version>
+						<version>${mwe2Version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
