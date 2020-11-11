@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtend2.lib.StringConcatenation
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -56,7 +57,8 @@ class ContentAssistContextTestHelper {
 		factory.pool = Executors.newCachedThreadPool
 		val ctxs = factory.create(doc, new TextRegion(0, 0), offset, res)
 		val f = new GrammarElementTitleSwitch().showAssignments.showQualified.showRule
-		return '''
+		val result = new StringConcatenation("\n")
+		result.append('''
 			«FOR ctx : ctxs.indexed»
 				context«ctx.key» {
 					«FOR ele:ctx.value.firstSetGrammarElements»
@@ -64,6 +66,7 @@ class ContentAssistContextTestHelper {
 					«ENDFOR»
 				}
 			«ENDFOR»
-		'''
+		''')
+		result.toString
 	}
 }

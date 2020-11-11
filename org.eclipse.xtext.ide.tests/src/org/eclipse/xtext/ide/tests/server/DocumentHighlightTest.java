@@ -118,7 +118,9 @@ public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
 					"	}\n}";
 			cfg.setModel(model);
 			cfg.setLine(1);
-			cfg.setColumn("\top fo".length());
+			cfg.setColumn(
+				"	op fo".length()
+			);
 			cfg.setExpectedDocumentHighlight("W [[1, 4] .. [1, 7]] | R [[3, 2] .. [3, 5]]");
 		});
 	}

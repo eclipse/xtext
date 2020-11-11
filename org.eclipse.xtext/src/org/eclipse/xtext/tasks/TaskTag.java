@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,6 +16,21 @@ public class TaskTag {
 	private String name;
 
 	private Priority priority;
+
+	/**
+	 * @since 2.6
+	 */
+	public TaskTag() {
+		
+	}
+
+	/**
+	 * @since 2.24
+	 */
+	public TaskTag(String name, Priority priority) {
+		this.name = name;
+		this.priority = priority;
+	}
 
 	public int length() {
 		return name.length();
