@@ -812,6 +812,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return sb.toString();
   }
   
+  @Deprecated
   protected String _toExpectation(final Pair<SemanticHighlightingInformation, List<List<String>>> it) {
     final StringBuilder sb = new StringBuilder();
     final List<SemanticHighlightingTokens.Token> tokens = IterableExtensions.<SemanticHighlightingTokens.Token>sort(SemanticHighlightingTokens.decode(it.getKey().getTokens()));
@@ -1478,6 +1479,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  @Deprecated
   protected Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>> getSemanticHighlightingParams() {
     try {
       final Function1<CancelIndicator, Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>> _function = (CancelIndicator it) -> {

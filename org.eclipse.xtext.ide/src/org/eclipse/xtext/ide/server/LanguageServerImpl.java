@@ -72,7 +72,6 @@ import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.RenameCapabilities;
 import org.eclipse.lsp4j.RenameOptions;
 import org.eclipse.lsp4j.RenameParams;
-import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities;
 import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
@@ -104,6 +103,7 @@ import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.BuildManager.Buildable;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess.Context;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
@@ -115,7 +115,6 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.rename.IRenameService2;
-import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
@@ -164,8 +163,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	@Inject
 	private ExecutableCommandRegistry commandRegistry;
 
-	@Inject
-	private SemanticHighlightingRegistry semanticHighlightingRegistry;
+	@Inject @Deprecated
+	private org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry semanticHighlightingRegistry;
 
 	@Inject
 	private ILanguageServerShutdownAndExitHandler shutdownAndExitHandler;
@@ -310,9 +309,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			executeCommandOptions.setCommands(commandRegistry.getCommands());
 			serverCapabilities.setExecuteCommandProvider(executeCommandOptions);
 		}
-		semanticHighlightingRegistry.initialize(allLanguages, clientCapabilities, client);
-		serverCapabilities.setSemanticHighlighting(
-				new SemanticHighlightingServerCapabilities(semanticHighlightingRegistry.getAllScopes()));
+		initSemanticHighlighting(serverCapabilities, allLanguages, clientCapabilities);
 
 		for (IResourceServiceProvider language : allLanguages) {
 			ICapabilitiesContributor capabilitiesContributor = language.get(ICapabilitiesContributor.class);
@@ -321,6 +318,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			}
 		}
 		return serverCapabilities;
+	}
+
+	@Deprecated
+	private void initSemanticHighlighting(ServerCapabilities serverCapabilities,
+			Set<? extends IResourceServiceProvider> allLanguages, ClientCapabilities clientCapabilities) {
+		semanticHighlightingRegistry.initialize(allLanguages, clientCapabilities, client);
+		serverCapabilities.setSemanticHighlighting(
+				new org.eclipse.lsp4j.SemanticHighlightingServerCapabilities(semanticHighlightingRegistry.getAllScopes()));
 	}
 
 	@Override
@@ -1142,10 +1147,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		FluentIterable.from(deltas).filter(it -> it.getNew() != null).transform(it -> it.getUri().toString())
 				.forEach(it -> {
 					access.doRead(it, ctx -> {
-						semanticHighlightingRegistry.update(ctx);
+						updateSemanticHighlighting(ctx);
 						return null;
 					});
 				});
+	}
+
+	@Deprecated
+	private void updateSemanticHighlighting(Context ctx) {
+		semanticHighlightingRegistry.update(ctx);
 	}
 
 	/**

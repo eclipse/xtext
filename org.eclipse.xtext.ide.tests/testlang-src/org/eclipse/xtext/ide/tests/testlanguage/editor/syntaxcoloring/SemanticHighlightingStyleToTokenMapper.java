@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyleToTokenMapper;
 
+@Deprecated
 public class SemanticHighlightingStyleToTokenMapper implements ISemanticHighlightingStyleToTokenMapper {
 
 	@Override

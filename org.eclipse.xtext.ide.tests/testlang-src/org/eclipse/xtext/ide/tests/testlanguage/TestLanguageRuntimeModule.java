@@ -11,10 +11,8 @@ package org.eclipse.xtext.ide.tests.testlanguage;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
-import org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyleToTokenMapper;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingCalculatorImpl;
-import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingStyleToTokenMapper;
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.serializer.TestLanguageReferenceUpdater;
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl;
@@ -36,8 +34,9 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
 		return SemanticHighlightingCalculatorImpl.class;
 	}
 
-	public Class<? extends ISemanticHighlightingStyleToTokenMapper> bindISemanticHighlightingStyleToTokenMapper() {
-		return SemanticHighlightingStyleToTokenMapper.class;
+	@Deprecated
+	public Class<? extends org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyleToTokenMapper> bindISemanticHighlightingStyleToTokenMapper() {
+		return org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingStyleToTokenMapper.class;
 	}
 
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {

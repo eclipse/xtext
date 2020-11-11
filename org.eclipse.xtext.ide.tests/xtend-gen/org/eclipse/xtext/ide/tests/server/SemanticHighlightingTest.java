@@ -41,6 +41,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+@Deprecated
 @SuppressWarnings("all")
 public class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
   @Inject

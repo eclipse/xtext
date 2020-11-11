@@ -24,6 +24,7 @@ import static org.junit.Assert.*
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.Position
 
+@Deprecated
 class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
 
 	@Inject
