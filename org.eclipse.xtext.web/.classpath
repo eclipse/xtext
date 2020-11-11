@@ -13,14 +13,6 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="bin/test" path="src/test/xtend-gen">
-		<attributes>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-			<attribute name="test" value="true"/>
-			<attribute name="ignore_optional_problems" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" output="bin/test" path="src/test/xtext-gen">
 		<attributes>
 			<attribute name="gradle_scope" value="test"/>
