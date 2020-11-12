@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -23,10 +23,10 @@ class CompilerTest {
 	
 	@Rule @Inject public TemporaryFolder temporaryFolder
 	
-	@Inject extension CompilationTestHelper
+	@Inject extension CompilationTestHelper compilationTestHelper
 	
 	@Test
-	def void literals() {
+	def void literals() throws Exception {
 		'''
 			/*
 			 * Literals are notations for representing fixed values.
@@ -95,7 +95,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void featureCalls() {
+	def void featureCalls() throws Exception {
 		'''
 			import org.eclipse.xtext.purexbase.test.data.Person
 			/*
@@ -139,7 +139,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void variableDeclarations() {
+	def void variableDeclarations() throws Exception {
 		'''
 			/*
 			 * Xbase variable declarations look a bit different to those in Java.
@@ -205,7 +205,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void casts() {
+	def void casts() throws Exception {
 		'''
 			/*
 			 * Casts work like in Java, but have a different (more readable and 
@@ -237,7 +237,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void closures() {
+	def void closures() throws Exception {
 		'''
 			/*
 			 * A closures is an anonymous function which can access variables from 
@@ -315,7 +315,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void ifExpression() {
+	def void ifExpression() throws Exception {
 		'''
 			/*
 			 * The if expression looks exactly like in Java. 
@@ -386,7 +386,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void operators() {
+	def void operators() throws Exception {
 		'''
 			import org.eclipse.xtext.purexbase.test.data.Amount
 			/*
@@ -420,7 +420,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void loops() {
+	def void loops() throws Exception {
 		'''
 			/*
 			 * Xbase supports Java's while and do .. while as well as the new form 
@@ -481,7 +481,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void exceptions() {
+	def void exceptions() throws Exception {
 		'''
 			/*
 			 * Xbase supports Exception handling using the same syntax as is used 
@@ -533,7 +533,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void switchExpression() {
+	def void switchExpression() throws Exception {
 		'''
 			import org.eclipse.xtext.purexbase.test.data.Circle
 			import org.eclipse.xtext.purexbase.test.data.Rectangle
@@ -643,7 +643,7 @@ class CompilerTest {
 	}
 	
 	@Test
-	def void typeCoercion() {
+	def void typeCoercion() throws Exception {
 		'''
 			/*
 			 * AUTOBOXING
