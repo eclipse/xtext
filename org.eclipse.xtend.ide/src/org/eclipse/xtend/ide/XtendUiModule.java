@@ -56,6 +56,7 @@ import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.ide.highlighting.XtendSyntaxColoringPreferencePage;
+import org.eclipse.xtend.ide.highlighting.XtendThemeManager;
 import org.eclipse.xtend.ide.hover.XtendAnnotationHover;
 import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
@@ -592,6 +593,10 @@ public class XtendUiModule extends AbstractXtendUiModule {
 
 	public Class<? extends JavaElementDelegateJunitLaunch> bindJavaElementDelegateJunitLaunch() {
 		return XtendJavaElementDelegateJunitLaunch.class;
+	}
+	
+	public void configureThemeManager(Binder binder) {
+		binder.bind(XtendThemeManager.class).asEagerSingleton();
 	}
 
 }

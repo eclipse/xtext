@@ -31,9 +31,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.jdt.core.manipulation;bundle-version="1.9.100";resolution:=optional,
  org.eclipse.e4.core.services,
  org.eclipse.osgi.services,
- org.eclipse.e4.ui.css.swt.theme;bundle-version="0.12.700",
- org.eclipse.ui.themes;bundle-version="1.2.1200",
- org.eclipse.ui.workbench
+ org.eclipse.e4.ui.css.swt.theme;bundle-version="0.12.700"
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: org.eclipse.xtend.ide.internal.XtendActivator
