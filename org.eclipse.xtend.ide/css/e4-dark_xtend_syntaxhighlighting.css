@@ -1,4 +1,4 @@
-IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-dark-theme { /* 'xtext-xtend-ide-dark-theme' is a pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
+IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-theme { /* 'xtext-xtend-ide-theme' is a pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
 
 	preferences:
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.default.color=129,162,190'

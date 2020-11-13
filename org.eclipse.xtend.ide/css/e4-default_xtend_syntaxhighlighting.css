@@ -1,4 +1,4 @@
-IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-default-theme { /* 'xtext-xtend-ide-default-theme' is a pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
+IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-theme { /* 'xtext-xtend-ide-theme' is a pseudo attribute added to allow contributions without replacing this node, see Bug 466075 */
 
 	preferences:
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.default.color=0,0,0'
@@ -22,7 +22,7 @@ IEclipsePreferences#org-eclipse-xtend-core-Xtend:xtext-xtend-ide-default-theme {
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.enum.style=2'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.extension.method.invacation.color=171,48,0'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.extension.method.invacation.style=2'
-				'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.field.color=0,26,171'
+		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.field.color=0,26,171'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.interface.color=0,0,0'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.final.variable.color=0,0,0'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.local.final.variable.declaration.color=0,0,0'
