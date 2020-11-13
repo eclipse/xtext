@@ -56,10 +56,10 @@ public class PreferenceStoreAccessor {
 
 	public void populateTextStyle(String id, TextStyle style, TextStyle defaults) {
 		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
-		RGB fontColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) 
+		RGB fontColorSystemDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) 
 				? getDisplay().getSystemColor(SWT.COLOR_LIST_FOREGROUND).getRGB()
 				: PreferenceConverter.getColor(editorsStore, AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND);
-		RGB backgrounColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) 
+		RGB backgroundColorSystemDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) 
 				? getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND).getRGB() 
 				: PreferenceConverter.getColor(editorsStore, AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
 		FontData[] fontDataDefaultDefault = JFaceResources.getTextFont().getFontData();
@@ -75,7 +75,7 @@ public class PreferenceStoreAccessor {
 		} else if (defaults.getColor() != null) {
 			PreferenceConverter.setDefault(preferenceStore, colorKey, defaults.getColor());
 		} else {
-			PreferenceConverter.setDefault(preferenceStore, colorKey, fontColorDefaultDefault);
+			PreferenceConverter.setDefault(preferenceStore, colorKey, fontColorSystemDefault);
 		}
 		
 		String backgroundKey = PREFERENCE_TAG + getTokenBackgroundColorPreferenceKey(id);
@@ -85,7 +85,7 @@ public class PreferenceStoreAccessor {
 		} else if (defaults.getBackgroundColor() != null) {
 			PreferenceConverter.setDefault(preferenceStore, backgroundKey, defaults.getBackgroundColor());
 		} else {
-			PreferenceConverter.setDefault(preferenceStore, backgroundKey, backgrounColorDefaultDefault);
+			PreferenceConverter.setDefault(preferenceStore, backgroundKey, backgroundColorSystemDefault);
 		}
 		
 		String fontKey = PREFERENCE_TAG + getTokenFontPreferenceKey(id);
@@ -108,10 +108,10 @@ public class PreferenceStoreAccessor {
 		
 		// populate
 		RGB color = PreferenceConverter.getColor(preferenceStore, colorKey);
-		if (!color.equals(fontColorDefaultDefault))
+		if (!color.equals(fontColorSystemDefault))
 			style.setColor(color);
 		RGB background = PreferenceConverter.getColor(preferenceStore, backgroundKey);
-		if (!background.equals(backgrounColorDefaultDefault))
+		if (!background.equals(backgroundColorSystemDefault))
 			style.setBackgroundColor(background);
 		FontData[] fontDataArray = PreferenceConverter.getFontDataArray(preferenceStore, fontKey);
 		if (!Arrays.equals(fontDataArray, fontDataDefaultDefault)) {
