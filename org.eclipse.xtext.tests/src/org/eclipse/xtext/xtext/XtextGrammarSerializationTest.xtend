@@ -40,10 +40,11 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 			MyRule <MyParam>:
 				<MyParam> name=ID
 				| <!MyParam> name=STRING
-				| name='name';'''
+				| name='name';
+		'''
 		doTestSerialization(model, expectedModel)
 	}
-	
+
 	@Test def void testArguments_01() throws Exception {
 		val String model = '''
 			grammar foo with org.eclipse.xtext.common.Terminals
@@ -58,10 +59,11 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 			generate mm "http://bar"
 			
 			Rule <arg>:
-				name=ID child=Rule<arg>;'''
+				name=ID child=Rule<arg>;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
-	
+
 	@Test def void testArguments_02() throws Exception {
 		val String model = '''
 			grammar foo with org.eclipse.xtext.common.Terminals
@@ -86,7 +88,8 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 				value3=MyParameterizedRule<arg=host>;
 			
 			MyParameterizedRule <arg>:
-				name=ID child=MyParameterizedRule<arg>;'''
+				name=ID child=MyParameterizedRule<arg>;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
 
@@ -102,7 +105,8 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 			generate mm "http://bar" as fooMM
 			
 			StartRule returns fooMM::T:
-				name=ID;'''
+				name=ID;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
 
@@ -118,10 +122,11 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 			generate mm "http://bar" as fooMM
 			
 			StartRule returns fooMM::T:
-				(name+=ID)*;'''
+				(name+=ID)*;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
-	
+
 	@Test def void testSerializationSuperCall() throws Exception {
 		val String model = '''
 			grammar foo with org.eclipse.xtext.common.Terminals
@@ -138,7 +143,8 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 				name=super::ID value=Terminals::STRING thing=STRING;
 			
 			terminal STRING:
-				super;'''
+				super;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
 
@@ -175,7 +181,8 @@ class XtextGrammarSerializationTest extends AbstractXtextTests {
 				rule=[xtext::ParserRule];
 			
 			MyRule returns xtext::ParserRule:
-				name=ID;'''
+				name=ID;
+		'''
 		doTestSerialization(model, expectedModel)
 	}
 

@@ -11,6 +11,9 @@ package org.eclipse.xtext;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
@@ -18,6 +21,7 @@ import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -39,6 +43,7 @@ import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextFormatter;
+import org.eclipse.xtext.xtext.XtextFormatterJava;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
@@ -98,6 +103,15 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public Class<? extends IFormatter> bindIFormatter() {
 		return XtextFormatter.class;
+	}
+
+	public Class<? extends IFormatter2> bindIFormatter2() {
+		return XtextFormatterJava.class;
+	}
+	
+	public void configureFormatterPreferences(Binder binder) {
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class)
+				.to(FormatterPreferenceValuesProvider.class);
 	}
 
 	@Override

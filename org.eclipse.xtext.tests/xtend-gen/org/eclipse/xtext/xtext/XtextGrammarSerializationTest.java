@@ -65,6 +65,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("| name=\'name\';");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -95,6 +96,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=ID child=Rule<arg>;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -150,6 +152,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=ID child=MyParameterizedRule<arg>;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -175,6 +178,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=ID;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -200,6 +204,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("(name+=ID)*;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -233,6 +238,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("super;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }
@@ -290,6 +296,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=ID;");
+    _builder_1.newLine();
     final String expectedModel = _builder_1.toString();
     this.doTestSerialization(model, expectedModel);
   }

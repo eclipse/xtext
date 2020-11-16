@@ -48,7 +48,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 	}
 
 	@Test public void testSelf() {
-		Grammar g = getGrammarAccess().getGrammar();
+		Grammar g = load(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"));
 		for (AbstractRule r : g.getRules()) {
 			// AbstractRule r = GrammarUtil.findRuleForName(g, "GrammarID");
 			// System.out.println("serializing :" + r.getName());

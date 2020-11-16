@@ -27,8 +27,8 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 			super.toVarName(element, reservedNames)
 		}
 		
-		override doGetXtendStubFile() {
-			super.doGetXtendStubFile
+		override doGetStubFile() {
+			super.doGetStubFile
 		}
 	}
 
@@ -66,7 +66,7 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 			'Hello' name=ID '!';
 		''')
 		
-		val actual = fragment.doGetXtendStubFile.concatenationClientToString
+		val actual = fragment.doGetStubFile.concatenationClientToString
 		val expected = '''
 		package org.xtext.example.mydsl.formatting2
 		
@@ -87,7 +87,6 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 				}
 			}
 			
-			// TODO: implement for 
 		}
 		'''
 		expected.assertEquals(actual)
@@ -108,7 +107,7 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 			text=STRING;
 		''')
 		
-		val actual = fragment.doGetXtendStubFile.concatenationClientToString
+		val actual = fragment.doGetStubFile.concatenationClientToString
 		val expected = '''
 		package org.xtext.example.mydsl.formatting2
 		
@@ -136,7 +135,51 @@ class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 				greeting.person.format
 			}
 			
-			// TODO: implement for 
+		}
+		'''
+		expected.assertEquals(actual)
+	}
+
+	@Test def void testFormatMethodJavaGeneration() throws Exception {
+		fragment = TestableFormatter2Fragment2.initializeFragmentWithGrammarFromString('''
+		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+		generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+		Model:
+			greetings+=Greeting*
+			description=Description;
+		Greeting:
+			'Hello' person=Person '!';
+		Person:
+			firstname=ID lastname=ID;
+		Description:
+			text=STRING;
+		''')
+		fragment.generateXtendStub = false
+		
+		val actual = fragment.doGetStubFile.concatenationClientToString
+		val expected = '''
+		package org.xtext.example.mydsl.formatting2;
+		
+		import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
+		import org.eclipse.xtext.formatting2.IFormattableDocument;
+		import org.xtext.example.mydsl.myDsl.Greeting;
+		import org.xtext.example.mydsl.myDsl.Model;
+		
+		public class MyDslFormatter extends AbstractJavaFormatter {
+		
+			protected void format(Model model, IFormattableDocument doc) {
+				// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+				for (Greeting greeting : model.getGreetings()) {
+					doc.format(greeting);
+				}
+				doc.format(model.getDescription());
+			}
+		
+			protected void format(Greeting greeting, IFormattableDocument doc) {
+				// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+				doc.format(greeting.getPerson());
+			}
+			
 		}
 		'''
 		expected.assertEquals(actual)

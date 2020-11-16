@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,8 +33,8 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
     }
     
     @Override
-    public XtendFileAccess doGetXtendStubFile() {
-      return super.doGetXtendStubFile();
+    public JavaFileAccess doGetStubFile() {
+      return super.doGetStubFile();
     }
   }
   
@@ -93,7 +93,7 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
     _builder.append("\'Hello\' name=ID \'!\';");
     _builder.newLine();
     this.fragment = this.<Formatter2Fragment2Test.TestableFormatter2Fragment2>initializeFragmentWithGrammarFromString(Formatter2Fragment2Test.TestableFormatter2Fragment2.class, _builder.toString());
-    final String actual = this.concatenationClientToString(this.fragment.doGetXtendStubFile());
+    final String actual = this.concatenationClientToString(this.fragment.doGetStubFile());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package org.xtext.example.mydsl.formatting2");
     _builder_1.newLine();
@@ -137,9 +137,6 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("// TODO: implement for ");
-    _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
@@ -177,7 +174,7 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
     _builder.append("text=STRING;");
     _builder.newLine();
     this.fragment = this.<Formatter2Fragment2Test.TestableFormatter2Fragment2>initializeFragmentWithGrammarFromString(Formatter2Fragment2Test.TestableFormatter2Fragment2.class, _builder.toString());
-    final String actual = this.concatenationClientToString(this.fragment.doGetXtendStubFile());
+    final String actual = this.concatenationClientToString(this.fragment.doGetStubFile());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package org.xtext.example.mydsl.formatting2");
     _builder_1.newLine();
@@ -239,8 +236,96 @@ public class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testFormatMethodJavaGeneration() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"");
+    _builder.newLine();
+    _builder.append("Model:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("greetings+=Greeting*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("description=Description;");
+    _builder.newLine();
+    _builder.append("Greeting:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'Hello\' person=Person \'!\';");
+    _builder.newLine();
+    _builder.append("Person:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("firstname=ID lastname=ID;");
+    _builder.newLine();
+    _builder.append("Description:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("text=STRING;");
+    _builder.newLine();
+    this.fragment = this.<Formatter2Fragment2Test.TestableFormatter2Fragment2>initializeFragmentWithGrammarFromString(Formatter2Fragment2Test.TestableFormatter2Fragment2.class, _builder.toString());
+    this.fragment.setGenerateXtendStub(false);
+    final String actual = this.concatenationClientToString(this.fragment.doGetStubFile());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package org.xtext.example.mydsl.formatting2;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.formatting2.AbstractJavaFormatter;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.formatting2.IFormattableDocument;");
+    _builder_1.newLine();
+    _builder_1.append("import org.xtext.example.mydsl.myDsl.Greeting;");
+    _builder_1.newLine();
+    _builder_1.append("import org.xtext.example.mydsl.myDsl.Model;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class MyDslFormatter extends AbstractJavaFormatter {");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("// TODO: implement for ");
+    _builder_1.append("protected void format(Model model, IFormattableDocument doc) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("// TODO: format HiddenRegions around keywords, attributes, cross references, etc. ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("for (Greeting greeting : model.getGreetings()) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("doc.format(greeting);");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("doc.format(model.getDescription());");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("protected void format(Greeting greeting, IFormattableDocument doc) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("// TODO: format HiddenRegions around keywords, attributes, cross references, etc. ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("doc.format(greeting.getPerson());");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

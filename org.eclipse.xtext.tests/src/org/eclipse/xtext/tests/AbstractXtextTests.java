@@ -13,12 +13,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -42,11 +46,14 @@ import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -388,6 +395,30 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 			}
 		}
 		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");
+	}
+
+	protected Grammar load(URI uri) {
+		XtextResourceSet rs = new XtextResourceSet();
+		return (Grammar) rs.getResource(uri, true).getContents().get(0);
+	}
+
+	protected List<Pair<EObject, ICompositeNode>> detachNodeModel(EObject eObject) {
+		EcoreUtil.resolveAll(eObject);
+		List<Pair<EObject, ICompositeNode>> result = Lists.newArrayList();
+		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
+		while (iterator.hasNext()) {
+			EObject object = (EObject) iterator.next();
+			Iterator<Adapter> adapters = object.eAdapters().iterator();
+			while (adapters.hasNext()) {
+				Adapter adapter = adapters.next();
+				if (adapter instanceof ICompositeNode) {
+					adapters.remove();
+					result.add(Tuples.create(object, (ICompositeNode) adapter));
+					break;
+				}
+			}
+		}
+		return result;
 	}
 
 	public static final class Keys {
