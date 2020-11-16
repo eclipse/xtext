@@ -450,11 +450,11 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	}
 	
 	//XMemberFeatureCall XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
-	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
+	//	[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 	//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (memberCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
 	//	| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?
 	//	')')?
 	//	memberCallArguments+=XClosure?)*;
@@ -521,8 +521,8 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	//XClosure XExpression:
 	//	=> ({XClosure}
 	//	'[')
-	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|')?
+	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|')?
 	//	expression=XExpressionInClosure
 	//	']';
 	public XbaseGrammarAccess.XClosureElements getXClosureAccess() {
@@ -544,8 +544,8 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	}
 	
 	//XShortClosure XExpression:
-	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|') expression=XExpression;
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|') expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();
 	}
@@ -567,7 +567,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	//XIfExpression XExpression:
 	//	{XIfExpression}
 	//	'if' '(' if=XExpression ')'
-	//	then=XExpression (=> 'else' else=XExpression)?;
+	//	then=XExpression (=>'else' else=XExpression)?;
 	public XbaseGrammarAccess.XIfExpressionElements getXIfExpressionAccess() {
 		return gaXbase.getXIfExpressionAccess();
 	}
@@ -694,7 +694,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	
 	//XFeatureCall XExpression:
 	//	{XFeatureCall} ('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (featureCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (featureCallArguments+=XShortClosure
 	//	| featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)?
 	//	')')?
 	//	featureCallArguments+=XClosure?;
@@ -728,8 +728,8 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	
 	//XConstructorCall XExpression:
 	//	{XConstructorCall}
-	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=> '<' typeArguments+=JvmArgumentTypeReference (','
-	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=> explicitConstructorCall?='(' (arguments+=XShortClosure
+	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=>'<' typeArguments+=JvmArgumentTypeReference (','
+	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=>explicitConstructorCall?='(' (arguments+=XShortClosure
 	//	| arguments+=XExpression (',' arguments+=XExpression)*)?
 	//	')')?
 	//	arguments+=XClosure?;
@@ -802,7 +802,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	}
 	
 	//XReturnExpression XExpression:
-	//	{XReturnExpression} 'return' -> expression=XExpression?;
+	//	{XReturnExpression} 'return' ->expression=XExpression?;
 	public XbaseGrammarAccess.XReturnExpressionElements getXReturnExpressionAccess() {
 		return gaXbase.getXReturnExpressionAccess();
 	}
@@ -814,7 +814,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	//XTryCatchFinallyExpression XExpression:
 	//	{XTryCatchFinallyExpression}
 	//	'try'
-	//	expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+	//	expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 	//	| 'finally' finallyExpression=XExpression);
 	public XbaseGrammarAccess.XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return gaXbase.getXTryCatchFinallyExpressionAccess();
@@ -836,7 +836,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	}
 	
 	//XCatchClause:
-	//	=> 'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
+	//	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
 	public XbaseGrammarAccess.XCatchClauseElements getXCatchClauseAccess() {
 		return gaXbase.getXCatchClauseAccess();
 	}
@@ -847,7 +847,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	
 	//@Override
 	//QualifiedName:
-	//	ValidID (=> '.' ValidID)*;
+	//	ValidID (=>'.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
 	}
@@ -869,7 +869,8 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	///**
 	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
-	// */ StaticQualifier:
+	// */
+	//StaticQualifier:
 	//	(ValidID '::')+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
@@ -929,9 +930,9 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	}
 	
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|super::QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (','
-	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>
-	//	'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
+	//	type=[JvmType|super::QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (','
+	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (
+	//	=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXtype.getJvmParameterizedTypeReferenceAccess();
 	}
