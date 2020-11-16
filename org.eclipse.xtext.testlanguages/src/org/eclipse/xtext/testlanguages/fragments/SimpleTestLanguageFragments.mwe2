@@ -51,7 +51,7 @@ XtextGeneratorLanguage {
 
 	// formatter API 
 	fragment = formatting.Formatter2Fragment2 {
-		generateXtendStub=true
+		generateStub=true
 	}
 
 	// labeling API 

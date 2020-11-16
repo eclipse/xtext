@@ -8,29 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**

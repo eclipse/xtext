@@ -13,7 +13,6 @@ import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import java.util.Collection
 import java.util.Set
-import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EReference
@@ -21,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.formatting2.AbstractFormatter2
+import org.eclipse.xtext.formatting2.AbstractJavaFormatter
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider
 import org.eclipse.xtext.formatting2.FormatterPreferences
 import org.eclipse.xtext.formatting2.IFormattableDocument
@@ -38,11 +38,8 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtext.formatting2.AbstractJavaFormatter
 
 class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
-	
-	static val Logger LOG = Logger.getLogger(Formatter2Fragment2)
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
