@@ -71,6 +71,9 @@ Workflow {
 			generator = {
 				generateXtendStub = true
 			}
+			formatter = {
+				generateStub = true
+			}
 		}
 		language = StandardLanguage {
 			name = "org.eclipse.xtext.ide.tests.testlanguage.IndentationAwareUiTestLanguage"
@@ -127,7 +130,6 @@ Workflow {
 			}
 			formatter = {
 				generateStub = true
-				generateXtendStub = true
 			}
 			generator = {
 				generateStub = true
