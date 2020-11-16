@@ -61,8 +61,12 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//	| 'bug304681' model=Bug304681Model;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1' first=SimpleModel | '2' second=MandatoryModel | '3' thrird=LoopedModel | '4' forth=GroupLoopedModel | '5'
-		//fifth=LoopedAlternativeModel | 'bug304681' model=Bug304681Model
+		//'1' first=SimpleModel
+		//| '2' second=MandatoryModel
+		//| '3' thrird=LoopedModel
+		//| '4' forth=GroupLoopedModel
+		//| '5' fifth=LoopedAlternativeModel
+		//| 'bug304681' model=Bug304681Model
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'1' first=SimpleModel
@@ -162,19 +166,21 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//SimpleModel:
-		//	(visibility=('public' | 'private' | 'protected')?
-		//	& static?='static'?
-		//	& synchronized?='synchronized'?
-		//	& (abstract?='abstract' | final?='final')?)
+		//	( visibility=('public' | 'private' | 'protected')?
+		//	  & static?='static'? & synchronized?='synchronized'? & (abstract?='abstract' | final?='final')?
+		//	)
 		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
-		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
+		//( visibility=('public' | 'private' | 'protected')?
+		//	  & static?='static'? & synchronized?='synchronized'? & (abstract?='abstract' | final?='final')?
+		//	)
+		//'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
-		//(abstract?='abstract' | final?='final')?)
+		//( visibility=('public' | 'private' | 'protected')?
+		//	  & static?='static'? & synchronized?='synchronized'? & (abstract?='abstract' | final?='final')?
+		//	)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 		
 		//visibility=('public' | 'private' | 'protected')?
@@ -259,18 +265,21 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//MandatoryModel:
-		//	(visibility=('public' | 'private' | 'protected') & static?='static'
-		//	& synchronized?='synchronized'
-		//	& (abstract?='abstract' | final?='final')?)
+		//	( visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' & (abstract?=
+		//	'abstract' | final?='final')?
+		//	)
 		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
-		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
+		//( visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' & (abstract?='abstract'
+		//| final?='final')?
+		//	)
+		//'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
-		//(abstract?='abstract' | final?='final')?)
+		//( visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' & (abstract?='abstract'
+		//| final?='final')?
+		//	)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 		
 		//visibility=('public' | 'private' | 'protected')
@@ -355,19 +364,21 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//LoopedModel:
-		//	(visibility+=('public' | 'private' | 'protected')*
-		//	& static+='static'*
-		//	& synchronized+='synchronized'*
-		//	& (abstract+='abstract' | final+='final')*)
+		//	( visibility+=('public' | 'private' | 'protected')*
+		//	  & static+='static'* & synchronized+='synchronized'* & (abstract+='abstract' | final+='final')*
+		//	)
 		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
-		//(abstract+='abstract' | final+='final')*) 'class' name=ID '{' '}'
+		//( visibility+=('public' | 'private' | 'protected')*
+		//	  & static+='static'* & synchronized+='synchronized'* & (abstract+='abstract' | final+='final')*
+		//	)
+		//'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
-		//(abstract+='abstract' | final+='final')*)
+		//( visibility+=('public' | 'private' | 'protected')*
+		//	  & static+='static'* & synchronized+='synchronized'* & (abstract+='abstract' | final+='final')*
+		//	)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 		
 		//visibility+=('public' | 'private' | 'protected')*
@@ -452,18 +463,18 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GroupLoopedModel:
-		//	(visibility+=('public' | 'private' | 'protected') & static+='static'
-		//	& synchronized+='synchronized'
-		//	& (abstract+='abstract' | final+='final'))*
+		//	( visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' & (abstract+=
+		//	'abstract' | final+='final') ) *
 		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
-		//(abstract+='abstract' | final+='final'))* 'class' name=ID '{' '}'
+		//( visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' & (abstract+=
+		//'abstract' | final+='final') ) *
+		//'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
-		//(abstract+='abstract' | final+='final'))*
+		//( visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' & (abstract+=
+		//'abstract' | final+='final') ) *
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 		
 		//visibility+=('public' | 'private' | 'protected')
@@ -557,12 +568,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
-		//(abstract+='abstract' | final+='final') | 'before' 'after'*)* 'class' name=ID '{' '}'
+		//(visibility+=('public' | 'private' | 'protected') | static+='static'
+		//| synchronized+='synchronized'
+		//| (abstract+='abstract' | final+='final') | 'before' 'after'*)*
+		//'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//(visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
-		//(abstract+='abstract' | final+='final') | 'before' 'after'*)*
+		//(visibility+=('public' | 'private' | 'protected') | static+='static'
+		//| synchronized+='synchronized'
+		//| (abstract+='abstract' | final+='final') | 'before' 'after'*)*
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//visibility+=('public' | 'private' | 'protected')
@@ -662,12 +676,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		
 		//Bug304681Model:
 		//	{Bug304681Model}
-		//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-		//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+		//	"{" ( ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?=
+		//	"flag" ";")? & features+=Bug304681Feature*
+		//     ) "}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
-		//";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+		//{Bug304681Model}
+		//"{" ( ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?=
+		//"flag" ";")? & features+=Bug304681Feature*
+		//     ) "}"
 		public Group getGroup() { return cGroup; }
 		
 		//{Bug304681Model}
@@ -676,8 +693,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//(("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
-		//";")? & features+=Bug304681Feature*)
+		//( ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
+		//";")? & features+=Bug304681Feature*
+		//     )
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//("short" shortDescription=STRING ";")?
@@ -896,10 +914,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//SimpleModel:
-	//	(visibility=('public' | 'private' | 'protected')?
-	//	& static?='static'?
-	//	& synchronized?='synchronized'?
-	//	& (abstract?='abstract' | final?='final')?)
+	//	( visibility=('public' | 'private' | 'protected')?
+	//	  & static?='static'? & synchronized?='synchronized'? & (abstract?='abstract' | final?='final')?
+	//	)
 	//	'class' name=ID '{' '}';
 	public SimpleModelElements getSimpleModelAccess() {
 		return pSimpleModel;
@@ -910,9 +927,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//MandatoryModel:
-	//	(visibility=('public' | 'private' | 'protected') & static?='static'
-	//	& synchronized?='synchronized'
-	//	& (abstract?='abstract' | final?='final')?)
+	//	( visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' & (abstract?=
+	//	'abstract' | final?='final')?
+	//	)
 	//	'class' name=ID '{' '}';
 	public MandatoryModelElements getMandatoryModelAccess() {
 		return pMandatoryModel;
@@ -923,10 +940,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//LoopedModel:
-	//	(visibility+=('public' | 'private' | 'protected')*
-	//	& static+='static'*
-	//	& synchronized+='synchronized'*
-	//	& (abstract+='abstract' | final+='final')*)
+	//	( visibility+=('public' | 'private' | 'protected')*
+	//	  & static+='static'* & synchronized+='synchronized'* & (abstract+='abstract' | final+='final')*
+	//	)
 	//	'class' name=ID '{' '}';
 	public LoopedModelElements getLoopedModelAccess() {
 		return pLoopedModel;
@@ -937,9 +953,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//GroupLoopedModel:
-	//	(visibility+=('public' | 'private' | 'protected') & static+='static'
-	//	& synchronized+='synchronized'
-	//	& (abstract+='abstract' | final+='final'))*
+	//	( visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' & (abstract+=
+	//	'abstract' | final+='final') ) *
 	//	'class' name=ID '{' '}';
 	public GroupLoopedModelElements getGroupLoopedModelAccess() {
 		return pGroupLoopedModel;
@@ -964,8 +979,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	
 	//Bug304681Model:
 	//	{Bug304681Model}
-	//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-	//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+	//	"{" ( ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?=
+	//	"flag" ";")? & features+=Bug304681Feature*
+	//     ) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
 		return pBug304681Model;
 	}

@@ -49,7 +49,9 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractElementFinder
 		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Types} 'Types' types+=Type*
+		//{Types}
+		//'Types'
+		//types+=Type*
 		public Group getGroup() { return cGroup; }
 		
 		//{Types}
@@ -126,7 +128,8 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractElementFinder
 		//	'base' baseType=CompositeTypeEntry ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Composite' name=ID 'base' baseType=CompositeTypeEntry ';'
+		//'Composite' name=ID
+		//'base' baseType=CompositeTypeEntry ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'Composite'

@@ -68,9 +68,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| element2=Scenario2_8;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//element1=Scenario1_1 | element1=Scenario1_2 | element1=Scenario1_3 | element1=Scenario1_4 | element2=Scenario2_1 |
-		//element2=Scenario2_2 | element2=Scenario2_3 | element2=Scenario2_4 | element2=Scenario2_5 | element2=Scenario2_6 |
-		//element2=Scenario2_7 | element2=Scenario2_8
+		//element1=Scenario1_1
+		//| element1=Scenario1_2
+		//| element1=Scenario1_3
+		//| element1=Scenario1_4
+		//| element2=Scenario2_1
+		//| element2=Scenario2_2
+		//| element2=Scenario2_3
+		//| element2=Scenario2_4
+		//| element2=Scenario2_5
+		//| element2=Scenario2_6
+		//| element2=Scenario2_7
+		//| element2=Scenario2_8
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//element1=Scenario1_1
@@ -165,13 +174,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1.1' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) 'next'
+		//'1.1' (child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'1.1'
 		public Keyword getDigitOneFullStopDigitOneKeyword_0() { return cDigitOneFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)
+		//(child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child1_1
@@ -215,13 +229,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1.2' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ 'next'
+		//'1.2' (child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)+
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'1.2'
 		public Keyword getDigitOneFullStopDigitTwoKeyword_0() { return cDigitOneFullStopDigitTwoKeyword_0; }
 		
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+
+		//(child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child1_1
@@ -267,7 +286,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario1} '1.3' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* 'next'
+		//{Scenario1}
+		//'1.3' (child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)*
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario1}
@@ -276,7 +299,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'1.3'
 		public Keyword getDigitOneFullStopDigitThreeKeyword_1() { return cDigitOneFullStopDigitThreeKeyword_1; }
 		
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)*
+		//(child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child1_1
@@ -322,7 +347,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario1} '1.4' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? 'next'
+		//{Scenario1}
+		//'1.4' (child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)?
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario1}
@@ -331,7 +360,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'1.4'
 		public Keyword getDigitOneFullStopDigitFourKeyword_1() { return cDigitOneFullStopDigitFourKeyword_1; }
 		
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)?
+		//(child+=Child1_1
+		//| child+=Child1_2
+		//| child+=Child1_3)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child1_1
@@ -376,7 +407,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//enumType=EnumType // this is not ok
 		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -435,7 +467,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//enumType=EnumType // this is not ok
 		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -494,7 +527,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//enumType=EnumType // this is not ok
 		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -552,13 +586,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.1' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) 'next'
+		//'2.1' (child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.1'
 		public Keyword getDigitTwoFullStopDigitOneKeyword_0() { return cDigitTwoFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)
+		//(child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_1
@@ -602,13 +641,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.2' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ 'next'
+		//'2.2' (child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)+
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.2'
 		public Keyword getDigitTwoFullStopDigitTwoKeyword_0() { return cDigitTwoFullStopDigitTwoKeyword_0; }
 		
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+
+		//(child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_1
@@ -652,13 +696,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.3' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) 'next'
+		//'2.3' (child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.3'
 		public Keyword getDigitTwoFullStopDigitThreeKeyword_0() { return cDigitTwoFullStopDigitThreeKeyword_0; }
 		
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)
+		//(child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_4
@@ -702,13 +751,18 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.4' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ 'next'
+		//'2.4' (child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)+
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.4'
 		public Keyword getDigitTwoFullStopDigitFourKeyword_0() { return cDigitTwoFullStopDigitFourKeyword_0; }
 		
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+
+		//(child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_4
@@ -754,7 +808,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario2} '2.5' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? 'next'
+		//{Scenario2}
+		//'2.5' (child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)?
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario2}
@@ -763,7 +821,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.5'
 		public Keyword getDigitTwoFullStopDigitFiveKeyword_1() { return cDigitTwoFullStopDigitFiveKeyword_1; }
 		
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)?
+		//(child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_1
@@ -809,7 +869,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario2} '2.6' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* 'next'
+		//{Scenario2}
+		//'2.6' (child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)*
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario2}
@@ -818,7 +882,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.6'
 		public Keyword getDigitTwoFullStopDigitSixKeyword_1() { return cDigitTwoFullStopDigitSixKeyword_1; }
 		
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)*
+		//(child+=Child2_1
+		//| child+=Child2_2
+		//| child+=Child2_3)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_1
@@ -864,7 +930,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario2} '2.7' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? 'next'
+		//{Scenario2}
+		//'2.7' (child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)?
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario2}
@@ -873,7 +943,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.7'
 		public Keyword getDigitTwoFullStopDigitSevenKeyword_1() { return cDigitTwoFullStopDigitSevenKeyword_1; }
 		
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)?
+		//(child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_4
@@ -919,7 +991,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'next';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Scenario2} '2.8' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* 'next'
+		//{Scenario2}
+		//'2.8' (child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)*
+		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//{Scenario2}
@@ -928,7 +1004,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.8'
 		public Keyword getDigitTwoFullStopDigitEightKeyword_1() { return cDigitTwoFullStopDigitEightKeyword_1; }
 		
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)*
+		//(child+=Child2_4
+		//| child+=Child2_5
+		//| child+=Child2_6)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_4
@@ -975,7 +1053,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child1' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//string=('a' | 'b')
+		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -1040,7 +1120,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child2' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//string=('a' | 'b')
+		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -1105,7 +1187,9 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child3' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')?
+		//string=('a' | 'b')
+		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -1170,7 +1254,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child1' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child1' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -1238,7 +1323,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child2' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child2' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -1306,7 +1392,8 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'child3' 'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child3' 'end'
+		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

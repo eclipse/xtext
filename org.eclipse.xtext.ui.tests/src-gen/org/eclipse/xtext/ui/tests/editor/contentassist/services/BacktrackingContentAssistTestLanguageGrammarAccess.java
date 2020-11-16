@@ -176,7 +176,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| OperationContextDecl;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PropertyContextDecl | ClassifierContextDecl | OperationContextDecl
+		//PropertyContextDecl
+		//| ClassifierContextDecl
+		//| OperationContextDecl
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//PropertyContextDecl
@@ -223,7 +225,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		@Override public ParserRule getRule() { return rule; }
 		
 		//static?='static'? 'def' constraintName=Identifier? ':' constrainedName=Identifier ('(' (parameters+=Parameter (','
-		//parameters+=Parameter)*)? ')')? ':' type=TypeExp? '=' expression=Expression
+		//parameters+=Parameter)*)? ')')?
+		//':' type=TypeExp? '=' expression=Expression
 		public Group getGroup() { return cGroup; }
 		
 		//static?='static'?
@@ -418,8 +421,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	')' ':' type=TypeExp? (pres+=Pre | posts+=Post | bodies+=Body)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'context' operation=OperationRef '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' ':' type=TypeExp?
-		//(pres+=Pre | posts+=Post | bodies+=Body)*
+		//'context' operation=OperationRef '(' (parameters+=Parameter (',' parameters+=Parameter)*)?
+		//')' ':' type=TypeExp? (pres+=Pre | posts+=Post | bodies+=Body)*
 		public Group getGroup() { return cGroup; }
 		
 		//'context'
@@ -778,7 +781,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'::' element=ClassifierRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//namespace=Identifier '::' element=ClassifierRef
+		//namespace=Identifier
+		//'::' element=ClassifierRef
 		public Group getGroup() { return cGroup; }
 		
 		//namespace=Identifier
@@ -810,7 +814,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'::' element=OperationRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//namespace=Identifier '::' element=OperationRef
+		//namespace=Identifier
+		//'::' element=OperationRef
 		public Group getGroup() { return cGroup; }
 		
 		//namespace=Identifier
@@ -842,7 +847,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'::' element=PropertyRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//namespace=Identifier '::' element=PropertyRef
+		//namespace=Identifier
+		//'::' element=PropertyRef
 		public Group getGroup() { return cGroup; }
 		
 		//namespace=Identifier
@@ -874,7 +880,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'::' element=PackageRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//namespace=Identifier '::' element=PackageRef
+		//namespace=Identifier
+		//'::' element=PackageRef
 		public Group getGroup() { return cGroup; }
 		
 		//namespace=Identifier
@@ -987,20 +994,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		////	EssentialOCL overrides
 		////---------------------------------------------------------------------------------
 		//NavigationExp Expression:
-		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-		//	op=('^^' | '^') messageName=Identifier
+		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+		//	'^^' | '^') messageName=Identifier
 		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-		//op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+		//'^^' | '^') messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 		
 		//SubNavigationExp
 		public RuleCall getSubNavigationExpParserRuleCall_0() { return cSubNavigationExpParserRuleCall_0; }
 		
 		//({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=('^^' | '^')
-		//messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+		//messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//{InfixExp.source=current} op=('.' | '->') argument=NavigatingExp
@@ -1027,8 +1036,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NavigatingExp
 		public RuleCall getArgumentNavigatingExpParserRuleCall_1_0_2_0() { return cArgumentNavigatingExpParserRuleCall_1_0_2_0; }
 		
-		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (','
-		//arguments+=OclMessageArg)*)? ')'
+		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//{OclMessage.source=current}
@@ -1112,20 +1121,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		
 		//// Follows ., ->, ^
 		//NavigatingExp:
-		//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-		//	op=('^^' | '^') messageName=Identifier
+		//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+		//	'^^' | '^') messageName=Identifier
 		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-		//op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+		//SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+		//'^^' | '^') messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 		
 		//SubNavigatingExp
 		public RuleCall getSubNavigatingExpParserRuleCall_0() { return cSubNavigatingExpParserRuleCall_0; }
 		
 		//({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=('^^' | '^')
-		//messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
+		//messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//{InfixExp.source=current} op=('.' | '->') argument=NavigatingExp
@@ -1152,8 +1163,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NavigatingExp
 		public RuleCall getArgumentNavigatingExpParserRuleCall_1_0_2_0() { return cArgumentNavigatingExpParserRuleCall_1_0_2_0; }
 		
-		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (','
-		//arguments+=OclMessageArg)*)? ')'
+		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier
+		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//{OclMessage.source=current}
@@ -1318,7 +1329,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| 'E';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'e' | 'E'
+		//'e'
+		//| 'E'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'e'
@@ -1336,7 +1348,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		@Override public ParserRule getRule() { return rule; }
 		
 		//// Intended to be overridden
-		//EssentialOCLRestrictedKeywords
+		//	EssentialOCLRestrictedKeywords
 		public RuleCall getEssentialOCLRestrictedKeywordsParserRuleCall() { return cEssentialOCLRestrictedKeywordsParserRuleCall; }
 	}
 	public class IdentifierElements extends AbstractParserRuleElementFinder {
@@ -1350,7 +1362,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| RestrictedKeywords;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID | RestrictedKeywords
+		//ID
+		//| RestrictedKeywords
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ID
@@ -1404,7 +1417,14 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| 'OclVoid';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' | 'OclAny' | 'OclInvalid' | 'OclVoid'
+		//'Boolean'
+		//| 'Integer'
+		//| 'Real'
+		//| 'String'
+		//| 'UnlimitedNatural'
+		//| 'OclAny'
+		//| 'OclInvalid'
+		//| 'OclVoid'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'Boolean'
@@ -1463,7 +1483,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| 'OrderedSet';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet'
+		//'Set'
+		//| 'Bag'
+		//| 'Sequence'
+		//| 'Collection'
+		//| 'OrderedSet'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'Set'
@@ -1496,7 +1520,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| TupleType;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PrimitiveType | NameExp | CollectionType | TupleType
+		//PrimitiveType
+		//| NameExp
+		//| CollectionType
+		//| TupleType
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//PrimitiveType
@@ -1659,14 +1686,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CollectionType ({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
-		//collectionLiteralParts+=CollectionLiteralPart)*)? '}')?
+		//collectionLiteralParts+=CollectionLiteralPart)*)?
+		//'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//CollectionType
 		public RuleCall getCollectionTypeParserRuleCall_0() { return cCollectionTypeParserRuleCall_0; }
 		
 		//({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
-		//collectionLiteralParts+=CollectionLiteralPart)*)? '}')?
+		//collectionLiteralParts+=CollectionLiteralPart)*)?
+		//'}')?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//{CollectionLiteralExp.type=current}
@@ -1751,7 +1780,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| NullLiteralExp;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NumberLiteralExp | StringLiteralExp | BooleanLiteralExp | InvalidLiteralExp | NullLiteralExp
+		//NumberLiteralExp
+		//| StringLiteralExp
+		//| BooleanLiteralExp
+		//| InvalidLiteralExp
+		//| NullLiteralExp
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//NumberLiteralExp
@@ -1915,13 +1948,15 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| 'false');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{BooleanLiteralExp} (isTrue?='true' | 'false')
+		//{BooleanLiteralExp} (isTrue?='true'
+		//| 'false')
 		public Group getGroup() { return cGroup; }
 		
 		//{BooleanLiteralExp}
 		public Action getBooleanLiteralExpAction_0() { return cBooleanLiteralExpAction_0; }
 		
-		//(isTrue?='true' | 'false')
+		//(isTrue?='true'
+		//| 'false')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//isTrue?='true'
@@ -1982,7 +2017,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| LetExp;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//implies | LetExp
+		//implies
+		//| LetExp
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//implies
@@ -2425,7 +2461,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| {PrefixExp} op=('-' | 'not') source=unary;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NavigationExp | {PrefixExp} op=('-' | 'not') source=unary
+		//NavigationExp
+		//| {PrefixExp} op=('-' | 'not') source=unary
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//NavigationExp
@@ -2487,8 +2524,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| '(' {NestedExp} source=Expression ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
-		//TypeExp | IfExp | '(' {NestedExp} source=Expression ')'
+		//RoundBracketExp
+		//| SquareBracketExp
+		//| SelfExp
+		//| PrimitiveLiteralExp
+		//| TupleLiteralExp
+		//| CollectionLiteralExp
+		//| PreExp
+		//| TypeExp
+		//| IfExp
+		//| '(' {NestedExp} source=Expression ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//RoundBracketExp
@@ -2551,7 +2596,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	| NameExp;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//RoundBracketExp | SquareBracketExp | PreExp | NameExp
+		//RoundBracketExp
+		//| SquareBracketExp
+		//| PreExp
+		//| NameExp
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//RoundBracketExp
@@ -2684,7 +2732,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=NameExp ('@' pre?='pre')? '(' (variable1=iteratorVariable (',' variable2=iteratorVariable | ';'
-		//variable2=iteratorAccumulator)? '|')? (arguments+=Expression (',' arguments+=Expression)*)? ')'
+		//variable2=iteratorAccumulator)?
+		//'|')? (arguments+=Expression (',' arguments+=Expression)*)?
+		//')'
 		public Group getGroup() { return cGroup; }
 		
 		//name=NameExp
@@ -2708,7 +2758,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 		
-		//(variable1=iteratorVariable (',' variable2=iteratorVariable | ';' variable2=iteratorAccumulator)? '|')?
+		//(variable1=iteratorVariable (',' variable2=iteratorVariable | ';' variable2=iteratorAccumulator)?
+		//'|')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//variable1=iteratorVariable
@@ -2970,7 +3021,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'endif';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression 'endif'
+		//'if' condition=Expression
+		//'then' thenExpression=Expression
+		//'else' elseExpression=Expression
+		//'endif'
 		public Group getGroup() { return cGroup; }
 		
 		//'if'
@@ -3023,7 +3077,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//	'in' in=Expression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'let' variable+=LetVariable (',' variable+=LetVariable)* 'in' in=Expression
+		//'let'
+		//variable+=LetVariable (',' variable+=LetVariable)*
+		//'in' in=Expression
 		public Group getGroup() { return cGroup; }
 		
 		//'let'
@@ -3565,8 +3621,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	////	EssentialOCL overrides
 	////---------------------------------------------------------------------------------
 	//NavigationExp Expression:
-	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-	//	op=('^^' | '^') messageName=Identifier
+	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+	//	'^^' | '^') messageName=Identifier
 	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigationExpElements getNavigationExpAccess() {
 		return pNavigationExp;
@@ -3578,8 +3634,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	
 	//// Follows ., ->, ^
 	//NavigatingExp:
-	//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
-	//	op=('^^' | '^') messageName=Identifier
+	//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
+	//	'^^' | '^') messageName=Identifier
 	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigatingExpElements getNavigatingExpAccess() {
 		return pNavigatingExp;

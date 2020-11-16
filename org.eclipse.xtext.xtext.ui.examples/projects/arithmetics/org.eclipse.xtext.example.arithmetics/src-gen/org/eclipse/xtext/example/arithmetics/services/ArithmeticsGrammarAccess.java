@@ -46,7 +46,9 @@ public class ArithmeticsGrammarAccess extends AbstractElementFinder.AbstractGram
 		//	statements+=Statement*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'module' name=ID imports+=Import* statements+=Statement*
+		//'module' name=ID
+		//imports+=Import*
+		//statements+=Statement*
 		public Group getGroup() { return cGroup; }
 		
 		//'module'
@@ -141,7 +143,8 @@ public class ArithmeticsGrammarAccess extends AbstractElementFinder.AbstractGram
 		//	':' expr=Expression ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')? ':' expr=Expression ';'
+		//'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
+		//':' expr=Expression ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'def'
@@ -397,12 +400,12 @@ public class ArithmeticsGrammarAccess extends AbstractElementFinder.AbstractGram
 		private final Keyword cRightParenthesisKeyword_2_2_3 = (Keyword)cGroup_2_2.eContents().get(3);
 		
 		//PrimaryExpression Expression:
-		//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
-		//	(',' args+=Expression)* ')')?;
+		//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (
+		//	',' args+=Expression)* ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (','
-		//args+=Expression)* ')')?
+		//'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (
+		//',' args+=Expression)* ')')?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'(' Expression ')'
@@ -642,8 +645,8 @@ public class ArithmeticsGrammarAccess extends AbstractElementFinder.AbstractGram
 	}
 	
 	//PrimaryExpression Expression:
-	//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
-	//	(',' args+=Expression)* ')')?;
+	//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (
+	//	',' args+=Expression)* ')')?;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}

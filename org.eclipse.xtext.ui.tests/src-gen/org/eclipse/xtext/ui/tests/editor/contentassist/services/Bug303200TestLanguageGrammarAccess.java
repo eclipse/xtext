@@ -37,7 +37,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	LT*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Program} (LT* directives+=ProgramDirective)* LT*
+		//{Program} (LT* directives+=ProgramDirective)*
+		//LT*
 		public Group getGroup() { return cGroup; }
 		
 		//{Program}
@@ -69,7 +70,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| Statement;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//FunctionDefinition | Statement
+		//FunctionDefinition
+		//| Statement
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//FunctionDefinition
@@ -99,7 +101,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	params=Parameters LT* body=Block;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//attributes+=Attribute* 'function' LT* name=ID LT* params=Parameters LT* body=Block
+		//attributes+=Attribute* 'function' LT* name=ID LT*
+		//params=Parameters LT* body=Block
 		public Group getGroup() { return cGroup; }
 		
 		//attributes+=Attribute*
@@ -157,7 +160,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ident=ID | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
+		//ident=ID
+		//| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ident=ID
@@ -213,7 +217,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Parameters} '(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')'
+		//{Parameters}
+		//'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')'
 		public Group getGroup() { return cGroup; }
 		
 		//{Parameters}
@@ -275,7 +280,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'{' (LT* directives+=Statement)* LT* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Block} '{' (LT* directives+=Statement)* LT* '}'
+		//{Block}
+		//'{' (LT* directives+=Statement)* LT* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//{Block}
@@ -319,7 +325,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Block | {ExpressionStatement} expression=PostfixExpression (';' | LT)
+		//Block
+		//| {ExpressionStatement} expression=PostfixExpression (';' | LT)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Block
@@ -372,15 +379,15 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
-		//{Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
+		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
+		//| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
 		public Group getGroup() { return cGroup; }
 		
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 		
-		//({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* '(' LT*
-		//(arguments=ListExpression LT*)? ')')*
+		//({PostfixExpression.expression=current} LT* property=PropertyOperator
+		//| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//{PostfixExpression.expression=current} LT* property=PropertyOperator
@@ -492,7 +499,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| '[' LT* expressions=ListExpression LT* ']';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'.' LT* name=ID | '[' LT* expressions=ListExpression LT* ']'
+		//'.' LT* name=ID
+		//| '[' LT* expressions=ListExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'.' LT* name=ID
@@ -553,7 +561,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Identifier} name=ID | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
+		//{Identifier} name=ID
+		//| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{Identifier} name=ID

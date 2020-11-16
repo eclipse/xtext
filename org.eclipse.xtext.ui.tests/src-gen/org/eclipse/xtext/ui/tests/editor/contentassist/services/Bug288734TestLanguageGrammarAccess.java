@@ -75,7 +75,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'constant' 'string' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation* 'constant' 'string' name=ID
+		//annotations+=TAnnotation*
+		//'constant' 'string' name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=TAnnotation*
@@ -111,7 +112,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'constant' 'integer' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation* 'constant' 'integer' name=ID
+		//annotations+=TAnnotation*
+		//'constant' 'integer' name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=TAnnotation*
@@ -147,7 +149,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'constant' 'boolean' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation* 'constant' 'boolean' name=ID
+		//annotations+=TAnnotation*
+		//'constant' 'boolean' name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=TAnnotation*

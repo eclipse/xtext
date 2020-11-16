@@ -52,7 +52,9 @@ public class FoldingTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'element' name=ID subelements+=Element* 'end'
+		//'element' name=ID
+		//subelements+=Element*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'element'

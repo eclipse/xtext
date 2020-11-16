@@ -64,15 +64,19 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 		//	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} ('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
-		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
+		//{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
+		//| '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//| '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//| '{' attribute+=Attribute+ attribute+=Pair+ '}')
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
-		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
+		//('(' attribute+=Attribute* attribute+=Pair* ')'
+		//| '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//| '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//| '{' attribute+=Attribute+ attribute+=Pair+ '}')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'(' attribute+=Attribute* attribute+=Pair* ')'

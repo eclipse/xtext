@@ -40,7 +40,8 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		//	templates+=Codetemplate*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'templates' 'for' language=[xtext::Grammar|FQN] ':' templates+=Codetemplate*
+		//'templates' 'for' language=[xtext::Grammar|FQN] ':'
+		//templates+=Codetemplate*
 		public Group getGroup() { return cGroup; }
 		
 		//'templates'
@@ -94,8 +95,8 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		//	keywordContext=STRING) body=TemplateBodyWithQuotes;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ValidID '(' id=ID ',' description=STRING ')' 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
-		//body=TemplateBodyWithQuotes
+		//name=ValidID '(' id=ID ',' description=STRING ')' 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING
+		//) body=TemplateBodyWithQuotes
 		public Group getGroup() { return cGroup; }
 		
 		//name=ValidID
@@ -168,7 +169,8 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		@Override public ParserRule getRule() { return rule; }
 		
 		//WS? '>>' // EOL
-		//TemplateBody '<<'
+		//TemplateBody
+		//'<<'
 		public Group getGroup() { return cGroup; }
 		
 		//WS?
@@ -311,8 +313,9 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'${' WS* (name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING
-		//| FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}'
+		//'${' WS* (name=ValidID
+		//| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+		//parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'${'
@@ -321,8 +324,9 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		//WS*
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
 		
-		//(name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN)
-		//(WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?)
+		//(name=ValidID
+		//| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+		//parameters+=(STRING | FQN))* WS*)? ')')?)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//name=ValidID

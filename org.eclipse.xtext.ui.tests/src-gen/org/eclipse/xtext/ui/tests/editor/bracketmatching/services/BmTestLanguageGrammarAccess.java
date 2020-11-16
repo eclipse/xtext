@@ -53,7 +53,8 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		//	"[" Expression "]";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SExpression | Atom | "[" Expression "]"
+		//SExpression | Atom |
+		//"[" Expression "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//SExpression
@@ -99,16 +100,28 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		//	"end");
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end")
+		//{SExpression} ("("
+		//element+=Expression*
+		//")" |
+		//"begin"
+		//element+=Expression*
+		//"end")
 		public Group getGroup() { return cGroup; }
 		
 		//{SExpression}
 		public Action getSExpressionAction_0() { return cSExpressionAction_0; }
 		
-		//("(" element+=Expression* ")" | "begin" element+=Expression* "end")
+		//("("
+		//element+=Expression*
+		//")" |
+		//"begin"
+		//element+=Expression*
+		//"end")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//"(" element+=Expression* ")"
+		//"("
+		//element+=Expression*
+		//")"
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//"("
@@ -123,7 +136,9 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		//")"
 		public Keyword getRightParenthesisKeyword_1_0_2() { return cRightParenthesisKeyword_1_0_2; }
 		
-		//"begin" element+=Expression* "end"
+		//"begin"
+		//element+=Expression*
+		//"end"
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//"begin"

@@ -47,8 +47,10 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	end=END_TAG;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
-		//children+=WorkflowElement* end=END_TAG
+		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
+		//| name=START_TAG attributes+=Attribute* GT
+		//children+=WorkflowElement*
+		//end=END_TAG
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
@@ -69,7 +71,9 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//END_TAG_SHORT
 		public RuleCall getEND_TAG_SHORTTerminalRuleCall_0_2() { return cEND_TAG_SHORTTerminalRuleCall_0_2; }
 		
-		//name=START_TAG attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG
+		//name=START_TAG attributes+=Attribute* GT
+		//children+=WorkflowElement*
+		//end=END_TAG
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//name=START_TAG

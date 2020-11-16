@@ -83,12 +83,12 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		private final Keyword cRpromoterRpromoterKeyword_19_0 = (Keyword)cRpromoterEnumLiteralDeclaration_19.eContents().get(0);
 		
 		//enum PolygonBasedNodeShape:
-		//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite
-		//	| proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+		//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
+		//	proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
 		public EnumRule getRule() { return rule; }
 		
-		//octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite |
-		//proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter
+		//octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
+		//proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//octagon
@@ -260,8 +260,8 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 	}
 	
 	//enum PolygonBasedNodeShape:
-	//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite
-	//	| proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+	//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
+	//	proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
 	public PolygonBasedNodeShapeElements getPolygonBasedNodeShapeAccess() {
 		return ePolygonBasedNodeShape;
 	}

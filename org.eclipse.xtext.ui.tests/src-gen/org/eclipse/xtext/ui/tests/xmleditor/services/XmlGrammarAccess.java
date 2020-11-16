@@ -31,7 +31,8 @@ public class XmlGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		///*
 		// * This grammar definition is based on the following tutorial:
 		// * https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687107/Parsing+XML 
-		// */ XmlDocument:
+		// */
+		//XmlDocument:
 		//	{XmlDocument} contents+=Content*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -98,8 +99,8 @@ public class XmlGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 		//	closeName=ID TAG_CLOSE);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TAG_START_OPEN name=ID attributes+=Attribute* (TAG_EMPTY_CLOSE | TAG_CLOSE contents+=Content* TAG_END_OPEN closeName=ID
-		//TAG_CLOSE)
+		//TAG_START_OPEN name=ID attributes+=Attribute* (TAG_EMPTY_CLOSE | TAG_CLOSE contents+=Content* TAG_END_OPEN
+		//closeName=ID TAG_CLOSE)
 		public Group getGroup() { return cGroup; }
 		
 		//TAG_START_OPEN
@@ -240,7 +241,8 @@ public class XmlGrammarAccess extends AbstractElementFinder.AbstractGrammarEleme
 	///*
 	// * This grammar definition is based on the following tutorial:
 	// * https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687107/Parsing+XML 
-	// */ XmlDocument:
+	// */
+	//XmlDocument:
 	//	{XmlDocument} contents+=Content*;
 	public XmlDocumentElements getXmlDocumentAccess() {
 		return pXmlDocument;
