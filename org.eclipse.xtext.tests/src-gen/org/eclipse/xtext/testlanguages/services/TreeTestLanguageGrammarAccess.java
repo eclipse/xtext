@@ -56,7 +56,9 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		//	'{' children+=Node* '};';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID '(' attrib=STRING ')' '{' children+=Node* '};'
+		//name=ID
+		//'(' attrib=STRING ')'
+		//'{' children+=Node* '};'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

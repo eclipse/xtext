@@ -35,7 +35,8 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import* types+=Type*
+		//imports+=Import*
+		//types+=Type*
 		public Group getGroup() { return cGroup; }
 		
 		//imports+=Import*

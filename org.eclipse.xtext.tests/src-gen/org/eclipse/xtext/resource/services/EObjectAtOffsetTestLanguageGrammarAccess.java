@@ -68,12 +68,12 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cFooFooQualifiedNameWithOtherDelimParserRuleCall_4_0_1 = (RuleCall)cFooFooCrossReference_4_0.eContents().get(1);
 		
 		//AbstractBar:
-		//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-		//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
+		//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=
+		//	[Foo|QualifiedNameWithOtherDelim]?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-		//foo+=[Foo|QualifiedNameWithOtherDelim]?
+		//'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=
+		//[Foo|QualifiedNameWithOtherDelim]?
 		public Group getGroup() { return cGroup; }
 		
 		//'zonk'?
@@ -308,8 +308,8 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//AbstractBar:
-	//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-	//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
+	//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=
+	//	[Foo|QualifiedNameWithOtherDelim]?;
 	public AbstractBarElements getAbstractBarAccess() {
 		return pAbstractBar;
 	}

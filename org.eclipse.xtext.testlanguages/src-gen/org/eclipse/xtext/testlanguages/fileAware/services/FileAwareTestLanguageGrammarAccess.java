@@ -40,7 +40,9 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	contents+=Element*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'package' name=QualifiedName imports+=Import* contents+=Element*
+		//'package' name=QualifiedName
+		//imports+=Import*
+		//contents+=Element*
 		public Group getGroup() { return cGroup; }
 		
 		//'package'
@@ -113,7 +115,8 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'element' name=ID '{' (contents+=Element | 'ref' ref+=[Element|QualifiedName])* '}'
+		//'element' name=ID '{' (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'element'

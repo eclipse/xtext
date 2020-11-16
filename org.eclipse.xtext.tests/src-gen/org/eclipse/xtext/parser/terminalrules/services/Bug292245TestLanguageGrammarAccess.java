@@ -43,7 +43,9 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	| 'TICK' tick+=Apostrophe+)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('FIX' fix+=Fix+ | 'ERROR' error+=Error+ | 'TICK' tick+=Apostrophe+)*
+		//('FIX' fix+=Fix+
+		//| 'ERROR' error+=Error+
+		//| 'TICK' tick+=Apostrophe+)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'FIX' fix+=Fix+
@@ -160,7 +162,8 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cCHARTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cWSTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		////some unused char
+		//// some unused char
+		//
 		//Graphical:
 		//	CHAR | WS;
 		@Override public ParserRule getRule() { return rule; }
@@ -283,7 +286,8 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRehideAccess().getRule();
 	}
 	
-	////some unused char
+	//// some unused char
+	//
 	//Graphical:
 	//	CHAR | WS;
 	public GraphicalElements getGraphicalAccess() {

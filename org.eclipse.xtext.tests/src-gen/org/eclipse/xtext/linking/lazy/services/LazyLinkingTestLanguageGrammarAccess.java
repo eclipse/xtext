@@ -71,7 +71,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		///* 
 		// * SuppressWarnings[BidirectionalReference]
 		// * SuppressWarnings[potentialOverride]
-		// */ Type:
+		// */
+		//Type:
 		//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
 		//	'{'
 		//	properties+=Property*
@@ -80,7 +81,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
-		//'{' properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* '}'
+		//'{'
+		//properties+=Property*
+		//unresolvedProxyProperty+=UnresolvedProxyProperty*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'type'
@@ -300,7 +304,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 	///* 
 	// * SuppressWarnings[BidirectionalReference]
 	// * SuppressWarnings[potentialOverride]
-	// */ Type:
+	// */
+	//Type:
 	//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
 	//	'{'
 	//	properties+=Property*

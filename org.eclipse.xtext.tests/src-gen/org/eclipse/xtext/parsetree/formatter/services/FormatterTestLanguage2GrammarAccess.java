@@ -35,7 +35,8 @@ public class FormatterTestLanguage2GrammarAccess extends AbstractElementFinder.A
 		//	"}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"test" name=ID "{" "}"
+		//"test" name=ID "{"
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//"test"

@@ -36,7 +36,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cStatesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
-		///* SuppressWarnings[noInstantiation] */ Statemachine:
+		///* SuppressWarnings[noInstantiation] */
+		//Statemachine:
 		//	'events'
 		//	events+=Event*
 		//	'end'
@@ -46,7 +47,13 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	states+=State*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'events' events+=Event* 'end' 'commands' commands+=Command* 'end' states+=State*
+		//'events'
+		//events+=Event*
+		//'end'
+		//'commands'
+		//commands+=Command*
+		//'end'
+		//states+=State*
 		public Group getGroup() { return cGroup; }
 		
 		//'events'
@@ -164,7 +171,9 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')? transitions+=Transition* 'end'
+		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
+		//transitions+=Transition*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'state'
@@ -296,7 +305,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	///* SuppressWarnings[noInstantiation] */ Statemachine:
+	///* SuppressWarnings[noInstantiation] */
+	//Statemachine:
 	//	'events'
 	//	events+=Event*
 	//	'end'

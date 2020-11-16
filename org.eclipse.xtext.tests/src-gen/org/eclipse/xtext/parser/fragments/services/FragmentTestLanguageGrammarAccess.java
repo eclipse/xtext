@@ -70,32 +70,40 @@ public class FragmentTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//	{ParserRuleFragments} ('#1' element=PRFNamed
 		//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 		//	| '#4' element=PRFNamedWithAction
-		//	//  | '#5' element=PRFNamedWithActionInFragment
-		//	//  | '#6' element=PRFNamedWithActionInFragment2
-		//	//  | '#7' element=PRFNamedWithActionInFragment3
+		////  | '#5' element=PRFNamedWithActionInFragment
+		////  | '#6' element=PRFNamedWithActionInFragment2
+		////  | '#7' element=PRFNamedWithActionInFragment3
 		//	| '#8' element=PRFNamedWithFQN
 		//	| '#9' element=PRFWithPredicate
 		//	| '#10' element=PRFNamedRecursive
 		//	| '#11' element=PRFNamedRecursiveFragment);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ParserRuleFragments} ('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
-		//| '#4' element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
+		//{ParserRuleFragments} ('#1' element=PRFNamed
+		//| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
+		//| '#4' element=PRFNamedWithAction
+		////  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate | '#10' element=PRFNamedRecursive | '#11'
-		//element=PRFNamedRecursiveFragment)
+		//| '#8' element=PRFNamedWithFQN
+		//| '#9' element=PRFWithPredicate
+		//| '#10' element=PRFNamedRecursive
+		//| '#11' element=PRFNamedRecursiveFragment)
 		public Group getGroup() { return cGroup; }
 		
 		//{ParserRuleFragments}
 		public Action getParserRuleFragmentsAction_0() { return cParserRuleFragmentsAction_0; }
 		
-		//('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
-		//element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
+		//('#1' element=PRFNamed
+		//| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
+		//| '#4' element=PRFNamedWithAction
+		////  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate | '#10' element=PRFNamedRecursive | '#11'
-		//element=PRFNamedRecursiveFragment)
+		//| '#8' element=PRFNamedWithFQN
+		//| '#9' element=PRFWithPredicate
+		//| '#10' element=PRFNamedRecursive
+		//| '#11' element=PRFNamedRecursiveFragment)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'#1' element=PRFNamed
@@ -792,9 +800,9 @@ public class FragmentTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 	//	{ParserRuleFragments} ('#1' element=PRFNamed
 	//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 	//	| '#4' element=PRFNamedWithAction
-	//	//  | '#5' element=PRFNamedWithActionInFragment
-	//	//  | '#6' element=PRFNamedWithActionInFragment2
-	//	//  | '#7' element=PRFNamedWithActionInFragment3
+	////  | '#5' element=PRFNamedWithActionInFragment
+	////  | '#6' element=PRFNamedWithActionInFragment2
+	////  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN
 	//	| '#9' element=PRFWithPredicate
 	//	| '#10' element=PRFNamedRecursive

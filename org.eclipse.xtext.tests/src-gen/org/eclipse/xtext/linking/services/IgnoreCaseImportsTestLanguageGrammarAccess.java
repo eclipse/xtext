@@ -34,7 +34,8 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractElementF
 		//	elements+=Element+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import* elements+=Element+
+		//imports+=Import*
+		//elements+=Element+
 		public Group getGroup() { return cGroup; }
 		
 		//imports+=Import*

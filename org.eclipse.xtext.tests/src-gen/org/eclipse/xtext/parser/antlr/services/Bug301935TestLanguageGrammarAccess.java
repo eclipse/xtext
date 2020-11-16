@@ -38,7 +38,8 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	value2=ID WS;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID WS value=ID NL value2=ID WS
+		//name=ID WS value=ID NL
+		//value2=ID WS
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

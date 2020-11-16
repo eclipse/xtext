@@ -50,7 +50,9 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{' properties+=Property* '}'
+		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
+		//properties+=Property*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'type'

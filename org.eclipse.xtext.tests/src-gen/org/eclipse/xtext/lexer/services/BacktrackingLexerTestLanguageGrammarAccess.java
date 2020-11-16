@@ -48,7 +48,12 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		//	^as+=CharA*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*
+		//enums+=EnumName*
+		//ycs+=Yc*
+		//abs+=Ab*
+		//xbs+=Xb*
+		//ys+=CharY*
+		//^as+=CharA*
 		public Group getGroup() { return cGroup; }
 		
 		//enums+=EnumName*

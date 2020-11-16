@@ -56,7 +56,9 @@ public class Bug305397GrammarAccess extends AbstractElementFinder.AbstractGramma
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Element} a?='a'? 'element' name=ID? elements+=Element* 'end'
+		//{Element} a?='a'? 'element' name=ID?
+		//elements+=Element*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//{Element}

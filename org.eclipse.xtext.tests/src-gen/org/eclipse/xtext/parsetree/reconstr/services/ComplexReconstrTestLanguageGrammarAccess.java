@@ -59,22 +59,22 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
 		
 		//Op Expression:
-		//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
+		//	Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
+		//Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*
 		public Group getGroup() { return cGroup; }
 		
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 		
-		//({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
+		//({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//{Add.addOperands+=current} '+' addOperands+=Term
+		//{Add.addOperands+= current} '+' addOperands+=Term
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//{Add.addOperands+=current}
+		//{Add.addOperands+= current}
 		public Action getAddAddOperandsAction_1_0_0() { return cAddAddOperandsAction_1_0_0; }
 		
 		//'+'
@@ -86,10 +86,10 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		//Term
 		public RuleCall getAddOperandsTermParserRuleCall_1_0_2_0() { return cAddOperandsTermParserRuleCall_1_0_2_0; }
 		
-		//{Minus.minusOperands+=current} '-' minusOperands+=Term
+		//{Minus.minusOperands+= current} '-' minusOperands+=Term
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//{Minus.minusOperands+=current}
+		//{Minus.minusOperands+= current}
 		public Action getMinusMinusOperandsAction_1_1_0() { return cMinusMinusOperandsAction_1_1_0; }
 		
 		//'-'
@@ -144,7 +144,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final Assignment cEmAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
-		///* SuppressWarnings[potentialOverride] */ Parens Expression:
+		///* SuppressWarnings[potentialOverride] */
+		//Parens Expression:
 		//	'(' Op ')' em='!'?;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -179,12 +180,14 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cTypeINTTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		///* TODO not working yet
-		//StrangeStuff :
-		//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
-		//*/ // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
+		// * StrangeStuff :
+		// * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+		// */
+		//// disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
 		////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 		////TrickyA1 returns TypeD: name+=ID;
-		///* SuppressWarnings[noInstantiation] */ TrickyB:
+		///* SuppressWarnings[noInstantiation] */
+		//TrickyB:
 		//	'TB' (name=ID type+=INT)? type+=INT*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -293,7 +296,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTypeIDTerminalRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
-		///* SuppressWarnings[noInstantiation] */ TrickyD:
+		///* SuppressWarnings[noInstantiation] */
+		//TrickyD:
 		//	'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -364,7 +368,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cTypeIDTerminalRuleCall_3_1_0 = (RuleCall)cTypeAssignment_3_1.eContents().get(0);
 		
 		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-		///* SuppressWarnings[noInstantiation] */ TrickyE:
+		///* SuppressWarnings[noInstantiation] */
+		//TrickyE:
 		//	'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -505,7 +510,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cValsTrickyG2ParserRuleCall_1_1_1_0 = (RuleCall)cValsAssignment_1_1_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		///* SuppressWarnings[noInstantiation] */ TrickyG1:
+		///* SuppressWarnings[noInstantiation] */
+		//TrickyG1:
 		//	'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -640,7 +646,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//Op Expression:
-	//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
+	//	Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*;
 	public OpElements getOpAccess() {
 		return pOp;
 	}
@@ -669,7 +675,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		return getAtomAccess().getRule();
 	}
 	
-	///* SuppressWarnings[potentialOverride] */ Parens Expression:
+	///* SuppressWarnings[potentialOverride] */
+	//Parens Expression:
 	//	'(' Op ')' em='!'?;
 	public ParensElements getParensAccess() {
 		return pParens;
@@ -680,12 +687,14 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	///* TODO not working yet
-	//StrangeStuff :
-	//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
-	//*/ // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
+	// * StrangeStuff :
+	// * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+	// */
+	//// disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
 	////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 	////TrickyA1 returns TypeD: name+=ID;
-	///* SuppressWarnings[noInstantiation] */ TrickyB:
+	///* SuppressWarnings[noInstantiation] */
+	//TrickyB:
 	//	'TB' (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
 		return pTrickyB;
@@ -705,7 +714,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		return getTrickyCAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ TrickyD:
+	///* SuppressWarnings[noInstantiation] */
+	//TrickyD:
 	//	'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 	public TrickyDElements getTrickyDAccess() {
 		return pTrickyD;
@@ -716,7 +726,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-	///* SuppressWarnings[noInstantiation] */ TrickyE:
+	///* SuppressWarnings[noInstantiation] */
+	//TrickyE:
 	//	'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 	public TrickyEElements getTrickyEAccess() {
 		return pTrickyE;
@@ -747,7 +758,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		return getTrickyGAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ TrickyG1:
+	///* SuppressWarnings[noInstantiation] */
+	//TrickyG1:
 	//	'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
 	public TrickyG1Elements getTrickyG1Access() {
 		return pTrickyG1;

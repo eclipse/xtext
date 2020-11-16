@@ -89,7 +89,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	"#11" ManyMandatoryValues |
 		//	"#12" MandatoryChildList |
 		//	"#13" OptionalChildList |
-		//	//	"#14" Imports |
+		////	"#14" Imports |
 		//	"#20" clazz+=EClassDecl+ |
 		//	"#21" EClassRef |
 		//	"#22" TwoChildLists |
@@ -98,10 +98,22 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	"#30" WithTransientContainer;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#1" Node | "#2" MandatoryValue | "#3" OptionalValue | "#4" MandatoryChild | "#5" OptionalChild | "#10"
-		//ManyOptionalValues | "#11" ManyMandatoryValues | "#12" MandatoryChildList | "#13" OptionalChildList | //	"#14" Imports |
-		//"#20" clazz+=EClassDecl+ | "#21" EClassRef | "#22" TwoChildLists | "#23" ChildWithSubChilds | "#24" TwoChilds | "#30"
-		//WithTransientContainer
+		//"#1" Node |
+		//"#2" MandatoryValue |
+		//"#3" OptionalValue |
+		//"#4" MandatoryChild |
+		//"#5" OptionalChild |
+		//"#10" ManyOptionalValues |
+		//"#11" ManyMandatoryValues |
+		//"#12" MandatoryChildList |
+		//"#13" OptionalChildList |
+		////	"#14" Imports |
+		//"#20" clazz+=EClassDecl+ |
+		//"#21" EClassRef |
+		//"#22" TwoChildLists |
+		//"#23" ChildWithSubChilds |
+		//"#24" TwoChilds |
+		//"#30" WithTransientContainer
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#1" Node
@@ -388,7 +400,12 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	"}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"{" directChildren+=MandatoryValue+ "children1" "{" childsList=MandatoryChildList "}" "}"
+		//"{"
+		//directChildren+=MandatoryValue+
+		//"children1" "{"
+		//childsList=MandatoryChildList
+		//"}"
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//"{"
@@ -437,7 +454,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	"child" ":" optChild=OptionalChild;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{TwoChilds} "direct" ":" directChild=MandatoryValue? "child" ":" optChild=OptionalChild
+		//{TwoChilds}
+		//"direct" ":" directChild=MandatoryValue?
+		//"child" ":" optChild=OptionalChild
 		public Group getGroup() { return cGroup; }
 		
 		//{TwoChilds}
@@ -503,7 +522,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	subChilds+=SubChild*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ChildWithSubChild} "subs" subChilds+=SubChild*
+		//{ChildWithSubChild} "subs"
+		//subChilds+=SubChild*
 		public Group getGroup() { return cGroup; }
 		
 		//{ChildWithSubChild}
@@ -627,8 +647,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//	name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Node} imports+=Import* name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref"
-		//ref=[Node|QualifiedName])? "}" | ";")
+		//{Node} imports+=Import*
+		//name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";")
 		public Group getGroup() { return cGroup; }
 		
 		//{Node}
@@ -881,7 +901,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	//	"#11" ManyMandatoryValues |
 	//	"#12" MandatoryChildList |
 	//	"#13" OptionalChildList |
-	//	//	"#14" Imports |
+	////	"#14" Imports |
 	//	"#20" clazz+=EClassDecl+ |
 	//	"#21" EClassRef |
 	//	"#22" TwoChildLists |

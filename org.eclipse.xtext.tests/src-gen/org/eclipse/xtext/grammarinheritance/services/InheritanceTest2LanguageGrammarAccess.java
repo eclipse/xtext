@@ -42,7 +42,10 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 		//	"}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"model" name=ID "{" elements+=Element* ids+=FQN "}"
+		//"model" name=ID "{"
+		//elements+=Element*
+		//ids+=FQN
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//"model"

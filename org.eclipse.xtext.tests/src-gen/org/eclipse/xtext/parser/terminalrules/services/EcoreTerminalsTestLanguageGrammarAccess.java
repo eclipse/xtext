@@ -43,7 +43,9 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		//	| 'date' dateValues+=EDATE)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE)*
+		//('int' intValues+=EINT
+		//| 'double' doubleValues+=EDOUBLE
+		//| 'date' dateValues+=EDATE)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'int' intValues+=EINT

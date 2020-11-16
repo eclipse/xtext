@@ -52,17 +52,25 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	| multi=MultiDatatype) | 'complex' object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'simple' (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | 'complex'
-		//object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
+		//'simple' (single=SingleValue
+		//| multi=MultiValue
+		//| single=SingleDatatype
+		//| multi=MultiDatatype) | 'complex' object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'simple' (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
+		//'simple' (single=SingleValue
+		//| multi=MultiValue
+		//| single=SingleDatatype
+		//| multi=MultiDatatype)
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'simple'
 		public Keyword getSimpleKeyword_0_0() { return cSimpleKeyword_0_0; }
 		
-		//(single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
+		//(single=SingleValue
+		//| multi=MultiValue
+		//| single=SingleDatatype
+		//| multi=MultiDatatype)
 		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
 		
 		//single=SingleValue
@@ -136,7 +144,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	| "alternative" value=(ID | STRING) | "string" value=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING
+		//"id" value=ID
+		//| "alternative" value=(ID | STRING) | "string" value=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"id" value=ID
@@ -204,7 +213,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	| "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING
+		//"ids" value+=ID
+		//| "alternatives" value+=(ID | STRING) | "strings" value+=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"ids" value+=ID
@@ -272,8 +282,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
-		//value=StringDatatype
+		//"datatypeid" value=IdDatatype
+		//| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"datatypeid" value=IdDatatype
@@ -341,8 +351,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
-		//value+=StringDatatype
+		//"datatypeids" value+=IdDatatype
+		//| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"datatypeids" value+=IdDatatype

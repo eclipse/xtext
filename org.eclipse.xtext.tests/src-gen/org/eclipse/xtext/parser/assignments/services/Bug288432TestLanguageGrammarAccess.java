@@ -52,8 +52,11 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'end body';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')? 'body' content=(Content | ParameterRef) foo+=Foo+
-		///* SuppressWarnings[SpacesInKeyword] */ 'end body'
+		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
+		//'body'
+		//content=(Content | ParameterRef) foo+=Foo+
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'end body'
 		public Group getGroup() { return cGroup; }
 		
 		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
@@ -104,7 +107,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//Foo
 		public RuleCall getFooFooParserRuleCall_3_0() { return cFooFooParserRuleCall_3_0; }
 		
-		///* SuppressWarnings[SpacesInKeyword] */ 'end body'
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'end body'
 		public Keyword getEndBodyKeyword_4() { return cEndBodyKeyword_4; }
 	}
 	public class FooElements extends AbstractParserRuleElementFinder {
@@ -135,7 +139,9 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'end content';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'content' MyElement /* SuppressWarnings[SpacesInKeyword] */ 'end content'
+		//'content' MyElement
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'end content'
 		public Group getGroup() { return cGroup; }
 		
 		//'content'
@@ -144,7 +150,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//MyElement
 		public RuleCall getMyElementParserRuleCall_1() { return cMyElementParserRuleCall_1; }
 		
-		///* SuppressWarnings[SpacesInKeyword] */ 'end content'
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'end content'
 		public Keyword getEndContentKeyword_2() { return cEndContentKeyword_2; }
 	}
 	public class MyElementElements extends AbstractParserRuleElementFinder {
@@ -215,7 +222,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	value=[ParameterObject]?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID value=[ParameterObject]?
+		//name=ID
+		//value=[ParameterObject]?
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

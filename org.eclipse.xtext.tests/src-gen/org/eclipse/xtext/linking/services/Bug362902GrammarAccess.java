@@ -37,7 +37,8 @@ public class Bug362902GrammarAccess extends AbstractElementFinder.AbstractGramma
 		//	'favourite' favourite=[Greeting|MyId];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//greetings+=Greeting* 'favourite' favourite=[Greeting|MyId]
+		//greetings+=Greeting*
+		//'favourite' favourite=[Greeting|MyId]
 		public Group getGroup() { return cGroup; }
 		
 		//greetings+=Greeting*

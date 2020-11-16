@@ -62,7 +62,8 @@ public class RenameTestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID ('extends' superType=[TypeDeclaration])? ('{' '}')?
+		//'type' name=ID ('extends' superType=[TypeDeclaration])? ('{'
+		//'}')?
 		public Group getGroup() { return cGroup; }
 		
 		//'type'
@@ -89,7 +90,8 @@ public class RenameTestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//ID
 		public RuleCall getSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1() { return cSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1; }
 		
-		//('{' '}')?
+		//('{'
+		//'}')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'{'

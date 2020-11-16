@@ -44,13 +44,16 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cEntitiesEntityParserRuleCall_1_0 = (RuleCall)cEntitiesAssignment_1.eContents().get(0);
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		///* SuppressWarnings[noInstantiation] */ DomainModel:
+		///* SuppressWarnings[noInstantiation] */
+		//DomainModel:
 		//	'entities'
 		//	entities+=Entity*
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entities' entities+=Entity* 'end'
+		//'entities'
+		//entities+=Entity*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'entities'
@@ -78,7 +81,8 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		//	description=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID description=STRING
+		//name=ID
+		//description=STRING
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -150,7 +154,8 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		return getModelAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ DomainModel:
+	///* SuppressWarnings[noInstantiation] */
+	//DomainModel:
 	//	'entities'
 	//	entities+=Entity*
 	//	'end';

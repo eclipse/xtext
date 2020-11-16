@@ -40,7 +40,9 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	reference=[Model]?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID enabled=UnassignedAction? reference=[Model]?
+		//name=ID
+		//enabled=UnassignedAction?
+		//reference=[Model]?
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

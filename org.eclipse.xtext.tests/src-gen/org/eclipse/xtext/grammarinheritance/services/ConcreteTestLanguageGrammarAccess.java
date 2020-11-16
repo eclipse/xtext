@@ -484,7 +484,8 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getInheritedParserRuleAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */
+	//AbstractCallOverridenParserRule mm::AModel:
 	//	'overridemodel' elements+=super::OverridableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
@@ -494,7 +495,8 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */
+	//AbstractCallExtendedParserRule mm::AModel:
 	//	'extendedmodel' elements+=super::ExtendableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();

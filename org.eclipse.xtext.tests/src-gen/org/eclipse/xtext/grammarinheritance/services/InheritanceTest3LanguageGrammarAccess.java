@@ -63,8 +63,10 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractElementFinder
 		//	| {Element} "element" name=super::STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//super::Element | {Element} "element" name=super::ID | {Element} "element" name=Terminals::ID | {Element} "element"
-		//name=super::STRING
+		//super::Element
+		//| {Element} "element" name=super::ID
+		//| {Element} "element" name=Terminals::ID
+		//| {Element} "element" name=super::STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//super::Element
