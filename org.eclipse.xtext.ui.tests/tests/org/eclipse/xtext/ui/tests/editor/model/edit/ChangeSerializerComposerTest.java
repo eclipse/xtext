@@ -8,6 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model.edit;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ui.editor.model.edit.ChangeSerializerTextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.junit.Ignore;
@@ -45,4 +51,22 @@ public class ChangeSerializerComposerTest extends AbstractTextEditComposerTest {
 		super.testObjectReplacement();
 	}
 
+	@Override
+	@Test public void testMultiEdit() throws Exception {
+		Resource res = getResource(newTestGrammar());
+
+		composer.beginRecording(res);
+		Grammar grammar = (Grammar) res.getContents().get(0);
+		ParserRule fooRule = (ParserRule) grammar.getRules().get(0);
+		ParserRule barRule = (ParserRule) grammar.getRules().get(1);
+		Alternatives fooAlternatives = (Alternatives) fooRule.getAlternatives();
+		barRule.setAlternatives(fooAlternatives.getElements().remove(0));
+		TextEdit edit = composer.endRecording();
+
+		assertTrue(edit instanceof MultiTextEdit);
+		TextEdit[] children = ((MultiTextEdit) edit).getChildren();
+		assertEquals(2, children.length);
+		assertMatches("'bar' | 'baz'", children[0]);
+		assertMatches("Bar: 'foo';", children[1]);
+	}
 }

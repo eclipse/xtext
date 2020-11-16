@@ -31,7 +31,7 @@ import org.junit.Test;
  */
 public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 
-	private ITextEditComposer composer;
+	protected ITextEditComposer composer;
 
 	@Override
 	public void setUp() throws Exception {
@@ -44,7 +44,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		return get(ITextEditComposer.class);
 	}
 
-	private InputStream newTestGrammar() {
+	protected InputStream newTestGrammar() {
 		return new StringInputStream("grammar foo.Foo " + "generate foo 'foo://foo/42' "
 				+ "Foo: 'foo' | 'bar' | 'baz'; " + "Bar: foo=Foo; ");
 	}
@@ -162,7 +162,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		assertMatches("Bar: 'foo' ;", children[1]);
 	}
 
-	private void assertMatches(String expected, TextEdit edit) {
+	protected void assertMatches(String expected, TextEdit edit) {
 		assertTrue(edit instanceof ReplaceEdit);
 		assertEqualsIgnoringWhitespace(expected, ((ReplaceEdit) edit).getText());
 	}
