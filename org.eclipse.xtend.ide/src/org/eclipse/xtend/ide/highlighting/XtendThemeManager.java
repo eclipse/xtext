@@ -23,31 +23,32 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
-import com.google.inject.Inject;
-
 /**
+ * Manages changing of syntax coloring preferences for Xtend when themes are changed.
+ * <p>
+ * This handler is registered to theme change events (topic {@link IThemeEngine.Events#THEME_CHANGED})
+ * and applies the Xtend styles to the theme engine. 
+ * </p>
+ * <p>
+ * When the theme is set to Dark the styles are defined by stylesheet {@code css/e4-dark_xtend_syntaxhighlighting.css}.
+ * </p>
+ * <p>
+ * For other themes style preferences are resetted to the values defined by {@link XtendHighlightingConfiguration}.
+ * </p>
+ * 
  * @author Karsten Thoms - Initial contribution and API
  * @author Emmanuel Chebbi - Initial implementation draft
  */
-public class XtendThemeManager {
+public class XtendThemeManager implements EventHandler {
+	// 
 	private static final String THEME_ID_DARK = "org.eclipse.e4.ui.css.theme.e4_dark";
-	private IHighlightingConfiguration highlightingConfiguration;
 
-	@Inject
-	public XtendThemeManager (IHighlightingConfiguration highlightingConfiguration) {
-		this.highlightingConfiguration = highlightingConfiguration;
-		if (PlatformUI.isWorkbenchRunning()) {
-			IWorkbench workbench = PlatformUI.getWorkbench();
-			IEventBroker eventBroker = workbench.getService(IEventBroker.class);
-			if (eventBroker != null) {
-				EventHandler eventHandler = evt -> initTheme(evt);
-				eventBroker.subscribe("org/eclipse/e4/ui/css/swt/theme/ThemeManager/themeChanged", eventHandler);
-				initTheme(null);
-			}
+
+	@Override
+	public void handleEvent(Event event) {
+		if (!IThemeEngine.Events.THEME_CHANGED.equals(event.getTopic())) {
+			return;
 		}
-	}
-	
-	private void initTheme(Event evt) {
 		IThemeEngine themeEngine = PlatformUI.getWorkbench().getService(IThemeEngine.class);
 		ITheme theme = themeEngine.getActiveTheme();
 
@@ -58,6 +59,7 @@ public class XtendThemeManager {
 		} else {
 			// resetting from dark theme does not work the same way
 			// as a workaround reset the preferences by evaluating the highlightingConfiguration
+			IHighlightingConfiguration highlightingConfiguration = new XtendHighlightingConfiguration();
 			highlightingConfiguration.configure((id,name,style) -> {
 				String colorKey = String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, COLOR_SUFFIX);
 				String bgColorKey = String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, BACKGROUNDCOLOR_SUFFIX);
