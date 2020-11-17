@@ -14,7 +14,6 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -54,8 +53,6 @@ import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 @SuppressWarnings("all")
 public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
-  private static final Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
-  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
