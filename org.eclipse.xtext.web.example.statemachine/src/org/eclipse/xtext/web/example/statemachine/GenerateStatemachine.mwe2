@@ -92,7 +92,7 @@ Workflow {
 
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 {
-				generateXtendStub = true
+				generateStub = true
 			}
 			
 			// testing API
