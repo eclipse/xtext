@@ -98,7 +98,9 @@ final class GenerateXbase {
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); setGenerateXtendStub(false); }} );
-				addFragment(new Formatter2Fragment2());
+				Formatter2Fragment2 formatterFragment = new Formatter2Fragment2();
+				formatterFragment.setGenerateXtendStub(true);
+				addFragment(formatterFragment);
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				ContentAssistFragment2 contentAssistFragment2 = new ContentAssistFragment2();
 				contentAssistFragment2.setGenerateXtendStub(false);
@@ -138,7 +140,9 @@ final class GenerateXbase {
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
-				addFragment(new Formatter2Fragment2());
+				Formatter2Fragment2 formatterFragment = new Formatter2Fragment2();
+				formatterFragment.setGenerateXtendStub(true);
+				addFragment(formatterFragment);
 				QuickfixProviderFragment2 quickfixProviderFragment2 = new QuickfixProviderFragment2();
 				quickfixProviderFragment2.setGenerateXtendStub(false);
 				addFragment(quickfixProviderFragment2);
@@ -183,7 +187,9 @@ final class GenerateXbase {
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment2());
-				addFragment(new Formatter2Fragment2());
+				Formatter2Fragment2 formatterFragment = new Formatter2Fragment2();
+				formatterFragment.setGenerateXtendStub(true);
+				addFragment(formatterFragment);
 				QuickfixProviderFragment2 quickfixProviderFragment2 = new QuickfixProviderFragment2();
 				quickfixProviderFragment2.setGenerateXtendStub(false);
 				addFragment(quickfixProviderFragment2);
