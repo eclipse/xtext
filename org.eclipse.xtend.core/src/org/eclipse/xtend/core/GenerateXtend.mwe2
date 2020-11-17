@@ -89,7 +89,9 @@ Workflow {
 				generatePropertyPage = false
 				generateDeprecationValidation = false
 			}
-			fragment = formatting.Formatter2Fragment2 {}
+			fragment = formatting.Formatter2Fragment2 {
+				generateXtendStub = true
+			}
 			fragment = generator.GeneratorFragment2 {}
 			fragment = scoping.ImportNamespacesScopingFragment2 {}
 			fragment = builder.BuilderIntegrationFragment2 {}
