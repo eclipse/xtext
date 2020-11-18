@@ -37,6 +37,7 @@ import org.osgi.service.event.EventHandler;
  * @author Karsten Thoms - Initial contribution and API
  * @author Emmanuel Chebbi - Initial implementation draft
  */
+@SuppressWarnings("restriction")
 public class XtendThemeManager implements EventHandler {
 
 	@Override
@@ -54,26 +55,10 @@ public class XtendThemeManager implements EventHandler {
 			// as a workaround reset the preferences by evaluating the XtendHighlightingConfiguration
 			IHighlightingConfiguration highlightingConfiguration = new XtendHighlightingConfiguration();
 			highlightingConfiguration.configure((id,name,style) -> {
-				String colorKey = String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, COLOR_SUFFIX);
-				String bgColorKey = String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, BACKGROUNDCOLOR_SUFFIX);
-				String styleKey = String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, STYLE_SUFFIX);
-
-				RGB color = style.getColor();
-				if (color != null) {
-					preferences.put(colorKey, String.format("%d,%d,%d", color.red, color.green, color.blue));
-				} else {
-					if (preferences.get(colorKey, null) != null) {
-						preferences.remove(colorKey);
-					}
-				}
-				RGB bgColor = style.getBackgroundColor();
-				if (bgColor != null) {
-					preferences.put(bgColorKey, String.format("%d,%d,%d", bgColor.red, bgColor.green, bgColor.blue));
-				} else {
-					if (preferences.get(bgColorKey, null) != null) {
-						preferences.remove(bgColorKey);
-					}
-				}
+				setColorPreference (preferences, getSyntaxHightlightingPreferenceKey(id, COLOR_SUFFIX), style.getColor());
+				setColorPreference (preferences, getSyntaxHightlightingPreferenceKey(id, BACKGROUNDCOLOR_SUFFIX), style.getBackgroundColor());
+				
+				String styleKey = getSyntaxHightlightingPreferenceKey(id, STYLE_SUFFIX);
 				int styleMask = style.getStyle();
 				if (preferences.getInt(styleKey, -1) != -1) {
 					preferences.remove(styleKey);
@@ -87,5 +72,23 @@ public class XtendThemeManager implements EventHandler {
 		
 		themeEngine.applyStyles(preferences, false);
 	}
+
+	private void setColorPreference (IEclipsePreferences preferences, String colorPreferenceKey, RGB color) {
+		if (color != null) {
+			preferences.put(colorPreferenceKey, encodeColor(color));
+		} else {
+			if (preferences.get(colorPreferenceKey, null) != null) {
+				preferences.remove(colorPreferenceKey);
+			}
+		}
+	}
+
+	private String getSyntaxHightlightingPreferenceKey(String id, String suffix) {
+		return String.format("%s.%s.%s.%s.%s", ORG_ECLIPSE_XTEND_CORE_XTEND, SYNTAX_COLORER_PREFERENCE_TAG, TOKEN_STYLES_PREFERENCE_TAG, id, suffix);
+	}
 	
+	private String encodeColor(RGB color) {
+		return String.format("%d,%d,%d", color.red, color.green, color.blue);
+	}
+
 }
