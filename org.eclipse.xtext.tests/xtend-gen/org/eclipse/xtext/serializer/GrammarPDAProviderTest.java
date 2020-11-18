@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -33,7 +33,6 @@ import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
 import org.eclipse.xtext.util.formallang.PdaToDot;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -59,7 +58,7 @@ public class GrammarPDAProviderTest {
   private ValidationTestHelper validator;
   
   @Test
-  public void testUnassignedAction() {
+  public void testUnassignedAction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Action};");
     _builder.newLine();
@@ -78,7 +77,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testAssignedAction() {
+  public void testAssignedAction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Foo} {Action.feat=current};");
     _builder.newLine();
@@ -100,7 +99,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testAssignedTerminalRuleCall() {
+  public void testAssignedTerminalRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: name=ID;");
     _builder.newLine();
@@ -119,7 +118,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testAssignedEObjectRuleCall() {
+  public void testAssignedEObjectRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: call=Called;");
     _builder.newLine();
@@ -148,7 +147,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testAssignedDatatypeRuleCall() {
+  public void testAssignedDatatypeRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: call=Called;");
     _builder.newLine();
@@ -169,7 +168,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedCalledAction() {
+  public void testUnassignedCalledAction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: D1 | D2;");
     _builder.newLine();
@@ -290,7 +289,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedFragmentRuleCall() {
+  public void testUnassignedFragmentRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: Called;");
     _builder.newLine();
@@ -317,7 +316,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedDatatypeRule() {
+  public void testUnassignedDatatypeRule() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: val=ID Called;");
     _builder.newLine();
@@ -341,7 +340,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedTerminalRule() {
+  public void testUnassignedTerminalRule() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: val=ID Called;");
     _builder.newLine();
@@ -365,7 +364,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedParserRuleCall() {
+  public void testUnassignedParserRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: Called;");
     _builder.newLine();
@@ -400,7 +399,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnassignedWildcardFragmentRuleCall() {
+  public void testUnassignedWildcardFragmentRuleCall() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: Called;");
     _builder.newLine();
@@ -427,7 +426,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testGroup() {
+  public void testGroup() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Rule} \'a\' \'b\' \'c\';");
     _builder.newLine();
@@ -455,7 +454,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testAlternative() {
+  public void testAlternative() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Rule} (\'a\' | \'b\' | \'c\');");
     _builder.newLine();
@@ -483,7 +482,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnorderedGroup() {
+  public void testUnorderedGroup() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Rule} (\'a\' & \'b\' & \'c\');");
     _builder.newLine();
@@ -511,7 +510,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testUnorderedGroup2() {
+  public void testUnorderedGroup2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: {Rule} (\'a\' & \'b\'? & \'c\'* & \'d\'+);");
     _builder.newLine();
@@ -542,7 +541,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testTwoAssignedEObjectRuleCalls() {
+  public void testTwoAssignedEObjectRuleCalls() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Rule: foo1=Sub foo2=Sub; Sub: id=\'id\';");
     _builder.newLine();
@@ -572,7 +571,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testRecursion() {
+  public void testRecursion() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Recursion: val=ID | \'(\' Recursion \')\';");
     _builder.newLine();
@@ -603,7 +602,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testExpression1() {
+  public void testExpression1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Exp: \'kw\' Addit; Addit returns Exp: Prim ({Add.left=current} \'+\' right=Prim)*; Prim returns Exp: {Val} val=ID;");
     _builder.newLine();
@@ -686,7 +685,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testActionAlternative() {
+  public void testActionAlternative() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Greeting: \'(\' Greeting \')\' {Foo.child=current} | val=ID;");
     _builder.newLine();
@@ -721,7 +720,7 @@ public class GrammarPDAProviderTest {
   
   @Test
   @Ignore
-  public void testFragmentWithAction() {
+  public void testFragmentWithAction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID;");
     _builder.newLine();
@@ -753,7 +752,7 @@ public class GrammarPDAProviderTest {
   
   @Test
   @Ignore
-  public void testFragmentWithAction2() {
+  public void testFragmentWithAction2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("R: \'kw1a\' f1=ID \'kw1b\' F; fragment F returns R: \'kw2a\' {A.prev=current} \'kw2b\' f2=ID \'kw2c\';");
     _builder.newLine();
@@ -784,7 +783,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testParameter1() {
+  public void testParameter1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("M: \"kw1\" s=S<true> | \"kw2\" s=S<false>;");
     _builder.newLine();
@@ -830,7 +829,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testDoubleFragment() {
+  public void testDoubleFragment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("R: F1 F2;");
     _builder.newLine();
@@ -868,7 +867,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testFragmentLoop() {
+  public void testFragmentLoop() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("R: F+;");
     _builder.newLine();
@@ -895,7 +894,7 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  public void testParameterizedDoubleDelegation() {
+  public void testParameterizedDoubleDelegation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("R: F<true> | F<false>;");
     _builder.newLine();
@@ -927,42 +926,38 @@ public class GrammarPDAProviderTest {
     Assert.assertEquals(expected, actual);
   }
   
-  private String toPda(final CharSequence rulesText) {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("grammar org.eclipse.xtext.serializer.GrammarPDAProviderTestLanguage with org.eclipse.xtext.common.Terminals");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("generate GrammarPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/GrammarPDAProviderTestLanguage\"");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append(rulesText);
-      _builder.newLineIfNotEmpty();
-      final Grammar grammar = this.parser.parse(_builder);
-      this.validator.assertNoErrors(grammar);
-      final SerializationContextMap<Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
-      final Consumer<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _function = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
-        this.assertNoLeakedGrammarElements(grammar, it.getValue());
-      };
-      pdas.values().forEach(_function);
-      final Function1<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>> _function_1 = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
-        return it.getContexts();
-      };
-      final Function1<ISerializationContext, String> _function_2 = (ISerializationContext it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append(it);
-        _builder_1.append(":");
-        _builder_1.newLineIfNotEmpty();
-        _builder_1.append("\t");
-        String _listString = this.toListString(pdas.get(it));
-        _builder_1.append(_listString, "\t");
-        _builder_1.newLineIfNotEmpty();
-        return _builder_1.toString();
-      };
-      return IterableExtensions.join(ListExtensions.<ISerializationContext, String>map(IterableExtensions.<ISerializationContext>sort(Iterables.<ISerializationContext>concat(ListExtensions.<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>>map(pdas.values(), _function_1))), _function_2));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  private String toPda(final CharSequence rulesText) throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.eclipse.xtext.serializer.GrammarPDAProviderTestLanguage with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("generate GrammarPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/GrammarPDAProviderTestLanguage\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append(rulesText);
+    _builder.newLineIfNotEmpty();
+    final Grammar grammar = this.parser.parse(_builder);
+    this.validator.assertNoErrors(grammar);
+    final SerializationContextMap<Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
+    final Consumer<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _function = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
+      this.assertNoLeakedGrammarElements(grammar, it.getValue());
+    };
+    pdas.values().forEach(_function);
+    final Function1<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>> _function_1 = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
+      return it.getContexts();
+    };
+    final Function1<ISerializationContext, String> _function_2 = (ISerializationContext it) -> {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(it);
+      _builder_1.append(":");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("\t");
+      String _listString = this.toListString(pdas.get(it));
+      _builder_1.append(_listString, "\t");
+      _builder_1.newLineIfNotEmpty();
+      return _builder_1.toString();
+    };
+    return IterableExtensions.join(ListExtensions.<ISerializationContext, String>map(IterableExtensions.<ISerializationContext>sort(Iterables.<ISerializationContext>concat(ListExtensions.<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>>map(pdas.values(), _function_1))), _function_2));
   }
   
   private void assertNoLeakedGrammarElements(final Grammar grammar, final Pda<ISerState, RuleCall> pda) {
@@ -983,13 +978,9 @@ public class GrammarPDAProviderTest {
     }
   }
   
-  protected void toDot(final Pda<ISerState, RuleCall> pda, final String name) {
-    try {
-      final String test = (Thread.currentThread().getStackTrace()[6]).getMethodName();
-      new PdaToDot<Object, Object>().draw(pda, (((("dot2/" + test) + "_") + name) + ".pdf"), "-T pdf");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  protected void toDot(final Pda<ISerState, RuleCall> pda, final String name) throws Exception {
+    final String test = (Thread.currentThread().getStackTrace()[6]).getMethodName();
+    new PdaToDot<Object, Object>().draw(pda, (((("dot2/" + test) + "_") + name) + ".pdf"), "-T pdf");
   }
   
   private String toListString(final Pda<ISerState, RuleCall> pda) {
