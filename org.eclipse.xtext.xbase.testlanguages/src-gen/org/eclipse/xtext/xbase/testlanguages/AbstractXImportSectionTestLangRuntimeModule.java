@@ -40,12 +40,10 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
-import org.eclipse.xtext.xbase.testlanguages.jvmmodel.XImportSectionTestLangJvmModelInferrer;
 import org.eclipse.xtext.xbase.testlanguages.parser.antlr.XImportSectionTestLangAntlrTokenFileProvider;
 import org.eclipse.xtext.xbase.testlanguages.parser.antlr.XImportSectionTestLangParser;
 import org.eclipse.xtext.xbase.testlanguages.parser.antlr.internal.InternalXImportSectionTestLangLexer;
@@ -220,11 +218,6 @@ public abstract class AbstractXImportSectionTestLangRuntimeModule extends Defaul
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return DerivedStateAwareResourceValidator.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
-		return XImportSectionTestLangJvmModelInferrer.class;
 	}
 	
 }

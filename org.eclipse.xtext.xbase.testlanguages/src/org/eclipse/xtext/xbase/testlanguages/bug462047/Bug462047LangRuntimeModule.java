@@ -3,9 +3,16 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.bug462047;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
-public class Bug462047LangRuntimeModule extends org.eclipse.xtext.xbase.testlanguages.bug462047.AbstractBug462047LangRuntimeModule {
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.testlanguages.bug462047.jvmmodel.Bug462047LangJvmModelInferrer;
 
+/**
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
+ */
+public class Bug462047LangRuntimeModule
+		extends org.eclipse.xtext.xbase.testlanguages.bug462047.AbstractBug462047LangRuntimeModule {
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return Bug462047LangJvmModelInferrer.class;
+	}
 }

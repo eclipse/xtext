@@ -3,9 +3,16 @@
  */
 package org.eclipse.xtext.xbase.testlanguages;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
-public class ContentAssistFragmentTestLangRuntimeModule extends org.eclipse.xtext.xbase.testlanguages.AbstractContentAssistFragmentTestLangRuntimeModule {
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.testlanguages.jvmmodel.ContentAssistFragmentTestLangJvmModelInferrer;
 
+/**
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
+ */
+public class ContentAssistFragmentTestLangRuntimeModule
+		extends org.eclipse.xtext.xbase.testlanguages.AbstractContentAssistFragmentTestLangRuntimeModule {
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return ContentAssistFragmentTestLangJvmModelInferrer.class;
+	}
 }
