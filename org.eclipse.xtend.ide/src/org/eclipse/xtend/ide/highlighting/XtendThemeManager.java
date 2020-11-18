@@ -66,8 +66,7 @@ public class XtendThemeManager implements EventHandler {
 				if (styleMask > 0) {
 					preferences.putInt(styleKey, styleMask);
 				}
-			}
-			);
+			});
 		}
 		
 		themeEngine.applyStyles(preferences, false);

@@ -12,10 +12,9 @@ import static java.util.Collections.*;
 
 import java.util.Optional;
 
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.css.swt.theme.IThemeEngine;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.ide.highlighting.XtendThemeManager;
 import org.osgi.framework.BundleContext;
@@ -35,10 +34,9 @@ public class XtendActivator extends org.eclipse.xtend.ide.internal.XtendActivato
 		getEventBroker().ifPresent(eventBroker -> {
 			themeManager = new XtendThemeManager();
 			eventBroker.subscribe(IThemeEngine.Events.THEME_CHANGED, themeManager);
-			Job.createSystem("Init Xtend theme preferences", monitor -> {
-				themeManager.handleEvent(new Event(IThemeEngine.Events.THEME_CHANGED, emptyMap()));
-				return Status.OK_STATUS;
-			});
+			Display.getCurrent().asyncExec(() -> 
+				themeManager.handleEvent(new Event(IThemeEngine.Events.THEME_CHANGED, emptyMap()))
+			);
 		});
 	}
 
