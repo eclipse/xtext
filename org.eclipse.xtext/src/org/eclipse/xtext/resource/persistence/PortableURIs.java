@@ -37,7 +37,7 @@ import com.google.common.collect.Streams;
 import com.google.inject.Inject;
 
 /**
- * Portable URIs are based on names and therefore are independent of the concrete file pathes and fuile names the of
+ * Portable URIs are based on names and therefore are independent of the concrete file paths and file names of the
  * resources.
  * 
  * A portable URI is really a resource URI to the client URI and a fragment that contains the information to retrieve
