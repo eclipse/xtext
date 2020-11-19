@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,7 +41,7 @@ class GrammarPDAProviderTest {
 	@Inject ParseHelper<Grammar> parser
 	@Inject ValidationTestHelper validator
 
-	@Test def void testUnassignedAction() {
+	@Test def void testUnassignedAction() throws Exception {
 		val actual = '''
 			Rule: {Action};
 		'''.toPda
@@ -53,7 +53,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testAssignedAction() {
+	@Test def void testAssignedAction() throws Exception {
 		val actual = '''
 			Rule: {Foo} {Action.feat=current};
 		'''.toPda
@@ -66,7 +66,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testAssignedTerminalRuleCall() {
+	@Test def void testAssignedTerminalRuleCall() throws Exception {
 		val actual = '''
 			Rule: name=ID;
 		'''.toPda
@@ -78,7 +78,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testAssignedEObjectRuleCall() {
+	@Test def void testAssignedEObjectRuleCall() throws Exception {
 		val actual = '''
 			Rule: call=Called;
 			Called: name=ID;
@@ -94,7 +94,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testAssignedDatatypeRuleCall() {
+	@Test def void testAssignedDatatypeRuleCall() throws Exception {
 		val actual = '''
 			Rule: call=Called;
 			Called: "foo";
@@ -107,7 +107,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedCalledAction() {
+	@Test def void testUnassignedCalledAction() throws Exception {
 		val actual = '''
 			Rule: D1 | D2;
 			D1: 'd1' A;
@@ -155,7 +155,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedFragmentRuleCall() {
+	@Test def void testUnassignedFragmentRuleCall() throws Exception {
 		val actual = '''
 			Rule: Called;
 			fragment Called returns Abstract: name=ID;
@@ -170,7 +170,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedDatatypeRule() {
+	@Test def void testUnassignedDatatypeRule() throws Exception {
 		val actual = '''
 			Rule: val=ID Called;
 			Called: 'kw1';
@@ -184,7 +184,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedTerminalRule() {
+	@Test def void testUnassignedTerminalRule() throws Exception {
 		val actual = '''
 			Rule: val=ID Called;
 			terminal Called: 'kw1';
@@ -198,7 +198,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedParserRuleCall() {
+	@Test def void testUnassignedParserRuleCall() throws Exception {
 		val actual = '''
 			Rule: Called;
 			Called returns Sub: name=ID;
@@ -216,7 +216,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnassignedWildcardFragmentRuleCall() {
+	@Test def void testUnassignedWildcardFragmentRuleCall() throws Exception {
 		val actual = '''
 			Rule: Called;
 			fragment Called*: name=ID;
@@ -231,7 +231,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testGroup() {
+	@Test def void testGroup() throws Exception {
 		val actual = '''
 			Rule: {Rule} 'a' 'b' 'c';
 		'''.toPda
@@ -246,7 +246,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testAlternative() {
+	@Test def void testAlternative() throws Exception {
 		val actual = '''
 			Rule: {Rule} ('a' | 'b' | 'c');
 		'''.toPda
@@ -261,7 +261,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnorderedGroup() {
+	@Test def void testUnorderedGroup() throws Exception {
 		val actual = '''
 			Rule: {Rule} ('a' & 'b' & 'c');
 		'''.toPda
@@ -276,7 +276,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testUnorderedGroup2() {
+	@Test def void testUnorderedGroup2() throws Exception {
 		val actual = '''
 			Rule: {Rule} ('a' & 'b'? & 'c'* & 'd'+);
 		'''.toPda
@@ -292,7 +292,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testTwoAssignedEObjectRuleCalls() {
+	@Test def void testTwoAssignedEObjectRuleCalls() throws Exception {
 		val actual = '''
 			Rule: foo1=Sub foo2=Sub; Sub: id='id';
 		'''.toPda
@@ -308,7 +308,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testRecursion() {
+	@Test def void testRecursion() throws Exception {
 		val actual = '''
 			Recursion: val=ID | '(' Recursion ')';
 		'''.toPda
@@ -324,7 +324,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testExpression1() {
+	@Test def void testExpression1() throws Exception {
 		val actual = '''
 			Exp: 'kw' Addit; Addit returns Exp: Prim ({Add.left=current} '+' right=Prim)*; Prim returns Exp: {Val} val=ID;
 		'''.toPda
@@ -358,7 +358,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testActionAlternative() {
+	@Test def void testActionAlternative() throws Exception {
 		val actual = '''
 			Greeting: '(' Greeting ')' {Foo.child=current} | val=ID;
 		'''.toPda
@@ -375,7 +375,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test @Ignore def void testFragmentWithAction() {
+	@Test @Ignore def void testFragmentWithAction() throws Exception {
 		val actual = '''
 			R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID;
 		'''.toPda
@@ -391,7 +391,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test @Ignore def void testFragmentWithAction2() {
+	@Test @Ignore def void testFragmentWithAction2() throws Exception {
 		val actual = '''
 			R: 'kw1a' f1=ID 'kw1b' F; fragment F returns R: 'kw2a' {A.prev=current} 'kw2b' f2=ID 'kw2c';
 		'''.toPda
@@ -407,7 +407,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testParameter1() {
+	@Test def void testParameter1() throws Exception {
 		val actual = '''
 			M: "kw1" s=S<true> | "kw2" s=S<false>;
 			S <P>: <P> v1=ID | <!P> v2=ID;  
@@ -429,7 +429,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testDoubleFragment() {
+	@Test def void testDoubleFragment() throws Exception {
 		val actual = '''
 			R: F1 F2;
 			fragment F1: f1=ID;  
@@ -448,7 +448,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testFragmentLoop() {
+	@Test def void testFragmentLoop() throws Exception {
 		val actual = '''
 			R: F+;
 			fragment F: f+=ID;  
@@ -463,7 +463,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	@Test def void testParameterizedDoubleDelegation() {
+	@Test def void testParameterizedDoubleDelegation() throws Exception {
 		val actual = '''
 			R: F<true> | F<false>;
 			fragment F<X>: f+=ID;
@@ -480,7 +480,7 @@ class GrammarPDAProviderTest {
 		Assert.assertEquals(expected, actual)
 	}
 
-	def private String toPda(CharSequence rulesText) {
+	def private String toPda(CharSequence rulesText) throws Exception {
 		val grammar = parser.parse('''
 			grammar org.eclipse.xtext.serializer.GrammarPDAProviderTestLanguage with org.eclipse.xtext.common.Terminals
 			
@@ -510,7 +510,7 @@ class GrammarPDAProviderTest {
 		}
 	}
 
-	def protected toDot(Pda<ISerState, RuleCall> pda, String name) {
+	def protected toDot(Pda<ISerState, RuleCall> pda, String name) throws Exception {
 		val test = Thread.currentThread.stackTrace.get(6).methodName
 		new PdaToDot().draw(pda, "dot2/" + test + "_" + name + ".pdf", "-T pdf")
 
