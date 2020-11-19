@@ -21,14 +21,6 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="bin/longrunning" path="longrunning/xtend-gen">
-		<attributes>
-			<attribute name="gradle_scope" value="longrunning"/>
-			<attribute name="gradle_used_by_scope" value="longrunning,suites"/>
-			<attribute name="ignore_optional_problems" value="true"/>
-			<attribute name="test" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" output="bin/suites" path="suites">
 		<attributes>
 			<attribute name="gradle_scope" value="suites"/>
