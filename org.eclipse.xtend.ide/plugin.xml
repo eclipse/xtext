@@ -1614,9 +1614,10 @@
 	</extension>
 	<extension point="org.eclipse.e4.ui.css.swt.theme">
 		<stylesheet uri="css/e4-dark_xtend_syntaxhighlighting.css">
-			<themeid
-				refid="org.eclipse.e4.ui.css.theme.e4_dark">
-			</themeid>
+			<themeid refid="org.eclipse.e4.ui.css.theme.e4_dark"/>
+		</stylesheet>
+		<stylesheet uri="css/e4-default_xtend_syntaxhighlighting.css">
+			<themeid refid="org.eclipse.e4.ui.css.theme.e4_default"/>
 		</stylesheet>
 	</extension>
 	<extension
