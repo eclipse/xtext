@@ -29,17 +29,17 @@ public class StatemachineFormatter extends AbstractDeclarativeFormatter {
 	private StatemachineGrammarAccess statemachineGrammarAccess;
 
 	@Override
-	protected void configureFormatting(final FormattingConfig c) {
-		c.setLinewrap(0, 1, 2).before(this.statemachineGrammarAccess.getSL_COMMENTRule());
-		c.setLinewrap(0, 1, 2).before(this.statemachineGrammarAccess.getML_COMMENTRule());
-		c.setLinewrap(0, 1, 1).after(this.statemachineGrammarAccess.getML_COMMENTRule());
-		c.setLinewrap().before(this.statemachineGrammarAccess.getInputSignalAccess().getInputKeyword_1());
-		c.setLinewrap().before(this.statemachineGrammarAccess.getOutputSignalAccess().getOutputKeyword_1());
-		c.setLinewrap(1, 1, 2).before(this.statemachineGrammarAccess.getStateAccess().getStateKeyword_0());
-		c.setIndentationIncrement().after(this.statemachineGrammarAccess.getStateAccess().getNameAssignment_1());
-		c.setLinewrap().before(this.statemachineGrammarAccess.getCommandAccess().getSetKeyword_0());
-		c.setLinewrap().before(this.statemachineGrammarAccess.getTransitionAccess().getIfKeyword_0());
-		c.setLinewrap().before(this.statemachineGrammarAccess.getStateAccess().getEndKeyword_5());
-		c.setIndentationDecrement().before(this.statemachineGrammarAccess.getStateAccess().getEndKeyword_5());
+	protected void configureFormatting(FormattingConfig c) {
+		c.setLinewrap(0, 1, 2).before(statemachineGrammarAccess.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(statemachineGrammarAccess.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(statemachineGrammarAccess.getML_COMMENTRule());
+		c.setLinewrap().before(statemachineGrammarAccess.getInputSignalAccess().getInputKeyword_1());
+		c.setLinewrap().before(statemachineGrammarAccess.getOutputSignalAccess().getOutputKeyword_1());
+		c.setLinewrap(1, 1, 2).before(statemachineGrammarAccess.getStateAccess().getStateKeyword_0());
+		c.setIndentationIncrement().after(statemachineGrammarAccess.getStateAccess().getNameAssignment_1());
+		c.setLinewrap().before(statemachineGrammarAccess.getCommandAccess().getSetKeyword_0());
+		c.setLinewrap().before(statemachineGrammarAccess.getTransitionAccess().getIfKeyword_0());
+		c.setLinewrap().before(statemachineGrammarAccess.getStateAccess().getEndKeyword_5());
+		c.setIndentationDecrement().before(statemachineGrammarAccess.getStateAccess().getEndKeyword_5());
 	}
 }
