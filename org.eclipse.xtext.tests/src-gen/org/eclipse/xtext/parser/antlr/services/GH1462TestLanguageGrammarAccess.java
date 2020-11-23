@@ -89,9 +89,18 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//	| '#12' element=Rule12;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#1' element=Rule1 | '#2' element=Rule2 | '#3' element=Rule3 | '#4' element=Rule4 | '#5' element=Rule5 | '#6'
-		//element=Rule6 | '#7' element=Rule7 | '#8' element=Rule8 | '#9' element=Rule9 | '#10' element=Rule10 | '#11'
-		//element=Rule11 | '#12' element=Rule12
+		//'#1' element=Rule1
+		//| '#2' element=Rule2
+		//| '#3' element=Rule3
+		//| '#4' element=Rule4
+		//| '#5' element=Rule5
+		//| '#6' element=Rule6
+		//| '#7' element=Rule7
+		//| '#8' element=Rule8
+		//| '#9' element=Rule9
+		//| '#10' element=Rule10
+		//| '#11' element=Rule11
+		//| '#12' element=Rule12
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'#1' element=Rule1

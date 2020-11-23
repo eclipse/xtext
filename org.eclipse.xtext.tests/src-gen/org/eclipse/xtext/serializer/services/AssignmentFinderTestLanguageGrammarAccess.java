@@ -70,13 +70,13 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cCrossRefCrossRefParserRuleCall_9_1_0 = (RuleCall)cCrossRefAssignment_9_1.eContents().get(0);
 		
 		//Model:
-		//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
-		//	"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
-		//	"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
+		//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
+		//	| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07"
+		//	mixedValue=MixedValue | "#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
-		//"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
+		//"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
+		//| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
 		//"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
@@ -717,9 +717,9 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 
 	
 	//Model:
-	//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
-	//	"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
-	//	"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
+	//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
+	//	| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07"
+	//	mixedValue=MixedValue | "#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

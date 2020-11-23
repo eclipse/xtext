@@ -189,7 +189,8 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIndentIndentParserRuleCall_3_0 = (RuleCall)cIndentAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		///* SuppressWarnings[noInstantiation] */ Indent:
+		///* SuppressWarnings[noInstantiation] */
+		//Indent:
 		//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -323,7 +324,8 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		return getTwoOptionsAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ Indent:
+	///* SuppressWarnings[noInstantiation] */
+	//Indent:
 	//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 	public IndentElements getIndentAccess() {
 		return pIndent;

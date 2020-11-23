@@ -47,7 +47,14 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'DollarSign';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} 'dummy' name=ID '_' '_dummy_' '__dummy__' '$__dummy__' '$' 'DollarSign'
+		//{Model}
+		//'dummy' name=ID
+		//'_'
+		//'_dummy_'
+		//'__dummy__'
+		//'$__dummy__'
+		//'$'
+		//'DollarSign'
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}

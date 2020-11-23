@@ -51,7 +51,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
+		///* SuppressWarnings[noInstantiation] */
+		//AbstractCallOverridenParserRule mm::AModel:
 		//	'overridemodel' elements+=OverridableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -97,7 +98,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		///* SuppressWarnings[SpacesInKeyword] */ OverridableParserRule2 mm::AType:
+		///* SuppressWarnings[SpacesInKeyword] */
+		//OverridableParserRule2 mm::AType:
 		//	'other element' name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -120,7 +122,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
+		///* SuppressWarnings[noInstantiation] */
+		//AbstractCallExtendedParserRule mm::AModel:
 		//	'extendedmodel' elements+=ExtendableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -226,7 +229,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getInheritedParserRuleAccess().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */
+	//AbstractCallOverridenParserRule mm::AModel:
 	//	'overridemodel' elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return pAbstractCallOverridenParserRule;
@@ -246,7 +250,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getOverridableParserRuleAccess().getRule();
 	}
 	
-	///* SuppressWarnings[SpacesInKeyword] */ OverridableParserRule2 mm::AType:
+	///* SuppressWarnings[SpacesInKeyword] */
+	//OverridableParserRule2 mm::AType:
 	//	'other element' name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;
@@ -256,7 +261,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getOverridableParserRule2Access().getRule();
 	}
 	
-	///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */
+	//AbstractCallExtendedParserRule mm::AModel:
 	//	'extendedmodel' elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return pAbstractCallExtendedParserRule;

@@ -87,20 +87,20 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cNodeExclusionListNodeExclusion2ListParserRuleCall_8_2_0_1 = (RuleCall)cNodeExclusionListAlternatives_8_2_0.eContents().get(1);
 		
 		//Model:
-		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
-		//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-		//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
-		//	ValueExclusionTest2) | "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING
-		//	nodeExclusionList=(NodeExclusion1List | NodeExclusion2List);
+		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
+		//	(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
+		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=
+		//	(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+		//	| "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=
+		//	(NodeExclusion1List | NodeExclusion2List);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
-		//nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-		//NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
-		//ValueExclusionTest2) | "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING
-		//nodeExclusionList=(NodeExclusion1List | NodeExclusion2List)
+		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
+		//(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2
+		//) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=(QuantityExclusionTest1 |
+		//QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2) | "#7" name=STRING
+		//nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=(NodeExclusion1List |
+		//NodeExclusion2List)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#0" model=Model2
@@ -900,12 +900,12 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//Model:
-	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
-	//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5"
-	//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
-	//	ValueExclusionTest2) | "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING
-	//	nodeExclusionList=(NodeExclusion1List | NodeExclusion2List);
+	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
+	//	(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
+	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=
+	//	(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+	//	| "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=
+	//	(NodeExclusion1List | NodeExclusion2List);
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

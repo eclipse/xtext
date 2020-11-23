@@ -94,9 +94,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	//	{ParserRuleFragments} ('#1' element=PRFNamed
 	//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 	//	| '#4' element=PRFNamedWithAction
-	//	//  | '#5' element=PRFNamedWithActionInFragment
-	//	//  | '#6' element=PRFNamedWithActionInFragment2
-	//	//  | '#7' element=PRFNamedWithActionInFragment3
+	////  | '#5' element=PRFNamedWithActionInFragment
+	////  | '#6' element=PRFNamedWithActionInFragment2
+	////  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN
 	//	| '#9' element=PRFWithPredicate
 	//	| '#10' element=PRFNamedRecursive

@@ -123,7 +123,9 @@ public class IndexTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=QualifiedName '{' elements+=Element* '}'
+		//name=QualifiedName '{'
+		//elements+=Element*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//name=QualifiedName
@@ -203,7 +205,9 @@ public class IndexTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID '{' properties+=Property* '}'
+		//'entity' name=ID '{'
+		//properties+=Property*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'

@@ -36,7 +36,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		//	components+=Component*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=Element* components+=Component*
+		//elements+=Element*
+		//components+=Component*
 		public Group getGroup() { return cGroup; }
 		
 		//elements+=Element*
@@ -135,7 +136,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		//	'end' ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)? 'end' ';'
+		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
+		//'end' ';'
 		public Group getGroup() { return cGroup; }
 		
 		//(Bus | Processor)
@@ -188,7 +190,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		//	port+=Port*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'bus' name=ID port+=Port*
+		//'bus' name=ID
+		//port+=Port*
 		public Group getGroup() { return cGroup; }
 		
 		//'bus'
@@ -220,7 +223,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		//	data+=Data*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'processor' name=ID data+=Data*
+		//'processor' name=ID
+		//data+=Data*
 		public Group getGroup() { return cGroup; }
 		
 		//'processor'

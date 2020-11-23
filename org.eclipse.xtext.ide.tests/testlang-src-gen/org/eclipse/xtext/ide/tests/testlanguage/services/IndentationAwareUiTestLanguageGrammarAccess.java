@@ -40,7 +40,8 @@ public class IndentationAwareUiTestLanguageGrammarAccess extends AbstractElement
 		//	moreNodes+=OtherTreeNode*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Tree} nodes+=TreeNode* moreNodes+=OtherTreeNode*
+		//{Tree} nodes+=TreeNode*
+		//moreNodes+=OtherTreeNode*
 		public Group getGroup() { return cGroup; }
 		
 		//{Tree}
@@ -75,7 +76,9 @@ public class IndentationAwareUiTestLanguageGrammarAccess extends AbstractElement
 		//	DEDENT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID (INDENT children+=TreeNode* DEDENT)?
+		//name=ID (INDENT
+		//children+=TreeNode*
+		//DEDENT)?
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -84,7 +87,9 @@ public class IndentationAwareUiTestLanguageGrammarAccess extends AbstractElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
-		//(INDENT children+=TreeNode* DEDENT)?
+		//(INDENT
+		//children+=TreeNode*
+		//DEDENT)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//INDENT
@@ -112,7 +117,8 @@ public class IndentationAwareUiTestLanguageGrammarAccess extends AbstractElement
 		//	childList=ChildList?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=STRING childList=ChildList?
+		//name=STRING
+		//childList=ChildList?
 		public Group getGroup() { return cGroup; }
 		
 		//name=STRING
@@ -142,7 +148,9 @@ public class IndentationAwareUiTestLanguageGrammarAccess extends AbstractElement
 		//	DEDENT;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ChildList} INDENT children+=OtherTreeNode+ DEDENT
+		//{ChildList} INDENT
+		//children+=OtherTreeNode+
+		//DEDENT
 		public Group getGroup() { return cGroup; }
 		
 		//{ChildList}

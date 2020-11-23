@@ -42,7 +42,8 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractElementFinde
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'container' name=ID '{' (nested+=Nested | content+=Content)* '}'
+		//'container' name=ID '{' (nested+=Nested | content+=Content)*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'container'
@@ -90,7 +91,9 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractElementFinde
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'nested' '{' nested+=SomeContainer+ '}'
+		//'nested' '{'
+		//nested+=SomeContainer+
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'nested'
@@ -146,7 +149,9 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractElementFinde
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'children' '{' children+=Child (',' children+=Child)* '}'
+		//'children' '{'
+		//children+=Child (',' children+=Child)*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'children'
@@ -220,13 +225,21 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cAbstractChildrenAbstractChildParserRuleCall_2_0 = (RuleCall)cAbstractChildrenAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//AbstractChildren: /* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}';
+		//AbstractChildren:
+		//	/* SuppressWarnings[SpacesInKeyword] */
+		//	'abstract children' '{'
+		//	abstractChildren+=AbstractChild+
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		///* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}'
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'abstract children' '{'
+		//abstractChildren+=AbstractChild+
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
-		///* SuppressWarnings[SpacesInKeyword] */ 'abstract children'
+		///* SuppressWarnings[SpacesInKeyword] */
+		//'abstract children'
 		public Keyword getAbstractChildrenKeyword_0() { return cAbstractChildrenKeyword_0; }
 		
 		//'{'
@@ -489,7 +502,11 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractElementFinde
 		return getChildAccess().getRule();
 	}
 	
-	//AbstractChildren: /* SuppressWarnings[SpacesInKeyword] */ 'abstract children' '{' abstractChildren+=AbstractChild+ '}';
+	//AbstractChildren:
+	//	/* SuppressWarnings[SpacesInKeyword] */
+	//	'abstract children' '{'
+	//	abstractChildren+=AbstractChild+
+	//	'}';
 	public AbstractChildrenElements getAbstractChildrenAccess() {
 		return pAbstractChildren;
 	}

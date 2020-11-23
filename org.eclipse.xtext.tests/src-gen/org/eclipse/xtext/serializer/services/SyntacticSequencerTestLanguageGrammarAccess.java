@@ -577,14 +577,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cRef5SingleCrossReferenceKw5Keyword_6_1_0_1 = (Keyword)cRef5SingleCrossReferenceCrossReference_6_1_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
-		//	("kw5" ref5=[SingleCrossReference])?;
+		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
+		//	[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
+		//	ref5=[SingleCrossReference])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
-		//("kw5" ref5=[SingleCrossReference])?
+		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
+		//[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5" ref5=
+		//[SingleCrossReference])?
 		public Group getGroup() { return cGroup; }
 		
 		//"#5"
@@ -1011,8 +1011,15 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		//	'!';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#13' foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID?
-		//| "kw7" val7+=ID? | "kw8" val8+=ID?)* '!'
+		//'#13' foo=ID ("kw1" val1+=ID? |
+		//"kw2" val2+=ID? |
+		//"kw3" val3+=ID? |
+		//"kw4" val4+=ID? |
+		//"kw5" val5+=ID? |
+		//"kw6" val6+=ID? |
+		//"kw7" val7+=ID? |
+		//"kw8" val8+=ID?)*
+		//'!'
 		public Group getGroup() { return cGroup; }
 		
 		//'#13'
@@ -1024,8 +1031,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_1_0() { return cFooIDTerminalRuleCall_1_0; }
 		
-		//("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID? | "kw7"
-		//val7+=ID? | "kw8" val8+=ID?)*
+		//("kw1" val1+=ID? |
+		//"kw2" val2+=ID? |
+		//"kw3" val3+=ID? |
+		//"kw4" val4+=ID? |
+		//"kw5" val5+=ID? |
+		//"kw6" val6+=ID? |
+		//"kw7" val7+=ID? |
+		//"kw8" val8+=ID?)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//"kw1" val1+=ID?
@@ -1138,10 +1151,10 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIDTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//ActionOnly:
-		//	"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?;
+		//	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?
+		//"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?
 		public Group getGroup() { return cGroup; }
 		
 		//"#14"
@@ -1150,7 +1163,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		//"kw1"?
 		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
 		
-		//=> ID?
+		//=>ID?
 		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 		
 		//{ActionOnly}
@@ -1480,9 +1493,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//SingleCrossReference:
-	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
-	//	("kw5" ref5=[SingleCrossReference])?;
+	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
+	//	[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
+	//	ref5=[SingleCrossReference])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return pSingleCrossReference;
 	}
@@ -1616,7 +1629,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//ActionOnly:
-	//	"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?;
+	//	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
 	public ActionOnlyElements getActionOnlyAccess() {
 		return pActionOnly;
 	}

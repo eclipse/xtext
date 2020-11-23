@@ -61,7 +61,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'package' name=QualifiedName '{' elements+=AbstractElement* '}'
+		//'package' name=QualifiedName '{'
+		//elements+=AbstractElement*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'package'
@@ -126,7 +128,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{' members+=Member* '}'
+		//'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
+		//members+=Member*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'type'
@@ -223,10 +227,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cRightSquareBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//Type:
-		//	(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*;
+		//	(TypeReference | PrimitiveType) (arrayDiemensions+='['']')*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*
+		//(TypeReference | PrimitiveType) (arrayDiemensions+='['']')*
 		public Group getGroup() { return cGroup; }
 		
 		//(TypeReference | PrimitiveType)
@@ -238,7 +242,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//PrimitiveType
 		public RuleCall getPrimitiveTypeParserRuleCall_0_1() { return cPrimitiveTypeParserRuleCall_0_1; }
 		
-		//(arrayDiemensions+='[' ']')*
+		//(arrayDiemensions+='['']')*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//arrayDiemensions+='['
@@ -282,7 +286,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
-		//operationCall=OperationCall? '}'
+		//operationCall=OperationCall?
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//{Operation}
@@ -651,7 +656,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//Type:
-	//	(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*;
+	//	(TypeReference | PrimitiveType) (arrayDiemensions+='['']')*;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}

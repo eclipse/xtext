@@ -56,7 +56,9 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID reference=[Element]? '{' elements+=Element* '}'
+		//name=ID reference=[Element]? '{'
+		//elements+=Element*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID

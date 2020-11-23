@@ -55,7 +55,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cTabKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cBackslashKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
-		///* SuppressWarnings[SpacesInKeyword] */ BS_ESCAPE:
+		///* SuppressWarnings[SpacesInKeyword] */
+		//BS_ESCAPE:
 		//	'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -136,7 +137,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	///* SuppressWarnings[SpacesInKeyword] */ BS_ESCAPE:
+	///* SuppressWarnings[SpacesInKeyword] */
+	//BS_ESCAPE:
 	//	'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\';
 	public BS_ESCAPEElements getBS_ESCAPEAccess() {
 		return pBS_ESCAPE;
