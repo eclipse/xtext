@@ -43,7 +43,8 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	states+=State*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Statemachine} signals+=Signal* states+=State*
+		//{Statemachine} signals+=Signal*
+		//states+=State*
 		public Group getGroup() { return cGroup; }
 		
 		//{Statemachine}
@@ -107,7 +108,8 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'input';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{InputSignal} 'input'
+		//{InputSignal}
+		//'input'
 		public Group getGroup() { return cGroup; }
 		
 		//{InputSignal}
@@ -127,7 +129,8 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'output';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{OutputSignal} 'output'
+		//{OutputSignal}
+		//'output'
 		public Group getGroup() { return cGroup; }
 		
 		//{OutputSignal}
@@ -158,7 +161,11 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'state' name=ID commands+=Command* transitions+=Transition* nestedStates+=State* 'end'
+		//'state' name=ID
+		//commands+=Command*
+		//transitions+=Transition*
+		//nestedStates+=State*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'state'
