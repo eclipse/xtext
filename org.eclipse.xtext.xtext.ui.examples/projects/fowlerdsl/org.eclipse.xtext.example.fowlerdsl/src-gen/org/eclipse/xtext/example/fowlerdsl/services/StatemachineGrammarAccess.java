@@ -57,14 +57,22 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	states+=State*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Statemachine} ('events' events+=Event+ 'end')? ('resetEvents' resetEvents+=[Event]+ 'end')? ('commands'
-		//commands+=Command+ 'end')? states+=State*
+		//{Statemachine} ('events'
+		//events+=Event+
+		//'end')? ('resetEvents'
+		//resetEvents+=[Event]+
+		//'end')? ('commands'
+		//commands+=Command+
+		//'end')?
+		//states+=State*
 		public Group getGroup() { return cGroup; }
 		
 		//{Statemachine}
 		public Action getStatemachineAction_0() { return cStatemachineAction_0; }
 		
-		//('events' events+=Event+ 'end')?
+		//('events'
+		//events+=Event+
+		//'end')?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'events'
@@ -79,7 +87,9 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'end'
 		public Keyword getEndKeyword_1_2() { return cEndKeyword_1_2; }
 		
-		//('resetEvents' resetEvents+=[Event]+ 'end')?
+		//('resetEvents'
+		//resetEvents+=[Event]+
+		//'end')?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'resetEvents'
@@ -97,7 +107,9 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'end'
 		public Keyword getEndKeyword_2_2() { return cEndKeyword_2_2; }
 		
-		//('commands' commands+=Command+ 'end')?
+		//('commands'
+		//commands+=Command+
+		//'end')?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'commands'
@@ -195,7 +207,9 @@ public class StatemachineGrammarAccess extends AbstractElementFinder.AbstractGra
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')? transitions+=Transition* 'end'
+		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
+		//transitions+=Transition*
+		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'state'

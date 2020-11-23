@@ -55,8 +55,11 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Root} 'Root' name=INT0 '{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0'
-		//concrete0=Concrete0)? '}'
+		//{Root}
+		//'Root'
+		//name=INT0
+		//'{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0' concrete0=Concrete0)?
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//{Root}
@@ -166,7 +169,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 		private final Keyword cINTKeyword = (Keyword)rule.eContents().get(1);
 		
 		//INT0 INT:
-		//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
+		//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */ ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'INT'
@@ -186,7 +189,9 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Concrete0} 'Concrete0' name=EString
+		//{Concrete0}
+		//'Concrete0'
+		//name=EString
 		public Group getGroup() { return cGroup; }
 		
 		//{Concrete0}
@@ -234,7 +239,9 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Concrete1} 'Concrete1' name=EString
+		//{Concrete1}
+		//'Concrete1'
+		//name=EString
 		public Group getGroup() { return cGroup; }
 		
 		//{Concrete1}
@@ -263,7 +270,9 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{DiamondInheritance} 'DiamondInheritance' name=EString
+		//{DiamondInheritance}
+		//'DiamondInheritance'
+		//name=EString
 		public Group getGroup() { return cGroup; }
 		
 		//{DiamondInheritance}
@@ -370,7 +379,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractElementFinder.Abstract
 	}
 	
 	//INT0 INT:
-	//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
+	//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */ ;
 	public INT0Elements getINT0Access() {
 		return pINT0;
 	}

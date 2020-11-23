@@ -36,7 +36,8 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	elements+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import* elements+=Type*
+		//imports+=Import*
+		//elements+=Type*
 		public Group getGroup() { return cGroup; }
 		
 		//imports+=Import*
@@ -145,7 +146,10 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'class' name=ID ('extends' superClass=[Class])? '{' properties+=Property* subClasses+=Class* '}'
+		//'class' name=ID ('extends' superClass=[Class])? '{'
+		//properties+=Property*
+		//subClasses+=Class*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'class'

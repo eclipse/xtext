@@ -152,7 +152,9 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 		//	'then' thenPart=XBlockExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Rule' description=STRING 'when' deviceState=[State|QualifiedName] 'then' thenPart=XBlockExpression
+		//'Rule' description=STRING
+		//'when' deviceState=[State|QualifiedName]
+		//'then' thenPart=XBlockExpression
 		public Group getGroup() { return cGroup; }
 		
 		//'Rule'
@@ -198,14 +200,15 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//@Override
 		//XBlockExpression xbase::XExpression:
-		//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
+		//	{xbase :: XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)* END
+		//{xbase :: XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
+		//END
 		public Group getGroup() { return cGroup; }
 		
-		//{xbase::XBlockExpression}
+		//{xbase :: XBlockExpression}
 		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 		
 		//BEGIN
@@ -262,26 +265,28 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 		
 		//@Override
 		//XSwitchExpression xbase::XExpression:
-		//	{xbase::XSwitchExpression}
+		//	{xbase :: XSwitchExpression}
 		//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 		//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN
 		//	cases+=XCasePart* ('default' ':' default=XExpression)?
 		//	END;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XSwitchExpression} 'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')' | =>
-		//(declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN cases+=XCasePart* ('default' ':'
-		//default=XExpression)? END
+		//{xbase :: XSwitchExpression}
+		//'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		//| => (declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN
+		//cases+=XCasePart* ('default' ':' default=XExpression)?
+		//END
 		public Group getGroup() { return cGroup; }
 		
-		//{xbase::XSwitchExpression}
+		//{xbase :: XSwitchExpression}
 		public Action getXSwitchExpressionAction_0() { return cXSwitchExpressionAction_0; }
 		
 		//'switch'
 		public Keyword getSwitchKeyword_1() { return cSwitchKeyword_1; }
 		
-		//(=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')' | => (declaredParam=JvmFormalParameter ':')?
-		//switch=XExpression)
+		//(=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		//| => (declaredParam=JvmFormalParameter ':')? switch=XExpression)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
@@ -486,7 +491,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//@Override
 	//XBlockExpression xbase::XExpression:
-	//	{xbase::XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
+	//	{xbase :: XBlockExpression} BEGIN (expressions+=XExpressionOrVarDeclaration ';'?)*
 	//	END;
 	public XBlockExpressionElements getXBlockExpressionAccess() {
 		return pXBlockExpression;
@@ -498,7 +503,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//@Override
 	//XSwitchExpression xbase::XExpression:
-	//	{xbase::XSwitchExpression}
+	//	{xbase :: XSwitchExpression}
 	//	'switch' (=> ('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
 	//	| => (declaredParam=JvmFormalParameter ':')? switch=XExpression) BEGIN
 	//	cases+=XCasePart* ('default' ':' default=XExpression)?
@@ -773,11 +778,11 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//XMemberFeatureCall XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
-	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
+	//	[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 	//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (memberCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
 	//	| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?
 	//	')')?
 	//	memberCallArguments+=XClosure?)*;
@@ -844,8 +849,8 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//XClosure XExpression:
 	//	=> ({XClosure}
 	//	'[')
-	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|')?
+	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|')?
 	//	expression=XExpressionInClosure
 	//	']';
 	public XbaseGrammarAccess.XClosureElements getXClosureAccess() {
@@ -867,8 +872,8 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//XShortClosure XExpression:
-	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|') expression=XExpression;
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|') expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();
 	}
@@ -890,7 +895,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//XIfExpression XExpression:
 	//	{XIfExpression}
 	//	'if' '(' if=XExpression ')'
-	//	then=XExpression (=> 'else' else=XExpression)?;
+	//	then=XExpression (=>'else' else=XExpression)?;
 	public XbaseGrammarAccess.XIfExpressionElements getXIfExpressionAccess() {
 		return gaXbase.getXIfExpressionAccess();
 	}
@@ -1002,7 +1007,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//XFeatureCall XExpression:
 	//	{XFeatureCall} ('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (featureCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (featureCallArguments+=XShortClosure
 	//	| featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)?
 	//	')')?
 	//	featureCallArguments+=XClosure?;
@@ -1036,8 +1041,8 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//XConstructorCall XExpression:
 	//	{XConstructorCall}
-	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=> '<' typeArguments+=JvmArgumentTypeReference (','
-	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=> explicitConstructorCall?='(' (arguments+=XShortClosure
+	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=>'<' typeArguments+=JvmArgumentTypeReference (','
+	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=>explicitConstructorCall?='(' (arguments+=XShortClosure
 	//	| arguments+=XExpression (',' arguments+=XExpression)*)?
 	//	')')?
 	//	arguments+=XClosure?;
@@ -1110,7 +1115,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//XReturnExpression XExpression:
-	//	{XReturnExpression} 'return' -> expression=XExpression?;
+	//	{XReturnExpression} 'return' ->expression=XExpression?;
 	public XbaseGrammarAccess.XReturnExpressionElements getXReturnExpressionAccess() {
 		return gaXbase.getXReturnExpressionAccess();
 	}
@@ -1122,7 +1127,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	//XTryCatchFinallyExpression XExpression:
 	//	{XTryCatchFinallyExpression}
 	//	'try'
-	//	expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+	//	expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 	//	| 'finally' finallyExpression=XExpression);
 	public XbaseGrammarAccess.XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return gaXbase.getXTryCatchFinallyExpressionAccess();
@@ -1144,7 +1149,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//XCatchClause:
-	//	=> 'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
+	//	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
 	public XbaseGrammarAccess.XCatchClauseElements getXCatchClauseAccess() {
 		return gaXbase.getXCatchClauseAccess();
 	}
@@ -1155,7 +1160,7 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	
 	//@Override
 	//QualifiedName:
-	//	ValidID (=> '.' ValidID)*;
+	//	ValidID (=>'.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
 	}
@@ -1177,7 +1182,8 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	///**
 	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
-	// */ StaticQualifier:
+	// */
+	//StaticQualifier:
 	//	(ValidID '::')+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
@@ -1237,9 +1243,9 @@ public class RuleEngineGrammarAccess extends AbstractElementFinder.AbstractGramm
 	}
 	
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|super::QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (','
-	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>
-	//	'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
+	//	type=[JvmType|super::QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (','
+	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (
+	//	=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXtype.getJvmParameterizedTypeReferenceAccess();
 	}

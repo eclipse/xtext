@@ -166,26 +166,97 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"}");
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
-		//"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
-		//operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
-		//errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+"
-		//name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5*
-		//"}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
+		//{Model} ("#1*" "{"
+		//errors+=Error_1*
+		//operations+=Operation_1*
+		//"}"
+		//| "#1+" "{"
+		//errors+=Error_1+
+		//operations+=Operation_1+
+		//"}"
+		//| "#2*" "{"
+		//errors+=Error_2*
+		//operations+=Operation_2*
+		//"}"
+		//| "#2+" name=ID "{"
+		//errors+=Error_2+
+		//operations+=Operation_2+
+		//"}"
+		//| "#3*" name=ID "{"
+		//errors+=Error_3*
+		//operations+=Operation_3*
+		//"}"
+		//| "#3+" name=ID "{"
+		//errors+=Error_3+
+		//operations+=Operation_3+
+		//"}"
+		//| "#4*" name=ID "{"
+		//errors+=Error_4*
+		//operations+=Operation_4*
+		//"}"
+		//| "#4+" name=ID "{"
+		//errors+=Error_4+
+		//operations+=Operation_4+
+		//"}"
+		//| "#5*" name=ID "{"
+		//errors+=Error_5*
+		//operations+=Operation_5*
+		//"}"
+		//| "#5+" name=ID "{"
+		//errors+=Error_5+
+		//operations+=Operation_5+
+		//"}")
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
-		//"#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
-		//"}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{" errors+=Error_3+
-		//operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+" name=ID "{"
-		//errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}" | "#5+"
-		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
+		//("#1*" "{"
+		//errors+=Error_1*
+		//operations+=Operation_1*
+		//"}"
+		//| "#1+" "{"
+		//errors+=Error_1+
+		//operations+=Operation_1+
+		//"}"
+		//| "#2*" "{"
+		//errors+=Error_2*
+		//operations+=Operation_2*
+		//"}"
+		//| "#2+" name=ID "{"
+		//errors+=Error_2+
+		//operations+=Operation_2+
+		//"}"
+		//| "#3*" name=ID "{"
+		//errors+=Error_3*
+		//operations+=Operation_3*
+		//"}"
+		//| "#3+" name=ID "{"
+		//errors+=Error_3+
+		//operations+=Operation_3+
+		//"}"
+		//| "#4*" name=ID "{"
+		//errors+=Error_4*
+		//operations+=Operation_4*
+		//"}"
+		//| "#4+" name=ID "{"
+		//errors+=Error_4+
+		//operations+=Operation_4+
+		//"}"
+		//| "#5*" name=ID "{"
+		//errors+=Error_5*
+		//operations+=Operation_5*
+		//"}"
+		//| "#5+" name=ID "{"
+		//errors+=Error_5+
+		//operations+=Operation_5+
+		//"}")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"
+		//"#1*" "{"
+		//errors+=Error_1*
+		//operations+=Operation_1*
+		//"}"
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//"#1*"
@@ -209,7 +280,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_0_4() { return cRightCurlyBracketKeyword_1_0_4; }
 		
-		//"#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}"
+		//"#1+" "{"
+		//errors+=Error_1+
+		//operations+=Operation_1+
+		//"}"
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//"#1+"
@@ -233,7 +307,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_1_4() { return cRightCurlyBracketKeyword_1_1_4; }
 		
-		//"#2*" "{" errors+=Error_2* operations+=Operation_2* "}"
+		//"#2*" "{"
+		//errors+=Error_2*
+		//operations+=Operation_2*
+		//"}"
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
 		//"#2*"
@@ -257,7 +334,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_2_4() { return cRightCurlyBracketKeyword_1_2_4; }
 		
-		//"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+ "}"
+		//"#2+" name=ID "{"
+		//errors+=Error_2+
+		//operations+=Operation_2+
+		//"}"
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//"#2+"
@@ -287,7 +367,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_3_5() { return cRightCurlyBracketKeyword_1_3_5; }
 		
-		//"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}"
+		//"#3*" name=ID "{"
+		//errors+=Error_3*
+		//operations+=Operation_3*
+		//"}"
 		public Group getGroup_1_4() { return cGroup_1_4; }
 		
 		//"#3*"
@@ -317,7 +400,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_4_5() { return cRightCurlyBracketKeyword_1_4_5; }
 		
-		//"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"
+		//"#3+" name=ID "{"
+		//errors+=Error_3+
+		//operations+=Operation_3+
+		//"}"
 		public Group getGroup_1_5() { return cGroup_1_5; }
 		
 		//"#3+"
@@ -347,7 +433,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_5_5() { return cRightCurlyBracketKeyword_1_5_5; }
 		
-		//"#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}"
+		//"#4*" name=ID "{"
+		//errors+=Error_4*
+		//operations+=Operation_4*
+		//"}"
 		public Group getGroup_1_6() { return cGroup_1_6; }
 		
 		//"#4*"
@@ -377,7 +466,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_6_5() { return cRightCurlyBracketKeyword_1_6_5; }
 		
-		//"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}"
+		//"#4+" name=ID "{"
+		//errors+=Error_4+
+		//operations+=Operation_4+
+		//"}"
 		public Group getGroup_1_7() { return cGroup_1_7; }
 		
 		//"#4+"
@@ -407,7 +499,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_7_5() { return cRightCurlyBracketKeyword_1_7_5; }
 		
-		//"#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}"
+		//"#5*" name=ID "{"
+		//errors+=Error_5*
+		//operations+=Operation_5*
+		//"}"
 		public Group getGroup_1_8() { return cGroup_1_8; }
 		
 		//"#5*"
@@ -437,7 +532,10 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_8_5() { return cRightCurlyBracketKeyword_1_8_5; }
 		
-		//"#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}"
+		//"#5+" name=ID "{"
+		//errors+=Error_5+
+		//operations+=Operation_5+
+		//"}"
 		public Group getGroup_1_9() { return cGroup_1_9; }
 		
 		//"#5+"
@@ -481,7 +579,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation* "error" name=ID
+		//annotations+=Annotation*
+		//"error" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation*
@@ -513,7 +612,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation* "operation" name=ID
+		//annotations+=Annotation*
+		//"operation" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation*
@@ -545,7 +645,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation+ "error" name=ID
+		//annotations+=Annotation+
+		//"error" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation+
@@ -577,7 +678,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation+ "operation" name=ID
+		//annotations+=Annotation+
+		//"operation" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation+
@@ -609,7 +711,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"error" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation? "error" name=ID
+		//annotations+=Annotation?
+		//"error" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation?
@@ -641,7 +744,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	"operation" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation? "operation" name=ID
+		//annotations+=Annotation?
+		//"operation" name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//annotations+=Annotation?

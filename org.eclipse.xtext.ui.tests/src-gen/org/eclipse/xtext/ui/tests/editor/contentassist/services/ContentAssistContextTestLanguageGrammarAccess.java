@@ -35,7 +35,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractEleme
 		//	secondLevelB+=SecondLevelB*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*
+		//secondLevelA+=SecondLevelA*
+		//secondLevelB+=SecondLevelB*
 		public Group getGroup() { return cGroup; }
 		
 		//secondLevelA+=SecondLevelA*
@@ -63,7 +64,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractEleme
 		//	thirdLevelA2+=ThirdLevelA2+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+
+		//thirdLevelA1+=ThirdLevelA1+
+		//thirdLevelA2+=ThirdLevelA2+
 		public Group getGroup() { return cGroup; }
 		
 		//thirdLevelA1+=ThirdLevelA1+
@@ -91,7 +93,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractEleme
 		//	thirdLevelB2+=ThirdLevelB2+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+
+		//thirdLevelB1+=ThirdLevelB1+
+		//thirdLevelB2+=ThirdLevelB2+
 		public Group getGroup() { return cGroup; }
 		
 		//thirdLevelB1+=ThirdLevelB1+

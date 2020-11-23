@@ -41,12 +41,12 @@ public class KeywordsUiTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Keyword cEighthDKeyword_7_0 = (Keyword)cEighthAssignment_7.eContents().get(0);
 		
 		//Model:
-		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
-		//	| eighth?='"d"';
+		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?=
+		//	"'c'" | eighth?='"d"';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'" |
-		//eighth?='"d"'
+		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
+		//| eighth?='"d"'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//first?="foo\\bar"
@@ -141,8 +141,8 @@ public class KeywordsUiTestLanguageGrammarAccess extends AbstractElementFinder.A
 
 	
 	//Model:
-	//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
-	//	| eighth?='"d"';
+	//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?=
+	//	"'c'" | eighth?='"d"';
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

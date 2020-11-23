@@ -274,7 +274,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage.STREAM");
 		private final Keyword cStreamKeyword = (Keyword)rule.eContents().get(0);
 		
-		//fragment STREAM *:
+		//fragment STREAM*:
 		//	'stream';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -285,7 +285,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage.DEFINE");
 		private final Keyword cDefineKeyword = (Keyword)rule.eContents().get(0);
 		
-		//fragment DEFINE *:
+		//fragment DEFINE*:
 		//	'define';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -438,7 +438,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getThirdAccess().getRule();
 	}
 	
-	//fragment STREAM *:
+	//fragment STREAM*:
 	//	'stream';
 	public STREAMElements getSTREAMAccess() {
 		return pSTREAM;
@@ -448,7 +448,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getSTREAMAccess().getRule();
 	}
 	
-	//fragment DEFINE *:
+	//fragment DEFINE*:
 	//	'define';
 	public DEFINEElements getDEFINEAccess() {
 		return pDEFINE;

@@ -59,7 +59,8 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 		//	name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//doc=STRING? name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
+		//doc=STRING?
+		//name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//doc=STRING?

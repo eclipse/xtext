@@ -121,8 +121,8 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//scenario=Scenario2<true> | '#4' scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6'
 		//scenario=Scenario2<false>) | '#7' scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9'
 		//(scenario=Scenario4<true> | scenario=Scenario2<true> 'trailing'?) | '#10' (scenario=Scenario4<true> |
-		//scenario=Scenario2<false> 'trailing'?) | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'trailing'?) |
-		//'#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?) | '#13' scenario=Scenario5<false> | '#14'
+		//scenario=Scenario2<false> 'trailing'?) | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'trailing'?) | '#12'
+		//(scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?) | '#13' scenario=Scenario5<false> | '#14'
 		//scenario=Scenario5<true>)
 		public Group getGroup() { return cGroup; }
 		
@@ -132,9 +132,9 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//('#1' scenario=Scenario1<true> | '#2' scenario=Scenario1<Param=false> | '#3' scenario=Scenario2<true> | '#4'
 		//scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6' scenario=Scenario2<false>) | '#7'
 		//scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9' (scenario=Scenario4<true> | scenario=Scenario2<true>
-		//'trailing'?) | '#10' (scenario=Scenario4<true> | scenario=Scenario2<false> 'trailing'?) | '#11'
-		//(scenario=Scenario4<false> | scenario=Scenario2<true> 'trailing'?) | '#12' (scenario=Scenario4<false> |
-		//scenario=Scenario2<false> 'trailing'?) | '#13' scenario=Scenario5<false> | '#14' scenario=Scenario5<true>)
+		//'trailing'?) | '#10' (scenario=Scenario4<true> | scenario=Scenario2<false> 'trailing'?) | '#11' (scenario=Scenario4<false>
+		//| scenario=Scenario2<true> 'trailing'?) | '#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?) |
+		//'#13' scenario=Scenario5<false> | '#14' scenario=Scenario5<true>)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'#1' scenario=Scenario1<true>
@@ -381,12 +381,13 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Assignment cSecondAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cSecondIDTerminalRuleCall_1_0_0 = (RuleCall)cSecondAssignment_1_0.eContents().get(0);
 		
-		//Scenario1 <Param Scenario:
+		//Scenario1 <ParamScenario:
 		//	<Param> first=ID
-		//	| <!Param> second=ID;
+		//	| <! Param> second=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Param> first=ID | <!Param> second=ID
+		//<Param> first=ID
+		//| <! Param> second=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Param> first=ID
@@ -398,7 +399,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//ID
 		public RuleCall getFirstIDTerminalRuleCall_0_0_0() { return cFirstIDTerminalRuleCall_0_0_0; }
 		
-		//<!Param> second=ID
+		//<! Param> second=ID
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//second=ID
@@ -412,7 +413,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Assignment cFirstAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cFirstIdOrKeywordParserRuleCall_0 = (RuleCall)cFirstAssignment.eContents().get(0);
 		
-		//Scenario2 <AllowKeyword Scenario:
+		//Scenario2 <AllowKeywordScenario:
 		//	first=IdOrKeyword<AllowKeyword>;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -430,14 +431,14 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Assignment cSecondAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword cSecondScenario3Keyword_1_0 = (Keyword)cSecondAssignment_1.eContents().get(0);
 		
-		//Scenario3 <AllowKeyword Scenario:
-		//	=> first=IdOrKeyword<AllowKeyword> | second='scenario3';
+		//Scenario3 <AllowKeywordScenario:
+		//	=>first=IdOrKeyword<AllowKeyword> | second='scenario3';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=> first=IdOrKeyword<AllowKeyword> | second='scenario3'
+		//=>first=IdOrKeyword<AllowKeyword> | second='scenario3'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//=> first=IdOrKeyword<AllowKeyword>
+		//=>first=IdOrKeyword<AllowKeyword>
 		public Assignment getFirstAssignment_0() { return cFirstAssignment_0; }
 		
 		//IdOrKeyword<AllowKeyword>
@@ -456,14 +457,14 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final RuleCall cSecondIdOrKeywordParserRuleCall_0_0 = (RuleCall)cSecondAssignment_0.eContents().get(0);
 		private final Keyword cScenario4Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//Scenario4 <AllowKeyword Scenario:
-		//	=> second=IdOrKeyword<AllowKeyword> 'scenario4';
+		//Scenario4 <AllowKeywordScenario:
+		//	=>second=IdOrKeyword<AllowKeyword> 'scenario4';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=> second=IdOrKeyword<AllowKeyword> 'scenario4'
+		//=>second=IdOrKeyword<AllowKeyword> 'scenario4'
 		public Group getGroup() { return cGroup; }
 		
-		//=> second=IdOrKeyword<AllowKeyword>
+		//=>second=IdOrKeyword<AllowKeyword>
 		public Assignment getSecondAssignment_0() { return cSecondAssignment_0; }
 		
 		//IdOrKeyword<AllowKeyword>
@@ -497,15 +498,17 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final RuleCall cScenario5BodyParserRuleCall_3_3 = (RuleCall)cGroup_3.eContents().get(3);
 		private final Keyword cTrailingKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
 		
-		//Scenario5 <Include Scenario:
+		//Scenario5 <IncludeScenario:
 		//	<Include> {Scenario} 'include'
 		//	| {Scenario} 'trailing'
 		//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
 		//	'scenario5' 'fragment' Scenario5Body<Include> 'trailing';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Include> {Scenario} 'include' | {Scenario} 'trailing' | {Scenario} 'scenario5' (<Include> 'include')?
-		//first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario} 'scenario5' 'fragment' Scenario5Body<Include> 'trailing'
+		//<Include> {Scenario} 'include'
+		//| {Scenario} 'trailing'
+		//| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
+		//'scenario5' 'fragment' Scenario5Body<Include> 'trailing'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Include> {Scenario} 'include'
@@ -581,10 +584,11 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		
 		//fragment Scenario5Body <Include> *:
 		//	<Include> 'include'
-		//	| <!Include> 'fragment'?;
+		//	| <! Include> 'fragment'?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Include> 'include' | <!Include> 'fragment'?
+		//<Include> 'include'
+		//| <! Include> 'fragment'?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Include> 'include'
@@ -593,7 +597,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//'include'
 		public Keyword getIncludeKeyword_0_0() { return cIncludeKeyword_0_0; }
 		
-		//<!Include> 'fragment'?
+		//<! Include> 'fragment'?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'fragment'?
@@ -611,7 +615,8 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//	| ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Keyword> 'keyword' | ID
+		//<Keyword> 'keyword'
+		//| ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Keyword> 'keyword'
@@ -696,9 +701,9 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getParserRuleParametersAccess().getRule();
 	}
 	
-	//Scenario1 <Param Scenario:
+	//Scenario1 <ParamScenario:
 	//	<Param> first=ID
-	//	| <!Param> second=ID;
+	//	| <! Param> second=ID;
 	public Scenario1Elements getScenario1Access() {
 		return pScenario1;
 	}
@@ -707,7 +712,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getScenario1Access().getRule();
 	}
 	
-	//Scenario2 <AllowKeyword Scenario:
+	//Scenario2 <AllowKeywordScenario:
 	//	first=IdOrKeyword<AllowKeyword>;
 	public Scenario2Elements getScenario2Access() {
 		return pScenario2;
@@ -717,8 +722,8 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getScenario2Access().getRule();
 	}
 	
-	//Scenario3 <AllowKeyword Scenario:
-	//	=> first=IdOrKeyword<AllowKeyword> | second='scenario3';
+	//Scenario3 <AllowKeywordScenario:
+	//	=>first=IdOrKeyword<AllowKeyword> | second='scenario3';
 	public Scenario3Elements getScenario3Access() {
 		return pScenario3;
 	}
@@ -727,8 +732,8 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getScenario3Access().getRule();
 	}
 	
-	//Scenario4 <AllowKeyword Scenario:
-	//	=> second=IdOrKeyword<AllowKeyword> 'scenario4';
+	//Scenario4 <AllowKeywordScenario:
+	//	=>second=IdOrKeyword<AllowKeyword> 'scenario4';
 	public Scenario4Elements getScenario4Access() {
 		return pScenario4;
 	}
@@ -737,7 +742,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getScenario4Access().getRule();
 	}
 	
-	//Scenario5 <Include Scenario:
+	//Scenario5 <IncludeScenario:
 	//	<Include> {Scenario} 'include'
 	//	| {Scenario} 'trailing'
 	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false> | {Scenario}
@@ -752,7 +757,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 	
 	//fragment Scenario5Body <Include> *:
 	//	<Include> 'include'
-	//	| <!Include> 'fragment'?;
+	//	| <! Include> 'fragment'?;
 	public Scenario5BodyElements getScenario5BodyAccess() {
 		return pScenario5Body;
 	}

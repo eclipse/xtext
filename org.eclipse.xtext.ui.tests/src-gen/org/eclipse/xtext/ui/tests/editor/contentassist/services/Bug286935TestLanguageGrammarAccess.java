@@ -63,7 +63,10 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{State} (isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType |
-		//isInitial?='init' stateKind=StateType isFinal?='final')? 'state'? stateName=ID? label=STRING?
+		//isInitial?='init' stateKind=StateType isFinal?='final')?
+		//'state'?
+		//stateName=ID?
+		//label=STRING?
 		public Group getGroup() { return cGroup; }
 		
 		//{State}

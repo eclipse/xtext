@@ -99,10 +99,14 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//abstract?='abstract'? transient?='transient'? 'class' name=ID ('extends' superClass=[Class])? ('implements'
-		//implementedInterfaces+=[Class] (',' 'implements' implementedInterfaces+=[Class])*)? '{' ('classNumber' '='
-		//classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)? attributes+=Attribute*
-		//operations+=Operation* '}'
+		//abstract?='abstract'?
+		//transient?='transient'?
+		//'class' name=ID ('extends' superClass=[Class])? ('implements' implementedInterfaces+=[Class] (',' 'implements'
+		//implementedInterfaces+=[Class])*)?
+		//'{' ('classNumber' '=' classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)?
+		//attributes+=Attribute*
+		//operations+=Operation*
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//abstract?='abstract'?
