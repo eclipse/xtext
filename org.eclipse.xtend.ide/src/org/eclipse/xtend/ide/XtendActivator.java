@@ -8,29 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide;
 
-import static java.util.Collections.*;
-
-import java.util.Optional;
-
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.css.swt.theme.IThemeEngine;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtend.ide.highlighting.XtendThemeManager;
 import org.osgi.framework.BundleContext;
-import org.osgi.service.event.Event;
 
 /**
  * @author Karsten Thoms - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtendActivator extends org.eclipse.xtend.ide.internal.XtendActivator {
 
-	private XtendThemeManager themeManager;
+	// private XtendThemeManager themeManager;
 
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		/* disabled due to issue#1173
 		getEventBroker().ifPresent(eventBroker -> {
 			themeManager = new XtendThemeManager();
 			eventBroker.subscribe(IThemeEngine.Events.THEME_CHANGED, themeManager);
@@ -38,20 +28,25 @@ public class XtendActivator extends org.eclipse.xtend.ide.internal.XtendActivato
 				themeManager.handleEvent(new Event(IThemeEngine.Events.THEME_CHANGED, emptyMap()))
 			);
 		});
+		*/
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		/* disabled due to issue#1173
 		getEventBroker().ifPresent(eventBroker -> {
 			if (themeManager != null) {
 				eventBroker.unsubscribe(themeManager);
 			}
 		});
+		*/
 		super.stop(context);
 	}
 
+	/* disabled due to issue#1173
 	private Optional<IEventBroker> getEventBroker() {
 		return Optional.ofNullable(PlatformUI.getWorkbench().getService(IEventBroker.class));
 	}
+	*/
 
 }
