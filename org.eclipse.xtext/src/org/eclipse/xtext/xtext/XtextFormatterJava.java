@@ -18,7 +18,11 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Annotation;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
+import org.eclipse.xtext.CompoundElement;
+import org.eclipse.xtext.Conjunction;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Disjunction;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
@@ -30,6 +34,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
@@ -60,7 +65,8 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	protected void format(ParserRule rule, IFormattableDocument doc) {
 		doc.prepend(regionFor(rule).keyword("<"), it -> it.oneSpace());
-		doc.append(regionFor(rule).keyword(">"), it -> it.noSpace());
+		doc.append(regionFor(rule).keyword("<"), it -> it.noSpace());
+		doc.prepend(regionFor(rule).keyword(">"), it -> it.noSpace());
 		rule.getParameters().forEach(p -> doc.format(p));
 		formatRule(rule, doc);
 		formatParens(rule, doc);
@@ -72,6 +78,10 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	protected void format(EnumRule rule, IFormattableDocument doc) {
 		formatRule(rule, doc);
+	}
+
+	protected void format(EnumLiteralDeclaration decl, IFormattableDocument doc) {
+		doc.surround(regionFor(decl).keyword("="), it -> it.noSpace());
 	}
 
 	protected void format(Alternatives alternatives, IFormattableDocument doc) {
@@ -94,25 +104,27 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(Group group, IFormattableDocument doc) {
+		doc.append(regionFor(group).keyword("<"), it -> it.noSpace());
+		doc.format(group.getGuardCondition());
+		doc.prepend(regionFor(group).keyword(">"), it -> it.noSpace());
 		formatCardinality(group, doc);
 		formatParens(group, doc);
-		boolean first = true;
-		EList<AbstractElement> elements = group.getElements();
-		int size = elements.size();
-		int index = 0;
-		for (AbstractElement element : elements) {
-			index++;
-			boolean last = index == size;
-			if (!first && !last) {
-				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
-				if (!(element instanceof UntilToken) && !(element instanceof Group))
-					doc.surround(element, it -> it.oneSpace());
-			} else if (!first && last) {
-				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
-			}
-			first = false;
-			doc.format(element);
-		}
+		formatGroupElements(group, doc);
+	}
+
+	protected void format(UnorderedGroup group, IFormattableDocument doc) {
+		doc.append(regionFor(group).keyword("&"), it -> it.oneSpace());
+		formatGroupElements(group, doc);
+	}
+
+	protected void format(Conjunction conjunction, IFormattableDocument doc) {
+		regionFor(conjunction).keywords("&").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		doc.format(conjunction.getRight());
+	}
+
+	protected void format(Disjunction disjunction, IFormattableDocument doc) {
+		regionFor(disjunction).keywords("|").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		doc.format(disjunction.getRight());
 	}
 
 	protected void format(Wildcard wildcard, IFormattableDocument doc) {
@@ -128,7 +140,11 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	protected void format(RuleCall call, IFormattableDocument doc) {
 		doc.append(call, it -> it.autowrap());
-		doc.prepend(regionFor(call).keyword("<"), it -> it.noSpace());
+		doc.surround(regionFor(call).keyword("<"), it -> it.noSpace());
+		doc.prepend(regionFor(call).keyword(">"), it -> it.noSpace());
+		regionFor(call).keywords(",").forEach(r -> doc.prepend(r, it -> it.noSpace()));
+		regionFor(call).keywords(",").forEach(r -> doc.append(r, it -> it.oneSpace()));
+		formatCardinality(call, doc);
 		call.getArguments().forEach(a -> doc.format(a));
 	}
 
@@ -152,6 +168,8 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	protected void format(Action action, IFormattableDocument doc) {
 		doc.append(regionFor(action).keyword("{"), it -> it.noSpace());
 		doc.prepend(regionFor(action).keyword("}"), it -> it.noSpace());
+		doc.surround(regionFor(action).keyword("."), it -> it.noSpace());
+		doc.surround(regionFor(action).keyword("="), it -> it.noSpace());
 	}
 
 	protected void format(CrossReference ref, IFormattableDocument doc) {
@@ -164,11 +182,9 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(Parameter param, IFormattableDocument doc) {
-		doc.surround(param, it -> it.noSpace());
 	}
 
 	protected void format(NamedArgument param, IFormattableDocument doc) {
-		doc.surround(param, it -> it.noSpace());
 		regionFor(param).keywords("=").forEach(k -> doc.surround(k, it -> it.noSpace()));
 	}
 
@@ -181,8 +197,32 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		doc.append(annotation, it -> it.newLine());
 	}
 
+	private void formatGroupElements(CompoundElement group, IFormattableDocument doc) {
+		boolean first = true;
+		EList<AbstractElement> elements = group.getElements();
+		int size = elements.size();
+		int index = 0;
+		for (AbstractElement element : elements) {
+			index++;
+			boolean last = index == size;
+			if (!first && !last) {
+				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
+				if (!(element instanceof UntilToken) && !(element instanceof Group))
+					doc.surround(element, it -> it.oneSpace());
+			} else if (!first && last) {
+				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
+			}
+			first = false;
+			doc.format(element);
+		}
+	}
+
 	private void formatRule(AbstractRule rule, IFormattableDocument doc) {
 		doc.surround(regionFor(rule).keyword("returns"), it -> it.oneSpace());
+		doc.prepend(regionFor(rule).keyword("hidden"), it -> it.oneSpace());
+		doc.append(regionFor(rule).keyword("hidden"), it -> it.noSpace());
+		regionFor(rule).keywords(",").forEach(r -> doc.prepend(r, it -> it.noSpace()));
+		regionFor(rule).keywords(",").forEach(r -> doc.append(r, it -> it.oneSpace()));
 		doc.prepend(regionFor(rule).keyword(":"), it -> it.noSpace());
 		doc.append(regionFor(rule).keyword(":"), it -> it.newLine());
 		doc.prepend(regionFor(rule).keyword(";"), it -> it.noSpace());
