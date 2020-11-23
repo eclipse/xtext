@@ -62,13 +62,13 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//SpecialBlockExpression xbase::XBlockExpression:
-		//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*;
+		//	{xbase :: XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*
+		//{xbase :: XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*
 		public Group getGroup() { return cGroup; }
 		
-		//{xbase::XBlockExpression}
+		//{xbase :: XBlockExpression}
 		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 		
 		//(expressions+=XExpressionOrVarDeclaration ';'?)*
@@ -144,36 +144,42 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		
 		//@Override
 		//XTryCatchFinallyExpression xbase::XExpression:
-		//	{xbase::XTryCatchFinallyExpression}
+		//	{xbase :: XTryCatchFinallyExpression}
 		//	'try' ('(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
 		//	expression=XExpression
-		//	-> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+		//	-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 		//	| 'finally' finallyExpression=XExpression)?
-		//	| expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+		//	| expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 		//	| 'finally' finallyExpression=XExpression));
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XTryCatchFinallyExpression} 'try' ('(' resources+=InitialisedVariableDeclaration (';'
-		//resources+=InitialisedVariableDeclaration)* ';'? ')' expression=XExpression -> (catchClauses+=XCatchClause+ (=>
-		//'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)? | expression=XExpression
-		//(catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression))
+		//{xbase :: XTryCatchFinallyExpression}
+		//'try' ('(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
+		//expression=XExpression
+		//-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)?
+		//| expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression))
 		public Group getGroup() { return cGroup; }
 		
-		//{xbase::XTryCatchFinallyExpression}
+		//{xbase :: XTryCatchFinallyExpression}
 		public Action getXTryCatchFinallyExpressionAction_0() { return cXTryCatchFinallyExpressionAction_0; }
 		
 		//'try'
 		public Keyword getTryKeyword_1() { return cTryKeyword_1; }
 		
 		//('(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
-		//expression=XExpression -> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally'
-		//finallyExpression=XExpression)? | expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally'
-		//finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression))
+		//expression=XExpression
+		//-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)?
+		//| expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression))
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
-		//expression=XExpression -> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally'
-		//finallyExpression=XExpression)?
+		//expression=XExpression
+		//-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//'('
@@ -209,14 +215,15 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XExpression
 		public RuleCall getExpressionXExpressionParserRuleCall_2_0_5_0() { return cExpressionXExpressionParserRuleCall_2_0_5_0; }
 		
-		//-> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally'
-		//finallyExpression=XExpression)?
+		//-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_0_6() { return cGroup_2_0_6; }
 		
-		//(catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)
+		//(catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)
 		public Alternatives getAlternatives_2_0_6_0() { return cAlternatives_2_0_6_0; }
 		
-		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+		//catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_0_6_0_0() { return cGroup_2_0_6_0_0; }
 		
 		//catchClauses+=XCatchClause+
@@ -225,10 +232,10 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XCatchClause
 		public RuleCall getCatchClausesXCatchClauseParserRuleCall_2_0_6_0_0_0_0() { return cCatchClausesXCatchClauseParserRuleCall_2_0_6_0_0_0_0; }
 		
-		//(=> 'finally' finallyExpression=XExpression)?
+		//(=>'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_0_6_0_0_1() { return cGroup_2_0_6_0_0_1; }
 		
-		//=> 'finally'
+		//=>'finally'
 		public Keyword getFinallyKeyword_2_0_6_0_0_1_0() { return cFinallyKeyword_2_0_6_0_0_1_0; }
 		
 		//finallyExpression=XExpression
@@ -249,8 +256,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XExpression
 		public RuleCall getFinallyExpressionXExpressionParserRuleCall_2_0_6_0_1_1_0() { return cFinallyExpressionXExpressionParserRuleCall_2_0_6_0_1_1_0; }
 		
-		//expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally'
-		//finallyExpression=XExpression)
+		//expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//expression=XExpression
@@ -259,10 +266,11 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XExpression
 		public RuleCall getExpressionXExpressionParserRuleCall_2_1_0_0() { return cExpressionXExpressionParserRuleCall_2_1_0_0; }
 		
-		//(catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)
+		//(catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
+		//| 'finally' finallyExpression=XExpression)
 		public Alternatives getAlternatives_2_1_1() { return cAlternatives_2_1_1; }
 		
-		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+		//catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_1_1_0() { return cGroup_2_1_1_0; }
 		
 		//catchClauses+=XCatchClause+
@@ -271,10 +279,10 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XCatchClause
 		public RuleCall getCatchClausesXCatchClauseParserRuleCall_2_1_1_0_0_0() { return cCatchClausesXCatchClauseParserRuleCall_2_1_1_0_0_0; }
 		
-		//(=> 'finally' finallyExpression=XExpression)?
+		//(=>'finally' finallyExpression=XExpression)?
 		public Group getGroup_2_1_1_0_1() { return cGroup_2_1_1_0_1; }
 		
-		//=> 'finally'
+		//=>'finally'
 		public Keyword getFinallyKeyword_2_1_1_0_1_0() { return cFinallyKeyword_2_1_1_0_1_0; }
 		
 		//finallyExpression=XExpression
@@ -317,15 +325,15 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cRightXExpressionParserRuleCall_4_0 = (RuleCall)cRightAssignment_4.eContents().get(0);
 		
 		//InitialisedVariableDeclaration xbase::XVariableDeclaration:
-		//	{xbase::XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
+		//	{xbase :: XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
 		//	right=XExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
+		//{xbase :: XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
 		//right=XExpression
 		public Group getGroup() { return cGroup; }
 		
-		//{xbase::XVariableDeclaration}
+		//{xbase :: XVariableDeclaration}
 		public Action getXVariableDeclarationAction_0() { return cXVariableDeclarationAction_0; }
 		
 		//(writeable?='var' | 'val')
@@ -401,20 +409,20 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		
 		//@Override
 		//XAssignment xbase::XExpression:
-		//	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
-		//	XConditionalExpression (=> ({xbase::XBinaryOperation.leftOperand=current}
-		//	feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
+		//	{xbase :: XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+		//	XConditionalExpression (=> ({xbase :: XBinaryOperation.leftOperand=current} feature=
+		//	[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
-		//XConditionalExpression (=> ({xbase::XBinaryOperation.leftOperand=current}
-		//feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
+		//{xbase :: XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+		//XConditionalExpression (=> ({xbase :: XBinaryOperation.leftOperand=current} feature=
+		//[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment
+		//{xbase :: XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//{xbase::XAssignment}
+		//{xbase :: XAssignment}
 		public Action getXAssignmentAction_0_0() { return cXAssignmentAction_0_0; }
 		
 		//feature=[types::JvmIdentifiableElement|FeatureCallID]
@@ -435,24 +443,24 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XAssignment
 		public RuleCall getValueXAssignmentParserRuleCall_0_3_0() { return cValueXAssignmentParserRuleCall_0_3_0; }
 		
-		//XConditionalExpression (=> ({xbase::XBinaryOperation.leftOperand=current}
-		//feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
+		//XConditionalExpression (=> ({xbase :: XBinaryOperation.leftOperand=current} feature=
+		//[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//XConditionalExpression
 		public RuleCall getXConditionalExpressionParserRuleCall_1_0() { return cXConditionalExpressionParserRuleCall_1_0; }
 		
-		//(=> ({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
+		//(=> ({xbase :: XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 		//rightOperand=XAssignment)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//=> ({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
+		//=> ({xbase :: XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 		
-		//({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
+		//({xbase :: XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 		public Group getGroup_1_1_0_0() { return cGroup_1_1_0_0; }
 		
-		//{xbase::XBinaryOperation.leftOperand=current}
+		//{xbase :: XBinaryOperation.leftOperand=current}
 		public Action getXBinaryOperationLeftOperandAction_1_1_0_0_0() { return cXBinaryOperationLeftOperandAction_1_1_0_0_0; }
 		
 		//feature=[types::JvmIdentifiableElement|OpMultiAssign]
@@ -488,30 +496,29 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cElseXExpressionParserRuleCall_1_2_1_0 = (RuleCall)cElseAssignment_1_2_1.eContents().get(0);
 		
 		//XConditionalExpression xbase::XExpression:
-		//	XOrExpression (
-		//	// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
-		//	-> ({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (-> ':' else=XExpression)?)?;
+		//	XOrExpression (// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+		//	-> ({xbase :: XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//XOrExpression ( // The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
-		//-> ({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (-> ':' else=XExpression)?)?
+		//XOrExpression (// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+		//-> ({xbase :: XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?)?
 		public Group getGroup() { return cGroup; }
 		
 		//XOrExpression
 		public RuleCall getXOrExpressionParserRuleCall_0() { return cXOrExpressionParserRuleCall_0; }
 		
-		//( // The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
-		//-> ({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (-> ':' else=XExpression)?)?
+		//(// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+		//-> ({xbase :: XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
-		//-> ({xbase::XIfExpression.if=current} conditionalExpression?='?')
+		//		-> ({xbase :: XIfExpression.if=current} conditionalExpression?='?')
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//({xbase::XIfExpression.if=current} conditionalExpression?='?')
+		//({xbase :: XIfExpression.if=current} conditionalExpression?='?')
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 		
-		//{xbase::XIfExpression.if=current}
+		//{xbase :: XIfExpression.if=current}
 		public Action getXIfExpressionIfAction_1_0_0_0() { return cXIfExpressionIfAction_1_0_0_0; }
 		
 		//conditionalExpression?='?'
@@ -526,10 +533,10 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XExpression
 		public RuleCall getThenXExpressionParserRuleCall_1_1_0() { return cThenXExpressionParserRuleCall_1_1_0; }
 		
-		//(-> ':' else=XExpression)?
+		//(->':' else=XExpression)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
-		//-> ':'
+		//->':'
 		public Keyword getColonKeyword_1_2_0() { return cColonKeyword_1_2_0; }
 		
 		//else=XExpression
@@ -612,7 +619,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//SpecialBlockExpression xbase::XBlockExpression:
-	//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*;
+	//	{xbase :: XBlockExpression} (expressions+=XExpressionOrVarDeclaration ';'?)*;
 	public SpecialBlockExpressionElements getSpecialBlockExpressionAccess() {
 		return pSpecialBlockExpression;
 	}
@@ -634,12 +641,12 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	//@Override
 	//XTryCatchFinallyExpression xbase::XExpression:
-	//	{xbase::XTryCatchFinallyExpression}
+	//	{xbase :: XTryCatchFinallyExpression}
 	//	'try' ('(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
 	//	expression=XExpression
-	//	-> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+	//	-> (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 	//	| 'finally' finallyExpression=XExpression)?
-	//	| expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
+	//	| expression=XExpression (catchClauses+=XCatchClause+ (=>'finally' finallyExpression=XExpression)?
 	//	| 'finally' finallyExpression=XExpression));
 	public XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return pXTryCatchFinallyExpression;
@@ -650,7 +657,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//InitialisedVariableDeclaration xbase::XVariableDeclaration:
-	//	{xbase::XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
+	//	{xbase :: XVariableDeclaration} (writeable?='var' | 'val') (=> (type=JvmTypeReference name=ValidID) | name=ValidID) '='
 	//	right=XExpression;
 	public InitialisedVariableDeclarationElements getInitialisedVariableDeclarationAccess() {
 		return pInitialisedVariableDeclaration;
@@ -662,9 +669,9 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	//@Override
 	//XAssignment xbase::XExpression:
-	//	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
-	//	XConditionalExpression (=> ({xbase::XBinaryOperation.leftOperand=current}
-	//	feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
+	//	{xbase :: XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+	//	XConditionalExpression (=> ({xbase :: XBinaryOperation.leftOperand=current} feature=
+	//	[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
 	public XAssignmentElements getXAssignmentAccess() {
 		return pXAssignment;
 	}
@@ -674,9 +681,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XConditionalExpression xbase::XExpression:
-	//	XOrExpression (
-	//	// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
-	//	-> ({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (-> ':' else=XExpression)?)?;
+	//	XOrExpression (// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+	//	-> ({xbase :: XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?)?;
 	public XConditionalExpressionElements getXConditionalExpressionAccess() {
 		return pXConditionalExpression;
 	}
@@ -923,11 +929,11 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XMemberFeatureCall XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
-	//	feature=[types::JvmIdentifiableElement|super::FeatureCallID] OpSingleAssign) value=super::XAssignment
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
+	//	[types::JvmIdentifiableElement|super::FeatureCallID] OpSingleAssign) value=super::XAssignment
 	//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 	//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (memberCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
 	//	| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?
 	//	')')?
 	//	memberCallArguments+=XClosure?)*;
@@ -994,8 +1000,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//XClosure XExpression:
 	//	=> ({XClosure}
 	//	'[')
-	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|')?
+	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|')?
 	//	expression=XExpressionInClosure
 	//	']';
 	public XbaseGrammarAccess.XClosureElements getXClosureAccess() {
@@ -1017,8 +1023,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XShortClosure XExpression:
-	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
-	//	explicitSyntax?='|') expression=XExpression;
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
+	//	? explicitSyntax?='|') expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();
 	}
@@ -1040,7 +1046,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//XIfExpression XExpression:
 	//	{XIfExpression}
 	//	'if' '(' if=XExpression ')'
-	//	then=XExpression (=> 'else' else=XExpression)?;
+	//	then=XExpression (=>'else' else=XExpression)?;
 	public XbaseGrammarAccess.XIfExpressionElements getXIfExpressionAccess() {
 		return gaXbase.getXIfExpressionAccess();
 	}
@@ -1178,7 +1184,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	//XFeatureCall XExpression:
 	//	{XFeatureCall} ('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?='(' (featureCallArguments+=XShortClosure
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (featureCallArguments+=XShortClosure
 	//	| featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)?
 	//	')')?
 	//	featureCallArguments+=XClosure?;
@@ -1202,8 +1208,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	//XConstructorCall XExpression:
 	//	{XConstructorCall}
-	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=> '<' typeArguments+=JvmArgumentTypeReference (','
-	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=> explicitConstructorCall?='(' (arguments+=XShortClosure
+	//	'new' constructor=[types::JvmConstructor|QualifiedName] (=>'<' typeArguments+=JvmArgumentTypeReference (','
+	//	typeArguments+=JvmArgumentTypeReference)* '>')? (=>explicitConstructorCall?='(' (arguments+=XShortClosure
 	//	| arguments+=XExpression (',' arguments+=XExpression)*)?
 	//	')')?
 	//	arguments+=XClosure?;
@@ -1276,7 +1282,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XReturnExpression XExpression:
-	//	{XReturnExpression} 'return' -> expression=XExpression?;
+	//	{XReturnExpression} 'return' ->expression=XExpression?;
 	public XbaseGrammarAccess.XReturnExpressionElements getXReturnExpressionAccess() {
 		return gaXbase.getXReturnExpressionAccess();
 	}
@@ -1297,7 +1303,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XCatchClause:
-	//	=> 'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
+	//	=>'catch' '(' declaredParam=FullJvmFormalParameter ')' expression=XExpression;
 	public XbaseGrammarAccess.XCatchClauseElements getXCatchClauseAccess() {
 		return gaXbase.getXCatchClauseAccess();
 	}
@@ -1308,7 +1314,7 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	//@Override
 	//QualifiedName:
-	//	ValidID (=> '.' ValidID)*;
+	//	ValidID (=>'.' ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
 	}
@@ -1330,7 +1336,8 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	///**
 	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes,
 	// * which makes downstream grammars break on classloading, when a rule is removed.
-	// */ StaticQualifier:
+	// */
+	//StaticQualifier:
 	//	(ValidID '::')+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
@@ -1390,9 +1397,9 @@ public class PureXbaseGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|super::QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (','
-	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>
-	//	'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
+	//	type=[JvmType|super::QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (','
+	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (
+	//	=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return gaXtype.getJvmParameterizedTypeReferenceAccess();
 	}

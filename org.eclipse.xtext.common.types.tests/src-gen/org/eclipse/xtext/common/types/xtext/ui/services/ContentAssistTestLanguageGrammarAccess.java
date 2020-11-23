@@ -39,7 +39,9 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractElementFinde
 		//	referenceHolder=ReferenceHolder?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?
+		//imports+=Import*
+		//generateDirective=GenerateDirective?
+		//referenceHolder=ReferenceHolder?
 		public Group getGroup() { return cGroup; }
 		
 		//imports+=Import*

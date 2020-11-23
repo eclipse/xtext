@@ -44,8 +44,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//	| XFunctionTypeRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
-		//XFunctionTypeRef
+		//JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		//| XFunctionTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
@@ -185,14 +185,14 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cGreaterThanSignKeyword_1_4_2_3 = (Keyword)cGroup_1_4_2.eContents().get(3);
 		
 		//JvmParameterizedTypeReference:
-		//	type=[JvmType|QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
-		//	'>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=> '<' arguments+=JvmArgumentTypeReference
+		//	type=[JvmType|QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
+		//	'>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference
 		//	(',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=[JvmType|QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'
-		//(=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=> '<' arguments+=JvmArgumentTypeReference (','
-		//arguments+=JvmArgumentTypeReference)* '>')?)*)?
+		//type=[JvmType|QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
+		//'>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (
+		//',' arguments+=JvmArgumentTypeReference)* '>')?)*)?
 		public Group getGroup() { return cGroup; }
 		
 		//type=[JvmType|QualifiedName]
@@ -204,12 +204,12 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//QualifiedName
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 		
-		//(=> '<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>' (=>
-		//({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=> '<' arguments+=JvmArgumentTypeReference (','
+		//(=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>' (=>
+		//({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (','
 		//arguments+=JvmArgumentTypeReference)* '>')?)*)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//=> '<'
+		//=>'<'
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 		
 		//arguments+=JvmArgumentTypeReference
@@ -233,7 +233,7 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'>'
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 		
-		//(=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=> '<' arguments+=JvmArgumentTypeReference (','
+		//(=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (','
 		//arguments+=JvmArgumentTypeReference)* '>')?)*
 		public Group getGroup_1_4() { return cGroup_1_4; }
 		
@@ -258,10 +258,10 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ValidID
 		public RuleCall getTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1() { return cTypeJvmTypeValidIDParserRuleCall_1_4_1_0_1; }
 		
-		//(=> '<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?
+		//(=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?
 		public Group getGroup_1_4_2() { return cGroup_1_4_2; }
 		
-		//=> '<'
+		//=>'<'
 		public Keyword getLessThanSignKeyword_1_4_2_0() { return cLessThanSignKeyword_1_4_2_0; }
 		
 		//arguments+=JvmArgumentTypeReference
@@ -326,8 +326,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//	| constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{JvmWildcardTypeReference} '?' (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound
-		//constraints+=JvmLowerBoundAnded*)?
+		//{JvmWildcardTypeReference} '?' (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
+		//| constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?
 		public Group getGroup() { return cGroup; }
 		
 		//{JvmWildcardTypeReference}
@@ -336,8 +336,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'?'
 		public Keyword getQuestionMarkKeyword_1() { return cQuestionMarkKeyword_1; }
 		
-		//(constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound
-		//constraints+=JvmLowerBoundAnded*)?
+		//(constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
+		//| constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
@@ -620,8 +620,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
-		//memberName=ValidID)
+		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?=
+		//'*' | memberName=ValidID)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//static?='static'
@@ -808,8 +808,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] (=> '<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
-	//	'>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=> '<' arguments+=JvmArgumentTypeReference
+	//	type=[JvmType|QualifiedName] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
+	//	'>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference
 	//	(',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 	public JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return pJvmParameterizedTypeReference;
