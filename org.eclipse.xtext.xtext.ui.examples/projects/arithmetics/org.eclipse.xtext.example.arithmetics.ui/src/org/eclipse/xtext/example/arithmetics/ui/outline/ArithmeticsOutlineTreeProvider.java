@@ -9,6 +9,7 @@
 package org.eclipse.xtext.example.arithmetics.ui.outline;
 
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
@@ -22,8 +23,7 @@ import com.google.common.collect.Iterables;
  */
 public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
-	public void _createChildren(IOutlineNode parentNode,
-			org.eclipse.xtext.example.arithmetics.arithmetics.Module module) {
+	public void _createChildren(IOutlineNode parentNode, Module module) {
 		Iterables.filter(module.eContents(), Definition.class).forEach((d) -> createNode(parentNode, d));
 	}
 

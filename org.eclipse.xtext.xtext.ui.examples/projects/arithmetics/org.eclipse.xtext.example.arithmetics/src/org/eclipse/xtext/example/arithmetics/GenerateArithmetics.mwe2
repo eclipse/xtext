@@ -62,6 +62,9 @@ Workflow {
 				generateStub = true
 				generateXtendStub = false
 			}
+			junitSupport = {
+				generateXtendStub = false
+			}
 		}
 	}
 }

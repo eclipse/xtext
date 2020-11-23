@@ -15,6 +15,7 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -69,8 +70,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 
 	protected Evaluation findEvaluation(DocumentCommand command, XtextResource state) {
 		if (!state.getContents().isEmpty()) {
-			org.eclipse.xtext.example.arithmetics.arithmetics.Module m = 
-					(org.eclipse.xtext.example.arithmetics.arithmetics.Module) state.getContents().get(0);
+			Module m = (Module) state.getContents().get(0);
 			for (Evaluation evaluation : Iterables.filter(m.getStatements(), Evaluation.class)) {
 				ICompositeNode node = NodeModelUtils.getNode(evaluation);
 				if (node.getOffset() <= command.offset && node.getOffset() + node.getLength() >= command.offset) {

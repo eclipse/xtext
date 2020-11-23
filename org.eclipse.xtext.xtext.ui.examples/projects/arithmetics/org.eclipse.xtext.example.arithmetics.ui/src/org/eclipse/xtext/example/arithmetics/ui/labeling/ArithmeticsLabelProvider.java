@@ -10,6 +10,7 @@ package org.eclipse.xtext.example.arithmetics.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -28,7 +29,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-	public String text(org.eclipse.xtext.example.arithmetics.arithmetics.Module ele) {
+	public String text(Module ele) {
 		return ele.getName();
 	}
 
@@ -36,7 +37,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
 		return ele.getName() + IterableExtensions.join(ele.getArgs(), "(", ",", ")", (p) -> p.getName());
 	}
 
-	public String image(org.eclipse.xtext.example.arithmetics.arithmetics.Module ele) {
+	public String image(Module ele) {
 		return "home_nav.gif";
 	}
 }
