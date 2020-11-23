@@ -14,21 +14,17 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.formatting2.AbstractFormatter2;
+import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.internal.tests.FormatterTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,32 +59,9 @@ public class FormatterSerializerIntegrationTest {
 		}
 	}
 
-	public static class Formatter extends AbstractFormatter2 {
-		protected void _format(IDList model, @Extension IFormattableDocument document) {
-			document.append(this.textRegionExtensions.regionFor(model).keyword("idlist"),
-					(IHiddenRegionFormatter it) -> {
-						it.setSpace("  ");
-					});
-		}
-
-		@Override
-		public void format(Object model, IFormattableDocument document) {
-			if (model instanceof XtextResource) {
-				_format((XtextResource) model, document);
-				return;
-			} else if (model instanceof IDList) {
-				_format((IDList) model, document);
-				return;
-			} else if (model instanceof EObject) {
-				_format((EObject) model, document);
-				return;
-			} else if (model == null) {
-				_format((Void) null, document);
-				return;
-			} else {
-				_format(model, document);
-				return;
-			}
+	public static class Formatter extends AbstractJavaFormatter {
+		protected void format(IDList model, IFormattableDocument document) {
+			document.append(regionFor(model).keyword("idlist"), it -> it.setSpace("  "));
 		}
 	}
 
