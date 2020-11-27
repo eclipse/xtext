@@ -360,14 +360,14 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ParserRule:
-		//	name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=
-		//	[AbstractRule])*)? ')')? ':'
+		//	name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (','
+		//	hiddenTokens+=[AbstractRule])*)? ')')? ':'
 		//	alternatives=Alternatives
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=
-		//[AbstractRule])*)? ')')? ':'
+		//name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (','
+		//hiddenTokens+=[AbstractRule])*)? ')')? ':'
 		//alternatives=Alternatives
 		//';'
 		public Group getGroup() { return cGroup; }
@@ -1625,8 +1625,8 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//ParserRule:
-	//	name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=
-	//	[AbstractRule])*)? ')')? ':'
+	//	name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (','
+	//	hiddenTokens+=[AbstractRule])*)? ')')? ':'
 	//	alternatives=Alternatives
 	//	';';
 	public ParserRuleElements getParserRuleAccess() {

@@ -172,33 +172,27 @@ public class Bug385636GrammarAccess extends AbstractElementFinder.AbstractGramma
 		//// Comparisons: left associative, priority 2
 		//Statement Expression:
 		//	Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
-		//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3'
-		//	{Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
-		//	{Expression_Equal.left=current} right=Expression_VariableName | 'C5'
-		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7')
-		//	{Expression_Not_Less.left=current} right=Expression_VariableName | ('C6' 'C8')
-		//	{Expression_Not_Greater.left=current} right=Expression_VariableName)*;
+		//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+		//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+		//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
-		//{Expression_Smaller.left=current} right=Expression_VariableName | 'C3'
-		//{Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
-		//{Expression_Equal.left=current} right=Expression_VariableName | 'C5'
-		//{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7')
-		//{Expression_Not_Less.left=current} right=Expression_VariableName | ('C6' 'C8')
-		//{Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+		//right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+		//{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+		//right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 		public Group getGroup() { return cGroup; }
 		
 		//Expression_VariableName
 		public RuleCall getExpression_VariableNameParserRuleCall_0() { return cExpression_VariableNameParserRuleCall_0; }
 		
-		//('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
-		//{Expression_Smaller.left=current} right=Expression_VariableName | 'C3'
-		//{Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
-		//{Expression_Equal.left=current} right=Expression_VariableName | 'C5'
-		//{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7')
-		//{Expression_Not_Less.left=current} right=Expression_VariableName | ('C6' 'C8')
-		//{Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2' {Expression_Smaller.left=current}
+		//right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
+		//{Expression_Equal.left=current} right=Expression_VariableName | 'C5' {Expression_Not_Equal.left=current}
+		//right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName | ('C6'
+		//'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName
@@ -429,12 +423,10 @@ public class Bug385636GrammarAccess extends AbstractElementFinder.AbstractGramma
 	//// Comparisons: left associative, priority 2
 	//Statement Expression:
 	//	Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
-	//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3'
-	//	{Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
-	//	{Expression_Equal.left=current} right=Expression_VariableName | 'C5'
-	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7')
-	//	{Expression_Not_Less.left=current} right=Expression_VariableName | ('C6' 'C8')
-	//	{Expression_Not_Greater.left=current} right=Expression_VariableName)*;
+	//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+	//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+	//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
