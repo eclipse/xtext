@@ -64,16 +64,16 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Action cATypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AType root::AType:
-		//	'foo' {root :: AType};
+		//	'foo' {root::AType};
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'foo' {root :: AType}
+		//'foo' {root::AType}
 		public Group getGroup() { return cGroup; }
 		
 		//'foo'
 		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
 		
-		//{root :: AType}
+		//{root::AType}
 		public Action getATypeAction_1() { return cATypeAction_1; }
 	}
 	public class AnotherTypeElements extends AbstractParserRuleElementFinder {
@@ -83,16 +83,16 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Action cAnotherTypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AnotherType sub::AnotherType:
-		//	'bar' {sub :: AnotherType};
+		//	'bar' {sub::AnotherType};
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'bar' {sub :: AnotherType}
+		//'bar' {sub::AnotherType}
 		public Group getGroup() { return cGroup; }
 		
 		//'bar'
 		public Keyword getBarKeyword_0() { return cBarKeyword_0; }
 		
-		//{sub :: AnotherType}
+		//{sub::AnotherType}
 		public Action getAnotherTypeAction_1() { return cAnotherTypeAction_1; }
 	}
 	
@@ -165,7 +165,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//AType root::AType:
-	//	'foo' {root :: AType};
+	//	'foo' {root::AType};
 	public ATypeElements getATypeAccess() {
 		return pAType;
 	}
@@ -175,7 +175,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//AnotherType sub::AnotherType:
-	//	'bar' {sub :: AnotherType};
+	//	'bar' {sub::AnotherType};
 	public AnotherTypeElements getAnotherTypeAccess() {
 		return pAnotherType;
 	}
