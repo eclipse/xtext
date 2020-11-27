@@ -815,6 +815,8 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				«ENDIF»
 				public class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 					
+					private static final long serialVersionUID = 1L;
+					
 					«DisposableRegistry» disposableRegistry;
 					
 					public void init() throws «'javax.servlet.ServletException'.typeRef» {
