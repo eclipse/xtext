@@ -2009,6 +2009,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
+          _builder.append("private static final long serialVersionUID = 1L;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
           _builder.append(DisposableRegistry.class, "\t");
           _builder.append(" disposableRegistry;");
           _builder.newLineIfNotEmpty();
