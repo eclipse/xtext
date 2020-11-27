@@ -1,0 +1,18 @@
+#Tue Jun 23 14:35:29 CEST 2020
+generateSuppressWarnings=true
+outlet.DEFAULT_OUTPUT.sourceFolder.generator.directory=build/xtend/mwe2
+BuilderConfiguration.is_project_specific=true
+targetJavaVersion=Java8
+useJavaCompilerCompliance=false
+outlet.DEFAULT_OUTPUT.installDslAsPrimarySource=false
+outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
+outlet.DEFAULT_OUTPUT.sourceFolder.src-gen.directory=xtend-gen
+outlet.DEFAULT_OUTPUT.hideLocalSyntheticVariables=true
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/mwe2/resources.directory=build/xtend/mwe2
+eclipse.preferences.version=1
+outlet.DEFAULT_OUTPUT.sourceFolder.emf-gen.directory=xtend-gen
+generateGeneratedAnnotation=false
+includeDateInGenerated=false
+outlet.DEFAULT_OUTPUT.sourceFolder.src.directory=xtend-gen
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/mwe2/java.directory=build/xtend/mwe2
+ValidatorConfiguration.is_project_specific=true
