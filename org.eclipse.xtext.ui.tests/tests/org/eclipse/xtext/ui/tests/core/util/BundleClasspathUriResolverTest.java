@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.tests.core.util;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
