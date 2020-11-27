@@ -795,21 +795,21 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//("{" ( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")
-		//? & constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
+		//("{" ( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//& constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
 		//"}" | ";")
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
-		//"{" ( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")
-		//? & constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
+		//"{" ( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//& constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
 		//"}"
 		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3_0_0() { return cLeftCurlyBracketKeyword_3_0_0; }
 		
-		//( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")
-		//? & constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
+		//( ("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//& constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")? )
 		public UnorderedGroup getUnorderedGroup_3_0_1() { return cUnorderedGroup_3_0_1; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
