@@ -313,10 +313,15 @@ spec:
 
     stage('Remove Release Branches') {
       when {
+        beforeInput true
         allOf {
           expression { params.RELEASE_TYPE != 'Integration' }
           expression { params.BRANCH_TO_DEPLOY != 'master' }
         }
+      }
+      input {
+        message "Only continue after ensuring OSSRH staging repositories are closed an promoted"
+        ok "Delete Branches!"
       }
       steps {
         sshagent(['github-bot-ssh']) {
