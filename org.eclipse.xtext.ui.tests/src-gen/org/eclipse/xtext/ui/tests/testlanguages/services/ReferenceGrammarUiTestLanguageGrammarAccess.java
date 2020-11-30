@@ -294,12 +294,12 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Familie:
-		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=
-		//	[Kind])* ")";
+		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
+		//	kinder+=[Kind])* ")";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=
-		//[Kind])* ")"
+		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
+		//kinder+=[Kind])* ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"familie"
@@ -485,8 +485,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Familie:
-	//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=
-	//	[Kind])* ")";
+	//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
+	//	kinder+=[Kind])* ")";
 	public FamilieElements getFamilieAccess() {
 		return pFamilie;
 	}
