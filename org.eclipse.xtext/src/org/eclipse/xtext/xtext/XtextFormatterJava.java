@@ -166,17 +166,18 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(Action action, IFormattableDocument doc) {
+		doc.prepend(regionFor(action).keyword("{"), it -> it.autowrap());
 		doc.append(regionFor(action).keyword("{"), it -> it.noSpace());
 		doc.prepend(regionFor(action).keyword("}"), it -> it.noSpace());
+		doc.append(regionFor(action).keyword("}"), it -> it.autowrap());
 		doc.surround(regionFor(action).keyword("."), it -> it.noSpace());
 		doc.surround(regionFor(action).keyword("="), it -> it.noSpace());
+		doc.format(action.getType());
 	}
 
 	protected void format(CrossReference ref, IFormattableDocument doc) {
-		doc.prepend(regionFor(ref).keyword("["), it -> it.autowrap());
 		doc.append(regionFor(ref).keyword("["), it -> it.noSpace());
 		doc.prepend(regionFor(ref).keyword("]"), it -> it.noSpace());
-		doc.append(regionFor(ref).keyword("]"), it -> it.autowrap());
 		doc.surround(regionFor(ref).keyword("|"), it -> it.noSpace());
 		doc.format(ref.getType());
 	}
@@ -242,6 +243,7 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	private void formatCardinality(EObject element, IFormattableDocument doc) {
 		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.prepend(r, it -> it.noSpace()));
+		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.append(r, it -> it.autowrap()));
 	}
 
 }

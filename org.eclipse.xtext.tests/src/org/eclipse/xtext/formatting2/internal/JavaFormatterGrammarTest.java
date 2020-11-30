@@ -153,7 +153,7 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				);
 		// @formatter:on
 	}
-	
+
 	@Test
 	public void disjunctedGuardExpressions() {
 		// @formatter:off
@@ -167,7 +167,7 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				);
 		// @formatter:on
 	}
-	
+
 	@Test
 	public void conjunctedGuardExpressions() {
 		// @formatter:off
@@ -181,7 +181,223 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				);
 		// @formatter:on
 	}
-	
+
+	@Test
+	public void bug287941TestLanguage() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"WhereEntry returns WhereEntry:" + NL +
+				TAB + "AndWhereEntry ({OrWhereEntry.entries+=current} " + NL +
+				TAB + TAB + "(\"or\" entries+=AndWhereEntry)+)?" + NL +
+				";"
+				,
+				"WhereEntry returns WhereEntry:" + NL +
+				TAB + "AndWhereEntry ({OrWhereEntry.entries+=current}" + NL +
+				TAB + "(\"or\" entries+=AndWhereEntry)+)?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void codetemplates() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"Codetemplate:" + NL +
+				"  name=ValidID '(' id=ID ',' description = STRING ')' 'for' " + NL +
+				"        (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) " + NL +
+				"    body = TemplateBodyWithQuotes" + NL +
+				"  ; "
+				,
+				"Codetemplate:" + NL +
+				TAB + "name=ValidID '(' id=ID ',' description=STRING ')' 'for'" + NL +
+				TAB + "(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)" + NL +
+				TAB + "body=TemplateBodyWithQuotes;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void bug297105TestLanguage() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"Real hidden(): INT ? '.' (EXT_INT | INT);"
+				,
+				"Real hidden():" + NL +
+				TAB + "INT? '.' (EXT_INT | INT);"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void xtextGrammarTestLanguage() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"ParserRule :" + NL +
+				"(" + NL +
+				TAB +   "  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) " + NL +
+				TAB + "| RuleNameAndParams ReturnsClause?" + NL +
+				TAB + ")" + NL +
+				TAB + "HiddenClause? ':'" + NL +
+				"   " + TAB + "alternatives=Alternatives   " + NL +
+				"    ';'" + NL +
+				";"
+				,
+				"ParserRule:" + NL +
+				TAB + "(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?)" + NL +
+				TAB + "| RuleNameAndParams ReturnsClause?)" + NL +
+				TAB + "HiddenClause? ':'" + NL +
+				TAB + "alternatives=Alternatives" + NL +
+				TAB + "';';"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void qualifiedTypes() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"AType returns root::AType:" + NL +
+				TAB + "'foo' {root::AType};"
+				,
+				"AType returns root::AType:" + NL +
+				TAB + "'foo' {root::AType};"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void qualifiedTypes2() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"AType returns root :: AType :" + NL +
+				TAB + "'foo' { root :: AType };"
+				,
+				"AType returns root::AType:" + NL +
+				TAB + "'foo' {root::AType};"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void pureXbase() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"@Override " + NL +
+				"XAssignment returns xbase::XExpression :" + NL +
+				"	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |" + NL +
+				"	XConditionalExpression (" + NL +
+				"		=>({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment" + NL +
+				"	)?;"
+				,
+				"@Override" + NL +
+				"XAssignment returns xbase::XExpression:" + NL +
+				TAB + "{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |" + NL +
+				TAB + "XConditionalExpression (=>({xbase::XBinaryOperation.leftOperand=current}" + NL +
+				TAB + "feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void pureXbase2() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"XClosure returns XExpression:" + NL +
+				"	=>({XClosure}" + NL +
+				"	'[')" + NL +
+				"		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')?" + NL +
+				"		expression=XExpressionInClosure" + NL +
+				"	']';"
+				,
+				"XClosure returns XExpression:" + NL +
+				TAB + "=>({XClosure}" + NL +
+				TAB + "'[')" + NL +
+				TAB + "=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?" + NL +
+				TAB + "explicitSyntax?='|')?" + NL +
+				TAB + "expression=XExpressionInClosure" + NL +
+				TAB + "']';"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void xbase() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"XMemberFeatureCall returns XExpression:" + NL +
+				"	XPrimaryExpression" + NL +
+				"	(=>({XAssignment.assignable=current} ('.'|explicitStatic?=\"::\") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment" + NL +
+				"	|=>({XMemberFeatureCall.memberCallTarget=current} (\".\"|nullSafe?=\"?.\"|explicitStatic?=\"::\"))" + NL +
+				"		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?" + NL +
+				"		feature=[types::JvmIdentifiableElement|IdOrSuper] (" + NL +
+				"			=>explicitOperationCall?='('" + NL +
+				"				(" + NL +
+				"				    memberCallArguments+=XShortClosure" + NL +
+				"				  | memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*" + NL +
+				"				)?" + NL +
+				"			')')?" + NL +
+				"			memberCallArguments+=XClosure?" + NL +
+				"		)*;"
+				,
+				"XMemberFeatureCall returns XExpression:" + NL +
+				TAB + "XPrimaryExpression" + NL +
+				TAB + "(=>({XAssignment.assignable=current} ('.' | explicitStatic?=\"::\")" + NL +
+				TAB + "feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment" + NL +
+				TAB + "| =>({XMemberFeatureCall.memberCallTarget=current} (\".\" | nullSafe?=\"?.\" | explicitStatic?=\"::\"))" + NL +
+				TAB + "('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?" + NL +
+				TAB + "feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='('" + NL +
+				TAB + "(memberCallArguments+=XShortClosure" + NL +
+				TAB + "| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?" + NL +
+				TAB + "')')?" + NL +
+				TAB + "memberCallArguments+=XClosure?)*;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void xbaseWithAnnowtation() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"XAnnotation :" + NL +
+				"	{XAnnotation}" + NL +
+				"	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('" + NL +
+				"		(" + NL +
+				"			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)*" + NL +
+				"		|	value=XAnnotationElementValueOrCommaList" + NL +
+				"		)?" + NL +
+				"	')')?" + NL +
+				";"
+				,
+				"XAnnotation:" + NL +
+				TAB + "{XAnnotation}" + NL +
+				TAB + "'@' annotationType=[types::JvmAnnotationType|QualifiedName] (=>'('" + NL +
+				TAB + "(elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)*" + NL +
+				TAB + "| value=XAnnotationElementValueOrCommaList)?" + NL +
+				TAB + "')')?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void xtend() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:" + NL +
+				"	type=[types::JvmType|QualifiedName] (" + NL +
+				"		'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>'" + NL +
+				"		(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*" + NL +
+				"	)" + NL +
+				";"
+				,
+				"ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:" + NL +
+				TAB + "type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','" + NL +
+				TAB + "arguments+=JvmArgumentTypeReference)* '>'" + NL +
+				TAB + "(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'" + NL +
+				TAB + "arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*);"
+				);
+		// @formatter:on
+	}
+
 	private void assertFormattedGrammar(String input, String expectation) {
 		assertFormatted("grammar a.A" + NL + NL + input, "grammar a.A" + NL + NL + expectation);
 	}
