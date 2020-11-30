@@ -470,8 +470,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//(leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=
-		//[NamedResource] rightFrag=FRAGMENT)
+		//(leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
+		//rightRes=[NamedResource] rightFrag=FRAGMENT)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//leftRes=[NamedResource] leftFrag=FRAGMENT

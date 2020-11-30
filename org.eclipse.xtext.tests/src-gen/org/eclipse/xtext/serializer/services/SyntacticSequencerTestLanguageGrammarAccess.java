@@ -577,14 +577,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cRef5SingleCrossReferenceKw5Keyword_6_1_0_1 = (Keyword)cRef5SingleCrossReferenceCrossReference_6_1_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
-		//	[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
-		//	ref5=[SingleCrossReference])?;
+		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? (
+		//	"kw5" ref5=[SingleCrossReference])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
-		//[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5" ref5=
-		//[SingleCrossReference])?
+		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
+		//ref5=[SingleCrossReference])?
 		public Group getGroup() { return cGroup; }
 		
 		//"#5"
@@ -1493,9 +1493,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//SingleCrossReference:
-	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2" ref2=
-	//	[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
-	//	ref5=[SingleCrossReference])?;
+	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
+	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? (
+	//	"kw5" ref5=[SingleCrossReference])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return pSingleCrossReference;
 	}

@@ -51,12 +51,12 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cValueListParserRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
 		
 		//Root:
-		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")
-		//	? mixed=Mixed | "8" ValueList;
+		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+		//	mixed=Mixed | "8" ValueList;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")
-		//? mixed=Mixed | "8" ValueList
+		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+		//mixed=Mixed | "8" ValueList
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Simple
@@ -690,8 +690,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 
 	
 	//Root:
-	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")
-	//	? mixed=Mixed | "8" ValueList;
+	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+	//	mixed=Mixed | "8" ValueList;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}

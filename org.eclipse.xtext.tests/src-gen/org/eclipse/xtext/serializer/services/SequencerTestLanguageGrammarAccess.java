@@ -1088,12 +1088,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRefSingleCrossReferenceID3TerminalRuleCall_2_2_0_1 = (RuleCall)cRefSingleCrossReferenceCrossReference_2_2_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=
-		//	[SingleCrossReference|ID3]);
+		//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
+		//	ref=[SingleCrossReference|ID3]);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=
-		//[SingleCrossReference|ID3])
+		//"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
+		//ref=[SingleCrossReference|ID3])
 		public Group getGroup() { return cGroup; }
 		
 		//"#14"
@@ -1878,7 +1878,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//	*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
+		//'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)
+		//*
 		public Group getGroup() { return cGroup; }
 		
 		//'#27'
@@ -2870,8 +2871,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SingleCrossReference:
-	//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=
-	//	[SingleCrossReference|ID3]);
+	//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
+	//	ref=[SingleCrossReference|ID3]);
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return pSingleCrossReference;
 	}
