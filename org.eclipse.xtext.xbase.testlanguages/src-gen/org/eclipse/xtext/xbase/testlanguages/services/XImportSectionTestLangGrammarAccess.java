@@ -363,8 +363,8 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//XMemberFeatureCall XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
-	//	[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 	//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
@@ -434,8 +434,8 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 	//XClosure XExpression:
 	//	=> ({XClosure}
 	//	'[')
-	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-	//	? explicitSyntax?='|')?
+	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+	//	explicitSyntax?='|')?
 	//	expression=XExpressionInClosure
 	//	']';
 	public XbaseGrammarAccess.XClosureElements getXClosureAccess() {
@@ -457,8 +457,8 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//XShortClosure XExpression:
-	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-	//	? explicitSyntax?='|') expression=XExpression;
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+	//	explicitSyntax?='|') expression=XExpression;
 	public XbaseGrammarAccess.XShortClosureElements getXShortClosureAccess() {
 		return gaXbase.getXShortClosureAccess();
 	}

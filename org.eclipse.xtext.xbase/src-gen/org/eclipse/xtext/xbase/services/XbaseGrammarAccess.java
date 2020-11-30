@@ -68,8 +68,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//	rightOperand=XAssignment)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression (=>
-		//({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
+		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression (=> (
+		//{XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment
@@ -1106,8 +1106,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cMemberCallArgumentsXClosureParserRuleCall_1_1_4_0 = (RuleCall)cMemberCallArgumentsAssignment_1_1_4.eContents().get(0);
 		
 		//XMemberFeatureCall XExpression:
-		//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
-		//	[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+		//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 		//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 		//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 		//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
@@ -1116,8 +1116,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//	memberCallArguments+=XClosure?)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
-		//[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+		//XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 		//| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 		//typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
@@ -1129,8 +1129,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//XPrimaryExpression
 		public RuleCall getXPrimaryExpressionParserRuleCall_0() { return cXPrimaryExpressionParserRuleCall_0; }
 		
-		//(=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID]
-		//OpSingleAssign) value=XAssignment
+		//(=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 		//| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 		//typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
@@ -1139,16 +1139,16 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//memberCallArguments+=XClosure?)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID]
-		//OpSingleAssign) value=XAssignment
+		//=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID]
-		//OpSingleAssign)
+		//=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign)
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 		
-		//({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID]
-		//OpSingleAssign)
+		//({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign)
 		public Group getGroup_1_0_0_0() { return cGroup_1_0_0_0; }
 		
 		//{XAssignment.assignable=current}
@@ -1574,8 +1574,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//XClosure XExpression:
 		//	=> ({XClosure}
 		//	'[')
-		//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-		//	? explicitSyntax?='|')?
+		//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+		//	explicitSyntax?='|')?
 		//	expression=XExpressionInClosure
 		//	']';
 		@Override public ParserRule getRule() { return rule; }
@@ -1695,20 +1695,20 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cExpressionXExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
 		
 		//XShortClosure XExpression:
-		//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-		//	? explicitSyntax?='|') expression=XExpression;
+		//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+		//	explicitSyntax?='|') expression=XExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-		//? explicitSyntax?='|') expression=XExpression
+		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?='|') expression=XExpression
 		public Group getGroup() { return cGroup; }
 		
-		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-		//? explicitSyntax?='|')
+		//=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?='|')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-		//? explicitSyntax?='|')
+		//({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+		//explicitSyntax?='|')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{XClosure}
@@ -3751,8 +3751,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//XMemberFeatureCall XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::") feature=
-	//	[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} ('.' | explicitStatic?="::")
+	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	//	| => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ('<'
 	//	typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='(' (memberCallArguments+=XShortClosure
@@ -3822,8 +3822,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	//XClosure XExpression:
 	//	=> ({XClosure}
 	//	'[')
-	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-	//	? explicitSyntax?='|')?
+	//	=> ((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+	//	explicitSyntax?='|')?
 	//	expression=XExpressionInClosure
 	//	']';
 	public XClosureElements getXClosureAccess() {
@@ -3845,8 +3845,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//XShortClosure XExpression:
-	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)
-	//	? explicitSyntax?='|') expression=XExpression;
+	//	=> ({XClosure} (declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?
+	//	explicitSyntax?='|') expression=XExpression;
 	public XShortClosureElements getXShortClosureAccess() {
 		return pXShortClosure;
 	}

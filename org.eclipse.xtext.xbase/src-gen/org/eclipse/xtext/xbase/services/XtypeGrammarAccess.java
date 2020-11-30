@@ -204,8 +204,8 @@ public class XtypeGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//QualifiedName
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 		
-		//(=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>' (=>
-		//({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (','
+		//(=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>' (=> (
+		//{JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (','
 		//arguments+=JvmArgumentTypeReference)* '>')?)*)?
 		public Group getGroup_1() { return cGroup_1; }
 		
