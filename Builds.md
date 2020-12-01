@@ -156,6 +156,7 @@ After everything above has run smoothly, it is finally time for some manual step
    * For each update the properties:
      * Version Number
      * Supported Eclipse Release(s)
+   * Click 'Save item to list' AND 'Save' afterwards - otherwise nothing will be saved.
    * Update Composite Repository for Eclipse Marketplace
      * Edit repository composite site descriptors at path `updates/composite/marketplace` from https://github.com/xtext/xtext-p2-orbit
      * Run https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/
