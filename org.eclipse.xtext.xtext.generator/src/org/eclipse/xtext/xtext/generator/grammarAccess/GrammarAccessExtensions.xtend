@@ -89,7 +89,7 @@ class GrammarAccessExtensions {
 
 	/**
 	 * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
-	 * The string is split up along the the characters that are not valid as java 
+	 * The string is split up along the characters that are not valid as java 
 	 * identifier. The first character of each segments is made upper case which 
 	 * leads to a camel-case style.
 	 * @param text the string

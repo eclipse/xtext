@@ -79,7 +79,7 @@ public class Files {
 		}
 	}
 
-	/** Clean the content of the the given folder.
+	/** Clean the content of the given folder.
 	 *
 	 * @param parentFolder the folder to be cleaned. It must not be {@code null}.
 	 * @param filter a filter for selecting the files to be removed. If it is {@code null}, all the files are removed.

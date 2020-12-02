@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.ITextRegion;
  * <li>The order in which methods of this service are called does not impact the result, except for insertions.</li>
  * </ol>
  * 
- * This service does NOT guarantee consistency the the grammar. This is the callers responsibility.
+ * This service does NOT guarantee consistency to the grammar. This is the callers responsibility.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * 

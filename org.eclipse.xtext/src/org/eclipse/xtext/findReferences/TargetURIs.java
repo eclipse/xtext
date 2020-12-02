@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * Encapsulate the searched data. Clients may choose to attach more information to the 
- * target URIs by means of {@link #putUserData(Key, Object)}. This information can be obtain
+ * target URIs by means of {@link #putUserData(Key, Object)}. This information can be obtained
  * in later processing steps to optimize the reference lookup.
  * 
  * If different clients (e.g. different languages) try to share user data, they have to agree on

@@ -13,7 +13,7 @@ import org.eclipse.xtext.testing.SignatureHelpConfiguration;
 import org.junit.Test;
 
 /**
- * Class for testing the the {@link SignatureHelpService signature help service}
+ * Class for testing the {@link SignatureHelpService signature help service}
  * implementation.
  * 
  * @author akos.kitta - Initial contribution and API

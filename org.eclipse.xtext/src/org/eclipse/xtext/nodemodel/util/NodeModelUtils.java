@@ -45,7 +45,7 @@ import com.google.common.collect.Lists;
  * 
  * This API is quite low level and internal functionality of the framework relies on the implemented contracts.
  * Clients should rather use the language specific APIs that provide almost the same functionality, e.g.
- * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to to access the region
+ * {@link ILocationInFileProvider} and {@link EObjectAtOffsetHelper} if they want to access the region
  * of a {@link EObject semantic object}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -110,8 +110,8 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	}
 	
 	/**
-	 * Compute the line and column information at the given offset from any node that belongs the the document. The line is one-based, e.g.
-	 * the first line has the line number '1'. The line break belongs the line that it breaks. In other words, the first line break in the
+	 * Compute the line and column information at the given offset from any node that belongs to the document. The line is one-based, e.g.
+	 * the first line has the line number '1'. The line break belongs to the line that it breaks. In other words, the first line break in the
 	 * document also has the line number '1'. The column number starts at '1', too. In effect, the document offset '0' will always return
 	 * line '1' and column '1'.
 	 * 

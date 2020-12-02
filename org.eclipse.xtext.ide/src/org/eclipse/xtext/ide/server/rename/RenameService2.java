@@ -305,7 +305,7 @@ public class RenameService2 implements IRenameService2 {
 	}
 
 	/**
-	 * Tries to read the {@code name} {@link EAttribute} from the the given {@code element}.
+	 * Tries to read the {@code name} {@link EAttribute} from the given {@code element}.
 	 * 
 	 * It never returns an empty string, but a {@code null} instead.
 	 */

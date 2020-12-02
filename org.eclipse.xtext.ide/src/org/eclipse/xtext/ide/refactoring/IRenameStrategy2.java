@@ -21,7 +21,7 @@ import com.google.inject.Inject;
  * 
  * Clients may extend the {@link DefaultImpl} to customize the behavior or implement this interface directly.
  * 
- * Changes are usually performed in the The {@link RenameContext}
+ * Changes are usually performed in the {@link RenameContext}
  * 
  * @author koehnlein - Initial contribution and API
  * @since 2.13
