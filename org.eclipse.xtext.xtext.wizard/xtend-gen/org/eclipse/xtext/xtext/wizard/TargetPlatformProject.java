@@ -112,7 +112,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
       boolean _isAtLeast = this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA11);
       if (_isAtLeast) {
         _builder.append("\t\t\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/releases/2020-12\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/releases/2021-03\"/>");
         _builder.newLine();
       } else {
         _builder.append("\t\t\t");
