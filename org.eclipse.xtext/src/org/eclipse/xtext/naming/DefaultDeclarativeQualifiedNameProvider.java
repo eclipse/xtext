@@ -96,7 +96,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 	 * Computes the fully qualified name for the given object, if any.
 	 * Uses the reflective {@link PolymorphicDispatcher} on the method name {@link #qualifiedName(Object)}.
 	 * If there is no such reflective name found, it tries to read an {@link EAttribute} {@code name} from the
-	 * the given object and appends that to its containers qualified name.
+	 * given object and appends that to its containers qualified name.
 	 * 
 	 * @see #computeFullyQualifiedNameFromNameAttribute(EObject)
 	 * 

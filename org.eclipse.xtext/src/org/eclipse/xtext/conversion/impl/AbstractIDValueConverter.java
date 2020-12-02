@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * Abstract implementation of a value converter that escapes a string
  * based on a set of values. The strategy to compute this values and how the 
- * the string is found in this set is the responsibility of the concrete 
+ * string is found in this set is the responsibility of the concrete 
  * implementation. A common use-case is to collect the keywords in a grammar
  * and match the string against these keywords or to use some ignore-case matching
  * algorithm against the list of normalized keywords.
