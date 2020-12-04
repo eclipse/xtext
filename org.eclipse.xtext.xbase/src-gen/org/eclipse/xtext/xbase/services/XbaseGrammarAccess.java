@@ -68,8 +68,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//	rightOperand=XAssignment)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression (=> (
-		//{XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
+		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment | XOrExpression (=>
+		//({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment
@@ -103,8 +103,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//XOrExpression
 		public RuleCall getXOrExpressionParserRuleCall_1_0() { return cXOrExpressionParserRuleCall_1_0; }
 		
-		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
-		//)?
+		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
+		//rightOperand=XAssignment)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
@@ -299,8 +299,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//XEqualityExpression
 		public RuleCall getXEqualityExpressionParserRuleCall_0() { return cXEqualityExpressionParserRuleCall_0; }
 		
-		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd]) rightOperand=XEqualityExpression
-		//)*
+		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
+		//rightOperand=XEqualityExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAnd])
@@ -824,7 +824,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//XUnaryOperation
 		public RuleCall getXUnaryOperationParserRuleCall_0() { return cXUnaryOperationParserRuleCall_0; }
 		
-		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XUnaryOperation)*
+		//(=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti]) rightOperand=XUnaryOperation)
+		//*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//=> ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMulti])
@@ -1606,7 +1607,8 @@ public class XbaseGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'|')?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')
+		//((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|'
+		//)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//(declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?

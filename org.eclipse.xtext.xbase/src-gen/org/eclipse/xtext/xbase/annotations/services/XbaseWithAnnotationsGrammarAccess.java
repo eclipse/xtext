@@ -195,11 +195,11 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractElementFinder.Abs
 		
 		//XAnnotationElementValueOrCommaList xbase::XExpression:
 		//	=> ({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression)*)? ']'
-		//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?;
+		//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> ({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression)*)? ']'
-		//| XAnnotationOrExpression ({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?
+		//| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//=> ({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression)*)? ']'
@@ -244,16 +244,16 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractElementFinder.Abs
 		//']'
 		public Keyword getRightSquareBracketKeyword_0_2() { return cRightSquareBracketKeyword_0_2; }
 		
-		//XAnnotationOrExpression ({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?
+		//XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//XAnnotationOrExpression
 		public RuleCall getXAnnotationOrExpressionParserRuleCall_1_0() { return cXAnnotationOrExpressionParserRuleCall_1_0; }
 		
-		//({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?
+		//({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//{xbase::XListLiteral.elements+= current}
+		//{xbase::XListLiteral.elements+=current}
 		public Action getXListLiteralElementsAction_1_1_0() { return cXListLiteralElementsAction_1_1_0; }
 		
 		//(',' elements+=XAnnotationOrExpression)+
@@ -445,7 +445,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractElementFinder.Abs
 	
 	//XAnnotationElementValueOrCommaList xbase::XExpression:
 	//	=> ({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression)*)? ']'
-	//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?;
+	//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?;
 	public XAnnotationElementValueOrCommaListElements getXAnnotationElementValueOrCommaListAccess() {
 		return pXAnnotationElementValueOrCommaList;
 	}
