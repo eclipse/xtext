@@ -344,7 +344,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-xtend.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/eclipse/xtext-xtend.git</developerConnection>
 		<url>https://github.com/eclipse/xtext-xtend.git</url>
 	</scm>
 	
