@@ -122,6 +122,23 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 	}
 
 	@Test
+	public void unorderedGroups2() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"CopyFieldNameToVariableStmt:" + NL +
+				"	'FIELD-NAME-TO-VARIABLE'   (  (   ',' 'SCREEN' '=' '('   line=INT    ',' column=INT ')'  )   &   " + NL +
+				"	  (  ',' 'VAR' '=' name=ID  )   &   " + NL +
+				"	  (  ',' 'TYPE' '=' 'REPLACE'  )  ?   )  ;"
+				,
+				"CopyFieldNameToVariableStmt:" + NL +
+				TAB + "'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
+				TAB + "(',' 'VAR' '=' name=ID) &" + NL +
+				TAB + "(',' 'TYPE' '=' 'REPLACE')?);"
+				);
+		// @formatter:on
+	}
+
+	@Test
 	public void guardExpressions() {
 		// @formatter:off
 		assertFormattedGrammar(
@@ -398,6 +415,100 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:on
 	}
 
+	@Test
+	public void predicatedKeyword0() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"Rule:" + NL +
+				TAB + "(  ->   'a')?;"
+				,
+				"Rule:" + NL +
+				TAB + "(->'a')?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void predicatedKeyword1() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"Rule:" + NL +
+				TAB + "(  =>   'a')?;"
+				,
+				"Rule:" + NL +
+				TAB + "(=>'a')?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void predicatedKeyword3() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"Rule:" + NL +
+				TAB + "{XReturnExpression} 'return'  ->  expression=XExpression?;"
+				,
+				"Rule:" + NL +
+				TAB + "{XReturnExpression} 'return' ->expression=XExpression?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void bug287941TestLanguageGrammarAccess() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"AndWhereEntry returns WhereEntry:" + NL +
+				"	ConcreteWhereEntry ({AndWhereEntry.entries += current}" + NL +
+				"	(\"and\" entries+=ConcreteWhereEntry)+)?;"
+				,
+				"AndWhereEntry returns WhereEntry:" + NL +
+				TAB + "ConcreteWhereEntry ({AndWhereEntry.entries+=current}" + NL +
+				TAB + "(\"and\" entries+=ConcreteWhereEntry)+)?;"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void untilToken() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"terminal RULE_ML_COMMENT:" + NL +
+				"			\"/*\"->\"*/\";"
+				,
+				"terminal RULE_ML_COMMENT:" + NL +
+				TAB + "\"/*\"->\"*/\";"
+				);
+		// @formatter:on
+	}
+
+	@Test
+	public void beeLanguage() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"ProvidedCapability: {ProvidedCapability}" + NL +
+				"	((nameSpace=ID) | \"unit\") " + NL +
+				"	('{'" + NL +
+				"     	( 	" + NL +
+				"     	  ('when' ':' condExpr = Expression ';')?" + NL +
+				"	    & (\"name\" ':' name = ID ';')          " + NL +
+				"	    & (\"version\" ':' version = ID ';')?" + NL +
+				"	    )" + NL +
+				"	'}')?" + NL +
+				";" + NL +
+				""
+				,
+				"ProvidedCapability:" + NL +
+				TAB + "{ProvidedCapability}" + NL +
+				TAB + "((nameSpace=ID) | \"unit\")" + NL +
+				TAB + "('{'" + NL +
+				TAB + "(('when' ':' condExpr=Expression ';')? & (\"name\" ':' name=ID ';') & (\"version\" ':' version=ID ';')?)" + NL +
+				TAB + "'}')?;" + NL +
+				""
+				);
+		// @formatter:on
+	}
+	
 	private void assertFormattedGrammar(String input, String expectation) {
 		assertFormatted("grammar a.A" + NL + NL + input, "grammar a.A" + NL + NL + expectation);
 	}

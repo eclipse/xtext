@@ -92,14 +92,14 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		});
 		formatParens(alternatives, doc);
 		formatCardinality(alternatives, doc);
-		for (AbstractElement element : alternatives.getElements())
-			doc.format(element);
+		formatGroupElements(alternatives, doc);
 	}
 
 	protected void format(Assignment assignment, IFormattableDocument doc) {
 		regionFor(assignment).keywords("=", "+=", "?=").forEach(r -> doc.surround(r, it -> it.noSpace()));
-		formatCardinality(assignment, doc);
+		regionFor(assignment).keywords("->", "=>").forEach(k -> doc.append(k, it -> it.noSpace()));
 		formatParens(assignment, doc);
+		formatCardinality(assignment, doc);
 		doc.format(assignment.getTerminal());
 	}
 
@@ -107,23 +107,26 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		doc.append(regionFor(group).keyword("<"), it -> it.noSpace());
 		doc.format(group.getGuardCondition());
 		doc.prepend(regionFor(group).keyword(">"), it -> it.noSpace());
-		formatCardinality(group, doc);
 		formatParens(group, doc);
+		formatCardinality(group, doc);
 		formatGroupElements(group, doc);
 	}
 
 	protected void format(UnorderedGroup group, IFormattableDocument doc) {
-		doc.append(regionFor(group).keyword("&"), it -> it.oneSpace());
+		regionFor(group).keywords("&").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		formatParens(group, doc);
 		formatGroupElements(group, doc);
 	}
 
 	protected void format(Conjunction conjunction, IFormattableDocument doc) {
 		regionFor(conjunction).keywords("&").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		formatParens(conjunction, doc);
 		doc.format(conjunction.getRight());
 	}
 
 	protected void format(Disjunction disjunction, IFormattableDocument doc) {
 		regionFor(disjunction).keywords("|").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		formatParens(disjunction, doc);
 		doc.format(disjunction.getRight());
 	}
 
@@ -133,6 +136,7 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	protected void format(CharacterRange range, IFormattableDocument doc) {
 		doc.surround(regionFor(range).keyword(".."), it -> it.noSpace());
+		formatParens(range, doc);
 		formatCardinality(range, doc);
 		doc.format(range.getLeft());
 		doc.format(range.getRight());
@@ -144,12 +148,15 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		doc.prepend(regionFor(call).keyword(">"), it -> it.noSpace());
 		regionFor(call).keywords(",").forEach(r -> doc.prepend(r, it -> it.noSpace()));
 		regionFor(call).keywords(",").forEach(r -> doc.append(r, it -> it.oneSpace()));
+		formatParens(call, doc);
 		formatCardinality(call, doc);
 		call.getArguments().forEach(a -> doc.format(a));
 	}
 
 	protected void format(Keyword keyword, IFormattableDocument doc) {
 		doc.surround(keyword, it -> it.autowrap());
+		regionFor(keyword).keywords("->", "=>").forEach(k -> doc.append(k, it -> it.noSpace()));
+		formatParens(keyword, doc);
 		formatCardinality(keyword, doc);
 	}
 
@@ -171,7 +178,7 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		doc.prepend(regionFor(action).keyword("}"), it -> it.noSpace());
 		doc.append(regionFor(action).keyword("}"), it -> it.autowrap());
 		doc.surround(regionFor(action).keyword("."), it -> it.noSpace());
-		doc.surround(regionFor(action).keyword("="), it -> it.noSpace());
+		regionFor(action).keywords("=", "+=").forEach(k -> doc.surround(k, it -> it.noSpace()));
 		doc.format(action.getType());
 	}
 
@@ -202,13 +209,18 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 		boolean first = true;
 		EList<AbstractElement> elements = group.getElements();
 		int size = elements.size();
-		int index = 0;
-		for (AbstractElement element : elements) {
-			index++;
-			boolean last = index == size;
-			if (!first && !last) {
+		for (int index = 0; index < elements.size(); index++) {
+			boolean last = index + 1 == size;
+			AbstractElement element = elements.get(index);
+			AbstractElement next = null;
+			if (!last)
+				next = elements.get(index + 1);
+			if (first && !last) {
+				if (elementsAreSeperatedBySpace(element, next))
+					doc.append(element, it -> it.oneSpace());
+			} else if (!first && !last) {
 				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
-				if (!(element instanceof UntilToken) && !(element instanceof Group))
+				if (elementsAreSeperatedBySpace(element, next))
 					doc.surround(element, it -> it.oneSpace());
 			} else if (!first && last) {
 				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
@@ -216,6 +228,10 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 			first = false;
 			doc.format(element);
 		}
+	}
+
+	private boolean elementsAreSeperatedBySpace(AbstractElement element, AbstractElement next) {
+		return !(element instanceof UntilToken || element instanceof Group || next instanceof UntilToken);
 	}
 
 	private void formatRule(AbstractRule rule, IFormattableDocument doc) {

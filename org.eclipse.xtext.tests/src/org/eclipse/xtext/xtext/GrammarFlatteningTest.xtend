@@ -426,8 +426,8 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 		grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
 		
 		ruleParserRuleParameters:
-			{ParserRuleParameters} ("#1" scenario=norm1_Scenario1 | "#2" scenario=ruleScenario1 | "#3" scenario=norm1_Scenario2 |
-			"#4" scenario=ruleScenario2 | => ("#5" scenario=norm1_Scenario2) | => ("#6" scenario=ruleScenario2) | "#7"
+			{ParserRuleParameters} ("#1" scenario=norm1_Scenario1 | "#2" scenario=ruleScenario1 | "#3" scenario=norm1_Scenario2
+			| "#4" scenario=ruleScenario2 | => ("#5" scenario=norm1_Scenario2) | => ("#6" scenario=ruleScenario2) | "#7"
 			scenario=norm1_Scenario3 | "#8" scenario=ruleScenario3 | "#9" (scenario=norm1_Scenario4 | scenario=norm1_Scenario2
 			"keyword"?) | "#10" (scenario=norm1_Scenario4 | scenario=ruleScenario2 "keyword"?) | "#11" (scenario=ruleScenario4 |
 			scenario=norm1_Scenario2 "keyword"?) | "#12" (scenario=ruleScenario4 | scenario=ruleScenario2 "keyword"?));
@@ -445,16 +445,16 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 			first=norm1_IdOrKeyword;
 		
 		ruleScenario3:
-			=> first=ruleIdOrKeyword | second="keyword";
+			=>first=ruleIdOrKeyword | second="keyword";
 		
 		norm1_Scenario3:
-			=> first=norm1_IdOrKeyword | second="keyword";
+			=>first=norm1_IdOrKeyword | second="keyword";
 		
 		ruleScenario4:
-			=> second=ruleIdOrKeyword "keyword";
+			=>second=ruleIdOrKeyword "keyword";
 		
 		norm1_Scenario4:
-			=> second=norm1_IdOrKeyword "keyword";
+			=>second=norm1_IdOrKeyword "keyword";
 		
 		ruleIdOrKeyword:
 			RULE_ID;
