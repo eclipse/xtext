@@ -384,22 +384,16 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_1_3_0 = (RuleCall)cVisibilityAssignment_1_3.eContents().get(0);
 		
 		//UnorderedModifiers:
-		//	{Modifiers} ( final?='final'?
-		//        & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?
-		//    );
+		//	{Modifiers} (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Modifiers} ( final?='final'?
-		//        & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?
-		//    )
+		//{Modifiers} (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 		public Group getGroup() { return cGroup; }
 		
 		//{Modifiers}
 		public Action getModifiersAction_0() { return cModifiersAction_0; }
 		
-		//( final?='final'?
-		//        & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?
-		//    )
+		//(final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//final?='final'?
@@ -623,9 +617,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//UnorderedModifiers:
-	//	{Modifiers} ( final?='final'?
-	//        & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?
-	//    );
+	//	{Modifiers} (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?);
 	public UnorderedModifiersElements getUnorderedModifiersAccess() {
 		return pUnorderedModifiers;
 	}

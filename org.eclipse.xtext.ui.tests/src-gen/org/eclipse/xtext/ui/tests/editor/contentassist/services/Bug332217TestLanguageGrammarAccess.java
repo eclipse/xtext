@@ -519,15 +519,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//TableView:
-		//	'tableview' name=ID ('(' content=Parameter ')')? '{' ( ('title:' title=ScalarExpression)?
-		//		& ('titleImage:' titleImage=ImageExpression)?
-		//		& ('style:' style=TableViewStyle)? ) sections+=Section*
+		//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
+		//	titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'tableview' name=ID ('(' content=Parameter ')')? '{' ( ('title:' title=ScalarExpression)?
-		//		& ('titleImage:' titleImage=ImageExpression)?
-		//		& ('style:' style=TableViewStyle)? ) sections+=Section*
+		//'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
+		//titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -558,9 +556,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//( ('title:' title=ScalarExpression)?
-		//		& ('titleImage:' titleImage=ImageExpression)?
-		//		& ('style:' style=TableViewStyle)? )
+		//(('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('title:' title=ScalarExpression)?
@@ -719,19 +715,15 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Cell:
-		//	'cell' type=CellType iterator=CollectionIterator? '{' ( ('text:' text=ScalarExpression)?
-		//		& ('details:' details=ScalarExpression)?
-		//		& ('image:' image=ScalarExpression)?
-		//		& ('action:' action=ViewAction)? 
-		//		& ('accessory:' accessory=CellAccessory)? )
+		//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
+		//	details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
+		//	accessory=CellAccessory)?)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'cell' type=CellType iterator=CollectionIterator? '{' ( ('text:' text=ScalarExpression)?
-		//		& ('details:' details=ScalarExpression)?
-		//		& ('image:' image=ScalarExpression)?
-		//		& ('action:' action=ViewAction)? 
-		//		& ('accessory:' accessory=CellAccessory)? )
+		//'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
+		//details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
+		//accessory=CellAccessory)?)
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -753,11 +745,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//( ('text:' text=ScalarExpression)?
-		//		& ('details:' details=ScalarExpression)?
-		//		& ('image:' image=ScalarExpression)?
-		//		& ('action:' action=ViewAction)? 
-		//		& ('accessory:' accessory=CellAccessory)? )
+		//(('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? & (
+		//'action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('text:' text=ScalarExpression)?
@@ -1321,9 +1310,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TableView:
-	//	'tableview' name=ID ('(' content=Parameter ')')? '{' ( ('title:' title=ScalarExpression)?
-	//		& ('titleImage:' titleImage=ImageExpression)?
-	//		& ('style:' style=TableViewStyle)? ) sections+=Section*
+	//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
+	//	titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
 	//	'}';
 	public TableViewElements getTableViewAccess() {
 		return pTableView;
@@ -1356,11 +1344,9 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Cell:
-	//	'cell' type=CellType iterator=CollectionIterator? '{' ( ('text:' text=ScalarExpression)?
-	//		& ('details:' details=ScalarExpression)?
-	//		& ('image:' image=ScalarExpression)?
-	//		& ('action:' action=ViewAction)? 
-	//		& ('accessory:' accessory=CellAccessory)? )
+	//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
+	//	details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
+	//	accessory=CellAccessory)?)
 	//	'}';
 	public CellElements getCellAccess() {
 		return pCell;

@@ -994,13 +994,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		////	EssentialOCL overrides
 		////---------------------------------------------------------------------------------
 		//NavigationExp Expression:
-		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-		//	'^^' | '^') messageName=Identifier
+		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+		//	('^^' | '^') messageName=Identifier
 		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-		//'^^' | '^') messageName=Identifier
+		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+		//('^^' | '^') messageName=Identifier
 		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 		
@@ -1121,13 +1121,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		
 		//// Follows ., ->, ^
 		//NavigatingExp:
-		//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-		//	'^^' | '^') messageName=Identifier
+		//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+		//	('^^' | '^') messageName=Identifier
 		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-		//'^^' | '^') messageName=Identifier
+		//SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+		//('^^' | '^') messageName=Identifier
 		//'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 		
@@ -3621,8 +3621,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	////	EssentialOCL overrides
 	////---------------------------------------------------------------------------------
 	//NavigationExp Expression:
-	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-	//	'^^' | '^') messageName=Identifier
+	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+	//	('^^' | '^') messageName=Identifier
 	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigationExpElements getNavigationExpAccess() {
 		return pNavigationExp;
@@ -3634,8 +3634,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	
 	//// Follows ., ->, ^
 	//NavigatingExp:
-	//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=(
-	//	'^^' | '^') messageName=Identifier
+	//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=
+	//	('^^' | '^') messageName=Identifier
 	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigatingExpElements getNavigatingExpAccess() {
 		return pNavigatingExp;

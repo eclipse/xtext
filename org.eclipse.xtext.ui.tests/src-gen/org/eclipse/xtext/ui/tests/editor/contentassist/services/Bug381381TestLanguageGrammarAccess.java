@@ -66,18 +66,18 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cREPLACEKeyword_1_2_3 = (Keyword)cGroup_1_2.eContents().get(3);
 		
 		//CopyFieldNameToVariableStmt:
-		//	'FIELD-NAME-TO-VARIABLE' ( ',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-		//	'REPLACE')? );
+		//	'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
+		//	'REPLACE')?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'FIELD-NAME-TO-VARIABLE' ( ',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-		//'REPLACE')? )
+		//'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
+		//'REPLACE')?)
 		public Group getGroup() { return cGroup; }
 		
 		//'FIELD-NAME-TO-VARIABLE'
 		public Keyword getFIELDNAMETOVARIABLEKeyword_0() { return cFIELDNAMETOVARIABLEKeyword_0; }
 		
-		//( ',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '=' 'REPLACE')? )
+		//(',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '=' 'REPLACE')?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//',' 'SCREEN' '=' '(' line=INT ',' column=INT ')'
@@ -202,8 +202,8 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CopyFieldNameToVariableStmt:
-	//	'FIELD-NAME-TO-VARIABLE' ( ',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-	//	'REPLACE')? );
+	//	'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
+	//	'REPLACE')?);
 	public CopyFieldNameToVariableStmtElements getCopyFieldNameToVariableStmtAccess() {
 		return pCopyFieldNameToVariableStmt;
 	}

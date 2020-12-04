@@ -309,8 +309,8 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 		
 		//Variable hidden():
 		//	'${' WS* (name=ValidID
-		//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
-		//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
+		//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ','
+		//	WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'${' WS* (name=ValidID
@@ -685,8 +685,8 @@ public class CodetemplatesGrammarAccess extends AbstractElementFinder.AbstractGr
 	
 	//Variable hidden():
 	//	'${' WS* (name=ValidID
-	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
-	//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
+	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ','
+	//	WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}

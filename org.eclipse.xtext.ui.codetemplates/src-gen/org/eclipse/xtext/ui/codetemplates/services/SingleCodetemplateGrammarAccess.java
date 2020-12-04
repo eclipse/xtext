@@ -291,8 +291,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//Variable hidden():
 	//	'${' WS* (name=ValidID
-	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
-	//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
+	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ','
+	//	WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 	public CodetemplatesGrammarAccess.VariableElements getVariableAccess() {
 		return gaCodetemplates.getVariableAccess();
 	}
