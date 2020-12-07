@@ -334,7 +334,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/eclipse/xtext-maven.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-maven.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/eclipse/xtext-maven.git</developerConnection>
 		<url>https://github.com/eclipse/xtext-maven.git</url>
 	</scm>
 	
