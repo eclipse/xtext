@@ -3,9 +3,16 @@
  */
 package org.eclipse.xtext.xbase.testlanguages;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
-public class XImportSectionTestLangRuntimeModule extends org.eclipse.xtext.xbase.testlanguages.AbstractXImportSectionTestLangRuntimeModule {
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.testlanguages.jvmmodel.XImportSectionTestLangJvmModelInferrer;
 
+/**
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
+ */
+public class XImportSectionTestLangRuntimeModule
+		extends org.eclipse.xtext.xbase.testlanguages.AbstractXImportSectionTestLangRuntimeModule {
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return XImportSectionTestLangJvmModelInferrer.class;
+	}
 }

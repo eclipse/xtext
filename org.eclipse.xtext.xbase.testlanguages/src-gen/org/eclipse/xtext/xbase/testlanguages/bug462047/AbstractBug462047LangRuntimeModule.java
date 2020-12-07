@@ -41,12 +41,10 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
-import org.eclipse.xtext.xbase.testlanguages.bug462047.jvmmodel.Bug462047LangJvmModelInferrer;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.Bug462047LangAntlrTokenFileProvider;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.Bug462047LangParser;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.parser.antlr.internal.InternalBug462047LangLexer;
@@ -228,11 +226,6 @@ public abstract class AbstractBug462047LangRuntimeModule extends DefaultXbaseRun
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return DerivedStateAwareResourceValidator.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
-		return Bug462047LangJvmModelInferrer.class;
 	}
 	
 }
