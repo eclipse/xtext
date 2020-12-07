@@ -59,7 +59,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("Bor { }");
     _builder_1.newLine();
-    _builder_1.append("---------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=multiFixableIssue2");
     _builder_1.newLine();
@@ -76,7 +76,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("Bor { }");
     _builder_2.newLine();
-    _builder_2.append("---------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
@@ -105,7 +105,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("Bor { }");
     _builder_1.newLine();
-    _builder_1.append("---------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=multiFixableIssue2");
     _builder_1.newLine();
@@ -131,7 +131,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("Bor { }");
     _builder_2.newLine();
-    _builder_2.append("---------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("0: message=multiFixableIssue2");
     _builder_2.newLine();
@@ -189,7 +189,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("<2<b>2> {\tbadname { baz {} } }");
     _builder_1.newLine();
-    _builder_1.append("---------------------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=badNameInSubelements");
     _builder_1.newLine();
@@ -206,7 +206,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("newElement { } b {\tgoodname { baz {} } }");
     _builder_2.newLine();
-    _builder_2.append("-------------------------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
@@ -227,7 +227,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("<1<a>1> {\tbadname { bar {} } }");
     _builder_1.newLine();
-    _builder_1.append("---------------------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=badNameInSubelements");
     _builder_1.newLine();
@@ -249,7 +249,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("<0<a>0> {\tbadname { bar {} } }");
     _builder_2.newLine();
-    _builder_2.append("-------------------------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("0: message=badNameInSubelements");
     _builder_2.newLine();
@@ -338,7 +338,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("<5<lowercase_f>5> {}");
     _builder_1.newLine();
-    _builder_1.append("--------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=lowercase");
     _builder_1.newLine();
@@ -368,7 +368,7 @@ public class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("LOWERCASE_F_LOWERCASE_F {}");
     _builder_2.newLine();
-    _builder_2.append("--------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();

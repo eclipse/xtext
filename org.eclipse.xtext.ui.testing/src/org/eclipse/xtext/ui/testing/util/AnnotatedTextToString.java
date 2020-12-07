@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.testing.util;
 import java.io.IOException;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -155,14 +154,12 @@ public class AnnotatedTextToString {
 		}
 
 		result.append(contents.substring(lastOffset, contents.length()));
-		String[] resultsArray = result.toString().replace("\t", "    ").split("\r?\n");
-		int maxLineLength = Arrays.stream(resultsArray).map(r -> r.length()).reduce(Integer::max).get();
 
 		if (!result.substring(result.length() - 1, result.length()).equals("\n")) {
 			result.append("\n");
 		}
 
-		result.append(Strings.repeat("-", maxLineLength));
+		result.append(Strings.repeat("-", 5));
 
 		if (sorted.isEmpty()) {
 			for (String message : emptyMessages) {

@@ -52,7 +52,7 @@ public class MultiQuickFixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("<1<\"no doc\">1> Bor { }");
     _builder_1.newLine();
-    _builder_1.append("----------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=multiFixableIssue");
     _builder_1.newLine();
@@ -67,7 +67,7 @@ public class MultiQuickFixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("\"Better documentation\" Bor { }");
     _builder_2.newLine();
-    _builder_2.append("------------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
@@ -92,7 +92,7 @@ public class MultiQuickFixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("<1<\"no doc\">1> Bor { }");
     _builder_1.newLine();
-    _builder_1.append("----------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=multiFixableIssue");
     _builder_1.newLine();
@@ -116,7 +116,7 @@ public class MultiQuickFixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("<0<\"no doc\">0> Bor { }");
     _builder_2.newLine();
-    _builder_2.append("----------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("0: message=multiFixableIssue");
     _builder_2.newLine();

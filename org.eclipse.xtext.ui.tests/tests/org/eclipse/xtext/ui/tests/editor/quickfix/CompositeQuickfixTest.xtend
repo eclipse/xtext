@@ -39,7 +39,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			Foo { ref Bor }
 			<1<"bad doc">1>
 			Bor { }
-			---------------
+			-----
 			0: message=multiFixableIssue2
 			1: message=multiFixableIssue2
 		''')
@@ -50,7 +50,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			Foo { ref Bor }
 			"not bad doc"
 			Bor { }
-			---------------
+			-----
 			(no markers found)
 		''')
 	}
@@ -69,7 +69,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			Foo { ref Bor }
 			<1<"bad doc">1>
 			Bor { }
-			---------------
+			-----
 			0: message=multiFixableIssue2
 			1: message=multiFixableIssue2
 		''')
@@ -80,7 +80,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			Foo { ref Bor }
 			<0<"bad doc">0>
 			Bor { }
-			---------------
+			-----
 			0: message=multiFixableIssue2
 		''')
 	}
@@ -117,7 +117,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			<0<c>0> {	badname { foo {} } }
 			<1<a>1> {	badname { bar {} } }
 			<2<b>2> {	badname { baz {} } }
-			---------------------------------
+			-----
 			0: message=badNameInSubelements
 			1: message=badNameInSubelements
 			2: message=badNameInSubelements
@@ -128,7 +128,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			newElement { } c {	goodname { foo {} } }
 			newElement { } a {	goodname { bar {} } }
 			newElement { } b {	goodname { baz {} } }
-			-------------------------------------------
+			-----
 			(no markers found)
 		''')
 	}
@@ -143,7 +143,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 		assertContentsAndMarkers(resource, markers, '''
 			<0<c>0> {	badname { foo {} } }
 			<1<a>1> {	badname { bar {} } }
-			---------------------------------
+			-----
 			0: message=badNameInSubelements
 			1: message=badNameInSubelements
 		''')
@@ -152,7 +152,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 		assertContentsAndMarkers(resource, '''
 			newElement { } c {	goodname { foo {} } }
 			<0<a>0> {	badname { bar {} } }
-			-------------------------------------------
+			-----
 			0: message=badNameInSubelements
 		''')
 	}
@@ -211,7 +211,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			<3<lowercase_d>3> {}
 			<4<lowercase_e>4> {}
 			<5<lowercase_f>5> {}
-			--------------------
+			-----
 			0: message=lowercase
 			1: message=lowercase
 			2: message=lowercase
@@ -229,7 +229,7 @@ class CompositeQuickfixTest extends AbstractMultiQuickfixTest {
 			LOWERCASE_D_LOWERCASE_D {}
 			LOWERCASE_E_LOWERCASE_E {}
 			LOWERCASE_F_LOWERCASE_F {}
-			--------------------------
+			-----
 			(no markers found)
 		''')
 	}

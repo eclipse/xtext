@@ -35,7 +35,7 @@ class MultiQuickFixTest extends AbstractMultiQuickfixTest {
 			<0<"no doc">0>
 			Foo { ref Bor }
 			<1<"no doc">1> Bor { }
-			----------------------
+			-----
 			0: message=multiFixableIssue
 			1: message=multiFixableIssue
 		''')
@@ -45,7 +45,7 @@ class MultiQuickFixTest extends AbstractMultiQuickfixTest {
 			"Better documentation"
 			Foo { ref Bor }
 			"Better documentation" Bor { }
-			------------------------------
+			-----
 			(no markers found)
 		''')
 	}
@@ -62,7 +62,7 @@ class MultiQuickFixTest extends AbstractMultiQuickfixTest {
 			<0<"no doc">0>
 			Foo { ref Bor }
 			<1<"no doc">1> Bor { }
-			----------------------
+			-----
 			0: message=multiFixableIssue
 			1: message=multiFixableIssue
 		''')
@@ -72,7 +72,7 @@ class MultiQuickFixTest extends AbstractMultiQuickfixTest {
 			"Better documentation"
 			Foo { ref Bor }
 			<0<"no doc">0> Bor { }
-			----------------------
+			-----
 			0: message=multiFixableIssue
 		''')
 	}
