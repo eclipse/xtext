@@ -1451,6 +1451,30 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
+	@Test public void testSerialVersionUIDNotUnused() throws Exception {
+		XtendClass clazz = clazz("import java.io.Serializable class X implements Serializable { static final long serialVersionUID = 1L }");
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
+		// in the following cases not all conditions are met, therefore it is still marked unused
+		// it must be static
+		clazz = clazz("import java.io.Serializable class X implements Serializable { final long serialVersionUID = 1L }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUID", "not used");
+		// it must be final
+		clazz = clazz("import java.io.Serializable class X implements Serializable { static long serialVersionUID = 1L }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUID", "not used");
+		// it must be long
+		clazz = clazz("import java.io.Serializable class X implements Serializable { static final int serialVersionUID = 1 }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUID", "not used");
+		// the declaring type must implement java.io.Serializable
+		clazz = clazz("class X { static final long serialVersionUID = 1L }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUID", "not used");
+		// it must have an initial value
+		clazz = clazz("import java.io.Serializable class X implements Serializable { static final long serialVersionUID }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUID", "not used");
+		// it must be correctly spelled
+		clazz = clazz("import java.io.Serializable class X implements Serializable { static final long serialVersionUid = 1L }");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "serialVersionUid", "not used");
+	}
+	
 	@Test public void testUnusedFieldWithPropertyAnnotation() throws Exception {
 		XtendClass clazz = clazz("class X { @Property String foo }");
 		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
