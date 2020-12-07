@@ -64,6 +64,9 @@ Workflow {
 				generate = true
 				generateToolbarButton = true
 			}
+			junitSupport = {
+				generateXtendStub = false
+			}
 		}
 	}
 }
