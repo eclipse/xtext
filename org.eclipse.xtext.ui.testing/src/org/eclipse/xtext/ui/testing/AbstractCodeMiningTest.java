@@ -23,6 +23,7 @@ import org.eclipse.jface.text.codemining.LineHeaderCodeMining;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.annotations.Beta;
 import com.google.common.util.concurrent.Futures;
@@ -71,7 +72,7 @@ public class AbstractCodeMiningTest extends AbstractEditorTest {
 
 	protected void codeMiningsArePresent(XtextEditor editor, String expected) {
 		String actual = insertCodeMinings(editor);
-		assertEquals(expected, actual);
+		assertEquals(Strings.toUnixLineSeparator(expected), Strings.toUnixLineSeparator(actual));
 	}
 
 	protected String insertCodeMinings(XtextEditor editor) {
