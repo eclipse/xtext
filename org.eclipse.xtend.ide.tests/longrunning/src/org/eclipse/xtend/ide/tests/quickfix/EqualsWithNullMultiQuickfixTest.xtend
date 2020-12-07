@@ -40,7 +40,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 					if(a <0<==>0> null || b <1<!=>1> null || c === null) 0 else 1
 				}
 			}
-			---------------------------------------------------------------------
+			-----
 			0: message=The operator '==' should be replaced by '===' when null is one of the arguments.
 			1: message=The operator '!=' should be replaced by '!==' when null is one of the arguments.
 		''','''
@@ -50,7 +50,7 @@ class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
 					if(a === null || b !== null || c === null) 0 else 1
 				}
 			}
-			-----------------------------------------------------------
+			-----
 			(no markers found)
 		''')
 	}

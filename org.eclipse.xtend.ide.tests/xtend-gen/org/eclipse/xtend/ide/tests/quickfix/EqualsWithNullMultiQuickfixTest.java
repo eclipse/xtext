@@ -68,7 +68,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("---------------------------------------------------------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=The operator \'==\' should be replaced by \'===\' when null is one of the arguments.");
     _builder_1.newLine();
@@ -90,7 +90,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("-----------------------------------------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
