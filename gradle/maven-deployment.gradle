@@ -20,8 +20,8 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
-                    developerConnection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+                    connection = "scm:git:https://github.com/eclipse/${rootProject.name}.git"
+                    developerConnection = "scm:git:https://github.com/eclipse/${rootProject.name}.git"
                     url = "git@github.com:eclipse/${rootProject.name}.git"
                 }
                 // We need to wait until the project's own build file has been executed
