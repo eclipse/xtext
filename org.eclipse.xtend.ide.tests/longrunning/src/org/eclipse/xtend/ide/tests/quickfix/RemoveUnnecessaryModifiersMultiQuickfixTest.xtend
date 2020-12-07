@@ -53,7 +53,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 					}
 				}
 			}
-			---------------------------------------------------
+			-----
 			0: message=The public modifier is unnecessary on class Foo
 			1: message=The private modifier is unnecessary on field A
 			2: message=The final modifier is unnecessary on field A
@@ -72,7 +72,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 					}
 				}
 			}
-			----------------------------
+			-----
 			(no markers found)
 		''')
 	}

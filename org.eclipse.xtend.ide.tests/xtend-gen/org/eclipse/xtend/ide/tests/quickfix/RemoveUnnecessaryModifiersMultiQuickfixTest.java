@@ -104,7 +104,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("---------------------------------------------------");
+    _builder_1.append("-----");
     _builder_1.newLine();
     _builder_1.append("0: message=The public modifier is unnecessary on class Foo");
     _builder_1.newLine();
@@ -149,7 +149,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("----------------------------");
+    _builder_2.append("-----");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();
