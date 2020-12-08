@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -48,9 +48,16 @@ public class ImportManagerTest extends AbstractXbaseTestCase {
 		assertTrue(importManager.getImports().isEmpty());
 	}
 
-	@Test public void testOtherString() {
+	@Test public void testOtherStringSamePackage() {
+		// String can refer to a custom class instead of java.lang.String, even if it is unqualified
 		JvmType otherString = typeReferences.findDeclaredType(foo.String.class, expression);
-		assertEquals("foo.String", importManager.serialize(otherString).toString());
+		assertEquals("String", importManager.serialize(otherString).toString());
+		assertTrue(importManager.getImports().isEmpty());
+	}
+
+	@Test public void testOtherStringDifferentPackage() {
+		JvmType otherString = typeReferences.findDeclaredType(bar.String.class, expression);
+		assertEquals("bar.String", importManager.serialize(otherString).toString());
 		assertTrue(importManager.getImports().isEmpty());
 	}
 	
