@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -75,6 +76,7 @@ import org.eclipse.xtext.xbase.typesystem.util.LocalTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -299,6 +301,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Inject
 	private ConstantConditionsInterpreter constantConditionsInterpreter;
+	
+	@Inject
+	private ReadAndWriteTracking readAndWriteTracking;
 	
 	protected Set<EObject> rootedInstances;
 	
@@ -767,9 +772,28 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				}
 			});
 		}
+		if (isSerialVersionUid(field, childResolvedTypes)) {
+			readAndWriteTracking.markReadAccess(field);
+		}
 		mergeChildTypes(childResolvedTypes);
 	}
 	
+	private boolean isSerialVersionUid(JvmField field, ResolvedTypes childResolvedTypes) {
+		LightweightTypeReference actualFieldType = childResolvedTypes.getActualType(field);
+		JvmDeclaredType declaringType = field.getDeclaringType();
+		LightweightTypeReference actualDeclaringType = declaringType != null ? childResolvedTypes.getActualType(declaringType) : null;
+		return "serialVersionUID".equals(field.getSimpleName())
+				&& field.isStatic()
+				&& field.isFinal()
+				&& actualFieldType != null && actualFieldType.isType(Long.TYPE)
+				&& hasInitialValue(field)
+				&& actualDeclaringType != null && actualDeclaringType.isSubtypeOf(Serializable.class);
+	}
+
+	private boolean hasInitialValue(JvmField field) {
+		return getLogicalContainerProvider().getAssociatedExpression(field) != null;
+	}
+
 	@SuppressWarnings("unused")
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(constructor);
