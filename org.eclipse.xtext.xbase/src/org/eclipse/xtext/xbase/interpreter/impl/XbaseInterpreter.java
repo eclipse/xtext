@@ -294,8 +294,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	protected Object _doEvaluate(XReturnExpression returnExpr, IEvaluationContext context, CancelIndicator indicator) {
-		Object returnValue = internalEvaluate(returnExpr.getExpression(), context, indicator);
-		throw new ReturnValue(returnValue);
+		XExpression expression = returnExpr.getExpression();
+		if (expression != null) {
+			Object returnValue = internalEvaluate(returnExpr.getExpression(), context, indicator);
+			throw new ReturnValue(returnValue);
+		} else {
+			throw new ReturnValue(null);
+		}
 	}
 
 	/**
