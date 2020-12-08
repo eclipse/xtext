@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -136,6 +136,14 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 	@Override
 	@Ignore @Test public void testArrays_04() throws Exception {
 		super.testArrays_01();
+	}
+	
+	@Test public void testReturnExpression_Void_01() throws Exception {
+		assertEvaluatesTo(null, "return");
+	}
+	
+	@Test public void testReturnExpression_Void_02() throws Exception {
+		assertEvaluatesTo(null, "{val Runnable r = [ return; ]; r.run()}");
 	}
 	
 }
