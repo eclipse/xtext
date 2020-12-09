@@ -786,6 +786,8 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				«ENDIF»
 				class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 					
+					static final long serialVersionUID = 1L
+					
 					«DisposableRegistry» disposableRegistry
 					
 					override init() {
