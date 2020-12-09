@@ -8,15 +8,15 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.tests;
 
-import com.google.inject.Inject;
 import org.eclipse.xtext.example.fowlerdsl.statemachine.Statemachine;
-import org.eclipse.xtext.example.fowlerdsl.tests.StatemachineInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
 
 /**
  * @author miklossy - Initial contribution and API
