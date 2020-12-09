@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @SuppressWarnings("all")
 public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   private static class StopCollecting extends Exception {
+    private static final long serialVersionUID = (-6188090786919774877L);
   }
   
   @Inject

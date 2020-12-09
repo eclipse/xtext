@@ -305,6 +305,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	private static class StopCollecting extends Exception {
+		static final long serialVersionUID=-6188090786919774877L
 	}
 	
 	override generateVisibilityModifier(JvmMember it, ITreeAppendable result) {
