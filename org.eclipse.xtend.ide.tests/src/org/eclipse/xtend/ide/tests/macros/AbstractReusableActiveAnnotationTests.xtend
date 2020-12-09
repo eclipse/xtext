@@ -1865,10 +1865,6 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 				import java.util.Arrays;
 				import myannotation.Base;
-				import myusercode.D1;
-				import myusercode.Derived1;
-				import myusercode.Derived2;
-				import myusercode.Derived3;
 				
 				@SuppressWarnings("all")
 				public class D2 extends D1 {

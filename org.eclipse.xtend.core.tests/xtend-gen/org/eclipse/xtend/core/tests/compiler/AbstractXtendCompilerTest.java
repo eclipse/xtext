@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -60,6 +60,32 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   protected XtendFile doAssertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config, final boolean serializeAllTypes) {
     try {
       final XtendFile file = this.file(input.toString(), true);
+      final ArrayList<CharSequence> results = this.compile(file, input, config);
+      if (serializeAllTypes) {
+        Assert.assertEquals(expected.toString(), IterableExtensions.join(results, "\n"));
+      } else {
+        Assert.assertEquals(expected.toString(), IterableExtensions.<CharSequence>head(results).toString());
+      }
+      return file;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void assertFilesCompileTo(final Iterable<XtendFile> xtendFiles, final CharSequence... expected) {
+    final GeneratorConfig config = this.generatorConfigProvider.get(null);
+    int i = 0;
+    for (final XtendFile file : xtendFiles) {
+      {
+        final ArrayList<CharSequence> results = this.compile(file, null, config);
+        Assert.assertEquals((expected[i]).toString(), IterableExtensions.<CharSequence>head(results).toString());
+        i++;
+      }
+    }
+  }
+  
+  private ArrayList<CharSequence> compile(final XtendFile file, final CharSequence input, final GeneratorConfig config) {
+    try {
       final ArrayList<CharSequence> results = CollectionLiterals.<CharSequence>newArrayList();
       Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(file.eResource().getContents(), JvmDeclaredType.class);
       for (final JvmDeclaredType inferredType : _filter) {
@@ -68,7 +94,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
           CharSequence javaCode = this.generator.generateType(inferredType, config);
           javaCode = this.postProcessor.postProcess(null, javaCode);
           results.add(javaCode);
-          if (this.useJavaCompiler) {
+          if ((this.useJavaCompiler && (input != null))) {
             final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
               it.getCompiledClass();
             };
@@ -76,12 +102,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
           }
         }
       }
-      if (serializeAllTypes) {
-        Assert.assertEquals(expected.toString(), IterableExtensions.join(results, "\n"));
-      } else {
-        Assert.assertEquals(expected.toString(), IterableExtensions.<CharSequence>head(results).toString());
-      }
-      return file;
+      return results;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

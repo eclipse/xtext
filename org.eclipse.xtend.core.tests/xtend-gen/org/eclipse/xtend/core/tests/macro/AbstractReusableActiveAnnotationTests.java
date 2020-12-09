@@ -3560,14 +3560,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.newLine();
     _builder_6.append("import myannotation.Base;");
     _builder_6.newLine();
-    _builder_6.append("import myusercode.D1;");
-    _builder_6.newLine();
-    _builder_6.append("import myusercode.Derived1;");
-    _builder_6.newLine();
-    _builder_6.append("import myusercode.Derived2;");
-    _builder_6.newLine();
-    _builder_6.append("import myusercode.Derived3;");
-    _builder_6.newLine();
     _builder_6.newLine();
     _builder_6.append("@SuppressWarnings(\"all\")");
     _builder_6.newLine();

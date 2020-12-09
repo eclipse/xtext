@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2689,34 +2689,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("import org.eclipse.xtext.nodemodel.INode;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.preferences.PreferenceKey;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.BlankLineKey;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.CommentInfo;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.FormattableDocument;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.FormattingData;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.HiddenLeafs;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.LeafInfo;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.NewLineData;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.NewLineKey;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.NewLineOrPreserveKey;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.WhitespaceData;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.WhitespaceKey;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1129,20 +1129,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import org.eclipse.xtext.nodemodel.INode;
 			import org.eclipse.xtext.preferences.PreferenceKey;
-			import org.eclipse.xtext.xbase.formatting.BlankLineKey;
-			import org.eclipse.xtext.xbase.formatting.CommentInfo;
-			import org.eclipse.xtext.xbase.formatting.FormattableDocument;
-			import org.eclipse.xtext.xbase.formatting.FormattingData;
-			import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
-			import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
-			import org.eclipse.xtext.xbase.formatting.LeafInfo;
-			import org.eclipse.xtext.xbase.formatting.NewLineData;
-			import org.eclipse.xtext.xbase.formatting.NewLineKey;
-			import org.eclipse.xtext.xbase.formatting.NewLineOrPreserveKey;
-			import org.eclipse.xtext.xbase.formatting.WhitespaceData;
-			import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;
-			import org.eclipse.xtext.xbase.formatting.WhitespaceKey;
-			import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Extension;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
