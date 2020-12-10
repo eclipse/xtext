@@ -49,9 +49,11 @@ public class ImportManagerTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testOtherStringSamePackage() {
-		// String can refer to a custom class instead of java.lang.String, even if it is unqualified
+		// although not strictly necessary, importManager.serialize() returns the qualified name 
+		// of a type that resides in the same package
+		// this is something that could be improved in a future version
 		JvmType otherString = typeReferences.findDeclaredType(foo.String.class, expression);
-		assertEquals("String", importManager.serialize(otherString).toString());
+		assertEquals("foo.String", importManager.serialize(otherString).toString());
 		assertTrue(importManager.getImports().isEmpty());
 	}
 

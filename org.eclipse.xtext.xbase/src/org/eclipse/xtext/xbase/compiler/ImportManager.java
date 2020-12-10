@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
-import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -209,13 +208,7 @@ public class ImportManager {
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
 		return getThisTypeQualifiedNames().contains(qualifiedName)
 				|| ((!thisCollidesWithJavaLang || !getThisTypeSimpleNames().contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
-				|| equal(qualifiedName, simpleName)
-				|| isInThisTypesPackage(qualifiedName);
-	}
-
-	private boolean isInThisTypesPackage(String qualifiedName) {
-		String packageName = qualifiedNamesToPackageNames.get(qualifiedName);
-		return packageName != null && packageName.equals(thisTypePackageName);
+				|| equal(qualifiedName, simpleName);
 	}
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
@@ -235,9 +228,19 @@ public class ImportManager {
 	}
 
 	public List<String> getImports() {
-		ArrayList<String> result = newArrayList(newLinkedHashSet(internalGetImports().values()));
+		ArrayList<String> result = newArrayList();
+		for (String qualifiedName : internalGetImports().values()) {
+			if (!result.contains(qualifiedName) && !isInThisTypesPackage(qualifiedName)) {
+				result.add(qualifiedName);
+			}
+		}
 		Collections.sort(result);
 		return result;
+	}
+
+	private boolean isInThisTypesPackage(String qualifiedName) {
+		String packageName = qualifiedNamesToPackageNames.get(qualifiedName);
+		return packageName != null && packageName.equals(thisTypePackageName);
 	}
 	
 	/**
