@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.xtext.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Automatic-Module-Name: org.eclipse.xtext.xbase.ide
 Export-Package: .,
+ bar,
  closures,
  constructorTypeParameters,
  foo,
