@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -121,9 +121,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("package test;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import test.Visibilities;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C extends Visibilities {");
@@ -164,9 +161,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("package test;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import test.Visibilities;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C {");
@@ -199,11 +193,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package test;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import test.Visibilities;");
-    _builder_1.newLine();
-    _builder_1.append("import test.VisibilitiesSubclass;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -246,11 +235,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("package test;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import test.Visibilities;");
-    _builder_1.newLine();
-    _builder_1.append("import test.VisibilitiesSubclass;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C extends Visibilities {");
@@ -288,8 +272,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("import test.Visibilities;");
-    _builder_1.newLine();
-    _builder_1.append("import x.D;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");

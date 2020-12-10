@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -235,9 +235,6 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import org.eclipse.xtend.lib.Data;
 			import org.eclipse.xtext.nodemodel.ILeafNode;
-			import org.eclipse.xtext.xbase.formatting.CommentInfo;
-			import org.eclipse.xtext.xbase.formatting.LeafInfo;
-			import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function2;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;

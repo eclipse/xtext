@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -66,8 +66,6 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 		''', '''
 			package test;
 			
-			import test.Visibilities;
-			
 			@SuppressWarnings("all")
 			public class C extends Visibilities {
 			  public void m(final Visibilities s) {
@@ -88,8 +86,6 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 		''', '''
 			package test;
 			
-			import test.Visibilities;
-			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m(final Visibilities s) {
@@ -107,9 +103,6 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			package test;
-			
-			import test.Visibilities;
-			import test.VisibilitiesSubclass;
 			
 			@SuppressWarnings("all")
 			public class C extends Visibilities {
@@ -131,9 +124,6 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 		''', '''
 			package test;
 			
-			import test.Visibilities;
-			import test.VisibilitiesSubclass;
-			
 			@SuppressWarnings("all")
 			public class C extends Visibilities {
 			  public void m(final VisibilitiesSubclass vc) {
@@ -154,7 +144,6 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			package x;
 			
 			import test.Visibilities;
-			import x.D;
 			
 			@SuppressWarnings("all")
 			public class C extends Visibilities {
