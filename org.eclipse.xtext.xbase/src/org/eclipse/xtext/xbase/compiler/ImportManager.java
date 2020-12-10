@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -43,8 +43,10 @@ public class ImportManager {
 
 	private boolean organizeImports;
 
+	private String thisTypePackageName;
 	private Set<String> thisTypeSimpleNames = Sets.newHashSet();
 	private Set<String> thisTypeQualifiedNames = Sets.newHashSet();
+	private Map<String, String> qualifiedNamesToPackageNames = newHashMap();
 
 	private final char innerTypeSeparator;
 
@@ -72,6 +74,7 @@ public class ImportManager {
 			getThisTypeQualifiedNames().add(thisType.getQualifiedName(innerTypeSeparator));
 			thisCollidesWithJavaLang |= CodeGenUtil2.isJavaLangType(thisType.getSimpleName());
 			registerSimpleNamesOfInnerClasses(thisType, new LinkedHashSet<JvmType>());
+			this.thisTypePackageName = thisType.getPackageName();
 		}
 	}
 
@@ -115,6 +118,10 @@ public class ImportManager {
 			builder.append("[]");
 		} else {
 			final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
+			if (type instanceof JvmDeclaredType) {
+				String packageName = ((JvmDeclaredType)type).getPackageName();
+				qualifiedNamesToPackageNames.put(qualifiedName, packageName);
+			}
 			String nameToImport = qualifiedName;
 			String shortName = type.getSimpleName();
 			String outerShortName = shortName;
@@ -150,6 +157,8 @@ public class ImportManager {
 			builder.append("[]");
 		} else {
 			final String qualifiedName = type.getCanonicalName();
+			String packageName = type.getPackage().getName();
+			qualifiedNamesToPackageNames.put(qualifiedName, packageName);
 			String nameToImport = qualifiedName;
 			String shortName = type.getSimpleName();
 			String outerShortName = shortName;
@@ -198,8 +207,15 @@ public class ImportManager {
 	}
 
 	protected boolean allowsSimpleName(String qualifiedName, String simpleName) {
-		return getThisTypeQualifiedNames().contains(qualifiedName) || ((!thisCollidesWithJavaLang || !getThisTypeSimpleNames().contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
-				|| equal(qualifiedName, simpleName);
+		return getThisTypeQualifiedNames().contains(qualifiedName)
+				|| ((!thisCollidesWithJavaLang || !getThisTypeSimpleNames().contains(simpleName)) && JAVA_LANG_PACK.matcher(qualifiedName).matches())
+				|| equal(qualifiedName, simpleName)
+				|| isInThisTypesPackage(qualifiedName);
+	}
+
+	private boolean isInThisTypesPackage(String qualifiedName) {
+		String packageName = qualifiedNamesToPackageNames.get(qualifiedName);
+		return packageName != null && packageName.equals(thisTypePackageName);
 	}
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
