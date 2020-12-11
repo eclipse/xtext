@@ -115,25 +115,17 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//Unit:
 		//	{Unit} documentation=DOCUMENTATION?
 		//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
-		//	'{' ( ('source' ':' sourceLocation=Path ';')?
-		//		& ('output' ':' outputLocation=Path ';')?
-		//		& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
-		//		& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
-		//		& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
-		//		& functions+=Function*
-		//		)
+		//	'{' (('source' ':' sourceLocation=Path ';')? & ('output' ':' outputLocation=Path ';')? & ('provides' ':'
+		//	providedCapabilities+=ProvidedCapability ';')* & ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'
+		//	)* & ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')* & functions+=Function*)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Unit} documentation=DOCUMENTATION?
 		//'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
-		//'{' ( ('source' ':' sourceLocation=Path ';')?
-		//		& ('output' ':' outputLocation=Path ';')?
-		//		& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
-		//		& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
-		//		& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
-		//		& functions+=Function*
-		//		)
+		//'{' (('source' ':' sourceLocation=Path ';')? & ('output' ':' outputLocation=Path ';')? & ('provides' ':'
+		//providedCapabilities+=ProvidedCapability ';')* & ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')* &
+		//('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')* & functions+=Function*)
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -194,13 +186,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 		
-		//( ('source' ':' sourceLocation=Path ';')?
-		//		& ('output' ':' outputLocation=Path ';')?
-		//		& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
-		//		& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
-		//		& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
-		//		& functions+=Function*
-		//		)
+		//(('source' ':' sourceLocation=Path ';')? & ('output' ':' outputLocation=Path ';')? & ('provides' ':'
+		//providedCapabilities+=ProvidedCapability ';')* & ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')* &
+		//('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')* & functions+=Function*)
 		public UnorderedGroup getUnorderedGroup_7() { return cUnorderedGroup_7; }
 		
 		//('source' ':' sourceLocation=Path ';')?
@@ -337,15 +325,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//ProvidedCapability:
-		//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ( ('when' ':' condExpr=Expression ';')?
-		//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-		//	    )
+		//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' &
+		//	("version" ':' version=ID ';')?)
 		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ProvidedCapability} (nameSpace=ID | "unit") ('{' ( ('when' ':' condExpr=Expression ';')?
-		//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-		//	    )
+		//{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' & (
+		//"version" ':' version=ID ';')?)
 		//'}')?
 		public Group getGroup() { return cGroup; }
 		
@@ -364,18 +350,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//"unit"
 		public Keyword getUnitKeyword_1_1() { return cUnitKeyword_1_1; }
 		
-		//('{' ( ('when' ':' condExpr=Expression ';')?
-		//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-		//	    )
+		//('{' (('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?)
 		//'}')?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 		
-		//( ('when' ':' condExpr=Expression ';')?
-		//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-		//	    )
+		//(('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?)
 		public UnorderedGroup getUnorderedGroup_2_1() { return cUnorderedGroup_2_1; }
 		
 		//('when' ':' condExpr=Expression ';')?
@@ -482,21 +464,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AliasedRequiredCapability:
-		//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')
+		//	? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		//	'}');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')? &
+		//("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		//'}')
 		public Group getGroup() { return cGroup; }
 		
@@ -530,24 +504,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//ID
 		public RuleCall getAliasIDTerminalRuleCall_2_1_0() { return cAliasIDTerminalRuleCall_2_1_0; }
 		
-		//('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')? & ("requires-min" ':' min=INT ';')? & (
+		//"requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		//'}')
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 		
-		//( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//(('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')? & ("requires-min" ':' min=INT ';')? & ("requires-max"
+		//':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 		
 		//('when' ':' condExpr=Expression ';')?
@@ -681,21 +647,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//RequiredCapability:
-		//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy"
+		//	';')? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?
+		//	)
 		//	'}');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';'
+		//)? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		//'}')
 		public Group getGroup() { return cGroup; }
 		
@@ -720,24 +679,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//('{' ( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')? & ("requires-min" ':' min=INT ';')? & (
+		//"requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		//'}')
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 		
-		//( ('when' ':' condExpr=Expression ';')?  
-		//		& (greedy?="greedy" ';')? 
-		//		& ("requires-min" ':' min=INT ';')? 
-		//		& ("requires-max" ':' max=INT ';')?
-		//		& ("version" ':' versionRange=ID ';')?
-		//	  	)
+		//(('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')? & ("requires-min" ':' min=INT ';')? & ("requires-max"
+		//':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 		
 		//('when' ':' condExpr=Expression ';')?
@@ -2906,13 +2857,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cFuncExprOneOrManyExpressionsParserRuleCall_4_0 = (RuleCall)cFuncExprAssignment_4.eContents().get(0);
 		
 		//ClosureExpression Expression:
-		//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)
-		//	* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
+		//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
+		//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
+		//	parameters+=ParameterDeclaration)?
 		//	'|' funcExpr=OneOrManyExpressions;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (
-		//',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
+		//{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*
+		//(',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
 		//'|' funcExpr=OneOrManyExpressions
 		public Group getGroup() { return cGroup; }
 		
@@ -3331,13 +3283,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 	//Unit:
 	//	{Unit} documentation=DOCUMENTATION?
 	//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
-	//	'{' ( ('source' ':' sourceLocation=Path ';')?
-	//		& ('output' ':' outputLocation=Path ';')?
-	//		& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
-	//		& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
-	//		& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
-	//		& functions+=Function*
-	//		)
+	//	'{' (('source' ':' sourceLocation=Path ';')? & ('output' ':' outputLocation=Path ';')? & ('provides' ':'
+	//	providedCapabilities+=ProvidedCapability ';')* & ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'
+	//	)* & ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')* & functions+=Function*)
 	//	'}';
 	public UnitElements getUnitAccess() {
 		return pUnit;
@@ -3348,9 +3296,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//ProvidedCapability:
-	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ( ('when' ':' condExpr=Expression ';')?
-	//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-	//	    )
+	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' &
+	//	("version" ':' version=ID ';')?)
 	//	'}')?;
 	public ProvidedCapabilityElements getProvidedCapabilityAccess() {
 		return pProvidedCapability;
@@ -3361,12 +3308,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//AliasedRequiredCapability:
-	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ( ('when' ':' condExpr=Expression ';')?  
-	//		& (greedy?="greedy" ';')? 
-	//		& ("requires-min" ':' min=INT ';')? 
-	//		& ("requires-max" ':' max=INT ';')?
-	//		& ("version" ':' versionRange=ID ';')?
-	//	  	)
+	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')
+	//	? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 	//	'}');
 	public AliasedRequiredCapabilityElements getAliasedRequiredCapabilityAccess() {
 		return pAliasedRequiredCapability;
@@ -3377,12 +3320,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//RequiredCapability:
-	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ( ('when' ':' condExpr=Expression ';')?  
-	//		& (greedy?="greedy" ';')? 
-	//		& ("requires-min" ':' min=INT ';')? 
-	//		& ("requires-max" ':' max=INT ';')?
-	//		& ("version" ':' versionRange=ID ';')?
-	//	  	)
+	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy"
+	//	';')? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?
+	//	)
 	//	'}');
 	public RequiredCapabilityElements getRequiredCapabilityAccess() {
 		return pRequiredCapability;
@@ -3885,8 +3825,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//ClosureExpression Expression:
-	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)
-	//	* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
+	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
+	//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
+	//	parameters+=ParameterDeclaration)?
 	//	'|' funcExpr=OneOrManyExpressions;
 	public ClosureExpressionElements getClosureExpressionAccess() {
 		return pClosureExpression;

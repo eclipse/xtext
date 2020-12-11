@@ -99,10 +99,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
 		//ReducibleRule ReducibleElement:
-		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+= current} actionFeature+=TerminalRule)?;
+		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+= current} actionFeature+=TerminalRule)?
+		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group getGroup() { return cGroup; }
 		
 		//"reducible"
@@ -111,10 +111,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//TerminalRule
 		public RuleCall getTerminalRuleParserRuleCall_1() { return cTerminalRuleParserRuleCall_1; }
 		
-		//({ReducibleComposite.actionFeature+= current} actionFeature+=TerminalRule)?
+		//({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//{ReducibleComposite.actionFeature+= current}
+		//{ReducibleComposite.actionFeature+=current}
 		public Action getReducibleCompositeActionFeatureAction_2_0() { return cReducibleCompositeActionFeatureAction_2_0; }
 		
 		//actionFeature+=TerminalRule
@@ -220,7 +220,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ReducibleRule ReducibleElement:
-	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+= current} actionFeature+=TerminalRule)?;
+	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 	public ReducibleRuleElements getReducibleRuleAccess() {
 		return pReducibleRule;
 	}

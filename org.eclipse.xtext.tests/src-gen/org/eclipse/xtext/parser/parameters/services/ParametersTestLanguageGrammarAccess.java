@@ -122,8 +122,8 @@ public class ParametersTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//('#1' scenario=Scenario1<true> | '#2' scenario=Scenario1<Param=false> | '#3' scenario=Scenario2<true> | '#4'
 		//scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6' scenario=Scenario2<false>) | '#7'
 		//scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9' (scenario=Scenario4<true> | scenario=Scenario2<true>
-		//'keyword'?) | '#10' (scenario=Scenario4<true> | scenario=Scenario2<false> 'keyword'?) | '#11' (scenario=Scenario4<false> |
-		//scenario=Scenario2<true> 'keyword'?) | '#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'keyword'?))
+		//'keyword'?) | '#10' (scenario=Scenario4<true> | scenario=Scenario2<false> 'keyword'?) | '#11' (scenario=Scenario4<false>
+		//| scenario=Scenario2<true> 'keyword'?) | '#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'keyword'?))
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'#1' scenario=Scenario1<true>

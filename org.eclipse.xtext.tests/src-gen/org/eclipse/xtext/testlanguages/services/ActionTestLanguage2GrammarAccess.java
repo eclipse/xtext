@@ -34,19 +34,19 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 		
 		//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
 		//ORing:
-		//	Value ({ORing.disjuncts+= current} '|' disjuncts+=Value)*;
+		//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Value ({ORing.disjuncts+= current} '|' disjuncts+=Value)*
+		//Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup() { return cGroup; }
 		
 		//Value
 		public RuleCall getValueParserRuleCall_0() { return cValueParserRuleCall_0; }
 		
-		//({ORing.disjuncts+= current} '|' disjuncts+=Value)*
+		//({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{ORing.disjuncts+= current}
+		//{ORing.disjuncts+=current}
 		public Action getORingDisjunctsAction_1_0() { return cORingDisjunctsAction_1_0; }
 		
 		//'|'
@@ -120,7 +120,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 	
 	//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
 	//ORing:
-	//	Value ({ORing.disjuncts+= current} '|' disjuncts+=Value)*;
+	//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 	public ORingElements getORingAccess() {
 		return pORing;
 	}

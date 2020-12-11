@@ -33,19 +33,19 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 		private final RuleCall cExpressionsAdditionParserRuleCall_1_1_0 = (RuleCall)cExpressionsAssignment_1_1.eContents().get(0);
 		
 		//Sequence:
-		//	Addition ({Sequence.expressions+= current} expressions+=Addition)*;
+		//	Addition ({Sequence.expressions+=current} expressions+=Addition)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Addition ({Sequence.expressions+= current} expressions+=Addition)*
+		//Addition ({Sequence.expressions+=current} expressions+=Addition)*
 		public Group getGroup() { return cGroup; }
 		
 		//Addition
 		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
 		
-		//({Sequence.expressions+= current} expressions+=Addition)*
+		//({Sequence.expressions+=current} expressions+=Addition)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Sequence.expressions+= current}
+		//{Sequence.expressions+=current}
 		public Action getSequenceExpressionsAction_1_0() { return cSequenceExpressionsAction_1_0; }
 		
 		//expressions+=Addition
@@ -68,19 +68,19 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 		private final RuleCall cValuesMultiplicationParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
 		//Addition Expression:
-		//	Multiplication ({Op.values+= current} operator=('+' | '-') values+=Multiplication)*;
+		//	Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Multiplication ({Op.values+= current} operator=('+' | '-') values+=Multiplication)*
+		//Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 		public Group getGroup() { return cGroup; }
 		
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 		
-		//({Op.values+= current} operator=('+' | '-') values+=Multiplication)*
+		//({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Op.values+= current}
+		//{Op.values+=current}
 		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 		
 		//operator=('+' | '-')
@@ -115,19 +115,19 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 		private final RuleCall cValuesTermParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
 		//Multiplication Expression:
-		//	Term ({Op.values+= current} operator=('*' | '/') values+=Term)*;
+		//	Term ({Op.values+=current} operator=('*' | '/') values+=Term)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Term ({Op.values+= current} operator=('*' | '/') values+=Term)*
+		//Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
 		public Group getGroup() { return cGroup; }
 		
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 		
-		//({Op.values+= current} operator=('*' | '/') values+=Term)*
+		//({Op.values+=current} operator=('*' | '/') values+=Term)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Op.values+= current}
+		//{Op.values+=current}
 		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 		
 		//operator=('*' | '/')
@@ -259,7 +259,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 
 	
 	//Sequence:
-	//	Addition ({Sequence.expressions+= current} expressions+=Addition)*;
+	//	Addition ({Sequence.expressions+=current} expressions+=Addition)*;
 	public SequenceElements getSequenceAccess() {
 		return pSequence;
 	}
@@ -269,7 +269,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//Addition Expression:
-	//	Multiplication ({Op.values+= current} operator=('+' | '-') values+=Multiplication)*;
+	//	Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return pAddition;
 	}
@@ -279,7 +279,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//Multiplication Expression:
-	//	Term ({Op.values+= current} operator=('*' | '/') values+=Term)*;
+	//	Term ({Op.values+=current} operator=('*' | '/') values+=Term)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return pMultiplication;
 	}

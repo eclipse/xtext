@@ -59,22 +59,22 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
 		
 		//Op Expression:
-		//	Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*;
+		//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*
+		//Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		public Group getGroup() { return cGroup; }
 		
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 		
-		//({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*
+		//({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//{Add.addOperands+= current} '+' addOperands+=Term
+		//{Add.addOperands+=current} '+' addOperands+=Term
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//{Add.addOperands+= current}
+		//{Add.addOperands+=current}
 		public Action getAddAddOperandsAction_1_0_0() { return cAddAddOperandsAction_1_0_0; }
 		
 		//'+'
@@ -86,10 +86,10 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 		//Term
 		public RuleCall getAddOperandsTermParserRuleCall_1_0_2_0() { return cAddOperandsTermParserRuleCall_1_0_2_0; }
 		
-		//{Minus.minusOperands+= current} '-' minusOperands+=Term
+		//{Minus.minusOperands+=current} '-' minusOperands+=Term
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//{Minus.minusOperands+= current}
+		//{Minus.minusOperands+=current}
 		public Action getMinusMinusOperandsAction_1_1_0() { return cMinusMinusOperandsAction_1_1_0; }
 		
 		//'-'
@@ -646,7 +646,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//Op Expression:
-	//	Term ({Add.addOperands+= current} '+' addOperands+=Term | {Minus.minusOperands+= current} '-' minusOperands+=Term)*;
+	//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
 	public OpElements getOpAccess() {
 		return pOp;
 	}

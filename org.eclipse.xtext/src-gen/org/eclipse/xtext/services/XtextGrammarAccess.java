@@ -113,7 +113,8 @@ public class XtextGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//GrammarID
 		public RuleCall getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1() { return cUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1; }
 		
-		//(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')?
+		//(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')
+		//?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//definesHiddenTokens?='hidden'
@@ -478,7 +479,8 @@ public class XtextGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//TypeRef
 		public RuleCall getTypeTypeRefParserRuleCall_1_1_1_1_0() { return cTypeTypeRefParserRuleCall_1_1_1_1_0; }
 		
-		//(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')?
+		//(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')
+		//?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//definesHiddenTokens?='hidden'

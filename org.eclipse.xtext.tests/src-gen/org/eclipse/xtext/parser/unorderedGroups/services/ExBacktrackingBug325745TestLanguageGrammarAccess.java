@@ -123,7 +123,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 	}
 	
 	//Expression:
-	//	{Expression} ( '['? & prefix=STRING? ) ('['? terms+=SimpleTerm ']'?)* ( ']'? & postfix=STRING? );
+	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 	public BacktrackingBug325745TestLanguageGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaBacktrackingBug325745TestLanguage.getExpressionAccess();
 	}
