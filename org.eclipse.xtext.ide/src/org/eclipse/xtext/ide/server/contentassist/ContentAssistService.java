@@ -183,19 +183,14 @@ public class ContentAssistService {
 	}
 
 	protected TextEdit toTextEdit(ReplaceRegion region, Document doc) {
-		Position start = null;
-		if (region.getOffset() > doc.getContents().length()) {
-			Position docEnd = doc.getPosition(doc.getContents().length());
-			start = new Position(docEnd.getLine(), docEnd.getCharacter() + region.getLength());
-		} else {
-			start = doc.getPosition(region.getOffset());
-		}
-		Position end = null;
-		if (region.getEndOffset() > doc.getContents().length()) {
-			end = new Position(start.getLine(), start.getCharacter() + region.getLength());
-		} else {
-			end = doc.getPosition(region.getEndOffset());
-		}
+		final Position start = getPosition(doc, region.getOffset());
+		final Position end = getPosition(doc, region.getEndOffset());
 		return new TextEdit(new Range(start, end), region.getText());
 	}
+	
+	private Position getPosition(final Document doc, final int offset) {
+		final int docLength = doc.getContents().length();
+		return offset > docLength ? doc.getPosition(docLength) : doc.getPosition(offset);
+    }
+    
 }
