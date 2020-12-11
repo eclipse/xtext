@@ -91,15 +91,15 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//Model:
-	//	{Model} ('1' ( first?='a'  & second?='b'  ) | '2' ( first?='a'  & second?='b' & third?='c' & forth?='d' ) | '3' ( first?='a'?
-	//	& second?='b'? ) | '4' ( first?='a'  & second?='b'? ) | '5' ( first?='a'? & second?='b'  ) | '6' ( firstAsList+='a'+
-	//	& secondAsList+='b'* ) | '7' ( firstAsList+='a'* & secondAsList+='b'+ ) | '8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d'
-	//	) | '9' ( firstAsList+='a' & secondAsList+='b' ) +
-	//	| '10' ( firstAsList+='a' & secondAsList+='b' ) *
-	//	| '11' ( first?='a' & second?='b' ) ?
-	//	| '12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' ) | '13' ( firstAsList+='a'
-	//	& secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
-	//	| '14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+	//	{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'
+	//	? & second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+
+	//	& secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d'
+	//	) | '9' (firstAsList+='a' & secondAsList+='b') +
+	//	| '10' (firstAsList+='a' & secondAsList+='b') *
+	//	| '11' (first?='a' & second?='b') ?
+	//	| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a'
+	//	& secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
+	//	| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 	//	| 'datatypes' value=UnorderedDatatype
 	//	| 'serialization' serialized=UnorderedSerialization
 	//	| 'bug302585' nestedModel+=NestedModel*);
@@ -112,7 +112,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//NestedModel:
-	//	{NestedModel} ( first?="a" & second?="b" ) ?
+	//	{NestedModel} (first?="a" & second?="b") ?
 	//	'nested';
 	public UnorderedGroupsTestLanguageGrammarAccess.NestedModelElements getNestedModelAccess() {
 		return gaUnorderedGroupsTestLanguage.getNestedModelAccess();
@@ -123,12 +123,12 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//UnorderedDatatype:
-	//	'1' ( 'a'  & 'b'  ) | '2' ( 'a'  & 'b' & 'c' & 'd' ) | '3' ( 'a'? & 'b'? ) | '4' ( 'a'  & 'b'? ) | '5' ( 'a'? & 'b'  ) | '6' (
-	//	'a'+ & 'b'* ) | '7' ( 'a'* & 'b'+ ) | '8' ( 'a' 'b' 'c' & 'a' 'b' 'd' ) | '9' ( 'a' & 'b' ) +
-	//	| '10' ( 'a' & 'b' ) *
-	//	| '11' ( 'a' & 'b' ) ?
-	//	| '12' ( 'a' & 'b' ) ( 'a' & 'b' ) | '13' ( 'a' & 'b' ) ? 'a' 'b'
-	//	| '14' ( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +;
+	//	'1' ('a' & 'b') | '2' ('a' & 'b' & 'c' & 'd') | '3' ('a'? & 'b'?) | '4' ('a' & 'b'?) | '5' ('a'? & 'b') | '6' ('a'+
+	//	& 'b'*) | '7' ('a'* & 'b'+) | '8' ('a' 'b' 'c' & 'a' 'b' 'd') | '9' ('a' & 'b') +
+	//	| '10' ('a' & 'b') *
+	//	| '11' ('a' & 'b') ?
+	//	| '12' ('a' & 'b') ('a' & 'b') | '13' ('a' & 'b') ? 'a' 'b'
+	//	| '14' (('a' & 'b') & ('c' & 'd')) +;
 	public UnorderedGroupsTestLanguageGrammarAccess.UnorderedDatatypeElements getUnorderedDatatypeAccess() {
 		return gaUnorderedGroupsTestLanguage.getUnorderedDatatypeAccess();
 	}
@@ -139,9 +139,9 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractElementF
 	
 	///* SuppressWarnings[potentialOverride] */
 	//UnorderedSerialization:
-	//	{UnorderedSerialization} ('1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
-	//	| '2' ( firstAsList+='a' & secondAsList+='b' ) *
-	//	| '3' ( firstAsList+='a'+ & second?='b' ) *);
+	//	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+	//	| '2' (firstAsList+='a' & secondAsList+='b') *
+	//	| '3' (firstAsList+='a'+ & second?='b') *);
 	public UnorderedGroupsTestLanguageGrammarAccess.UnorderedSerializationElements getUnorderedSerializationAccess() {
 		return gaUnorderedGroupsTestLanguage.getUnorderedSerializationAccess();
 	}

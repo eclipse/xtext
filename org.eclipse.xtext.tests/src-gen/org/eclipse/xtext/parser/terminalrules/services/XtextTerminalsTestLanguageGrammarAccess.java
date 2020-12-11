@@ -499,19 +499,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cGroupsGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//Alternatives AbstractElement:
-		//	Group ({Alternatives.groups+= current} ('|' groups+=Group)+)?;
+		//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Group ({Alternatives.groups+= current} ('|' groups+=Group)+)?
+		//Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//Group
 		public RuleCall getGroupParserRuleCall_0() { return cGroupParserRuleCall_0; }
 		
-		//({Alternatives.groups+= current} ('|' groups+=Group)+)?
+		//({Alternatives.groups+=current} ('|' groups+=Group)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Alternatives.groups+= current}
+		//{Alternatives.groups+=current}
 		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 		
 		//('|' groups+=Group)+
@@ -536,19 +536,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cTokensAbstractTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//Group AbstractElement:
-		//	AbstractToken ({Group.tokens+= current} tokens+=AbstractToken+)?;
+		//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//AbstractToken ({Group.tokens+= current} tokens+=AbstractToken+)?
+		//AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
 		public Group getGroup() { return cGroup; }
 		
 		//AbstractToken
 		public RuleCall getAbstractTokenParserRuleCall_0() { return cAbstractTokenParserRuleCall_0; }
 		
-		//({Group.tokens+= current} tokens+=AbstractToken+)?
+		//({Group.tokens+=current} tokens+=AbstractToken+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Group.tokens+= current}
+		//{Group.tokens+=current}
 		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 		
 		//tokens+=AbstractToken+
@@ -849,19 +849,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cGroupsAssignableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//AssignableAlternatives AbstractElement:
-		//	AssignableTerminal ({Alternatives.groups+= current} ('|' groups+=AssignableTerminal)+)?;
+		//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//AssignableTerminal ({Alternatives.groups+= current} ('|' groups+=AssignableTerminal)+)?
+		//AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//AssignableTerminal
 		public RuleCall getAssignableTerminalParserRuleCall_0() { return cAssignableTerminalParserRuleCall_0; }
 		
-		//({Alternatives.groups+= current} ('|' groups+=AssignableTerminal)+)?
+		//({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Alternatives.groups+= current}
+		//{Alternatives.groups+=current}
 		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 		
 		//('|' groups+=AssignableTerminal)+
@@ -1032,19 +1032,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cGroupsTerminalGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//TerminalAlternatives AbstractElement:
-		//	TerminalGroup ({Alternatives.groups+= current} ('|' groups+=TerminalGroup)+)?;
+		//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TerminalGroup ({Alternatives.groups+= current} ('|' groups+=TerminalGroup)+)?
+		//TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//TerminalGroup
 		public RuleCall getTerminalGroupParserRuleCall_0() { return cTerminalGroupParserRuleCall_0; }
 		
-		//({Alternatives.groups+= current} ('|' groups+=TerminalGroup)+)?
+		//({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Alternatives.groups+= current}
+		//{Alternatives.groups+=current}
 		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 		
 		//('|' groups+=TerminalGroup)+
@@ -1069,19 +1069,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cTokensTerminalTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//TerminalGroup AbstractElement:
-		//	TerminalToken ({Group.tokens+= current} tokens+=TerminalToken+)?;
+		//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TerminalToken ({Group.tokens+= current} tokens+=TerminalToken+)?
+		//TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
 		public Group getGroup() { return cGroup; }
 		
 		//TerminalToken
 		public RuleCall getTerminalTokenParserRuleCall_0() { return cTerminalTokenParserRuleCall_0; }
 		
-		//({Group.tokens+= current} tokens+=TerminalToken+)?
+		//({Group.tokens+=current} tokens+=TerminalToken+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Group.tokens+= current}
+		//{Group.tokens+=current}
 		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 		
 		//tokens+=TerminalToken+
@@ -1370,19 +1370,19 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//EnumLiterals AbstractElement:
-		//	EnumLiteralDeclaration ({Alternatives.groups+= current} ('|' groups+=EnumLiteralDeclaration)+)?;
+		//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//EnumLiteralDeclaration ({Alternatives.groups+= current} ('|' groups+=EnumLiteralDeclaration)+)?
+		//EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//EnumLiteralDeclaration
 		public RuleCall getEnumLiteralDeclarationParserRuleCall_0() { return cEnumLiteralDeclarationParserRuleCall_0; }
 		
-		//({Alternatives.groups+= current} ('|' groups+=EnumLiteralDeclaration)+)?
+		//({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Alternatives.groups+= current}
+		//{Alternatives.groups+=current}
 		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 		
 		//('|' groups+=EnumLiteralDeclaration)+
@@ -1648,7 +1648,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//Alternatives AbstractElement:
-	//	Group ({Alternatives.groups+= current} ('|' groups+=Group)+)?;
+	//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?;
 	public AlternativesElements getAlternativesAccess() {
 		return pAlternatives;
 	}
@@ -1658,7 +1658,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//Group AbstractElement:
-	//	AbstractToken ({Group.tokens+= current} tokens+=AbstractToken+)?;
+	//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 	public GroupElements getGroupAccess() {
 		return pGroup;
 	}
@@ -1759,7 +1759,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//AssignableAlternatives AbstractElement:
-	//	AssignableTerminal ({Alternatives.groups+= current} ('|' groups+=AssignableTerminal)+)?;
+	//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?;
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
 		return pAssignableAlternatives;
 	}
@@ -1811,7 +1811,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//TerminalAlternatives AbstractElement:
-	//	TerminalGroup ({Alternatives.groups+= current} ('|' groups+=TerminalGroup)+)?;
+	//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?;
 	public TerminalAlternativesElements getTerminalAlternativesAccess() {
 		return pTerminalAlternatives;
 	}
@@ -1821,7 +1821,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//TerminalGroup AbstractElement:
-	//	TerminalToken ({Group.tokens+= current} tokens+=TerminalToken+)?;
+	//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 	public TerminalGroupElements getTerminalGroupAccess() {
 		return pTerminalGroup;
 	}
@@ -1924,7 +1924,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//EnumLiterals AbstractElement:
-	//	EnumLiteralDeclaration ({Alternatives.groups+= current} ('|' groups+=EnumLiteralDeclaration)+)?;
+	//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?;
 	public EnumLiteralsElements getEnumLiteralsAccess() {
 		return pEnumLiterals;
 	}

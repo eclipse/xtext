@@ -105,13 +105,9 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractElementFinde
 	//Unit:
 	//	{Unit} documentation=DOCUMENTATION?
 	//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
-	//	'{' ( ('source' ':' sourceLocation=Path ';')?
-	//		& ('output' ':' outputLocation=Path ';')?
-	//		& ('provides' ':' providedCapabilities+=ProvidedCapability ';')*
-	//		& ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';')*
-	//		& ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')*
-	//		& functions+=Function*
-	//		)
+	//	'{' (('source' ':' sourceLocation=Path ';')? & ('output' ':' outputLocation=Path ';')? & ('provides' ':'
+	//	providedCapabilities+=ProvidedCapability ';')* & ('requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'
+	//	)* & ('requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';')* & functions+=Function*)
 	//	'}';
 	public BeeLangTestLanguageGrammarAccess.UnitElements getUnitAccess() {
 		return gaBeeLangTestLanguage.getUnitAccess();
@@ -122,9 +118,8 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//ProvidedCapability:
-	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ( ('when' ':' condExpr=Expression ';')?
-	//	    & "name" ':' name=ID ';' & ("version" ':' version=ID ';')?
-	//	    )
+	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' (('when' ':' condExpr=Expression ';')? & "name" ':' name=ID ';' &
+	//	("version" ':' version=ID ';')?)
 	//	'}')?;
 	public BeeLangTestLanguageGrammarAccess.ProvidedCapabilityElements getProvidedCapabilityAccess() {
 		return gaBeeLangTestLanguage.getProvidedCapabilityAccess();
@@ -135,12 +130,8 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//AliasedRequiredCapability:
-	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ( ('when' ':' condExpr=Expression ';')?  
-	//		& (greedy?="greedy" ';')? 
-	//		& ("requires-min" ':' min=INT ';')? 
-	//		& ("requires-max" ':' max=INT ';')?
-	//		& ("version" ':' versionRange=ID ';')?
-	//	  	)
+	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy" ';')
+	//	? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?)
 	//	'}');
 	public BeeLangTestLanguageGrammarAccess.AliasedRequiredCapabilityElements getAliasedRequiredCapabilityAccess() {
 		return gaBeeLangTestLanguage.getAliasedRequiredCapabilityAccess();
@@ -151,12 +142,9 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//RequiredCapability:
-	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ( ('when' ':' condExpr=Expression ';')?  
-	//		& (greedy?="greedy" ';')? 
-	//		& ("requires-min" ':' min=INT ';')? 
-	//		& ("requires-max" ':' max=INT ';')?
-	//		& ("version" ':' versionRange=ID ';')?
-	//	  	)
+	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' (('when' ':' condExpr=Expression ';')? & (greedy?="greedy"
+	//	';')? & ("requires-min" ':' min=INT ';')? & ("requires-max" ':' max=INT ';')? & ("version" ':' versionRange=ID ';')?
+	//	)
 	//	'}');
 	public BeeLangTestLanguageGrammarAccess.RequiredCapabilityElements getRequiredCapabilityAccess() {
 		return gaBeeLangTestLanguage.getRequiredCapabilityAccess();
@@ -659,8 +647,9 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//ClosureExpression Expression:
-	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)
-	//	* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
+	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
+	//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
+	//	parameters+=ParameterDeclaration)?
 	//	'|' funcExpr=OneOrManyExpressions;
 	public BeeLangTestLanguageGrammarAccess.ClosureExpressionElements getClosureExpressionAccess() {
 		return gaBeeLangTestLanguage.getClosureExpressionAccess();

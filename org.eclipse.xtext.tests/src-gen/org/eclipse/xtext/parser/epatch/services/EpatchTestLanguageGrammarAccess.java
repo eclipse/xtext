@@ -992,8 +992,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cImpFragFRAGMENTTerminalRuleCall_2_4_1_0 = (RuleCall)cImpFragAssignment_2_4_1.eContents().get(0);
 		
 		//ListAssignmentValue AssignmentValue:
-		//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]"
-		//	)?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
+		//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
+		//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
@@ -1754,8 +1754,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//ListAssignmentValue AssignmentValue:
-	//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]"
-	//	)?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
+	//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
+	//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
 	public ListAssignmentValueElements getListAssignmentValueAccess() {
 		return pListAssignmentValue;
 	}

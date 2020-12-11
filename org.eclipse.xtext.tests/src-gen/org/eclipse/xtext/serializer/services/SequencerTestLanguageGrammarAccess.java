@@ -1631,16 +1631,16 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cVal4UnorderedGroupValDelegateParserRuleCall_1_3_0 = (RuleCall)cVal4Assignment_1_3.eContents().get(0);
 		
 		//UnorderedGroup:
-		//	"#24" ( val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate );
+		//	"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#24" ( val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate )
+		//"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 		public Group getGroup() { return cGroup; }
 		
 		//"#24"
 		public Keyword getNumberSignDigitTwoDigitFourKeyword_0() { return cNumberSignDigitTwoDigitFourKeyword_0; }
 		
-		//( val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate )
+		//(val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//val1=ID
@@ -1744,10 +1744,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cVal3IDTerminalRuleCall_2_2_1_0 = (RuleCall)cVal3Assignment_2_2_1.eContents().get(0);
 		
 		//UnorderedGroupOptional:
-		//	"#25" {UnorderedGroupOptional} ( ("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)? );
+		//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#25" {UnorderedGroupOptional} ( ("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)? )
+		//"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
 		public Group getGroup() { return cGroup; }
 		
 		//"#25"
@@ -1756,7 +1756,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//{UnorderedGroupOptional}
 		public Action getUnorderedGroupOptionalAction_1() { return cUnorderedGroupOptionalAction_1; }
 		
-		//( ("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)? )
+		//(("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//("kw1" val1=ID)?
@@ -1809,10 +1809,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cVal3Kw3Keyword_2_2_0 = (Keyword)cVal3Assignment_2_2.eContents().get(0);
 		
 		//UnorderedGroupBoolean:
-		//	'#26' {UnorderedGroupBoolean} ( val1?='kw1'?  & val2?='kw2'? & val3?='kw3'? );
+		//	'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#26' {UnorderedGroupBoolean} ( val1?='kw1'?  & val2?='kw2'? & val3?='kw3'? )
+		//'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 		public Group getGroup() { return cGroup; }
 		
 		//'#26'
@@ -1821,7 +1821,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//{UnorderedGroupBoolean}
 		public Action getUnorderedGroupBooleanAction_1() { return cUnorderedGroupBooleanAction_1; }
 		
-		//( val1?='kw1'?  & val2?='kw2'? & val3?='kw3'? )
+		//(val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//val1?='kw1'?
@@ -3034,7 +3034,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//UnorderedGroup:
-	//	"#24" ( val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate );
+	//	"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate);
 	public UnorderedGroupElements getUnorderedGroupAccess() {
 		return pUnorderedGroup;
 	}
@@ -3074,7 +3074,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//UnorderedGroupOptional:
-	//	"#25" {UnorderedGroupOptional} ( ("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)? );
+	//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
 	public UnorderedGroupOptionalElements getUnorderedGroupOptionalAccess() {
 		return pUnorderedGroupOptional;
 	}
@@ -3084,7 +3084,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//UnorderedGroupBoolean:
-	//	'#26' {UnorderedGroupBoolean} ( val1?='kw1'?  & val2?='kw2'? & val3?='kw3'? );
+	//	'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?);
 	public UnorderedGroupBooleanElements getUnorderedGroupBooleanAccess() {
 		return pUnorderedGroupBoolean;
 	}

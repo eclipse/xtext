@@ -144,16 +144,16 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final RuleCall cPostfixSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cPostfixAssignment_3_1.eContents().get(0);
 		
 		//Expression:
-		//	{Expression} ( '['? & prefix=STRING? ) ('['? terms+=SimpleTerm ']'?)* ( ']'? & postfix=STRING? );
+		//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Expression} ( '['? & prefix=STRING? ) ('['? terms+=SimpleTerm ']'?)* ( ']'? & postfix=STRING? )
+		//{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?)
 		public Group getGroup() { return cGroup; }
 		
 		//{Expression}
 		public Action getExpressionAction_0() { return cExpressionAction_0; }
 		
-		//( '['? & prefix=STRING? )
+		//('['? & prefix=STRING?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//'['?
@@ -180,7 +180,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		//']'?
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 		
-		//( ']'? & postfix=STRING? )
+		//(']'? & postfix=STRING?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//']'?
@@ -343,7 +343,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 	}
 	
 	//Expression:
-	//	{Expression} ( '['? & prefix=STRING? ) ('['? terms+=SimpleTerm ']'?)* ( ']'? & postfix=STRING? );
+	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}

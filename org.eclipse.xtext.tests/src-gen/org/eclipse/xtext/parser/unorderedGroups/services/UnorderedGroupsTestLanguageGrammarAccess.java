@@ -166,29 +166,29 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cNestedModelNestedModelParserRuleCall_1_16_1_0 = (RuleCall)cNestedModelAssignment_1_16_1.eContents().get(0);
 		
 		//Model:
-		//	{Model} ('1' ( first?='a'  & second?='b'  ) | '2' ( first?='a'  & second?='b' & third?='c' & forth?='d' ) | '3' ( first?='a'?
-		//	& second?='b'? ) | '4' ( first?='a'  & second?='b'? ) | '5' ( first?='a'? & second?='b'  ) | '6' ( firstAsList+='a'+
-		//	& secondAsList+='b'* ) | '7' ( firstAsList+='a'* & secondAsList+='b'+ ) | '8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d'
-		//	) | '9' ( firstAsList+='a' & secondAsList+='b' ) +
-		//	| '10' ( firstAsList+='a' & secondAsList+='b' ) *
-		//	| '11' ( first?='a' & second?='b' ) ?
-		//	| '12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' ) | '13' ( firstAsList+='a'
-		//	& secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
-		//	| '14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+		//	{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'
+		//	? & second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+
+		//	& secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d'
+		//	) | '9' (firstAsList+='a' & secondAsList+='b') +
+		//	| '10' (firstAsList+='a' & secondAsList+='b') *
+		//	| '11' (first?='a' & second?='b') ?
+		//	| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a'
+		//	& secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
+		//	| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 		//	| 'datatypes' value=UnorderedDatatype
 		//	| 'serialization' serialized=UnorderedSerialization
 		//	| 'bug302585' nestedModel+=NestedModel*);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} ('1' ( first?='a'  & second?='b'  ) | '2' ( first?='a'  & second?='b' & third?='c' & forth?='d' ) | '3' ( first?='a'?
-		//& second?='b'? ) | '4' ( first?='a'  & second?='b'? ) | '5' ( first?='a'? & second?='b'  ) | '6' ( firstAsList+='a'+
-		//& secondAsList+='b'* ) | '7' ( firstAsList+='a'* & secondAsList+='b'+ ) | '8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d' ) |
-		//'9' ( firstAsList+='a' & secondAsList+='b' ) +
-		//| '10' ( firstAsList+='a' & secondAsList+='b' ) *
-		//| '11' ( first?='a' & second?='b' ) ?
-		//| '12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' ) | '13' ( firstAsList+='a'
-		//& secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
-		//| '14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+		//{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'?
+		//& second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+
+		//& secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') |
+		//'9' (firstAsList+='a' & secondAsList+='b') +
+		//| '10' (firstAsList+='a' & secondAsList+='b') *
+		//| '11' (first?='a' & second?='b') ?
+		//| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a'
+		//& secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
+		//| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 		//| 'datatypes' value=UnorderedDatatype
 		//| 'serialization' serialized=UnorderedSerialization
 		//| 'bug302585' nestedModel+=NestedModel*)
@@ -197,27 +197,27 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//('1' ( first?='a'  & second?='b'  ) | '2' ( first?='a'  & second?='b' & third?='c' & forth?='d' ) | '3' ( first?='a'? & second?=
-		//'b'? ) | '4' ( first?='a'  & second?='b'? ) | '5' ( first?='a'? & second?='b'  ) | '6' ( firstAsList+='a'+ & secondAsList+='b'
-		//* ) | '7' ( firstAsList+='a'* & secondAsList+='b'+ ) | '8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d' ) | '9' ( firstAsList+=
-		//'a' & secondAsList+='b' ) +
-		//| '10' ( firstAsList+='a' & secondAsList+='b' ) *
-		//| '11' ( first?='a' & second?='b' ) ?
-		//| '12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' ) | '13' ( firstAsList+='a'
-		//& secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
-		//| '14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+		//('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'? & second?=
+		//'b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ & secondAsList+='b'*)
+		//| '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') | '9' (firstAsList+='a'
+		//& secondAsList+='b') +
+		//| '10' (firstAsList+='a' & secondAsList+='b') *
+		//| '11' (first?='a' & second?='b') ?
+		//| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a'
+		//& secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
+		//| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 		//| 'datatypes' value=UnorderedDatatype
 		//| 'serialization' serialized=UnorderedSerialization
 		//| 'bug302585' nestedModel+=NestedModel*)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//'1' ( first?='a'  & second?='b'  )
+		//'1' (first?='a' & second?='b')
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//'1'
 		public Keyword getDigitOneKeyword_1_0_0() { return cDigitOneKeyword_1_0_0; }
 		
-		//( first?='a'  & second?='b'  )
+		//(first?='a' & second?='b')
 		public UnorderedGroup getUnorderedGroup_1_0_1() { return cUnorderedGroup_1_0_1; }
 		
 		//first?='a'
@@ -232,13 +232,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondBKeyword_1_0_1_1_0() { return cSecondBKeyword_1_0_1_1_0; }
 		
-		//'2' ( first?='a'  & second?='b' & third?='c' & forth?='d' )
+		//'2' (first?='a' & second?='b' & third?='c' & forth?='d')
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//'2'
 		public Keyword getDigitTwoKeyword_1_1_0() { return cDigitTwoKeyword_1_1_0; }
 		
-		//( first?='a'  & second?='b' & third?='c' & forth?='d' )
+		//(first?='a' & second?='b' & third?='c' & forth?='d')
 		public UnorderedGroup getUnorderedGroup_1_1_1() { return cUnorderedGroup_1_1_1; }
 		
 		//first?='a'
@@ -265,13 +265,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'d'
 		public Keyword getForthDKeyword_1_1_1_3_0() { return cForthDKeyword_1_1_1_3_0; }
 		
-		//'3' ( first?='a'? & second?='b'? )
+		//'3' (first?='a'? & second?='b'?)
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
 		//'3'
 		public Keyword getDigitThreeKeyword_1_2_0() { return cDigitThreeKeyword_1_2_0; }
 		
-		//( first?='a'? & second?='b'? )
+		//(first?='a'? & second?='b'?)
 		public UnorderedGroup getUnorderedGroup_1_2_1() { return cUnorderedGroup_1_2_1; }
 		
 		//first?='a'?
@@ -286,13 +286,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondBKeyword_1_2_1_1_0() { return cSecondBKeyword_1_2_1_1_0; }
 		
-		//'4' ( first?='a'  & second?='b'? )
+		//'4' (first?='a' & second?='b'?)
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//'4'
 		public Keyword getDigitFourKeyword_1_3_0() { return cDigitFourKeyword_1_3_0; }
 		
-		//( first?='a'  & second?='b'? )
+		//(first?='a' & second?='b'?)
 		public UnorderedGroup getUnorderedGroup_1_3_1() { return cUnorderedGroup_1_3_1; }
 		
 		//first?='a'
@@ -307,13 +307,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondBKeyword_1_3_1_1_0() { return cSecondBKeyword_1_3_1_1_0; }
 		
-		//'5' ( first?='a'? & second?='b'  )
+		//'5' (first?='a'? & second?='b')
 		public Group getGroup_1_4() { return cGroup_1_4; }
 		
 		//'5'
 		public Keyword getDigitFiveKeyword_1_4_0() { return cDigitFiveKeyword_1_4_0; }
 		
-		//( first?='a'? & second?='b'  )
+		//(first?='a'? & second?='b')
 		public UnorderedGroup getUnorderedGroup_1_4_1() { return cUnorderedGroup_1_4_1; }
 		
 		//first?='a'?
@@ -328,13 +328,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondBKeyword_1_4_1_1_0() { return cSecondBKeyword_1_4_1_1_0; }
 		
-		//'6' ( firstAsList+='a'+ & secondAsList+='b'* )
+		//'6' (firstAsList+='a'+ & secondAsList+='b'*)
 		public Group getGroup_1_5() { return cGroup_1_5; }
 		
 		//'6'
 		public Keyword getDigitSixKeyword_1_5_0() { return cDigitSixKeyword_1_5_0; }
 		
-		//( firstAsList+='a'+ & secondAsList+='b'* )
+		//(firstAsList+='a'+ & secondAsList+='b'*)
 		public UnorderedGroup getUnorderedGroup_1_5_1() { return cUnorderedGroup_1_5_1; }
 		
 		//firstAsList+='a'+
@@ -349,13 +349,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_5_1_1_0() { return cSecondAsListBKeyword_1_5_1_1_0; }
 		
-		//'7' ( firstAsList+='a'* & secondAsList+='b'+ )
+		//'7' (firstAsList+='a'* & secondAsList+='b'+)
 		public Group getGroup_1_6() { return cGroup_1_6; }
 		
 		//'7'
 		public Keyword getDigitSevenKeyword_1_6_0() { return cDigitSevenKeyword_1_6_0; }
 		
-		//( firstAsList+='a'* & secondAsList+='b'+ )
+		//(firstAsList+='a'* & secondAsList+='b'+)
 		public UnorderedGroup getUnorderedGroup_1_6_1() { return cUnorderedGroup_1_6_1; }
 		
 		//firstAsList+='a'*
@@ -370,13 +370,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_6_1_1_0() { return cSecondAsListBKeyword_1_6_1_1_0; }
 		
-		//'8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d' )
+		//'8' ('a' 'b' first?='c' & 'a' 'b' second?='d')
 		public Group getGroup_1_7() { return cGroup_1_7; }
 		
 		//'8'
 		public Keyword getDigitEightKeyword_1_7_0() { return cDigitEightKeyword_1_7_0; }
 		
-		//( 'a' 'b' first?='c' & 'a' 'b' second?='d' )
+		//('a' 'b' first?='c' & 'a' 'b' second?='d')
 		public UnorderedGroup getUnorderedGroup_1_7_1() { return cUnorderedGroup_1_7_1; }
 		
 		//'a' 'b' first?='c'
@@ -409,13 +409,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'d'
 		public Keyword getSecondDKeyword_1_7_1_1_2_0() { return cSecondDKeyword_1_7_1_1_2_0; }
 		
-		//'9' ( firstAsList+='a' & secondAsList+='b' ) +
+		//'9' (firstAsList+='a' & secondAsList+='b') +
 		public Group getGroup_1_8() { return cGroup_1_8; }
 		
 		//'9'
 		public Keyword getDigitNineKeyword_1_8_0() { return cDigitNineKeyword_1_8_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' ) +
+		//(firstAsList+='a' & secondAsList+='b') +
 		public UnorderedGroup getUnorderedGroup_1_8_1() { return cUnorderedGroup_1_8_1; }
 		
 		//firstAsList+='a'
@@ -430,13 +430,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_8_1_1_0() { return cSecondAsListBKeyword_1_8_1_1_0; }
 		
-		//'10' ( firstAsList+='a' & secondAsList+='b' ) *
+		//'10' (firstAsList+='a' & secondAsList+='b') *
 		public Group getGroup_1_9() { return cGroup_1_9; }
 		
 		//'10'
 		public Keyword getDigitOneDigitZeroKeyword_1_9_0() { return cDigitOneDigitZeroKeyword_1_9_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' ) *
+		//(firstAsList+='a' & secondAsList+='b') *
 		public UnorderedGroup getUnorderedGroup_1_9_1() { return cUnorderedGroup_1_9_1; }
 		
 		//firstAsList+='a'
@@ -451,13 +451,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_9_1_1_0() { return cSecondAsListBKeyword_1_9_1_1_0; }
 		
-		//'11' ( first?='a' & second?='b' ) ?
+		//'11' (first?='a' & second?='b') ?
 		public Group getGroup_1_10() { return cGroup_1_10; }
 		
 		//'11'
 		public Keyword getDigitOneDigitOneKeyword_1_10_0() { return cDigitOneDigitOneKeyword_1_10_0; }
 		
-		//( first?='a' & second?='b' ) ?
+		//(first?='a' & second?='b') ?
 		public UnorderedGroup getUnorderedGroup_1_10_1() { return cUnorderedGroup_1_10_1; }
 		
 		//first?='a'
@@ -472,13 +472,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondBKeyword_1_10_1_1_0() { return cSecondBKeyword_1_10_1_1_0; }
 		
-		//'12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' )
+		//'12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b')
 		public Group getGroup_1_11() { return cGroup_1_11; }
 		
 		//'12'
 		public Keyword getDigitOneDigitTwoKeyword_1_11_0() { return cDigitOneDigitTwoKeyword_1_11_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' )
+		//(firstAsList+='a' & secondAsList+='b')
 		public UnorderedGroup getUnorderedGroup_1_11_1() { return cUnorderedGroup_1_11_1; }
 		
 		//firstAsList+='a'
@@ -493,7 +493,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_11_1_1_0() { return cSecondAsListBKeyword_1_11_1_1_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' )
+		//(firstAsList+='a' & secondAsList+='b')
 		public UnorderedGroup getUnorderedGroup_1_11_2() { return cUnorderedGroup_1_11_2; }
 		
 		//firstAsList+='a'
@@ -508,13 +508,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_11_2_1_0() { return cSecondAsListBKeyword_1_11_2_1_0; }
 		
-		//'13' ( firstAsList+='a' & secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
+		//'13' (firstAsList+='a' & secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
 		public Group getGroup_1_12() { return cGroup_1_12; }
 		
 		//'13'
 		public Keyword getDigitOneDigitThreeKeyword_1_12_0() { return cDigitOneDigitThreeKeyword_1_12_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' ) ?
+		//(firstAsList+='a' & secondAsList+='b') ?
 		public UnorderedGroup getUnorderedGroup_1_12_1() { return cUnorderedGroup_1_12_1; }
 		
 		//firstAsList+='a'
@@ -541,16 +541,16 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_12_3_0() { return cSecondAsListBKeyword_1_12_3_0; }
 		
-		//'14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+		//'14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 		public Group getGroup_1_13() { return cGroup_1_13; }
 		
 		//'14'
 		public Keyword getDigitOneDigitFourKeyword_1_13_0() { return cDigitOneDigitFourKeyword_1_13_0; }
 		
-		//( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+		//((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 		public UnorderedGroup getUnorderedGroup_1_13_1() { return cUnorderedGroup_1_13_1; }
 		
-		//( firstAsList+='a' & secondAsList+='b' )
+		//(firstAsList+='a' & secondAsList+='b')
 		public UnorderedGroup getUnorderedGroup_1_13_1_0() { return cUnorderedGroup_1_13_1_0; }
 		
 		//firstAsList+='a'
@@ -565,7 +565,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_13_1_0_1_0() { return cSecondAsListBKeyword_1_13_1_0_1_0; }
 		
-		//( thirdAsList+='c' & forthAsList+='d' )
+		//(thirdAsList+='c' & forthAsList+='d')
 		public UnorderedGroup getUnorderedGroup_1_13_1_1() { return cUnorderedGroup_1_13_1_1; }
 		
 		//thirdAsList+='c'
@@ -628,18 +628,18 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cNestedKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//NestedModel:
-		//	{NestedModel} ( first?="a" & second?="b" ) ?
+		//	{NestedModel} (first?="a" & second?="b") ?
 		//	'nested';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{NestedModel} ( first?="a" & second?="b" ) ?
+		//{NestedModel} (first?="a" & second?="b") ?
 		//'nested'
 		public Group getGroup() { return cGroup; }
 		
 		//{NestedModel}
 		public Action getNestedModelAction_0() { return cNestedModelAction_0; }
 		
-		//( first?="a" & second?="b" ) ?
+		//(first?="a" & second?="b") ?
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//first?="a"
@@ -749,29 +749,29 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cDKeyword_13_1_1_1 = (Keyword)cUnorderedGroup_13_1_1.eContents().get(1);
 		
 		//UnorderedDatatype:
-		//	'1' ( 'a'  & 'b'  ) | '2' ( 'a'  & 'b' & 'c' & 'd' ) | '3' ( 'a'? & 'b'? ) | '4' ( 'a'  & 'b'? ) | '5' ( 'a'? & 'b'  ) | '6' (
-		//	'a'+ & 'b'* ) | '7' ( 'a'* & 'b'+ ) | '8' ( 'a' 'b' 'c' & 'a' 'b' 'd' ) | '9' ( 'a' & 'b' ) +
-		//	| '10' ( 'a' & 'b' ) *
-		//	| '11' ( 'a' & 'b' ) ?
-		//	| '12' ( 'a' & 'b' ) ( 'a' & 'b' ) | '13' ( 'a' & 'b' ) ? 'a' 'b'
-		//	| '14' ( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +;
+		//	'1' ('a' & 'b') | '2' ('a' & 'b' & 'c' & 'd') | '3' ('a'? & 'b'?) | '4' ('a' & 'b'?) | '5' ('a'? & 'b') | '6' ('a'+
+		//	& 'b'*) | '7' ('a'* & 'b'+) | '8' ('a' 'b' 'c' & 'a' 'b' 'd') | '9' ('a' & 'b') +
+		//	| '10' ('a' & 'b') *
+		//	| '11' ('a' & 'b') ?
+		//	| '12' ('a' & 'b') ('a' & 'b') | '13' ('a' & 'b') ? 'a' 'b'
+		//	| '14' (('a' & 'b') & ('c' & 'd')) +;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1' ( 'a'  & 'b'  ) | '2' ( 'a'  & 'b' & 'c' & 'd' ) | '3' ( 'a'? & 'b'? ) | '4' ( 'a'  & 'b'? ) | '5' ( 'a'? & 'b'  ) | '6' (
-		//'a'+ & 'b'* ) | '7' ( 'a'* & 'b'+ ) | '8' ( 'a' 'b' 'c' & 'a' 'b' 'd' ) | '9' ( 'a' & 'b' ) +
-		//| '10' ( 'a' & 'b' ) *
-		//| '11' ( 'a' & 'b' ) ?
-		//| '12' ( 'a' & 'b' ) ( 'a' & 'b' ) | '13' ( 'a' & 'b' ) ? 'a' 'b'
-		//| '14' ( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +
+		//'1' ('a' & 'b') | '2' ('a' & 'b' & 'c' & 'd') | '3' ('a'? & 'b'?) | '4' ('a' & 'b'?) | '5' ('a'? & 'b') | '6' ('a'+
+		//& 'b'*) | '7' ('a'* & 'b'+) | '8' ('a' 'b' 'c' & 'a' 'b' 'd') | '9' ('a' & 'b') +
+		//| '10' ('a' & 'b') *
+		//| '11' ('a' & 'b') ?
+		//| '12' ('a' & 'b') ('a' & 'b') | '13' ('a' & 'b') ? 'a' 'b'
+		//| '14' (('a' & 'b') & ('c' & 'd')) +
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'1' ( 'a'  & 'b'  )
+		//'1' ('a' & 'b')
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'1'
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 		
-		//( 'a'  & 'b'  )
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_0_1() { return cUnorderedGroup_0_1; }
 		
 		//'a'
@@ -780,13 +780,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_0_1_1() { return cBKeyword_0_1_1; }
 		
-		//'2' ( 'a'  & 'b' & 'c' & 'd' )
+		//'2' ('a' & 'b' & 'c' & 'd')
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'2'
 		public Keyword getDigitTwoKeyword_1_0() { return cDigitTwoKeyword_1_0; }
 		
-		//( 'a'  & 'b' & 'c' & 'd' )
+		//('a' & 'b' & 'c' & 'd')
 		public UnorderedGroup getUnorderedGroup_1_1() { return cUnorderedGroup_1_1; }
 		
 		//'a'
@@ -801,13 +801,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'d'
 		public Keyword getDKeyword_1_1_3() { return cDKeyword_1_1_3; }
 		
-		//'3' ( 'a'? & 'b'? )
+		//'3' ('a'? & 'b'?)
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'3'
 		public Keyword getDigitThreeKeyword_2_0() { return cDigitThreeKeyword_2_0; }
 		
-		//( 'a'? & 'b'? )
+		//('a'? & 'b'?)
 		public UnorderedGroup getUnorderedGroup_2_1() { return cUnorderedGroup_2_1; }
 		
 		//'a'?
@@ -816,13 +816,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'?
 		public Keyword getBKeyword_2_1_1() { return cBKeyword_2_1_1; }
 		
-		//'4' ( 'a'  & 'b'? )
+		//'4' ('a' & 'b'?)
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'4'
 		public Keyword getDigitFourKeyword_3_0() { return cDigitFourKeyword_3_0; }
 		
-		//( 'a'  & 'b'? )
+		//('a' & 'b'?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 		
 		//'a'
@@ -831,13 +831,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'?
 		public Keyword getBKeyword_3_1_1() { return cBKeyword_3_1_1; }
 		
-		//'5' ( 'a'? & 'b'  )
+		//'5' ('a'? & 'b')
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'5'
 		public Keyword getDigitFiveKeyword_4_0() { return cDigitFiveKeyword_4_0; }
 		
-		//( 'a'? & 'b'  )
+		//('a'? & 'b')
 		public UnorderedGroup getUnorderedGroup_4_1() { return cUnorderedGroup_4_1; }
 		
 		//'a'?
@@ -846,13 +846,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_4_1_1() { return cBKeyword_4_1_1; }
 		
-		//'6' ( 'a'+ & 'b'* )
+		//'6' ('a'+ & 'b'*)
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'6'
 		public Keyword getDigitSixKeyword_5_0() { return cDigitSixKeyword_5_0; }
 		
-		//( 'a'+ & 'b'* )
+		//('a'+ & 'b'*)
 		public UnorderedGroup getUnorderedGroup_5_1() { return cUnorderedGroup_5_1; }
 		
 		//'a'+
@@ -861,13 +861,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'*
 		public Keyword getBKeyword_5_1_1() { return cBKeyword_5_1_1; }
 		
-		//'7' ( 'a'* & 'b'+ )
+		//'7' ('a'* & 'b'+)
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//'7'
 		public Keyword getDigitSevenKeyword_6_0() { return cDigitSevenKeyword_6_0; }
 		
-		//( 'a'* & 'b'+ )
+		//('a'* & 'b'+)
 		public UnorderedGroup getUnorderedGroup_6_1() { return cUnorderedGroup_6_1; }
 		
 		//'a'*
@@ -876,13 +876,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'+
 		public Keyword getBKeyword_6_1_1() { return cBKeyword_6_1_1; }
 		
-		//'8' ( 'a' 'b' 'c' & 'a' 'b' 'd' )
+		//'8' ('a' 'b' 'c' & 'a' 'b' 'd')
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//'8'
 		public Keyword getDigitEightKeyword_7_0() { return cDigitEightKeyword_7_0; }
 		
-		//( 'a' 'b' 'c' & 'a' 'b' 'd' )
+		//('a' 'b' 'c' & 'a' 'b' 'd')
 		public UnorderedGroup getUnorderedGroup_7_1() { return cUnorderedGroup_7_1; }
 		
 		//'a' 'b' 'c'
@@ -909,13 +909,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'d'
 		public Keyword getDKeyword_7_1_1_2() { return cDKeyword_7_1_1_2; }
 		
-		//'9' ( 'a' & 'b' ) +
+		//'9' ('a' & 'b') +
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//'9'
 		public Keyword getDigitNineKeyword_8_0() { return cDigitNineKeyword_8_0; }
 		
-		//( 'a' & 'b' ) +
+		//('a' & 'b') +
 		public UnorderedGroup getUnorderedGroup_8_1() { return cUnorderedGroup_8_1; }
 		
 		//'a'
@@ -924,13 +924,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_8_1_1() { return cBKeyword_8_1_1; }
 		
-		//'10' ( 'a' & 'b' ) *
+		//'10' ('a' & 'b') *
 		public Group getGroup_9() { return cGroup_9; }
 		
 		//'10'
 		public Keyword getDigitOneDigitZeroKeyword_9_0() { return cDigitOneDigitZeroKeyword_9_0; }
 		
-		//( 'a' & 'b' ) *
+		//('a' & 'b') *
 		public UnorderedGroup getUnorderedGroup_9_1() { return cUnorderedGroup_9_1; }
 		
 		//'a'
@@ -939,13 +939,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_9_1_1() { return cBKeyword_9_1_1; }
 		
-		//'11' ( 'a' & 'b' ) ?
+		//'11' ('a' & 'b') ?
 		public Group getGroup_10() { return cGroup_10; }
 		
 		//'11'
 		public Keyword getDigitOneDigitOneKeyword_10_0() { return cDigitOneDigitOneKeyword_10_0; }
 		
-		//( 'a' & 'b' ) ?
+		//('a' & 'b') ?
 		public UnorderedGroup getUnorderedGroup_10_1() { return cUnorderedGroup_10_1; }
 		
 		//'a'
@@ -954,13 +954,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_10_1_1() { return cBKeyword_10_1_1; }
 		
-		//'12' ( 'a' & 'b' ) ( 'a' & 'b' )
+		//'12' ('a' & 'b') ('a' & 'b')
 		public Group getGroup_11() { return cGroup_11; }
 		
 		//'12'
 		public Keyword getDigitOneDigitTwoKeyword_11_0() { return cDigitOneDigitTwoKeyword_11_0; }
 		
-		//( 'a' & 'b' )
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_11_1() { return cUnorderedGroup_11_1; }
 		
 		//'a'
@@ -969,7 +969,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_11_1_1() { return cBKeyword_11_1_1; }
 		
-		//( 'a' & 'b' )
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_11_2() { return cUnorderedGroup_11_2; }
 		
 		//'a'
@@ -978,13 +978,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_11_2_1() { return cBKeyword_11_2_1; }
 		
-		//'13' ( 'a' & 'b' ) ? 'a' 'b'
+		//'13' ('a' & 'b') ? 'a' 'b'
 		public Group getGroup_12() { return cGroup_12; }
 		
 		//'13'
 		public Keyword getDigitOneDigitThreeKeyword_12_0() { return cDigitOneDigitThreeKeyword_12_0; }
 		
-		//( 'a' & 'b' ) ?
+		//('a' & 'b') ?
 		public UnorderedGroup getUnorderedGroup_12_1() { return cUnorderedGroup_12_1; }
 		
 		//'a'
@@ -999,16 +999,16 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_12_3() { return cBKeyword_12_3; }
 		
-		//'14' ( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +
+		//'14' (('a' & 'b') & ('c' & 'd')) +
 		public Group getGroup_13() { return cGroup_13; }
 		
 		//'14'
 		public Keyword getDigitOneDigitFourKeyword_13_0() { return cDigitOneDigitFourKeyword_13_0; }
 		
-		//( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +
+		//(('a' & 'b') & ('c' & 'd')) +
 		public UnorderedGroup getUnorderedGroup_13_1() { return cUnorderedGroup_13_1; }
 		
-		//( 'a' & 'b' )
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_13_1_0() { return cUnorderedGroup_13_1_0; }
 		
 		//'a'
@@ -1017,7 +1017,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getBKeyword_13_1_0_1() { return cBKeyword_13_1_0_1; }
 		
-		//( 'c' & 'd' )
+		//('c' & 'd')
 		public UnorderedGroup getUnorderedGroup_13_1_1() { return cUnorderedGroup_13_1_1; }
 		
 		//'c'
@@ -1059,25 +1059,25 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		
 		///* SuppressWarnings[potentialOverride] */
 		//UnorderedSerialization:
-		//	{UnorderedSerialization} ('1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
-		//	| '2' ( firstAsList+='a' & secondAsList+='b' ) *
-		//	| '3' ( firstAsList+='a'+ & second?='b' ) *);
+		//	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+		//	| '2' (firstAsList+='a' & secondAsList+='b') *
+		//	| '3' (firstAsList+='a'+ & second?='b') *);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{UnorderedSerialization} ('1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
-		//| '2' ( firstAsList+='a' & secondAsList+='b' ) *
-		//| '3' ( firstAsList+='a'+ & second?='b' ) *)
+		//{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+		//| '2' (firstAsList+='a' & secondAsList+='b') *
+		//| '3' (firstAsList+='a'+ & second?='b') *)
 		public Group getGroup() { return cGroup; }
 		
 		//{UnorderedSerialization}
 		public Action getUnorderedSerializationAction_0() { return cUnorderedSerializationAction_0; }
 		
-		//('1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
-		//| '2' ( firstAsList+='a' & secondAsList+='b' ) *
-		//| '3' ( firstAsList+='a'+ & second?='b' ) *)
+		//('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+		//| '2' (firstAsList+='a' & secondAsList+='b') *
+		//| '3' (firstAsList+='a'+ & second?='b') *)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//'1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
+		//'1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
 		public UnorderedGroup getUnorderedGroup_1_0() { return cUnorderedGroup_1_0; }
 		
 		//'1' first?='a'?
@@ -1110,13 +1110,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'d'
 		public Keyword getForthDKeyword_1_0_3_0() { return cForthDKeyword_1_0_3_0; }
 		
-		//'2' ( firstAsList+='a' & secondAsList+='b' ) *
+		//'2' (firstAsList+='a' & secondAsList+='b') *
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//'2'
 		public Keyword getDigitTwoKeyword_1_1_0() { return cDigitTwoKeyword_1_1_0; }
 		
-		//( firstAsList+='a' & secondAsList+='b' ) *
+		//(firstAsList+='a' & secondAsList+='b') *
 		public UnorderedGroup getUnorderedGroup_1_1_1() { return cUnorderedGroup_1_1_1; }
 		
 		//firstAsList+='a'
@@ -1131,13 +1131,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_1_1_1_0() { return cSecondAsListBKeyword_1_1_1_1_0; }
 		
-		//'3' ( firstAsList+='a'+ & second?='b' ) *
+		//'3' (firstAsList+='a'+ & second?='b') *
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
 		//'3'
 		public Keyword getDigitThreeKeyword_1_2_0() { return cDigitThreeKeyword_1_2_0; }
 		
-		//( firstAsList+='a'+ & second?='b' ) *
+		//(firstAsList+='a'+ & second?='b') *
 		public UnorderedGroup getUnorderedGroup_1_2_1() { return cUnorderedGroup_1_2_1; }
 		
 		//firstAsList+='a'+
@@ -1202,15 +1202,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 
 	
 	//Model:
-	//	{Model} ('1' ( first?='a'  & second?='b'  ) | '2' ( first?='a'  & second?='b' & third?='c' & forth?='d' ) | '3' ( first?='a'?
-	//	& second?='b'? ) | '4' ( first?='a'  & second?='b'? ) | '5' ( first?='a'? & second?='b'  ) | '6' ( firstAsList+='a'+
-	//	& secondAsList+='b'* ) | '7' ( firstAsList+='a'* & secondAsList+='b'+ ) | '8' ( 'a' 'b' first?='c' & 'a' 'b' second?='d'
-	//	) | '9' ( firstAsList+='a' & secondAsList+='b' ) +
-	//	| '10' ( firstAsList+='a' & secondAsList+='b' ) *
-	//	| '11' ( first?='a' & second?='b' ) ?
-	//	| '12' ( firstAsList+='a' & secondAsList+='b' ) ( firstAsList+='a' & secondAsList+='b' ) | '13' ( firstAsList+='a'
-	//	& secondAsList+='b' ) ? firstAsList+='a' secondAsList+='b'
-	//	| '14' ( ( firstAsList+='a' & secondAsList+='b' ) & ( thirdAsList+='c' & forthAsList+='d' ) ) +
+	//	{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'
+	//	? & second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+
+	//	& secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d'
+	//	) | '9' (firstAsList+='a' & secondAsList+='b') +
+	//	| '10' (firstAsList+='a' & secondAsList+='b') *
+	//	| '11' (first?='a' & second?='b') ?
+	//	| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a'
+	//	& secondAsList+='b') ? firstAsList+='a' secondAsList+='b'
+	//	| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d')) +
 	//	| 'datatypes' value=UnorderedDatatype
 	//	| 'serialization' serialized=UnorderedSerialization
 	//	| 'bug302585' nestedModel+=NestedModel*);
@@ -1223,7 +1223,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//NestedModel:
-	//	{NestedModel} ( first?="a" & second?="b" ) ?
+	//	{NestedModel} (first?="a" & second?="b") ?
 	//	'nested';
 	public NestedModelElements getNestedModelAccess() {
 		return pNestedModel;
@@ -1234,12 +1234,12 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//UnorderedDatatype:
-	//	'1' ( 'a'  & 'b'  ) | '2' ( 'a'  & 'b' & 'c' & 'd' ) | '3' ( 'a'? & 'b'? ) | '4' ( 'a'  & 'b'? ) | '5' ( 'a'? & 'b'  ) | '6' (
-	//	'a'+ & 'b'* ) | '7' ( 'a'* & 'b'+ ) | '8' ( 'a' 'b' 'c' & 'a' 'b' 'd' ) | '9' ( 'a' & 'b' ) +
-	//	| '10' ( 'a' & 'b' ) *
-	//	| '11' ( 'a' & 'b' ) ?
-	//	| '12' ( 'a' & 'b' ) ( 'a' & 'b' ) | '13' ( 'a' & 'b' ) ? 'a' 'b'
-	//	| '14' ( ( 'a' & 'b' ) & ( 'c' & 'd' ) ) +;
+	//	'1' ('a' & 'b') | '2' ('a' & 'b' & 'c' & 'd') | '3' ('a'? & 'b'?) | '4' ('a' & 'b'?) | '5' ('a'? & 'b') | '6' ('a'+
+	//	& 'b'*) | '7' ('a'* & 'b'+) | '8' ('a' 'b' 'c' & 'a' 'b' 'd') | '9' ('a' & 'b') +
+	//	| '10' ('a' & 'b') *
+	//	| '11' ('a' & 'b') ?
+	//	| '12' ('a' & 'b') ('a' & 'b') | '13' ('a' & 'b') ? 'a' 'b'
+	//	| '14' (('a' & 'b') & ('c' & 'd')) +;
 	public UnorderedDatatypeElements getUnorderedDatatypeAccess() {
 		return pUnorderedDatatype;
 	}
@@ -1250,9 +1250,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractElementFin
 	
 	///* SuppressWarnings[potentialOverride] */
 	//UnorderedSerialization:
-	//	{UnorderedSerialization} ('1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
-	//	| '2' ( firstAsList+='a' & secondAsList+='b' ) *
-	//	| '3' ( firstAsList+='a'+ & second?='b' ) *);
+	//	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+	//	| '2' (firstAsList+='a' & secondAsList+='b') *
+	//	| '3' (firstAsList+='a'+ & second?='b') *);
 	public UnorderedSerializationElements getUnorderedSerializationAccess() {
 		return pUnorderedSerialization;
 	}
