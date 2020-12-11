@@ -122,10 +122,11 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		//{ParserRuleParameters} ('#1' scenario=Scenario6<true, true> | '#2' scenario=Scenario6<false, false> | '#3'
 		//scenario=Scenario7<true, true> | '#4' scenario=Scenario7<false, true> | => ('#5' scenario=Scenario7<true, true>) | => (
 		//'#6' scenario=Scenario7<false, false>) | '#7' scenario=Scenario8<true, true> | '#8' scenario=Scenario8<false, true> |
-		//'#9' (scenario=Scenario9<true, true> | scenario=Scenario7<true, true> 'trailing'?) | '#10' (scenario=Scenario9<true, true>
-		//| scenario=Scenario7<false, false> 'trailing'?) | '#11' (scenario=Scenario9<false, false> |
-		//scenario=Scenario7<true, true> 'trailing'?) | '#12' (scenario=Scenario9<false, false> | scenario=Scenario7<false, false>
-		//'trailing'?) | '#13' scenario=Scenario10<true, false> | '#14' scenario=Scenario10<true, true>)
+		//'#9' (scenario=Scenario9<true, true> | scenario=Scenario7<true, true> 'trailing'?) | '#10'
+		//(scenario=Scenario9<true, true> | scenario=Scenario7<false, false> 'trailing'?) | '#11'
+		//(scenario=Scenario9<false, false> | scenario=Scenario7<true, true> 'trailing'?) | '#12'
+		//(scenario=Scenario9<false, false> | scenario=Scenario7<false, false> 'trailing'?) | '#13'
+		//scenario=Scenario10<true, false> | '#14' scenario=Scenario10<true, true>)
 		public Group getGroup() { return cGroup; }
 		
 		//{ParserRuleParameters}

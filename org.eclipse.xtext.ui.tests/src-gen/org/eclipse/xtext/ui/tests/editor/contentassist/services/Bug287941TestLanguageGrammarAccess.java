@@ -412,19 +412,19 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cEntriesAndWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
 		//WhereEntry:
-		//	AndWhereEntry ({OrWhereEntry.entries+= current} ("or" entries+=AndWhereEntry)+)?;
+		//	AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//AndWhereEntry ({OrWhereEntry.entries+= current} ("or" entries+=AndWhereEntry)+)?
+		//AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//AndWhereEntry
 		public RuleCall getAndWhereEntryParserRuleCall_0() { return cAndWhereEntryParserRuleCall_0; }
 		
-		//({OrWhereEntry.entries+= current} ("or" entries+=AndWhereEntry)+)?
+		//({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{OrWhereEntry.entries+= current}
+		//{OrWhereEntry.entries+=current}
 		public Action getOrWhereEntryEntriesAction_1_0() { return cOrWhereEntryEntriesAction_1_0; }
 		
 		//("or" entries+=AndWhereEntry)+
@@ -451,19 +451,19 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cEntriesConcreteWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
 		//AndWhereEntry WhereEntry:
-		//	ConcreteWhereEntry ({AndWhereEntry.entries+= current} ("and" entries+=ConcreteWhereEntry)+)?;
+		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ConcreteWhereEntry ({AndWhereEntry.entries+= current} ("and" entries+=ConcreteWhereEntry)+)?
+		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//ConcreteWhereEntry
 		public RuleCall getConcreteWhereEntryParserRuleCall_0() { return cConcreteWhereEntryParserRuleCall_0; }
 		
-		//({AndWhereEntry.entries+= current} ("and" entries+=ConcreteWhereEntry)+)?
+		//({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{AndWhereEntry.entries+= current}
+		//{AndWhereEntry.entries+=current}
 		public Action getAndWhereEntryEntriesAction_1_0() { return cAndWhereEntryEntriesAction_1_0; }
 		
 		//("and" entries+=ConcreteWhereEntry)+
@@ -1424,7 +1424,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//WhereEntry:
-	//	AndWhereEntry ({OrWhereEntry.entries+= current} ("or" entries+=AndWhereEntry)+)?;
+	//	AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
 	public WhereEntryElements getWhereEntryAccess() {
 		return pWhereEntry;
 	}
@@ -1434,7 +1434,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//AndWhereEntry WhereEntry:
-	//	ConcreteWhereEntry ({AndWhereEntry.entries+= current} ("and" entries+=ConcreteWhereEntry)+)?;
+	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
 	public AndWhereEntryElements getAndWhereEntryAccess() {
 		return pAndWhereEntry;
 	}
@@ -1606,7 +1606,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//terminal SINGED_LONG returns ecore::ELong:
-	//	'-'?'0'..'9'+;
+	//	'-'? '0'..'9'+;
 	public TerminalRule getSINGED_LONGRule() {
 		return tSINGED_LONG;
 	}
