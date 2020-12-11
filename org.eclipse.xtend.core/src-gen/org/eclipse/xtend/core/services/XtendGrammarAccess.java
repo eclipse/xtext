@@ -2404,17 +2404,20 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		// * do no longer have two equally short path's from method identifier to block expression
 		// **************************************************************************************/
 		//TypeReferenceWithTypeArgs types::JvmTypeReference:
-		//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
+		//	*
 		//	| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+
 		//	| XFunctionTypeRef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
+		//*
 		//| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+
 		//| XFunctionTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
+		//*
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//ParameterizedTypeReferenceWithTypeArgs
@@ -2487,14 +2490,16 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cGreaterThanSignKeyword_1_4_2_3 = (Keyword)cGroup_1_4_2.eContents().get(3);
 		
 		//ParameterizedTypeReferenceWithTypeArgs types::JvmParameterizedTypeReference:
-		//	type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference
-		//	)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'
-		//	arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*);
+		//	type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','
+		//	arguments+=JvmArgumentTypeReference)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.')
+		//	type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
+		//	'>')?)*);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference
-		//)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'
-		//arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)
+		//type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','
+		//arguments+=JvmArgumentTypeReference)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.')
+		//type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')
+		//?)*)
 		public Group getGroup() { return cGroup; }
 		
 		//type=[types::JvmType|QualifiedName]
@@ -3958,19 +3963,19 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cReferencesJvmTypeReferenceParserRuleCall_1_1_1_0 = (RuleCall)cReferencesAssignment_1_1_1.eContents().get(0);
 		
 		//MultiTypeReference types::JvmTypeReference:
-		//	JvmTypeReference ({types::JvmSynonymTypeReference.references+= current} ('|' references+=JvmTypeReference)+)?;
+		//	JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//JvmTypeReference ({types::JvmSynonymTypeReference.references+= current} ('|' references+=JvmTypeReference)+)?
+		//JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?
 		public Group getGroup() { return cGroup; }
 		
 		//JvmTypeReference
 		public RuleCall getJvmTypeReferenceParserRuleCall_0() { return cJvmTypeReferenceParserRuleCall_0; }
 		
-		//({types::JvmSynonymTypeReference.references+= current} ('|' references+=JvmTypeReference)+)?
+		//({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{types::JvmSynonymTypeReference.references+= current}
+		//{types::JvmSynonymTypeReference.references+=current}
 		public Action getJvmSynonymTypeReferenceReferencesAction_1_0() { return cJvmSynonymTypeReferenceReferencesAction_1_0; }
 		
 		//('|' references+=JvmTypeReference)+
@@ -5074,7 +5079,8 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	// * do no longer have two equally short path's from method identifier to block expression
 	// **************************************************************************************/
 	//TypeReferenceWithTypeArgs types::JvmTypeReference:
-	//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
+	//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
+	//	*
 	//	| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+
 	//	| XFunctionTypeRef;
 	public TypeReferenceWithTypeArgsElements getTypeReferenceWithTypeArgsAccess() {
@@ -5086,9 +5092,10 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//ParameterizedTypeReferenceWithTypeArgs types::JvmParameterizedTypeReference:
-	//	type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference
-	//	)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'
-	//	arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*);
+	//	type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','
+	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({types::JvmInnerTypeReference.outer=current} '.')
+	//	type=[types::JvmType|ValidID] (=>'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)*
+	//	'>')?)*);
 	public ParameterizedTypeReferenceWithTypeArgsElements getParameterizedTypeReferenceWithTypeArgsAccess() {
 		return pParameterizedTypeReferenceWithTypeArgs;
 	}
@@ -5349,7 +5356,7 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//MultiTypeReference types::JvmTypeReference:
-	//	JvmTypeReference ({types::JvmSynonymTypeReference.references+= current} ('|' references+=JvmTypeReference)+)?;
+	//	JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?;
 	public MultiTypeReferenceElements getMultiTypeReferenceAccess() {
 		return pMultiTypeReference;
 	}
@@ -6070,7 +6077,7 @@ public class XtendGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//XAnnotationElementValueOrCommaList xbase::XExpression:
 	//	=> ({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression)*)? ']'
-	//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+= current} (',' elements+=XAnnotationOrExpression)+)?;
+	//	| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression)+)?;
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueOrCommaListElements getXAnnotationElementValueOrCommaListAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValueOrCommaListAccess();
 	}
