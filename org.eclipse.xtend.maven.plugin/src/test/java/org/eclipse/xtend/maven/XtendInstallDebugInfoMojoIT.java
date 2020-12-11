@@ -142,27 +142,27 @@ public class XtendInstallDebugInfoMojoIT {
 				"    \n" + 
 				"    package test; // XtendA.class\n" + 
 				"    class XtendA {\n" + 
-				"      void <init>() { // XtendA.java:7\n" + 
+				"      void <init>() { // XtendA.java:4\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
-				"      void test2() { // XtendA.java:9\n" + 
-				"        // XtendA.java:9 -> XtendA.xtend:6\n" + 
+				"      void test2() { // XtendA.java:6\n" + 
+				"        // XtendA.java:6 -> XtendA.xtend:6\n" + 
 				"        void this;\n" + 
 				"        void s;\n" + 
 				"      }\n" + 
-				"      void newJavaB() { // XtendA.java:13\n" + 
-				"        // XtendA.java:13 -> XtendA.xtend:10\n" + 
+				"      void newJavaB() { // XtendA.java:10\n" + 
+				"        // XtendA.java:10 -> XtendA.xtend:10\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
 				"    }\n" + 
 				"    \n" + 
 				"    package test; // XtendC.class\n" + 
 				"    class XtendC {\n" + 
-				"      void <init>() { // XtendC.java:7\n" + 
+				"      void <init>() { // XtendC.java:4\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
-				"      void test() { // XtendC.java:9\n" + 
-				"        // XtendC.java:9 -> XtendC.xtend:5\n" + 
+				"      void test() { // XtendC.java:6\n" + 
+				"        // XtendC.java:6 -> XtendC.xtend:5\n" + 
 				"        void this;\n" + 
 				"        void s;\n" + 
 				"      }\n" + 
@@ -193,11 +193,11 @@ public class XtendInstallDebugInfoMojoIT {
 				"    \n" + 
 				"    package foo; // FooTest.class\n" + 
 				"    class FooTest {\n" + 
-				"      void <init>() { // FooTest.java:8\n" + 
+				"      void <init>() { // FooTest.java:7\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
-				"      void assertTrue() { // FooTest.java:11\n" + 
-				"        // FooTest.java:11 -> FooTest.xtend:11\n" + 
+				"      void assertTrue() { // FooTest.java:10\n" + 
+				"        // FooTest.java:10 -> FooTest.xtend:11\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
 				"    }\n" + 
