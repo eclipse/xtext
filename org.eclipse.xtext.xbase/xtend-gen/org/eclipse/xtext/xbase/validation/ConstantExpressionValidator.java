@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
-import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException;
 
 /**
  * Checks whether a given XExpression is a a constant expression.

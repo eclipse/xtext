@@ -10,7 +10,6 @@ package org.eclipse.xtext.purexbase.test;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.purexbase.test.RuntimeInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Extension;

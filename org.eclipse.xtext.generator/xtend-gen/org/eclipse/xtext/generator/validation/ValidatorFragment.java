@@ -28,7 +28,6 @@ import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
-import org.eclipse.xtext.generator.validation.ValidatorNaming;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
