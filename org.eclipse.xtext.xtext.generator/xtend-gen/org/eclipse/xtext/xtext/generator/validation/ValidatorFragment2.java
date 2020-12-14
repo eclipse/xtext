@@ -50,7 +50,6 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
-import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**

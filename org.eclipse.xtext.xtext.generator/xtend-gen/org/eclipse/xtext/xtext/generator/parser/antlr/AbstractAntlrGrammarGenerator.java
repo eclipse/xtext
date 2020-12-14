@@ -45,12 +45,6 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
-import org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")

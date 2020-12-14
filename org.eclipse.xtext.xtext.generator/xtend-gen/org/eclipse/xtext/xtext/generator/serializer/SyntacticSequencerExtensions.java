@@ -26,8 +26,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
-import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
-import org.eclipse.xtext.xtext.generator.serializer.InjectableRuleNames;
 
 @SuppressWarnings("all")
 public class SyntacticSequencerExtensions {

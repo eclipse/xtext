@@ -36,11 +36,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGrammarWithActionsGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
 @SuppressWarnings("all")
 public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {

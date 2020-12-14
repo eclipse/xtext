@@ -35,11 +35,6 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
-import org.eclipse.xtext.xtext.generator.serializer.NamedSerializationContextProvider;
-import org.eclipse.xtext.xtext.generator.serializer.NamedSerializationContexts;
-import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerExtensions;
-import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 
 @SuppressWarnings("all")
 public class DebugGraphGenerator {

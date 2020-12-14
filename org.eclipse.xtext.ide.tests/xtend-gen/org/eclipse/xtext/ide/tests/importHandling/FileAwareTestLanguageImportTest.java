@@ -16,7 +16,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
-import org.eclipse.xtext.ide.tests.importHandling.ImportTestHelper;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;

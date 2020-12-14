@@ -84,10 +84,6 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
-import org.eclipse.xtext.xtext.generator.serializer.DebugGraphGenerator;
-import org.eclipse.xtext.xtext.generator.serializer.EqualAmbiguousTransitions;
-import org.eclipse.xtext.xtext.generator.serializer.SemanticSequencerExtensions;
-import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerExtensions;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
