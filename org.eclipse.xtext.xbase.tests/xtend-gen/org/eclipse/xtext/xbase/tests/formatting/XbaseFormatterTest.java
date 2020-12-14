@@ -9,8 +9,6 @@ import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTestInjectorProvider;
-import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTester;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

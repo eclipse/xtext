@@ -32,8 +32,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.controlflow.EarlyExitInterpreter;
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

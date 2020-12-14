@@ -18,8 +18,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.controlflow.IConstantEvaluationResult;
-import org.eclipse.xtext.xbase.controlflow.ThisReference;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 

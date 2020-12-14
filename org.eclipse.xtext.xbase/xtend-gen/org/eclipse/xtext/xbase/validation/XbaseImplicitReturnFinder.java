@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 
 /**
  * @author Stefan Oehme - Initial contribution and API

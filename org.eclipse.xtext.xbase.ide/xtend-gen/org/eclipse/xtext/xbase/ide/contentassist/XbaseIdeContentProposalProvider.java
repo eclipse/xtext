@@ -47,8 +47,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider;
-import org.eclipse.xtext.xbase.ide.contentassist.TypeFilters;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
