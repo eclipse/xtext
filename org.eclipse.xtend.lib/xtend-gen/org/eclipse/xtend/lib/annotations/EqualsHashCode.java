@@ -5,7 +5,6 @@ import com.google.common.annotations.GwtCompatible;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.Arrays;
-import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 /**

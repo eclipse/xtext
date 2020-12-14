@@ -3,7 +3,6 @@ package org.eclipse.xtend.lib;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import org.eclipse.xtend.lib.DataProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 /**

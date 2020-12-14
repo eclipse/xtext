@@ -1,6 +1,5 @@
 package org.eclipse.xtend.lib.annotations;
 
-import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;

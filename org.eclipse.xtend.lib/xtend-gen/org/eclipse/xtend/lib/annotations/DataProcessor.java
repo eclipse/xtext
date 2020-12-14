@@ -2,12 +2,9 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import java.util.function.Consumer;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
-import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
