@@ -8,9 +8,6 @@
  */
 package extract;
 
-import extract.Extract;
-import extract.ExtractExampleInterface;
-
 @Extract
 @SuppressWarnings("all")
 public class ExtractExample implements ExtractExampleInterface {

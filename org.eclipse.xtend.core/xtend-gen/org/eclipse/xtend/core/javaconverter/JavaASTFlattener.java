@@ -113,8 +113,6 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
-import org.eclipse.xtend.core.javaconverter.ASTFlattenerUtils;
-import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;

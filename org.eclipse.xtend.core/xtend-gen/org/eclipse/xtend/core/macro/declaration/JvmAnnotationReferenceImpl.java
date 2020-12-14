@@ -11,8 +11,6 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;

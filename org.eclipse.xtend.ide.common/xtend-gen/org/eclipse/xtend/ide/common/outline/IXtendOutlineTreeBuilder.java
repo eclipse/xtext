@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.common.outline;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 
 /**
  * <p>

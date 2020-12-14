@@ -10,9 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
-import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;

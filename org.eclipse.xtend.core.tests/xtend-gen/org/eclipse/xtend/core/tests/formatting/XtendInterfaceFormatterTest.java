@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;

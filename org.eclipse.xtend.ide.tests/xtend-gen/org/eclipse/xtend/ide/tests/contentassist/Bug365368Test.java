@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.junit.Test;
 
 /**

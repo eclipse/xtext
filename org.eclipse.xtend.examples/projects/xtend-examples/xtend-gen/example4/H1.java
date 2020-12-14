@@ -8,7 +8,6 @@
  */
 package example4;
 
-import example4.ContentNode;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;

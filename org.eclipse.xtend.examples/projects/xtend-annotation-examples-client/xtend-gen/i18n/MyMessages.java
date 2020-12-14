@@ -1,6 +1,5 @@
 package i18n;
 
-import i18n.Externalized;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.MissingResourceException;

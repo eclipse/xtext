@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.validation;
 
-import org.eclipse.xtend.core.tests.validation.AmbiguityValidationTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 

@@ -11,7 +11,6 @@
 package example6;
 
 import com.google.common.io.CharStreams;
-import example6.Movie;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;

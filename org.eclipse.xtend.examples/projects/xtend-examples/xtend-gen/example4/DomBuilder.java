@@ -8,17 +8,6 @@
  */
 package example4;
 
-import example4.A;
-import example4.B;
-import example4.Body;
-import example4.Contents;
-import example4.H1;
-import example4.H2;
-import example4.Head;
-import example4.Html;
-import example4.Node;
-import example4.P;
-import example4.Title;
 import java.util.ArrayList;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 

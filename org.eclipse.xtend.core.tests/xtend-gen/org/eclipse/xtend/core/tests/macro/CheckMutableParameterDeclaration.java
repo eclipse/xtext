@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import org.eclipse.xtend.core.tests.macro.CheckMutableParameterDeclarationProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(CheckMutableParameterDeclarationProcessor.class)

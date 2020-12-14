@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import org.eclipse.xtend.core.tests.compiler.FileProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(FileProcessor.class)

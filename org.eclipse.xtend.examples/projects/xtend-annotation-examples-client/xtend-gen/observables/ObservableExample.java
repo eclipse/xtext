@@ -10,7 +10,6 @@ package observables;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import observables.ObservableBean;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;

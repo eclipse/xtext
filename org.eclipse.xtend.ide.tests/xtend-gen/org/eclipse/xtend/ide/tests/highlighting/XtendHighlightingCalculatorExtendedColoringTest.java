@@ -11,7 +11,6 @@ package org.eclipse.xtend.ide.tests.highlighting;
 import com.google.inject.Inject;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtend.ide.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.ide.tests.highlighting.XtendHighlightingCalculatorTest;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 import org.eclipse.xtext.xbase.lib.Extension;

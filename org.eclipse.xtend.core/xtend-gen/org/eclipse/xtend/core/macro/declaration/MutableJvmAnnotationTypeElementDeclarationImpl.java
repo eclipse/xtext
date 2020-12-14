@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;

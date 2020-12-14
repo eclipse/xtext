@@ -8,16 +8,6 @@
  */
 package example4;
 
-import example4.A;
-import example4.B;
-import example4.Body;
-import example4.DomBuilder;
-import example4.DomSerializer;
-import example4.H1;
-import example4.Head;
-import example4.Html;
-import example4.P;
-import example4.Title;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;

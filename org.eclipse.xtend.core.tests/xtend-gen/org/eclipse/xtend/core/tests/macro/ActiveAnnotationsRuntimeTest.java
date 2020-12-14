@@ -12,8 +12,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
-import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.tests.util.TemporaryFolder;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;

@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.imports;
 
 import java.util.List;
-import org.eclipse.xtend.core.tests.imports.AbstractRewritableImportSectionTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 

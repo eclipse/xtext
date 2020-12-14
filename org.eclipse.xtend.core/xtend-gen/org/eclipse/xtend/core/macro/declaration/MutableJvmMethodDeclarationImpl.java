@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Preconditions;
-import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;

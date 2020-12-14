@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;

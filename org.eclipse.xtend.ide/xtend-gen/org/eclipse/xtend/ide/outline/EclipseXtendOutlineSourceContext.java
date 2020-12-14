@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
-import org.eclipse.xtend.ide.outline.EclipseXtendOutlineContext;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.Extension;

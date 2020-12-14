@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.refactoring.importer;
 
-import org.eclipse.xtend.ide.refactoring.importer.StaticMethodImporter;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;

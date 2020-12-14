@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl;
 
 @SuppressWarnings("all")
 public abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {

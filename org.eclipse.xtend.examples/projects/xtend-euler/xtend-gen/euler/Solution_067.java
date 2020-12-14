@@ -11,7 +11,6 @@
  */
 package euler;
 
-import euler.SolutionTriangle;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 

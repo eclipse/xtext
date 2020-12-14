@@ -13,7 +13,6 @@ import org.eclipse.xtend.ide.buildpath.Junit4LibClasspathAdder;
 import org.eclipse.xtend.ide.buildpath.Junit5LibClasspathAdder;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend.ide.tests.buildpath.AbstractJunitLibClasspathAdderTestCase;
-import org.eclipse.xtend.ide.tests.quickfix.QuickfixTestBuilder;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.testing.InjectWith;

@@ -14,8 +14,6 @@ import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.ide.common.outline.AbstractXtendOutlineTreeBuilder;
-import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 /**

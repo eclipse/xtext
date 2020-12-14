@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import org.eclipse.xtend.core.tests.macro.Bug464136Processor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(Bug464136Processor.class)

@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.compiler.batch;
 
-import org.eclipse.xtend.core.tests.compiler.batch._TESTDATA_InternalClassProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(_TESTDATA_InternalClassProcessor.class)

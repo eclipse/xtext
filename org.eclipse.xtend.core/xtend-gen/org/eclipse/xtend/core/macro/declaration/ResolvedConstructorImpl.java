@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.ResolvedExecutableImpl;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;

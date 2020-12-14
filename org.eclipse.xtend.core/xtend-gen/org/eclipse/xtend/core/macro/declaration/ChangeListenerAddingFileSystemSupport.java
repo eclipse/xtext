@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import java.io.InputStream;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;

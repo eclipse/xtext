@@ -10,9 +10,6 @@
  */
 package example5;
 
-import example5.Distance;
-import example5.Speed;
-import example5.Time;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.junit.Assert;
 import org.junit.Test;

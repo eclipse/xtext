@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.common.outline;
 
 import java.util.Set;
-import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;

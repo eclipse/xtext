@@ -2,7 +2,6 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;

@@ -20,7 +20,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
-import org.eclipse.xtend.performance.tests.PerformanceTestProjectSetup;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;

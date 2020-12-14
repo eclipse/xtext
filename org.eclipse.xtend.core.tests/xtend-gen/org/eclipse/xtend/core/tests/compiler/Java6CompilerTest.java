@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.Java6RuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Test;

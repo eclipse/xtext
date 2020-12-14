@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
-import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;

@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.common.highlighting;
 
 import java.util.Collections;
 import java.util.Set;
-import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 

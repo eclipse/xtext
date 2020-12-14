@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
-import org.eclipse.xtend.ide.tests.macros.JavaIoFileSystemTest;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;

@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.formatting2;
 
-import org.eclipse.xtend.core.formatting2.Chunk;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 

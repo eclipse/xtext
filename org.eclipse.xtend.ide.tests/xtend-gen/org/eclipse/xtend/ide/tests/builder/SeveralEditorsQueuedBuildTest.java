@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtend.ide.tests.builder.AbstractQueuedBuildDataTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;

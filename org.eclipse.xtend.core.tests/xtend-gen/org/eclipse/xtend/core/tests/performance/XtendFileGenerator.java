@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.performance;
 
 import java.util.Map;
-import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;

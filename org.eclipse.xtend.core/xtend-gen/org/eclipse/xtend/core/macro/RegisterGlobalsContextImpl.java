@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;

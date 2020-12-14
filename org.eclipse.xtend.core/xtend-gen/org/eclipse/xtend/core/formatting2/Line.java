@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.formatting2;
 
 import java.util.List;
-import org.eclipse.xtend.core.formatting2.Chunk;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;

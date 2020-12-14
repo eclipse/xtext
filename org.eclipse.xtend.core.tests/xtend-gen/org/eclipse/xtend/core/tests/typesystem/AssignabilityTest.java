@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import org.eclipse.xtend.core.tests.typesystem.CommonAssignabilityTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;

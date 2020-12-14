@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import java.util.List;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;

@@ -10,10 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Preconditions;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;

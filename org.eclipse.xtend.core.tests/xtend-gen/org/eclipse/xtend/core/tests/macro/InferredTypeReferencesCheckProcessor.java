@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.collect.Iterables;
 import java.util.Collections;
-import org.eclipse.xtend.core.tests.macro.MutableAssert;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;

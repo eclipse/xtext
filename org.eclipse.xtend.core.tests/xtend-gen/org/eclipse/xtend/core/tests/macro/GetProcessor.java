@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import java.util.List;
-import org.eclipse.xtend.core.tests.macro.Get;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;

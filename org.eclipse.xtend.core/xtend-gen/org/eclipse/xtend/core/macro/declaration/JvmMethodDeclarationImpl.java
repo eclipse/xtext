@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
-import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;

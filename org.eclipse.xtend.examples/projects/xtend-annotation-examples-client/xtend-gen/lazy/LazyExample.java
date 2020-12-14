@@ -8,8 +8,6 @@
  */
 package lazy;
 
-import lazy.Lazy;
-
 @SuppressWarnings("all")
 public class LazyExample {
   @Lazy
