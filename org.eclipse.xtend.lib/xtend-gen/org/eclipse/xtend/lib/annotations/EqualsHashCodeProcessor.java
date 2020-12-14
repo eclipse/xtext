@@ -3,8 +3,6 @@ package org.eclipse.xtend.lib.annotations;
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import java.util.Arrays;
-import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;

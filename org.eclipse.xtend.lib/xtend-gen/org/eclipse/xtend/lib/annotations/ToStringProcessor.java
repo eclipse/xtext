@@ -2,9 +2,6 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
-import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtend.lib.annotations.ToString;
-import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
