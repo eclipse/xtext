@@ -17,7 +17,6 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
-import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestHelper;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegate;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;

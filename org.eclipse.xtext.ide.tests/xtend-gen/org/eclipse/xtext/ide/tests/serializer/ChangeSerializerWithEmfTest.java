@@ -22,8 +22,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer;
-import org.eclipse.xtext.ide.tests.serializer.ChangeSerializerTestHelper;
-import org.eclipse.xtext.ide.tests.serializer.PartialSerializationTestLanguageInjectorProviderWithEmf;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.EClassRef;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Model;
 import org.eclipse.xtext.testing.InjectWith;

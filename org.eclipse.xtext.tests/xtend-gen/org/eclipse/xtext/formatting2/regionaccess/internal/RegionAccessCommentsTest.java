@@ -14,7 +14,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
-import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestHelper;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.tests.RegionAccessTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;

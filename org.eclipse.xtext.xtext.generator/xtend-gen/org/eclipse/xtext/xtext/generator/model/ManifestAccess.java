@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
-import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * Configuration object for MANIFEST.MF files for use in Eclipse.

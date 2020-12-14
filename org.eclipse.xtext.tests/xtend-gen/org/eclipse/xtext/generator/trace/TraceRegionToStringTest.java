@@ -10,9 +10,6 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.generator.trace.SourceRelativeURI;
-import org.eclipse.xtext.generator.trace.TraceRegionToStringTester;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;

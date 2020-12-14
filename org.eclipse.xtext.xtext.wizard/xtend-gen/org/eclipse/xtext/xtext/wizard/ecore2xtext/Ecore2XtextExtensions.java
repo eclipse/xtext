@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
-import org.eclipse.xtext.xtext.wizard.ecore2xtext.UniqueNameUtil;
 
 @SuppressWarnings("all")
 public class Ecore2XtextExtensions {

@@ -75,16 +75,6 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrContentAssistGrammarGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrDebugGrammarGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenerator;
-import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
-import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
