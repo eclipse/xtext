@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.refactoring.importer;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtend.ide.refactoring.importer.AbstractStaticMethodImporter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;

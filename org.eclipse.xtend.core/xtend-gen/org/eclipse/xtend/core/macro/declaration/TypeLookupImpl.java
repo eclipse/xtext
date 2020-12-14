@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;

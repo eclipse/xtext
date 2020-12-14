@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 @SuppressWarnings("all")

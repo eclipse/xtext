@@ -13,7 +13,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
-import org.eclipse.xtend.core.tests.macro.AnnotationWithNestedAnnotationsProcessor;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtend.lib.macro.Active;

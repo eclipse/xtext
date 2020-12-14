@@ -13,8 +13,6 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
-import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;

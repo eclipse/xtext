@@ -11,8 +11,6 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Preconditions;
 import java.util.List;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;

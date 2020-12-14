@@ -10,8 +10,6 @@
  */
 package example5;
 
-import example5.Distance;
-import example5.Time;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import org.eclipse.xtend.lib.annotations.Data;

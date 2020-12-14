@@ -10,7 +10,6 @@ package lazy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import lazy.LazyProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 /**

@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.macro;
 import java.io.File;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;

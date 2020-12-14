@@ -19,7 +19,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.buildpath.Junit4LibClasspathAdder;
 import org.eclipse.xtend.ide.buildpath.Junit5LibClasspathAdder;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
-import org.eclipse.xtend.ide.tests.buildpath.AbstractJunitLibClasspathAdderTestCase;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Conversions;

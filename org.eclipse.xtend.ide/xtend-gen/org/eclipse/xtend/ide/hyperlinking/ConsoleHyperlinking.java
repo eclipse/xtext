@@ -6,7 +6,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.console.IPatternMatchListenerDelegate;
 import org.eclipse.ui.console.PatternMatchEvent;
 import org.eclipse.ui.console.TextConsole;
-import org.eclipse.xtend.ide.hyperlinking.XtendFileHyperlink;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.tests.smoke.Case_8;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")

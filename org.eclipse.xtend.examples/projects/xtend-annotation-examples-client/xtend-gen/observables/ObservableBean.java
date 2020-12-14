@@ -10,7 +10,6 @@ package observables;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import observables.Observable;
 
 @Observable
 @SuppressWarnings("all")

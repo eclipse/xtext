@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.macro;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import org.eclipse.xtend.core.tests.macro.ToAnnoProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 @Active(ToAnnoProcessor.class)

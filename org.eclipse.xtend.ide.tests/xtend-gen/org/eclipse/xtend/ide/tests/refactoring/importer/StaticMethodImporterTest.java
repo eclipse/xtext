@@ -11,7 +11,6 @@ package org.eclipse.xtend.ide.tests.refactoring.importer;
 import com.google.inject.Inject;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtend.ide.tests.refactoring.importer.StaticMethodImporterTestBuilder;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;

@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.jdt.core.IType;
-import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.Primitives;

@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;

@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
 

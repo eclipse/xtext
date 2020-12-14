@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 
 @SuppressWarnings("all")
 public class NopResourceChangeRegistry implements IResourceChangeRegistry {

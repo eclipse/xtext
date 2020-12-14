@@ -12,8 +12,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;

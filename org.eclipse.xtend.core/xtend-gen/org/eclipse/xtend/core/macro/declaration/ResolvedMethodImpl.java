@@ -10,8 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.xtend.core.macro.declaration.ResolvedExecutableImpl;
-import org.eclipse.xtend.core.macro.declaration.ResolvedTypeParameterImpl;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedTypeParameter;

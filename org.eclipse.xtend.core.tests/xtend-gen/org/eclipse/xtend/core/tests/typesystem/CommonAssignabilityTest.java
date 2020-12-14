@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import org.eclipse.xtend.core.tests.typesystem.AbstractAssignabilityTest;
-import org.eclipse.xtend.core.tests.typesystem.StrangeIterable;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Ignore;

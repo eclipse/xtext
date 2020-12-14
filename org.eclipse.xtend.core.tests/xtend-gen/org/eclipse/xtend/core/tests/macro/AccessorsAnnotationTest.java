@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
-import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;

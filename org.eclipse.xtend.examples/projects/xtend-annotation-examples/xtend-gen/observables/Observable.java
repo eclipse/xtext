@@ -10,7 +10,6 @@ package observables;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import observables.ObservableCompilationParticipant;
 import org.eclipse.xtend.lib.macro.Active;
 
 /**

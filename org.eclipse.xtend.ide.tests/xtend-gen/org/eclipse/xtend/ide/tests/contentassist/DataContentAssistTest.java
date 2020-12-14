@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
-import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtext.testing.Flaky;
 import org.junit.Test;
 

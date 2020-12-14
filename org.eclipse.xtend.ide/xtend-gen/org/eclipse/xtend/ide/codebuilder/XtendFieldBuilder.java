@@ -10,9 +10,7 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
-import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.resource.XtextResource;

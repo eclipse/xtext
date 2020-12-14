@@ -25,7 +25,6 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.core.macro.FilteringClassLoader;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;

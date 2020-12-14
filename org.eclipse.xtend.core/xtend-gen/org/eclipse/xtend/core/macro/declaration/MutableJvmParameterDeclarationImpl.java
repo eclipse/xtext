@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;

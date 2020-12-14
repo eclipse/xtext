@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
-import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;

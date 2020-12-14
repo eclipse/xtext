@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import org.eclipse.xtend.core.tests.typesystem.RuntimeInjectorProviderWithCustomSynonyms;
-import org.eclipse.xtend.core.tests.typesystem.SynonmyTypesTest;
 import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Test;
 

@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
-
 /**
  * @author Jan Koehnlein
  */

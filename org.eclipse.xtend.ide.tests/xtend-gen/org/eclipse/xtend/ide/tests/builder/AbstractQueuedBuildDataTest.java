@@ -17,7 +17,6 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtend.ide.tests.builder.JavaEditorExtension;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter;

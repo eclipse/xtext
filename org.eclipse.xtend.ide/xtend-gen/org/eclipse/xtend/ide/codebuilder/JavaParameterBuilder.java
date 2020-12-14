@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 /**

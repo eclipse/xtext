@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.builder;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.xtend.ide.tests.builder.AbstractQueuedBuildDataTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;

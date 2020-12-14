@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
 import java.lang.reflect.Method;
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;

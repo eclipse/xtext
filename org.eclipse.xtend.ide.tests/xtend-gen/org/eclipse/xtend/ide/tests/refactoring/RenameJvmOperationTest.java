@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.xtend.ide.tests.refactoring.AbstractXtendRenameRefactoringTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;

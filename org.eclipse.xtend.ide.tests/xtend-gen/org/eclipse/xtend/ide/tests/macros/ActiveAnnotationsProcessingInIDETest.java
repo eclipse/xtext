@@ -21,7 +21,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
-import org.eclipse.xtend.ide.tests.macros.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.testing.InjectWith;

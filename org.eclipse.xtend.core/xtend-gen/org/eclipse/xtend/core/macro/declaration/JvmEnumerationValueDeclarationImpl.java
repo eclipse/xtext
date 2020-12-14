@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;

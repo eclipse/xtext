@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;

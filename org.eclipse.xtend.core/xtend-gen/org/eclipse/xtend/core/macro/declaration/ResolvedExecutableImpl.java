@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.AbstractDelegator;
-import org.eclipse.xtend.core.macro.declaration.ResolvedParameterImpl;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;

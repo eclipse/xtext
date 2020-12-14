@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.linking;
 
-import org.eclipse.xtend.core.tests.linking.LinkingTest;
-import org.eclipse.xtend.core.tests.linking.RuntimeInjectorProviderWithReversedCandidates;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Ignore;

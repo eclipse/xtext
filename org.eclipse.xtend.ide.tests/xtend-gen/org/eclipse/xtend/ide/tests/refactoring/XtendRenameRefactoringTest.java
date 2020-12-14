@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import org.eclipse.xtend.ide.tests.refactoring.AbstractXtendRenameRefactoringTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.xbase.lib.Exceptions;

@@ -8,9 +8,6 @@
  */
 package example4;
 
-import example4.A;
-import example4.Contents;
-import example4.Node;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;

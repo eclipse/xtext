@@ -11,8 +11,6 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.XtendAnnotationTargetImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;

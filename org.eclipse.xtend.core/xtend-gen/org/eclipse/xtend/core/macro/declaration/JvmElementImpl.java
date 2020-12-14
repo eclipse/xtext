@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")

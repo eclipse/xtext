@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.tests.debug;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.debug.TraceRegionFSAForTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IGenerator;

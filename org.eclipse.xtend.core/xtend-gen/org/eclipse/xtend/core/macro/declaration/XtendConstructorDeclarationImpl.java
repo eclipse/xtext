@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;

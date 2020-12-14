@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.linking;
 
-import org.eclipse.xtend.core.tests.linking.AbstractOverloadedStaticMethodTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 /**

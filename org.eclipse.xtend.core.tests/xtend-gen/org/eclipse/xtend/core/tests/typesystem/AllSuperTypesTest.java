@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.typesystem.AbstractSuperTypesTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Ignore;

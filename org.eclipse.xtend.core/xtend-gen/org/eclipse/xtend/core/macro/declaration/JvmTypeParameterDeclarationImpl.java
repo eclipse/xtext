@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;

@@ -3,7 +3,6 @@ package org.eclipse.xtend.ide.tests.codebuilder;
 import com.google.inject.Inject;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
-import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;

@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendPackage;

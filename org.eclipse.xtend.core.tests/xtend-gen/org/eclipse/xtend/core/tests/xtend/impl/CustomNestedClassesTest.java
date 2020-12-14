@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.xtend.impl;
 
-import org.eclipse.xtend.core.tests.xtend.impl.CustomClassesTest;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendEnum;

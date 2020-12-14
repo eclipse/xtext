@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtext.common.types.JvmEnumerationType;

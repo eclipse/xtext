@@ -10,7 +10,6 @@
  */
 package example3;
 
-import example3.BottleSupport;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;

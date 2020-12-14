@@ -11,7 +11,6 @@ package org.eclipse.xtend.ide.tests.refactoring.importer;
 import com.google.inject.Inject;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.xtend.ide.refactoring.importer.StaticExtensionMethodImporter;
-import org.eclipse.xtend.ide.tests.refactoring.importer.StaticMethodImporterTestBuilder;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Extension;
 

@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JavaVersion;
 import org.junit.Test;

@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.compiler.RootTraceRegionForTesting;
-import org.eclipse.xtend.core.tests.compiler.SimpleTrace;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;

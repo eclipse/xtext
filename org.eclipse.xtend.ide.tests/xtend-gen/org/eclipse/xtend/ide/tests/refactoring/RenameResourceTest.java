@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import org.eclipse.xtend.ide.tests.refactoring.AbstractXtendRenameRefactoringTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 

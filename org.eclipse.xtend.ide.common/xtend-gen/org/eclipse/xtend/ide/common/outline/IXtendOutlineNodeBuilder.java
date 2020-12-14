@@ -11,7 +11,6 @@ package org.eclipse.xtend.ide.common.outline;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;

@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;

@@ -9,7 +9,6 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtend.ide.tests.builder.AbstractSingleEditorQueuedBuildTest;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 /**

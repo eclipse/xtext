@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;

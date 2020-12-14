@@ -2,12 +2,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
-import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
 import org.eclipse.xtend.lib.macro.declaration.Type;

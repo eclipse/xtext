@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.imports;
 
-import org.eclipse.xtend.core.tests.imports.AbstractRewritableImportSectionTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")

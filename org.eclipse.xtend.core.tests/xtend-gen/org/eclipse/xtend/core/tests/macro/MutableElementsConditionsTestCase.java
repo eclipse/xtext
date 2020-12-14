@@ -8,13 +8,6 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
-import org.eclipse.xtend.core.tests.macro.CheckMutableClassDeclaration;
-import org.eclipse.xtend.core.tests.macro.CheckMutableEnumerationTypeDeclaration;
-import org.eclipse.xtend.core.tests.macro.CheckMutableFieldDeclaration;
-import org.eclipse.xtend.core.tests.macro.CheckMutableInterfaceDeclaration;
-import org.eclipse.xtend.core.tests.macro.CheckMutableMethodDeclaration;
-import org.eclipse.xtend.core.tests.macro.CheckMutableParameterDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 

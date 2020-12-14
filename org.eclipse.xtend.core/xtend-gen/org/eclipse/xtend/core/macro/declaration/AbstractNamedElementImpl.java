@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 @SuppressWarnings("all")

@@ -9,9 +9,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableElement;
 import org.eclipse.xtend.lib.macro.services.Associator;
