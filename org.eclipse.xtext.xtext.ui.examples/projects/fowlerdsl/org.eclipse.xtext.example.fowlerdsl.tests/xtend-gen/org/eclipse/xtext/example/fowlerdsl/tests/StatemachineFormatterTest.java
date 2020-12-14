@@ -10,7 +10,6 @@ package org.eclipse.xtext.example.fowlerdsl.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.fowlerdsl.tests.StatemachineInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.formatter.FormatterTestHelper;

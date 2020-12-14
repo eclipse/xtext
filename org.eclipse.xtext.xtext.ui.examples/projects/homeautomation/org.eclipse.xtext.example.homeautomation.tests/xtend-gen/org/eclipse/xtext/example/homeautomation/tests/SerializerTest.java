@@ -25,7 +25,6 @@ import org.eclipse.xtext.example.homeautomation.ruleEngine.Model;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEngineFactory;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State;
-import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;

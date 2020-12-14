@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui.wizard;
 
-import org.eclipse.xtext.example.fowlerdsl.ui.wizard.MrsGrantsSecretCompartmentsProject;
 import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
 import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
 

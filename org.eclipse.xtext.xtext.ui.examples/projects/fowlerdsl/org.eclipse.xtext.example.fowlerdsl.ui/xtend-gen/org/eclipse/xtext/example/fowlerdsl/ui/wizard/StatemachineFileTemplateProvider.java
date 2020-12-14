@@ -8,8 +8,6 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui.wizard;
 
-import org.eclipse.xtext.example.fowlerdsl.ui.wizard.EmptyFile;
-import org.eclipse.xtext.example.fowlerdsl.ui.wizard.MrsGrantsSecretCompartmentsFile;
 import org.eclipse.xtext.ui.wizard.template.AbstractFileTemplate;
 import org.eclipse.xtext.ui.wizard.template.IFileTemplateProvider;
 

@@ -8,7 +8,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
