@@ -9,7 +9,6 @@
 package org.eclipse.xtext.example.homeautomation.ui.tests;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.homeautomation.ui.tests.RuleEngineUiInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractHyperlinkingTest;

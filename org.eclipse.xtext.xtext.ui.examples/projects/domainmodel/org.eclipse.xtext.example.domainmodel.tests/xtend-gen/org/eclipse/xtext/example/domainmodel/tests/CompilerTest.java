@@ -11,7 +11,6 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import com.google.inject.Inject;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;

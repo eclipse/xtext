@@ -9,7 +9,6 @@
 package org.eclipse.xtext.example.homeautomation.tests;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Test;

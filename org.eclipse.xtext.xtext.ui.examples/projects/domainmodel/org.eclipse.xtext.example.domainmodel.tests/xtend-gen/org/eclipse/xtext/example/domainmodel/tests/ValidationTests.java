@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;

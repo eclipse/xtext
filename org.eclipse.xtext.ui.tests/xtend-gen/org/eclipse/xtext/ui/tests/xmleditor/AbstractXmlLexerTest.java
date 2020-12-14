@@ -1,7 +1,6 @@
 package org.eclipse.xtext.ui.tests.xmleditor;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.tests.xmleditor.AbstractLexerTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;

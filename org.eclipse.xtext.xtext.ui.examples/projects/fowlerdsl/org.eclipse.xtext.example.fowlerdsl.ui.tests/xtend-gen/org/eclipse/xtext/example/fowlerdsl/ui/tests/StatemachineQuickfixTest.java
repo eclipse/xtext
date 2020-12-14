@@ -10,7 +10,6 @@ package org.eclipse.xtext.example.fowlerdsl.ui.tests;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.example.fowlerdsl.ui.tests.StatemachineUiInjectorProvider;
 import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;

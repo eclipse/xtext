@@ -17,7 +17,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.fowlerdsl.ui.internal.FowlerdslActivator;
-import org.eclipse.xtext.example.fowlerdsl.ui.wizard.TemplateContent;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;

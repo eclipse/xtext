@@ -11,7 +11,6 @@ package org.eclipse.xtext.example.fowlerdsl.ui.tests;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.fowlerdsl.ui.tests.StatemachineUiInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
