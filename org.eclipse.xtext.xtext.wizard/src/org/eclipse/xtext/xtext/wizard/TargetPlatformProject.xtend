@@ -62,7 +62,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 					«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-						<repository location="https://download.eclipse.org/releases/2020-12"/>
+						<repository location="https://download.eclipse.org/releases/2021-03"/>
 					«ELSE»
 						<!-- newer Eclipse versions need Java 11 to run the Maven Tycho build -->
 						<repository location="https://download.eclipse.org/releases/2020-06"/>
