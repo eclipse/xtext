@@ -29,7 +29,6 @@ import com.google.inject.Injector;
 public class JavaFormatterGrammarTest extends AbstractXtextTests {
 
 	private static final String NL = System.lineSeparator();
-	private static final String TAB = "\t";
 
 	@Inject
 	private FormatterTestHelper formatterTestHelper;
@@ -45,10 +44,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"Rule:" + NL +
-				TAB + "SubRule ({ Other . source = current } op='.');"
+				"	SubRule ({ Other . source = current } op='.');"
 				,
 				"Rule:" + NL +
-				TAB + "SubRule ({Other.source=current} op='.');"
+				"	SubRule ({Other.source=current} op='.');"
 		);
 		// @formatter:on
 	}
@@ -58,10 +57,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"enum StateType:" + NL +
-				TAB + "FIRST|SECOND|THIRD;"
+				"	FIRST|SECOND|THIRD;"
 				,
 				"enum StateType:" + NL +
-				TAB + "FIRST | SECOND | THIRD;"
+				"	FIRST | SECOND | THIRD;"
 				);
 		// @formatter:on
 	}
@@ -71,10 +70,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"enum StateType:" + NL +
-				TAB + "PSEUDO = 'cond';"
+				"	PSEUDO = 'cond';"
 				,
 				"enum StateType:" + NL +
-				TAB + "PSEUDO='cond';"
+				"	PSEUDO='cond';"
 				);
 		// @formatter:on
 	}
@@ -84,10 +83,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"Child  hidden ( WS ,  ID ):" + NL +
-				TAB + "A;"
+				"	A;"
 				,
 				"Child hidden(WS, ID):" + NL +
-				TAB + "A;"
+				"	A;"
 				);
 		// @formatter:on
 	}
@@ -99,7 +98,7 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"Real hidden(): INT ? '.' (EXT_INT | INT);"
 				,
 				"Real hidden():" + NL
-				+ TAB + "INT? '.' (EXT_INT | INT);"
+				+ "	INT? '.' (EXT_INT | INT);"
 				);
 		// @formatter:on
 	}
@@ -110,13 +109,13 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		assertFormattedGrammar(
 				"CopyFieldNameToVariableStmt:" + NL +
 				"  'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
-				TAB + TAB + TAB + "(','     'VAR' '=' name=ID) &" + NL +
-				TAB + TAB + TAB + "(',' 'TYPE' '='    'REPLACE')?);"
+				"			(','     'VAR' '=' name=ID) &" + NL +
+				"			(',' 'TYPE' '='    'REPLACE')?);"
 				,
 				"CopyFieldNameToVariableStmt:" + NL +
-				TAB + "'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
-				TAB + "(',' 'VAR' '=' name=ID) &" + NL +
-				TAB + "(',' 'TYPE' '=' 'REPLACE')?);"
+				"	'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
+				"	(',' 'VAR' '=' name=ID) &" + NL +
+				"	(',' 'TYPE' '=' 'REPLACE')?);"
 				);
 		// @formatter:on
 	}
@@ -131,9 +130,9 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"	  (  ',' 'TYPE' '=' 'REPLACE'  )  ?   )  ;"
 				,
 				"CopyFieldNameToVariableStmt:" + NL +
-				TAB + "'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
-				TAB + "(',' 'VAR' '=' name=ID) &" + NL +
-				TAB + "(',' 'TYPE' '=' 'REPLACE')?);"
+				"	'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &" + NL +
+				"	(',' 'VAR' '=' name=ID) &" + NL +
+				"	(',' 'TYPE' '=' 'REPLACE')?);"
 				);
 		// @formatter:on
 	}
@@ -143,14 +142,14 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"AssignmentExpression <In, Yield> returns Expression:" + NL +
-				TAB + "<Yield> YieldExpression<In>" + NL +
-				TAB + "| RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?" + NL +
+				"	<Yield> YieldExpression<In>" + NL +
+				"	| RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?" + NL +
 				";"
 				,
 				"AssignmentExpression <In, Yield> returns Expression:" + NL +
-				TAB + "<Yield> YieldExpression<In>" + NL +
-				TAB + "| RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=')" + NL +
-				TAB + "rhs=AssignmentExpression<In, Yield>)?;"
+				"	<Yield> YieldExpression<In>" + NL +
+				"	| RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=')" + NL +
+				"	rhs=AssignmentExpression<In, Yield>)?;"
 				);
 		// @formatter:on
 	}
@@ -160,13 +159,13 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + TAB + "<Expression> body=Block<Yield>" + NL +
-				TAB + "|"+ TAB + "<!Expression> body=Block<Yield>?" + NL +
+				"		<Expression> body=Block<Yield>" + NL +
+				"	|"+ "	<!Expression> body=Block<Yield>?" + NL +
 				";"
 				,
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + "<Expression> body=Block<Yield>" + NL +
-				TAB + "| <!Expression> body=Block<Yield>?;"
+				"	<Expression> body=Block<Yield>" + NL +
+				"	| <!Expression> body=Block<Yield>?;"
 				);
 		// @formatter:on
 	}
@@ -176,11 +175,11 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + "<Expression|Expression> body=Block<Yield>?" + NL +
+				"	<Expression|Expression> body=Block<Yield>?" + NL +
 				";"
 				,
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + "<Expression | Expression> body=Block<Yield>?;"
+				"	<Expression | Expression> body=Block<Yield>?;"
 				);
 		// @formatter:on
 	}
@@ -190,11 +189,11 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + "<Expression&Expression> body=Block<Yield>?" + NL +
+				"	<Expression&Expression> body=Block<Yield>?" + NL +
 				";"
 				,
 				"fragment FunctionBody <Yield, Expression>*:" + NL +
-				TAB + "<Expression & Expression> body=Block<Yield>?;"
+				"	<Expression & Expression> body=Block<Yield>?;"
 				);
 		// @formatter:on
 	}
@@ -204,13 +203,13 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"WhereEntry returns WhereEntry:" + NL +
-				TAB + "AndWhereEntry ({OrWhereEntry.entries+=current} " + NL +
-				TAB + TAB + "(\"or\" entries+=AndWhereEntry)+)?" + NL +
+				"	AndWhereEntry ({OrWhereEntry.entries+=current} " + NL +
+				"		(\"or\" entries+=AndWhereEntry)+)?" + NL +
 				";"
 				,
 				"WhereEntry returns WhereEntry:" + NL +
-				TAB + "AndWhereEntry ({OrWhereEntry.entries+=current}" + NL +
-				TAB + "(\"or\" entries+=AndWhereEntry)+)?;"
+				"	AndWhereEntry ({OrWhereEntry.entries+=current}" + NL +
+				"	(\"or\" entries+=AndWhereEntry)+)?;"
 				);
 		// @formatter:on
 	}
@@ -226,9 +225,9 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"  ; "
 				,
 				"Codetemplate:" + NL +
-				TAB + "name=ValidID '(' id=ID ',' description=STRING ')' 'for'" + NL +
-				TAB + "(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)" + NL +
-				TAB + "body=TemplateBodyWithQuotes;"
+				"	name=ValidID '(' id=ID ',' description=STRING ')' 'for'" + NL +
+				"	(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)" + NL +
+				"	body=TemplateBodyWithQuotes;"
 				);
 		// @formatter:on
 	}
@@ -240,7 +239,7 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"Real hidden(): INT ? '.' (EXT_INT | INT);"
 				,
 				"Real hidden():" + NL +
-				TAB + "INT? '.' (EXT_INT | INT);"
+				"	INT? '.' (EXT_INT | INT);"
 				);
 		// @formatter:on
 	}
@@ -251,20 +250,20 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		assertFormattedGrammar(
 				"ParserRule :" + NL +
 				"(" + NL +
-				TAB +   "  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) " + NL +
-				TAB + "| RuleNameAndParams ReturnsClause?" + NL +
-				TAB + ")" + NL +
-				TAB + "HiddenClause? ':'" + NL +
-				"   " + TAB + "alternatives=Alternatives   " + NL +
+				"	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) " + NL +
+				"	| RuleNameAndParams ReturnsClause?" + NL +
+				"	)" + NL +
+				"	HiddenClause? ':'" + NL +
+				"   " + "	alternatives=Alternatives   " + NL +
 				"    ';'" + NL +
 				";"
 				,
 				"ParserRule:" + NL +
-				TAB + "(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?)" + NL +
-				TAB + "| RuleNameAndParams ReturnsClause?)" + NL +
-				TAB + "HiddenClause? ':'" + NL +
-				TAB + "alternatives=Alternatives" + NL +
-				TAB + "';';"
+				"	(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?)" + NL +
+				"	| RuleNameAndParams ReturnsClause?)" + NL +
+				"	HiddenClause? ':'" + NL +
+				"	alternatives=Alternatives" + NL +
+				"	';';"
 				);
 		// @formatter:on
 	}
@@ -274,10 +273,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"AType returns root::AType:" + NL +
-				TAB + "'foo' {root::AType};"
+				"	'foo' {root::AType};"
 				,
 				"AType returns root::AType:" + NL +
-				TAB + "'foo' {root::AType};"
+				"	'foo' {root::AType};"
 				);
 		// @formatter:on
 	}
@@ -287,10 +286,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"AType returns root :: AType :" + NL +
-				TAB + "'foo' { root :: AType };"
+				"	'foo' { root :: AType };"
 				,
 				"AType returns root::AType:" + NL +
-				TAB + "'foo' {root::AType};"
+				"	'foo' {root::AType};"
 				);
 		// @formatter:on
 	}
@@ -308,9 +307,9 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				,
 				"@Override" + NL +
 				"XAssignment returns xbase::XExpression:" + NL +
-				TAB + "{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |" + NL +
-				TAB + "XConditionalExpression (=>({xbase::XBinaryOperation.leftOperand=current}" + NL +
-				TAB + "feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;"
+				"	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |" + NL +
+				"	XConditionalExpression (=>({xbase::XBinaryOperation.leftOperand=current}" + NL +
+				"	feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;"
 				);
 		// @formatter:on
 	}
@@ -327,12 +326,12 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"	']';"
 				,
 				"XClosure returns XExpression:" + NL +
-				TAB + "=>({XClosure}" + NL +
-				TAB + "'[')" + NL +
-				TAB + "=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?" + NL +
-				TAB + "explicitSyntax?='|')?" + NL +
-				TAB + "expression=XExpressionInClosure" + NL +
-				TAB + "']';"
+				"	=>({XClosure}" + NL +
+				"	'[')" + NL +
+				"	=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)?" + NL +
+				"	explicitSyntax?='|')?" + NL +
+				"	expression=XExpressionInClosure" + NL +
+				"	']';"
 				);
 		// @formatter:on
 	}
@@ -357,16 +356,16 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"		)*;"
 				,
 				"XMemberFeatureCall returns XExpression:" + NL +
-				TAB + "XPrimaryExpression" + NL +
-				TAB + "(=>({XAssignment.assignable=current} ('.' | explicitStatic?=\"::\")" + NL +
-				TAB + "feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment" + NL +
-				TAB + "| =>({XMemberFeatureCall.memberCallTarget=current} (\".\" | nullSafe?=\"?.\" | explicitStatic?=\"::\"))" + NL +
-				TAB + "('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?" + NL +
-				TAB + "feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='('" + NL +
-				TAB + "(memberCallArguments+=XShortClosure" + NL +
-				TAB + "| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?" + NL +
-				TAB + "')')?" + NL +
-				TAB + "memberCallArguments+=XClosure?)*;"
+				"	XPrimaryExpression" + NL +
+				"	(=>({XAssignment.assignable=current} ('.' | explicitStatic?=\"::\")" + NL +
+				"	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment" + NL +
+				"	| =>({XMemberFeatureCall.memberCallTarget=current} (\".\" | nullSafe?=\"?.\" | explicitStatic?=\"::\"))" + NL +
+				"	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?" + NL +
+				"	feature=[types::JvmIdentifiableElement|IdOrSuper] (=>explicitOperationCall?='('" + NL +
+				"	(memberCallArguments+=XShortClosure" + NL +
+				"	| memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*)?" + NL +
+				"	')')?" + NL +
+				"	memberCallArguments+=XClosure?)*;"
 				);
 		// @formatter:on
 	}
@@ -386,11 +385,11 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				";"
 				,
 				"XAnnotation:" + NL +
-				TAB + "{XAnnotation}" + NL +
-				TAB + "'@' annotationType=[types::JvmAnnotationType|QualifiedName] (=>'('" + NL +
-				TAB + "(elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)*" + NL +
-				TAB + "| value=XAnnotationElementValueOrCommaList)?" + NL +
-				TAB + "')')?;"
+				"	{XAnnotation}" + NL +
+				"	'@' annotationType=[types::JvmAnnotationType|QualifiedName] (=>'('" + NL +
+				"	(elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)*" + NL +
+				"	| value=XAnnotationElementValueOrCommaList)?" + NL +
+				"	')')?;"
 				);
 		// @formatter:on
 	}
@@ -407,10 +406,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				";"
 				,
 				"ParameterizedTypeReferenceWithTypeArgs returns types::JvmParameterizedTypeReference:" + NL +
-				TAB + "type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','" + NL +
-				TAB + "arguments+=JvmArgumentTypeReference)* '>'" + NL +
-				TAB + "(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'" + NL +
-				TAB + "arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*);"
+				"	type=[types::JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (','" + NL +
+				"	arguments+=JvmArgumentTypeReference)* '>'" + NL +
+				"	(=>({types::JvmInnerTypeReference.outer=current} '.') type=[types::JvmType|ValidID] (=>'<'" + NL +
+				"	arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*);"
 				);
 		// @formatter:on
 	}
@@ -420,10 +419,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"Rule:" + NL +
-				TAB + "(  ->   'a')?;"
+				"	(  ->   'a')?;"
 				,
 				"Rule:" + NL +
-				TAB + "(->'a')?;"
+				"	(->'a')?;"
 				);
 		// @formatter:on
 	}
@@ -433,10 +432,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"Rule:" + NL +
-				TAB + "(  =>   'a')?;"
+				"	(  =>   'a')?;"
 				,
 				"Rule:" + NL +
-				TAB + "(=>'a')?;"
+				"	(=>'a')?;"
 				);
 		// @formatter:on
 	}
@@ -446,10 +445,10 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 		// @formatter:off
 		assertFormattedGrammar(
 				"Rule:" + NL +
-				TAB + "{XReturnExpression} 'return'  ->  expression=XExpression?;"
+				"	{XReturnExpression} 'return'  ->  expression=XExpression?;"
 				,
 				"Rule:" + NL +
-				TAB + "{XReturnExpression} 'return' ->expression=XExpression?;"
+				"	{XReturnExpression} 'return' ->expression=XExpression?;"
 				);
 		// @formatter:on
 	}
@@ -463,8 +462,8 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"	(\"and\" entries+=ConcreteWhereEntry)+)?;"
 				,
 				"AndWhereEntry returns WhereEntry:" + NL +
-				TAB + "ConcreteWhereEntry ({AndWhereEntry.entries+=current}" + NL +
-				TAB + "(\"and\" entries+=ConcreteWhereEntry)+)?;"
+				"	ConcreteWhereEntry ({AndWhereEntry.entries+=current}" + NL +
+				"	(\"and\" entries+=ConcreteWhereEntry)+)?;"
 				);
 		// @formatter:on
 	}
@@ -477,7 +476,7 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				"			\"/*\"->\"*/\";"
 				,
 				"terminal RULE_ML_COMMENT:" + NL +
-				TAB + "\"/*\"->\"*/\";"
+				"	\"/*\"->\"*/\";"
 				);
 		// @formatter:on
 	}
@@ -499,16 +498,42 @@ public class JavaFormatterGrammarTest extends AbstractXtextTests {
 				""
 				,
 				"ProvidedCapability:" + NL +
-				TAB + "{ProvidedCapability}" + NL +
-				TAB + "((nameSpace=ID) | \"unit\")" + NL +
-				TAB + "('{'" + NL +
-				TAB + "(('when' ':' condExpr=Expression ';')? & (\"name\" ':' name=ID ';') & (\"version\" ':' version=ID ';')?)" + NL +
-				TAB + "'}')?;" + NL +
+				"	{ProvidedCapability}" + NL +
+				"	((nameSpace=ID) | \"unit\")" + NL +
+				"	('{'" + NL +
+				"	(('when' ':' condExpr=Expression ';')? & (\"name\" ':' name=ID ';') & (\"version\" ':' version=ID ';')?)" + NL +
+				"	'}')?;" + NL +
 				""
 				);
 		// @formatter:on
 	}
-	
+
+	@Test
+	public void xtextDocumentModifyTest_testCommentsNotDuplicated() {
+		// @formatter:off
+		assertFormattedGrammar(
+				"generate foo \"http://foo.net/foo\"" + NL +
+				"Foo: // comment in Foo " + NL +
+				"// comment before Assignment" + NL +
+				"  bars+= /* comment in assignment */ Bar // comment after assignment" + NL +
+				"// comment before keywod" + NL +
+				"'foo';" + NL +
+				"Bar: 'bar';"
+				,
+				"generate foo \"http://foo.net/foo\"" + NL +
+				""  + NL +
+				"Foo: // comment in Foo " + NL +
+				"// comment before Assignment" + NL +
+				"	bars+= /* comment in assignment */ Bar // comment after assignment" + NL +
+				"// comment before keywod" + NL +
+				"	'foo';" + NL +
+				""  + NL +
+				"Bar:" + NL +
+				"	'bar';"
+				);
+		// @formatter:on
+	}
+
 	private void assertFormattedGrammar(String input, String expectation) {
 		assertFormatted("grammar a.A" + NL + NL + input, "grammar a.A" + NL + NL + expectation);
 	}
