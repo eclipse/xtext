@@ -89,8 +89,20 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 				return grammar;
 			}
 		});
-		// TODO .replace(" Bar ", " Bar  ") is a temporary workaround to a serializer/formatter flaw
-		assertEquals(grammar.replace("bars", "foobars").replace(" Bar ", " Bar  "), document.get());
+		String newContent = document.get();
+		assertContainsExactlyOnce(newContent,"foobars");
+		assertContainsExactlyOnce(newContent,"// comment in Foo");
+		assertContainsExactlyOnce(newContent,"// comment before Assignment");
+		assertContainsExactlyOnce(newContent,"/* comment in assignment */");
+		assertContainsExactlyOnce(newContent,"// comment after assignment");
+		assertContainsExactlyOnce(newContent,"// comment before keywod");
+	}
+	
+	private void assertContainsExactlyOnce(String content, String onlyOnce) {
+		int index = content.indexOf(onlyOnce);
+		assertTrue("Missing: " + onlyOnce, index >= 0);
+		int index2 = content.indexOf(onlyOnce, index + 1);
+		assertEquals("Duplicate: " + onlyOnce, index2, -1);
 	}
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
