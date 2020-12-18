@@ -13,6 +13,12 @@ dependencies {
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
 	testCompile sourceSets.mwe2.output
 	testCompile 'args4j:args4j'
+	// optional for the utilities but mandatory to run the tests
+	testImplementation 'junit:junit'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation 'org.junit.platform:junit-platform-suite-api'
+	testImplementation 'org.junit.platform:junit-platform-runner'
 }
 
 sourceSets.test {
