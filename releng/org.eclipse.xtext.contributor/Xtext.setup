@@ -69,6 +69,9 @@
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
     <choice
+        value="2021-03"
+        label="Eclipse 2021-03 - 4.19"/>
+    <choice
         value="2020-12"
         label="Eclipse 2020-12 - 4.18"/>
     <choice
@@ -130,7 +133,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2020-12"/>
+      value="https://download.eclipse.org/tools/orbit/downloads/2021-03"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -1253,6 +1256,41 @@
         </repositoryList>
         <repositoryList
             name="2020-12">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.12"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
+          <repository
+              url="${p2.license}"/>
+        </repositoryList>
+        <repositoryList
+            name="2021-03">
           <repository
               url="${p2.xtext}"/>
           <repository
