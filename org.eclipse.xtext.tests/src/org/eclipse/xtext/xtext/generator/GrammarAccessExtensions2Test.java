@@ -70,19 +70,20 @@ public class GrammarAccessExtensions2Test {
 				"	| '?:';\n";
 		String expected = 
 				"//OpOther:" + NL +
-				"//	'->'" + NL +
-				"//	| '..<'" + NL +
-				"//	| '>' '..'" + NL +
-				"//	| '..'" + NL +
-				"//	| '=>'" + NL +
-				"//	| '>' (=> ('>' '>') | '>') | '<' (=> ('<' '<') | '<' | '=>') | '<>'" + NL +
-				"//	| '?:';";
+				"//      '->'" + NL +
+				"//    | '..<'" + NL +
+				"//    | '>' '..'" + NL +
+				"//    | '..'" + NL +
+				"//    | '=>'" + NL +
+				"//    | '>' (=>('>' '>') | '>')" + NL +
+				"//    | '<' (=>('<' '<') | '<' | '=>')" + NL +
+				"//    | '<>'" + NL +
+				"//    | '?:';";
 		firstRuleIsConvertedTo(grammar, expected);
 	}
 	
 	@Test
 	public void testGrammarFragmentToString2() throws Exception {
-		String NL = System.lineSeparator();
 		String grammar =
 				"grammar org.xtext.example.mydsl.MyDsl hidden (ML_COMMENT)\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
@@ -91,8 +92,7 @@ public class GrammarAccessExtensions2Test {
 				"terminal ML_COMMENT: '/*'(!'*')->'*/';\n" +
 				"terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;";
 		String expected = 
-				"//terminal ML_COMMENT:" + NL
-				+ "//	'/*' !'*'->'*/';";
+				"//terminal ML_COMMENT: '/*'(!'*')->'*/';";
 		secondRuleIsConvertedTo(grammar, expected);
 	}
 

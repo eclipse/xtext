@@ -9,12 +9,10 @@
 package org.eclipse.xtext.xtext.generator.grammarAccess;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,10 +43,13 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.service.CompoundModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -93,14 +94,12 @@ public class GrammarAccessExtensions {
   
   private static Map<String, String> SPECIAL_CHARS = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("\b", "backspace"), Pair.<String, String>of("\f", "formFeed"), Pair.<String, String>of("\n", "lineFeed"), Pair.<String, String>of("\r", "carriageReturn"), Pair.<String, String>of("\t", "tab"), Pair.<String, String>of("\\", "backslash")));
   
-  private final Map<String, ISerializer> xtextSerializerByLineDelimiter = Maps.<String, ISerializer>newHashMapWithExpectedSize(2);
-  
-  @Inject
-  private CodeConfig codeConfig;
-  
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
+  
+  @Inject
+  private CodeConfig codeConfig;
   
   /**
    * Returns a reference to the GrammarAccess implementation for a grammar.
@@ -600,8 +599,91 @@ public class GrammarAccessExtensions {
     return _switchResult;
   }
   
-  public String grammarFragmentToString(final EObject ele, final String prefix) {
-    return GrammarAccessExtensions.grammarFragmentToString(this.getSerializer(), ele, prefix);
+  public String grammarFragmentToString(final EObject object, final String prefix) {
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(object);
+    if ((node == null)) {
+      if ((object instanceof RuleCall)) {
+        AbstractRule _rule = null;
+        if (((RuleCall)object)!=null) {
+          _rule=((RuleCall)object).getRule();
+        }
+        String _name = null;
+        if (_rule!=null) {
+          _name=_rule.getName();
+        }
+        boolean _tripleNotEquals = (_name != null);
+        if (_tripleNotEquals) {
+          return this.process(((RuleCall)object).getRule().getName(), prefix);
+        }
+      }
+      return "";
+    } else {
+      return this.process(node.getText(), prefix);
+    }
+  }
+  
+  private String process(final String input, final String prefix) {
+    String[] lines = input.split("\\s*(\\r?\\n)");
+    int first = 0;
+    while (this.isBlank(lines[first])) {
+      first++;
+    }
+    int _length = lines.length;
+    int last = (_length - 1);
+    while (this.isBlank(lines[last])) {
+      last--;
+    }
+    final String[] _converted_lines = (String[])lines;
+    lines = ((String[])Conversions.unwrapArray(((List<String>)Conversions.doWrapArray(_converted_lines)).subList(first, (last + 1)), String.class));
+    final String[] _converted_lines_1 = (String[])lines;
+    int _size = ((List<String>)Conversions.doWrapArray(_converted_lines_1)).size();
+    boolean _equals = (_size == 1);
+    if (_equals) {
+      String _trim = (lines[0]).trim();
+      return (prefix + _trim);
+    }
+    final String[] _converted_lines_2 = (String[])lines;
+    final String commonWhitespace = this.commonLeadingWhitespace(((List<String>)Conversions.doWrapArray(_converted_lines_2)));
+    for (int n = 0; (n < lines.length); n++) {
+      String _substring = (lines[n]).replaceAll("\t", "    ").substring(commonWhitespace.length());
+      String _plus = (prefix + _substring);
+      lines[n] = _plus;
+    }
+    final String[] _converted_lines_3 = (String[])lines;
+    return IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_converted_lines_3)), this.codeConfig.getLineDelimiter());
+  }
+  
+  private boolean isBlank(final String line) {
+    return line.trim().isEmpty();
+  }
+  
+  private String commonLeadingWhitespace(final List<String> lines) {
+    int _size = lines.size();
+    boolean _lessThan = (_size < 2);
+    if (_lessThan) {
+      return "";
+    }
+    String current = Strings.repeat(" ", lines.get(0).replaceAll("\t", "    ").length());
+    for (int i = 0; (i < ((Object[])Conversions.unwrapArray(lines, Object.class)).length); i++) {
+      {
+        final String next = lines.get(i).replaceAll("\t", "    ");
+        boolean _isBlank = this.isBlank(next);
+        boolean _not = (!_isBlank);
+        if (_not) {
+          current = Strings.commonPrefix(current, next);
+        }
+      }
+    }
+    for (int i = 0; (i < ((Object[])Conversions.unwrapArray(lines, Object.class)).length); i++) {
+      {
+        final String next = lines.get(i).replaceAll("\t", "    ");
+        boolean _isBlank = this.isBlank(next);
+        if (_isBlank) {
+          lines.set(i, current);
+        }
+      }
+    }
+    return current;
   }
   
   /**
@@ -860,22 +942,6 @@ public class GrammarAccessExtensions {
       _switchResult = "null";
     }
     return _switchResult;
-  }
-  
-  private ISerializer getSerializer() {
-    final String delimiter = this.codeConfig.getLineDelimiter();
-    ISerializer result = this.xtextSerializerByLineDelimiter.get(delimiter);
-    if ((result != null)) {
-      return result;
-    }
-    final ILineSeparatorInformation _function = () -> {
-      return delimiter;
-    };
-    GrammarAccessExtensions.LineSeparatorModule _lineSeparatorModule = new GrammarAccessExtensions.LineSeparatorModule(_function);
-    final Injector injector = Guice.createInjector(_lineSeparatorModule);
-    result = injector.<ISerializer>getInstance(ISerializer.class);
-    this.xtextSerializerByLineDelimiter.put(delimiter, result);
-    return result;
   }
   
   public String grammarElementIdentifier(final EObject it) {
