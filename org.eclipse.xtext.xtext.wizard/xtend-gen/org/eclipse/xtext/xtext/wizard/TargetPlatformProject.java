@@ -188,7 +188,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"com.google.gson\" version=\"2.8.2.v20180104-1110\"/>");
+    _builder.append("<unit id=\"com.google.gson\" version=\"2.8.6.v20201231-1626\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
