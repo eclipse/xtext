@@ -18,7 +18,7 @@ import org.junit.Test;
  * @author dhuebner - Initial contribution and API
  */
 public class XtextVersionTests {
-	private static Pattern VERSION_MATCHER = Pattern.compile("\\d\\.\\d+\\.\\d+(?:(-SNAPSHOT)|(\\.M\\d))?");
+	private static Pattern VERSION_MATCHER = Pattern.compile("\\d\\.\\d+\\.\\d+(?:(-SNAPSHOT)|(\\.M\\d)|(\\.Beta\\d?))?");
 
 	@Test
 	public void testVersionKinds() {
@@ -58,6 +58,7 @@ public class XtextVersionTests {
 		assertTrue("2.20.0 did not match", VERSION_MATCHER.matcher("2.20.0").matches());
 		assertTrue("2.20.0-SNAPSHOT did not match", VERSION_MATCHER.matcher("2.20.0-SNAPSHOT").matches());
 		assertTrue("2.20.0.M1 did not match", VERSION_MATCHER.matcher("2.20.0.M1").matches());
+		assertTrue("2.20.0.Beta did not match", VERSION_MATCHER.matcher("2.20.0.Beta").matches());
 		
 		assertFalse(VERSION_MATCHER.matcher("2.20.0.qualifier").matches());
 		assertFalse(VERSION_MATCHER.matcher("2.20.0.vSomething").matches());
