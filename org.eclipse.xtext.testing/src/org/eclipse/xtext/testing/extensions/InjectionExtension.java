@@ -62,7 +62,7 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 
 		public RegistryReset(IRegistryConfigurator resetter) {
 			this.resetter = resetter;
-			resetter.setupRegistry();
+			setup();
 		}
 		
 		public void setup() {

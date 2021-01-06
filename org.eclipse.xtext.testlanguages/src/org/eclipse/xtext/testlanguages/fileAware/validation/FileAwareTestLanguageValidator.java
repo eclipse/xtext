@@ -3,23 +3,25 @@
  */
 package org.eclipse.xtext.testlanguages.fileAware.validation;
 
+import org.eclipse.xtext.testlanguages.fileAware.fileAware.Element;
+import org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage;
+import org.eclipse.xtext.validation.Check;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+ * See
+ * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class FileAwareTestLanguageValidator extends AbstractFileAwareTestLanguageValidator {
-	
-//	public static final INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital",
-//					FileAwareTestLanguagePackage.Literals.GREETING__NAME,
-//					INVALID_NAME);
-//		}
-//	}
-	
+
+	public static final String INVALID_NAME = "invalidName";
+
+	@Check
+	public void checkGreetingStartsWithCapital(Element element) {
+		if ("LetItFail".equals(element.getName())) {
+			warning("LetItFail really is a bad name!", FileAwarePackage.Literals.ELEMENT__NAME, INVALID_NAME);
+		}
+	}
+
 }
