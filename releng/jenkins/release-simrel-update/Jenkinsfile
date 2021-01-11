@@ -68,13 +68,6 @@ pipeline {
             sed -i -e "s|versionRange=\\"\\([^\\"]*\\)|versionRange=\\"[$XTEXT_VERSION]|" tmf-xtext.aggrcon
             git add tmf-xtext.aggrcon
             
-            # disable EMF parsley for M1
-            if [ "$RELEASE_TYPE" == "M1" ]; then
-              # add xml attribute 'enabled="false"' to aggregator line
-              sed -i -e 's|<aggregator\\([^>]*\\)|<aggregator\\1 enabled="false"|' emf-parsley.aggrcon
-              git add emf-parsley.aggrcon
-            fi
-            
             case "$RELEASE_TYPE" in
               GA)
                 XTEXT_VERSION_LABEL=$(echo $XTEXT_VERSION | sed "s|\\(.*\\)\\.v.*|\\1|");;
