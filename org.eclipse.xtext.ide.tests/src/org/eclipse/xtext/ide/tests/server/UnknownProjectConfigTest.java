@@ -22,10 +22,12 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.util.Strings;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
+
 public class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
 	@Test
 	public void testCompletionWithInmemoryScheme_01() throws Exception {
-		initialize(it -> it.setRootUri(null));
+		initialize(it -> it.setWorkspaceFolders(Lists.newArrayList()));
 		String inmemoryUri = "inmemory:/mydoc.testlang";
 		languageServer.didOpen(new DidOpenTextDocumentParams(newTextDocumentItem(inmemoryUri, "type Foo {}")));
 		checkCompletion(inmemoryUri);
@@ -41,7 +43,7 @@ public class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest
 
 	@Test
 	public void testCompletionWithFileScheme_01() throws Exception {
-		initialize(it -> it.setRootUri(null));
+		initialize(it -> it.setWorkspaceFolders(Lists.newArrayList()));
 		String fileUri = "file:/home/test/workspace/mydoc.testlang";
 		languageServer.didOpen(new DidOpenTextDocumentParams(newTextDocumentItem(fileUri, "type Foo {}")));
 		checkCompletion(fileUri);

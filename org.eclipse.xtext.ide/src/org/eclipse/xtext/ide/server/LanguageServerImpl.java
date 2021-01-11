@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -103,7 +103,7 @@ import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.BuildManager.Buildable;
-import org.eclipse.xtext.ide.server.ILanguageServerAccess.Context;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
@@ -130,7 +130,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -162,9 +161,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 	@Inject
 	private ExecutableCommandRegistry commandRegistry;
-
-	@Inject @Deprecated
-	private org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry semanticHighlightingRegistry;
 
 	@Inject
 	private ILanguageServerShutdownAndExitHandler shutdownAndExitHandler;
@@ -309,7 +305,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			executeCommandOptions.setCommands(commandRegistry.getCommands());
 			serverCapabilities.setExecuteCommandProvider(executeCommandOptions);
 		}
-		initSemanticHighlighting(serverCapabilities, allLanguages, clientCapabilities);
 
 		for (IResourceServiceProvider language : allLanguages) {
 			ICapabilitiesContributor capabilitiesContributor = language.get(ICapabilitiesContributor.class);
@@ -318,14 +313,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 			}
 		}
 		return serverCapabilities;
-	}
-
-	@Deprecated
-	private void initSemanticHighlighting(ServerCapabilities serverCapabilities,
-			Set<? extends IResourceServiceProvider> allLanguages, ClientCapabilities clientCapabilities) {
-		semanticHighlightingRegistry.initialize(allLanguages, clientCapabilities, client);
-		serverCapabilities.setSemanticHighlighting(
-				new org.eclipse.lsp4j.SemanticHighlightingServerCapabilities(semanticHighlightingRegistry.getAllScopes()));
 	}
 
 	@Override
@@ -345,6 +332,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	/**
 	 * Compute the base dir.
 	 */
+	@Deprecated
 	protected URI getBaseDir(InitializeParams params) {
 		String rootUri = params.getRootUri();
 		if (rootUri != null) {
@@ -1142,20 +1130,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		}
 	};
 
+	/**
+	 * @deprecated please register a {@link IBuildListener} directly through {@link ILanguageServerAccess#addBuildListener(IBuildListener)}
+	 */
 	@Override
-	public void afterBuild(List<IResourceDescription.Delta> deltas) {
-		FluentIterable.from(deltas).filter(it -> it.getNew() != null).transform(it -> it.getUri().toString())
-				.forEach(it -> {
-					access.doRead(it, ctx -> {
-						updateSemanticHighlighting(ctx);
-						return null;
-					});
-				});
-	}
-
 	@Deprecated
-	private void updateSemanticHighlighting(Context ctx) {
-		semanticHighlightingRegistry.update(ctx);
+	public void afterBuild(List<IResourceDescription.Delta> deltas) {
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -57,6 +57,7 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.HoverParams;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.InsertReplaceEdit;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.MarkupContent;
@@ -66,8 +67,6 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.ResourceOperation;
-import org.eclipse.lsp4j.SemanticHighlightingInformation;
-import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.SignatureInformation;
@@ -86,7 +85,6 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.util.Ranges;
-import org.eclipse.lsp4j.util.SemanticHighlightingTokens;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -332,9 +330,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
         it.setProcessId(Integer.valueOf(1));
-        it.setRootUri(this._uriExtensions.toUriString(this.root.toURI().normalize()));
-        String _rootUri = it.getRootUri();
-        WorkspaceFolder _workspaceFolder = new WorkspaceFolder(_rootUri, "");
+        String _uriString = this._uriExtensions.toUriString(this.root.toURI().normalize());
+        WorkspaceFolder _workspaceFolder = new WorkspaceFolder(_uriString, "");
         it.setWorkspaceFolders(Collections.<WorkspaceFolder>unmodifiableList(CollectionLiterals.<WorkspaceFolder>newArrayList(_workspaceFolder)));
       };
       final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
@@ -644,7 +641,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       }
     }
     {
-      TextEdit _textEdit = it.getTextEdit();
+      Either<TextEdit, InsertReplaceEdit> _textEdit = it.getTextEdit();
       boolean _tripleNotEquals = (_textEdit != null);
       if (_tripleNotEquals) {
         _builder.append(" -> ");
@@ -797,37 +794,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     };
     it.entrySet().forEach(_function);
     return sb.toString();
-  }
-  
-  @Deprecated
-  protected String _toExpectation(final Pair<SemanticHighlightingInformation, List<List<String>>> it) {
-    final StringBuilder sb = new StringBuilder();
-    final List<SemanticHighlightingTokens.Token> tokens = IterableExtensions.<SemanticHighlightingTokens.Token>sort(SemanticHighlightingTokens.decode(it.getKey().getTokens()));
-    for (final SemanticHighlightingTokens.Token token : tokens) {
-      {
-        int _length = sb.length();
-        boolean _greaterThan = (_length > 0);
-        if (_greaterThan) {
-          sb.append(", ");
-        }
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append(token.character);
-        _builder.append(":");
-        _builder.append(token.length);
-        _builder.append(":");
-        List<String> _get = it.getValue().get(token.scope);
-        _builder.append(_get);
-        sb.append(_builder);
-      }
-    }
-    StringConcatenation _builder = new StringConcatenation();
-    int _line = it.getKey().getLine();
-    _builder.append(_line);
-    _builder.append(" : [");
-    String _string = sb.toString();
-    _builder.append(_string);
-    _builder.append("]");
-    return _builder.toString();
   }
   
   protected String _toExpectation(final CodeLens it) {
@@ -1466,27 +1432,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  @Deprecated
-  protected Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>> getSemanticHighlightingParams() {
-    try {
-      final Function1<CancelIndicator, Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>> _function = (CancelIndicator it) -> {
-        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
-          return it_1.getValue();
-        };
-        final Function1<SemanticHighlightingParams, VersionedTextDocumentIdentifier> _function_2 = (SemanticHighlightingParams it_1) -> {
-          return it_1.getTextDocument();
-        };
-        final Function1<SemanticHighlightingParams, List<SemanticHighlightingInformation>> _function_3 = (SemanticHighlightingParams it_1) -> {
-          return it_1.getLines();
-        };
-        return IterableExtensions.<SemanticHighlightingParams, VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>toMap(Iterables.<SemanticHighlightingParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), SemanticHighlightingParams.class), _function_2, _function_3);
-      };
-      return this.languageServer.getRequestManager().<Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>>runRead(_function).get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
   protected String toExpectation(final Object it) {
     if (it instanceof Integer) {
       return _toExpectation((Integer)it);
@@ -1498,8 +1443,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((String)it);
     } else if (it instanceof VersionedTextDocumentIdentifier) {
       return _toExpectation((VersionedTextDocumentIdentifier)it);
-    } else if (it instanceof Pair) {
-      return _toExpectation((Pair<SemanticHighlightingInformation, List<List<String>>>)it);
     } else if (it == null) {
       return _toExpectation((Void)null);
     } else if (it instanceof Map) {
