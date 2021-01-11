@@ -18,7 +18,7 @@ source code repository logs.
 
 This program and the accompanying materials are made available under the terms
 of the Eclipse Public License v. 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+https://www.eclipse.org/legal/epl-2.0.
 
 SPDX-License-Identifier: EPL-2.0
 
@@ -129,6 +129,10 @@ ASM (7.2)
 * License: BSD-3-Clause
 
 ASM (7.3.1)
+
+* License: BSD-3-Clause
+
+ASM (8.0)
 
 * License: BSD-3-Clause
 
@@ -290,11 +294,27 @@ Gradle Wrapper (5.6.3)
 
 Gradle Wrapper (6.0)
 
-* License: Pending
+* License: Apache-2.0
 
 Gradle Wrapper (6.1)
 
-* License: Pending
+* License: Apache-2.0
+
+Gradle Wrapper (6.2)
+
+* License: Apache-2.0
+
+Gradle Wrapper (6.4)
+
+* License: Apache-2.0
+
+Gradle Wrapper (6.5.1)
+
+* License: Apache-2.0
+
+Gradle Wrapper (6.7)
+
+* License: Apache-2.0
 
 gson (2.8.2)
 
