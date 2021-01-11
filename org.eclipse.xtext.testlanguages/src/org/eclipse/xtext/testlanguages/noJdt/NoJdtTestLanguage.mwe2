@@ -27,9 +27,9 @@ XtextGeneratorLanguage {
 
 	// The antlr parser generator fragment.
 	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
-	//  options = {
-	//      backtrack = true
-	//  }
+	  options = {
+	     k = 1
+	  }
 	}
 //	fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {}
 	

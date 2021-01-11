@@ -5,6 +5,7 @@ grammar InternalNoJdtTestLanguage;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
+	k=1;
 }
 
 @lexer::header {
