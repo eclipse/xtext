@@ -16,7 +16,7 @@ public class FileAwareTestLanguageFormatter extends AbstractJavaFormatter {
 
 	protected void format(PackageDeclaration pkg, IFormattableDocument doc) {
 		doc.append(regionFor(pkg).feature(FileAwarePackage.Literals.PACKAGE_DECLARATION__NAME), it -> it.setNewLines(2));
-		Import last = Iterables.getLast(pkg.getImports());
+		Import last = Iterables.getLast(pkg.getImports(), null);
 		for (Import imp : pkg.getImports()) {
 			doc.format(imp);
 			doc.append(imp, it -> it.setNewLines(imp == last ? 2 : 1));
