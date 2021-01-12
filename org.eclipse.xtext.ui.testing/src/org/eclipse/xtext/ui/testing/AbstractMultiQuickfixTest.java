@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -32,11 +33,13 @@ import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 
 import com.google.common.annotations.Beta;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -161,5 +164,19 @@ public abstract class AbstractMultiQuickfixTest extends AbstractEditorTest {
 		Assert.assertEquals(1, resolutions.length);
 		IMarkerResolution resolution = resolutions[0];
 		resolution.run(marker);
+	}
+	
+	/**
+	 * @since 2.25
+	 */
+	protected IMarker getFirstMarker(IMarker[] markers) {
+		IMarker firstMarker = Iterables.getFirst(IterableExtensions.sortBy(Arrays.asList(markers), (IMarker it) -> {
+			try {
+				return ((Integer) it.getAttribute(IMarker.CHAR_START));
+			} catch (CoreException e) {
+				throw Exceptions.sneakyThrow(e);
+			}
+		}), null);
+		return firstMarker;
 	}
 }
