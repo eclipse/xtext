@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,7 +9,6 @@
 package org.eclipse.xtext.xbase.interpreter
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -21,6 +20,11 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
+import org.eclipse.xtext.common.types.access.impl.ClassFinder
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmTypeReference
+import java.util.Map
+import java.util.Set
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -91,9 +95,13 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 		}
 	}
 	
-	@FinalFieldsConstructor
 	private static class SwitchContext extends Context {
 		boolean validationMode
+
+		new(JvmTypeReference expectedType, ClassFinder classFinder, Map<String, JvmIdentifiableElement> visibleFeatures,
+			Set<XExpression> alreadyEvaluating) {
+			super(expectedType, classFinder, visibleFeatures, alreadyEvaluating)
+		}
 	}
 
 }
