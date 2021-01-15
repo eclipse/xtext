@@ -46,10 +46,10 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 public class XtextFormatterJava extends AbstractJavaFormatter {
 
 	protected void format(Grammar grammar, IFormattableDocument doc) {
-		doc.prepend(regionFor(grammar).keyword("("), it -> it.noSpace());
+		doc.prepend(regionFor(grammar).keyword("("), this::noSpace);
 		formatParens(grammar, doc);
-		regionFor(grammar).keywords(",").forEach(s -> doc.prepend(s, it -> it.noSpace()));
-		regionFor(grammar).keywords(",").forEach(s -> doc.append(s, it -> it.oneSpace()));
+		regionFor(grammar).keywords(",").forEach(s -> doc.prepend(s, this::noSpace));
+		regionFor(grammar).keywords(",").forEach(s -> doc.append(s, this::oneSpace));
 		boolean first = true;
 		for (AbstractMetamodelDeclaration decl : grammar.getMetamodelDeclarations()) {
 			doc.set(previousHiddenRegion(decl), first ? it -> it.setNewLines(2) : it -> it.setNewLines(1));
@@ -64,9 +64,9 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(ParserRule rule, IFormattableDocument doc) {
-		doc.prepend(regionFor(rule).keyword("<"), it -> it.oneSpace());
-		doc.append(regionFor(rule).keyword("<"), it -> it.noSpace());
-		doc.prepend(regionFor(rule).keyword(">"), it -> it.noSpace());
+		doc.prepend(regionFor(rule).keyword("<"), this::oneSpace);
+		doc.append(regionFor(rule).keyword("<"), this::noSpace);
+		doc.prepend(regionFor(rule).keyword(">"), this::noSpace);
 		rule.getParameters().forEach(p -> doc.format(p));
 		formatRule(rule, doc);
 		formatParens(rule, doc);
@@ -81,14 +81,14 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(EnumLiteralDeclaration decl, IFormattableDocument doc) {
-		doc.surround(regionFor(decl).keyword("="), it -> it.noSpace());
+		doc.surround(regionFor(decl).keyword("="), this::noSpace);
 	}
 
 	protected void format(Alternatives alternatives, IFormattableDocument doc) {
 		regionFor(alternatives).keywords("|").forEach(r -> {
-			doc.surround(r, it -> it.autowrap());
+			doc.surround(r, this::autowrap);
 			doc.surround(r, it -> it.setNewLines(0, 0, 1));
-			doc.surround(r, it -> it.oneSpace());
+			doc.surround(r, this::oneSpace);
 		});
 		formatParens(alternatives, doc);
 		formatCardinality(alternatives, doc);
@@ -96,46 +96,46 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(Assignment assignment, IFormattableDocument doc) {
-		regionFor(assignment).keywords("=", "+=", "?=").forEach(r -> doc.surround(r, it -> it.noSpace()));
-		regionFor(assignment).keywords("->", "=>").forEach(k -> doc.append(k, it -> it.noSpace()));
+		regionFor(assignment).keywords("=", "+=", "?=").forEach(r -> doc.surround(r, this::noSpace));
+		regionFor(assignment).keywords("->", "=>").forEach(k -> doc.append(k, this::noSpace));
 		formatParens(assignment, doc);
 		formatCardinality(assignment, doc);
 		doc.format(assignment.getTerminal());
 	}
 
 	protected void format(Group group, IFormattableDocument doc) {
-		doc.append(regionFor(group).keyword("<"), it -> it.noSpace());
+		doc.append(regionFor(group).keyword("<"), this::noSpace);
 		doc.format(group.getGuardCondition());
-		doc.prepend(regionFor(group).keyword(">"), it -> it.noSpace());
+		doc.prepend(regionFor(group).keyword(">"), this::noSpace);
 		formatParens(group, doc);
 		formatCardinality(group, doc);
 		formatGroupElements(group, doc);
 	}
 
 	protected void format(UnorderedGroup group, IFormattableDocument doc) {
-		regionFor(group).keywords("&").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		regionFor(group).keywords("&").forEach(r -> doc.surround(r, this::oneSpace));
 		formatParens(group, doc);
 		formatGroupElements(group, doc);
 	}
 
 	protected void format(Conjunction conjunction, IFormattableDocument doc) {
-		regionFor(conjunction).keywords("&").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		regionFor(conjunction).keywords("&").forEach(r -> doc.surround(r, this::oneSpace));
 		formatParens(conjunction, doc);
 		doc.format(conjunction.getRight());
 	}
 
 	protected void format(Disjunction disjunction, IFormattableDocument doc) {
-		regionFor(disjunction).keywords("|").forEach(r -> doc.surround(r, it -> it.oneSpace()));
+		regionFor(disjunction).keywords("|").forEach(r -> doc.surround(r, this::oneSpace));
 		formatParens(disjunction, doc);
 		doc.format(disjunction.getRight());
 	}
 
 	protected void format(Wildcard wildcard, IFormattableDocument doc) {
-		doc.surround(regionFor(wildcard).keyword(":"), it -> it.oneSpace());
+		doc.surround(regionFor(wildcard).keyword(":"), this::oneSpace);
 	}
 
 	protected void format(CharacterRange range, IFormattableDocument doc) {
-		doc.surround(regionFor(range).keyword(".."), it -> it.noSpace());
+		doc.surround(regionFor(range).keyword(".."), this::noSpace);
 		formatParens(range, doc);
 		formatCardinality(range, doc);
 		doc.format(range.getLeft());
@@ -143,49 +143,49 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(RuleCall call, IFormattableDocument doc) {
-		doc.append(call, it -> it.autowrap());
-		doc.surround(regionFor(call).keyword("<"), it -> it.noSpace());
-		doc.prepend(regionFor(call).keyword(">"), it -> it.noSpace());
-		regionFor(call).keywords(",").forEach(r -> doc.prepend(r, it -> it.noSpace()));
-		regionFor(call).keywords(",").forEach(r -> doc.append(r, it -> it.oneSpace()));
+		doc.append(call, this::autowrap);
+		doc.surround(regionFor(call).keyword("<"), this::noSpace);
+		doc.prepend(regionFor(call).keyword(">"), this::noSpace);
+		regionFor(call).keywords(",").forEach(r -> doc.prepend(r, this::noSpace));
+		regionFor(call).keywords(",").forEach(r -> doc.append(r, this::oneSpace));
 		formatParens(call, doc);
 		formatCardinality(call, doc);
 		call.getArguments().forEach(a -> doc.format(a));
 	}
 
 	protected void format(Keyword keyword, IFormattableDocument doc) {
-		doc.surround(keyword, it -> it.autowrap());
-		regionFor(keyword).keywords("->", "=>").forEach(k -> doc.append(k, it -> it.noSpace()));
+		doc.surround(keyword, this::autowrap);
+		regionFor(keyword).keywords("->", "=>").forEach(k -> doc.append(k, this::noSpace));
 		formatParens(keyword, doc);
 		formatCardinality(keyword, doc);
 	}
 
 	protected void format(NegatedToken token, IFormattableDocument doc) {
-		doc.append(regionFor(token).keyword("!"), it -> it.noSpace());
+		doc.append(regionFor(token).keyword("!"), this::noSpace);
 		formatParens(token, doc);
 		formatCardinality(token, doc);
 		doc.format(token.getTerminal());
 	}
 
 	protected void format(UntilToken token, IFormattableDocument doc) {
-		doc.surround(regionFor(token).keyword("->"), it -> it.noSpace());
+		doc.surround(regionFor(token).keyword("->"), this::noSpace);
 		doc.format(token.getTerminal());
 	}
 
 	protected void format(Action action, IFormattableDocument doc) {
-		doc.prepend(regionFor(action).keyword("{"), it -> it.autowrap());
-		doc.append(regionFor(action).keyword("{"), it -> it.noSpace());
-		doc.prepend(regionFor(action).keyword("}"), it -> it.noSpace());
-		doc.append(regionFor(action).keyword("}"), it -> it.autowrap());
-		doc.surround(regionFor(action).keyword("."), it -> it.noSpace());
-		regionFor(action).keywords("=", "+=").forEach(k -> doc.surround(k, it -> it.noSpace()));
+		doc.prepend(regionFor(action).keyword("{"), this::autowrap);
+		doc.append(regionFor(action).keyword("{"), this::noSpace);
+		doc.prepend(regionFor(action).keyword("}"), this::noSpace);
+		doc.append(regionFor(action).keyword("}"), this::autowrap);
+		doc.surround(regionFor(action).keyword("."), this::noSpace);
+		regionFor(action).keywords("=", "+=").forEach(k -> doc.surround(k, this::noSpace));
 		doc.format(action.getType());
 	}
 
 	protected void format(CrossReference ref, IFormattableDocument doc) {
-		doc.append(regionFor(ref).keyword("["), it -> it.noSpace());
-		doc.prepend(regionFor(ref).keyword("]"), it -> it.noSpace());
-		doc.surround(regionFor(ref).keyword("|"), it -> it.noSpace());
+		doc.append(regionFor(ref).keyword("["), this::noSpace);
+		doc.prepend(regionFor(ref).keyword("]"), this::noSpace);
+		doc.surround(regionFor(ref).keyword("|"), this::noSpace);
 		doc.format(ref.getType());
 	}
 
@@ -193,16 +193,16 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	protected void format(NamedArgument param, IFormattableDocument doc) {
-		regionFor(param).keywords("=").forEach(k -> doc.surround(k, it -> it.noSpace()));
+		regionFor(param).keywords("=").forEach(k -> doc.surround(k, this::noSpace));
 	}
 
 	protected void format(TypeRef ref, IFormattableDocument doc) {
-		doc.surround(regionFor(ref).keyword("::"), it -> it.noSpace());
+		doc.surround(regionFor(ref).keyword("::"), this::noSpace);
 	}
 
 	protected void format(Annotation annotation, IFormattableDocument doc) {
-		doc.surround(regionFor(annotation).keyword("@"), it -> it.noSpace());
-		doc.append(annotation, it -> it.newLine());
+		doc.surround(regionFor(annotation).keyword("@"), this::noSpace);
+		doc.append(annotation, this::newLine);
 	}
 
 	private void formatGroupElements(CompoundElement group, IFormattableDocument doc) {
@@ -217,11 +217,11 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 				next = elements.get(index + 1);
 			if (first && !last) {
 				if (elementsAreSeperatedBySpace(element, next))
-					doc.append(element, it -> it.oneSpace());
+					doc.append(element, this::oneSpace);
 			} else if (!first && !last) {
 				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
 				if (elementsAreSeperatedBySpace(element, next))
-					doc.surround(element, it -> it.oneSpace());
+					doc.surround(element, this::oneSpace);
 			} else if (!first && last) {
 				doc.prepend(element, it -> it.setNewLines(0, 0, 1));
 			}
@@ -235,31 +235,31 @@ public class XtextFormatterJava extends AbstractJavaFormatter {
 	}
 
 	private void formatRule(AbstractRule rule, IFormattableDocument doc) {
-		doc.surround(regionFor(rule).keyword("returns"), it -> it.oneSpace());
-		doc.prepend(regionFor(rule).keyword("hidden"), it -> it.oneSpace());
-		doc.append(regionFor(rule).keyword("hidden"), it -> it.noSpace());
-		regionFor(rule).keywords(",").forEach(r -> doc.prepend(r, it -> it.noSpace()));
-		regionFor(rule).keywords(",").forEach(r -> doc.append(r, it -> it.oneSpace()));
-		doc.prepend(regionFor(rule).keyword(":"), it -> it.noSpace());
-		doc.append(regionFor(rule).keyword(":"), it -> it.newLine());
-		doc.prepend(regionFor(rule).keyword(";"), it -> it.noSpace());
-		doc.append(regionFor(rule).keyword(";"), it -> it.noSpace());
-		doc.interior(regionFor(rule).keyword(":"), regionFor(rule).keyword(";"), it -> it.indent());
+		doc.surround(regionFor(rule).keyword("returns"), this::oneSpace);
+		doc.prepend(regionFor(rule).keyword("hidden"), this::oneSpace);
+		doc.append(regionFor(rule).keyword("hidden"), this::noSpace);
+		regionFor(rule).keywords(",").forEach(r -> doc.prepend(r, this::noSpace));
+		regionFor(rule).keywords(",").forEach(r -> doc.append(r, this::oneSpace));
+		doc.prepend(regionFor(rule).keyword(":"), this::noSpace);
+		doc.append(regionFor(rule).keyword(":"), this::newLine);
+		doc.prepend(regionFor(rule).keyword(";"), this::noSpace);
+		doc.append(regionFor(rule).keyword(";"), this::noSpace);
+		doc.interior(regionFor(rule).keyword(":"), regionFor(rule).keyword(";"), this::indent);
 		rule.getAnnotations().forEach(a -> doc.format(a));
 		doc.format(rule.getType());
 		doc.format(rule.getAlternatives());
 	}
 
 	private void formatParens(EObject element, IFormattableDocument doc) {
-		doc.prepend(regionFor(element).keyword("("), it -> it.autowrap());
-		doc.append(regionFor(element).keyword("("), it -> it.noSpace());
-		doc.prepend(regionFor(element).keyword(")"), it -> it.noSpace());
-		doc.append(regionFor(element).keyword(")"), it -> it.autowrap());
+		doc.prepend(regionFor(element).keyword("("), this::autowrap);
+		doc.append(regionFor(element).keyword("("), this::noSpace);
+		doc.prepend(regionFor(element).keyword(")"), this::noSpace);
+		doc.append(regionFor(element).keyword(")"), this::autowrap);
 	}
 
 	private void formatCardinality(EObject element, IFormattableDocument doc) {
-		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.prepend(r, it -> it.noSpace()));
-		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.append(r, it -> it.autowrap()));
+		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.prepend(r, this::noSpace));
+		regionFor(element).keywords("?", "*", "+").forEach(r -> doc.append(r, this::autowrap));
 	}
 
 }

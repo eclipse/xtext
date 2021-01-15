@@ -49,20 +49,20 @@ import com.google.common.annotations.Beta;
  * 	}
  * 
  * 	protected void _format(Parent parent, IFormattableDocument doc) {
- * 		doc.prepend(regionFor(parent).keyword("parent"), it -> it.noSpace());
- * 		doc.append(regionFor(parent).keyword("parent"), it -> it.oneSpace());
- * 		doc.append(regionFor(parent).feature(PARENT__NAME), it -> it.oneSpace());
- * 		doc.prepend(regionFor(parent).keyword("{"), it -> it.oneSpace());
- * 		doc.append(regionFor(parent).keyword("{"), it -> it.newLine());
- * 		doc.interior(regionFor(parent).keyword("{"), regionFor(parent).keyword("}"), it -> it.indent());
+ * 		doc.prepend(regionFor(parent).keyword("parent"), this::noSpace);
+ * 		doc.append(regionFor(parent).keyword("parent"), this::oneSpace);
+ * 		doc.append(regionFor(parent).feature(PARENT__NAME), this::oneSpace);
+ * 		doc.prepend(regionFor(parent).keyword("{"), this::oneSpace);
+ * 		doc.append(regionFor(parent).keyword("{"), this::newLine);
+ * 		doc.interior(regionFor(parent).keyword("{"), regionFor(parent).keyword("}"), this::indent);
  * 		doc.append(regionFor(parent).keyword("}"), it -> it.setNewLines(1, 1, 2));
  * 		for (Child child : parent.getChildren())
  * 			doc.format(child);
  * 	}
  * 
  * 	protected void _format(Child child, IFormattableDocument doc) {
- * 		doc.append(regionFor(child).keyword("child"), it -> it.oneSpace());
- * 		doc.append(regionFor(child).feature(CHILD__NAME), it -> it.newLine());
+ * 		doc.append(regionFor(child).keyword("child"), this::oneSpace);
+ * 		doc.append(regionFor(child).feature(CHILD__NAME), this::newLine);
  * 	}
  * }
  * </pre>
@@ -175,6 +175,83 @@ public abstract class AbstractJavaFormatter extends AbstractFormatter2 {
 
 	protected Iterable<ISemanticRegion> semanticRegions(EObject semanticElement) {
 		return textRegionExtensions.semanticRegions(semanticElement);
+	}
+
+	// implementations that delegate the methods of IHiddenRegionFormatter to allow e.g. 'this::noSpace' instead of 'it -> it.noSpace()'.
+
+	/**
+	 * Configure autowrap.
+	 * @since 2.25
+	 */
+	protected void autowrap(IHiddenRegionFormatter hrf) {
+		hrf.autowrap();
+	}
+
+	/**
+	 * Suppresses auto wrap in this hidden region.
+	 * @since 2.25
+	 */
+	protected void noAutowrap(IHiddenRegionFormatter hrf) {
+		hrf.noAutowrap();
+	}
+
+	/**
+	 * When merging, treat this configuration with a high priority.
+	 * 
+	 * @see #lowPriority(IHiddenRegionFormatter)
+	 * @since 2.25
+	 */
+	protected void highPriority(IHiddenRegionFormatter hrf) {
+		hrf.highPriority();
+	}
+
+	/**
+	 * When merging, treat this configuration with a low priority.
+	 * 
+	 * @see #highPriority(IHiddenRegionFormatter)
+	 * @since 2.25
+	 */
+	protected void lowPriority(IHiddenRegionFormatter hrf) {
+		hrf.lowPriority();
+	}
+
+	/**
+	 * Resets the indentation level to zero.
+	 * @since 2.25
+	 */
+	protected void noIndentation(IHiddenRegionFormatter hrf) {
+		hrf.noIndentation();
+	}
+
+	/**
+	 * @since 2.25
+	 */
+	protected void indent(IHiddenRegionFormatter hrf) {
+		hrf.indent();
+	}
+
+	/**
+	 * Forces a line break in this hidden region.
+	 * @since 2.25
+	 */
+	protected void newLine(IHiddenRegionFormatter hrf) {
+		hrf.newLine();
+	}
+
+	/**
+	 * Format this hidden region with using no space (zero characters).
+	 * @since 2.25
+	 */
+	protected void noSpace(IHiddenRegionFormatter hrf) {
+		hrf.noSpace();
+	}
+
+	/**
+	 * One space is added at this hidden region.
+	 * @since 2.25
+	 */
+	protected void oneSpace(IHiddenRegionFormatter hrf) {
+		hrf.oneSpace();
 	}
 
 }
