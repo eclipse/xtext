@@ -111,7 +111,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 
 	/**
 	 * Tries to read an {@link EAttribute} {@code name} from the
-	 * the given object and appends that to its containers qualified name.
+	 * given object and appends that to its container's qualified name.
 	 * 
 	 * @since 2.15
 	 */
