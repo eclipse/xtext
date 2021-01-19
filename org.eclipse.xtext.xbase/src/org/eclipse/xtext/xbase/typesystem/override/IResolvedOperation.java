@@ -223,7 +223,7 @@ public interface IResolvedOperation extends IResolvedExecutable {
 	
 	/**
 	 * Returns the resolved return types in the current context. That is, all free type variables are bound according
-	 * the the bottom of this method hierarchy.
+	 * to the bottom of this method hierarchy.
 	 * 
 	 * @see #getContextType()
 	 * @see #getResolvedTypeParameters()

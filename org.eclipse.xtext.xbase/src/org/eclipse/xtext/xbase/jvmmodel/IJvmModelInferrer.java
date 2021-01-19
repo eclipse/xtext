@@ -73,7 +73,7 @@ public interface IJvmModelInferrer {
 	 *            an acceptor awaiting derived root {@link JvmDeclaredType}s
 	 * @param preIndexingPhase
 	 *            whether the call is done in before indexing. During this phase clients may not rely on any global indexing information 
-	 *            and only need to to provide the information needed by the language's {@link org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy}.
+	 *            and only need to provide the information needed by the language's {@link org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy}.
 	 *            IF not implemented differently this is just the {@link JvmDeclaredType}s with their qualified name, but no members and no other data.
 	 */
 	void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase);

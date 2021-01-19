@@ -18,7 +18,7 @@ public interface IResolvedField extends IResolvedFeature {
 
 	/**
 	 * Returns the resolved type in the current context. That is, all free type variables are bound according
-	 * the the bottom of this hierarchy.
+	 * to the bottom of this hierarchy.
 	 * 
 	 * @see #getContextType()
 	 * @return the return type.

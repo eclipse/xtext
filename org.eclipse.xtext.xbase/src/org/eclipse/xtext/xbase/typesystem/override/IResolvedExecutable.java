@@ -28,7 +28,7 @@ public interface IResolvedExecutable extends IResolvedFeature {
 
 	/**
 	 * Returns the resolved parameter types in the current context. That is, all free type variables are bound according
-	 * the the bottom of this method hierarchy.
+	 * to the bottom of this method hierarchy.
 	 * 
 	 * @see #getContextType()
 	 * @return the list of parameter types.
@@ -37,7 +37,7 @@ public interface IResolvedExecutable extends IResolvedFeature {
 	
 	/**
 	 * Returns the resolved declared exceptions in the current context. That is, all free type variables are bound
-	 * according the the bottom of this method hierarchy.
+	 * according to the bottom of this method hierarchy.
 	 * 
 	 * @see #getContextType()
 	 * @return the declared exceptions.

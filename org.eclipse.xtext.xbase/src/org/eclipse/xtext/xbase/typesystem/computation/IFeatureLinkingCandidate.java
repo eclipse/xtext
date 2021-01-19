@@ -28,20 +28,20 @@ public interface IFeatureLinkingCandidate extends ILinkingCandidate {
 	XAbstractFeatureCall getFeatureCall();
 
 	/**
-	 * Returns <code>true</code> if the the linked feature is static.
+	 * Returns <code>true</code> if the linked feature is static.
 	 * @return whether the feature is static.
 	 */
 	boolean isStatic();
 	
 	/**
-	 * Returns <code>true</code> if the the linked feature is contributed
+	 * Returns <code>true</code> if the linked feature is contributed
 	 * by an extension.
 	 * @return whether the feature is extension.
 	 */
 	boolean isExtension();
 	
 	/**
-	 * Returns <code>true</code> if the the feature call is linked as a type literal.
+	 * Returns <code>true</code> if the feature call is linked as a type literal.
 	 * @return whether the feature call is a type literal rather than a <em>real</em> feature call.
 	 */
 	boolean isTypeLiteral();

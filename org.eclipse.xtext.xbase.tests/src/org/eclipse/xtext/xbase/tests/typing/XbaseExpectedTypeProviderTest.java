@@ -290,7 +290,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	// testForLoopExpression_4_*:
 	// if the expected component type is compatible, the expectation of the for expression is refined to 
-	// to what it actually is
+	// what it actually is
 	@Test public void testForLoopExpression_4_a() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as double[]) null");
 		assertExpected("double[]", loop.getForExpression());

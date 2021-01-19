@@ -11,7 +11,7 @@
  * This package contains the primary hooks for the actual type computation in Xbase
  * as well as their respective base implementations.
  * 
- * Sensible entry points to explore are the these interfaces.
+ * Sensible entry points to explore are these interfaces.
  * <ol>
  *	<li>{@link org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer ITypeComputer} -
  *    The primary SPI. Clients implement this interface in order to compute types or expressions.
