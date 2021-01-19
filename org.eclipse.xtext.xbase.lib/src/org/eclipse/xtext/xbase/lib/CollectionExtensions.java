@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -59,7 +59,7 @@ import static com.google.common.collect.Sets.*;
 	 *            the to-be-changed collection. May not be <code>null</code>.
 	 * @param newElements
 	 *            elements to be inserted into the collection. May not be <code>null</code> but may contain
-	 *            <code>null</code> elements if the the target collection supports <code>null</code> elements.
+	 *            <code>null</code> elements if the target collection supports <code>null</code> elements.
 	 * @return <code>true</code> if the collection changed due to this operation.
 	 * @see #addAll(Collection, Iterable)
 	 */
@@ -93,7 +93,7 @@ import static com.google.common.collect.Sets.*;
 	 *            the to-be-changed collection. May not be <code>null</code>.
 	 * @param newElements
 	 *            elements to be removed from the collection. May not be <code>null</code> but may contain
-	 *            <code>null</code> elements if the the target collection supports <code>null</code> elements.
+	 *            <code>null</code> elements if the target collection supports <code>null</code> elements.
 	 * @return <code>true</code> if the collection changed due to this operation.
 	 * @see #removeAll(Collection, Collection)
 	 * @since 2.4
