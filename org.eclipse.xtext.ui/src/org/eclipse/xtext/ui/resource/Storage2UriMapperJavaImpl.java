@@ -568,7 +568,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			 * accepts a scheduling rule to allow a workspace runnable to be postponed
 			 * when another plain job with the same SR is still running (and vice versa),
 			 * but the main lock during the run is the one of the Workmanager.
-			 * Even if the there is no current rule on the manager, the workspace may be currently
+			 * Even if there is no current rule on the manager, the workspace may be currently
 			 * locked by this thread. If that is already the case, initialize the cache
 			 * immediately, otherwise postpone the initialization to another thread.  
 			 */

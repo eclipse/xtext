@@ -370,7 +370,7 @@ public class XbaseEditor extends XtextEditor {
 		 * This is only overwritten for documentation purpose.
 		 * It is not necessary to fix the offset and length for #reveal since this API is 
 		 * private to Xtext and never used from JDT thus the given offset and length are
-		 * always relative the our own objects and not relative the the derived java files.
+		 * always relative the our own objects and not relative to the derived java files.
 		 */
 		super.reveal(offset, length);
 	}

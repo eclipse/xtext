@@ -47,7 +47,7 @@ public class ClipboardUtil {
 	}
 
 	/**
-	 * Retrieves a string the the clipboard {@link DND#CLIPBOARD} using {@link TextTransfer}
+	 * Retrieves a string from the clipboard {@link DND#CLIPBOARD} using {@link TextTransfer}
 	 *
 	 * @return Text from the {@link Clipboard} using {@link TextTransfer}
 	 */

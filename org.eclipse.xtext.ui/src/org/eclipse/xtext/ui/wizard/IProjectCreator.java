@@ -37,7 +37,7 @@ public interface IProjectCreator extends IRunnableWithProgress {
 	void setProjectInfo(IProjectInfo projectInfo);
 
 	/**
-	 * <p>Result is a file that will be opened after the the project creation was successfully completed.</p>
+	 * <p>Result is a file that will be opened after the project creation was successfully completed.</p>
 	 * (Dennis: This method name is misleading. Should be fileToOpenOnFinish or something. Consider to deprecate it in 2.4)
 	 * @return {@link IFile} that should be opened after the project creation was successfully done.
 	 */
