@@ -28,6 +28,7 @@ class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase {
 
 	@After
 	override tearDown() throws Exception {
+		super.tearDown()
 		cleanWorkspace
 	}
 
