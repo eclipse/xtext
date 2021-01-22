@@ -34,6 +34,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   @After
   @Override
   public void tearDown() throws Exception {
+    super.tearDown();
     IResourcesSetupUtil.cleanWorkspace();
   }
   
