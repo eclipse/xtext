@@ -255,11 +255,19 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
   </thead>
   <tbody>
     <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/">2.25.0</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.25">2.25.0</a> (2.20.0)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.0/">2.12.0</a> (2.9.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/releases/2021-03">4.19.0</a> (4.7.3)</td>
+      <td><a href="http://download.eclipse.org/releases/2021-03">2021-03</a></td>
+    </tr>
+    <tr>
       <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.24.0/">2.24.0</a></td>
       <td><a href="http://download.eclipse.org/modeling/emf/emf/builds/release/2.24">2.24.0</a> (2.20.0)</td>
       <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.0/">2.12.0</a> (2.9.1)</td>
       <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315">2.2.0</a> (1.4)</td>
-      <td><a href="http://download.eclipse.org/releases/2020-09">4.17.0</a> (4.7.3)</td>
+      <td><a href="http://download.eclipse.org/releases/2020-12">4.18.0</a> (4.7.3)</td>
       <td><a href="http://download.eclipse.org/releases/2020-12">2020-12</a></td>
     </tr>
     <tr>
@@ -409,7 +417,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
   </tbody>
 </table>
 
-<p>The following is an example target platform definition for Xtext 2.24.0 and Eclipse 4.18 alias 2020-12.</p>
+<p>The following is an example target platform definition for Xtext 2.25.0 and Eclipse 4.19 alias 2021-03.</p>
 
 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
 &lt;?pde version="3.8"?&gt;
@@ -417,7 +425,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
 &lt;locations&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.24.0/"/&gt;
+    &lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/"/&gt;
   &lt;/location&gt;
   &lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
     &lt;unit id="org.eclipse.jdt.feature.group" version="0.0.0"/&gt;
@@ -429,7 +437,7 @@ The second way is to use Eclipse <a href="https://wiki.eclipse.org/Tycho/Target_
     &lt;unit id="org.eclipse.xtend" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/&gt;
     &lt;unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/&gt;
-    &lt;repository location="http://download.eclipse.org/releases/2020-12/"/&gt;
+    &lt;repository location="http://download.eclipse.org/releases/2021-03/"/&gt;
   &lt;/location&gt;
 &lt;/locations&gt;
 &lt;/target&gt;
