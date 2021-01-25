@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2020, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -77,14 +77,34 @@ public class GrammarAccessExtensions2Test {
 				"//	| '=>'" + NL +
 				"//	| '>' (=> ('>' '>') | '>') | '<' (=> ('<' '<') | '<' | '=>') | '<>'" + NL +
 				"//	| '?:';";
-		firstRuleIsConvertedTo(
-				grammar,
-				expected);
+		firstRuleIsConvertedTo(grammar, expected);
+	}
+	
+	@Test
+	public void testGrammarFragmentToString2() throws Exception {
+		String NL = System.lineSeparator();
+		String grammar =
+				"grammar org.xtext.example.mydsl.MyDsl hidden (ML_COMMENT)\n" +
+				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
+				"generate myDsl 'http://www.xtext.org/example/mydsl/MyDsl'\n" +
+				"Model: name=ID;\n" +
+				"terminal ML_COMMENT: '/*'(!'*')->'*/';\n" +
+				"terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;";
+		String expected = 
+				"//terminal ML_COMMENT:" + NL
+				+ "//	'/*' !'*'->'*/';";
+		secondRuleIsConvertedTo(grammar, expected);
 	}
 
 	private void firstRuleIsConvertedTo(CharSequence text, CharSequence expected) throws Exception {
 		String actual = grammarAccessExtensions
 				.grammarFragmentToString(Iterables.getFirst(parseHelper.parse(text).getRules(), null), "//");
+		Assert.assertEquals(expected.toString().trim(), actual);
+	}
+	
+	private void secondRuleIsConvertedTo(CharSequence text, CharSequence expected) throws Exception {
+		String actual = grammarAccessExtensions
+				.grammarFragmentToString(Iterables.get(parseHelper.parse(text).getRules(), 1), "//");
 		Assert.assertEquals(expected.toString().trim(), actual);
 	}
 }
