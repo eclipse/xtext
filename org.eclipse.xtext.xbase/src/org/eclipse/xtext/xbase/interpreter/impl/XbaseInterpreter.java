@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -114,8 +114,19 @@ import com.google.inject.Provider;
  */
 public class XbaseInterpreter implements IExpressionInterpreter {
 	
+	/**
+	 * Encapsulates the return value of an {@link XReturnExpression}.
+	 *
+	 * To be able to break up the control flow of the interpreter, this class inherits from {@link RuntimeException}.
+	 * Clients that catch the ReturnValue, should usually re-throw it further.
+	 * See also {@link #_doEvaluate(XTryCatchFinallyExpression, IEvaluationContext, CancelIndicator) }
+	 * where the finally clause is evaluated after the return value has been computed but the original
+	 * return value is propagated further, if the finally block completes normally.
+	 * 
+	 * @since 2.25
+	 */
 	@SuppressWarnings("serial")
-	static class ReturnValue extends RuntimeException {
+	public static class ReturnValue extends RuntimeException {
 		public Object returnValue;
 		public ReturnValue(Object value) {
 			super();
