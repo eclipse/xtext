@@ -20,7 +20,7 @@
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-03"/>
 			<unit id="org.junit" version="4.12.0.v201504281640"/>
-			<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
+			<unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
 		</location>
 	</locations>
 </target>
