@@ -40,6 +40,6 @@ src:
 
 javadoc:
   java: "http://docs.oracle.com/javase/8/docs/api"
-  guava: "https://guava.dev/releases/27.1-jre/api/docs/"
+  guava: "https://guava.dev/releases/30.1-jre/api/docs/"
 
 edit-repo : "https://github.com/eclipse/xtext/edit/website-published/xtend-website/"
