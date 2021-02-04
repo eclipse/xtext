@@ -87,7 +87,7 @@ plugins {
   id "org.xtext.xtend" version "2.0.8"
 }
 
-repositories.jcenter()
+repositories.mavenCentral()
 
 dependencies {
   compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.25.0'
