@@ -126,7 +126,7 @@ After everything above has run smoothly, it is finally time for some manual step
 1. Check that everything was promoted correctly:
    * [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
    * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
-2. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @Hejado)
+2. Promote staged release on [s01.oss.sonatype.org](https://s01.oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @Hejado)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
    * Search for _orgeclipsextext-NNNN_ and _orgeclipsextend-NNNN_ with status _open_
