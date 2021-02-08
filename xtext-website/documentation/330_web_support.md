@@ -367,4 +367,4 @@ Without further adaptation the Xtext server does not provide any persistence fun
 
 ---
 
-**[Next Chapter: Continuous Integration](350_continuous_integration.html)**
+**[Next Chapter: LSP Support](340_lsp_support.html)**
