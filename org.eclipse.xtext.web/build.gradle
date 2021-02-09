@@ -1,5 +1,5 @@
 plugins {
-	id 'com.github.node-gradle.node' version '2.2.4'
+	id 'com.github.node-gradle.node' version '3.0.1'
 }
 
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
@@ -47,29 +47,32 @@ task copyImages(type: Copy) {
 }
 processResources.dependsOn(copyImages)
 
-class OptimizationTask extends com.moowork.gradle.node.task.NodeTask {
+abstract class OptimizationTask extends com.github.gradle.node.task.NodeTask {
 	OptimizationTask() {
 		dependsOn(project.npmInstall)
 		inputs.dir 'src/main/js'
-		script = project.file('node_modules/requirejs/bin/r.js')
-		def optimizeLogLevel = 2 // WARN
-		args = ['-o', 'logLevel=' + optimizeLogLevel]
+		script.set(project.file('node_modules/requirejs/bin/r.js'))
+		def logLevelWarn = 2 // WARN
+		args.add('-o')
+		args.add('logLevel=' + logLevelWarn)
 	}
 	def setBuildProfile(File buildProfile) {
-		args.add(1, buildProfile.path)
+		def l = new ArrayList<String>(args.get())
+		l.add(1, buildProfile.path)
+		args.set(l)
 	}
 	def setCssInput(File cssInput) {
 		inputs.file cssInput
-		args += 'cssIn=' + cssInput
+		args.add('cssIn=' + cssInput)
 	}
 	def setOutput(File output) {
 		outputs.file output
-		args += 'out=' + output.path
+		args.add('out=' + output.path)
 	}
 	def setOptimize(String optimize) {
-		args += 'optimize=' + optimize
+		args.add('optimize=' + optimize)
 		if (optimize != 'none')
-			args += 'preserveLicenseComments=false'
+			args.add('preserveLicenseComments=false')
 	}
 }
 
