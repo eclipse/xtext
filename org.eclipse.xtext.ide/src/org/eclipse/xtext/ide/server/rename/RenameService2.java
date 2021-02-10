@@ -125,7 +125,7 @@ public class RenameService2 implements IRenameService2 {
 						issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL,
 								"No element found at " + toPositionFragment(position, uri));
 					} else {
-						applyModifications(element, workspaceEdit, issueAcceptor, options);
+						applyModifications(element, workspaceEdit, issueAcceptor, options, context);
 					}
 				} else {
 					issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL,
@@ -151,21 +151,31 @@ public class RenameService2 implements IRenameService2 {
 		}
 	}
 	
-	protected void applyModifications(EObject element, WorkspaceEdit workspaceEdit, ServerRefactoringIssueAcceptor issueAcceptor, IRenameService2.Options options) {
+	/**
+	 * <p>
+	 * Performs the actual renaming. Runs within a read transaction on the index and a live-scoped resource set.
+	 * </p>
+	 * <p>
+	 * Override this method to implement custom renaming behavior.
+	 * </p>
+	 * 
+	 * @since 2.25
+	 */
+	protected void applyModifications(EObject element, WorkspaceEdit workspaceEdit,
+			ServerRefactoringIssueAcceptor issueAcceptor, IRenameService2.Options options,
+			ILanguageServerAccess.Context context) {
 		IResourceServiceProvider services = serviceProviderRegistry
 				.getResourceServiceProvider(element.eResource().getURI());
 		IChangeSerializer changeSerializer = services.get(IChangeSerializer.class);
-		RenameChange change = new RenameChange(options.getRenameParams().getNewName(),
-				EcoreUtil.getURI(element));
+		RenameChange change = new RenameChange(options.getRenameParams().getNewName(), EcoreUtil.getURI(element));
 		ResourceSet resourceSet = element.eResource().getResourceSet();
-		RenameContext renameContext = new RenameContext(Lists.newArrayList(change), resourceSet,
-				changeSerializer, issueAcceptor);
+		RenameContext renameContext = new RenameContext(Lists.newArrayList(change), resourceSet, changeSerializer,
+				issueAcceptor);
 		IRenameStrategy2 renameStrategy = services.<IRenameStrategy2>get(IRenameStrategy2.class);
 		renameStrategy.applyRename(renameContext);
 		ChangeConverter2.Factory converterFactory = services.<ChangeConverter2.Factory>get(
 				ChangeConverter2.Factory.class);
-		ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit,
-				options.getLanguageServerAccess());
+		ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit, options.getLanguageServerAccess());
 		changeSerializer.applyModifications(changeConverter);
 	}
 
