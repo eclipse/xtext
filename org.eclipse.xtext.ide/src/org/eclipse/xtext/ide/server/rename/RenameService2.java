@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -139,6 +139,7 @@ public class RenameService2 implements IRenameService2 {
 						ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit,
 								options.getLanguageServerAccess());
 						changeSerializer.applyModifications(changeConverter);
+						applyCustomModifications(element, workspaceEdit, options.getLanguageServerAccess());
 					}
 				} else {
 					issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL,
@@ -196,6 +197,20 @@ public class RenameService2 implements IRenameService2 {
 		return (leafNode.getGrammarElement() instanceof RuleCall
 				|| leafNode.getGrammarElement() instanceof CrossReference)
 				&& !tokenUtil.isWhitespaceOrCommentNode(leafNode);
+	}
+	
+	/**
+	 * Override this method to supplement custom modifications on a {@link WorkspaceEdit}. 
+	 * This method is called after every other modification has been processed.
+	 * 
+	 * @param eObject Originally renamed EObject
+	 * @param edit Allows for additional changes to be added 
+	 * @param languageServerAccess Access to the language server
+	 * 
+	 * @since 2.25
+	 */
+	protected void applyCustomModifications(EObject eObject, WorkspaceEdit edit, ILanguageServerAccess languageServerAccess) {
+		
 	}
 
 	@Override
