@@ -125,21 +125,7 @@ public class RenameService2 implements IRenameService2 {
 						issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL,
 								"No element found at " + toPositionFragment(position, uri));
 					} else {
-						IResourceServiceProvider services = serviceProviderRegistry
-								.getResourceServiceProvider(element.eResource().getURI());
-						IChangeSerializer changeSerializer = services.get(IChangeSerializer.class);
-						RenameChange change = new RenameChange(options.getRenameParams().getNewName(),
-								EcoreUtil.getURI(element));
-						RenameContext renameContext = new RenameContext(Lists.newArrayList(change), resourceSet,
-								changeSerializer, issueAcceptor);
-						IRenameStrategy2 renameStrategy = services.<IRenameStrategy2>get(IRenameStrategy2.class);
-						renameStrategy.applyRename(renameContext);
-						ChangeConverter2.Factory converterFactory = services.<ChangeConverter2.Factory>get(
-								ChangeConverter2.Factory.class);
-						ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit,
-								options.getLanguageServerAccess());
-						changeSerializer.applyModifications(changeConverter);
-						applyCustomModifications(element, workspaceEdit, options.getLanguageServerAccess());
+						applyModifications(element, workspaceEdit, issueAcceptor, options);
 					}
 				} else {
 					issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL,
@@ -163,6 +149,24 @@ public class RenameService2 implements IRenameService2 {
 		} catch (InterruptedException | ExecutionException e) {
 			throw Exceptions.sneakyThrow(e);
 		}
+	}
+	
+	protected void applyModifications(EObject element, WorkspaceEdit workspaceEdit, ServerRefactoringIssueAcceptor issueAcceptor, IRenameService2.Options options) {
+		IResourceServiceProvider services = serviceProviderRegistry
+				.getResourceServiceProvider(element.eResource().getURI());
+		IChangeSerializer changeSerializer = services.get(IChangeSerializer.class);
+		RenameChange change = new RenameChange(options.getRenameParams().getNewName(),
+				EcoreUtil.getURI(element));
+		ResourceSet resourceSet = element.eResource().getResourceSet();
+		RenameContext renameContext = new RenameContext(Lists.newArrayList(change), resourceSet,
+				changeSerializer, issueAcceptor);
+		IRenameStrategy2 renameStrategy = services.<IRenameStrategy2>get(IRenameStrategy2.class);
+		renameStrategy.applyRename(renameContext);
+		ChangeConverter2.Factory converterFactory = services.<ChangeConverter2.Factory>get(
+				ChangeConverter2.Factory.class);
+		ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit,
+				options.getLanguageServerAccess());
+		changeSerializer.applyModifications(changeConverter);
 	}
 
 	protected EObject getElementAtOffset(XtextResource xtextResource, Document document, Position caretPosition) {
@@ -197,20 +201,6 @@ public class RenameService2 implements IRenameService2 {
 		return (leafNode.getGrammarElement() instanceof RuleCall
 				|| leafNode.getGrammarElement() instanceof CrossReference)
 				&& !tokenUtil.isWhitespaceOrCommentNode(leafNode);
-	}
-	
-	/**
-	 * Override this method to supplement custom modifications on a {@link WorkspaceEdit}. 
-	 * This method is called after every other modification has been processed.
-	 * 
-	 * @param eObject Originally renamed EObject
-	 * @param edit Allows for additional changes to be added 
-	 * @param languageServerAccess Access to the language server
-	 * 
-	 * @since 2.25
-	 */
-	protected void applyCustomModifications(EObject eObject, WorkspaceEdit edit, ILanguageServerAccess languageServerAccess) {
-		
 	}
 
 	@Override
