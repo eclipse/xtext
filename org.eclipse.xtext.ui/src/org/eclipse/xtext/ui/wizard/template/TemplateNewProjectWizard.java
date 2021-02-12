@@ -93,6 +93,13 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 	protected String getGrammarName() {
 		return grammarAccess.getGrammar().getName();
 	}
+	
+	/**
+	 * @since 2.25
+	 */
+	protected TemplateLabelProvider getLabelProvider() {
+		return labelProvider;
+	}
 
 	private String shortName(String fullName) {
 		return fullName.contains(".") ? fullName.substring(fullName.lastIndexOf('.') + 1) : fullName; //$NON-NLS-1$

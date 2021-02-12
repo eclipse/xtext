@@ -46,7 +46,10 @@ public abstract class AbstractProjectTemplate extends AbstractTemplate {
 		return projectInfo;
 	}
 
-	void setProjectInfo(IExtendedProjectInfo projectInfo) {
+	/**
+	 * @since 2.25
+	 */
+	protected void setProjectInfo(IExtendedProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;
 	}
 

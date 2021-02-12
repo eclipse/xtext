@@ -82,6 +82,27 @@ public class TemplateNewFileWizard extends Wizard implements INewWizard {
 
 		setForcePreviousAndNextButtons(hasMoreThenOneTemplate());
 	}
+	
+	/**
+	 * @since 2.25
+	 */
+	public AbstractFileTemplate[] getTemplates() {
+		return templates;
+	}
+	
+	/**
+	 * @since 2.25
+	 */
+	public IStructuredSelection getSelection() {
+		return selection;
+	}
+	
+	/**
+	 * @since 2.25
+	 */
+	public TemplateLabelProvider getLabelProvider() {
+		return labelProvider;
+	}
 
 	protected NewFileWizardPrimaryPage createMainPage(String pageName) {
 		return new NewFileWizardPrimaryPage(pageName, templates, selection, labelProvider);
@@ -126,7 +147,7 @@ public class TemplateNewFileWizard extends Wizard implements INewWizard {
 	protected void doFinish(final TemplateFileInfo info, final IProgressMonitor monitor) {
 		try {
 			AbstractFileTemplate fileTemplate = info.getFileTemplate();
-			WorkspaceFileGenerator fileGenerator = new WorkspaceFileGenerator();
+			WorkspaceFileGenerator fileGenerator = createWorkspaceFileGenerator();
 			fileTemplate.setTemplateInfo(info);
 			fileTemplate.generateFiles(fileGenerator);
 			fileGenerator.run(monitor);
@@ -138,6 +159,13 @@ public class TemplateNewFileWizard extends Wizard implements INewWizard {
 			// cancelled by user, ok
 			return;
 		}
+	}
+	
+	/**
+	 * @since 2.25
+	 */
+	protected WorkspaceFileGenerator createWorkspaceFileGenerator() {
+		return new WorkspaceFileGenerator();
 	}
 
 	@Override

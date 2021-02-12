@@ -113,7 +113,8 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		fileText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		fileText.setFocus();
 
-		folderText.setText(getFolderFromSelection());
+		folderText.setText(initFolderText());
+		fileText.setText(initFileText());
 
 		folderText.addModifyListener(e -> validate());
 		fileText.addModifyListener(e -> validate());
@@ -128,8 +129,25 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 			}
 		});
 	}
+	
+	/**
+	 * @since 2.25
+	 */
+	protected String initFolderText() {
+		return getFolderFromSelection();
+	}
 
-	private String getFolderFromSelection() {
+	/**
+	 * @since 2.25
+	 */
+	protected String initFileText() {
+		return "";
+	}
+	
+	/**
+	 * @since 2.25
+	 */
+	protected String getFolderFromSelection() {
 		Object element = Adapters.adapt(selection.getFirstElement(), IResource.class);
 		IContainer container = null;
 		if (element instanceof IContainer) {
@@ -194,7 +212,10 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		return templates.length > 1;
 	}
 
-	private void validateInitial() {
+	/**
+	 * @since 2.25
+	 */
+	protected void validateInitial() {
 		setStatus(null);
 		IContainer folder = getFolder();
 		if (folder == null || !folder.exists()) {
@@ -208,7 +229,10 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		setPageComplete(false);
 	}
 
-	private void validate() {
+	/**
+	 * @since 2.25
+	 */
+	protected void validate() {
 		setStatus(null);
 		IContainer folder = getFolder();
 		if (folder == null || !folder.exists()) {
@@ -239,11 +263,17 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		}
 	}
 
-	private IContainer getFolder() {
+	/**
+	 * @since 2.25
+	 */
+	protected IContainer getFolder() {
 		return getFolder(folderText.getText());
 	}
 
-	private IContainer getFolder(String folderText) {
+	/**
+	 * @since 2.25
+	 */
+	protected IContainer getFolder(String folderText) {
 		try {
 			return ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path("/" + folderText)); //$NON-NLS-1$
 		} catch (IllegalArgumentException e) {

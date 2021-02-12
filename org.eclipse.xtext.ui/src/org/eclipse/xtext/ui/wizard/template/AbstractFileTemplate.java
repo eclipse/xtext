@@ -38,7 +38,10 @@ public abstract class AbstractFileTemplate extends AbstractTemplate {
 		return info.getName();
 	}
 
-	void setTemplateInfo(TemplateFileInfo info) {
+	/**
+	 * @since 2.25
+	 */
+	protected void setTemplateInfo(TemplateFileInfo info) {
 		this.info = info;
 	}
 
