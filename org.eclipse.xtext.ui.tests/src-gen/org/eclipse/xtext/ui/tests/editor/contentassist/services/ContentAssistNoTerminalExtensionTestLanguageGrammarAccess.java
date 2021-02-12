@@ -28,10 +28,10 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		private final RuleCall cShapePolygonBasedNodeShapeEnumRuleCall_0 = (RuleCall)cShapeAssignment.eContents().get(0);
 		
 		//PolygonBasedShape:
-		//	shape+=PolygonBasedNodeShape+;
+		//    shape += PolygonBasedNodeShape+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//shape+=PolygonBasedNodeShape+
+		//shape += PolygonBasedNodeShape+
 		public Assignment getShapeAssignment() { return cShapeAssignment; }
 		
 		//PolygonBasedNodeShape
@@ -83,132 +83,114 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		private final Keyword cRpromoterRpromoterKeyword_19_0 = (Keyword)cRpromoterEnumLiteralDeclaration_19.eContents().get(0);
 		
 		//enum PolygonBasedNodeShape:
-		//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
-		//	proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+		//    octagon | oval |
+		//    parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite | proteinstab |
+		//    rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
 		public EnumRule getRule() { return rule; }
 		
-		//octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
-		//proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter
+		//octagon | oval |
+		//parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite | proteinstab |
+		//rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//octagon
 		public EnumLiteralDeclaration getOctagonEnumLiteralDeclaration_0() { return cOctagonEnumLiteralDeclaration_0; }
 		
-		//"octagon"
 		public Keyword getOctagonOctagonKeyword_0_0() { return cOctagonOctagonKeyword_0_0; }
 		
 		//oval
 		public EnumLiteralDeclaration getOvalEnumLiteralDeclaration_1() { return cOvalEnumLiteralDeclaration_1; }
 		
-		//"oval"
 		public Keyword getOvalOvalKeyword_1_0() { return cOvalOvalKeyword_1_0; }
 		
 		//parallelogram
 		public EnumLiteralDeclaration getParallelogramEnumLiteralDeclaration_2() { return cParallelogramEnumLiteralDeclaration_2; }
 		
-		//"parallelogram"
 		public Keyword getParallelogramParallelogramKeyword_2_0() { return cParallelogramParallelogramKeyword_2_0; }
 		
 		//pentagon
 		public EnumLiteralDeclaration getPentagonEnumLiteralDeclaration_3() { return cPentagonEnumLiteralDeclaration_3; }
 		
-		//"pentagon"
 		public Keyword getPentagonPentagonKeyword_3_0() { return cPentagonPentagonKeyword_3_0; }
 		
 		//plain
 		public EnumLiteralDeclaration getPlainEnumLiteralDeclaration_4() { return cPlainEnumLiteralDeclaration_4; }
 		
-		//"plain"
 		public Keyword getPlainPlainKeyword_4_0() { return cPlainPlainKeyword_4_0; }
 		
 		//plaintext
 		public EnumLiteralDeclaration getPlaintextEnumLiteralDeclaration_5() { return cPlaintextEnumLiteralDeclaration_5; }
 		
-		//"plaintext"
 		public Keyword getPlaintextPlaintextKeyword_5_0() { return cPlaintextPlaintextKeyword_5_0; }
 		
 		//point
 		public EnumLiteralDeclaration getPointEnumLiteralDeclaration_6() { return cPointEnumLiteralDeclaration_6; }
 		
-		//"point"
 		public Keyword getPointPointKeyword_6_0() { return cPointPointKeyword_6_0; }
 		
 		//polygon
 		public EnumLiteralDeclaration getPolygonEnumLiteralDeclaration_7() { return cPolygonEnumLiteralDeclaration_7; }
 		
-		//"polygon"
 		public Keyword getPolygonPolygonKeyword_7_0() { return cPolygonPolygonKeyword_7_0; }
 		
 		//primersite
 		public EnumLiteralDeclaration getPrimersiteEnumLiteralDeclaration_8() { return cPrimersiteEnumLiteralDeclaration_8; }
 		
-		//"primersite"
 		public Keyword getPrimersitePrimersiteKeyword_8_0() { return cPrimersitePrimersiteKeyword_8_0; }
 		
 		//promoter
 		public EnumLiteralDeclaration getPromoterEnumLiteralDeclaration_9() { return cPromoterEnumLiteralDeclaration_9; }
 		
-		//"promoter"
 		public Keyword getPromoterPromoterKeyword_9_0() { return cPromoterPromoterKeyword_9_0; }
 		
 		//proteasesite
 		public EnumLiteralDeclaration getProteasesiteEnumLiteralDeclaration_10() { return cProteasesiteEnumLiteralDeclaration_10; }
 		
-		//"proteasesite"
 		public Keyword getProteasesiteProteasesiteKeyword_10_0() { return cProteasesiteProteasesiteKeyword_10_0; }
 		
 		//proteinstab
 		public EnumLiteralDeclaration getProteinstabEnumLiteralDeclaration_11() { return cProteinstabEnumLiteralDeclaration_11; }
 		
-		//"proteinstab"
 		public Keyword getProteinstabProteinstabKeyword_11_0() { return cProteinstabProteinstabKeyword_11_0; }
 		
 		//rarrow
 		public EnumLiteralDeclaration getRarrowEnumLiteralDeclaration_12() { return cRarrowEnumLiteralDeclaration_12; }
 		
-		//"rarrow"
 		public Keyword getRarrowRarrowKeyword_12_0() { return cRarrowRarrowKeyword_12_0; }
 		
 		//record
 		public EnumLiteralDeclaration getRecordEnumLiteralDeclaration_13() { return cRecordEnumLiteralDeclaration_13; }
 		
-		//"record"
 		public Keyword getRecordRecordKeyword_13_0() { return cRecordRecordKeyword_13_0; }
 		
 		//rect
 		public EnumLiteralDeclaration getRectEnumLiteralDeclaration_14() { return cRectEnumLiteralDeclaration_14; }
 		
-		//"rect"
 		public Keyword getRectRectKeyword_14_0() { return cRectRectKeyword_14_0; }
 		
 		//rectangle
 		public EnumLiteralDeclaration getRectangleEnumLiteralDeclaration_15() { return cRectangleEnumLiteralDeclaration_15; }
 		
-		//"rectangle"
 		public Keyword getRectangleRectangleKeyword_15_0() { return cRectangleRectangleKeyword_15_0; }
 		
 		//restrictionsite
 		public EnumLiteralDeclaration getRestrictionsiteEnumLiteralDeclaration_16() { return cRestrictionsiteEnumLiteralDeclaration_16; }
 		
-		//"restrictionsite"
 		public Keyword getRestrictionsiteRestrictionsiteKeyword_16_0() { return cRestrictionsiteRestrictionsiteKeyword_16_0; }
 		
 		//ribosite
 		public EnumLiteralDeclaration getRibositeEnumLiteralDeclaration_17() { return cRibositeEnumLiteralDeclaration_17; }
 		
-		//"ribosite"
 		public Keyword getRibositeRibositeKeyword_17_0() { return cRibositeRibositeKeyword_17_0; }
 		
 		//rnastab
 		public EnumLiteralDeclaration getRnastabEnumLiteralDeclaration_18() { return cRnastabEnumLiteralDeclaration_18; }
 		
-		//"rnastab"
 		public Keyword getRnastabRnastabKeyword_18_0() { return cRnastabRnastabKeyword_18_0; }
 		
 		//rpromoter
 		public EnumLiteralDeclaration getRpromoterEnumLiteralDeclaration_19() { return cRpromoterEnumLiteralDeclaration_19; }
 		
-		//"rpromoter"
 		public Keyword getRpromoterRpromoterKeyword_19_0() { return cRpromoterRpromoterKeyword_19_0; }
 	}
 	
@@ -250,7 +232,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 
 	
 	//PolygonBasedShape:
-	//	shape+=PolygonBasedNodeShape+;
+	//    shape += PolygonBasedNodeShape+;
 	public PolygonBasedShapeElements getPolygonBasedShapeAccess() {
 		return pPolygonBasedShape;
 	}
@@ -260,8 +242,9 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 	}
 	
 	//enum PolygonBasedNodeShape:
-	//	octagon | oval | parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter |
-	//	proteasesite | proteinstab | rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+	//    octagon | oval |
+	//    parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite | proteinstab |
+	//    rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
 	public PolygonBasedNodeShapeElements getPolygonBasedNodeShapeAccess() {
 		return ePolygonBasedNodeShape;
 	}
@@ -270,8 +253,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		return getPolygonBasedNodeShapeAccess().getRule();
 	}
 	
-	//terminal WS:
-	//	' '+;
+	//terminal WS: (' ')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}

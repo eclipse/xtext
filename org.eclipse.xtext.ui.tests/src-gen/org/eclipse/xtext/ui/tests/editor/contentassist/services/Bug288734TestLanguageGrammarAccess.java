@@ -27,8 +27,9 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cConstantsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cConstantsTConstantParserRuleCall_0 = (RuleCall)cConstantsAssignment.eContents().get(0);
 		
-		//Model:
-		//	constants+=TConstant;
+		//Model :
+		//    constants+=TConstant
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//constants+=TConstant
@@ -45,7 +46,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cTBooleanConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//TConstant:
-		//	TStringConstant | TIntegerConstant | TBooleanConstant;
+		//    TStringConstant | TIntegerConstant | TBooleanConstant
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//TStringConstant | TIntegerConstant | TBooleanConstant
@@ -70,16 +72,17 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
-		//TStringConstant:
-		//	annotations+=TAnnotation*
-		//	'constant' 'string' name=ID;
+		//TStringConstant :
+		//    (annotations+=TAnnotation)*
+		//    'constant' 'string' name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		//'constant' 'string' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//TAnnotation
@@ -108,15 +111,16 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TIntegerConstant:
-		//	annotations+=TAnnotation*
-		//	'constant' 'integer' name=ID;
+		//    (annotations+=TAnnotation)*
+		//    'constant' 'integer' name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		//'constant' 'integer' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//TAnnotation
@@ -145,15 +149,16 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TBooleanConstant:
-		//	annotations+=TAnnotation*
-		//	'constant' 'boolean' name=ID;
+		//    (annotations+=TAnnotation)*
+		//    'constant' 'boolean' name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		//'constant' 'boolean' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=TAnnotation*
+		//(annotations+=TAnnotation)*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//TAnnotation
@@ -179,7 +184,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
 		
 		//TAnnotation:
-		//	'@desc' description=STRING;
+		//    '@desc' description=STRING
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'@desc' description=STRING
@@ -247,8 +253,9 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	constants+=TConstant;
+	//Model :
+	//    constants+=TConstant
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -258,7 +265,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TConstant:
-	//	TStringConstant | TIntegerConstant | TBooleanConstant;
+	//    TStringConstant | TIntegerConstant | TBooleanConstant
+	//;
 	public TConstantElements getTConstantAccess() {
 		return pTConstant;
 	}
@@ -267,9 +275,10 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getTConstantAccess().getRule();
 	}
 	
-	//TStringConstant:
-	//	annotations+=TAnnotation*
-	//	'constant' 'string' name=ID;
+	//TStringConstant :
+	//    (annotations+=TAnnotation)*
+	//    'constant' 'string' name=ID
+	//;
 	public TStringConstantElements getTStringConstantAccess() {
 		return pTStringConstant;
 	}
@@ -279,8 +288,9 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TIntegerConstant:
-	//	annotations+=TAnnotation*
-	//	'constant' 'integer' name=ID;
+	//    (annotations+=TAnnotation)*
+	//    'constant' 'integer' name=ID
+	//;
 	public TIntegerConstantElements getTIntegerConstantAccess() {
 		return pTIntegerConstant;
 	}
@@ -290,8 +300,9 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TBooleanConstant:
-	//	annotations+=TAnnotation*
-	//	'constant' 'boolean' name=ID;
+	//    (annotations+=TAnnotation)*
+	//    'constant' 'boolean' name=ID
+	//;
 	public TBooleanConstantElements getTBooleanConstantAccess() {
 		return pTBooleanConstant;
 	}
@@ -301,7 +312,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TAnnotation:
-	//	'@desc' description=STRING;
+	//    '@desc' description=STRING
+	//;
 	public TAnnotationElements getTAnnotationAccess() {
 		return pTAnnotation;
 	}
@@ -310,45 +322,40 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getTAnnotationAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

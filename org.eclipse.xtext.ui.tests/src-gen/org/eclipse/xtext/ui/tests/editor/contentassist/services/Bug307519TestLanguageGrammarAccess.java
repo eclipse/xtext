@@ -32,20 +32,22 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cE2Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cE2Elem2ParserRuleCall_1_0 = (RuleCall)cE2Assignment_1.eContents().get(0);
 		
-		//Model:
-		//	(e1+=Elem1 | e2+=Elem2)+;
+		//Model :
+		//    ((e1 += Elem1)
+		//    | (e2 += Elem2))+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(e1+=Elem1 | e2+=Elem2)+
+		//((e1 += Elem1)
+		//| (e2 += Elem2))+
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//e1+=Elem1
+		//(e1 += Elem1)
 		public Assignment getE1Assignment_0() { return cE1Assignment_0; }
 		
 		//Elem1
 		public RuleCall getE1Elem1ParserRuleCall_0_0() { return cE1Elem1ParserRuleCall_0_0; }
 		
-		//e2+=Elem2
+		//(e2 += Elem2)
 		public Assignment getE2Assignment_1() { return cE2Assignment_1; }
 		
 		//Elem2
@@ -56,11 +58,11 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueEnumTEnumRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//Elem1:
-		//	value=EnumT;
+		//Elem1 :
+		//    value = EnumT;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value=EnumT
+		//value = EnumT
 		public Assignment getValueAssignment() { return cValueAssignment; }
 		
 		//EnumT
@@ -75,14 +77,14 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cPercentSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cDollarSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Elem2:
-		//	value=EnumT "foo" "%" "$";
+		//Elem2 :
+		//    value = EnumT "foo" "%" "$";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value=EnumT "foo" "%" "$"
+		//value = EnumT "foo" "%" "$"
 		public Group getGroup() { return cGroup; }
 		
-		//value=EnumT
+		//value = EnumT
 		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
 		
 		//EnumT
@@ -106,8 +108,8 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final EnumLiteralDeclaration cT2EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cT2T2Keyword_1_0 = (Keyword)cT2EnumLiteralDeclaration_1.eContents().get(0);
 		
-		//enum EnumT:
-		//	T1 | T2;
+		//enum EnumT :
+		//    T1 | T2;
 		public EnumRule getRule() { return rule; }
 		
 		//T1 | T2
@@ -116,13 +118,11 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//T1
 		public EnumLiteralDeclaration getT1EnumLiteralDeclaration_0() { return cT1EnumLiteralDeclaration_0; }
 		
-		//"T1"
 		public Keyword getT1T1Keyword_0_0() { return cT1T1Keyword_0_0; }
 		
 		//T2
 		public EnumLiteralDeclaration getT2EnumLiteralDeclaration_1() { return cT2EnumLiteralDeclaration_1; }
 		
-		//"T2"
 		public Keyword getT2T2Keyword_1_0() { return cT2T2Keyword_1_0; }
 	}
 	
@@ -173,8 +173,9 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	(e1+=Elem1 | e2+=Elem2)+;
+	//Model :
+	//    ((e1 += Elem1)
+	//    | (e2 += Elem2))+;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -183,8 +184,8 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//enum EnumT:
-	//	T1 | T2;
+	//enum EnumT :
+	//    T1 | T2;
 	public EnumTElements getEnumTAccess() {
 		return eEnumT;
 	}
@@ -193,8 +194,8 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getEnumTAccess().getRule();
 	}
 	
-	//Elem1:
-	//	value=EnumT;
+	//Elem1 :
+	//    value = EnumT;
 	public Elem1Elements getElem1Access() {
 		return pElem1;
 	}
@@ -203,8 +204,8 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getElem1Access().getRule();
 	}
 	
-	//Elem2:
-	//	value=EnumT "foo" "%" "$";
+	//Elem2 :
+	//    value = EnumT "foo" "%" "$";
 	public Elem2Elements getElem2Access() {
 		return pElem2;
 	}
@@ -213,45 +214,40 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getElem2Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

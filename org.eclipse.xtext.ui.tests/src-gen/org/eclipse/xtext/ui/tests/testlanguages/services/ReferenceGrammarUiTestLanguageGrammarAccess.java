@@ -43,25 +43,23 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cFamilieFamilieParserRuleCall_4_3_0 = (RuleCall)cFamilieAssignment_4_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Spielplatz:
-		//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-		//	familie+=Familie)* "}")?;
+		//Spielplatz :
+		//     ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ? ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-		//familie+=Familie)* "}")?
+		//( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ?
 		public Group getGroup() { return cGroup; }
 		
 		//"spielplatz"
 		public Keyword getSpielplatzKeyword_0() { return cSpielplatzKeyword_0; }
 		
-		//groesse=INT
+		//groesse = INT
 		public Assignment getGroesseAssignment_1() { return cGroesseAssignment_1; }
 		
 		//INT
 		public RuleCall getGroesseINTTerminalRuleCall_1_0() { return cGroesseINTTerminalRuleCall_1_0; }
 		
-		//beschreibung=STRING?
+		//( beschreibung = STRING ) ?
 		public Assignment getBeschreibungAssignment_2() { return cBeschreibungAssignment_2; }
 		
 		//STRING
@@ -70,28 +68,28 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*
+		//( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
-		//kinder+=Kind
+		//kinder += Kind
 		public Assignment getKinderAssignment_4_0() { return cKinderAssignment_4_0; }
 		
 		//Kind
 		public RuleCall getKinderKindParserRuleCall_4_0_0() { return cKinderKindParserRuleCall_4_0_0; }
 		
-		//erzieher+=Erwachsener
+		//erzieher += Erwachsener
 		public Assignment getErzieherAssignment_4_1() { return cErzieherAssignment_4_1; }
 		
 		//Erwachsener
 		public RuleCall getErzieherErwachsenerParserRuleCall_4_1_0() { return cErzieherErwachsenerParserRuleCall_4_1_0; }
 		
-		//spielzeuge+=Spielzeug
+		//spielzeuge += Spielzeug
 		public Assignment getSpielzeugeAssignment_4_2() { return cSpielzeugeAssignment_4_2; }
 		
 		//Spielzeug
 		public RuleCall getSpielzeugeSpielzeugParserRuleCall_4_2_0() { return cSpielzeugeSpielzeugParserRuleCall_4_2_0; }
 		
-		//familie+=Familie
+		//familie += Familie
 		public Assignment getFamilieAssignment_4_3() { return cFamilieAssignment_4_3; }
 		
 		//Familie
@@ -106,8 +104,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cKindParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cErwachsenerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Person:
-		//	Kind | Erwachsener;
+		//Person :
+		//     Kind | Erwachsener ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Kind | Erwachsener
@@ -130,11 +128,11 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAgeINTTerminalRuleCall_3_0 = (RuleCall)cAgeAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Kind:
-		//	"kind" "(" name=ID age=INT ")";
+		//Kind :
+		//     "kind" "(" name = ID age = INT ")" ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"kind" "(" name=ID age=INT ")"
+		//"kind" "(" name = ID age = INT ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"kind"
@@ -143,13 +141,13 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//age=INT
+		//age = INT
 		public Assignment getAgeAssignment_3() { return cAgeAssignment_3; }
 		
 		//INT
@@ -169,11 +167,11 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAgeINTTerminalRuleCall_3_0 = (RuleCall)cAgeAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Erwachsener:
-		//	"erwachsener" "(" name=ID age=INT ")";
+		//Erwachsener :
+		//     "erwachsener" "(" name = ID age = INT ")" ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"erwachsener" "(" name=ID age=INT ")"
+		//"erwachsener" "(" name = ID age = INT ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"erwachsener"
@@ -182,13 +180,13 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//age=INT
+		//age = INT
 		public Assignment getAgeAssignment_3() { return cAgeAssignment_3; }
 		
 		//INT
@@ -208,11 +206,11 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cFarbeFarbeParserRuleCall_3_0 = (RuleCall)cFarbeAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Spielzeug:
-		//	"spielzeug" "(" name=ID farbe=Farbe ")";
+		//Spielzeug :
+		//     "spielzeug" "(" name = ID farbe = Farbe ")" ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"spielzeug" "(" name=ID farbe=Farbe ")"
+		//"spielzeug" "(" name = ID farbe = Farbe ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"spielzeug"
@@ -221,13 +219,13 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//farbe=Farbe
+		//farbe = Farbe
 		public Assignment getFarbeAssignment_3() { return cFarbeAssignment_3; }
 		
 		//Farbe
@@ -245,8 +243,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
 		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
-		//Farbe:
-		//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
+		//Farbe :
+		//     wert=("ROT" | "BLAU" | "GELB" | "GRÜN") ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
@@ -293,13 +291,11 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cKinderKindIDTerminalRuleCall_6_1_0_1 = (RuleCall)cKinderKindCrossReference_6_1_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//Familie:
-		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
-		//	kinder+=[Kind])* ")";
+		//Familie :
+		//     "familie" "(" name=("keyword" | STRING | ID)  mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")" ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
-		//kinder+=[Kind])* ")"
+		//"familie" "(" name=("keyword" | STRING | ID)  mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"familie"
@@ -423,9 +419,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 	}
 
 	
-	//Spielplatz:
-	//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-	//	familie+=Familie)* "}")?;
+	//Spielplatz :
+	//     ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ? ;
 	public SpielplatzElements getSpielplatzAccess() {
 		return pSpielplatz;
 	}
@@ -434,8 +429,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getSpielplatzAccess().getRule();
 	}
 	
-	//Person:
-	//	Kind | Erwachsener;
+	//Person :
+	//     Kind | Erwachsener ;
 	public PersonElements getPersonAccess() {
 		return pPerson;
 	}
@@ -444,8 +439,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getPersonAccess().getRule();
 	}
 	
-	//Kind:
-	//	"kind" "(" name=ID age=INT ")";
+	//Kind :
+	//     "kind" "(" name = ID age = INT ")" ;
 	public KindElements getKindAccess() {
 		return pKind;
 	}
@@ -454,8 +449,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getKindAccess().getRule();
 	}
 	
-	//Erwachsener:
-	//	"erwachsener" "(" name=ID age=INT ")";
+	//Erwachsener :
+	//     "erwachsener" "(" name = ID age = INT ")" ;
 	public ErwachsenerElements getErwachsenerAccess() {
 		return pErwachsener;
 	}
@@ -464,8 +459,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getErwachsenerAccess().getRule();
 	}
 	
-	//Spielzeug:
-	//	"spielzeug" "(" name=ID farbe=Farbe ")";
+	//Spielzeug :
+	//     "spielzeug" "(" name = ID farbe = Farbe ")" ;
 	public SpielzeugElements getSpielzeugAccess() {
 		return pSpielzeug;
 	}
@@ -474,8 +469,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getSpielzeugAccess().getRule();
 	}
 	
-	//Farbe:
-	//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
+	//Farbe :
+	//     wert=("ROT" | "BLAU" | "GELB" | "GRÜN") ;
 	public FarbeElements getFarbeAccess() {
 		return pFarbe;
 	}
@@ -484,9 +479,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getFarbeAccess().getRule();
 	}
 	
-	//Familie:
-	//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
-	//	kinder+=[Kind])* ")";
+	//Familie :
+	//     "familie" "(" name=("keyword" | STRING | ID)  mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")" ;
 	public FamilieElements getFamilieAccess() {
 		return pFamilie;
 	}
@@ -495,45 +489,40 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractElement
 		return getFamilieAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

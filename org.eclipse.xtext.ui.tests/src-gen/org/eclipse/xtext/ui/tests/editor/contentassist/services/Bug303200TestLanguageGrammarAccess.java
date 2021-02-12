@@ -32,13 +32,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cDirectivesProgramDirectiveParserRuleCall_1_1_0 = (RuleCall)cDirectivesAssignment_1_1.eContents().get(0);
 		private final RuleCall cLTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//Program:
-		//	{Program} (LT* directives+=ProgramDirective)*
-		//	LT*;
+		//Program: {Program}
+		//    (LT* directives+=ProgramDirective)*
+		//    LT*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Program} (LT* directives+=ProgramDirective)*
-		//LT*
+		//{Program}
+		//   (LT* directives+=ProgramDirective)*
+		//   LT*
 		public Group getGroup() { return cGroup; }
 		
 		//{Program}
@@ -65,13 +66,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cFunctionDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//ProgramDirective:
-		//	FunctionDefinition
-		//	| Statement;
+		//ProgramDirective
+		//    : FunctionDefinition
+		//    | Statement
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//FunctionDefinition
-		//| Statement
+		//   | Statement
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//FunctionDefinition
@@ -97,15 +99,15 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//FunctionDefinition:
-		//	attributes+=Attribute* 'function' LT* name=ID LT*
-		//	params=Parameters LT* body=Block;
+		//    (attributes+=Attribute)* 'function' LT* name=ID LT*
+		//    params=Parameters LT* body=Block;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//attributes+=Attribute* 'function' LT* name=ID LT*
+		//(attributes+=Attribute)* 'function' LT* name=ID LT*
 		//params=Parameters LT* body=Block
 		public Group getGroup() { return cGroup; }
 		
-		//attributes+=Attribute*
+		//(attributes+=Attribute)*
 		public Assignment getAttributesAssignment_0() { return cAttributesAssignment_0; }
 		
 		//Attribute
@@ -155,13 +157,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_1_4 = (RuleCall)cGroup_1.eContents().get(4);
 		private final Keyword cRightSquareBracketKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		
-		//Attribute:
-		//	ident=ID
-		//	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
+		//Attribute
+		//    : ident=ID
+		//    | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ident=ID
-		//| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
+		//   | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ident=ID
@@ -212,13 +215,13 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_3_2_3 = (RuleCall)cGroup_3_2.eContents().get(3);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Parameters:
-		//	{Parameters}
-		//	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
+		//Parameters :
+		//    {Parameters}
+		//    '(' LT* (params+=ID LT* (',' LT* params+=ID LT*)* )? ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Parameters}
-		//'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')'
+		//'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)* )? ')'
 		public Group getGroup() { return cGroup; }
 		
 		//{Parameters}
@@ -230,7 +233,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//LT*
 		public RuleCall getLTTerminalRuleCall_2() { return cLTTerminalRuleCall_2; }
 		
-		//(params+=ID LT* (',' LT* params+=ID LT*)*)?
+		//(params+=ID LT* (',' LT* params+=ID LT*)* )?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//params+=ID
@@ -275,13 +278,13 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Block:
-		//	{Block}
-		//	'{' (LT* directives+=Statement)* LT* '}';
+		//Block :
+		//    {Block}
+		//    '{' (LT* directives+=Statement )* LT* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Block}
-		//'{' (LT* directives+=Statement)* LT* '}'
+		//'{' (LT* directives+=Statement )* LT* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//{Block}
@@ -290,7 +293,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//(LT* directives+=Statement)*
+		//(LT* directives+=Statement )*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//LT*
@@ -320,13 +323,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSemicolonKeyword_1_2_0 = (Keyword)cAlternatives_1_2.eContents().get(0);
 		private final RuleCall cLTTerminalRuleCall_1_2_1 = (RuleCall)cAlternatives_1_2.eContents().get(1);
 		
-		//Statement:
-		//	Block
-		//	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
+		//Statement
+		//    : Block
+		//    | {ExpressionStatement} expression=PostfixExpression (';' | LT)
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Block
-		//| {ExpressionStatement} expression=PostfixExpression (';' | LT)
+		//   | {ExpressionStatement} expression=PostfixExpression (';' | LT)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Block
@@ -374,26 +378,32 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_1_1_4_1 = (RuleCall)cGroup_1_1_4.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_1_5 = (Keyword)cGroup_1_1.eContents().get(5);
 		
-		//PostfixExpression:
-		//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
-		//	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
+		//PostfixExpression
+		//    :     PrimaryExpression
+		//        ( {PostfixExpression.expression = current} LT* property=PropertyOperator
+		//        | {Invocation.expression = current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
+		//        )*
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
-		//| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
+		//PrimaryExpression
+		//   ( {PostfixExpression.expression = current} LT* property=PropertyOperator
+		//   | {Invocation.expression = current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
+		//   )*
 		public Group getGroup() { return cGroup; }
 		
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 		
-		//({PostfixExpression.expression=current} LT* property=PropertyOperator
-		//| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
+		//( {PostfixExpression.expression = current} LT* property=PropertyOperator
+		//| {Invocation.expression = current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
+		//)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//{PostfixExpression.expression=current} LT* property=PropertyOperator
+		//{PostfixExpression.expression = current} LT* property=PropertyOperator
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//{PostfixExpression.expression=current}
+		//{PostfixExpression.expression = current}
 		public Action getPostfixExpressionExpressionAction_1_0_0() { return cPostfixExpressionExpressionAction_1_0_0; }
 		
 		//LT*
@@ -405,10 +415,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//PropertyOperator
 		public RuleCall getPropertyPropertyOperatorParserRuleCall_1_0_2_0() { return cPropertyPropertyOperatorParserRuleCall_1_0_2_0; }
 		
-		//{Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
+		//{Invocation.expression = current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//{Invocation.expression=current}
+		//{Invocation.expression = current}
 		public Action getInvocationExpressionAction_1_1_0() { return cInvocationExpressionAction_1_1_0; }
 		
 		//LT*
@@ -448,7 +458,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cExpressionsPostfixExpressionParserRuleCall_1_3_0 = (RuleCall)cExpressionsAssignment_1_3.eContents().get(0);
 		
 		//ListExpression:
-		//	expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
+		//    expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*
@@ -494,13 +504,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
-		//PropertyOperator:
-		//	'.' LT* name=ID
-		//	| '[' LT* expressions=ListExpression LT* ']';
+		//PropertyOperator
+		//    : '.' LT* name=ID
+		//    | '[' LT* expressions=ListExpression LT* ']'
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'.' LT* name=ID
-		//| '[' LT* expressions=ListExpression LT* ']'
+		//   | '[' LT* expressions=ListExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'.' LT* name=ID
@@ -556,13 +567,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cBodyAssignment_1_5 = (Assignment)cGroup_1.eContents().get(5);
 		private final RuleCall cBodyBlockParserRuleCall_1_5_0 = (RuleCall)cBodyAssignment_1_5.eContents().get(0);
 		
-		//PrimaryExpression:
-		//	{Identifier} name=ID
-		//	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
+		//PrimaryExpression
+		//    : {Identifier} name=ID
+		//    | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Identifier} name=ID
-		//| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
+		//   | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{Identifier} name=ID
@@ -665,9 +677,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	
 
 	
-	//Program:
-	//	{Program} (LT* directives+=ProgramDirective)*
-	//	LT*;
+	//Program: {Program}
+	//    (LT* directives+=ProgramDirective)*
+	//    LT*;
 	public ProgramElements getProgramAccess() {
 		return pProgram;
 	}
@@ -676,9 +688,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getProgramAccess().getRule();
 	}
 	
-	//ProgramDirective:
-	//	FunctionDefinition
-	//	| Statement;
+	//ProgramDirective
+	//    : FunctionDefinition
+	//    | Statement
+	//    ;
 	public ProgramDirectiveElements getProgramDirectiveAccess() {
 		return pProgramDirective;
 	}
@@ -688,8 +701,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FunctionDefinition:
-	//	attributes+=Attribute* 'function' LT* name=ID LT*
-	//	params=Parameters LT* body=Block;
+	//    (attributes+=Attribute)* 'function' LT* name=ID LT*
+	//    params=Parameters LT* body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return pFunctionDefinition;
 	}
@@ -698,9 +711,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getFunctionDefinitionAccess().getRule();
 	}
 	
-	//Attribute:
-	//	ident=ID
-	//	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
+	//Attribute
+	//    : ident=ID
+	//    | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
+	//    ;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -709,9 +723,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getAttributeAccess().getRule();
 	}
 	
-	//Parameters:
-	//	{Parameters}
-	//	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
+	//Parameters :
+	//    {Parameters}
+	//    '(' LT* (params+=ID LT* (',' LT* params+=ID LT*)* )? ')';
 	public ParametersElements getParametersAccess() {
 		return pParameters;
 	}
@@ -720,9 +734,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getParametersAccess().getRule();
 	}
 	
-	//Block:
-	//	{Block}
-	//	'{' (LT* directives+=Statement)* LT* '}';
+	//Block :
+	//    {Block}
+	//    '{' (LT* directives+=Statement )* LT* '}';
 	public BlockElements getBlockAccess() {
 		return pBlock;
 	}
@@ -731,9 +745,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getBlockAccess().getRule();
 	}
 	
-	//Statement:
-	//	Block
-	//	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
+	//Statement
+	//    : Block
+	//    | {ExpressionStatement} expression=PostfixExpression (';' | LT)
+	//    ;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -742,9 +757,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getStatementAccess().getRule();
 	}
 	
-	//PostfixExpression:
-	//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
-	//	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
+	//PostfixExpression
+	//    :     PrimaryExpression
+	//        ( {PostfixExpression.expression = current} LT* property=PropertyOperator
+	//        | {Invocation.expression = current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
+	//        )*
+	//    ;
 	public PostfixExpressionElements getPostfixExpressionAccess() {
 		return pPostfixExpression;
 	}
@@ -754,7 +772,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ListExpression:
-	//	expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
+	//    expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
 	public ListExpressionElements getListExpressionAccess() {
 		return pListExpression;
 	}
@@ -763,9 +781,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getListExpressionAccess().getRule();
 	}
 	
-	//PropertyOperator:
-	//	'.' LT* name=ID
-	//	| '[' LT* expressions=ListExpression LT* ']';
+	//PropertyOperator
+	//    : '.' LT* name=ID
+	//    | '[' LT* expressions=ListExpression LT* ']'
+	//    ;
 	public PropertyOperatorElements getPropertyOperatorAccess() {
 		return pPropertyOperator;
 	}
@@ -774,9 +793,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getPropertyOperatorAccess().getRule();
 	}
 	
-	//PrimaryExpression:
-	//	{Identifier} name=ID
-	//	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
+	//PrimaryExpression
+	//    : {Identifier} name=ID
+	//    | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
+	//    ;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -785,20 +805,17 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getPrimaryExpressionAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'a'..'z' | 'A'..'Z'+;
+	//terminal ID: ('a'..'z'|'A'..'Z')+;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal WS:
-	//	' ' | '\t'+;
+	//terminal WS: (' '|'\t')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal LT:
-	//	'\r' | '\n';
+	//terminal LT: '\r'|'\n';
 	public TerminalRule getLTRule() {
 		return tLT;
 	}

@@ -28,7 +28,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cStmtCopyFieldNameToVariableStmtParserRuleCall_0 = (RuleCall)cStmtAssignment.eContents().get(0);
 		
 		//Model:
-		//	stmt=CopyFieldNameToVariableStmt;
+		//    stmt=CopyFieldNameToVariableStmt;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//stmt=CopyFieldNameToVariableStmt
@@ -66,21 +66,25 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cREPLACEKeyword_1_2_3 = (Keyword)cGroup_1_2.eContents().get(3);
 		
 		//CopyFieldNameToVariableStmt:
-		//	'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-		//	'REPLACE')?);
+		//  'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &
+		//                            (',' 'VAR' '=' name=ID) &
+		//                            (',' 'TYPE' '=' 'REPLACE')?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-		//'REPLACE')?)
+		//'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &
+		//                          (',' 'VAR' '=' name=ID) &
+		//                          (',' 'TYPE' '=' 'REPLACE')?)
 		public Group getGroup() { return cGroup; }
 		
 		//'FIELD-NAME-TO-VARIABLE'
 		public Keyword getFIELDNAMETOVARIABLEKeyword_0() { return cFIELDNAMETOVARIABLEKeyword_0; }
 		
-		//(',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '=' 'REPLACE')?)
+		//((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &
+		//                           (',' 'VAR' '=' name=ID) &
+		//                           (',' 'TYPE' '=' 'REPLACE')?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
-		//',' 'SCREEN' '=' '(' line=INT ',' column=INT ')'
+		//(',' 'SCREEN' '=' '(' line=INT ',' column=INT ')')
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//','
@@ -113,7 +117,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//')'
 		public Keyword getRightParenthesisKeyword_1_0_7() { return cRightParenthesisKeyword_1_0_7; }
 		
-		//',' 'VAR' '=' name=ID
+		//(',' 'VAR' '=' name=ID)
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//','
@@ -192,7 +196,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	stmt=CopyFieldNameToVariableStmt;
+	//    stmt=CopyFieldNameToVariableStmt;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -202,8 +206,9 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CopyFieldNameToVariableStmt:
-	//	'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '='
-	//	'REPLACE')?);
+	//  'FIELD-NAME-TO-VARIABLE' ((',' 'SCREEN' '=' '(' line=INT ',' column=INT ')') &
+	//                            (',' 'VAR' '=' name=ID) &
+	//                            (',' 'TYPE' '=' 'REPLACE')?);
 	public CopyFieldNameToVariableStmtElements getCopyFieldNameToVariableStmtAccess() {
 		return pCopyFieldNameToVariableStmt;
 	}
@@ -212,45 +217,40 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCopyFieldNameToVariableStmtAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -32,7 +32,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//MyProgram:
-		//	{MyProgram} LT* package=MyPackage LT*;
+		//    {MyProgram} LT* package=MyPackage LT*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{MyProgram} LT* package=MyPackage LT*
@@ -59,7 +59,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Identifier:
-		//	name=ID;
+		//    name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -79,7 +79,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		
 		//FQN:
-		//	ID (LT* '.' LT* ID)*;
+		//    ID (LT* '.' LT* ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID (LT* '.' LT* ID)*
@@ -110,7 +110,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//VirtualSemi:
-		//	';' | LT;
+		//    ';' | LT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//';' | LT
@@ -135,7 +135,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cBoolFalseKeyword_3_0 = (Keyword)cBoolAssignment_3.eContents().get(0);
 		
 		//Literal:
-		//	num=NUMBER | str=STRING | bool='true' | bool='false';
+		//    num=NUMBER | str=STRING | bool='true' | bool='false';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//num=NUMBER | str=STRING | bool='true' | bool='false'
@@ -172,7 +172,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIdentifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//MyPrimary:
-		//	Literal | Identifier;
+		//    Literal | Identifier;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Literal | Identifier
@@ -201,7 +201,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//MyPackage:
-		//	'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
+		//    'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}'
@@ -261,7 +261,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//MyClass:
-		//	'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
+		//    'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}'
@@ -315,7 +315,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cPRIVATEPrivateKeyword_1_0 = (Keyword)cPRIVATEAssignment_1.eContents().get(0);
 		
 		//MyAttribute:
-		//	PUBLIC='public' | PRIVATE='private';
+		//    PUBLIC='public' | PRIVATE='private';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//PUBLIC='public' | PRIVATE='private'
@@ -341,16 +341,16 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cAttributesMyAttributeParserRuleCall_1_0 = (RuleCall)cAttributesAssignment_1.eContents().get(0);
 		
 		//MyAttributes:
-		//	{MyAttributes} attributes+=MyAttribute*;
+		//    {MyAttributes} (attributes+=MyAttribute)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MyAttributes} attributes+=MyAttribute*
+		//{MyAttributes} (attributes+=MyAttribute)*
 		public Group getGroup() { return cGroup; }
 		
 		//{MyAttributes}
 		public Action getMyAttributesAction_0() { return cMyAttributesAction_0; }
 		
-		//attributes+=MyAttribute*
+		//(attributes+=MyAttribute)*
 		public Assignment getAttributesAssignment_1() { return cAttributesAssignment_1; }
 		
 		//MyAttribute
@@ -374,7 +374,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cVirtualSemiParserRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//MyField:
-		//	attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
+		//    attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi
@@ -438,7 +438,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cExpressionMyPrimaryParserRuleCall_2_3_0 = (RuleCall)cExpressionAssignment_2_3.eContents().get(0);
 		
 		//MyBinding:
-		//	name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
+		//    name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?
@@ -562,7 +562,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//MyProgram:
-	//	{MyProgram} LT* package=MyPackage LT*;
+	//    {MyProgram} LT* package=MyPackage LT*;
 	public MyProgramElements getMyProgramAccess() {
 		return pMyProgram;
 	}
@@ -572,7 +572,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Identifier:
-	//	name=ID;
+	//    name=ID;
 	public IdentifierElements getIdentifierAccess() {
 		return pIdentifier;
 	}
@@ -582,7 +582,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FQN:
-	//	ID (LT* '.' LT* ID)*;
+	//    ID (LT* '.' LT* ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -592,7 +592,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//VirtualSemi:
-	//	';' | LT;
+	//    ';' | LT;
 	public VirtualSemiElements getVirtualSemiAccess() {
 		return pVirtualSemi;
 	}
@@ -602,7 +602,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Literal:
-	//	num=NUMBER | str=STRING | bool='true' | bool='false';
+	//    num=NUMBER | str=STRING | bool='true' | bool='false';
 	public LiteralElements getLiteralAccess() {
 		return pLiteral;
 	}
@@ -612,7 +612,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyPrimary:
-	//	Literal | Identifier;
+	//    Literal | Identifier;
 	public MyPrimaryElements getMyPrimaryAccess() {
 		return pMyPrimary;
 	}
@@ -622,7 +622,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyPackage:
-	//	'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
+	//    'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
 	public MyPackageElements getMyPackageAccess() {
 		return pMyPackage;
 	}
@@ -632,7 +632,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyClass:
-	//	'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
+	//    'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
 	public MyClassElements getMyClassAccess() {
 		return pMyClass;
 	}
@@ -642,7 +642,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyAttribute:
-	//	PUBLIC='public' | PRIVATE='private';
+	//    PUBLIC='public' | PRIVATE='private';
 	public MyAttributeElements getMyAttributeAccess() {
 		return pMyAttribute;
 	}
@@ -652,7 +652,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyAttributes:
-	//	{MyAttributes} attributes+=MyAttribute*;
+	//    {MyAttributes} (attributes+=MyAttribute)*;
 	public MyAttributesElements getMyAttributesAccess() {
 		return pMyAttributes;
 	}
@@ -662,7 +662,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyField:
-	//	attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
+	//    attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
 	public MyFieldElements getMyFieldAccess() {
 		return pMyField;
 	}
@@ -672,7 +672,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//MyBinding:
-	//	name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
+	//    name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
 	public MyBindingElements getMyBindingAccess() {
 		return pMyBinding;
 	}
@@ -681,56 +681,61 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getMyBindingAccess().getRule();
 	}
 	
+	//    // terminal rules
 	//terminal ID:
-	//	idPlainChar (idPlainChar | digit)*;
+	//    idPlainChar (idPlainChar | digit)*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
 	//terminal LT:
-	//	'\r' '\n' | '\r' | '\n';
+	//    '\r' '\n' | '\r' | '\n';
 	public TerminalRule getLTRule() {
 		return tLT;
 	}
 	
 	//terminal WS:
-	//	' ' | '\t'+;
+	//    (' ' | '\t')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' escape | !('\\' | '"'))* '"';
+	//    '"' ('\\' escape | !('\\' | '"'))* '"';
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	}
 	
 	//terminal NUMBER returns ecore::EDouble:
-	//	digit+ ('.' digit+)? | '.' digit+;
+	//    digit+ ('.' digit+)? | '.' digit+;
 	public TerminalRule getNUMBERRule() {
 		return tNUMBER;
 	}
 	
+	///* SuppressWarnings[InvalidTerminalRuleName] */
 	//terminal fragment digit:
-	//	'0'..'9';
+	//    '0'..'9';
 	public TerminalRule getDigitRule() {
 		return tDigit;
 	}
 	
+	///* SuppressWarnings[InvalidTerminalRuleName] */
 	//terminal fragment hex:
-	//	digit | 'A'..'F' | 'a'..'f';
+	//    digit | 'A'..'F' | 'a'..'f';
 	public TerminalRule getHexRule() {
 		return tHex;
 	}
 	
+	///* SuppressWarnings[InvalidTerminalRuleName] */
 	//terminal fragment escape:
-	//	'b' | 't' | 'n' | 'f' | 'v' | 'r' | '"' | "'" | '\\' | 'u' hex hex hex hex;
+	//    ('b' | 't' | 'n' | 'f' | 'v' | 'r' | '"' | "'" | '\\' | 'u' hex hex hex hex);
 	public TerminalRule getEscapeRule() {
 		return tEscape;
 	}
 	
+	///* SuppressWarnings[InvalidTerminalRuleName] */
 	//terminal fragment idPlainChar:
-	//	'$' | 'A'..'Z' | '_' | 'a'..'z';
+	//    '$' | 'A'..'Z' | '_' | 'a'..'z';
 	public TerminalRule getIdPlainCharRule() {
 		return tIdPlainChar;
 	}

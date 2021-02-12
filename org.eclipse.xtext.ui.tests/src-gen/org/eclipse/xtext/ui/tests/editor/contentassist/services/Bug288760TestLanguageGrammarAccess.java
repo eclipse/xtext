@@ -41,19 +41,20 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cEndEND_TAGTerminalRuleCall_1_4_0 = (RuleCall)cEndAssignment_1_4.eContents().get(0);
 		
 		//WorkflowElement:
-		//	name=START_TAG attributes+=Attribute* END_TAG_SHORT
-		//	| name=START_TAG attributes+=Attribute* GT
-		//	children+=WorkflowElement*
-		//	end=END_TAG;
+		//      name=START_TAG (attributes+=Attribute)* END_TAG_SHORT
+		//    | name=START_TAG (attributes+=Attribute)* GT
+		//        (children+=WorkflowElement)*
+		//      end=END_TAG
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
-		//| name=START_TAG attributes+=Attribute* GT
-		//children+=WorkflowElement*
-		//end=END_TAG
+		//  name=START_TAG (attributes+=Attribute)* END_TAG_SHORT
+		//| name=START_TAG (attributes+=Attribute)* GT
+		//    (children+=WorkflowElement)*
+		//  end=END_TAG
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
+		//name=START_TAG (attributes+=Attribute)* END_TAG_SHORT
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//name=START_TAG
@@ -62,7 +63,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//START_TAG
 		public RuleCall getNameSTART_TAGTerminalRuleCall_0_0_0() { return cNameSTART_TAGTerminalRuleCall_0_0_0; }
 		
-		//attributes+=Attribute*
+		//(attributes+=Attribute)*
 		public Assignment getAttributesAssignment_0_1() { return cAttributesAssignment_0_1; }
 		
 		//Attribute
@@ -71,9 +72,9 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//END_TAG_SHORT
 		public RuleCall getEND_TAG_SHORTTerminalRuleCall_0_2() { return cEND_TAG_SHORTTerminalRuleCall_0_2; }
 		
-		//name=START_TAG attributes+=Attribute* GT
-		//children+=WorkflowElement*
-		//end=END_TAG
+		//name=START_TAG (attributes+=Attribute)* GT
+		//       (children+=WorkflowElement)*
+		//     end=END_TAG
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//name=START_TAG
@@ -82,7 +83,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//START_TAG
 		public RuleCall getNameSTART_TAGTerminalRuleCall_1_0_0() { return cNameSTART_TAGTerminalRuleCall_1_0_0; }
 		
-		//attributes+=Attribute*
+		//(attributes+=Attribute)*
 		public Assignment getAttributesAssignment_1_1() { return cAttributesAssignment_1_1; }
 		
 		//Attribute
@@ -91,7 +92,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//GT
 		public RuleCall getGTTerminalRuleCall_1_2() { return cGTTerminalRuleCall_1_2; }
 		
-		//children+=WorkflowElement*
+		//(children+=WorkflowElement)*
 		public Assignment getChildrenAssignment_1_3() { return cChildrenAssignment_1_3; }
 		
 		//WorkflowElement
@@ -113,7 +114,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//	name=ID EQ value=STRING;
+		//    name=ID EQ value=STRING
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID EQ value=STRING
@@ -198,10 +200,11 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//WorkflowElement:
-	//	name=START_TAG attributes+=Attribute* END_TAG_SHORT
-	//	| name=START_TAG attributes+=Attribute* GT
-	//	children+=WorkflowElement*
-	//	end=END_TAG;
+	//      name=START_TAG (attributes+=Attribute)* END_TAG_SHORT
+	//    | name=START_TAG (attributes+=Attribute)* GT
+	//        (children+=WorkflowElement)*
+	//      end=END_TAG
+	//;
 	public WorkflowElementElements getWorkflowElementAccess() {
 		return pWorkflowElement;
 	}
@@ -211,7 +214,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Attribute:
-	//	name=ID EQ value=STRING;
+	//    name=ID EQ value=STRING
+	//;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -220,81 +224,70 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getAttributeAccess().getRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'<!--'->'-->';
+	//terminal ML_COMMENT: '<!--' -> '-->' ;
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}
 	
-	//terminal START_TAG:
-	//	LT ID;
+	//terminal START_TAG: LT ID ;
 	public TerminalRule getSTART_TAGRule() {
 		return tSTART_TAG;
 	}
 	
-	//terminal LT:
-	//	'<';
+	//terminal LT: '<' ;
 	public TerminalRule getLTRule() {
 		return tLT;
 	}
 	
-	//terminal GT:
-	//	'>';
+	//terminal GT: '>' ;
 	public TerminalRule getGTRule() {
 		return tGT;
 	}
 	
-	//terminal EQ:
-	//	'=';
+	//terminal EQ: '=' ;
 	public TerminalRule getEQRule() {
 		return tEQ;
 	}
 	
-	//terminal END_TAG_SHORT:
-	//	'/>';
+	//terminal END_TAG_SHORT: '/>' ;
 	public TerminalRule getEND_TAG_SHORTRule() {
 		return tEND_TAG_SHORT;
 	}
 	
-	//terminal END_TAG_START:
-	//	'</';
+	//terminal END_TAG_START: '</' ;
 	public TerminalRule getEND_TAG_STARTRule() {
 		return tEND_TAG_START;
 	}
 	
-	//terminal END_TAG:
-	//	END_TAG_START ID GT;
+	//terminal END_TAG: END_TAG_START ID GT;
 	public TerminalRule getEND_TAGRule() {
 		return tEND_TAG;
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return tINT;
 	}
 	
-	//terminal STRING:
-	//	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
-	//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
+	//terminal STRING    :
+	//            '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS			: (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
 	}
