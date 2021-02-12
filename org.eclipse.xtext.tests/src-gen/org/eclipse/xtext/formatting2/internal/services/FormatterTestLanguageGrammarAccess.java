@@ -30,7 +30,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cKWListParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Root:
-		//	IDList | KWList;
+		//    IDList | KWList;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//IDList | KWList
@@ -51,7 +51,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIdsIDTerminalRuleCall_2_0 = (RuleCall)cIdsAssignment_2.eContents().get(0);
 		
 		//IDList:
-		//	{IDList} "idlist" ids+=ID*;
+		//    {IDList} "idlist" ids+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{IDList} "idlist" ids+=ID*
@@ -86,7 +86,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cKw5Kw5Keyword_6_0 = (Keyword)cKw5Assignment_6.eContents().get(0);
 		
 		//KWList:
-		//	{KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?;
+		//    {KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?
@@ -176,7 +176,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Root:
-	//	IDList | KWList;
+	//    IDList | KWList;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -186,7 +186,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//IDList:
-	//	{IDList} "idlist" ids+=ID*;
+	//    {IDList} "idlist" ids+=ID*;
 	public IDListElements getIDListAccess() {
 		return pIDList;
 	}
@@ -196,7 +196,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//KWList:
-	//	{KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?;
+	//    {KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?;
 	public KWListElements getKWListAccess() {
 		return pKWList;
 	}
@@ -205,45 +205,40 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getKWListAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -30,25 +30,25 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cChildrenNodeParserRuleCall_1_1_0 = (RuleCall)cChildrenAssignment_1_1.eContents().get(0);
 		
 		//NodeList:
-		//	children+=Node (NL children+=Node)*;
+		//    children += Node (NL children += Node)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//children+=Node (NL children+=Node)*
+		//children += Node (NL children += Node)*
 		public Group getGroup() { return cGroup; }
 		
-		//children+=Node
+		//children += Node
 		public Assignment getChildrenAssignment_0() { return cChildrenAssignment_0; }
 		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_0_0() { return cChildrenNodeParserRuleCall_0_0; }
 		
-		//(NL children+=Node)*
+		//(NL children += Node)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//NL
 		public RuleCall getNLTerminalRuleCall_1_0() { return cNLTerminalRuleCall_1_0; }
 		
-		//children+=Node
+		//children += Node
 		public Assignment getChildrenAssignment_1_1() { return cChildrenAssignment_1_1; }
 		
 		//Node
@@ -67,19 +67,19 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cENDTerminalRuleCall_1_3 = (RuleCall)cGroup_1.eContents().get(3);
 		
 		//Node:
-		//	name=String (NL BEGIN children=NodeList END)?;
+		//    name = String (NL BEGIN children = NodeList END)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=String (NL BEGIN children=NodeList END)?
+		//name = String (NL BEGIN children = NodeList END)?
 		public Group getGroup() { return cGroup; }
 		
-		//name=String
+		//name = String
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
 		//String
 		public RuleCall getNameStringParserRuleCall_0_0() { return cNameStringParserRuleCall_0_0; }
 		
-		//(NL BEGIN children=NodeList END)?
+		//(NL BEGIN children = NodeList END)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//NL
@@ -88,7 +88,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
 		
-		//children=NodeList
+		//children = NodeList
 		public Assignment getChildrenAssignment_1_2() { return cChildrenAssignment_1_2; }
 		
 		//NodeList
@@ -101,8 +101,8 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
 		private final RuleCall cOTHERTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//String:
-		//	OTHER+;
+		//String returns ecore::EString:
+		//    OTHER+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//OTHER+
@@ -156,7 +156,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 
 	
 	//NodeList:
-	//	children+=Node (NL children+=Node)*;
+	//    children += Node (NL children += Node)*;
 	public NodeListElements getNodeListAccess() {
 		return pNodeList;
 	}
@@ -166,7 +166,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Node:
-	//	name=String (NL BEGIN children=NodeList END)?;
+	//    name = String (NL BEGIN children = NodeList END)?;
 	public NodeElements getNodeAccess() {
 		return pNode;
 	}
@@ -175,8 +175,8 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		return getNodeAccess().getRule();
 	}
 	
-	//String:
-	//	OTHER+;
+	//String returns ecore::EString:
+	//    OTHER+;
 	public StringElements getStringAccess() {
 		return pString;
 	}
@@ -185,26 +185,22 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		return getStringAccess().getRule();
 	}
 	
-	//terminal NL:
-	//	('\r' | '\n')+ '\t'*;
+	//terminal NL: ('\r'|'\n')+ '\t'*;
 	public TerminalRule getNLRule() {
 		return tNL;
 	}
 	
-	//terminal BEGIN:
-	//	'{';
+	//terminal BEGIN : '{';
 	public TerminalRule getBEGINRule() {
 		return tBEGIN;
 	}
 	
-	//terminal END:
-	//	'}';
+	//terminal END : '}';
 	public TerminalRule getENDRule() {
 		return tEND;
 	}
 	
-	//terminal OTHER:
-	//	.;
+	//terminal OTHER: .;
 	public TerminalRule getOTHERRule() {
 		return tOTHER;
 	}

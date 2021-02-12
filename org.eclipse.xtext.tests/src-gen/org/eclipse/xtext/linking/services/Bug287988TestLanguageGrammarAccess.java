@@ -54,17 +54,23 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		
 		///* SuppressWarnings[noInstantiation] */
 		//Model:
-		//	'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
-		//	attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
-		//	attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*;
+		//    ('actions' attributes+=BaseAttribute*)
+		//  | ('simple' attributes+=SimpleAttribute*)
+		//  | ('rulecall' attributes+=RuleCallAttribute*)
+		//  | ('rulecall2' attributes+=RuleCallAttribute2*)
+		//  | ('rulecall3' attributes+=RuleCallAttribute3*)
+		//  | ('inlinedActions' attributes+=ActionAttribute*);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
-		//attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
-		//attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*
+		//  ('actions' attributes+=BaseAttribute*)
+		//| ('simple' attributes+=SimpleAttribute*)
+		//| ('rulecall' attributes+=RuleCallAttribute*)
+		//| ('rulecall2' attributes+=RuleCallAttribute2*)
+		//| ('rulecall3' attributes+=RuleCallAttribute3*)
+		//| ('inlinedActions' attributes+=ActionAttribute*)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'actions' attributes+=BaseAttribute*
+		//('actions' attributes+=BaseAttribute*)
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'actions'
@@ -76,7 +82,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//BaseAttribute
 		public RuleCall getAttributesBaseAttributeParserRuleCall_0_1_0() { return cAttributesBaseAttributeParserRuleCall_0_1_0; }
 		
-		//'simple' attributes+=SimpleAttribute*
+		//('simple' attributes+=SimpleAttribute*)
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'simple'
@@ -88,7 +94,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//SimpleAttribute
 		public RuleCall getAttributesSimpleAttributeParserRuleCall_1_1_0() { return cAttributesSimpleAttributeParserRuleCall_1_1_0; }
 		
-		//'rulecall' attributes+=RuleCallAttribute*
+		//('rulecall' attributes+=RuleCallAttribute*)
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'rulecall'
@@ -100,7 +106,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//RuleCallAttribute
 		public RuleCall getAttributesRuleCallAttributeParserRuleCall_2_1_0() { return cAttributesRuleCallAttributeParserRuleCall_2_1_0; }
 		
-		//'rulecall2' attributes+=RuleCallAttribute2*
+		//('rulecall2' attributes+=RuleCallAttribute2*)
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'rulecall2'
@@ -112,7 +118,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//RuleCallAttribute2
 		public RuleCall getAttributesRuleCallAttribute2ParserRuleCall_3_1_0() { return cAttributesRuleCallAttribute2ParserRuleCall_3_1_0; }
 		
-		//'rulecall3' attributes+=RuleCallAttribute3*
+		//('rulecall3' attributes+=RuleCallAttribute3*)
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'rulecall3'
@@ -124,7 +130,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//RuleCallAttribute3
 		public RuleCall getAttributesRuleCallAttribute3ParserRuleCall_4_1_0() { return cAttributesRuleCallAttribute3ParserRuleCall_4_1_0; }
 		
-		//'inlinedActions' attributes+=ActionAttribute*
+		//('inlinedActions' attributes+=ActionAttribute*)
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'inlinedActions'
@@ -155,13 +161,13 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//BaseAttribute:
-		//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+		//  (Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+		//(Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//(Attribute | Master)
+		//(Attribute|Master)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//Attribute
@@ -170,7 +176,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//Master
 		public RuleCall getMasterParserRuleCall_0_1() { return cMasterParserRuleCall_0_1; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID)
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -210,7 +216,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Attribute:
-		//	{Attribute} "attribute";
+		//  {Attribute} "attribute";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Attribute} "attribute"
@@ -229,7 +235,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cMasterKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Master:
-		//	{Master} "master";
+		//  {Master} "master";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Master} "master"
@@ -263,14 +269,14 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//ActionAttribute BaseAttribute:
-		//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+		//ActionAttribute returns BaseAttribute:
+		//  ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+		//({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//({Attribute} "attribute" | {Master} "master")
+		//({Attribute} "attribute"|{Master} "master")
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//{Attribute} "attribute"
@@ -291,7 +297,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"master"
 		public Keyword getMasterKeyword_0_1_1() { return cMasterKeyword_0_1_1; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID)
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -339,14 +345,14 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//SimpleAttribute Attribute:
-		//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+		//SimpleAttribute returns Attribute:
+		//  ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+		//("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID)
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -387,8 +393,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//RuleCallAttribute Attribute:
-		//	CallMe name=ID ";";
+		//RuleCallAttribute returns Attribute:
+		//  CallMe name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CallMe name=ID ";"
@@ -417,11 +423,11 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cTypeAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cTypeIDTerminalRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		
-		//CallMe Attribute:
-		//	"ref" typeRef=[BaseAttribute] | type=ID;
+		//CallMe returns Attribute:
+		//  ("ref" typeRef=[BaseAttribute]|type=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -459,17 +465,17 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cTypeIDTerminalRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//RuleCallAttribute2 Attribute:
-		//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+		//RuleCallAttribute2 returns Attribute:
+		//  CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+		//CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";"
 		public Group getGroup() { return cGroup; }
 		
 		//CallMe2
 		public RuleCall getCallMe2ParserRuleCall_0() { return cCallMe2ParserRuleCall_0; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID)
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -501,8 +507,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//CallMe2 Attribute:
-		//	name=ID;
+		//CallMe2 returns Attribute:
+		//  name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -525,17 +531,17 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cTypeIDTerminalRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//RuleCallAttribute3 Attribute:
-		//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+		//RuleCallAttribute3 returns Attribute:
+		//  CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+		//CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";"
 		public Group getGroup() { return cGroup; }
 		
 		//CallMe3
 		public RuleCall getCallMe3ParserRuleCall_0() { return cCallMe3ParserRuleCall_0; }
 		
-		//("ref" typeRef=[BaseAttribute] | type=ID)
+		//("ref" typeRef=[BaseAttribute]|type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -569,8 +575,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cMeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cCallMe4ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//CallMe3 Attribute:
-		//	"call" "me" CallMe4;
+		//CallMe3 returns Attribute:
+		//  "call" "me" CallMe4;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"call" "me" CallMe4
@@ -590,8 +596,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//CallMe4 Attribute:
-		//	name=ID;
+		//CallMe4 returns Attribute:
+		//  name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -669,9 +675,12 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	
 	///* SuppressWarnings[noInstantiation] */
 	//Model:
-	//	'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
-	//	attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
-	//	attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*;
+	//    ('actions' attributes+=BaseAttribute*)
+	//  | ('simple' attributes+=SimpleAttribute*)
+	//  | ('rulecall' attributes+=RuleCallAttribute*)
+	//  | ('rulecall2' attributes+=RuleCallAttribute2*)
+	//  | ('rulecall3' attributes+=RuleCallAttribute3*)
+	//  | ('inlinedActions' attributes+=ActionAttribute*);
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -681,7 +690,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//BaseAttribute:
-	//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+	//  (Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 	public BaseAttributeElements getBaseAttributeAccess() {
 		return pBaseAttribute;
 	}
@@ -691,7 +700,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Attribute:
-	//	{Attribute} "attribute";
+	//  {Attribute} "attribute";
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -701,7 +710,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Master:
-	//	{Master} "master";
+	//  {Master} "master";
 	public MasterElements getMasterAccess() {
 		return pMaster;
 	}
@@ -710,8 +719,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getMasterAccess().getRule();
 	}
 	
-	//ActionAttribute BaseAttribute:
-	//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+	//ActionAttribute returns BaseAttribute:
+	//  ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 	public ActionAttributeElements getActionAttributeAccess() {
 		return pActionAttribute;
 	}
@@ -720,8 +729,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getActionAttributeAccess().getRule();
 	}
 	
-	//SimpleAttribute Attribute:
-	//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+	//SimpleAttribute returns Attribute:
+	//  ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
 	public SimpleAttributeElements getSimpleAttributeAccess() {
 		return pSimpleAttribute;
 	}
@@ -730,8 +739,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getSimpleAttributeAccess().getRule();
 	}
 	
-	//RuleCallAttribute Attribute:
-	//	CallMe name=ID ";";
+	//RuleCallAttribute returns Attribute:
+	//  CallMe name=ID ";";
 	public RuleCallAttributeElements getRuleCallAttributeAccess() {
 		return pRuleCallAttribute;
 	}
@@ -740,8 +749,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRuleCallAttributeAccess().getRule();
 	}
 	
-	//CallMe Attribute:
-	//	"ref" typeRef=[BaseAttribute] | type=ID;
+	//CallMe returns Attribute:
+	//  ("ref" typeRef=[BaseAttribute]|type=ID);
 	public CallMeElements getCallMeAccess() {
 		return pCallMe;
 	}
@@ -750,8 +759,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCallMeAccess().getRule();
 	}
 	
-	//RuleCallAttribute2 Attribute:
-	//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+	//RuleCallAttribute2 returns Attribute:
+	//  CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
 	public RuleCallAttribute2Elements getRuleCallAttribute2Access() {
 		return pRuleCallAttribute2;
 	}
@@ -760,8 +769,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRuleCallAttribute2Access().getRule();
 	}
 	
-	//CallMe2 Attribute:
-	//	name=ID;
+	//CallMe2 returns Attribute:
+	//  name=ID;
 	public CallMe2Elements getCallMe2Access() {
 		return pCallMe2;
 	}
@@ -770,8 +779,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCallMe2Access().getRule();
 	}
 	
-	//RuleCallAttribute3 Attribute:
-	//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+	//RuleCallAttribute3 returns Attribute:
+	//  CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
 	public RuleCallAttribute3Elements getRuleCallAttribute3Access() {
 		return pRuleCallAttribute3;
 	}
@@ -780,8 +789,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRuleCallAttribute3Access().getRule();
 	}
 	
-	//CallMe3 Attribute:
-	//	"call" "me" CallMe4;
+	//CallMe3 returns Attribute:
+	//  "call" "me" CallMe4;
 	public CallMe3Elements getCallMe3Access() {
 		return pCallMe3;
 	}
@@ -790,8 +799,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCallMe3Access().getRule();
 	}
 	
-	//CallMe4 Attribute:
-	//	name=ID;
+	//CallMe4 returns Attribute:
+	//  name=ID;
 	public CallMe4Elements getCallMe4Access() {
 		return pCallMe4;
 	}
@@ -800,45 +809,40 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCallMe4Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -29,7 +29,8 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cProductionRule2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ProductionRules:
-		//	ProductionRule1 | ProductionRule2;
+		//    ProductionRule1 | ProductionRule2
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ProductionRule1 | ProductionRule2
@@ -55,7 +56,7 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cIINTTerminalRuleCall_5_0 = (RuleCall)cIAssignment_5.eContents().get(0);
 		
 		//ProductionRule1:
-		//	{P1} id=ID? {P2.p=current} string=STRING? {P3.p=current} i=INT;
+		//  {P1} id=ID? {P2.p=current} string=STRING? {P3.p=current} i=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{P1} id=ID? {P2.p=current} string=STRING? {P3.p=current} i=INT
@@ -97,16 +98,17 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ProductionRule2:
-		//	STRING {Entry} name=ID;
+		//    STRING /* unassigned */ {Entry} name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//STRING {Entry} name=ID
+		//STRING /* unassigned */ {Entry} name=ID
 		public Group getGroup() { return cGroup; }
 		
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
 		
-		//{Entry}
+		///* unassigned */ {Entry}
 		public Action getEntryAction_1() { return cEntryAction_1; }
 		
 		//name=ID
@@ -163,7 +165,8 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 
 	
 	//ProductionRules:
-	//	ProductionRule1 | ProductionRule2;
+	//    ProductionRule1 | ProductionRule2
+	//;
 	public ProductionRulesElements getProductionRulesAccess() {
 		return pProductionRules;
 	}
@@ -173,7 +176,7 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//ProductionRule1:
-	//	{P1} id=ID? {P2.p=current} string=STRING? {P3.p=current} i=INT;
+	//  {P1} id=ID? {P2.p=current} string=STRING? {P3.p=current} i=INT;
 	public ProductionRule1Elements getProductionRule1Access() {
 		return pProductionRule1;
 	}
@@ -183,7 +186,8 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//ProductionRule2:
-	//	STRING {Entry} name=ID;
+	//    STRING /* unassigned */ {Entry} name=ID
+	//;
 	public ProductionRule2Elements getProductionRule2Access() {
 		return pProductionRule2;
 	}
@@ -192,45 +196,40 @@ public class ActionTestLanguage3GrammarAccess extends AbstractElementFinder.Abst
 		return getProductionRule2Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

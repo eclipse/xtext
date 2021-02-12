@@ -40,12 +40,25 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_7_0 = (RuleCall)cAnyValueAssignment_7.eContents().get(0);
 		
 		//Model:
-		//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
-		//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
+		//  idValue=ID |
+		//  intValue=INT |
+		//  stringValue=STRING |
+		//  richStringValue=RICH_STRING |
+		//  mlCommentValue=ML_COMMENT |
+		//  slCommentValue=SL_COMMENT |
+		//  wsValue=WS  |
+		//  anyValue=ANY_OTHER
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
-		//slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER
+		//idValue=ID |
+		//intValue=INT |
+		//stringValue=STRING |
+		//richStringValue=RICH_STRING |
+		//mlCommentValue=ML_COMMENT |
+		//slCommentValue=SL_COMMENT |
+		//wsValue=WS  |
+		//anyValue=ANY_OTHER
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//idValue=ID
@@ -152,8 +165,15 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//Model:
-	//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
-	//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
+	//  idValue=ID |
+	//  intValue=INT |
+	//  stringValue=STRING |
+	//  richStringValue=RICH_STRING |
+	//  mlCommentValue=ML_COMMENT |
+	//  slCommentValue=SL_COMMENT |
+	//  wsValue=WS  |
+	//  anyValue=ANY_OTHER
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -162,63 +182,58 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getModelAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal INT:
-	//	'0'..'9'+;
+	//terminal INT 		: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return tINT;
 	}
 	
-	//terminal STRING:
-	//	'"' (ESCAPED_CHAR | !('\\' | '"'))* '"' |
-	//	"'" (ESCAPED_CHAR | !('\\' | "'"))* "'";
+	//terminal STRING    :
+	//            '"' ( ESCAPED_CHAR | !('\\'|'"') )* '"' |
+	//            "'" ( ESCAPED_CHAR | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	}
 	
-	//terminal RICH_STRING:
-	//	"'''" IN_RICH_STRING* ("'''" | ("'" "'"?)? EOF);
+	//terminal RICH_STRING : "'''" IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF);
 	public TerminalRule getRICH_STRINGRule() {
 		return tRICH_STRING;
 	}
 	
-	//terminal fragment IN_RICH_STRING:
-	//	"''" !('«' | "'") | "'" !('«' | "'") | !('«' | "'");
+	//terminal fragment IN_RICH_STRING :
+	//      "''" !('«'|"'")
+	//    | "'" !('«'|"'")
+	//    | !('«'|"'");
 	public TerminalRule getIN_RICH_STRINGRule() {
 		return tIN_RICH_STRING;
 	}
 	
-	//terminal fragment ESCAPED_CHAR:
-	//	'\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\');
+	//terminal fragment ESCAPED_CHAR: '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\');
 	public TerminalRule getESCAPED_CHARRule() {
 		return tESCAPED_CHAR;
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT	: '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS			: (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
 	}

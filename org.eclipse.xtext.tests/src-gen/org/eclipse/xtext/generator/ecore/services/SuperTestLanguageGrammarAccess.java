@@ -28,8 +28,8 @@ public class SuperTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//SuperMain:
-		//	"super" name=ID;
+		//SuperMain :
+		//    "super" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"super" name=ID
@@ -51,8 +51,8 @@ public class SuperTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//AnotherSuperMain:
-		//	"another" name=ID;
+		//AnotherSuperMain :
+		//    "another" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"another" name=ID
@@ -112,8 +112,8 @@ public class SuperTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 
 	
-	//SuperMain:
-	//	"super" name=ID;
+	//SuperMain :
+	//    "super" name=ID;
 	public SuperMainElements getSuperMainAccess() {
 		return pSuperMain;
 	}
@@ -122,8 +122,8 @@ public class SuperTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getSuperMainAccess().getRule();
 	}
 	
-	//AnotherSuperMain:
-	//	"another" name=ID;
+	//AnotherSuperMain :
+	//    "another" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
 		return pAnotherSuperMain;
 	}
@@ -132,45 +132,40 @@ public class SuperTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getAnotherSuperMainAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

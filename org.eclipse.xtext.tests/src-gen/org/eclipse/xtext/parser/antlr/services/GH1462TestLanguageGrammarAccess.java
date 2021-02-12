@@ -75,21 +75,22 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cElementRule12ParserRuleCall_11_1_0 = (RuleCall)cElementAssignment_11_1.eContents().get(0);
 		
 		//Root:
-		//	'#1' element=Rule1
-		//	| '#2' element=Rule2
-		//	| '#3' element=Rule3
-		//	| '#4' element=Rule4
-		//	| '#5' element=Rule5
-		//	| '#6' element=Rule6
-		//	| '#7' element=Rule7
-		//	| '#8' element=Rule8
-		//	| '#9' element=Rule9
-		//	| '#10' element=Rule10
-		//	| '#11' element=Rule11
-		//	| '#12' element=Rule12;
+		//      '#1' element=Rule1
+		//    | '#2' element=Rule2
+		//    | '#3' element=Rule3
+		//    | '#4' element=Rule4
+		//    | '#5' element=Rule5
+		//    | '#6' element=Rule6
+		//    | '#7' element=Rule7
+		//    | '#8' element=Rule8
+		//    | '#9' element=Rule9
+		//    | '#10' element=Rule10
+		//    | '#11' element=Rule11
+		//    | '#12' element=Rule12
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#1' element=Rule1
+		//  '#1' element=Rule1
 		//| '#2' element=Rule2
 		//| '#3' element=Rule3
 		//| '#4' element=Rule4
@@ -258,7 +259,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule1:
-		//	left=INT right=INT unit='s';
+		//    left=INT right=INT unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right=INT unit='s'
@@ -292,7 +294,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule2:
-		//	INT value=INT unit='s';
+		//    INT value=INT unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT value=INT unit='s'
@@ -324,7 +327,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule3:
-		//	left=ID right=STRING unit='s';
+		//    left=ID right=STRING unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=ID right=STRING unit='s'
@@ -359,7 +363,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule4:
-		//	left=STRING right=ID unit='s';
+		//    left=STRING right=ID unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=STRING right=ID unit='s'
@@ -394,7 +399,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule5:
-		//	left=INT right=Integer unit='s';
+		//    left=INT right=Integer unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right=Integer unit='s'
@@ -429,7 +435,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule6:
-		//	left=INT right=Wrapper unit='s';
+		//    left=INT right=Wrapper unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right=Wrapper unit='s'
@@ -464,7 +471,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule7:
-		//	left=INT right?=INT unit='s';
+		//    left=INT right?=INT unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right?=INT unit='s'
@@ -499,7 +507,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule8:
-		//	left=INT right?='#1' unit='s';
+		//    left=INT right?='#1' unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right?='#1' unit='s'
@@ -534,7 +543,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule9:
-		//	left=INT right=MaybeEmpty unit='s';
+		//    left=INT right=MaybeEmpty unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right=MaybeEmpty unit='s'
@@ -569,7 +579,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule10:
-		//	left=INT right?=MaybeEmpty unit='s';
+		//    left=INT right?=MaybeEmpty unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right?=MaybeEmpty unit='s'
@@ -604,7 +615,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule11:
-		//	left=INT right?=Integer unit='s';
+		//    left=INT right?=Integer unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right?=Integer unit='s'
@@ -639,7 +651,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cUnitSKeyword_2_0 = (Keyword)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule12:
-		//	left=INT right?=Wrapper unit='s';
+		//    left=INT right?=Wrapper unit='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=INT right?=Wrapper unit='s'
@@ -667,8 +680,9 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.GH1462TestLanguage.Integer");
 		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Integer EInt:
-		//	INT;
+		//Integer returns EInt:
+		//    INT
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT
@@ -679,7 +693,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//MaybeEmpty:
-		//	INT?;
+		//    INT?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT?
@@ -691,7 +706,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cValueINTTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//Wrapper:
-		//	value=INT;
+		//    value=INT
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value=INT
@@ -774,18 +790,19 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 
 	
 	//Root:
-	//	'#1' element=Rule1
-	//	| '#2' element=Rule2
-	//	| '#3' element=Rule3
-	//	| '#4' element=Rule4
-	//	| '#5' element=Rule5
-	//	| '#6' element=Rule6
-	//	| '#7' element=Rule7
-	//	| '#8' element=Rule8
-	//	| '#9' element=Rule9
-	//	| '#10' element=Rule10
-	//	| '#11' element=Rule11
-	//	| '#12' element=Rule12;
+	//      '#1' element=Rule1
+	//    | '#2' element=Rule2
+	//    | '#3' element=Rule3
+	//    | '#4' element=Rule4
+	//    | '#5' element=Rule5
+	//    | '#6' element=Rule6
+	//    | '#7' element=Rule7
+	//    | '#8' element=Rule8
+	//    | '#9' element=Rule9
+	//    | '#10' element=Rule10
+	//    | '#11' element=Rule11
+	//    | '#12' element=Rule12
+	//;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -795,7 +812,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule1:
-	//	left=INT right=INT unit='s';
+	//    left=INT right=INT unit='s'
+	//;
 	public Rule1Elements getRule1Access() {
 		return pRule1;
 	}
@@ -805,7 +823,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule2:
-	//	INT value=INT unit='s';
+	//    INT value=INT unit='s'
+	//;
 	public Rule2Elements getRule2Access() {
 		return pRule2;
 	}
@@ -815,7 +834,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule3:
-	//	left=ID right=STRING unit='s';
+	//    left=ID right=STRING unit='s'
+	//;
 	public Rule3Elements getRule3Access() {
 		return pRule3;
 	}
@@ -825,7 +845,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule4:
-	//	left=STRING right=ID unit='s';
+	//    left=STRING right=ID unit='s'
+	//;
 	public Rule4Elements getRule4Access() {
 		return pRule4;
 	}
@@ -835,7 +856,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule5:
-	//	left=INT right=Integer unit='s';
+	//    left=INT right=Integer unit='s'
+	//;
 	public Rule5Elements getRule5Access() {
 		return pRule5;
 	}
@@ -845,7 +867,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule6:
-	//	left=INT right=Wrapper unit='s';
+	//    left=INT right=Wrapper unit='s'
+	//;
 	public Rule6Elements getRule6Access() {
 		return pRule6;
 	}
@@ -855,7 +878,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule7:
-	//	left=INT right?=INT unit='s';
+	//    left=INT right?=INT unit='s'
+	//;
 	public Rule7Elements getRule7Access() {
 		return pRule7;
 	}
@@ -865,7 +889,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule8:
-	//	left=INT right?='#1' unit='s';
+	//    left=INT right?='#1' unit='s'
+	//;
 	public Rule8Elements getRule8Access() {
 		return pRule8;
 	}
@@ -875,7 +900,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule9:
-	//	left=INT right=MaybeEmpty unit='s';
+	//    left=INT right=MaybeEmpty unit='s'
+	//;
 	public Rule9Elements getRule9Access() {
 		return pRule9;
 	}
@@ -885,7 +911,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule10:
-	//	left=INT right?=MaybeEmpty unit='s';
+	//    left=INT right?=MaybeEmpty unit='s'
+	//;
 	public Rule10Elements getRule10Access() {
 		return pRule10;
 	}
@@ -895,7 +922,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule11:
-	//	left=INT right?=Integer unit='s';
+	//    left=INT right?=Integer unit='s'
+	//;
 	public Rule11Elements getRule11Access() {
 		return pRule11;
 	}
@@ -905,7 +933,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Rule12:
-	//	left=INT right?=Wrapper unit='s';
+	//    left=INT right?=Wrapper unit='s'
+	//;
 	public Rule12Elements getRule12Access() {
 		return pRule12;
 	}
@@ -914,8 +943,9 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getRule12Access().getRule();
 	}
 	
-	//Integer EInt:
-	//	INT;
+	//Integer returns EInt:
+	//    INT
+	//;
 	public IntegerElements getIntegerAccess() {
 		return pInteger;
 	}
@@ -925,7 +955,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//MaybeEmpty:
-	//	INT?;
+	//    INT?
+	//;
 	public MaybeEmptyElements getMaybeEmptyAccess() {
 		return pMaybeEmpty;
 	}
@@ -935,7 +966,8 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Wrapper:
-	//	value=INT;
+	//    value=INT
+	//;
 	public WrapperElements getWrapperAccess() {
 		return pWrapper;
 	}
@@ -944,45 +976,40 @@ public class GH1462TestLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getWrapperAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

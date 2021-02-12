@@ -33,14 +33,15 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//@Override
-		//Model:
-		//	"model" name=ID "{"
-		//	elements+=Element*
-		//	"}";
+		//Model :
+		//    "model" name=ID "{"
+		//        elements+=Element*
+		//    "}"
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"model" name=ID "{"
-		//elements+=Element*
+		//    elements+=Element*
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -72,8 +73,9 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Element:
-		//	"element" name=ID;
+		//Element :
+		//    "element" name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"element" name=ID
@@ -144,10 +146,11 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 
 	
 	//@Override
-	//Model:
-	//	"model" name=ID "{"
-	//	elements+=Element*
-	//	"}";
+	//Model :
+	//    "model" name=ID "{"
+	//        elements+=Element*
+	//    "}"
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -156,8 +159,9 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	"element" name=ID;
+	//Element :
+	//    "element" name=ID
+	//;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -167,14 +171,12 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//@Override
-	//terminal ID:
-	//	'a'..'z'+;
+	//terminal ID: ('a'..'z')+;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//FQN:
-	//	super::ID ('.' super::ID)*;
+	//FQN: ID ('.' ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
@@ -183,39 +185,35 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getFQNAccess().getRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

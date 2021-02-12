@@ -87,23 +87,30 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cNodeExclusionListNodeExclusion2ListParserRuleCall_8_2_0_1 = (RuleCall)cNodeExclusionListAlternatives_8_2_0.eContents().get(1);
 		
 		//Model:
-		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
-		//	(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=
-		//	(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
-		//	| "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=
-		//	(NodeExclusion1List | NodeExclusion2List);
+		//    ("#0" model=Model2) |
+		//    ("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) |
+		//    ("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) |
+		//    ("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) |
+		//    ("#4" parentRef=(ParentRefTest1|ParentRefTest2)) |
+		//    ("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)) |
+		//    ("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)) |
+		//    ("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2)) |
+		//    ("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
-		//(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2
-		//) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=(QuantityExclusionTest1 |
-		//QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2) | "#7" name=STRING
-		//nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=(NodeExclusion1List |
-		//NodeExclusion2List)
+		//("#0" model=Model2) |
+		//("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) |
+		//("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) |
+		//("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) |
+		//("#4" parentRef=(ParentRefTest1|ParentRefTest2)) |
+		//("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)) |
+		//("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)) |
+		//("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2)) |
+		//("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//"#0" model=Model2
+		//("#0" model=Model2)
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//"#0"
@@ -115,16 +122,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//Model2
 		public RuleCall getModelModel2ParserRuleCall_0_1_0() { return cModelModel2ParserRuleCall_0_1_0; }
 		
-		//"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
+		//("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2))
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"#1"
 		public Keyword getNumberSignDigitOneKeyword_1_0() { return cNumberSignDigitOneKeyword_1_0; }
 		
-		//attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
+		//attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)
 		public Assignment getAttributeExclusionAssignment_1_1() { return cAttributeExclusionAssignment_1_1; }
 		
-		//(AttributeExclusionTest1 | AttributeExclusionTest2)
+		//(AttributeExclusionTest1|AttributeExclusionTest2)
 		public Alternatives getAttributeExclusionAlternatives_1_1_0() { return cAttributeExclusionAlternatives_1_1_0; }
 		
 		//AttributeExclusionTest1
@@ -133,16 +140,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//AttributeExclusionTest2
 		public RuleCall getAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1() { return cAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1; }
 		
-		//"#2" nestedType=(NestedTypeTest1 | NestedTypeTest2)
+		//("#2" nestedType=(NestedTypeTest1|NestedTypeTest2))
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_2_0() { return cNumberSignDigitTwoKeyword_2_0; }
 		
-		//nestedType=(NestedTypeTest1 | NestedTypeTest2)
+		//nestedType=(NestedTypeTest1|NestedTypeTest2)
 		public Assignment getNestedTypeAssignment_2_1() { return cNestedTypeAssignment_2_1; }
 		
-		//(NestedTypeTest1 | NestedTypeTest2)
+		//(NestedTypeTest1|NestedTypeTest2)
 		public Alternatives getNestedTypeAlternatives_2_1_0() { return cNestedTypeAlternatives_2_1_0; }
 		
 		//NestedTypeTest1
@@ -151,16 +158,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//NestedTypeTest2
 		public RuleCall getNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1() { return cNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1; }
 		
-		//"#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		//("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2))
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//"#3"
 		public Keyword getNumberSignDigitThreeKeyword_3_0() { return cNumberSignDigitThreeKeyword_3_0; }
 		
-		//nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		//nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)
 		public Assignment getNestedTypeRecursiveTest2Assignment_3_1() { return cNestedTypeRecursiveTest2Assignment_3_1; }
 		
-		//(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		//(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)
 		public Alternatives getNestedTypeRecursiveTest2Alternatives_3_1_0() { return cNestedTypeRecursiveTest2Alternatives_3_1_0; }
 		
 		//NestedTypeRecursiveTest1
@@ -169,16 +176,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//NestedTypeRecursiveTest2
 		public RuleCall getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1() { return cNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1; }
 		
-		//"#4" parentRef=(ParentRefTest1 | ParentRefTest2)
+		//("#4" parentRef=(ParentRefTest1|ParentRefTest2))
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//"#4"
 		public Keyword getNumberSignDigitFourKeyword_4_0() { return cNumberSignDigitFourKeyword_4_0; }
 		
-		//parentRef=(ParentRefTest1 | ParentRefTest2)
+		//parentRef=(ParentRefTest1|ParentRefTest2)
 		public Assignment getParentRefAssignment_4_1() { return cParentRefAssignment_4_1; }
 		
-		//(ParentRefTest1 | ParentRefTest2)
+		//(ParentRefTest1|ParentRefTest2)
 		public Alternatives getParentRefAlternatives_4_1_0() { return cParentRefAlternatives_4_1_0; }
 		
 		//ParentRefTest1
@@ -187,16 +194,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//ParentRefTest2
 		public RuleCall getParentRefParentRefTest2ParserRuleCall_4_1_0_1() { return cParentRefParentRefTest2ParserRuleCall_4_1_0_1; }
 		
-		//"#5" quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+		//("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2))
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//"#5"
 		public Keyword getNumberSignDigitFiveKeyword_5_0() { return cNumberSignDigitFiveKeyword_5_0; }
 		
-		//quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2)
+		//quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)
 		public Assignment getQuantityExclusionAssignment_5_1() { return cQuantityExclusionAssignment_5_1; }
 		
-		//(QuantityExclusionTest1 | QuantityExclusionTest2)
+		//(QuantityExclusionTest1|QuantityExclusionTest2)
 		public Alternatives getQuantityExclusionAlternatives_5_1_0() { return cQuantityExclusionAlternatives_5_1_0; }
 		
 		//QuantityExclusionTest1
@@ -205,16 +212,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//QuantityExclusionTest2
 		public RuleCall getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1() { return cQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1; }
 		
-		//"#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+		//("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2))
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//"#6"
 		public Keyword getNumberSignDigitSixKeyword_6_0() { return cNumberSignDigitSixKeyword_6_0; }
 		
-		//valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
+		//valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)
 		public Assignment getValueExclusionAssignment_6_1() { return cValueExclusionAssignment_6_1; }
 		
-		//(ValueExclusionTest1 | ValueExclusionTest2)
+		//(ValueExclusionTest1|ValueExclusionTest2)
 		public Alternatives getValueExclusionAlternatives_6_1_0() { return cValueExclusionAlternatives_6_1_0; }
 		
 		//ValueExclusionTest1
@@ -223,7 +230,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//ValueExclusionTest2
 		public RuleCall getValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1() { return cValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1; }
 		
-		//"#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2)
+		//("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2))
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//"#7"
@@ -235,10 +242,10 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_7_1_0() { return cNameSTRINGTerminalRuleCall_7_1_0; }
 		
-		//nodeExclusion=(NodeExclusion1 | NodeExclusion2)
+		//nodeExclusion=(NodeExclusion1|NodeExclusion2)
 		public Assignment getNodeExclusionAssignment_7_2() { return cNodeExclusionAssignment_7_2; }
 		
-		//(NodeExclusion1 | NodeExclusion2)
+		//(NodeExclusion1|NodeExclusion2)
 		public Alternatives getNodeExclusionAlternatives_7_2_0() { return cNodeExclusionAlternatives_7_2_0; }
 		
 		//NodeExclusion1
@@ -247,7 +254,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//NodeExclusion2
 		public RuleCall getNodeExclusionNodeExclusion2ParserRuleCall_7_2_0_1() { return cNodeExclusionNodeExclusion2ParserRuleCall_7_2_0_1; }
 		
-		//"#8" name=STRING nodeExclusionList=(NodeExclusion1List | NodeExclusion2List)
+		//("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//"#8"
@@ -259,10 +266,10 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_8_1_0() { return cNameSTRINGTerminalRuleCall_8_1_0; }
 		
-		//nodeExclusionList=(NodeExclusion1List | NodeExclusion2List)
+		//nodeExclusionList=(NodeExclusion1List|NodeExclusion2List)
 		public Assignment getNodeExclusionListAssignment_8_2() { return cNodeExclusionListAssignment_8_2; }
 		
-		//(NodeExclusion1List | NodeExclusion2List)
+		//(NodeExclusion1List|NodeExclusion2List)
 		public Alternatives getNodeExclusionListAlternatives_8_2_0() { return cNodeExclusionListAlternatives_8_2_0; }
 		
 		//NodeExclusion1List
@@ -277,8 +284,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cModelKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//Model2 Model:
-		//	{Model} "model";
+		//Model2 returns Model: {Model} "model";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Model} "model"
@@ -297,8 +303,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cAttr1Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cAttr1IDTerminalRuleCall_1_0 = (RuleCall)cAttr1Assignment_1.eContents().get(0);
 		
-		//AttributeExclusionTest1 AttributeExclusionTest:
-		//	"kw1" attr1=ID;
+		//AttributeExclusionTest1 returns AttributeExclusionTest: "kw1" attr1=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" attr1=ID
@@ -320,8 +325,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cAttr2Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cAttr2IDTerminalRuleCall_1_0 = (RuleCall)cAttr2Assignment_1.eContents().get(0);
 		
-		//AttributeExclusionTest2 AttributeExclusionTest:
-		//	"kw2" attr2=ID;
+		//AttributeExclusionTest2 returns AttributeExclusionTest: "kw2" attr2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" attr2=ID
@@ -341,8 +345,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cNestedAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNestedNestedTypeChild1ParserRuleCall_0 = (RuleCall)cNestedAssignment.eContents().get(0);
 		
-		//NestedTypeTest1 NestedTypeTest:
-		//	nested=NestedTypeChild1;
+		//NestedTypeTest1 returns NestedTypeTest:	nested=NestedTypeChild1;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//nested=NestedTypeChild1
@@ -356,8 +359,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cNestedAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNestedNestedTypeChild2ParserRuleCall_0 = (RuleCall)cNestedAssignment.eContents().get(0);
 		
-		//NestedTypeTest2 NestedTypeTest:
-		//	nested=NestedTypeChild2;
+		//NestedTypeTest2 returns NestedTypeTest:	nested=NestedTypeChild2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//nested=NestedTypeChild2
@@ -372,11 +374,10 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cNestedTypeChild1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cNestedTypeChild2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//NestedTypeChild:
-		//	NestedTypeChild1 | NestedTypeChild2;
+		//NestedTypeChild: NestedTypeChild1| NestedTypeChild2;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NestedTypeChild1 | NestedTypeChild2
+		//NestedTypeChild1| NestedTypeChild2
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//NestedTypeChild1
@@ -392,8 +393,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		//NestedTypeChild1:
-		//	"kw1" val=ID;
+		//NestedTypeChild1: "kw1" val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" val=ID
@@ -415,8 +415,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		//NestedTypeChild2:
-		//	"kw2" val=ID;
+		//NestedTypeChild2: "kw2" val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" val=ID
@@ -440,8 +439,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Action cNestedTypeRecursiveTestLeftAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Keyword cFullStopKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		
-		//NestedTypeRecursiveTest1 NestedTypeRecursiveTest:
-		//	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
+		//NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+
@@ -471,8 +469,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Action cNestedTypeRecursiveTestLeftAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Keyword cFullStopKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		
-		//NestedTypeRecursiveTest2 NestedTypeRecursiveTest:
-		//	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
+		//NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+
@@ -500,8 +497,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cChild1Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cChild1ParentRefTestChild1ParserRuleCall_1_0 = (RuleCall)cChild1Assignment_1.eContents().get(0);
 		
-		//ParentRefTest1:
-		//	"kw1" child1=ParentRefTestChild1;
+		//ParentRefTest1: "kw1" child1=ParentRefTestChild1;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" child1=ParentRefTestChild1
@@ -523,8 +519,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cChild2Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cChild2ParentRefTestChild2ParserRuleCall_1_0 = (RuleCall)cChild2Assignment_1.eContents().get(0);
 		
-		//ParentRefTest2:
-		//	"kw2" child2=ParentRefTestChild2;
+		//ParentRefTest2: "kw2" child2=ParentRefTestChild2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" child2=ParentRefTestChild2
@@ -547,8 +542,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cChildAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cChildParentRefTestChild1ParserRuleCall_2_0 = (RuleCall)cChildAssignment_2.eContents().get(0);
 		
-		//ParentRefTestChild1 ParentRefTestChild:
-		//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+		//ParentRefTestChild1 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild1?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{ParentRefTestChild} "foo" child=ParentRefTestChild1?
@@ -574,8 +568,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cChildAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cChildParentRefTestChild2ParserRuleCall_2_0 = (RuleCall)cChildAssignment_2.eContents().get(0);
 		
-		//ParentRefTestChild2 ParentRefTestChild:
-		//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+		//ParentRefTestChild2 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild2?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{ParentRefTestChild} "foo" child=ParentRefTestChild2?
@@ -602,8 +595,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cAttr2Assignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cAttr2IDTerminalRuleCall_2_0 = (RuleCall)cAttr2Assignment_2.eContents().get(0);
 		
-		//QuantityExclusionTest1 QuantityExclusionTest:
-		//	"kw1" attr1=ID attr2=ID?;
+		//QuantityExclusionTest1 returns QuantityExclusionTest: "kw1" attr1=ID attr2=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" attr1=ID attr2=ID?
@@ -633,8 +625,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cAttr2Assignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cAttr2IDTerminalRuleCall_2_0 = (RuleCall)cAttr2Assignment_2.eContents().get(0);
 		
-		//QuantityExclusionTest2 QuantityExclusionTest:
-		//	"kw2" attr1=ID? attr2=ID;
+		//QuantityExclusionTest2 returns QuantityExclusionTest: "kw2" attr1=ID? attr2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" attr1=ID? attr2=ID
@@ -660,8 +651,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValValueExclusionTestEn1EnumRuleCall_0 = (RuleCall)cValAssignment.eContents().get(0);
 		
-		//ValueExclusionTest1 ValueExclusionTest:
-		//	val=ValueExclusionTestEn1;
+		//ValueExclusionTest1 returns ValueExclusionTest: val=ValueExclusionTestEn1;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val=ValueExclusionTestEn1
@@ -675,8 +665,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValValueExclusionTestEn2EnumRuleCall_0 = (RuleCall)cValAssignment.eContents().get(0);
 		
-		//ValueExclusionTest2 ValueExclusionTest:
-		//	val=ValueExclusionTestEn2;
+		//ValueExclusionTest2 returns ValueExclusionTest: val=ValueExclusionTestEn2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val=ValueExclusionTestEn2
@@ -691,14 +680,13 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final CrossReference cRefModelCrossReference_0 = (CrossReference)cRefAssignment.eContents().get(0);
 		private final RuleCall cRefModelIDTerminalRuleCall_0_1 = (RuleCall)cRefModelCrossReference_0.eContents().get(1);
 		
-		//NodeExclusion1 NodeExclusion:
-		//	ref=[Model];
+		//NodeExclusion1 returns NodeExclusion: ref=[Model|ID];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ref=[Model]
+		//ref=[Model|ID]
 		public Assignment getRefAssignment() { return cRefAssignment; }
 		
-		//[Model]
+		//[Model|ID]
 		public CrossReference getRefModelCrossReference_0() { return cRefModelCrossReference_0; }
 		
 		//ID
@@ -710,8 +698,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final CrossReference cRefModelCrossReference_0 = (CrossReference)cRefAssignment.eContents().get(0);
 		private final RuleCall cRefModelSTRINGTerminalRuleCall_0_1 = (RuleCall)cRefModelCrossReference_0.eContents().get(1);
 		
-		//NodeExclusion2 NodeExclusion:
-		//	ref=[Model|STRING];
+		//NodeExclusion2 returns NodeExclusion: ref=[Model|STRING];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ref=[Model|STRING]
@@ -729,14 +716,13 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final CrossReference cRefModelCrossReference_0 = (CrossReference)cRefAssignment.eContents().get(0);
 		private final RuleCall cRefModelIDTerminalRuleCall_0_1 = (RuleCall)cRefModelCrossReference_0.eContents().get(1);
 		
-		//NodeExclusion1List NodeExclusionList:
-		//	ref+=[Model]+;
+		//NodeExclusion1List returns NodeExclusionList: ref+=[Model|ID]+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ref+=[Model]+
+		//ref+=[Model|ID]+
 		public Assignment getRefAssignment() { return cRefAssignment; }
 		
-		//[Model]
+		//[Model|ID]
 		public CrossReference getRefModelCrossReference_0() { return cRefModelCrossReference_0; }
 		
 		//ID
@@ -748,8 +734,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final CrossReference cRefModelCrossReference_0 = (CrossReference)cRefAssignment.eContents().get(0);
 		private final RuleCall cRefModelSTRINGTerminalRuleCall_0_1 = (RuleCall)cRefModelCrossReference_0.eContents().get(1);
 		
-		//NodeExclusion2List NodeExclusionList:
-		//	ref+=[Model|STRING]+;
+		//NodeExclusion2List returns NodeExclusionList: ref+=[Model|STRING]+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ref+=[Model|STRING]+
@@ -767,14 +752,12 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final EnumLiteralDeclaration cLit0EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit0Lit0Keyword_0 = (Keyword)cLit0EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
-		//	lit0;
+		//enum ValueExclusionTestEn0 returns ValueExclusionTestEn: lit0;
 		public EnumRule getRule() { return rule; }
 		
 		//lit0
 		public EnumLiteralDeclaration getLit0EnumLiteralDeclaration() { return cLit0EnumLiteralDeclaration; }
 		
-		//"lit0"
 		public Keyword getLit0Lit0Keyword_0() { return cLit0Lit0Keyword_0; }
 	}
 	public class ValueExclusionTestEn1Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -782,14 +765,12 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
-		//	lit1;
+		//enum ValueExclusionTestEn1 returns ValueExclusionTestEn: lit1;
 		public EnumRule getRule() { return rule; }
 		
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration() { return cLit1EnumLiteralDeclaration; }
 		
-		//"lit1"
 		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
 	}
 	public class ValueExclusionTestEn2Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -797,14 +778,12 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
-		//	lit2;
+		//enum ValueExclusionTestEn2 returns ValueExclusionTestEn: lit2;
 		public EnumRule getRule() { return rule; }
 		
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration() { return cLit2EnumLiteralDeclaration; }
 		
-		//"lit2"
 		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
 	}
 	
@@ -900,12 +879,16 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//Model:
-	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=
-	//	(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
-	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2) | "#5" quantityExclusion=
-	//	(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 | ValueExclusionTest2)
-	//	| "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING nodeExclusionList=
-	//	(NodeExclusion1List | NodeExclusion2List);
+	//    ("#0" model=Model2) |
+	//    ("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) |
+	//    ("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) |
+	//    ("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) |
+	//    ("#4" parentRef=(ParentRefTest1|ParentRefTest2)) |
+	//    ("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)) |
+	//    ("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)) |
+	//    ("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2)) |
+	//    ("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))
+	//    ;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -914,8 +897,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getModelAccess().getRule();
 	}
 	
-	//Model2 Model:
-	//	{Model} "model";
+	//Model2 returns Model: {Model} "model";
 	public Model2Elements getModel2Access() {
 		return pModel2;
 	}
@@ -924,8 +906,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getModel2Access().getRule();
 	}
 	
-	//AttributeExclusionTest1 AttributeExclusionTest:
-	//	"kw1" attr1=ID;
+	//AttributeExclusionTest1 returns AttributeExclusionTest: "kw1" attr1=ID;
 	public AttributeExclusionTest1Elements getAttributeExclusionTest1Access() {
 		return pAttributeExclusionTest1;
 	}
@@ -934,8 +915,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getAttributeExclusionTest1Access().getRule();
 	}
 	
-	//AttributeExclusionTest2 AttributeExclusionTest:
-	//	"kw2" attr2=ID;
+	//AttributeExclusionTest2 returns AttributeExclusionTest: "kw2" attr2=ID;
 	public AttributeExclusionTest2Elements getAttributeExclusionTest2Access() {
 		return pAttributeExclusionTest2;
 	}
@@ -944,8 +924,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getAttributeExclusionTest2Access().getRule();
 	}
 	
-	//NestedTypeTest1 NestedTypeTest:
-	//	nested=NestedTypeChild1;
+	//NestedTypeTest1 returns NestedTypeTest:	nested=NestedTypeChild1;
 	public NestedTypeTest1Elements getNestedTypeTest1Access() {
 		return pNestedTypeTest1;
 	}
@@ -954,8 +933,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeTest1Access().getRule();
 	}
 	
-	//NestedTypeTest2 NestedTypeTest:
-	//	nested=NestedTypeChild2;
+	//NestedTypeTest2 returns NestedTypeTest:	nested=NestedTypeChild2;
 	public NestedTypeTest2Elements getNestedTypeTest2Access() {
 		return pNestedTypeTest2;
 	}
@@ -964,8 +942,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeTest2Access().getRule();
 	}
 	
-	//NestedTypeChild:
-	//	NestedTypeChild1 | NestedTypeChild2;
+	//NestedTypeChild: NestedTypeChild1| NestedTypeChild2;
 	public NestedTypeChildElements getNestedTypeChildAccess() {
 		return pNestedTypeChild;
 	}
@@ -974,8 +951,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeChildAccess().getRule();
 	}
 	
-	//NestedTypeChild1:
-	//	"kw1" val=ID;
+	//NestedTypeChild1: "kw1" val=ID;
 	public NestedTypeChild1Elements getNestedTypeChild1Access() {
 		return pNestedTypeChild1;
 	}
@@ -984,8 +960,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeChild1Access().getRule();
 	}
 	
-	//NestedTypeChild2:
-	//	"kw2" val=ID;
+	//NestedTypeChild2: "kw2" val=ID;
 	public NestedTypeChild2Elements getNestedTypeChild2Access() {
 		return pNestedTypeChild2;
 	}
@@ -994,8 +969,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeChild2Access().getRule();
 	}
 	
-	//NestedTypeRecursiveTest1 NestedTypeRecursiveTest:
-	//	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
+	//NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
 	public NestedTypeRecursiveTest1Elements getNestedTypeRecursiveTest1Access() {
 		return pNestedTypeRecursiveTest1;
 	}
@@ -1004,8 +978,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeRecursiveTest1Access().getRule();
 	}
 	
-	//NestedTypeRecursiveTest2 NestedTypeRecursiveTest:
-	//	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
+	//NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
 	public NestedTypeRecursiveTest2Elements getNestedTypeRecursiveTest2Access() {
 		return pNestedTypeRecursiveTest2;
 	}
@@ -1014,8 +987,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedTypeRecursiveTest2Access().getRule();
 	}
 	
-	//ParentRefTest1:
-	//	"kw1" child1=ParentRefTestChild1;
+	//ParentRefTest1: "kw1" child1=ParentRefTestChild1;
 	public ParentRefTest1Elements getParentRefTest1Access() {
 		return pParentRefTest1;
 	}
@@ -1024,8 +996,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getParentRefTest1Access().getRule();
 	}
 	
-	//ParentRefTest2:
-	//	"kw2" child2=ParentRefTestChild2;
+	//ParentRefTest2: "kw2" child2=ParentRefTestChild2;
 	public ParentRefTest2Elements getParentRefTest2Access() {
 		return pParentRefTest2;
 	}
@@ -1034,8 +1005,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getParentRefTest2Access().getRule();
 	}
 	
-	//ParentRefTestChild1 ParentRefTestChild:
-	//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+	//ParentRefTestChild1 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild1?;
 	public ParentRefTestChild1Elements getParentRefTestChild1Access() {
 		return pParentRefTestChild1;
 	}
@@ -1044,8 +1014,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getParentRefTestChild1Access().getRule();
 	}
 	
-	//ParentRefTestChild2 ParentRefTestChild:
-	//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+	//ParentRefTestChild2 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild2?;
 	public ParentRefTestChild2Elements getParentRefTestChild2Access() {
 		return pParentRefTestChild2;
 	}
@@ -1054,8 +1023,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getParentRefTestChild2Access().getRule();
 	}
 	
-	//QuantityExclusionTest1 QuantityExclusionTest:
-	//	"kw1" attr1=ID attr2=ID?;
+	//QuantityExclusionTest1 returns QuantityExclusionTest: "kw1" attr1=ID attr2=ID?;
 	public QuantityExclusionTest1Elements getQuantityExclusionTest1Access() {
 		return pQuantityExclusionTest1;
 	}
@@ -1064,8 +1032,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getQuantityExclusionTest1Access().getRule();
 	}
 	
-	//QuantityExclusionTest2 QuantityExclusionTest:
-	//	"kw2" attr1=ID? attr2=ID;
+	//QuantityExclusionTest2 returns QuantityExclusionTest: "kw2" attr1=ID? attr2=ID;
 	public QuantityExclusionTest2Elements getQuantityExclusionTest2Access() {
 		return pQuantityExclusionTest2;
 	}
@@ -1074,8 +1041,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getQuantityExclusionTest2Access().getRule();
 	}
 	
-	//ValueExclusionTest1 ValueExclusionTest:
-	//	val=ValueExclusionTestEn1;
+	//ValueExclusionTest1 returns ValueExclusionTest: val=ValueExclusionTestEn1;
 	public ValueExclusionTest1Elements getValueExclusionTest1Access() {
 		return pValueExclusionTest1;
 	}
@@ -1084,8 +1050,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getValueExclusionTest1Access().getRule();
 	}
 	
-	//ValueExclusionTest2 ValueExclusionTest:
-	//	val=ValueExclusionTestEn2;
+	//ValueExclusionTest2 returns ValueExclusionTest: val=ValueExclusionTestEn2;
 	public ValueExclusionTest2Elements getValueExclusionTest2Access() {
 		return pValueExclusionTest2;
 	}
@@ -1094,8 +1059,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getValueExclusionTest2Access().getRule();
 	}
 	
-	//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
-	//	lit0;
+	//enum ValueExclusionTestEn0 returns ValueExclusionTestEn: lit0;
 	public ValueExclusionTestEn0Elements getValueExclusionTestEn0Access() {
 		return eValueExclusionTestEn0;
 	}
@@ -1104,8 +1068,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getValueExclusionTestEn0Access().getRule();
 	}
 	
-	//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
-	//	lit1;
+	//enum ValueExclusionTestEn1 returns ValueExclusionTestEn: lit1;
 	public ValueExclusionTestEn1Elements getValueExclusionTestEn1Access() {
 		return eValueExclusionTestEn1;
 	}
@@ -1114,8 +1077,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getValueExclusionTestEn1Access().getRule();
 	}
 	
-	//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
-	//	lit2;
+	//enum ValueExclusionTestEn2 returns ValueExclusionTestEn: lit2;
 	public ValueExclusionTestEn2Elements getValueExclusionTestEn2Access() {
 		return eValueExclusionTestEn2;
 	}
@@ -1124,8 +1086,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getValueExclusionTestEn2Access().getRule();
 	}
 	
-	//NodeExclusion1 NodeExclusion:
-	//	ref=[Model];
+	//NodeExclusion1 returns NodeExclusion: ref=[Model|ID];
 	public NodeExclusion1Elements getNodeExclusion1Access() {
 		return pNodeExclusion1;
 	}
@@ -1134,8 +1095,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNodeExclusion1Access().getRule();
 	}
 	
-	//NodeExclusion2 NodeExclusion:
-	//	ref=[Model|STRING];
+	//NodeExclusion2 returns NodeExclusion: ref=[Model|STRING];
 	public NodeExclusion2Elements getNodeExclusion2Access() {
 		return pNodeExclusion2;
 	}
@@ -1144,8 +1104,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNodeExclusion2Access().getRule();
 	}
 	
-	//NodeExclusion1List NodeExclusionList:
-	//	ref+=[Model]+;
+	//NodeExclusion1List returns NodeExclusionList: ref+=[Model|ID]+;
 	public NodeExclusion1ListElements getNodeExclusion1ListAccess() {
 		return pNodeExclusion1List;
 	}
@@ -1154,8 +1113,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNodeExclusion1ListAccess().getRule();
 	}
 	
-	//NodeExclusion2List NodeExclusionList:
-	//	ref+=[Model|STRING]+;
+	//NodeExclusion2List returns NodeExclusionList: ref+=[Model|STRING]+;
 	public NodeExclusion2ListElements getNodeExclusion2ListAccess() {
 		return pNodeExclusion2List;
 	}
@@ -1164,45 +1122,40 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNodeExclusion2ListAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

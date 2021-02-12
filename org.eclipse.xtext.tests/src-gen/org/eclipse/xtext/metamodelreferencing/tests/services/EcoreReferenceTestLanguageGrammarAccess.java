@@ -35,9 +35,10 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cExtendsExtendsResourceEObjectParserRuleCall_2_0 = (RuleCall)cExtendsAssignment_2.eContents().get(0);
 		
 		//Model:
-		//	extends+=ExtendsNsURIEObject
-		//	extends+=ExtendsPluginEObject
-		//	extends+=ExtendsResourceEObject;
+		//    extends+=ExtendsNsURIEObject
+		//    extends+=ExtendsPluginEObject
+		//    extends+=ExtendsResourceEObject
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//extends+=ExtendsNsURIEObject
@@ -118,28 +119,49 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cEObjectContainmentMyEAttributeParserRuleCall_3_10_0 = (RuleCall)cEObjectContainmentAssignment_3_10.eContents().get(0);
 		
 		//ExtendsNsURIEObject:
-		//	'ExtendsNsURIEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-		//	eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//	?
-		//	eObjectContainment+=ExtendsPluginEObject?
-		//	eObjectContainment+=ExtendsResourceEObject?
-		//	eObjectContainment+=EObject
-		//	eObjectContainment+=EAttribute
-		//	eObjectContainment+=MyEAttribute)?;
+		//    'ExtendsNsURIEObject' name=ValidID
+		//    (
+		//      'EObject' eObjectReference1=[EObject]
+		//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//    )
+		//    (
+		//        'ExtendsPluginEObject'
+		//        eAttributeReference=[MyEAttribute]
+		//        eObjectReference2=[ExtendsNsURIEObject]
+		//        eObjectReference3=[ExtendsPluginEObject]
+		//        eObjectReference4=[ExtendsResourceEObject]
+		//        eObjectContainment+=ExtendsNsURIEObject?
+		//        eObjectContainment+=ExtendsPluginEObject?
+		//        eObjectContainment+=ExtendsResourceEObject?
+		//        eObjectContainment+=EObject
+		//        eObjectContainment+=EAttribute
+		//        eObjectContainment+=MyEAttribute
+		//    )?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ExtendsNsURIEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-		//eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//?
-		//eObjectContainment+=ExtendsPluginEObject?
-		//eObjectContainment+=ExtendsResourceEObject?
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//'ExtendsNsURIEObject' name=ValidID
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
+		//(
+		//    'ExtendsPluginEObject'
+		//    eAttributeReference=[MyEAttribute]
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject?
+		//    eObjectContainment+=ExtendsPluginEObject?
+		//    eObjectContainment+=ExtendsResourceEObject?
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup() { return cGroup; }
 		
 		//'ExtendsNsURIEObject'
@@ -151,9 +173,12 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 		
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
-		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'EObject' eObjectReference1=[EObject]
@@ -216,14 +241,19 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ID
 		public RuleCall getEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1() { return cEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1; }
 		
-		//('ExtendsPluginEObject'
-		//eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//?
-		//eObjectContainment+=ExtendsPluginEObject?
-		//eObjectContainment+=ExtendsResourceEObject?
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//(
+		//    'ExtendsPluginEObject'
+		//    eAttributeReference=[MyEAttribute]
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject?
+		//    eObjectContainment+=ExtendsPluginEObject?
+		//    eObjectContainment+=ExtendsResourceEObject?
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'ExtendsPluginEObject'
@@ -308,7 +338,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Keyword cMyEAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//MyEAttribute:
-		//	{MyEAttribute} 'MyEAttribute';
+		//    {MyEAttribute} 'MyEAttribute'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{MyEAttribute} 'MyEAttribute'
@@ -327,7 +358,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Keyword cEAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//EAttribute:
-		//	{EAttribute} 'EAttribute';
+		//    {EAttribute} 'EAttribute'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EAttribute} 'EAttribute'
@@ -391,28 +423,47 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cEObjectContainmentMyEAttributeParserRuleCall_3_9_0 = (RuleCall)cEObjectContainmentAssignment_3_9.eContents().get(0);
 		
 		//ExtendsPluginEObject:
-		//	'ExtendsPluginEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-		//	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//	?
-		//	eObjectContainment+=ExtendsPluginEObject?
-		//	eObjectContainment+=ExtendsResourceEObject?
-		//	eObjectContainment+=EObject
-		//	eObjectContainment+=EAttribute
-		//	eObjectContainment+=MyEAttribute)?;
+		//    'ExtendsPluginEObject' name=ValidID
+		//    (
+		//      'EObject' eObjectReference1=[EObject]
+		//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//    )
+		//    (
+		//        'ExtendsPluginEObject'
+		//        eObjectReference2=[ExtendsNsURIEObject]
+		//        eObjectReference3=[ExtendsPluginEObject]
+		//        eObjectReference4=[ExtendsResourceEObject]
+		//        eObjectContainment+=ExtendsNsURIEObject?
+		//        eObjectContainment+=ExtendsPluginEObject?
+		//        eObjectContainment+=ExtendsResourceEObject?
+		//        eObjectContainment+=EObject
+		//        eObjectContainment+=EAttribute
+		//        eObjectContainment+=MyEAttribute
+		//    )?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ExtendsPluginEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-		//eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//?
-		//eObjectContainment+=ExtendsPluginEObject?
-		//eObjectContainment+=ExtendsResourceEObject?
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//'ExtendsPluginEObject' name=ValidID
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
+		//(
+		//    'ExtendsPluginEObject'
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject?
+		//    eObjectContainment+=ExtendsPluginEObject?
+		//    eObjectContainment+=ExtendsResourceEObject?
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup() { return cGroup; }
 		
 		//'ExtendsPluginEObject'
@@ -424,9 +475,12 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 		
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
-		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'EObject' eObjectReference1=[EObject]
@@ -489,14 +543,18 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ID
 		public RuleCall getEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1() { return cEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1; }
 		
-		//('ExtendsPluginEObject'
-		//eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//?
-		//eObjectContainment+=ExtendsPluginEObject?
-		//eObjectContainment+=ExtendsResourceEObject?
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//(
+		//    'ExtendsPluginEObject'
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject?
+		//    eObjectContainment+=ExtendsPluginEObject?
+		//    eObjectContainment+=ExtendsResourceEObject?
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'ExtendsPluginEObject'
@@ -572,17 +630,18 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Unused_01 ExtendsNsURIEObject:
-		//	{MyNamedElement_01} name=ValidID;
+		//Unused_01 returns ExtendsNsURIEObject:
+		//    {MyNamedElement_01} name = ValidID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MyNamedElement_01} name=ValidID
+		//{MyNamedElement_01} name = ValidID
 		public Group getGroup() { return cGroup; }
 		
 		//{MyNamedElement_01}
 		public Action getMyNamedElement_01Action_0() { return cMyNamedElement_01Action_0; }
 		
-		//name=ValidID
+		//name = ValidID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ValidID
@@ -595,17 +654,18 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Unused_02 ExtendsResourceEObject:
-		//	{MyNamedElement_02} name=ValidID;
+		//Unused_02 returns ExtendsResourceEObject:
+		//    {MyNamedElement_02} name = ValidID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MyNamedElement_02} name=ValidID
+		//{MyNamedElement_02} name = ValidID
 		public Group getGroup() { return cGroup; }
 		
 		//{MyNamedElement_02}
 		public Action getMyNamedElement_02Action_0() { return cMyNamedElement_02Action_0; }
 		
-		//name=ValidID
+		//name = ValidID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ValidID
@@ -618,17 +678,18 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Unused_03 ExtendsPluginEObject:
-		//	{MyNamedElement_03} name=ValidID;
+		//Unused_03 returns ExtendsPluginEObject:
+		//    {MyNamedElement_03} name = ValidID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MyNamedElement_03} name=ValidID
+		//{MyNamedElement_03} name = ValidID
 		public Group getGroup() { return cGroup; }
 		
 		//{MyNamedElement_03}
 		public Action getMyNamedElement_03Action_0() { return cMyNamedElement_03Action_0; }
 		
-		//name=ValidID
+		//name = ValidID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ValidID
@@ -686,26 +747,47 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cEObjectContainmentMyEAttributeParserRuleCall_3_9_0 = (RuleCall)cEObjectContainmentAssignment_3_9.eContents().get(0);
 		
 		//ExtendsResourceEObject:
-		//	'ExtendsResourceEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsResourceEObject'
-		//	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//	eObjectContainment+=ExtendsPluginEObject
-		//	eObjectContainment+=ExtendsResourceEObject
-		//	eObjectContainment+=EObject
-		//	eObjectContainment+=EAttribute
-		//	eObjectContainment+=MyEAttribute)?;
+		//    'ExtendsResourceEObject' name=ValidID
+		//    (
+		//      'EObject' eObjectReference1=[EObject]
+		//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//    )
+		//    (
+		//        'ExtendsResourceEObject'
+		//        eObjectReference2=[ExtendsNsURIEObject]
+		//        eObjectReference3=[ExtendsPluginEObject]
+		//        eObjectReference4=[ExtendsResourceEObject]
+		//        eObjectContainment+=ExtendsNsURIEObject
+		//        eObjectContainment+=ExtendsPluginEObject
+		//        eObjectContainment+=ExtendsResourceEObject
+		//        eObjectContainment+=EObject
+		//        eObjectContainment+=EAttribute
+		//        eObjectContainment+=MyEAttribute
+		//    )?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ExtendsResourceEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-		//eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-		//'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsResourceEObject'
-		//eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//eObjectContainment+=ExtendsPluginEObject
-		//eObjectContainment+=ExtendsResourceEObject
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//'ExtendsResourceEObject' name=ValidID
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
+		//(
+		//    'ExtendsResourceEObject'
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject
+		//    eObjectContainment+=ExtendsPluginEObject
+		//    eObjectContainment+=ExtendsResourceEObject
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup() { return cGroup; }
 		
 		//'ExtendsResourceEObject'
@@ -717,9 +799,12 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 		
-		//('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
-		//'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
-		//eObjectReference1=[ExtendsResourceEObject])
+		//(
+		//  'EObject' eObjectReference1=[EObject]
+		//| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+		//| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+		//| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+		//)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'EObject' eObjectReference1=[EObject]
@@ -782,13 +867,18 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		//ID
 		public RuleCall getEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1() { return cEObjectReference1ExtendsResourceEObjectIDTerminalRuleCall_2_3_1_0_1; }
 		
-		//('ExtendsResourceEObject'
-		//eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-		//eObjectContainment+=ExtendsPluginEObject
-		//eObjectContainment+=ExtendsResourceEObject
-		//eObjectContainment+=EObject
-		//eObjectContainment+=EAttribute
-		//eObjectContainment+=MyEAttribute)?
+		//(
+		//    'ExtendsResourceEObject'
+		//    eObjectReference2=[ExtendsNsURIEObject]
+		//    eObjectReference3=[ExtendsPluginEObject]
+		//    eObjectReference4=[ExtendsResourceEObject]
+		//    eObjectContainment+=ExtendsNsURIEObject
+		//    eObjectContainment+=ExtendsPluginEObject
+		//    eObjectContainment+=ExtendsResourceEObject
+		//    eObjectContainment+=EObject
+		//    eObjectContainment+=EAttribute
+		//    eObjectContainment+=MyEAttribute
+		//)?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'ExtendsResourceEObject'
@@ -864,7 +954,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final Keyword cObjectKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//EObject:
-		//	{EObject} 'object';
+		//    {EObject} 'object'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{EObject} 'object'
@@ -880,8 +971,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ValidID");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ValidID:
-		//	ID;
+		//ValidID returns EString:
+		//    ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID
@@ -951,9 +1043,10 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 
 	
 	//Model:
-	//	extends+=ExtendsNsURIEObject
-	//	extends+=ExtendsPluginEObject
-	//	extends+=ExtendsResourceEObject;
+	//    extends+=ExtendsNsURIEObject
+	//    extends+=ExtendsPluginEObject
+	//    extends+=ExtendsResourceEObject
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -963,16 +1056,27 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//ExtendsNsURIEObject:
-	//	'ExtendsNsURIEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-	//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-	//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-	//	eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-	//	?
-	//	eObjectContainment+=ExtendsPluginEObject?
-	//	eObjectContainment+=ExtendsResourceEObject?
-	//	eObjectContainment+=EObject
-	//	eObjectContainment+=EAttribute
-	//	eObjectContainment+=MyEAttribute)?;
+	//    'ExtendsNsURIEObject' name=ValidID
+	//    (
+	//      'EObject' eObjectReference1=[EObject]
+	//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+	//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	//    )
+	//    (
+	//        'ExtendsPluginEObject'
+	//        eAttributeReference=[MyEAttribute]
+	//        eObjectReference2=[ExtendsNsURIEObject]
+	//        eObjectReference3=[ExtendsPluginEObject]
+	//        eObjectReference4=[ExtendsResourceEObject]
+	//        eObjectContainment+=ExtendsNsURIEObject?
+	//        eObjectContainment+=ExtendsPluginEObject?
+	//        eObjectContainment+=ExtendsResourceEObject?
+	//        eObjectContainment+=EObject
+	//        eObjectContainment+=EAttribute
+	//        eObjectContainment+=MyEAttribute
+	//    )?
+	//;
 	public ExtendsNsURIEObjectElements getExtendsNsURIEObjectAccess() {
 		return pExtendsNsURIEObject;
 	}
@@ -982,7 +1086,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//MyEAttribute:
-	//	{MyEAttribute} 'MyEAttribute';
+	//    {MyEAttribute} 'MyEAttribute'
+	//;
 	public MyEAttributeElements getMyEAttributeAccess() {
 		return pMyEAttribute;
 	}
@@ -992,7 +1097,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//EAttribute:
-	//	{EAttribute} 'EAttribute';
+	//    {EAttribute} 'EAttribute'
+	//;
 	public EAttributeElements getEAttributeAccess() {
 		return pEAttribute;
 	}
@@ -1002,16 +1108,26 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//ExtendsPluginEObject:
-	//	'ExtendsPluginEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-	//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-	//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
-	//	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-	//	?
-	//	eObjectContainment+=ExtendsPluginEObject?
-	//	eObjectContainment+=ExtendsResourceEObject?
-	//	eObjectContainment+=EObject
-	//	eObjectContainment+=EAttribute
-	//	eObjectContainment+=MyEAttribute)?;
+	//    'ExtendsPluginEObject' name=ValidID
+	//    (
+	//      'EObject' eObjectReference1=[EObject]
+	//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+	//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	//    )
+	//    (
+	//        'ExtendsPluginEObject'
+	//        eObjectReference2=[ExtendsNsURIEObject]
+	//        eObjectReference3=[ExtendsPluginEObject]
+	//        eObjectReference4=[ExtendsResourceEObject]
+	//        eObjectContainment+=ExtendsNsURIEObject?
+	//        eObjectContainment+=ExtendsPluginEObject?
+	//        eObjectContainment+=ExtendsResourceEObject?
+	//        eObjectContainment+=EObject
+	//        eObjectContainment+=EAttribute
+	//        eObjectContainment+=MyEAttribute
+	//    )?
+	//;
 	public ExtendsPluginEObjectElements getExtendsPluginEObjectAccess() {
 		return pExtendsPluginEObject;
 	}
@@ -1020,8 +1136,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		return getExtendsPluginEObjectAccess().getRule();
 	}
 	
-	//Unused_01 ExtendsNsURIEObject:
-	//	{MyNamedElement_01} name=ValidID;
+	//Unused_01 returns ExtendsNsURIEObject:
+	//    {MyNamedElement_01} name = ValidID
+	//;
 	public Unused_01Elements getUnused_01Access() {
 		return pUnused_01;
 	}
@@ -1030,8 +1147,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		return getUnused_01Access().getRule();
 	}
 	
-	//Unused_02 ExtendsResourceEObject:
-	//	{MyNamedElement_02} name=ValidID;
+	//Unused_02 returns ExtendsResourceEObject:
+	//    {MyNamedElement_02} name = ValidID
+	//;
 	public Unused_02Elements getUnused_02Access() {
 		return pUnused_02;
 	}
@@ -1040,8 +1158,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		return getUnused_02Access().getRule();
 	}
 	
-	//Unused_03 ExtendsPluginEObject:
-	//	{MyNamedElement_03} name=ValidID;
+	//Unused_03 returns ExtendsPluginEObject:
+	//    {MyNamedElement_03} name = ValidID
+	//;
 	public Unused_03Elements getUnused_03Access() {
 		return pUnused_03;
 	}
@@ -1051,15 +1170,26 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//ExtendsResourceEObject:
-	//	'ExtendsResourceEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
-	//	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
-	//	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsResourceEObject'
-	//	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
-	//	eObjectContainment+=ExtendsPluginEObject
-	//	eObjectContainment+=ExtendsResourceEObject
-	//	eObjectContainment+=EObject
-	//	eObjectContainment+=EAttribute
-	//	eObjectContainment+=MyEAttribute)?;
+	//    'ExtendsResourceEObject' name=ValidID
+	//    (
+	//      'EObject' eObjectReference1=[EObject]
+	//    | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
+	//    | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	//    | 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	//    )
+	//    (
+	//        'ExtendsResourceEObject'
+	//        eObjectReference2=[ExtendsNsURIEObject]
+	//        eObjectReference3=[ExtendsPluginEObject]
+	//        eObjectReference4=[ExtendsResourceEObject]
+	//        eObjectContainment+=ExtendsNsURIEObject
+	//        eObjectContainment+=ExtendsPluginEObject
+	//        eObjectContainment+=ExtendsResourceEObject
+	//        eObjectContainment+=EObject
+	//        eObjectContainment+=EAttribute
+	//        eObjectContainment+=MyEAttribute
+	//    )?
+	//;
 	public ExtendsResourceEObjectElements getExtendsResourceEObjectAccess() {
 		return pExtendsResourceEObject;
 	}
@@ -1069,7 +1199,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//EObject:
-	//	{EObject} 'object';
+	//    {EObject} 'object'
+	//;
 	public EObjectElements getEObjectAccess() {
 		return pEObject;
 	}
@@ -1078,8 +1209,9 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		return getEObjectAccess().getRule();
 	}
 	
-	//ValidID:
-	//	ID;
+	//ValidID returns EString:
+	//    ID
+	//;
 	public ValidIDElements getValidIDAccess() {
 		return pValidID;
 	}
@@ -1088,45 +1220,40 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractElementFind
 		return getValidIDAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

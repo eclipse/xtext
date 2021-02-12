@@ -45,13 +45,13 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TypeDeclaration:
-		//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-		//	properties+=Property*
-		//	'}';
+		//    'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
+		//       properties+=Property*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-		//properties+=Property*
+		//   properties+=Property*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -102,7 +102,8 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Property:
-		//	type=("int" | "bool") name=ID;
+		//    type=("int" | "bool") name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type=("int" | "bool") name=ID
@@ -172,9 +173,9 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 
 	
 	//TypeDeclaration:
-	//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-	//	properties+=Property*
-	//	'}';
+	//    'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
+	//       properties+=Property*
+	//    '}';
 	public TypeDeclarationElements getTypeDeclarationAccess() {
 		return pTypeDeclaration;
 	}
@@ -184,7 +185,8 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//Property:
-	//	type=("int" | "bool") name=ID;
+	//    type=("int" | "bool") name=ID
+	//;
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -193,45 +195,40 @@ public class PartialContentAssistTestLanguageGrammarAccess extends AbstractEleme
 		return getPropertyAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

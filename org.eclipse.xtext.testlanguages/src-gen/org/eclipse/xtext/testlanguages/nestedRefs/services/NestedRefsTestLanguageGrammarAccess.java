@@ -28,10 +28,10 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final RuleCall cDeclarationsSelfReferingDeclParserRuleCall_0 = (RuleCall)cDeclarationsAssignment.eContents().get(0);
 		
 		//Doc:
-		//	declarations+=SelfReferingDecl*;
+		//    (declarations += SelfReferingDecl)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//declarations+=SelfReferingDecl*
+		//(declarations += SelfReferingDecl)*
 		public Assignment getDeclarationsAssignment() { return cDeclarationsAssignment; }
 		
 		//SelfReferingDecl
@@ -50,7 +50,7 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//SelfReferingDecl:
-		//	'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';';
+		//    'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';'
@@ -89,7 +89,7 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ('.' ID)*;
+		//    ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ('.' ID)*
@@ -155,7 +155,7 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 
 	
 	//Doc:
-	//	declarations+=SelfReferingDecl*;
+	//    (declarations += SelfReferingDecl)*;
 	public DocElements getDocAccess() {
 		return pDoc;
 	}
@@ -165,7 +165,7 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//SelfReferingDecl:
-	//	'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';';
+	//    'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';';
 	public SelfReferingDeclElements getSelfReferingDeclAccess() {
 		return pSelfReferingDecl;
 	}
@@ -175,7 +175,7 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//QualifiedName:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -184,45 +184,40 @@ public class NestedRefsTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

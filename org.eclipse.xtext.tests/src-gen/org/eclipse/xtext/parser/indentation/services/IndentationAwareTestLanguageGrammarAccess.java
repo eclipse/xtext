@@ -30,13 +30,15 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cMoreNodesAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cMoreNodesOtherTreeNodeParserRuleCall_2_0 = (RuleCall)cMoreNodesAssignment_2.eContents().get(0);
 		
-		//Tree:
-		//	{Tree} nodes+=TreeNode*
-		//	moreNodes+=OtherTreeNode*;
+		//Tree: {Tree}
+		//    nodes+=TreeNode*
+		//    moreNodes+=OtherTreeNode*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Tree} nodes+=TreeNode*
-		//moreNodes+=OtherTreeNode*
+		//{Tree}
+		//   nodes+=TreeNode*
+		//   moreNodes+=OtherTreeNode*
 		public Group getGroup() { return cGroup; }
 		
 		//{Tree}
@@ -66,13 +68,16 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cDEDENTTerminalRuleCall_1_2 = (RuleCall)cGroup_1.eContents().get(2);
 		
 		//TreeNode:
-		//	name=ID (INDENT
-		//	children+=TreeNode*
-		//	DEDENT)?;
+		//    name=ID
+		//    (INDENT
+		//        children+=TreeNode*
+		//    DEDENT)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID (INDENT
-		//children+=TreeNode*
+		//name=ID
+		//(INDENT
+		//    children+=TreeNode*
 		//DEDENT)?
 		public Group getGroup() { return cGroup; }
 		
@@ -83,7 +88,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
 		//(INDENT
-		//children+=TreeNode*
+		//    children+=TreeNode*
 		//DEDENT)?
 		public Group getGroup_1() { return cGroup_1; }
 		
@@ -108,12 +113,13 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cChildListChildListParserRuleCall_1_0 = (RuleCall)cChildListAssignment_1.eContents().get(0);
 		
 		//OtherTreeNode:
-		//	name=STRING
-		//	childList=ChildList?;
+		//    name=STRING
+		//    childList = ChildList?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=STRING
-		//childList=ChildList?
+		//childList = ChildList?
 		public Group getGroup() { return cGroup; }
 		
 		//name=STRING
@@ -122,7 +128,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_0_0() { return cNameSTRINGTerminalRuleCall_0_0; }
 		
-		//childList=ChildList?
+		//childList = ChildList?
 		public Assignment getChildListAssignment_1() { return cChildListAssignment_1; }
 		
 		//ChildList
@@ -137,15 +143,17 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cChildrenOtherTreeNodeParserRuleCall_2_0 = (RuleCall)cChildrenAssignment_2.eContents().get(0);
 		private final RuleCall cDEDENTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//ChildList:
-		//	{ChildList} INDENT
-		//	children+=OtherTreeNode+
-		//	DEDENT;
+		//ChildList: {ChildList}
+		//    INDENT
+		//        children+=OtherTreeNode+
+		//    DEDENT
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ChildList} INDENT
-		//children+=OtherTreeNode+
-		//DEDENT
+		//{ChildList}
+		//   INDENT
+		//       children+=OtherTreeNode+
+		//   DEDENT
 		public Group getGroup() { return cGroup; }
 		
 		//{ChildList}
@@ -218,9 +226,10 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 	}
 
 	
-	//Tree:
-	//	{Tree} nodes+=TreeNode*
-	//	moreNodes+=OtherTreeNode*;
+	//Tree: {Tree}
+	//    nodes+=TreeNode*
+	//    moreNodes+=OtherTreeNode*
+	//;
 	public TreeElements getTreeAccess() {
 		return pTree;
 	}
@@ -230,9 +239,11 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//TreeNode:
-	//	name=ID (INDENT
-	//	children+=TreeNode*
-	//	DEDENT)?;
+	//    name=ID
+	//    (INDENT
+	//        children+=TreeNode*
+	//    DEDENT)?
+	//;
 	public TreeNodeElements getTreeNodeAccess() {
 		return pTreeNode;
 	}
@@ -242,8 +253,9 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//OtherTreeNode:
-	//	name=STRING
-	//	childList=ChildList?;
+	//    name=STRING
+	//    childList = ChildList?
+	//;
 	public OtherTreeNodeElements getOtherTreeNodeAccess() {
 		return pOtherTreeNode;
 	}
@@ -252,10 +264,11 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 		return getOtherTreeNodeAccess().getRule();
 	}
 	
-	//ChildList:
-	//	{ChildList} INDENT
-	//	children+=OtherTreeNode+
-	//	DEDENT;
+	//ChildList: {ChildList}
+	//    INDENT
+	//        children+=OtherTreeNode+
+	//    DEDENT
+	//;
 	public ChildListElements getChildListAccess() {
 		return pChildList;
 	}
@@ -265,57 +278,50 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//@Override
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')*;
+	//terminal SL_COMMENT: '//' !('\n'|'\r')*;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}
 	
-	//terminal INDENT:
-	//	'synthetic:INDENT';
+	//terminal INDENT: 'synthetic:INDENT';
 	public TerminalRule getINDENTRule() {
 		return tINDENT;
 	}
 	
-	//terminal DEDENT:
-	//	'synthetic:DEDENT';
+	//terminal DEDENT: 'synthetic:DEDENT';
 	public TerminalRule getDEDENTRule() {
 		return tDEDENT;
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

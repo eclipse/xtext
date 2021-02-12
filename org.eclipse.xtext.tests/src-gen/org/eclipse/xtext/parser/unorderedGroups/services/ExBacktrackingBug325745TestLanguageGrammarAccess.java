@@ -22,8 +22,9 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.ExBacktrackingBug325745TestLanguage.DelegateModel");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//DelegateModel Model:
-		//	Model;
+		//DelegateModel returns Model:
+		//    Model
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Model
@@ -80,8 +81,9 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 	}
 
 	
-	//DelegateModel Model:
-	//	Model;
+	//DelegateModel returns Model:
+	//    Model
+	//;
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}
@@ -91,7 +93,9 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 	}
 	
 	//Model:
-	//	{Model} fields+=Element+;
+	//    {Model}
+	//    (fields+=Element)+
+	//;
 	public BacktrackingBug325745TestLanguageGrammarAccess.ModelElements getModelAccess() {
 		return gaBacktrackingBug325745TestLanguage.getModelAccess();
 	}
@@ -100,10 +104,12 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	name=ID
-	//	dataType=DataType?
-	//	expression=Expression '.';
+	//Element :
+	//    name=ID
+	//    (dataType=DataType)?
+	//    (expression=Expression)
+	//    '.'
+	//;
 	public BacktrackingBug325745TestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaBacktrackingBug325745TestLanguage.getElementAccess();
 	}
@@ -112,8 +118,9 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 		return getElementAccess().getRule();
 	}
 	
-	//DataType:
-	//	baseType=ID (':=' defaultValue=STRING)?;
+	//DataType :
+	//    (baseType=ID (':=' defaultValue=STRING)?)
+	//;
 	public BacktrackingBug325745TestLanguageGrammarAccess.DataTypeElements getDataTypeAccess() {
 		return gaBacktrackingBug325745TestLanguage.getDataTypeAccess();
 	}
@@ -123,7 +130,11 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 	}
 	
 	//Expression:
-	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
+	//  {Expression}
+	//  ('['? & prefix=STRING?)
+	//  ('['? terms+=SimpleTerm ']'?)*
+	//  (']'? & postfix=STRING?)
+	//;
 	public BacktrackingBug325745TestLanguageGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaBacktrackingBug325745TestLanguage.getExpressionAccess();
 	}
@@ -133,11 +144,12 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 	}
 	
 	//SimpleTerm:
-	//	lineCount=INT
-	//	'*'?
-	//	charCount=INT?
-	//	'!'?
-	//	charSet=ID? | refChar=ID;
+	//  (lineCount=INT
+	//  '*'?
+	//  (charCount=INT)?
+	//  '!'?
+	//  (charSet=ID)?) | refChar=ID
+	//;
 	public BacktrackingBug325745TestLanguageGrammarAccess.SimpleTermElements getSimpleTermAccess() {
 		return gaBacktrackingBug325745TestLanguage.getSimpleTermAccess();
 	}
@@ -146,45 +158,40 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractEl
 		return getSimpleTermAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

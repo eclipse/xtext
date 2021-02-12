@@ -86,20 +86,18 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cX28Heuristic1ParserRuleCall_27_0 = (RuleCall)cX28Assignment_27.eContents().get(0);
 		
 		//Model:
-		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
-		//	x5=AlternativeMultiplicities | x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 |
-		//	x9=UnassignedAction2 | x10=UnassignedAction3 | x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1
-		//	| x14=Combination2 | x15=Combination3 | x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5
-		//	| x22=AltList1 | x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification |
-		//	x27=TwoVersion | x28=Heuristic1;
+		//    x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
+		//    x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 |
+		//    x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 |
+		//    x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+		//    x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion | x28=Heuristic1;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
-		//x5=AlternativeMultiplicities | x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2
-		//| x10=UnassignedAction3 | x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 |
-		//x15=Combination3 | x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 |
-		//x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion |
-		//x28=Heuristic1
+		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
+		//x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 |
+		//x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 |
+		//x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+		//x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion | x28=Heuristic1
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//x1=SimpleGroup
@@ -280,7 +278,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_2_0 = (RuleCall)cVal2Assignment_2.eContents().get(0);
 		
 		//SimpleGroup:
-		//	"#1" val1=ID val2=ID;
+		//    "#1" val1=ID val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#1" val1=ID val2=ID
@@ -316,7 +314,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_1_1_1_0 = (RuleCall)cVal2Assignment_1_1_1.eContents().get(0);
 		
 		//SimpleAlternative:
-		//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
+		//    "#2" ("kw1" val1=ID | "kw2" val2=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#2" ("kw1" val1=ID | "kw2" val2=ID)
@@ -369,7 +367,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal4IDTerminalRuleCall_7_0 = (RuleCall)cVal4Assignment_7.eContents().get(0);
 		
 		//SimpleMultiplicities:
-		//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
+		//    "#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*
@@ -437,7 +435,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal7IDTerminalRuleCall_7_1_0 = (RuleCall)cVal7Assignment_7_1.eContents().get(0);
 		
 		//GroupMultiplicities:
-		//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
+		//    "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*
@@ -535,10 +533,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal7IDTerminalRuleCall_5_1_1_0 = (RuleCall)cVal7Assignment_5_1_1.eContents().get(0);
 		
 		//AlternativeMultiplicities:
-		//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
+		//    "#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | ("kw5" val7+=ID))*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*
+		//"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | ("kw5" val7+=ID))*
 		public Group getGroup() { return cGroup; }
 		
 		//"#5"
@@ -592,7 +590,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//"kw4"
 		public Keyword getKw4Keyword_4() { return cKw4Keyword_4; }
 		
-		//(val6+=ID | "kw5" val7+=ID)*
+		//(val6+=ID | ("kw5" val7+=ID))*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 		
 		//val6+=ID
@@ -601,7 +599,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getVal6IDTerminalRuleCall_5_0_0() { return cVal6IDTerminalRuleCall_5_0_0; }
 		
-		//"kw5" val7+=ID
+		//("kw5" val7+=ID)
 		public Group getGroup_5_1() { return cGroup_5_1; }
 		
 		//"kw5"
@@ -625,7 +623,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal1IDTerminalRuleCall_2_1_0 = (RuleCall)cVal1Assignment_2_1.eContents().get(0);
 		
 		//AssignedAction:
-		//	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
+		//    "#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#6" val1=ID ({AssignedAction.child=current} val1=ID)+
@@ -662,8 +660,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cVal2Assignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
-		//AssignedActionSecond AssignedAction:
-		//	"#7" val1=ID "kw1" val2=ID;
+		//AssignedActionSecond returns AssignedAction:
+		//    "#7" val1=ID "kw1" val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#7" val1=ID "kw1" val2=ID
@@ -698,7 +696,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
 		//UnassignedAction1:
-		//	{UnassignedAction1} "#8" val1=ID val2=ID?;
+		//    {UnassignedAction1} "#8" val1=ID val2=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{UnassignedAction1} "#8" val1=ID val2=ID?
@@ -733,7 +731,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
 		//UnassignedAction2:
-		//	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
+		//    {UnassignedAction2Sub} "#9" val1=ID val2=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{UnassignedAction2Sub} "#9" val1=ID val2=ID?
@@ -774,16 +772,16 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
 		//UnassignedAction3:
-		//	"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
+		//    "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?
+		//"#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?
 		public Group getGroup() { return cGroup; }
 		
 		//"#10"
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_0() { return cNumberSignDigitOneDigitZeroKeyword_0; }
 		
-		//("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2})
+		//("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2})
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1" {UnassignedAction2Sub1}
@@ -825,7 +823,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_2_0 = (RuleCall)cVal2Assignment_2.eContents().get(0);
 		
 		//UnassignedRuleCall1:
-		//	"#11" UnassignedRuleCall1Sub val2=ID;
+		//    "#11" UnassignedRuleCall1Sub val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#11" UnassignedRuleCall1Sub val2=ID
@@ -849,7 +847,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal1IDTerminalRuleCall_0 = (RuleCall)cVal1Assignment.eContents().get(0);
 		
 		//UnassignedRuleCall1Sub:
-		//	val1=ID;
+		//    val1=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val1=ID
@@ -867,7 +865,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_2_0 = (RuleCall)cVal2Assignment_2.eContents().get(0);
 		
 		//UnassignedRuleCall2:
-		//	"#12" UnassignedRuleCall2Sub val2=ID;
+		//    "#12" UnassignedRuleCall2Sub val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#12" UnassignedRuleCall2Sub val2=ID
@@ -890,7 +888,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final Action cUnassignedRuleCall2SubActionAction = (Action)rule.eContents().get(1);
 		
 		//UnassignedRuleCall2Sub:
-		//	{UnassignedRuleCall2SubAction};
+		//    {UnassignedRuleCall2SubAction};
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{UnassignedRuleCall2SubAction}
@@ -915,7 +913,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal4IDTerminalRuleCall_2_2_1_0 = (RuleCall)cVal4Assignment_2_2_1.eContents().get(0);
 		
 		//Combination1:
-		//	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
+		//    "#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?
@@ -981,10 +979,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal4IDTerminalRuleCall_2_1_1_0 = (RuleCall)cVal4Assignment_2_1_1.eContents().get(0);
 		
 		//Combination2:
-		//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
+		//    "#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*)
+		//"#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*)
 		public Group getGroup() { return cGroup; }
 		
 		//"#14"
@@ -996,10 +994,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
 		
-		//("kw1" val2=ID | (val3+=ID val4+=ID)*)
+		//(("kw1" val2=ID) | (val3+=ID val4+=ID)*)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
-		//"kw1" val2=ID
+		//("kw1" val2=ID)
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
 		//"kw1"
@@ -1040,7 +1038,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation, potentialOverride] */
 		//Combination3:
-		//	"#15" (val1=ID | val2=INT | val3=STRING)*;
+		//    "#15" (val1=ID | val2=INT | val3=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#15" (val1=ID | val2=INT | val3=STRING)*
@@ -1084,7 +1082,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal3IDTerminalRuleCall_1_3_0 = (RuleCall)cVal3Assignment_1_3.eContents().get(0);
 		
 		//Combination4:
-		//	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
+		//    "#16" ("group" val1+=ID val2+=ID val3+=ID)+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#16" ("group" val1+=ID val2+=ID val3+=ID)+
@@ -1129,7 +1127,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal1IDTerminalRuleCall_2_1_0 = (RuleCall)cVal1Assignment_2_1.eContents().get(0);
 		
 		//List1:
-		//	"#17" val1+=ID ("," val1+=ID)*;
+		//    "#17" val1+=ID ("," val1+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#17" val1+=ID ("," val1+=ID)*
@@ -1170,7 +1168,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation] */
 		//List2:
-		//	"#18" (val1+=ID ("," val1+=ID)*)?;
+		//    "#18" (val1+=ID ("," val1+=ID)*)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#18" (val1+=ID ("," val1+=ID)*)?
@@ -1218,10 +1216,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_1_1_0 = (RuleCall)cVal2Assignment_1_1.eContents().get(0);
 		
 		//List3:
-		//	"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID;
+		//    "#19" (val1+=ID ("," val1+=ID)*) | ("kw3" val2=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID
+		//"#19" (val1+=ID ("," val1+=ID)*) | ("kw3" val2=ID)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#19" (val1+=ID ("," val1+=ID)*)
@@ -1251,7 +1249,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_0_1_1_1_0() { return cVal1IDTerminalRuleCall_0_1_1_1_0; }
 		
-		//"kw3" val2=ID
+		//("kw3" val2=ID)
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"kw3"
@@ -1278,7 +1276,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal2IDTerminalRuleCall_4_0 = (RuleCall)cVal2Assignment_4.eContents().get(0);
 		
 		//List4:
-		//	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
+		//    "#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID
@@ -1333,19 +1331,19 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal3IDTerminalRuleCall_1_1_0 = (RuleCall)cVal3Assignment_1_1.eContents().get(0);
 		
 		//List5:
-		//	"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID);
+		//    "#21" ((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
+		//"#21" ((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID)
 		public Group getGroup() { return cGroup; }
 		
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 		
-		//(val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
+		//((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//val1+=ID ("," val1+=ID)* "kw3" val2=ID
+		//(val1+=ID ("," val1+=ID)* "kw3" val2=ID)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//val1+=ID
@@ -1405,7 +1403,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal4IDTerminalRuleCall_1_2_2_0 = (RuleCall)cVal4Assignment_1_2_2.eContents().get(0);
 		
 		//AltList1:
-		//	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
+		//    "#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
@@ -1490,7 +1488,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal3IDTerminalRuleCall_1_1_3_0 = (RuleCall)cVal3Assignment_1_1_3.eContents().get(0);
 		
 		//AltList2:
-		//	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
+		//    "#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
@@ -1559,7 +1557,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation] */
 		//TransientObject:
-		//	"#24" (val1=ID nested=TransientObjectSub)?;
+		//    "#24" (val1=ID nested=TransientObjectSub)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#24" (val1=ID nested=TransientObjectSub)?
@@ -1592,7 +1590,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cVal3IDTerminalRuleCall_1_0 = (RuleCall)cVal3Assignment_1.eContents().get(0);
 		
 		//TransientObjectSub:
-		//	val2=ID val3=ID;
+		//    val2=ID val3=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val2=ID val3=ID
@@ -1627,7 +1625,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation] */
 		//TransientSerializeables1:
-		//	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+		//    "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?
@@ -1688,16 +1686,16 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation, potentialOverride] */
 		//StaticSimplification:
-		//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
+		//    "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?)
+		//"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?)
 		public Group getGroup() { return cGroup; }
 		
 		//"#26"
 		public Keyword getNumberSignDigitTwoDigitSixKeyword_0() { return cNumberSignDigitTwoDigitSixKeyword_0; }
 		
-		//("kw1" | {EmptyAlternativeSub} | val1=ID)
+		//("kw1"|{EmptyAlternativeSub}|val1=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1"
@@ -1712,7 +1710,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_2_0() { return cVal1IDTerminalRuleCall_1_2_0; }
 		
-		//("kw2" | val2=ID)
+		//("kw2"|val2=ID)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//"kw2"
@@ -1724,19 +1722,19 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
 		
-		//("kw3" ("kw4" val3=ID+)?)
+		//("kw3" ("kw4" (val3=ID)+)?)
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//"kw3"
 		public Keyword getKw3Keyword_3_0() { return cKw3Keyword_3_0; }
 		
-		//("kw4" val3=ID+)?
+		//("kw4" (val3=ID)+)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//"kw4"
 		public Keyword getKw4Keyword_3_1_0() { return cKw4Keyword_3_1_0; }
 		
-		//val3=ID+
+		//(val3=ID)+
 		public Assignment getVal3Assignment_3_1_1() { return cVal3Assignment_3_1_1; }
 		
 		//ID
@@ -1751,7 +1749,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cTwoVersionNo2ParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		
 		//TwoVersion:
-		//	"#27" (TwoVersionNo1 | TwoVersionNo2);
+		//    "#27" (TwoVersionNo1 | TwoVersionNo2);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#27" (TwoVersionNo1 | TwoVersionNo2)
@@ -1786,8 +1784,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cVersion1Assignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cVersion1IDTerminalRuleCall_5_0 = (RuleCall)cVersion1Assignment_5.eContents().get(0);
 		
-		//TwoVersionNo1 TwoVersion:
-		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+		//TwoVersionNo1 returns TwoVersion:
+		//    shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
@@ -1859,13 +1857,13 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cExtra4Assignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
 		private final RuleCall cExtra4IDTerminalRuleCall_6_1_1_0 = (RuleCall)cExtra4Assignment_6_1_1.eContents().get(0);
 		
-		//TwoVersionNo2 TwoVersion:
-		//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
-		//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
+		//TwoVersionNo2 returns TwoVersion:
+		//    shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+		//    "extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
-		//"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
+		//"extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?
 		public Group getGroup() { return cGroup; }
 		
 		//shared1=ID?
@@ -1907,10 +1905,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//ID
 		public RuleCall getExtra1IDTerminalRuleCall_5_0() { return cExtra1IDTerminalRuleCall_5_0; }
 		
-		//(extra2=ID extra3=ID | "two" extra4=ID)?
+		//((extra2=ID extra3=ID) | "two" extra4=ID)?
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
-		//extra2=ID extra3=ID
+		//(extra2=ID extra3=ID)
 		public Group getGroup_6_0() { return cGroup_6_0; }
 		
 		//extra2=ID
@@ -1962,7 +1960,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		
 		///* SuppressWarnings[noInstantiation] */
 		//Heuristic1:
-		//	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
+		//    "#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*
@@ -2035,7 +2033,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		private final Keyword cLit2Lit2Keyword_1_0 = (Keyword)cLit2EnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum TransientSerializeables1Enum:
-		//	lit1 | lit2;
+		//    lit1 | lit2;
 		public EnumRule getRule() { return rule; }
 		
 		//lit1 | lit2
@@ -2044,13 +2042,11 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
 		
-		//"lit1"
 		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
 		
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
 		
-		//"lit2"
 		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
 	}
 	
@@ -2164,12 +2160,11 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 
 	
 	//Model:
-	//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
-	//	x5=AlternativeMultiplicities | x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 |
-	//	x9=UnassignedAction2 | x10=UnassignedAction3 | x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1
-	//	| x14=Combination2 | x15=Combination3 | x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5
-	//	| x22=AltList1 | x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification |
-	//	x27=TwoVersion | x28=Heuristic1;
+	//    x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
+	//    x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 |
+	//    x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 |
+	//    x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+	//    x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion | x28=Heuristic1;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -2179,7 +2174,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//SimpleGroup:
-	//	"#1" val1=ID val2=ID;
+	//    "#1" val1=ID val2=ID;
 	public SimpleGroupElements getSimpleGroupAccess() {
 		return pSimpleGroup;
 	}
@@ -2189,7 +2184,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//SimpleAlternative:
-	//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
+	//    "#2" ("kw1" val1=ID | "kw2" val2=ID);
 	public SimpleAlternativeElements getSimpleAlternativeAccess() {
 		return pSimpleAlternative;
 	}
@@ -2199,7 +2194,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//SimpleMultiplicities:
-	//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
+	//    "#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
 	public SimpleMultiplicitiesElements getSimpleMultiplicitiesAccess() {
 		return pSimpleMultiplicities;
 	}
@@ -2209,7 +2204,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//GroupMultiplicities:
-	//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
+	//    "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
 	public GroupMultiplicitiesElements getGroupMultiplicitiesAccess() {
 		return pGroupMultiplicities;
 	}
@@ -2219,7 +2214,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//AlternativeMultiplicities:
-	//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
+	//    "#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | ("kw5" val7+=ID))*;
 	public AlternativeMultiplicitiesElements getAlternativeMultiplicitiesAccess() {
 		return pAlternativeMultiplicities;
 	}
@@ -2229,7 +2224,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//AssignedAction:
-	//	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
+	//    "#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
 	public AssignedActionElements getAssignedActionAccess() {
 		return pAssignedAction;
 	}
@@ -2238,8 +2233,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		return getAssignedActionAccess().getRule();
 	}
 	
-	//AssignedActionSecond AssignedAction:
-	//	"#7" val1=ID "kw1" val2=ID;
+	//AssignedActionSecond returns AssignedAction:
+	//    "#7" val1=ID "kw1" val2=ID;
 	public AssignedActionSecondElements getAssignedActionSecondAccess() {
 		return pAssignedActionSecond;
 	}
@@ -2249,7 +2244,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedAction1:
-	//	{UnassignedAction1} "#8" val1=ID val2=ID?;
+	//    {UnassignedAction1} "#8" val1=ID val2=ID?;
 	public UnassignedAction1Elements getUnassignedAction1Access() {
 		return pUnassignedAction1;
 	}
@@ -2259,7 +2254,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedAction2:
-	//	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
+	//    {UnassignedAction2Sub} "#9" val1=ID val2=ID?;
 	public UnassignedAction2Elements getUnassignedAction2Access() {
 		return pUnassignedAction2;
 	}
@@ -2269,7 +2264,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedAction3:
-	//	"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
+	//    "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
 	public UnassignedAction3Elements getUnassignedAction3Access() {
 		return pUnassignedAction3;
 	}
@@ -2279,7 +2274,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedRuleCall1:
-	//	"#11" UnassignedRuleCall1Sub val2=ID;
+	//    "#11" UnassignedRuleCall1Sub val2=ID;
 	public UnassignedRuleCall1Elements getUnassignedRuleCall1Access() {
 		return pUnassignedRuleCall1;
 	}
@@ -2289,7 +2284,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedRuleCall1Sub:
-	//	val1=ID;
+	//    val1=ID;
 	public UnassignedRuleCall1SubElements getUnassignedRuleCall1SubAccess() {
 		return pUnassignedRuleCall1Sub;
 	}
@@ -2299,7 +2294,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedRuleCall2:
-	//	"#12" UnassignedRuleCall2Sub val2=ID;
+	//    "#12" UnassignedRuleCall2Sub val2=ID;
 	public UnassignedRuleCall2Elements getUnassignedRuleCall2Access() {
 		return pUnassignedRuleCall2;
 	}
@@ -2309,7 +2304,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//UnassignedRuleCall2Sub:
-	//	{UnassignedRuleCall2SubAction};
+	//    {UnassignedRuleCall2SubAction};
 	public UnassignedRuleCall2SubElements getUnassignedRuleCall2SubAccess() {
 		return pUnassignedRuleCall2Sub;
 	}
@@ -2319,7 +2314,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Combination1:
-	//	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
+	//    "#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
 	public Combination1Elements getCombination1Access() {
 		return pCombination1;
 	}
@@ -2329,7 +2324,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Combination2:
-	//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
+	//    "#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*);
 	public Combination2Elements getCombination2Access() {
 		return pCombination2;
 	}
@@ -2340,7 +2335,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation, potentialOverride] */
 	//Combination3:
-	//	"#15" (val1=ID | val2=INT | val3=STRING)*;
+	//    "#15" (val1=ID | val2=INT | val3=STRING)*;
 	public Combination3Elements getCombination3Access() {
 		return pCombination3;
 	}
@@ -2350,7 +2345,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Combination4:
-	//	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
+	//    "#16" ("group" val1+=ID val2+=ID val3+=ID)+;
 	public Combination4Elements getCombination4Access() {
 		return pCombination4;
 	}
@@ -2360,7 +2355,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//List1:
-	//	"#17" val1+=ID ("," val1+=ID)*;
+	//    "#17" val1+=ID ("," val1+=ID)*;
 	public List1Elements getList1Access() {
 		return pList1;
 	}
@@ -2371,7 +2366,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation] */
 	//List2:
-	//	"#18" (val1+=ID ("," val1+=ID)*)?;
+	//    "#18" (val1+=ID ("," val1+=ID)*)?;
 	public List2Elements getList2Access() {
 		return pList2;
 	}
@@ -2381,7 +2376,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//List3:
-	//	"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID;
+	//    "#19" (val1+=ID ("," val1+=ID)*) | ("kw3" val2=ID);
 	public List3Elements getList3Access() {
 		return pList3;
 	}
@@ -2391,7 +2386,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//List4:
-	//	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
+	//    "#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
 	public List4Elements getList4Access() {
 		return pList4;
 	}
@@ -2401,7 +2396,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//List5:
-	//	"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID);
+	//    "#21" ((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID);
 	public List5Elements getList5Access() {
 		return pList5;
 	}
@@ -2411,7 +2406,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//AltList1:
-	//	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
+	//    "#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
 	public AltList1Elements getAltList1Access() {
 		return pAltList1;
 	}
@@ -2421,7 +2416,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//AltList2:
-	//	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
+	//    "#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
 	public AltList2Elements getAltList2Access() {
 		return pAltList2;
 	}
@@ -2432,7 +2427,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation] */
 	//TransientObject:
-	//	"#24" (val1=ID nested=TransientObjectSub)?;
+	//    "#24" (val1=ID nested=TransientObjectSub)?;
 	public TransientObjectElements getTransientObjectAccess() {
 		return pTransientObject;
 	}
@@ -2442,7 +2437,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//TransientObjectSub:
-	//	val2=ID val3=ID;
+	//    val2=ID val3=ID;
 	public TransientObjectSubElements getTransientObjectSubAccess() {
 		return pTransientObjectSub;
 	}
@@ -2453,7 +2448,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation] */
 	//TransientSerializeables1:
-	//	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+	//    "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
 	public TransientSerializeables1Elements getTransientSerializeables1Access() {
 		return pTransientSerializeables1;
 	}
@@ -2463,7 +2458,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//enum TransientSerializeables1Enum:
-	//	lit1 | lit2;
+	//    lit1 | lit2;
 	public TransientSerializeables1EnumElements getTransientSerializeables1EnumAccess() {
 		return eTransientSerializeables1Enum;
 	}
@@ -2474,7 +2469,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation, potentialOverride] */
 	//StaticSimplification:
-	//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
+	//    "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
 	public StaticSimplificationElements getStaticSimplificationAccess() {
 		return pStaticSimplification;
 	}
@@ -2484,7 +2479,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//TwoVersion:
-	//	"#27" (TwoVersionNo1 | TwoVersionNo2);
+	//    "#27" (TwoVersionNo1 | TwoVersionNo2);
 	public TwoVersionElements getTwoVersionAccess() {
 		return pTwoVersion;
 	}
@@ -2493,8 +2488,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		return getTwoVersionAccess().getRule();
 	}
 	
-	//TwoVersionNo1 TwoVersion:
-	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+	//TwoVersionNo1 returns TwoVersion:
+	//    shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
 	public TwoVersionNo1Elements getTwoVersionNo1Access() {
 		return pTwoVersionNo1;
 	}
@@ -2503,9 +2498,9 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		return getTwoVersionNo1Access().getRule();
 	}
 	
-	//TwoVersionNo2 TwoVersion:
-	//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
-	//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
+	//TwoVersionNo2 returns TwoVersion:
+	//    shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+	//    "extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?;
 	public TwoVersionNo2Elements getTwoVersionNo2Access() {
 		return pTwoVersionNo2;
 	}
@@ -2516,7 +2511,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 	
 	///* SuppressWarnings[noInstantiation] */
 	//Heuristic1:
-	//	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
+	//    "#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
 	public Heuristic1Elements getHeuristic1Access() {
 		return pHeuristic1;
 	}
@@ -2525,45 +2520,40 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractE
 		return getHeuristic1Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

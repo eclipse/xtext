@@ -31,22 +31,22 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cComponentsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cComponentsComponentParserRuleCall_1_0 = (RuleCall)cComponentsAssignment_1.eContents().get(0);
 		
-		//Model:
-		//	elements+=Element*
-		//	components+=Component*;
+		//Model :
+		//    (elements+=Element)*
+		//    (components+=Component)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=Element*
-		//components+=Component*
+		//(elements+=Element)*
+		//(components+=Component)*
 		public Group getGroup() { return cGroup; }
 		
-		//elements+=Element*
+		//(elements+=Element)*
 		public Assignment getElementsAssignment_0() { return cElementsAssignment_0; }
 		
 		//Element
 		public RuleCall getElementsElementParserRuleCall_0_0() { return cElementsElementParserRuleCall_0_0; }
 		
-		//components+=Component*
+		//(components+=Component)*
 		public Assignment getComponentsAssignment_1() { return cComponentsAssignment_1; }
 		
 		//Component
@@ -69,8 +69,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final CrossReference cMultirefsElementCrossReference_3_1_0 = (CrossReference)cMultirefsAssignment_3_1.eContents().get(0);
 		private final RuleCall cMultirefsElementIDTerminalRuleCall_3_1_0_1 = (RuleCall)cMultirefsElementCrossReference_3_1_0.eContents().get(1);
 		
-		//Element:
-		//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
+		//Element :
+		//    "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*
@@ -131,12 +131,19 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Component:
-		//	(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
-		//	'end' ';';
+		//Component :
+		//    (Bus | Processor)
+		//    ('modes' (mode+=Mode |
+		//        transition+=Transition)+
+		//    )?
+		//    'end' ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
+		//(Bus | Processor)
+		//('modes' (mode+=Mode |
+		//    transition+=Transition)+
+		//)?
 		//'end' ';'
 		public Group getGroup() { return cGroup; }
 		
@@ -149,13 +156,16 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		//Processor
 		public RuleCall getProcessorParserRuleCall_0_1() { return cProcessorParserRuleCall_0_1; }
 		
-		//('modes' (mode+=Mode | transition+=Transition)+)?
+		//('modes' (mode+=Mode |
+		//    transition+=Transition)+
+		//)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'modes'
 		public Keyword getModesKeyword_1_0() { return cModesKeyword_1_0; }
 		
-		//(mode+=Mode | transition+=Transition)+
+		//(mode+=Mode |
+		//       transition+=Transition)+
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//mode+=Mode
@@ -186,24 +196,25 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cPortPortParserRuleCall_2_0 = (RuleCall)cPortAssignment_2.eContents().get(0);
 		
 		//Bus:
-		//	'bus' name=ID
-		//	port+=Port*;
+		//    'bus' name = ID
+		//    (port+=Port)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'bus' name=ID
-		//port+=Port*
+		//'bus' name = ID
+		//(port+=Port)*
 		public Group getGroup() { return cGroup; }
 		
 		//'bus'
 		public Keyword getBusKeyword_0() { return cBusKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//port+=Port*
+		//(port+=Port)*
 		public Assignment getPortAssignment_2() { return cPortAssignment_2; }
 		
 		//Port
@@ -219,24 +230,25 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cDataDataParserRuleCall_2_0 = (RuleCall)cDataAssignment_2.eContents().get(0);
 		
 		//Processor:
-		//	'processor' name=ID
-		//	data+=Data*;
+		//    'processor' name = ID
+		//    (data+=Data)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'processor' name=ID
-		//data+=Data*
+		//'processor' name = ID
+		//(data+=Data)*
 		public Group getGroup() { return cGroup; }
 		
 		//'processor'
 		public Keyword getProcessorKeyword_0() { return cProcessorKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//data+=Data*
+		//(data+=Data)*
 		public Assignment getDataAssignment_2() { return cDataAssignment_2; }
 		
 		//Data
@@ -250,17 +262,18 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Mode:
-		//	'mode' name=ID ';';
+		//Mode :
+		//    'mode' name = ID ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'mode' name=ID ';'
+		//'mode' name = ID ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'mode'
 		public Keyword getModeKeyword_0() { return cModeKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
@@ -285,7 +298,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Transition:
-		//	name=ID ':' source=[Mode] '->' destination=[Mode] ';';
+		//    name=ID ':' source=[Mode] '->' destination=[Mode] ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID ':' source=[Mode] '->' destination=[Mode] ';'
@@ -333,16 +347,17 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Port:
-		//	'port' name=ID ';';
+		//    'port' name = ID ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'port' name=ID ';'
+		//'port' name = ID ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'port'
 		public Keyword getPortKeyword_0() { return cPortKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
@@ -360,16 +375,17 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Data:
-		//	'data' name=ID ';';
+		//    'data' name = ID ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'data' name=ID ';'
+		//'data' name = ID ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'data'
 		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
@@ -437,9 +453,9 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 
 	
-	//Model:
-	//	elements+=Element*
-	//	components+=Component*;
+	//Model :
+	//    (elements+=Element)*
+	//    (components+=Component)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -448,8 +464,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
+	//Element :
+	//    "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -458,9 +474,13 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		return getElementAccess().getRule();
 	}
 	
-	//Component:
-	//	(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
-	//	'end' ';';
+	//Component :
+	//    (Bus | Processor)
+	//    ('modes' (mode+=Mode |
+	//        transition+=Transition)+
+	//    )?
+	//    'end' ';'
+	//;
 	public ComponentElements getComponentAccess() {
 		return pComponent;
 	}
@@ -470,8 +490,9 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Bus:
-	//	'bus' name=ID
-	//	port+=Port*;
+	//    'bus' name = ID
+	//    (port+=Port)*
+	//;
 	public BusElements getBusAccess() {
 		return pBus;
 	}
@@ -481,8 +502,9 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Processor:
-	//	'processor' name=ID
-	//	data+=Data*;
+	//    'processor' name = ID
+	//    (data+=Data)*
+	//;
 	public ProcessorElements getProcessorAccess() {
 		return pProcessor;
 	}
@@ -491,8 +513,9 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		return getProcessorAccess().getRule();
 	}
 	
-	//Mode:
-	//	'mode' name=ID ';';
+	//Mode :
+	//    'mode' name = ID ';'
+	//;
 	public ModeElements getModeAccess() {
 		return pMode;
 	}
@@ -502,7 +525,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Transition:
-	//	name=ID ':' source=[Mode] '->' destination=[Mode] ';';
+	//    name=ID ':' source=[Mode] '->' destination=[Mode] ';'
+	//;
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
 	}
@@ -512,7 +536,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Port:
-	//	'port' name=ID ';';
+	//    'port' name = ID ';'
+	//;
 	public PortElements getPortAccess() {
 		return pPort;
 	}
@@ -522,7 +547,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Data:
-	//	'data' name=ID ';';
+	//    'data' name = ID ';'
+	//;
 	public DataElements getDataAccess() {
 		return pData;
 	}
@@ -531,45 +557,40 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractElementFi
 		return getDataAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

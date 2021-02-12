@@ -28,10 +28,10 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cModelModelParserRuleCall_0 = (RuleCall)cModelAssignment.eContents().get(0);
 		
 		//CompositeModel:
-		//	model+=Model+;
+		//  (model+=Model)+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//model+=Model+
+		//(model+=Model)+
 		public Assignment getModelAssignment() { return cModelAssignment; }
 		
 		//Model
@@ -61,7 +61,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Model:
-		//	id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
+		//  id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';'
@@ -131,8 +131,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//ModelId:
-		//	ID '.' ID;
+		//ModelId returns ecore::EString:
+		//  ID '.' ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID '.' ID
@@ -154,8 +154,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cModelIdParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//NestedModelId:
-		//	ModelId '.' ModelId;
+		//NestedModelId :
+		//  ModelId '.' ModelId;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ModelId '.' ModelId
@@ -178,8 +178,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cSolidusKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//Fraction ecore::EBigDecimal:
-		//	INT ('/' INT)?;
+		//Fraction returns ecore::EBigDecimal:
+		//  INT ('/' INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT ('/' INT)?
@@ -205,8 +205,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Vector:
-		//	'(' INT INT ')';
+		//Vector :
+		//  '(' INT INT ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' INT INT ')'
@@ -232,14 +232,14 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cFullStopKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final Keyword cFullStopFullStopKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		//Dots:
-		//	'.' '.' | '..';
+		//Dots returns ecore::EString:
+		//  ( '.' '.' ) | '..';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'.' '.' | '..'
+		//( '.' '.' ) | '..'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'.' '.'
+		//( '.' '.' )
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'.'
@@ -263,8 +263,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cHyphenMinusKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
 		
-		//Double ecore::EDouble:
-		//	'-'? INT? '.' INT ('E' '-'? INT)?;
+		//Double returns ecore::EDouble:
+		//    '-'? INT? '.' INT ('E' '-'? INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'-'? INT? '.' INT ('E' '-'? INT)?
@@ -352,7 +352,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//CompositeModel:
-	//	model+=Model+;
+	//  (model+=Model)+;
 	public CompositeModelElements getCompositeModelAccess() {
 		return pCompositeModel;
 	}
@@ -362,7 +362,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//Model:
-	//	id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
+	//  id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -371,8 +371,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getModelAccess().getRule();
 	}
 	
-	//ModelId:
-	//	ID '.' ID;
+	//ModelId returns ecore::EString:
+	//  ID '.' ID;
 	public ModelIdElements getModelIdAccess() {
 		return pModelId;
 	}
@@ -381,8 +381,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getModelIdAccess().getRule();
 	}
 	
-	//NestedModelId:
-	//	ModelId '.' ModelId;
+	//NestedModelId :
+	//  ModelId '.' ModelId;
 	public NestedModelIdElements getNestedModelIdAccess() {
 		return pNestedModelId;
 	}
@@ -391,8 +391,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getNestedModelIdAccess().getRule();
 	}
 	
-	//Fraction ecore::EBigDecimal:
-	//	INT ('/' INT)?;
+	//Fraction returns ecore::EBigDecimal:
+	//  INT ('/' INT)?;
 	public FractionElements getFractionAccess() {
 		return pFraction;
 	}
@@ -401,8 +401,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getFractionAccess().getRule();
 	}
 	
-	//Vector:
-	//	'(' INT INT ')';
+	//Vector :
+	//  '(' INT INT ')';
 	public VectorElements getVectorAccess() {
 		return pVector;
 	}
@@ -411,8 +411,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getVectorAccess().getRule();
 	}
 	
-	//Dots:
-	//	'.' '.' | '..';
+	//Dots returns ecore::EString:
+	//  ( '.' '.' ) | '..';
 	public DotsElements getDotsAccess() {
 		return pDots;
 	}
@@ -421,8 +421,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getDotsAccess().getRule();
 	}
 	
-	//Double ecore::EDouble:
-	//	'-'? INT? '.' INT ('E' '-'? INT)?;
+	//Double returns ecore::EDouble:
+	//    '-'? INT? '.' INT ('E' '-'? INT)?;
 	public DoubleElements getDoubleAccess() {
 		return pDouble;
 	}
@@ -431,45 +431,40 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractElementFinde
 		return getDoubleAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

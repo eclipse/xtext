@@ -36,25 +36,25 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cDollarSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		private final Keyword cDollarSignKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
-		//Model:
-		//	{Model}
-		//	'dummy' name=ID
-		//	'_'
-		//	'_dummy_'
-		//	'__dummy__'
-		//	'$__dummy__'
-		//	'$'
-		//	'DollarSign';
+		//Model: {Model}
+		//    'dummy' name=ID
+		//    '_'
+		//    '_dummy_'
+		//    '__dummy__'
+		//    '$__dummy__'
+		//    '$'
+		//    'DollarSign'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Model}
-		//'dummy' name=ID
-		//'_'
-		//'_dummy_'
-		//'__dummy__'
-		//'$__dummy__'
-		//'$'
-		//'DollarSign'
+		//   'dummy' name=ID
+		//   '_'
+		//   '_dummy_'
+		//   '__dummy__'
+		//   '$__dummy__'
+		//   '$'
+		//   'DollarSign'
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
@@ -130,15 +130,15 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	{Model}
-	//	'dummy' name=ID
-	//	'_'
-	//	'_dummy_'
-	//	'__dummy__'
-	//	'$__dummy__'
-	//	'$'
-	//	'DollarSign';
+	//Model: {Model}
+	//    'dummy' name=ID
+	//    '_'
+	//    '_dummy_'
+	//    '__dummy__'
+	//    '$__dummy__'
+	//    '$'
+	//    'DollarSign'
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -147,45 +147,40 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

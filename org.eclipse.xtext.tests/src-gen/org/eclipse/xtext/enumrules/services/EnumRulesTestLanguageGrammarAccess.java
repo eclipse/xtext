@@ -41,7 +41,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cGeneratedGeneratedEnumEnumRuleCall_1_1_0 = (RuleCall)cGeneratedAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//	'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum;
+		//  'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum
@@ -95,28 +96,27 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cDifferentNameDifferentLiteralKeyword_2_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum ExistingEnum:
-		//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
+		//  SameName | OverriddenLiteral = "overridden" | DifferentName
+		//;
 		public EnumRule getRule() { return rule; }
 		
-		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
+		//SameName | OverriddenLiteral = "overridden" | DifferentName
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//SameName
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
 		
-		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 		
-		//OverriddenLiteral="overridden"
+		//OverriddenLiteral = "overridden"
 		public EnumLiteralDeclaration getOverriddenLiteralEnumLiteralDeclaration_1() { return cOverriddenLiteralEnumLiteralDeclaration_1; }
 		
 		//"overridden"
 		public Keyword getOverriddenLiteralOverriddenKeyword_1_0() { return cOverriddenLiteralOverriddenKeyword_1_0; }
 		
-		//DifferentName="DifferentLiteral"
+		//DifferentName
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_2() { return cDifferentNameEnumLiteralDeclaration_2; }
 		
-		//"DifferentLiteral"
 		public Keyword getDifferentNameDifferentLiteralKeyword_2_0() { return cDifferentNameDifferentLiteralKeyword_2_0; }
 	}
 	public class GeneratedEnumElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -128,19 +128,19 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cDifferentNameDifferentLiteralKeyword_1_0 = (Keyword)cDifferentNameEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum GeneratedEnum:
-		//	SameName | DifferentName="DifferentLiteral";
+		//  SameName | DifferentName = "DifferentLiteral"
+		//;
 		public EnumRule getRule() { return rule; }
 		
-		//SameName | DifferentName="DifferentLiteral"
+		//SameName | DifferentName = "DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//SameName
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
 		
-		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
 		
-		//DifferentName="DifferentLiteral"
+		//DifferentName = "DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_1() { return cDifferentNameEnumLiteralDeclaration_1; }
 		
 		//"DifferentLiteral"
@@ -193,7 +193,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum;
+	//  'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -203,7 +204,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum ExistingEnum:
-	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
+	//  SameName | OverriddenLiteral = "overridden" | DifferentName
+	//;
 	public ExistingEnumElements getExistingEnumAccess() {
 		return eExistingEnum;
 	}
@@ -213,7 +215,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum GeneratedEnum:
-	//	SameName | DifferentName="DifferentLiteral";
+	//  SameName | DifferentName = "DifferentLiteral"
+	//;
 	public GeneratedEnumElements getGeneratedEnumAccess() {
 		return eGeneratedEnum;
 	}
@@ -222,45 +225,40 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getGeneratedEnumAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

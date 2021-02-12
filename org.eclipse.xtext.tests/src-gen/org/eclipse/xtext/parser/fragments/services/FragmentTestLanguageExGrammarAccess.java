@@ -22,8 +22,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguageEx.ParserRuleFragmentsEx");
 		private final RuleCall cParserRuleFragmentsParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ParserRuleFragmentsEx ParserRuleFragments:
-		//	ParserRuleFragments;
+		//ParserRuleFragmentsEx returns ParserRuleFragments:
+		//    ParserRuleFragments
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ParserRuleFragments
@@ -80,8 +81,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 
 	
-	//ParserRuleFragmentsEx ParserRuleFragments:
-	//	ParserRuleFragments;
+	//ParserRuleFragmentsEx returns ParserRuleFragments:
+	//    ParserRuleFragments
+	//;
 	public ParserRuleFragmentsExElements getParserRuleFragmentsExAccess() {
 		return pParserRuleFragmentsEx;
 	}
@@ -90,17 +92,20 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getParserRuleFragmentsExAccess().getRule();
 	}
 	
-	//ParserRuleFragments:
-	//	{ParserRuleFragments} ('#1' element=PRFNamed
-	//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
-	//	| '#4' element=PRFNamedWithAction
+	//ParserRuleFragments: {ParserRuleFragments}
+	//  ( '#1' element=PRFNamed
+	//  | '#2' element=PRFNamed '->' ref=[PRFNamed]
+	//  | '#3' element=PRFNamedRefFirst
+	//  | '#4' element=PRFNamedWithAction
 	////  | '#5' element=PRFNamedWithActionInFragment
 	////  | '#6' element=PRFNamedWithActionInFragment2
 	////  | '#7' element=PRFNamedWithActionInFragment3
-	//	| '#8' element=PRFNamedWithFQN
-	//	| '#9' element=PRFWithPredicate
-	//	| '#10' element=PRFNamedRecursive
-	//	| '#11' element=PRFNamedRecursiveFragment);
+	//  | '#8' element=PRFNamedWithFQN
+	//  | '#9' element=PRFWithPredicate
+	//  | '#10' element=PRFNamedRecursive
+	//  | '#11' element=PRFNamedRecursiveFragment
+	//  )
+	//;
 	public FragmentTestLanguageGrammarAccess.ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return gaFragmentTestLanguage.getParserRuleFragmentsAccess();
 	}
@@ -109,8 +114,11 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getParserRuleFragmentsAccess().getRule();
 	}
 	
-	//PRFNamed:
-	//	PRFNamedFragment (':' ref=[PRFNamed] | '-' PRFNamedRef)?;
+	//PRFNamed: PRFNamedFragment (
+	//      ':' ref=[PRFNamed]
+	//    | '-' PRFNamedRef
+	//    )?
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedElements getPRFNamedAccess() {
 		return gaFragmentTestLanguage.getPRFNamedAccess();
 	}
@@ -119,8 +127,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getPRFNamedAccess().getRule();
 	}
 	
-	//PRFNamedRecursive PRFNamedWithAction:
-	//	name=ID RecursiveFromFragment;
+	//PRFNamedRecursive returns PRFNamedWithAction:
+	//    name=ID RecursiveFromFragment
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRecursiveAccess();
 	}
@@ -129,8 +138,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getPRFNamedRecursiveAccess().getRule();
 	}
 	
-	//PRFNamedRecursiveFragment PRFNamedWithAction:
-	//	name=ID RecursiveFragment;
+	//PRFNamedRecursiveFragment returns PRFNamedWithAction:
+	//    name=ID RecursiveFragment
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRecursiveFragmentAccess();
 	}
@@ -139,8 +149,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getPRFNamedRecursiveFragmentAccess().getRule();
 	}
 	
-	//PRFNamedRefFirst PRFNamed:
-	//	ref=[PRFNamed] '<-' PRFNamedFragment;
+	//PRFNamedRefFirst returns PRFNamed:
+	//    ref=[PRFNamed] '<-' PRFNamedFragment
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRefFirstElements getPRFNamedRefFirstAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRefFirstAccess();
 	}
@@ -149,8 +160,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getPRFNamedRefFirstAccess().getRule();
 	}
 	
-	//PRFNamedWithAction PRFNamed:
-	//	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?;
+	//PRFNamedWithAction returns PRFNamed:
+	//    PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionElements getPRFNamedWithActionAccess() {
 		return gaFragmentTestLanguage.getPRFNamedWithActionAccess();
 	}
@@ -160,18 +172,19 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	////PRFNamedWithActionInFragment returns PRFNamed:
-	////	FragmentWithAction ('-' ref=[PRFNamed])?
+	////    FragmentWithAction ('-' ref=[PRFNamed])?
 	////;
 	////
 	////PRFNamedWithActionInFragment2 returns PRFNamed:
-	////	name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
+	////    name=ID FragmentWithAction2 ('-' ref=[PRFNamed])?
 	////;
 	////
 	////PRFNamedWithActionInFragment3 returns PRFNamed:
-	////	FragmentWithAction3 ('-' ref=[PRFNamed])?
+	////    FragmentWithAction3 ('-' ref=[PRFNamed])?
 	////;
-	//PRFNamedWithFQN PRFNamed:
-	//	name=FQN ('-' ref=[PRFNamed|FQN2])?;
+	//PRFNamedWithFQN returns PRFNamed:
+	//    name=FQN ('-' ref=[PRFNamed|FQN2])?
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithFQNElements getPRFNamedWithFQNAccess() {
 		return gaFragmentTestLanguage.getPRFNamedWithFQNAccess();
 	}
@@ -180,8 +193,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getPRFNamedWithFQNAccess().getRule();
 	}
 	
-	//PRFWithPredicate PRFNamed:
-	//	PRFNamedFragment => ('-' PRFNamedRef)?;
+	//PRFWithPredicate returns PRFNamed:
+	//    PRFNamedFragment =>('-' PRFNamedRef)?
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFWithPredicateElements getPRFWithPredicateAccess() {
 		return gaFragmentTestLanguage.getPRFWithPredicateAccess();
 	}
@@ -191,7 +205,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//FQN:
-	//	ID Suffix?;
+	//    ID Suffix?
+	//;
 	public FragmentTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaFragmentTestLanguage.getFQNAccess();
 	}
@@ -201,7 +216,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//FQN2:
-	//	ID Suffix2*;
+	//    ID Suffix2*
+	//;
 	public FragmentTestLanguageGrammarAccess.FQN2Elements getFQN2Access() {
 		return gaFragmentTestLanguage.getFQN2Access();
 	}
@@ -211,7 +227,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//fragment Suffix:
-	//	'.' ID Suffix?;
+	//    '.' ID Suffix?
+	//;
 	public FragmentTestLanguageGrammarAccess.SuffixElements getSuffixAccess() {
 		return gaFragmentTestLanguage.getSuffixAccess();
 	}
@@ -221,7 +238,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//fragment Suffix2:
-	//	'.' ID;
+	//    '.' ID
+	//;
 	public FragmentTestLanguageGrammarAccess.Suffix2Elements getSuffix2Access() {
 		return gaFragmentTestLanguage.getSuffix2Access();
 	}
@@ -231,18 +249,19 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	////fragment FragmentWithAction returns PRFNamed:
-	////	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+	////    name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
 	////;
 	////
 	////fragment FragmentWithAction2 returns PRFNamed:
-	////	{PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
+	////    {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
 	////;
 	////
 	////fragment FragmentWithAction3 returns PRFNamed:
-	////	name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)* 
+	////    name=ID ({PRFNamedWithAction.prev=current} '->' name=ID (ref2=[PRFNamed])?)*
 	////;
 	//fragment PRFNamedFragment returns PRFNamed:
-	//	name=ID;
+	//    name=ID
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedFragmentElements getPRFNamedFragmentAccess() {
 		return gaFragmentTestLanguage.getPRFNamedFragmentAccess();
 	}
@@ -252,7 +271,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//fragment PRFNamedRef returns PRFNamed:
-	//	ref=[PRFNamed];
+	//    ref=[PRFNamed]
+	//;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRefElements getPRFNamedRefAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRefAccess();
 	}
@@ -262,7 +282,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//fragment RecursiveFromFragment returns PRFNamedWithAction:
-	//	prev=NamedInParentheses;
+	//    prev=NamedInParentheses
+	//;
 	public FragmentTestLanguageGrammarAccess.RecursiveFromFragmentElements getRecursiveFromFragmentAccess() {
 		return gaFragmentTestLanguage.getRecursiveFromFragmentAccess();
 	}
@@ -271,8 +292,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getRecursiveFromFragmentAccess().getRule();
 	}
 	
-	//NamedInParentheses PRFNamed:
-	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID;
+	//NamedInParentheses returns PRFNamed:
+	//    '(' NamedInParentheses ')' | {PRFNamed} name=ID
+	//;
 	public FragmentTestLanguageGrammarAccess.NamedInParenthesesElements getNamedInParenthesesAccess() {
 		return gaFragmentTestLanguage.getNamedInParenthesesAccess();
 	}
@@ -282,7 +304,8 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 	}
 	
 	//fragment RecursiveFragment returns PRFNamedWithAction:
-	//	'(' RecursiveFragment ')' | prev=NamedByAction;
+	//    '(' RecursiveFragment ')' | prev=NamedByAction
+	//;
 	public FragmentTestLanguageGrammarAccess.RecursiveFragmentElements getRecursiveFragmentAccess() {
 		return gaFragmentTestLanguage.getRecursiveFragmentAccess();
 	}
@@ -291,8 +314,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getRecursiveFragmentAccess().getRule();
 	}
 	
-	//NamedByAction PRFNamed:
-	//	{PRFNamed} name=ID;
+	//NamedByAction returns PRFNamed:
+	//    {PRFNamed} name=ID
+	//;
 	public FragmentTestLanguageGrammarAccess.NamedByActionElements getNamedByActionAccess() {
 		return gaFragmentTestLanguage.getNamedByActionAccess();
 	}
@@ -301,45 +325,40 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractElementFinder.A
 		return getNamedByActionAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -33,8 +33,8 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cDisjunctsValueParserRuleCall_1_2_0 = (RuleCall)cDisjunctsAssignment_1_2.eContents().get(0);
 		
 		//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
-		//ORing:
-		//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
+		//ORing :
+		//    Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
@@ -63,8 +63,8 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueAKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
-		//Value:
-		//	value='a';
+		//Value :
+		//    value='a';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value='a'
@@ -119,8 +119,8 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 
 	
 	//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
-	//ORing:
-	//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
+	//ORing :
+	//    Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 	public ORingElements getORingAccess() {
 		return pORing;
 	}
@@ -129,8 +129,8 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 		return getORingAccess().getRule();
 	}
 	
-	//Value:
-	//	value='a';
+	//Value :
+	//    value='a';
 	public ValueElements getValueAccess() {
 		return pValue;
 	}
@@ -139,45 +139,40 @@ public class ActionTestLanguage2GrammarAccess extends AbstractElementFinder.Abst
 		return getValueAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

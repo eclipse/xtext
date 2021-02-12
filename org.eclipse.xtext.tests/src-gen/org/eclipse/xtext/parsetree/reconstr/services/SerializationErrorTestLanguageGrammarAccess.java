@@ -31,7 +31,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cTestParenthesisParserRuleCall_1_0 = (RuleCall)cTestAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	test=Test | test=Parenthesis;
+		//    test=Test | test=Parenthesis;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//test=Test | test=Parenthesis
@@ -56,8 +56,8 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cTestParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Parenthesis Test:
-		//	"(" Test ")";
+		//Parenthesis returns Test:
+		//    "(" Test ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"(" Test ")"
@@ -80,7 +80,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIndentParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Test:
-		//	TwoRequired | TwoOptions | Indent;
+		//    TwoRequired | TwoOptions | Indent;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//TwoRequired | TwoOptions | Indent
@@ -105,7 +105,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cTwoIDTerminalRuleCall_2_0 = (RuleCall)cTwoAssignment_2.eContents().get(0);
 		
 		//TwoRequired:
-		//	"tworequired" one=ID two=ID;
+		//    "tworequired" one=ID two=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"tworequired" one=ID two=ID
@@ -141,7 +141,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cTwoIDTerminalRuleCall_1_1_1_0 = (RuleCall)cTwoAssignment_1_1_1.eContents().get(0);
 		
 		//TwoOptions:
-		//	"twooptions" ("one" one=ID | "two" two=ID);
+		//    "twooptions" ("one" one=ID | "two" two=ID);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"twooptions" ("one" one=ID | "two" two=ID)
@@ -191,7 +191,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		
 		///* SuppressWarnings[noInstantiation] */
 		//Indent:
-		//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+		//    "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
@@ -275,7 +275,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 
 	
 	//Model:
-	//	test=Test | test=Parenthesis;
+	//    test=Test | test=Parenthesis;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -284,8 +284,8 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		return getModelAccess().getRule();
 	}
 	
-	//Parenthesis Test:
-	//	"(" Test ")";
+	//Parenthesis returns Test:
+	//    "(" Test ")";
 	public ParenthesisElements getParenthesisAccess() {
 		return pParenthesis;
 	}
@@ -295,7 +295,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Test:
-	//	TwoRequired | TwoOptions | Indent;
+	//    TwoRequired | TwoOptions | Indent;
 	public TestElements getTestAccess() {
 		return pTest;
 	}
@@ -305,7 +305,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//TwoRequired:
-	//	"tworequired" one=ID two=ID;
+	//    "tworequired" one=ID two=ID;
 	public TwoRequiredElements getTwoRequiredAccess() {
 		return pTwoRequired;
 	}
@@ -315,7 +315,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//TwoOptions:
-	//	"twooptions" ("one" one=ID | "two" two=ID);
+	//    "twooptions" ("one" one=ID | "two" two=ID);
 	public TwoOptionsElements getTwoOptionsAccess() {
 		return pTwoOptions;
 	}
@@ -326,7 +326,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 	
 	///* SuppressWarnings[noInstantiation] */
 	//Indent:
-	//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+	//    "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 	public IndentElements getIndentAccess() {
 		return pIndent;
 	}
@@ -335,45 +335,40 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractElement
 		return getIndentAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

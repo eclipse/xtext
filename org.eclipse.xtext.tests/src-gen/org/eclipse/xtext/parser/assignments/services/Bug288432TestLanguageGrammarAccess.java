@@ -44,43 +44,45 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cFooFooParserRuleCall_3_0 = (RuleCall)cFooAssignment_3.eContents().get(0);
 		private final Keyword cEndBodyKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Body:
-		//	('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
-		//	'body'
-		//	content=(Content | ParameterRef) foo+=Foo+
-		//	/* SuppressWarnings[SpacesInKeyword] */
-		//	'end body';
+		//Body :
+		//    ('(' parameter+=(Parameter) (',' parameter+=(Parameter))* ')')?
+		//    'body'
+		//    content=(Content|ParameterRef)
+		//    (foo+=Foo)+
+		//    /* SuppressWarnings[SpacesInKeyword] */
+		//    'end body';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
+		//('(' parameter+=(Parameter) (',' parameter+=(Parameter))* ')')?
 		//'body'
-		//content=(Content | ParameterRef) foo+=Foo+
+		//content=(Content|ParameterRef)
+		//(foo+=Foo)+
 		///* SuppressWarnings[SpacesInKeyword] */
 		//'end body'
 		public Group getGroup() { return cGroup; }
 		
-		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
+		//('(' parameter+=(Parameter) (',' parameter+=(Parameter))* ')')?
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'('
 		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
 		
-		//parameter+=Parameter
+		//parameter+=(Parameter)
 		public Assignment getParameterAssignment_0_1() { return cParameterAssignment_0_1; }
 		
-		//Parameter
+		//(Parameter)
 		public RuleCall getParameterParameterParserRuleCall_0_1_0() { return cParameterParameterParserRuleCall_0_1_0; }
 		
-		//(',' parameter+=Parameter)*
+		//(',' parameter+=(Parameter))*
 		public Group getGroup_0_2() { return cGroup_0_2; }
 		
 		//','
 		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
 		
-		//parameter+=Parameter
+		//parameter+=(Parameter)
 		public Assignment getParameterAssignment_0_2_1() { return cParameterAssignment_0_2_1; }
 		
-		//Parameter
+		//(Parameter)
 		public RuleCall getParameterParameterParserRuleCall_0_2_1_0() { return cParameterParameterParserRuleCall_0_2_1_0; }
 		
 		//')'
@@ -89,10 +91,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'body'
 		public Keyword getBodyKeyword_1() { return cBodyKeyword_1; }
 		
-		//content=(Content | ParameterRef)
+		//content=(Content|ParameterRef)
 		public Assignment getContentAssignment_2() { return cContentAssignment_2; }
 		
-		//(Content | ParameterRef)
+		//(Content|ParameterRef)
 		public Alternatives getContentAlternatives_2_0() { return cContentAlternatives_2_0; }
 		
 		//Content
@@ -101,7 +103,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ParameterRef
 		public RuleCall getContentParameterRefParserRuleCall_2_0_1() { return cContentParameterRefParserRuleCall_2_0_1; }
 		
-		//foo+=Foo+
+		//(foo+=Foo)+
 		public Assignment getFooAssignment_3() { return cFooAssignment_3; }
 		
 		//Foo
@@ -117,10 +119,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cFooValueSTRINGTerminalRuleCall_0 = (RuleCall)cFooValueAssignment.eContents().get(0);
 		
 		//Foo:
-		//	fooValue=STRING;
+		//    fooValue = STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//fooValue=STRING
+		//fooValue = STRING
 		public Assignment getFooValueAssignment() { return cFooValueAssignment; }
 		
 		//STRING
@@ -133,10 +135,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cMyElementParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cEndContentKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Content:
-		//	'content' MyElement
-		//	/* SuppressWarnings[SpacesInKeyword] */
-		//	'end content';
+		//Content :
+		//    'content' MyElement
+		//    /* SuppressWarnings[SpacesInKeyword] */
+		//    'end content' ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'content' MyElement
@@ -163,20 +165,20 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cBarMyIntParserRuleCall_1_0_0 = (RuleCall)cBarAlternatives_1_0.eContents().get(0);
 		private final RuleCall cBarParameterRefParserRuleCall_1_0_1 = (RuleCall)cBarAlternatives_1_0.eContents().get(1);
 		
-		//MyElement:
-		//	'element' bar=(MyInt | ParameterRef);
+		//MyElement :
+		//    'element' bar=(MyInt|ParameterRef);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'element' bar=(MyInt | ParameterRef)
+		//'element' bar=(MyInt|ParameterRef)
 		public Group getGroup() { return cGroup; }
 		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
 		
-		//bar=(MyInt | ParameterRef)
+		//bar=(MyInt|ParameterRef)
 		public Assignment getBarAssignment_1() { return cBarAssignment_1; }
 		
-		//(MyInt | ParameterRef)
+		//(MyInt|ParameterRef)
 		public Alternatives getBarAlternatives_1_0() { return cBarAlternatives_1_0; }
 		
 		//MyInt
@@ -192,8 +194,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cContentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cParameterRefParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//ParameterObject:
-		//	MyInt | Content | ParameterRef;
+		//ParameterObject :
+		//    MyInt | Content | ParameterRef    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//MyInt | Content | ParameterRef
@@ -218,12 +220,12 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValueParameterObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cValueParameterObjectCrossReference_1_0.eContents().get(1);
 		
 		//Parameter:
-		//	name=ID
-		//	value=[ParameterObject]?;
+		//    name=ID
+		//    (value=[ParameterObject])?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
-		//value=[ParameterObject]?
+		//(value=[ParameterObject])?
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -232,7 +234,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
-		//value=[ParameterObject]?
+		//(value=[ParameterObject])?
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 		
 		//[ParameterObject]
@@ -248,7 +250,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cParameterParameterIDTerminalRuleCall_0_1 = (RuleCall)cParameterParameterCrossReference_0.eContents().get(1);
 		
 		//ParameterRef:
-		//	parameter=[Parameter];
+		//    parameter=[Parameter];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//parameter=[Parameter]
@@ -265,8 +267,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cIntAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cIntINTTerminalRuleCall_0 = (RuleCall)cIntAssignment.eContents().get(0);
 		
-		//MyInt:
-		//	int=INT;
+		//MyInt :
+		//    int=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//int=INT
@@ -332,12 +334,13 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Body:
-	//	('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
-	//	'body'
-	//	content=(Content | ParameterRef) foo+=Foo+
-	//	/* SuppressWarnings[SpacesInKeyword] */
-	//	'end body';
+	//Body :
+	//    ('(' parameter+=(Parameter) (',' parameter+=(Parameter))* ')')?
+	//    'body'
+	//    content=(Content|ParameterRef)
+	//    (foo+=Foo)+
+	//    /* SuppressWarnings[SpacesInKeyword] */
+	//    'end body';
 	public BodyElements getBodyAccess() {
 		return pBody;
 	}
@@ -347,7 +350,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Foo:
-	//	fooValue=STRING;
+	//    fooValue = STRING;
 	public FooElements getFooAccess() {
 		return pFoo;
 	}
@@ -356,10 +359,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getFooAccess().getRule();
 	}
 	
-	//Content:
-	//	'content' MyElement
-	//	/* SuppressWarnings[SpacesInKeyword] */
-	//	'end content';
+	//Content :
+	//    'content' MyElement
+	//    /* SuppressWarnings[SpacesInKeyword] */
+	//    'end content' ;
 	public ContentElements getContentAccess() {
 		return pContent;
 	}
@@ -368,8 +371,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getContentAccess().getRule();
 	}
 	
-	//MyElement:
-	//	'element' bar=(MyInt | ParameterRef);
+	//MyElement :
+	//    'element' bar=(MyInt|ParameterRef);
 	public MyElementElements getMyElementAccess() {
 		return pMyElement;
 	}
@@ -378,8 +381,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getMyElementAccess().getRule();
 	}
 	
-	//ParameterObject:
-	//	MyInt | Content | ParameterRef;
+	//ParameterObject :
+	//    MyInt | Content | ParameterRef    ;
 	public ParameterObjectElements getParameterObjectAccess() {
 		return pParameterObject;
 	}
@@ -389,8 +392,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Parameter:
-	//	name=ID
-	//	value=[ParameterObject]?;
+	//    name=ID
+	//    (value=[ParameterObject])?;
 	public ParameterElements getParameterAccess() {
 		return pParameter;
 	}
@@ -400,7 +403,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ParameterRef:
-	//	parameter=[Parameter];
+	//    parameter=[Parameter];
 	public ParameterRefElements getParameterRefAccess() {
 		return pParameterRef;
 	}
@@ -409,8 +412,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getParameterRefAccess().getRule();
 	}
 	
-	//MyInt:
-	//	int=INT;
+	//MyInt :
+	//    int=INT;
 	public MyIntElements getMyIntAccess() {
 		return pMyInt;
 	}
@@ -419,45 +422,40 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getMyIntAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

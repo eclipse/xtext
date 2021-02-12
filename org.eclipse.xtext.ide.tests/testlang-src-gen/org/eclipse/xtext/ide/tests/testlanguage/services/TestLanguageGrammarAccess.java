@@ -35,7 +35,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Model:
-		//	elements+=AbstractElement*;
+		//    elements+=AbstractElement*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//elements+=AbstractElement*
@@ -56,13 +57,14 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//PackageDeclaration:
-		//	'package' name=QualifiedName '{'
-		//	elements+=AbstractElement*
-		//	'}';
+		//    'package' name=QualifiedName '{'
+		//        (elements+=AbstractElement)*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'package' name=QualifiedName '{'
-		//elements+=AbstractElement*
+		//    (elements+=AbstractElement)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -78,7 +80,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//elements+=AbstractElement*
+		//(elements+=AbstractElement)*
 		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 		
 		//AbstractElement
@@ -94,10 +96,13 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cTypeDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractElement:
-		//	PackageDeclaration | TypeDeclaration;
+		//    PackageDeclaration |
+		//    TypeDeclaration
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PackageDeclaration | TypeDeclaration
+		//PackageDeclaration |
+		//TypeDeclaration
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//PackageDeclaration
@@ -123,13 +128,14 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TypeDeclaration:
-		//	'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
-		//	members+=Member*
-		//	'}';
+		//    'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
+		//       members+=Member*
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
-		//members+=Member*
+		//   members+=Member*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -175,11 +181,14 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cPropertyParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cOperationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Member:
-		//	Property | Operation;
+		//Member returns Member:
+		//    Property |
+		//    Operation
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Property | Operation
+		//Property |
+		//Operation
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Property
@@ -197,7 +206,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Property:
-		//	type=Type name=ID;
+		//    type=Type name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type=Type name=ID
@@ -226,11 +236,12 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cArrayDiemensionsLeftSquareBracketKeyword_1_0_0 = (Keyword)cArrayDiemensionsAssignment_1_0.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
-		//Type:
-		//	(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*;
+		//Type :
+		//    (TypeReference | PrimitiveType) (arrayDiemensions+='['']')*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*
+		//(TypeReference | PrimitiveType) (arrayDiemensions+='['']')*
 		public Group getGroup() { return cGroup; }
 		
 		//(TypeReference | PrimitiveType)
@@ -242,7 +253,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//PrimitiveType
 		public RuleCall getPrimitiveTypeParserRuleCall_0_1() { return cPrimitiveTypeParserRuleCall_0_1; }
 		
-		//(arrayDiemensions+='[' ']')*
+		//(arrayDiemensions+='['']')*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//arrayDiemensions+='['
@@ -279,14 +290,15 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cOperationCallOperationCallParserRuleCall_8_0 = (RuleCall)cOperationCallAssignment_8.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
-		//Operation:
-		//	{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
-		//	operationCall=OperationCall?
-		//	'}';
+		//Operation returns Operation:
+		//    {Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+		//        (operationCall=OperationCall)?
+		//    '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
-		//operationCall=OperationCall?
+		//    (operationCall=OperationCall)?
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -344,7 +356,7 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
 		
-		//operationCall=OperationCall?
+		//(operationCall=OperationCall)?
 		public Assignment getOperationCallAssignment_8() { return cOperationCallAssignment_8; }
 		
 		//OperationCall
@@ -370,16 +382,17 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//OperationCall:
-		//	operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')';
+		//    operation=[Operation|ID] '(' (params+=INT (',' params+=INT)*)? ')'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')'
+		//operation=[Operation|ID] '(' (params+=INT (',' params+=INT)*)? ')'
 		public Group getGroup() { return cGroup; }
 		
-		//operation=[Operation]
+		//operation=[Operation|ID]
 		public Assignment getOperationAssignment_0() { return cOperationAssignment_0; }
 		
-		//[Operation]
+		//[Operation|ID]
 		public CrossReference getOperationOperationCrossReference_0_0() { return cOperationOperationCrossReference_0_0; }
 		
 		//ID
@@ -422,8 +435,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTypeTypeParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
-		//Parameter:
-		//	{Parameter} name=ID ':' type=Type;
+		//Parameter returns Parameter:
+		//    {Parameter} name=ID ':' type=Type
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Parameter} name=ID ':' type=Type
@@ -454,7 +468,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cTypeRefTypeDeclarationQualifiedNameParserRuleCall_0_1 = (RuleCall)cTypeRefTypeDeclarationCrossReference_0.eContents().get(1);
 		
 		//TypeReference:
-		//	typeRef=[TypeDeclaration|QualifiedName];
+		//    typeRef=[TypeDeclaration|QualifiedName]
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//typeRef=[TypeDeclaration|QualifiedName]
@@ -476,13 +491,14 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cNameVoidKeyword_0_3 = (Keyword)cNameAlternatives_0.eContents().get(3);
 		
 		//PrimitiveType:
-		//	name=('string' | 'int' | 'boolean' | 'void');
+		//    name=('string'|'int'|'boolean'|'void')
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=('string' | 'int' | 'boolean' | 'void')
+		//name=('string'|'int'|'boolean'|'void')
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
-		//('string' | 'int' | 'boolean' | 'void')
+		//('string'|'int'|'boolean'|'void')
 		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
 		
 		//'string'
@@ -506,7 +522,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ('.' ID)*;
+		//    ID ('.' ID)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ('.' ID)*
@@ -592,7 +609,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 
 	
 	//Model:
-	//	elements+=AbstractElement*;
+	//    elements+=AbstractElement*
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -602,9 +620,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//PackageDeclaration:
-	//	'package' name=QualifiedName '{'
-	//	elements+=AbstractElement*
-	//	'}';
+	//    'package' name=QualifiedName '{'
+	//        (elements+=AbstractElement)*
+	//    '}'
+	//;
 	public PackageDeclarationElements getPackageDeclarationAccess() {
 		return pPackageDeclaration;
 	}
@@ -614,7 +633,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//AbstractElement:
-	//	PackageDeclaration | TypeDeclaration;
+	//    PackageDeclaration |
+	//    TypeDeclaration
+	//;
 	public AbstractElementElements getAbstractElementAccess() {
 		return pAbstractElement;
 	}
@@ -624,9 +645,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//TypeDeclaration:
-	//	'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
-	//	members+=Member*
-	//	'}';
+	//    'type' name=ID ('extends' superType=[TypeDeclaration|QualifiedName])? '{'
+	//       members+=Member*
+	//    '}'
+	//;
 	public TypeDeclarationElements getTypeDeclarationAccess() {
 		return pTypeDeclaration;
 	}
@@ -635,8 +657,10 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getTypeDeclarationAccess().getRule();
 	}
 	
-	//Member:
-	//	Property | Operation;
+	//Member returns Member:
+	//    Property |
+	//    Operation
+	//;
 	public MemberElements getMemberAccess() {
 		return pMember;
 	}
@@ -646,7 +670,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//Property:
-	//	type=Type name=ID;
+	//    type=Type name=ID
+	//;
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -655,8 +680,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getPropertyAccess().getRule();
 	}
 	
-	//Type:
-	//	(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*;
+	//Type :
+	//    (TypeReference | PrimitiveType) (arrayDiemensions+='['']')*
+	//;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -665,10 +691,11 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getTypeAccess().getRule();
 	}
 	
-	//Operation:
-	//	{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
-	//	operationCall=OperationCall?
-	//	'}';
+	//Operation returns Operation:
+	//    {Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+	//        (operationCall=OperationCall)?
+	//    '}'
+	//;
 	public OperationElements getOperationAccess() {
 		return pOperation;
 	}
@@ -678,7 +705,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//OperationCall:
-	//	operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')';
+	//    operation=[Operation|ID] '(' (params+=INT (',' params+=INT)*)? ')'
+	//;
 	public OperationCallElements getOperationCallAccess() {
 		return pOperationCall;
 	}
@@ -687,8 +715,9 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getOperationCallAccess().getRule();
 	}
 	
-	//Parameter:
-	//	{Parameter} name=ID ':' type=Type;
+	//Parameter returns Parameter:
+	//    {Parameter} name=ID ':' type=Type
+	//;
 	public ParameterElements getParameterAccess() {
 		return pParameter;
 	}
@@ -698,7 +727,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//TypeReference:
-	//	typeRef=[TypeDeclaration|QualifiedName];
+	//    typeRef=[TypeDeclaration|QualifiedName]
+	//;
 	public TypeReferenceElements getTypeReferenceAccess() {
 		return pTypeReference;
 	}
@@ -708,7 +738,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//PrimitiveType:
-	//	name=('string' | 'int' | 'boolean' | 'void');
+	//    name=('string'|'int'|'boolean'|'void')
+	//;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return pPrimitiveType;
 	}
@@ -718,7 +749,8 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//QualifiedName:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*
+	//;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -727,45 +759,40 @@ public class TestLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

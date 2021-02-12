@@ -45,10 +45,10 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cElementRule4ParserRuleCall_3_1_0 = (RuleCall)cElementAssignment_3_1.eContents().get(0);
 		
 		//Root:
-		//	'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4;
+		//    ('1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3| '4' element=Rule4);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4
+		//('1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3| '4' element=Rule4)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'1' element=Rule1
@@ -110,7 +110,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cUnitSecondEnumEnumRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
 		
 		//Rule1:
-		//	type=FirstEnum value=INT unit=SecondEnum;
+		//    type=FirstEnum value=INT unit=SecondEnum
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type=FirstEnum value=INT unit=SecondEnum
@@ -143,16 +144,17 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Rule2:
-		//	'after' value=INT 's';
+		//    'after' value =INT 's'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'after' value=INT 's'
+		//'after' value =INT 's'
 		public Group getGroup() { return cGroup; }
 		
 		//'after'
 		public Keyword getAfterKeyword_0() { return cAfterKeyword_0; }
 		
-		//value=INT
+		//value =INT
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 		
 		//INT
@@ -170,7 +172,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cSParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Rule3:
-		//	After value=INT S;
+		//     After value=INT S
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//After value=INT S
@@ -199,13 +202,14 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cSSObjParserRuleCall_2_0 = (RuleCall)cSAssignment_2.eContents().get(0);
 		
 		//Rule4:
-		//	after=AfterObj value=INT s=SObj;
+		//    after= AfterObj value=INT s=SObj
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//after=AfterObj value=INT s=SObj
+		//after= AfterObj value=INT s=SObj
 		public Group getGroup() { return cGroup; }
 		
-		//after=AfterObj
+		//after= AfterObj
 		public Assignment getAfterAssignment_0() { return cAfterAssignment_0; }
 		
 		//AfterObj
@@ -229,7 +233,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
 		//AfterObj:
-		//	value='after';
+		//    value='after'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value='after'
@@ -244,7 +249,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
 		//SObj:
-		//	value='s';
+		//    value='s'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value='s'
@@ -258,7 +264,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cAfterKeyword = (Keyword)rule.eContents().get(1);
 		
 		//After:
-		//	'after';
+		//    'after'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'after'
@@ -269,7 +276,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSKeyword = (Keyword)rule.eContents().get(1);
 		
 		//S:
-		//	's';
+		//    's'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'s'
@@ -282,7 +290,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
 		
 		//enum FirstEnum:
-		//	value='after';
+		//    value='after';
 		public EnumRule getRule() { return rule; }
 		
 		//value='after'
@@ -297,7 +305,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
 		
 		//enum SecondEnum:
-		//	value='s';
+		//    value='s';
 		public EnumRule getRule() { return rule; }
 		
 		//value='s'
@@ -369,7 +377,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Root:
-	//	'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4;
+	//    ('1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3| '4' element=Rule4);
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -379,7 +387,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Rule1:
-	//	type=FirstEnum value=INT unit=SecondEnum;
+	//    type=FirstEnum value=INT unit=SecondEnum
+	//;
 	public Rule1Elements getRule1Access() {
 		return pRule1;
 	}
@@ -389,7 +398,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Rule2:
-	//	'after' value=INT 's';
+	//    'after' value =INT 's'
+	//;
 	public Rule2Elements getRule2Access() {
 		return pRule2;
 	}
@@ -399,7 +409,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Rule3:
-	//	After value=INT S;
+	//     After value=INT S
+	//;
 	public Rule3Elements getRule3Access() {
 		return pRule3;
 	}
@@ -409,7 +420,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Rule4:
-	//	after=AfterObj value=INT s=SObj;
+	//    after= AfterObj value=INT s=SObj
+	//;
 	public Rule4Elements getRule4Access() {
 		return pRule4;
 	}
@@ -419,7 +431,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum FirstEnum:
-	//	value='after';
+	//    value='after';
 	public FirstEnumElements getFirstEnumAccess() {
 		return eFirstEnum;
 	}
@@ -429,7 +441,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum SecondEnum:
-	//	value='s';
+	//    value='s';
 	public SecondEnumElements getSecondEnumAccess() {
 		return eSecondEnum;
 	}
@@ -439,7 +451,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//AfterObj:
-	//	value='after';
+	//    value='after'
+	//;
 	public AfterObjElements getAfterObjAccess() {
 		return pAfterObj;
 	}
@@ -449,7 +462,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SObj:
-	//	value='s';
+	//    value='s'
+	//;
 	public SObjElements getSObjAccess() {
 		return pSObj;
 	}
@@ -459,7 +473,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//After:
-	//	'after';
+	//    'after'
+	//;
 	public AfterElements getAfterAccess() {
 		return pAfter;
 	}
@@ -469,7 +484,8 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//S:
-	//	's';
+	//    's'
+	//;
 	public SElements getSAccess() {
 		return pS;
 	}
@@ -478,45 +494,40 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getSAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -51,12 +51,10 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cValueListParserRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
 		
 		//Root:
-		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-		//	mixed=Mixed | "8" ValueList;
+		//    Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed | "8" ValueList;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-		//mixed=Mixed | "8" ValueList
+		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed | "8" ValueList
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Simple
@@ -127,7 +125,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Simple:
-		//	"1" name=ID;
+		//    "1" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"1" name=ID
@@ -150,7 +148,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cDelegateDelegateParserRuleCall_1_0 = (RuleCall)cDelegateAssignment_1.eContents().get(0);
 		
 		//Delegation:
-		//	"2" delegate=Delegate;
+		//    "2" delegate=Delegate;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"2" delegate=Delegate
@@ -172,7 +170,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cDelegateParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Unassigned:
-		//	"3" Delegate;
+		//    "3" Delegate;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"3" Delegate
@@ -192,7 +190,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cDelegatePrefixedDelegateParserRuleCall_1_0 = (RuleCall)cDelegateAssignment_1.eContents().get(0);
 		
 		//PrefixedUnassigned:
-		//	"4" delegate=PrefixedDelegate;
+		//    "4" delegate=PrefixedDelegate;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"4" delegate=PrefixedDelegate
@@ -214,7 +212,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cDelegateParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//PrefixedDelegate:
-		//	"prefix" Delegate;
+		//    "prefix" Delegate;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"prefix" Delegate
@@ -232,7 +230,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Delegate:
-		//	name=ID;
+		//    name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -252,7 +250,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cRightPrimaryParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Expression:
-		//	Primary ({Add.left=current} "+" right=Primary)*;
+		//    Primary ({Add.left=current} "+" right=Primary)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Primary ({Add.left=current} "+" right=Primary)*
@@ -285,8 +283,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
 		private final RuleCall cParenthesizedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Primary Expression:
-		//	{Named} name=ID | Parenthesized;
+		//Primary returns Expression:
+		//    {Named} name=ID | Parenthesized;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Named} name=ID | Parenthesized
@@ -314,8 +312,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Parenthesized Expression:
-		//	"(" Expression ")";
+		//Parenthesized returns Expression:
+		//    "(" Expression ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"(" Expression ")"
@@ -372,14 +370,22 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final Keyword cEndKeyword_4_2_1 = (Keyword)cGroup_4_2.eContents().get(1);
 		
 		//Mixed:
-		//	"(" ("unassigned" (ID | Datatype))? ({Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed |
-		//	datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
-		//	")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+		//    "("
+		//    ("unassigned" (ID | Datatype))?
+		//    ({Action} ("fragment" Fragment)? |
+		//    Mixed |
+		//    (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum))
+		//    ")"
+		//    ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"(" ("unassigned" (ID | Datatype))? ({Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed |
-		//datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
-		//")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*
+		//"("
+		//("unassigned" (ID | Datatype))?
+		//({Action} ("fragment" Fragment)? |
+		//Mixed |
+		//(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum))
+		//")"
+		//({AssignedAction.child=current} "action" (body=Mixed "end")?)*
 		public Group getGroup() { return cGroup; }
 		
 		//"("
@@ -400,8 +406,9 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		//Datatype
 		public RuleCall getDatatypeParserRuleCall_1_1_1() { return cDatatypeParserRuleCall_1_1_1; }
 		
-		//({Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] |
-		//lit=Enum))
+		//({Action} ("fragment" Fragment)? |
+		//Mixed |
+		//(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum))
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//{Action} ("fragment" Fragment)?
@@ -422,7 +429,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		//Mixed
 		public RuleCall getMixedParserRuleCall_2_1() { return cMixedParserRuleCall_2_1; }
 		
-		//(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
+		//(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum)
 		public Alternatives getAlternatives_2_2() { return cAlternatives_2_2; }
 		
 		//name=ID
@@ -449,16 +456,16 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		//Datatype
 		public RuleCall getDatatypeDatatypeParserRuleCall_2_2_2_0() { return cDatatypeDatatypeParserRuleCall_2_2_2_0; }
 		
-		//"ref" ref=[Mixed]
+		//"ref" ref=[Mixed|ID]
 		public Group getGroup_2_2_3() { return cGroup_2_2_3; }
 		
 		//"ref"
 		public Keyword getRefKeyword_2_2_3_0() { return cRefKeyword_2_2_3_0; }
 		
-		//ref=[Mixed]
+		//ref=[Mixed|ID]
 		public Assignment getRefAssignment_2_2_3_1() { return cRefAssignment_2_2_3_1; }
 		
-		//[Mixed]
+		//[Mixed|ID]
 		public CrossReference getRefMixedCrossReference_2_2_3_1_0() { return cRefMixedCrossReference_2_2_3_1_0; }
 		
 		//ID
@@ -503,7 +510,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		
 		//Datatype:
-		//	"datatype" (Datatype | ID);
+		//    "datatype" (Datatype | ID);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"datatype" (Datatype | ID)
@@ -535,7 +542,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cFragmentParserRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
 		
 		//fragment Fragment returns Mixed:
-		//	fragName=ID | "child" mixed=Mixed | "recursion" Fragment;
+		//    fragName=ID | "child" mixed=Mixed | "recursion" Fragment;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//fragName=ID | "child" mixed=Mixed | "recursion" Fragment
@@ -576,7 +583,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//ValueList:
-		//	{ValueList} name+=ID*;
+		//    {ValueList} name+=ID*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{ValueList} name+=ID*
@@ -601,7 +609,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		private final Keyword cLit2Lit2Keyword_1_0 = (Keyword)cLit2EnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum Enum:
-		//	lit1 | lit2;
+		//    lit1 | lit2;
 		public EnumRule getRule() { return rule; }
 		
 		//lit1 | lit2
@@ -610,13 +618,11 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
 		
-		//"lit1"
 		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
 		
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
 		
-		//"lit2"
 		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
 	}
 	
@@ -690,8 +696,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 
 	
 	//Root:
-	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
-	//	mixed=Mixed | "8" ValueList;
+	//    Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")? mixed=Mixed | "8" ValueList;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -701,7 +706,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Simple:
-	//	"1" name=ID;
+	//    "1" name=ID;
 	public SimpleElements getSimpleAccess() {
 		return pSimple;
 	}
@@ -711,7 +716,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Delegation:
-	//	"2" delegate=Delegate;
+	//    "2" delegate=Delegate;
 	public DelegationElements getDelegationAccess() {
 		return pDelegation;
 	}
@@ -721,7 +726,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Unassigned:
-	//	"3" Delegate;
+	//    "3" Delegate;
 	public UnassignedElements getUnassignedAccess() {
 		return pUnassigned;
 	}
@@ -731,7 +736,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//PrefixedUnassigned:
-	//	"4" delegate=PrefixedDelegate;
+	//    "4" delegate=PrefixedDelegate;
 	public PrefixedUnassignedElements getPrefixedUnassignedAccess() {
 		return pPrefixedUnassigned;
 	}
@@ -741,7 +746,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//PrefixedDelegate:
-	//	"prefix" Delegate;
+	//    "prefix" Delegate;
 	public PrefixedDelegateElements getPrefixedDelegateAccess() {
 		return pPrefixedDelegate;
 	}
@@ -751,7 +756,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Delegate:
-	//	name=ID;
+	//    name=ID;
 	public DelegateElements getDelegateAccess() {
 		return pDelegate;
 	}
@@ -761,7 +766,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Expression:
-	//	Primary ({Add.left=current} "+" right=Primary)*;
+	//    Primary ({Add.left=current} "+" right=Primary)*;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -770,8 +775,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		return getExpressionAccess().getRule();
 	}
 	
-	//Primary Expression:
-	//	{Named} name=ID | Parenthesized;
+	//Primary returns Expression:
+	//    {Named} name=ID | Parenthesized;
 	public PrimaryElements getPrimaryAccess() {
 		return pPrimary;
 	}
@@ -780,8 +785,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		return getPrimaryAccess().getRule();
 	}
 	
-	//Parenthesized Expression:
-	//	"(" Expression ")";
+	//Parenthesized returns Expression:
+	//    "(" Expression ")";
 	public ParenthesizedElements getParenthesizedAccess() {
 		return pParenthesized;
 	}
@@ -791,9 +796,13 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Mixed:
-	//	"(" ("unassigned" (ID | Datatype))? ({Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed |
-	//	datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
-	//	")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+	//    "("
+	//    ("unassigned" (ID | Datatype))?
+	//    ({Action} ("fragment" Fragment)? |
+	//    Mixed |
+	//    (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed|ID] | lit=Enum))
+	//    ")"
+	//    ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
 	public MixedElements getMixedAccess() {
 		return pMixed;
 	}
@@ -803,7 +812,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//Datatype:
-	//	"datatype" (Datatype | ID);
+	//    "datatype" (Datatype | ID);
 	public DatatypeElements getDatatypeAccess() {
 		return pDatatype;
 	}
@@ -813,7 +822,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//fragment Fragment returns Mixed:
-	//	fragName=ID | "child" mixed=Mixed | "recursion" Fragment;
+	//    fragName=ID | "child" mixed=Mixed | "recursion" Fragment;
 	public FragmentElements getFragmentAccess() {
 		return pFragment;
 	}
@@ -823,7 +832,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//enum Enum:
-	//	lit1 | lit2;
+	//    lit1 | lit2;
 	public EnumElements getEnumAccess() {
 		return eEnum;
 	}
@@ -833,7 +842,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//ValueList:
-	//	{ValueList} name+=ID*;
+	//    {ValueList} name+=ID*
+	//;
 	public ValueListElements getValueListAccess() {
 		return pValueList;
 	}
@@ -842,45 +852,40 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractElementFinder
 		return getValueListAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

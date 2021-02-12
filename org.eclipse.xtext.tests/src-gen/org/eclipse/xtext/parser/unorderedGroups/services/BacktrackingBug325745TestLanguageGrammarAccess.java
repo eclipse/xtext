@@ -32,16 +32,19 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final RuleCall cFieldsElementParserRuleCall_1_0 = (RuleCall)cFieldsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	{Model} fields+=Element+;
+		//    {Model}
+		//    (fields+=Element)+
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} fields+=Element+
+		//{Model}
+		//(fields+=Element)+
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//fields+=Element+
+		//(fields+=Element)+
 		public Assignment getFieldsAssignment_1() { return cFieldsAssignment_1; }
 		
 		//Element
@@ -58,15 +61,18 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		private final Keyword cFullStopKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Element:
-		//	name=ID
-		//	dataType=DataType?
-		//	expression=Expression '.';
+		//Element :
+		//    name=ID
+		//    (dataType=DataType)?
+		//    (expression=Expression)
+		//    '.'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
-		//dataType=DataType?
-		//expression=Expression '.'
+		//(dataType=DataType)?
+		//(expression=Expression)
+		//'.'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -75,13 +81,13 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
-		//dataType=DataType?
+		//(dataType=DataType)?
 		public Assignment getDataTypeAssignment_1() { return cDataTypeAssignment_1; }
 		
 		//DataType
 		public RuleCall getDataTypeDataTypeParserRuleCall_1_0() { return cDataTypeDataTypeParserRuleCall_1_0; }
 		
-		//expression=Expression
+		//(expression=Expression)
 		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
 		
 		//Expression
@@ -100,11 +106,12 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final Assignment cDefaultValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cDefaultValueSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cDefaultValueAssignment_1_1.eContents().get(0);
 		
-		//DataType:
-		//	baseType=ID (':=' defaultValue=STRING)?;
+		//DataType :
+		//    (baseType=ID (':=' defaultValue=STRING)?)
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//baseType=ID (':=' defaultValue=STRING)?
+		//(baseType=ID (':=' defaultValue=STRING)?)
 		public Group getGroup() { return cGroup; }
 		
 		//baseType=ID
@@ -144,10 +151,17 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final RuleCall cPostfixSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cPostfixAssignment_3_1.eContents().get(0);
 		
 		//Expression:
-		//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
+		//  {Expression}
+		//  ('['? & prefix=STRING?)
+		//  ('['? terms+=SimpleTerm ']'?)*
+		//  (']'? & postfix=STRING?)
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?)
+		//{Expression}
+		//('['? & prefix=STRING?)
+		//('['? terms+=SimpleTerm ']'?)*
+		//(']'? & postfix=STRING?)
 		public Group getGroup() { return cGroup; }
 		
 		//{Expression}
@@ -208,25 +222,26 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		private final RuleCall cRefCharIDTerminalRuleCall_1_0 = (RuleCall)cRefCharAssignment_1.eContents().get(0);
 		
 		//SimpleTerm:
-		//	lineCount=INT
-		//	'*'?
-		//	charCount=INT?
-		//	'!'?
-		//	charSet=ID? | refChar=ID;
+		//  (lineCount=INT
+		//  '*'?
+		//  (charCount=INT)?
+		//  '!'?
+		//  (charSet=ID)?) | refChar=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//lineCount=INT
+		//(lineCount=INT
 		//'*'?
-		//charCount=INT?
+		//(charCount=INT)?
 		//'!'?
-		//charSet=ID? | refChar=ID
+		//(charSet=ID)?) | refChar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//lineCount=INT
+		//(lineCount=INT
 		//'*'?
-		//charCount=INT?
+		//(charCount=INT)?
 		//'!'?
-		//charSet=ID?
+		//(charSet=ID)?)
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//lineCount=INT
@@ -238,7 +253,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		//'*'?
 		public Keyword getAsteriskKeyword_0_1() { return cAsteriskKeyword_0_1; }
 		
-		//charCount=INT?
+		//(charCount=INT)?
 		public Assignment getCharCountAssignment_0_2() { return cCharCountAssignment_0_2; }
 		
 		//INT
@@ -247,7 +262,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		//'!'?
 		public Keyword getExclamationMarkKeyword_0_3() { return cExclamationMarkKeyword_0_3; }
 		
-		//charSet=ID?
+		//(charSet=ID)?
 		public Assignment getCharSetAssignment_0_4() { return cCharSetAssignment_0_4; }
 		
 		//ID
@@ -311,7 +326,9 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 
 	
 	//Model:
-	//	{Model} fields+=Element+;
+	//    {Model}
+	//    (fields+=Element)+
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -320,10 +337,12 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	name=ID
-	//	dataType=DataType?
-	//	expression=Expression '.';
+	//Element :
+	//    name=ID
+	//    (dataType=DataType)?
+	//    (expression=Expression)
+	//    '.'
+	//;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -332,8 +351,9 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		return getElementAccess().getRule();
 	}
 	
-	//DataType:
-	//	baseType=ID (':=' defaultValue=STRING)?;
+	//DataType :
+	//    (baseType=ID (':=' defaultValue=STRING)?)
+	//;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}
@@ -343,7 +363,11 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 	}
 	
 	//Expression:
-	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
+	//  {Expression}
+	//  ('['? & prefix=STRING?)
+	//  ('['? terms+=SimpleTerm ']'?)*
+	//  (']'? & postfix=STRING?)
+	//;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -353,11 +377,12 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 	}
 	
 	//SimpleTerm:
-	//	lineCount=INT
-	//	'*'?
-	//	charCount=INT?
-	//	'!'?
-	//	charSet=ID? | refChar=ID;
+	//  (lineCount=INT
+	//  '*'?
+	//  (charCount=INT)?
+	//  '!'?
+	//  (charSet=ID)?) | refChar=ID
+	//;
 	public SimpleTermElements getSimpleTermAccess() {
 		return pSimpleTerm;
 	}
@@ -366,45 +391,40 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractElem
 		return getSimpleTermAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

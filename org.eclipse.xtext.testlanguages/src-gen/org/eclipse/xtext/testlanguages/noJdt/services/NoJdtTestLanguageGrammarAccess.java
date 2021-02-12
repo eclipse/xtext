@@ -27,11 +27,10 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cGreetingsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cGreetingsGreetingParserRuleCall_0 = (RuleCall)cGreetingsAssignment.eContents().get(0);
 		
-		//Model:
-		//	greetings+=Greeting;
+		//Model: greetings += Greeting;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//greetings+=Greeting
+		//greetings += Greeting
 		public Assignment getGreetingsAssignment() { return cGreetingsAssignment; }
 		
 		//Greeting
@@ -52,8 +51,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		private final Keyword cExclamationMarkKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Greeting:
-		//	'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
+		//Greeting: 'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!'
@@ -137,8 +135,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 
 	
-	//Model:
-	//	greetings+=Greeting;
+	//Model: greetings += Greeting;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -147,8 +144,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getModelAccess().getRule();
 	}
 	
-	//Greeting:
-	//	'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
+	//Greeting: 'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
 	public GreetingElements getGreetingAccess() {
 		return pGreeting;
 	}
@@ -157,45 +153,40 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getGreetingAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

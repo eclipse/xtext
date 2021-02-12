@@ -80,40 +80,41 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cWithTransientContainerParserRuleCall_14_1 = (RuleCall)cGroup_14.eContents().get(1);
 		
 		//Model:
-		//	"#1" Node |
-		//	"#2" MandatoryValue |
-		//	"#3" OptionalValue |
-		//	"#4" MandatoryChild |
-		//	"#5" OptionalChild |
-		//	"#10" ManyOptionalValues |
-		//	"#11" ManyMandatoryValues |
-		//	"#12" MandatoryChildList |
-		//	"#13" OptionalChildList |
-		////	"#14" Imports |
-		//	"#20" clazz+=EClassDecl+ |
-		//	"#21" EClassRef |
-		//	"#22" TwoChildLists |
-		//	"#23" ChildWithSubChilds |
-		//	"#24" TwoChilds |
-		//	"#30" WithTransientContainer;
+		//    "#1" Node |
+		//    "#2" MandatoryValue |
+		//    "#3" OptionalValue |
+		//    "#4" MandatoryChild |
+		//    "#5" OptionalChild |
+		//    "#10" ManyOptionalValues |
+		//    "#11" ManyMandatoryValues |
+		//    "#12" MandatoryChildList |
+		//    "#13" OptionalChildList |
+		////    "#14" Imports |
+		//    "#20" clazz+=EClassDecl+ |
+		//    "#21" EClassRef |
+		//    "#22" TwoChildLists |
+		//    "#23" ChildWithSubChilds |
+		//    "#24" TwoChilds |
+		//    "#30" WithTransientContainer
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#1" Node |
-		//"#2" MandatoryValue |
-		//"#3" OptionalValue |
-		//"#4" MandatoryChild |
-		//"#5" OptionalChild |
-		//"#10" ManyOptionalValues |
-		//"#11" ManyMandatoryValues |
-		//"#12" MandatoryChildList |
-		//"#13" OptionalChildList |
-		////	"#14" Imports |
-		//"#20" clazz+=EClassDecl+ |
-		//"#21" EClassRef |
-		//"#22" TwoChildLists |
-		//"#23" ChildWithSubChilds |
-		//"#24" TwoChilds |
-		//"#30" WithTransientContainer
+		//    "#1" Node |
+		//    "#2" MandatoryValue |
+		//    "#3" OptionalValue |
+		//    "#4" MandatoryChild |
+		//    "#5" OptionalChild |
+		//    "#10" ManyOptionalValues |
+		//    "#11" ManyMandatoryValues |
+		//    "#12" MandatoryChildList |
+		//    "#13" OptionalChildList |
+		////    "#14" Imports |
+		//    "#20" clazz+=EClassDecl+ |
+		//    "#21" EClassRef |
+		//    "#22" TwoChildLists |
+		//    "#23" ChildWithSubChilds |
+		//    "#24" TwoChilds |
+		//    "#30" WithTransientContainer
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#1" Node
@@ -197,12 +198,12 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//OptionalChildList
 		public RuleCall getOptionalChildListParserRuleCall_8_1() { return cOptionalChildListParserRuleCall_8_1; }
 		
-		////	"#14" Imports |
-		//"#20" clazz+=EClassDecl+
+		////    "#14" Imports |
+		//    "#20" clazz+=EClassDecl+
 		public Group getGroup_9() { return cGroup_9; }
 		
-		////	"#14" Imports |
-		//"#20"
+		////    "#14" Imports |
+		//    "#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_9_0() { return cNumberSignDigitTwoDigitZeroKeyword_9_0; }
 		
 		//clazz+=EClassDecl+
@@ -262,7 +263,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//MandatoryValue:
-		//	name=ID;
+		//    name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -281,7 +282,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Keyword cKw2Keyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//OptionalValue:
-		//	{OptionalValue} "kw1"? name=ID? "kw2"?;
+		//    {OptionalValue} "kw1"? name=ID? "kw2"?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{OptionalValue} "kw1"? name=ID? "kw2"?
@@ -310,7 +311,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//ManyOptionalValues:
-		//	{ManyValues} name+=ID*;
+		//    {ManyValues} name+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{ManyValues} name+=ID*
@@ -331,7 +332,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//ManyMandatoryValues:
-		//	name+=ID+;
+		//    name+=ID+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name+=ID+
@@ -346,7 +347,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildMandatoryValueParserRuleCall_0 = (RuleCall)cChildAssignment.eContents().get(0);
 		
 		//MandatoryChild:
-		//	child=MandatoryValue;
+		//    child=MandatoryValue;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//child=MandatoryValue
@@ -363,7 +364,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildMandatoryValueParserRuleCall_1_0 = (RuleCall)cChildAssignment_1.eContents().get(0);
 		
 		//OptionalChild:
-		//	{OptionalChild} child=MandatoryValue?;
+		//    {OptionalChild} child=MandatoryValue?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{OptionalChild} child=MandatoryValue?
@@ -392,26 +393,27 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//TwoChildLists:
-		//	"{"
-		//	directChildren+=MandatoryValue+
-		//	"children1" "{"
-		//	childsList=MandatoryChildList
-		//	"}"
-		//	"}";
+		//    "{"
+		//        directChildren += MandatoryValue+
+		//        "children1" "{"
+		//            childsList = MandatoryChildList
+		//        "}"
+		//    "}"
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"{"
-		//directChildren+=MandatoryValue+
-		//"children1" "{"
-		//childsList=MandatoryChildList
-		//"}"
+		//    directChildren += MandatoryValue+
+		//    "children1" "{"
+		//        childsList = MandatoryChildList
+		//    "}"
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
 		
-		//directChildren+=MandatoryValue+
+		//directChildren += MandatoryValue+
 		public Assignment getDirectChildrenAssignment_1() { return cDirectChildrenAssignment_1; }
 		
 		//MandatoryValue
@@ -423,7 +425,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//childsList=MandatoryChildList
+		//childsList = MandatoryChildList
 		public Assignment getChildsListAssignment_4() { return cChildsListAssignment_4; }
 		
 		//MandatoryChildList
@@ -449,14 +451,15 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cOptChildOptionalChildParserRuleCall_6_0 = (RuleCall)cOptChildAssignment_6.eContents().get(0);
 		
 		//TwoChilds:
-		//	{TwoChilds}
-		//	"direct" ":" directChild=MandatoryValue?
-		//	"child" ":" optChild=OptionalChild;
+		//    {TwoChilds}
+		//        "direct" ":" directChild = MandatoryValue?
+		//        "child" ":" optChild = OptionalChild
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TwoChilds}
-		//"direct" ":" directChild=MandatoryValue?
-		//"child" ":" optChild=OptionalChild
+		//    "direct" ":" directChild = MandatoryValue?
+		//    "child" ":" optChild = OptionalChild
 		public Group getGroup() { return cGroup; }
 		
 		//{TwoChilds}
@@ -468,7 +471,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 		
-		//directChild=MandatoryValue?
+		//directChild = MandatoryValue?
 		public Assignment getDirectChildAssignment_3() { return cDirectChildAssignment_3; }
 		
 		//MandatoryValue
@@ -480,7 +483,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		//":"
 		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
 		
-		//optChild=OptionalChild
+		//optChild = OptionalChild
 		public Assignment getOptChildAssignment_6() { return cOptChildAssignment_6; }
 		
 		//OptionalChild
@@ -494,10 +497,13 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildrenChildWithSubChildParserRuleCall_1_0 = (RuleCall)cChildrenAssignment_1.eContents().get(0);
 		
 		//ChildWithSubChilds:
-		//	{ChildWithSubChilds} children+=ChildWithSubChild*;
+		//    {ChildWithSubChilds}
+		//    children+=ChildWithSubChild*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ChildWithSubChilds} children+=ChildWithSubChild*
+		//{ChildWithSubChilds}
+		//children+=ChildWithSubChild*
 		public Group getGroup() { return cGroup; }
 		
 		//{ChildWithSubChilds}
@@ -518,11 +524,12 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cSubChildsSubChildParserRuleCall_2_0 = (RuleCall)cSubChildsAssignment_2.eContents().get(0);
 		
 		//ChildWithSubChild:
-		//	{ChildWithSubChild} "subs"
-		//	subChilds+=SubChild*;
+		//    {ChildWithSubChild}"subs"
+		//    subChilds+=SubChild*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ChildWithSubChild} "subs"
+		//{ChildWithSubChild}"subs"
 		//subChilds+=SubChild*
 		public Group getGroup() { return cGroup; }
 		
@@ -543,8 +550,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//SubChild:
-		//	name=ID;
+		//SubChild: name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -559,7 +565,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildrenMandatoryValueParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//MandatoryChildList:
-		//	children+=MandatoryValue+;
+		//    children+=MandatoryValue+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//children+=MandatoryValue+
@@ -576,7 +582,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildrenMandatoryValueParserRuleCall_1_0 = (RuleCall)cChildrenAssignment_1.eContents().get(0);
 		
 		//OptionalChildList:
-		//	{OptionalChildList} children+=MandatoryValue*;
+		//    {OptionalChildList} children+=MandatoryValue*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{OptionalChildList} children+=MandatoryValue*
@@ -599,7 +605,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importedNamespace=QualifiedName;
+		//    "import" importedNamespace=QualifiedName;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"import" importedNamespace=QualifiedName
@@ -641,14 +647,16 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Keyword cSemicolonKeyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
 		
 		////Imports:
-		////	{ManyReferences} imports+=Import* "refs" refs+=[ecore::EObject|QualifiedName]*;
+		////    {ManyReferences} imports+=Import* "refs" refs+=[ecore::EObject|QualifiedName]*;
 		//Node:
-		//	{Node} imports+=Import*
-		//	name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
+		//    {Node} imports+=Import*
+		//    name=ID? ("refs" refs+=[Node|QualifiedName]*)?
+		//    ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Node} imports+=Import*
-		//name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";")
+		//name=ID? ("refs" refs+=[Node|QualifiedName]*)?
+		//("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";")
 		public Group getGroup() { return cGroup; }
 		
 		//{Node}
@@ -726,7 +734,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ("." ID)*;
+		//    ID ("." ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ("." ID)*
@@ -749,8 +757,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//EClassDecl ecore::EClass:
-		//	name=ID;
+		//EClassDecl returns ecore::EClass:
+		//    name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -766,7 +774,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cRefEClassQualifiedNameParserRuleCall_0_1 = (RuleCall)cRefEClassCrossReference_0.eContents().get(1);
 		
 		//EClassRef:
-		//	ref=[ecore::EClass|QualifiedName];
+		//    ref=[ecore::EClass|QualifiedName];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ref=[ecore::EClass|QualifiedName]
@@ -784,7 +792,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cChildWithTransientParserRuleCall_0 = (RuleCall)cChildAssignment.eContents().get(0);
 		
 		//WithTransientContainer:
-		//	child=WithTransient;
+		//    child=WithTransient
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//child=WithTransient
@@ -798,8 +807,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//WithTransient withtransient::WithTransient:
-		//	name=ID;
+		//WithTransient returns withtransient::WithTransient:
+		//    name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -892,22 +902,23 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 
 	
 	//Model:
-	//	"#1" Node |
-	//	"#2" MandatoryValue |
-	//	"#3" OptionalValue |
-	//	"#4" MandatoryChild |
-	//	"#5" OptionalChild |
-	//	"#10" ManyOptionalValues |
-	//	"#11" ManyMandatoryValues |
-	//	"#12" MandatoryChildList |
-	//	"#13" OptionalChildList |
-	////	"#14" Imports |
-	//	"#20" clazz+=EClassDecl+ |
-	//	"#21" EClassRef |
-	//	"#22" TwoChildLists |
-	//	"#23" ChildWithSubChilds |
-	//	"#24" TwoChilds |
-	//	"#30" WithTransientContainer;
+	//    "#1" Node |
+	//    "#2" MandatoryValue |
+	//    "#3" OptionalValue |
+	//    "#4" MandatoryChild |
+	//    "#5" OptionalChild |
+	//    "#10" ManyOptionalValues |
+	//    "#11" ManyMandatoryValues |
+	//    "#12" MandatoryChildList |
+	//    "#13" OptionalChildList |
+	////    "#14" Imports |
+	//    "#20" clazz+=EClassDecl+ |
+	//    "#21" EClassRef |
+	//    "#22" TwoChildLists |
+	//    "#23" ChildWithSubChilds |
+	//    "#24" TwoChilds |
+	//    "#30" WithTransientContainer
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -917,7 +928,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//MandatoryValue:
-	//	name=ID;
+	//    name=ID;
 	public MandatoryValueElements getMandatoryValueAccess() {
 		return pMandatoryValue;
 	}
@@ -927,7 +938,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//OptionalValue:
-	//	{OptionalValue} "kw1"? name=ID? "kw2"?;
+	//    {OptionalValue} "kw1"? name=ID? "kw2"?;
 	public OptionalValueElements getOptionalValueAccess() {
 		return pOptionalValue;
 	}
@@ -937,7 +948,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//ManyOptionalValues:
-	//	{ManyValues} name+=ID*;
+	//    {ManyValues} name+=ID*;
 	public ManyOptionalValuesElements getManyOptionalValuesAccess() {
 		return pManyOptionalValues;
 	}
@@ -947,7 +958,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//ManyMandatoryValues:
-	//	name+=ID+;
+	//    name+=ID+;
 	public ManyMandatoryValuesElements getManyMandatoryValuesAccess() {
 		return pManyMandatoryValues;
 	}
@@ -957,7 +968,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//MandatoryChild:
-	//	child=MandatoryValue;
+	//    child=MandatoryValue;
 	public MandatoryChildElements getMandatoryChildAccess() {
 		return pMandatoryChild;
 	}
@@ -967,7 +978,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//OptionalChild:
-	//	{OptionalChild} child=MandatoryValue?;
+	//    {OptionalChild} child=MandatoryValue?;
 	public OptionalChildElements getOptionalChildAccess() {
 		return pOptionalChild;
 	}
@@ -977,12 +988,13 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//TwoChildLists:
-	//	"{"
-	//	directChildren+=MandatoryValue+
-	//	"children1" "{"
-	//	childsList=MandatoryChildList
-	//	"}"
-	//	"}";
+	//    "{"
+	//        directChildren += MandatoryValue+
+	//        "children1" "{"
+	//            childsList = MandatoryChildList
+	//        "}"
+	//    "}"
+	//    ;
 	public TwoChildListsElements getTwoChildListsAccess() {
 		return pTwoChildLists;
 	}
@@ -992,9 +1004,10 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//TwoChilds:
-	//	{TwoChilds}
-	//	"direct" ":" directChild=MandatoryValue?
-	//	"child" ":" optChild=OptionalChild;
+	//    {TwoChilds}
+	//        "direct" ":" directChild = MandatoryValue?
+	//        "child" ":" optChild = OptionalChild
+	//    ;
 	public TwoChildsElements getTwoChildsAccess() {
 		return pTwoChilds;
 	}
@@ -1004,7 +1017,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//ChildWithSubChilds:
-	//	{ChildWithSubChilds} children+=ChildWithSubChild*;
+	//    {ChildWithSubChilds}
+	//    children+=ChildWithSubChild*
+	//;
 	public ChildWithSubChildsElements getChildWithSubChildsAccess() {
 		return pChildWithSubChilds;
 	}
@@ -1014,8 +1029,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//ChildWithSubChild:
-	//	{ChildWithSubChild} "subs"
-	//	subChilds+=SubChild*;
+	//    {ChildWithSubChild}"subs"
+	//    subChilds+=SubChild*
+	//;
 	public ChildWithSubChildElements getChildWithSubChildAccess() {
 		return pChildWithSubChild;
 	}
@@ -1024,8 +1040,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		return getChildWithSubChildAccess().getRule();
 	}
 	
-	//SubChild:
-	//	name=ID;
+	//SubChild: name=ID;
 	public SubChildElements getSubChildAccess() {
 		return pSubChild;
 	}
@@ -1035,7 +1050,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//MandatoryChildList:
-	//	children+=MandatoryValue+;
+	//    children+=MandatoryValue+;
 	public MandatoryChildListElements getMandatoryChildListAccess() {
 		return pMandatoryChildList;
 	}
@@ -1045,7 +1060,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//OptionalChildList:
-	//	{OptionalChildList} children+=MandatoryValue*;
+	//    {OptionalChildList} children+=MandatoryValue*;
 	public OptionalChildListElements getOptionalChildListAccess() {
 		return pOptionalChildList;
 	}
@@ -1055,7 +1070,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//Import:
-	//	"import" importedNamespace=QualifiedName;
+	//    "import" importedNamespace=QualifiedName;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -1065,10 +1080,11 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	////Imports:
-	////	{ManyReferences} imports+=Import* "refs" refs+=[ecore::EObject|QualifiedName]*;
+	////    {ManyReferences} imports+=Import* "refs" refs+=[ecore::EObject|QualifiedName]*;
 	//Node:
-	//	{Node} imports+=Import*
-	//	name=ID? ("refs" refs+=[Node|QualifiedName]*)? ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
+	//    {Node} imports+=Import*
+	//    name=ID? ("refs" refs+=[Node|QualifiedName]*)?
+	//    ("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";");
 	public NodeElements getNodeAccess() {
 		return pNode;
 	}
@@ -1078,7 +1094,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//QualifiedName:
-	//	ID ("." ID)*;
+	//    ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -1087,8 +1103,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//EClassDecl ecore::EClass:
-	//	name=ID;
+	//EClassDecl returns ecore::EClass:
+	//    name=ID;
 	public EClassDeclElements getEClassDeclAccess() {
 		return pEClassDecl;
 	}
@@ -1098,7 +1114,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//EClassRef:
-	//	ref=[ecore::EClass|QualifiedName];
+	//    ref=[ecore::EClass|QualifiedName];
 	public EClassRefElements getEClassRefAccess() {
 		return pEClassRef;
 	}
@@ -1108,7 +1124,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//WithTransientContainer:
-	//	child=WithTransient;
+	//    child=WithTransient
+	//;
 	public WithTransientContainerElements getWithTransientContainerAccess() {
 		return pWithTransientContainer;
 	}
@@ -1117,8 +1134,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		return getWithTransientContainerAccess().getRule();
 	}
 	
-	//WithTransient withtransient::WithTransient:
-	//	name=ID;
+	//WithTransient returns withtransient::WithTransient:
+	//    name=ID
+	//;
 	public WithTransientElements getWithTransientAccess() {
 		return pWithTransient;
 	}
@@ -1127,45 +1145,40 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractEleme
 		return getWithTransientAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -44,33 +44,53 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cSubModelAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cSubModelSubModelParserRuleCall_3_1_0 = (RuleCall)cSubModelAssignment_3_1.eContents().get(0);
 		
-		//Model:
-		//	{Model} ('{'
-		//	strings+=STRING?
-		//	'}')* ('[' (keys+=STRING
-		//	values+=STRING)*
-		//	']')* ('subModel' subModel=SubModel)?;
+		//Model: {Model}
+		//    (
+		//          '{'
+		//        strings += STRING ?
+		//           '}'
+		//    )*
+		//    (
+		//        '['
+		//        (    keys += STRING
+		//            values += STRING
+		//        )*
+		//        ']'
+		//    )*
+		//    ('subModel' subModel=SubModel)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} ('{'
-		//strings+=STRING?
-		//'}')* ('[' (keys+=STRING
-		//values+=STRING)*
-		//']')* ('subModel' subModel=SubModel)?
+		//{Model}
+		//   (
+		//         '{'
+		//       strings += STRING ?
+		//          '}'
+		//   )*
+		//   (
+		//       '['
+		//       (    keys += STRING
+		//           values += STRING
+		//       )*
+		//       ']'
+		//   )*
+		//   ('subModel' subModel=SubModel)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//('{'
-		//strings+=STRING?
-		//'}')*
+		//(
+		//      '{'
+		//    strings += STRING ?
+		//       '}'
+		//)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 		
-		//strings+=STRING?
+		//strings += STRING ?
 		public Assignment getStringsAssignment_1_1() { return cStringsAssignment_1_1; }
 		
 		//STRING
@@ -79,25 +99,30 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 		
-		//('[' (keys+=STRING
-		//values+=STRING)*
-		//']')*
+		//(
+		//    '['
+		//    (    keys += STRING
+		//        values += STRING
+		//    )*
+		//    ']'
+		//)*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 		
-		//(keys+=STRING
-		//values+=STRING)*
+		//(    keys += STRING
+		//    values += STRING
+		//)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
-		//keys+=STRING
+		//keys += STRING
 		public Assignment getKeysAssignment_2_1_0() { return cKeysAssignment_2_1_0; }
 		
 		//STRING
 		public RuleCall getKeysSTRINGTerminalRuleCall_2_1_0_0() { return cKeysSTRINGTerminalRuleCall_2_1_0_0; }
 		
-		//values+=STRING
+		//values += STRING
 		public Assignment getValuesAssignment_2_1_1() { return cValuesAssignment_2_1_1; }
 		
 		//STRING
@@ -128,23 +153,31 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cStringsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cStringsSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cStringsAssignment_1_2.eContents().get(0);
 		
-		//SubModel:
-		//	{SubModel} ('1'
-		//	'2'
-		//	strings+=STRING?)*;
+		//SubModel: {SubModel}
+		//        (
+		//             '1'
+		//             '2'
+		//             strings += STRING?
+		//        )*
+		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{SubModel} ('1'
-		//'2'
-		//strings+=STRING?)*
+		//{SubModel}
+		//       (
+		//            '1'
+		//            '2'
+		//            strings += STRING?
+		//       )*
 		public Group getGroup() { return cGroup; }
 		
 		//{SubModel}
 		public Action getSubModelAction_0() { return cSubModelAction_0; }
 		
-		//('1'
-		//'2'
-		//strings+=STRING?)*
+		//(
+		//     '1'
+		//     '2'
+		//     strings += STRING?
+		//)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'1'
@@ -153,7 +186,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2'
 		public Keyword getDigitTwoKeyword_1_1() { return cDigitTwoKeyword_1_1; }
 		
-		//strings+=STRING?
+		//strings += STRING?
 		public Assignment getStringsAssignment_1_2() { return cStringsAssignment_1_2; }
 		
 		//STRING
@@ -204,12 +237,21 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	{Model} ('{'
-	//	strings+=STRING?
-	//	'}')* ('[' (keys+=STRING
-	//	values+=STRING)*
-	//	']')* ('subModel' subModel=SubModel)?;
+	//Model: {Model}
+	//    (
+	//          '{'
+	//        strings += STRING ?
+	//           '}'
+	//    )*
+	//    (
+	//        '['
+	//        (    keys += STRING
+	//            values += STRING
+	//        )*
+	//        ']'
+	//    )*
+	//    ('subModel' subModel=SubModel)?
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -218,10 +260,13 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//SubModel:
-	//	{SubModel} ('1'
-	//	'2'
-	//	strings+=STRING?)*;
+	//SubModel: {SubModel}
+	//        (
+	//             '1'
+	//             '2'
+	//             strings += STRING?
+	//        )*
+	//    ;
 	public SubModelElements getSubModelAccess() {
 		return pSubModel;
 	}
@@ -230,45 +275,40 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getSubModelAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

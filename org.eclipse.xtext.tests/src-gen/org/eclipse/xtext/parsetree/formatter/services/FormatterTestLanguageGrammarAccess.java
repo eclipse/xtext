@@ -37,7 +37,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cWrappingDataTypeTestParserRuleCall_1_3 = (RuleCall)cAlternatives_1.eContents().get(3);
 		
 		//Root:
-		//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
+		//    "test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
@@ -79,7 +79,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
+		//    (Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
@@ -133,7 +133,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Decl:
-		//	type+=ID name+=ID;
+		//    type+=ID name+=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type+=ID name+=ID
@@ -171,10 +171,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Assign:
-		//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
+		//    var=ID op=("="|"+=") "[" (val+=INT ("," val+=INT)*)? "]";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]"
+		//var=ID op=("="|"+=") "[" (val+=INT ("," val+=INT)*)? "]"
 		public Group getGroup() { return cGroup; }
 		
 		//var=ID
@@ -183,10 +183,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ID
 		public RuleCall getVarIDTerminalRuleCall_0_0() { return cVarIDTerminalRuleCall_0_0; }
 		
-		//op=("=" | "+=")
+		//op=("="|"+=")
 		public Assignment getOpAssignment_1() { return cOpAssignment_1; }
 		
-		//("=" | "+=")
+		//("="|"+=")
 		public Alternatives getOpAlternatives_1_0() { return cOpAlternatives_1_0; }
 		
 		//"="
@@ -239,7 +239,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Meth:
-		//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+		//    "void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")"
@@ -291,7 +291,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cTypeIDTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//Param:
-		//	name+=ID ":" type+=ID;
+		//    name+=ID ":" type+=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name+=ID ":" type+=ID
@@ -319,8 +319,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		//Space:
-		//	"space" val=ID;
+		//Space: "space" val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"space" val=ID
@@ -344,7 +343,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cItemsLineParserRuleCall_2_0 = (RuleCall)cItemsAssignment_2.eContents().get(0);
 		
 		//TestLinewrap:
-		//	{TestLinewrap} "linewrap" items+=Line*;
+		//    {TestLinewrap} "linewrap" items+=Line*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestLinewrap} "linewrap" items+=Line*
@@ -371,7 +370,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cItemsLineParserRuleCall_2_0 = (RuleCall)cItemsAssignment_2.eContents().get(0);
 		
 		//TestLinewrapMinMax:
-		//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
+		//    {TestLinewrapMinMax} "wrapminmax" items+=Line*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestLinewrapMinMax} "wrapminmax" items+=Line*
@@ -404,7 +403,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSemiSemicolonKeyword_5_0 = (Keyword)cSemiAssignment_5.eContents().get(0);
 		
 		//TestIndentation:
-		//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
+		//    {TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?
@@ -448,7 +447,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameFQNParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//FqnObj:
-		//	"fqn" name=FQN;
+		//    "fqn" name=FQN;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"fqn" name=FQN
@@ -472,7 +471,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//    ID ("." ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ("." ID)*
@@ -499,7 +498,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRefFqnObjFQNParserRuleCall_1_0_1 = (RuleCall)cRefFqnObjCrossReference_1_0.eContents().get(1);
 		
 		//FqnRef:
-		//	"fqnref" ref=[FqnObj|FQN];
+		//    "fqnref" ref=[FqnObj|FQN];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"fqnref" ref=[FqnObj|FQN]
@@ -529,7 +528,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValEnum1EnumRuleCall_2_1_0 = (RuleCall)cValAssignment_2_1.eContents().get(0);
 		
 		//Enumeration:
-		//	"enum" val+=Enum1+ (',' val+=Enum1)*;
+		//    "enum" val+=Enum1+ (',' val+=Enum1)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"enum" val+=Enum1+ (',' val+=Enum1)*
@@ -571,7 +570,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cGraveAccentKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//SuppressedHidden hidden():
-		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
+		//    {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`"
@@ -614,7 +613,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cSuppressedHiddenSubIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SuppressedHiddenSub:
-		//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
+		//    SuppressedHiddenSubSub | SuppressedHiddenSubID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//SuppressedHiddenSubSub | SuppressedHiddenSubID
@@ -635,7 +634,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SuppressedHiddenSubSub hidden(WS):
-		//	'<' idval=ID '>';
+		//    '<' idval=ID '>';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'<' idval=ID '>'
@@ -659,7 +658,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIdvalIDTerminalRuleCall_0 = (RuleCall)cIdvalAssignment.eContents().get(0);
 		
 		//SuppressedHiddenSubID:
-		//	idval=ID;
+		//    idval=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//idval=ID
@@ -672,8 +671,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype1:
-		//	FQN;
+		//Datatype1: FQN;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//FQN
@@ -683,8 +681,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype2:
-		//	FQN;
+		//Datatype2: FQN;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//FQN
@@ -694,8 +691,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype3:
-		//	FQN;
+		//Datatype3: FQN;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//FQN
@@ -714,8 +710,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cVal3Datatype3ParserRuleCall_4_0 = (RuleCall)cVal3Assignment_4.eContents().get(0);
 		private final Keyword cKw3Keyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Datatypes:
-		//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+		//Datatypes: "datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3"
@@ -757,7 +752,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cKw1Keyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//WrappingDataTypeTest:
-		//	"wrappingdt" datatype=WrappingDataType "kw1";
+		//    "wrappingdt" datatype=WrappingDataType "kw1";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"wrappingdt" datatype=WrappingDataType "kw1"
@@ -780,7 +775,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//WrappingDataType:
-		//	ID+;
+		//    ID+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID+
@@ -798,7 +793,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cLit3Lit3Keyword_2_0 = (Keyword)cLit3EnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum Enum1:
-		//	lit1 | lit2 | lit3;
+		//    lit1 | lit2 | lit3;
 		public EnumRule getRule() { return rule; }
 		
 		//lit1 | lit2 | lit3
@@ -807,19 +802,16 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
 		
-		//"lit1"
 		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
 		
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
 		
-		//"lit2"
 		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
 		
 		//lit3
 		public EnumLiteralDeclaration getLit3EnumLiteralDeclaration_2() { return cLit3EnumLiteralDeclaration_2; }
 		
-		//"lit3"
 		public Keyword getLit3Lit3Keyword_2_0() { return cLit3Lit3Keyword_2_0; }
 	}
 	
@@ -913,7 +905,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Root:
-	//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
+	//    "test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -923,7 +915,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Line:
-	//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
+	//    (Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 	public LineElements getLineAccess() {
 		return pLine;
 	}
@@ -933,7 +925,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Decl:
-	//	type+=ID name+=ID;
+	//    type+=ID name+=ID;
 	public DeclElements getDeclAccess() {
 		return pDecl;
 	}
@@ -943,7 +935,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Assign:
-	//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
+	//    var=ID op=("="|"+=") "[" (val+=INT ("," val+=INT)*)? "]";
 	public AssignElements getAssignAccess() {
 		return pAssign;
 	}
@@ -953,7 +945,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Meth:
-	//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+	//    "void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
 	public MethElements getMethAccess() {
 		return pMeth;
 	}
@@ -963,7 +955,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Param:
-	//	name+=ID ":" type+=ID;
+	//    name+=ID ":" type+=ID;
 	public ParamElements getParamAccess() {
 		return pParam;
 	}
@@ -972,8 +964,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getParamAccess().getRule();
 	}
 	
-	//Space:
-	//	"space" val=ID;
+	//Space: "space" val=ID;
 	public SpaceElements getSpaceAccess() {
 		return pSpace;
 	}
@@ -983,7 +974,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TestLinewrap:
-	//	{TestLinewrap} "linewrap" items+=Line*;
+	//    {TestLinewrap} "linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
 		return pTestLinewrap;
 	}
@@ -993,7 +984,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TestLinewrapMinMax:
-	//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
+	//    {TestLinewrapMinMax} "wrapminmax" items+=Line*;
 	public TestLinewrapMinMaxElements getTestLinewrapMinMaxAccess() {
 		return pTestLinewrapMinMax;
 	}
@@ -1003,7 +994,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TestIndentation:
-	//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
+	//    {TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
 		return pTestIndentation;
 	}
@@ -1013,7 +1004,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FqnObj:
-	//	"fqn" name=FQN;
+	//    "fqn" name=FQN;
 	public FqnObjElements getFqnObjAccess() {
 		return pFqnObj;
 	}
@@ -1023,7 +1014,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FQN:
-	//	ID ("." ID)*;
+	//    ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -1033,7 +1024,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FqnRef:
-	//	"fqnref" ref=[FqnObj|FQN];
+	//    "fqnref" ref=[FqnObj|FQN];
 	public FqnRefElements getFqnRefAccess() {
 		return pFqnRef;
 	}
@@ -1043,7 +1034,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Enumeration:
-	//	"enum" val+=Enum1+ (',' val+=Enum1)*;
+	//    "enum" val+=Enum1+ (',' val+=Enum1)*;
 	public EnumerationElements getEnumerationAccess() {
 		return pEnumeration;
 	}
@@ -1053,7 +1044,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum Enum1:
-	//	lit1 | lit2 | lit3;
+	//    lit1 | lit2 | lit3;
 	public Enum1Elements getEnum1Access() {
 		return eEnum1;
 	}
@@ -1063,7 +1054,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SuppressedHidden hidden():
-	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
+	//    {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
 	public SuppressedHiddenElements getSuppressedHiddenAccess() {
 		return pSuppressedHidden;
 	}
@@ -1073,7 +1064,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SuppressedHiddenSub:
-	//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
+	//    SuppressedHiddenSubSub | SuppressedHiddenSubID;
 	public SuppressedHiddenSubElements getSuppressedHiddenSubAccess() {
 		return pSuppressedHiddenSub;
 	}
@@ -1083,7 +1074,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SuppressedHiddenSubSub hidden(WS):
-	//	'<' idval=ID '>';
+	//    '<' idval=ID '>';
 	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
 		return pSuppressedHiddenSubSub;
 	}
@@ -1093,7 +1084,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SuppressedHiddenSubID:
-	//	idval=ID;
+	//    idval=ID;
 	public SuppressedHiddenSubIDElements getSuppressedHiddenSubIDAccess() {
 		return pSuppressedHiddenSubID;
 	}
@@ -1102,8 +1093,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getSuppressedHiddenSubIDAccess().getRule();
 	}
 	
-	//Datatype1:
-	//	FQN;
+	//Datatype1: FQN;
 	public Datatype1Elements getDatatype1Access() {
 		return pDatatype1;
 	}
@@ -1112,8 +1102,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getDatatype1Access().getRule();
 	}
 	
-	//Datatype2:
-	//	FQN;
+	//Datatype2: FQN;
 	public Datatype2Elements getDatatype2Access() {
 		return pDatatype2;
 	}
@@ -1122,8 +1111,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getDatatype2Access().getRule();
 	}
 	
-	//Datatype3:
-	//	FQN;
+	//Datatype3: FQN;
 	public Datatype3Elements getDatatype3Access() {
 		return pDatatype3;
 	}
@@ -1132,8 +1120,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getDatatype3Access().getRule();
 	}
 	
-	//Datatypes:
-	//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+	//Datatypes: "datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
 	public DatatypesElements getDatatypesAccess() {
 		return pDatatypes;
 	}
@@ -1143,7 +1130,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//WrappingDataTypeTest:
-	//	"wrappingdt" datatype=WrappingDataType "kw1";
+	//    "wrappingdt" datatype=WrappingDataType "kw1";
 	public WrappingDataTypeTestElements getWrappingDataTypeTestAccess() {
 		return pWrappingDataTypeTest;
 	}
@@ -1153,7 +1140,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//WrappingDataType:
-	//	ID+;
+	//    ID+;
 	public WrappingDataTypeElements getWrappingDataTypeAccess() {
 		return pWrappingDataType;
 	}
@@ -1162,45 +1149,40 @@ public class FormatterTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getWrappingDataTypeAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

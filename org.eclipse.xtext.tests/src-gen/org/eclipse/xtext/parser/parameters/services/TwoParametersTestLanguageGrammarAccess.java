@@ -100,34 +100,55 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cKeywordKeyword_1_11_1_1_1 = (Keyword)cGroup_1_11_1_1.eContents().get(1);
 		
 		//@Override
-		//ParserRuleParameters:
-		//	{ParserRuleParameters} ('#1' scenario=Scenario5<true, true> | '#2' scenario=Scenario5<false, false> | '#3'
-		//	scenario=Scenario6<true, true> | '#4' scenario=Scenario6<false, true> | => ('#5' scenario=Scenario6<true, true>) | =>
-		//	('#6' scenario=Scenario6<false, false>) | '#7' scenario=Scenario7<true, true> | '#8' scenario=Scenario7<false, true>
-		//	| '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?) | '#10'
-		//	(scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?) | '#11'
-		//	(scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?) | '#12'
-		//	(scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?));
+		//ParserRuleParameters: {ParserRuleParameters}
+		//  ( '#1' scenario=Scenario5<true, true>
+		//  |    '#2' scenario=Scenario5<false, false>
+		//  | '#3' scenario=Scenario6<true, true>
+		//  | '#4' scenario=Scenario6<false, true>
+		//  | =>('#5' scenario=Scenario6<true, true>)
+		//  | =>('#6' scenario=Scenario6<false, false>)
+		//  | '#7' scenario=Scenario7<true, true>
+		//  | '#8' scenario=Scenario7<false, true>
+		//  | '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?)
+		//  | '#10' (scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?)
+		//  | '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?)
+		//  | '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?)
+		//  )
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ParserRuleParameters} ('#1' scenario=Scenario5<true, true> | '#2' scenario=Scenario5<false, false> | '#3'
-		//scenario=Scenario6<true, true> | '#4' scenario=Scenario6<false, true> | => ('#5' scenario=Scenario6<true, true>) | => (
-		//'#6' scenario=Scenario6<false, false>) | '#7' scenario=Scenario7<true, true> | '#8' scenario=Scenario7<false, true> |
-		//'#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?) | '#10'
-		//(scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?) | '#11' (scenario=Scenario8<false, false>
-		//| scenario=Scenario6<true, true> 'keyword'?) | '#12' (scenario=Scenario8<false, false> |
-		//scenario=Scenario6<false, false> 'keyword'?))
+		//{ParserRuleParameters}
+		// ( '#1' scenario=Scenario5<true, true>
+		// |    '#2' scenario=Scenario5<false, false>
+		// | '#3' scenario=Scenario6<true, true>
+		// | '#4' scenario=Scenario6<false, true>
+		// | =>('#5' scenario=Scenario6<true, true>)
+		// | =>('#6' scenario=Scenario6<false, false>)
+		// | '#7' scenario=Scenario7<true, true>
+		// | '#8' scenario=Scenario7<false, true>
+		// | '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?)
+		// | '#10' (scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?)
+		// | '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?)
+		// | '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?)
+		// )
 		public Group getGroup() { return cGroup; }
 		
 		//{ParserRuleParameters}
 		public Action getParserRuleParametersAction_0() { return cParserRuleParametersAction_0; }
 		
-		//('#1' scenario=Scenario5<true, true> | '#2' scenario=Scenario5<false, false> | '#3' scenario=Scenario6<true, true> |
-		//'#4' scenario=Scenario6<false, true> | => ('#5' scenario=Scenario6<true, true>) | => ('#6'
-		//scenario=Scenario6<false, false>) | '#7' scenario=Scenario7<true, true> | '#8' scenario=Scenario7<false, true> | '#9'
-		//(scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?) | '#10' (scenario=Scenario8<true, true> |
-		//scenario=Scenario6<false, false> 'keyword'?) | '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true>
-		//'keyword'?) | '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?))
+		//( '#1' scenario=Scenario5<true, true>
+		//|    '#2' scenario=Scenario5<false, false>
+		//| '#3' scenario=Scenario6<true, true>
+		//| '#4' scenario=Scenario6<false, true>
+		//| =>('#5' scenario=Scenario6<true, true>)
+		//| =>('#6' scenario=Scenario6<false, false>)
+		//| '#7' scenario=Scenario7<true, true>
+		//| '#8' scenario=Scenario7<false, true>
+		//| '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?)
+		//| '#10' (scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?)
+		//| '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?)
+		//| '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?)
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'#1' scenario=Scenario5<true, true>
@@ -178,10 +199,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		//Scenario6<false, true>
 		public RuleCall getScenarioScenario6ParserRuleCall_1_3_1_0() { return cScenarioScenario6ParserRuleCall_1_3_1_0; }
 		
-		//=> ('#5' scenario=Scenario6<true, true>)
+		//=>('#5' scenario=Scenario6<true, true>)
 		public Group getGroup_1_4() { return cGroup_1_4; }
 		
-		//('#5' scenario=Scenario6<true, true>)
+		//'#5' scenario=Scenario6<true, true>
 		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
 		
 		//'#5'
@@ -193,10 +214,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		//Scenario6<true, true>
 		public RuleCall getScenarioScenario6ParserRuleCall_1_4_0_1_0() { return cScenarioScenario6ParserRuleCall_1_4_0_1_0; }
 		
-		//=> ('#6' scenario=Scenario6<false, false>)
+		//=>('#6' scenario=Scenario6<false, false>)
 		public Group getGroup_1_5() { return cGroup_1_5; }
 		
-		//('#6' scenario=Scenario6<false, false>)
+		//'#6' scenario=Scenario6<false, false>
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 		
 		//'#6'
@@ -350,13 +371,14 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cSecondAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cSecondIDTerminalRuleCall_1_0_0 = (RuleCall)cSecondAssignment_1_0.eContents().get(0);
 		
-		//Scenario5 <A, BScenario:
-		//	<A & B> first=ID
-		//	| <! A | ! B> second=ID;
+		//Scenario5<A, B> returns Scenario:
+		//    <A & B> first=ID
+		//  | <!A | !B> second=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<A & B> first=ID
-		//| <! A | ! B> second=ID
+		//  <A & B> first=ID
+		//| <!A | !B> second=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<A & B> first=ID
@@ -368,7 +390,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		//ID
 		public RuleCall getFirstIDTerminalRuleCall_0_0_0() { return cFirstIDTerminalRuleCall_0_0_0; }
 		
-		//<! A | ! B> second=ID
+		//<!A | !B> second=ID
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//second=ID
@@ -382,14 +404,15 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cFirstAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cFirstIdOrKeyword2ParserRuleCall_0 = (RuleCall)cFirstAssignment.eContents().get(0);
 		
-		//Scenario6 <A, BScenario:
-		//	first=IdOrKeyword2<A, B, A & B>;
+		//Scenario6<A, B> returns Scenario:
+		//    first=IdOrKeyword2<A, B, A&B>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//first=IdOrKeyword2<A, B, A & B>
+		//first=IdOrKeyword2<A, B, A&B>
 		public Assignment getFirstAssignment() { return cFirstAssignment; }
 		
-		//IdOrKeyword2<A, B, A & B>
+		//IdOrKeyword2<A, B, A&B>
 		public RuleCall getFirstIdOrKeyword2ParserRuleCall_0() { return cFirstIdOrKeyword2ParserRuleCall_0; }
 	}
 	public class Scenario7Elements extends AbstractParserRuleElementFinder {
@@ -400,17 +423,20 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Assignment cSecondAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword cSecondKeywordKeyword_1_0 = (Keyword)cSecondAssignment_1.eContents().get(0);
 		
-		//Scenario7 <A, BScenario:
-		//	=>first=IdOrKeyword2<A, B, A & B> | second='keyword';
+		//Scenario7<A, B> returns Scenario:
+		//    =>first=IdOrKeyword2<A, B, A&B>
+		//    | second='keyword'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=>first=IdOrKeyword2<A, B, A & B> | second='keyword'
+		//=>first=IdOrKeyword2<A, B, A&B>
+		//| second='keyword'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//=>first=IdOrKeyword2<A, B, A & B>
+		//=>first=IdOrKeyword2<A, B, A&B>
 		public Assignment getFirstAssignment_0() { return cFirstAssignment_0; }
 		
-		//IdOrKeyword2<A, B, A & B>
+		//IdOrKeyword2<A, B, A&B>
 		public RuleCall getFirstIdOrKeyword2ParserRuleCall_0_0() { return cFirstIdOrKeyword2ParserRuleCall_0_0; }
 		
 		//second='keyword'
@@ -426,17 +452,18 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cSecondIdOrKeyword2ParserRuleCall_0_0 = (RuleCall)cSecondAssignment_0.eContents().get(0);
 		private final Keyword cKeywordKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//Scenario8 <A, BScenario:
-		//	=>second=IdOrKeyword2<A, B, A | B> 'keyword';
+		//Scenario8<A, B> returns Scenario:
+		//    =>second=IdOrKeyword2<A, B, A|B> 'keyword'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=>second=IdOrKeyword2<A, B, A | B> 'keyword'
+		//=>second=IdOrKeyword2<A, B, A|B> 'keyword'
 		public Group getGroup() { return cGroup; }
 		
-		//=>second=IdOrKeyword2<A, B, A | B>
+		//=>second=IdOrKeyword2<A, B, A|B>
 		public Assignment getSecondAssignment_0() { return cSecondAssignment_0; }
 		
-		//IdOrKeyword2<A, B, A | B>
+		//IdOrKeyword2<A, B, A|B>
 		public RuleCall getSecondIdOrKeyword2ParserRuleCall_0_0() { return cSecondIdOrKeyword2ParserRuleCall_0_0; }
 		
 		//'keyword'
@@ -449,9 +476,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cKeywordKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//IdOrKeyword2 <A, B, C>:
-		//	<A & B | C> 'keyword'
-		//	| ID;
+		//IdOrKeyword2<A, B, C>:
+		//    <A & B | C> 'keyword'
+		//    | ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//<A & B | C> 'keyword'
@@ -529,14 +557,21 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//@Override
-	//ParserRuleParameters:
-	//	{ParserRuleParameters} ('#1' scenario=Scenario5<true, true> | '#2' scenario=Scenario5<false, false> | '#3'
-	//	scenario=Scenario6<true, true> | '#4' scenario=Scenario6<false, true> | => ('#5' scenario=Scenario6<true, true>) | =>
-	//	('#6' scenario=Scenario6<false, false>) | '#7' scenario=Scenario7<true, true> | '#8' scenario=Scenario7<false, true>
-	//	| '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?) | '#10'
-	//	(scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?) | '#11'
-	//	(scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?) | '#12'
-	//	(scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?));
+	//ParserRuleParameters: {ParserRuleParameters}
+	//  ( '#1' scenario=Scenario5<true, true>
+	//  |    '#2' scenario=Scenario5<false, false>
+	//  | '#3' scenario=Scenario6<true, true>
+	//  | '#4' scenario=Scenario6<false, true>
+	//  | =>('#5' scenario=Scenario6<true, true>)
+	//  | =>('#6' scenario=Scenario6<false, false>)
+	//  | '#7' scenario=Scenario7<true, true>
+	//  | '#8' scenario=Scenario7<false, true>
+	//  | '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?)
+	//  | '#10' (scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?)
+	//  | '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?)
+	//  | '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?)
+	//  )
+	//;
 	public ParserRuleParametersElements getParserRuleParametersAccess() {
 		return pParserRuleParameters;
 	}
@@ -545,9 +580,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getParserRuleParametersAccess().getRule();
 	}
 	
-	//Scenario5 <A, BScenario:
-	//	<A & B> first=ID
-	//	| <! A | ! B> second=ID;
+	//Scenario5<A, B> returns Scenario:
+	//    <A & B> first=ID
+	//  | <!A | !B> second=ID
+	//;
 	public Scenario5Elements getScenario5Access() {
 		return pScenario5;
 	}
@@ -556,8 +592,9 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario5Access().getRule();
 	}
 	
-	//Scenario6 <A, BScenario:
-	//	first=IdOrKeyword2<A, B, A & B>;
+	//Scenario6<A, B> returns Scenario:
+	//    first=IdOrKeyword2<A, B, A&B>
+	//;
 	public Scenario6Elements getScenario6Access() {
 		return pScenario6;
 	}
@@ -566,8 +603,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario6Access().getRule();
 	}
 	
-	//Scenario7 <A, BScenario:
-	//	=>first=IdOrKeyword2<A, B, A & B> | second='keyword';
+	//Scenario7<A, B> returns Scenario:
+	//    =>first=IdOrKeyword2<A, B, A&B>
+	//    | second='keyword'
+	//;
 	public Scenario7Elements getScenario7Access() {
 		return pScenario7;
 	}
@@ -576,8 +615,9 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario7Access().getRule();
 	}
 	
-	//Scenario8 <A, BScenario:
-	//	=>second=IdOrKeyword2<A, B, A | B> 'keyword';
+	//Scenario8<A, B> returns Scenario:
+	//    =>second=IdOrKeyword2<A, B, A|B> 'keyword'
+	//;
 	public Scenario8Elements getScenario8Access() {
 		return pScenario8;
 	}
@@ -586,9 +626,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario8Access().getRule();
 	}
 	
-	//IdOrKeyword2 <A, B, C>:
-	//	<A & B | C> 'keyword'
-	//	| ID;
+	//IdOrKeyword2<A, B, C>:
+	//    <A & B | C> 'keyword'
+	//    | ID
+	//;
 	public IdOrKeyword2Elements getIdOrKeyword2Access() {
 		return pIdOrKeyword2;
 	}
@@ -597,9 +638,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getIdOrKeyword2Access().getRule();
 	}
 	
-	//Scenario1 <ParamScenario:
-	//	<Param> first=ID
-	//	| <! Param> second=ID;
+	//Scenario1<Param> returns Scenario:
+	//    <Param> first=ID
+	//  | <!Param> second=ID
+	//;
 	public ParametersTestLanguageGrammarAccess.Scenario1Elements getScenario1Access() {
 		return gaParametersTestLanguage.getScenario1Access();
 	}
@@ -608,8 +650,9 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario1Access().getRule();
 	}
 	
-	//Scenario2 <AllowKeywordScenario:
-	//	first=IdOrKeyword<AllowKeyword>;
+	//Scenario2<AllowKeyword> returns Scenario:
+	//    first=IdOrKeyword<AllowKeyword>
+	//;
 	public ParametersTestLanguageGrammarAccess.Scenario2Elements getScenario2Access() {
 		return gaParametersTestLanguage.getScenario2Access();
 	}
@@ -618,8 +661,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario2Access().getRule();
 	}
 	
-	//Scenario3 <AllowKeywordScenario:
-	//	=>first=IdOrKeyword<AllowKeyword> | second='keyword';
+	//Scenario3<AllowKeyword> returns Scenario:
+	//    =>first=IdOrKeyword<AllowKeyword>
+	//    | second='keyword'
+	//;
 	public ParametersTestLanguageGrammarAccess.Scenario3Elements getScenario3Access() {
 		return gaParametersTestLanguage.getScenario3Access();
 	}
@@ -628,8 +673,9 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario3Access().getRule();
 	}
 	
-	//Scenario4 <AllowKeywordScenario:
-	//	=>second=IdOrKeyword<AllowKeyword> 'keyword';
+	//Scenario4<AllowKeyword> returns Scenario:
+	//    =>second=IdOrKeyword<AllowKeyword> 'keyword'
+	//;
 	public ParametersTestLanguageGrammarAccess.Scenario4Elements getScenario4Access() {
 		return gaParametersTestLanguage.getScenario4Access();
 	}
@@ -638,9 +684,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getScenario4Access().getRule();
 	}
 	
-	//IdOrKeyword <Keyword>:
-	//	<Keyword> 'keyword'
-	//	| ID;
+	//IdOrKeyword<Keyword>:
+	//    <Keyword> 'keyword'
+	//    | ID
+	//;
 	public ParametersTestLanguageGrammarAccess.IdOrKeywordElements getIdOrKeywordAccess() {
 		return gaParametersTestLanguage.getIdOrKeywordAccess();
 	}
@@ -649,45 +696,40 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractElementFinde
 		return getIdOrKeywordAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -27,10 +27,11 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cDomainModelDomainModelParserRuleCall_0 = (RuleCall)cDomainModelAssignment.eContents().get(0);
 		
 		//Model:
-		//	domainModel=DomainModel;
+		//    domainModel = DomainModel
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//domainModel=DomainModel
+		//domainModel = DomainModel
 		public Assignment getDomainModelAssignment() { return cDomainModelAssignment; }
 		
 		//DomainModel
@@ -46,20 +47,21 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		
 		///* SuppressWarnings[noInstantiation] */
 		//DomainModel:
-		//	'entities'
-		//	entities+=Entity*
-		//	'end';
+		//    'entities'
+		//        (entities+=Entity)*
+		//    'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'entities'
-		//entities+=Entity*
+		//    (entities+=Entity)*
 		//'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'entities'
 		public Keyword getEntitiesKeyword_0() { return cEntitiesKeyword_0; }
 		
-		//entities+=Entity*
+		//(entities+=Entity)*
 		public Assignment getEntitiesAssignment_1() { return cEntitiesAssignment_1; }
 		
 		//Entity
@@ -77,21 +79,22 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
 		
 		//Entity:
-		//	name=ID
-		//	description=STRING;
+		//    name = ID
+		//    description = STRING
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID
-		//description=STRING
+		//name = ID
+		//description = STRING
 		public Group getGroup() { return cGroup; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
-		//description=STRING
+		//description = STRING
 		public Assignment getDescriptionAssignment_1() { return cDescriptionAssignment_1; }
 		
 		//STRING
@@ -145,7 +148,8 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 
 	
 	//Model:
-	//	domainModel=DomainModel;
+	//    domainModel = DomainModel
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -156,9 +160,10 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 	
 	///* SuppressWarnings[noInstantiation] */
 	//DomainModel:
-	//	'entities'
-	//	entities+=Entity*
-	//	'end';
+	//    'entities'
+	//        (entities+=Entity)*
+	//    'end'
+	//;
 	public DomainModelElements getDomainModelAccess() {
 		return pDomainModel;
 	}
@@ -168,8 +173,9 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//Entity:
-	//	name=ID
-	//	description=STRING;
+	//    name = ID
+	//    description = STRING
+	//;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -178,45 +184,40 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractEleme
 		return getEntityAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}
