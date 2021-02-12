@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
@@ -45,7 +46,6 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 	private TemplateStore templateStore;
 	private ContextTypeRegistry registry;
 	private ContextTypeIdHelper helper;
-	private Image image;
 	
 	@Inject
 	public DefaultTemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry, ContextTypeIdHelper helper) {
@@ -82,13 +82,15 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 	}
 
 	public Image getImage(Template template) {
-		if (image == null) {
-			ImageDescriptor imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif"); //$NON-NLS-1$
-			image = imageDescriptor.createImage();
+		ImageRegistry registry = Activator.getDefault().getImageRegistry();
+		ImageDescriptor descriptor = registry.getDescriptor("defaultoutlinenode.gif");
+		if (descriptor == null) {
+			descriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif"); //$NON-NLS-1$
+			registry.put("defaultoutlinenode.gif", descriptor);
 		}
-		return image;
+		return registry.get("defaultoutlinenode.gif");
 	}
-	
+
 	public int getRelevance(Template template) {
 		return 90;
 	}
