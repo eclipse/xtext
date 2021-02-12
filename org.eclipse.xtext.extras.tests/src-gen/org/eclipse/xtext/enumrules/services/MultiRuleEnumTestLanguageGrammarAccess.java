@@ -36,7 +36,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		private final RuleCall cCEnumRuleCEnumRuleCall_3_0 = (RuleCall)cCAssignment_3.eContents().get(0);
 		
 		//Model:
-		//	'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC;
+		//  'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC
@@ -75,7 +76,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cCCKeyword_2_0 = (Keyword)cCEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum EnumRuleA returns MyEnum:
-		//	A | B | C;
+		//  A | B | C
+		//;
 		public EnumRule getRule() { return rule; }
 		
 		//A | B | C
@@ -84,19 +86,16 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		//A
 		public EnumLiteralDeclaration getAEnumLiteralDeclaration_0() { return cAEnumLiteralDeclaration_0; }
 		
-		//"A"
 		public Keyword getAAKeyword_0_0() { return cAAKeyword_0_0; }
 		
 		//B
 		public EnumLiteralDeclaration getBEnumLiteralDeclaration_1() { return cBEnumLiteralDeclaration_1; }
 		
-		//"B"
 		public Keyword getBBKeyword_1_0() { return cBBKeyword_1_0; }
 		
 		//C
 		public EnumLiteralDeclaration getCEnumLiteralDeclaration_2() { return cCEnumLiteralDeclaration_2; }
 		
-		//"C"
 		public Keyword getCCKeyword_2_0() { return cCCKeyword_2_0; }
 	}
 	public class EnumRuleBElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -110,7 +109,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cEEKeyword_2_0 = (Keyword)cEEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum EnumRuleB returns MyEnum:
-		//	C | D | E;
+		//  C | D | E
+		//;
 		public EnumRule getRule() { return rule; }
 		
 		//C | D | E
@@ -119,19 +119,16 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		//C
 		public EnumLiteralDeclaration getCEnumLiteralDeclaration_0() { return cCEnumLiteralDeclaration_0; }
 		
-		//"C"
 		public Keyword getCCKeyword_0_0() { return cCCKeyword_0_0; }
 		
 		//D
 		public EnumLiteralDeclaration getDEnumLiteralDeclaration_1() { return cDEnumLiteralDeclaration_1; }
 		
-		//"D"
 		public Keyword getDDKeyword_1_0() { return cDDKeyword_1_0; }
 		
 		//E
 		public EnumLiteralDeclaration getEEnumLiteralDeclaration_2() { return cEEnumLiteralDeclaration_2; }
 		
-		//"E"
 		public Keyword getEEKeyword_2_0() { return cEEKeyword_2_0; }
 	}
 	public class EnumRuleCElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -145,7 +142,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		private final Keyword cBBKeyword_2_0 = (Keyword)cBEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum EnumRuleC returns MyEnum:
-		//	A | D | B;
+		//  A | D | B
+		//;
 		public EnumRule getRule() { return rule; }
 		
 		//A | D | B
@@ -154,19 +152,16 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		//A
 		public EnumLiteralDeclaration getAEnumLiteralDeclaration_0() { return cAEnumLiteralDeclaration_0; }
 		
-		//"A"
 		public Keyword getAAKeyword_0_0() { return cAAKeyword_0_0; }
 		
 		//D
 		public EnumLiteralDeclaration getDEnumLiteralDeclaration_1() { return cDEnumLiteralDeclaration_1; }
 		
-		//"D"
 		public Keyword getDDKeyword_1_0() { return cDDKeyword_1_0; }
 		
 		//B
 		public EnumLiteralDeclaration getBEnumLiteralDeclaration_2() { return cBEnumLiteralDeclaration_2; }
 		
-		//"B"
 		public Keyword getBBKeyword_2_0() { return cBBKeyword_2_0; }
 	}
 	
@@ -218,7 +213,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 
 	
 	//Model:
-	//	'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC;
+	//  'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -228,7 +224,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//enum EnumRuleA returns MyEnum:
-	//	A | B | C;
+	//  A | B | C
+	//;
 	public EnumRuleAElements getEnumRuleAAccess() {
 		return eEnumRuleA;
 	}
@@ -238,7 +235,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//enum EnumRuleB returns MyEnum:
-	//	C | D | E;
+	//  C | D | E
+	//;
 	public EnumRuleBElements getEnumRuleBAccess() {
 		return eEnumRuleB;
 	}
@@ -248,7 +246,8 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 	}
 	
 	//enum EnumRuleC returns MyEnum:
-	//	A | D | B;
+	//  A | D | B
+	//;
 	public EnumRuleCElements getEnumRuleCAccess() {
 		return eEnumRuleC;
 	}
@@ -257,45 +256,40 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractElementFinde
 		return getEnumRuleCAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}
