@@ -65,7 +65,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 		}
 		
 	}
-	
+
 	/**
 	 * @since 2.19
 	 */
@@ -171,4 +171,5 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	public IXtextDocument getXtextDocument() {
 		return xtextDocumentUtil.getXtextDocument(getDocument());
 	}
+	
 }

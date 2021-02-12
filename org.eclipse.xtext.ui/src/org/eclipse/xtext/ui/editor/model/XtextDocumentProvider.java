@@ -198,12 +198,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			String message= (ex.getMessage() != null ? ex.getMessage() : ""); //$NON-NLS-1$
 			IStatus s= new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, IStatus.OK, message, ex);
 			throw new CoreException(s);
-		} catch (CoreException ex) {
-			if (ex.getStatus().getCode()==IResourceStatus.RESOURCE_NOT_FOUND) {
-				return false;
-			} else {
-				throw ex;
-			}
 		}
 	}
 
@@ -279,7 +273,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	 */
 	protected void registerAnnotationInfoProcessor(ElementInfo info) {
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		if(info.fModel != null) {
+		if(doc != null && info.fModel != null) {
 			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
 				issueResolutionProvider);
 			ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);

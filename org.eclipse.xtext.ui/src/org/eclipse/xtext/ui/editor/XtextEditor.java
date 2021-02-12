@@ -268,7 +268,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	 * @since 2.8
 	 */
 	protected void removeDirtyStateSupport() {
-		if(getSourceViewer() != null && getEditorInput() != null)
+		if(getSourceViewer() != null && getEditorInput() != null && getDocument() != null)
 			dirtyStateEditorSupport.removeDirtyStateSupport(this);
 	}
 
@@ -276,7 +276,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	 * @since 2.8
 	 */
 	protected void initializeDirtyStateSupport() {
-		if(getSourceViewer() != null && getEditorInput() != null) 
+		if(getSourceViewer() != null && getEditorInput() != null && getDocument() != null) 
 			dirtyStateEditorSupport.initializeDirtyStateSupport(this);
 	}
 
@@ -284,11 +284,6 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		if (log.isDebugEnabled())
 			log.debug("init:" + input);
-		if (!input.exists()) {
-			// Set site to prevent issues when disposing this editor
-			setSite(site);
-			throw new PartInitException("Input doesn't exist");
-		}
 
 		// do document provider setup
 		setDocumentProvider(documentProvider.get());
