@@ -31,11 +31,18 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cLabelledStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cExpressionStatementParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//RootStatement <YieldStatement:
-		//	Block<Yield> | FunctionDeclaration<Yield> | LabelledStatement<Yield> | ExpressionStatement<Yield>;
+		//RootStatement <Yield> returns Statement:
+		//      Block<Yield>
+		//    | FunctionDeclaration<Yield>
+		//    | LabelledStatement<Yield>
+		//    | ExpressionStatement<Yield>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Block<Yield> | FunctionDeclaration<Yield> | LabelledStatement<Yield> | ExpressionStatement<Yield>
+		//  Block<Yield>
+		//| FunctionDeclaration<Yield>
+		//| LabelledStatement<Yield>
+		//| ExpressionStatement<Yield>
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Block<Yield>
@@ -60,29 +67,33 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//FunctionDeclaration <Yield>:
-		//	=> ({FunctionDeclaration}
-		//	-> FunctionImpl<Yield, Yield, Expression=false>) =>';'?;
+		//    => ({FunctionDeclaration}
+		//        -> FunctionImpl <Yield,Yield,Expression=false>
+		//    ) => ';'?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> ({FunctionDeclaration}
-		//-> FunctionImpl<Yield, Yield, Expression=false>) =>';'?
+		//    -> FunctionImpl <Yield,Yield,Expression=false>
+		//) => ';'?
 		public Group getGroup() { return cGroup; }
 		
 		//=> ({FunctionDeclaration}
-		//-> FunctionImpl<Yield, Yield, Expression=false>)
+		//    -> FunctionImpl <Yield,Yield,Expression=false>
+		//)
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//({FunctionDeclaration}
-		//-> FunctionImpl<Yield, Yield, Expression=false>)
+		//{FunctionDeclaration}
+		//        -> FunctionImpl <Yield,Yield,Expression=false>
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{FunctionDeclaration}
 		public Action getFunctionDeclarationAction_0_0_0() { return cFunctionDeclarationAction_0_0_0; }
 		
-		//-> FunctionImpl<Yield, Yield, Expression=false>
+		//-> FunctionImpl <Yield,Yield,Expression=false>
 		public RuleCall getFunctionImplParserRuleCall_0_0_1() { return cFunctionImplParserRuleCall_0_0_1; }
 		
-		//=>';'?
+		//=> ';'?
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 	public class FunctionImplElements extends AbstractParserRuleElementFinder {
@@ -99,23 +110,32 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cFunctionHeaderParserRuleCall_1_1_0 = (RuleCall)cGroup_1_1.eContents().get(0);
 		private final RuleCall cFunctionBodyParserRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
 		
-		//fragment FunctionImpl <Yield, YieldIfGenerator, Expression> *:
-		//	'function' (generator?='*' FunctionHeader<YieldIfGenerator, Generator=true> FunctionBody<Yield=true, Expression> |
-		//	FunctionHeader<Yield, Generator=false> FunctionBody<Yield=false, Expression>);
+		//fragment FunctionImpl<Yield, YieldIfGenerator, Expression>*:
+		//    'function'
+		//    (
+		//        generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
+		//    |     FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
+		//    )
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'function' (generator?='*' FunctionHeader<YieldIfGenerator, Generator=true> FunctionBody<Yield=true, Expression> |
-		//FunctionHeader<Yield, Generator=false> FunctionBody<Yield=false, Expression>)
+		//'function'
+		//(
+		//    generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
+		//|     FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
+		//)
 		public Group getGroup() { return cGroup; }
 		
 		//'function'
 		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
 		
-		//(generator?='*' FunctionHeader<YieldIfGenerator, Generator=true> FunctionBody<Yield=true, Expression> |
-		//FunctionHeader<Yield, Generator=false> FunctionBody<Yield=false, Expression>)
+		//(
+		//    generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
+		//|     FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//generator?='*' FunctionHeader<YieldIfGenerator, Generator=true> FunctionBody<Yield=true, Expression>
+		//generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//generator?='*'
@@ -124,19 +144,19 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//'*'
 		public Keyword getGeneratorAsteriskKeyword_1_0_0_0() { return cGeneratorAsteriskKeyword_1_0_0_0; }
 		
-		//FunctionHeader<YieldIfGenerator, Generator=true>
+		//FunctionHeader<YieldIfGenerator,Generator=true>
 		public RuleCall getFunctionHeaderParserRuleCall_1_0_1() { return cFunctionHeaderParserRuleCall_1_0_1; }
 		
-		//FunctionBody<Yield=true, Expression>
+		//FunctionBody<Yield=true,Expression>
 		public RuleCall getFunctionBodyParserRuleCall_1_0_2() { return cFunctionBodyParserRuleCall_1_0_2; }
 		
-		//FunctionHeader<Yield, Generator=false> FunctionBody<Yield=false, Expression>
+		//FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//FunctionHeader<Yield, Generator=false>
+		//FunctionHeader<Yield,Generator=false>
 		public RuleCall getFunctionHeaderParserRuleCall_1_1_0() { return cFunctionHeaderParserRuleCall_1_1_0; }
 		
-		//FunctionBody<Yield=false, Expression>
+		//FunctionBody<Yield=false,Expression>
 		public RuleCall getFunctionBodyParserRuleCall_1_1_1() { return cFunctionBodyParserRuleCall_1_1_1; }
 	}
 	public class FunctionHeaderElements extends AbstractParserRuleElementFinder {
@@ -147,13 +167,14 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//fragment FunctionHeader <Yield, Generator> *:
-		//	name=Identifier<Yield>?
-		//	'(' ')';
+		//fragment FunctionHeader<Yield, Generator>*:
+		//    name=Identifier<Yield>?
+		//    '('')'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=Identifier<Yield>?
-		//'(' ')'
+		//'('')'
 		public Group getGroup() { return cGroup; }
 		
 		//name=Identifier<Yield>?
@@ -178,11 +199,14 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cBodyAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cBodyBlockParserRuleCall_1_0_0 = (RuleCall)cBodyAssignment_1_0.eContents().get(0);
 		
-		//fragment FunctionBody <Yield, Expression> *:
-		//	<Expression> body=Block<Yield> | <! Expression> body=Block<Yield>?;
+		//fragment FunctionBody <Yield, Expression>*:
+		//        <Expression> body=Block<Yield>
+		//    |    <!Expression> body=Block<Yield>?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Expression> body=Block<Yield> | <! Expression> body=Block<Yield>?
+		//    <Expression> body=Block<Yield>
+		//|    <!Expression> body=Block<Yield>?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Expression> body=Block<Yield>
@@ -194,7 +218,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//Block<Yield>
 		public RuleCall getBodyBlockParserRuleCall_0_0_0() { return cBodyBlockParserRuleCall_0_0_0; }
 		
-		//<! Expression> body=Block<Yield>?
+		//<!Expression> body=Block<Yield>?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//body=Block<Yield>?
@@ -214,8 +238,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cStatementsStatementParserRuleCall_1_0 = (RuleCall)cStatementsAssignment_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Block <Yield>:
-		//	=> ({Block} '{') statements+=Statement<Yield>* '}';
+		//Block <Yield>: => ({Block} '{') statements+=Statement<Yield>* '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> ({Block} '{') statements+=Statement<Yield>* '}'
@@ -224,7 +247,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//=> ({Block} '{')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//({Block} '{')
+		//{Block} '{'
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{Block}
@@ -249,10 +272,13 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cRootStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Statement <Yield>:
-		//	FunctionDeclaration<Yield> | RootStatement<Yield>;
+		//      FunctionDeclaration<Yield>
+		//    | RootStatement<Yield>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//FunctionDeclaration<Yield> | RootStatement<Yield>
+		//  FunctionDeclaration<Yield>
+		//| RootStatement<Yield>
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//FunctionDeclaration<Yield>
@@ -269,16 +295,17 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ExpressionStatement <Yield>:
-		//	expression=Expression<In=true, Yield> ';';
+		//    expression=Expression<In=true,Yield> ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//expression=Expression<In=true, Yield> ';'
+		//expression=Expression<In=true,Yield> ';'
 		public Group getGroup() { return cGroup; }
 		
-		//expression=Expression<In=true, Yield>
+		//expression=Expression<In=true,Yield>
 		public Assignment getExpressionAssignment_0() { return cExpressionAssignment_0; }
 		
-		//Expression<In=true, Yield>
+		//Expression<In=true,Yield>
 		public RuleCall getExpressionExpressionParserRuleCall_0_0() { return cExpressionExpressionParserRuleCall_0_0; }
 		
 		//';'
@@ -295,8 +322,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cStatementAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cStatementStatementParserRuleCall_1_0 = (RuleCall)cStatementAssignment_1.eContents().get(0);
 		
-		//LabelledStatement <Yield>:
-		//	=> (name=Identifier<Yield> ':') statement=Statement<Yield>;
+		//LabelledStatement <Yield>: => (name=Identifier<Yield> ':') statement=Statement<Yield>;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> (name=Identifier<Yield> ':') statement=Statement<Yield>
@@ -305,7 +331,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//=> (name=Identifier<Yield> ':')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//(name=Identifier<Yield> ':')
+		//name=Identifier<Yield> ':'
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//name=Identifier<Yield>
@@ -327,8 +353,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ParameterizedExpressionsTestLanguage.PrimaryExpression");
 		private final RuleCall cIdentifierRefParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//PrimaryExpression <YieldExpression:
-		//	IdentifierRef<Yield>;
+		//PrimaryExpression <Yield> returns Expression:
+		//      IdentifierRef<Yield>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//IdentifierRef<Yield>
@@ -340,7 +367,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cIdIdentifierParserRuleCall_0 = (RuleCall)cIdAssignment.eContents().get(0);
 		
 		//IdentifierRef <Yield>:
-		//	id=Identifier<Yield>;
+		//    id=Identifier<Yield>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//id=Identifier<Yield>
@@ -361,20 +389,27 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Action cParameterizedPropertyAccessExpressionTargetAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
 		private final RuleCall cParameterizedPropertyAccessExpressionTailParserRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
 		
-		//MemberExpression <YieldExpression:
-		//	PrimaryExpression<Yield> ({IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield> |
-		//	{ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>)*;
+		//MemberExpression <Yield> returns Expression:
+		//    PrimaryExpression<Yield> (
+		//          {IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield>
+		//        | {ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>
+		//        )*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PrimaryExpression<Yield> ({IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield> |
-		//{ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>)*
+		//PrimaryExpression<Yield> (
+		//      {IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield>
+		//    | {ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>
+		//    )*
 		public Group getGroup() { return cGroup; }
 		
 		//PrimaryExpression<Yield>
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 		
-		//({IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield> |
-		//{ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>)*
+		//(
+		//         {IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield>
+		//       | {ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>
+		//       )*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//{IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield>
@@ -403,20 +438,21 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cIndexExpressionParserRuleCall_1_0 = (RuleCall)cIndexAssignment_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//fragment IndexedAccessExpressionTail <Yield> *:
-		//	'[' index=Expression<In=true, Yield> ']';
+		//fragment IndexedAccessExpressionTail <Yield>*:
+		//    '[' index=Expression<In=true,Yield> ']'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' index=Expression<In=true, Yield> ']'
+		//'[' index=Expression<In=true,Yield> ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//index=Expression<In=true, Yield>
+		//index=Expression<In=true,Yield>
 		public Assignment getIndexAssignment_1() { return cIndexAssignment_1; }
 		
-		//Expression<In=true, Yield>
+		//Expression<In=true,Yield>
 		public RuleCall getIndexExpressionParserRuleCall_1_0() { return cIndexExpressionParserRuleCall_1_0; }
 		
 		//']'
@@ -429,8 +465,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cPropertyAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cPropertyIdentifierParserRuleCall_1_0 = (RuleCall)cPropertyAssignment_1.eContents().get(0);
 		
-		//fragment ParameterizedPropertyAccessExpressionTail <Yield> *:
-		//	'.' property=Identifier<Yield>;
+		//fragment ParameterizedPropertyAccessExpressionTail <Yield>*:
+		//    '.' property=Identifier<Yield>
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'.' property=Identifier<Yield>
@@ -459,29 +496,31 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cRhsAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
 		private final RuleCall cRhsMemberExpressionParserRuleCall_1_0_2_0 = (RuleCall)cRhsAssignment_1_0_2.eContents().get(0);
 		
-		//ShiftExpression <YieldExpression:
-		//	MemberExpression<Yield> => ({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)*;
+		//ShiftExpression <Yield> returns Expression: MemberExpression<Yield>
+		//    (=>({ShiftExpression.lhs=current} op=('>>'|'<<') rhs=MemberExpression<Yield>))*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//MemberExpression<Yield> => ({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)*
+		//MemberExpression<Yield>
+		//   (=>({ShiftExpression.lhs=current} op=('>>'|'<<') rhs=MemberExpression<Yield>))*
 		public Group getGroup() { return cGroup; }
 		
 		//MemberExpression<Yield>
 		public RuleCall getMemberExpressionParserRuleCall_0() { return cMemberExpressionParserRuleCall_0; }
 		
-		//=> ({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)*
+		//(=>({ShiftExpression.lhs=current} op=('>>'|'<<') rhs=MemberExpression<Yield>))*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)
+		//{ShiftExpression.lhs=current} op=('>>'|'<<') rhs=MemberExpression<Yield>
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//{ShiftExpression.lhs=current}
 		public Action getShiftExpressionLhsAction_1_0_0() { return cShiftExpressionLhsAction_1_0_0; }
 		
-		//op=('>>' | '<<')
+		//op=('>>'|'<<')
 		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 		
-		//('>>' | '<<')
+		//('>>'|'<<')
 		public Alternatives getOpAlternatives_1_0_1_0() { return cOpAlternatives_1_0_1_0; }
 		
 		//'>>'
@@ -508,22 +547,21 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cRhsAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
 		private final RuleCall cRhsShiftExpressionParserRuleCall_1_0_2_0 = (RuleCall)cRhsAssignment_1_0_2.eContents().get(0);
 		
-		//RelationalExpression <In, YieldExpression:
-		//	ShiftExpression<Yield>
-		//	=> ({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*;
+		//RelationalExpression <In, Yield> returns Expression: ShiftExpression<Yield>
+		//    =>({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ShiftExpression<Yield>
-		//=> ({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*
+		//   =>({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*
 		public Group getGroup() { return cGroup; }
 		
 		//ShiftExpression<Yield>
 		public RuleCall getShiftExpressionParserRuleCall_0() { return cShiftExpressionParserRuleCall_0; }
 		
-		//=> ({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*
+		//=>({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)
+		//{RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//{RelationalExpression.lhs=current}
@@ -552,8 +590,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
 		private final Keyword cInKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		
-		//RelationalOperator <In>:
-		//	'<' | '>' | '<=' | '>=' | 'instanceof' | <In> 'in';
+		//RelationalOperator <In> :
+		//    '<' | '>' | '<=' | '>=' | 'instanceof' | <In> 'in';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'<' | '>' | '<=' | '>=' | 'instanceof' | <In> 'in'
@@ -596,13 +634,14 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cRhsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cRhsAssignmentExpressionParserRuleCall_1_1_1_0 = (RuleCall)cRhsAssignment_1_1_1.eContents().get(0);
 		
-		//AssignmentExpression <In, YieldExpression:
-		//	<Yield> YieldExpression<In> | RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=')
-		//	rhs=AssignmentExpression<In, Yield>)?;
+		//AssignmentExpression <In, Yield> returns Expression:
+		//    <Yield> YieldExpression<In>
+		//    | RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//<Yield> YieldExpression<In> | RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=')
-		//rhs=AssignmentExpression<In, Yield>)?
+		//<Yield> YieldExpression<In>
+		//| RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//<Yield> YieldExpression<In>
@@ -611,19 +650,19 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//YieldExpression<In>
 		public RuleCall getYieldExpressionParserRuleCall_0_0() { return cYieldExpressionParserRuleCall_0_0; }
 		
-		//RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In, Yield>)?
+		//RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//RelationalExpression<In, Yield>
+		//RelationalExpression<In,Yield>
 		public RuleCall getRelationalExpressionParserRuleCall_1_0() { return cRelationalExpressionParserRuleCall_1_0; }
 		
-		//(=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In, Yield>)?
+		//(=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//=> ({AssignmentExpression.lhs=current} op='=')
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 		
-		//({AssignmentExpression.lhs=current} op='=')
+		//{AssignmentExpression.lhs=current} op='='
 		public Group getGroup_1_1_0_0() { return cGroup_1_1_0_0; }
 		
 		//{AssignmentExpression.lhs=current}
@@ -635,10 +674,10 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//'='
 		public Keyword getOpEqualsSignKeyword_1_1_0_0_1_0() { return cOpEqualsSignKeyword_1_1_0_0_1_0; }
 		
-		//rhs=AssignmentExpression<In, Yield>
+		//rhs=AssignmentExpression<In,Yield>
 		public Assignment getRhsAssignment_1_1_1() { return cRhsAssignment_1_1_1; }
 		
-		//AssignmentExpression<In, Yield>
+		//AssignmentExpression<In,Yield>
 		public RuleCall getRhsAssignmentExpressionParserRuleCall_1_1_1_0() { return cRhsAssignmentExpressionParserRuleCall_1_1_1_0; }
 	}
 	public class YieldExpressionElements extends AbstractParserRuleElementFinder {
@@ -651,11 +690,12 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cExpressionAssignmentExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
-		//YieldExpression <InExpression:
-		//	{YieldExpression} 'yield' =>many?='*'? ->expression=AssignmentExpression<In, Yield=true>?;
+		//YieldExpression <In> returns Expression:
+		//    {YieldExpression} 'yield' => many?='*'? -> expression=AssignmentExpression<In,Yield=true>?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{YieldExpression} 'yield' =>many?='*'? ->expression=AssignmentExpression<In, Yield=true>?
+		//{YieldExpression} 'yield' => many?='*'? -> expression=AssignmentExpression<In,Yield=true>?
 		public Group getGroup() { return cGroup; }
 		
 		//{YieldExpression}
@@ -664,16 +704,16 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//'yield'
 		public Keyword getYieldKeyword_1() { return cYieldKeyword_1; }
 		
-		//=>many?='*'?
+		//=> many?='*'?
 		public Assignment getManyAssignment_2() { return cManyAssignment_2; }
 		
 		//'*'
 		public Keyword getManyAsteriskKeyword_2_0() { return cManyAsteriskKeyword_2_0; }
 		
-		//->expression=AssignmentExpression<In, Yield=true>?
+		//-> expression=AssignmentExpression<In,Yield=true>?
 		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
 		
-		//AssignmentExpression<In, Yield=true>
+		//AssignmentExpression<In,Yield=true>
 		public RuleCall getExpressionAssignmentExpressionParserRuleCall_3_0() { return cExpressionAssignmentExpressionParserRuleCall_3_0; }
 	}
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
@@ -691,19 +731,17 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final RuleCall cExprsAssignmentExpressionParserRuleCall_1_3_1_0 = (RuleCall)cExprsAssignment_1_3_1.eContents().get(0);
 		
 		//Expression <In, Yield>:
-		//	AssignmentExpression<In, Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In, Yield> (','
-		//	exprs+=AssignmentExpression<In, Yield>)*)?;
+		//    AssignmentExpression<In,Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In,Yield> (','    exprs+=AssignmentExpression<In,Yield>)*)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//AssignmentExpression<In, Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In, Yield> (','
-		//exprs+=AssignmentExpression<In, Yield>)*)?
+		//AssignmentExpression<In,Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In,Yield> (','	exprs+=AssignmentExpression<In,Yield>)*)?
 		public Group getGroup() { return cGroup; }
 		
-		//AssignmentExpression<In, Yield>
+		//AssignmentExpression<In,Yield>
 		public RuleCall getAssignmentExpressionParserRuleCall_0() { return cAssignmentExpressionParserRuleCall_0; }
 		
-		//({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In, Yield> (',' exprs+=AssignmentExpression<In, Yield>
-		//)*)?
+		//({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In,Yield> (','	exprs+=AssignmentExpression<In,Yield>)*)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//{CommaExpression.exprs+=current}
@@ -712,22 +750,22 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		//','
 		public Keyword getCommaKeyword_1_1() { return cCommaKeyword_1_1; }
 		
-		//exprs+=AssignmentExpression<In, Yield>
+		//exprs+=AssignmentExpression<In,Yield>
 		public Assignment getExprsAssignment_1_2() { return cExprsAssignment_1_2; }
 		
-		//AssignmentExpression<In, Yield>
+		//AssignmentExpression<In,Yield>
 		public RuleCall getExprsAssignmentExpressionParserRuleCall_1_2_0() { return cExprsAssignmentExpressionParserRuleCall_1_2_0; }
 		
-		//(',' exprs+=AssignmentExpression<In, Yield>)*
+		//(','	exprs+=AssignmentExpression<In,Yield>)*
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//','
 		public Keyword getCommaKeyword_1_3_0() { return cCommaKeyword_1_3_0; }
 		
-		//exprs+=AssignmentExpression<In, Yield>
+		//exprs+=AssignmentExpression<In,Yield>
 		public Assignment getExprsAssignment_1_3_1() { return cExprsAssignment_1_3_1; }
 		
-		//AssignmentExpression<In, Yield>
+		//AssignmentExpression<In,Yield>
 		public RuleCall getExprsAssignmentExpressionParserRuleCall_1_3_1_0() { return cExprsAssignmentExpressionParserRuleCall_1_3_1_0; }
 	}
 	public class IdentifierElements extends AbstractParserRuleElementFinder {
@@ -738,16 +776,17 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		private final Keyword cYieldKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		
 		//Identifier <Yield>:
-		//	ID | <! Yield> 'yield';
+		//    ID | <!Yield> 'yield'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID | <! Yield> 'yield'
+		//ID | <!Yield> 'yield'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 		
-		//<! Yield> 'yield'
+		//<!Yield> 'yield'
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'yield'
@@ -836,8 +875,12 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 
 	
-	//RootStatement <YieldStatement:
-	//	Block<Yield> | FunctionDeclaration<Yield> | LabelledStatement<Yield> | ExpressionStatement<Yield>;
+	//RootStatement <Yield> returns Statement:
+	//      Block<Yield>
+	//    | FunctionDeclaration<Yield>
+	//    | LabelledStatement<Yield>
+	//    | ExpressionStatement<Yield>
+	//;
 	public RootStatementElements getRootStatementAccess() {
 		return pRootStatement;
 	}
@@ -847,8 +890,10 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//FunctionDeclaration <Yield>:
-	//	=> ({FunctionDeclaration}
-	//	-> FunctionImpl<Yield, Yield, Expression=false>) =>';'?;
+	//    => ({FunctionDeclaration}
+	//        -> FunctionImpl <Yield,Yield,Expression=false>
+	//    ) => ';'?
+	//;
 	public FunctionDeclarationElements getFunctionDeclarationAccess() {
 		return pFunctionDeclaration;
 	}
@@ -857,9 +902,13 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getFunctionDeclarationAccess().getRule();
 	}
 	
-	//fragment FunctionImpl <Yield, YieldIfGenerator, Expression> *:
-	//	'function' (generator?='*' FunctionHeader<YieldIfGenerator, Generator=true> FunctionBody<Yield=true, Expression> |
-	//	FunctionHeader<Yield, Generator=false> FunctionBody<Yield=false, Expression>);
+	//fragment FunctionImpl<Yield, YieldIfGenerator, Expression>*:
+	//    'function'
+	//    (
+	//        generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
+	//    |     FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
+	//    )
+	//;
 	public FunctionImplElements getFunctionImplAccess() {
 		return pFunctionImpl;
 	}
@@ -868,9 +917,10 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getFunctionImplAccess().getRule();
 	}
 	
-	//fragment FunctionHeader <Yield, Generator> *:
-	//	name=Identifier<Yield>?
-	//	'(' ')';
+	//fragment FunctionHeader<Yield, Generator>*:
+	//    name=Identifier<Yield>?
+	//    '('')'
+	//;
 	public FunctionHeaderElements getFunctionHeaderAccess() {
 		return pFunctionHeader;
 	}
@@ -879,8 +929,10 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getFunctionHeaderAccess().getRule();
 	}
 	
-	//fragment FunctionBody <Yield, Expression> *:
-	//	<Expression> body=Block<Yield> | <! Expression> body=Block<Yield>?;
+	//fragment FunctionBody <Yield, Expression>*:
+	//        <Expression> body=Block<Yield>
+	//    |    <!Expression> body=Block<Yield>?
+	//;
 	public FunctionBodyElements getFunctionBodyAccess() {
 		return pFunctionBody;
 	}
@@ -889,8 +941,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getFunctionBodyAccess().getRule();
 	}
 	
-	//Block <Yield>:
-	//	=> ({Block} '{') statements+=Statement<Yield>* '}';
+	//Block <Yield>: => ({Block} '{') statements+=Statement<Yield>* '}';
 	public BlockElements getBlockAccess() {
 		return pBlock;
 	}
@@ -900,7 +951,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Statement <Yield>:
-	//	FunctionDeclaration<Yield> | RootStatement<Yield>;
+	//      FunctionDeclaration<Yield>
+	//    | RootStatement<Yield>
+	//;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -910,7 +963,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//ExpressionStatement <Yield>:
-	//	expression=Expression<In=true, Yield> ';';
+	//    expression=Expression<In=true,Yield> ';'
+	//;
 	public ExpressionStatementElements getExpressionStatementAccess() {
 		return pExpressionStatement;
 	}
@@ -919,8 +973,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getExpressionStatementAccess().getRule();
 	}
 	
-	//LabelledStatement <Yield>:
-	//	=> (name=Identifier<Yield> ':') statement=Statement<Yield>;
+	//LabelledStatement <Yield>: => (name=Identifier<Yield> ':') statement=Statement<Yield>;
 	public LabelledStatementElements getLabelledStatementAccess() {
 		return pLabelledStatement;
 	}
@@ -929,8 +982,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getLabelledStatementAccess().getRule();
 	}
 	
-	//PrimaryExpression <YieldExpression:
-	//	IdentifierRef<Yield>;
+	//PrimaryExpression <Yield> returns Expression:
+	//      IdentifierRef<Yield>
+	//;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -940,7 +994,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//IdentifierRef <Yield>:
-	//	id=Identifier<Yield>;
+	//    id=Identifier<Yield>
+	//;
 	public IdentifierRefElements getIdentifierRefAccess() {
 		return pIdentifierRef;
 	}
@@ -949,9 +1004,12 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getIdentifierRefAccess().getRule();
 	}
 	
-	//MemberExpression <YieldExpression:
-	//	PrimaryExpression<Yield> ({IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield> |
-	//	{ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>)*;
+	//MemberExpression <Yield> returns Expression:
+	//    PrimaryExpression<Yield> (
+	//          {IndexedAccessExpression.target=current} IndexedAccessExpressionTail<Yield>
+	//        | {ParameterizedPropertyAccessExpression.target=current} ParameterizedPropertyAccessExpressionTail<Yield>
+	//        )*
+	//;
 	public MemberExpressionElements getMemberExpressionAccess() {
 		return pMemberExpression;
 	}
@@ -960,8 +1018,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getMemberExpressionAccess().getRule();
 	}
 	
-	//fragment IndexedAccessExpressionTail <Yield> *:
-	//	'[' index=Expression<In=true, Yield> ']';
+	//fragment IndexedAccessExpressionTail <Yield>*:
+	//    '[' index=Expression<In=true,Yield> ']'
+	//;
 	public IndexedAccessExpressionTailElements getIndexedAccessExpressionTailAccess() {
 		return pIndexedAccessExpressionTail;
 	}
@@ -970,8 +1029,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getIndexedAccessExpressionTailAccess().getRule();
 	}
 	
-	//fragment ParameterizedPropertyAccessExpressionTail <Yield> *:
-	//	'.' property=Identifier<Yield>;
+	//fragment ParameterizedPropertyAccessExpressionTail <Yield>*:
+	//    '.' property=Identifier<Yield>
+	//;
 	public ParameterizedPropertyAccessExpressionTailElements getParameterizedPropertyAccessExpressionTailAccess() {
 		return pParameterizedPropertyAccessExpressionTail;
 	}
@@ -980,8 +1040,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getParameterizedPropertyAccessExpressionTailAccess().getRule();
 	}
 	
-	//ShiftExpression <YieldExpression:
-	//	MemberExpression<Yield> => ({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)*;
+	//ShiftExpression <Yield> returns Expression: MemberExpression<Yield>
+	//    (=>({ShiftExpression.lhs=current} op=('>>'|'<<') rhs=MemberExpression<Yield>))*
+	//;
 	public ShiftExpressionElements getShiftExpressionAccess() {
 		return pShiftExpression;
 	}
@@ -990,9 +1051,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getShiftExpressionAccess().getRule();
 	}
 	
-	//RelationalExpression <In, YieldExpression:
-	//	ShiftExpression<Yield>
-	//	=> ({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*;
+	//RelationalExpression <In, Yield> returns Expression: ShiftExpression<Yield>
+	//    =>({RelationalExpression.lhs=current} op=RelationalOperator<In> ->rhs=ShiftExpression<Yield>)*;
 	public RelationalExpressionElements getRelationalExpressionAccess() {
 		return pRelationalExpression;
 	}
@@ -1001,8 +1061,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getRelationalExpressionAccess().getRule();
 	}
 	
-	//RelationalOperator <In>:
-	//	'<' | '>' | '<=' | '>=' | 'instanceof' | <In> 'in';
+	//RelationalOperator <In> :
+	//    '<' | '>' | '<=' | '>=' | 'instanceof' | <In> 'in';
 	public RelationalOperatorElements getRelationalOperatorAccess() {
 		return pRelationalOperator;
 	}
@@ -1011,9 +1071,10 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getRelationalOperatorAccess().getRule();
 	}
 	
-	//AssignmentExpression <In, YieldExpression:
-	//	<Yield> YieldExpression<In> | RelationalExpression<In, Yield> (=> ({AssignmentExpression.lhs=current} op='=')
-	//	rhs=AssignmentExpression<In, Yield>)?;
+	//AssignmentExpression <In, Yield> returns Expression:
+	//    <Yield> YieldExpression<In>
+	//    | RelationalExpression<In,Yield> (=> ({AssignmentExpression.lhs=current} op='=') rhs=AssignmentExpression<In,Yield>)?
+	//;
 	public AssignmentExpressionElements getAssignmentExpressionAccess() {
 		return pAssignmentExpression;
 	}
@@ -1022,8 +1083,9 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getAssignmentExpressionAccess().getRule();
 	}
 	
-	//YieldExpression <InExpression:
-	//	{YieldExpression} 'yield' =>many?='*'? ->expression=AssignmentExpression<In, Yield=true>?;
+	//YieldExpression <In> returns Expression:
+	//    {YieldExpression} 'yield' => many?='*'? -> expression=AssignmentExpression<In,Yield=true>?
+	//;
 	public YieldExpressionElements getYieldExpressionAccess() {
 		return pYieldExpression;
 	}
@@ -1033,8 +1095,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Expression <In, Yield>:
-	//	AssignmentExpression<In, Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In, Yield> (','
-	//	exprs+=AssignmentExpression<In, Yield>)*)?;
+	//    AssignmentExpression<In,Yield> ({CommaExpression.exprs+=current} ',' exprs+=AssignmentExpression<In,Yield> (','    exprs+=AssignmentExpression<In,Yield>)*)?
+	//;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -1044,7 +1106,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 	}
 	
 	//Identifier <Yield>:
-	//	ID | <! Yield> 'yield';
+	//    ID | <!Yield> 'yield'
+	//;
 	public IdentifierElements getIdentifierAccess() {
 		return pIdentifier;
 	}
@@ -1053,45 +1116,40 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractE
 		return getIdentifierAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

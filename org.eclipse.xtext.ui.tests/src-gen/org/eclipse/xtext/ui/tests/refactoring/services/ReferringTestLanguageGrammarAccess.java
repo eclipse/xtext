@@ -29,7 +29,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cReferencedAbstractReferenceParserRuleCall_0 = (RuleCall)cReferencedAssignment.eContents().get(0);
 		
 		//Main:
-		//	referenced+=AbstractReference*;
+		//    referenced+=AbstractReference*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//referenced+=AbstractReference*
@@ -45,7 +45,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cReference2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractReference:
-		//	Reference | Reference2;
+		//    Reference | Reference2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Reference | Reference2
@@ -66,16 +66,16 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cReferencedEObjectFQNParserRuleCall_1_0_1 = (RuleCall)cReferencedEObjectCrossReference_1_0.eContents().get(1);
 		
 		//Reference:
-		//	'ref' referenced=[ecore::EObject|FQN];
+		//    'ref' referenced =[ecore::EObject|FQN];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ref' referenced=[ecore::EObject|FQN]
+		//'ref' referenced =[ecore::EObject|FQN]
 		public Group getGroup() { return cGroup; }
 		
 		//'ref'
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 		
-		//referenced=[ecore::EObject|FQN]
+		//referenced =[ecore::EObject|FQN]
 		public Assignment getReferencedAssignment_1() { return cReferencedAssignment_1; }
 		
 		//[ecore::EObject|FQN]
@@ -94,10 +94,10 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cReferencedEObjectFQNParserRuleCall_2_0_1 = (RuleCall)cReferencedEObjectCrossReference_2_0.eContents().get(1);
 		
 		//Reference2:
-		//	Named '=' referenced=[ecore::EObject|FQN];
+		//    Named '=' referenced =[ecore::EObject|FQN];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Named '=' referenced=[ecore::EObject|FQN]
+		//Named '=' referenced =[ecore::EObject|FQN]
 		public Group getGroup() { return cGroup; }
 		
 		//Named
@@ -106,7 +106,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'='
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 		
-		//referenced=[ecore::EObject|FQN]
+		//referenced =[ecore::EObject|FQN]
 		public Assignment getReferencedAssignment_2() { return cReferencedAssignment_2; }
 		
 		//[ecore::EObject|FQN]
@@ -121,7 +121,8 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Named:
-		//	name=ID;
+		//    name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -139,7 +140,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ('.' ID)*;
+		//    ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ('.' ID)*
@@ -211,7 +212,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Main:
-	//	referenced+=AbstractReference*;
+	//    referenced+=AbstractReference*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -221,7 +222,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//AbstractReference:
-	//	Reference | Reference2;
+	//    Reference | Reference2;
 	public AbstractReferenceElements getAbstractReferenceAccess() {
 		return pAbstractReference;
 	}
@@ -231,7 +232,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Reference:
-	//	'ref' referenced=[ecore::EObject|FQN];
+	//    'ref' referenced =[ecore::EObject|FQN];
 	public ReferenceElements getReferenceAccess() {
 		return pReference;
 	}
@@ -241,7 +242,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Reference2:
-	//	Named '=' referenced=[ecore::EObject|FQN];
+	//    Named '=' referenced =[ecore::EObject|FQN];
 	public Reference2Elements getReference2Access() {
 		return pReference2;
 	}
@@ -251,7 +252,8 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Named:
-	//	name=ID;
+	//    name=ID
+	//;
 	public NamedElements getNamedAccess() {
 		return pNamed;
 	}
@@ -261,7 +263,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FQN:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -270,45 +272,40 @@ public class ReferringTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getFQNAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

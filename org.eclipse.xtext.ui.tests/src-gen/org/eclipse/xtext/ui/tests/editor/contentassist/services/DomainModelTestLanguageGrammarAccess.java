@@ -31,22 +31,22 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsTypeParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		//Model:
-		//	imports+=Import*
-		//	elements+=Type*;
+		//Model :
+		//    (imports+=Import)*
+		//    (elements+=Type)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import*
-		//elements+=Type*
+		//(imports+=Import)*
+		//(elements+=Type)*
 		public Group getGroup() { return cGroup; }
 		
-		//imports+=Import*
+		//(imports+=Import)*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
 		
-		//elements+=Type*
+		//(elements+=Type)*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
 		//Type
@@ -59,8 +59,8 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
-		//Import:
-		//	'import' importURI=STRING;
+		//Import :
+		//    'import' importURI=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'import' importURI=STRING
@@ -82,7 +82,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//	DataType | Class;
+		//    DataType | Class;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//DataType | Class
@@ -103,7 +103,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//DataType:
-		//	'datatype' name=ID ';'?;
+		//    'datatype' name=ID ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'datatype' name=ID ';'?
@@ -139,16 +139,16 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cSubClassesClassParserRuleCall_5_0 = (RuleCall)cSubClassesAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//Class:
-		//	'class' name=ID ('extends' superClass=[Class])? '{'
-		//	properties+=Property*
-		//	subClasses+=Class*
-		//	'}';
+		//Class :
+		//    'class' name=ID ('extends' superClass=[Class])? '{'
+		//        properties+=Property*
+		//        subClasses += Class*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'class' name=ID ('extends' superClass=[Class])? '{'
-		//properties+=Property*
-		//subClasses+=Class*
+		//    properties+=Property*
+		//    subClasses += Class*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -185,7 +185,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		//Property
 		public RuleCall getPropertiesPropertyParserRuleCall_4_0() { return cPropertiesPropertyParserRuleCall_4_0; }
 		
-		//subClasses+=Class*
+		//subClasses += Class*
 		public Assignment getSubClassesAssignment_5() { return cSubClassesAssignment_5; }
 		
 		//Class
@@ -201,7 +201,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Property:
-		//	Attribute | Reference;
+		//    Attribute | Reference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Attribute | Reference
@@ -226,7 +226,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Attribute:
-		//	'attr' name=ID ':' type=[DataType] ';'?;
+		//    'attr' name=ID ':' type=[DataType] ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'attr' name=ID ':' type=[DataType] ';'?
@@ -269,7 +269,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Reference:
-		//	'ref' name=ID ':' type=[Class] ';'?;
+		//    'ref' name=ID ':' type=[Class] ';'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'ref' name=ID ':' type=[Class] ';'?
@@ -356,9 +356,9 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//Model:
-	//	imports+=Import*
-	//	elements+=Type*;
+	//Model :
+	//    (imports+=Import)*
+	//    (elements+=Type)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -367,8 +367,8 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getModelAccess().getRule();
 	}
 	
-	//Import:
-	//	'import' importURI=STRING;
+	//Import :
+	//    'import' importURI=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -378,7 +378,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//Type:
-	//	DataType | Class;
+	//    DataType | Class;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -388,7 +388,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//DataType:
-	//	'datatype' name=ID ';'?;
+	//    'datatype' name=ID ';'?;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}
@@ -397,11 +397,11 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getDataTypeAccess().getRule();
 	}
 	
-	//Class:
-	//	'class' name=ID ('extends' superClass=[Class])? '{'
-	//	properties+=Property*
-	//	subClasses+=Class*
-	//	'}';
+	//Class :
+	//    'class' name=ID ('extends' superClass=[Class])? '{'
+	//        properties+=Property*
+	//        subClasses += Class*
+	//    '}';
 	public ClassElements getClassAccess() {
 		return pClass;
 	}
@@ -411,7 +411,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//Property:
-	//	Attribute | Reference;
+	//    Attribute | Reference;
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -421,7 +421,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//Attribute:
-	//	'attr' name=ID ':' type=[DataType] ';'?;
+	//    'attr' name=ID ':' type=[DataType] ';'?;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -431,7 +431,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//Reference:
-	//	'ref' name=ID ':' type=[Class] ';'?;
+	//    'ref' name=ID ':' type=[Class] ';'?;
 	public ReferenceElements getReferenceAccess() {
 		return pReference;
 	}
@@ -440,45 +440,40 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getReferenceAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

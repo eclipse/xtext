@@ -35,10 +35,12 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		
 		//@Override
 		//Codetemplates:
-		//	'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate;
+		//  'templates' 'for' language=[xtext::Grammar|FQN]
+		//  templates+=Codetemplate;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate
+		//'templates' 'for' language=[xtext::Grammar|FQN]
+		//templates+=Codetemplate
 		public Group getGroup() { return cGroup; }
 		
 		//'templates'
@@ -79,10 +81,13 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		
 		//@Override
 		//Codetemplate:
-		//	name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
+		//  name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
+		//  body = TemplateBodyWithQuotes
+		//  ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes
+		//name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
+		//body = TemplateBodyWithQuotes
 		public Group getGroup() { return cGroup; }
 		
 		//name=STRING
@@ -112,7 +117,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		//STRING
 		public RuleCall getKeywordContextSTRINGTerminalRuleCall_2_1_0() { return cKeywordContextSTRINGTerminalRuleCall_2_1_0; }
 		
-		//body=TemplateBodyWithQuotes
+		//body = TemplateBodyWithQuotes
 		public Assignment getBodyAssignment_3() { return cBodyAssignment_3; }
 		
 		//TemplateBodyWithQuotes
@@ -125,9 +130,10 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cTemplateBodyParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//@Override
-		//TemplateBodyWithQuotes TemplateBody hidden():
-		//	'>>' // EOL
-		//	TemplateBody;
+		//TemplateBodyWithQuotes returns TemplateBody hidden():
+		//  '>>' // EOL
+		//  TemplateBody
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'>>' // EOL
@@ -138,7 +144,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		public Keyword getGreaterThanSignGreaterThanSignKeyword_0() { return cGreaterThanSignGreaterThanSignKeyword_0; }
 		
 		//// EOL
-		//TemplateBody
+		// TemplateBody
 		public RuleCall getTemplateBodyParserRuleCall_1() { return cTemplateBodyParserRuleCall_1; }
 	}
 	public class LiteralValueElements extends AbstractParserRuleElementFinder {
@@ -150,7 +156,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		
 		//@Override
 		//LiteralValue hidden():
-		//	(WS | ANY_OTHER | ID)+;
+		//  (WS | ANY_OTHER | ID)+
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(WS | ANY_OTHER | ID)+
@@ -216,7 +223,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//@Override
 	//Codetemplates:
-	//	'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate;
+	//  'templates' 'for' language=[xtext::Grammar|FQN]
+	//  templates+=Codetemplate;
 	public CodetemplatesElements getCodetemplatesAccess() {
 		return pCodetemplates;
 	}
@@ -227,7 +235,9 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//@Override
 	//Codetemplate:
-	//	name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
+	//  name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
+	//  body = TemplateBodyWithQuotes
+	//  ;
 	public CodetemplateElements getCodetemplateAccess() {
 		return pCodetemplate;
 	}
@@ -237,9 +247,10 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//@Override
-	//TemplateBodyWithQuotes TemplateBody hidden():
-	//	'>>' // EOL
-	//	TemplateBody;
+	//TemplateBodyWithQuotes returns TemplateBody hidden():
+	//  '>>' // EOL
+	//  TemplateBody
+	//;
 	public TemplateBodyWithQuotesElements getTemplateBodyWithQuotesAccess() {
 		return pTemplateBodyWithQuotes;
 	}
@@ -250,7 +261,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//@Override
 	//LiteralValue hidden():
-	//	(WS | ANY_OTHER | ID)+;
+	//  (WS | ANY_OTHER | ID)+
+	//;
 	public LiteralValueElements getLiteralValueAccess() {
 		return pLiteralValue;
 	}
@@ -259,8 +271,10 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		return getLiteralValueAccess().getRule();
 	}
 	
-	//TemplateBody hidden():
-	//	{TemplateBody} parts+=Literal? (parts+=VariableOrDollar parts+=Literal?)*;
+	//TemplateBody hidden(): {TemplateBody}
+	//     parts+=Literal?
+	//    (parts+=VariableOrDollar parts+=Literal?)*
+	//;
 	public CodetemplatesGrammarAccess.TemplateBodyElements getTemplateBodyAccess() {
 		return gaCodetemplates.getTemplateBodyAccess();
 	}
@@ -270,7 +284,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//TemplatePart:
-	//	Literal | VariableOrDollar;
+	//  Literal | VariableOrDollar
+	//;
 	public CodetemplatesGrammarAccess.TemplatePartElements getTemplatePartAccess() {
 		return gaCodetemplates.getTemplatePartAccess();
 	}
@@ -279,8 +294,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		return getTemplatePartAccess().getRule();
 	}
 	
-	//VariableOrDollar TemplatePart hidden():
-	//	Variable | Dollar;
+	//VariableOrDollar returns TemplatePart hidden():
+	//  Variable | Dollar;
 	public CodetemplatesGrammarAccess.VariableOrDollarElements getVariableOrDollarAccess() {
 		return gaCodetemplates.getVariableOrDollarAccess();
 	}
@@ -290,9 +305,13 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Variable hidden():
-	//	'${' WS* (name=ValidID
-	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ','
-	//	WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
+	//    '${' WS*
+	//    (
+	//         name=ValidID
+	//       | (name=ValidID WS*)? ':' WS* type = ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING|FQN) ( WS* ',' WS* parameters+=(STRING|FQN))* WS*)? ')')?
+	//    )
+	//    WS* '}'
+	//;
 	public CodetemplatesGrammarAccess.VariableElements getVariableAccess() {
 		return gaCodetemplates.getVariableAccess();
 	}
@@ -302,7 +321,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//ValidID hidden():
-	//	ID | 'for' | 'templates';
+	//  ID | 'for' | 'templates'
+	//;
 	public CodetemplatesGrammarAccess.ValidIDElements getValidIDAccess() {
 		return gaCodetemplates.getValidIDAccess();
 	}
@@ -311,8 +331,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		return getValidIDAccess().getRule();
 	}
 	
-	//FQN hidden():
-	//	ValidID ('.' ValidID)*;
+	//FQN hidden(): ValidID ('.' ValidID)*;
 	public CodetemplatesGrammarAccess.FQNElements getFQNAccess() {
 		return gaCodetemplates.getFQNAccess();
 	}
@@ -322,7 +341,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Literal hidden():
-	//	value=super::LiteralValue;
+	//  value = LiteralValue
+	//;
 	public CodetemplatesGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaCodetemplates.getLiteralAccess();
 	}
@@ -332,7 +352,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//Dollar hidden():
-	//	{Dollar} (escaped?='$$' | '$');
+	//  {Dollar} (escaped?='$$' | '$')
+	//;
 	public CodetemplatesGrammarAccess.DollarElements getDollarAccess() {
 		return gaCodetemplates.getDollarAccess();
 	}
@@ -341,26 +362,24 @@ public class SingleCodetemplateGrammarAccess extends AbstractElementFinder.Abstr
 		return getDollarAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaCodetemplates.getIDRule();
 	}
 	
-	//terminal STRING:
-	//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
+	//terminal STRING    :
+	//            "'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaCodetemplates.getSTRINGRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS			: (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaCodetemplates.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaCodetemplates.getANY_OTHERRule();
 	}

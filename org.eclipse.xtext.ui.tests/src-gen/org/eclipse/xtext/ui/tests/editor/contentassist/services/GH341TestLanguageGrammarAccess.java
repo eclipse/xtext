@@ -32,7 +32,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final RuleCall cElementsThirdParserRuleCall_0_2 = (RuleCall)cElementsAlternatives_0.eContents().get(2);
 		
 		//Model:
-		//	elements+=(Works | Broken | Third)*;
+		//    elements+=(Works | Broken | Third)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//elements+=(Works | Broken | Third)*
@@ -57,8 +57,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final RuleCall cBrokenParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cThirdParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//Element:
-		//	Works | Broken | Third;
+		//Element: Works | Broken | Third;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Works | Broken | Third
@@ -100,10 +99,10 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Keyword cSemicolonKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//Works:
-		//	"works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works] ("." refs+=[Works])* "X" ";")*;
+		//    "works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works|ID] ("." refs+=[Works|ID])* "X" ";")*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works] ("." refs+=[Works])* "X" ";")*
+		//"works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works|ID] ("." refs+=[Works|ID])* "X" ";")*
 		public Group getGroup() { return cGroup; }
 		
 		//"works"
@@ -139,28 +138,28 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//";"
 		public Keyword getSemicolonKeyword_2_2() { return cSemicolonKeyword_2_2; }
 		
-		//(refs+=[Works] ("." refs+=[Works])* "X" ";")*
+		//(refs+=[Works|ID] ("." refs+=[Works|ID])* "X" ";")*
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//refs+=[Works]
+		//refs+=[Works|ID]
 		public Assignment getRefsAssignment_3_0() { return cRefsAssignment_3_0; }
 		
-		//[Works]
+		//[Works|ID]
 		public CrossReference getRefsWorksCrossReference_3_0_0() { return cRefsWorksCrossReference_3_0_0; }
 		
 		//ID
 		public RuleCall getRefsWorksIDTerminalRuleCall_3_0_0_1() { return cRefsWorksIDTerminalRuleCall_3_0_0_1; }
 		
-		//("." refs+=[Works])*
+		//("." refs+=[Works|ID])*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//"."
 		public Keyword getFullStopKeyword_3_1_0() { return cFullStopKeyword_3_1_0; }
 		
-		//refs+=[Works]
+		//refs+=[Works|ID]
 		public Assignment getRefsAssignment_3_1_1() { return cRefsAssignment_3_1_1; }
 		
-		//[Works]
+		//[Works|ID]
 		public CrossReference getRefsWorksCrossReference_3_1_1_0() { return cRefsWorksCrossReference_3_1_1_0; }
 		
 		//ID
@@ -192,10 +191,10 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Keyword cSemicolonKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//Broken:
-		//	"broken" name=ID Fragment (refs+=[Broken] ("." refs+=[Broken])* "X" ";")*;
+		//    "broken" name=ID Fragment (refs+=[Broken|ID] ("." refs+=[Broken|ID])* "X" ";")*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"broken" name=ID Fragment (refs+=[Broken] ("." refs+=[Broken])* "X" ";")*
+		//"broken" name=ID Fragment (refs+=[Broken|ID] ("." refs+=[Broken|ID])* "X" ";")*
 		public Group getGroup() { return cGroup; }
 		
 		//"broken"
@@ -210,28 +209,28 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//Fragment
 		public RuleCall getFragmentParserRuleCall_2() { return cFragmentParserRuleCall_2; }
 		
-		//(refs+=[Broken] ("." refs+=[Broken])* "X" ";")*
+		//(refs+=[Broken|ID] ("." refs+=[Broken|ID])* "X" ";")*
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//refs+=[Broken]
+		//refs+=[Broken|ID]
 		public Assignment getRefsAssignment_3_0() { return cRefsAssignment_3_0; }
 		
-		//[Broken]
+		//[Broken|ID]
 		public CrossReference getRefsBrokenCrossReference_3_0_0() { return cRefsBrokenCrossReference_3_0_0; }
 		
 		//ID
 		public RuleCall getRefsBrokenIDTerminalRuleCall_3_0_0_1() { return cRefsBrokenIDTerminalRuleCall_3_0_0_1; }
 		
-		//("." refs+=[Broken])*
+		//("." refs+=[Broken|ID])*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//"."
 		public Keyword getFullStopKeyword_3_1_0() { return cFullStopKeyword_3_1_0; }
 		
-		//refs+=[Broken]
+		//refs+=[Broken|ID]
 		public Assignment getRefsAssignment_3_1_1() { return cRefsAssignment_3_1_1; }
 		
-		//[Broken]
+		//[Broken|ID]
 		public CrossReference getRefsBrokenCrossReference_3_1_1_0() { return cRefsBrokenCrossReference_3_1_1_0; }
 		
 		//ID
@@ -252,7 +251,8 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Third:
-		//	DEFINE STREAM name=ID;
+		//    DEFINE STREAM name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//DEFINE STREAM name=ID
@@ -274,8 +274,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage.STREAM");
 		private final Keyword cStreamKeyword = (Keyword)rule.eContents().get(0);
 		
-		//fragment STREAM*:
-		//	'stream';
+		//fragment STREAM*: 'stream';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'stream'
@@ -285,8 +284,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.GH341TestLanguage.DEFINE");
 		private final Keyword cDefineKeyword = (Keyword)rule.eContents().get(0);
 		
-		//fragment DEFINE*:
-		//	'define';
+		//fragment DEFINE*: 'define';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'define'
@@ -304,7 +302,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//fragment Fragment *:
-		//	(ids+=ID ("." ids+=ID)* ";")*;
+		//    (ids+=ID ("." ids+=ID)* ";")*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(ids+=ID ("." ids+=ID)* ";")*
@@ -389,7 +387,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 
 	
 	//Model:
-	//	elements+=(Works | Broken | Third)*;
+	//    elements+=(Works | Broken | Third)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -398,8 +396,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	Works | Broken | Third;
+	//Element: Works | Broken | Third;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -409,7 +406,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 	
 	//Works:
-	//	"works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works] ("." refs+=[Works])* "X" ";")*;
+	//    "works" name=ID (ids+=ID ("." ids+=ID)* ";")* (refs+=[Works|ID] ("." refs+=[Works|ID])* "X" ";")*;
 	public WorksElements getWorksAccess() {
 		return pWorks;
 	}
@@ -419,7 +416,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 	
 	//Broken:
-	//	"broken" name=ID Fragment (refs+=[Broken] ("." refs+=[Broken])* "X" ";")*;
+	//    "broken" name=ID Fragment (refs+=[Broken|ID] ("." refs+=[Broken|ID])* "X" ";")*;
 	public BrokenElements getBrokenAccess() {
 		return pBroken;
 	}
@@ -429,7 +426,8 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 	
 	//Third:
-	//	DEFINE STREAM name=ID;
+	//    DEFINE STREAM name=ID
+	//;
 	public ThirdElements getThirdAccess() {
 		return pThird;
 	}
@@ -438,8 +436,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getThirdAccess().getRule();
 	}
 	
-	//fragment STREAM*:
-	//	'stream';
+	//fragment STREAM*: 'stream';
 	public STREAMElements getSTREAMAccess() {
 		return pSTREAM;
 	}
@@ -448,8 +445,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getSTREAMAccess().getRule();
 	}
 	
-	//fragment DEFINE*:
-	//	'define';
+	//fragment DEFINE*: 'define';
 	public DEFINEElements getDEFINEAccess() {
 		return pDEFINE;
 	}
@@ -459,7 +455,7 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 	
 	//fragment Fragment *:
-	//	(ids+=ID ("." ids+=ID)* ";")*;
+	//    (ids+=ID ("." ids+=ID)* ";")*;
 	public FragmentElements getFragmentAccess() {
 		return pFragment;
 	}
@@ -468,45 +464,40 @@ public class GH341TestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getFragmentAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

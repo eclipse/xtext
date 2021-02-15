@@ -27,8 +27,8 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Main:
-		//	elements+=Element*;
+		//Main :
+		//    elements+=Element*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//elements+=Element*
@@ -55,15 +55,16 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Element:
-		//	doc=STRING?
-		//	name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}';
+		//    (doc=STRING)?
+		//    name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//doc=STRING?
+		//(doc=STRING)?
 		//name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//doc=STRING?
+		//(doc=STRING)?
 		public Assignment getDocAssignment_0() { return cDocAssignment_0; }
 		
 		//STRING
@@ -147,8 +148,8 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 	}
 
 	
-	//Main:
-	//	elements+=Element*;
+	//Main :
+	//    elements+=Element*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -158,8 +159,9 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//Element:
-	//	doc=STRING?
-	//	name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}';
+	//    (doc=STRING)?
+	//    name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
+	//;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -168,45 +170,40 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractElementFi
 		return getElementAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

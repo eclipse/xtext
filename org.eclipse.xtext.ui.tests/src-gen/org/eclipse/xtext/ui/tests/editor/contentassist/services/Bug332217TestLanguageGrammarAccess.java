@@ -33,10 +33,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cElementsTableViewParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Model:
-		//	elements+=TableView*;
+		//    (elements+=TableView)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=TableView*
+		//(elements+=TableView)*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 		
 		//TableView
@@ -52,7 +52,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//// General
 		//// common supertype to allow variableReferences
 		//PropertyPathPart:
-		//	Parameter | CollectionIterator;
+		//    Parameter | CollectionIterator;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Parameter | CollectionIterator
@@ -73,10 +73,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cManyLeftSquareBracketRightSquareBracketKeyword_1_0 = (Keyword)cManyAssignment_1.eContents().get(0);
 		
 		//TypeDescription:
-		//	type=ID many?='[]'?;
+		//    type=ID (many?='[]')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=ID many?='[]'?
+		//type=ID (many?='[]')?
 		public Group getGroup() { return cGroup; }
 		
 		//type=ID
@@ -85,7 +85,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ID
 		public RuleCall getTypeIDTerminalRuleCall_0_0() { return cTypeIDTerminalRuleCall_0_0; }
 		
-		//many?='[]'?
+		//(many?='[]')?
 		public Assignment getManyAssignment_1() { return cManyAssignment_1; }
 		
 		//'[]'
@@ -100,7 +100,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Parameter:
-		//	description=TypeDescription name=ID;
+		//    description=TypeDescription name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//description=TypeDescription name=ID
@@ -128,7 +128,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cTailNestedObjectReferenceParserRuleCall_1_0 = (RuleCall)cTailAssignment_1.eContents().get(0);
 		
 		//ObjectReference:
-		//	object=[PropertyPathPart] tail=NestedObjectReference?;
+		//    object=[PropertyPathPart] tail=NestedObjectReference?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//object=[PropertyPathPart] tail=NestedObjectReference?
@@ -159,12 +159,12 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cTailAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTailNestedObjectReferenceParserRuleCall_2_0 = (RuleCall)cTailAssignment_2.eContents().get(0);
 		
-		////workaround: NestedObjectReference as separate rule to guide the content 
+		////workaround: NestedObjectReference as separate rule to guide the content
 		////   assist parser technically could have been include in ObjectReference like
 		////   ObjectReference:
 		////     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
-		//NestedObjectReference ObjectReference:
-		//	'.' object=[PropertyPathPart] tail=NestedObjectReference?;
+		//NestedObjectReference returns ObjectReference:
+		//    '.' object=[PropertyPathPart] tail=NestedObjectReference?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'.' object=[PropertyPathPart] tail=NestedObjectReference?
@@ -199,7 +199,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		
 		////TODO: could this be ScalarExpression | CollectionExpression? and simplify rootParameter extension
 		//Expression:
-		//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
+		//    StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference
@@ -224,8 +224,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ImageExpression");
 		private final RuleCall cScalarExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ImageExpression ScalarExpression:
-		//	ScalarExpression;
+		//ImageExpression returns ScalarExpression:
+		//    ScalarExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ScalarExpression
@@ -239,7 +239,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cObjectReferenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ScalarExpression:
-		//	StringLiteral | StringFunction | ObjectReference;
+		//    StringLiteral | StringFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//StringLiteral | StringFunction | ObjectReference
@@ -262,7 +262,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cObjectReferenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//CollectionExpression:
-		//	CollectionLiteral | CollectionFunction | ObjectReference;
+		//    CollectionLiteral | CollectionFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CollectionLiteral | CollectionFunction | ObjectReference
@@ -283,7 +283,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValueSTRINGTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//StringLiteral:
-		//	value=STRING;
+		//    value=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value=STRING
@@ -321,17 +321,17 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//StringFunction:
-		//	{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
-		//	match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform('
-		//	value=ScalarExpression ')';
+		//    {StringConcat} '(' (values+=ScalarExpression)+ ')' |
+		//    {StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')' |
+		//    {StringUrlConform} 'urlconform(' value=ScalarExpression ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
-		//match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
-		//')'
+		//{StringConcat} '(' (values+=ScalarExpression)+ ')' |
+		//{StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')' |
+		//{StringUrlConform} 'urlconform(' value=ScalarExpression ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{StringConcat} '(' values+=ScalarExpression+ ')'
+		//{StringConcat} '(' (values+=ScalarExpression)+ ')'
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//{StringConcat}
@@ -340,7 +340,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'('
 		public Keyword getLeftParenthesisKeyword_0_1() { return cLeftParenthesisKeyword_0_1; }
 		
-		//values+=ScalarExpression+
+		//(values+=ScalarExpression)+
 		public Assignment getValuesAssignment_0_2() { return cValuesAssignment_0_2; }
 		
 		//ScalarExpression
@@ -416,7 +416,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//CollectionLiteral:
-		//	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
+		//    '[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']'
@@ -459,7 +459,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//CollectionFunction:
-		//	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')';
+		//    {StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
@@ -519,13 +520,19 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//TableView:
-		//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
-		//	titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
-		//	'}';
+		//    'tableview' name=ID ('(' content=Parameter ')')? '{'
+		//        ( ('title:' title=ScalarExpression)?
+		//        & ('titleImage:' titleImage=ImageExpression)?
+		//        & ('style:' style=TableViewStyle)? )
+		//        (sections+=Section)*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
-		//titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
+		//'tableview' name=ID ('(' content=Parameter ')')? '{'
+		//    ( ('title:' title=ScalarExpression)?
+		//    & ('titleImage:' titleImage=ImageExpression)?
+		//    & ('style:' style=TableViewStyle)? )
+		//    (sections+=Section)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -556,7 +563,9 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?)
+		//( ('title:' title=ScalarExpression)?
+		//& ('titleImage:' titleImage=ImageExpression)?
+		//& ('style:' style=TableViewStyle)? )
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('title:' title=ScalarExpression)?
@@ -595,7 +604,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//TableViewStyle
 		public RuleCall getStyleTableViewStyleEnumRuleCall_4_2_1_0() { return cStyleTableViewStyleEnumRuleCall_4_2_1_0; }
 		
-		//sections+=Section*
+		//(sections+=Section)*
 		public Assignment getSectionsAssignment_5() { return cSectionsAssignment_5; }
 		
 		//Section
@@ -611,7 +620,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cCellParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ViewContentElement:
-		//	Section | Cell;
+		//    Section | Cell;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Section | Cell
@@ -639,13 +648,15 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Section:
-		//	'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)?
-		//	cells+=Cell+
-		//	'}';
+		//    'section' iterator=CollectionIterator? '{'
+		//        ('title:' title=ScalarExpression)?
+		//        (cells+=Cell)+
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)?
-		//cells+=Cell+
+		//'section' iterator=CollectionIterator? '{'
+		//    ('title:' title=ScalarExpression)?
+		//    (cells+=Cell)+
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -673,7 +684,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//ScalarExpression
 		public RuleCall getTitleScalarExpressionParserRuleCall_3_1_0() { return cTitleScalarExpressionParserRuleCall_3_1_0; }
 		
-		//cells+=Cell+
+		//(cells+=Cell)+
 		public Assignment getCellsAssignment_4() { return cCellsAssignment_4; }
 		
 		//Cell
@@ -715,15 +726,21 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Cell:
-		//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
-		//	details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
-		//	accessory=CellAccessory)?)
-		//	'}';
+		//    'cell' type=CellType iterator=CollectionIterator? '{'
+		//        ( ('text:' text=ScalarExpression)?
+		//        & ('details:' details=ScalarExpression)?
+		//        & ('image:' image=ScalarExpression)?
+		//        & ('action:' action=ViewAction)?
+		//        & ('accessory:' accessory=CellAccessory)?)
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
-		//details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
-		//accessory=CellAccessory)?)
+		//'cell' type=CellType iterator=CollectionIterator? '{'
+		//    ( ('text:' text=ScalarExpression)?
+		//    & ('details:' details=ScalarExpression)?
+		//    & ('image:' image=ScalarExpression)?
+		//    & ('action:' action=ViewAction)?
+		//    & ('accessory:' accessory=CellAccessory)?)
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -745,8 +762,11 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? & (
-		//'action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?)
+		//( ('text:' text=ScalarExpression)?
+		//& ('details:' details=ScalarExpression)?
+		//& ('image:' image=ScalarExpression)?
+		//& ('action:' action=ViewAction)?
+		//& ('accessory:' accessory=CellAccessory)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('text:' text=ScalarExpression)?
@@ -823,7 +843,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cCollectionCollectionExpressionParserRuleCall_3_0 = (RuleCall)cCollectionAssignment_3.eContents().get(0);
 		
 		//CollectionIterator:
-		//	'for' name=ID 'in' collection=CollectionExpression;
+		//    'for' name=ID 'in' collection=CollectionExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'for' name=ID 'in' collection=CollectionExpression
@@ -854,7 +874,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cSelectorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ViewAction:
-		//	ExternalOpen | Selector;
+		//    ExternalOpen | Selector;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ExternalOpen | Selector
@@ -876,7 +896,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SelectorName:
-		//	ID (':' ID)* ':'?;
+		//  ID (':' ID)* ':'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID (':' ID)* ':'?
@@ -907,7 +927,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Selector:
-		//	'@selector' '(' name=SelectorName ')';
+		//    '@selector' '(' name=SelectorName ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'@selector' '(' name=SelectorName ')'
@@ -934,7 +954,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cUrlScalarExpressionParserRuleCall_0 = (RuleCall)cUrlAssignment.eContents().get(0);
 		
 		//ExternalOpen:
-		//	url=ScalarExpression;
+		//    url=ScalarExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//url=ScalarExpression
@@ -952,8 +972,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final EnumLiteralDeclaration cGroupedEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cGroupedGroupedKeyword_1_0 = (Keyword)cGroupedEnumLiteralDeclaration_1.eContents().get(0);
 		
+		//// -------------------------------------------
+		//// views
 		//enum TableViewStyle:
-		//	Plain | Grouped;
+		//    Plain | Grouped;
 		public EnumRule getRule() { return rule; }
 		
 		//Plain | Grouped
@@ -962,13 +984,11 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//Plain
 		public EnumLiteralDeclaration getPlainEnumLiteralDeclaration_0() { return cPlainEnumLiteralDeclaration_0; }
 		
-		//"Plain"
 		public Keyword getPlainPlainKeyword_0_0() { return cPlainPlainKeyword_0_0; }
 		
 		//Grouped
 		public EnumLiteralDeclaration getGroupedEnumLiteralDeclaration_1() { return cGroupedEnumLiteralDeclaration_1; }
 		
-		//"Grouped"
 		public Keyword getGroupedGroupedKeyword_1_0() { return cGroupedGroupedKeyword_1_0; }
 	}
 	public class CellTypeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -984,31 +1004,37 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cSubtitleSubtitleKeyword_3_0 = (Keyword)cSubtitleEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum CellType:
-		//	default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle';
+		//    default = 'Default' |
+		//    value1 = 'Value1' |
+		//    value2 = 'Value2' |
+		//    subtitle = 'Subtitle';
 		public EnumRule getRule() { return rule; }
 		
-		//default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle'
+		//default = 'Default' |
+		//value1 = 'Value1' |
+		//value2 = 'Value2' |
+		//subtitle = 'Subtitle'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//default='Default'
+		//default = 'Default'
 		public EnumLiteralDeclaration getDefaultEnumLiteralDeclaration_0() { return cDefaultEnumLiteralDeclaration_0; }
 		
 		//'Default'
 		public Keyword getDefaultDefaultKeyword_0_0() { return cDefaultDefaultKeyword_0_0; }
 		
-		//value1='Value1'
+		//value1 = 'Value1'
 		public EnumLiteralDeclaration getValue1EnumLiteralDeclaration_1() { return cValue1EnumLiteralDeclaration_1; }
 		
 		//'Value1'
 		public Keyword getValue1Value1Keyword_1_0() { return cValue1Value1Keyword_1_0; }
 		
-		//value2='Value2'
+		//value2 = 'Value2'
 		public EnumLiteralDeclaration getValue2EnumLiteralDeclaration_2() { return cValue2EnumLiteralDeclaration_2; }
 		
 		//'Value2'
 		public Keyword getValue2Value2Keyword_2_0() { return cValue2Value2Keyword_2_0; }
 		
-		//subtitle='Subtitle'
+		//subtitle = 'Subtitle'
 		public EnumLiteralDeclaration getSubtitleEnumLiteralDeclaration_3() { return cSubtitleEnumLiteralDeclaration_3; }
 		
 		//'Subtitle'
@@ -1027,7 +1053,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cCheckCheckKeyword_3_0 = (Keyword)cCheckEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum CellAccessory:
-		//	None | Link | Detail | Check;
+		//    None | Link | Detail | Check;
 		public EnumRule getRule() { return rule; }
 		
 		//None | Link | Detail | Check
@@ -1036,25 +1062,21 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//None
 		public EnumLiteralDeclaration getNoneEnumLiteralDeclaration_0() { return cNoneEnumLiteralDeclaration_0; }
 		
-		//"None"
 		public Keyword getNoneNoneKeyword_0_0() { return cNoneNoneKeyword_0_0; }
 		
 		//Link
 		public EnumLiteralDeclaration getLinkEnumLiteralDeclaration_1() { return cLinkEnumLiteralDeclaration_1; }
 		
-		//"Link"
 		public Keyword getLinkLinkKeyword_1_0() { return cLinkLinkKeyword_1_0; }
 		
 		//Detail
 		public EnumLiteralDeclaration getDetailEnumLiteralDeclaration_2() { return cDetailEnumLiteralDeclaration_2; }
 		
-		//"Detail"
 		public Keyword getDetailDetailKeyword_2_0() { return cDetailDetailKeyword_2_0; }
 		
 		//Check
 		public EnumLiteralDeclaration getCheckEnumLiteralDeclaration_3() { return cCheckEnumLiteralDeclaration_3; }
 		
-		//"Check"
 		public Keyword getCheckCheckKeyword_3_0() { return cCheckCheckKeyword_3_0; }
 	}
 	
@@ -1150,7 +1172,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	elements+=TableView*;
+	//    (elements+=TableView)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1163,7 +1185,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	//// General
 	//// common supertype to allow variableReferences
 	//PropertyPathPart:
-	//	Parameter | CollectionIterator;
+	//    Parameter | CollectionIterator;
 	public PropertyPathPartElements getPropertyPathPartAccess() {
 		return pPropertyPathPart;
 	}
@@ -1173,7 +1195,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TypeDescription:
-	//	type=ID many?='[]'?;
+	//    type=ID (many?='[]')?;
 	public TypeDescriptionElements getTypeDescriptionAccess() {
 		return pTypeDescription;
 	}
@@ -1183,7 +1205,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Parameter:
-	//	description=TypeDescription name=ID;
+	//    description=TypeDescription name=ID;
 	public ParameterElements getParameterAccess() {
 		return pParameter;
 	}
@@ -1193,7 +1215,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ObjectReference:
-	//	object=[PropertyPathPart] tail=NestedObjectReference?;
+	//    object=[PropertyPathPart] tail=NestedObjectReference?;
 	public ObjectReferenceElements getObjectReferenceAccess() {
 		return pObjectReference;
 	}
@@ -1202,12 +1224,12 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getObjectReferenceAccess().getRule();
 	}
 	
-	////workaround: NestedObjectReference as separate rule to guide the content 
+	////workaround: NestedObjectReference as separate rule to guide the content
 	////   assist parser technically could have been include in ObjectReference like
 	////   ObjectReference:
 	////     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
-	//NestedObjectReference ObjectReference:
-	//	'.' object=[PropertyPathPart] tail=NestedObjectReference?;
+	//NestedObjectReference returns ObjectReference:
+	//    '.' object=[PropertyPathPart] tail=NestedObjectReference?;
 	public NestedObjectReferenceElements getNestedObjectReferenceAccess() {
 		return pNestedObjectReference;
 	}
@@ -1218,7 +1240,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	
 	////TODO: could this be ScalarExpression | CollectionExpression? and simplify rootParameter extension
 	//Expression:
-	//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
+	//    StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -1227,8 +1249,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getExpressionAccess().getRule();
 	}
 	
-	//ImageExpression ScalarExpression:
-	//	ScalarExpression;
+	//ImageExpression returns ScalarExpression:
+	//    ScalarExpression;
 	public ImageExpressionElements getImageExpressionAccess() {
 		return pImageExpression;
 	}
@@ -1238,7 +1260,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ScalarExpression:
-	//	StringLiteral | StringFunction | ObjectReference;
+	//    StringLiteral | StringFunction | ObjectReference;
 	public ScalarExpressionElements getScalarExpressionAccess() {
 		return pScalarExpression;
 	}
@@ -1248,7 +1270,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CollectionExpression:
-	//	CollectionLiteral | CollectionFunction | ObjectReference;
+	//    CollectionLiteral | CollectionFunction | ObjectReference;
 	public CollectionExpressionElements getCollectionExpressionAccess() {
 		return pCollectionExpression;
 	}
@@ -1258,7 +1280,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//StringLiteral:
-	//	value=STRING;
+	//    value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
 		return pStringLiteral;
 	}
@@ -1268,9 +1290,9 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//StringFunction:
-	//	{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
-	//	match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform('
-	//	value=ScalarExpression ')';
+	//    {StringConcat} '(' (values+=ScalarExpression)+ ')' |
+	//    {StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')' |
+	//    {StringUrlConform} 'urlconform(' value=ScalarExpression ')';
 	public StringFunctionElements getStringFunctionAccess() {
 		return pStringFunction;
 	}
@@ -1280,7 +1302,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CollectionLiteral:
-	//	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
+	//    '[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
 	public CollectionLiteralElements getCollectionLiteralAccess() {
 		return pCollectionLiteral;
 	}
@@ -1290,7 +1312,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CollectionFunction:
-	//	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')';
+	//    {StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
+	//;
 	public CollectionFunctionElements getCollectionFunctionAccess() {
 		return pCollectionFunction;
 	}
@@ -1299,8 +1322,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getCollectionFunctionAccess().getRule();
 	}
 	
+	//// -------------------------------------------
+	//// views
 	//enum TableViewStyle:
-	//	Plain | Grouped;
+	//    Plain | Grouped;
 	public TableViewStyleElements getTableViewStyleAccess() {
 		return eTableViewStyle;
 	}
@@ -1310,9 +1335,12 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//TableView:
-	//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
-	//	titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section*
-	//	'}';
+	//    'tableview' name=ID ('(' content=Parameter ')')? '{'
+	//        ( ('title:' title=ScalarExpression)?
+	//        & ('titleImage:' titleImage=ImageExpression)?
+	//        & ('style:' style=TableViewStyle)? )
+	//        (sections+=Section)*
+	//    '}';
 	public TableViewElements getTableViewAccess() {
 		return pTableView;
 	}
@@ -1322,7 +1350,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ViewContentElement:
-	//	Section | Cell;
+	//    Section | Cell;
 	public ViewContentElementElements getViewContentElementAccess() {
 		return pViewContentElement;
 	}
@@ -1332,9 +1360,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Section:
-	//	'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)?
-	//	cells+=Cell+
-	//	'}';
+	//    'section' iterator=CollectionIterator? '{'
+	//        ('title:' title=ScalarExpression)?
+	//        (cells+=Cell)+
+	//    '}';
 	public SectionElements getSectionAccess() {
 		return pSection;
 	}
@@ -1344,10 +1373,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Cell:
-	//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
-	//	details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
-	//	accessory=CellAccessory)?)
-	//	'}';
+	//    'cell' type=CellType iterator=CollectionIterator? '{'
+	//        ( ('text:' text=ScalarExpression)?
+	//        & ('details:' details=ScalarExpression)?
+	//        & ('image:' image=ScalarExpression)?
+	//        & ('action:' action=ViewAction)?
+	//        & ('accessory:' accessory=CellAccessory)?)
+	//    '}';
 	public CellElements getCellAccess() {
 		return pCell;
 	}
@@ -1357,7 +1389,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum CellType:
-	//	default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle';
+	//    default = 'Default' |
+	//    value1 = 'Value1' |
+	//    value2 = 'Value2' |
+	//    subtitle = 'Subtitle';
 	public CellTypeElements getCellTypeAccess() {
 		return eCellType;
 	}
@@ -1367,7 +1402,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//enum CellAccessory:
-	//	None | Link | Detail | Check;
+	//    None | Link | Detail | Check;
 	public CellAccessoryElements getCellAccessoryAccess() {
 		return eCellAccessory;
 	}
@@ -1377,7 +1412,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//CollectionIterator:
-	//	'for' name=ID 'in' collection=CollectionExpression;
+	//    'for' name=ID 'in' collection=CollectionExpression;
 	public CollectionIteratorElements getCollectionIteratorAccess() {
 		return pCollectionIterator;
 	}
@@ -1387,7 +1422,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ViewAction:
-	//	ExternalOpen | Selector;
+	//    ExternalOpen | Selector;
 	public ViewActionElements getViewActionAccess() {
 		return pViewAction;
 	}
@@ -1397,7 +1432,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//SelectorName:
-	//	ID (':' ID)* ':'?;
+	//  ID (':' ID)* ':'?;
 	public SelectorNameElements getSelectorNameAccess() {
 		return pSelectorName;
 	}
@@ -1407,7 +1442,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Selector:
-	//	'@selector' '(' name=SelectorName ')';
+	//    '@selector' '(' name=SelectorName ')';
 	public SelectorElements getSelectorAccess() {
 		return pSelector;
 	}
@@ -1417,7 +1452,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//ExternalOpen:
-	//	url=ScalarExpression;
+	//    url=ScalarExpression;
 	public ExternalOpenElements getExternalOpenAccess() {
 		return pExternalOpen;
 	}
@@ -1426,45 +1461,40 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getExternalOpenAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

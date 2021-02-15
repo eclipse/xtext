@@ -57,26 +57,31 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 		private final RuleCall cAttributePairParserRuleCall_1_3_2_0 = (RuleCall)cAttributeAssignment_1_3_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_3_3 = (Keyword)cGroup_1_3.eContents().get(3);
 		
-		//Model:
-		//	{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
-		//	| '[' attribute+=Attribute+ attribute+=Pair* ']'
-		//	| '<' attribute+=Attribute* attribute+=Pair+ '>'
-		//	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
+		//Model : {Model} (
+		//        '(' attribute+=Attribute* attribute+=Pair* ')'
+		//    |    '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//    |    '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//    |    '{' attribute+=Attribute+ attribute+=Pair+ '}'
+		//    );
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
-		//| '[' attribute+=Attribute+ attribute+=Pair* ']'
-		//| '<' attribute+=Attribute* attribute+=Pair+ '>'
-		//| '{' attribute+=Attribute+ attribute+=Pair+ '}')
+		//{Model} (
+		//       '(' attribute+=Attribute* attribute+=Pair* ')'
+		//   |    '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//   |    '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//   |    '{' attribute+=Attribute+ attribute+=Pair+ '}'
+		//   )
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//('(' attribute+=Attribute* attribute+=Pair* ')'
-		//| '[' attribute+=Attribute+ attribute+=Pair* ']'
-		//| '<' attribute+=Attribute* attribute+=Pair+ '>'
-		//| '{' attribute+=Attribute+ attribute+=Pair+ '}')
+		//(
+		//       '(' attribute+=Attribute* attribute+=Pair* ')'
+		//   |    '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//   |    '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//   |    '{' attribute+=Attribute+ attribute+=Pair+ '}'
+		//   )
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'(' attribute+=Attribute* attribute+=Pair* ')'
@@ -169,7 +174,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 		private final RuleCall cValueIDTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//Attribute:
-		//	value=ID;
+		//        value=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value=ID
@@ -188,7 +193,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 		private final RuleCall cValueIDTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Pair:
-		//	name=ID "=" value=ID;
+		//        name=ID "=" value=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID "=" value=ID
@@ -256,11 +261,12 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 	}
 
 	
-	//Model:
-	//	{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
-	//	| '[' attribute+=Attribute+ attribute+=Pair* ']'
-	//	| '<' attribute+=Attribute* attribute+=Pair+ '>'
-	//	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
+	//Model : {Model} (
+	//        '(' attribute+=Attribute* attribute+=Pair* ')'
+	//    |    '[' attribute+=Attribute+ attribute+=Pair* ']'
+	//    |    '<' attribute+=Attribute* attribute+=Pair+ '>'
+	//    |    '{' attribute+=Attribute+ attribute+=Pair+ '}'
+	//    );
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -270,7 +276,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 	}
 	
 	//Attribute:
-	//	value=ID;
+	//        value=ID;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -280,7 +286,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 	}
 	
 	//Pair:
-	//	name=ID "=" value=ID;
+	//        name=ID "=" value=ID;
 	public PairElements getPairAccess() {
 		return pPair;
 	}
@@ -289,45 +295,40 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractEle
 		return getPairAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

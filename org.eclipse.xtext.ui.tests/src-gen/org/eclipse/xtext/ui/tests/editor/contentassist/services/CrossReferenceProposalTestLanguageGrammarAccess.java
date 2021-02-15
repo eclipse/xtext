@@ -28,11 +28,11 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsClassParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Model:
-		//	elements+=Class*;
+		//Model :
+		//        (elements+=Class)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=Class*
+		//(elements+=Class)*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 		
 		//Class
@@ -60,23 +60,23 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Class:
-		//	((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}';
+		//Class :
+		//        ((superClass=[Class|'Object']|superClass=[Class]|superClass=[Class|ComplexName]) '<-')? name=(ID|ComplexName) '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}'
+		//((superClass=[Class|'Object']|superClass=[Class]|superClass=[Class|ComplexName]) '<-')? name=(ID|ComplexName) '{' '}'
 		public Group getGroup() { return cGroup; }
 		
-		//((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')?
+		//((superClass=[Class|'Object']|superClass=[Class]|superClass=[Class|ComplexName]) '<-')?
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//(superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName])
+		//(superClass=[Class|'Object']|superClass=[Class]|superClass=[Class|ComplexName])
 		public Alternatives getAlternatives_0_0() { return cAlternatives_0_0; }
 		
-		//superClass=[Class]
+		//superClass=[Class|'Object']
 		public Assignment getSuperClassAssignment_0_0_0() { return cSuperClassAssignment_0_0_0; }
 		
-		//[Class]
+		//[Class|'Object']
 		public CrossReference getSuperClassClassCrossReference_0_0_0_0() { return cSuperClassClassCrossReference_0_0_0_0; }
 		
 		//'Object'
@@ -103,10 +103,10 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		//'<-'
 		public Keyword getLessThanSignHyphenMinusKeyword_0_1() { return cLessThanSignHyphenMinusKeyword_0_1; }
 		
-		//name=(ID | ComplexName)
+		//name=(ID|ComplexName)
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//(ID | ComplexName)
+		//(ID|ComplexName)
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 		
 		//ID
@@ -128,7 +128,8 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//ComplexName:
-		//	'::' ID;
+		//    '::' ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'::' ID
@@ -187,8 +188,8 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 	}
 
 	
-	//Model:
-	//	elements+=Class*;
+	//Model :
+	//        (elements+=Class)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -197,8 +198,8 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		return getModelAccess().getRule();
 	}
 	
-	//Class:
-	//	((superClass=[Class] | superClass=[Class] | superClass=[Class|ComplexName]) '<-')? name=(ID | ComplexName) '{' '}';
+	//Class :
+	//        ((superClass=[Class|'Object']|superClass=[Class]|superClass=[Class|ComplexName]) '<-')? name=(ID|ComplexName) '{' '}';
 	public ClassElements getClassAccess() {
 		return pClass;
 	}
@@ -208,7 +209,8 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 	}
 	
 	//ComplexName:
-	//	'::' ID;
+	//    '::' ID
+	//;
 	public ComplexNameElements getComplexNameAccess() {
 		return pComplexName;
 	}
@@ -217,45 +219,40 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractEle
 		return getComplexNameAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

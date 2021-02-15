@@ -30,9 +30,9 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cTypesAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
-		//Main:
-		//	imports+=Import*
-		//	types+=Type*;
+		//Main :
+		//    imports+=Import*
+		//    types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//imports+=Import*
@@ -58,8 +58,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
-		//Import:
-		//	'import' importURI=STRING;
+		//Import :
+		//    'import' importURI=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'import' importURI=STRING
@@ -85,8 +85,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final CrossReference cExtendsTypeCrossReference_3_0 = (CrossReference)cExtendsAssignment_3.eContents().get(0);
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
 		
-		//Type:
-		//	'type' name=ID 'extends' ^extends=[Type];
+		//Type :
+		//    'type' name=ID 'extends' ^extends=[Type];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type' name=ID 'extends' ^extends=[Type]
@@ -160,9 +160,9 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//Main:
-	//	imports+=Import*
-	//	types+=Type*;
+	//Main :
+	//    imports+=Import*
+	//    types+=Type*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -171,8 +171,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getMainAccess().getRule();
 	}
 	
-	//Import:
-	//	'import' importURI=STRING;
+	//Import :
+	//    'import' importURI=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -181,8 +181,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getImportAccess().getRule();
 	}
 	
-	//Type:
-	//	'type' name=ID 'extends' ^extends=[Type];
+	//Type :
+	//    'type' name=ID 'extends' ^extends=[Type];
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -191,45 +191,40 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getTypeAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

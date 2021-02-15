@@ -28,11 +28,11 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		private final Assignment cExpressionAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cExpressionExpressionParserRuleCall_0 = (RuleCall)cExpressionAssignment.eContents().get(0);
 		
-		//File:
-		//	expression+=Expression*;
+		//File :
+		//    (expression+=Expression)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//expression+=Expression*
+		//(expression+=Expression)*
 		public Assignment getExpressionAssignment() { return cExpressionAssignment; }
 		
 		//Expression
@@ -48,12 +48,14 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		private final RuleCall cExpressionParserRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
-		//Expression:
-		//	SExpression | Atom |
-		//	"[" Expression "]";
+		//Expression :
+		//  SExpression |
+		//  Atom |
+		//  "[" Expression "]";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//SExpression | Atom |
+		//SExpression |
+		//Atom |
 		//"[" Expression "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
@@ -92,36 +94,41 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		private final Keyword cEndKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		
 		//SExpression:
-		//	{SExpression} ("("
-		//	element+=Expression*
-		//	")" |
-		//	"begin"
-		//	element+=Expression*
-		//	"end");
+		//    {SExpression}
+		//    ("("
+		//      element+=Expression*
+		//    ")" |
+		//    "begin"
+		//      element+=Expression*
+		//    "end"
+		//    );
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{SExpression} ("("
-		//element+=Expression*
+		//{SExpression}
+		//("("
+		//  element+=Expression*
 		//")" |
 		//"begin"
-		//element+=Expression*
-		//"end")
+		//  element+=Expression*
+		//"end"
+		//)
 		public Group getGroup() { return cGroup; }
 		
 		//{SExpression}
 		public Action getSExpressionAction_0() { return cSExpressionAction_0; }
 		
 		//("("
-		//element+=Expression*
+		//  element+=Expression*
 		//")" |
 		//"begin"
-		//element+=Expression*
-		//"end")
+		//  element+=Expression*
+		//"end"
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"("
-		//element+=Expression*
-		//")"
+		//      element+=Expression*
+		//    ")"
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//"("
@@ -137,7 +144,7 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		public Keyword getRightParenthesisKeyword_1_0_2() { return cRightParenthesisKeyword_1_0_2; }
 		
 		//"begin"
-		//element+=Expression*
+		//  element+=Expression*
 		//"end"
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
@@ -158,8 +165,8 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueVALUEParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//Atom:
-		//	value=VALUE;
+		//Atom :
+		//  value=VALUE;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//value=VALUE
@@ -175,11 +182,10 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//VALUE:
-		//	ID | INT | STRING;
+		//VALUE : ID|INT|STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID | INT | STRING
+		//ID|INT|STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ID
@@ -242,8 +248,8 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 	}
 
 	
-	//File:
-	//	expression+=Expression*;
+	//File :
+	//    (expression+=Expression)*;
 	public FileElements getFileAccess() {
 		return pFile;
 	}
@@ -252,9 +258,10 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		return getFileAccess().getRule();
 	}
 	
-	//Expression:
-	//	SExpression | Atom |
-	//	"[" Expression "]";
+	//Expression :
+	//  SExpression |
+	//  Atom |
+	//  "[" Expression "]";
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -264,12 +271,14 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 	}
 	
 	//SExpression:
-	//	{SExpression} ("("
-	//	element+=Expression*
-	//	")" |
-	//	"begin"
-	//	element+=Expression*
-	//	"end");
+	//    {SExpression}
+	//    ("("
+	//      element+=Expression*
+	//    ")" |
+	//    "begin"
+	//      element+=Expression*
+	//    "end"
+	//    );
 	public SExpressionElements getSExpressionAccess() {
 		return pSExpression;
 	}
@@ -278,8 +287,8 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		return getSExpressionAccess().getRule();
 	}
 	
-	//Atom:
-	//	value=VALUE;
+	//Atom :
+	//  value=VALUE;
 	public AtomElements getAtomAccess() {
 		return pAtom;
 	}
@@ -288,8 +297,7 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		return getAtomAccess().getRule();
 	}
 	
-	//VALUE:
-	//	ID | INT | STRING;
+	//VALUE : ID|INT|STRING;
 	public VALUEElements getVALUEAccess() {
 		return pVALUE;
 	}
@@ -298,45 +306,40 @@ public class BmTestLanguageGrammarAccess extends AbstractElementFinder.AbstractG
 		return getVALUEAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

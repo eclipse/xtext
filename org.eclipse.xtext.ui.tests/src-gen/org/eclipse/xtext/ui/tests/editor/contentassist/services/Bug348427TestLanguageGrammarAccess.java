@@ -53,22 +53,23 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cElement2Assignment_11 = (Assignment)cAlternatives.eContents().get(11);
 		private final RuleCall cElement2Scenario2_8ParserRuleCall_11_0 = (RuleCall)cElement2Assignment_11.eContents().get(0);
 		
-		//Model:
-		//	element1=Scenario1_1
-		//	| element1=Scenario1_2
-		//	| element1=Scenario1_3
-		//	| element1=Scenario1_4
-		//	| element2=Scenario2_1
-		//	| element2=Scenario2_2
-		//	| element2=Scenario2_3
-		//	| element2=Scenario2_4
-		//	| element2=Scenario2_5
-		//	| element2=Scenario2_6
-		//	| element2=Scenario2_7
-		//	| element2=Scenario2_8;
+		//Model :
+		//      element1=Scenario1_1
+		//    | element1=Scenario1_2
+		//    | element1=Scenario1_3
+		//    | element1=Scenario1_4
+		//    | element2=Scenario2_1
+		//    | element2=Scenario2_2
+		//    | element2=Scenario2_3
+		//    | element2=Scenario2_4
+		//    | element2=Scenario2_5
+		//    | element2=Scenario2_6
+		//    | element2=Scenario2_7
+		//    | element2=Scenario2_8
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//element1=Scenario1_1
+		//  element1=Scenario1_1
 		//| element1=Scenario1_2
 		//| element1=Scenario1_3
 		//| element1=Scenario1_4
@@ -167,25 +168,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild1_3ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario1_1 Scenario1:
-		//	'1.1' (child+=Child1_1
-		//	| child+=Child1_2
-		//	| child+=Child1_3)
-		//	'next';
+		//Scenario1_1 returns Scenario1:
+		//    '1.1'
+		//    (
+		//          child+=Child1_1
+		//      |   child+=Child1_2
+		//      |   child+=Child1_3
+		//    )
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1.1' (child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)
+		//'1.1'
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'1.1'
 		public Keyword getDigitOneFullStopDigitOneKeyword_0() { return cDigitOneFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child1_1
@@ -222,25 +232,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild1_3ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario1_2 Scenario1:
-		//	'1.2' (child+=Child1_1
-		//	| child+=Child1_2
-		//	| child+=Child1_3)+
-		//	'next';
+		//Scenario1_2 returns Scenario1:
+		//    '1.2'
+		//    (
+		//          child+=Child1_1
+		//      |   child+=Child1_2
+		//      |   child+=Child1_3
+		//    )+
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1.2' (child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)+
+		//'1.2'
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)+
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'1.2'
 		public Keyword getDigitOneFullStopDigitTwoKeyword_0() { return cDigitOneFullStopDigitTwoKeyword_0; }
 		
-		//(child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)+
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child1_1
@@ -278,18 +297,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild1_3ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario1_3 Scenario1:
-		//	{Scenario1}
-		//	'1.3' (child+=Child1_1
-		//	| child+=Child1_2
-		//	| child+=Child1_3)*
-		//	'next';
+		//Scenario1_3 returns Scenario1:
+		//    {Scenario1}
+		//    '1.3'
+		//    (
+		//          child+=Child1_1
+		//      |   child+=Child1_2
+		//      |   child+=Child1_3
+		//    )*
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario1}
-		//'1.3' (child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)*
+		//'1.3'
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)*
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -299,9 +325,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'1.3'
 		public Keyword getDigitOneFullStopDigitThreeKeyword_1() { return cDigitOneFullStopDigitThreeKeyword_1; }
 		
-		//(child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)*
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child1_1
@@ -339,18 +367,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild1_3ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario1_4 Scenario1:
-		//	{Scenario1}
-		//	'1.4' (child+=Child1_1
-		//	| child+=Child1_2
-		//	| child+=Child1_3)?
-		//	'next';
+		//Scenario1_4 returns Scenario1:
+		//    {Scenario1}
+		//    '1.4'
+		//    (
+		//          child+=Child1_1
+		//      |   child+=Child1_2
+		//      |   child+=Child1_3
+		//    )?
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario1}
-		//'1.4' (child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)?
+		//'1.4'
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)?
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -360,9 +395,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'1.4'
 		public Keyword getDigitOneFullStopDigitFourKeyword_1() { return cDigitOneFullStopDigitFourKeyword_1; }
 		
-		//(child+=Child1_1
-		//| child+=Child1_2
-		//| child+=Child1_3)?
+		//(
+		//      child+=Child1_1
+		//  |   child+=Child1_2
+		//  |   child+=Child1_3
+		//)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child1_1
@@ -401,13 +438,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild1Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child1_1 Child1:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	enumType=EnumType // this is not ok
-		//	'child1' 'end';
+		//Child1_1 returns Child1:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    enumType=EnumType // this is not ok
+		//    'child1' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//enumType=EnumType // this is not ok
 		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
@@ -440,7 +480,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		public RuleCall getEnumTypeEnumTypeEnumRuleCall_3_0() { return cEnumTypeEnumTypeEnumRuleCall_3_0; }
 		
 		//// this is not ok
-		//'child1'
+		//   'child1'
 		public Keyword getChild1Keyword_4() { return cChild1Keyword_4; }
 		
 		//'end'
@@ -461,13 +501,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild2Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child1_2 Child1:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	enumType=EnumType // this is not ok
-		//	'child2' 'end';
+		//Child1_2 returns Child1:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    enumType=EnumType // this is not ok
+		//    'child2' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//enumType=EnumType // this is not ok
 		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
@@ -500,7 +543,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		public RuleCall getEnumTypeEnumTypeEnumRuleCall_3_0() { return cEnumTypeEnumTypeEnumRuleCall_3_0; }
 		
 		//// this is not ok
-		//'child2'
+		//   'child2'
 		public Keyword getChild2Keyword_4() { return cChild2Keyword_4; }
 		
 		//'end'
@@ -521,13 +564,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild3Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child1_3 Child1:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	enumType=EnumType // this is not ok
-		//	'child3' 'end';
+		//Child1_3 returns Child1:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    enumType=EnumType // this is not ok
+		//    'child3' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//enumType=EnumType // this is not ok
 		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
@@ -560,7 +606,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		public RuleCall getEnumTypeEnumTypeEnumRuleCall_3_0() { return cEnumTypeEnumTypeEnumRuleCall_3_0; }
 		
 		//// this is not ok
-		//'child3'
+		//   'child3'
 		public Keyword getChild3Keyword_4() { return cChild3Keyword_4; }
 		
 		//'end'
@@ -579,25 +625,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_3ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario2_1 Scenario2:
-		//	'2.1' (child+=Child2_1
-		//	| child+=Child2_2
-		//	| child+=Child2_3)
-		//	'next';
+		//Scenario2_1 returns Scenario2:
+		//    '2.1'
+		//    (
+		//          child+=Child2_1
+		//      |   child+=Child2_2
+		//      |   child+=Child2_3
+		//    )
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.1' (child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)
+		//'2.1'
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.1'
 		public Keyword getDigitTwoFullStopDigitOneKeyword_0() { return cDigitTwoFullStopDigitOneKeyword_0; }
 		
-		//(child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_1
@@ -634,25 +689,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_3ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario2_2 Scenario2:
-		//	'2.2' (child+=Child2_1
-		//	| child+=Child2_2
-		//	| child+=Child2_3)+
-		//	'next';
+		//Scenario2_2 returns Scenario2:
+		//    '2.2'
+		//    (
+		//          child+=Child2_1
+		//      |   child+=Child2_2
+		//      |   child+=Child2_3
+		//    )+
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.2' (child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)+
+		//'2.2'
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)+
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.2'
 		public Keyword getDigitTwoFullStopDigitTwoKeyword_0() { return cDigitTwoFullStopDigitTwoKeyword_0; }
 		
-		//(child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)+
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_1
@@ -689,25 +753,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_6ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario2_3 Scenario2:
-		//	'2.3' (child+=Child2_4
-		//	| child+=Child2_5
-		//	| child+=Child2_6)
-		//	'next';
+		//Scenario2_3 returns Scenario2:
+		//    '2.3'
+		//    (
+		//          child+=Child2_4
+		//      |   child+=Child2_5
+		//      |   child+=Child2_6
+		//    )
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.3' (child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)
+		//'2.3'
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.3'
 		public Keyword getDigitTwoFullStopDigitThreeKeyword_0() { return cDigitTwoFullStopDigitThreeKeyword_0; }
 		
-		//(child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_4
@@ -744,25 +817,34 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_6ParserRuleCall_1_2_0 = (RuleCall)cChildAssignment_1_2.eContents().get(0);
 		private final Keyword cNextKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Scenario2_4 Scenario2:
-		//	'2.4' (child+=Child2_4
-		//	| child+=Child2_5
-		//	| child+=Child2_6)+
-		//	'next';
+		//Scenario2_4 returns Scenario2:
+		//    '2.4'
+		//    (
+		//          child+=Child2_4
+		//      |   child+=Child2_5
+		//      |   child+=Child2_6
+		//    )+
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'2.4' (child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)+
+		//'2.4'
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)+
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
 		//'2.4'
 		public Keyword getDigitTwoFullStopDigitFourKeyword_0() { return cDigitTwoFullStopDigitFourKeyword_0; }
 		
-		//(child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)+
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//child+=Child2_4
@@ -800,18 +882,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_3ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario2_5 Scenario2:
-		//	{Scenario2}
-		//	'2.5' (child+=Child2_1
-		//	| child+=Child2_2
-		//	| child+=Child2_3)?
-		//	'next';
+		//Scenario2_5 returns Scenario2:
+		//    {Scenario2}
+		//    '2.5'
+		//    (
+		//          child+=Child2_1
+		//      |   child+=Child2_2
+		//      |   child+=Child2_3
+		//    )?
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2}
-		//'2.5' (child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)?
+		//'2.5'
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)?
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -821,9 +910,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.5'
 		public Keyword getDigitTwoFullStopDigitFiveKeyword_1() { return cDigitTwoFullStopDigitFiveKeyword_1; }
 		
-		//(child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)?
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_1
@@ -861,18 +952,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_3ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario2_6 Scenario2:
-		//	{Scenario2}
-		//	'2.6' (child+=Child2_1
-		//	| child+=Child2_2
-		//	| child+=Child2_3)*
-		//	'next';
+		//Scenario2_6 returns Scenario2:
+		//    {Scenario2}
+		//    '2.6'
+		//    (
+		//          child+=Child2_1
+		//      |   child+=Child2_2
+		//      |   child+=Child2_3
+		//    )*
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2}
-		//'2.6' (child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)*
+		//'2.6'
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)*
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -882,9 +980,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.6'
 		public Keyword getDigitTwoFullStopDigitSixKeyword_1() { return cDigitTwoFullStopDigitSixKeyword_1; }
 		
-		//(child+=Child2_1
-		//| child+=Child2_2
-		//| child+=Child2_3)*
+		//(
+		//      child+=Child2_1
+		//  |   child+=Child2_2
+		//  |   child+=Child2_3
+		//)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_1
@@ -922,18 +1022,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_6ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario2_7 Scenario2:
-		//	{Scenario2}
-		//	'2.7' (child+=Child2_4
-		//	| child+=Child2_5
-		//	| child+=Child2_6)?
-		//	'next';
+		//Scenario2_7 returns Scenario2:
+		//    {Scenario2}
+		//    '2.7'
+		//    (
+		//          child+=Child2_4
+		//      |   child+=Child2_5
+		//      |   child+=Child2_6
+		//    )?
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2}
-		//'2.7' (child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)?
+		//'2.7'
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)?
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -943,9 +1050,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.7'
 		public Keyword getDigitTwoFullStopDigitSevenKeyword_1() { return cDigitTwoFullStopDigitSevenKeyword_1; }
 		
-		//(child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)?
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_4
@@ -983,18 +1092,25 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cChildChild2_6ParserRuleCall_2_2_0 = (RuleCall)cChildAssignment_2_2.eContents().get(0);
 		private final Keyword cNextKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Scenario2_8 Scenario2:
-		//	{Scenario2}
-		//	'2.8' (child+=Child2_4
-		//	| child+=Child2_5
-		//	| child+=Child2_6)*
-		//	'next';
+		//Scenario2_8 returns Scenario2:
+		//    {Scenario2}
+		//    '2.8'
+		//    (
+		//          child+=Child2_4
+		//      |   child+=Child2_5
+		//      |   child+=Child2_6
+		//    )*
+		//    'next'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Scenario2}
-		//'2.8' (child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)*
+		//'2.8'
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)*
 		//'next'
 		public Group getGroup() { return cGroup; }
 		
@@ -1004,9 +1120,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//'2.8'
 		public Keyword getDigitTwoFullStopDigitEightKeyword_1() { return cDigitTwoFullStopDigitEightKeyword_1; }
 		
-		//(child+=Child2_4
-		//| child+=Child2_5
-		//| child+=Child2_6)*
+		//(
+		//      child+=Child2_4
+		//  |   child+=Child2_5
+		//  |   child+=Child2_6
+		//)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//child+=Child2_4
@@ -1047,13 +1165,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild1Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_1 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	string=('a' | 'b')
-		//	'child1' 'end';
+		//Child2_1 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    string=('a' | 'b')
+		//    'child1' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//string=('a' | 'b')
 		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
@@ -1114,13 +1235,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild2Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_2 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	string=('a' | 'b')
-		//	'child2' 'end';
+		//Child2_2 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    string=('a' | 'b')
+		//    'child2' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//string=('a' | 'b')
 		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
@@ -1181,13 +1305,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild3Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_3 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')?
-		//	string=('a' | 'b')
-		//	'child3' 'end';
+		//Child2_3 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    string=('a' | 'b')
+		//    'child3' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')?
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
 		//string=('a' | 'b')
 		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
@@ -1249,12 +1376,17 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild1Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_4 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child1' 'end';
+		//Child2_4 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    (string='a' | string='b')
+		//    'child1' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
+		//(string='a' | string='b')
 		//'child1' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -1318,12 +1450,17 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild2Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_5 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child2' 'end';
+		//Child2_5 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    (string='a' | string='b')
+		//    'child2' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
+		//(string='a' | string='b')
 		//'child2' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -1387,12 +1524,17 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cChild3Keyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//Child2_6 Child2:
-		//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-		//	'child3' 'end';
+		//Child2_6 returns Child2:
+		//    name=ID ':'
+		//    (bool?='bool' 'keyword')?
+		//    (string='a' | string='b')
+		//    'child3' 'end'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+		//name=ID ':'
+		//(bool?='bool' 'keyword')?
+		//(string='a' | string='b')
 		//'child3' 'end'
 		public Group getGroup() { return cGroup; }
 		
@@ -1447,8 +1589,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final EnumLiteralDeclaration cBEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cBBKeyword_1_0 = (Keyword)cBEnumLiteralDeclaration_1.eContents().get(0);
 		
-		//enum EnumType:
-		//	a | b;
+		//enum EnumType: a | b;
 		public EnumRule getRule() { return rule; }
 		
 		//a | b
@@ -1457,13 +1598,11 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//a
 		public EnumLiteralDeclaration getAEnumLiteralDeclaration_0() { return cAEnumLiteralDeclaration_0; }
 		
-		//"a"
 		public Keyword getAAKeyword_0_0() { return cAAKeyword_0_0; }
 		
 		//b
 		public EnumLiteralDeclaration getBEnumLiteralDeclaration_1() { return cBEnumLiteralDeclaration_1; }
 		
-		//"b"
 		public Keyword getBBKeyword_1_0() { return cBBKeyword_1_0; }
 	}
 	
@@ -1552,19 +1691,20 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	element1=Scenario1_1
-	//	| element1=Scenario1_2
-	//	| element1=Scenario1_3
-	//	| element1=Scenario1_4
-	//	| element2=Scenario2_1
-	//	| element2=Scenario2_2
-	//	| element2=Scenario2_3
-	//	| element2=Scenario2_4
-	//	| element2=Scenario2_5
-	//	| element2=Scenario2_6
-	//	| element2=Scenario2_7
-	//	| element2=Scenario2_8;
+	//Model :
+	//      element1=Scenario1_1
+	//    | element1=Scenario1_2
+	//    | element1=Scenario1_3
+	//    | element1=Scenario1_4
+	//    | element2=Scenario2_1
+	//    | element2=Scenario2_2
+	//    | element2=Scenario2_3
+	//    | element2=Scenario2_4
+	//    | element2=Scenario2_5
+	//    | element2=Scenario2_6
+	//    | element2=Scenario2_7
+	//    | element2=Scenario2_8
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1573,11 +1713,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//Scenario1_1 Scenario1:
-	//	'1.1' (child+=Child1_1
-	//	| child+=Child1_2
-	//	| child+=Child1_3)
-	//	'next';
+	//Scenario1_1 returns Scenario1:
+	//    '1.1'
+	//    (
+	//          child+=Child1_1
+	//      |   child+=Child1_2
+	//      |   child+=Child1_3
+	//    )
+	//    'next'
+	//;
 	public Scenario1_1Elements getScenario1_1Access() {
 		return pScenario1_1;
 	}
@@ -1586,11 +1730,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario1_1Access().getRule();
 	}
 	
-	//Scenario1_2 Scenario1:
-	//	'1.2' (child+=Child1_1
-	//	| child+=Child1_2
-	//	| child+=Child1_3)+
-	//	'next';
+	//Scenario1_2 returns Scenario1:
+	//    '1.2'
+	//    (
+	//          child+=Child1_1
+	//      |   child+=Child1_2
+	//      |   child+=Child1_3
+	//    )+
+	//    'next'
+	//;
 	public Scenario1_2Elements getScenario1_2Access() {
 		return pScenario1_2;
 	}
@@ -1599,12 +1747,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario1_2Access().getRule();
 	}
 	
-	//Scenario1_3 Scenario1:
-	//	{Scenario1}
-	//	'1.3' (child+=Child1_1
-	//	| child+=Child1_2
-	//	| child+=Child1_3)*
-	//	'next';
+	//Scenario1_3 returns Scenario1:
+	//    {Scenario1}
+	//    '1.3'
+	//    (
+	//          child+=Child1_1
+	//      |   child+=Child1_2
+	//      |   child+=Child1_3
+	//    )*
+	//    'next'
+	//;
 	public Scenario1_3Elements getScenario1_3Access() {
 		return pScenario1_3;
 	}
@@ -1613,12 +1765,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario1_3Access().getRule();
 	}
 	
-	//Scenario1_4 Scenario1:
-	//	{Scenario1}
-	//	'1.4' (child+=Child1_1
-	//	| child+=Child1_2
-	//	| child+=Child1_3)?
-	//	'next';
+	//Scenario1_4 returns Scenario1:
+	//    {Scenario1}
+	//    '1.4'
+	//    (
+	//          child+=Child1_1
+	//      |   child+=Child1_2
+	//      |   child+=Child1_3
+	//    )?
+	//    'next'
+	//;
 	public Scenario1_4Elements getScenario1_4Access() {
 		return pScenario1_4;
 	}
@@ -1627,10 +1783,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario1_4Access().getRule();
 	}
 	
-	//Child1_1 Child1:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	enumType=EnumType // this is not ok
-	//	'child1' 'end';
+	//Child1_1 returns Child1:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    enumType=EnumType // this is not ok
+	//    'child1' 'end'
+	//;
 	public Child1_1Elements getChild1_1Access() {
 		return pChild1_1;
 	}
@@ -1639,10 +1797,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild1_1Access().getRule();
 	}
 	
-	//Child1_2 Child1:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	enumType=EnumType // this is not ok
-	//	'child2' 'end';
+	//Child1_2 returns Child1:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    enumType=EnumType // this is not ok
+	//    'child2' 'end'
+	//;
 	public Child1_2Elements getChild1_2Access() {
 		return pChild1_2;
 	}
@@ -1651,10 +1811,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild1_2Access().getRule();
 	}
 	
-	//Child1_3 Child1:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	enumType=EnumType // this is not ok
-	//	'child3' 'end';
+	//Child1_3 returns Child1:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    enumType=EnumType // this is not ok
+	//    'child3' 'end'
+	//;
 	public Child1_3Elements getChild1_3Access() {
 		return pChild1_3;
 	}
@@ -1663,8 +1825,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild1_3Access().getRule();
 	}
 	
-	//enum EnumType:
-	//	a | b;
+	//enum EnumType: a | b;
 	public EnumTypeElements getEnumTypeAccess() {
 		return eEnumType;
 	}
@@ -1673,11 +1834,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getEnumTypeAccess().getRule();
 	}
 	
-	//Scenario2_1 Scenario2:
-	//	'2.1' (child+=Child2_1
-	//	| child+=Child2_2
-	//	| child+=Child2_3)
-	//	'next';
+	//Scenario2_1 returns Scenario2:
+	//    '2.1'
+	//    (
+	//          child+=Child2_1
+	//      |   child+=Child2_2
+	//      |   child+=Child2_3
+	//    )
+	//    'next'
+	//;
 	public Scenario2_1Elements getScenario2_1Access() {
 		return pScenario2_1;
 	}
@@ -1686,11 +1851,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_1Access().getRule();
 	}
 	
-	//Scenario2_2 Scenario2:
-	//	'2.2' (child+=Child2_1
-	//	| child+=Child2_2
-	//	| child+=Child2_3)+
-	//	'next';
+	//Scenario2_2 returns Scenario2:
+	//    '2.2'
+	//    (
+	//          child+=Child2_1
+	//      |   child+=Child2_2
+	//      |   child+=Child2_3
+	//    )+
+	//    'next'
+	//;
 	public Scenario2_2Elements getScenario2_2Access() {
 		return pScenario2_2;
 	}
@@ -1699,11 +1868,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_2Access().getRule();
 	}
 	
-	//Scenario2_3 Scenario2:
-	//	'2.3' (child+=Child2_4
-	//	| child+=Child2_5
-	//	| child+=Child2_6)
-	//	'next';
+	//Scenario2_3 returns Scenario2:
+	//    '2.3'
+	//    (
+	//          child+=Child2_4
+	//      |   child+=Child2_5
+	//      |   child+=Child2_6
+	//    )
+	//    'next'
+	//;
 	public Scenario2_3Elements getScenario2_3Access() {
 		return pScenario2_3;
 	}
@@ -1712,11 +1885,15 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_3Access().getRule();
 	}
 	
-	//Scenario2_4 Scenario2:
-	//	'2.4' (child+=Child2_4
-	//	| child+=Child2_5
-	//	| child+=Child2_6)+
-	//	'next';
+	//Scenario2_4 returns Scenario2:
+	//    '2.4'
+	//    (
+	//          child+=Child2_4
+	//      |   child+=Child2_5
+	//      |   child+=Child2_6
+	//    )+
+	//    'next'
+	//;
 	public Scenario2_4Elements getScenario2_4Access() {
 		return pScenario2_4;
 	}
@@ -1725,12 +1902,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_4Access().getRule();
 	}
 	
-	//Scenario2_5 Scenario2:
-	//	{Scenario2}
-	//	'2.5' (child+=Child2_1
-	//	| child+=Child2_2
-	//	| child+=Child2_3)?
-	//	'next';
+	//Scenario2_5 returns Scenario2:
+	//    {Scenario2}
+	//    '2.5'
+	//    (
+	//          child+=Child2_1
+	//      |   child+=Child2_2
+	//      |   child+=Child2_3
+	//    )?
+	//    'next'
+	//;
 	public Scenario2_5Elements getScenario2_5Access() {
 		return pScenario2_5;
 	}
@@ -1739,12 +1920,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_5Access().getRule();
 	}
 	
-	//Scenario2_6 Scenario2:
-	//	{Scenario2}
-	//	'2.6' (child+=Child2_1
-	//	| child+=Child2_2
-	//	| child+=Child2_3)*
-	//	'next';
+	//Scenario2_6 returns Scenario2:
+	//    {Scenario2}
+	//    '2.6'
+	//    (
+	//          child+=Child2_1
+	//      |   child+=Child2_2
+	//      |   child+=Child2_3
+	//    )*
+	//    'next'
+	//;
 	public Scenario2_6Elements getScenario2_6Access() {
 		return pScenario2_6;
 	}
@@ -1753,12 +1938,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_6Access().getRule();
 	}
 	
-	//Scenario2_7 Scenario2:
-	//	{Scenario2}
-	//	'2.7' (child+=Child2_4
-	//	| child+=Child2_5
-	//	| child+=Child2_6)?
-	//	'next';
+	//Scenario2_7 returns Scenario2:
+	//    {Scenario2}
+	//    '2.7'
+	//    (
+	//          child+=Child2_4
+	//      |   child+=Child2_5
+	//      |   child+=Child2_6
+	//    )?
+	//    'next'
+	//;
 	public Scenario2_7Elements getScenario2_7Access() {
 		return pScenario2_7;
 	}
@@ -1767,12 +1956,16 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_7Access().getRule();
 	}
 	
-	//Scenario2_8 Scenario2:
-	//	{Scenario2}
-	//	'2.8' (child+=Child2_4
-	//	| child+=Child2_5
-	//	| child+=Child2_6)*
-	//	'next';
+	//Scenario2_8 returns Scenario2:
+	//    {Scenario2}
+	//    '2.8'
+	//    (
+	//          child+=Child2_4
+	//      |   child+=Child2_5
+	//      |   child+=Child2_6
+	//    )*
+	//    'next'
+	//;
 	public Scenario2_8Elements getScenario2_8Access() {
 		return pScenario2_8;
 	}
@@ -1781,10 +1974,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getScenario2_8Access().getRule();
 	}
 	
-	//Child2_1 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	string=('a' | 'b')
-	//	'child1' 'end';
+	//Child2_1 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    string=('a' | 'b')
+	//    'child1' 'end'
+	//;
 	public Child2_1Elements getChild2_1Access() {
 		return pChild2_1;
 	}
@@ -1793,10 +1988,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_1Access().getRule();
 	}
 	
-	//Child2_2 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	string=('a' | 'b')
-	//	'child2' 'end';
+	//Child2_2 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    string=('a' | 'b')
+	//    'child2' 'end'
+	//;
 	public Child2_2Elements getChild2_2Access() {
 		return pChild2_2;
 	}
@@ -1805,10 +2002,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_2Access().getRule();
 	}
 	
-	//Child2_3 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')?
-	//	string=('a' | 'b')
-	//	'child3' 'end';
+	//Child2_3 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    string=('a' | 'b')
+	//    'child3' 'end'
+	//;
 	public Child2_3Elements getChild2_3Access() {
 		return pChild2_3;
 	}
@@ -1817,9 +2016,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_3Access().getRule();
 	}
 	
-	//Child2_4 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child1' 'end';
+	//Child2_4 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    (string='a' | string='b')
+	//    'child1' 'end'
+	//;
 	public Child2_4Elements getChild2_4Access() {
 		return pChild2_4;
 	}
@@ -1828,9 +2030,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_4Access().getRule();
 	}
 	
-	//Child2_5 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child2' 'end';
+	//Child2_5 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    (string='a' | string='b')
+	//    'child2' 'end'
+	//;
 	public Child2_5Elements getChild2_5Access() {
 		return pChild2_5;
 	}
@@ -1839,9 +2044,12 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_5Access().getRule();
 	}
 	
-	//Child2_6 Child2:
-	//	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
-	//	'child3' 'end';
+	//Child2_6 returns Child2:
+	//    name=ID ':'
+	//    (bool?='bool' 'keyword')?
+	//    (string='a' | string='b')
+	//    'child3' 'end'
+	//;
 	public Child2_6Elements getChild2_6Access() {
 		return pChild2_6;
 	}
@@ -1850,45 +2058,40 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getChild2_6Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}
