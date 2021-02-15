@@ -1090,7 +1090,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.13"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1125,7 +1125,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.14"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1160,7 +1160,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.15"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1195,7 +1195,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.16.0"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1230,7 +1230,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.16.2"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1265,7 +1265,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.17.1"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1300,7 +1300,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.12"/>
+              url="${p2.m2e}/1.17.1"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
