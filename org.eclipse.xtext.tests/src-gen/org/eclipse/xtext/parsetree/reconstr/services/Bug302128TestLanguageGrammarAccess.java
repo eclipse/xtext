@@ -27,11 +27,11 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Model:
-		//	elements+=Element*;
+		//Model :
+		//    (elements+=Element)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=Element*
+		//(elements+=Element)*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 		
 		//Element
@@ -45,11 +45,10 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueValueTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
-		//Element:
-		//	name=Variable value=Value?;
+		//Element: name=Variable (value=Value)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=Variable value=Value?
+		//name=Variable (value=Value)?
 		public Group getGroup() { return cGroup; }
 		
 		//name=Variable
@@ -58,7 +57,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//Variable
 		public RuleCall getNameVariableParserRuleCall_0_0() { return cNameVariableParserRuleCall_0_0; }
 		
-		//value=Value?
+		//(value=Value)?
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 		
 		//Value
@@ -74,20 +73,19 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cHyphenMinusKeyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//Variable:
-		//	ID (('.' | '-') ID)*;
+		//Variable: ID (('.'|'-') ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID (('.' | '-') ID)*
+		//ID (('.'|'-') ID)*
 		public Group getGroup() { return cGroup; }
 		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 		
-		//(('.' | '-') ID)*
+		//(('.'|'-') ID)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//('.' | '-')
+		//('.'|'-')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 		
 		//'.'
@@ -150,8 +148,8 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	elements+=Element*;
+	//Model :
+	//    (elements+=Element)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -160,8 +158,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	name=Variable value=Value?;
+	//Element: name=Variable (value=Value)?;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -170,8 +167,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getElementAccess().getRule();
 	}
 	
-	//Variable:
-	//	ID (('.' | '-') ID)*;
+	//Variable: ID (('.'|'-') ID)*;
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}
@@ -180,52 +176,47 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getVariableAccess().getRule();
 	}
 	
-	//terminal Value:
-	//	('=' | '+=' | '-=')->'\n';
+	///* SuppressWarnings[InvalidTerminalruleName] */
+	//terminal Value: ('='|'+='|'-=') -> '\n';
 	public TerminalRule getValueRule() {
 		return tValue;
 	}
 	
 	//@Override
-	//terminal SL_COMMENT:
-	//	'#' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT: '#' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

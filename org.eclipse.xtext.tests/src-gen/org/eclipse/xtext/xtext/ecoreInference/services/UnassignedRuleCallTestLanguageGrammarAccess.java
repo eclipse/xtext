@@ -30,7 +30,8 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cModelFeaturesModelFeaturesParserRuleCall_2_0 = (RuleCall)cModelFeaturesAssignment_2.eContents().get(0);
 		
 		//Model:
-		//	'model' INT+ modelFeatures=ModelFeatures;
+		//  'model' INT+ modelFeatures=ModelFeatures
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'model' INT+ modelFeatures=ModelFeatures
@@ -58,16 +59,17 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ModelFeatures:
-		//	'feature' name=ID DataTypeRule ';';
+		//  'feature' name = ID DataTypeRule ';'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'feature' name=ID DataTypeRule ';'
+		//'feature' name = ID DataTypeRule ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'feature'
 		public Keyword getFeatureKeyword_0() { return cFeatureKeyword_0; }
 		
-		//name=ID
+		//name = ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
@@ -88,7 +90,8 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cSTRINGTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//DataTypeRule:
-		//	INT 'keyword' INT STRING?;
+		//  INT 'keyword' INT STRING?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT 'keyword' INT STRING?
@@ -154,7 +157,8 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 
 	
 	//Model:
-	//	'model' INT+ modelFeatures=ModelFeatures;
+	//  'model' INT+ modelFeatures=ModelFeatures
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -164,7 +168,8 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//ModelFeatures:
-	//	'feature' name=ID DataTypeRule ';';
+	//  'feature' name = ID DataTypeRule ';'
+	//;
 	public ModelFeaturesElements getModelFeaturesAccess() {
 		return pModelFeatures;
 	}
@@ -174,7 +179,8 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//DataTypeRule:
-	//	INT 'keyword' INT STRING?;
+	//  INT 'keyword' INT STRING?
+	//;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
 		return pDataTypeRule;
 	}
@@ -183,45 +189,40 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractElement
 		return getDataTypeRuleAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

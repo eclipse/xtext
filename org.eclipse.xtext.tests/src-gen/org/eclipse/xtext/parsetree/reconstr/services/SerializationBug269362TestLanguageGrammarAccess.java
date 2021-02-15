@@ -39,7 +39,8 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractEle
 		private final RuleCall cBarIDTerminalRuleCall_1_1_0 = (RuleCall)cBarAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
+		//  'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
@@ -125,7 +126,8 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractEle
 
 	
 	//Model:
-	//	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
+	//  'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -134,45 +136,40 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractEle
 		return getModelAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

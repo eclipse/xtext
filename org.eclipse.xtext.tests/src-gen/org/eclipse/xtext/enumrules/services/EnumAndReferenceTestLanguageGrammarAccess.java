@@ -38,7 +38,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEntityWithEnumAndReferenceCrossReference_3_0.eContents().get(1);
 		
 		//EntityWithEnumAndReference:
-		//	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
+		//    type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference]
@@ -78,7 +78,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0 = (Keyword)cAnotherEnumLiteralEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum KindOfKeyword:
-		//	kindOfKeyword | anotherEnumLiteral;
+		//    kindOfKeyword | anotherEnumLiteral;
 		public EnumRule getRule() { return rule; }
 		
 		//kindOfKeyword | anotherEnumLiteral
@@ -87,13 +87,11 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 		//kindOfKeyword
 		public EnumLiteralDeclaration getKindOfKeywordEnumLiteralDeclaration_0() { return cKindOfKeywordEnumLiteralDeclaration_0; }
 		
-		//"kindOfKeyword"
 		public Keyword getKindOfKeywordKindOfKeywordKeyword_0_0() { return cKindOfKeywordKindOfKeywordKeyword_0_0; }
 		
 		//anotherEnumLiteral
 		public EnumLiteralDeclaration getAnotherEnumLiteralEnumLiteralDeclaration_1() { return cAnotherEnumLiteralEnumLiteralDeclaration_1; }
 		
-		//"anotherEnumLiteral"
 		public Keyword getAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0() { return cAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0; }
 	}
 	
@@ -141,7 +139,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 
 	
 	//EntityWithEnumAndReference:
-	//	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
+	//    type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
 	public EntityWithEnumAndReferenceElements getEntityWithEnumAndReferenceAccess() {
 		return pEntityWithEnumAndReference;
 	}
@@ -151,7 +149,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 	}
 	
 	//enum KindOfKeyword:
-	//	kindOfKeyword | anotherEnumLiteral;
+	//    kindOfKeyword | anotherEnumLiteral;
 	public KindOfKeywordElements getKindOfKeywordAccess() {
 		return eKindOfKeyword;
 	}
@@ -160,45 +158,40 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractElementFi
 		return getKindOfKeywordAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -29,10 +29,10 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cDefDefinitionParserRuleCall_0 = (RuleCall)cDefAssignment.eContents().get(0);
 		
 		//Model:
-		//	def+=Definition+;
+		//  (def+=Definition)+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//def+=Definition+
+		//(def+=Definition)+
 		public Assignment getDefAssignment() { return cDefAssignment; }
 		
 		//Definition
@@ -51,10 +51,10 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRefReferenceParserRuleCall_4_0 = (RuleCall)cRefAssignment_4.eContents().get(0);
 		
 		//Definition:
-		//	'(def)' name=ID ':' child+=Child ref+=Reference?;
+		//  '(def)' name=ID ':' (child+=Child) (ref+=Reference)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'(def)' name=ID ':' child+=Child ref+=Reference?
+		//'(def)' name=ID ':' (child+=Child) (ref+=Reference)?
 		public Group getGroup() { return cGroup; }
 		
 		//'(def)'
@@ -69,13 +69,13 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 		
-		//child+=Child
+		//(child+=Child)
 		public Assignment getChildAssignment_3() { return cChildAssignment_3; }
 		
 		//Child
 		public RuleCall getChildChildParserRuleCall_3_0() { return cChildChildParserRuleCall_3_0; }
 		
-		//ref+=Reference?
+		//(ref+=Reference)?
 		public Assignment getRefAssignment_4() { return cRefAssignment_4; }
 		
 		//Reference
@@ -93,7 +93,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLinkDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cLinkDefinitionCrossReference_3_0.eContents().get(1);
 		
 		//Child:
-		//	'(child)' name=ID ':' link=[Definition]?;
+		//  '(child)' name=ID ':' link=[Definition]?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(child)' name=ID ':' link=[Definition]?
@@ -135,7 +135,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRefChildChildIDTerminalRuleCall_2_2_0_1 = (RuleCall)cRefChildChildCrossReference_2_2_0.eContents().get(1);
 		
 		//Reference:
-		//	'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
+		//  '(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*
@@ -221,7 +221,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	def+=Definition+;
+	//  (def+=Definition)+;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -231,7 +231,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Definition:
-	//	'(def)' name=ID ':' child+=Child ref+=Reference?;
+	//  '(def)' name=ID ':' (child+=Child) (ref+=Reference)?;
 	public DefinitionElements getDefinitionAccess() {
 		return pDefinition;
 	}
@@ -241,7 +241,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Child:
-	//	'(child)' name=ID ':' link=[Definition]?;
+	//  '(child)' name=ID ':' link=[Definition]?;
 	public ChildElements getChildAccess() {
 		return pChild;
 	}
@@ -251,7 +251,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Reference:
-	//	'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
+	//  '(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
 	public ReferenceElements getReferenceAccess() {
 		return pReference;
 	}
@@ -260,45 +260,40 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getReferenceAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

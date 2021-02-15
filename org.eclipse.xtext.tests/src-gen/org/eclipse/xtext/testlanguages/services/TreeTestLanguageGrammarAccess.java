@@ -27,10 +27,10 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final RuleCall cChildrenNodeParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//Model:
-		//	children+=Node*;
+		//  (children+=Node)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//children+=Node*
+		//(children+=Node)*
 		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
 		
 		//Node
@@ -51,14 +51,14 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Keyword cRightCurlyBracketSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Node:
-		//	name=ID
-		//	'(' attrib=STRING ')'
-		//	'{' children+=Node* '};';
+		//  name=ID
+		//  '(' attrib=STRING ')'
+		//  '{'(children+=Node)*'};';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
 		//'(' attrib=STRING ')'
-		//'{' children+=Node* '};'
+		//'{'(children+=Node)*'};'
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -82,7 +82,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 		
-		//children+=Node*
+		//(children+=Node)*
 		public Assignment getChildrenAssignment_5() { return cChildrenAssignment_5; }
 		
 		//Node
@@ -137,7 +137,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 
 	
 	//Model:
-	//	children+=Node*;
+	//  (children+=Node)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -147,9 +147,9 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//Node:
-	//	name=ID
-	//	'(' attrib=STRING ')'
-	//	'{' children+=Node* '};';
+	//  name=ID
+	//  '(' attrib=STRING ')'
+	//  '{'(children+=Node)*'};';
 	public NodeElements getNodeAccess() {
 		return pNode;
 	}
@@ -158,45 +158,40 @@ public class TreeTestLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getNodeAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

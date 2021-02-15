@@ -28,10 +28,11 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cExpressionsExpressionParserRuleCall_0 = (RuleCall)cExpressionsAssignment.eContents().get(0);
 		
 		//Model:
-		//	expressions+=Expression*;
+		//    expressions += Expression*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//expressions+=Expression*
+		//expressions += Expression*
 		public Assignment getExpressionsAssignment() { return cExpressionsAssignment; }
 		
 		//Expression
@@ -46,8 +47,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cRightAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cRightLiteralParserRuleCall_2_0 = (RuleCall)cRightAssignment_2.eContents().get(0);
 		
-		//Expression:
-		//	left=Literal '+' right=Literal;
+		//Expression : left=Literal '+' right=Literal;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=Literal '+' right=Literal
@@ -74,8 +74,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRealLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIntLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Literal:
-		//	RealLiteral | IntLiteral;
+		//Literal : RealLiteral | IntLiteral;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//RealLiteral | IntLiteral
@@ -92,11 +91,10 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueIntValueParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//IntLiteral:
-		//	value=IntValue;
+		//IntLiteral : value = IntValue ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value=IntValue
+		//value = IntValue
 		public Assignment getValueAssignment() { return cValueAssignment; }
 		
 		//IntValue
@@ -107,11 +105,10 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueRealValueParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//RealLiteral:
-		//	value=RealValue;
+		//RealLiteral : value = RealValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value=RealValue
+		//value = RealValue
 		public Assignment getValueAssignment() { return cValueAssignment; }
 		
 		//RealValue
@@ -121,8 +118,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.IntValue");
 		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//IntValue:
-		//	INT;
+		//IntValue : INT ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT
@@ -132,8 +128,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.RealValue");
 		private final RuleCall cRealParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//RealValue:
-		//	Real;
+		//RealValue : Real ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Real
@@ -148,14 +143,13 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cEXT_INTTerminalRuleCall_2_0 = (RuleCall)cAlternatives_2.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
 		
-		//Real hidden():
-		//	INT? '.' (EXT_INT | INT);
+		//Real hidden(): INT ? '.' (EXT_INT | INT);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//INT? '.' (EXT_INT | INT)
+		//INT ? '.' (EXT_INT | INT)
 		public Group getGroup() { return cGroup; }
 		
-		//INT?
+		//INT ?
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 		
 		//'.'
@@ -230,7 +224,8 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	expressions+=Expression*;
+	//    expressions += Expression*
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -239,8 +234,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//Expression:
-	//	left=Literal '+' right=Literal;
+	//Expression : left=Literal '+' right=Literal;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -249,8 +243,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getExpressionAccess().getRule();
 	}
 	
-	//Literal:
-	//	RealLiteral | IntLiteral;
+	//Literal : RealLiteral | IntLiteral;
 	public LiteralElements getLiteralAccess() {
 		return pLiteral;
 	}
@@ -259,8 +252,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getLiteralAccess().getRule();
 	}
 	
-	//IntLiteral:
-	//	value=IntValue;
+	//IntLiteral : value = IntValue ;
 	public IntLiteralElements getIntLiteralAccess() {
 		return pIntLiteral;
 	}
@@ -269,8 +261,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getIntLiteralAccess().getRule();
 	}
 	
-	//RealLiteral:
-	//	value=RealValue;
+	//RealLiteral : value = RealValue;
 	public RealLiteralElements getRealLiteralAccess() {
 		return pRealLiteral;
 	}
@@ -279,8 +270,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRealLiteralAccess().getRule();
 	}
 	
-	//IntValue:
-	//	INT;
+	//IntValue : INT ;
 	public IntValueElements getIntValueAccess() {
 		return pIntValue;
 	}
@@ -289,8 +279,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getIntValueAccess().getRule();
 	}
 	
-	//RealValue:
-	//	Real;
+	//RealValue : Real ;
 	public RealValueElements getRealValueAccess() {
 		return pRealValue;
 	}
@@ -299,8 +288,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRealValueAccess().getRule();
 	}
 	
-	//Real hidden():
-	//	INT? '.' (EXT_INT | INT);
+	//Real hidden(): INT ? '.' (EXT_INT | INT);
 	public RealElements getRealAccess() {
 		return pReal;
 	}
@@ -309,51 +297,45 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getRealAccess().getRule();
 	}
 	
-	//terminal EXT_INT:
-	//	INT ('e' | 'E') ('-' | '+') INT;
+	//terminal EXT_INT: INT ('e'|'E')('-'|'+') INT;
 	public TerminalRule getEXT_INTRule() {
 		return tEXT_INT;
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

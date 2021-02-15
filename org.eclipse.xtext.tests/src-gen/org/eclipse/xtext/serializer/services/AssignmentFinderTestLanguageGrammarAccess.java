@@ -70,17 +70,31 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final RuleCall cCrossRefCrossRefParserRuleCall_9_1_0 = (RuleCall)cCrossRefAssignment_9_1.eContents().get(0);
 		
 		//Model:
-		//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
-		//	| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07"
-		//	mixedValue=MixedValue | "#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
+		//    ("#00" keywordVal=KeywordVal) |
+		//    ("#01" terminalVal=TerminalVal) |
+		//    ("#02" enumVal=EnumVal) |
+		//    ("#03" keywordBool=KeywordBool) |
+		//    ("#04" terminalBool=TerminalBool) |
+		//    ("#05" enumBool=EnumBool) |
+		//    ("#06" mixedBool=MixedBool) |
+		//    ("#07" mixedValue=MixedValue) |
+		//    ("#08" containmentRef=ContainmentRef) |
+		//    ("#09" crossRef=CrossRef);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
-		//| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
-		//"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef
+		//("#00" keywordVal=KeywordVal) |
+		//("#01" terminalVal=TerminalVal) |
+		//("#02" enumVal=EnumVal) |
+		//("#03" keywordBool=KeywordBool) |
+		//("#04" terminalBool=TerminalBool) |
+		//("#05" enumBool=EnumBool) |
+		//("#06" mixedBool=MixedBool) |
+		//("#07" mixedValue=MixedValue) |
+		//("#08" containmentRef=ContainmentRef) |
+		//("#09" crossRef=CrossRef)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//"#00" keywordVal=KeywordVal
+		//("#00" keywordVal=KeywordVal)
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//"#00"
@@ -92,7 +106,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//KeywordVal
 		public RuleCall getKeywordValKeywordValParserRuleCall_0_1_0() { return cKeywordValKeywordValParserRuleCall_0_1_0; }
 		
-		//"#01" terminalVal=TerminalVal
+		//("#01" terminalVal=TerminalVal)
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"#01"
@@ -104,7 +118,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//TerminalVal
 		public RuleCall getTerminalValTerminalValParserRuleCall_1_1_0() { return cTerminalValTerminalValParserRuleCall_1_1_0; }
 		
-		//"#02" enumVal=EnumVal
+		//("#02" enumVal=EnumVal)
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//"#02"
@@ -116,7 +130,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//EnumVal
 		public RuleCall getEnumValEnumValParserRuleCall_2_1_0() { return cEnumValEnumValParserRuleCall_2_1_0; }
 		
-		//"#03" keywordBool=KeywordBool
+		//("#03" keywordBool=KeywordBool)
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//"#03"
@@ -128,7 +142,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//KeywordBool
 		public RuleCall getKeywordBoolKeywordBoolParserRuleCall_3_1_0() { return cKeywordBoolKeywordBoolParserRuleCall_3_1_0; }
 		
-		//"#04" terminalBool=TerminalBool
+		//("#04" terminalBool=TerminalBool)
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//"#04"
@@ -140,7 +154,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//TerminalBool
 		public RuleCall getTerminalBoolTerminalBoolParserRuleCall_4_1_0() { return cTerminalBoolTerminalBoolParserRuleCall_4_1_0; }
 		
-		//"#05" enumBool=EnumBool
+		//("#05" enumBool=EnumBool)
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//"#05"
@@ -152,7 +166,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//EnumBool
 		public RuleCall getEnumBoolEnumBoolParserRuleCall_5_1_0() { return cEnumBoolEnumBoolParserRuleCall_5_1_0; }
 		
-		//"#06" mixedBool=MixedBool
+		//("#06" mixedBool=MixedBool)
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//"#06"
@@ -164,7 +178,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//MixedBool
 		public RuleCall getMixedBoolMixedBoolParserRuleCall_6_1_0() { return cMixedBoolMixedBoolParserRuleCall_6_1_0; }
 		
-		//"#07" mixedValue=MixedValue
+		//("#07" mixedValue=MixedValue)
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//"#07"
@@ -176,7 +190,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//MixedValue
 		public RuleCall getMixedValueMixedValueParserRuleCall_7_1_0() { return cMixedValueMixedValueParserRuleCall_7_1_0; }
 		
-		//"#08" containmentRef=ContainmentRef
+		//("#08" containmentRef=ContainmentRef)
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//"#08"
@@ -188,7 +202,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		//ContainmentRef
 		public RuleCall getContainmentRefContainmentRefParserRuleCall_8_1_0() { return cContainmentRefContainmentRefParserRuleCall_8_1_0; }
 		
-		//"#09" crossRef=CrossRef
+		//("#09" crossRef=CrossRef)
 		public Group getGroup_9() { return cGroup_9; }
 		
 		//"#09"
@@ -208,8 +222,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cKwAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword cKwKw2Keyword_1_0 = (Keyword)cKwAssignment_1.eContents().get(0);
 		
-		//KeywordVal:
-		//	kw="kw1" | kw="kw2";
+		//KeywordVal: kw="kw1" | kw="kw2";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//kw="kw1" | kw="kw2"
@@ -237,8 +250,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cTermAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final Keyword cTermFooKeyword_2_0 = (Keyword)cTermAssignment_2.eContents().get(0);
 		
-		//TerminalVal:
-		//	term=Terminal1 | term=Terminal2 | term="%foo";
+		//TerminalVal: term=Terminal1 | term=Terminal2 | term="%foo";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//term=Terminal1 | term=Terminal2 | term="%foo"
@@ -270,8 +282,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cEnAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cEnEnum2EnumRuleCall_1_0 = (RuleCall)cEnAssignment_1.eContents().get(0);
 		
-		//EnumVal:
-		//	en=Enum1 | en=Enum2;
+		//EnumVal: en=Enum1 | en=Enum2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//en=Enum1 | en=Enum2
@@ -297,8 +308,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cKwAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final Keyword cKwKw2Keyword_1_0 = (Keyword)cKwAssignment_1.eContents().get(0);
 		
-		//KeywordBool:
-		//	kw?="kw1" | kw?="kw2";
+		//KeywordBool: kw?="kw1" | kw?="kw2";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//kw?="kw1" | kw?="kw2"
@@ -326,8 +336,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cTermAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final Keyword cTermFooKeyword_2_0 = (Keyword)cTermAssignment_2.eContents().get(0);
 		
-		//TerminalBool:
-		//	term?=Terminal1 | term?=Terminal2 | term?="%foo";
+		//TerminalBool: term?=Terminal1 | term?=Terminal2 | term?="%foo";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//term?=Terminal1 | term?=Terminal2 | term?="%foo"
@@ -359,8 +368,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cEnAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cEnEnum2EnumRuleCall_1_0 = (RuleCall)cEnAssignment_1.eContents().get(0);
 		
-		//EnumBool:
-		//	en?=Enum1 | en?=Enum2;
+		//EnumBool: en?=Enum1 | en?=Enum2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//en?=Enum1 | en?=Enum2
@@ -386,8 +394,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cValAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cValBooleanParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		//MixedBool:
-		//	val?="kw1" | val=Boolean;
+		//MixedBool: val?="kw1" | val=Boolean;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val?="kw1" | val=Boolean
@@ -411,8 +418,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Keyword cTrueKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cFalseKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		//Boolean ecore::EBoolean:
-		//	"true" | "false";
+		//Boolean returns ecore::EBoolean: "true" | "false";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"true" | "false"
@@ -432,8 +438,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cValAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cValDatEnumParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		//MixedValue:
-		//	val=Enum1 | val=DatEnum;
+		//MixedValue: val=Enum1 | val=DatEnum;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//val=Enum1 | val=DatEnum
@@ -455,8 +460,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.DatEnum");
 		private final Keyword cLit3Keyword = (Keyword)rule.eContents().get(1);
 		
-		//DatEnum TestEnum:
-		//	"lit3";
+		//DatEnum returns TestEnum: "lit3";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"lit3"
@@ -470,8 +474,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cCtxAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cCtxContainmentRef2ParserRuleCall_1_0 = (RuleCall)cCtxAssignment_1.eContents().get(0);
 		
-		//ContainmentRef:
-		//	ctx=ContainmentRef1 | ctx=ContainmentRef2;
+		//ContainmentRef: ctx=ContainmentRef1 | ctx=ContainmentRef2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ctx=ContainmentRef1 | ctx=ContainmentRef2
@@ -496,8 +499,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cVal1IDTerminalRuleCall_1_0 = (RuleCall)cVal1Assignment_1.eContents().get(0);
 		
-		//ContainmentRef1 ContainmentRefN:
-		//	"kw1" val1=ID;
+		//ContainmentRef1 returns ContainmentRefN: "kw1" val1=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" val1=ID
@@ -519,8 +521,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final Assignment cVal2Assignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cVal2IDTerminalRuleCall_1_0 = (RuleCall)cVal2Assignment_1.eContents().get(0);
 		
-		//ContainmentRef2 ContainmentRefN:
-		//	"kw2" val2=ID;
+		//ContainmentRef2 returns ContainmentRefN: "kw2" val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" val2=ID
@@ -550,17 +551,16 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final CrossReference cCrossRefCrossRefCrossReference_1_1_0 = (CrossReference)cCrossRefAssignment_1_1.eContents().get(0);
 		private final RuleCall cCrossRefCrossRefTerminal2TerminalRuleCall_1_1_0_1 = (RuleCall)cCrossRefCrossRefCrossReference_1_1_0.eContents().get(1);
 		
-		//CrossRef:
-		//	name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
+		//CrossRef: name=(Terminal1|Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2])
+		//name=(Terminal1|Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2])
 		public Group getGroup() { return cGroup; }
 		
-		//name=(Terminal1 | Terminal2)
+		//name=(Terminal1|Terminal2)
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
-		//(Terminal1 | Terminal2)
+		//(Terminal1|Terminal2)
 		public Alternatives getNameAlternatives_0_0() { return cNameAlternatives_0_0; }
 		
 		//Terminal1
@@ -596,14 +596,12 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum Enum1 returns TestEnum:
-		//	lit1;
+		//enum Enum1 returns TestEnum: lit1;
 		public EnumRule getRule() { return rule; }
 		
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration() { return cLit1EnumLiteralDeclaration; }
 		
-		//"lit1"
 		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
 	}
 	public class Enum2Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -611,14 +609,12 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum Enum2 returns TestEnum:
-		//	lit2;
+		//enum Enum2 returns TestEnum: lit2;
 		public EnumRule getRule() { return rule; }
 		
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration() { return cLit2EnumLiteralDeclaration; }
 		
-		//"lit2"
 		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
 	}
 	public class Enum3Elements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -626,14 +622,12 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		private final EnumLiteralDeclaration cLit3EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit3Lit3Keyword_0 = (Keyword)cLit3EnumLiteralDeclaration.eContents().get(0);
 		
-		//enum Enum3 returns TestEnum:
-		//	lit3;
+		//enum Enum3 returns TestEnum: lit3;
 		public EnumRule getRule() { return rule; }
 		
 		//lit3
 		public EnumLiteralDeclaration getLit3EnumLiteralDeclaration() { return cLit3EnumLiteralDeclaration; }
 		
-		//"lit3"
 		public Keyword getLit3Lit3Keyword_0() { return cLit3Lit3Keyword_0; }
 	}
 	
@@ -717,9 +711,16 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 
 	
 	//Model:
-	//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool
-	//	| "#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07"
-	//	mixedValue=MixedValue | "#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
+	//    ("#00" keywordVal=KeywordVal) |
+	//    ("#01" terminalVal=TerminalVal) |
+	//    ("#02" enumVal=EnumVal) |
+	//    ("#03" keywordBool=KeywordBool) |
+	//    ("#04" terminalBool=TerminalBool) |
+	//    ("#05" enumBool=EnumBool) |
+	//    ("#06" mixedBool=MixedBool) |
+	//    ("#07" mixedValue=MixedValue) |
+	//    ("#08" containmentRef=ContainmentRef) |
+	//    ("#09" crossRef=CrossRef);
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -728,8 +729,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getModelAccess().getRule();
 	}
 	
-	//KeywordVal:
-	//	kw="kw1" | kw="kw2";
+	//KeywordVal: kw="kw1" | kw="kw2";
 	public KeywordValElements getKeywordValAccess() {
 		return pKeywordVal;
 	}
@@ -738,8 +738,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getKeywordValAccess().getRule();
 	}
 	
-	//TerminalVal:
-	//	term=Terminal1 | term=Terminal2 | term="%foo";
+	//TerminalVal: term=Terminal1 | term=Terminal2 | term="%foo";
 	public TerminalValElements getTerminalValAccess() {
 		return pTerminalVal;
 	}
@@ -748,20 +747,19 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getTerminalValAccess().getRule();
 	}
 	
-	//terminal Terminal1:
-	//	'%' 'A'..'Z'*;
+	///* SuppressWarnings[InvalidTerminalruleName] */
+	//terminal Terminal1: '%' ('A'..'Z')*;
 	public TerminalRule getTerminal1Rule() {
 		return tTerminal1;
 	}
 	
-	//terminal Terminal2:
-	//	'%' 'a'..'z'*;
+	///* SuppressWarnings[InvalidTerminalruleName] */
+	//terminal Terminal2: '%' ('a'..'z')*;
 	public TerminalRule getTerminal2Rule() {
 		return tTerminal2;
 	}
 	
-	//EnumVal:
-	//	en=Enum1 | en=Enum2;
+	//EnumVal: en=Enum1 | en=Enum2;
 	public EnumValElements getEnumValAccess() {
 		return pEnumVal;
 	}
@@ -770,8 +768,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getEnumValAccess().getRule();
 	}
 	
-	//enum Enum1 returns TestEnum:
-	//	lit1;
+	//enum Enum1 returns TestEnum: lit1;
 	public Enum1Elements getEnum1Access() {
 		return eEnum1;
 	}
@@ -780,8 +777,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getEnum1Access().getRule();
 	}
 	
-	//enum Enum2 returns TestEnum:
-	//	lit2;
+	//enum Enum2 returns TestEnum: lit2;
 	public Enum2Elements getEnum2Access() {
 		return eEnum2;
 	}
@@ -790,8 +786,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getEnum2Access().getRule();
 	}
 	
-	//enum Enum3 returns TestEnum:
-	//	lit3;
+	//enum Enum3 returns TestEnum: lit3;
 	public Enum3Elements getEnum3Access() {
 		return eEnum3;
 	}
@@ -800,8 +795,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getEnum3Access().getRule();
 	}
 	
-	//KeywordBool:
-	//	kw?="kw1" | kw?="kw2";
+	//KeywordBool: kw?="kw1" | kw?="kw2";
 	public KeywordBoolElements getKeywordBoolAccess() {
 		return pKeywordBool;
 	}
@@ -810,8 +804,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getKeywordBoolAccess().getRule();
 	}
 	
-	//TerminalBool:
-	//	term?=Terminal1 | term?=Terminal2 | term?="%foo";
+	//TerminalBool: term?=Terminal1 | term?=Terminal2 | term?="%foo";
 	public TerminalBoolElements getTerminalBoolAccess() {
 		return pTerminalBool;
 	}
@@ -820,8 +813,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getTerminalBoolAccess().getRule();
 	}
 	
-	//EnumBool:
-	//	en?=Enum1 | en?=Enum2;
+	//EnumBool: en?=Enum1 | en?=Enum2;
 	public EnumBoolElements getEnumBoolAccess() {
 		return pEnumBool;
 	}
@@ -830,8 +822,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getEnumBoolAccess().getRule();
 	}
 	
-	//MixedBool:
-	//	val?="kw1" | val=Boolean;
+	//MixedBool: val?="kw1" | val=Boolean;
 	public MixedBoolElements getMixedBoolAccess() {
 		return pMixedBool;
 	}
@@ -840,8 +831,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getMixedBoolAccess().getRule();
 	}
 	
-	//Boolean ecore::EBoolean:
-	//	"true" | "false";
+	//Boolean returns ecore::EBoolean: "true" | "false";
 	public BooleanElements getBooleanAccess() {
 		return pBoolean;
 	}
@@ -850,8 +840,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getBooleanAccess().getRule();
 	}
 	
-	//MixedValue:
-	//	val=Enum1 | val=DatEnum;
+	//MixedValue: val=Enum1 | val=DatEnum;
 	public MixedValueElements getMixedValueAccess() {
 		return pMixedValue;
 	}
@@ -860,8 +849,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getMixedValueAccess().getRule();
 	}
 	
-	//DatEnum TestEnum:
-	//	"lit3";
+	//DatEnum returns TestEnum: "lit3";
 	public DatEnumElements getDatEnumAccess() {
 		return pDatEnum;
 	}
@@ -870,8 +858,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getDatEnumAccess().getRule();
 	}
 	
-	//ContainmentRef:
-	//	ctx=ContainmentRef1 | ctx=ContainmentRef2;
+	//ContainmentRef: ctx=ContainmentRef1 | ctx=ContainmentRef2;
 	public ContainmentRefElements getContainmentRefAccess() {
 		return pContainmentRef;
 	}
@@ -880,8 +867,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getContainmentRefAccess().getRule();
 	}
 	
-	//ContainmentRef1 ContainmentRefN:
-	//	"kw1" val1=ID;
+	//ContainmentRef1 returns ContainmentRefN: "kw1" val1=ID;
 	public ContainmentRef1Elements getContainmentRef1Access() {
 		return pContainmentRef1;
 	}
@@ -890,8 +876,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getContainmentRef1Access().getRule();
 	}
 	
-	//ContainmentRef2 ContainmentRefN:
-	//	"kw2" val2=ID;
+	//ContainmentRef2 returns ContainmentRefN: "kw2" val2=ID;
 	public ContainmentRef2Elements getContainmentRef2Access() {
 		return pContainmentRef2;
 	}
@@ -900,8 +885,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getContainmentRef2Access().getRule();
 	}
 	
-	//CrossRef:
-	//	name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
+	//CrossRef: name=(Terminal1|Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
 	public CrossRefElements getCrossRefAccess() {
 		return pCrossRef;
 	}
@@ -910,45 +894,40 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractElementFi
 		return getCrossRefAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

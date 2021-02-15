@@ -36,15 +36,16 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 		
 		//@Override
 		//Model:
-		//	"model" name=ID "{"
-		//	elements+=Element*
-		//	ids+=FQN
-		//	"}";
+		//    "model" name=ID "{"
+		//        elements+=Element*
+		//        ids+=FQN
+		//    "}"
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"model" name=ID "{"
-		//elements+=Element*
-		//ids+=FQN
+		//    elements+=Element*
+		//    ids+=FQN
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -136,10 +137,11 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 	
 	//@Override
 	//Model:
-	//	"model" name=ID "{"
-	//	elements+=Element*
-	//	ids+=FQN
-	//	"}";
+	//    "model" name=ID "{"
+	//        elements+=Element*
+	//        ids+=FQN
+	//    "}"
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -148,8 +150,9 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	"element" name=ID;
+	//Element :
+	//    "element" name=ID
+	//;
 	public InheritanceTestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaInheritanceTestLanguage.getElementAccess();
 	}
@@ -159,14 +162,12 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 	}
 	
 	//@Override
-	//terminal ID:
-	//	'a'..'z'+;
+	//terminal ID: ('a'..'z')+;
 	public TerminalRule getIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();
 	}
 	
-	//FQN:
-	//	super::ID ('.' super::ID)*;
+	//FQN: ID ('.' ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
@@ -175,39 +176,35 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractElementFinder
 		return getFQNAccess().getRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

@@ -61,16 +61,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cX16Bug398890ParserRuleCall_15_0 = (RuleCall)cX16Assignment_15.eContents().get(0);
 		
 		//Model:
-		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
-		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
-		//	x16=Bug398890;
+		//    x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+		//    x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
+		//    x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller | x16=Bug398890;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
-		//x16=Bug398890
+		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller | x16=Bug398890
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//x1=MandatoryKeywords
@@ -185,7 +183,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cKw4Keyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//MandatoryKeywords:
-		//	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
+		//    "#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4"
@@ -231,7 +229,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAddition0ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Exp0:
-		//	"#2" Addition0;
+		//    "#2" Addition0;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#2" Addition0
@@ -253,8 +251,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim0ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition0 Exp0:
-		//	Prim0 ({Add0.left=current} '+' right=Prim0)*;
+		//Addition0 returns Exp0:
+		//    Prim0 ({Add0.left=current} '+' right=Prim0)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim0 ({Add0.left=current} '+' right=Prim0)*
@@ -285,8 +283,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Prim0 Exp0:
-		//	{Val0} name=ID;
+		//Prim0 returns Exp0:
+		//    {Val0} name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val0} name=ID
@@ -308,7 +306,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAddition1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Exp1:
-		//	"#3" Addition1;
+		//    "#3" Addition1;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#3" Addition1
@@ -330,8 +328,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim1ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition1 Exp1:
-		//	Prim1 ({Add1.left=current} '+' right=Prim1)*;
+		//Addition1 returns Exp1:
+		//    Prim1 ({Add1.left=current} '+' right=Prim1)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim1 ({Add1.left=current} '+' right=Prim1)*
@@ -367,8 +365,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAddition1ParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//Prim1 Exp1:
-		//	{Val1} name=ID | '(' Addition1 ')';
+		//Prim1 returns Exp1:
+		//    {Val1} name=ID | '(' Addition1 ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val1} name=ID | '(' Addition1 ')'
@@ -405,7 +403,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAddition2ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Exp2:
-		//	"#4" Addition2;
+		//    "#4" Addition2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#4" Addition2
@@ -427,8 +425,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightMultiplication2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition2 Exp2:
-		//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
+		//Addition2 returns Exp2:
+		//    Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
@@ -462,8 +460,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Multiplication2 Exp2:
-		//	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
+		//Multiplication2 returns Exp2:
+		//    Prim2 ({Mult2.left=current} '*' right=Prim2)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim2 ({Mult2.left=current} '*' right=Prim2)*
@@ -499,8 +497,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cAddition2ParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//Prim2 Exp2:
-		//	{Val2} name=ID | '(' Addition2 ')';
+		//Prim2 returns Exp2:
+		//    {Val2} name=ID | '(' Addition2 ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val2} name=ID | '(' Addition2 ')'
@@ -535,7 +533,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DatatypeID:
-		//	ID;
+		//    ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID
@@ -577,14 +575,20 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cRef5SingleCrossReferenceKw5Keyword_6_1_0_1 = (Keyword)cRef5SingleCrossReferenceCrossReference_6_1_0.eContents().get(1);
 		
 		//SingleCrossReference:
-		//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? (
-		//	"kw5" ref5=[SingleCrossReference])?;
+		//    "#5" name=(TERMINAL_ID | ID | "kw5")
+		//    ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
+		//    ("kw2" ref2=[SingleCrossReference|DatatypeID])?
+		//    ("kw3" ref3=[SingleCrossReference|ID])?
+		//    ("kw4" ref4=[SingleCrossReference])?
+		//    ("kw5" ref5=[SingleCrossReference|"kw5"])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? ("kw5"
-		//ref5=[SingleCrossReference])?
+		//"#5" name=(TERMINAL_ID | ID | "kw5")
+		//("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
+		//("kw2" ref2=[SingleCrossReference|DatatypeID])?
+		//("kw3" ref3=[SingleCrossReference|ID])?
+		//("kw4" ref4=[SingleCrossReference])?
+		//("kw5" ref5=[SingleCrossReference|"kw5"])?
 		public Group getGroup() { return cGroup; }
 		
 		//"#5"
@@ -635,16 +639,16 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		//DatatypeID
 		public RuleCall getRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1() { return cRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1; }
 		
-		//("kw3" ref3=[SingleCrossReference])?
+		//("kw3" ref3=[SingleCrossReference|ID])?
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//"kw3"
 		public Keyword getKw3Keyword_4_0() { return cKw3Keyword_4_0; }
 		
-		//ref3=[SingleCrossReference]
+		//ref3=[SingleCrossReference|ID]
 		public Assignment getRef3Assignment_4_1() { return cRef3Assignment_4_1; }
 		
-		//[SingleCrossReference]
+		//[SingleCrossReference|ID]
 		public CrossReference getRef3SingleCrossReferenceCrossReference_4_1_0() { return cRef3SingleCrossReferenceCrossReference_4_1_0; }
 		
 		//ID
@@ -665,16 +669,16 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		//ID
 		public RuleCall getRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1() { return cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1; }
 		
-		//("kw5" ref5=[SingleCrossReference])?
+		//("kw5" ref5=[SingleCrossReference|"kw5"])?
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//"kw5"
 		public Keyword getKw5Keyword_6_0() { return cKw5Keyword_6_0; }
 		
-		//ref5=[SingleCrossReference]
+		//ref5=[SingleCrossReference|"kw5"]
 		public Assignment getRef5Assignment_6_1() { return cRef5Assignment_6_1; }
 		
-		//[SingleCrossReference]
+		//[SingleCrossReference|"kw5"]
 		public CrossReference getRef5SingleCrossReferenceCrossReference_6_1_0() { return cRef5SingleCrossReferenceCrossReference_6_1_0; }
 		
 		//"kw5"
@@ -688,7 +692,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cBoolBooleanAlternativeLiteralParserRuleCall_1_0 = (RuleCall)cBoolAssignment_1.eContents().get(0);
 		
 		//BooleanAlternative:
-		//	"#6" bool=BooleanAlternativeLiteral;
+		//    "#6" bool=BooleanAlternativeLiteral;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#6" bool=BooleanAlternativeLiteral
@@ -713,7 +717,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cIsTrueKw2Keyword_1_1_0 = (Keyword)cIsTrueAssignment_1_1.eContents().get(0);
 		
 		//BooleanAlternativeLiteral:
-		//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+		//    {BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2")
@@ -743,7 +747,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cKW1ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//UnassignedDatatype:
-		//	"#7" val=ID KW1;
+		//    "#7" val=ID KW1;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#7" val=ID KW1
@@ -770,7 +774,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//KW1:
-		//	"kw1" | "matched" INT?;
+		//    "kw1" | "matched" INT?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" | "matched" INT?
@@ -797,7 +801,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cValIDTerminalRuleCall_2_0 = (RuleCall)cValAssignment_2.eContents().get(0);
 		
 		//OptionalSingleTransition:
-		//	"#8" KW1? val=ID;
+		//    "#8" KW1? val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#8" KW1? val=ID
@@ -824,7 +828,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cValIDTerminalRuleCall_2_0 = (RuleCall)cValAssignment_2.eContents().get(0);
 		
 		//OptionalManyTransition:
-		//	"#9" KW1* val=ID;
+		//    "#9" KW1* val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#9" KW1* val=ID
@@ -851,7 +855,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cValIDTerminalRuleCall_2_0 = (RuleCall)cValAssignment_2.eContents().get(0);
 		
 		//MandatoryManyTransition:
-		//	"#10" KW1+ val=ID;
+		//    "#10" KW1+ val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#10" KW1+ val=ID
@@ -880,7 +884,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cValIDTerminalRuleCall_2_0 = (RuleCall)cValAssignment_2.eContents().get(0);
 		
 		//AlternativeTransition:
-		//	"#11" (KW1 | "kw2") val=ID;
+		//    "#11" (KW1 | "kw2") val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#11" (KW1 | "kw2") val=ID
@@ -909,7 +913,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//BooleanDatatypeID:
-		//	ID;
+		//    ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID
@@ -928,7 +932,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cVal3BooleanDatatypeIDParserRuleCall_4_0 = (RuleCall)cVal3Assignment_4.eContents().get(0);
 		
 		//BooleanValues:
-		//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+		//    {BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?
@@ -1000,25 +1004,27 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Keyword cExclamationMarkKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//LongAlternative:
-		//	'#13' foo=ID ("kw1" val1+=ID? |
-		//	"kw2" val2+=ID? |
-		//	"kw3" val3+=ID? |
-		//	"kw4" val4+=ID? |
-		//	"kw5" val5+=ID? |
-		//	"kw6" val6+=ID? |
-		//	"kw7" val7+=ID? |
-		//	"kw8" val8+=ID?)*
-		//	'!';
+		//  '#13' foo=ID
+		//    ("kw1" val1+=ID? |
+		//     "kw2" val2+=ID? |
+		//     "kw3" val3+=ID? |
+		//     "kw4" val4+=ID? |
+		//     "kw5" val5+=ID? |
+		//     "kw6" val6+=ID? |
+		//     "kw7" val7+=ID? |
+		//     "kw8" val8+=ID?)*
+		//  '!';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#13' foo=ID ("kw1" val1+=ID? |
-		//"kw2" val2+=ID? |
-		//"kw3" val3+=ID? |
-		//"kw4" val4+=ID? |
-		//"kw5" val5+=ID? |
-		//"kw6" val6+=ID? |
-		//"kw7" val7+=ID? |
-		//"kw8" val8+=ID?)*
+		//'#13' foo=ID
+		//  ("kw1" val1+=ID? |
+		//   "kw2" val2+=ID? |
+		//   "kw3" val3+=ID? |
+		//   "kw4" val4+=ID? |
+		//   "kw5" val5+=ID? |
+		//   "kw6" val6+=ID? |
+		//   "kw7" val7+=ID? |
+		//   "kw8" val8+=ID?)*
 		//'!'
 		public Group getGroup() { return cGroup; }
 		
@@ -1032,13 +1038,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		public RuleCall getFooIDTerminalRuleCall_1_0() { return cFooIDTerminalRuleCall_1_0; }
 		
 		//("kw1" val1+=ID? |
-		//"kw2" val2+=ID? |
-		//"kw3" val3+=ID? |
-		//"kw4" val4+=ID? |
-		//"kw5" val5+=ID? |
-		//"kw6" val6+=ID? |
-		//"kw7" val7+=ID? |
-		//"kw8" val8+=ID?)*
+		// "kw2" val2+=ID? |
+		// "kw3" val3+=ID? |
+		// "kw4" val4+=ID? |
+		// "kw5" val5+=ID? |
+		// "kw6" val6+=ID? |
+		// "kw7" val7+=ID? |
+		// "kw8" val8+=ID?)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//"kw1" val1+=ID?
@@ -1151,7 +1157,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cIDTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//ActionOnly:
-		//	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
+		//    "#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?
@@ -1185,8 +1191,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final Assignment cValAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cValIDTerminalRuleCall_3_0 = (RuleCall)cValAssignment_3.eContents().get(0);
 		
-		//FragmentCaller FragmentCallerType:
-		//	"#15" val1=ID Fragment1 val=ID;
+		//FragmentCaller returns FragmentCallerType:
+		//    "#15" val1=ID Fragment1 val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#15" val1=ID Fragment1 val=ID
@@ -1216,7 +1222,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cFragValIDTerminalRuleCall_0 = (RuleCall)cFragValAssignment.eContents().get(0);
 		
 		//fragment Fragment1 returns FragmentCallerType:
-		//	fragVal=ID;
+		//    fragVal=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//fragVal=ID
@@ -1233,7 +1239,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Bug398890:
-		//	C_COMMENT_END name=ID;
+		//    C_COMMENT_END name=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//C_COMMENT_END name=ID
@@ -1354,10 +1361,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 
 	
 	//Model:
-	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
-	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
-	//	x16=Bug398890;
+	//    x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+	//    x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
+	//    x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller | x16=Bug398890;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1367,7 +1373,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//MandatoryKeywords:
-	//	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
+	//    "#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
 	public MandatoryKeywordsElements getMandatoryKeywordsAccess() {
 		return pMandatoryKeywords;
 	}
@@ -1377,7 +1383,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Exp0:
-	//	"#2" Addition0;
+	//    "#2" Addition0;
 	public Exp0Elements getExp0Access() {
 		return pExp0;
 	}
@@ -1386,8 +1392,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getExp0Access().getRule();
 	}
 	
-	//Addition0 Exp0:
-	//	Prim0 ({Add0.left=current} '+' right=Prim0)*;
+	//Addition0 returns Exp0:
+	//    Prim0 ({Add0.left=current} '+' right=Prim0)*;
 	public Addition0Elements getAddition0Access() {
 		return pAddition0;
 	}
@@ -1396,8 +1402,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getAddition0Access().getRule();
 	}
 	
-	//Prim0 Exp0:
-	//	{Val0} name=ID;
+	//Prim0 returns Exp0:
+	//    {Val0} name=ID;
 	public Prim0Elements getPrim0Access() {
 		return pPrim0;
 	}
@@ -1407,7 +1413,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Exp1:
-	//	"#3" Addition1;
+	//    "#3" Addition1;
 	public Exp1Elements getExp1Access() {
 		return pExp1;
 	}
@@ -1416,8 +1422,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getExp1Access().getRule();
 	}
 	
-	//Addition1 Exp1:
-	//	Prim1 ({Add1.left=current} '+' right=Prim1)*;
+	//Addition1 returns Exp1:
+	//    Prim1 ({Add1.left=current} '+' right=Prim1)*;
 	public Addition1Elements getAddition1Access() {
 		return pAddition1;
 	}
@@ -1426,8 +1432,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getAddition1Access().getRule();
 	}
 	
-	//Prim1 Exp1:
-	//	{Val1} name=ID | '(' Addition1 ')';
+	//Prim1 returns Exp1:
+	//    {Val1} name=ID | '(' Addition1 ')';
 	public Prim1Elements getPrim1Access() {
 		return pPrim1;
 	}
@@ -1437,7 +1443,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Exp2:
-	//	"#4" Addition2;
+	//    "#4" Addition2;
 	public Exp2Elements getExp2Access() {
 		return pExp2;
 	}
@@ -1446,8 +1452,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getExp2Access().getRule();
 	}
 	
-	//Addition2 Exp2:
-	//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
+	//Addition2 returns Exp2:
+	//    Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
 	public Addition2Elements getAddition2Access() {
 		return pAddition2;
 	}
@@ -1456,8 +1462,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getAddition2Access().getRule();
 	}
 	
-	//Multiplication2 Exp2:
-	//	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
+	//Multiplication2 returns Exp2:
+	//    Prim2 ({Mult2.left=current} '*' right=Prim2)*;
 	public Multiplication2Elements getMultiplication2Access() {
 		return pMultiplication2;
 	}
@@ -1466,8 +1472,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getMultiplication2Access().getRule();
 	}
 	
-	//Prim2 Exp2:
-	//	{Val2} name=ID | '(' Addition2 ')';
+	//Prim2 returns Exp2:
+	//    {Val2} name=ID | '(' Addition2 ')';
 	public Prim2Elements getPrim2Access() {
 		return pPrim2;
 	}
@@ -1477,13 +1483,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//terminal TERMINAL_ID:
-	//	'$1' ID;
+	//    '$1' ID;
 	public TerminalRule getTERMINAL_IDRule() {
 		return tTERMINAL_ID;
 	}
 	
 	//DatatypeID:
-	//	ID;
+	//    ID;
 	public DatatypeIDElements getDatatypeIDAccess() {
 		return pDatatypeID;
 	}
@@ -1493,9 +1499,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//SingleCrossReference:
-	//	"#5" name=(TERMINAL_ID | ID | "kw5") ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
-	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])? (
-	//	"kw5" ref5=[SingleCrossReference])?;
+	//    "#5" name=(TERMINAL_ID | ID | "kw5")
+	//    ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])?
+	//    ("kw2" ref2=[SingleCrossReference|DatatypeID])?
+	//    ("kw3" ref3=[SingleCrossReference|ID])?
+	//    ("kw4" ref4=[SingleCrossReference])?
+	//    ("kw5" ref5=[SingleCrossReference|"kw5"])?;
 	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
 		return pSingleCrossReference;
 	}
@@ -1505,7 +1514,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//BooleanAlternative:
-	//	"#6" bool=BooleanAlternativeLiteral;
+	//    "#6" bool=BooleanAlternativeLiteral;
 	public BooleanAlternativeElements getBooleanAlternativeAccess() {
 		return pBooleanAlternative;
 	}
@@ -1515,7 +1524,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//BooleanAlternativeLiteral:
-	//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+	//    {BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
 	public BooleanAlternativeLiteralElements getBooleanAlternativeLiteralAccess() {
 		return pBooleanAlternativeLiteral;
 	}
@@ -1525,7 +1534,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//UnassignedDatatype:
-	//	"#7" val=ID KW1;
+	//    "#7" val=ID KW1;
 	public UnassignedDatatypeElements getUnassignedDatatypeAccess() {
 		return pUnassignedDatatype;
 	}
@@ -1535,7 +1544,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//KW1:
-	//	"kw1" | "matched" INT?;
+	//    "kw1" | "matched" INT?;
 	public KW1Elements getKW1Access() {
 		return pKW1;
 	}
@@ -1545,7 +1554,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//OptionalSingleTransition:
-	//	"#8" KW1? val=ID;
+	//    "#8" KW1? val=ID;
 	public OptionalSingleTransitionElements getOptionalSingleTransitionAccess() {
 		return pOptionalSingleTransition;
 	}
@@ -1555,7 +1564,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//OptionalManyTransition:
-	//	"#9" KW1* val=ID;
+	//    "#9" KW1* val=ID;
 	public OptionalManyTransitionElements getOptionalManyTransitionAccess() {
 		return pOptionalManyTransition;
 	}
@@ -1565,7 +1574,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//MandatoryManyTransition:
-	//	"#10" KW1+ val=ID;
+	//    "#10" KW1+ val=ID;
 	public MandatoryManyTransitionElements getMandatoryManyTransitionAccess() {
 		return pMandatoryManyTransition;
 	}
@@ -1575,7 +1584,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//AlternativeTransition:
-	//	"#11" (KW1 | "kw2") val=ID;
+	//    "#11" (KW1 | "kw2") val=ID;
 	public AlternativeTransitionElements getAlternativeTransitionAccess() {
 		return pAlternativeTransition;
 	}
@@ -1585,13 +1594,13 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//terminal BOOLEAN_TERMINAL_ID:
-	//	'%1' ID;
+	//    '%1' ID;
 	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
 		return tBOOLEAN_TERMINAL_ID;
 	}
 	
 	//BooleanDatatypeID:
-	//	ID;
+	//    ID;
 	public BooleanDatatypeIDElements getBooleanDatatypeIDAccess() {
 		return pBooleanDatatypeID;
 	}
@@ -1601,7 +1610,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//BooleanValues:
-	//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
+	//    {BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
 	public BooleanValuesElements getBooleanValuesAccess() {
 		return pBooleanValues;
 	}
@@ -1611,15 +1620,16 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//LongAlternative:
-	//	'#13' foo=ID ("kw1" val1+=ID? |
-	//	"kw2" val2+=ID? |
-	//	"kw3" val3+=ID? |
-	//	"kw4" val4+=ID? |
-	//	"kw5" val5+=ID? |
-	//	"kw6" val6+=ID? |
-	//	"kw7" val7+=ID? |
-	//	"kw8" val8+=ID?)*
-	//	'!';
+	//  '#13' foo=ID
+	//    ("kw1" val1+=ID? |
+	//     "kw2" val2+=ID? |
+	//     "kw3" val3+=ID? |
+	//     "kw4" val4+=ID? |
+	//     "kw5" val5+=ID? |
+	//     "kw6" val6+=ID? |
+	//     "kw7" val7+=ID? |
+	//     "kw8" val8+=ID?)*
+	//  '!';
 	public LongAlternativeElements getLongAlternativeAccess() {
 		return pLongAlternative;
 	}
@@ -1629,7 +1639,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//ActionOnly:
-	//	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
+	//    "#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
 	public ActionOnlyElements getActionOnlyAccess() {
 		return pActionOnly;
 	}
@@ -1638,8 +1648,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getActionOnlyAccess().getRule();
 	}
 	
-	//FragmentCaller FragmentCallerType:
-	//	"#15" val1=ID Fragment1 val=ID;
+	//FragmentCaller returns FragmentCallerType:
+	//    "#15" val1=ID Fragment1 val=ID;
 	public FragmentCallerElements getFragmentCallerAccess() {
 		return pFragmentCaller;
 	}
@@ -1649,7 +1659,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//fragment Fragment1 returns FragmentCallerType:
-	//	fragVal=ID;
+	//    fragVal=ID;
 	public Fragment1Elements getFragment1Access() {
 		return pFragment1;
 	}
@@ -1659,7 +1669,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 	}
 	
 	//Bug398890:
-	//	C_COMMENT_END name=ID;
+	//    C_COMMENT_END name=ID
+	//;
 	public Bug398890Elements getBug398890Access() {
 		return pBug398890;
 	}
@@ -1668,51 +1679,45 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractElement
 		return getBug398890Access().getRule();
 	}
 	
-	//terminal C_COMMENT_END:
-	//	'*/';
+	//terminal C_COMMENT_END: '*/';
 	public TerminalRule getC_COMMENT_ENDRule() {
 		return tC_COMMENT_END;
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

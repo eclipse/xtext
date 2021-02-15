@@ -28,11 +28,10 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cContentsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cContentsAltsParserRuleCall_0 = (RuleCall)cContentsAssignment.eContents().get(0);
 		
-		//Entry:
-		//	contents+=Alts*;
+		//Entry: (contents+=Alts)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//contents+=Alts*
+		//(contents+=Alts)*
 		public Assignment getContentsAssignment() { return cContentsAssignment; }
 		
 		//Alts
@@ -47,8 +46,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cLookAheadPredicateParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cLookBeyondParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
-		//Alts:
-		//	LookAhead0 | LookAhead1 | LookAhead3 | LookAheadPredicate | LookBeyond;
+		//Alts: LookAhead0 | LookAhead1 | LookAhead3 | LookAheadPredicate | LookBeyond;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//LookAhead0 | LookAhead1 | LookAhead3 | LookAheadPredicate | LookBeyond
@@ -76,8 +74,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cXAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cXAKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
-		//LookAhead0:
-		//	'bar' x='a';
+		//LookAhead0: 'bar' x='a';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'bar' x='a'
@@ -103,8 +100,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cZAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cZDKeyword_3_0 = (Keyword)cZAssignment_3.eContents().get(0);
 		
-		//LookAhead1:
-		//	'foo' y=LookAhead2 x='b' z='d';
+		//LookAhead1: 'foo' y=LookAhead2 x='b' z='d';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foo' y=LookAhead2 x='b' z='d'
@@ -142,7 +138,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cCKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//LookAhead2:
-		//	(z='foo' | z='bar') 'c';
+		//    (z='foo' | z='bar') 'c';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(z='foo' | z='bar') 'c'
@@ -176,8 +172,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cZAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cZLookAhead4ParserRuleCall_3_0 = (RuleCall)cZAssignment_3.eContents().get(0);
 		
-		//LookAhead3:
-		//	'foo' 'bar' x='b' z=LookAhead4;
+		//LookAhead3: 'foo' 'bar' x='b' z=LookAhead4;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foo' 'bar' x='b' z=LookAhead4
@@ -210,7 +205,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cXDKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
 		//LookAhead4:
-		//	x='c' | x='d';
+		//    x='c' | x='d';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//x='c' | x='d'
@@ -240,16 +235,17 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cDKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//LookAheadPredicate:
-		//	=> ({LookAheadPredicate} 'zonk' 'a' 'b') 'd';
+		//    =>({LookAheadPredicate} 'zonk' 'a' 'b') 'd'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//=> ({LookAheadPredicate} 'zonk' 'a' 'b') 'd'
+		//=>({LookAheadPredicate} 'zonk' 'a' 'b') 'd'
 		public Group getGroup() { return cGroup; }
 		
-		//=> ({LookAheadPredicate} 'zonk' 'a' 'b')
+		//=>({LookAheadPredicate} 'zonk' 'a' 'b')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//({LookAheadPredicate} 'zonk' 'a' 'b')
+		//{LookAheadPredicate} 'zonk' 'a' 'b'
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{LookAheadPredicate}
@@ -276,7 +272,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cRightFewerLookAheadStringsParserRuleCall_1_0 = (RuleCall)cRightAssignment_1.eContents().get(0);
 		
 		//LookBeyond:
-		//	left=LookAheadStrings? right=FewerLookAheadStrings;
+		//    left=LookAheadStrings? right=FewerLookAheadStrings
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//left=LookAheadStrings? right=FewerLookAheadStrings
@@ -300,10 +297,11 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValuesSTRINGTerminalRuleCall_0 = (RuleCall)cValuesAssignment.eContents().get(0);
 		
 		//LookAheadStrings:
-		//	values+=STRING+;
+		//    values += STRING+
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//values+=STRING+
+		//values += STRING+
 		public Assignment getValuesAssignment() { return cValuesAssignment; }
 		
 		//STRING
@@ -320,7 +318,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cValuesIDTerminalRuleCall_2_0 = (RuleCall)cValuesAssignment_2.eContents().get(0);
 		
 		//FewerLookAheadStrings:
-		//	values+=STRING values+=STRING values+=ID;
+		//    values+=STRING values+=STRING values+=ID
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//values+=STRING values+=STRING values+=ID
@@ -407,8 +406,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Entry:
-	//	contents+=Alts*;
+	//Entry: (contents+=Alts)*;
 	public EntryElements getEntryAccess() {
 		return pEntry;
 	}
@@ -417,8 +415,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getEntryAccess().getRule();
 	}
 	
-	//Alts:
-	//	LookAhead0 | LookAhead1 | LookAhead3 | LookAheadPredicate | LookBeyond;
+	//Alts: LookAhead0 | LookAhead1 | LookAhead3 | LookAheadPredicate | LookBeyond;
 	public AltsElements getAltsAccess() {
 		return pAlts;
 	}
@@ -427,8 +424,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getAltsAccess().getRule();
 	}
 	
-	//LookAhead0:
-	//	'bar' x='a';
+	//LookAhead0: 'bar' x='a';
 	public LookAhead0Elements getLookAhead0Access() {
 		return pLookAhead0;
 	}
@@ -437,8 +433,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getLookAhead0Access().getRule();
 	}
 	
-	//LookAhead1:
-	//	'foo' y=LookAhead2 x='b' z='d';
+	//LookAhead1: 'foo' y=LookAhead2 x='b' z='d';
 	public LookAhead1Elements getLookAhead1Access() {
 		return pLookAhead1;
 	}
@@ -448,7 +443,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//LookAhead2:
-	//	(z='foo' | z='bar') 'c';
+	//    (z='foo' | z='bar') 'c';
 	public LookAhead2Elements getLookAhead2Access() {
 		return pLookAhead2;
 	}
@@ -457,8 +452,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getLookAhead2Access().getRule();
 	}
 	
-	//LookAhead3:
-	//	'foo' 'bar' x='b' z=LookAhead4;
+	//LookAhead3: 'foo' 'bar' x='b' z=LookAhead4;
 	public LookAhead3Elements getLookAhead3Access() {
 		return pLookAhead3;
 	}
@@ -468,7 +462,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//LookAhead4:
-	//	x='c' | x='d';
+	//    x='c' | x='d';
 	public LookAhead4Elements getLookAhead4Access() {
 		return pLookAhead4;
 	}
@@ -478,7 +472,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//LookAheadPredicate:
-	//	=> ({LookAheadPredicate} 'zonk' 'a' 'b') 'd';
+	//    =>({LookAheadPredicate} 'zonk' 'a' 'b') 'd'
+	//;
 	public LookAheadPredicateElements getLookAheadPredicateAccess() {
 		return pLookAheadPredicate;
 	}
@@ -488,7 +483,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//LookBeyond:
-	//	left=LookAheadStrings? right=FewerLookAheadStrings;
+	//    left=LookAheadStrings? right=FewerLookAheadStrings
+	//;
 	public LookBeyondElements getLookBeyondAccess() {
 		return pLookBeyond;
 	}
@@ -498,7 +494,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//LookAheadStrings:
-	//	values+=STRING+;
+	//    values += STRING+
+	//;
 	public LookAheadStringsElements getLookAheadStringsAccess() {
 		return pLookAheadStrings;
 	}
@@ -508,7 +505,8 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//FewerLookAheadStrings:
-	//	values+=STRING values+=STRING values+=ID;
+	//    values+=STRING values+=STRING values+=ID
+	//;
 	public FewerLookAheadStringsElements getFewerLookAheadStringsAccess() {
 		return pFewerLookAheadStrings;
 	}
@@ -517,45 +515,40 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getFewerLookAheadStringsAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

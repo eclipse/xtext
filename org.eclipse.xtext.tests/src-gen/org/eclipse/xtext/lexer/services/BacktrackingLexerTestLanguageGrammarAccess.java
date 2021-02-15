@@ -39,54 +39,54 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		private final Assignment cAsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cAsCharATerminalRuleCall_5_0 = (RuleCall)cAsAssignment_5.eContents().get(0);
 		
-		//Model:
-		//	enums+=EnumName*
-		//	ycs+=Yc*
-		//	abs+=Ab*
-		//	xbs+=Xb*
-		//	ys+=CharY*
-		//	^as+=CharA*;
+		//Model :
+		//    (enums+=EnumName)*
+		//    (ycs+=Yc)*
+		//    (abs+=Ab)*
+		//    (xbs+=Xb)*
+		//    (ys+=CharY)*
+		//    (^as+=CharA)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//enums+=EnumName*
-		//ycs+=Yc*
-		//abs+=Ab*
-		//xbs+=Xb*
-		//ys+=CharY*
-		//^as+=CharA*
+		//(enums+=EnumName)*
+		//(ycs+=Yc)*
+		//(abs+=Ab)*
+		//(xbs+=Xb)*
+		//(ys+=CharY)*
+		//(^as+=CharA)*
 		public Group getGroup() { return cGroup; }
 		
-		//enums+=EnumName*
+		//(enums+=EnumName)*
 		public Assignment getEnumsAssignment_0() { return cEnumsAssignment_0; }
 		
 		//EnumName
 		public RuleCall getEnumsEnumNameEnumRuleCall_0_0() { return cEnumsEnumNameEnumRuleCall_0_0; }
 		
-		//ycs+=Yc*
+		//(ycs+=Yc)*
 		public Assignment getYcsAssignment_1() { return cYcsAssignment_1; }
 		
 		//Yc
 		public RuleCall getYcsYcTerminalRuleCall_1_0() { return cYcsYcTerminalRuleCall_1_0; }
 		
-		//abs+=Ab*
+		//(abs+=Ab)*
 		public Assignment getAbsAssignment_2() { return cAbsAssignment_2; }
 		
 		//Ab
 		public RuleCall getAbsAbParserRuleCall_2_0() { return cAbsAbParserRuleCall_2_0; }
 		
-		//xbs+=Xb*
+		//(xbs+=Xb)*
 		public Assignment getXbsAssignment_3() { return cXbsAssignment_3; }
 		
 		//Xb
 		public RuleCall getXbsXbParserRuleCall_3_0() { return cXbsXbParserRuleCall_3_0; }
 		
-		//ys+=CharY*
+		//(ys+=CharY)*
 		public Assignment getYsAssignment_4() { return cYsAssignment_4; }
 		
 		//CharY
 		public RuleCall getYsCharYTerminalRuleCall_4_0() { return cYsCharYTerminalRuleCall_4_0; }
 		
-		//^as+=CharA*
+		//(^as+=CharA)*
 		public Assignment getAsAssignment_5() { return cAsAssignment_5; }
 		
 		//CharA
@@ -100,8 +100,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		private final Assignment cYAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cYCharbTerminalRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
 		
-		//Ab:
-		//	x=CharA y=Charb;
+		//Ab: x=CharA y=Charb;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//x=CharA y=Charb
@@ -127,8 +126,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		private final Assignment cYAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cYCharbTerminalRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
 		
-		//Xb:
-		//	x=CharX y=Charb;
+		//Xb: x=CharX y=Charb;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//x=CharX y=Charb
@@ -155,11 +153,10 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		private final EnumLiteralDeclaration cEfgEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cEfgEfgKeyword_1_0 = (Keyword)cEfgEnumLiteralDeclaration_1.eContents().get(0);
 		
-		//enum EnumName:
-		//	abc='Abc' | efg="Efg";
+		//enum EnumName: abc='Abc'|efg="Efg";
 		public EnumRule getRule() { return rule; }
 		
-		//abc='Abc' | efg="Efg"
+		//abc='Abc'|efg="Efg"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//abc='Abc'
@@ -230,13 +227,13 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 	
 
 	
-	//Model:
-	//	enums+=EnumName*
-	//	ycs+=Yc*
-	//	abs+=Ab*
-	//	xbs+=Xb*
-	//	ys+=CharY*
-	//	^as+=CharA*;
+	//Model :
+	//    (enums+=EnumName)*
+	//    (ycs+=Yc)*
+	//    (abs+=Ab)*
+	//    (xbs+=Xb)*
+	//    (ys+=CharY)*
+	//    (^as+=CharA)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -245,8 +242,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		return getModelAccess().getRule();
 	}
 	
-	//Ab:
-	//	x=CharA y=Charb;
+	//Ab: x=CharA y=Charb;
 	public AbElements getAbAccess() {
 		return pAb;
 	}
@@ -255,8 +251,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		return getAbAccess().getRule();
 	}
 	
-	//Xb:
-	//	x=CharX y=Charb;
+	//Xb: x=CharX y=Charb;
 	public XbElements getXbAccess() {
 		return pXb;
 	}
@@ -265,44 +260,37 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		return getXbAccess().getRule();
 	}
 	
-	//terminal CharA:
-	//	'A';
+	//terminal CharA: 'A';
 	public TerminalRule getCharARule() {
 		return tCharA;
 	}
 	
-	//terminal Charb:
-	//	'b';
+	//terminal Charb: 'b';
 	public TerminalRule getCharbRule() {
 		return tCharb;
 	}
 	
-	//terminal CharX:
-	//	'X';
+	//terminal CharX: 'X';
 	public TerminalRule getCharXRule() {
 		return tCharX;
 	}
 	
-	//terminal Yc:
-	//	CharY CharC;
+	//terminal Yc: CharY CharC;
 	public TerminalRule getYcRule() {
 		return tYc;
 	}
 	
-	//terminal CharY:
-	//	'Y';
+	//terminal CharY: 'Y';
 	public TerminalRule getCharYRule() {
 		return tCharY;
 	}
 	
-	//terminal CharC:
-	//	'c';
+	//terminal CharC: 'c';
 	public TerminalRule getCharCRule() {
 		return tCharC;
 	}
 	
-	//enum EnumName:
-	//	abc='Abc' | efg="Efg";
+	//enum EnumName: abc='Abc'|efg="Efg";
 	public EnumNameElements getEnumNameAccess() {
 		return eEnumName;
 	}
@@ -311,14 +299,12 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractElementF
 		return getEnumNameAccess().getRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}

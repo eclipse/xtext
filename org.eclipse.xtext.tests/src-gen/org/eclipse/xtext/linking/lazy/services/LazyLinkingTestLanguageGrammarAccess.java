@@ -27,8 +27,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cTypesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
-		//Model:
-		//	types+=Type*;
+		//Model :
+		//    types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//types+=Type*
@@ -68,22 +68,20 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0 = (RuleCall)cUnresolvedProxyPropertyAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		///* 
+		///*
 		// * SuppressWarnings[BidirectionalReference]
 		// * SuppressWarnings[potentialOverride]
 		// */
-		//Type:
-		//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
-		//	'{'
-		//	properties+=Property*
-		//	unresolvedProxyProperty+=UnresolvedProxyProperty*
-		//	'}';
+		//Type :
+		//    'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
+		//        (properties+=Property)*
+		//        (unresolvedProxyProperty+=UnresolvedProxyProperty)*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
-		//'{'
-		//properties+=Property*
-		//unresolvedProxyProperty+=UnresolvedProxyProperty*
+		//'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
+		//    (properties+=Property)*
+		//    (unresolvedProxyProperty+=UnresolvedProxyProperty)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -153,13 +151,13 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 		
-		//properties+=Property*
+		//(properties+=Property)*
 		public Assignment getPropertiesAssignment_5() { return cPropertiesAssignment_5; }
 		
 		//Property
 		public RuleCall getPropertiesPropertyParserRuleCall_5_0() { return cPropertiesPropertyParserRuleCall_5_0; }
 		
-		//unresolvedProxyProperty+=UnresolvedProxyProperty*
+		//(unresolvedProxyProperty+=UnresolvedProxyProperty)*
 		public Assignment getUnresolvedProxyPropertyAssignment_6() { return cUnresolvedProxyPropertyAssignment_6; }
 		
 		//UnresolvedProxyProperty
@@ -178,14 +176,14 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Property:
-		//	type+=[Type]+ name=ID ';';
+		//Property :
+		//    (type+=[Type])+ name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type+=[Type]+ name=ID ';'
+		//(type+=[Type])+ name=ID ';'
 		public Group getGroup() { return cGroup; }
 		
-		//type+=[Type]+
+		//(type+=[Type])+
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 		
 		//[Type]
@@ -214,17 +212,17 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//UnresolvedProxyProperty:
-		//	'unresolved' type+=[Type]+ name=ID ';';
+		//UnresolvedProxyProperty :
+		//    'unresolved' (type+=[Type])+ name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'unresolved' type+=[Type]+ name=ID ';'
+		//'unresolved' (type+=[Type])+ name=ID ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'unresolved'
 		public Keyword getUnresolvedKeyword_0() { return cUnresolvedKeyword_0; }
 		
-		//type+=[Type]+
+		//(type+=[Type])+
 		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
 		//[Type]
@@ -291,8 +289,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//Model:
-	//	types+=Type*;
+	//Model :
+	//    types+=Type*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -301,16 +299,15 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getModelAccess().getRule();
 	}
 	
-	///* 
+	///*
 	// * SuppressWarnings[BidirectionalReference]
 	// * SuppressWarnings[potentialOverride]
 	// */
-	//Type:
-	//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
-	//	'{'
-	//	properties+=Property*
-	//	unresolvedProxyProperty+=UnresolvedProxyProperty*
-	//	'}';
+	//Type :
+	//    'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
+	//        (properties+=Property)*
+	//        (unresolvedProxyProperty+=UnresolvedProxyProperty)*
+	//    '}';
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -319,8 +316,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getTypeAccess().getRule();
 	}
 	
-	//Property:
-	//	type+=[Type]+ name=ID ';';
+	//Property :
+	//    (type+=[Type])+ name=ID ';';
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -329,8 +326,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getPropertyAccess().getRule();
 	}
 	
-	//UnresolvedProxyProperty:
-	//	'unresolved' type+=[Type]+ name=ID ';';
+	//UnresolvedProxyProperty :
+	//    'unresolved' (type+=[Type])+ name=ID ';';
 	public UnresolvedProxyPropertyElements getUnresolvedProxyPropertyAccess() {
 		return pUnresolvedProxyProperty;
 	}
@@ -339,45 +336,40 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getUnresolvedProxyPropertyAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

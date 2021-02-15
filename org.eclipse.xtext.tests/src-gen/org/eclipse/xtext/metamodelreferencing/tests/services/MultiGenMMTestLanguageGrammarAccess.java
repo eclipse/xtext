@@ -28,11 +28,11 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Assignment cNameRefsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameRefsNameRefParserRuleCall_1_0 = (RuleCall)cNameRefsAssignment_1.eContents().get(0);
 		
-		//Foo:
-		//	name=ID nameRefs+=NameRef*;
+		//Foo :
+		//    name=ID (nameRefs+=NameRef)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID nameRefs+=NameRef*
+		//name=ID (nameRefs+=NameRef)*
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -41,7 +41,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 		
-		//nameRefs+=NameRef*
+		//(nameRefs+=NameRef)*
 		public Assignment getNameRefsAssignment_1() { return cNameRefsAssignment_1; }
 		
 		//NameRef
@@ -52,8 +52,8 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//NameRef other::FooBar:
-		//	name=STRING;
+		//NameRef returns other::FooBar :
+		//    name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=STRING
@@ -107,8 +107,8 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 	}
 
 	
-	//Foo:
-	//	name=ID nameRefs+=NameRef*;
+	//Foo :
+	//    name=ID (nameRefs+=NameRef)*;
 	public FooElements getFooAccess() {
 		return pFoo;
 	}
@@ -117,8 +117,8 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getFooAccess().getRule();
 	}
 	
-	//NameRef other::FooBar:
-	//	name=STRING;
+	//NameRef returns other::FooBar :
+	//    name=STRING;
 	public NameRefElements getNameRefAccess() {
 		return pNameRef;
 	}
@@ -127,45 +127,40 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractElementFinder.A
 		return getNameRefAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

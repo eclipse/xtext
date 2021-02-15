@@ -72,27 +72,40 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Assignment cChildrenAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
 		private final RuleCall cChildrenChildParserRuleCall_8_1_0 = (RuleCall)cChildrenAssignment_8_1.eContents().get(0);
 		
-		//Model:
-		//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
-		//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-		//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child;
+		//Model:    ('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		//        | ('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		//        | ('2' value = STRING)
+		//        | ('2+' multiValue += STRING)
+		//        | ('3' value = Datatype)
+		//        | ('3+' multiValue += Datatype)
+		//        | ('4' value = NestedDatatype)
+		//        | ('4+' multiValue += NestedDatatype)
+		//        |
+		//          ('content' children = Child);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
-		//NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-		//multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child
+		//('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		//    | ('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+		//    | ('2' value = STRING)
+		//    | ('2+' multiValue += STRING)
+		//    | ('3' value = Datatype)
+		//    | ('3+' multiValue += Datatype)
+		//    | ('4' value = NestedDatatype)
+		//    | ('4+' multiValue += NestedDatatype)
+		//    |
+		//      ('content' children = Child)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'1'?
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 		
-		//value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID )
 		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
 		
-		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID )
 		public Alternatives getValueAlternatives_0_1_0() { return cValueAlternatives_0_1_0; }
 		
 		//'mykeyword1'
@@ -110,16 +123,16 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_0_1_0_4() { return cValueIDTerminalRuleCall_0_1_0_4; }
 		
-		//'1+' multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'1+'
 		public Keyword getDigitOnePlusSignKeyword_1_0() { return cDigitOnePlusSignKeyword_1_0; }
 		
-		//multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID )
 		public Assignment getMultiValueAssignment_1_1() { return cMultiValueAssignment_1_1; }
 		
-		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
+		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID )
 		public Alternatives getMultiValueAlternatives_1_1_0() { return cMultiValueAlternatives_1_1_0; }
 		
 		//'mykeyword1'
@@ -137,85 +150,85 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		//ID
 		public RuleCall getMultiValueIDTerminalRuleCall_1_1_0_4() { return cMultiValueIDTerminalRuleCall_1_1_0_4; }
 		
-		//'2' value=STRING
+		//('2' value = STRING)
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'2'
 		public Keyword getDigitTwoKeyword_2_0() { return cDigitTwoKeyword_2_0; }
 		
-		//value=STRING
+		//value = STRING
 		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 		
 		//STRING
 		public RuleCall getValueSTRINGTerminalRuleCall_2_1_0() { return cValueSTRINGTerminalRuleCall_2_1_0; }
 		
-		//'2+' multiValue+=STRING
+		//('2+' multiValue += STRING)
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'2+'
 		public Keyword getDigitTwoPlusSignKeyword_3_0() { return cDigitTwoPlusSignKeyword_3_0; }
 		
-		//multiValue+=STRING
+		//multiValue += STRING
 		public Assignment getMultiValueAssignment_3_1() { return cMultiValueAssignment_3_1; }
 		
 		//STRING
 		public RuleCall getMultiValueSTRINGTerminalRuleCall_3_1_0() { return cMultiValueSTRINGTerminalRuleCall_3_1_0; }
 		
-		//'3' value=Datatype
+		//('3' value = Datatype)
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'3'
 		public Keyword getDigitThreeKeyword_4_0() { return cDigitThreeKeyword_4_0; }
 		
-		//value=Datatype
+		//value = Datatype
 		public Assignment getValueAssignment_4_1() { return cValueAssignment_4_1; }
 		
 		//Datatype
 		public RuleCall getValueDatatypeParserRuleCall_4_1_0() { return cValueDatatypeParserRuleCall_4_1_0; }
 		
-		//'3+' multiValue+=Datatype
+		//('3+' multiValue += Datatype)
 		public Group getGroup_5() { return cGroup_5; }
 		
 		//'3+'
 		public Keyword getDigitThreePlusSignKeyword_5_0() { return cDigitThreePlusSignKeyword_5_0; }
 		
-		//multiValue+=Datatype
+		//multiValue += Datatype
 		public Assignment getMultiValueAssignment_5_1() { return cMultiValueAssignment_5_1; }
 		
 		//Datatype
 		public RuleCall getMultiValueDatatypeParserRuleCall_5_1_0() { return cMultiValueDatatypeParserRuleCall_5_1_0; }
 		
-		//'4' value=NestedDatatype
+		//('4' value = NestedDatatype)
 		public Group getGroup_6() { return cGroup_6; }
 		
 		//'4'
 		public Keyword getDigitFourKeyword_6_0() { return cDigitFourKeyword_6_0; }
 		
-		//value=NestedDatatype
+		//value = NestedDatatype
 		public Assignment getValueAssignment_6_1() { return cValueAssignment_6_1; }
 		
 		//NestedDatatype
 		public RuleCall getValueNestedDatatypeParserRuleCall_6_1_0() { return cValueNestedDatatypeParserRuleCall_6_1_0; }
 		
-		//'4+' multiValue+=NestedDatatype
+		//('4+' multiValue += NestedDatatype)
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//'4+'
 		public Keyword getDigitFourPlusSignKeyword_7_0() { return cDigitFourPlusSignKeyword_7_0; }
 		
-		//multiValue+=NestedDatatype
+		//multiValue += NestedDatatype
 		public Assignment getMultiValueAssignment_7_1() { return cMultiValueAssignment_7_1; }
 		
 		//NestedDatatype
 		public RuleCall getMultiValueNestedDatatypeParserRuleCall_7_1_0() { return cMultiValueNestedDatatypeParserRuleCall_7_1_0; }
 		
-		//'content' children=Child
+		//('content' children = Child)
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//'content'
 		public Keyword getContentKeyword_8_0() { return cContentKeyword_8_0; }
 		
-		//children=Child
+		//children = Child
 		public Assignment getChildrenAssignment_8_1() { return cChildrenAssignment_8_1; }
 		
 		//Child
@@ -228,8 +241,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//Datatype:
-		//	ID '-' ID;
+		//Datatype: ID '-' ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID '-' ID
@@ -251,8 +263,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Keyword cPlusSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//NestedDatatype:
-		//	ID '+' Datatype?;
+		//NestedDatatype: ID '+' Datatype?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID '+' Datatype?
@@ -273,8 +284,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cChild1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cChild2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Child:
-		//	Child1 | Child2;
+		//Child: Child1 | Child2;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Child1 | Child2
@@ -291,8 +301,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//Child1:
-		//	name=ID;
+		//Child1: name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -306,8 +315,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//Child2:
-		//	name=STRING;
+		//Child2: name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=STRING
@@ -369,10 +377,16 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 
 	
-	//Model:
-	//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
-	//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-	//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child;
+	//Model:    ('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+	//        | ('1+' multiValue += ('mykeyword1' | STRING | NestedDatatype | Datatype | ID ) )
+	//        | ('2' value = STRING)
+	//        | ('2+' multiValue += STRING)
+	//        | ('3' value = Datatype)
+	//        | ('3+' multiValue += Datatype)
+	//        | ('4' value = NestedDatatype)
+	//        | ('4+' multiValue += NestedDatatype)
+	//        |
+	//          ('content' children = Child);
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -381,8 +395,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getModelAccess().getRule();
 	}
 	
-	//Datatype:
-	//	ID '-' ID;
+	//Datatype: ID '-' ID;
 	public DatatypeElements getDatatypeAccess() {
 		return pDatatype;
 	}
@@ -391,8 +404,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getDatatypeAccess().getRule();
 	}
 	
-	//NestedDatatype:
-	//	ID '+' Datatype?;
+	//NestedDatatype: ID '+' Datatype?;
 	public NestedDatatypeElements getNestedDatatypeAccess() {
 		return pNestedDatatype;
 	}
@@ -401,8 +413,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getNestedDatatypeAccess().getRule();
 	}
 	
-	//Child:
-	//	Child1 | Child2;
+	//Child: Child1 | Child2;
 	public ChildElements getChildAccess() {
 		return pChild;
 	}
@@ -411,8 +422,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getChildAccess().getRule();
 	}
 	
-	//Child1:
-	//	name=ID;
+	//Child1: name=ID;
 	public Child1Elements getChild1Access() {
 		return pChild1;
 	}
@@ -421,8 +431,7 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getChild1Access().getRule();
 	}
 	
-	//Child2:
-	//	name=STRING;
+	//Child2: name=STRING;
 	public Child2Elements getChild2Access() {
 		return pChild2;
 	}
@@ -431,45 +440,40 @@ public class Bug250313GrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getChild2Access().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

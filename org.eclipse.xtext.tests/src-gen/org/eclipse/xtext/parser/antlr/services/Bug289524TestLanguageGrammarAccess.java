@@ -32,11 +32,10 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cRefsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cRefsModelElementParserRuleCall_2_0 = (RuleCall)cRefsAssignment_2.eContents().get(0);
 		
-		//Model:
-		//	{Model} "Model" refs+=ModelElement*;
+		//Model: {Model} "Model"  (refs+=ModelElement)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Model} "Model" refs+=ModelElement*
+		//{Model} "Model"  (refs+=ModelElement)*
 		public Group getGroup() { return cGroup; }
 		
 		//{Model}
@@ -45,7 +44,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//"Model"
 		public Keyword getModelKeyword_1() { return cModelKeyword_1; }
 		
-		//refs+=ModelElement*
+		//(refs+=ModelElement)*
 		public Assignment getRefsAssignment_2() { return cRefsAssignment_2; }
 		
 		//ModelElement
@@ -69,17 +68,16 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final CrossReference cRefsContainedCrossReference_1_1_2_1_0 = (CrossReference)cRefsAssignment_1_1_2_1.eContents().get(0);
 		private final RuleCall cRefsContainedIDTerminalRuleCall_1_1_2_1_0_1 = (RuleCall)cRefsContainedCrossReference_1_1_2_1_0.eContents().get(1);
 		
-		//ModelElement:
-		//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
+		//ModelElement: {ModelElement} ( containments+=Contained | "reference" refs+=[Contained]  ("$" refs+=[Contained])* )+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
+		//{ModelElement} ( containments+=Contained | "reference" refs+=[Contained]  ("$" refs+=[Contained])* )+
 		public Group getGroup() { return cGroup; }
 		
 		//{ModelElement}
 		public Action getModelElementAction_0() { return cModelElementAction_0; }
 		
-		//(containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
+		//( containments+=Contained | "reference" refs+=[Contained]  ("$" refs+=[Contained])* )+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//containments+=Contained
@@ -88,7 +86,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		//Contained
 		public RuleCall getContainmentsContainedParserRuleCall_1_0_0() { return cContainmentsContainedParserRuleCall_1_0_0; }
 		
-		//"reference" refs+=[Contained] ("$" refs+=[Contained])*
+		//"reference" refs+=[Contained]  ("$" refs+=[Contained])*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//"reference"
@@ -125,8 +123,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Contained:
-		//	"containment" name=ID;
+		//Contained: "containment" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"containment" name=ID
@@ -188,8 +185,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 
 	
-	//Model:
-	//	{Model} "Model" refs+=ModelElement*;
+	//Model: {Model} "Model"  (refs+=ModelElement)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -198,8 +194,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelAccess().getRule();
 	}
 	
-	//ModelElement:
-	//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
+	//ModelElement: {ModelElement} ( containments+=Contained | "reference" refs+=[Contained]  ("$" refs+=[Contained])* )+;
 	public ModelElementElements getModelElementAccess() {
 		return pModelElement;
 	}
@@ -208,8 +203,7 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getModelElementAccess().getRule();
 	}
 	
-	//Contained:
-	//	"containment" name=ID;
+	//Contained: "containment" name=ID;
 	public ContainedElements getContainedAccess() {
 		return pContained;
 	}
@@ -218,45 +212,40 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getContainedAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

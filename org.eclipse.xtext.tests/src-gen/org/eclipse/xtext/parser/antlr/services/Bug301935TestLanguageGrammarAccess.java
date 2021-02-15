@@ -34,8 +34,9 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cWSTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//Model:
-		//	name=ID WS value=ID NL
-		//	value2=ID WS;
+		//    name=ID WS value=ID NL
+		//    value2=ID WS
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID WS value=ID NL
@@ -79,7 +80,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NL:
-		//	WS* ('\r'? '\n') WS*;
+		//    WS* ('\r'? '\n') WS*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//WS* ('\r'? '\n') WS*
@@ -144,8 +145,9 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	name=ID WS value=ID NL
-	//	value2=ID WS;
+	//    name=ID WS value=ID NL
+	//    value2=ID WS
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -155,7 +157,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//NL:
-	//	WS* ('\r'? '\n') WS*;
+	//    WS* ('\r'? '\n') WS*;
 	public NLElements getNLAccess() {
 		return pNL;
 	}
@@ -164,20 +166,17 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getNLAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal WS:
-	//	' ' | '\t'+;
+	//terminal WS			: (' '|'\t')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
 	}

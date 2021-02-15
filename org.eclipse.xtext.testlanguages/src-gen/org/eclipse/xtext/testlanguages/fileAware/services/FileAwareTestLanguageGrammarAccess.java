@@ -35,9 +35,9 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cContentsElementParserRuleCall_3_0 = (RuleCall)cContentsAssignment_3.eContents().get(0);
 		
 		//PackageDeclaration:
-		//	'package' name=QualifiedName
-		//	imports+=Import*
-		//	contents+=Element*;
+		//    'package' name=QualifiedName
+		//    imports+=Import*
+		//    contents+=Element*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'package' name=QualifiedName
@@ -75,7 +75,7 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cElementElementQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cElementElementCrossReference_1_0.eContents().get(1);
 		
 		//Import:
-		//	'import' element=[Element|QualifiedName];
+		//    'import' element=[Element|QualifiedName];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'import' element=[Element|QualifiedName]
@@ -111,11 +111,13 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Element:
-		//	'element' name=ID '{' (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
-		//	'}';
+		//    'element' name=ID '{'
+		//        (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
+		//    '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'element' name=ID '{' (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
+		//'element' name=ID '{'
+		//    (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -167,7 +169,7 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ('.' ID)*;
+		//    ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ('.' ID)*
@@ -235,9 +237,9 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//PackageDeclaration:
-	//	'package' name=QualifiedName
-	//	imports+=Import*
-	//	contents+=Element*;
+	//    'package' name=QualifiedName
+	//    imports+=Import*
+	//    contents+=Element*;
 	public PackageDeclarationElements getPackageDeclarationAccess() {
 		return pPackageDeclaration;
 	}
@@ -247,7 +249,7 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Import:
-	//	'import' element=[Element|QualifiedName];
+	//    'import' element=[Element|QualifiedName];
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -257,8 +259,9 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//Element:
-	//	'element' name=ID '{' (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
-	//	'}';
+	//    'element' name=ID '{'
+	//        (contents+=Element | 'ref' ref+=[Element|QualifiedName])*
+	//    '}';
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -268,7 +271,7 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	}
 	
 	//QualifiedName:
-	//	ID ('.' ID)*;
+	//    ID ('.' ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -277,45 +280,40 @@ public class FileAwareTestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

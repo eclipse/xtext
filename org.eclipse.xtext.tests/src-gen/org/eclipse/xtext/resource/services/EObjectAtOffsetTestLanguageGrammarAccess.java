@@ -33,7 +33,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cBarsAbstractBarParserRuleCall_1_0 = (RuleCall)cBarsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	(foos+=Foo | bars+=AbstractBar)*;
+		//    (foos+=Foo | bars+=AbstractBar)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(foos+=Foo | bars+=AbstractBar)*
@@ -68,12 +68,10 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cFooFooQualifiedNameWithOtherDelimParserRuleCall_4_0_1 = (RuleCall)cFooFooCrossReference_4_0.eContents().get(1);
 		
 		//AbstractBar:
-		//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-		//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
+		//    'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=[Foo|QualifiedNameWithOtherDelim]?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-		//foo+=[Foo|QualifiedNameWithOtherDelim]?
+		//'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=[Foo|QualifiedNameWithOtherDelim]?
 		public Group getGroup() { return cGroup; }
 		
 		//'zonk'?
@@ -128,7 +126,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cFooFooQualifiedNameWithOtherDelimParserRuleCall_3_1_0_1 = (RuleCall)cFooFooCrossReference_3_1_0.eContents().get(1);
 		
 		//Bar:
-		//	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
+		//    'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*
@@ -175,7 +173,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final RuleCall cNameQualifiedNameWithOtherDelimParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Foo:
-		//	'foo' name=QualifiedNameWithOtherDelim;
+		//    'foo' name=QualifiedNameWithOtherDelim;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foo' name=QualifiedNameWithOtherDelim
@@ -198,8 +196,9 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cEqualsSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cQualifiedNameParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//QualifiedNameWithOtherDelim:
-		//	QualifiedName ('=' QualifiedName)*;
+		//QualifiedNameWithOtherDelim :
+		//    QualifiedName ('=' QualifiedName)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//QualifiedName ('=' QualifiedName)*
@@ -225,8 +224,9 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//QualifiedName:
-		//	ID ('.' ID)*;
+		//QualifiedName :
+		//    ID ('.' ID)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ID ('.' ID)*
@@ -298,7 +298,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 
 	
 	//Model:
-	//	(foos+=Foo | bars+=AbstractBar)*;
+	//    (foos+=Foo | bars+=AbstractBar)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -308,8 +308,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//AbstractBar:
-	//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
-	//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
+	//    'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])? foo+=[Foo|QualifiedNameWithOtherDelim]?;
 	public AbstractBarElements getAbstractBarAccess() {
 		return pAbstractBar;
 	}
@@ -319,7 +318,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//Bar:
-	//	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
+	//    'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
 	public BarElements getBarAccess() {
 		return pBar;
 	}
@@ -329,7 +328,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 	}
 	
 	//Foo:
-	//	'foo' name=QualifiedNameWithOtherDelim;
+	//    'foo' name=QualifiedNameWithOtherDelim;
 	public FooElements getFooAccess() {
 		return pFoo;
 	}
@@ -338,8 +337,9 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		return getFooAccess().getRule();
 	}
 	
-	//QualifiedNameWithOtherDelim:
-	//	QualifiedName ('=' QualifiedName)*;
+	//QualifiedNameWithOtherDelim :
+	//    QualifiedName ('=' QualifiedName)*
+	//;
 	public QualifiedNameWithOtherDelimElements getQualifiedNameWithOtherDelimAccess() {
 		return pQualifiedNameWithOtherDelim;
 	}
@@ -348,8 +348,9 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		return getQualifiedNameWithOtherDelimAccess().getRule();
 	}
 	
-	//QualifiedName:
-	//	ID ('.' ID)*;
+	//QualifiedName :
+	//    ID ('.' ID)*
+	//;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -358,45 +359,40 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractElementFin
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

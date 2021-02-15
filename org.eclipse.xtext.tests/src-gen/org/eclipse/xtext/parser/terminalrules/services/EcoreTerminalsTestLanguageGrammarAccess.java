@@ -38,9 +38,9 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 		private final RuleCall cDateValuesEDATETerminalRuleCall_2_1_0 = (RuleCall)cDateValuesAssignment_2_1.eContents().get(0);
 		
 		//Model:
-		//	('int' intValues+=EINT
-		//	| 'double' doubleValues+=EDOUBLE
-		//	| 'date' dateValues+=EDATE)*;
+		//    ('int' intValues+=EINT
+		//    | 'double' doubleValues+=EDOUBLE
+		//    | 'date' dateValues+=EDATE)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//('int' intValues+=EINT
@@ -128,9 +128,9 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 
 	
 	//Model:
-	//	('int' intValues+=EINT
-	//	| 'double' doubleValues+=EDOUBLE
-	//	| 'date' dateValues+=EDATE)*;
+	//    ('int' intValues+=EINT
+	//    | 'double' doubleValues+=EDOUBLE
+	//    | 'date' dateValues+=EDATE)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -140,26 +140,28 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractElementFind
 	}
 	
 	//terminal EDOUBLE returns ecore::EDouble:
-	//	('.' '0'..'9'+ | '0'..'9'+ '.' '0'..'9'*) (('E' | 'e') ('-' | '+'?) '0'..'9'+)?;
+	//    ('.' ('0'..'9')+ | ('0'..'9')+ '.' ('0'..'9')*) (('E'|'e') ('-' | '+'?) ('0'..'9')+)?;
 	public TerminalRule getEDOUBLERule() {
 		return tEDOUBLE;
 	}
 	
+	//// the default ecore date format is  "yyyy-MM-dd'T'HH:mm:ss'.'SSSZ"
 	//terminal EDATE returns ecore::EDate:
-	//	'0'..'9' '0'..'9' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' 'T' '0'..'9' '0'..'9' ':' '0'..'9'
-	//	'0'..'9' ':' '0'..'9' '0'..'9' '.' '0'..'9' '0'..'9' '0'..'9' ('+' | '-') '0'..'9' '0'..'9' '0'..'9' '0'..'9';
+	//    ('0'..'9')('0'..'9')('0'..'9')('0'..'9')'-'('0'..'9')('0'..'9')'-'('0'..'9')('0'..'9')
+	//    'T'('0'..'9')('0'..'9')':'('0'..'9')('0'..'9')':'('0'..'9')('0'..'9')'.'('0'..'9')('0'..'9')('0'..'9')
+	//    ('+'|'-')('0'..'9')('0'..'9')('0'..'9')('0'..'9');
 	public TerminalRule getEDATERule() {
 		return tEDATE;
 	}
 	
 	//terminal EINT returns ecore::EInt:
-	//	'-'? '0'..'9'+;
+	//    '-'? ('0'..'9')+;
 	public TerminalRule getEINTRule() {
 		return tEINT;
 	}
 	
 	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//    (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}

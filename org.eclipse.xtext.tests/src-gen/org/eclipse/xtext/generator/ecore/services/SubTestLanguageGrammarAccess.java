@@ -31,11 +31,11 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 		private final Assignment cAnotherAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cAnotherAnotherSuperMainParserRuleCall_3_0 = (RuleCall)cAnotherAssignment_3.eContents().get(0);
 		
-		//SubMain:
-		//	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
+		//SubMain :
+		//    "{" superMains+=SuperMain "}" (another=AnotherSuperMain)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"{" superMains+=SuperMain "}" another=AnotherSuperMain?
+		//"{" superMains+=SuperMain "}" (another=AnotherSuperMain)?
 		public Group getGroup() { return cGroup; }
 		
 		//"{"
@@ -50,7 +50,7 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 		
-		//another=AnotherSuperMain?
+		//(another=AnotherSuperMain)?
 		public Assignment getAnotherAssignment_3() { return cAnotherAssignment_3; }
 		
 		//AnotherSuperMain
@@ -64,8 +64,8 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//@Override
-		//AnotherSuperMain:
-		//	"ups" name=ID;
+		//AnotherSuperMain :
+		//   "ups" name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"ups" name=ID
@@ -133,8 +133,8 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 	}
 
 	
-	//SubMain:
-	//	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
+	//SubMain :
+	//    "{" superMains+=SuperMain "}" (another=AnotherSuperMain)?;
 	public SubMainElements getSubMainAccess() {
 		return pSubMain;
 	}
@@ -144,8 +144,8 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 	}
 	
 	//@Override
-	//AnotherSuperMain:
-	//	"ups" name=ID;
+	//AnotherSuperMain :
+	//   "ups" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
 		return pAnotherSuperMain;
 	}
@@ -154,8 +154,8 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 		return getAnotherSuperMainAccess().getRule();
 	}
 	
-	//SuperMain:
-	//	"super" name=ID;
+	//SuperMain :
+	//    "super" name=ID;
 	public SuperTestLanguageGrammarAccess.SuperMainElements getSuperMainAccess() {
 		return gaSuperTestLanguage.getSuperMainAccess();
 	}
@@ -164,45 +164,40 @@ public class SubTestLanguageGrammarAccess extends AbstractElementFinder.Abstract
 		return getSuperMainAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

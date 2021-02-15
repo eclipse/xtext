@@ -33,7 +33,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cTestListParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
 		//Root:
-		//	"test" (TestRequired | TestOptional | TestList);
+		//    "test" (TestRequired | TestOptional | TestList);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"test" (TestRequired | TestOptional | TestList)
@@ -65,7 +65,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cRequired2INTTerminalRuleCall_3_0 = (RuleCall)cRequired2Assignment_3.eContents().get(0);
 		
 		//TestRequired:
-		//	{TestRequired} "required" required1=INT required2=INT;
+		//    {TestRequired} "required" required1=INT required2=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestRequired} "required" required1=INT required2=INT
@@ -102,7 +102,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cOpt2INTTerminalRuleCall_3_1_0 = (RuleCall)cOpt2Assignment_3_1.eContents().get(0);
 		
 		//TestOptional:
-		//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
+		//    {TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestOptional} "optional" opt1=INT? (":" opt2=INT)?
@@ -141,7 +141,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 		private final RuleCall cItemINTTerminalRuleCall_2_0 = (RuleCall)cItemAssignment_2.eContents().get(0);
 		
 		//TestList:
-		//	{TestList} "list" item+=INT*;
+		//    {TestList} "list" item+=INT*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{TestList} "list" item+=INT*
@@ -209,7 +209,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 
 	
 	//Root:
-	//	"test" (TestRequired | TestOptional | TestList);
+	//    "test" (TestRequired | TestOptional | TestList);
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -219,7 +219,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//TestRequired:
-	//	{TestRequired} "required" required1=INT required2=INT;
+	//    {TestRequired} "required" required1=INT required2=INT;
 	public TestRequiredElements getTestRequiredAccess() {
 		return pTestRequired;
 	}
@@ -229,7 +229,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//TestOptional:
-	//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
+	//    {TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 	public TestOptionalElements getTestOptionalAccess() {
 		return pTestOptional;
 	}
@@ -239,7 +239,7 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 	}
 	
 	//TestList:
-	//	{TestList} "list" item+=INT*;
+	//    {TestList} "list" item+=INT*;
 	public TestListElements getTestListAccess() {
 		return pTestList;
 	}
@@ -248,45 +248,40 @@ public class TransientValuesTestGrammarAccess extends AbstractElementFinder.Abst
 		return getTestListAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

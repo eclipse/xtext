@@ -21,8 +21,9 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractElementFinder.
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935ExTestLanguage.DelegateModel");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//DelegateModel Model:
-		//	Model;
+		//DelegateModel returns Model:
+		//    Model
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Model
@@ -71,8 +72,9 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//DelegateModel Model:
-	//	Model;
+	//DelegateModel returns Model:
+	//    Model
+	//;
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}
@@ -82,8 +84,9 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//Model:
-	//	name=ID WS value=ID NL
-	//	value2=ID WS;
+	//    name=ID WS value=ID NL
+	//    value2=ID WS
+	//;
 	public Bug301935TestLanguageGrammarAccess.ModelElements getModelAccess() {
 		return gaBug301935TestLanguage.getModelAccess();
 	}
@@ -93,7 +96,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//NL:
-	//	WS* ('\r'? '\n') WS*;
+	//    WS* ('\r'? '\n') WS*;
 	public Bug301935TestLanguageGrammarAccess.NLElements getNLAccess() {
 		return gaBug301935TestLanguage.getNLAccess();
 	}
@@ -102,20 +105,17 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractElementFinder.
 		return getNLAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaBug301935TestLanguage.getIDRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t'+;
+	//terminal WS			: (' '|'\t')+;
 	public TerminalRule getWSRule() {
 		return gaBug301935TestLanguage.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBug301935TestLanguage.getANY_OTHERRule();
 	}

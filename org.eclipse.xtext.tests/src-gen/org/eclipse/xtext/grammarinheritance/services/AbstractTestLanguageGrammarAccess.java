@@ -28,8 +28,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//InheritedParserRule mm::AType:
-		//	'element' name=ID;
+		//InheritedParserRule returns mm::AType:
+		//    'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -52,17 +52,17 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		///* SuppressWarnings[noInstantiation] */
-		//AbstractCallOverridenParserRule mm::AModel:
-		//	'overridemodel' elements+=OverridableParserRule*;
+		//AbstractCallOverridenParserRule returns mm::AModel:
+		//    'overridemodel' (elements+=OverridableParserRule)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'overridemodel' elements+=OverridableParserRule*
+		//'overridemodel' (elements+=OverridableParserRule)*
 		public Group getGroup() { return cGroup; }
 		
 		//'overridemodel'
 		public Keyword getOverridemodelKeyword_0() { return cOverridemodelKeyword_0; }
 		
-		//elements+=OverridableParserRule*
+		//(elements+=OverridableParserRule)*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
 		//OverridableParserRule
@@ -75,8 +75,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//OverridableParserRule mm::AType:
-		//	'element' name=ID;
+		//OverridableParserRule returns mm::AType :
+		//    'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -99,8 +99,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		///* SuppressWarnings[SpacesInKeyword] */
-		//OverridableParserRule2 mm::AType:
-		//	'other element' name=STRING;
+		//OverridableParserRule2 returns mm::AType :
+		//    'other element' name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'other element' name=STRING
@@ -123,17 +123,17 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		///* SuppressWarnings[noInstantiation] */
-		//AbstractCallExtendedParserRule mm::AModel:
-		//	'extendedmodel' elements+=ExtendableParserRule*;
+		//AbstractCallExtendedParserRule returns mm::AModel:
+		//    'extendedmodel' (elements+=ExtendableParserRule)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'extendedmodel' elements+=ExtendableParserRule*
+		//'extendedmodel' (elements+=ExtendableParserRule)*
 		public Group getGroup() { return cGroup; }
 		
 		//'extendedmodel'
 		public Keyword getExtendedmodelKeyword_0() { return cExtendedmodelKeyword_0; }
 		
-		//elements+=ExtendableParserRule*
+		//(elements+=ExtendableParserRule)*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
 		//ExtendableParserRule
@@ -146,8 +146,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//ExtendableParserRule mm::AType:
-		//	'element' name=ID;
+		//ExtendableParserRule returns mm::AType :
+		//    'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -219,8 +219,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 
 	
-	//InheritedParserRule mm::AType:
-	//	'element' name=ID;
+	//InheritedParserRule returns mm::AType:
+	//    'element' name=ID;
 	public InheritedParserRuleElements getInheritedParserRuleAccess() {
 		return pInheritedParserRule;
 	}
@@ -230,8 +230,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	///* SuppressWarnings[noInstantiation] */
-	//AbstractCallOverridenParserRule mm::AModel:
-	//	'overridemodel' elements+=OverridableParserRule*;
+	//AbstractCallOverridenParserRule returns mm::AModel:
+	//    'overridemodel' (elements+=OverridableParserRule)*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return pAbstractCallOverridenParserRule;
 	}
@@ -240,8 +240,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 	
-	//OverridableParserRule mm::AType:
-	//	'element' name=ID;
+	//OverridableParserRule returns mm::AType :
+	//    'element' name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return pOverridableParserRule;
 	}
@@ -251,8 +251,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	///* SuppressWarnings[SpacesInKeyword] */
-	//OverridableParserRule2 mm::AType:
-	//	'other element' name=STRING;
+	//OverridableParserRule2 returns mm::AType :
+	//    'other element' name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;
 	}
@@ -262,8 +262,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	///* SuppressWarnings[noInstantiation] */
-	//AbstractCallExtendedParserRule mm::AModel:
-	//	'extendedmodel' elements+=ExtendableParserRule*;
+	//AbstractCallExtendedParserRule returns mm::AModel:
+	//    'extendedmodel' (elements+=ExtendableParserRule)*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return pAbstractCallExtendedParserRule;
 	}
@@ -272,8 +272,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getAbstractCallExtendedParserRuleAccess().getRule();
 	}
 	
-	//ExtendableParserRule mm::AType:
-	//	'element' name=ID;
+	//ExtendableParserRule returns mm::AType :
+	//    'element' name=ID;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return pExtendableParserRule;
 	}
@@ -282,52 +282,46 @@ public class AbstractTestLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getExtendableParserRuleAccess().getRule();
 	}
 	
-	//terminal REAL returns ecore::EDouble:
-	//	INT '.' INT;
+	//terminal REAL returns ecore::EDouble : INT '.' INT;
 	public TerminalRule getREALRule() {
 		return tREAL;
 	}
 	
 	//@Override
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | 'ö' | 'ä' | 'ü' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID        : ('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

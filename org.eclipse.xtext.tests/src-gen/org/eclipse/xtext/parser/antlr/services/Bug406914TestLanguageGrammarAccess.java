@@ -29,7 +29,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		private final RuleCall cBS_ESCAPEParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Model:
-		//	name=ID BS_ESCAPE;
+		//    name=ID BS_ESCAPE
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID BS_ESCAPE
@@ -57,7 +58,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		
 		///* SuppressWarnings[SpacesInKeyword] */
 		//BS_ESCAPE:
-		//	'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\';
+		//    '\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\'
@@ -128,7 +130,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 
 	
 	//Model:
-	//	name=ID BS_ESCAPE;
+	//    name=ID BS_ESCAPE
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -139,7 +142,8 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 	
 	///* SuppressWarnings[SpacesInKeyword] */
 	//BS_ESCAPE:
-	//	'\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\';
+	//    '\b' | '\f' | '\n' | 'lineFeed' | '\r' | '\t' | '\\'
+	//;
 	public BS_ESCAPEElements getBS_ESCAPEAccess() {
 		return pBS_ESCAPE;
 	}
@@ -148,20 +152,17 @@ public class Bug406914TestLanguageGrammarAccess extends AbstractElementFinder.Ab
 		return getBS_ESCAPEAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID			: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
 	
-	//terminal WS:
-	//	' ' | '\t'+;
+	//terminal WS			: (' '|'\t')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER:	.;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
 	}

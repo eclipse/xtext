@@ -30,9 +30,9 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cTypesAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
-		//Main:
-		//	imports+=Import*
-		//	types+=Type*;
+		//Main :
+		//    imports+=Import*
+		//    types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//imports+=Import*
@@ -58,8 +58,8 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cUriAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cUriSTRINGTerminalRuleCall_1_0 = (RuleCall)cUriAssignment_1.eContents().get(0);
 		
-		//Import:
-		//	'import' uri=STRING;
+		//Import :
+		//    'import' uri=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'import' uri=STRING
@@ -96,8 +96,8 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final CrossReference cImplementsTypeCrossReference_3_2_1_0 = (CrossReference)cImplementsAssignment_3_2_1.eContents().get(0);
 		private final RuleCall cImplementsTypeIDTerminalRuleCall_3_2_1_0_1 = (RuleCall)cImplementsTypeCrossReference_3_2_1_0.eContents().get(1);
 		
-		//Type:
-		//	'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
+		//Type :
+		//    'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?
@@ -204,9 +204,9 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 
 	
-	//Main:
-	//	imports+=Import*
-	//	types+=Type*;
+	//Main :
+	//    imports+=Import*
+	//    types+=Type*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -215,8 +215,8 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getMainAccess().getRule();
 	}
 	
-	//Import:
-	//	'import' uri=STRING;
+	//Import :
+	//    'import' uri=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -225,8 +225,8 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getImportAccess().getRule();
 	}
 	
-	//Type:
-	//	'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
+	//Type :
+	//    'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -235,45 +235,40 @@ public class LangATestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getTypeAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

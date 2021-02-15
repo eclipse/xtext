@@ -27,8 +27,8 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractElementFin
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Keyword cValueCaSeKeyword_2_0 = (Keyword)cValueAssignment_2.eContents().get(0);
 		
-		//Model:
-		//	"case" "foo"? value="CaSe";
+		//Model :
+		//    "case" "foo"? value="CaSe";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"case" "foo"? value="CaSe"
@@ -85,8 +85,8 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractElementFin
 	
 
 	
-	//Model:
-	//	"case" "foo"? value="CaSe";
+	//Model :
+	//    "case" "foo"? value="CaSe";
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -95,14 +95,12 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractElementFin
 		return getModelAccess().getRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}

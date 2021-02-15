@@ -26,11 +26,11 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Model:
-		//	elements+=Element*;
+		//Model :
+		//    (elements+=Element)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//elements+=Element*
+		//(elements+=Element)*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 		
 		//Element
@@ -48,14 +48,14 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		private final RuleCall cDescriptionsSTRINGTerminalRuleCall_3_0 = (RuleCall)cDescriptionsAssignment_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Element:
-		//	optional?='optional'? "element" name=ID descriptions+=STRING* ';';
+		//Element :
+		//    (optional?='optional')? "element" name=ID (descriptions+=STRING)* ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//optional?='optional'? "element" name=ID descriptions+=STRING* ';'
+		//(optional?='optional')? "element" name=ID (descriptions+=STRING)* ';'
 		public Group getGroup() { return cGroup; }
 		
-		//optional?='optional'?
+		//(optional?='optional')?
 		public Assignment getOptionalAssignment_0() { return cOptionalAssignment_0; }
 		
 		//'optional'
@@ -70,7 +70,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//descriptions+=STRING*
+		//(descriptions+=STRING)*
 		public Assignment getDescriptionsAssignment_3() { return cDescriptionsAssignment_3; }
 		
 		//STRING
@@ -124,8 +124,8 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 	}
 
 	
-	//Model:
-	//	elements+=Element*;
+	//Model :
+	//    (elements+=Element)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -134,8 +134,8 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getModelAccess().getRule();
 	}
 	
-	//Element:
-	//	optional?='optional'? "element" name=ID descriptions+=STRING* ';';
+	//Element :
+	//    (optional?='optional')? "element" name=ID (descriptions+=STRING)* ';';
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -144,45 +144,40 @@ public class DummyTestLanguageGrammarAccess extends AbstractElementFinder.Abstra
 		return getElementAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}

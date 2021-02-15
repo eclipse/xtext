@@ -30,21 +30,22 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 		
 		//@Override
 		//Model:
-		//	imports+=Import*
-		//	elements+=Element+;
+		//    imports += Import*
+		//    elements += Element+
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//imports+=Import*
-		//elements+=Element+
+		//imports += Import*
+		//elements += Element+
 		public Group getGroup() { return cGroup; }
 		
-		//imports+=Import*
+		//imports += Import*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
 		
-		//elements+=Element+
+		//elements += Element+
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
 		//Element
@@ -56,10 +57,11 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 		private final RuleCall cImportedNamespaceSTRINGTerminalRuleCall_0 = (RuleCall)cImportedNamespaceAssignment.eContents().get(0);
 		
 		//Import:
-		//	importedNamespace=STRING;
+		//    importedNamespace = STRING
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//importedNamespace=STRING
+		//importedNamespace = STRING
 		public Assignment getImportedNamespaceAssignment() { return cImportedNamespaceAssignment; }
 		
 		//STRING
@@ -120,8 +122,9 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 	
 	//@Override
 	//Model:
-	//	imports+=Import*
-	//	elements+=Element+;
+	//    imports += Import*
+	//    elements += Element+
+	//;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -131,7 +134,8 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//Import:
-	//	importedNamespace=STRING;
+	//    importedNamespace = STRING
+	//;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -141,9 +145,10 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 	}
 	
 	//Element:
-	//	name=ID reference=[Element]? '{'
-	//	elements+=Element*
-	//	'}';
+	//    name=ID reference=[Element]? '{'
+	//        elements += Element*
+	//    '}'
+	//;
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getElementAccess();
 	}
@@ -152,45 +157,40 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractEleme
 		return getElementAccess().getRule();
 	}
 	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	}
 	
-	//terminal INT returns ecore::EInt:
-	//	'0'..'9'+;
+	//terminal INT returns ecore::EInt: ('0'..'9')+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+	//        ;
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}
 	
-	//terminal ML_COMMENT:
-	//	'/*'->'*/';
+	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
 	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	}
 	
-	//terminal WS:
-	//	' ' | '\t' | '\r' | '\n'+;
+	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	}
 	
-	//terminal ANY_OTHER:
-	//	.;
+	//terminal ANY_OTHER: .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	}
