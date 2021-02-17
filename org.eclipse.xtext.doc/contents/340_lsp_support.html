@@ -1,0 +1,211 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>LSP Support</title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+
+<h1 id="lsp-support">LSP Support</h1>
+
+<p>Xtext supports the generation of language servers that comply to the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol (LSP)</a>.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p><strong>Step 1:</strong> Create a new Xtext Project with language server support.<br />
+<img src="images/LSP_1_Xtext_Wizard.png" alt="Xtext project wizard" /></p>
+
+<p><strong>Step 2:</strong> Implement the Domainmodel language following the <a href="https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html">Xtext - 15 Minutes Tutorial</a>.</p>
+
+<p><strong>Step 3:</strong> Try out the Domainmodel language server in Eclipse based on <a href="https://projects.eclipse.org/projects/technology.lsp4e">LSP4E</a>.</p>
+
+<ol>
+  <li>
+    <p>Configure a content type to the <code>*.dmodel</code> files:<br />
+<img src="images/LSP_2_DomainmodelContentType.png" alt="Domainmodel Content Type" /></p>
+  </li>
+  <li>
+    <p>Create a launch configuration that starts the Domainmodel language server:<br />
+<img src="images/LSP_3_DomainmodelLanguageServerLauncher.png" alt="Domainmodel Language Server Launcher" /></p>
+  </li>
+  <li>
+    <p>Assign the Domainmodel content type to the Domainmodel language server launcher:<br />
+<img src="images/LSP_4_DomainmodelLanguageServer.png" alt="Domainmodel Language Server" /></p>
+  </li>
+  <li>LSP does not support syntax highlighting (usually it is done on the client side). The following <a href="https://projects.eclipse.org/projects/technology.tm4e">TextMate</a> json file adds syntax highlighting support for the keywords, single-line and multi-line comments of the Domainmodel language:
+    <pre><code class="language-json">{
+"name": "Domainmodel",
+"scopeName": "text.dmodel",
+"fileTypes": [
+    "dmodel"
+],
+"repository": {
+    "general": {
+        "patterns": [
+            {
+                "include": "#linecomment"
+            },
+            {
+                "include": "#blockcomment"
+            },
+            {
+                "include": "#keyword"
+            }
+        ]
+    },
+    "linecomment": {
+        "name": "comment.line.double-dash.dmodel",
+        "begin": "(^[ \\t]+)?(?=//)",
+        "end": "(?=$)"
+    },
+    "blockcomment": {
+        "name": "comment.block.dmodel",
+        "begin": "/\\*(\\*)?(?!/)",
+        "end": "\\*/"
+    },
+    "keyword": {
+        "name": "keyword.control.mydsl",
+        "match": "\\b(entity|datatype)\\b|!"
+
+    }
+},
+"patterns": [
+    {
+        "include": "#general"
+    }
+],
+"uuid": "8383e49a-fa0d-4bb5-827b-10e8abb294ca"
+}
+</code></pre>
+  </li>
+  <li>Open a <code>*.dmodel</code> file with the Generic Editor and explore the supported language features like syntax highlighting, content assist, validation, displaying code lenses, quickfixes, formatting, … :<br />
+<img src="images/LSP_5_DomainmodelLanguageFeatures.png" alt="Domainmodel Language Features" /></li>
+</ol>
+
+<p><strong>Step 4:</strong>  Feel free to implement further LSP clients to the Domainmodel language server based on Atom, Eclipse Che, Eclipse Theia, IntelliJ IDEA, Monaco Editor, VS Code, … The currenly supported LSP clients are available in the <code>LSP clients</code> section of <a href="https://langserver.org/">https://langserver.org/</a>.</p>
+
+<h2 id="language-features">Language Features</h2>
+
+<p>Currently, Xtext supports the following LSP language features:</p>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#version_3_16_0"> LSP 3.16.0 </a> (released on 2020-12-14) <br /> <a href="https://github.com/eclipse/lsp4j/blob/master/CHANGELOG.md#v0100-nov-2020"> LSP4J 0.10.0 </a>(released on 2020-11-05)</th>
+			<th><a href="https://www.eclipse.org/Xtext/releasenotes.html#/releasenotes/2020/12/01/version-2-24-0"> Xtext 2.24.0 </a> <br /> (released on 2020-12-01)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#diagnostic">Diagnostic</a> (aka Validation)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion">Completion</a> (aka Content Assist)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax">Snippets</a> (aka Template Proposals)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_hover">Hover</a></td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_signatureHelp">Signature Help</a></td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_declaration">Goto Declaration</a> (aka Hyperlinking)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition">Goto Definition</a> (aka Hyperlinking)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_typeDefinition">Goto Type Defintion</a> (aka Hyperlinking)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_implementation">Goto Implementation</a> (aka Hyperlinking)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_references">Find References</a></td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentHighlight">Document Highlight</a> (aka Marking Occurrences)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol">Document Symbols</a> (aka Model Elements, Outline View)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_codeAction">Code Action</a> (aka QuickAssist, QuickFixes)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_codeLens">Code Lens</a> (aka Code Mining)</td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentLink">Document Link</a> (aka Hyperlinking)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentColor">Document Color</a></td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_formatting">Document Formatting</a> (aka Formatting)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_rangeFormatting">Document Range Formatting</a> (aka Formatting)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_onTypeFormatting">Document on Type Formatting</a> (aka Auto Editing)</td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_rename">Rename</a> (aka Rename Refactoring)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_foldingRange">Folding Range</a> (aka Folding)</td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_selectionRange">Selection Range</a> (aka Double Click Text Selection)</td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_prepareCallHierarchy">Call Hierarchy</a> </td>
+			<td><div class="not-supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_semanticTokens">Semantic Tokens</a> (aka Semantic Highlighting)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+		<tr>
+			<td><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_linkedEditingRange">Linked Editing Range</a> (aka Rename Refactoring)</td>
+			<td><div class="supported"></div></td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 id="unit-testing">Unit Testing</h2>
+<p>Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language server, too. Xtext provides the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/AbstractLanguageServerTest.xtend">org.eclipse.xtext.testing.AbstractLanguageServerTest</a> base class that comes in handy when implementing automated LSP unit tests. The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.ide.tests/src/org/eclipse/xtext/ide/tests/server">org.eclipse.xtext.ide.tests.server</a> package contains JUnit test cases for almost all supported <a href="#language-features">language features</a>. Feel free to study them to get some inspirations on how to implement automated unit tests for your Xtext-based language server.</p>
+
+<p><strong><a href="350_continuous_integration.html">Next Chapter: Continuous Integration</a></strong></p>
+
+
+</body>
+</html>
