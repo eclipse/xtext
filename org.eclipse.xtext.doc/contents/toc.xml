@@ -321,6 +321,14 @@
 				</topic>
 			</topic>
 		</topic>
+		<topic href="contents/340_lsp_support.html" label="LSP Support">
+			<topic href="contents/340_lsp_support.html#getting-started" label="Getting Started">
+			</topic>
+			<topic href="contents/340_lsp_support.html#language-features" label="Language Features">
+			</topic>
+			<topic href="contents/340_lsp_support.html#unit-testing" label="Unit Testing">
+			</topic>
+		</topic>
 		<topic href="contents/350_continuous_integration.html" label="Continuous Integration (with Maven)">
 			<topic href="contents/350_continuous_integration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
 			</topic>
