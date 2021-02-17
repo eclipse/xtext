@@ -21,8 +21,8 @@
       <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.objectweb.asm" version="9.0.0.v20201001-1419"/>
-      <unit id="org.objectweb.asm.tree" version="9.0.0.v20201001-1419"/>
+      <unit id="org.objectweb.asm" version="9.1.0.v20210209-1849"/>
+      <unit id="org.objectweb.asm.tree" version="9.1.0.v20210209-1849"/>
       <unit id="com.google.inject" version="3.0.0.v201605172100"/>
       <unit id="org.apache.commons.cli" version="1.2.0.v201404270220"/>
       <unit id="com.google.guava" version="30.1.0.v20210127-2300"/>

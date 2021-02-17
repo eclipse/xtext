@@ -850,10 +850,10 @@
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
             name="org.objectweb.asm"
-            versionRange="[9.0.0,9.1.0)"/>
+            versionRange="[9.1.0,9.2.0)"/>
         <requirement
             name="org.objectweb.asm.tree"
-            versionRange="[9.0.0,9.1.0)"/>
+            versionRange="[9.1.0,9.2.0)"/>
         <requirement
             name="io.github.classgraph"
             versionRange="[4.8.35,4.9.0)"/>
