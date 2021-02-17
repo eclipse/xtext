@@ -10,10 +10,10 @@
    <bundle id="com.google.guava.source" version="30.1.0.qualifier"/>
    <bundle id="org.junit" version="4.12.0.qualifier"/>
    <bundle id="org.junit.source" version="4.12.0.qualifier"/>
-   <bundle id="org.objectweb.asm" version="9.0.0.qualifier"/>
-   <bundle id="org.objectweb.asm.source" version="9.0.0.qualifier"/>
-   <bundle id="org.objectweb.asm.tree" version="9.0.0.qualifier"/>
-   <bundle id="org.objectweb.asm.tree.source" version="9.0.0.qualifier"/>
+   <bundle id="org.objectweb.asm" version="9.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.source" version="9.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.tree" version="9.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.tree.source" version="9.1.0.qualifier"/>
    <bundle id="io.github.classgraph" version="4.8.35.qualifier"/>
    <bundle id="io.github.classgraph.source" version="4.8.35.qualifier"/>
    <category-def name="Xtext" label="Xtext"/>
