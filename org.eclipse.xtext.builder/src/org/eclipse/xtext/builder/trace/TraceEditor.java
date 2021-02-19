@@ -15,19 +15,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.presentation.EcoreEditor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Sash;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -107,6 +117,68 @@ public class TraceEditor extends EcoreEditor {
 						text.setText(Throwables.getStackTraceAsString(e));
 					}
 				}
+			}
+		});
+		Menu contextMenu = new Menu(text);
+		MenuItem copyItem = new MenuItem(contextMenu, SWT.PUSH);
+		copyItem.setText("&Copy");
+		copyItem.setAccelerator(SWT.MOD1 | 'C');
+		copyItem.setEnabled(false);
+		final Clipboard cb = new Clipboard(Display.getDefault());
+		copyItem.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String textData = text.getSelectionText();
+				TextTransfer textTransfer = TextTransfer.getInstance();
+				cb.setContents(new Object[] { textData }, new Transfer[] { textTransfer });
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+		text.setMenu(contextMenu);
+		text.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				final String selectionText = text.getSelectionText();
+				copyItem.setEnabled(!"".equals(selectionText));
+				final Point range = text.getSelectionRange();
+				TraceEditor.super.setSelection(new ITextSelection() {
+					@Override
+					public boolean isEmpty() {
+						return "".equals(selectionText);
+					}
+					
+					@Override
+					public String getText() {
+						return selectionText;
+					}
+					
+					@Override
+					public int getStartLine() {
+						return -1;
+					}
+					
+					@Override
+					public int getOffset() {
+						return range.x;
+					}
+					
+					@Override
+					public int getLength() {
+						return range.y;
+					}
+					
+					@Override
+					public int getEndLine() {
+						return -1;
+					}
+				});
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
 		return tree;
