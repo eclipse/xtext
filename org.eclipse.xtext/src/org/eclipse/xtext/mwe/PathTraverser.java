@@ -70,7 +70,7 @@ public class PathTraverser {
 				zipFile.close();
 			}
 		} catch (Exception e) {
-			throw new WrappedException(e);
+			throw new WrappedException("Error traversing archive " + file, e);
 		}
 	}
 
