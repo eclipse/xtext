@@ -53,6 +53,8 @@ import org.eclipse.lsp4j.DocumentSymbolCapabilities;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.FoldingRange;
+import org.eclipse.lsp4j.FoldingRangeRequestParams;
 import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.HoverParams;
 import org.eclipse.lsp4j.InitializeParams;
@@ -803,6 +805,21 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return (_plus + _expectation);
   }
   
+  protected String _toExpectation(final FoldingRange it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[");
+    String _valueOf = String.valueOf(it.getKind());
+    _builder.append(_valueOf);
+    _builder.append(" ");
+    int _startLine = it.getStartLine();
+    _builder.append(_startLine);
+    _builder.append("..");
+    int _endLine = it.getEndLine();
+    _builder.append(_endLine);
+    _builder.append("]");
+    return _builder.toString();
+  }
+  
   protected void testCodeLens(final Procedure1<? super AbstractLanguageServerTest.TestCodeLensConfiguration> configurator) {
     try {
       @Extension
@@ -1402,6 +1419,30 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  /**
+   * @since 2.26
+   */
+  protected void testFolding(final Procedure1<? super FoldingConfiguration> configurator) {
+    try {
+      @Extension
+      final FoldingConfiguration configuration = new FoldingConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final FileInfo fileInfo = this.initializeContext(configuration);
+      FoldingRangeRequestParams _foldingRangeRequestParams = new FoldingRangeRequestParams();
+      final Procedure1<FoldingRangeRequestParams> _function = (FoldingRangeRequestParams it) -> {
+        String _uri = fileInfo.getUri();
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
+        it.setTextDocument(_textDocumentIdentifier);
+      };
+      FoldingRangeRequestParams _doubleArrow = ObjectExtensions.<FoldingRangeRequestParams>operator_doubleArrow(_foldingRangeRequestParams, _function);
+      final List<FoldingRange> foldings = this.languageServer.foldingRange(_doubleArrow).get();
+      this.assertEqualsStricter(configuration.getExpectedFoldings(), this.toExpectation(foldings));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Override
   public void notify(final String method, final Object parameter) {
     Pair<String, Object> _mappedTo = Pair.<String, Object>of(method, parameter);
@@ -1459,6 +1500,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((DocumentHighlight)it);
     } else if (it instanceof DocumentSymbol) {
       return _toExpectation((DocumentSymbol)it);
+    } else if (it instanceof FoldingRange) {
+      return _toExpectation((FoldingRange)it);
     } else if (it instanceof Hover) {
       return _toExpectation((Hover)it);
     } else if (it instanceof Location) {

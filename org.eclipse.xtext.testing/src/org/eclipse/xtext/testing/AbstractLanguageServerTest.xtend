@@ -42,6 +42,8 @@ import org.eclipse.lsp4j.DocumentSymbol
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
+import org.eclipse.lsp4j.FoldingRange
+import org.eclipse.lsp4j.FoldingRangeRequestParams
 import org.eclipse.lsp4j.Hover
 import org.eclipse.lsp4j.HoverParams
 import org.eclipse.lsp4j.InitializeParams
@@ -392,6 +394,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected dispatch def String toExpectation(CodeLens it) {
 		return command.title + " " +range.toExpectation
 	}
+	
+	protected dispatch def String toExpectation(FoldingRange it) {
+		return '''[«String.valueOf(kind)» «startLine»..«endLine»]'''
+	}
 
 	@Accessors static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
 		String expectedCodeLensItems = ''
@@ -710,6 +716,23 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 		val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
 		assertEqualsStricter(configuration.expectedText, result.contents)
+	}
+	
+	/**
+	 * @since 2.26
+	 */
+	protected def testFolding((FoldingConfiguration)=>void configurator) {
+		val extension configuration = new FoldingConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		
+		val fileInfo = initializeContext(configuration)
+		
+		val foldings = languageServer.foldingRange(new FoldingRangeRequestParams => [
+			textDocument = new TextDocumentIdentifier(fileInfo.uri)
+		]).get()
+		
+		assertEqualsStricter(configuration.expectedFoldings, foldings.toExpectation);
 	}
 
 	override notify(String method, Object parameter) {
