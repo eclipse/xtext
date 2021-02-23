@@ -156,7 +156,7 @@ spec:
             -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
             -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
             -Posspub.version=$XTEXT_VERSION \
-            -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+            -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
             -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
             -Posspub.branch=$BRANCH_TO_DEPLOY \
             -Psigning.secretKeyRingFile=/home/default/.gnupg/secring.gpg \
