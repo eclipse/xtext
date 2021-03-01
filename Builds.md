@@ -133,11 +133,18 @@ After everything above has run smoothly, it is finally time for some manual step
    * Select both and perform the _Close_ toolbar action
    * Wait until the checks have run successfully
    * Select both repositories again the perform the _Release_ toolbar action
-   * It will take some hours until the artifacts are mirrored to Maven Central.
-3. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+3. The [sign-and-deploy job](https://ci.eclipse.org/xtext/job/releng/job/sign-and-deploy) waits for manual confirmation until the staging repositories
+   are promoted. Open the console and look for
+   ```
+   [Pipeline] input
+   Only continue after ensuring OSSRH staging repositories are closed an promoted
+   Delete Branches! or Abort
+   ```
+   Click on _Delete Branches_ to continue
+4. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
    * Make sure the commit message is correct! (Correct SimRel Target etc)
    * Merge the [open Gerrit change](https://git.eclipse.org/r/#/q/project:simrel/org.eclipse.simrel.build+owner:xtext-bot%2540eclipse.org+status:open) for the `simrel/org.eclipse.simrel.build` repository
-4. Release Notes (Only on final release)
+5. Release Notes (Only on final release)
    * Create and review release notes
    * Update committer stats for Xtext (without Xtend)
      * Run [committer-activity-count job](https://ci.eclipse.org/xtext/job/releng/job/committer-activity-count/)
@@ -147,10 +154,10 @@ After everything above has run smoothly, it is finally time for some manual step
        [committer-activity-count job](https://ci.eclipse.org/xtext/job/releng/job/committer-activity-count/) with an old tag as FROM_VERSION param)
    * Update committer stats for Xtend
      * Run `git shortlog -s -n -e v<PREV_RELEASE>..v<NEW_RELEASE>` in the xtext-xtend repo
-5. Publish websites (Only on final release)
+6. Publish websites (Only on final release)
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
-6. Update Marketplace entries (Only on final release)
+7. Update Marketplace entries (Only on final release)
    * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext/edit)
    * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend/edit)
    * For each update the properties:
@@ -160,23 +167,29 @@ After everything above has run smoothly, it is finally time for some manual step
    * Update Composite Repository for Eclipse Marketplace
      * Edit repository composite site descriptors at path `updates/composite/marketplace` from https://github.com/xtext/xtext-p2-orbit
      * Run https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/
-7. Update Marketplace composite site (Only on final release)
+8. Update Marketplace composite site (Only on final release)
    * In repository https://github.com/xtext/xtext-p2-orbit update files
      * [`updates/composite/marketplace/compositeArtifacts.xml`](https://github.com/xtext/xtext-p2-orbit/blob/master/updates/composite/marketplace/compositeArtifacts.xml)
      * [`updates/composite/marketplace/compositeContent.xml`](https://github.com/xtext/xtext-p2-orbit/blob/master/updates/composite/marketplace/compositeContent.xml)
    * Run job [update-composite-sites](https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/)
-8. As soon as Maven Central is updated - send notifications
+9. Check availability of artifacts on Maven Central
+   * It can take some hours until the artifacts are mirrored to Maven Central. 
+     _Note_: search.maven.org might not show the new release immediately when it is available. Check the availability of the artifacts for example with
+     ```
+    mvn dependency:get -U -DgroupId=org.eclipse.xtext -DartifactId=org.eclipse.xtext -Dversion=<VERSION>
+     ```
+9. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
    * Gitter
    * Twitter
    * Blog (for releases)
-9. Add / Update xtext-reference-projects (Only on final release)
-10. Adjust the bootstrap version to use the newly produced milestone / release
+10. Add / Update xtext-reference-projects (Only on final release)
+11. Adjust the bootstrap version to use the newly produced milestone / release
    * Note: The builds will fail if the newly promoted artifacts are not available on maven central yet.
    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
-11. xtext-apidiff (Only on final release)
+12. xtext-apidiff (Only on final release)
    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
