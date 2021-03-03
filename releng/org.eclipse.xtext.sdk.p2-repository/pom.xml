@@ -13,6 +13,15 @@
 	<artifactId>org.eclipse.xtext.sdk.p2-repository</artifactId>
 	<version>2.26.0-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
+	
+	<properties>
+		<!-- 
+			Version qualifier of the target zip file 
+			Usually this is the same as the (snaphsot) project version
+			but for releases it is set to the release version.
+		-->
+		<zipFileVersion>2.26.0-SNAPSHOT</zipFileVersion>
+	</properties>
 
 	<build>
 		<plugins>
@@ -61,7 +70,7 @@
 								</copy>
 								<copy
 									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.26.0-SNAPSHOT.zip"
-									tofile="${basedir}/../../build/org.eclipse.xtext.sdk.p2-repository-2.26.0-SNAPSHOT.zip">
+									tofile="${basedir}/../../build/org.eclipse.xtext.sdk.p2-repository-${zipFileVersion}.zip">
 								</copy>
 							</target>
 						</configuration>
