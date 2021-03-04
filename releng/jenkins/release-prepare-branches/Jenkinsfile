@@ -107,7 +107,6 @@ pipeline {
             }
           }
           if (!params.DRY_RUN) {
-            withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
             sshagent([GENIE_XTEXT_CREDENTIALS]) {
               repositoryNames.split(',').each {
                 dir (it) {
@@ -116,7 +115,7 @@ pipeline {
                   """
                 }
               }
-            }}
+            }
             slackSend message: "RELEASE BRANCH '${branchName}' PREPARED.", botUser: true, channel: 'xtext-builds', color: '#00FF00'
           }
         } // END script
@@ -131,9 +130,8 @@ pipeline {
  * Retrieve the Xtext version from 'versions.gradle' of the branch from xtext-lib
  */
 def getCurrentXtextVersion (branch) {
-  // TODO replace 'master' in curl url
   version = sh (returnStdout: true, 
-    script: '''curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/master/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')"''')  
+    script: """curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')" """)  
   version = version.replace('-SNAPSHOT','').trim()
   return version
 }
