@@ -1,0 +1,176 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'centos-7'
+    }
+  }
+    
+  parameters {
+    string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source Git Branch')
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'1'))
+    disableConcurrentBuilds()
+  }
+
+  triggers { // https://jenkins.io/doc/book/pipeline/syntax/#triggers
+    cron('H H(2-6) * * 1-5') // once a day in the night on weekdays
+  }
+
+  stages {
+    stage('Check') {
+      steps {
+        script {
+          def upToDate      = true
+          def versions      = load 'build-tools/version_functions.groovy'
+          def SOURCE_BRANCH = "${params.SOURCE_BRANCH}"
+          
+          def writeJUnitReport = {results, fileName ->
+            sh """
+              echo \"<?xml version='1.0' encoding='UTF-8'?>\" > ${fileName}
+              echo \"<testsuites>\" >> ${fileName}
+            """
+            
+            // OPEN TESTSUITE
+            results
+              .groupBy { it[0] }
+              .each { entry -> 
+                def resultsForKey = entry.value
+                def numberOfFailures = resultsForKey.count { result -> result[2]!=result[3] }
+                sh """
+                  echo \"  <testsuite name='${entry.key}' tests='${resultsForKey.size()}' failures='${numberOfFailures}'>\" >> ${fileName}
+                """
+                // iterate over all entries with the current test suite key
+                resultsForKey.each {
+                  def checkCategory  = it[0]
+                  def checkName      = it[1]
+                  def currentVersion = it[2]
+                  def latestVersion  = it[3]
+                  sh "echo \"    <testcase name='${checkName}'>\" >> ${fileName}"
+                  if (currentVersion!=latestVersion) {
+                    sh "echo \"      <failure message='UPDATE AVAILABLE ${currentVersion} -> ${latestVersion}'></failure>\" >> ${fileName}"
+                  }
+                  
+                  sh "echo \"      <system-out>LATEST AVAILABLE VERSION: ${latestVersion}</system-out>\" >> ${fileName}"
+                  sh "echo \"    </testcase>\" >> ${fileName}"
+                }
+                sh "echo \"  </testsuite>\" >> ${fileName}"
+            } // END each
+            sh """
+              echo \"</testsuites>\" >> ${fileName}
+              cat ${fileName}
+              pwd
+              find . 
+            """
+          }
+          
+          def results = [] // 0: Category(Class), 1: Check; 2: Current Version used by Xtext; 3: Latest Available Version
+          results.add([
+            'versions.versions_gradle',
+            'Xtext Bootstrap Version',
+            versions.getVersionFromGradleVersions('xtext_bootstrap',SOURCE_BRANCH),
+            versions.getLatestArtifactVersion('org.eclipse.xtend','xtend-maven-plugin')
+          ])
+          results.add([
+            'versions.Gradle',
+            'xtext-gradle-plugin',
+            versions.getXtextGradlePluginVersion(SOURCE_BRANCH),
+            versions.getLatestArtifactVersion('org.xtext','xtext-gradle-plugin')
+          ])
+          
+          // CHECK BOM
+          // The version properties in the BOM without the '-version' suffix
+          // For Eclipse platform artifact versions there is a common pattern
+          def eclipsePlatformProperties = [
+            'core.commands','core.contenttype','core.expressions','core.filesystem','core.jobs','core.resources','core.runtime',
+            'equinox.app','equinox.common','equinox.preferences','equinox.registry',
+            'osgi','text'
+          ]
+          eclipsePlatformProperties.each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              versions.getVersionFromBOM("org.eclipse.platform:org.eclipse.${it}", SOURCE_BRANCH),
+              versions.getLatestArtifactVersion('org.eclipse.platform',"org.eclipse.${it}")
+            ])
+          }
+          // JDT
+          ['jdt.core','jdt.compiler.apt','jdt.compiler.tool'].each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              versions.getVersionFromBOM("org.eclipse.jdt:org.eclipse.${it}", SOURCE_BRANCH),
+              versions.getLatestArtifactVersion('org.eclipse.jdt',"org.eclipse.${it}")
+            ])
+          }
+          // EMF
+          ['emf.codegen','emf.codegen.ecore','emf.common','emf.ecore','emf.ecore.change','emf.ecore.xmi'].each {
+            results.add([
+              'versions.BOM',
+              "org.eclipse.${it}",
+              versions.getVersionFromBOM("org.eclipse.emf:org.eclipse.${it}", SOURCE_BRANCH),
+              versions.getLatestArtifactVersion('org.eclipse.emf',"org.eclipse.${it}")
+            ])
+          }
+          results.add([
+            'versions.BOM',
+            'javax.annotation-api',
+            versions.getVersionFromBOM('javax.annotation:javax.annotation-api', SOURCE_BRANCH),
+            versions.getLatestArtifactVersion('javax.annotation','javax.annotation-api')
+          ])
+          
+          /*
+          results.add([
+            'versions.BOM',
+            'org.eclipse.lsp4j',
+            versions.getVersionFromBOM('org.eclipse.lsp4j:org.eclipse.lsp4j', SOURCE_BRANCH),
+            versions.getLatestArtifactVersion('org.eclipse.lsp4j','org.eclipse.lsp4j')
+          ])
+          */
+          
+          // MAVEN PLUGINS
+          results.add([
+            'Maven Plugins',
+            'Eclipse Tycho',
+            versions.getXtextTychoVersion(SOURCE_BRANCH),
+            versions.getLatestArtifactVersion('org.eclipse.tycho','tycho-maven-plugin')
+          ])
+
+          // Gradle Version
+          results.add([
+            'versions.Gradle',
+            'Gradle',
+            versions.getXtextGradleVersion(SOURCE_BRANCH),
+            versions.getLatestReleaseFromGitHubRepository('gradle','gradle')
+          ])
+          
+          // Use org.eclipse.xtext.maven.parent as reference for Maven plugins
+          def mavenParentUrl = "https://raw.githubusercontent.com/eclipse/xtext-maven/${SOURCE_BRANCH}/org.eclipse.xtext.maven.parent/pom.xml"
+          // List all Maven plugin artifactIds in that POM
+          def standardMavenPluginArtifactIds = ['maven-antrun-plugin','maven-compiler-plugin','maven-deploy-plugin','maven-enforcer-plugin','maven-install-plugin','maven-javadoc-plugin','maven-plugin-plugin','maven-source-plugin','maven-surefire-plugin']
+          standardMavenPluginArtifactIds.each {
+            results.add([
+              'Maven Plugins',
+              it,
+              versions.getArtifactVersionFromPOM(mavenParentUrl, it),
+              versions.getLatestArtifactVersion('org.apache.maven.plugins',it)
+            ])
+          }
+
+          sh "mkdir target" // make sure target directory exists
+          writeJUnitReport(results,"target/report.xml")
+        } // END script
+        
+        step([$class: 'JUnitResultArchiver', testResults: "target/report.xml"])
+      } // END steps
+    } // END stage
+  } // stages
+
+  // TODO Send messages when status changes
+  post {
+    always {
+      archiveArtifacts artifacts: 'target/**'
+    }
+  }
+}
