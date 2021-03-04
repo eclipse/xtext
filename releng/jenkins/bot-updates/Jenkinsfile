@@ -19,7 +19,6 @@ pipeline {
       'GENERATE_TEST_LANGUAGES'
       ]
       , description: '''
-      <b><i>ATTENTION: Pull Requests on repositories that require the ECA check will fail, if you do not fill out GIT_USER_NAME/GIT_USER_EMAIL!</i></b>
       The type of update to perform. The options are:
       <ul>
         <li><b>XTEXT_VERSION:</b> Set Xtext version. Modifies MANIFEST.MF, POM files, versions.gradle</li>
@@ -52,8 +51,6 @@ pipeline {
         <li><b>GENERATE_TEST_LANGUAGES:</b> <i>NO VALUE NEEDED</i></li>
       </ul>
     ''')
-    string(name: 'GIT_USER_NAME', defaultValue: 'xtext-bot', description: 'The Git user on whose behalf the changes are committed and signed off.')
-    string(name: 'GIT_USER_EMAIL', defaultValue: 'xtext-bot@eclipse.org', description: 'The Git user email address.')
     string(name: 'GITHUB_PR_REVIEWERS', defaultValue: '"kthoms","cdietrich"', description: 'Comma seperated list of GitHub users to assign as reviewers for the PR. Each value must be double-quoted.')
     booleanParam(name: 'PUSH_UNCHANGED_BRANCH', defaultValue: false, description: 'Push the target branch even when no changes were done. Usually useful in combination with enabling ADJUST_PIPELINES.')
     booleanParam(name: 'OPEN_PULL_REQUEST', defaultValue: true, description: 'Create Pull Requests for repositories that have changes.')
@@ -94,17 +91,19 @@ pipeline {
 
           // checkout source branch for each repository and create the target branch
           sshagent([GENIE_XTEXT_CREDENTIALS]) {
-            REPOSITORY_NAMES.split(',').each {
-              sh """
-                git clone --branch ${params.SOURCE_BRANCH} --depth 1 git@github.com:eclipse/${it}.git ${it}
-                cd ${it}
-                git config user.name "${params.GIT_USER_NAME}"
-                git config user.email "${params.GIT_USER_EMAIL}"
+            wrap([$class: 'BuildUser']) {
+              REPOSITORY_NAMES.split(',').each {
+                sh """
+                  git clone --branch ${params.SOURCE_BRANCH} --depth 1 git@github.com:eclipse/${it}.git ${it}
+                  cd ${it}
+                  git config user.name "${env.BUILD_USER}"
+                  git config user.email "${env.BUILD_USER_EMAIL}"
 
-                # create target branch
-                git checkout -b ${env.TARGET_BRANCH}
-              """
-            } // for each repo
+                  # create target branch
+                  git checkout -b ${env.TARGET_BRANCH}
+                """
+              } // for each repo
+            } // BuildUser
           } // sshagent
 
           // read versions.gradle and grep the Xtext version without qualifier
