@@ -29,7 +29,7 @@ SPDX-License-Identifier: EPL-2.0
       <import plugin="org.eclipse.xtend.typesystem.emf"/>
       <import plugin="com.google.guava" version="30.1.0" match="compatible"/>
       <import plugin="javax.inject" version="1.0.0" match="compatible"/>
-      <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
+      <import plugin="com.google.inject" version="5.0.1" match="compatible"/>
       <import plugin="org.objectweb.asm" version="9.1.0" match="compatible"/>
       <import plugin="io.github.classgraph" version="4.8.35" match="compatible"/>
    </requires>
