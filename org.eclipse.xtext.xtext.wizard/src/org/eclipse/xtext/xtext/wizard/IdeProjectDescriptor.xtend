@@ -214,6 +214,9 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 												implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 												<resource>plugin.properties</resource>
 											</transformer>
+											<transformer 
+												implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
+											</transformer>
 										</transformers>
 										«IF isEclipsePluginProject»
 											<artifactSet>
