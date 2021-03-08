@@ -44,19 +44,19 @@ public class ContentAssistCatchTest extends ContentAssistTest {
 
 	@Override
 	public void testOnStringLiteral_33() throws Exception {
-		newBuilder().append("(\'\'.toString )").assertTextAtCursorPosition(")",
+		newBuilder().append("(''.toString )").assertTextAtCursorPosition(")",
 				expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
 	}
 
 	@Override
 	public void testAfterBinaryOperation_06() throws Exception {
-		newBuilder().append("((\'\'+\'\'))").assertTextAtCursorPosition("))", 1,
+		newBuilder().append("((''+''))").assertTextAtCursorPosition("))", 1,
 				expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
 	}
 
 	@Override
 	public void testAfterBinaryOperation_07() throws Exception {
-		newBuilder().append("((\'\'+\'\'))").assertTextAtCursorPosition("))",
+		newBuilder().append("((''+''))").assertTextAtCursorPosition("))",
 				expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" }));
 	}
 
