@@ -97,10 +97,12 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 
 	protected boolean doNeedRebuild(JavaBuilderState javaBuilderState, Procedure1<? super UnconfirmedStructuralChangesDelta> processor) {
 		Iterator<UnconfirmedStructuralChangesDelta> ucDeltas = unconfirmedDeltas.iterator();
+		int buildNumber = javaBuilderState.getBuildNumber().intValue();
+		IProject project = javaBuilderState.getProject();
 		while (ucDeltas.hasNext()) {
 			UnconfirmedStructuralChangesDelta ucDelta = ucDeltas.next();
-			if ((ucDelta.getBuildNumber() < javaBuilderState.getBuildNumber().intValue())
-					&& ucDelta.getProject().equals(javaBuilderState.getProject())) {
+			if ((ucDelta.getBuildNumber() < buildNumber)
+					&& ucDelta.getProject().equals(project)) {
 				ucDeltas.remove();
 				if (processor != null) {
 					processor.apply(ucDelta);
