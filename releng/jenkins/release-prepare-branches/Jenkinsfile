@@ -33,7 +33,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        // checkout xtext-build-tools
+        // checkout xtext-umbrella
         checkout scm
         
         script {
