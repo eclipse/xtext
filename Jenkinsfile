@@ -150,7 +150,7 @@ def isTriggeredByUpstream() {
 def eclipseVersion() {
   def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "4.19"
+    return "4.20"
   } else if (targetPlatform == 'photon') {
     return "4.8"
   } else if (targetPlatform == 'oxygen') {
