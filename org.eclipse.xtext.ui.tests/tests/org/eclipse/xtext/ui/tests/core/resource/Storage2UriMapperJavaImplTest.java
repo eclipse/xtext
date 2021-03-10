@@ -64,8 +64,10 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 				/* java9 */ return true;
 			case 49:
 				/* java10 + java11 + java13 */ return true;
+			case 50:
+				/* java11.0.9+ */ return true;
 			case 51:
-				/* java14 */ return true;
+				/* java14 + java 15 */ return true;
 			default:
 				return false;
 		}
@@ -208,7 +210,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 					r -> "JrtPackageFragmentRoot".equals(r.getClass().getSimpleName()));
 			if (java9OrNewer) {
 				Assert.assertTrue(it.getValue().associatedRoots.size() + " / " + it.getKey(),
-						Lists.newArrayList(44 /* java11 */, 49, 63 /* java9 */, 51 /* java14 */)
+						Lists.newArrayList(44 /* java11 */, 49, 63 /* java9 */, 51 /* java14 */, 50 /* java15 */)
 								.contains(Integer.valueOf(it.getValue().associatedRoots.size())));
 			} else {
 				Assert.assertEquals(it.getKey(), 1, it.getValue().associatedRoots.size());
