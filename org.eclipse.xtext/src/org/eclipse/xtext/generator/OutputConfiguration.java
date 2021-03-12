@@ -108,7 +108,7 @@ public class OutputConfiguration {
 	}
 
 	/**
-	 * whether the output directory should be created if t doesn't already exist.
+	 * whether the output directory should be created if it doesn't already exist.
 	 */
 	public void setCreateOutputDirectory(boolean createOutputDirectory) {
 		this.createOutputDirectory = createOutputDirectory;
