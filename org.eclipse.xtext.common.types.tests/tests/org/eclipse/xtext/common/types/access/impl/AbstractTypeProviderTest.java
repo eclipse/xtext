@@ -323,8 +323,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			Set<String> memberNames = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString");
 			assertMembers(typeName, memberNames);
 		} catch(AssertionError e) {
-			Set<String> memberNamesJ11 = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString", "compare");
-			assertMembers(typeName, memberNamesJ11);
+			try {
+				Set<String> memberNamesJ11 = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString", "compare");
+				assertMembers(typeName, memberNamesJ11);
+			} catch (AssertionError e2) {
+				Set<String> memberNamesJ15 = Sets.newHashSet("length", "chars", "charAt", "codePoints", "isEmpty", "subSequence", "toString", "compare");
+				assertMembers(typeName, memberNamesJ15);
+			}
 		}
 	}
 
