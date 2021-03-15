@@ -88,6 +88,8 @@ class TargetPlatformProject extends ProjectDescriptor {
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="com.google.gson" version="2.8.6.v20201231-1626"/>
+					<unit id="com.google.inject" version="3.0.0.v201605172100"/>
+					<unit id="javax.inject" version="1.0.0.v20091030"/>
 					<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 					<unit id="org.junit" version="4.12.0.v201504281640"/>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
