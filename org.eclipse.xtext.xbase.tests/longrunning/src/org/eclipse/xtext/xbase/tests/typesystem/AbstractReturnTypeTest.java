@@ -258,26 +258,44 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_11() throws Exception {
-		resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'",
+					"Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_12() throws Exception {
-		resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}",
+					"Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_13() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try return 'literal' as Object as Boolean\n" +
-				"catch(NullPointerException e) return 'second thing is thrown'" +
-				"catch(ClassCastException e) throw new NullPointerException()",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) return 'second thing is thrown'" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) return 'second thing is thrown'" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 
@@ -285,11 +303,19 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_14() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try return 'literal' as Object as Boolean\n"+
-				"catch(ClassCastException e) throw new NullPointerException()\n" +
-				"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n"+
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n"+
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 
@@ -308,24 +334,40 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_19() throws Exception {
-		resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_20() throws Exception {
-		resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_21() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try return 'literal' as Object as Boolean\n" +
-				"catch(NullPointerException e) 'second thing is thrown'\n" +
-				"catch(ClassCastException e) throw new NullPointerException()",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) 'second thing is thrown'\n" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) 'second thing is thrown'\n" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 
@@ -333,48 +375,81 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_22() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try return 'literal' as Object as Boolean\n" +
-				"catch(ClassCastException e) throw new NullPointerException()\n" +
-				"catch(NullPointerException e) 'dont catch subsequent exceptions'",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try return 'literal' as Object as Boolean\n" +
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_25() throws Exception {
-		resolvesTo("try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'", "Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'", "Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'", "Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_26() throws Exception {
-		resolvesTo("try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return true finally true",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return true finally true",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return true finally true",
+					"Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_27() throws Exception {
-		resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'", "Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'", "Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'", "Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_28() throws Exception {
-		resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}", "Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}", "Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}", "Serializable & Comparable<?>");
+		}
 	}
 
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_29() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try 'literal' as Object as Boolean\n" +
-				"catch(NullPointerException e) return 'second thing is thrown'\n" +
-				"catch(ClassCastException e) throw new NullPointerException()",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) return 'second thing is thrown'\n" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try 'literal' as Object as Boolean\n" +
+							"catch(NullPointerException e) return 'second thing is thrown'\n" +
+							"catch(ClassCastException e) throw new NullPointerException()",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 
@@ -382,11 +457,19 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_30() throws Exception {
 		// @formatter:off
-		resolvesTo(
-				"try 'literal' as Object as Boolean\n" +
-				"catch(ClassCastException e) throw new NullPointerException()\n" +
-				"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
-				"Serializable & Comparable<?>");
+		if (isJava15OrLater()) {
+			resolvesTo(
+					"try 'literal' as Object as Boolean\n" +
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?> & Constable");
+		} else {
+			resolvesTo(
+					"try 'literal' as Object as Boolean\n" +
+							"catch(ClassCastException e) throw new NullPointerException()\n" +
+							"catch(NullPointerException e) return 'dont catch subsequent exceptions'",
+					"Serializable & Comparable<?>");
+		}
 		// @formatter:on
 	}
 

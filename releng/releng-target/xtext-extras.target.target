@@ -3,7 +3,7 @@
 <target name="org.eclipse.xtext.extras.target" sequenceNumber="0">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/S202101110955/"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0"/>
 			<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -11,14 +11,14 @@
 			<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S202102011009/"/>
+			<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.12.1/"/>
 			<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-03"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-06"/>
 			<unit id="org.junit" version="4.12.0.v201504281640"/>
 			<unit id="org.objectweb.asm" version="9.1.0.v20210209-1849"/>
 			<unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
