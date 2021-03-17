@@ -162,16 +162,11 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 	}
 
 	protected String getFragment(EObject obj) {
-		boolean orphaned = obj.eResource() == null;
-		if(orphaned) {
-			LOG.debug("Object (" + obj + ") is not contained in any resource");
+		if (obj == null || obj.eIsProxy()) {
+			return MISSING_FRAGMENT;
 		}
-		if (obj == null || obj.eIsProxy() || orphaned) {
-			 /*
-			  *  TODO This will overwrite a map entry if used as a key,
-			  *  will lead to a case where only the last null/proxy object is stored.
-			  *  Bad for debugging/analysis. 
-			  */
+		if (obj.eResource() == null) {
+			LOG.error("Object (" + obj + ") is not contained in any resource");
 			return MISSING_FRAGMENT;
 		}
 		return obj.eResource().getURIFragment(obj);
