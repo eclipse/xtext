@@ -164,7 +164,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 	protected String getFragment(EObject obj) {
 		boolean orphaned = obj.eResource() == null;
 		if(orphaned) {
-			LOG.error("Object (" + obj + ") is not contained in any resource");
+			LOG.debug("Object (" + obj + ") is not contained in any resource");
 		}
 		if (obj == null || obj.eIsProxy() || orphaned) {
 			 /*
