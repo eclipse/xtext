@@ -17,8 +17,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -100,6 +104,9 @@ public class ResourceStorageTest extends AbstractJvmModelTest {
 	@Inject
 	private BatchLinkableResourceStorageFacade resourceStorageFacade;
 
+	@Inject
+	private JvmModelAssociator associator;
+	
 	@Test
 	public void testWriteAndLoad() throws Exception {
 		StringBuilder model = new StringBuilder();
@@ -162,5 +169,48 @@ public class ResourceStorageTest extends AbstractJvmModelTest {
 		Assert.assertEquals(originalAdapter.logicalContainerMap.size(), restoredAdapter.logicalContainerMap.size());
 		Assert.assertEquals(originalAdapter.sourceToTargetMap.size(), restoredAdapter.sourceToTargetMap.size());
 		Assert.assertEquals(originalAdapter.targetToSourceMap.size(), restoredAdapter.targetToSourceMap.size());
+	}
+	
+	@Test
+	public void testWriteAndLoadWithMissing() throws Exception {
+		String code = "{}";
+		XExpression file = this.expression(code);
+
+		assertEquals(2, file.eResource().getContents().size()); // Jvm model loaded
+
+		JvmGenericType type = ((JvmGenericType) file.eResource().getContents().get(1));
+		// add a synthetic constructor 
+		JvmConstructor jvmConstructor = TypesPackage.eINSTANCE.getTypesFactory().createJvmConstructor();
+		jvmConstructor.setSimpleName("Test");
+
+		type.getMembers().add(jvmConstructor);
+		associator.associate(file.eResource().getContents().get(0), jvmConstructor);
+
+		StorageAwareResource originalResource = ((StorageAwareResource) file.eResource());
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		resourceStorageFacade.setStoreNodeModel(false);
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource);
+		
+		// Remove synthetic constructor to cause an addition of a "none" fragment
+		type.getMembers().remove(jvmConstructor);
+		bout = new ByteArrayOutputStream();
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(originalResource);
+
+		ResourceSet resSet = file.eResource().getResourceSet();
+		originalResource.unload();
+
+		// Load broken associations
+		ResourceStorageLoadable in = resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray()));
+		StorageAwareResource resource = (StorageAwareResource) resSet.createResource(URI.createURI("synthetic:/Test.___xbase"));
+		InMemoryURIConverter converter = new InMemoryURIConverter();
+		converter.addModel(resource.getURI().toString(), code);
+		resource.getResourceSet().setURIConverter(converter);
+		resSet.getResources().add(resource);
+		resource.loadFromStorage(in);
+
+		resource.unload();
+		resource.load(null);
+		// Write broken associations
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(resource);
 	}
 }

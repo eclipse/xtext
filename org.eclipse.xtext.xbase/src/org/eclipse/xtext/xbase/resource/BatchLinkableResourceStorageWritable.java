@@ -41,6 +41,8 @@ import com.google.common.collect.FluentIterable;
  */
 public class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
 	private static final Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable.class);
+	
+	public static final String MISSING_FRAGMENT = "none";
 
 	public BatchLinkableResourceStorageWritable(OutputStream out, boolean storeNodeModel) {
 		super(out, storeNodeModel);
@@ -101,7 +103,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 			out.writeBoolean(false);
 		}
 	}
-
+	
 	protected void writeAssociationsAdapter(BatchLinkableResource resource, OutputStream zipOut) throws IOException {
 		JvmModelAssociator.Adapter adapter = (JvmModelAssociator.Adapter) EcoreUtil.getExistingAdapter(resource, JvmModelAssociator.Adapter.class);
 		if (adapter == null) {
@@ -122,7 +124,10 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 			Map<String, String> logicalMap = new LinkedHashMap<>();
 			adapter.logicalContainerMap.forEach((key, value)->{
 				logIfResourceMismatch(resource, key);
-				logicalMap.put(getFragment(key), getFragment(value));
+				String keyFragment = getFragment(key);
+				if(!MISSING_FRAGMENT.equals(keyFragment)) {
+					logicalMap.put(keyFragment, getFragment(value));
+				}
 			});
 			objOut.writeObject(logicalMap);
 			
@@ -135,7 +140,10 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 		Map<String, Set<String>> fragmentMap = new LinkedHashMap<>();
 		serializeMe.forEach((keyObject, valueObjects)->{
 			logIfResourceMismatch(resource, keyObject);
-			fragmentMap.put(getFragment(keyObject), objectsToFragments(valueObjects));
+			String keyFragment = getFragment(keyObject);
+			if(!MISSING_FRAGMENT.equals(keyFragment)) {
+				fragmentMap.put(keyFragment, objectsToFragments(valueObjects));
+			}
 		});
 		objOut.writeObject(fragmentMap);
 	}
@@ -154,8 +162,12 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
 	}
 
 	protected String getFragment(EObject obj) {
-		if (obj == null || obj.eIsProxy() || obj.eResource() == null) {
-			return "none";
+		if (obj == null || obj.eIsProxy()) {
+			return MISSING_FRAGMENT;
+		}
+		if (obj.eResource() == null) {
+			LOG.error("Object (" + obj + ") is not contained in any resource");
+			return MISSING_FRAGMENT;
 		}
 		return obj.eResource().getURIFragment(obj);
 	}
