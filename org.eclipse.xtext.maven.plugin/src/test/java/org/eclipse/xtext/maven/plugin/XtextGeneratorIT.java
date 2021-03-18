@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.maven.plugin;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
+import org.eclipse.xtext.maven.trace.ClassFileDebugSourceExtractor;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -66,7 +69,8 @@ public class XtextGeneratorIT {
 	@Test
 	public void mavenConfiguration() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/maven-config");
-		verifier.assertFileMatches(verifier.getBasedir() + "/model2-output/Model.nojdt.txt", "People to greet\\: maven2");
+		verifier.assertFileMatches(verifier.getBasedir() + "/model2-output/Model.nojdt.txt",
+				"People to greet\\: maven2");
 		verifier.assertFilePresent(verifier.getBasedir() + "/model-output/IntegrationTestXbase.java");
 	}
 
@@ -85,7 +89,7 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase2.class");
 	}
-	
+
 	@Test
 	public void outputPerGoal() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/output-per-goal");
@@ -93,7 +97,7 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleClassXbase.class");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-test-gen/SimpleTestClassXbase.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleTestClassXbase.class");
-	}	
+	}
 
 	@Test
 	public void outputPerSource() throws Exception {
@@ -123,19 +127,19 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcore() throws Exception {
-		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang",true, "clean", "verify");
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang", true, "clean", "verify");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(
 				verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
 		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
 				"(?s).*MY_FIRST_LITERAL\\(-7.*MY_SECOND_LITERAL\\(137.*");
 	}
-	
+
 	@Test
 	public void xcoreMapping() throws Exception {
 		verifyErrorFreeLog(ROOT + "/xcore-mapping", true, "clean", "verify");
 	}
-	
+
 	@Test
 	public void xcoreAutoMapping() throws Exception {
 		verifyErrorFreeLog(ROOT + "/xcore-auto-mapping", true, "clean", "verify");
@@ -147,18 +151,35 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/xcore/bug463946/pack/MyModel.java");
 	}
 
+	@Test
+	public void traceFileIsGenerated() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/trace");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/.IntegrationTestXbase.java._trace");
+
+		String expectedSourceName = "IntegrationTestXbase.xbase";
+		File classFile = new File(verifier.getBasedir() + "/target/classes/IntegrationTestXbase.class");
+
+		assertTraceSourceFileName(expectedSourceName, classFile);
+	}
+
+	private void assertTraceSourceFileName(String expectedSourceName, File file) throws IOException {
+		String sourceName = new ClassFileDebugSourceExtractor().getDebugSourceFileName(file);
+		assertEquals("Source file name doesn't match", expectedSourceName, sourceName);
+	}
+
 	private Verifier verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		return verifyErrorFreeLog(pathToTestProject, false, "clean", "verify");
 	}
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject, boolean updateSnapshots, String... goals)
 			throws IOException, VerificationException {
-		if(goals == null || goals.length < 1) {
+		if (goals == null || goals.length < 1) {
 			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
 		}
 		Verifier verifier = newVerifier(pathToTestProject);
 
-		if(updateSnapshots) {
+		if (updateSnapshots) {
 			verifier.addCliOption("-U");
 		}
 		for (String goal : goals) {

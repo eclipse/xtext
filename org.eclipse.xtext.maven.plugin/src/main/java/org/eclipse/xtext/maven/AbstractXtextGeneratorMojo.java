@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -35,12 +34,17 @@ import com.google.inject.Injector;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
+public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 
 	/**
-	 * Lock object to ensure thread-safety
+	 * File encoding argument for the generator.
 	 */
-	private static final Object lock = new Object();
+	@Parameter(property = "xtext.encoding", defaultValue = "${project.build.sourceEncoding}")
+	private String encoding;
+
+	public String getEncoding() {
+		return encoding;
+	}
 
 	/**
 	 * Location of the generated source files.
@@ -49,39 +53,20 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 	private String tmpClassDirectory;
 
 	/**
-	 * File encoding argument for the generator.
-	 */
-	@Parameter(property = "xtext.encoding", defaultValue = "${project.build.sourceEncoding}")
-	protected String encoding;
-
-	/**
-	 * The project itself. This parameter is set by maven.
-	 */
-	@Parameter(defaultValue = "${project}", readonly = true, required = true)
-	protected MavenProject project;
-
-	/**
-	 * Project source roots. List of folders, where the source models are located.<br>
-	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
-	 * When adding a new entry the default value will be overwritten not extended.
-	 */
-	@Parameter(defaultValue = "${project.compileSourceRoots}", required = true)
-	private List<String> sourceRoots;
-
-	/**
-	 * Java source roots. List of folders, where the java source files are located.<br>
-	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
-	 * When adding a new entry the default value will be overwritten not extended.<br>
+	 * Java source roots. List of folders, where the java source files are
+	 * located.<br>
+	 * The default value is a reference to the project's
+	 * ${project.compileSourceRoots}.<br>
+	 * When adding a new entry the default value will be overwritten not
+	 * extended.<br>
 	 * Used when your language needs java.
 	 */
 	@Parameter(defaultValue = "${project.compileSourceRoots}", required = true)
 	private List<String> javaSourceRoots;
 
-	@Parameter(required = true)
-	private List<Language> languages;
-
 	/**
-	 * you can specify a list of project mappings that is used to populate the EMF Platform Resource Map.
+	 * you can specify a list of project mappings that is used to populate the EMF
+	 * Platform Resource Map.
 	 * 
 	 * <pre>
 		&lt;projectMappings&gt;
@@ -130,10 +115,18 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 	private ClusteringConfig clusteringConfig;
 
 	/**
-	 * if enabled the plugin will scan the project and its siblings and add them to the platform resource map automatically
+	 * if enabled the plugin will scan the project and its siblings and add them to
+	 * the platform resource map automatically
 	 */
 	@Parameter(defaultValue = "false")
 	private Boolean autoFillPlatformResourceMap = Boolean.FALSE;
+
+	/**
+	 * Automatically add all output directories of all configured languages to the
+	 * compile source roots needed by maven-compiler
+	 */
+	@Parameter(defaultValue = "true")
+	boolean addOutputDirectoriesToCompileSourceRoots = Boolean.TRUE;
 
 	/*
 	 * (non-Javadoc)
@@ -146,23 +139,27 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 		} else {
 			synchronized (lock) {
 				new MavenLog4JConfigurator().configureLog4j(getLog());
-				autoAddToPlatformResourceMap(project);
+				autoAddToPlatformResourceMap(getProject());
 				manuallyAddToPlatformResourceMap();
 				internalExecute();
 			}
 		}
 	}
 
-	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
-		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this.getClass().getClassLoader());
+	protected void internalExecute() throws MojoExecutionException {
+		if (addOutputDirectoriesToCompileSourceRoots) {
+			configureMavenOutputs();
+		}
+		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(),
+				this.getClass().getClassLoader());
 		Injector injector = Guice.createInjector(new MavenStandaloneBuilderModule());
 		StandaloneBuilder builder = injector.getInstance(StandaloneBuilder.class);
-		builder.setBaseDir(project.getBasedir().getAbsolutePath());
+		builder.setBaseDir(getProject().getBasedir().getAbsolutePath());
 		builder.setLanguages(languages);
-		builder.setEncoding(encoding);
+		builder.setEncoding(getEncoding());
 		builder.setClassPathEntries(getClasspathElements());
 		builder.setClassPathLookUpFilter(classPathLookupFilter);
-		builder.setSourceDirs(sourceRoots);
+		builder.setSourceDirs(getSourceRoots());
 		builder.setJavaSourceDirs(javaSourceRoots);
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
@@ -177,6 +174,8 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 		}
 	}
 
+	protected abstract List<String> getSourceRoots();
+
 	private void configureCompiler(IJavaCompiler compiler) {
 		CompilerConfiguration conf = compiler.getConfiguration();
 		conf.setSourceLevel(compilerSourceLevel);
@@ -187,11 +186,12 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 	}
 
 	private void logState() {
-		getLog().info("Encoding: " + (encoding == null ? "not set. Encoding provider will be used." : encoding));
+		getLog().info(
+				"Encoding: " + (getEncoding() == null ? "not set. Encoding provider will be used." : getEncoding()));
 		getLog().info("Compiler source level: " + compilerSourceLevel);
 		getLog().info("Compiler target level: " + compilerTargetLevel);
 		if (getLog().isDebugEnabled()) {
-			getLog().debug("Source dirs: " + IterableExtensions.join(sourceRoots, ", "));
+			getLog().debug("Source dirs: " + IterableExtensions.join(getSourceRoots(), ", "));
 			getLog().debug("Java source dirs: " + IterableExtensions.join(javaSourceRoots, ", "));
 			getLog().debug("Classpath entries: " + IterableExtensions.join(getClasspathElements(), ", "));
 		}
@@ -213,15 +213,12 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 		};
 	}
 
+	/**
+	 * @return resolved class path elements
+	 */
 	public abstract Set<String> getClasspathElements();
 
-	public List<Language> getLanguages() {
-		return languages;
-	}
-
-	public void setLanguages(List<Language> languages) {
-		this.languages = languages;
-	}
+	protected abstract void configureMavenOutputs();
 
 	public List<ProjectMapping> getProjectMappings() {
 		return projectMappings;
@@ -232,15 +229,18 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 	}
 
 	/**
-	 * Adds the given project and its child modules ({@link MavenProject#getModules()}) to {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses {@link MavenProject#getParent()} recursively, if set.
+	 * Adds the given project and its child modules
+	 * ({@link MavenProject#getModules()}) to
+	 * {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses
+	 * {@link MavenProject#getParent()} recursively, if set.
 	 *
-	 * @param project
-	 *            the project
+	 * @param project the project
 	 */
 	private void autoAddToPlatformResourceMap(final MavenProject project) {
 		if (autoFillPlatformResourceMap) {
 			addToPlatformResourceMap(project.getBasedir());
-			project.getModules().stream().map(module -> new File(project.getBasedir(), module)).forEach(e -> addToPlatformResourceMap(e));
+			project.getModules().stream().map(module -> new File(project.getBasedir(), module))
+					.forEach(this::addToPlatformResourceMap);
 
 			if (project.getParent() != null)
 				autoAddToPlatformResourceMap(project.getParent());
@@ -262,15 +262,16 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 	}
 
 	/**
-	 * Adds the given file to EcorePlugin's platform resource map. The file's name will be used as the map entry's key.
+	 * Adds the given file to EcorePlugin's platform resource map. The file's name
+	 * will be used as the map entry's key.
 	 *
-	 * @param file
-	 *            a file to register
+	 * @param file a file to register
 	 * @return the registered URI pointing to the given file
 	 * @see EcorePlugin#getPlatformResourceMap()
 	 */
 	private URI addToPlatformResourceMap(final File file) {
-		getLog().info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString() + "' to Platform Resource Map");
+		getLog().info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString()
+				+ "' to Platform Resource Map");
 		final URI uri = URI.createURI(file.toURI().toString());
 		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
 	}

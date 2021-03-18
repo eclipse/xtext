@@ -18,8 +18,11 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.eclipse.xtext.ISetup;
 
 /**
+ * Generates test sources of all contributing {@link ISetup} language instances
+ * 
  * @author Jan Rosczak - Initial contribution and API
  */
 @Mojo(name = "testGenerate", defaultPhase = LifecyclePhase.GENERATE_TEST_SOURCES, requiresDependencyResolution = ResolutionScope.TEST, threadSafe = true)
@@ -35,8 +38,30 @@ public class XtextTestGenerateMojo extends AbstractXtextGeneratorMojo {
 	public Set<String> getClasspathElements() {
 		Set<String> classpathElementSet = newLinkedHashSet();
 		classpathElementSet.addAll(this.classpathElements);
-		classpathElementSet.remove(project.getBuild().getTestOutputDirectory());
+		classpathElementSet.remove(getProject().getBuild().getTestOutputDirectory());
 		return newLinkedHashSet(filter(classpathElementSet, emptyStringFilter()));
+	}
+
+	@Override
+	protected void configureMavenOutputs() {
+		for (Language language : getLanguages()) {
+			addTestCompileSourceRoots(language);
+		}
+	}
+	
+	/**
+	 * Project test source roots. List of folders, where the test source models are
+	 * located.<br>
+	 * The default value is a reference to the project's
+	 * ${project.testCompileSourceRoots}.<br>
+	 * When adding a new entry the default value will be overwritten not extended.
+	 */
+	@Parameter(defaultValue = "${project.testCompileSourceRoots}", required = true)
+	private List<String> sourceRoots;
+
+	@Override
+	protected List<String> getSourceRoots() {
+		return sourceRoots;
 	}
 
 }
