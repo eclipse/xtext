@@ -1163,6 +1163,9 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.append("\t");
               _builder_1.append("append(\'plugin.properties\')");
               _builder_1.newLine();
+              _builder_1.append("\t");
+              _builder_1.append("mergeServiceFiles()");
+              _builder_1.newLine();
               _builder_1.append("}");
               _builder_1.newLine();
             }

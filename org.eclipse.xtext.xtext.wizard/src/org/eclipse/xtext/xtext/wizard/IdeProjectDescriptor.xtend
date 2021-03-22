@@ -339,6 +339,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 								'plugin.xml', 'systembundle.properties', 'profile.list')
 							classifier = 'ls'
 							append('plugin.properties')
+							mergeServiceFiles()
 						}
 					«ENDIF»
 				«ENDIF»
