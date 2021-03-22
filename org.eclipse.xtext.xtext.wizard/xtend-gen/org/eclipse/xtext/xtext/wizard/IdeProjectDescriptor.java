@@ -698,6 +698,18 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.append("</transformer>");
               _builder.newLine();
               _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("<transformer ");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t\t");
+              _builder.append("implementation=\"org.apache.maven.plugins.shade.resource.ServicesResourceTransformer\">");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t");
+              _builder.append("</transformer>");
+              _builder.newLine();
+              _builder.append("\t\t");
               _builder.append("\t\t");
               _builder.append("</transformers>");
               _builder.newLine();
