@@ -102,7 +102,12 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		Set<QualifiedName> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());
 		addExportedNames(names,delta.getNew());
-		return !Collections.disjoint(names, getImportedNames(candidate));
+		Collection<QualifiedName> importedNames = getImportedNames(candidate);
+		if (names.size() > importedNames.size()) {
+			return !Collections.disjoint(names, importedNames);
+		} else {
+			return !Collections.disjoint(importedNames, names);
+		}
 	}
 
 	protected Collection<QualifiedName> getImportedNames(IResourceDescription candidate) {
