@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -497,5 +497,129 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
-		
+
+	@Test
+	def testVoidAndObjectDoNotGenerateUnusedCode() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void v) {}
+				def dispatch void doThing(Object o) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void v) {
+			  }
+			  
+			  protected void _doThing(final Object o) {
+			  }
+			  
+			  public void doThing(final Object v) {
+			    if (v == null) {
+			      _doThing((Void)null);
+			      return;
+			    } else {
+			      _doThing(v);
+			      return;
+			    }
+			  }
+			}
+		''')
+	}		
+
+	@Test
+	def testVoidAndStringDoNotGenerateUnusedCode() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void v) {}
+				def dispatch void doThing(String o) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void v) {
+			  }
+			  
+			  protected void _doThing(final String o) {
+			  }
+			  
+			  public void doThing(final String o) {
+			    if (o != null) {
+			      _doThing(o);
+			      return;
+			    } else {
+			      _doThing((Void)null);
+			      return;
+			    }
+			  }
+			}
+		''')
+	}		
+
+	@Test
+	def testVoidAndObjectTwoParametersDoNotGenerateUnusedCode() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void p0, Object p1) {}
+				def dispatch void doThing(Object p0, Void p1) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void p0, final Object p1) {
+			  }
+			  
+			  protected void _doThing(final Object p0, final Void p1) {
+			  }
+			  
+			  public void doThing(final Object p0, final Object p1) {
+			    if (p0 == null
+			         && p1 != null) {
+			      _doThing((Void)null, p1);
+			      return;
+			    } else {
+			      _doThing(p0, (Void)null);
+			      return;
+			    }
+			  }
+			}
+		''')
+	}		
+
+
+	@Test
+	def testVoidAndObjectTwoParametersButDifferentTypesGenerateElse() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void p0, Float p1) {}
+				def dispatch void doThing(Object p0, Integer p1) {}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void p0, final Float p1) {
+			  }
+			  
+			  protected void _doThing(final Object p0, final Integer p1) {
+			  }
+			  
+			  public void doThing(final Object p0, final Number p1) {
+			    if (p0 == null
+			         && p1 instanceof Float) {
+			      _doThing((Void)null, (Float)p1);
+			      return;
+			    } else if (p0 != null
+			         && p1 instanceof Integer) {
+			      _doThing(p0, (Integer)p1);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(p0, p1).toString());
+			    }
+			  }
+			}
+		''')
+	}		
 }
