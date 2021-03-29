@@ -16,6 +16,7 @@ import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -104,6 +105,7 @@ class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQuickfixT
 
 	override setUp() {
 		super.setUp
+		TargetPlatformUtil.setTargetPlatform(RemoveUnnecessaryModifiersMultiQuickfixTest)
 		projectName.createPluginProject
 	}
 

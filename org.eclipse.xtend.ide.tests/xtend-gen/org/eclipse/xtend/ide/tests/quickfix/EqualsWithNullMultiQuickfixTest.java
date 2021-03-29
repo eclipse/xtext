@@ -20,6 +20,7 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistCompletionProposal;
 import org.eclipse.xtext.ui.testing.AbstractMultiQuickfixTest;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -148,6 +149,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
   public void setUp() {
     try {
       super.setUp();
+      TargetPlatformUtil.setTargetPlatform(EqualsWithNullMultiQuickfixTest.class);
       WorkbenchTestHelper.createPluginProject(this.getProjectName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
