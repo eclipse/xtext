@@ -9,6 +9,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -1167,6 +1168,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Ignore
   public void testVoidAndObjectDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
@@ -1233,6 +1235,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Ignore
   public void testVoidAndStringDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
@@ -1299,6 +1302,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Ignore
   public void testVoidAndObjectTwoParametersDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
@@ -1355,6 +1359,104 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testVoidNotAllCases() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch String toExpectation(Void p1) {\"\"}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch String toExpectation(String p1) {\"\"}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch String toExpectation(Integer p1) {\"\"}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Arrays;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Test {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected String _toExpectation(final Void p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected String _toExpectation(final String p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected String _toExpectation(final Integer p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String toExpectation(final Object p1) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (p1 instanceof Integer) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _toExpectation((Integer)p1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (p1 instanceof String) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _toExpectation((String)p1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (p1 == null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _toExpectation((Void)null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("Arrays.<Object>asList(p1).toString());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
