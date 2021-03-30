@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -121,13 +121,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 	
 	
-	@Inject private JarEntryLocator locator;
-	@Inject private IJdtHelper jdtHelper;
-	@Inject private UriValidator uriValidator;
-	@Inject private JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
-	@Inject private IWorkspace workspace;
-	@Inject private IStorage2UriMapper host;
-	@Inject private WorkspaceLockAccess workspaceLockAccess;
+	@Inject protected JarEntryLocator locator;
+	@Inject protected IJdtHelper jdtHelper;
+	@Inject protected UriValidator uriValidator;
+	@Inject protected JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
+	@Inject protected IWorkspace workspace;
+	@Inject protected IStorage2UriMapper host;
+	@Inject protected WorkspaceLockAccess workspaceLockAccess;
 	
 	/**
 	 * Public for testing purpose
@@ -192,7 +192,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		this.workspaceLockAccess = workspaceLockAccess;
 	}
 	
-	private final Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
+	protected final Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
 	
 	/**
 	 * Rejects Java output folders when traversing a project.
@@ -242,7 +242,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return data.uri2Storage;
 	}
 	
-	private PackageFragmentRootData getData(IPackageFragmentRoot root) {
+	protected PackageFragmentRootData getData(IPackageFragmentRoot root) {
 		final boolean isCachable = root.isArchive() || root.isExternal();
 		if (isCachable) {
 			return getCachedData(root);
@@ -251,7 +251,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return data;
 	}
 
-	private PackageFragmentRootData getCachedData(IPackageFragmentRoot root) {
+	protected PackageFragmentRootData getCachedData(IPackageFragmentRoot root) {
 		final String path = root.getPath().toString();
 		synchronized (cachedPackageFragmentRootData) {
 			if(cachedPackageFragmentRootData.containsKey(path)) {
@@ -271,11 +271,11 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return data;
 	}
 	
-	private boolean isUpToDate(PackageFragmentRootData data, IPackageFragmentRoot root) {
+	protected boolean isUpToDate(PackageFragmentRootData data, IPackageFragmentRoot root) {
 		return Objects.equal(data.modificationStamp, computeModificationStamp(root));
 	}
 	
-	private Object computeModificationStamp(IPackageFragmentRoot root) {
+	protected Object computeModificationStamp(IPackageFragmentRoot root) {
 		try {
 			if (root.exists()) {
 				IResource resource = root.getUnderlyingResource();
@@ -465,13 +465,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		this.workspace = workspace;
 	}
 	
-	private volatile boolean isInitialized = false;
-	private AtomicReference<CountDownLatch> initializerGuard = new AtomicReference<CountDownLatch>();
+	protected volatile boolean isInitialized = false;
+	protected AtomicReference<CountDownLatch> initializerGuard = new AtomicReference<CountDownLatch>();
 
 	/**
 	 * @since 2.4
 	 */
-	private void updateCache(IJavaProject project) {
+	protected void updateCache(IJavaProject project) {
 		Set<PackageFragmentRootData> datas = newHashSet();
 		try {
 			if (project.exists() && project.getProject().isAccessible()) {
@@ -489,7 +489,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 	
-	private void clearCache(IJavaProject project, Set<PackageFragmentRootData> toBeKept) {
+	protected void clearCache(IJavaProject project, Set<PackageFragmentRootData> toBeKept) {
 		Collection<PackageFragmentRootData> values;
 		synchronized (cachedPackageFragmentRootData) {
 			values = newArrayList(cachedPackageFragmentRootData.values());
@@ -561,7 +561,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 
-	private boolean initializeCache(boolean wait) {
+	protected boolean initializeCache(boolean wait) {
 		if(!isInitialized) {
 			/*
 			 * IWorkspace.run(IWorkspaceRunnable, ISchedulingRule, int, IProgressMonitor)
@@ -608,7 +608,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * If no thread has been spawned so far, spawns a new one that will perform the cache init.
 	 * Optionally waits for the cache initialization to be performed in a another thread.
 	 */
-	private void useNewThreadToInitialize(boolean wait) {
+	protected void useNewThreadToInitialize(boolean wait) {
 		WorkspaceLockAccess.Result workspaceLockedByCurrentThread = workspaceLockAccess.isWorkspaceLockedByCurrentThread(workspace);
 		if (workspaceLockedByCurrentThread == WorkspaceLockAccess.Result.SHUTDOWN) {
 			// do nothing
@@ -646,7 +646,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 
-	private void startInitializerThread(final CountDownLatch countDown) {
+	protected void startInitializerThread(final CountDownLatch countDown) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -662,7 +662,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}, "Storage2UriMapperJavaImpl::doInitializeCache").start();
 	}
 
-	private void doInitializeCache() throws CoreException {
+	protected void doInitializeCache() throws CoreException {
 		if(!isInitialized) {
 			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 				@Override
@@ -688,7 +688,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 	
-	private Set<IJavaElementDelta> getProjectDeltas(IJavaElementDelta delta) {
+	protected Set<IJavaElementDelta> getProjectDeltas(IJavaElementDelta delta) {
 		IJavaElement element = delta.getElement();
 		if(delta.getElement().getElementType() == IJavaElement.JAVA_PROJECT) {
 			return Collections.singleton(delta);
