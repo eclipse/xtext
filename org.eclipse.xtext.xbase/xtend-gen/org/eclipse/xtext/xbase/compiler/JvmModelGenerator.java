@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -309,9 +309,7 @@ public class JvmModelGenerator implements IGenerator {
       EObject _eContainer = it.eContainer();
       boolean _tripleEquals = (_eContainer == null);
       if (_tripleEquals) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("@SuppressWarnings(\"all\")");
-        _xifexpression = appendable.append(_builder).newLine();
+        _xifexpression = appendable.append("@SuppressWarnings(\"all\")").newLine();
       }
       _xblockexpression = _xifexpression;
     }
@@ -641,12 +639,9 @@ public class JvmModelGenerator implements IGenerator {
     if (!_matched) {
       if (it instanceof JvmEnumerationType) {
         _matched=true;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("java.lang.Enum<");
         String _identifier = ((JvmEnumerationType)it).getIdentifier();
-        _builder.append(_identifier);
-        _builder.append(">");
-        _switchResult = _builder.toString();
+        String _plus = ("java.lang.Enum<" + _identifier);
+        _switchResult = (_plus + ">");
       }
     }
     if (!_matched) {
@@ -1247,9 +1242,8 @@ public class JvmModelGenerator implements IGenerator {
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/**");
-      final StringConcatenation doc = ((StringConcatenation) _builder);
+      final StringConcatenation doc = new StringConcatenation();
+      doc.append("/**");
       doc.newLine();
       doc.append(" * ");
       doc.append(text, " * ");

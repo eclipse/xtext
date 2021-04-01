@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -199,7 +199,7 @@ class JvmModelGenerator implements IGenerator {
 		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != SuppressWarnings.name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
 		if (it.eContainer === null)
-			appendable.append('''@SuppressWarnings("all")''').newLine
+			appendable.append("@SuppressWarnings(\"all\")").newLine
 	}
 
 	def dispatch ITreeAppendable generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -404,7 +404,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val implicitSuperType = switch it {
 			JvmAnnotationType: 'java.lang.Annotation'
-			JvmEnumerationType: '''java.lang.Enum<«identifier»>'''.toString
+			JvmEnumerationType: "java.lang.Enum<"+identifier+">"
 			default: 'java.lang.Object'
 		} 
 		if (it instanceof JvmAnnotationType || (it instanceof JvmGenericType && (it as JvmGenericType).isInterface)) {
@@ -833,7 +833,8 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
-		val doc = '''/**''' as StringConcatenation
+		val doc = new StringConcatenation
+			doc.append("/**")
 			doc.newLine
 			doc.append(" * ")
 			doc.append(text, " * ")
