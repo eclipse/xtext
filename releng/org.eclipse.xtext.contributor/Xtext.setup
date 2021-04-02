@@ -149,7 +149,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.lsp4j"
-      value="https://download.eclipse.org/lsp4j/updates/releases/0.11.0"/>
+      value="https://download.eclipse.org/lsp4j/updates/releases/0.12.0"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
