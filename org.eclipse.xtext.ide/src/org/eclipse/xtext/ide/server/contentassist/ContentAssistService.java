@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,6 +20,7 @@ import org.eclipse.lsp4j.InsertTextFormat;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
@@ -120,7 +121,7 @@ public class ContentAssistService {
 		}
 		int prefixOffset = caretOffset - prefix.length();
 		Position prefixPosition = document.getPosition(prefixOffset);
-		completionItem.setTextEdit(new TextEdit(new Range(prefixPosition, caretPosition), entry.getProposal()));
+		completionItem.setTextEdit(Either.forLeft(new TextEdit(new Range(prefixPosition, caretPosition), entry.getProposal())));
 		completionItem.setKind(translateKind(entry));
 		if (!entry.getTextReplacements().isEmpty()) {
 			if (completionItem.getAdditionalTextEdits() == null) {

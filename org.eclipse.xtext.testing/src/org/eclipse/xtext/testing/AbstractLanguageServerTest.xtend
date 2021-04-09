@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -69,7 +69,6 @@ import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClient
-import org.eclipse.lsp4j.util.SemanticHighlightingTokens
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
@@ -213,9 +212,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected def InitializeResult initialize((InitializeParams)=>void initializer, boolean callInitialized) {
 		val params = new InitializeParams => [
 			processId = 1
-			rootUri = root.toURI.normalize.toUriString
 			workspaceFolders = #[
-				new WorkspaceFolder(rootUri, '')
+				new WorkspaceFolder(root.toURI.normalize.toUriString, '')
 			]
 		]
 		initializer?.apply(params)
@@ -389,19 +387,6 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			}
  		];
 		return sb.toString;
-	}
-
-	@Deprecated
-	protected dispatch def String toExpectation(Pair<org.eclipse.lsp4j.SemanticHighlightingInformation, List<List<String>>> it) {
-		val sb = new StringBuilder()
-		val tokens = SemanticHighlightingTokens.decode(key.tokens).sort;
-		for (token : tokens) {
-			if (sb.length > 0) {
-				sb.append(', ');
-			}
-			sb.append('''«token.character»:«token.length»:«value.get(token.scope)»''')
-		}
-		return '''«key.line» : [«sb.toString»]''';
 	}
 
 	protected dispatch def String toExpectation(CodeLens it) {
@@ -745,11 +730,5 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		].get
 	}
 
-	@Deprecated
-	protected def getSemanticHighlightingParams() {
-		languageServer.requestManager.runRead[
-			return notifications.map[value].filter(org.eclipse.lsp4j.SemanticHighlightingParams).toMap([textDocument], [lines]);
-		].get
-	}
 }
 
