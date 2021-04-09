@@ -74,7 +74,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
@@ -82,7 +82,7 @@
 			<version>${xtext-version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<pluginManagement>
@@ -94,9 +94,16 @@
 					<executions>
 						<execution>
 							<id>generate</id>
-							<phase>generate-sources</phase>
 							<goals>
 								<goal>generate</goal>
+								<goal>testGenerate</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>trace</id>
+							<goals>
+								<goal>install-debug-info</goal>
+								<goal>test-install-debug-info</goal>
 							</goals>
 						</execution>
 					</executions>
