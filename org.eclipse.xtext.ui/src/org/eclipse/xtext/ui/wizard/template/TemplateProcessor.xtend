@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2020 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template
 
-import com.google.common.annotations.Beta
 import java.util.HashMap
 import java.util.List
 import java.util.Map
@@ -32,7 +31,6 @@ import org.eclipse.xtend.lib.macro.file.Path
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 abstract class TemplateProcessor extends AbstractClassProcessor {
 
 	// the annotation processors run in parallel but write the same file ... we synchronize to avoid race conditions 

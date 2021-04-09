@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,15 +16,12 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Composite to be used inside a wizard to select the parameters for a template. These might be parameters for a project or a file template.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public class ParameterComposite extends Composite {
 
 	private final AbstractTemplate template;

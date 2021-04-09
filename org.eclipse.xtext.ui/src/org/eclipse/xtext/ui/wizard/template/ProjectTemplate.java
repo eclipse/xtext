@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2020 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,8 +15,6 @@ import java.lang.annotation.Target;
 
 import org.eclipse.xtend.lib.macro.Active;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Annotation to define a project template that is selected by the user in the new project wizard and declared in a language specific
  * ProjectTemplateProvider.
@@ -27,7 +25,6 @@ import com.google.common.annotations.Beta;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Active(ProjectTemplateProcessor.class)
-@Beta
 public @interface ProjectTemplate {
 	/**
 	 * Label of the project template presented to the user in the list of templates. The label is written to a file "messages.properties"
