@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,8 +27,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.StringInputStream;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Implementation of {@link IFileGenerator} to create the files from the template inside the eclipse workspace.
  * 
@@ -36,7 +34,6 @@ import com.google.common.annotations.Beta;
  * @author Hannes Niederhausen - encoding fix in execute method
  * @since 2.14
  */
-@Beta
 public class WorkspaceFileGenerator extends WorkspaceModifyOperation implements IFileGenerator {
 
 	private final SortedMap<String, CharSequence> files = new TreeMap<>();

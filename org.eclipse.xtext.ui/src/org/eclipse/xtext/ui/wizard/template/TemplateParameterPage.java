@@ -15,8 +15,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Page in the new project wizard to display a list with project templates. User get some description text and can select a template. In a
  * later page he can eventually configure the project template further.
@@ -24,7 +22,6 @@ import com.google.common.annotations.Beta;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public class TemplateParameterPage extends WizardPage implements IParameterPage {
 
 	private final AbstractTemplate template;

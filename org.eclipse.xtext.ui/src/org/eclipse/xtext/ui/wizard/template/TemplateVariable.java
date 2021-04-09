@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2020 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,8 +11,6 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Part of a template the variable defines the UI for the user to configure the generated files. A variable will be associated with a widget
  * to represent it inside the UI.
@@ -20,7 +18,6 @@ import com.google.common.annotations.Beta;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public abstract class TemplateVariable {
 	private final String label;
 

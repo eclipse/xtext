@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -7,8 +7,6 @@
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
-
-import com.google.common.annotations.Beta;
 
 /**
  * A template definition for a file, used by the new file wizard. Defines the UI (label, description, icon, variables) on how to present the
@@ -19,7 +17,6 @@ import com.google.common.annotations.Beta;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public abstract class AbstractFileTemplate extends AbstractTemplate {
 
 	private TemplateFileInfo info;

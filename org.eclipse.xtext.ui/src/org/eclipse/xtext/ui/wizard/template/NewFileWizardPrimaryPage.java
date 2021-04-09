@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,8 +41,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-import com.google.common.annotations.Beta;
-
 /**
  * The first page shown in the {@link TemplateNewFileWizard}. Allows selection of a path, a name and optionally of any parameters provided
  * by a template. In case multiple templates are available a combo box is shown to select the template. In that case the configuration of
@@ -51,7 +49,6 @@ import com.google.common.annotations.Beta;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPage {
 
 	private final AbstractFileTemplate[] templates;

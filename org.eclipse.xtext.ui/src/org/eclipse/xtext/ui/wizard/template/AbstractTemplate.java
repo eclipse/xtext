@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.de) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,8 +18,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.xbase.lib.Pair;
 
-import com.google.common.annotations.Beta;
-
 /**
  * A template definition used by the new wizards. Defines the UI (label, description, icon, variables) on how to present the template to the
  * user.
@@ -27,7 +25,6 @@ import com.google.common.annotations.Beta;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public abstract class AbstractTemplate {
 
 	private static final Logger logger = Logger.getLogger(AbstractTemplate.class);
