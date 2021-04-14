@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -23,5 +24,15 @@ public class GenericFormatterTestRequest extends FormatterTestRequest {
 
 	public void setFormatter(GenericFormatter<? extends EObject> formatter) {
 		this.formatter = formatter;
+	}
+	
+	@Override
+	public FormatterTestRequest setExpectation(CharSequence expectation) {
+		return super.setExpectation(Strings.toPlatformLineSeparator(expectation));
+	}
+	
+	@Override
+	public FormatterTestRequest setToBeFormatted(CharSequence toBeFormatted) {
+		return super.setToBeFormatted(Strings.toPlatformLineSeparator(toBeFormatted));
 	}
 }
