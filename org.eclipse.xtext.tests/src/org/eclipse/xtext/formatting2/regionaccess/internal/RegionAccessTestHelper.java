@@ -57,7 +57,7 @@ public class RegionAccessTestHelper {
 		return modified;
 	}
 
-	public void operator_tripleEquals(ITextRegionAccess access, CharSequence expectation) {
+	public void assertRegions(ITextRegionAccess access, CharSequence expectation) {
 		if (access instanceof ITextRegionAccessDiff) {
 			assertDiffs((ITextRegionAccessDiff) access);
 		}
