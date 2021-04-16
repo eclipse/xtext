@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -499,7 +498,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 
-	@Test @Ignore
+	@Test
 	def testVoidAndObjectDoNotGenerateUnusedCode() {
 		assertCompilesTo('''
 			class Test {
@@ -528,7 +527,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}		
 
-	@Test @Ignore
+	@Test
 	def testVoidAndStringDoNotGenerateUnusedCode() {
 		assertCompilesTo('''
 			class Test {
@@ -557,7 +556,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}		
 
-	@Test @Ignore
+	@Test
 	def testVoidAndObjectTwoParametersDoNotGenerateUnusedCode() {
 		assertCompilesTo('''
 			class Test {

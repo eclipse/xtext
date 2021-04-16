@@ -9,7 +9,6 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -1168,7 +1167,6 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testVoidAndObjectDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
@@ -1235,7 +1233,6 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testVoidAndStringDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
@@ -1302,7 +1299,6 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore
   public void testVoidAndObjectTwoParametersDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Test {");
