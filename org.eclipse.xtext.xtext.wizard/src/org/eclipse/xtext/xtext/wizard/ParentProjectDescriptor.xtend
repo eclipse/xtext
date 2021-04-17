@@ -11,6 +11,7 @@ package org.eclipse.xtext.xtext.wizard
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -69,6 +70,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	def String getTychoVersion() {
+		'2.3.0'
+	}
+	
+	def String getTychoVersionJ8() {
 		'1.7.0'
 	}
 	
@@ -212,7 +217,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>«tychoVersion»</tycho-version>
+						<tycho-version>«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»«tychoVersion»«ELSE»«tychoVersionJ8»«ENDIF»</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
