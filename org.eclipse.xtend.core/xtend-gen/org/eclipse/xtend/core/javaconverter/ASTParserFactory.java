@@ -156,6 +156,9 @@ public class ASTParserFactory {
         case "15":
           _switchResult = 11;
           break;
+        case "16":
+          _switchResult = 11;
+          break;
         default:
           _switchResult = 3;
           break;
