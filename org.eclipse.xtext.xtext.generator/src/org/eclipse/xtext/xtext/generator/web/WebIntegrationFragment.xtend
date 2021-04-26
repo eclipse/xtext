@@ -49,7 +49,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	
 	static val REQUIREJS_VERSION = '2.3.6'
 	static val REQUIREJS_TEXT_VERSION = '2.0.15'
-	static val JQUERY_VERSION = '3.5.1'
+	static val JQUERY_VERSION = '3.6.0'
 	static val ACE_VERSION = '1.3.3'
 	static val CODEMIRROR_VERSION = '5.41.0'
 	

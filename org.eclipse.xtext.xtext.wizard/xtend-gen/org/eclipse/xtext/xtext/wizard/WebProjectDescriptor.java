@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class WebProjectDescriptor extends ProjectDescriptor {
   private static final String REQUIREJS_VERSION = "2.3.6";
   
-  private static final String JQUERY_VERSION = "3.5.1";
+  private static final String JQUERY_VERSION = "3.6.0";
   
   private static final String JETTY_VERSION = "9.4.34.v20201102";
   
