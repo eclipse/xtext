@@ -37,7 +37,7 @@ import com.google.common.collect.Lists;
  * @deprecated Uses reflection which will not work well with future java
  * versions. Use {@link MergeableManifest2} instead.
  */
-@Deprecated
+@Deprecated//(forRemoval=true)
 public class MergeableManifest extends Manifest {
 
 	public static final Attributes.Name BUNDLE_NAME = new Attributes.Name("Bundle-Name");
