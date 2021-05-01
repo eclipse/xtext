@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,12 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.preferences;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
-import com.google.common.collect.Maps;
-
+/**
+ * @since 2.26
+ */
 public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPreferenceValuesProvider {
 	private final IPreferenceValues delegate;
 	private final Map<String, String> values;
@@ -34,7 +37,7 @@ public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPrefer
 	}
 	
 	public MapBasedPreferenceValues() {
-		this(null, Maps.<String, String>newLinkedHashMap());
+		this(null, new LinkedHashMap<>());
 	}
 
 	public void clear() {
@@ -68,17 +71,37 @@ public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPrefer
 	}
 
 	public Map<String, String> getValues() {
-		return values;
+		return Collections.unmodifiableMap(values);
 	}
 
+	/**
+	 * Put the given preference value under the given key into this store.
+	 * If the value is null, it's being removed from this store.
+	 */
 	public void put(PreferenceKey key, Object value) {
-		put(key.getId(), value.toString());
+		if (value == null) {
+			values.remove(key.getId());
+		} else {
+			put(key.getId(), value.toString());
+		}
 	}
 
+	/**
+	 * Put the given preference value under the given key into this store.
+	 * If the value is null, it's being removed from this store.
+	 */
 	public void put(String key, String value) {
-		values.put(key, value);
+		if (value == null) {
+			values.remove(key);
+		} else {
+			values.put(key, value);
+		}
 	}
 
+	/**
+	 * Put the given preference value under the given key into this store.
+	 * If the value is null, it's being removed from this store.
+	 */
 	public <T> void put(TypedPreferenceKey<T> key, T value) {
 		put(key.getId(), key.toString(value));
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,33 +8,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.preferences;
 
-import org.apache.log4j.Logger;
-
 /**
+ * A representation of an integer valued preference.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @since 2.26
  */
 public class IntegerKey extends TypedPreferenceKey<Integer> {
 
-	private final static Logger log = Logger.getLogger(IntegerKey.class);
-
 	public IntegerKey(String id, Integer defaultValue) {
-		super(id, defaultValue.toString());
+		super(id, defaultValue != null ? defaultValue.toString() : null);
 	}
 
 	@Override
 	public String toString(Integer value) {
-		return value.toString();
+		if (value != null) {
+			return value.toString();
+		}
+		return null;
 	}
 
 	@Override
 	public Integer toValue(String string) {
 		try {
-			if (string != null)
+			if (string != null) {
 				return Integer.valueOf(string);
+			}
+			return null;
 		} catch (NumberFormatException e) {
-			log.warn("Couldn't parse value '" + string + "' of formatting preference '" + getId() + "'.");
+			throw new IllegalArgumentException(string + " is not a valid integer preference value", e);
 		}
-		return Integer.valueOf(getDefaultValue());
 	}
 
 }

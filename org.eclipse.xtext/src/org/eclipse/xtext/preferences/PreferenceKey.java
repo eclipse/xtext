@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,16 +8,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.preferences;
 
+import java.util.Objects;
+
 /**
  * Implementers of this interface represent a configuration key.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Sven Efftinge
+ * 
+ * @since 2.26
  */
 public class PreferenceKey {
+	
+	private final String id;
+	private final String defaultValue;
+	
+	public PreferenceKey(String id, String defaultValue) {
+		this.id = Objects.requireNonNull(id);
+		this.defaultValue = defaultValue;
+	}
 
 	/**
-	 * @return the default value.
+	 * @return the default value. May be null.
 	 */
 	public String getDefaultValue() {
 		return this.defaultValue;
@@ -30,25 +42,14 @@ public class PreferenceKey {
 		return this.id;
 	}
 
-	private final String id;
-	private final String defaultValue;
-
-	public PreferenceKey(String id, String defaultValue) {
-		this.id = id;
-		this.defaultValue = defaultValue;
-	}
-
 	@Override
 	public String toString() {
-		return "Configuration key '" + id + "' default value '" + getDefaultValue() + "'.";
+		return "Preference key '" + id + "' with default value '" + getDefaultValue() + "'.";
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return id.hashCode();
 	}
 
 	@Override
@@ -60,11 +61,6 @@ public class PreferenceKey {
 		if (getClass() != obj.getClass())
 			return false;
 		PreferenceKey other = (PreferenceKey) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		return id.equals(other.id);
 	}
 }
