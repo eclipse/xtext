@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -130,7 +130,13 @@ public abstract class AbstractContentProposalProvider extends AbstractCompletion
 	}
 	
 	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
-		return new StyledString(getDisplayString(element, qualifiedName, shortName));
+        StyledString styledString = new StyledString(getDisplayString(element, qualifiedName, shortName));
+        String text = styledString.getString();
+        int offset = text.indexOf(" - ");
+        if (offset != -1) {
+            styledString.setStyle(offset, text.length() - offset, StyledString.QUALIFIER_STYLER);
+        }
+        return styledString;
 	}
 
 	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
