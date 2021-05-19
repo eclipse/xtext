@@ -340,7 +340,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>exec-maven-plugin</artifactId>
-							<version>1.6.0</version>
+							<version>3.0.0</version>
 							<executions>
 								<execution>
 									<id>mwe2Launcher</id>
