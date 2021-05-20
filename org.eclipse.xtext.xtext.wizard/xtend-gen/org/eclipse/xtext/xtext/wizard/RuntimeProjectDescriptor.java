@@ -762,7 +762,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("<artifactId>exec-maven-plugin</artifactId>");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("<version>1.6.0</version>");
+      _builder.append("<version>3.0.0</version>");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("<executions>");
