@@ -29,7 +29,7 @@ pipeline {
   }
 
   tools {
-     maven "apache-maven-3.6.3"
+     maven "apache-maven-3.8.1"
      jdk "${params.JDK_VERSION}"
   }
 
