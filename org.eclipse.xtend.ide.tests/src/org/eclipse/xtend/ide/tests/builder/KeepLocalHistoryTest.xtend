@@ -10,6 +10,9 @@ package org.eclipse.xtend.ide.tests.builder
 
 import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IWorkspaceDescription
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess
@@ -18,8 +21,8 @@ import org.junit.Test
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*
 import static org.eclipse.xtext.generator.IFileSystemAccess.*
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.ui.editor.preferences.PreferenceConstants.*
+import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -162,6 +165,21 @@ class KeepLocalHistoryTest extends AbstractXtendUITestCase {
 
 	def setKeepLocalHistory(boolean keepLocalHistory) {
 		setValue(OUTPUT_KEEP_LOCAL_HISTORY, keepLocalHistory)
+		val IWorkspaceDescription description = ResourcesPlugin.getWorkspace().getDescription();
+		try {
+			val setKeepDerivedStateMethod = description.class.getDeclaredMethod("setKeepDerivedState", Boolean.TYPE)
+			if (setKeepDerivedStateMethod !== null) {
+				setKeepDerivedStateMethod.invoke(description, keepLocalHistory)
+			}
+		} catch (NoSuchMethodException | SecurityException e) {
+			// ok
+		}
+		try {
+			// as it is only a copy save it back in
+			ResourcesPlugin.getWorkspace().setDescription(description);
+		} catch (CoreException e) {
+			throw new RuntimeException(e)
+		}
 	}
 
 	def setOverride(boolean ^override) {
