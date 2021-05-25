@@ -10,8 +10,12 @@ package org.eclipse.xtext.builder.impl;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 
 import com.google.common.annotations.Beta;
 
@@ -29,6 +33,8 @@ import com.google.common.annotations.Beta;
 @Beta
 public class BuilderStateDiscarder {
 
+	private static final Logger logger = Logger.getLogger(BuilderStateDiscarder.class);
+
 	/**
 	 * Returns true, if the given builderArguments indicate that we should discard the built state
 	 * for the given projects.
@@ -39,11 +45,41 @@ public class BuilderStateDiscarder {
 				XtextBuilder builder = BuildManagerAccess.findBuilder(project);
 				if (builder != null) {
 					builder.forgetLastBuiltState();
+					touchProject(project);
 				}
 			}
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Touch a given project such that the auto-build knows it should be rebuild.
+	 *
+	 * @since 2.26
+	 */
+	protected void touchProject(IProject project) {
+		if (!project.getWorkspace().isTreeLocked()) {
+			try {
+				project.touch(null);
+			} catch (CoreException e) {
+				logger.error("Failed to refresh project while forgetting its builder state", e);
+			}
+		} else {
+			Job touchJob = Job.create("Touch project " + project.getName(), progressMonitor -> {
+				try {
+					project.touch(progressMonitor);
+					return Status.OK_STATUS;
+				} catch (CoreException e) {
+					logger.error("Failed to refresh project while forgetting its builder state", e);
+					return Status.CANCEL_STATUS;
+				}
+			});
+			touchJob.setRule(project);
+			touchJob.setUser(false);
+			touchJob.setSystem(true);
+			touchJob.schedule(0);
+		}
 	}
 
 	protected boolean canHandleBuildFlag(Map<String, String> builderArguments) {
