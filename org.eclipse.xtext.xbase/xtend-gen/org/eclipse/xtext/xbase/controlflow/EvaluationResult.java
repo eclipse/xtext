@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.controlflow;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
-import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -278,12 +277,8 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     } else if (myValue != null
          && otherValue instanceof ThisReference) {
       return _equalValue(myValue, (ThisReference)otherValue);
-    } else if (myValue != null
-         && otherValue != null) {
-      return _equalValue(myValue, otherValue);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(myValue, otherValue).toString());
+      return _equalValue(myValue, otherValue);
     }
   }
   
