@@ -204,7 +204,7 @@ spec:
         container ('jnlp') {
         dir('publishing') {
           sh '''
-          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -o "version = \\'[^\\']*" | cut -d "'" -f2)
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'[^\\']*" | cut -d "'" -f2)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           if [ -z "$BUILD_ID" ]
