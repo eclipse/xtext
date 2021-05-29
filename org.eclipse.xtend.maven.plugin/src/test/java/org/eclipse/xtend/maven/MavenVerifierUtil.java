@@ -32,6 +32,7 @@ public class MavenVerifierUtil {
 		
 		verifier.setSystemProperty("nonTestMavenRepo", System.getProperty("maven.repo.local"));
 		verifier.setSystemProperty("WORKSPACE", System.getProperty("WORKSPACE"));
+		verifier.setSystemProperty("aether.metadataResolver.threads", "1");
 		
 		String testMavenRepo = System.getProperty("testMavenRepo");
 		Assert.assertNotNull("testMavenRepo is null", testMavenRepo);
