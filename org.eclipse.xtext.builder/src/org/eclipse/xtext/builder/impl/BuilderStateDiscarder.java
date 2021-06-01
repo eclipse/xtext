@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -59,27 +59,22 @@ public class BuilderStateDiscarder {
 	 * @since 2.26
 	 */
 	protected void touchProject(IProject project) {
-		if (!project.getWorkspace().isTreeLocked()) {
+		Job touchJob = Job.create("Touch project " + project.getName(), progressMonitor -> {
 			try {
-				project.touch(null);
+				if (project.isAccessible()) {
+					project.touch(progressMonitor);
+				}
+				return Status.OK_STATUS;
 			} catch (CoreException e) {
 				logger.error("Failed to refresh project while forgetting its builder state", e);
+				return Status.CANCEL_STATUS;
 			}
-		} else {
-			Job touchJob = Job.create("Touch project " + project.getName(), progressMonitor -> {
-				try {
-					project.touch(progressMonitor);
-					return Status.OK_STATUS;
-				} catch (CoreException e) {
-					logger.error("Failed to refresh project while forgetting its builder state", e);
-					return Status.CANCEL_STATUS;
-				}
-			});
-			touchJob.setRule(project);
-			touchJob.setUser(false);
-			touchJob.setSystem(true);
-			touchJob.schedule(0);
-		}
+		});
+		touchJob.setRule(project);
+		touchJob.setUser(false);
+		touchJob.setSystem(true);
+		touchJob.schedule(0);
+
 	}
 
 	protected boolean canHandleBuildFlag(Map<String, String> builderArguments) {
