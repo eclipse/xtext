@@ -31,8 +31,15 @@
 		<profile>
 			<id>latest</id>
 			<properties>
-				<tycho-version>2.2.0</tycho-version>
+				<tycho-version>2.3.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtext.target-latest</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202106</id>
+			<properties>
+				<tycho-version>2.3.0</tycho-version>
+				<target-platform-classifier>org.eclipse.xtext.target-r202106</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
