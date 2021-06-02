@@ -8,7 +8,6 @@
  */
 package org.eclipse.xtend.ide.editor.copyqualifiedname;
 
-import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -105,12 +104,8 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     } else if (it == null
          && context != null) {
       return _getQualifiedName((Void)null, context);
-    } else if (it == null
-         && context == null) {
-      return _getQualifiedName((Void)null, (Void)null);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, context).toString());
+      return _getQualifiedName((Void)null, (Void)null);
     }
   }
 }
