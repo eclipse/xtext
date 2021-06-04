@@ -9,9 +9,13 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import com.google.inject.Inject;
+import java.lang.reflect.Method;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFileState;
+import org.eclipse.core.resources.IWorkspaceDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -217,7 +221,33 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   }
   
   public void setKeepLocalHistory(final boolean keepLocalHistory) {
-    this.setValue(EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY, keepLocalHistory);
+    try {
+      this.setValue(EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY, keepLocalHistory);
+      final IWorkspaceDescription description = ResourcesPlugin.getWorkspace().getDescription();
+      try {
+        final Method setKeepDerivedStateMethod = description.getClass().getDeclaredMethod("setKeepDerivedState", Boolean.TYPE);
+        if ((setKeepDerivedStateMethod != null)) {
+          setKeepDerivedStateMethod.invoke(description, Boolean.valueOf(keepLocalHistory));
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchMethodException || _t instanceof SecurityException) {
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      try {
+        ResourcesPlugin.getWorkspace().setDescription(description);
+      } catch (final Throwable _t) {
+        if (_t instanceof CoreException) {
+          final CoreException e = (CoreException)_t;
+          throw new RuntimeException(e);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public void setOverride(final boolean override) {
