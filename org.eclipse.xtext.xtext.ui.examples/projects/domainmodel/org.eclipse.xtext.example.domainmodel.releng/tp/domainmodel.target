@@ -8,7 +8,7 @@
       <unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-      <repository location="https://download.eclipse.org/releases/2021-06"/>
+      <repository location="https://download.eclipse.org/releases/2021-09"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
