@@ -3,7 +3,7 @@
 <target name="org.eclipse.xtext.lib.target" sequenceNumber="0">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-06"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-09"/>
 			<unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
