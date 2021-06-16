@@ -47,9 +47,3 @@ subprojects {
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	apply from: "${rootDir}/gradle/validation.gradle"
 }
-
-task clean(type: Delete) {
-	group 'Build'
-	description 'Deletes the local repositories.'
-	delete 'build'
-}
