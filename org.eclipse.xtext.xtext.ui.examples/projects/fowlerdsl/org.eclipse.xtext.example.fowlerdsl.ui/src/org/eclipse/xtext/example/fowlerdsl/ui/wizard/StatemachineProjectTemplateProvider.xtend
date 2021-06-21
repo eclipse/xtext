@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider
 import org.eclipse.xtext.ui.wizard.template.ProjectTemplate
 
 import static org.eclipse.core.runtime.IStatus.*
+import com.google.inject.Inject
 
 /**
  * Create a list with all project templates to be shown in the template new project wizard.
@@ -30,9 +31,12 @@ import static org.eclipse.core.runtime.IStatus.*
  * @author miklossy - Initial contribution and API
  */
 class StatemachineProjectTemplateProvider implements IProjectTemplateProvider {
+	
+	@Inject
+	MrsGrantsSecretCompartmentsProject project
 
 	override getProjectTemplates() {
-		#[new MrsGrantsSecretCompartmentsProject]
+		#[project]
 	}
 }
 
@@ -43,6 +47,9 @@ final class MrsGrantsSecretCompartmentsProject {
 	val advanced = check("Advanced:", false)
 	val advancedGroup = group("Properties")
 	val path = text("Package:", "mydsl", "The package path to place the files in", advancedGroup)
+	
+	@Inject
+	PluginImageHelper pluginImageHelper
 
 	override protected updateVariables() {
 		path.enabled = advanced.value
@@ -75,7 +82,7 @@ final class MrsGrantsSecretCompartmentsProject {
 	}
 
 	private def image(String id) {
-		id -> new PluginImageHelper().getImage('''platform:/plugin/«FowlerdslActivator.PLUGIN_ID»/«id»''')
+		id -> pluginImageHelper.getImage('''platform:/plugin/«FowlerdslActivator.PLUGIN_ID»/«id»''')
 	}
 
 }

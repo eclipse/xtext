@@ -9,6 +9,7 @@
 package org.eclipse.xtext.example.fowlerdsl.ui.wizard;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.core.runtime.IStatus;
@@ -40,6 +41,9 @@ public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTem
   private final GroupTemplateVariable advancedGroup = this.group("Properties");
   
   private final StringTemplateVariable path = this.text("Package:", "mydsl", "The package path to place the files in", this.advancedGroup);
+  
+  @Inject
+  private PluginImageHelper pluginImageHelper;
   
   @Override
   protected void updateVariables() {
@@ -94,13 +98,12 @@ public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTem
   }
   
   private Pair<String, Image> image(final String id) {
-    PluginImageHelper _pluginImageHelper = new PluginImageHelper();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("platform:/plugin/");
     _builder.append(FowlerdslActivator.PLUGIN_ID);
     _builder.append("/");
     _builder.append(id);
-    Image _image = _pluginImageHelper.getImage(_builder.toString());
+    Image _image = this.pluginImageHelper.getImage(_builder.toString());
     return Pair.<String, Image>of(id, _image);
   }
 }
