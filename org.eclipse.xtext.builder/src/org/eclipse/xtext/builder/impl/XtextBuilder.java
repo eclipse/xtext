@@ -223,7 +223,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			queuedBuildData.discardCheckpoint();
 			if (monitor != null)
 				monitor.done();
-			String message = "Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms";
+			String message = "Built " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms";
 			log.info(message);
 			buildLogger.log(message);
 			task.stop();
