@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.example.fowlerdsl.ui.wizard;
 
+import com.google.inject.Inject;
 import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
 import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
 
@@ -20,9 +21,11 @@ import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider;
  */
 @SuppressWarnings("all")
 public class StatemachineProjectTemplateProvider implements IProjectTemplateProvider {
+  @Inject
+  private MrsGrantsSecretCompartmentsProject project;
+  
   @Override
   public AbstractProjectTemplate[] getProjectTemplates() {
-    MrsGrantsSecretCompartmentsProject _mrsGrantsSecretCompartmentsProject = new MrsGrantsSecretCompartmentsProject();
-    return new AbstractProjectTemplate[] { _mrsGrantsSecretCompartmentsProject };
+    return new AbstractProjectTemplate[] { this.project };
   }
 }
