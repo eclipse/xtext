@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -110,11 +110,11 @@ public class BuildAffectionTest {
       _builder_1.newLine();
       _builder_1.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_1.newLine();
-      _builder_1.append("Build test.project in \\d+ ms");
+      _builder_1.append("Built test.project in \\d+ ms");
       _builder_1.newLine();
       _builder_1.append("Building test.project");
       _builder_1.newLine();
-      _builder_1.append("Build test.project in \\d+ ms");
+      _builder_1.append("Built test.project in \\d+ ms");
       _builder_1.newLine();
       this.assertBuildLogs(_builder_1);
     } catch (Throwable _e) {
@@ -143,11 +143,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -174,7 +174,7 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -205,11 +205,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -238,11 +238,11 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -281,11 +281,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -322,11 +322,11 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -357,17 +357,17 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -396,11 +396,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -436,11 +436,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -477,17 +477,17 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -528,11 +528,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -569,17 +569,17 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -612,11 +612,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -645,11 +645,11 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -680,11 +680,11 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -711,17 +711,17 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Bar.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -755,21 +755,21 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -801,25 +801,25 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -862,25 +862,25 @@ public class BuildAffectionTest {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -954,21 +954,21 @@ public class BuildAffectionTest {
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
       _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.project");
       _builder_3.newLine();
-      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.append("Built test.project in \\d+ ms");
       _builder_3.newLine();
       _builder_3.append("Building test.client");
       _builder_3.newLine();
-      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.append("Built test.client in \\d+ ms");
       _builder_3.newLine();
       this.assertBuildLogs(_builder_3);
     } catch (Throwable _e) {
@@ -1037,21 +1037,21 @@ public class BuildAffectionTest {
       _builder_4.newLine();
       _builder_4.append("indexing platform:/resource/test.project/src/Foo.xtend");
       _builder_4.newLine();
-      _builder_4.append("Build test.project in \\d+ ms");
+      _builder_4.append("Built test.project in \\d+ ms");
       _builder_4.newLine();
       _builder_4.append("Building test.client");
       _builder_4.newLine();
       _builder_4.append("indexing platform:/resource/test.client/src/Client.xtend");
       _builder_4.newLine();
-      _builder_4.append("Build test.client in \\d+ ms");
+      _builder_4.append("Built test.client in \\d+ ms");
       _builder_4.newLine();
       _builder_4.append("Building test.project");
       _builder_4.newLine();
-      _builder_4.append("Build test.project in \\d+ ms");
+      _builder_4.append("Built test.project in \\d+ ms");
       _builder_4.newLine();
       _builder_4.append("Building test.client");
       _builder_4.newLine();
-      _builder_4.append("Build test.client in \\d+ ms");
+      _builder_4.append("Built test.client in \\d+ ms");
       _builder_4.newLine();
       this.assertBuildLogs(_builder_4);
     } catch (Throwable _e) {
