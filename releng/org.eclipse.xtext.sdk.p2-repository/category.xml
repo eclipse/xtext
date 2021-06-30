@@ -16,6 +16,8 @@
    <bundle id="org.junit.source" version="4.12.0.qualifier"/>
    <bundle id="org.objectweb.asm" version="9.1.0.qualifier"/>
    <bundle id="org.objectweb.asm.source" version="9.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.commons" version="9.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.commons.source" version="9.1.0.qualifier"/>
    <bundle id="org.objectweb.asm.tree" version="9.1.0.qualifier"/>
    <bundle id="org.objectweb.asm.tree.source" version="9.1.0.qualifier"/>
    <bundle id="io.github.classgraph" version="4.8.35.qualifier"/>
