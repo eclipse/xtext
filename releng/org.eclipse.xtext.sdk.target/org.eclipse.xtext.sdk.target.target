@@ -164,6 +164,8 @@
 		<unit id="org.opentest4j.source" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="9.1.0.v20210209-1849"/>
 		<unit id="org.objectweb.asm.source" version="9.1.0.v20210209-1849"/>
+		<unit id="org.objectweb.asm.commons" version="9.1.0.v20210209-1849"/>
+		<unit id="org.objectweb.asm.commons.source" version="9.1.0.v20210209-1849"/>
 		<unit id="org.objectweb.asm.tree" version="9.1.0.v20210209-1849"/>
 		<unit id="org.objectweb.asm.tree.source" version="9.1.0.v20210209-1849"/>
 		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
