@@ -1555,7 +1555,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		String grammarAsString = "grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate myDsl 'uri'\n" +
 				"Model: element=Element;\n" +
-				"enum Element : ^false='false' | true='true';\n";
+				"enum Element : //das ist ein test\n^false='false' | true='true';\n";
 		XtextResource resource = getResourceFromString(grammarAsString);
 		Grammar g = (Grammar) resource.getContents().get(0);
 		EnumRule enumRule = (EnumRule) g.getRules().get(1);
