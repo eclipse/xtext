@@ -43,6 +43,7 @@ import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.LazyStringInputStream;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
@@ -297,6 +298,7 @@ public class XtextResource extends ResourceImpl {
 		if (newRootASTElement != null && !containsRootElement(newRootASTElement))
 			getContents().add(0, newRootASTElement);
 		reattachModificationTracker(newRootASTElement);
+		clearCache();
 		clearErrorsAndWarnings();
 		addSyntaxErrors();
 		doLinking();
@@ -308,7 +310,17 @@ public class XtextResource extends ResourceImpl {
 	boolean containsRootElement(EObject newRootASTElement) {
 		return getContents().contains(newRootASTElement);
 	}
-	
+
+	/**
+	 * @since 2.26
+	 */
+	protected void clearCache() {
+		IResourceScopeCache cache = getCache();
+		if (cache instanceof OnChangeEvictingCache) {
+			cache.clear(this);
+		}
+	}
+
 	protected void clearErrorsAndWarnings() {
 		getWarnings().clear();
 		getErrors().clear();
