@@ -174,6 +174,11 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		}
 		embeddedEditor.getDocument().setValidationJob(null);
 		createTextLayout();
+		parent.addDisposeListener(e -> {
+			if (fTextLayout != null && !fTextLayout.isDisposed()) {
+				fTextLayout.dispose();
+			}
+		});
 	}
 	
 	protected Composite createComposite(Composite parent, int columns, int hspan, int fill) {
