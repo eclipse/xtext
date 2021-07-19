@@ -503,6 +503,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 throw new OperationCanceledException();
             }
             final URI candidateURI = iter.next();
+            progress.subTask("Checking if " + candidateURI.lastSegment() + " is affected by changes");
             final IResourceDescription candidateDescription = oldState.getResourceDescription(candidateURI);
             final IResourceDescription.Manager manager = getResourceDescriptionManager(candidateURI);
             if (candidateDescription == null || manager == null) {
