@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.osgi.framework.BundleEvent;
@@ -65,6 +66,8 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	@Named("org.eclipse.xtext.ui.PluginImageHelper.notFound")
 	private String notFound = "notFound.gif"; //$NON-NLS-1$
 
+	private DisplayDisposeListener displayDisposeListener = null;
+
 	/**
 	 * Returns the image associated with the given image descriptor.
 	 * 
@@ -86,7 +89,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 		}
 		result = descriptor.createImage();
 		if (result != null) {
-			registry.put(descriptor, result);
+			putToRegistry(descriptor, result);
 		}
 		return result;
 	}
@@ -100,6 +103,10 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 			image.dispose();
 		}
 		registry.clear();
+		if (displayDisposeListener != null) {
+			displayDisposeListener.setHelper(null);
+			displayDisposeListener = null;
+		}
 	}
 
 	@Inject
@@ -168,8 +175,19 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 				return entry.getKey();
 		}
 		ImageDescriptor newDescriptor = ImageDescriptor.createFromImage(image);
-		registry.put(newDescriptor, image);
+		putToRegistry(newDescriptor, image);
 		return newDescriptor;
+	}
+
+	/**
+	 * @since 2.26
+	 */
+	protected void putToRegistry(ImageDescriptor descriptor, Image image) {
+		if (displayDisposeListener == null) {
+			displayDisposeListener = new DisplayDisposeListener(this);
+			Display.getCurrent().disposeExec(displayDisposeListener);
+		}
+		registry.put(descriptor, image);
 	}
 
 	public void setPathSuffix(String pathSuffix) {
@@ -241,6 +259,35 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * @since 2.26
+	 */
+	public static class DisplayDisposeListener implements Runnable {
+
+		private PluginImageHelper helper;
+
+		public DisplayDisposeListener(PluginImageHelper helper) {
+			this.helper = helper;
+		}
+
+		public PluginImageHelper getHelper() {
+			return helper;
+		}
+
+		public void setHelper(PluginImageHelper helper) {
+			this.helper = helper;
+		}
+
+		@Override
+		public void run() {
+			if (helper != null) {
+				helper.dispose();
+			}
+			helper = null;
+		}
+
 	}
 
 }
