@@ -57,6 +57,8 @@ class ASTParserFactory {
 			case "15" : 11
 			// TODO update to 16 later
 			case "16" : 11
+			// TODO update to 17 later
+			case "17" : 11
 			default: 3
 		}
 	}
