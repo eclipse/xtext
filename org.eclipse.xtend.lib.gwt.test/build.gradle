@@ -1,5 +1,5 @@
 plugins {
-    id "de.esoco.gwt" version "1.1.0"
+     id "org.wisepersist.gwt" version "1.1.13"
 }
 
 group = 'org.eclipse.xtend'
@@ -11,8 +11,10 @@ dependencies {
 
 gwt {
 	gwtVersion = versions.gwt
-	module 'org.eclipse.xtend.lib.test.Test'
-	compile {
+	modules 'org.eclipse.xtend.lib.test.Test'
+	minHeapSize = "512M"
+	maxHeapSize = "512M"
+	compiler {
 		strict = true
 	}
 }
@@ -22,7 +24,7 @@ jar {
 }
 
 test {
-	dependsOn gwtCompile
+	dependsOn compileGwt
 }
 
 tasks.withType(Javadoc) {
