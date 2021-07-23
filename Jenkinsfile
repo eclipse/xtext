@@ -121,7 +121,7 @@ pipeline {
         }
       }
     }
-    failure {
+    unsuccessful {
       archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
