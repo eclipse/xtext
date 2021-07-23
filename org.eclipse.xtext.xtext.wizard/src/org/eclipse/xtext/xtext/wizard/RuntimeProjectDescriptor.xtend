@@ -285,7 +285,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			additionalContent = '''
 				configurations {
 					mwe2 {
-						extendsFrom api
+						extendsFrom compileClasspath
 					}
 				}
 

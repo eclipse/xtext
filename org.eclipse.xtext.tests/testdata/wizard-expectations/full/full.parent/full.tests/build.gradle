@@ -1,8 +1,8 @@
 dependencies {
-	compile project(':full')
-	testCompile 'junit:junit'
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
+	api project(':full')
+	testImplementation 'junit:junit'
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 }
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false

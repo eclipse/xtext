@@ -586,7 +586,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("mwe2 {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("extendsFrom api");
+      _builder.append("extendsFrom compileClasspath");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
