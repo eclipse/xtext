@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -466,8 +466,13 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("@SuppressWarnings(\"restriction\")");
-        _builder.newLine();
+        {
+          boolean _inheritsXbase = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+          if (_inheritsXbase) {
+            _builder.append("@SuppressWarnings(\"restriction\")");
+            _builder.newLine();
+          }
+        }
         _builder.append("public class ");
         TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
         _builder.append(_configurableIssueCodesProviderClass);
