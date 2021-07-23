@@ -104,9 +104,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						«ENDIF»
 					}
 					
-					apply plugin: 'java'
+					apply plugin: 'java-library'
 					dependencies {
-						compile platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+						api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
 					}
 
 					apply plugin: 'org.xtext.xtend'

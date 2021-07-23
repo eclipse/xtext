@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -115,7 +115,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder_1.append("classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("main = \'");
+      _builder_1.append("mainClass = \'");
       String _basePackage = this.getConfig().getLanguage().getBasePackage();
       _builder_1.append(_basePackage, "\t");
       _builder_1.append(".web.ServerLauncher\'");

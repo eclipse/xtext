@@ -187,13 +187,13 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("apply plugin: \'java\'");
+      _builder.append("apply plugin: \'java-library\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("compile platform(\"org.eclipse.xtext:xtext-dev-bom:${xtextVersion}\")");
+      _builder.append("api platform(\"org.eclipse.xtext:xtext-dev-bom:${xtextVersion}\")");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
