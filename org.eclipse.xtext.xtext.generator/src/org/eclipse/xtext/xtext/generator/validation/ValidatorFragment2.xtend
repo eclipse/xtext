@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -246,7 +246,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	protected def generateIssueProvider(){
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(configurableIssueCodesProviderClass)
 		javaFile.content = '''
+			«IF language.grammar.inheritsXbase»
 			@SuppressWarnings("restriction")
+			«ENDIF»
 			public class «configurableIssueCodesProviderClass» extends «superConfigurableIssueCodesProviderClass» {
 				protected static final String ISSUE_CODE_PREFIX = "«grammar.runtimeBasePackage».";
 			

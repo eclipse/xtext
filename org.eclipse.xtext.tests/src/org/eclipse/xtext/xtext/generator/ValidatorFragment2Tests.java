@@ -145,7 +145,6 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 				"import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;\n" +
 				"import org.eclipse.xtext.validation.SeverityConverter;\n" +
 				"\n" +
-				"@SuppressWarnings(\"restriction\")\n" +
 				"public class FooConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {\n" +
 				"	protected static final String ISSUE_CODE_PREFIX = \"org.xtext.\";\n" +
 				"\n" +
@@ -181,7 +180,6 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 				"import org.eclipse.xtext.util.IAcceptor;\n" +
 				"import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;\n" +
 				"\n" +
-				"@SuppressWarnings(\"restriction\")\n" +
 				"public class FooConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {\n" +
 				"	protected static final String ISSUE_CODE_PREFIX = \"org.xtext.\";\n" +
 				"\n" +
