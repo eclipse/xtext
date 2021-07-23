@@ -94,7 +94,7 @@ pipeline {
         }
       }
     }
-    failure {
+    unsuccessful {
       archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
