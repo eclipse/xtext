@@ -435,6 +435,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 														</versionRange>
 														<goals>
 															<goal>compile</goal>
+															<goal>testCompile</goal>
 														</goals>
 													</pluginExecutionFilter>
 													<action>
@@ -457,6 +458,25 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 															<goal>build-qualifier-aggregator</goal>
 															<goal>validate-id</goal>
 															<goal>validate-version</goal>
+														</goals>
+													</pluginExecutionFilter>
+													<action>
+														<ignore></ignore>
+													</action>
+												</pluginExecution>
+												<pluginExecution>
+													<pluginExecutionFilter>
+														<groupId>
+															org.eclipse.tycho
+														</groupId>
+														<artifactId>
+															target-platform-configuration
+														</artifactId>
+														<versionRange>
+															[2.4.0,)
+														</versionRange>
+														<goals>
+															<goal>target-platform</goal>
 														</goals>
 													</pluginExecutionFilter>
 													<action>
