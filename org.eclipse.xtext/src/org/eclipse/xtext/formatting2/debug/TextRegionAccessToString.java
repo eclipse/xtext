@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.debug;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -128,7 +129,7 @@ public class TextRegionAccessToString {
 			for (ITextSegmentDiff diff : this.access.getRegionDifferences()) {
 				ISequentialRegion current = toSequential(diff.getOriginalFirstRegion());
 				ISequentialRegion last = toSequential(diff.getOriginalLastRegion());
-				List<ITextSegment> regions = Lists.newArrayList();
+				List<ITextSegment> regions = new ArrayList<>();
 				while (current != null) {
 					regions.add(current);
 					if (current.getOffset() >= last.getOffset()) {
@@ -174,7 +175,7 @@ public class TextRegionAccessToString {
 
 	private boolean hideIndentation = false;
 
-	private boolean hightlightOrigin = false;
+	private boolean highlightOrigin = false;
 
 	private ITextSegment origin;
 
@@ -183,7 +184,7 @@ public class TextRegionAccessToString {
 	protected void appendRegions(TextRegionListToString result, List<ITextSegment> list, DiffColumn diff,
 			boolean isDiffAppendix) {
 		Multimap<IHiddenRegion, IEObjectRegion> hiddens = LinkedListMultimap.create();
-		List<String> errors = Lists.newArrayList();
+		List<String> errors = new ArrayList<>();
 		ITextRegionAccess access = list.get(0).getTextRegionAccess();
 		TreeIterator<EObject> all = EcoreUtil2.eAll(access.regionForRootEObject().getSemanticElement());
 		while (all.hasNext()) {
@@ -224,8 +225,8 @@ public class TextRegionAccessToString {
 		}
 		indentation = min < 0 ? min * -1 : 0;
 		for (ITextSegment region : list) {
-			List<IEObjectRegion> previous = Lists.newArrayList();
-			List<IEObjectRegion> next = Lists.newArrayList();
+			List<IEObjectRegion> previous = new ArrayList<>();
+			List<IEObjectRegion> next = new ArrayList<>();
 			List<String> middle = Lists.newArrayList(toString(region));
 			if (region instanceof IHiddenRegion) {
 				Collection<IEObjectRegion> found = hiddens.get((IHiddenRegion) region);
@@ -273,8 +274,11 @@ public class TextRegionAccessToString {
 		return this;
 	}
 
-	public TextRegionAccessToString hightlightOrigin() {
-		this.hightlightOrigin = true;
+	/**
+	 * @since 2.26
+	 */
+	public TextRegionAccessToString highlightOrigin() {
+		this.highlightOrigin = true;
 		return this;
 	}
 
@@ -292,8 +296,11 @@ public class TextRegionAccessToString {
 		return hideIndentation;
 	}
 
-	public boolean isHightlightOrigin() {
-		return hightlightOrigin;
+	/**
+	 * @since 2.26
+	 */
+	public boolean isHighlightOrigin() {
+		return highlightOrigin;
 	}
 
 	protected String quote(String string) {
@@ -349,14 +356,17 @@ public class TextRegionAccessToString {
 			return grammarToString.apply((AbstractElement) ele);
 		if (ele instanceof AbstractRule)
 			return ele.eClass().getName() + "'" + ((AbstractRule) ele).getName() + "'";
+		if (ele == null) {
+			return "(null)";
+		}
 		return ele.toString();
 	}
 
 	protected String toString(IComment comment) {
 		String text = quote(comment.getText());
-		String gammar = toString(comment.getGrammarElement());
+		String grammar = toString(comment.getGrammarElement());
 		String association = comment.getAssociation() + "";
-		return String.format("%s Comment:%s Association:%s", text, gammar, association);
+		return String.format("%s Comment:%s Association:%s", text, grammar, association);
 	}
 
 	protected String toString(IEObjectRegion region) {
@@ -369,7 +379,7 @@ public class TextRegionAccessToString {
 			builder.append(((AbstractRule) element).getName());
 		else
 			builder.append(": ERROR: No grammar element.");
-		List<String> segments = Lists.newArrayList();
+		List<String> segments = new ArrayList<>();
 		EObject current = obj;
 		while (current.eContainer() != null) {
 			EObject container = current.eContainer();
@@ -424,7 +434,7 @@ public class TextRegionAccessToString {
 			result = region.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(region));
 		else
 			result = "null";
-		if (hightlightOrigin && region == origin)
+		if (highlightOrigin && region == origin)
 			return ">>>" + result + "<<<";
 		return result;
 	}
@@ -436,36 +446,34 @@ public class TextRegionAccessToString {
 	}
 
 	protected List<ITextSegment> toTokenAndGapList() {
-		final int range = this.hightlightOrigin ? 4 : (Integer.MAX_VALUE / 2);
+		int range = this.highlightOrigin ? 4 : (Integer.MAX_VALUE / 2);
 		ITextSegment first = null;
-		{
-			ITextSegment current = origin;
-			for (int i = 0; i < range && current != null; i++) {
-				first = current;
-				if (current instanceof ITextRegionAccess)
-					current = ((ITextRegionAccess) current).regionForRootEObject().getPreviousHiddenRegion();
-				else if (current instanceof ISequentialRegion)
-					current = ((ISequentialRegion) current).getPreviousHiddenRegion();
-				else if (current instanceof IHiddenRegionPart)
-					current = ((IHiddenRegionPart) current).getHiddenRegion();
-				else
-					throw new IllegalStateException("Unexpected Type: " + current.getClass());
-			}
+		ITextSegment current = origin;
+		for (int i = 0; i < range && current != null; i++) {
+			first = current;
+			if (current instanceof ITextRegionAccess)
+				current = ((ITextRegionAccess) current).regionForRootEObject().getPreviousHiddenRegion();
+			else if (current instanceof ISequentialRegion)
+				current = ((ISequentialRegion) current).getPreviousHiddenRegion();
+			else if (current instanceof IHiddenRegionPart)
+				current = ((IHiddenRegionPart) current).getHiddenRegion();
+			else
+				throw new IllegalStateException("Unexpected Type: " + current.getClass());
 		}
+		
 		if (first == null)
 			return Collections.emptyList();
-		List<ITextSegment> result = Lists.newArrayList();
-		{
-			ITextSegment current = first;
-			for (int i = 0; i <= (range * 2) && current != null; i++) {
-				result.add(current);
-				if (current instanceof ISemanticRegion)
-					current = ((ISemanticRegion) current).getNextHiddenRegion();
-				else if (current instanceof IHiddenRegion)
-					current = ((IHiddenRegion) current).getNextSemanticRegion();
-				else
-					throw new IllegalStateException("Unexpected Type: " + current.getClass());
-			}
+		
+		List<ITextSegment> result = new ArrayList<>();
+		ITextSegment currentRegion = first;
+		for (int i = 0; i <= (range * 2) && currentRegion != null; i++) {
+			result.add(currentRegion);
+			if (currentRegion instanceof ISemanticRegion)
+				currentRegion = ((ISemanticRegion) currentRegion).getNextHiddenRegion();
+			else if (currentRegion instanceof IHiddenRegion)
+				currentRegion = ((IHiddenRegion) currentRegion).getNextSemanticRegion();
+			else
+				throw new IllegalStateException("Unexpected Type: " + currentRegion.getClass());
 		}
 		return result;
 	}
@@ -477,7 +485,7 @@ public class TextRegionAccessToString {
 
 	public TextRegionAccessToString withRegionAccess(ITextRegionAccess access) {
 		this.origin = access.regionForRootEObject();
-		this.hightlightOrigin = false;
+		this.highlightOrigin = false;
 		return this;
 	}
 

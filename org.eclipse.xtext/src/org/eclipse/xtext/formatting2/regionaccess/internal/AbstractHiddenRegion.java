@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,10 +49,10 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	protected List<ITextSegment> collectAlternatingSpaceAndComments(boolean includeComments) {
 		List<IHiddenRegionPart> parts = getParts();
 		if (parts.isEmpty()) {
-			return Collections.<ITextSegment>singletonList(this);
+			return Collections.singletonList(this);
 		} else {
 			ITextSegment lastWhitespace = null;
-			List<ITextSegment> result = Lists.newArrayList();
+			List<ITextSegment> result = new ArrayList<>();
 			for (IHiddenRegionPart part : parts) {
 				if (part instanceof IWhitespace) {
 					if (lastWhitespace == null) {
@@ -130,7 +131,7 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 
 	@Override
 	public List<IHiddenRegionPart> getParts() {
-		return ImmutableList.<IHiddenRegionPart>copyOf(hiddens);
+		return ImmutableList.copyOf(hiddens);
 	}
 
 	@Override
@@ -168,7 +169,7 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 
 	@Override
 	public String toString() {
-		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
+		return new TextRegionAccessToString().withOrigin(this).highlightOrigin().toString();
 	}
 
 	@Override

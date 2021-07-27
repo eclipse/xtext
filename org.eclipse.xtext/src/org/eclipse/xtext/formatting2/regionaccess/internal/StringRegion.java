@@ -43,6 +43,6 @@ public class StringRegion extends AbstractTextSegment {
 
 	@Override
 	public String toString() {
-		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
+		return new TextRegionAccessToString().withOrigin(this).highlightOrigin().toString();
 	}
 }
