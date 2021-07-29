@@ -43,6 +43,7 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.common.annotations.Beta;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * Loads resources in one more separate threads.
@@ -157,7 +158,7 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 					return resourceSet;
 				}
 			};
-			this.executor = Executors.newFixedThreadPool(nThreads);
+			this.executor = Executors.newFixedThreadPool(nThreads, new ThreadFactoryBuilder().setNameFormat("ParallelLoad-%d").build());
 			this.waitTime = getTimeout();
 		}
 
