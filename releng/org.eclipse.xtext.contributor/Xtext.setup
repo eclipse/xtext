@@ -826,6 +826,9 @@
             name="com.google.guava"
             versionRange="[30.1.0,31.0.0)"/>
         <requirement
+            name="com.google.inject"
+            versionRange="[5.0.1,6.0.0)"/>
+        <requirement
             name="org.eclipse.jdt.java8patch.feature.group"
             optional="true"/>
         <requirement

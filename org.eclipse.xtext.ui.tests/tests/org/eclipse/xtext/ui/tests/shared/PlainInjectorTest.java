@@ -87,7 +87,13 @@ public class PlainInjectorTest {
 	
 	@Test
 	public void testChildInjectorNoJIT() {
-		Injector parentInjector = Guice.createInjector();
+		Injector parentInjector = Guice.createInjector(new Module() {
+			@Override
+			public void configure(Binder binder) {
+				binder.bind(String.class).toInstance("");
+			}
+			
+		});
 		Injector injector = parentInjector.createChildInjector(new Module() {
 			@Override
 			public void configure(Binder binder) {

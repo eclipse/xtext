@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.tests
 Bundle-Version: 2.26.0.qualifier
 Bundle-Localization: plugin
-Require-Bundle: com.google.inject;bundle-version="3.0.0",
+Require-Bundle: com.google.inject;bundle-version="5.0.1",
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.ui.codetemplates,
  org.eclipse.xtext.ui.codetemplates.ui,
