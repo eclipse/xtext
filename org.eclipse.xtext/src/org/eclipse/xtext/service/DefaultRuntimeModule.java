@@ -82,7 +82,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 	}
-	
+
 	public EValidator.Registry bindEValidatorRegistry() {
 		return EValidator.Registry.INSTANCE;
 	}
@@ -90,11 +90,11 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public EPackage.Registry bindEPackageRegistry() {
 		return EPackage.Registry.INSTANCE;
 	}
-	
+
 	public IResourceServiceProvider.Registry bindIResourceServiceProvider$Registry() {
 		return IResourceServiceProvider.Registry.INSTANCE;
 	}
-	
+
 	@SingletonBinding
 	public Class<? extends Diagnostician> bindDiagnostician() {
 		return CancelableDiagnostician.class;
@@ -256,4 +256,5 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(new TypeLiteral<ImmutableList<IsAffectedExtension>>() {}).toProvider(AllIsAffectedExtensions.class);
 		binder.bind(Key.get(IsAffectedExtension.class, Names.named("IsAffectedExtension.UniqueNames"))).to(INamesAreUniqueValidationHelper.ContextProvider.class);
 	}
+	
 }

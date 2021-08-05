@@ -43,7 +43,7 @@ Export-Package: org.eclipse.xtext.util;
    org.eclipse.xtext.xbase"
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.20.0",
  com.google.guava;bundle-version="[30.1.0,31.0.0)";visibility:=reexport,
- com.google.inject;bundle-version="3.0.0";visibility:=reexport,
+ com.google.inject;bundle-version="5.0.1";visibility:=reexport,
  javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"
