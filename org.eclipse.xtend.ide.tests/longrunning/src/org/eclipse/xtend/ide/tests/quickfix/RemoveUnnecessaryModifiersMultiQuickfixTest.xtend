@@ -21,7 +21,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPluginProject
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 
 /**
  * @author Aaron R Miller - Initial contribution and API

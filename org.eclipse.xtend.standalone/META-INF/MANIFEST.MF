@@ -6,7 +6,7 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.26.0.qualifier
 Require-Bundle: org.eclipse.xtend.core;visibility:=reexport,
  org.eclipse.xtext.junit4;visibility:=reexport,
- com.google.inject;bundle-version="3.0.0";visibility:=reexport,
+ com.google.inject;bundle-version="5.0.1";visibility:=reexport,
  org.eclipse.xtext.xbase.junit;visibility:=reexport,
  org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.13.102";visibility:=reexport,
