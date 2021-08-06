@@ -15,6 +15,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory.StatefulFactory;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -35,7 +37,7 @@ public class DelegatingContentAssistContextFactoryWithSharedPool extends Abstrac
 	 */
 	@Singleton
 	public static class SharedExecutorServiceAccess {
-		ExecutorService pool = Executors.newFixedThreadPool(3);
+		ExecutorService pool = Executors.newFixedThreadPool(3, new ThreadFactoryBuilder().setNameFormat("ContentAssistContextFactorySharedPool-%d").build());
 
 		ExecutorService pool() {
 			return pool;
