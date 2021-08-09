@@ -162,6 +162,34 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 			this.waitTime = getTimeout();
 		}
 
+		/**
+		 * @since 2.26
+		 */
+		protected int getToProcess() {
+			return toProcess;
+		}
+
+		/**
+		 * @since 2.26
+		 */
+		protected void setToProcess(int toProcess) {
+			this.toProcess = toProcess;
+		}
+
+		/**
+		 * @since 2.26
+		 */
+		protected BlockingQueue<Triple<URI, Resource, Throwable>> getResourceQueue() {
+			return resourceQueue;
+		}
+
+		/**
+		 * @since 2.26
+		 */
+		protected ExecutorService getExecutor() {
+			return executor;
+		}
+
 		private class ResourceLoadJob implements Runnable {
 			private final URI uri;
 
