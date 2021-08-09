@@ -55,7 +55,10 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	 */
 	@Override
 	public void clear(Resource resource) {
-		getOrCreate(resource).clearValues();
+		CacheAdapter cacheAdapter = findCacheAdapter(resource);
+		if (cacheAdapter != null) {
+			cacheAdapter.clearValues();
+		}
 	}
 	
 	/**
@@ -108,13 +111,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	 * @return the cache adapter for the given resource. Never <code>null</code>.
 	 */
 	public CacheAdapter getOrCreate(Resource resource) {
-		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
+		CacheAdapter adapter = findCacheAdapter(resource);
 		if (adapter == null) {
 			adapter = createCacheAdapter();
 			resource.eAdapters().add(adapter);
 			adapter.setResource(resource);
 		}
 		return adapter;
+	}
+
+	/**
+	 * @since 2.26
+	 */
+	protected CacheAdapter findCacheAdapter(Resource resource) {
+		return (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
 	}
 
 	/**

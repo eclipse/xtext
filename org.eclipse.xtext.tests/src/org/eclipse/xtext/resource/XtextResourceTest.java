@@ -141,4 +141,12 @@ public class XtextResourceTest extends AbstractXtextTests {
 		assertEquals(1, diag.getLength());
 	}
 
+	@Test public void testClearCache() throws Exception {
+		resource.update(0, 0, simpleModel);
+		Object cv1 = resource.getCache().get("justatest", resource, ()->new Object());
+		resource.update(0, 0, "");
+		Object cv2 = resource.getCache().get("justatest", resource, ()->new Object());
+		assertNotSame(cv1, cv2);
+	}
+
 }
