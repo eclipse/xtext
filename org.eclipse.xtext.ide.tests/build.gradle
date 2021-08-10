@@ -1,13 +1,13 @@
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.ide')
-	compile project(':org.eclipse.xtext.testing')
-	compile project(':org.eclipse.xtext.testlanguages')
-	compile project(':org.eclipse.xtext.testlanguages.ide')
-	compile 'junit:junit'
-	compile 'org.eclipse.lsp4j:org.eclipse.lsp4j'
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change'
+	api project(':org.eclipse.xtext.ide')
+	api project(':org.eclipse.xtext.testing')
+	api project(':org.eclipse.xtext.testlanguages')
+	api project(':org.eclipse.xtext.testlanguages.ide')
+	api 'junit:junit'
+	api 'org.eclipse.lsp4j:org.eclipse.lsp4j'
+	api 'org.eclipse.emf:org.eclipse.emf.ecore.change'
 }
 
 sourceSets.test.java {

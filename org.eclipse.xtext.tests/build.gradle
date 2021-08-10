@@ -1,18 +1,18 @@
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.testing')
-	compile project(':org.eclipse.xtext.xtext.generator')
-	compile project(':org.eclipse.xtext.xtext.wizard')
-	compile project(':org.eclipse.xtext.testlanguages')
-	mwe2Compile project(':org.eclipse.xtext.testlanguages')
-	compile 'junit:junit'
-	compile 'org.eclipse.emf:org.eclipse.emf.common'
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
+	api project(':org.eclipse.xtext.testing')
+	api project(':org.eclipse.xtext.xtext.generator')
+	api project(':org.eclipse.xtext.xtext.wizard')
+	api project(':org.eclipse.xtext.testlanguages')
+	mwe2Implementation project(':org.eclipse.xtext.testlanguages')
+	api 'junit:junit'
+	api 'org.eclipse.emf:org.eclipse.emf.common'
+	api 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
 	optional files('lib/simple.jar')
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
-	testCompile sourceSets.mwe2.output
-	testCompile 'args4j:args4j'
+	testImplementation sourceSets.mwe2.output
+	testImplementation 'args4j:args4j'
 	// optional for the utilities but mandatory to run the tests
 	testImplementation 'junit:junit'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api'
@@ -33,8 +33,12 @@ sourceSets.mwe2 {
 	runtimeClasspath += processTestResources.outputs.files
 }
 jar.from sourceSets.mwe2.output
-sourcesJar.from sourceSets.mwe2.allSource
-
+sourcesJar {
+	if (findProperty('compileXtend') == 'true') {
+		dependsOn(generateTestXtext)
+	}
+	from sourceSets.mwe2.allSource
+}
 task generateTestLanguages(type: XtextGeneratorTask) {
 	workflow = file('src/org/eclipse/xtext/GenerateAllTestLanguages.mwe2')
 	outputs.dir 'src-gen'

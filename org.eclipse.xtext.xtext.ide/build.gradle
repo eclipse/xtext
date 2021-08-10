@@ -2,5 +2,5 @@ ext.title = 'Xtext Language IDE Support'
 description = 'Xtext Language generic IDE support.'
 
 dependencies {
-	compile project(':org.eclipse.xtext.ide')
+	api project(':org.eclipse.xtext.ide')
 }

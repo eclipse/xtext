@@ -3,18 +3,20 @@
  */
 
 sourceSets {
-	mwe2 {}
-}
+	mwe2 {
 
-eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+	}
+}
+eclipse.classpath.plusConfigurations += [configurations.mwe2RuntimeClasspath]
 
 dependencies {
 	if (!name.endsWith('bootstrap')) {
-		mwe2Compile project(':org.eclipse.xtext.xtext.generator')
+		mwe2Implementation project(':org.eclipse.xtext.xtext.generator')
 	}
-	mwe2Runtime 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
-	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
+	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
+	mwe2Implementation platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
 }
 
 if (findProperty('compileXtend') == 'true') {
@@ -24,7 +26,7 @@ if (findProperty('compileXtend') == 'true') {
 class XtextGeneratorTask extends JavaExec {
 	XtextGeneratorTask() {
 		group = 'Build'
-		main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+		mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 		classpath = project.sourceSets.mwe2.runtimeClasspath
 	}
 	def setWorkflow(File workflowFile) {
