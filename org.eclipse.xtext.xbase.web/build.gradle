@@ -4,11 +4,11 @@ ext.title = 'Xbase Web Integration'
 description = 'Additional services for the web integration of Xbase.'
 
 dependencies {
-	compile project(':org.eclipse.xtext.web')
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
-	testCompile 'junit:junit'
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	testCompile project(':org.eclipse.xtext.web.example.entities.ide')
+	api project(':org.eclipse.xtext.web')
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
+	testImplementation'junit:junit'
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	testImplementation project(':org.eclipse.xtext.web.example.entities.ide')
 }
 
 jar.bnd(
