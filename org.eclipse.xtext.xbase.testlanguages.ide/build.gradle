@@ -1,7 +1,7 @@
 dependencies {
-	compile project(':org.eclipse.xtext.xbase.testlanguages')
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
-	compile project(':org.eclipse.xtext.xbase.ide')
+	api project(':org.eclipse.xtext.xbase.testlanguages')
+	api "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+	api project(':org.eclipse.xtext.xbase.ide')
 }
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false

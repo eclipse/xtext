@@ -3,8 +3,8 @@ apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 ext.title = 'Pure Xbase Runtime'
 
 dependencies {
-	compile project(':org.eclipse.xtext.xbase')
-	mwe2Compile project(':org.eclipse.xtext.xbase')
+	api project(':org.eclipse.xtext.xbase')
+	mwe2Implementation project(':org.eclipse.xtext.xbase')
 }
 
 // Include the mwe2 and xtext files from the main source set when executing the workflow

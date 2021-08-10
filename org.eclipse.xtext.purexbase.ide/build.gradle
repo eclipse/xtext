@@ -1,7 +1,7 @@
 ext.title = 'Pure Xbase Generic Ide'
 
 dependencies {
-	compile project(':org.eclipse.xtext.xbase')
-	compile project(':org.eclipse.xtext.purexbase')
-	compile project(':org.eclipse.xtext.xbase.ide')
+	api project(':org.eclipse.xtext.xbase')
+	api project(':org.eclipse.xtext.purexbase')
+	api project(':org.eclipse.xtext.xbase.ide')
 }

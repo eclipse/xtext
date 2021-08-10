@@ -1,21 +1,21 @@
 sourceSets {
 	mwe2 {}
 }
-eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+eclipse.classpath.plusConfigurations += [configurations.mwe2RuntimeClasspath]
 
 ext.title = 'Common Types Runtime Library'
 description = 'JVM type model used by Xbase and other languages.'
 
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	compile 'org.ow2.asm:asm-commons'
-	compile 'io.github.classgraph:classgraph'
-	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
-	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
-	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen'
-	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+	api 'org.ow2.asm:asm-commons'
+	api 'io.github.classgraph:classgraph'
+	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.codegen'
+	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
 	// this is needed cause buildship wont work otherwise
-	mwe2Compile platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
+	mwe2Implementation platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
 }
 
 sourceSets.main.java.srcDir 'deprecated'

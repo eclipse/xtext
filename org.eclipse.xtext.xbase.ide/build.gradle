@@ -2,6 +2,6 @@ ext.title = 'Xbase Generic IDE Services'
 description = 'Platform-independent support for Xbase languages.'
 
 dependencies {
-	compile project(':org.eclipse.xtext.xbase')
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+	api project(':org.eclipse.xtext.xbase')
+	api "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
 }
