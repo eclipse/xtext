@@ -319,7 +319,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 			pluginsSection = '''
 				«IF config.languageServer === LanguageServer.FATJAR»
 					plugins {
-						id 'com.github.johnrengelman.shadow' version '5.2.0'
+						id 'com.github.johnrengelman.shadow' version '7.0.0'
 					}
 					
 				«ENDIF»
@@ -336,7 +336,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 					«IF config.languageServer === LanguageServer.FATJAR»
 						shadowJar {
 							from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)
-							configurations = [project.configurations.runtime]
+							configurations = [project.configurations.runtimeClasspath]
 							exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
 								'.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
 								'plugin.xml', 'systembundle.properties', 'profile.list')

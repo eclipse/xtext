@@ -586,7 +586,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("mwe2 {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("extendsFrom compile");
+      _builder.append("extendsFrom compileClasspath");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -614,7 +614,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("task generateXtextLanguage(type: JavaExec) {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("main = \'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\'");
+      _builder.append("mainClass = \'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("classpath = configurations.mwe2");
@@ -669,6 +669,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.append("processResources.dependsOn(generateXtextLanguage)");
+      _builder.newLine();
       _builder.append("generateXtext.dependsOn(generateXtextLanguage)");
       _builder.newLine();
       _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");

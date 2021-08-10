@@ -1121,7 +1121,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("plugins {");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("id \'com.github.johnrengelman.shadow\' version \'5.2.0\'");
+          _builder.append("id \'com.github.johnrengelman.shadow\' version \'7.0.0\'");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
@@ -1158,7 +1158,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.append("from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)");
               _builder_1.newLine();
               _builder_1.append("\t");
-              _builder_1.append("configurations = [project.configurations.runtime]");
+              _builder_1.append("configurations = [project.configurations.runtimeClasspath]");
               _builder_1.newLine();
               _builder_1.append("\t");
               _builder_1.append("exclude(\'META-INF/INDEX.LIST\', \'META-INF/*.SF\', \'META-INF/*.DSA\', \'META-INF/*.RSA\',\'schema/*\',");

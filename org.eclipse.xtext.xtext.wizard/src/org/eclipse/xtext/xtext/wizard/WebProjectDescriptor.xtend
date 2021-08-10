@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -69,7 +69,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 				task jettyRun(type:JavaExec) {
 					dependsOn(sourceSets.main.runtimeClasspath)
 					classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-					main = '«config.language.basePackage».web.ServerLauncher'
+					mainClass = '«config.language.basePackage».web.ServerLauncher'
 					standardInput = System.in
 					group = 'run'
 					description = 'Starts an example Jetty server with your language'

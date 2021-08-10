@@ -285,7 +285,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			additionalContent = '''
 				configurations {
 					mwe2 {
-						extendsFrom compile
+						extendsFrom compileClasspath
 					}
 				}
 
@@ -297,7 +297,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 				
 				task generateXtextLanguage(type: JavaExec) {
-					main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+					mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 					classpath = configurations.mwe2
 					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«workflowFilePath»"
 					inputs.file "«Outlet.MAIN_JAVA.sourceFolder»/«grammarFilePath»"
@@ -310,6 +310,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				«IF testProject.inlined»
 					«testProject.buildGradle.additionalContent»
 				«ENDIF»
+				processResources.dependsOn(generateXtextLanguage)
 				generateXtext.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
 				eclipse.classpath.plusConfigurations += [configurations.mwe2]
