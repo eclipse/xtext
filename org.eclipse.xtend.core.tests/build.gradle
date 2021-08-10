@@ -1,10 +1,10 @@
 dependencies {
-	compile project(':org.eclipse.xtend.core')
-	compile "org.eclipse.emf:org.eclipse.emf.codegen"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore"
-	compile "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
+	api project(':org.eclipse.xtend.core')
+	api "org.eclipse.emf:org.eclipse.emf.codegen"
+	api "org.eclipse.emf:org.eclipse.emf.codegen.ecore"
+	api "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
+	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 }
 
 sourceSets.test {

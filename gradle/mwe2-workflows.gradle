@@ -5,14 +5,14 @@
 sourceSets {
 	mwe2 {}
 }
-
-eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+configurations.mwe2Implementation.canBeResolved = true //TODO is there a better way
+eclipse.classpath.plusConfigurations += [configurations.mwe2Implementation]
 
 dependencies {
-	mwe2Compile platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
+	mwe2Implementation platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Implementation "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
 }
 
 if (findProperty('compileXtend') == 'true') {
@@ -22,7 +22,7 @@ if (findProperty('compileXtend') == 'true') {
 class XtextGeneratorTask extends JavaExec {
 	XtextGeneratorTask() {
 		group = 'Build'
-		main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+		mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 		classpath = project.sourceSets.mwe2.runtimeClasspath
 	}
 	def setWorkflow(File workflowFile) {

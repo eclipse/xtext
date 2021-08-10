@@ -3,18 +3,18 @@ description = 'Core language services for Xtend.'
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
-	compile "org.eclipse.platform:org.eclipse.equinox.common"
-	compile "org.eclipse.platform:org.eclipse.core.runtime"
-	compile "org.eclipse.jdt:org.eclipse.jdt.core"
-	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt"
-	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
+	api "org.eclipse.platform:org.eclipse.equinox.common"
+	api "org.eclipse.platform:org.eclipse.core.runtime"
+	api "org.eclipse.jdt:org.eclipse.jdt.core"
+	api "org.eclipse.jdt:org.eclipse.jdt.compiler.apt"
+	api "org.eclipse.jdt:org.eclipse.jdt.compiler.tool"
 	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 	optional "org.apache.ant:ant:$versions.ant"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
-	mwe2Compile "de.jflex:jflex:$versions.jflex"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Implementation "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
+	mwe2Implementation "de.jflex:jflex:$versions.jflex"
+	mwe2Implementation "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
 }
 
 sourceSets {
