@@ -5,8 +5,7 @@
 sourceSets {
 	mwe2 {}
 }
-configurations.mwe2Implementation.canBeResolved = true //TODO is there a better way
-eclipse.classpath.plusConfigurations += [configurations.mwe2Implementation]
+eclipse.classpath.plusConfigurations += [configurations.mwe2RuntimeClasspath]
 
 dependencies {
 	mwe2Implementation platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
