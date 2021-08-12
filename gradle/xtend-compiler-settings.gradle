@@ -4,6 +4,7 @@
 
 if (findProperty('compileXtend') == 'true') {
 	[generateXtext, generateTestXtext].each { gen ->
+		sourcesJar.dependsOn(gen)
 		gen.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
 	}
 	

@@ -3,8 +3,8 @@ ext.title = 'Eclipse Xtend Runtime Library'
 description = 'The runtime library for the Xtend programming language.'
 
 dependencies {
-	compile project(':org.eclipse.xtext.xbase.lib')
-	compile project(':org.eclipse.xtend.lib.macro')
+	api project(':org.eclipse.xtext.xbase.lib')
+	api project(':org.eclipse.xtend.lib.macro')
 }
 
 apply from: "${rootDir}/gradle/gwtSourceProject.gradle"

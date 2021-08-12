@@ -5,8 +5,9 @@ plugins {
 group = 'org.eclipse.xtend'
 
 dependencies {
-	compile project(':org.eclipse.xtend.lib.gwt')
-	compile "com.google.gwt:gwt-dev:$versions.gwt"
+	api project(':org.eclipse.xtend.lib.gwt')
+	gwt project(':org.eclipse.xtend.lib.gwt')
+	api "com.google.gwt:gwt-dev:$versions.gwt"
 }
 
 gwt {
