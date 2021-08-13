@@ -43,11 +43,13 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CompositeModel returns CompositeModel
 	 *
 	 * Constraint:
 	 *     model+=Model+
+	 * </pre>
 	 */
 	protected void sequence_CompositeModel(ISerializationContext context, CompositeModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (id=NestedModelId value=Fraction? vector=Vector? dots=Dots? double=Double?)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -93,6 +93,7 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
@@ -111,6 +112,7 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         element=Rule11 | 
 	 *         element=Rule12
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -118,11 +120,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule10 returns Rule10
 	 *
 	 * Constraint:
 	 *     (left=INT right?=MaybeEmpty unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule10(ISerializationContext context, Rule10 semanticObject) {
 		if (errorAcceptor != null) {
@@ -142,11 +146,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule11 returns Rule11
 	 *
 	 * Constraint:
 	 *     (left=INT right?=Integer unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule11(ISerializationContext context, Rule11 semanticObject) {
 		if (errorAcceptor != null) {
@@ -166,11 +172,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule12 returns Rule12
 	 *
 	 * Constraint:
 	 *     (left=INT right?=Wrapper unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule12(ISerializationContext context, Rule12 semanticObject) {
 		if (errorAcceptor != null) {
@@ -190,11 +198,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule1 returns Rule1
 	 *
 	 * Constraint:
 	 *     (left=INT right=INT unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule1(ISerializationContext context, Rule1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -214,11 +224,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule2 returns Rule2
 	 *
 	 * Constraint:
 	 *     (value=INT unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule2(ISerializationContext context, Rule2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -235,11 +247,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule3 returns Rule3
 	 *
 	 * Constraint:
 	 *     (left=ID right=STRING unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule3(ISerializationContext context, Rule3 semanticObject) {
 		if (errorAcceptor != null) {
@@ -259,11 +273,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule4 returns Rule4
 	 *
 	 * Constraint:
 	 *     (left=STRING right=ID unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule4(ISerializationContext context, Rule4 semanticObject) {
 		if (errorAcceptor != null) {
@@ -283,11 +299,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule5 returns Rule5
 	 *
 	 * Constraint:
 	 *     (left=INT right=Integer unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule5(ISerializationContext context, Rule5 semanticObject) {
 		if (errorAcceptor != null) {
@@ -307,11 +325,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule6 returns Rule6
 	 *
 	 * Constraint:
 	 *     (left=INT right=Wrapper unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule6(ISerializationContext context, Rule6 semanticObject) {
 		if (errorAcceptor != null) {
@@ -331,11 +351,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule7 returns Rule7
 	 *
 	 * Constraint:
 	 *     (left=INT right?=INT unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule7(ISerializationContext context, Rule7 semanticObject) {
 		if (errorAcceptor != null) {
@@ -355,11 +377,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule8 returns Rule8
 	 *
 	 * Constraint:
 	 *     (left=INT right?='#1' unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule8(ISerializationContext context, Rule8 semanticObject) {
 		if (errorAcceptor != null) {
@@ -379,11 +403,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule9 returns Rule9
 	 *
 	 * Constraint:
 	 *     (left=INT right=MaybeEmpty unit='s')
+	 * </pre>
 	 */
 	protected void sequence_Rule9(ISerializationContext context, Rule9 semanticObject) {
 		if (errorAcceptor != null) {
@@ -403,11 +429,13 @@ public class GH1462TestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Wrapper returns Wrapper
 	 *
 	 * Constraint:
 	 *     value=INT
+	 * </pre>
 	 */
 	protected void sequence_Wrapper(ISerializationContext context, Wrapper semanticObject) {
 		if (errorAcceptor != null) {

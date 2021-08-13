@@ -85,11 +85,13 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DefineVariable returns DefineVariable
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_DefineVariable(ISerializationContext context, DefineVariable semanticObject) {
 		if (errorAcceptor != null) {
@@ -103,11 +105,13 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DefineVariables returns DefineVariables
 	 *
 	 * Constraint:
 	 *     variables+=DefineVariable+
+	 * </pre>
 	 */
 	protected void sequence_DefineVariables(ISerializationContext context, DefineVariables semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -115,6 +119,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_VariableName
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_VariableName
@@ -128,6 +133,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     variable=NVariableAccess
+	 * </pre>
 	 */
 	protected void sequence_Expression_VariableName(ISerializationContext context, Expression_VariableName semanticObject) {
 		if (errorAcceptor != null) {
@@ -141,11 +147,13 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NVariableAccess returns NVariableAccess
 	 *
 	 * Constraint:
 	 *     variable=[DefineVariable|ID]
+	 * </pre>
 	 */
 	protected void sequence_NVariableAccess(ISerializationContext context, NVariableAccess semanticObject) {
 		if (errorAcceptor != null) {
@@ -159,11 +167,13 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Program returns Program
 	 *
 	 * Constraint:
 	 *     (define=DefineVariables statements+=Statement*)
+	 * </pre>
 	 */
 	protected void sequence_Program(ISerializationContext context, Program semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -171,6 +181,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Equal
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Equal
@@ -183,6 +194,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Equal_1_3_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Equal semanticObject) {
 		if (errorAcceptor != null) {
@@ -199,6 +211,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Larger_Equal
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Larger_Equal
@@ -211,6 +224,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Larger_Equal_1_0_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Larger_Equal semanticObject) {
 		if (errorAcceptor != null) {
@@ -227,6 +241,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Not_Equal
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Equal
@@ -239,6 +254,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Equal_1_4_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Not_Equal semanticObject) {
 		if (errorAcceptor != null) {
@@ -255,6 +271,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Not_Greater
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Greater
@@ -267,6 +284,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Greater_1_6_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Not_Greater semanticObject) {
 		if (errorAcceptor != null) {
@@ -283,6 +301,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Not_Less
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Not_Less
@@ -295,6 +314,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Less_1_5_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Not_Less semanticObject) {
 		if (errorAcceptor != null) {
@@ -311,6 +331,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Smaller
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Smaller
@@ -323,6 +344,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_1_1_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Smaller semanticObject) {
 		if (errorAcceptor != null) {
@@ -339,6 +361,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Expression_Smaller_Equal
 	 *     Statement.Expression_Larger_Equal_1_0_1 returns Expression_Smaller_Equal
@@ -351,6 +374,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_Equal_1_2_1 right=Expression_VariableName)
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Expression_Smaller_Equal semanticObject) {
 		if (errorAcceptor != null) {

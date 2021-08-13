@@ -72,6 +72,7 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -80,12 +81,15 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -94,12 +98,15 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -107,19 +114,22 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '[' filtered=InverseLiteralValue
 	 *     (rule start) (ambiguity) '{' type=TypeRef
 	 *     (rule start) (ambiguity) feature=ID
-	 *     (rule start) (ambiguity) firstSetPredicated?='->'
-	 *     (rule start) (ambiguity) predicated?='=>'
+	 *     (rule start) (ambiguity) firstSetPredicated?='-&gt;'
+	 *     (rule start) (ambiguity) predicated?='=&gt;'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
 	 *     (rule start) (ambiguity) {Group.elements+=}
 	 *     (rule start) (ambiguity) {UnorderedGroup.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedElement_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -127,25 +137,28 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '[' filtered=InverseLiteralValue
 	 *     (rule start) (ambiguity) '{' type=TypeRef
 	 *     (rule start) (ambiguity) feature=ID
-	 *     (rule start) (ambiguity) firstSetPredicated?='->'
-	 *     (rule start) (ambiguity) predicated?='=>'
+	 *     (rule start) (ambiguity) firstSetPredicated?='-&gt;'
+	 *     (rule start) (ambiguity) predicated?='=&gt;'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
 	 *     (rule start) (ambiguity) {Group.elements+=}
 	 *     (rule start) (ambiguity) {UnorderedGroup.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedElement_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
-	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
+	 *     (rule start) (ambiguity) '-&gt;' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' (rule start)
 	 *     (rule start) (ambiguity) '.' cardinality='*'
 	 *     (rule start) (ambiguity) '.' cardinality='+'
@@ -159,18 +172,21 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
 	 *     (rule start) (ambiguity) {CharacterRange.left=}
 	 *     (rule start) (ambiguity) {Group.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
-	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
+	 *     (rule start) (ambiguity) '-&gt;' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' ')' (rule start)
 	 *     (rule start) (ambiguity) '.' cardinality='*'
 	 *     (rule start) (ambiguity) '.' cardinality='+'
@@ -184,17 +200,22 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
 	 *     (rule start) (ambiguity) {CharacterRange.left=}
 	 *     (rule start) (ambiguity) {Group.elements+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('[' ']')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) wildcard?='*'
+	 
+	 * </pre>
 	 */
 	protected void emit_RuleNameAndParams___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

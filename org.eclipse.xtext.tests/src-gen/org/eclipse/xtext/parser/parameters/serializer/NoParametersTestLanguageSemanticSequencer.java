@@ -96,6 +96,7 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParserRuleParameters returns ParserRuleParameters
 	 *
@@ -118,6 +119,7 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	 *         scenario=Scenario4_False | 
 	 *         scenario=Scenario2_False
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -125,11 +127,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_False returns Scenario
 	 *
 	 * Constraint:
 	 *     second=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_False(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -143,11 +147,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_True returns Scenario
 	 *
 	 * Constraint:
 	 *     first=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_True(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -161,11 +167,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_False returns Scenario
 	 *
 	 * Constraint:
 	 *     first=IdOrKeyword_False
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_False(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -179,11 +187,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_True returns Scenario
 	 *
 	 * Constraint:
 	 *     first=IdOrKeyword_True
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_True(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -197,11 +207,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario3_False returns Scenario
 	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword_False | second='keyword')
+	 * </pre>
 	 */
 	protected void sequence_Scenario3_False(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,11 +221,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario3_True returns Scenario
 	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword_True | second='keyword')
+	 * </pre>
 	 */
 	protected void sequence_Scenario3_True(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,11 +235,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario4_False returns Scenario
 	 *
 	 * Constraint:
 	 *     second=IdOrKeyword_False
+	 * </pre>
 	 */
 	protected void sequence_Scenario4_False(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -239,11 +255,13 @@ public class NoParametersTestLanguageSemanticSequencer extends ParametersTestLan
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario4_True returns Scenario
 	 *
 	 * Constraint:
 	 *     second=IdOrKeyword_True
+	 * </pre>
 	 */
 	protected void sequence_Scenario4_True(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {

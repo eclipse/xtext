@@ -49,12 +49,14 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child returns Child1
 	 *     Child1 returns Child1
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Child1(ISerializationContext context, Child1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -68,12 +70,14 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child returns Child2
 	 *     Child2 returns Child2
 	 *
 	 * Constraint:
 	 *     name=STRING
+	 * </pre>
 	 */
 	protected void sequence_Child2(ISerializationContext context, Child2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -87,6 +91,7 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -110,6 +115,7 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         multiValue+=NestedDatatype | 
 	 *         children=Child
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

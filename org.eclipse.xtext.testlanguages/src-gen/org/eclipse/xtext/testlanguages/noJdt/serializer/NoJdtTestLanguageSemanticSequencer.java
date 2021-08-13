@@ -43,11 +43,13 @@ public class NoJdtTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Greeting returns Greeting
 	 *
 	 * Constraint:
 	 *     (name=ID other=[Greeting|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class NoJdtTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     greetings+=Greeting
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

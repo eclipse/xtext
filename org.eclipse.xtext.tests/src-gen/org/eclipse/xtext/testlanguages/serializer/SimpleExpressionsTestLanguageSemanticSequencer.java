@@ -49,6 +49,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Sequence returns Op
 	 *     Sequence.Sequence_1_0 returns Op
@@ -64,6 +65,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 *         (values+=Addition_Op_1_0 (operator='+' | operator='-') values+=Multiplication) | 
 	 *         (values+=Multiplication_Op_1_0 (operator='*' | operator='/') values+=Term)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Addition_Multiplication(ISerializationContext context, Op semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -71,6 +73,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Sequence returns Atom
 	 *     Sequence.Sequence_1_0 returns Atom
@@ -84,6 +87,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
 		if (errorAcceptor != null) {
@@ -97,12 +101,14 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Sequence returns Sequence
 	 *     Sequence.Sequence_1_0 returns Sequence
 	 *
 	 * Constraint:
 	 *     (expressions+=Sequence_Sequence_1_0 expressions+=Addition)
+	 * </pre>
 	 */
 	protected void sequence_Sequence(ISerializationContext context, Sequence semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

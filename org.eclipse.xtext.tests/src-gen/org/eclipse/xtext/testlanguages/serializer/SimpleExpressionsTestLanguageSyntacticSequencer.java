@@ -51,24 +51,30 @@ public class SimpleExpressionsTestLanguageSyntacticSequencer extends AbstractSyn
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Op.values+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parens_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Op.values+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parens_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

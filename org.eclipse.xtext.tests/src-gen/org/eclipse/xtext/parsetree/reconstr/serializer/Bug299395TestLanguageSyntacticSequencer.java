@@ -72,6 +72,7 @@ public class Bug299395TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')*
 	 *
@@ -82,12 +83,15 @@ public class Bug299395TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     strings+=STRING '}' (ambiguity) '[' (']' '[')* keys+=STRING
 	 *     strings+=STRING '}' (ambiguity) ('[' ']')* 'subModel' subModel=SubModel
 	 *     strings+=STRING '}' (ambiguity) ('[' ']')* (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('[' ']')*
 	 *
@@ -98,34 +102,43 @@ public class Bug299395TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     strings+=STRING '}' ('{' '}')* (ambiguity) (rule end)
 	 *     values+=STRING ']' (ambiguity) 'subModel' subModel=SubModel
 	 *     values+=STRING ']' (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___LeftSquareBracketKeyword_2_0_RightSquareBracketKeyword_2_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('}' '{')*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '{' (ambiguity) strings+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___RightCurlyBracketKeyword_1_2_LeftCurlyBracketKeyword_1_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('}' '{')+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     strings+=STRING (ambiguity) strings+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___RightCurlyBracketKeyword_1_2_LeftCurlyBracketKeyword_1_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (']' '[')*
 	 *
@@ -133,30 +146,38 @@ public class Bug299395TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) ('{' '}')* '[' (ambiguity) keys+=STRING
 	 *     strings+=STRING '}' ('{' '}')* '[' (ambiguity) keys+=STRING
 	 *     values+=STRING (ambiguity) keys+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___RightSquareBracketKeyword_2_2_LeftSquareBracketKeyword_2_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('1' '2')*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
 	 *     strings+=STRING (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_SubModel___DigitOneKeyword_1_0_DigitTwoKeyword_1_1__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('1' '2')+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) strings+=STRING
 	 *     strings+=STRING (ambiguity) strings+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_SubModel___DigitOneKeyword_1_0_DigitTwoKeyword_1_1__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

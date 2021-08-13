@@ -105,11 +105,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Atom returns Atom
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
 		if (errorAcceptor != null) {
@@ -123,6 +125,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Atom
 	 *     Op returns Atom
@@ -133,6 +136,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	 *
 	 * Constraint:
 	 *     (name=ID em='!'*)
+	 * </pre>
 	 */
 	protected void sequence_Atom_Parens(ISerializationContext context, Atom semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,6 +144,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Add
 	 *     Op returns Add
@@ -150,6 +155,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	 *
 	 * Constraint:
 	 *     (addOperands+=Op_Add_1_0_0 addOperands+=Term em='!'*)
+	 * </pre>
 	 */
 	protected void sequence_Op_Parens(ISerializationContext context, Add semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -157,6 +163,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Minus
 	 *     Op returns Minus
@@ -167,6 +174,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	 *
 	 * Constraint:
 	 *     (minusOperands+=Op_Minus_1_1_0 minusOperands+=Term em='!'*)
+	 * </pre>
 	 */
 	protected void sequence_Op_Parens(ISerializationContext context, Minus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -174,11 +182,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyB returns TrickyB
 	 *
 	 * Constraint:
 	 *     ((name=ID type+=INT type+=INT+) | type+=INT+)?
+	 * </pre>
 	 */
 	protected void sequence_TrickyB(ISerializationContext context, TrickyB semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -186,6 +196,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyC returns C1
 	 *     TrickyC.C2_3_0 returns C1
@@ -193,6 +204,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	 *
 	 * Constraint:
 	 *     x=TrickyC_C1_2_0
+	 * </pre>
 	 */
 	protected void sequence_TrickyC(ISerializationContext context, C1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -206,12 +218,14 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyC returns C2
 	 *     TrickyC.C3_4_0 returns C2
 	 *
 	 * Constraint:
 	 *     y=TrickyC_C2_3_0
+	 * </pre>
 	 */
 	protected void sequence_TrickyC(ISerializationContext context, C2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -225,11 +239,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyC returns C3
 	 *
 	 * Constraint:
 	 *     z=TrickyC_C3_4_0
+	 * </pre>
 	 */
 	protected void sequence_TrickyC(ISerializationContext context, C3 semanticObject) {
 		if (errorAcceptor != null) {
@@ -243,6 +259,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyC returns TrickyC
 	 *     TrickyC.C1_2_0 returns TrickyC
@@ -251,6 +268,7 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_TrickyC(ISerializationContext context, TrickyC semanticObject) {
 		if (errorAcceptor != null) {
@@ -264,11 +282,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyD returns TrickyD
 	 *
 	 * Constraint:
 	 *     ((name+=INT foo=STRING type+=ID ((name+=INT type+=ID type+=ID+) | type+=ID+)) | (name+=INT type+=ID type+=ID+) | type+=ID+)?
+	 * </pre>
 	 */
 	protected void sequence_TrickyD(ISerializationContext context, TrickyD semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -276,11 +296,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyE returns TrickyE
 	 *
 	 * Constraint:
 	 *     ((name+=INT foo+=STRING type+=ID)* (name+=INT type+=ID)*)
+	 * </pre>
 	 */
 	protected void sequence_TrickyE(ISerializationContext context, TrickyE semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -288,11 +310,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyF returns TrickyF
 	 *
 	 * Constraint:
 	 *     ((name+=ID type+=INT)* (name+=ID | type+=INT))
+	 * </pre>
 	 */
 	protected void sequence_TrickyF(ISerializationContext context, TrickyF semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -300,12 +324,14 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyG1 returns TrickyG1
 	 *     TrickyG2 returns TrickyG1
 	 *
 	 * Constraint:
 	 *     (vals+=TrickyG2 vals+=TrickyG2*)
+	 * </pre>
 	 */
 	protected void sequence_TrickyG1(ISerializationContext context, TrickyG1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -313,11 +339,13 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TrickyG2 returns TrickyG2
 	 *
 	 * Constraint:
 	 *     val=INT
+	 * </pre>
 	 */
 	protected void sequence_TrickyG2(ISerializationContext context, TrickyG2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -331,12 +359,14 @@ public class ComplexReconstrTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns TrickyG
 	 *     TrickyG returns TrickyG
 	 *
 	 * Constraint:
 	 *     tree=TrickyG1
+	 * </pre>
 	 */
 	protected void sequence_TrickyG(ISerializationContext context, TrickyG semanticObject) {
 		if (errorAcceptor != null) {

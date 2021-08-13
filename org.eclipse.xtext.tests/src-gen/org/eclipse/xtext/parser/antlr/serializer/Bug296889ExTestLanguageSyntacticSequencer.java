@@ -48,11 +48,14 @@ public class Bug296889ExTestLanguageSyntacticSequencer extends AbstractSyntactic
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'Model' | 'DataType'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_DataTypeKeyword_1_0_or_ModelKeyword_0_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

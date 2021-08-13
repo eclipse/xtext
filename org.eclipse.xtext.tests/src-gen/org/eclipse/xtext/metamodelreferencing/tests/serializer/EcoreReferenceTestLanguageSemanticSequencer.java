@@ -91,11 +91,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EAttribute returns EAttribute
 	 *
 	 * Constraint:
 	 *     {EAttribute}
+	 * </pre>
 	 */
 	protected void sequence_EAttribute(ISerializationContext context, EAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -103,11 +105,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EObject returns EObject
 	 *
 	 * Constraint:
 	 *     {EObject}
+	 * </pre>
 	 */
 	protected void sequence_EObject(ISerializationContext context, EObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -115,6 +119,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendsNsURIEObject returns ExtendsNsURIEObject
 	 *
@@ -140,6 +145,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ExtendsNsURIEObject(ISerializationContext context, ExtendsNsURIEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -147,6 +153,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendsPluginEObject returns ExtendsPluginEObject
 	 *
@@ -171,6 +178,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ExtendsPluginEObject(ISerializationContext context, ExtendsPluginEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -178,6 +186,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendsResourceEObject returns ExtendsResourceEObject
 	 *
@@ -202,6 +211,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	 *             eObjectContainment+=MyEAttribute
 	 *         )?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ExtendsResourceEObject(ISerializationContext context, ExtendsResourceEObject semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,11 +219,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,11 +233,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyEAttribute returns MyEAttribute
 	 *
 	 * Constraint:
 	 *     {MyEAttribute}
+	 * </pre>
 	 */
 	protected void sequence_MyEAttribute(ISerializationContext context, EAttribute semanticObject) {
 		genericSequencer.createSequence(context, (EObject) semanticObject);
@@ -233,11 +247,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Unused_01 returns MyNamedElement_01
 	 *
 	 * Constraint:
 	 *     name=ValidID
+	 * </pre>
 	 */
 	protected void sequence_Unused_01(ISerializationContext context, MyNamedElement_01 semanticObject) {
 		if (errorAcceptor != null) {
@@ -251,11 +267,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Unused_02 returns MyNamedElement_02
 	 *
 	 * Constraint:
 	 *     name=ValidID
+	 * </pre>
 	 */
 	protected void sequence_Unused_02(ISerializationContext context, MyNamedElement_02 semanticObject) {
 		if (errorAcceptor != null) {
@@ -269,11 +287,13 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Unused_03 returns MyNamedElement_03
 	 *
 	 * Constraint:
 	 *     name=ValidID
+	 * </pre>
 	 */
 	protected void sequence_Unused_03(ISerializationContext context, MyNamedElement_03 semanticObject) {
 		if (errorAcceptor != null) {

@@ -39,6 +39,7 @@ public class TerminalRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -53,6 +54,7 @@ public class TerminalRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	 *         wsValue=WS | 
 	 *         anyValue=ANY_OTHER
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

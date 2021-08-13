@@ -51,22 +51,28 @@ public abstract class AbstractFragmentTestLanguageExSyntacticSequencer extends A
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) name=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_NamedInParentheses_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) prev=NamedByAction
+	 
+	 * </pre>
 	 */
 	protected void emit_RecursiveFragment_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

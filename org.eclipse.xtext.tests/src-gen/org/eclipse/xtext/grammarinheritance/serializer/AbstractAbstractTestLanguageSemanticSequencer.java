@@ -67,11 +67,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractCallExtendedParserRule returns AModel
 	 *
 	 * Constraint:
 	 *     elements+=ExtendableParserRule+
+	 * </pre>
 	 */
 	protected void sequence_AbstractCallExtendedParserRule(ISerializationContext context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -79,11 +81,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractCallOverridenParserRule returns AModel
 	 *
 	 * Constraint:
 	 *     elements+=OverridableParserRule+
+	 * </pre>
 	 */
 	protected void sequence_AbstractCallOverridenParserRule(ISerializationContext context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -91,11 +95,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendableParserRule returns AType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_ExtendableParserRule(ISerializationContext context, AType semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,11 +115,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InheritedParserRule returns AType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_InheritedParserRule(ISerializationContext context, AType semanticObject) {
 		if (errorAcceptor != null) {
@@ -127,11 +135,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OverridableParserRule2 returns AType
 	 *
 	 * Constraint:
 	 *     name=STRING
+	 * </pre>
 	 */
 	protected void sequence_OverridableParserRule2(ISerializationContext context, AType semanticObject) {
 		if (errorAcceptor != null) {
@@ -145,11 +155,13 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OverridableParserRule returns AType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_OverridableParserRule(ISerializationContext context, AType semanticObject) {
 		if (errorAcceptor != null) {

@@ -41,11 +41,13 @@ public class QualifiedNameTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     qualifiedName=QualifiedName
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		if (errorAcceptor != null) {

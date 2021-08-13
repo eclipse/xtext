@@ -49,11 +49,13 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Ab returns Ab
 	 *
 	 * Constraint:
 	 *     (x=CharA y=Charb)
+	 * </pre>
 	 */
 	protected void sequence_Ab(ISerializationContext context, Ab semanticObject) {
 		if (errorAcceptor != null) {
@@ -70,6 +72,7 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -86,6 +89,7 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	 *         (xbs+=Xb+ as+=CharA+) | 
 	 *         as+=CharA+
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,11 +97,13 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Xb returns Xb
 	 *
 	 * Constraint:
 	 *     (x=CharX y=Charb)
+	 * </pre>
 	 */
 	protected void sequence_Xb(ISerializationContext context, Xb semanticObject) {
 		if (errorAcceptor != null) {

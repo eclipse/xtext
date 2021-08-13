@@ -84,6 +84,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Delegate
 	 *     Unassigned returns Delegate
@@ -92,6 +93,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Delegate(ISerializationContext context, Delegate semanticObject) {
 		if (errorAcceptor != null) {
@@ -105,12 +107,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Delegation
 	 *     Delegation returns Delegation
 	 *
 	 * Constraint:
 	 *     delegate=Delegate
+	 * </pre>
 	 */
 	protected void sequence_Delegation(ISerializationContext context, Delegation semanticObject) {
 		if (errorAcceptor != null) {
@@ -124,6 +128,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Add
 	 *     Expression returns Add
@@ -133,6 +138,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     (left=Expression_Add_1_0 right=Primary)
+	 * </pre>
 	 */
 	protected void sequence_Expression(ISerializationContext context, Add semanticObject) {
 		if (errorAcceptor != null) {
@@ -149,6 +155,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Action
 	 *     Mixed returns Action
@@ -156,6 +163,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     (fragName=ID | mixed=Mixed)?
+	 * </pre>
 	 */
 	protected void sequence_Fragment_Mixed(ISerializationContext context, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -163,6 +171,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns AssignedAction
 	 *     Mixed returns AssignedAction
@@ -170,6 +179,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     (child=Mixed_AssignedAction_4_0 body=Mixed?)
+	 * </pre>
 	 */
 	protected void sequence_Mixed(ISerializationContext context, AssignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -177,6 +187,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Mixed
 	 *     Mixed returns Mixed
@@ -184,6 +195,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     (name=ID | eobj=Mixed | datatype=Datatype | ref=[Mixed|ID] | lit=Enum)
+	 * </pre>
 	 */
 	protected void sequence_Mixed(ISerializationContext context, Mixed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -191,12 +203,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns PrefixedUnassigned
 	 *     PrefixedUnassigned returns PrefixedUnassigned
 	 *
 	 * Constraint:
 	 *     delegate=PrefixedDelegate
+	 * </pre>
 	 */
 	protected void sequence_PrefixedUnassigned(ISerializationContext context, PrefixedUnassigned semanticObject) {
 		if (errorAcceptor != null) {
@@ -210,6 +224,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Named
 	 *     Expression returns Named
@@ -219,6 +234,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Primary(ISerializationContext context, Named semanticObject) {
 		if (errorAcceptor != null) {
@@ -232,11 +248,13 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
 	 * Constraint:
 	 *     mixed=Mixed
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		if (errorAcceptor != null) {
@@ -250,11 +268,13 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns RootAction
 	 *
 	 * Constraint:
 	 *     mixed=Mixed
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, RootAction semanticObject) {
 		if (errorAcceptor != null) {
@@ -268,12 +288,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Simple
 	 *     Simple returns Simple
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Simple(ISerializationContext context, Simple semanticObject) {
 		if (errorAcceptor != null) {
@@ -287,12 +309,14 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns ValueList
 	 *     ValueList returns ValueList
 	 *
 	 * Constraint:
 	 *     name+=ID*
+	 * </pre>
 	 */
 	protected void sequence_ValueList(ISerializationContext context, ValueList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

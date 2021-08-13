@@ -86,6 +86,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParserRuleParameters returns ParserRuleParameters
 	 *
@@ -108,6 +109,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *         scenario=Scenario8 | 
 	 *         scenario=Scenario6
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -115,11 +117,13 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario5<A,B> returns Scenario
 	 *
 	 * Constraint:
 	 *     first=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario5$A$true$B$true$(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -133,6 +137,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario5<A> returns Scenario
 	 *     Scenario5<B> returns Scenario
@@ -140,6 +145,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *
 	 * Constraint:
 	 *     second=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario5(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -153,6 +159,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario6<A,B> returns Scenario
 	 *     Scenario6<A> returns Scenario
@@ -161,6 +168,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *
 	 * Constraint:
 	 *     first=IdOrKeyword2
+	 * </pre>
 	 */
 	protected void sequence_Scenario6(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -174,6 +182,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario7<A,B> returns Scenario
 	 *     Scenario7<A> returns Scenario
@@ -182,6 +191,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword2 | second='keyword')
+	 * </pre>
 	 */
 	protected void sequence_Scenario7(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -189,6 +199,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario8<A,B> returns Scenario
 	 *     Scenario8<A> returns Scenario
@@ -197,6 +208,7 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *
 	 * Constraint:
 	 *     second=IdOrKeyword2
+	 * </pre>
 	 */
 	protected void sequence_Scenario8(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {

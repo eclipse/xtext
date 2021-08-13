@@ -52,11 +52,13 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importURI=STRING
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -70,11 +72,13 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (imports+=Import* elements+=Element+)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

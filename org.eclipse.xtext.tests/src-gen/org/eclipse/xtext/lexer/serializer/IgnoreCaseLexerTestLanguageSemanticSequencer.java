@@ -41,11 +41,13 @@ public class IgnoreCaseLexerTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     value='CaSe'
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

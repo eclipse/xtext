@@ -41,11 +41,13 @@ public abstract class AbstractBug301935TestLanguageSemanticSequencer extends Abs
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (name=ID value=ID value2=ID)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

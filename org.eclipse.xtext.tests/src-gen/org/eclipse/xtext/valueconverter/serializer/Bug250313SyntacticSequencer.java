@@ -47,6 +47,7 @@ public class Bug250313SyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '1'?
 	 *
@@ -56,6 +57,8 @@ public class Bug250313SyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) value=ID
 	 *     (rule start) (ambiguity) value=NestedDatatype
 	 *     (rule start) (ambiguity) value=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_DigitOneKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

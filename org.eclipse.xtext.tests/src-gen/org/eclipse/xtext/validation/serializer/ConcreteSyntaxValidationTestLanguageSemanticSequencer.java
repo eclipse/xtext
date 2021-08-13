@@ -197,11 +197,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AltList1 returns AltList1
 	 *
 	 * Constraint:
 	 *     ((val1=ID val2=ID) | (val1=ID val3=ID) | (val1=ID val4=ID?))
+	 * </pre>
 	 */
 	protected void sequence_AltList1(ISerializationContext context, AltList1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,11 +211,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AltList2 returns AltList2
 	 *
 	 * Constraint:
 	 *     ((val1+=ID val2=ID) | (val1+=ID val1+=ID* val3=ID))
+	 * </pre>
 	 */
 	protected void sequence_AltList2(ISerializationContext context, AltList2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,11 +225,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AlternativeMultiplicities returns AlternativeMultiplicities
 	 *
 	 * Constraint:
 	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val6+=ID? (val7+=ID? val6+=ID?)*)
+	 * </pre>
 	 */
 	protected void sequence_AlternativeMultiplicities(ISerializationContext context, AlternativeMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -233,11 +239,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignedActionSecond returns AssignedAction
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_AssignedActionSecond(ISerializationContext context, AssignedAction semanticObject) {
 		if (errorAcceptor != null) {
@@ -254,11 +262,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignedAction returns AssignedAction
 	 *
 	 * Constraint:
 	 *     (child=AssignedAction_AssignedAction_2_0 val1=ID)
+	 * </pre>
 	 */
 	protected void sequence_AssignedAction(ISerializationContext context, AssignedAction semanticObject) {
 		if (errorAcceptor != null) {
@@ -275,11 +285,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignedAction.AssignedAction_2_0 returns AssignedAction
 	 *
 	 * Constraint:
 	 *     (val1=ID | (child=AssignedAction_AssignedAction_2_0 val1=ID))
+	 * </pre>
 	 */
 	protected void sequence_AssignedAction_AssignedAction_2_0(ISerializationContext context, AssignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -287,11 +299,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Combination1 returns Combination1
 	 *
 	 * Constraint:
 	 *     (val1=ID (val2=ID (val3=ID | val4=ID))?)
+	 * </pre>
 	 */
 	protected void sequence_Combination1(ISerializationContext context, Combination1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -299,11 +313,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Combination2 returns Combination2
 	 *
 	 * Constraint:
 	 *     (val1=ID (val2=ID | (val3+=ID val4+=ID)+)?)
+	 * </pre>
 	 */
 	protected void sequence_Combination2(ISerializationContext context, Combination2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -311,11 +327,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Combination3 returns Combination3
 	 *
 	 * Constraint:
 	 *     (val1=ID | val2=INT | val3=STRING)+
+	 * </pre>
 	 */
 	protected void sequence_Combination3(ISerializationContext context, Combination3 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -323,11 +341,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Combination4 returns Combination4
 	 *
 	 * Constraint:
 	 *     (val1+=ID val2+=ID val3+=ID)+
+	 * </pre>
 	 */
 	protected void sequence_Combination4(ISerializationContext context, Combination4 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -335,11 +355,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GroupMultiplicities returns GroupMultiplicities
 	 *
 	 * Constraint:
 	 *     (val1=ID (val2=ID val3=ID)? (val4+=ID val5+=ID)+ (val6+=ID val7+=ID)*)
+	 * </pre>
 	 */
 	protected void sequence_GroupMultiplicities(ISerializationContext context, GroupMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -347,11 +369,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Heuristic1 returns Heuristic1
 	 *
 	 * Constraint:
 	 *     (((a+=ID b+=ID)* (a+=ID c+=ID)+ (b+=ID c+=ID)+) | ((a+=ID b+=ID)* (b+=ID c+=ID)+) | (b+=ID c+=ID)+)?
+	 * </pre>
 	 */
 	protected void sequence_Heuristic1(ISerializationContext context, Heuristic1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -359,11 +383,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     List1 returns List1
 	 *
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
+	 * </pre>
 	 */
 	protected void sequence_List1(ISerializationContext context, List1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -371,11 +397,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     List2 returns List2
 	 *
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
+	 * </pre>
 	 */
 	protected void sequence_List2(ISerializationContext context, List2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -383,11 +411,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     List3 returns List3
 	 *
 	 * Constraint:
 	 *     ((val1+=ID val1+=ID*) | val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_List3(ISerializationContext context, List3 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -395,11 +425,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     List4 returns List4
 	 *
 	 * Constraint:
 	 *     (val1+=ID val1+=ID* val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_List4(ISerializationContext context, List4 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -407,11 +439,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     List5 returns List5
 	 *
 	 * Constraint:
 	 *     ((val1+=ID val1+=ID* val2=ID) | val3=ID)
+	 * </pre>
 	 */
 	protected void sequence_List5(ISerializationContext context, List5 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -419,6 +453,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -453,6 +488,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *         x27=TwoVersion | 
 	 *         x28=Heuristic1
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -460,11 +496,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleAlternative returns SimpleAlternative
 	 *
 	 * Constraint:
 	 *     (val1=ID | val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_SimpleAlternative(ISerializationContext context, SimpleAlternative semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -472,11 +510,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleGroup returns SimpleGroup
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_SimpleGroup(ISerializationContext context, SimpleGroup semanticObject) {
 		if (errorAcceptor != null) {
@@ -493,11 +533,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleMultiplicities returns SimpleMultiplicities
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID? val3+=ID+ val4+=ID*)
+	 * </pre>
 	 */
 	protected void sequence_SimpleMultiplicities(ISerializationContext context, SimpleMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -505,11 +547,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     StaticSimplification returns EmptyAlternativeSub
 	 *
 	 * Constraint:
 	 *     (val2=ID? val3=ID*)
+	 * </pre>
 	 */
 	protected void sequence_StaticSimplification(ISerializationContext context, EmptyAlternativeSub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -517,11 +561,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     StaticSimplification returns StaticSimplification
 	 *
 	 * Constraint:
 	 *     (val1=ID? val2=ID? val3=ID*)
+	 * </pre>
 	 */
 	protected void sequence_StaticSimplification(ISerializationContext context, StaticSimplification semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -529,11 +575,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TransientObjectSub returns TransientObjectSub
 	 *
 	 * Constraint:
 	 *     (val2=ID val3=ID)
+	 * </pre>
 	 */
 	protected void sequence_TransientObjectSub(ISerializationContext context, TransientObjectSub semanticObject) {
 		if (errorAcceptor != null) {
@@ -550,11 +598,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TransientObject returns TransientObject
 	 *
 	 * Constraint:
 	 *     (val1=ID nested=TransientObjectSub)
+	 * </pre>
 	 */
 	protected void sequence_TransientObject(ISerializationContext context, TransientObject semanticObject) {
 		if (errorAcceptor != null) {
@@ -571,11 +621,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TransientSerializeables1 returns TransientSerializeables1
 	 *
 	 * Constraint:
 	 *     ((val1=ID enum1=TransientSerializeables1Enum (val2=ID int1=INT)) | (val2=ID int1=INT))?
+	 * </pre>
 	 */
 	protected void sequence_TransientSerializeables1(ISerializationContext context, TransientSerializeables1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -583,11 +635,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TwoVersionNo1 returns TwoVersion
 	 *
 	 * Constraint:
 	 *     (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? version1=ID?)
+	 * </pre>
 	 */
 	protected void sequence_TwoVersionNo1(ISerializationContext context, TwoVersion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -595,6 +649,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TwoVersion returns TwoVersion
 	 *
@@ -603,6 +658,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? version1=ID?) | 
 	 *         (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_TwoVersionNo1_TwoVersionNo2(ISerializationContext context, TwoVersion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -610,11 +666,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TwoVersionNo2 returns TwoVersion
 	 *
 	 * Constraint:
 	 *     (shared1=ID? shared2=ID (shared3+=ID shared3+=ID*)? extra1=ID? ((extra2=ID extra3=ID) | extra4=ID)?)
+	 * </pre>
 	 */
 	protected void sequence_TwoVersionNo2(ISerializationContext context, TwoVersion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -622,11 +680,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedAction1 returns UnassignedAction1
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID?)
+	 * </pre>
 	 */
 	protected void sequence_UnassignedAction1(ISerializationContext context, UnassignedAction1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -634,11 +694,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedAction2 returns UnassignedAction2Sub
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID?)
+	 * </pre>
 	 */
 	protected void sequence_UnassignedAction2(ISerializationContext context, UnassignedAction2Sub semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -646,11 +708,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedAction3 returns UnassignedAction2Sub1
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID?)
+	 * </pre>
 	 */
 	protected void sequence_UnassignedAction3(ISerializationContext context, UnassignedAction2Sub1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -658,11 +722,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedAction3 returns UnassignedAction2Sub2
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID?)
+	 * </pre>
 	 */
 	protected void sequence_UnassignedAction3(ISerializationContext context, UnassignedAction2Sub2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -670,11 +736,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedRuleCall1Sub returns UnassignedRuleCall1Sub
 	 *
 	 * Constraint:
 	 *     val1=ID
+	 * </pre>
 	 */
 	protected void sequence_UnassignedRuleCall1Sub(ISerializationContext context, UnassignedRuleCall1Sub semanticObject) {
 		if (errorAcceptor != null) {
@@ -688,11 +756,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedRuleCall1 returns UnassignedRuleCall1Sub
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID)
+	 * </pre>
 	 */
 	protected void sequence_UnassignedRuleCall1_UnassignedRuleCall1Sub(ISerializationContext context, UnassignedRuleCall1Sub semanticObject) {
 		if (errorAcceptor != null) {
@@ -709,11 +779,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedRuleCall2Sub returns UnassignedRuleCall2SubAction
 	 *
 	 * Constraint:
 	 *     {UnassignedRuleCall2SubAction}
+	 * </pre>
 	 */
 	protected void sequence_UnassignedRuleCall2Sub(ISerializationContext context, UnassignedRuleCall2SubAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -721,11 +793,13 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedRuleCall2 returns UnassignedRuleCall2SubAction
 	 *
 	 * Constraint:
 	 *     val2=ID
+	 * </pre>
 	 */
 	protected void sequence_UnassignedRuleCall2_UnassignedRuleCall2Sub(ISerializationContext context, UnassignedRuleCall2SubAction semanticObject) {
 		if (errorAcceptor != null) {

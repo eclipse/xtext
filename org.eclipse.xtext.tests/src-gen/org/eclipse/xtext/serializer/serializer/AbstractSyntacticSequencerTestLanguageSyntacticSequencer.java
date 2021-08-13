@@ -186,61 +186,77 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ID?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#14' 'kw1'? (ambiguity) 'kw2'? ID? (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_ActionOnly_IDTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ID?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#14' 'kw1'? ID? 'kw2'? (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_ActionOnly_IDTerminalRuleCall_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'kw1'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#14' (ambiguity) ID? 'kw2'? ID? (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_ActionOnly_Kw1Keyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'kw2'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#14' 'kw1'? ID? (ambiguity) ID? (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_ActionOnly_Kw2Keyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     KW1 | 'kw2'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#11' (ambiguity) val=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         'kw1' | 
@@ -263,12 +279,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) '!' (rule end)
 	 *     val7+=ID (ambiguity) '!' (rule end)
 	 *     val8+=ID (ambiguity) '!' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -293,12 +312,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val8+=ID
 	 *     val7+=ID (ambiguity) val8+=ID
 	 *     val8+=ID (ambiguity) val8+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -323,12 +345,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val7+=ID
 	 *     val7+=ID (ambiguity) val7+=ID
 	 *     val8+=ID (ambiguity) val7+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw8Keyword_2_7_0__a_Kw7Keyword_2_6_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -353,12 +378,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val6+=ID
 	 *     val7+=ID (ambiguity) val6+=ID
 	 *     val8+=ID (ambiguity) val6+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw6Keyword_2_5_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -383,12 +411,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val5+=ID
 	 *     val7+=ID (ambiguity) val5+=ID
 	 *     val8+=ID (ambiguity) val5+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw5Keyword_2_4_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -413,12 +444,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val4+=ID
 	 *     val7+=ID (ambiguity) val4+=ID
 	 *     val8+=ID (ambiguity) val4+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw4Keyword_2_3_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -443,12 +477,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val3+=ID
 	 *     val7+=ID (ambiguity) val3+=ID
 	 *     val8+=ID (ambiguity) val3+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw3Keyword_2_2_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -473,12 +510,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val2+=ID
 	 *     val7+=ID (ambiguity) val2+=ID
 	 *     val8+=ID (ambiguity) val2+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw2Keyword_2_1_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         (
@@ -503,45 +543,57 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     val6+=ID (ambiguity) val1+=ID
 	 *     val7+=ID (ambiguity) val1+=ID
 	 *     val8+=ID (ambiguity) val1+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_LongAlternative_____Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw1Keyword_2_0_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     KW1+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#10' (ambiguity) val=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_MandatoryManyTransition_KW1ParserRuleCall_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     KW1*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#9' (ambiguity) val=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_OptionalManyTransition_KW1ParserRuleCall_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     KW1?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '#8' (ambiguity) val=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_OptionalSingleTransition_KW1ParserRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -550,23 +602,29 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     (rule start) '#3' (ambiguity) {Add1.left=}
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add1.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Prim1_LeftParenthesisKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) {Add1.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Prim1_LeftParenthesisKeyword_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -577,18 +635,23 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add2.left=}
 	 *     (rule start) (ambiguity) {Mult2.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Prim2_LeftParenthesisKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) {Add2.left=}
 	 *     (rule start) (ambiguity) {Mult2.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Prim2_LeftParenthesisKeyword_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

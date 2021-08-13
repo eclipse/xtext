@@ -70,11 +70,14 @@ public class UnassignedRuleCallTestLanguageSyntacticSequencer extends AbstractSy
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     INT+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'model' (ambiguity) modelFeatures=ModelFeatures
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_INTTerminalRuleCall_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

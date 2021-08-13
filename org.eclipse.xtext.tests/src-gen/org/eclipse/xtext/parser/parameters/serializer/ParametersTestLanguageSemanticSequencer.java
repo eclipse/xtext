@@ -65,6 +65,7 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParserRuleParameters returns ParserRuleParameters
 	 *
@@ -87,6 +88,7 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	 *         scenario=Scenario4 | 
 	 *         scenario=Scenario2
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -94,11 +96,13 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1 returns Scenario
 	 *
 	 * Constraint:
 	 *     second=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario1$Param$false$(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -112,11 +116,13 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1<Param> returns Scenario
 	 *
 	 * Constraint:
 	 *     first=ID
+	 * </pre>
 	 */
 	protected void sequence_Scenario1$Param$true$(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -130,12 +136,14 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2<AllowKeyword> returns Scenario
 	 *     Scenario2 returns Scenario
 	 *
 	 * Constraint:
 	 *     first=IdOrKeyword
+	 * </pre>
 	 */
 	protected void sequence_Scenario2(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
@@ -149,12 +157,14 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario3<AllowKeyword> returns Scenario
 	 *     Scenario3 returns Scenario
 	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword | second='keyword')
+	 * </pre>
 	 */
 	protected void sequence_Scenario3(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -162,12 +172,14 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario4<AllowKeyword> returns Scenario
 	 *     Scenario4 returns Scenario
 	 *
 	 * Constraint:
 	 *     second=IdOrKeyword
+	 * </pre>
 	 */
 	protected void sequence_Scenario4(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {

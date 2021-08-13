@@ -130,11 +130,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ChildWithSubChild returns ChildWithSubChild
 	 *
 	 * Constraint:
 	 *     subChilds+=SubChild*
+	 * </pre>
 	 */
 	protected void sequence_ChildWithSubChild(ISerializationContext context, ChildWithSubChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -142,12 +144,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns ChildWithSubChilds
 	 *     ChildWithSubChilds returns ChildWithSubChilds
 	 *
 	 * Constraint:
 	 *     children+=ChildWithSubChild*
+	 * </pre>
 	 */
 	protected void sequence_ChildWithSubChilds(ISerializationContext context, ChildWithSubChilds semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -155,11 +159,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EClassDecl returns EClass
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_EClassDecl(ISerializationContext context, EClass semanticObject) {
 		if (errorAcceptor != null) {
@@ -173,12 +179,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns EClassRef
 	 *     EClassRef returns EClassRef
 	 *
 	 * Constraint:
 	 *     ref=[EClass|QualifiedName]
+	 * </pre>
 	 */
 	protected void sequence_EClassRef(ISerializationContext context, EClassRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -192,11 +200,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importedNamespace=QualifiedName
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -210,12 +220,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns MandatoryChildList
 	 *     MandatoryChildList returns MandatoryChildList
 	 *
 	 * Constraint:
 	 *     children+=MandatoryValue+
+	 * </pre>
 	 */
 	protected void sequence_MandatoryChildList(ISerializationContext context, MandatoryChildList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -223,12 +235,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns MandatoryChild
 	 *     MandatoryChild returns MandatoryChild
 	 *
 	 * Constraint:
 	 *     child=MandatoryValue
+	 * </pre>
 	 */
 	protected void sequence_MandatoryChild(ISerializationContext context, MandatoryChild semanticObject) {
 		if (errorAcceptor != null) {
@@ -242,12 +256,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns MandatoryValue
 	 *     MandatoryValue returns MandatoryValue
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_MandatoryValue(ISerializationContext context, MandatoryValue semanticObject) {
 		if (errorAcceptor != null) {
@@ -261,12 +277,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns ManyMandatoryValues
 	 *     ManyMandatoryValues returns ManyMandatoryValues
 	 *
 	 * Constraint:
 	 *     name+=ID+
+	 * </pre>
 	 */
 	protected void sequence_ManyMandatoryValues(ISerializationContext context, ManyMandatoryValues semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -274,12 +292,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns ManyValues
 	 *     ManyOptionalValues returns ManyValues
 	 *
 	 * Constraint:
 	 *     name+=ID*
+	 * </pre>
 	 */
 	protected void sequence_ManyOptionalValues(ISerializationContext context, ManyValues semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -287,11 +307,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     clazz+=EClassDecl+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -299,12 +321,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Node
 	 *     Node returns Node
 	 *
 	 * Constraint:
 	 *     (imports+=Import* name=ID? refs+=[Node|QualifiedName]* children+=Node* ref=[Node|QualifiedName]?)
+	 * </pre>
 	 */
 	protected void sequence_Node(ISerializationContext context, Node semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -312,12 +336,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns OptionalChildList
 	 *     OptionalChildList returns OptionalChildList
 	 *
 	 * Constraint:
 	 *     children+=MandatoryValue*
+	 * </pre>
 	 */
 	protected void sequence_OptionalChildList(ISerializationContext context, OptionalChildList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -325,12 +351,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns OptionalChild
 	 *     OptionalChild returns OptionalChild
 	 *
 	 * Constraint:
 	 *     child=MandatoryValue?
+	 * </pre>
 	 */
 	protected void sequence_OptionalChild(ISerializationContext context, OptionalChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -338,12 +366,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns OptionalValue
 	 *     OptionalValue returns OptionalValue
 	 *
 	 * Constraint:
 	 *     name=ID?
+	 * </pre>
 	 */
 	protected void sequence_OptionalValue(ISerializationContext context, OptionalValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -351,11 +381,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SubChild returns SubChild
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_SubChild(ISerializationContext context, SubChild semanticObject) {
 		if (errorAcceptor != null) {
@@ -369,12 +401,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns TwoChildLists
 	 *     TwoChildLists returns TwoChildLists
 	 *
 	 * Constraint:
 	 *     (directChildren+=MandatoryValue+ childsList=MandatoryChildList)
+	 * </pre>
 	 */
 	protected void sequence_TwoChildLists(ISerializationContext context, TwoChildLists semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -382,12 +416,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns TwoChilds
 	 *     TwoChilds returns TwoChilds
 	 *
 	 * Constraint:
 	 *     (directChild=MandatoryValue? optChild=OptionalChild)
+	 * </pre>
 	 */
 	protected void sequence_TwoChilds(ISerializationContext context, TwoChilds semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -395,12 +431,14 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns WithTransientContainer
 	 *     WithTransientContainer returns WithTransientContainer
 	 *
 	 * Constraint:
 	 *     child=WithTransient
+	 * </pre>
 	 */
 	protected void sequence_WithTransientContainer(ISerializationContext context, WithTransientContainer semanticObject) {
 		if (errorAcceptor != null) {
@@ -414,11 +452,13 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WithTransient returns WithTransient
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_WithTransient(ISerializationContext context, WithTransient semanticObject) {
 		if (errorAcceptor != null) {

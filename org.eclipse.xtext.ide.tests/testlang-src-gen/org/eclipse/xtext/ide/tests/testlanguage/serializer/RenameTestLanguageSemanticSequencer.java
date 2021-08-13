@@ -48,11 +48,13 @@ public class RenameTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     types+=TypeDeclaration+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -60,11 +62,13 @@ public class RenameTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeDeclaration returns TypeDeclaration
 	 *
 	 * Constraint:
 	 *     (name=ID superType=[TypeDeclaration|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_TypeDeclaration(ISerializationContext context, TypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -41,11 +41,13 @@ public class FormatterTestLanguage2SemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		if (errorAcceptor != null) {

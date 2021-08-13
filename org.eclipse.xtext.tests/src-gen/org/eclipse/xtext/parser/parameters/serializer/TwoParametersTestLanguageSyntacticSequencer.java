@@ -59,44 +59,56 @@ public class TwoParametersTestLanguageSyntacticSequencer extends AbstractSyntact
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'keyword'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario6 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'keyword'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario6 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'keyword'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario6 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'keyword'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario6 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

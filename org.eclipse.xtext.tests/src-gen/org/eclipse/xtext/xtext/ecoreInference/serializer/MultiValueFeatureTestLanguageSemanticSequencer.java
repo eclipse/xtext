@@ -39,11 +39,13 @@ public class MultiValueFeatureTestLanguageSemanticSequencer extends AbstractDele
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Start returns Start
 	 *
 	 * Constraint:
 	 *     featureA+=ID+
+	 * </pre>
 	 */
 	protected void sequence_Start(ISerializationContext context, Start semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

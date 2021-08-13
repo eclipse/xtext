@@ -43,12 +43,14 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns IDList
 	 *     IDList returns IDList
 	 *
 	 * Constraint:
 	 *     ids+=ID*
+	 * </pre>
 	 */
 	protected void sequence_IDList(ISerializationContext context, IDList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -56,12 +58,14 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns KWList
 	 *     KWList returns KWList
 	 *
 	 * Constraint:
 	 *     (kw1?='kw1'? kw2?='kw2'? kw3?='kw3'? kw4?='kw4'? kw5?='kw5'?)
+	 * </pre>
 	 */
 	protected void sequence_KWList(ISerializationContext context, KWList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

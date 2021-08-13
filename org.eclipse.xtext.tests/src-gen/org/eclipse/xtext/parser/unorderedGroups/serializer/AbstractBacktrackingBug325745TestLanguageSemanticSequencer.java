@@ -55,11 +55,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DataType returns DataType
 	 *
 	 * Constraint:
 	 *     (baseType=ID defaultValue=STRING?)
+	 * </pre>
 	 */
 	protected void sequence_DataType(ISerializationContext context, DataType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -67,11 +69,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID dataType=DataType? expression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -79,11 +83,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Expression
 	 *
 	 * Constraint:
 	 *     (prefix=STRING* terms+=SimpleTerm* postfix=STRING*)
+	 * </pre>
 	 */
 	protected void sequence_Expression(ISerializationContext context, Expression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -91,11 +97,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     fields+=Element+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -103,11 +111,13 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSemanticSequencer
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleTerm returns SimpleTerm
 	 *
 	 * Constraint:
 	 *     ((lineCount=INT charCount=INT? charSet=ID?) | refChar=ID)
+	 * </pre>
 	 */
 	protected void sequence_SimpleTerm(ISerializationContext context, SimpleTerm semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -69,12 +69,14 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Content returns AbstractChildren
 	 *     AbstractChildren returns AbstractChildren
 	 *
 	 * Constraint:
 	 *     abstractChildren+=AbstractChild+
+	 * </pre>
 	 */
 	protected void sequence_AbstractChildren(ISerializationContext context, AbstractChildren semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -82,11 +84,13 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child returns Child
 	 *
 	 * Constraint:
 	 *     value=Named
+	 * </pre>
 	 */
 	protected void sequence_Child(ISerializationContext context, Child semanticObject) {
 		if (errorAcceptor != null) {
@@ -100,12 +104,14 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Content returns Children
 	 *     Children returns Children
 	 *
 	 * Constraint:
 	 *     (children+=Child children+=Child*)
+	 * </pre>
 	 */
 	protected void sequence_Children(ISerializationContext context, Children semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -113,12 +119,14 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractChild returns FirstConcrete
 	 *     FirstConcrete returns FirstConcrete
 	 *
 	 * Constraint:
 	 *     (value=Named referencedContainer=[SomeContainer|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_FirstConcrete(ISerializationContext context, FirstConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -126,11 +134,13 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Named returns Named
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Named(ISerializationContext context, Named semanticObject) {
 		if (errorAcceptor != null) {
@@ -144,11 +154,13 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Nested returns Nested
 	 *
 	 * Constraint:
 	 *     nested+=SomeContainer+
+	 * </pre>
 	 */
 	protected void sequence_Nested(ISerializationContext context, Nested semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -156,12 +168,14 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractChild returns SecondConcrete
 	 *     SecondConcrete returns SecondConcrete
 	 *
 	 * Constraint:
 	 *     (value=Named referencedChildren+=[Child|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_SecondConcrete(ISerializationContext context, SecondConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -169,11 +183,13 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SomeContainer returns SomeContainer
 	 *
 	 * Constraint:
 	 *     (name=ID (nested+=Nested | content+=Content)*)
+	 * </pre>
 	 */
 	protected void sequence_SomeContainer(ISerializationContext context, SomeContainer semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -61,6 +61,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -75,6 +76,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	 *         object=SingleDatatype | 
 	 *         object=MultiDatatype
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -82,11 +84,13 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MultiDatatype returns MultiValue
 	 *
 	 * Constraint:
 	 *     (value+=IdDatatype | value+=IdDatatype | value+=StringDatatype | value+=StringDatatype)
+	 * </pre>
 	 */
 	protected void sequence_MultiDatatype(ISerializationContext context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -94,11 +98,13 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MultiValue returns MultiValue
 	 *
 	 * Constraint:
 	 *     (value+=ID | value+=ID | value+=STRING | value+=STRING)
+	 * </pre>
 	 */
 	protected void sequence_MultiValue(ISerializationContext context, MultiValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -106,11 +112,13 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SingleDatatype returns SingleValue
 	 *
 	 * Constraint:
 	 *     (value=IdDatatype | value=IdDatatype | value=StringDatatype | value=StringDatatype)
+	 * </pre>
 	 */
 	protected void sequence_SingleDatatype(ISerializationContext context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -118,11 +126,13 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SingleValue returns SingleValue
 	 *
 	 * Constraint:
 	 *     (value=ID | value=ID | value=STRING | value=STRING)
+	 * </pre>
 	 */
 	protected void sequence_SingleValue(ISerializationContext context, SingleValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

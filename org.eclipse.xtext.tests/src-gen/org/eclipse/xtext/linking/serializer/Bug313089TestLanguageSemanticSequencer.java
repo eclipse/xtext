@@ -49,11 +49,13 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bar returns Bar
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Bar(ISerializationContext context, Bar semanticObject) {
 		if (errorAcceptor != null) {
@@ -67,12 +69,14 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Baz returns Baz
 	 *     Baz.Baz_2_0 returns Baz
 	 *
 	 * Constraint:
 	 *     (name=ID | (child=Baz_Baz_2_0 name=ID))
+	 * </pre>
 	 */
 	protected void sequence_Baz(ISerializationContext context, Baz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -80,11 +84,13 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Foo returns Foo
 	 *
 	 * Constraint:
 	 *     (name=ID (bar=Bar | baz=Baz) ref=[Foo|ID])
+	 * </pre>
 	 */
 	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

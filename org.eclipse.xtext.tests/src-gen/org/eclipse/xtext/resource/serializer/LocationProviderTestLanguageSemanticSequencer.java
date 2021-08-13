@@ -83,11 +83,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bus returns Bus
 	 *
 	 * Constraint:
 	 *     (name=ID port+=Port*)
+	 * </pre>
 	 */
 	protected void sequence_Bus(ISerializationContext context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -95,11 +97,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Component returns Bus
 	 *
 	 * Constraint:
 	 *     (name=ID port+=Port* (mode+=Mode | transition+=Transition)*)
+	 * </pre>
 	 */
 	protected void sequence_Bus_Component(ISerializationContext context, Bus semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -107,11 +111,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Component returns Processor
 	 *
 	 * Constraint:
 	 *     (name=ID data+=Data* (mode+=Mode | transition+=Transition)*)
+	 * </pre>
 	 */
 	protected void sequence_Component_Processor(ISerializationContext context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -119,11 +125,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Data returns Data
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Data(ISerializationContext context, Data semanticObject) {
 		if (errorAcceptor != null) {
@@ -137,11 +145,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID singleref=[Element|ID]? multirefs+=[Element|ID]*)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -149,11 +159,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Mode returns Mode
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Mode(ISerializationContext context, Mode semanticObject) {
 		if (errorAcceptor != null) {
@@ -167,11 +179,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     ((elements+=Element+ components+=Component+) | components+=Component+)?
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -179,11 +193,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Port returns Port
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Port(ISerializationContext context, Port semanticObject) {
 		if (errorAcceptor != null) {
@@ -197,11 +213,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Processor returns Processor
 	 *
 	 * Constraint:
 	 *     (name=ID data+=Data*)
+	 * </pre>
 	 */
 	protected void sequence_Processor(ISerializationContext context, Processor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,11 +227,13 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Transition returns Transition
 	 *
 	 * Constraint:
 	 *     (name=ID source=[Mode|ID] destination=[Mode|ID])
+	 * </pre>
 	 */
 	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {
 		if (errorAcceptor != null) {

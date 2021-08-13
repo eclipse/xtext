@@ -53,11 +53,13 @@ public class ActionTestLanguage3SemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProductionRule1.P2_2 returns P1
 	 *
 	 * Constraint:
 	 *     id=ID?
+	 * </pre>
 	 */
 	protected void sequence_ProductionRule1_P2_2(ISerializationContext context, P1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -65,12 +67,14 @@ public class ActionTestLanguage3SemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProductionRules returns P3
 	 *     ProductionRule1 returns P3
 	 *
 	 * Constraint:
 	 *     (p=ProductionRule1_P3_4 i=INT)
+	 * </pre>
 	 */
 	protected void sequence_ProductionRule1(ISerializationContext context, P3 semanticObject) {
 		if (errorAcceptor != null) {
@@ -87,11 +91,13 @@ public class ActionTestLanguage3SemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProductionRule1.P3_4 returns P2
 	 *
 	 * Constraint:
 	 *     (p=ProductionRule1_P2_2 string=STRING?)
+	 * </pre>
 	 */
 	protected void sequence_ProductionRule1_P3_4(ISerializationContext context, P2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -99,12 +105,14 @@ public class ActionTestLanguage3SemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProductionRules returns Entry
 	 *     ProductionRule2 returns Entry
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_ProductionRule2(ISerializationContext context, Entry semanticObject) {
 		if (errorAcceptor != null) {

@@ -45,11 +45,13 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ModelFeatures returns ModelFeatures
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_ModelFeatures(ISerializationContext context, ModelFeatures semanticObject) {
 		if (errorAcceptor != null) {
@@ -63,11 +65,13 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     modelFeatures=ModelFeatures
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

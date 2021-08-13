@@ -61,11 +61,13 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractBar returns Bar
 	 *
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]* foo+=[Foo|QualifiedNameWithOtherDelim]?)
+	 * </pre>
 	 */
 	protected void sequence_AbstractBar_Bar(ISerializationContext context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -73,11 +75,13 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractBar returns FooBar
 	 *
 	 * Constraint:
 	 *     (bar=AbstractBar_FooBar_3_0 foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]?)
+	 * </pre>
 	 */
 	protected void sequence_AbstractBar(ISerializationContext context, FooBar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,12 +89,14 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractBar.FooBar_3_0 returns Bar
 	 *     Bar returns Bar
 	 *
 	 * Constraint:
 	 *     (name=ID foo+=[Foo|QualifiedNameWithOtherDelim] foo+=[Foo|QualifiedNameWithOtherDelim]*)
+	 * </pre>
 	 */
 	protected void sequence_Bar(ISerializationContext context, Bar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -98,11 +104,13 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Foo returns Foo
 	 *
 	 * Constraint:
 	 *     name=QualifiedNameWithOtherDelim
+	 * </pre>
 	 */
 	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		if (errorAcceptor != null) {
@@ -116,11 +124,13 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (foos+=Foo | bars+=AbstractBar)+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -39,11 +39,13 @@ public class SerializationBug269362TestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     ((foo=ID bar=ID?) | bar=ID)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

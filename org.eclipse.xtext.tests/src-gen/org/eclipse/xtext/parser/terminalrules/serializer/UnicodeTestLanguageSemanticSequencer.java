@@ -49,12 +49,14 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractString returns GString
 	 *     GString returns GString
 	 *
 	 * Constraint:
 	 *     name=GERMAN_STRING
+	 * </pre>
 	 */
 	protected void sequence_GString(ISerializationContext context, GString semanticObject) {
 		if (errorAcceptor != null) {
@@ -68,11 +70,13 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     strings+=AbstractString+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -80,12 +84,14 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractString returns QuotedString
 	 *     QuotedString returns QuotedString
 	 *
 	 * Constraint:
 	 *     name=STRING
+	 * </pre>
 	 */
 	protected void sequence_QuotedString(ISerializationContext context, QuotedString semanticObject) {
 		if (errorAcceptor != null) {

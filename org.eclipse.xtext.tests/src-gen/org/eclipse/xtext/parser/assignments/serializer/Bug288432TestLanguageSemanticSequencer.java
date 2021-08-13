@@ -60,11 +60,13 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Body returns Body
 	 *
 	 * Constraint:
 	 *     ((parameter+=Parameter parameter+=Parameter*)? (content=Content | content=ParameterRef) foo+=Foo+)
+	 * </pre>
 	 */
 	protected void sequence_Body(ISerializationContext context, Body semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -72,11 +74,13 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Foo returns Foo
 	 *
 	 * Constraint:
 	 *     fooValue=STRING
+	 * </pre>
 	 */
 	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		if (errorAcceptor != null) {
@@ -90,6 +94,7 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Content returns MyElement
 	 *     MyElement returns MyElement
@@ -97,6 +102,7 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (bar=MyInt | bar=ParameterRef)
+	 * </pre>
 	 */
 	protected void sequence_MyElement(ISerializationContext context, MyElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,12 +110,14 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParameterObject returns MyInt
 	 *     MyInt returns MyInt
 	 *
 	 * Constraint:
 	 *     int=INT
+	 * </pre>
 	 */
 	protected void sequence_MyInt(ISerializationContext context, MyInt semanticObject) {
 		if (errorAcceptor != null) {
@@ -123,12 +131,14 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParameterObject returns ParameterRef
 	 *     ParameterRef returns ParameterRef
 	 *
 	 * Constraint:
 	 *     parameter=[Parameter|ID]
+	 * </pre>
 	 */
 	protected void sequence_ParameterRef(ISerializationContext context, ParameterRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -142,11 +152,13 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
 	 *     (name=ID value=[ParameterObject|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.parser.assignments.bug288432Test.Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

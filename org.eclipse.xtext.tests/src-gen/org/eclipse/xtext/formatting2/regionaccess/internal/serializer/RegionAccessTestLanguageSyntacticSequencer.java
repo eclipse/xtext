@@ -87,6 +87,7 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'recursion'*
 	 *
@@ -95,24 +96,30 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) '6' ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
 	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
 	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Fragment_RecursionKeyword_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ('unassigned' (ID | Datatype))?)*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '6' (ambiguity) {AssignedAction.child=}
 	 *     (rule start) (ambiguity) {AssignedAction.child=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ('unassigned' (ID | Datatype))?)+
 	 *
@@ -133,12 +140,15 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) datatype=Datatype
 	 *     (rule start) (ambiguity) lit=Enum
 	 *     (rule start) (ambiguity) name=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -147,18 +157,23 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) '5' (ambiguity) {Add.left=}
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parenthesized_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parenthesized_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

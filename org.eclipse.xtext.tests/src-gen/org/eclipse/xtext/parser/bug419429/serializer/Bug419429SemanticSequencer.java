@@ -41,11 +41,13 @@ public class Bug419429SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EReference returns EReference
 	 *
 	 * Constraint:
 	 *     eType=[EClassifier|ID]
+	 * </pre>
 	 */
 	protected void sequence_EReference(ISerializationContext context, EReference semanticObject) {
 		if (errorAcceptor != null) {

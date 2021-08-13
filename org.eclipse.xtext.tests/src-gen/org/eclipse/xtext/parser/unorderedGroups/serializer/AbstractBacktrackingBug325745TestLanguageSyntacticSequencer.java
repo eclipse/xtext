@@ -67,6 +67,7 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '['*
 	 *
@@ -79,12 +80,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     prefix=STRING (ambiguity) ']'* (rule end)
 	 *     prefix=STRING (ambiguity) ']'* postfix=STRING
 	 *     prefix=STRING (ambiguity) prefix=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Expression_LeftSquareBracketKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '['?
 	 *
@@ -92,12 +96,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     (rule start) '['* (ambiguity) terms+=SimpleTerm
 	 *     prefix=STRING '['* (ambiguity) terms+=SimpleTerm
 	 *     terms+=SimpleTerm ']'? (ambiguity) terms+=SimpleTerm
+	 
+	 * </pre>
 	 */
 	protected void emit_Expression_LeftSquareBracketKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ']'?
 	 *
@@ -105,12 +112,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     terms+=SimpleTerm (ambiguity) '['? terms+=SimpleTerm
 	 *     terms+=SimpleTerm (ambiguity) ']'* (rule end)
 	 *     terms+=SimpleTerm (ambiguity) ']'* postfix=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Expression_RightSquareBracketKeyword_2_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ']'*
 	 *
@@ -123,12 +133,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     prefix=STRING '['* (ambiguity) postfix=STRING
 	 *     terms+=SimpleTerm ']'? (ambiguity) (rule end)
 	 *     terms+=SimpleTerm ']'? (ambiguity) postfix=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Expression_RightSquareBracketKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '*'?
 	 *
@@ -136,12 +149,15 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     lineCount=INT (ambiguity) '!'? (rule end)
 	 *     lineCount=INT (ambiguity) '!'? charSet=ID
 	 *     lineCount=INT (ambiguity) charCount=INT
+	 
+	 * </pre>
 	 */
 	protected void emit_SimpleTerm_AsteriskKeyword_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '!'?
 	 *
@@ -150,6 +166,8 @@ public abstract class AbstractBacktrackingBug325745TestLanguageSyntacticSequence
 	 *     charCount=INT (ambiguity) charSet=ID
 	 *     lineCount=INT '*'? (ambiguity) (rule end)
 	 *     lineCount=INT '*'? (ambiguity) charSet=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_SimpleTerm_ExclamationMarkKeyword_0_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

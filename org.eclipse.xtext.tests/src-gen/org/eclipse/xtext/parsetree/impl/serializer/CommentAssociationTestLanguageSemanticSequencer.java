@@ -52,11 +52,13 @@ public class CommentAssociationTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID | (child=Element_Element_2_0 name=ID))
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -64,11 +66,13 @@ public class CommentAssociationTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element.Element_2_0 returns Element
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Element_Element_2_0(ISerializationContext context, Element semanticObject) {
 		if (errorAcceptor != null) {
@@ -82,11 +86,13 @@ public class CommentAssociationTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=Element+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

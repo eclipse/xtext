@@ -53,11 +53,13 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (expressions+=Expression+ | values+=DataTypeExpression+)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -65,12 +67,14 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Postop
 	 *     Postop returns Postop
 	 *
 	 * Constraint:
 	 *     (expr=Postop_Postop_1_0 functionName='--')
+	 * </pre>
 	 */
 	protected void sequence_Postop(ISerializationContext context, Postop semanticObject) {
 		if (errorAcceptor != null) {
@@ -87,12 +91,14 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Preop
 	 *     Preop returns Preop
 	 *
 	 * Constraint:
 	 *     (functionName='--' expr=Variable)
+	 * </pre>
 	 */
 	protected void sequence_Preop(ISerializationContext context, Preop semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,6 +115,7 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Variable
 	 *     Postop returns Variable
@@ -117,6 +124,7 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
 		if (errorAcceptor != null) {

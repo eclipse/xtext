@@ -55,33 +55,42 @@ public class Bug292245TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'ERROR'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     error+=Error (ambiguity) error+=Error
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_ERRORKeyword_1_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'FIX'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     fix+=Fix (ambiguity) fix+=Fix
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_FIXKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'TICK'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     tick+=Apostrophe (ambiguity) tick+=Apostrophe
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_TICKKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

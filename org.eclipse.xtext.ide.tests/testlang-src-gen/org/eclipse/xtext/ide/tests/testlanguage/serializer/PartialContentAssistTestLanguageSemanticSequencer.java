@@ -48,11 +48,13 @@ public class PartialContentAssistTestLanguageSemanticSequencer extends AbstractD
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Property returns Property
 	 *
 	 * Constraint:
 	 *     ((type='int' | type='bool') name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -60,11 +62,13 @@ public class PartialContentAssistTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeDeclaration returns TypeDeclaration
 	 *
 	 * Constraint:
 	 *     (name=ID superType=[TypeDeclaration|ID]? properties+=Property*)
+	 * </pre>
 	 */
 	protected void sequence_TypeDeclaration(ISerializationContext context, TypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

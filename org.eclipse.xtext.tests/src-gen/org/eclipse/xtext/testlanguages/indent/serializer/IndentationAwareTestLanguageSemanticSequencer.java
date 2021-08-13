@@ -43,11 +43,13 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NodeList returns NodeList
 	 *
 	 * Constraint:
 	 *     (children+=Node children+=Node*)
+	 * </pre>
 	 */
 	protected void sequence_NodeList(ISerializationContext context, NodeList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Node returns Node
 	 *
 	 * Constraint:
 	 *     (name=String children=NodeList?)
+	 * </pre>
 	 */
 	protected void sequence_Node(ISerializationContext context, Node semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

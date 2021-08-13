@@ -125,11 +125,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ActionOnly returns ActionOnly
 	 *
 	 * Constraint:
 	 *     {ActionOnly}
+	 * </pre>
 	 */
 	protected void sequence_ActionOnly(ISerializationContext context, ActionOnly semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -137,6 +139,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp0 returns Add0
 	 *     Addition0 returns Add0
@@ -144,6 +147,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     (left=Addition0_Add0_1_0 right=Prim0)
+	 * </pre>
 	 */
 	protected void sequence_Addition0(ISerializationContext context, Add0 semanticObject) {
 		if (errorAcceptor != null) {
@@ -160,6 +164,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp1 returns Add1
 	 *     Addition1 returns Add1
@@ -168,6 +173,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     (left=Addition1_Add1_1_0 right=Prim1)
+	 * </pre>
 	 */
 	protected void sequence_Addition1(ISerializationContext context, Add1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -184,6 +190,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp2 returns Add2
 	 *     Addition2 returns Add2
@@ -194,6 +201,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     (left=Addition2_Add2_1_0 right=Multiplication2)
+	 * </pre>
 	 */
 	protected void sequence_Addition2(ISerializationContext context, Add2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -210,11 +218,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AlternativeTransition returns AlternativeTransition
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_AlternativeTransition(ISerializationContext context, AlternativeTransition semanticObject) {
 		if (errorAcceptor != null) {
@@ -228,11 +238,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BooleanAlternativeLiteral returns BooleanAlternativeLiteral
 	 *
 	 * Constraint:
 	 *     isTrue?='kw2'?
+	 * </pre>
 	 */
 	protected void sequence_BooleanAlternativeLiteral(ISerializationContext context, BooleanAlternativeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -240,11 +252,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BooleanAlternative returns BooleanAlternative
 	 *
 	 * Constraint:
 	 *     bool=BooleanAlternativeLiteral
+	 * </pre>
 	 */
 	protected void sequence_BooleanAlternative(ISerializationContext context, BooleanAlternative semanticObject) {
 		if (errorAcceptor != null) {
@@ -258,11 +272,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BooleanValues returns BooleanValues
 	 *
 	 * Constraint:
 	 *     (val1?='kw1'? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?)
+	 * </pre>
 	 */
 	protected void sequence_BooleanValues(ISerializationContext context, BooleanValues semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -270,11 +286,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bug398890 returns Bug398890
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Bug398890(ISerializationContext context, Bug398890 semanticObject) {
 		if (errorAcceptor != null) {
@@ -288,11 +306,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FragmentCaller returns FragmentCallerType
 	 *
 	 * Constraint:
 	 *     (val1=ID fragVal=ID val=ID)
+	 * </pre>
 	 */
 	protected void sequence_Fragment1_FragmentCaller(ISerializationContext context, FragmentCallerType semanticObject) {
 		if (errorAcceptor != null) {
@@ -312,6 +332,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LongAlternative returns LongAlternative
 	 *
@@ -329,6 +350,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *             val8+=ID
 	 *         )*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_LongAlternative(ISerializationContext context, LongAlternative semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -336,11 +358,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MandatoryKeywords returns MandatoryKeywords
 	 *
 	 * Constraint:
 	 *     (val1=ID val2=ID val3=ID)
+	 * </pre>
 	 */
 	protected void sequence_MandatoryKeywords(ISerializationContext context, MandatoryKeywords semanticObject) {
 		if (errorAcceptor != null) {
@@ -360,11 +384,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MandatoryManyTransition returns MandatoryManyTransition
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_MandatoryManyTransition(ISerializationContext context, MandatoryManyTransition semanticObject) {
 		if (errorAcceptor != null) {
@@ -378,6 +404,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -400,6 +427,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         x15=FragmentCaller | 
 	 *         x16=Bug398890
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -407,6 +435,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp2 returns Mult2
 	 *     Addition2 returns Mult2
@@ -417,6 +446,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     (left=Multiplication2_Mult2_1_0 right=Prim2)
+	 * </pre>
 	 */
 	protected void sequence_Multiplication2(ISerializationContext context, Mult2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -433,11 +463,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OptionalManyTransition returns OptionalManyTransition
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_OptionalManyTransition(ISerializationContext context, OptionalManyTransition semanticObject) {
 		if (errorAcceptor != null) {
@@ -451,11 +483,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OptionalSingleTransition returns OptionalSingleTransition
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_OptionalSingleTransition(ISerializationContext context, OptionalSingleTransition semanticObject) {
 		if (errorAcceptor != null) {
@@ -469,6 +503,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp0 returns Val0
 	 *     Addition0 returns Val0
@@ -477,6 +512,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Prim0(ISerializationContext context, Val0 semanticObject) {
 		if (errorAcceptor != null) {
@@ -490,6 +526,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp1 returns Val1
 	 *     Addition1 returns Val1
@@ -498,6 +535,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Prim1(ISerializationContext context, Val1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -511,6 +549,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Exp2 returns Val2
 	 *     Addition2 returns Val2
@@ -521,6 +560,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Prim2(ISerializationContext context, Val2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -534,6 +574,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SingleCrossReference returns SingleCrossReference
 	 *
@@ -546,6 +587,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         ref4=[SingleCrossReference|ID]? 
 	 *         ref5=[SingleCrossReference|'kw5']?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_SingleCrossReference(ISerializationContext context, SingleCrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -553,11 +595,13 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedDatatype returns UnassignedDatatype
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_UnassignedDatatype(ISerializationContext context, UnassignedDatatype semanticObject) {
 		if (errorAcceptor != null) {
