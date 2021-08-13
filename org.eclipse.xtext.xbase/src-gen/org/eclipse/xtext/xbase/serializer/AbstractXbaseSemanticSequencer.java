@@ -321,11 +321,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FullJvmFormalParameter returns JvmFormalParameter
 	 *
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference name=ValidID)
+	 * </pre>
 	 */
 	protected void sequence_FullJvmFormalParameter(ISerializationContext context, JvmFormalParameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -346,11 +348,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmFormalParameter returns JvmFormalParameter
 	 *
 	 * Constraint:
 	 *     (parameterType=JvmTypeReference? name=ValidID)
+	 * </pre>
 	 */
 	protected void sequence_JvmFormalParameter(ISerializationContext context, JvmFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -362,6 +366,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XBinaryOperation
 	 *     XAssignment returns XBinaryOperation
@@ -404,6 +409,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (leftOperand=XAdditiveExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpAdd] rightOperand=XMultiplicativeExpression) | 
 	 *         (leftOperand=XMultiplicativeExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpMulti] rightOperand=XUnaryOperation)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(ISerializationContext context, XBinaryOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -415,6 +421,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XAssignment
 	 *     XAssignment returns XAssignment
@@ -451,6 +458,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
 	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAssignment_XMemberFeatureCall(ISerializationContext context, XAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -462,6 +470,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XBasicForLoopExpression
 	 *     XAssignment returns XBasicForLoopExpression
@@ -501,6 +510,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (updateExpressions+=XExpression updateExpressions+=XExpression*)? 
 	 *         eachExpression=XExpression
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XBasicForLoopExpression(ISerializationContext context, XBasicForLoopExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -512,6 +522,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XBlockExpression
 	 *     XAssignment returns XBlockExpression
@@ -546,6 +557,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
+	 * </pre>
 	 */
 	protected void sequence_XBlockExpression(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -557,6 +569,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XBooleanLiteral
 	 *     XAssignment returns XBooleanLiteral
@@ -592,6 +605,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     isTrue?='true'?
+	 * </pre>
 	 */
 	protected void sequence_XBooleanLiteral(ISerializationContext context, XBooleanLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -603,11 +617,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XCasePart returns XCasePart
 	 *
 	 * Constraint:
 	 *     (typeGuard=JvmTypeReference? case=XExpression? (then=XExpression | fallThrough?=','))
+	 * </pre>
 	 */
 	protected void sequence_XCasePart(ISerializationContext context, XCasePart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -619,6 +635,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XCastedExpression
 	 *     XAssignment returns XCastedExpression
@@ -652,6 +669,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (target=XCastedExpression_XCastedExpression_1_0_0_0 type=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_XCastedExpression(ISerializationContext context, XCastedExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -672,11 +690,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XCatchClause returns XCatchClause
 	 *
 	 * Constraint:
 	 *     (declaredParam=FullJvmFormalParameter expression=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XCatchClause(ISerializationContext context, XCatchClause semanticObject) {
 		if (errorAcceptor != null) {
@@ -697,6 +717,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XClosure
 	 *     XAssignment returns XClosure
@@ -735,6 +756,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|')? 
 	 *         expression=XExpressionInClosure
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XClosure(ISerializationContext context, XClosure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -746,6 +768,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XConstructorCall
 	 *     XAssignment returns XConstructorCall
@@ -785,6 +808,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (explicitConstructorCall?='(' (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?)? 
 	 *         arguments+=XClosure?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XConstructorCall(ISerializationContext context, XConstructorCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -796,6 +820,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XDoWhileExpression
 	 *     XAssignment returns XDoWhileExpression
@@ -830,6 +855,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (body=XExpression predicate=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XDoWhileExpression(ISerializationContext context, XDoWhileExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -850,11 +876,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpressionInClosure returns XBlockExpression
 	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
+	 * </pre>
 	 */
 	protected void sequence_XExpressionInClosure(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -866,6 +894,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XFeatureCall
 	 *     XAssignment returns XFeatureCall
@@ -905,6 +934,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)? 
 	 *         featureCallArguments+=XClosure?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XFeatureCall(ISerializationContext context, XFeatureCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -916,6 +946,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XForLoopExpression
 	 *     XAssignment returns XForLoopExpression
@@ -950,6 +981,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (declaredParam=JvmFormalParameter forExpression=XExpression eachExpression=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XForLoopExpression(ISerializationContext context, XForLoopExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -973,6 +1005,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XIfExpression
 	 *     XAssignment returns XIfExpression
@@ -1007,6 +1040,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (if=XExpression then=XExpression else=XExpression?)
+	 * </pre>
 	 */
 	protected void sequence_XIfExpression(ISerializationContext context, XIfExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1018,6 +1052,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XListLiteral
 	 *     XAssignment returns XListLiteral
@@ -1054,6 +1089,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
+	 * </pre>
 	 */
 	protected void sequence_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1065,6 +1101,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XMemberFeatureCall
 	 *     XAssignment returns XMemberFeatureCall
@@ -1105,6 +1142,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? 
 	 *         memberCallArguments+=XClosure?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XMemberFeatureCall(ISerializationContext context, XMemberFeatureCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1116,6 +1154,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XNullLiteral
 	 *     XAssignment returns XNullLiteral
@@ -1151,6 +1190,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     {XNullLiteral}
+	 * </pre>
 	 */
 	protected void sequence_XNullLiteral(ISerializationContext context, XNullLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1162,6 +1202,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XNumberLiteral
 	 *     XAssignment returns XNumberLiteral
@@ -1197,6 +1238,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     value=Number
+	 * </pre>
 	 */
 	protected void sequence_XNumberLiteral(ISerializationContext context, XNumberLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1214,6 +1256,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XPostfixOperation
 	 *     XAssignment returns XPostfixOperation
@@ -1247,6 +1290,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (operand=XPostfixOperation_XPostfixOperation_1_0_0 feature=[JvmIdentifiableElement|OpPostfix])
+	 * </pre>
 	 */
 	protected void sequence_XPostfixOperation(ISerializationContext context, XPostfixOperation semanticObject) {
 		if (errorAcceptor != null) {
@@ -1267,6 +1311,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XInstanceOfExpression
 	 *     XAssignment returns XInstanceOfExpression
@@ -1300,6 +1345,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (expression=XRelationalExpression_XInstanceOfExpression_1_0_0_0_0 type=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_XRelationalExpression(ISerializationContext context, XInstanceOfExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1320,6 +1366,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XReturnExpression
 	 *     XAssignment returns XReturnExpression
@@ -1354,6 +1401,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     expression=XExpression?
+	 * </pre>
 	 */
 	protected void sequence_XReturnExpression(ISerializationContext context, XReturnExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1365,6 +1413,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XSetLiteral
 	 *     XAssignment returns XSetLiteral
@@ -1401,6 +1450,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (elements+=XExpression elements+=XExpression*)?
+	 * </pre>
 	 */
 	protected void sequence_XSetLiteral(ISerializationContext context, XSetLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1412,11 +1462,13 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XShortClosure returns XClosure
 	 *
 	 * Constraint:
 	 *     ((declaredFormalParameters+=JvmFormalParameter declaredFormalParameters+=JvmFormalParameter*)? explicitSyntax?='|' expression=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XShortClosure(ISerializationContext context, XClosure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1428,6 +1480,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XStringLiteral
 	 *     XAssignment returns XStringLiteral
@@ -1463,6 +1516,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     value=STRING
+	 * </pre>
 	 */
 	protected void sequence_XStringLiteral(ISerializationContext context, XStringLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1480,6 +1534,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XSwitchExpression
 	 *     XAssignment returns XSwitchExpression
@@ -1518,6 +1573,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         cases+=XCasePart* 
 	 *         default=XExpression?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XSwitchExpression(ISerializationContext context, XSwitchExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1529,6 +1585,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XSynchronizedExpression
 	 *     XAssignment returns XSynchronizedExpression
@@ -1563,6 +1620,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (param=XExpression expression=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XSynchronizedExpression(ISerializationContext context, XSynchronizedExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1583,6 +1641,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XThrowExpression
 	 *     XAssignment returns XThrowExpression
@@ -1617,6 +1676,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     expression=XExpression
+	 * </pre>
 	 */
 	protected void sequence_XThrowExpression(ISerializationContext context, XThrowExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1634,6 +1694,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XTryCatchFinallyExpression
 	 *     XAssignment returns XTryCatchFinallyExpression
@@ -1668,6 +1729,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
+	 * </pre>
 	 */
 	protected void sequence_XTryCatchFinallyExpression(ISerializationContext context, XTryCatchFinallyExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1679,6 +1741,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XTypeLiteral
 	 *     XAssignment returns XTypeLiteral
@@ -1714,6 +1777,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arrayDimensions+=ArrayBrackets*)
+	 * </pre>
 	 */
 	protected void sequence_XTypeLiteral(ISerializationContext context, XTypeLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1725,6 +1789,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XUnaryOperation
 	 *     XAssignment returns XUnaryOperation
@@ -1758,6 +1823,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (feature=[JvmIdentifiableElement|OpUnary] operand=XUnaryOperation)
+	 * </pre>
 	 */
 	protected void sequence_XUnaryOperation(ISerializationContext context, XUnaryOperation semanticObject) {
 		if (errorAcceptor != null) {
@@ -1778,12 +1844,14 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpressionOrVarDeclaration returns XVariableDeclaration
 	 *     XVariableDeclaration returns XVariableDeclaration
 	 *
 	 * Constraint:
 	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
+	 * </pre>
 	 */
 	protected void sequence_XVariableDeclaration(ISerializationContext context, XVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1795,6 +1863,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XExpression returns XWhileExpression
 	 *     XAssignment returns XWhileExpression
@@ -1829,6 +1898,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *
 	 * Constraint:
 	 *     (predicate=XExpression body=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_XWhileExpression(ISerializationContext context, XWhileExpression semanticObject) {
 		if (errorAcceptor != null) {

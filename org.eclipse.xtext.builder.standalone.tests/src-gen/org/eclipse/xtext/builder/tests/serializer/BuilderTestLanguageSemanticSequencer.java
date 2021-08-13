@@ -49,12 +49,14 @@ public class BuilderTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedElement returns Element
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID references=[Element|QualifiedName]? (otherRefs+=[Element|QualifiedName] otherRefs+=[Element|QualifiedName]*)?)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -62,11 +64,13 @@ public class BuilderTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importedNamespace=QualifiedName
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -80,12 +84,14 @@ public class BuilderTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedElement returns Namespace
 	 *     Namespace returns Namespace
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName imports+=Import* elements+=NamedElement*)
+	 * </pre>
 	 */
 	protected void sequence_Namespace(ISerializationContext context, Namespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

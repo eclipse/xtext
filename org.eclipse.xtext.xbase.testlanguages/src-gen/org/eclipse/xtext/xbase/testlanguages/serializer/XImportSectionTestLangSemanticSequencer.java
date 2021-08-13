@@ -325,11 +325,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ImportSectionTestLanguageRoot returns ImportSectionTestLanguageRoot
 	 *
 	 * Constraint:
 	 *     importSection=XImportSection
+	 * </pre>
 	 */
 	protected void sequence_ImportSectionTestLanguageRoot(ISerializationContext context, ImportSectionTestLanguageRoot semanticObject) {
 		if (errorAcceptor != null) {
@@ -343,11 +345,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmLowerBoundAnded returns JvmLowerBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmLowerBoundAnded(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -361,11 +365,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmLowerBound returns JvmLowerBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmLowerBound(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -379,6 +385,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmInnerTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
@@ -392,6 +399,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *         type=[JvmType|ValidID] 
 	 *         (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmInnerTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -399,11 +407,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmParameterizedTypeReference
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,6 +421,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmParameterizedTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
@@ -419,6 +430,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -426,11 +438,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeParameter returns JvmTypeParameter
 	 *
 	 * Constraint:
 	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
+	 * </pre>
 	 */
 	protected void sequence_JvmTypeParameter(ISerializationContext context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -438,6 +452,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmGenericArrayTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
@@ -445,6 +460,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *
 	 * Constraint:
 	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
+	 * </pre>
 	 */
 	protected void sequence_JvmTypeReference(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -458,11 +474,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmUpperBoundAnded returns JvmUpperBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmUpperBoundAnded(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -476,11 +494,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmUpperBound returns JvmUpperBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmUpperBound(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -494,12 +514,14 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmArgumentTypeReference returns JvmWildcardTypeReference
 	 *     JvmWildcardTypeReference returns JvmWildcardTypeReference
 	 *
 	 * Constraint:
 	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
+	 * </pre>
 	 */
 	protected void sequence_JvmWildcardTypeReference(ISerializationContext context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -507,6 +529,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns XFunctionTypeRef
 	 *     XFunctionTypeRef returns XFunctionTypeRef
@@ -514,6 +537,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *
 	 * Constraint:
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_XFunctionTypeRef(ISerializationContext context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -521,6 +545,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XImportDeclaration returns XImportDeclaration
 	 *
@@ -530,6 +555,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *         importedType=[JvmDeclaredType|QualifiedName] | 
 	 *         importedNamespace=QualifiedNameWithWildcard
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XImportDeclaration(ISerializationContext context, XImportDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -537,11 +563,13 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XImportSection returns XImportSection
 	 *
 	 * Constraint:
 	 *     importDeclarations+=XImportDeclaration+
+	 * </pre>
 	 */
 	protected void sequence_XImportSection(ISerializationContext context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
