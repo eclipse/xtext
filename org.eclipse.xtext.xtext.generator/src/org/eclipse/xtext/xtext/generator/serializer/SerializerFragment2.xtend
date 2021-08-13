@@ -397,11 +397,13 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		val states = c.linearListOfMandatoryAssignments
 		'''
 			/**
+			 * <pre>
 			 * Contexts:
 			 *     «c.contexts.sort.join("\n").replaceAll("\\n","\n*     ")»
 			 *
 			 * Constraint:
-			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ")»«ENDIF»
+			 *     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n*     ").replaceAll("<","&lt;").replaceAll(">", "&gt;")»«ENDIF»
+			 * </pre>
 			 */
 			protected void sequence_«c.simpleName»(«ISerializationContext» context, «c.type» semanticObject) {
 				«IF states !== null»
@@ -470,13 +472,16 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 			
 				«FOR group : allAmbiguousTransitionsBySyntax»
 					/**
+					 * <pre>
 					 * Ambiguous syntax:
-					 *     «group.elementAlias.toString.replace("\n", "\n *     ")»
+					 *     «group.elementAlias.toString.replace("\n", "\n *     ").replaceAll("<","&lt;").replaceAll(">", "&gt;")»
 					 *
 					 * This ambiguous syntax occurs at:
 					 «FOR trans : group.transitions.map[group.ambiguityInsideTransition(it).trim].toSet.sort»
-					 	*     «trans.toString.replace("\n", "\n*     ")»
+					 	*     «trans.toString.replace("\n", "\n*     ").replaceAll("<","&lt;").replaceAll(">", "&gt;")»
 					 «ENDFOR»
+					 
+					 * </pre>
 					 */
 					protected void emit_«group.identifier»(«EObject» semanticObject, «ISyntacticSequencerPDAProvider.ISynNavigable» transition, «List»<«INode»> nodes) {
 						acceptNodes(transition, nodes);
