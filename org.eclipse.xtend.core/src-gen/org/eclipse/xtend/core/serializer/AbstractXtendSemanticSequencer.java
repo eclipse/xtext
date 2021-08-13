@@ -728,11 +728,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField returns XtendAnnotationType
 	 *
 	 * Constraint:
 	 *     (annotationInfo=AnnotationField_XtendAnnotationType_2_4_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField(ISerializationContext context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -740,6 +742,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField.XtendField_2_0_0_0_0 returns XtendMember
 	 *     AnnotationField.XtendField_2_0_0_1_0 returns XtendMember
@@ -750,6 +753,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField_XtendAnnotationType_2_4_0_XtendClass_2_1_0_XtendEnum_2_3_0_XtendField_2_0_0_0_0_XtendField_2_0_0_1_0_XtendInterface_2_2_0(ISerializationContext context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -757,6 +761,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField returns XtendClass
 	 *
@@ -770,6 +775,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField(ISerializationContext context, XtendClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -777,11 +783,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField returns XtendEnum
 	 *
 	 * Constraint:
 	 *     (annotationInfo=AnnotationField_XtendEnum_2_3_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField(ISerializationContext context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -789,6 +797,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField returns XtendField
 	 *
@@ -807,6 +816,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ) 
 	 *         initialValue=XAnnotationElementValue?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField(ISerializationContext context, XtendField semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -814,6 +824,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnnotationField returns XtendInterface
 	 *
@@ -826,6 +837,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (extends+=JvmParameterizedTypeReference extends+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_AnnotationField(ISerializationContext context, XtendInterface semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -833,11 +845,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CreateExtensionInfo returns CreateExtensionInfo
 	 *
 	 * Constraint:
 	 *     (name=ValidID? createExpression=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_CreateExtensionInfo(ISerializationContext context, CreateExtensionInfo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -845,11 +859,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     File returns XtendFile
 	 *
 	 * Constraint:
 	 *     ((package=QualifiedName? importSection=XImportSection xtendTypes+=Type+) | (package=QualifiedName? xtendTypes+=Type+) | xtendTypes+=Type+)?
+	 * </pre>
 	 */
 	protected void sequence_File(ISerializationContext context, XtendFile semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -857,11 +873,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FullJvmFormalParameter returns XtendFormalParameter
 	 *
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=MultiTypeReference name=InnerVarID)
+	 * </pre>
 	 */
 	protected void sequence_FullJvmFormalParameter(ISerializationContext context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -869,6 +887,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InitializedVariableDeclaration returns XtendVariableDeclaration
 	 *
@@ -878,6 +897,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ((type=JvmTypeReference name=InnerVarID) | name=InnerVarID) 
 	 *         right=XExpression
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_InitializedVariableDeclaration_VariableModifier(ISerializationContext context, XtendVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -885,11 +905,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InternalRichString returns RichString
 	 *
 	 * Constraint:
 	 *     (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart? expressions+=RichStringLiteralInbetween)*)
+	 * </pre>
 	 */
 	protected void sequence_InternalRichString(ISerializationContext context, RichString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -897,11 +919,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmFormalParameter returns XtendFormalParameter
 	 *
 	 * Constraint:
 	 *     (extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID)
+	 * </pre>
 	 */
 	protected void sequence_JvmFormalParameter(ISerializationContext context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -909,11 +933,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendAnnotationType
 	 *
 	 * Constraint:
 	 *     (annotationInfo=Member_XtendAnnotationType_2_6_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -921,6 +947,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member.XtendField_2_0_0 returns XtendMember
 	 *     Member.XtendFunction_2_1_0 returns XtendMember
@@ -932,6 +959,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
+	 * </pre>
 	 */
 	protected void sequence_Member_XtendAnnotationType_2_6_0_XtendClass_2_3_0_XtendConstructor_2_2_0_XtendEnum_2_5_0_XtendField_2_0_0_XtendFunction_2_1_0_XtendInterface_2_4_0(ISerializationContext context, XtendMember semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -939,6 +967,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendClass
 	 *
@@ -952,6 +981,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -959,6 +989,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendConstructor
 	 *
@@ -971,6 +1002,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)? 
 	 *         expression=XBlockExpression
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendConstructor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -978,11 +1010,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendEnum
 	 *
 	 * Constraint:
 	 *     (annotationInfo=Member_XtendEnum_2_5_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -990,6 +1024,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendField
 	 *
@@ -1012,6 +1047,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ) 
 	 *         initialValue=XExpression?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendField semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1019,6 +1055,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendFunction
 	 *
@@ -1040,6 +1077,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)? 
 	 *         (expression=XBlockExpression | expression=RichString)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1047,6 +1085,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns XtendInterface
 	 *
@@ -1059,6 +1098,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (extends+=JvmParameterizedTypeReference extends+=JvmParameterizedTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Member(ISerializationContext context, XtendInterface semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1066,11 +1106,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MultiTypeReference returns JvmSynonymTypeReference
 	 *
 	 * Constraint:
 	 *     (references+=MultiTypeReference_JvmSynonymTypeReference_1_0 references+=JvmTypeReference+)
+	 * </pre>
 	 */
 	protected void sequence_MultiTypeReference(ISerializationContext context, JvmSynonymTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1078,11 +1120,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parameter returns XtendParameter
 	 *
 	 * Constraint:
 	 *     (annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)? parameterType=JvmTypeReference varArg?='...'? name=ValidID)
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, XtendParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1090,6 +1134,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceWithTypeArgs returns JvmInnerTypeReference
 	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
@@ -1102,6 +1147,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         type=[JvmType|ValidID] 
 	 *         (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParameterizedTypeReferenceWithTypeArgs(ISerializationContext context, JvmInnerTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1109,6 +1155,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceWithTypeArgs returns JvmParameterizedTypeReference
 	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
@@ -1117,6 +1164,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
+	 * </pre>
 	 */
 	protected void sequence_ParameterizedTypeReferenceWithTypeArgs(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1124,11 +1172,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringElseIf returns RichStringElseIf
 	 *
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString)
+	 * </pre>
 	 */
 	protected void sequence_RichStringElseIf(ISerializationContext context, RichStringElseIf semanticObject) {
 		if (errorAcceptor != null) {
@@ -1145,6 +1195,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringPart returns RichStringForLoop
 	 *     RichStringForLoop returns RichStringForLoop
@@ -1158,6 +1209,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         after=XExpression? 
 	 *         eachExpression=InternalRichString
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_RichStringForLoop(ISerializationContext context, RichStringForLoop semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1165,12 +1217,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringPart returns RichStringIf
 	 *     RichStringIf returns RichStringIf
 	 *
 	 * Constraint:
 	 *     (if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* else=InternalRichString?)
+	 * </pre>
 	 */
 	protected void sequence_RichStringIf(ISerializationContext context, RichStringIf semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1178,11 +1232,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringLiteralEnd returns RichStringLiteral
 	 *
 	 * Constraint:
 	 *     (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END)
+	 * </pre>
 	 */
 	protected void sequence_RichStringLiteralEnd(ISerializationContext context, RichStringLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1190,11 +1246,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringLiteralInbetween returns RichStringLiteral
 	 *
 	 * Constraint:
 	 *     (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN)
+	 * </pre>
 	 */
 	protected void sequence_RichStringLiteralInbetween(ISerializationContext context, RichStringLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1202,11 +1260,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringLiteralStart returns RichStringLiteral
 	 *
 	 * Constraint:
 	 *     value=RICH_TEXT_START
+	 * </pre>
 	 */
 	protected void sequence_RichStringLiteralStart(ISerializationContext context, RichStringLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1220,11 +1280,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RichStringLiteral returns RichStringLiteral
 	 *
 	 * Constraint:
 	 *     value=RICH_TEXT
+	 * </pre>
 	 */
 	protected void sequence_RichStringLiteral(ISerializationContext context, RichStringLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1238,6 +1300,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns RichString
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns RichString
@@ -1290,6 +1353,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *             expressions+=RichStringLiteralEnd
 	 *         )
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_RichString(ISerializationContext context, RichString semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1297,6 +1361,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XStringLiteral
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XStringLiteral
@@ -1341,6 +1406,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     value=STRING
+	 * </pre>
 	 */
 	protected void sequence_SimpleStringLiteral(ISerializationContext context, XStringLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1354,12 +1420,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceNoTypeArgs returns JvmParameterizedTypeReference
 	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_1_1_0_0 returns JvmParameterizedTypeReference
 	 *
 	 * Constraint:
 	 *     type=[JvmType|QualifiedName]
+	 * </pre>
 	 */
 	protected void sequence_TypeReferenceNoTypeArgs(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -1373,6 +1441,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceWithTypeArgs returns JvmGenericArrayTypeReference
 	 *
@@ -1381,6 +1450,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0 | 
 	 *         componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_TypeReferenceWithTypeArgs(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1388,11 +1458,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
 	 *
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0
+	 * </pre>
 	 */
 	protected void sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_0_1_0_0(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -1406,11 +1478,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReferenceWithTypeArgs.JvmGenericArrayTypeReference_1_1_0_0 returns JvmGenericArrayTypeReference
 	 *
 	 * Constraint:
 	 *     componentType=TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0
+	 * </pre>
 	 */
 	protected void sequence_TypeReferenceWithTypeArgs_JvmGenericArrayTypeReference_1_1_0_0(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -1424,11 +1498,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns XtendAnnotationType
 	 *
 	 * Constraint:
 	 *     (annotationInfo=Type_XtendAnnotationType_2_3_0 modifiers+=CommonModifier* name=ValidID members+=AnnotationField*)
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, XtendAnnotationType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1436,6 +1512,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type.XtendClass_2_0_0 returns XtendTypeDeclaration
 	 *     Type.XtendInterface_2_1_0 returns XtendTypeDeclaration
@@ -1444,6 +1521,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     annotations+=XAnnotation*
+	 * </pre>
 	 */
 	protected void sequence_Type_XtendAnnotationType_2_3_0_XtendClass_2_0_0_XtendEnum_2_2_0_XtendInterface_2_1_0(ISerializationContext context, XtendTypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1451,6 +1529,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns XtendClass
 	 *
@@ -1464,6 +1543,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (implements+=JvmSuperTypeReference implements+=JvmSuperTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, XtendClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1471,11 +1551,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns XtendEnum
 	 *
 	 * Constraint:
 	 *     (annotationInfo=Type_XtendEnum_2_2_0 modifiers+=CommonModifier* name=ValidID (members+=XtendEnumLiteral members+=XtendEnumLiteral*)?)
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, XtendEnum semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1483,6 +1565,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns XtendInterface
 	 *
@@ -1495,6 +1578,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (extends+=JvmSuperTypeReference extends+=JvmSuperTypeReference*)? 
 	 *         members+=Member*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, XtendInterface semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1502,6 +1586,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XVariableDeclaration returns XtendVariableDeclaration
 	 *     RichStringPart returns XtendVariableDeclaration
@@ -1513,6 +1598,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ((type=JvmTypeReference name=InnerVarID) | name=InnerVarID) 
 	 *         right=XExpression?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_VariableModifier_XVariableDeclaration(ISerializationContext context, XtendVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1520,6 +1606,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XBinaryOperation
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
@@ -1570,6 +1657,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (leftOperand=XAdditiveExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpAdd] rightOperand=XMultiplicativeExpression) | 
 	 *         (leftOperand=XMultiplicativeExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpMulti] rightOperand=XUnaryOperation)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(ISerializationContext context, XBinaryOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1577,6 +1665,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XAssignment
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XAssignment
@@ -1621,6 +1710,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
 	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAssignment_XMemberFeatureCall(ISerializationContext context, XAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1628,11 +1718,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XCasePart returns XCasePart
 	 *
 	 * Constraint:
 	 *     (typeGuard=MultiTypeReference? case=XExpression? (then=XExpression | fallThrough?=','))
+	 * </pre>
 	 */
 	protected void sequence_XCasePart(ISerializationContext context, XCasePart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1640,6 +1732,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XIfExpression
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XIfExpression
@@ -1684,6 +1777,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (if=XConditionalExpression_XIfExpression_1_0_0_0 conditionalExpression?='?' then=XExpression else=XExpression?) | 
 	 *         (if=XExpression then=XExpression else=XExpression?)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XConditionalExpression_XIfExpression(ISerializationContext context, XIfExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1691,6 +1785,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns AnonymousClass
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns AnonymousClass
@@ -1733,6 +1828,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *
 	 * Constraint:
 	 *     (constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*)
+	 * </pre>
 	 */
 	protected void sequence_XConstructorCall(ISerializationContext context, AnonymousClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1740,12 +1836,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmSuperTypeReference returns XFunctionTypeRef
 	 *     XFunctionSuperTypeRef returns XFunctionTypeRef
 	 *
 	 * Constraint:
 	 *     ((instanceContext?='(' (paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)?)? returnType=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_XFunctionSuperTypeRef(ISerializationContext context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1753,6 +1851,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XSwitchExpression
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XSwitchExpression
@@ -1799,6 +1898,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         cases+=XCasePart* 
 	 *         default=XExpression?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XSwitchExpression(ISerializationContext context, XSwitchExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1806,6 +1906,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XTryCatchFinallyExpression
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XTryCatchFinallyExpression
@@ -1856,6 +1957,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ) | 
 	 *         (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XTryCatchFinallyExpression(ISerializationContext context, XTryCatchFinallyExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1863,6 +1965,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XConstructorCall
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XConstructorCall
@@ -1912,6 +2015,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (explicitConstructorCall?='(' (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?)? 
 	 *         arguments+=XClosure?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XbaseConstructorCall(ISerializationContext context, XConstructorCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1919,11 +2023,13 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XtendEnumLiteral returns XtendEnumLiteral
 	 *
 	 * Constraint:
 	 *     (annotations+=XAnnotation* name=ValidID)
+	 * </pre>
 	 */
 	protected void sequence_XtendEnumLiteral(ISerializationContext context, XtendEnumLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
