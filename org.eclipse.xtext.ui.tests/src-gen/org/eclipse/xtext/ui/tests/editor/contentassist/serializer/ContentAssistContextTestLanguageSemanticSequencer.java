@@ -63,11 +63,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FirstLevel returns FirstLevel
 	 *
 	 * Constraint:
 	 *     ((secondLevelA+=SecondLevelA+ secondLevelB+=SecondLevelB+) | secondLevelB+=SecondLevelB+)?
+	 * </pre>
 	 */
 	protected void sequence_FirstLevel(ISerializationContext context, FirstLevel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -75,11 +77,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SecondLevelA returns SecondLevelA
 	 *
 	 * Constraint:
 	 *     (thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+)
+	 * </pre>
 	 */
 	protected void sequence_SecondLevelA(ISerializationContext context, SecondLevelA semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -87,11 +91,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SecondLevelB returns SecondLevelB
 	 *
 	 * Constraint:
 	 *     (thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+)
+	 * </pre>
 	 */
 	protected void sequence_SecondLevelB(ISerializationContext context, SecondLevelB semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -99,11 +105,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ThirdLevelA1 returns ThirdLevelA1
 	 *
 	 * Constraint:
 	 *     name=ID?
+	 * </pre>
 	 */
 	protected void sequence_ThirdLevelA1(ISerializationContext context, ThirdLevelA1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -111,11 +119,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ThirdLevelA2 returns ThirdLevelA2
 	 *
 	 * Constraint:
 	 *     name=ID?
+	 * </pre>
 	 */
 	protected void sequence_ThirdLevelA2(ISerializationContext context, ThirdLevelA2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -123,11 +133,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ThirdLevelB1 returns ThirdLevelB1
 	 *
 	 * Constraint:
 	 *     name=ID?
+	 * </pre>
 	 */
 	protected void sequence_ThirdLevelB1(ISerializationContext context, ThirdLevelB1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -135,11 +147,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ThirdLevelB2 returns ThirdLevelB2
 	 *
 	 * Constraint:
 	 *     name=ID?
+	 * </pre>
 	 */
 	protected void sequence_ThirdLevelB2(ISerializationContext context, ThirdLevelB2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

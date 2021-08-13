@@ -48,12 +48,15 @@ public class OutlineTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) '{' '}' (rule end)
 	 *     name=ID (ambiguity) '{' children+=Element
+	 
+	 * </pre>
 	 */
 	protected void emit_Element___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -53,6 +53,7 @@ public class Bug291022TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';' | ('{' '}')
 	 *
@@ -60,18 +61,23 @@ public class Bug291022TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     firstReference=[ModelElement|ID] (ambiguity) (rule end)
 	 *     name=ID (ambiguity) (rule end)
 	 *     secondReference=[ModelElement|ID] (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ModelElement_SemicolonKeyword_3_0_or___LeftCurlyBracketKeyword_3_1_0_RightCurlyBracketKeyword_3_1_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
 	 *     type=[ModelElement|ID] (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_RootModel___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -253,18 +253,22 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '1' '{' (ambiguity) time+=TimeDef1
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -275,24 +279,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_3_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name+=ID (ambiguity) time+=TimeDef2
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_3_0_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -303,24 +313,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef2 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef3 (ambiguity) 'otherelement' alias+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_3_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     alias+=ID (ambiguity) time+=TimeDef3
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_3_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -330,72 +346,90 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_0_4_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '2' '{' (ambiguity) time+=TimeDef1
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '2' '{' (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_3_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name+=ID (ambiguity) time+=TimeDef2
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_3_0_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '2' '{' (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef1 (ambiguity) 'otherelement' alias+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_3_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     alias+=ID (ambiguity) time+=TimeDef3
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_3_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -405,24 +439,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_1_4_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '3' '{' (ambiguity) time+=TimeDef1
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -433,24 +473,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_3_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name+=ID (ambiguity) time+=TimeDef2
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_3_0_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -461,24 +507,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef2 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef3 (ambiguity) 'otherelement' alias+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_3_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     alias+=ID (ambiguity) time+=TimeDef3
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_3_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -487,24 +539,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name+=ID (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_2_4_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' '4' '{' (ambiguity) time+=TimeDef1
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -515,24 +573,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_3_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name+=ID (ambiguity) time+=TimeDef2
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_3_0_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -543,24 +607,30 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef2 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef3 (ambiguity) 'otherelement' alias+=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_3_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     alias+=ID (ambiguity) time+=TimeDef3
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_3_1_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -570,12 +640,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_3_4_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -583,12 +656,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) 'define' 'timeperiod' '5' '{' (ambiguity) 'otherelement' alias+=ID
 	 *     (rule start) 'define' 'timeperiod' '5' '{' (ambiguity) 'timeperiod_name' name+=ID
 	 *     (rule start) 'define' 'timeperiod' '5' '{' (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -597,12 +673,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -611,12 +690,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     name+=ID (ambiguity) '}' (rule end)
 	 *     name+=ID (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_4_0_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -625,12 +707,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_4_0_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -639,12 +724,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     alias+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     alias+=ID (ambiguity) '}' (rule end)
 	 *     alias+=ID (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_4_1_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -653,12 +741,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_4_4_1_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -666,12 +757,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) 'define' 'timeperiod' '6' '{' (ambiguity) 'otherelement' alias+=ID
 	 *     (rule start) 'define' 'timeperiod' '6' '{' (ambiguity) 'timeperiod_name' name+=ID
 	 *     (rule start) 'define' 'timeperiod' '6' '{' (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -680,60 +774,75 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name+=ID (ambiguity) '}' (rule end)
 	 *     name+=ID (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_4_0_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_4_0_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     alias+=ID (ambiguity) '}' (rule end)
 	 *     alias+=ID (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_4_1_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_5_4_1_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -741,12 +850,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) 'define' 'timeperiod' '7' '{' (ambiguity) 'otherelement' alias+=ID
 	 *     (rule start) 'define' 'timeperiod' '7' '{' (ambiguity) 'timeperiod_name' name+=ID
 	 *     (rule start) 'define' 'timeperiod' '7' '{' (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -754,12 +866,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'otherelement' alias+=ID
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -768,12 +883,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     name+=ID (ambiguity) '}' (rule end)
 	 *     name+=ID (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_4_0_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -782,12 +900,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_4_0_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -796,12 +917,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     alias+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     alias+=ID (ambiguity) '}' (rule end)
 	 *     alias+=ID (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_4_1_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -810,12 +934,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_6_4_1_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -823,12 +950,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) 'define' 'timeperiod' '8' '{' (ambiguity) 'otherelement' alias+=ID
 	 *     (rule start) 'define' 'timeperiod' '8' '{' (ambiguity) 'timeperiod_name' name+=ID
 	 *     (rule start) 'define' 'timeperiod' '8' '{' (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -837,12 +967,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef1 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef1 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef1 (ambiguity) time+=TimeDef1
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -851,12 +984,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     name+=ID (ambiguity) '}' (rule end)
 	 *     name+=ID (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_4_0_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -865,12 +1001,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef2 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef2 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef2 (ambiguity) time+=TimeDef2
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_4_0_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -879,12 +1018,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     alias+=ID (ambiguity) 'timeperiod_name' name+=ID
 	 *     alias+=ID (ambiguity) '}' (rule end)
 	 *     alias+=ID (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_4_1_2_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     NL+
 	 *
@@ -893,12 +1035,15 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     time+=TimeDef3 (ambiguity) 'timeperiod_name' name+=ID
 	 *     time+=TimeDef3 (ambiguity) '}' (rule end)
 	 *     time+=TimeDef3 (ambiguity) time+=TimeDef3
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod_NLTerminalRuleCall_3_7_4_1_3_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         ('1' '{' NL+ '}') | 
@@ -911,6 +1056,8 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'define' 'timeperiod' (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_Timeperiod___DigitEightKeyword_3_7_0_LeftCurlyBracketKeyword_3_7_1_NLTerminalRuleCall_3_7_2_p_RightCurlyBracketKeyword_3_7_5___or___DigitFiveKeyword_3_4_0_LeftCurlyBracketKeyword_3_4_1_NLTerminalRuleCall_3_4_2_p_RightCurlyBracketKeyword_3_4_5___or___DigitFourKeyword_3_3_0_LeftCurlyBracketKeyword_3_3_1_NLTerminalRuleCall_3_3_4_p_RightCurlyBracketKeyword_3_3_5___or___DigitOneKeyword_3_0_0_LeftCurlyBracketKeyword_3_0_1_NLTerminalRuleCall_3_0_4_p_RightCurlyBracketKeyword_3_0_5___or___DigitSixKeyword_3_5_0_LeftCurlyBracketKeyword_3_5_1_NLTerminalRuleCall_3_5_2_p_RightCurlyBracketKeyword_3_5_5___or___DigitTwoKeyword_3_1_0_LeftCurlyBracketKeyword_3_1_1_NLTerminalRuleCall_3_1_4_p_RightCurlyBracketKeyword_3_1_5__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

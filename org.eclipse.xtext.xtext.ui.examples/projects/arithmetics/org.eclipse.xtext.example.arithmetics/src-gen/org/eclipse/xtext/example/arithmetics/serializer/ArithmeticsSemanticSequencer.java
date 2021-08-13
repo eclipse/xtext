@@ -85,6 +85,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Minus
 	 *     Addition returns Minus
@@ -97,6 +98,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (left=Addition_Minus_1_0_1_0 right=Multiplication)
+	 * </pre>
 	 */
 	protected void sequence_Addition(ISerializationContext context, Minus semanticObject) {
 		if (errorAcceptor != null) {
@@ -113,6 +115,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Plus
 	 *     Addition returns Plus
@@ -125,6 +128,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (left=Addition_Plus_1_0_0_0 right=Multiplication)
+	 * </pre>
 	 */
 	protected void sequence_Addition(ISerializationContext context, Plus semanticObject) {
 		if (errorAcceptor != null) {
@@ -141,12 +145,14 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DeclaredParameter returns DeclaredParameter
 	 *     AbstractDefinition returns DeclaredParameter
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_DeclaredParameter(ISerializationContext context, DeclaredParameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -160,6 +166,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Definition
 	 *     Definition returns Definition
@@ -167,6 +174,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (name=ID (args+=DeclaredParameter args+=DeclaredParameter*)? expr=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Definition(ISerializationContext context, Definition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -174,12 +182,14 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statement returns Evaluation
 	 *     Evaluation returns Evaluation
 	 *
 	 * Constraint:
 	 *     expression=Expression
+	 * </pre>
 	 */
 	protected void sequence_Evaluation(ISerializationContext context, Evaluation semanticObject) {
 		if (errorAcceptor != null) {
@@ -193,11 +203,13 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     module=[Module|ID]
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -211,11 +223,13 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Module returns Module
 	 *
 	 * Constraint:
 	 *     (name=ID imports+=Import* statements+=Statement*)
+	 * </pre>
 	 */
 	protected void sequence_Module(ISerializationContext context, org.eclipse.xtext.example.arithmetics.arithmetics.Module semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -223,6 +237,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Div
 	 *     Addition returns Div
@@ -235,6 +250,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (left=Multiplication_Div_1_0_1_0 right=PrimaryExpression)
+	 * </pre>
 	 */
 	protected void sequence_Multiplication(ISerializationContext context, Div semanticObject) {
 		if (errorAcceptor != null) {
@@ -251,6 +267,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Multi
 	 *     Addition returns Multi
@@ -263,6 +280,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (left=Multiplication_Multi_1_0_0_0 right=PrimaryExpression)
+	 * </pre>
 	 */
 	protected void sequence_Multiplication(ISerializationContext context, Multi semanticObject) {
 		if (errorAcceptor != null) {
@@ -279,6 +297,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns FunctionCall
 	 *     Addition returns FunctionCall
@@ -291,6 +310,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     (func=[AbstractDefinition|ID] (args+=Expression args+=Expression*)?)
+	 * </pre>
 	 */
 	protected void sequence_PrimaryExpression(ISerializationContext context, FunctionCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -298,6 +318,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns NumberLiteral
 	 *     Addition returns NumberLiteral
@@ -310,6 +331,7 @@ public class ArithmeticsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *
 	 * Constraint:
 	 *     value=NUMBER
+	 * </pre>
 	 */
 	protected void sequence_PrimaryExpression(ISerializationContext context, NumberLiteral semanticObject) {
 		if (errorAcceptor != null) {

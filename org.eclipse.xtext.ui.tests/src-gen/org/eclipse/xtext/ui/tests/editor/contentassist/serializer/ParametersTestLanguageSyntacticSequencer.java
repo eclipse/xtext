@@ -68,66 +68,84 @@ public class ParametersTestLanguageSyntacticSequencer extends AbstractSyntacticS
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'trailing'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_TrailingKeyword_1_10_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'trailing'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'trailing'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'trailing'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'include' | 'trailing'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'include'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'scenario5' (ambiguity) first=IdOrKeyword
+	 
+	 * </pre>
 	 */
 	protected void emit_Scenario5_IncludeKeyword_2_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

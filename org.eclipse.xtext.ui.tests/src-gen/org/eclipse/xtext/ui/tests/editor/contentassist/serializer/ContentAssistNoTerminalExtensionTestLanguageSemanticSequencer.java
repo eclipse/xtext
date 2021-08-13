@@ -39,11 +39,13 @@ public class ContentAssistNoTerminalExtensionTestLanguageSemanticSequencer exten
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PolygonBasedShape returns PolygonBasedShape
 	 *
 	 * Constraint:
 	 *     shape+=PolygonBasedNodeShape+
+	 * </pre>
 	 */
 	protected void sequence_PolygonBasedShape(ISerializationContext context, PolygonBasedShape semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

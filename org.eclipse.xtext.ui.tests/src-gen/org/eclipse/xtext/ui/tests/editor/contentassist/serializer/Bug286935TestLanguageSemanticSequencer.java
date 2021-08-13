@@ -39,6 +39,7 @@ public class Bug286935TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     State returns State
 	 *
@@ -54,6 +55,7 @@ public class Bug286935TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         stateName=ID? 
 	 *         label=STRING?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

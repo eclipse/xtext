@@ -45,11 +45,13 @@ public class Bug288760TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (name=ID value=STRING)
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -66,11 +68,13 @@ public class Bug288760TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WorkflowElement returns WorkflowElement
 	 *
 	 * Constraint:
 	 *     ((name=START_TAG attributes+=Attribute*) | (name=START_TAG attributes+=Attribute* children+=WorkflowElement* end=END_TAG))
+	 * </pre>
 	 */
 	protected void sequence_WorkflowElement(ISerializationContext context, WorkflowElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -47,6 +47,7 @@ public class Bug286935TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'state'?
 	 *
@@ -63,6 +64,8 @@ public class Bug286935TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     stateKind=StateType (ambiguity) (rule end)
 	 *     stateKind=StateType (ambiguity) label=STRING
 	 *     stateKind=StateType (ambiguity) stateName=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_State_StateKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

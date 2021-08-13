@@ -336,12 +336,14 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Declaration returns Device
 	 *     Device returns Device
 	 *
 	 * Constraint:
 	 *     (name=ID (states+=State states+=State*)?)
+	 * </pre>
 	 */
 	protected void sequence_Device(ISerializationContext context, Device semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -349,11 +351,13 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     declarations+=Declaration+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -361,12 +365,14 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Declaration returns Rule
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
 	 *     (description=STRING deviceState=[State|QualifiedName] thenPart=XBlockExpression)
+	 * </pre>
 	 */
 	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
 		if (errorAcceptor != null) {
@@ -386,11 +392,13 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     State returns State
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		if (errorAcceptor != null) {
@@ -404,6 +412,7 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XBlockExpression returns XBlockExpression
 	 *     XExpression returns XBlockExpression
@@ -438,6 +447,7 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
+	 * </pre>
 	 */
 	protected void sequence_XBlockExpression(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -445,6 +455,7 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XSwitchExpression returns XSwitchExpression
 	 *     XExpression returns XSwitchExpression
@@ -483,6 +494,7 @@ public class RuleEngineSemanticSequencer extends XbaseSemanticSequencer {
 	 *         cases+=XCasePart* 
 	 *         default=XExpression?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XSwitchExpression(ISerializationContext context, XSwitchExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

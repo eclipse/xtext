@@ -42,11 +42,13 @@ public class CrossReferenceProposalTestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Class returns Class
 	 *
 	 * Constraint:
 	 *     ((superClass=[Class|'Object'] | superClass=[Class|ID] | superClass=[Class|ComplexName])? (name=ID | name=ComplexName))
+	 * </pre>
 	 */
 	protected void sequence_Class(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -54,11 +56,13 @@ public class CrossReferenceProposalTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=Class+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

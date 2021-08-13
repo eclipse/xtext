@@ -53,12 +53,14 @@ public class GH341TestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Broken
 	 *     Broken returns Broken
 	 *
 	 * Constraint:
 	 *     (name=ID (ids+=ID ids+=ID*)* (refs+=[Broken|ID] refs+=[Broken|ID]*)*)
+	 * </pre>
 	 */
 	protected void sequence_Broken_Fragment(ISerializationContext context, Broken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -66,11 +68,13 @@ public class GH341TestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (elements+=Works | elements+=Broken | elements+=Third)+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -78,12 +82,14 @@ public class GH341TestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Third
 	 *     Third returns Third
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Third(ISerializationContext context, Third semanticObject) {
 		if (errorAcceptor != null) {
@@ -97,12 +103,14 @@ public class GH341TestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Works
 	 *     Works returns Works
 	 *
 	 * Constraint:
 	 *     (name=ID (ids+=ID ids+=ID*)* (refs+=[Works|ID] refs+=[Works|ID]*)*)
+	 * </pre>
 	 */
 	protected void sequence_Works(ISerializationContext context, Works semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

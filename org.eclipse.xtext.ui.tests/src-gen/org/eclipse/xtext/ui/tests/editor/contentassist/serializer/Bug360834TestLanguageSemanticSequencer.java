@@ -72,11 +72,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AlternativeClassModifiers returns Modifiers
 	 *
 	 * Constraint:
 	 *     (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility)?
+	 * </pre>
 	 */
 	protected void sequence_AlternativeClassModifiers(ISerializationContext context, Modifiers semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -84,11 +86,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternative returns Alternative
 	 *
 	 * Constraint:
 	 *     (name=FQN rootDeclaration=RecursiveClassDeclaration)
+	 * </pre>
 	 */
 	protected void sequence_Alternative(ISerializationContext context, Alternative semanticObject) {
 		if (errorAcceptor != null) {
@@ -105,11 +109,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassMember returns ClassMember
 	 *
 	 * Constraint:
 	 *     (modifiers=UnorderedModifiers name=ID)
+	 * </pre>
 	 */
 	protected void sequence_ClassMember(ISerializationContext context, ClassMember semanticObject) {
 		if (errorAcceptor != null) {
@@ -126,11 +132,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (element=Alternative | element=Unordered)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -138,11 +146,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RecursiveClassDeclaration returns RecursiveClassDeclaration
 	 *
 	 * Constraint:
 	 *     (modifiers=AlternativeClassModifiers name=ID members+=RecursiveClassDeclaration*)
+	 * </pre>
 	 */
 	protected void sequence_RecursiveClassDeclaration(ISerializationContext context, RecursiveClassDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -150,11 +160,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleClassDeclaration returns SimpleClassDeclaration
 	 *
 	 * Constraint:
 	 *     (modifiers=UnorderedModifiers name=ID members+=ClassMember*)
+	 * </pre>
 	 */
 	protected void sequence_SimpleClassDeclaration(ISerializationContext context, SimpleClassDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -162,11 +174,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnorderedModifiers returns Modifiers
 	 *
 	 * Constraint:
 	 *     (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility)*
+	 * </pre>
 	 */
 	protected void sequence_UnorderedModifiers(ISerializationContext context, Modifiers semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -174,11 +188,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Unordered returns Unordered
 	 *
 	 * Constraint:
 	 *     (name=FQN rootDeclaration=SimpleClassDeclaration)
+	 * </pre>
 	 */
 	protected void sequence_Unordered(ISerializationContext context, Unordered semanticObject) {
 		if (errorAcceptor != null) {

@@ -57,11 +57,13 @@ public class Bug288734TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     constants+=TConstant
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -69,11 +71,13 @@ public class Bug288734TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TAnnotation returns TAnnotation
 	 *
 	 * Constraint:
 	 *     description=STRING
+	 * </pre>
 	 */
 	protected void sequence_TAnnotation(ISerializationContext context, TAnnotation semanticObject) {
 		if (errorAcceptor != null) {
@@ -87,12 +91,14 @@ public class Bug288734TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TConstant returns TBooleanConstant
 	 *     TBooleanConstant returns TBooleanConstant
 	 *
 	 * Constraint:
 	 *     (annotations+=TAnnotation* name=ID)
+	 * </pre>
 	 */
 	protected void sequence_TBooleanConstant(ISerializationContext context, TBooleanConstant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -100,12 +106,14 @@ public class Bug288734TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TConstant returns TIntegerConstant
 	 *     TIntegerConstant returns TIntegerConstant
 	 *
 	 * Constraint:
 	 *     (annotations+=TAnnotation* name=ID)
+	 * </pre>
 	 */
 	protected void sequence_TIntegerConstant(ISerializationContext context, TIntegerConstant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -113,12 +121,14 @@ public class Bug288734TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TConstant returns TStringConstant
 	 *     TStringConstant returns TStringConstant
 	 *
 	 * Constraint:
 	 *     (annotations+=TAnnotation* name=ID)
+	 * </pre>
 	 */
 	protected void sequence_TStringConstant(ISerializationContext context, TStringConstant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

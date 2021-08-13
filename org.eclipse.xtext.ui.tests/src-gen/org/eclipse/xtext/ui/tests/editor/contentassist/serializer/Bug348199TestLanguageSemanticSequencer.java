@@ -56,11 +56,13 @@ public class Bug348199TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TimeDef1 returns TimeDef
 	 *
 	 * Constraint:
 	 *     day=INT
+	 * </pre>
 	 */
 	protected void sequence_TimeDef1(ISerializationContext context, TimeDef semanticObject) {
 		if (errorAcceptor != null) {
@@ -74,11 +76,13 @@ public class Bug348199TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TimeDef2 returns TimeDef
 	 *
 	 * Constraint:
 	 *     day=INT
+	 * </pre>
 	 */
 	protected void sequence_TimeDef2(ISerializationContext context, TimeDef semanticObject) {
 		if (errorAcceptor != null) {
@@ -92,11 +96,13 @@ public class Bug348199TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TimeDef3 returns TimeDef
 	 *
 	 * Constraint:
 	 *     day=INT
+	 * </pre>
 	 */
 	protected void sequence_TimeDef3(ISerializationContext context, TimeDef semanticObject) {
 		if (errorAcceptor != null) {
@@ -110,6 +116,7 @@ public class Bug348199TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Timeperiod returns Timeperiod
 	 *
@@ -124,6 +131,7 @@ public class Bug348199TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         (time+=TimeDef1* ((name+=ID time+=TimeDef2*) | (alias+=ID time+=TimeDef3*))+) | 
 	 *         (time+=TimeDef1* ((name+=ID time+=TimeDef2*) | (alias+=ID time+=TimeDef3*))*)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Timeperiod(ISerializationContext context, Timeperiod semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

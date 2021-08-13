@@ -105,17 +105,21 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Attribute2_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('parameters' ';')*
 	 *
@@ -125,23 +129,29 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     parameters+=STRING ';' (ambiguity) 'message' message=STRING
 	 *     parameters+=STRING ';' (ambiguity) '}' (rule end)
 	 *     type=ID '{' (ambiguity) 'message' message=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('parameters' ';')+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     type=ID '{' (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (';' 'parameters')*
 	 *
@@ -149,12 +159,15 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     message=STRING ';' 'parameters' (ambiguity) parameters+=STRING
 	 *     parameters+=STRING (ambiguity) parameters+=STRING
 	 *     type=ID '{' 'parameters' (ambiguity) parameters+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_ConstraintDefinition___SemicolonKeyword_3_0_2_ParametersKeyword_3_0_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'optionalLoop'*
 	 *
@@ -173,23 +186,29 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     parent=[Object|ID] '{' (ambiguity) 'before' ('after' (ambiguity) 'before')* features+=Feature
 	 *     serialVersionUID=INT ';' (ambiguity) 'before' ('after' (ambiguity) 'before')* features+=Feature
 	 *     shortDescription=STRING ';' (ambiguity) 'before' ('after' (ambiguity) 'before')* features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object_OptionalLoopKeyword_5_6_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'optionalLoop'+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     features+=Feature 'after' (('before' | ((ambiguity) 'before')) 'after')* (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object_OptionalLoopKeyword_5_6_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('after' 'optionalLoop'* 'before')*
 	 *
@@ -202,12 +221,15 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     parent=[Object|ID] '{' 'optionalLoop'* 'before' (ambiguity) features+=Feature
 	 *     serialVersionUID=INT ';' 'optionalLoop'* 'before' (ambiguity) features+=Feature
 	 *     shortDescription=STRING ';' 'optionalLoop'* 'before' (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('before' 'after' 'optionalLoop'*)*
 	 *
@@ -219,23 +241,29 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     features+=Feature 'after' 'optionalLoop'* (ambiguity) '}' (rule end)
 	 *     features+=Feature 'after' 'optionalLoop'* (ambiguity) cloneable?='cloneable'
 	 *     features+=Feature 'after' 'optionalLoop'* (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('optionalLoop' ('before' 'after')*)*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     features+=Feature (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('optionalLoop' ('before' 'after')*)+
 	 *
@@ -247,12 +275,15 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     parent=[Object|ID] '{' (ambiguity) features+=Feature
 	 *     serialVersionUID=INT ';' (ambiguity) features+=Feature
 	 *     shortDescription=STRING ';' (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('optionalLoop'? ('before' 'after')?)+
 	 *
@@ -306,50 +337,64 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     shortDescription=STRING ';' (ambiguity) '}' (rule end)
 	 *     shortDescription=STRING ';' (ambiguity) cloneable?='cloneable'
 	 *     shortDescription=STRING ';' (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (('before' | ('optionalLoop'+ 'before')) 'after')*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     features+=Feature 'after' (ambiguity) 'optionalLoop'+ features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (('optionalLoop'? ('before' 'after')?)+ 'mandatoryLoop')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     features+=Feature (ambiguity) features+=Feature
+	 
+	 * </pre>
 	 */
 	protected void emit_Object_____OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p_MandatoryLoopKeyword_5_7_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Reference2_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Reference_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

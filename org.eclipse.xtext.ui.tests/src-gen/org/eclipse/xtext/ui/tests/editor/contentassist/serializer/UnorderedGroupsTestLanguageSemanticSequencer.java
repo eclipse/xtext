@@ -73,12 +73,14 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bug304681Feature returns Bug304681Attribute
 	 *     Bug304681Attribute returns Bug304681Attribute
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Bug304681Attribute(ISerializationContext context, Bug304681Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -92,11 +94,13 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bug304681Model returns Bug304681Model
 	 *
 	 * Constraint:
 	 *     (shortDescription=STRING | longDescription=STRING | uid=STRING | flag?='flag' | features+=Bug304681Feature)*
+	 * </pre>
 	 */
 	protected void sequence_Bug304681Model(ISerializationContext context, Bug304681Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,12 +108,14 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Bug304681Feature returns Bug304681Reference
 	 *     Bug304681Reference returns Bug304681Reference
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Bug304681Reference(ISerializationContext context, Bug304681Reference semanticObject) {
 		if (errorAcceptor != null) {
@@ -123,6 +129,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GroupLoopedModel returns GroupLoopedModel
 	 *
@@ -139,6 +146,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         )* 
 	 *         name=ID
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_GroupLoopedModel(ISerializationContext context, GroupLoopedModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -146,6 +154,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LoopedAlternativeModel returns LoopedAlternativeModel
 	 *
@@ -162,6 +171,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         )* 
 	 *         name=ID
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_LoopedAlternativeModel(ISerializationContext context, LoopedAlternativeModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -169,6 +179,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LoopedModel returns LoopedModel
 	 *
@@ -185,6 +196,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         )* 
 	 *         name=ID
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_LoopedModel(ISerializationContext context, LoopedModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -192,6 +204,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MandatoryModel returns MandatoryModel
 	 *
@@ -208,6 +221,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         )* 
 	 *         name=ID
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_MandatoryModel(ISerializationContext context, MandatoryModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -215,6 +229,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -227,6 +242,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         fifth=LoopedAlternativeModel | 
 	 *         model=Bug304681Model
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -234,6 +250,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SimpleModel returns SimpleModel
 	 *
@@ -250,6 +267,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         )* 
 	 *         name=ID
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_SimpleModel(ISerializationContext context, SimpleModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

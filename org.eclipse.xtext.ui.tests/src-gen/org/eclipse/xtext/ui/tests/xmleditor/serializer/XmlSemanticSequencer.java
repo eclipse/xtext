@@ -53,11 +53,13 @@ public class XmlSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (name=ID value=STRING)
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -74,11 +76,13 @@ public class XmlSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Content returns Content
 	 *
 	 * Constraint:
 	 *     (tag=Tag | text=PCDATA)
+	 * </pre>
 	 */
 	protected void sequence_Content(ISerializationContext context, Content semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -86,11 +90,13 @@ public class XmlSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Tag returns Tag
 	 *
 	 * Constraint:
 	 *     (name=ID attributes+=Attribute* (contents+=Content* closeName=ID)?)
+	 * </pre>
 	 */
 	protected void sequence_Tag(ISerializationContext context, Tag semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -98,11 +104,13 @@ public class XmlSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XmlDocument returns XmlDocument
 	 *
 	 * Constraint:
 	 *     contents+=Content*
+	 * </pre>
 	 */
 	protected void sequence_XmlDocument(ISerializationContext context, XmlDocument semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

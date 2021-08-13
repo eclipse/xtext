@@ -49,12 +49,14 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ModelAttribute returns Attribute
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (feature=[ModelElement|ID] value=STRING)
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -71,12 +73,14 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ModelElement returns ModelElement
 	 *     ModelAttribute returns ModelElement
 	 *
 	 * Constraint:
 	 *     (firstReference=[ModelElement|ID] name=ID? secondReference=[ModelElement|ID]? elements+=ModelAttribute*)
+	 * </pre>
 	 */
 	protected void sequence_ModelElement(ISerializationContext context, ModelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -84,11 +88,13 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootModel returns RootModel
 	 *
 	 * Constraint:
 	 *     (name=ID type=[ModelElement|ID]? elements+=ModelAttribute*)
+	 * </pre>
 	 */
 	protected void sequence_RootModel(ISerializationContext context, RootModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

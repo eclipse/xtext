@@ -48,11 +48,14 @@ public class RefactoringTestLanguageSyntacticSequencer extends AbstractSyntactic
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Element___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

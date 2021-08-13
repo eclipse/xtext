@@ -48,12 +48,15 @@ public class BacktrackingContentAssistTestLanguageSyntacticSequencer extends Abs
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     constrainedName=Identifier (ambiguity) ':' '=' expression=Expression
 	 *     constrainedName=Identifier (ambiguity) ':' type=TypeExp
+	 
+	 * </pre>
 	 */
 	protected void emit_Definition___LeftParenthesisKeyword_5_0_RightParenthesisKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -57,11 +57,13 @@ public class ReferringTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Main returns Main
 	 *
 	 * Constraint:
 	 *     referenced+=AbstractReference+
+	 * </pre>
 	 */
 	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -69,11 +71,13 @@ public class ReferringTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Named returns Named
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Named(ISerializationContext context, Named semanticObject) {
 		if (errorAcceptor != null) {
@@ -87,12 +91,14 @@ public class ReferringTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractReference returns Named
 	 *     Reference2 returns Named
 	 *
 	 * Constraint:
 	 *     (name=ID referenced=[EObject|FQN])
+	 * </pre>
 	 */
 	protected void sequence_Named_Reference2(ISerializationContext context, Named semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,12 +115,14 @@ public class ReferringTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractReference returns Reference
 	 *     Reference returns Reference
 	 *
 	 * Constraint:
 	 *     referenced=[EObject|FQN]
+	 * </pre>
 	 */
 	protected void sequence_Reference(ISerializationContext context, Reference semanticObject) {
 		if (errorAcceptor != null) {

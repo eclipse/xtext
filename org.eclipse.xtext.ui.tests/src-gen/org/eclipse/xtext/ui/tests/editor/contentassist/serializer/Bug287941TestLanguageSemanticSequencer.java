@@ -113,6 +113,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns AliasWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns AliasWhereEntry
@@ -124,6 +125,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] rightAlias=[FromEntry|ID])
+	 * </pre>
 	 */
 	protected void sequence_AliasWhereEntry(ISerializationContext context, AliasWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -140,6 +142,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns AndWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns AndWhereEntry
@@ -150,6 +153,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (entries+=AndWhereEntry_AndWhereEntry_1_0 entries+=ConcreteWhereEntry+)
+	 * </pre>
 	 */
 	protected void sequence_AndWhereEntry(ISerializationContext context, AndWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -157,6 +161,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns BooleanAttributeWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns BooleanAttributeWhereEntry
@@ -169,6 +174,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=BooleanOperator isTrue?='true'?)
+	 * </pre>
 	 */
 	protected void sequence_BooleanAttributeWhereEntry(ISerializationContext context, BooleanAttributeWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -176,6 +182,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns DoubleWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns DoubleWhereEntry
@@ -189,6 +196,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator value=SIGNED_DOUBLE)
+	 * </pre>
 	 */
 	protected void sequence_DoubleWhereEntry(ISerializationContext context, DoubleWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -211,12 +219,14 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scope returns ElementScope
 	 *     ElementScope returns ElementScope
 	 *
 	 * Constraint:
 	 *     (uris+=STRING uris+=STRING*)
+	 * </pre>
 	 */
 	protected void sequence_ElementScope(ISerializationContext context, ElementScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -224,11 +234,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FromEntry returns FromEntry
 	 *
 	 * Constraint:
 	 *     (type=[EClass|ID] withoutsubtypes?='withoutsubtypes'? alias=ID scopeClause=ScopeClause?)
+	 * </pre>
 	 */
 	protected void sequence_FromEntry(ISerializationContext context, FromEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -236,11 +248,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importURI=STRING
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -254,6 +268,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns LongWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns LongWhereEntry
@@ -267,6 +282,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator value=SINGED_LONG)
+	 * </pre>
 	 */
 	protected void sequence_LongWhereEntry(ISerializationContext context, LongWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -289,11 +305,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MQLquery returns MQLquery
 	 *
 	 * Constraint:
 	 *     (selectEntries+=SelectEntry selectEntries+=SelectEntry* fromEntries+=FromEntry fromEntries+=FromEntry* whereEntries+=WhereEntry*)
+	 * </pre>
 	 */
 	protected void sequence_MQLquery(ISerializationContext context, MQLquery semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -301,11 +319,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (imports+=Import* query=MQLquery)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -313,6 +333,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns NullWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns NullWhereEntry
@@ -324,6 +345,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] feature=[EStructuralFeature|ID] operator=BooleanOperator)
+	 * </pre>
 	 */
 	protected void sequence_NullWhereEntry(ISerializationContext context, NullWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -343,6 +365,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns ReferenceAliasWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns ReferenceAliasWhereEntry
@@ -354,6 +377,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] reference=[EReference|ID] rightAlias=[FromEntry|ID])
+	 * </pre>
 	 */
 	protected void sequence_ReferenceAliasWhereEntry(ISerializationContext context, ReferenceAliasWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -373,12 +397,14 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scope returns ResourceScope
 	 *     ResourceScope returns ResourceScope
 	 *
 	 * Constraint:
 	 *     (uris+=STRING uris+=STRING*)
+	 * </pre>
 	 */
 	protected void sequence_ResourceScope(ISerializationContext context, ResourceScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -386,11 +412,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ScopeClause returns ScopeClause
 	 *
 	 * Constraint:
 	 *     (notIn?='not'? scope=Scope)
+	 * </pre>
 	 */
 	protected void sequence_ScopeClause(ISerializationContext context, ScopeClause semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -398,11 +426,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SelectEntry returns SelectEntry
 	 *
 	 * Constraint:
 	 *     (select=[FromEntry|ID] attribute=[EAttribute|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_SelectEntry(ISerializationContext context, SelectEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -410,6 +440,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns StringAttributeWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns StringAttributeWhereEntry
@@ -422,6 +453,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=StringOperator pattern=STRING)
+	 * </pre>
 	 */
 	protected void sequence_StringAttributeWhereEntry(ISerializationContext context, StringAttributeWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -444,6 +476,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns SubselectWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns SubselectWhereEntry
@@ -455,6 +488,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] reference=[EReference|ID] notIn?='not'? subQuery=MQLquery)
+	 * </pre>
 	 */
 	protected void sequence_SubselectWhereEntry(ISerializationContext context, SubselectWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -462,6 +496,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns VariableWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns VariableWhereEntry
@@ -474,6 +509,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator rightAlias=[FromEntry|ID] rightAttribute=[EAttribute|ID])
+	 * </pre>
 	 */
 	protected void sequence_VariableWhereEntry(ISerializationContext context, VariableWhereEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -499,6 +535,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     WhereEntry returns OrWhereEntry
 	 *     WhereEntry.OrWhereEntry_1_0 returns OrWhereEntry
@@ -509,6 +546,7 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (entries+=WhereEntry_OrWhereEntry_1_0 entries+=AndWhereEntry+)
+	 * </pre>
 	 */
 	protected void sequence_WhereEntry(ISerializationContext context, OrWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

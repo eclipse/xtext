@@ -56,6 +56,7 @@ public class ArithmeticsSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -66,12 +67,15 @@ public class ArithmeticsSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {Minus.left=}
 	 *     (rule start) (ambiguity) {Multi.left=}
 	 *     (rule start) (ambiguity) {Plus.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_PrimaryExpression_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -80,6 +84,8 @@ public class ArithmeticsSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {Minus.left=}
 	 *     (rule start) (ambiguity) {Multi.left=}
 	 *     (rule start) (ambiguity) {Plus.left=}
+	 
+	 * </pre>
 	 */
 	protected void emit_PrimaryExpression_LeftParenthesisKeyword_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

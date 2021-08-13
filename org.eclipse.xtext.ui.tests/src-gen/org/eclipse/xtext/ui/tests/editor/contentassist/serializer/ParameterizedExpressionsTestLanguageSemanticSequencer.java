@@ -85,6 +85,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignmentExpression<In,Yield> returns AssignmentExpression
 	 *     AssignmentExpression<In> returns AssignmentExpression
@@ -101,6 +102,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (lhs=AssignmentExpression_AssignmentExpression_1_1_0_0_0 op='=' rhs=AssignmentExpression)
+	 * </pre>
 	 */
 	protected void sequence_AssignmentExpression(ISerializationContext context, AssignmentExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -120,6 +122,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootStatement<Yield> returns Block
 	 *     RootStatement returns Block
@@ -130,6 +133,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     statements+=Statement*
+	 * </pre>
 	 */
 	protected void sequence_Block(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -137,6 +141,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootStatement<Yield> returns ExpressionStatement
 	 *     RootStatement returns ExpressionStatement
@@ -147,6 +152,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     expression=Expression
+	 * </pre>
 	 */
 	protected void sequence_ExpressionStatement(ISerializationContext context, ExpressionStatement semanticObject) {
 		if (errorAcceptor != null) {
@@ -160,6 +166,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression<In,Yield> returns CommaExpression
 	 *     Expression<In> returns CommaExpression
@@ -168,6 +175,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (exprs+=Expression_CommaExpression_1_0 exprs+=AssignmentExpression exprs+=AssignmentExpression*)
+	 * </pre>
 	 */
 	protected void sequence_Expression(ISerializationContext context, CommaExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -175,6 +183,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootStatement<Yield> returns FunctionDeclaration
 	 *     RootStatement returns FunctionDeclaration
@@ -185,6 +194,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (generator?='*'? name=Identifier? body=Block?)
+	 * </pre>
 	 */
 	protected void sequence_FunctionBody_FunctionDeclaration_FunctionHeader_FunctionImpl(ISerializationContext context, FunctionDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -192,6 +202,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PrimaryExpression<Yield> returns IdentifierRef
 	 *     PrimaryExpression returns IdentifierRef
@@ -272,6 +283,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     id=Identifier
+	 * </pre>
 	 */
 	protected void sequence_IdentifierRef(ISerializationContext context, IdentifierRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -285,6 +297,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MemberExpression<Yield> returns IndexedAccessExpression
 	 *     MemberExpression returns IndexedAccessExpression
@@ -361,6 +374,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (target=MemberExpression_IndexedAccessExpression_1_0_0 index=Expression)
+	 * </pre>
 	 */
 	protected void sequence_IndexedAccessExpressionTail_MemberExpression(ISerializationContext context, IndexedAccessExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -377,6 +391,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootStatement<Yield> returns LabelledStatement
 	 *     RootStatement returns LabelledStatement
@@ -387,6 +402,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (name=Identifier statement=Statement)
+	 * </pre>
 	 */
 	protected void sequence_LabelledStatement(ISerializationContext context, LabelledStatement semanticObject) {
 		if (errorAcceptor != null) {
@@ -403,6 +419,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MemberExpression<Yield> returns ParameterizedPropertyAccessExpression
 	 *     MemberExpression returns ParameterizedPropertyAccessExpression
@@ -479,6 +496,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (target=MemberExpression_ParameterizedPropertyAccessExpression_1_1_0 property=Identifier)
+	 * </pre>
 	 */
 	protected void sequence_MemberExpression_ParameterizedPropertyAccessExpressionTail(ISerializationContext context, ParameterizedPropertyAccessExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -495,6 +513,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RelationalExpression<In,Yield> returns RelationalExpression
 	 *     RelationalExpression<In> returns RelationalExpression
@@ -532,6 +551,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (lhs=RelationalExpression_RelationalExpression_1_0_0 op=RelationalOperator rhs=ShiftExpression)
+	 * </pre>
 	 */
 	protected void sequence_RelationalExpression(ISerializationContext context, RelationalExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -551,6 +571,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ShiftExpression<Yield> returns ShiftExpression
 	 *     ShiftExpression returns ShiftExpression
@@ -600,7 +621,8 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *     Expression.CommaExpression_1_0 returns ShiftExpression
 	 *
 	 * Constraint:
-	 *     (lhs=ShiftExpression_ShiftExpression_1_0_0 (op='>>' | op='<<') rhs=MemberExpression)
+	 *     (lhs=ShiftExpression_ShiftExpression_1_0_0 (op='&gt;&gt;' | op='&lt;&lt;') rhs=MemberExpression)
+	 * </pre>
 	 */
 	protected void sequence_ShiftExpression(ISerializationContext context, ShiftExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -608,6 +630,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignmentExpression<In,Yield> returns YieldExpression
 	 *     AssignmentExpression<Yield> returns YieldExpression
@@ -622,6 +645,7 @@ public class ParameterizedExpressionsTestLanguageSemanticSequencer extends Abstr
 	 *
 	 * Constraint:
 	 *     (many?='*'? expression=AssignmentExpression?)
+	 * </pre>
 	 */
 	protected void sequence_YieldExpression(ISerializationContext context, YieldExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

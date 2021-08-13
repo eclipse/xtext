@@ -53,11 +53,13 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CompositeTypeEntry returns CompositeTypeEntry
 	 *
 	 * Constraint:
 	 *     dataType=[Type|TypeId]
+	 * </pre>
 	 */
 	protected void sequence_CompositeTypeEntry(ISerializationContext context, CompositeTypeEntry semanticObject) {
 		if (errorAcceptor != null) {
@@ -71,12 +73,14 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns CompositeType
 	 *     CompositeType returns CompositeType
 	 *
 	 * Constraint:
 	 *     (name=ID baseType=CompositeTypeEntry)
+	 * </pre>
 	 */
 	protected void sequence_CompositeType(ISerializationContext context, CompositeType semanticObject) {
 		if (errorAcceptor != null) {
@@ -93,12 +97,14 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns SimpleType
 	 *     SimpleType returns SimpleType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_SimpleType(ISerializationContext context, SimpleType semanticObject) {
 		if (errorAcceptor != null) {
@@ -112,12 +118,14 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Types
 	 *     Types returns Types
 	 *
 	 * Constraint:
 	 *     types+=Type*
+	 * </pre>
 	 */
 	protected void sequence_Types(ISerializationContext context, Types semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

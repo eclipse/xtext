@@ -135,11 +135,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child1_1 returns Child1
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? enumType=EnumType)
+	 * </pre>
 	 */
 	protected void sequence_Child1_1(ISerializationContext context, Child1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -147,11 +149,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child1_2 returns Child1
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? enumType=EnumType)
+	 * </pre>
 	 */
 	protected void sequence_Child1_2(ISerializationContext context, Child1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -159,11 +163,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child1_3 returns Child1
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? enumType=EnumType)
+	 * </pre>
 	 */
 	protected void sequence_Child1_3(ISerializationContext context, Child1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -171,11 +177,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_1 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_1(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -183,11 +191,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_2 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_2(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -195,11 +205,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_3 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_3(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -207,11 +219,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_4 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_4(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -219,11 +233,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_5 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_5(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -231,11 +247,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child2_6 returns Child2
 	 *
 	 * Constraint:
 	 *     (name=ID bool?='bool'? (string='a' | string='b'))
+	 * </pre>
 	 */
 	protected void sequence_Child2_6(ISerializationContext context, Child2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -243,6 +261,7 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -261,6 +280,7 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         element2=Scenario2_7 | 
 	 *         element2=Scenario2_8
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -268,11 +288,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_1 returns Scenario1
 	 *
 	 * Constraint:
 	 *     (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_1(ISerializationContext context, Scenario1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -280,11 +302,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_2 returns Scenario1
 	 *
 	 * Constraint:
 	 *     (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_2(ISerializationContext context, Scenario1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -292,11 +316,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_3 returns Scenario1
 	 *
 	 * Constraint:
 	 *     (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)*
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_3(ISerializationContext context, Scenario1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -304,11 +330,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario1_4 returns Scenario1
 	 *
 	 * Constraint:
 	 *     (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)?
+	 * </pre>
 	 */
 	protected void sequence_Scenario1_4(ISerializationContext context, Scenario1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -316,11 +344,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_1 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_1(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -328,11 +358,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_2 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_2(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -340,11 +372,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_3 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_3(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -352,11 +386,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_4 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_4(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -364,11 +400,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_5 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)?
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_5(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -376,11 +414,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_6 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)*
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_6(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -388,11 +428,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_7 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)?
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_7(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -400,11 +442,13 @@ public class Bug348427TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Scenario2_8 returns Scenario2
 	 *
 	 * Constraint:
 	 *     (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)*
+	 * </pre>
 	 */
 	protected void sequence_Scenario2_8(ISerializationContext context, Scenario2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -60,12 +60,14 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Property returns Attribute
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (name=ID type=[DataType|ID])
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -82,12 +84,14 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns Class
 	 *     Class returns Class
 	 *
 	 * Constraint:
 	 *     (name=ID superClass=[Class|ID]? properties+=Property* subClasses+=Class*)
+	 * </pre>
 	 */
 	protected void sequence_Class(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -95,12 +99,14 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns DataType
 	 *     DataType returns DataType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_DataType(ISerializationContext context, DataType semanticObject) {
 		if (errorAcceptor != null) {
@@ -114,11 +120,13 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importURI=STRING
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -132,11 +140,13 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     ((imports+=Import+ elements+=Type+) | elements+=Type+)?
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -144,12 +154,14 @@ public class DomainModelTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Property returns Reference
 	 *     Reference returns Reference
 	 *
 	 * Constraint:
 	 *     (name=ID type=[Class|ID])
+	 * </pre>
 	 */
 	protected void sequence_Reference(ISerializationContext context, Reference semanticObject) {
 		if (errorAcceptor != null) {

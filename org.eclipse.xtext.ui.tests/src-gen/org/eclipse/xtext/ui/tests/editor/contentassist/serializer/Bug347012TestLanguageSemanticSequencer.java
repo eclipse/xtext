@@ -73,12 +73,14 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Identifier returns Identifier
 	 *     MyPrimary returns Identifier
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Identifier(ISerializationContext context, Identifier semanticObject) {
 		if (errorAcceptor != null) {
@@ -92,12 +94,14 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Literal returns Literal
 	 *     MyPrimary returns Literal
 	 *
 	 * Constraint:
 	 *     (num=NUMBER | str=STRING | bool='true' | bool='false')
+	 * </pre>
 	 */
 	protected void sequence_Literal(ISerializationContext context, Literal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -105,11 +109,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyAttribute returns MyAttribute
 	 *
 	 * Constraint:
 	 *     (PUBLIC='public' | PRIVATE='private')
+	 * </pre>
 	 */
 	protected void sequence_MyAttribute(ISerializationContext context, MyAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -117,11 +123,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyAttributes returns MyAttributes
 	 *
 	 * Constraint:
 	 *     attributes+=MyAttribute*
+	 * </pre>
 	 */
 	protected void sequence_MyAttributes(ISerializationContext context, MyAttributes semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -129,11 +137,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyBinding returns MyBinding
 	 *
 	 * Constraint:
 	 *     (name=ID type=FQN? expression=MyPrimary?)
+	 * </pre>
 	 */
 	protected void sequence_MyBinding(ISerializationContext context, MyBinding semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,11 +151,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyClass returns MyClass
 	 *
 	 * Constraint:
 	 *     (name=ID directives+=MyField*)
+	 * </pre>
 	 */
 	protected void sequence_MyClass(ISerializationContext context, MyClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -153,11 +165,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyField returns MyField
 	 *
 	 * Constraint:
 	 *     (attr=MyAttributes bindings+=MyBinding bindings+=MyBinding*)
+	 * </pre>
 	 */
 	protected void sequence_MyField(ISerializationContext context, MyField semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -165,11 +179,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyPackage returns MyPackage
 	 *
 	 * Constraint:
 	 *     (name=FQN directives+=MyClass*)
+	 * </pre>
 	 */
 	protected void sequence_MyPackage(ISerializationContext context, MyPackage semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -177,11 +193,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyProgram returns MyProgram
 	 *
 	 * Constraint:
 	 *     package=MyPackage
+	 * </pre>
 	 */
 	protected void sequence_MyProgram(ISerializationContext context, MyProgram semanticObject) {
 		if (errorAcceptor != null) {
