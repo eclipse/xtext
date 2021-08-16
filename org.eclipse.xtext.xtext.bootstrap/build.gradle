@@ -11,8 +11,8 @@ dependencies {
 	// We cannot use the projects within the workspace, as we would have
 	// to compile them before generating the code, so we need to stick to the bootstrapping version.
 	// Buildship, however, links the workspace projects anyway if a composite build is used.
-	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext_bootstrap"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
+	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext_bootstrap"
+	api "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
 }
 
 sourceSets.main.java.srcDirs = []
@@ -28,10 +28,14 @@ sourceSets.mwe2 {
 		java.srcDir 'xtend-gen'
 	}
 }
-configurations.mwe2Compile.extendsFrom configurations.compile
+configurations.mwe2Implementation.extendsFrom configurations.api
 jar.from sourceSets.mwe2.output
-sourcesJar.from sourceSets.mwe2.allSource
-
+sourcesJar {
+	if (findProperty('compileXtend') == 'true') {
+		dependsOn generateMwe2Xtext
+	}
+	from sourceSets.mwe2.allSource
+}
 task generateXtextLanguage(type: XtextGeneratorTask) {
 	workflow = file('src/org/eclipse/xtext/xtext/bootstrap/GenerateXtext.mwe2')
 }

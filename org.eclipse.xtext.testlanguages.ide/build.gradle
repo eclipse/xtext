@@ -1,4 +1,4 @@
 dependencies {
-	compile project(':org.eclipse.xtext.testlanguages')
-	compile project(':org.eclipse.xtext.ide')
+	api project(':org.eclipse.xtext.testlanguages')
+	api project(':org.eclipse.xtext.ide')
 }
