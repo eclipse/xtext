@@ -2,18 +2,18 @@ apply from: "${rootDir}/gradle/longrunning-tests.gradle"
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.common.types')
-	compile project(':org.eclipse.xtext.xbase.testdata')
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile 'org.eclipse.platform:org.eclipse.equinox.common'
-	compile 'org.eclipse.platform:org.eclipse.core.runtime'
-	compile 'org.eclipse.jdt:org.eclipse.jdt.core'
-	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
-	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
-	compile 'com.google.errorprone:error_prone_annotations'
-	compile 'junit:junit'
-	compile 'javax.annotation:javax.annotation-api'
-	compile 'com.google.code.findbugs:jsr305'
+	api project(':org.eclipse.xtext.common.types')
+	api project(':org.eclipse.xtext.xbase.testdata')
+	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	api 'org.eclipse.platform:org.eclipse.equinox.common'
+	api 'org.eclipse.platform:org.eclipse.core.runtime'
+	api 'org.eclipse.jdt:org.eclipse.jdt.core'
+	api 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
+	api 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
+	api 'com.google.errorprone:error_prone_annotations'
+	api 'junit:junit'
+	api 'javax.annotation:javax.annotation-api'
+	api 'com.google.code.findbugs:jsr305'
 }
 
 sourceSets.test.java {

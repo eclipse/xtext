@@ -4,7 +4,7 @@ ext.title = 'Xbase Runtime Library'
 description = 'Reusable expression language that interoperates with Java.'
 
 dependencies {
-	compile project(':org.eclipse.xtext.common.types')
+	api project(':org.eclipse.xtext.common.types')
 }
 
 // Include the xtext files from the main source set when executing the workflow
@@ -17,7 +17,7 @@ sourceSets.mwe2.java.srcDir 'generator'
 task generateXbase(type: JavaExec) {
 	group = 'Build'
 	description "Execute the MWE2 workflow GenerateXbase.java"
-	main = 'org.eclipse.xtext.xbase.GenerateXbase'
+	mainClass = 'org.eclipse.xtext.xbase.GenerateXbase'
 	classpath = sourceSets.mwe2.runtimeClasspath
 	outputs.dir 'src-gen'
 }

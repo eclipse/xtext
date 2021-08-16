@@ -2,12 +2,12 @@ ext.title = 'Xtext Generator'
 description = 'Generator for Xtext (superseded by org.eclipse.xtext.xtext.generator).'
 
 dependencies {
-	compile project(':org.eclipse.xtext.ecore')
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	compile 'org.eclipse.emf:org.eclipse.emf.codegen'
-	compile 'org.eclipse.xpand:org.eclipse.xpand'
-	compile 'org.eclipse.xpand:org.eclipse.xtend'
-	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	api project(':org.eclipse.xtext.ecore')
+	api "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	api 'org.eclipse.emf:org.eclipse.emf.codegen'
+	api 'org.eclipse.xpand:org.eclipse.xpand'
+	api 'org.eclipse.xpand:org.eclipse.xtend'
+	api 'org.eclipse.platform:org.eclipse.equinox.common'
 	optional 'org.eclipse.platform:org.eclipse.core.runtime'
 	optional 'org.eclipse.jdt:org.eclipse.jdt.core'
 	optional 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'

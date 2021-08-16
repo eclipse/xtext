@@ -1,10 +1,10 @@
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.builder.standalone')
-	compile project(':org.eclipse.xtext.ecore')
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile 'junit:junit'
+	api project(':org.eclipse.xtext.builder.standalone')
+	api project(':org.eclipse.xtext.ecore')
+	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	api 'junit:junit'
 }
 
 // Include the mwe2 and xtext files from the test source set when executing the workflow

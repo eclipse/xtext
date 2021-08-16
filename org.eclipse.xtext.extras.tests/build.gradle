@@ -1,14 +1,14 @@
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.generator')
-	compile project(':org.eclipse.xtext.common.types')
-	compile project(':org.eclipse.xtext.xbase')
-	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile 'junit:junit'
+	api project(':org.eclipse.xtext.generator')
+	api project(':org.eclipse.xtext.common.types')
+	api project(':org.eclipse.xtext.xbase')
+	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	api 'junit:junit'
 	optional files('lib/simple.jar')
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
-	testCompile sourceSets.mwe2.output
+	testImplementation sourceSets.mwe2.output
 }
 
 sourceSets.test {

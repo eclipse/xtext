@@ -22,9 +22,9 @@ sourceSets {
 }
 
 configurations {
-	longrunningCompile.extendsFrom testCompile
+	longrunningImplementation.extendsFrom testImplementation
 	longrunningRuntime.extendsFrom testRuntime
-	suitesCompile.extendsFrom testCompile
+	suitesImplementation.extendsFrom testImplementation
 	suitesRuntime.extendsFrom testRuntime
 }
 
@@ -38,6 +38,12 @@ jar {
 }
 
 sourcesJar {
+	if (findProperty('compileXtend') == 'true') {
+		// TODO conditional is this correct?!?
+		dependsOn(generateLongrunningXtext)
+		dependsOn(generateSuitesXtext)
+	}
+
 	from sourceSets.longrunning.allSource
 	from sourceSets.suites.allSource
 }
