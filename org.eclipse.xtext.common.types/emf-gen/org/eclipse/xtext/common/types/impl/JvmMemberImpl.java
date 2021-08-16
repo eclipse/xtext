@@ -266,6 +266,20 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * @generated
 	 */
 	@Override
+	public void setIdentifier(String newIdentifier)
+	{
+		String oldIdentifier = identifier;
+		identifier = newIdentifier;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_MEMBER__IDENTIFIER, oldIdentifier, identifier));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isDeprecated()
 	{
 		return deprecated;
@@ -420,6 +434,9 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				setSimpleName((String)newValue);
 				return;
+			case TypesPackage.JVM_MEMBER__IDENTIFIER:
+				setIdentifier((String)newValue);
+				return;
 			case TypesPackage.JVM_MEMBER__DEPRECATED:
 				setDeprecated((Boolean)newValue);
 				return;
@@ -445,6 +462,9 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 				return;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				setSimpleName(SIMPLE_NAME_EDEFAULT);
+				return;
+			case TypesPackage.JVM_MEMBER__IDENTIFIER:
+				setIdentifier(IDENTIFIER_EDEFAULT);
 				return;
 			case TypesPackage.JVM_MEMBER__DEPRECATED:
 				unsetDeprecated();

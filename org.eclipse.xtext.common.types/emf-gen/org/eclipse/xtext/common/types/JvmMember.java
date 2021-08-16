@@ -107,11 +107,22 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifier</em>' attribute.
+	 * @see #setIdentifier(String)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Identifier()
-	 * @model transient="true" changeable="false" derived="true"
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getIdentifier();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Identifier</em>' attribute.
+	 * @see #getIdentifier()
+	 * @generated
+	 */
+	void setIdentifier(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
