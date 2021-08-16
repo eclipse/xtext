@@ -49,11 +49,13 @@ public class FileAwareTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID (contents+=Element | ref+=[Element|QualifiedName])*)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -61,11 +63,13 @@ public class FileAwareTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     element=[Element|QualifiedName]
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -79,11 +83,13 @@ public class FileAwareTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageDeclaration returns PackageDeclaration
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName imports+=Import* contents+=Element*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

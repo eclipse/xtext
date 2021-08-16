@@ -43,11 +43,13 @@ public class Bug289059TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (name=ID enabled=UnassignedAction? reference=[Model|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class Bug289059TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnassignedAction returns UnassignedAction
 	 *
 	 * Constraint:
 	 *     {UnassignedAction}
+	 * </pre>
 	 */
 	protected void sequence_UnassignedAction(ISerializationContext context, UnassignedAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

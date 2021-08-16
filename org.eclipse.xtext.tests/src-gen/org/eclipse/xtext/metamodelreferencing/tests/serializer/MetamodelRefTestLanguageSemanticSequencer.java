@@ -52,11 +52,13 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Foo returns Foo
 	 *
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
+	 * </pre>
 	 */
 	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -64,11 +66,13 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MyRule returns ParserRule
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_MyRule(ISerializationContext context, ParserRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -82,11 +86,13 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NameRef returns RuleCall
 	 *
 	 * Constraint:
 	 *     rule=[ParserRule|ID]
+	 * </pre>
 	 */
 	protected void sequence_NameRef(ISerializationContext context, RuleCall semanticObject) {
 		if (errorAcceptor != null) {

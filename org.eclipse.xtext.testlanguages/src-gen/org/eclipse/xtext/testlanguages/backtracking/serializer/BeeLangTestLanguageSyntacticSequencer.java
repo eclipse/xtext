@@ -68,6 +68,7 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '|'?
 	 *
@@ -76,13 +77,16 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     (rule start) '('+ '{' (ambiguity) parameters+=ParameterDeclaration
 	 *     (rule start) '{' (ambiguity) parameters+=ParameterDeclaration
 	 *     (rule start) (ambiguity) parameters+=ParameterDeclaration
-	 *     returnType=TypeRef '>' (ambiguity) parameters+=ParameterDeclaration
+	 *     returnType=TypeRef '&gt;' (ambiguity) parameters+=ParameterDeclaration
+	 
+	 * </pre>
 	 */
 	protected void emit_ClosureExpression_VerticalLineKeyword_2_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
@@ -91,12 +95,15 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     typeExpr=ID (ambiguity) 'as' alias=ID
 	 *     typeExpr=ID (ambiguity) (rule end)
 	 *     typeExpr=ID (ambiguity) contextBlock=InitializationBlockExpression
+	 
+	 * </pre>
 	 */
 	protected void emit_ConstructorCallExpression___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
@@ -104,12 +111,15 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     name=ID (ambiguity) ':' funcExpr=Expression
 	 *     name=ID (ambiguity) 'when' guard=GuardExpression
 	 *     name=ID (ambiguity) funcExpr=BlockExpression
+	 
+	 * </pre>
 	 */
 	protected void emit_Function___LeftParenthesisKeyword_6_0_RightParenthesisKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -120,7 +130,7 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     (rule start) (ambiguity) 'with' 'context' expr=Expression
 	 *     (rule start) (ambiguity) 'with' '{' funcExpr=BlockExpressionWithoutBrackets
 	 *     (rule start) (ambiguity) 'with' referencedAdvice+=ID
-	 *     (rule start) (ambiguity) '{' '<' returnType=TypeRef
+	 *     (rule start) (ambiguity) '{' '&lt;' returnType=TypeRef
 	 *     (rule start) (ambiguity) '{' '|' funcExpr=OneOrManyExpressions
 	 *     (rule start) (ambiguity) '{' '|'? parameters+=ParameterDeclaration
 	 *     (rule start) (ambiguity) '{' '}' (rule start)
@@ -148,12 +158,15 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     (rule start) (ambiguity) {FeatureExpression.objExpr=}
 	 *     (rule start) (ambiguity) {OrExpression.leftExpr=}
 	 *     (rule start) (ambiguity) {UnaryPostOpExpression.expr=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParanthesizedExpression_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -164,7 +177,7 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     (rule start) (ambiguity) 'with' 'context' expr=Expression
 	 *     (rule start) (ambiguity) 'with' '{' funcExpr=BlockExpressionWithoutBrackets
 	 *     (rule start) (ambiguity) 'with' referencedAdvice+=ID
-	 *     (rule start) (ambiguity) '{' '<' returnType=TypeRef
+	 *     (rule start) (ambiguity) '{' '&lt;' returnType=TypeRef
 	 *     (rule start) (ambiguity) '{' '|' funcExpr=OneOrManyExpressions
 	 *     (rule start) (ambiguity) '{' '|'? parameters+=ParameterDeclaration
 	 *     (rule start) (ambiguity) '{' '}' ')' (rule start)
@@ -192,18 +205,23 @@ public class BeeLangTestLanguageSyntacticSequencer extends AbstractSyntacticSequ
 	 *     (rule start) (ambiguity) {FeatureExpression.objExpr=}
 	 *     (rule start) (ambiguity) {OrExpression.leftExpr=}
 	 *     (rule start) (ambiguity) {UnaryPostOpExpression.expr=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParanthesizedExpression_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'unit' (ambiguity) (rule start)
 	 *     nameSpace=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_ProvidedCapability___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

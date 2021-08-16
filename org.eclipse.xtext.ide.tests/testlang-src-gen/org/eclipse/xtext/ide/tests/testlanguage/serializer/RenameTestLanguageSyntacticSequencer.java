@@ -53,12 +53,15 @@ public class RenameTestLanguageSyntacticSequencer extends AbstractSyntacticSeque
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
 	 *     superType=[TypeDeclaration|ID] (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_TypeDeclaration___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

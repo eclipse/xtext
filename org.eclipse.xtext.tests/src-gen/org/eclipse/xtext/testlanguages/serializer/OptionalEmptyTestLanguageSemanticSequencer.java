@@ -45,11 +45,13 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Greeting returns Greeting
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
 		if (errorAcceptor != null) {
@@ -63,11 +65,13 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     child=Greeting
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

@@ -52,11 +52,13 @@ public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnotherSuperMain returns AnotherSuperMain
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_AnotherSuperMain(ISerializationContext context, AnotherSuperMain semanticObject) {
 		if (errorAcceptor != null) {
@@ -70,11 +72,13 @@ public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SubMain returns SubMain
 	 *
 	 * Constraint:
 	 *     (superMains+=SuperMain another=AnotherSuperMain?)
+	 * </pre>
 	 */
 	protected void sequence_SubMain(ISerializationContext context, SubMain semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

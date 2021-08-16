@@ -146,11 +146,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignmentValue returns AssignmentValue
 	 *
 	 * Constraint:
 	 *     (value=STRING | (refObject=[NamedObject|ID] (refFeature=ID refIndex=INT?)?) | newObject=CreatedObject | (import=[Import|ID] impFrag=FRAGMENT))
+	 * </pre>
 	 */
 	protected void sequence_AssignmentValue(ISerializationContext context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -158,6 +160,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BiListAssignment returns ListAssignment
 	 *
@@ -167,6 +170,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         (leftValues+=ListAssignmentValue leftValues+=ListAssignmentValue*)? 
 	 *         (rightValues+=ListAssignmentValue rightValues+=ListAssignmentValue*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_BiListAssignment(ISerializationContext context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -174,6 +178,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Assignment returns ListAssignment
 	 *
@@ -186,6 +191,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         ) | 
 	 *         (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_BiListAssignment_MonoListAssignment(ISerializationContext context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -193,11 +199,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Assignment returns SingleAssignment
 	 *
 	 * Constraint:
 	 *     ((feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue) | (feature=ID leftValue=SingleAssignmentValue))
+	 * </pre>
 	 */
 	protected void sequence_BiSingleAssignment_MonoSingleAssignment(ISerializationContext context, SingleAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -205,11 +213,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BiSingleAssignment returns SingleAssignment
 	 *
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue rightValue=SingleAssignmentValue)
+	 * </pre>
 	 */
 	protected void sequence_BiSingleAssignment(ISerializationContext context, SingleAssignment semanticObject) {
 		if (errorAcceptor != null) {
@@ -229,6 +239,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedObject returns ObjectCopy
 	 *     CreatedObject returns ObjectCopy
@@ -240,6 +251,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         name=ID? 
 	 *         ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_CreatedObject_ObjectCopy(ISerializationContext context, ObjectCopy semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -247,12 +259,14 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedObject returns ObjectNew
 	 *     CreatedObject returns ObjectNew
 	 *
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT name=ID? ((assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+ leftMig=Migration?)?)
+	 * </pre>
 	 */
 	protected void sequence_CreatedObject_ObjectNew(ISerializationContext context, ObjectNew semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -260,6 +274,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns EPackageImport
 	 *     ModelImport returns EPackageImport
@@ -267,6 +282,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *
 	 * Constraint:
 	 *     (name=ID nsURI=STRING)
+	 * </pre>
 	 */
 	protected void sequence_EPackageImport(ISerializationContext context, EPackageImport semanticObject) {
 		if (errorAcceptor != null) {
@@ -283,11 +299,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EPatch returns EPatch
 	 *
 	 * Constraint:
 	 *     (name=ID imports+=Import* resources+=NamedResource* objects+=ObjectRef*)
+	 * </pre>
 	 */
 	protected void sequence_EPatch(ISerializationContext context, EPatch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -295,12 +313,14 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Executable returns ExpressionExecutable
 	 *     ExpressionExecutable returns ExpressionExecutable
 	 *
 	 * Constraint:
 	 *     exprstr=STRING
+	 * </pre>
 	 */
 	protected void sequence_ExpressionExecutable(ISerializationContext context, ExpressionExecutable semanticObject) {
 		if (errorAcceptor != null) {
@@ -314,12 +334,14 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns ExtensionImport
 	 *     ExtensionImport returns ExtensionImport
 	 *
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
+	 * </pre>
 	 */
 	protected void sequence_ExtensionImport(ISerializationContext context, ExtensionImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -327,12 +349,14 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Executable returns JavaExecutable
 	 *     JavaExecutable returns JavaExecutable
 	 *
 	 * Constraint:
 	 *     method=ID
+	 * </pre>
 	 */
 	protected void sequence_JavaExecutable(ISerializationContext context, JavaExecutable semanticObject) {
 		if (errorAcceptor != null) {
@@ -346,12 +370,14 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns JavaImport
 	 *     JavaImport returns JavaImport
 	 *
 	 * Constraint:
 	 *     (path+=ID path+=ID*)
+	 * </pre>
 	 */
 	protected void sequence_JavaImport(ISerializationContext context, JavaImport semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -359,6 +385,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ListAssignmentValue returns AssignmentValue
 	 *
@@ -373,6 +400,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *             (import=[Import|ID] impFrag=FRAGMENT)
 	 *         )
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ListAssignmentValue(ISerializationContext context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -380,11 +408,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Migration returns Migration
 	 *
 	 * Constraint:
 	 *     (first=Executable? (asOp=Executable | eachOp=Executable)?)
+	 * </pre>
 	 */
 	protected void sequence_Migration(ISerializationContext context, Migration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -392,11 +422,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MonoListAssignment returns ListAssignment
 	 *
 	 * Constraint:
 	 *     (feature=ID (leftValues+=AssignmentValue leftValues+=AssignmentValue*)?)
+	 * </pre>
 	 */
 	protected void sequence_MonoListAssignment(ISerializationContext context, ListAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -404,11 +436,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MonoSingleAssignment returns SingleAssignment
 	 *
 	 * Constraint:
 	 *     (feature=ID leftValue=SingleAssignmentValue)
+	 * </pre>
 	 */
 	protected void sequence_MonoSingleAssignment(ISerializationContext context, SingleAssignment semanticObject) {
 		if (errorAcceptor != null) {
@@ -425,11 +459,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedResource returns NamedResource
 	 *
 	 * Constraint:
 	 *     (name=ID (leftUri=STRING | leftRoot=CreatedObject) (rightUri=STRING | rightRoot=CreatedObject))
+	 * </pre>
 	 */
 	protected void sequence_NamedResource(ISerializationContext context, NamedResource semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -437,11 +473,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ObjectCopy returns ObjectCopy
 	 *
 	 * Constraint:
 	 *     (resource=[NamedResource|ID] fragment=FRAGMENT)
+	 * </pre>
 	 */
 	protected void sequence_ObjectCopy(ISerializationContext context, ObjectCopy semanticObject) {
 		if (errorAcceptor != null) {
@@ -458,11 +496,13 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ObjectNew returns ObjectNew
 	 *
 	 * Constraint:
 	 *     (import=[Import|ID] impFrag=FRAGMENT)
+	 * </pre>
 	 */
 	protected void sequence_ObjectNew(ISerializationContext context, ObjectNew semanticObject) {
 		if (errorAcceptor != null) {
@@ -479,6 +519,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedObject returns ObjectRef
 	 *     ObjectRef returns ObjectRef
@@ -489,6 +530,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         ((leftRes=[NamedResource|ID] leftFrag=FRAGMENT) | (leftRes=[NamedResource|ID] leftFrag=FRAGMENT rightRes=[NamedResource|ID] rightFrag=FRAGMENT)) 
 	 *         ((assignments+=BiSingleAssignment | assignments+=BiListAssignment)+ leftMig=Migration? rightMig=Migration?)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ObjectRef(ISerializationContext context, ObjectRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -496,6 +538,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns ResourceImport
 	 *     ModelImport returns ResourceImport
@@ -503,6 +546,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *
 	 * Constraint:
 	 *     (name=ID uri=STRING)
+	 * </pre>
 	 */
 	protected void sequence_ResourceImport(ISerializationContext context, ResourceImport semanticObject) {
 		if (errorAcceptor != null) {
@@ -519,6 +563,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SingleAssignmentValue returns AssignmentValue
 	 *
@@ -530,6 +575,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *         newObject=CreatedObject | 
 	 *         (import=[Import|ID] impFrag=FRAGMENT)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_SingleAssignmentValue(ISerializationContext context, AssignmentValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

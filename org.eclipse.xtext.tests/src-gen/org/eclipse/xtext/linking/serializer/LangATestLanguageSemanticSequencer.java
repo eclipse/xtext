@@ -49,11 +49,13 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     uri=STRING
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -67,11 +69,13 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Main returns Main
 	 *
 	 * Constraint:
 	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
+	 * </pre>
 	 */
 	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -79,11 +83,13 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns Type
 	 *
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID]? (implements+=[Type|ID] implements+=[Type|ID]*)?)
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

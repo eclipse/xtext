@@ -68,11 +68,14 @@ public class IndentationAwareUiTestLanguageSyntacticSequencer extends AbstractSy
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (INDENT DEDENT)?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_TreeNode___INDENTTerminalRuleCall_1_0_DEDENTTerminalRuleCall_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -53,12 +53,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns ChoiceElement
 	 *     ChoiceRule returns ChoiceElement
 	 *
 	 * Constraint:
 	 *     (optionalKeyword?='optional'? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_ChoiceRule(ISerializationContext context, ChoiceElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -66,11 +68,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EntryRule returns Model
 	 *
 	 * Constraint:
 	 *     multiFeature+=AbstractRule+
+	 * </pre>
 	 */
 	protected void sequence_EntryRule(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -78,12 +82,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns ReducibleComposite
 	 *     ReducibleRule returns ReducibleComposite
 	 *
 	 * Constraint:
 	 *     (actionFeature+=ReducibleRule_ReducibleComposite_2_0 actionFeature+=TerminalRule)
+	 * </pre>
 	 */
 	protected void sequence_ReducibleRule(ISerializationContext context, ReducibleComposite semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -91,6 +97,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns TerminalElement
 	 *     ReducibleRule returns TerminalElement
@@ -99,6 +106,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *
 	 * Constraint:
 	 *     stringFeature=STRING
+	 * </pre>
 	 */
 	protected void sequence_TerminalRule(ISerializationContext context, TerminalElement semanticObject) {
 		if (errorAcceptor != null) {

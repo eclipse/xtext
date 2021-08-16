@@ -65,11 +65,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AfterObj returns AfterObj
 	 *
 	 * Constraint:
 	 *     value='after'
+	 * </pre>
 	 */
 	protected void sequence_AfterObj(ISerializationContext context, AfterObj semanticObject) {
 		if (errorAcceptor != null) {
@@ -83,11 +85,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
 	 * Constraint:
 	 *     (element=Rule1 | element=Rule2 | element=Rule3 | element=Rule4)
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -95,11 +99,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule1 returns Rule1
 	 *
 	 * Constraint:
 	 *     (type=FirstEnum value=INT unit=SecondEnum)
+	 * </pre>
 	 */
 	protected void sequence_Rule1(ISerializationContext context, Rule1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -119,11 +125,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule2 returns Rule2
 	 *
 	 * Constraint:
 	 *     value=INT
+	 * </pre>
 	 */
 	protected void sequence_Rule2(ISerializationContext context, Rule2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -137,11 +145,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule3 returns Rule3
 	 *
 	 * Constraint:
 	 *     value=INT
+	 * </pre>
 	 */
 	protected void sequence_Rule3(ISerializationContext context, Rule3 semanticObject) {
 		if (errorAcceptor != null) {
@@ -155,11 +165,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Rule4 returns Rule4
 	 *
 	 * Constraint:
 	 *     (after=AfterObj value=INT s=SObj)
+	 * </pre>
 	 */
 	protected void sequence_Rule4(ISerializationContext context, Rule4 semanticObject) {
 		if (errorAcceptor != null) {
@@ -179,11 +191,13 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SObj returns SObj
 	 *
 	 * Constraint:
 	 *     value='s'
+	 * </pre>
 	 */
 	protected void sequence_SObj(ISerializationContext context, SObj semanticObject) {
 		if (errorAcceptor != null) {

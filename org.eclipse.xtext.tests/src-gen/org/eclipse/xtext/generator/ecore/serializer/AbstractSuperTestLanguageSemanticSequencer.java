@@ -45,11 +45,13 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnotherSuperMain returns AnotherSuperMain
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_AnotherSuperMain(ISerializationContext context, AnotherSuperMain semanticObject) {
 		if (errorAcceptor != null) {
@@ -63,11 +65,13 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SuperMain returns SuperMain
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_SuperMain(ISerializationContext context, SuperMain semanticObject) {
 		if (errorAcceptor != null) {

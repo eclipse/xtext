@@ -39,6 +39,7 @@ public class KeywordsTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -53,6 +54,7 @@ public class KeywordsTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 *         seventh?=''c'' | 
 	 *         eighth?='"d"'
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

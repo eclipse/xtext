@@ -41,11 +41,13 @@ public class EcoreFragmentTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Second returns Second
 	 *
 	 * Constraint:
 	 *     (name=ID first=[First|ID])
+	 * </pre>
 	 */
 	protected void sequence_Second(ISerializationContext context, Second semanticObject) {
 		if (errorAcceptor != null) {

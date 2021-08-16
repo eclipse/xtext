@@ -49,12 +49,14 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractDetail returns AssociatedDetail
 	 *     AssociatedDetail returns AssociatedDetail
 	 *
 	 * Constraint:
 	 *     detailClass=[Model|FQN]
+	 * </pre>
 	 */
 	protected void sequence_AssociatedDetail(ISerializationContext context, AssociatedDetail semanticObject) {
 		if (errorAcceptor != null) {
@@ -68,12 +70,14 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractDetail returns Detail
 	 *     Detail returns Detail
 	 *
 	 * Constraint:
 	 *     ((visibility='private' | visibility='protected' | visibility='public')? detailClass=[Model|FQN])
+	 * </pre>
 	 */
 	protected void sequence_Detail(ISerializationContext context, Detail semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -81,11 +85,13 @@ public class Bug287184TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (name=FQN (detail+=Detail | detail+=AssociatedDetail)+)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

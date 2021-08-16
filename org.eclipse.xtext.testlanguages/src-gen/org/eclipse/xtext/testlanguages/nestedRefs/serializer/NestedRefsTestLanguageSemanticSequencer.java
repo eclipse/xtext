@@ -45,11 +45,13 @@ public class NestedRefsTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Doc returns Doc
 	 *
 	 * Constraint:
 	 *     declarations+=SelfReferingDecl+
+	 * </pre>
 	 */
 	protected void sequence_Doc(ISerializationContext context, Doc semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -57,11 +59,13 @@ public class NestedRefsTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SelfReferingDecl returns SelfReferingDecl
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName selfRef=[SelfReferingDecl|QualifiedName])
+	 * </pre>
 	 */
 	protected void sequence_SelfReferingDecl(ISerializationContext context, SelfReferingDecl semanticObject) {
 		if (errorAcceptor != null) {

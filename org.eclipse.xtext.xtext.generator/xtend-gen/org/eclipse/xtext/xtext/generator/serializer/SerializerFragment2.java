@@ -988,6 +988,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.append("/**");
           _builder.newLine();
           _builder.append(" ");
+          _builder.append("* <pre>");
+          _builder.newLine();
+          _builder.append(" ");
           _builder.append("* Contexts:");
           _builder.newLine();
           _builder.append(" ");
@@ -1012,11 +1015,14 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
               _builder.append(_name, " ");
               _builder.append("}");
             } else {
-              String _replaceAll_1 = c.getBody().toString().replaceAll("\\n", "\n*     ");
+              String _replaceAll_1 = c.getBody().toString().replaceAll("\\n", "\n*     ").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
               _builder.append(_replaceAll_1, " ");
             }
           }
           _builder.newLineIfNotEmpty();
+          _builder.append(" ");
+          _builder.append("* </pre>");
+          _builder.newLine();
           _builder.append(" ");
           _builder.append("*/");
           _builder.newLine();
@@ -1284,13 +1290,17 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             _builder.newLine();
             _builder.append("\t");
             _builder.append(" ");
+            _builder.append("* <pre>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(" ");
             _builder.append("* Ambiguous syntax:");
             _builder.newLine();
             _builder.append("\t");
             _builder.append(" ");
             _builder.append("*     ");
-            String _replace = group_2.getElementAlias().toString().replace("\n", "\n *     ");
-            _builder.append(_replace, "\t ");
+            String _replaceAll = group_2.getElementAlias().toString().replace("\n", "\n *     ").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+            _builder.append(_replaceAll, "\t ");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append(" ");
@@ -1309,11 +1319,18 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 _builder.append("\t");
                 _builder.append(" ");
                 _builder.append("*     ");
-                String _replace_1 = trans.toString().replace("\n", "\n*     ");
-                _builder.append(_replace_1, "\t ");
+                String _replaceAll_1 = trans.toString().replace("\n", "\n*     ").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+                _builder.append(_replaceAll_1, "\t ");
                 _builder.newLineIfNotEmpty();
               }
             }
+            _builder.append("\t");
+            _builder.append(" ");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(" ");
+            _builder.append("* </pre>");
+            _builder.newLine();
             _builder.append("\t");
             _builder.append(" ");
             _builder.append("*/");

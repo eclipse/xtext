@@ -55,7 +55,7 @@ import com.google.common.annotations.Beta;
  * 		doc.prepend(regionFor(parent).keyword("{"), this::oneSpace);
  * 		doc.append(regionFor(parent).keyword("{"), this::newLine);
  * 		doc.interior(regionFor(parent).keyword("{"), regionFor(parent).keyword("}"), this::indent);
- * 		doc.append(regionFor(parent).keyword("}"), it -> it.setNewLines(1, 1, 2));
+ * 		doc.append(regionFor(parent).keyword("}"), it -&gt; it.setNewLines(1, 1, 2));
  * 		for (Child child : parent.getChildren())
  * 			doc.format(child);
  * 	}

@@ -162,11 +162,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AttributeExclusionTest1 returns AttributeExclusionTest
 	 *
 	 * Constraint:
 	 *     attr1=ID
+	 * </pre>
 	 */
 	protected void sequence_AttributeExclusionTest1(ISerializationContext context, AttributeExclusionTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -180,11 +182,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AttributeExclusionTest2 returns AttributeExclusionTest
 	 *
 	 * Constraint:
 	 *     attr2=ID
+	 * </pre>
 	 */
 	protected void sequence_AttributeExclusionTest2(ISerializationContext context, AttributeExclusionTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -198,11 +202,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model2 returns Model
 	 *
 	 * Constraint:
 	 *     {Model}
+	 * </pre>
 	 */
 	protected void sequence_Model2(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -210,6 +216,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -231,6 +238,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	 *         (name=STRING (nodeExclusion=NodeExclusion1 | nodeExclusion=NodeExclusion2)) | 
 	 *         (name=STRING (nodeExclusionList=NodeExclusion1List | nodeExclusionList=NodeExclusion2List))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -238,12 +246,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeChild returns NestedTypeChild1
 	 *     NestedTypeChild1 returns NestedTypeChild1
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeChild1(ISerializationContext context, NestedTypeChild1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -257,12 +267,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeChild returns NestedTypeChild2
 	 *     NestedTypeChild2 returns NestedTypeChild2
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeChild2(ISerializationContext context, NestedTypeChild2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -276,12 +288,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest
 	 *     NestedTypeRecursiveTest1.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest
 	 *
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeRecursiveTest1(ISerializationContext context, NestedTypeRecursiveTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -295,11 +309,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeRecursiveTest1.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest1
 	 *
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest1}
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(ISerializationContext context, NestedTypeRecursiveTest1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -307,12 +323,14 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest
 	 *     NestedTypeRecursiveTest2.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest
 	 *
 	 * Constraint:
 	 *     left=NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeRecursiveTest2(ISerializationContext context, NestedTypeRecursiveTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -326,11 +344,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeRecursiveTest2.NestedTypeRecursiveTest_2_0 returns NestedTypeRecursiveTest2
 	 *
 	 * Constraint:
 	 *     {NestedTypeRecursiveTest2}
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(ISerializationContext context, NestedTypeRecursiveTest2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -338,11 +358,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeTest1 returns NestedTypeTest
 	 *
 	 * Constraint:
 	 *     nested=NestedTypeChild1
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeTest1(ISerializationContext context, NestedTypeTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -356,11 +378,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedTypeTest2 returns NestedTypeTest
 	 *
 	 * Constraint:
 	 *     nested=NestedTypeChild2
+	 * </pre>
 	 */
 	protected void sequence_NestedTypeTest2(ISerializationContext context, NestedTypeTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -374,11 +398,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NodeExclusion1List returns NodeExclusionList
 	 *
 	 * Constraint:
 	 *     ref+=[Model|ID]+
+	 * </pre>
 	 */
 	protected void sequence_NodeExclusion1List(ISerializationContext context, NodeExclusionList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -386,11 +412,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NodeExclusion1 returns NodeExclusion
 	 *
 	 * Constraint:
 	 *     ref=[Model|ID]
+	 * </pre>
 	 */
 	protected void sequence_NodeExclusion1(ISerializationContext context, NodeExclusion semanticObject) {
 		if (errorAcceptor != null) {
@@ -404,11 +432,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NodeExclusion2List returns NodeExclusionList
 	 *
 	 * Constraint:
 	 *     ref+=[Model|STRING]+
+	 * </pre>
 	 */
 	protected void sequence_NodeExclusion2List(ISerializationContext context, NodeExclusionList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -416,11 +446,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NodeExclusion2 returns NodeExclusion
 	 *
 	 * Constraint:
 	 *     ref=[Model|STRING]
+	 * </pre>
 	 */
 	protected void sequence_NodeExclusion2(ISerializationContext context, NodeExclusion semanticObject) {
 		if (errorAcceptor != null) {
@@ -434,11 +466,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParentRefTest1 returns ParentRefTest1
 	 *
 	 * Constraint:
 	 *     child1=ParentRefTestChild1
+	 * </pre>
 	 */
 	protected void sequence_ParentRefTest1(ISerializationContext context, ParentRefTest1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -452,11 +486,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParentRefTest2 returns ParentRefTest2
 	 *
 	 * Constraint:
 	 *     child2=ParentRefTestChild2
+	 * </pre>
 	 */
 	protected void sequence_ParentRefTest2(ISerializationContext context, ParentRefTest2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -470,11 +506,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParentRefTestChild1 returns ParentRefTestChild
 	 *
 	 * Constraint:
 	 *     child=ParentRefTestChild1?
+	 * </pre>
 	 */
 	protected void sequence_ParentRefTestChild1(ISerializationContext context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -482,11 +520,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParentRefTestChild2 returns ParentRefTestChild
 	 *
 	 * Constraint:
 	 *     child=ParentRefTestChild2?
+	 * </pre>
 	 */
 	protected void sequence_ParentRefTestChild2(ISerializationContext context, ParentRefTestChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -494,11 +534,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QuantityExclusionTest1 returns QuantityExclusionTest
 	 *
 	 * Constraint:
 	 *     (attr1=ID attr2=ID?)
+	 * </pre>
 	 */
 	protected void sequence_QuantityExclusionTest1(ISerializationContext context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -506,11 +548,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     QuantityExclusionTest2 returns QuantityExclusionTest
 	 *
 	 * Constraint:
 	 *     (attr1=ID? attr2=ID)
+	 * </pre>
 	 */
 	protected void sequence_QuantityExclusionTest2(ISerializationContext context, QuantityExclusionTest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -518,11 +562,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ValueExclusionTest1 returns ValueExclusionTest
 	 *
 	 * Constraint:
 	 *     val=ValueExclusionTestEn1
+	 * </pre>
 	 */
 	protected void sequence_ValueExclusionTest1(ISerializationContext context, ValueExclusionTest semanticObject) {
 		if (errorAcceptor != null) {
@@ -536,11 +582,13 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ValueExclusionTest2 returns ValueExclusionTest
 	 *
 	 * Constraint:
 	 *     val=ValueExclusionTestEn2
+	 * </pre>
 	 */
 	protected void sequence_ValueExclusionTest2(ISerializationContext context, ValueExclusionTest semanticObject) {
 		if (errorAcceptor != null) {

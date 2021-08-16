@@ -43,11 +43,13 @@ public class Bug299395TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (strings+=STRING* (keys+=STRING values+=STRING)* subModel=SubModel?)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class Bug299395TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SubModel returns SubModel
 	 *
 	 * Constraint:
 	 *     strings+=STRING*
+	 * </pre>
 	 */
 	protected void sequence_SubModel(ISerializationContext context, SubModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -77,11 +77,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Entry returns Entry
 	 *
 	 * Constraint:
 	 *     contents+=Alts+
+	 * </pre>
 	 */
 	protected void sequence_Entry(ISerializationContext context, Entry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -89,11 +91,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FewerLookAheadStrings returns FewerLookAheadStrings
 	 *
 	 * Constraint:
 	 *     (values+=STRING values+=STRING values+=ID)
+	 * </pre>
 	 */
 	protected void sequence_FewerLookAheadStrings(ISerializationContext context, FewerLookAheadStrings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -101,12 +105,14 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alts returns LookAhead0
 	 *     LookAhead0 returns LookAhead0
 	 *
 	 * Constraint:
 	 *     x='a'
+	 * </pre>
 	 */
 	protected void sequence_LookAhead0(ISerializationContext context, LookAhead0 semanticObject) {
 		if (errorAcceptor != null) {
@@ -120,12 +126,14 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alts returns LookAhead1
 	 *     LookAhead1 returns LookAhead1
 	 *
 	 * Constraint:
 	 *     (y=LookAhead2 x='b' z='d')
+	 * </pre>
 	 */
 	protected void sequence_LookAhead1(ISerializationContext context, LookAhead1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -145,11 +153,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LookAhead2 returns LookAhead2
 	 *
 	 * Constraint:
 	 *     (z='foo' | z='bar')
+	 * </pre>
 	 */
 	protected void sequence_LookAhead2(ISerializationContext context, LookAhead2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -157,12 +167,14 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alts returns LookAhead3
 	 *     LookAhead3 returns LookAhead3
 	 *
 	 * Constraint:
 	 *     (x='b' z=LookAhead4)
+	 * </pre>
 	 */
 	protected void sequence_LookAhead3(ISerializationContext context, LookAhead3 semanticObject) {
 		if (errorAcceptor != null) {
@@ -179,11 +191,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LookAhead4 returns LookAhead4
 	 *
 	 * Constraint:
 	 *     (x='c' | x='d')
+	 * </pre>
 	 */
 	protected void sequence_LookAhead4(ISerializationContext context, LookAhead4 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -191,12 +205,14 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alts returns LookAheadPredicate
 	 *     LookAheadPredicate returns LookAheadPredicate
 	 *
 	 * Constraint:
 	 *     {LookAheadPredicate}
+	 * </pre>
 	 */
 	protected void sequence_LookAheadPredicate(ISerializationContext context, LookAheadPredicate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -204,11 +220,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LookAheadStrings returns LookAheadStrings
 	 *
 	 * Constraint:
 	 *     values+=STRING+
+	 * </pre>
 	 */
 	protected void sequence_LookAheadStrings(ISerializationContext context, LookAheadStrings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -216,12 +234,14 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alts returns LookBeyond
 	 *     LookBeyond returns LookBeyond
 	 *
 	 * Constraint:
 	 *     (left=LookAheadStrings? right=FewerLookAheadStrings)
+	 * </pre>
 	 */
 	protected void sequence_LookBeyond(ISerializationContext context, LookBeyond semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

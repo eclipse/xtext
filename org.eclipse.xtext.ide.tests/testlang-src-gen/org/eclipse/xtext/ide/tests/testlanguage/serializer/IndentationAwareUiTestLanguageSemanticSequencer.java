@@ -56,11 +56,13 @@ public class IndentationAwareUiTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ChildList returns ChildList
 	 *
 	 * Constraint:
 	 *     children+=OtherTreeNode+
+	 * </pre>
 	 */
 	protected void sequence_ChildList(ISerializationContext context, ChildList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -68,11 +70,13 @@ public class IndentationAwareUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OtherTreeNode returns OtherTreeNode
 	 *
 	 * Constraint:
 	 *     (name=STRING childList=ChildList?)
+	 * </pre>
 	 */
 	protected void sequence_OtherTreeNode(ISerializationContext context, OtherTreeNode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -80,11 +84,13 @@ public class IndentationAwareUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TreeNode returns TreeNode
 	 *
 	 * Constraint:
 	 *     (name=ID children+=TreeNode*)
+	 * </pre>
 	 */
 	protected void sequence_TreeNode(ISerializationContext context, TreeNode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -92,11 +98,13 @@ public class IndentationAwareUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Tree returns Tree
 	 *
 	 * Constraint:
 	 *     (nodes+=TreeNode* moreNodes+=OtherTreeNode*)
+	 * </pre>
 	 */
 	protected void sequence_Tree(ISerializationContext context, Tree semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

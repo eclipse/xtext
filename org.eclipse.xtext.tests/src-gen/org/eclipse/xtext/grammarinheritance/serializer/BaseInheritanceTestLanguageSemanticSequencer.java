@@ -41,11 +41,13 @@ public class BaseInheritanceTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

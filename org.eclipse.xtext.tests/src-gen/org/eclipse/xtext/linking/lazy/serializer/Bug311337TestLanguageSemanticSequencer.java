@@ -57,11 +57,13 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child returns Child
 	 *
 	 * Constraint:
 	 *     (name=ID link=[Definition|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_Child(ISerializationContext context, Child semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -69,11 +71,13 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Definition returns Definition
 	 *
 	 * Constraint:
 	 *     (name=ID child+=Child ref+=Reference?)
+	 * </pre>
 	 */
 	protected void sequence_Definition(ISerializationContext context, Definition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -81,11 +85,13 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     def+=Definition+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,12 +99,14 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Reference returns NestedRef
 	 *     Reference.NestedRef_2_1 returns NestedRef
 	 *
 	 * Constraint:
 	 *     (left=Reference_NestedRef_2_1 refChild=[Child|ID])
+	 * </pre>
 	 */
 	protected void sequence_Reference(ISerializationContext context, NestedRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -115,12 +123,14 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Reference returns Reference
 	 *     Reference.NestedRef_2_1 returns Reference
 	 *
 	 * Constraint:
 	 *     refChild=[Child|ID]
+	 * </pre>
 	 */
 	protected void sequence_Reference(ISerializationContext context, Reference semanticObject) {
 		if (errorAcceptor != null) {

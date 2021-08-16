@@ -90,12 +90,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootRule returns CallExtendedParserRule
 	 *     CallExtendedParserRule returns CallExtendedParserRule
 	 *
 	 * Constraint:
 	 *     call=AbstractCallExtendedParserRule
+	 * </pre>
 	 */
 	protected void sequence_CallExtendedParserRule(ISerializationContext context, CallExtendedParserRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,12 +111,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootRule returns CallOverridenParserRule
 	 *     CallOverridenParserRule returns CallOverridenParserRule
 	 *
 	 * Constraint:
 	 *     call=AbstractCallOverridenParserRule
+	 * </pre>
 	 */
 	protected void sequence_CallOverridenParserRule(ISerializationContext context, CallOverridenParserRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -128,12 +132,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootRule returns ConcreteParserRule
 	 *     ConcreteParserRule returns ConcreteParserRule
 	 *
 	 * Constraint:
 	 *     (magicNumber=REAL elements+=InheritedParserRule*)
+	 * </pre>
 	 */
 	protected void sequence_ConcreteParserRule(ISerializationContext context, ConcreteParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,12 +147,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RootRule returns AType2
 	 *     OverridableParserRule2 returns AType2
 	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
+	 * </pre>
 	 */
 	protected void sequence_OverridableParserRule2(ISerializationContext context, AType2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -163,11 +171,13 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OverridableParserRule returns AType
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_OverridableParserRule(ISerializationContext context, AType semanticObject) {
 		if (errorAcceptor != null) {
@@ -181,12 +191,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendableParserRule returns Subrule1
 	 *     Subrule1 returns Subrule1
 	 *
 	 * Constraint:
 	 *     (name=ID sub1=ID)
+	 * </pre>
 	 */
 	protected void sequence_Subrule1(ISerializationContext context, Subrule1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -203,12 +215,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendableParserRule returns Subrule2
 	 *     Subrule2 returns Subrule2
 	 *
 	 * Constraint:
 	 *     (name=ID sub2=STRING)
+	 * </pre>
 	 */
 	protected void sequence_Subrule2(ISerializationContext context, Subrule2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -225,12 +239,14 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ExtendableParserRule returns Subrule3
 	 *     Subrule3 returns Subrule3
 	 *
 	 * Constraint:
 	 *     (name=ID sub1=INT)
+	 * </pre>
 	 */
 	protected void sequence_Subrule3(ISerializationContext context, Subrule3 semanticObject) {
 		if (errorAcceptor != null) {

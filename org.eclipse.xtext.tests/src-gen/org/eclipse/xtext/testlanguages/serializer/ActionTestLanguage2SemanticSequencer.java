@@ -45,12 +45,14 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ORing returns ORing
 	 *     ORing.ORing_1_0 returns ORing
 	 *
 	 * Constraint:
 	 *     (disjuncts+=ORing_ORing_1_0 disjuncts+=Value)
+	 * </pre>
 	 */
 	protected void sequence_ORing(ISerializationContext context, ORing semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -58,6 +60,7 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ORing returns Value
 	 *     ORing.ORing_1_0 returns Value
@@ -65,6 +68,7 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     value='a'
+	 * </pre>
 	 */
 	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
 		if (errorAcceptor != null) {

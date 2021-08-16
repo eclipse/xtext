@@ -43,11 +43,13 @@ public class Bug302128TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=Variable value=Value?)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class Bug302128TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=Element+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

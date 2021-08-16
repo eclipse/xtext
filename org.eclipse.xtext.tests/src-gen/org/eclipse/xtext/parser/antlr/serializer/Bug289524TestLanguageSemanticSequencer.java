@@ -49,11 +49,13 @@ public class Bug289524TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Contained returns Contained
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Contained(ISerializationContext context, Contained semanticObject) {
 		if (errorAcceptor != null) {
@@ -67,11 +69,13 @@ public class Bug289524TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ModelElement returns ModelElement
 	 *
 	 * Constraint:
 	 *     (containments+=Contained | (refs+=[Contained|ID] refs+=[Contained|ID]*))+
+	 * </pre>
 	 */
 	protected void sequence_ModelElement(ISerializationContext context, ModelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -79,11 +83,13 @@ public class Bug289524TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     refs+=ModelElement*
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

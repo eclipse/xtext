@@ -49,11 +49,13 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     DomainModel returns DomainModel
 	 *
 	 * Constraint:
 	 *     entities+=Entity+
+	 * </pre>
 	 */
 	protected void sequence_DomainModel(ISerializationContext context, DomainModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -61,11 +63,13 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
 	 *     (name=ID description=STRING)
+	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		if (errorAcceptor != null) {
@@ -82,11 +86,13 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     domainModel=DomainModel
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

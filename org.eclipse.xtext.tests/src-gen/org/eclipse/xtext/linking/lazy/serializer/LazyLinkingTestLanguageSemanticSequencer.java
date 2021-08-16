@@ -51,11 +51,13 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     types+=Type+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -63,11 +65,13 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Property returns Property
 	 *
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -75,6 +79,7 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns Type
 	 *
@@ -86,6 +91,7 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	 *         properties+=Property* 
 	 *         unresolvedProxyProperty+=UnresolvedProxyProperty*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,11 +99,13 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnresolvedProxyProperty returns UnresolvedProxyProperty
 	 *
 	 * Constraint:
 	 *     (type+=[Type|ID]+ name=ID)
+	 * </pre>
 	 */
 	protected void sequence_UnresolvedProxyProperty(ISerializationContext context, UnresolvedProxyProperty semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -92,11 +92,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ContainmentRef1 returns ContainmentRefN
 	 *
 	 * Constraint:
 	 *     val1=ID
+	 * </pre>
 	 */
 	protected void sequence_ContainmentRef1(ISerializationContext context, ContainmentRefN semanticObject) {
 		if (errorAcceptor != null) {
@@ -110,11 +112,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ContainmentRef2 returns ContainmentRefN
 	 *
 	 * Constraint:
 	 *     val2=ID
+	 * </pre>
 	 */
 	protected void sequence_ContainmentRef2(ISerializationContext context, ContainmentRefN semanticObject) {
 		if (errorAcceptor != null) {
@@ -128,11 +132,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ContainmentRef returns ContainmentRef
 	 *
 	 * Constraint:
 	 *     (ctx=ContainmentRef1 | ctx=ContainmentRef2)
+	 * </pre>
 	 */
 	protected void sequence_ContainmentRef(ISerializationContext context, ContainmentRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,11 +146,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CrossRef returns CrossRef
 	 *
 	 * Constraint:
 	 *     ((name=Terminal1 | name=Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]))
+	 * </pre>
 	 */
 	protected void sequence_CrossRef(ISerializationContext context, CrossRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,11 +160,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EnumBool returns EnumBool
 	 *
 	 * Constraint:
 	 *     (en?=Enum1 | en?=Enum2)
+	 * </pre>
 	 */
 	protected void sequence_EnumBool(ISerializationContext context, EnumBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -164,11 +174,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EnumVal returns EnumVal
 	 *
 	 * Constraint:
 	 *     (en=Enum1 | en=Enum2)
+	 * </pre>
 	 */
 	protected void sequence_EnumVal(ISerializationContext context, EnumVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -176,11 +188,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     KeywordBool returns KeywordBool
 	 *
 	 * Constraint:
 	 *     (kw?='kw1' | kw?='kw2')
+	 * </pre>
 	 */
 	protected void sequence_KeywordBool(ISerializationContext context, KeywordBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -188,11 +202,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     KeywordVal returns KeywordVal
 	 *
 	 * Constraint:
 	 *     (kw='kw1' | kw='kw2')
+	 * </pre>
 	 */
 	protected void sequence_KeywordVal(ISerializationContext context, KeywordVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -200,11 +216,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MixedBool returns MixedBool
 	 *
 	 * Constraint:
 	 *     (val?='kw1' | val=Boolean)
+	 * </pre>
 	 */
 	protected void sequence_MixedBool(ISerializationContext context, MixedBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -212,11 +230,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MixedValue returns MixedValue
 	 *
 	 * Constraint:
 	 *     (val=Enum1 | val=DatEnum)
+	 * </pre>
 	 */
 	protected void sequence_MixedValue(ISerializationContext context, MixedValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -224,6 +244,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -240,6 +261,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	 *         containmentRef=ContainmentRef | 
 	 *         crossRef=CrossRef
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -247,11 +269,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalBool returns TerminalBool
 	 *
 	 * Constraint:
 	 *     (term?=Terminal1 | term?=Terminal2 | term?='%foo')
+	 * </pre>
 	 */
 	protected void sequence_TerminalBool(ISerializationContext context, TerminalBool semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -259,11 +283,13 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalVal returns TerminalVal
 	 *
 	 * Constraint:
 	 *     (term=Terminal1 | term=Terminal2 | term='%foo')
+	 * </pre>
 	 */
 	protected void sequence_TerminalVal(ISerializationContext context, TerminalVal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

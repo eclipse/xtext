@@ -47,6 +47,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -70,6 +71,7 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         serialized=UnorderedSerialization | 
 	 *         nestedModel+=NestedModel+
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -77,11 +79,13 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedModel returns NestedModel
 	 *
 	 * Constraint:
 	 *     (first?='a' | second?='b')*
+	 * </pre>
 	 */
 	protected void sequence_NestedModel(ISerializationContext context, NestedModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -89,11 +93,13 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     UnorderedSerialization returns UnorderedSerialization
 	 *
 	 * Constraint:
 	 *     ((first?='a' | second?='b' | third?='c' | forth?='d')+ | (firstAsList+='a' | secondAsList+='b')+ | (firstAsList+='a' | second?='b')+)?
+	 * </pre>
 	 */
 	protected void sequence_UnorderedSerialization(ISerializationContext context, UnorderedSerialization semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

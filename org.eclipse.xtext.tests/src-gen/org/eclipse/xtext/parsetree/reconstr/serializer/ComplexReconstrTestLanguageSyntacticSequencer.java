@@ -51,6 +51,7 @@ public class ComplexReconstrTestLanguageSyntacticSequencer extends AbstractSynta
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -58,12 +59,15 @@ public class ComplexReconstrTestLanguageSyntacticSequencer extends AbstractSynta
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add.addOperands+=}
 	 *     (rule start) (ambiguity) {Minus.minusOperands+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parens_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -71,6 +75,8 @@ public class ComplexReconstrTestLanguageSyntacticSequencer extends AbstractSynta
 	 *     (rule start) (ambiguity) name=ID
 	 *     (rule start) (ambiguity) {Add.addOperands+=}
 	 *     (rule start) (ambiguity) {Minus.minusOperands+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_Parens_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

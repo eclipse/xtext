@@ -49,11 +49,13 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (first=Named second=Named? (third+=Named forth+=Named)*)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -61,11 +63,13 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=Element+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -73,11 +77,13 @@ public class Bug317840TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Named returns Named
 	 *
 	 * Constraint:
 	 *     name=NAME
+	 * </pre>
 	 */
 	protected void sequence_Named(ISerializationContext context, Named semanticObject) {
 		if (errorAcceptor != null) {

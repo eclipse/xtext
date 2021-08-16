@@ -45,6 +45,7 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Child
 	 *     Model.Parent_1_0 returns Child
@@ -52,6 +53,7 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Child(ISerializationContext context, Child semanticObject) {
 		if (errorAcceptor != null) {
@@ -65,11 +67,13 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Parent
 	 *
 	 * Constraint:
 	 *     (left=Model_Parent_1_0 right=Child)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Parent semanticObject) {
 		if (errorAcceptor != null) {

@@ -53,11 +53,13 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Expression
 	 *
 	 * Constraint:
 	 *     (left=Literal right=Literal)
+	 * </pre>
 	 */
 	protected void sequence_Expression(ISerializationContext context, Expression semanticObject) {
 		if (errorAcceptor != null) {
@@ -74,12 +76,14 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Literal returns IntLiteral
 	 *     IntLiteral returns IntLiteral
 	 *
 	 * Constraint:
 	 *     value=IntValue
+	 * </pre>
 	 */
 	protected void sequence_IntLiteral(ISerializationContext context, IntLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -93,11 +97,13 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     expressions+=Expression+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -105,12 +111,14 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Literal returns RealLiteral
 	 *     RealLiteral returns RealLiteral
 	 *
 	 * Constraint:
 	 *     value=RealValue
+	 * </pre>
 	 */
 	protected void sequence_RealLiteral(ISerializationContext context, RealLiteral semanticObject) {
 		if (errorAcceptor != null) {

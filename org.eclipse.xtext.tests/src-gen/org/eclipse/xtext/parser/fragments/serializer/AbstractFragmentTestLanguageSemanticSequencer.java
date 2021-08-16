@@ -84,11 +84,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedByAction returns PRFNamed
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_NamedByAction(ISerializationContext context, PRFNamed semanticObject) {
 		if (errorAcceptor != null) {
@@ -102,11 +104,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NamedInParentheses returns PRFNamed
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_NamedInParentheses(ISerializationContext context, PRFNamed semanticObject) {
 		if (errorAcceptor != null) {
@@ -120,11 +124,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamedRefFirst returns PRFNamed
 	 *
 	 * Constraint:
 	 *     (ref=[PRFNamed|ID] name=ID)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedFragment_PRFNamedRefFirst(ISerializationContext context, PRFNamed semanticObject) {
 		if (errorAcceptor != null) {
@@ -141,11 +147,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFWithPredicate returns PRFNamed
 	 *
 	 * Constraint:
 	 *     (name=ID ref=[PRFNamed|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedFragment_PRFNamedRef(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -153,11 +161,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamedRecursiveFragment returns PRFNamedWithAction
 	 *
 	 * Constraint:
 	 *     (name=ID prev=NamedByAction)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedRecursiveFragment_RecursiveFragment(ISerializationContext context, PRFNamedWithAction semanticObject) {
 		if (errorAcceptor != null) {
@@ -174,11 +184,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamedRecursive returns PRFNamedWithAction
 	 *
 	 * Constraint:
 	 *     (name=ID prev=NamedInParentheses)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedRecursive_RecursiveFromFragment(ISerializationContext context, PRFNamedWithAction semanticObject) {
 		if (errorAcceptor != null) {
@@ -195,11 +207,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamedWithAction returns PRFNamedWithAction
 	 *
 	 * Constraint:
 	 *     (prev=PRFNamedWithAction_PRFNamedWithAction_1 name=ID (ref=[PRFNamed|ID] ref2=[PRFNamed|ID])?)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedWithAction(ISerializationContext context, PRFNamedWithAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -207,11 +221,13 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamedWithFQN returns PRFNamed
 	 *
 	 * Constraint:
 	 *     (name=FQN ref=[PRFNamed|FQN2]?)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamedWithFQN(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -219,12 +235,14 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PRFNamed returns PRFNamed
 	 *     PRFNamedWithAction.PRFNamedWithAction_1 returns PRFNamed
 	 *
 	 * Constraint:
 	 *     (name=ID (ref=[PRFNamed|ID] | ref=[PRFNamed|ID])?)
+	 * </pre>
 	 */
 	protected void sequence_PRFNamed_PRFNamedFragment_PRFNamedRef(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -232,6 +250,7 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParserRuleFragments returns ParserRuleFragments
 	 *
@@ -246,6 +265,7 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 	 *         element=PRFNamedRecursive | 
 	 *         element=PRFNamedRecursiveFragment
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParserRuleFragments(ISerializationContext context, ParserRuleFragments semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

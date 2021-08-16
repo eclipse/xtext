@@ -66,6 +66,7 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'refs'?
 	 *
@@ -82,12 +83,15 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	 *     name=ID (ambiguity) '{' 'ref' ref=[Node|QualifiedName]
 	 *     name=ID (ambiguity) '{' children+=Node
 	 *     name=ID (ambiguity) (('{' '}') | ';') (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Node_RefsKeyword_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}') | ';'
 	 *
@@ -97,12 +101,15 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	 *     imports+=Import 'refs'? (ambiguity) (rule end)
 	 *     name=ID 'refs'? (ambiguity) (rule end)
 	 *     refs+=[Node|QualifiedName] (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Node_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_3__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'kw1'?
 	 *
@@ -111,12 +118,15 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	 *     (rule start) '#3' (ambiguity) name=ID
 	 *     (rule start) (ambiguity) 'kw2'? (rule start)
 	 *     (rule start) (ambiguity) name=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_OptionalValue_Kw1Keyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'kw2'?
 	 *
@@ -124,6 +134,8 @@ public class PartialSerializationTestLanguageSyntacticSequencer extends Abstract
 	 *     (rule start) '#3' 'kw1'? (ambiguity) (rule start)
 	 *     (rule start) 'kw1'? (ambiguity) (rule start)
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_OptionalValue_Kw2Keyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

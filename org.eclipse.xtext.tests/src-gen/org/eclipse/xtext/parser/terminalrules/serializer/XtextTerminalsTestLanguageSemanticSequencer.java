@@ -304,6 +304,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns Action
 	 *     Alternatives.Alternatives_1_0 returns Action
@@ -316,6 +317,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))? (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_Action(ISerializationContext context, org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -323,6 +325,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns Alternatives
 	 *     Alternatives.Alternatives_1_0 returns Alternatives
@@ -335,6 +338,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+ (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_Alternatives(ISerializationContext context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -342,6 +346,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns Assignment
 	 *     Alternatives.Alternatives_1_0 returns Assignment
@@ -354,6 +359,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_Assignment(ISerializationContext context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -361,6 +367,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns Group
 	 *     Alternatives.Alternatives_1_0 returns Group
@@ -373,6 +380,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+ (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_Group(ISerializationContext context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -380,6 +388,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns Keyword
 	 *     Alternatives.Alternatives_1_0 returns Keyword
@@ -392,6 +401,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_Keyword(ISerializationContext context, Keyword semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -399,6 +409,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Alternatives returns RuleCall
 	 *     Alternatives.Alternatives_1_0 returns RuleCall
@@ -411,6 +422,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_AbstractTokenWithCardinality_RuleCall(ISerializationContext context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -418,11 +430,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Action returns Action
 	 *
 	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))?)
+	 * </pre>
 	 */
 	protected void sequence_Action(ISerializationContext context, org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -430,6 +444,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignableTerminal returns Alternatives
 	 *     ParenthesizedAssignableElement returns Alternatives
@@ -438,6 +453,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (groups+=AssignableAlternatives_Alternatives_1_0 groups+=AssignableTerminal+)
+	 * </pre>
 	 */
 	protected void sequence_AssignableAlternatives(ISerializationContext context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -445,11 +461,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Assignment returns Assignment
 	 *
 	 * Constraint:
 	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
+	 * </pre>
 	 */
 	protected void sequence_Assignment(ISerializationContext context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -457,11 +475,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CharacterRange returns CharacterRange
 	 *
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword)
+	 * </pre>
 	 */
 	protected void sequence_CharacterRange(ISerializationContext context, CharacterRange semanticObject) {
 		if (errorAcceptor != null) {
@@ -478,6 +498,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns CharacterRange
 	 *     TerminalAlternatives.Alternatives_1_0 returns CharacterRange
@@ -489,6 +510,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_CharacterRange_TerminalToken(ISerializationContext context, CharacterRange semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -496,6 +518,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AssignableTerminal returns CrossReference
 	 *     ParenthesizedAssignableElement returns CrossReference
@@ -505,6 +528,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (type=TypeRef terminal=CrossReferenceableTerminal?)
+	 * </pre>
 	 */
 	protected void sequence_CrossReference(ISerializationContext context, CrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -512,6 +536,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EnumLiterals returns EnumLiteralDeclaration
 	 *     EnumLiterals.Alternatives_1_0 returns EnumLiteralDeclaration
@@ -519,6 +544,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (enumLiteral=[EEnumLiteral|ID] literal=Keyword?)
+	 * </pre>
 	 */
 	protected void sequence_EnumLiteralDeclaration(ISerializationContext context, EnumLiteralDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -526,11 +552,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EnumLiterals returns Alternatives
 	 *
 	 * Constraint:
 	 *     (groups+=EnumLiterals_Alternatives_1_0 groups+=EnumLiteralDeclaration+)
+	 * </pre>
 	 */
 	protected void sequence_EnumLiterals(ISerializationContext context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -538,12 +566,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns EnumRule
 	 *     EnumRule returns EnumRule
 	 *
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=EnumLiterals)
+	 * </pre>
 	 */
 	protected void sequence_EnumRule(ISerializationContext context, EnumRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -551,12 +581,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractMetamodelDeclaration returns GeneratedMetamodel
 	 *     GeneratedMetamodel returns GeneratedMetamodel
 	 *
 	 * Constraint:
 	 *     (name=ID ePackage=[EPackage|STRING] alias=ID?)
+	 * </pre>
 	 */
 	protected void sequence_GeneratedMetamodel(ISerializationContext context, GeneratedMetamodel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -564,6 +596,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Grammar returns Grammar
 	 *
@@ -575,6 +608,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *         metamodelDeclarations+=AbstractMetamodelDeclaration* 
 	 *         rules+=AbstractRule+
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Grammar(ISerializationContext context, Grammar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -582,6 +616,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Keyword returns Keyword
 	 *     AssignableTerminal returns Keyword
@@ -594,6 +629,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     value=STRING
+	 * </pre>
 	 */
 	protected void sequence_Keyword(ISerializationContext context, Keyword semanticObject) {
 		if (errorAcceptor != null) {
@@ -607,6 +643,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns Keyword
 	 *     TerminalAlternatives.Alternatives_1_0 returns Keyword
@@ -618,6 +655,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_Keyword_TerminalToken(ISerializationContext context, Keyword semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -625,12 +663,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractNegatedToken returns NegatedToken
 	 *     NegatedToken returns NegatedToken
 	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
+	 * </pre>
 	 */
 	protected void sequence_NegatedToken(ISerializationContext context, NegatedToken semanticObject) {
 		if (errorAcceptor != null) {
@@ -644,6 +684,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns NegatedToken
 	 *     TerminalAlternatives.Alternatives_1_0 returns NegatedToken
@@ -655,6 +696,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_NegatedToken_TerminalToken(ISerializationContext context, NegatedToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -662,6 +704,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns ParserRule
 	 *     ParserRule returns ParserRule
@@ -673,6 +716,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *         (definesHiddenTokens?='hidden' (hiddenTokens+=[AbstractRule|ID] hiddenTokens+=[AbstractRule|ID]*)?)? 
 	 *         alternatives=Alternatives
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ParserRule(ISerializationContext context, org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.ParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -680,12 +724,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractMetamodelDeclaration returns ReferencedMetamodel
 	 *     ReferencedMetamodel returns ReferencedMetamodel
 	 *
 	 * Constraint:
 	 *     (ePackage=[EPackage|STRING] alias=ID?)
+	 * </pre>
 	 */
 	protected void sequence_ReferencedMetamodel(ISerializationContext context, ReferencedMetamodel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -693,6 +739,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RuleCall returns RuleCall
 	 *     AssignableTerminal returns RuleCall
@@ -703,6 +750,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     rule=[AbstractRule|ID]
+	 * </pre>
 	 */
 	protected void sequence_RuleCall(ISerializationContext context, RuleCall semanticObject) {
 		if (errorAcceptor != null) {
@@ -716,6 +764,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns RuleCall
 	 *     TerminalAlternatives.Alternatives_1_0 returns RuleCall
@@ -727,6 +776,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_RuleCall_TerminalToken(ISerializationContext context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -734,6 +784,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns Alternatives
 	 *     TerminalAlternatives.Alternatives_1_0 returns Alternatives
@@ -745,6 +796,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_TerminalAlternatives_TerminalToken(ISerializationContext context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -752,6 +804,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns Group
 	 *     TerminalAlternatives.Alternatives_1_0 returns Group
@@ -763,6 +816,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_TerminalGroup_TerminalToken(ISerializationContext context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -770,12 +824,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns TerminalRule
 	 *     TerminalRule returns TerminalRule
 	 *
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=TerminalAlternatives)
+	 * </pre>
 	 */
 	protected void sequence_TerminalRule(ISerializationContext context, TerminalRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -783,6 +839,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns UntilToken
 	 *     TerminalAlternatives.Alternatives_1_0 returns UntilToken
@@ -794,6 +851,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')*)
+	 * </pre>
 	 */
 	protected void sequence_TerminalToken_UntilToken(ISerializationContext context, UntilToken semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -801,6 +859,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TerminalAlternatives returns Wildcard
 	 *     TerminalAlternatives.Alternatives_1_0 returns Wildcard
@@ -812,6 +871,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	 *
 	 * Constraint:
 	 *     (cardinality='?' | cardinality='*' | cardinality='+')*
+	 * </pre>
 	 */
 	protected void sequence_TerminalToken_Wildcard(ISerializationContext context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -819,11 +879,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeRef returns TypeRef
 	 *
 	 * Constraint:
 	 *     (metamodel=[AbstractMetamodelDeclaration|ID]? classifier=[EClassifier|ID])
+	 * </pre>
 	 */
 	protected void sequence_TypeRef(ISerializationContext context, TypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -831,12 +893,14 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractNegatedToken returns UntilToken
 	 *     UntilToken returns UntilToken
 	 *
 	 * Constraint:
 	 *     terminal=TerminalTokenElement
+	 * </pre>
 	 */
 	protected void sequence_UntilToken(ISerializationContext context, UntilToken semanticObject) {
 		if (errorAcceptor != null) {
@@ -850,11 +914,13 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Wildcard returns Wildcard
 	 *
 	 * Constraint:
 	 *     {Wildcard}
+	 * </pre>
 	 */
 	protected void sequence_Wildcard(ISerializationContext context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

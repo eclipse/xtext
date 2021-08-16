@@ -60,6 +60,7 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (
 	  *         '3' | 
@@ -74,12 +75,15 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_Model_Bug302585Keyword_1_16_0_or_DigitFiveKeyword_1_4_0_or_DigitFourKeyword_1_3_0_or_DigitOneDigitOneKeyword_1_10_0_or_DigitOneDigitZeroKeyword_1_9_0_or_DigitSevenKeyword_1_6_0_or_DigitSixKeyword_1_5_0_or_DigitThreeKeyword_1_2_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '1'*
 	 *
@@ -103,12 +107,15 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	 *     third?='c' (ambiguity) forth?='d'
 	 *     third?='c' (ambiguity) second?='b'
 	 *     third?='c' (ambiguity) third?='c'
+	 
+	 * </pre>
 	 */
 	protected void emit_UnorderedSerialization_DigitOneKeyword_1_0_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '1'+
 	 *
@@ -118,17 +125,22 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	 *     forth?='d' (ambiguity) first?='a'
 	 *     second?='b' (ambiguity) first?='a'
 	 *     third?='c' (ambiguity) first?='a'
+	 
+	 * </pre>
 	 */
 	protected void emit_UnorderedSerialization_DigitOneKeyword_1_0_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('1'+ | '2' | '3')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_UnorderedSerialization___DigitOneKeyword_1_0_0_0_p_or_DigitThreeKeyword_1_2_0_or_DigitTwoKeyword_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

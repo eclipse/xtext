@@ -49,11 +49,13 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Foo returns Foo
 	 *
 	 * Constraint:
 	 *     (name=ID nameRefs+=NameRef*)
+	 * </pre>
 	 */
 	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -61,11 +63,13 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NameRef returns FooBar
 	 *
 	 * Constraint:
 	 *     name=STRING
+	 * </pre>
 	 */
 	protected void sequence_NameRef(ISerializationContext context, FooBar semanticObject) {
 		if (errorAcceptor != null) {

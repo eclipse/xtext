@@ -46,11 +46,13 @@ public class InheritanceTest2LanguageSemanticSequencer extends InheritanceTestLa
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (name=ID elements+=Element* ids+=FQN)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

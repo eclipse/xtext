@@ -91,11 +91,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=AbstractElement+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -103,11 +105,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OperationCall returns OperationCall
 	 *
 	 * Constraint:
 	 *     (operation=[Operation|ID] (params+=INT params+=INT*)?)
+	 * </pre>
 	 */
 	protected void sequence_OperationCall(ISerializationContext context, OperationCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -115,12 +119,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns Operation
 	 *     Operation returns Operation
 	 *
 	 * Constraint:
 	 *     (name=ID (params+=Parameter params+=Parameter*)? returnType=Type? operationCall=OperationCall?)
+	 * </pre>
 	 */
 	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -128,12 +134,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageDeclaration returns PackageDeclaration
 	 *     AbstractElement returns PackageDeclaration
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName elements+=AbstractElement*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,11 +149,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
 	 *     (name=ID type=Type)
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -162,11 +172,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PrimitiveType returns PrimitiveType
 	 *
 	 * Constraint:
 	 *     (name='string' | name='int' | name='boolean' | name='void')
+	 * </pre>
 	 */
 	protected void sequence_PrimitiveType(ISerializationContext context, PrimitiveType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -174,11 +186,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns PrimitiveType
 	 *
 	 * Constraint:
 	 *     ((name='string' | name='int' | name='boolean' | name='void') arrayDiemensions+='['*)
+	 * </pre>
 	 */
 	protected void sequence_PrimitiveType_Type(ISerializationContext context, PrimitiveType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -186,12 +200,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Member returns Property
 	 *     Property returns Property
 	 *
 	 * Constraint:
 	 *     (type=Type name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		if (errorAcceptor != null) {
@@ -208,12 +224,14 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractElement returns TypeDeclaration
 	 *     TypeDeclaration returns TypeDeclaration
 	 *
 	 * Constraint:
 	 *     (name=ID superType=[TypeDeclaration|QualifiedName]? members+=Member*)
+	 * </pre>
 	 */
 	protected void sequence_TypeDeclaration(ISerializationContext context, TypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,11 +239,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeReference returns TypeReference
 	 *
 	 * Constraint:
 	 *     typeRef=[TypeDeclaration|QualifiedName]
+	 * </pre>
 	 */
 	protected void sequence_TypeReference(ISerializationContext context, TypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -239,11 +259,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns TypeReference
 	 *
 	 * Constraint:
 	 *     (typeRef=[TypeDeclaration|QualifiedName] arrayDiemensions+='['*)
+	 * </pre>
 	 */
 	protected void sequence_Type_TypeReference(ISerializationContext context, TypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

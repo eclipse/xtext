@@ -61,6 +61,7 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Datatype
 	 *     Type returns Datatype
@@ -68,6 +69,7 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Datatype(ISerializationContext context, Datatype semanticObject) {
 		if (errorAcceptor != null) {
@@ -81,6 +83,7 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Entity
 	 *     Type returns Entity
@@ -88,6 +91,7 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	 *
 	 * Constraint:
 	 *     (name=ID properties+=Property*)
+	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -95,11 +99,13 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     File returns File
 	 *
 	 * Constraint:
 	 *     elements+=Element+
+	 * </pre>
 	 */
 	protected void sequence_File(ISerializationContext context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -107,12 +113,14 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *     Element returns Import
 	 *
 	 * Constraint:
 	 *     importedNamespace=QualifiedNameWithWildCard
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -126,12 +134,14 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Namespace returns Namespace
 	 *     Element returns Namespace
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName elements+=Element*)
+	 * </pre>
 	 */
 	protected void sequence_Namespace(ISerializationContext context, Namespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -139,11 +149,13 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Property returns Property
 	 *
 	 * Constraint:
 	 *     (type=[Type|QualifiedName] name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		if (errorAcceptor != null) {

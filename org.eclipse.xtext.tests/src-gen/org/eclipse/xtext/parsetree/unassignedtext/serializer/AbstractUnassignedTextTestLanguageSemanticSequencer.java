@@ -61,12 +61,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns CaseInsensitiveKeywordRule
 	 *     CaseInsensitiveKeywordRule returns CaseInsensitiveKeywordRule
 	 *
 	 * Constraint:
 	 *     val=INT
+	 * </pre>
 	 */
 	protected void sequence_CaseInsensitiveKeywordRule(ISerializationContext context, CaseInsensitiveKeywordRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -80,12 +82,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns CommonTerminalsRule
 	 *     CommonTerminalsRule returns CommonTerminalsRule
 	 *
 	 * Constraint:
 	 *     val=ID
+	 * </pre>
 	 */
 	protected void sequence_CommonTerminalsRule(ISerializationContext context, CommonTerminalsRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -99,12 +103,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns DatatypeRule
 	 *     DatatypeRule returns DatatypeRule
 	 *
 	 * Constraint:
 	 *     val=INT
+	 * </pre>
 	 */
 	protected void sequence_DatatypeRule(ISerializationContext context, DatatypeRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -118,12 +124,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns GroupRule
 	 *     GroupRule returns GroupRule
 	 *
 	 * Constraint:
 	 *     {GroupRule}
+	 * </pre>
 	 */
 	protected void sequence_GroupRule(ISerializationContext context, GroupRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -131,12 +139,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns MultiRule
 	 *     MultiRule returns MultiRule
 	 *
 	 * Constraint:
 	 *     val=INT
+	 * </pre>
 	 */
 	protected void sequence_MultiRule(ISerializationContext context, MultiRule semanticObject) {
 		if (errorAcceptor != null) {
@@ -150,12 +160,14 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns PluralRule
 	 *     PluralRule returns PluralRule
 	 *
 	 * Constraint:
 	 *     count=INT
+	 * </pre>
 	 */
 	protected void sequence_PluralRule(ISerializationContext context, PluralRule semanticObject) {
 		if (errorAcceptor != null) {

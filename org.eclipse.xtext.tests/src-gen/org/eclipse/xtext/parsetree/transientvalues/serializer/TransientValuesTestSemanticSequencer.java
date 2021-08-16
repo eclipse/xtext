@@ -49,12 +49,14 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns TestList
 	 *     TestList returns TestList
 	 *
 	 * Constraint:
 	 *     item+=INT*
+	 * </pre>
 	 */
 	protected void sequence_TestList(ISerializationContext context, TestList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -62,12 +64,14 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns TestOptional
 	 *     TestOptional returns TestOptional
 	 *
 	 * Constraint:
 	 *     (opt1=INT? opt2=INT?)
+	 * </pre>
 	 */
 	protected void sequence_TestOptional(ISerializationContext context, TestOptional semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -75,12 +79,14 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns TestRequired
 	 *     TestRequired returns TestRequired
 	 *
 	 * Constraint:
 	 *     (required1=INT required2=INT)
+	 * </pre>
 	 */
 	protected void sequence_TestRequired(ISerializationContext context, TestRequired semanticObject) {
 		if (errorAcceptor != null) {

@@ -45,11 +45,13 @@ public class Bug362902SemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Greeting returns Greeting
 	 *
 	 * Constraint:
 	 *     name=MyId
+	 * </pre>
 	 */
 	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
 		if (errorAcceptor != null) {
@@ -63,11 +65,13 @@ public class Bug362902SemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (greetings+=Greeting* favourite=[Greeting|MyId])
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -51,12 +51,14 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns AType
 	 *     AType returns AType
 	 *
 	 * Constraint:
 	 *     {AType}
+	 * </pre>
 	 */
 	protected void sequence_AType(ISerializationContext context, AType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -64,12 +66,14 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns AnotherType
 	 *     AnotherType returns AnotherType
 	 *
 	 * Constraint:
 	 *     {AnotherType}
+	 * </pre>
 	 */
 	protected void sequence_AnotherType(ISerializationContext context, AnotherType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -77,11 +81,13 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns AModel
 	 *
 	 * Constraint:
 	 *     elements+=Type+
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -53,13 +53,15 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parenthesis returns Indent
 	 *     Test returns Indent
 	 *     Indent returns Indent
 	 *
 	 * Constraint:
-	 *     ((((req=TwoRequired opt=TwoOptions) | opt=TwoOptions)? indent+=Indent+) | indent+=Indent+)?
+	 *     ((req=TwoRequired? opt=TwoOptions indent+=Indent+) | (req=TwoRequired? indent+=Indent+) | indent+=Indent+)?
+	 * </pre>
 	 */
 	protected void sequence_Indent(ISerializationContext context, Indent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -67,11 +69,13 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (test=Test | test=Parenthesis)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -79,6 +83,7 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parenthesis returns TwoOptions
 	 *     Test returns TwoOptions
@@ -86,6 +91,7 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	 *
 	 * Constraint:
 	 *     (one=ID | two=ID)
+	 * </pre>
 	 */
 	protected void sequence_TwoOptions(ISerializationContext context, TwoOptions semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -93,6 +99,7 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parenthesis returns TwoRequired
 	 *     Test returns TwoRequired
@@ -100,6 +107,7 @@ public class SerializationErrorTestLanguageSemanticSequencer extends AbstractDel
 	 *
 	 * Constraint:
 	 *     (one=ID two=ID)
+	 * </pre>
 	 */
 	protected void sequence_TwoRequired(ISerializationContext context, TwoRequired semanticObject) {
 		if (errorAcceptor != null) {

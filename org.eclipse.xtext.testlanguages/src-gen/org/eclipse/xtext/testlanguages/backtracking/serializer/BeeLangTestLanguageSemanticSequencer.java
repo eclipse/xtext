@@ -369,6 +369,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns BinaryOpExpression
 	 *     Expression returns BinaryOpExpression
@@ -407,6 +408,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         (leftExpr=MultiplicativeExpression_BinaryOpExpression_1_0 (functionName='*' | functionName='/' | functionName='%') rightExpr=SetExpression) | 
 	 *         (leftExpr=SetExpression_BinaryOpExpression_1_0 functionName='..' rightExpr=UnaryOrInfixExpression)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_AdditiveExpression_MultiplicativeExpression_RelationalExpression_SetExpression(ISerializationContext context, BinaryOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -414,11 +416,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AliasedRequiredCapability returns AliasedRequiredCapability
 	 *
 	 * Constraint:
 	 *     (nameSpace=ID? name=ID alias=ID? (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
+	 * </pre>
 	 */
 	protected void sequence_AliasedRequiredCapability(ISerializationContext context, AliasedRequiredCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -426,6 +430,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns AndExpression
 	 *     Expression returns AndExpression
@@ -459,6 +464,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (leftExpr=AndExpression_AndExpression_1_0 rightExpr=RelationalExpression)
+	 * </pre>
 	 */
 	protected void sequence_AndExpression(ISerializationContext context, AndExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -475,6 +481,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns AssignmentExpression
 	 *     Expression returns AssignmentExpression
@@ -508,6 +515,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (leftExpr=AssignmentExpression_AssignmentExpression_1_0 functionName=AssignmentOperator rightExpr=AssignmentExpression)
+	 * </pre>
 	 */
 	protected void sequence_AssignmentExpression(ISerializationContext context, AssignmentExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -527,11 +535,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     BlockExpressionWithoutBrackets returns ChainedExpression
 	 *
 	 * Constraint:
 	 *     expressions+=TopLevelExpression+
+	 * </pre>
 	 */
 	protected void sequence_BlockExpressionWithoutBrackets(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -539,11 +549,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OneOrManyExpressions returns ChainedExpression
 	 *
 	 * Constraint:
 	 *     (expressions+=TopLevelExpression+ | expressions+=TopLevelExpression+)?
+	 * </pre>
 	 */
 	protected void sequence_BlockExpression_BlockExpressionWithoutBrackets(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -551,6 +563,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns ChainedExpression
 	 *     Expression returns ChainedExpression
@@ -584,6 +597,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     expressions+=TopLevelExpression*
+	 * </pre>
 	 */
 	protected void sequence_BlockExpression(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -591,6 +605,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns CachedExpression
 	 *     Expression returns CachedExpression
@@ -624,6 +639,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     expr=OrExpression
+	 * </pre>
 	 */
 	protected void sequence_CachedExpression(ISerializationContext context, CachedExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -637,6 +653,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns CallFunction
 	 *     Expression returns CallFunction
@@ -670,6 +687,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (funcExpr=CallExpression_CallFunction_1_0 parameterList=ParameterList?)
+	 * </pre>
 	 */
 	protected void sequence_CallExpression(ISerializationContext context, CallFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -677,6 +695,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns Function
 	 *     Expression returns Function
@@ -720,6 +739,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         )? 
 	 *         funcExpr=OneOrManyExpressions
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_ClosureExpression(ISerializationContext context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -727,12 +747,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FirstParameter returns ClosureParameter
 	 *     ClosureParameter returns ClosureParameter
 	 *
 	 * Constraint:
 	 *     expr=ClosureExpression
+	 * </pre>
 	 */
 	protected void sequence_ClosureParameter(ISerializationContext context, ClosureParameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -746,12 +768,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeRef returns ClosureTypeRef
 	 *     ClosureTypeRef returns ClosureTypeRef
 	 *
 	 * Constraint:
 	 *     (((parameterTypes+=ID parameterTypes+=ID* (varArgs?='...' parameterTypes+=ID)?) | (varArgs?='...' parameterTypes+=ID))? returnType=ID)
+	 * </pre>
 	 */
 	protected void sequence_ClosureTypeRef(ISerializationContext context, ClosureTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -759,6 +783,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns CreateExpression
 	 *     Expression returns CreateExpression
@@ -793,6 +818,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (typeExpr=ID parameterList=ParameterList? alias=ID? contextBlock=InitializationBlockExpression?)
+	 * </pre>
 	 */
 	protected void sequence_ConstructorCallExpression(ISerializationContext context, CreateExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -800,11 +826,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FeatureOfThis returns FeatureExpression
 	 *
 	 * Constraint:
 	 *     featureName=ID
+	 * </pre>
 	 */
 	protected void sequence_FeatureOfThis(ISerializationContext context, FeatureExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -818,6 +846,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Function returns Function
 	 *
@@ -835,6 +864,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         guard=GuardExpression? 
 	 *         (funcExpr=Expression | funcExpr=BlockExpression)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Function(ISerializationContext context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -842,11 +872,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GuardExpression returns GuardExpression
 	 *
 	 * Constraint:
 	 *     (guardExpr=Expression | guardExpr=BlockExpression)
+	 * </pre>
 	 */
 	protected void sequence_GuardExpression(ISerializationContext context, GuardExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -854,6 +886,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns AtExpression
 	 *     Expression returns AtExpression
@@ -887,6 +920,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (objExpr=InfixExpression_AtExpression_1_1_0 indexExpr=Expression)
+	 * </pre>
 	 */
 	protected void sequence_InfixExpression(ISerializationContext context, AtExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -903,6 +937,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns CallFeature
 	 *     Expression returns CallFeature
@@ -936,6 +971,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (funcExpr=InfixExpression_CallFeature_1_0_0 name=ID parameterList=ParameterList?)
+	 * </pre>
 	 */
 	protected void sequence_InfixExpression(ISerializationContext context, CallFeature semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -943,6 +979,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns FeatureExpression
 	 *     Expression returns FeatureExpression
@@ -976,6 +1013,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (objExpr=InfixExpression_FeatureExpression_1_2_0 featureName=ID)
+	 * </pre>
 	 */
 	protected void sequence_InfixExpression(ISerializationContext context, FeatureExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -992,11 +1030,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InitializationBlockExpression returns ChainedExpression
 	 *
 	 * Constraint:
 	 *     expressions+=InitializationExpression
+	 * </pre>
 	 */
 	protected void sequence_InitializationBlockExpression(ISerializationContext context, ChainedExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1004,11 +1044,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InitializationExpression returns AssignmentExpression
 	 *
 	 * Constraint:
 	 *     (leftExpr=FeatureOfThis functionName=':' rightExpr=Expression)
+	 * </pre>
 	 */
 	protected void sequence_InitializationExpression(ISerializationContext context, AssignmentExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1028,6 +1070,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns VariableExpression
 	 *     Expression returns VariableExpression
@@ -1070,6 +1113,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         name='unit' | 
 	 *         name='this'
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_KeywordVariables_Value(ISerializationContext context, VariableExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1077,6 +1121,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     KeywordVariables returns VariableExpression
 	 *
@@ -1090,6 +1135,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *         name='unit' | 
 	 *         name='this'
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_KeywordVariables(ISerializationContext context, VariableExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1097,11 +1143,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (units+=Unit+ | functions+=Function+)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1109,6 +1157,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns CallNamedFunction
 	 *     Expression returns CallNamedFunction
@@ -1144,6 +1193,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (name=ID parameterList=ParameterList?)
+	 * </pre>
 	 */
 	protected void sequence_OperationCall(ISerializationContext context, CallNamedFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1151,6 +1201,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns OrExpression
 	 *     Expression returns OrExpression
@@ -1184,6 +1235,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (leftExpr=OrExpression_OrExpression_1_0 rightExpr=AndExpression)
+	 * </pre>
 	 */
 	protected void sequence_OrExpression(ISerializationContext context, OrExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1200,11 +1252,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParameterDeclaration returns ParameterDeclaration
 	 *
 	 * Constraint:
 	 *     (type=TypeRef? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_ParameterDeclaration(ISerializationContext context, ParameterDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1212,11 +1266,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ParameterList returns ParameterList
 	 *
 	 * Constraint:
 	 *     (parameters+=FirstParameter parameters+=FirstParameter*)
+	 * </pre>
 	 */
 	protected void sequence_ParameterList(ISerializationContext context, ParameterList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1224,12 +1280,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     FirstParameter returns Parameter
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
 	 *     expr=Expression
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Parameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -1243,6 +1301,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns UnaryPostOpExpression
 	 *     Expression returns UnaryPostOpExpression
@@ -1276,6 +1335,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (expr=PostopExpression_UnaryPostOpExpression_1_0 (functionName='--' | functionName='++'))
+	 * </pre>
 	 */
 	protected void sequence_PostopExpression(ISerializationContext context, UnaryPostOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1283,6 +1343,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns UnaryPreOpExpression
 	 *     Expression returns UnaryPreOpExpression
@@ -1317,6 +1378,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     ((functionName='++' | functionName='--') expr=InfixExpression)
+	 * </pre>
 	 */
 	protected void sequence_PreopExpression(ISerializationContext context, UnaryPreOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1324,11 +1386,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProvidedCapability returns ProvidedCapability
 	 *
 	 * Constraint:
 	 *     (nameSpace=ID? (condExpr=Expression | name=ID | version=ID)*)
+	 * </pre>
 	 */
 	protected void sequence_ProvidedCapability(ISerializationContext context, ProvidedCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1336,11 +1400,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     RequiredCapability returns RequiredCapability
 	 *
 	 * Constraint:
 	 *     (nameSpace=ID? name=ID (condExpr=Expression | greedy?='greedy' | min=INT | max=INT | versionRange=ID)*)
+	 * </pre>
 	 */
 	protected void sequence_RequiredCapability(ISerializationContext context, RequiredCapability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1348,12 +1414,14 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeRef returns SimpleTypeRef
 	 *     SimpleTypeRef returns SimpleTypeRef
 	 *
 	 * Constraint:
 	 *     (rawType=ID (actualArgumentsList+=ID actualArgumentsList+=ID*)?)
+	 * </pre>
 	 */
 	protected void sequence_SimpleTypeRef(ISerializationContext context, SimpleTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1361,6 +1429,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns UnaryOpExpression
 	 *     Expression returns UnaryOpExpression
@@ -1395,6 +1464,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     ((functionName='!' | functionName='-') expr=InfixExpression)
+	 * </pre>
 	 */
 	protected void sequence_UnaryExpression(ISerializationContext context, UnaryOpExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1402,6 +1472,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Unit returns Unit
 	 *
@@ -1420,6 +1491,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *             functions+=Function
 	 *         )*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Unit(ISerializationContext context, Unit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1427,11 +1499,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ValDeclaration returns DefValue
 	 *
 	 * Constraint:
 	 *     (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression)
+	 * </pre>
 	 */
 	protected void sequence_ValDeclaration(ISerializationContext context, DefValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1439,11 +1513,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns DefValue
 	 *
 	 * Constraint:
 	 *     ((final?='final'? type=TypeRef? name=ID valueExpr=Expression?) | (final?='final'? immutable?='val' type=TypeRef? name=ID valueExpr=Expression))
+	 * </pre>
 	 */
 	protected void sequence_ValDeclaration_VarDeclaration(ISerializationContext context, DefValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1451,6 +1527,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns ValueLiteral
 	 *     Expression returns ValueLiteral
@@ -1486,6 +1563,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     value=STRING
+	 * </pre>
 	 */
 	protected void sequence_ValueLiteral(ISerializationContext context, ValueLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -1499,11 +1577,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Value returns VariableExpression
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Value(ISerializationContext context, VariableExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -1517,11 +1597,13 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     VarDeclaration returns DefValue
 	 *
 	 * Constraint:
 	 *     (final?='final'? type=TypeRef? name=ID valueExpr=Expression?)
+	 * </pre>
 	 */
 	protected void sequence_VarDeclaration(ISerializationContext context, DefValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1529,6 +1611,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns WithContextExpression
 	 *     Expression returns WithContextExpression
@@ -1563,6 +1646,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     (expr=Expression alias=ID? contextBlock=BlockExpression)
+	 * </pre>
 	 */
 	protected void sequence_WithContextExpression(ISerializationContext context, WithContextExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1570,6 +1654,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TopLevelExpression returns WithExpression
 	 *     Expression returns WithExpression
@@ -1604,6 +1689,7 @@ public class BeeLangTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	 *
 	 * Constraint:
 	 *     ((referencedAdvice+=ID referencedAdvice+=ID*)? (funcExpr=Expression | funcExpr=BlockExpressionWithoutBrackets))
+	 * </pre>
 	 */
 	protected void sequence_WithExpression(ISerializationContext context, WithExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

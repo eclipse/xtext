@@ -69,12 +69,14 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns DatatypeHiddens
 	 *     DatatypeHiddens returns DatatypeHiddens
 	 *
 	 * Constraint:
 	 *     valid?=DatatypeRule
+	 * </pre>
 	 */
 	protected void sequence_DatatypeHiddens(ISerializationContext context, DatatypeHiddens semanticObject) {
 		if (errorAcceptor != null) {
@@ -88,11 +90,13 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     HidingHiddens returns HidingHiddens
 	 *
 	 * Constraint:
 	 *     (space=WS called=InheritingHiddensCall)
+	 * </pre>
 	 */
 	protected void sequence_HidingHiddens(ISerializationContext context, HidingHiddens semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,11 +113,13 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InheritingHiddensCall returns InheritingHiddensCall
 	 *
 	 * Constraint:
 	 *     valid?=';'
+	 * </pre>
 	 */
 	protected void sequence_InheritingHiddensCall(ISerializationContext context, InheritingHiddensCall semanticObject) {
 		if (errorAcceptor != null) {
@@ -127,12 +133,14 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns InheritingHiddens
 	 *     InheritingHiddens returns InheritingHiddens
 	 *
 	 * Constraint:
 	 *     ((called=InheritingHiddensCall | hidingCalled=HidingHiddens) valid?=';')
+	 * </pre>
 	 */
 	protected void sequence_InheritingHiddens(ISerializationContext context, InheritingHiddens semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,11 +148,13 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OverridingHiddensCall returns OverridingHiddensCall
 	 *
 	 * Constraint:
 	 *     (spaces+=WS? valid?=';')
+	 * </pre>
 	 */
 	protected void sequence_OverridingHiddensCall(ISerializationContext context, OverridingHiddensCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,12 +162,14 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns OverridingHiddens
 	 *     OverridingHiddens returns OverridingHiddens
 	 *
 	 * Constraint:
 	 *     (called=OverridingHiddensCall valid?=';')
+	 * </pre>
 	 */
 	protected void sequence_OverridingHiddens(ISerializationContext context, OverridingHiddens semanticObject) {
 		if (errorAcceptor != null) {
@@ -174,12 +186,14 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns WithHiddens
 	 *     WithHiddens returns WithHiddens
 	 *
 	 * Constraint:
 	 *     valid?=';'
+	 * </pre>
 	 */
 	protected void sequence_WithHiddens(ISerializationContext context, WithHiddens semanticObject) {
 		if (errorAcceptor != null) {
@@ -193,12 +207,14 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns WithoutHiddens
 	 *     WithoutHiddens returns WithoutHiddens
 	 *
 	 * Constraint:
 	 *     (spaces+=WS spaces+=WS? valid?=';')
+	 * </pre>
 	 */
 	protected void sequence_WithoutHiddens(ISerializationContext context, WithoutHiddens semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
