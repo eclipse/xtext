@@ -88,11 +88,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Command returns Command
 	 *
 	 * Constraint:
 	 *     (signal=[Signal|ID] newValue=BOOLEAN)
+	 * </pre>
 	 */
 	protected void sequence_Command(ISerializationContext context, Command semanticObject) {
 		if (errorAcceptor != null) {
@@ -109,11 +111,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Condition returns Condition
 	 *
 	 * Constraint:
 	 *     (events+=Event events+=Event*)
+	 * </pre>
 	 */
 	protected void sequence_Condition(ISerializationContext context, Condition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -121,11 +125,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Event returns Event
 	 *
 	 * Constraint:
 	 *     (signal=[Signal|ID] value=BOOLEAN)
+	 * </pre>
 	 */
 	protected void sequence_Event(ISerializationContext context, Event semanticObject) {
 		if (errorAcceptor != null) {
@@ -142,11 +148,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InputSignal returns InputSignal
 	 *
 	 * Constraint:
 	 *     {InputSignal}
+	 * </pre>
 	 */
 	protected void sequence_InputSignal(ISerializationContext context, InputSignal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -154,11 +162,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Signal returns InputSignal
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_InputSignal_Signal(ISerializationContext context, InputSignal semanticObject) {
 		if (errorAcceptor != null) {
@@ -172,11 +182,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OutputSignal returns OutputSignal
 	 *
 	 * Constraint:
 	 *     {OutputSignal}
+	 * </pre>
 	 */
 	protected void sequence_OutputSignal(ISerializationContext context, OutputSignal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -184,11 +196,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Signal returns OutputSignal
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_OutputSignal_Signal(ISerializationContext context, OutputSignal semanticObject) {
 		if (errorAcceptor != null) {
@@ -202,11 +216,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     State returns State
 	 *
 	 * Constraint:
 	 *     (name=ID commands+=Command* transitions+=Transition* nestedStates+=State*)
+	 * </pre>
 	 */
 	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -214,11 +230,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Statemachine returns Statemachine
 	 *
 	 * Constraint:
 	 *     (signals+=Signal* states+=State*)
+	 * </pre>
 	 */
 	protected void sequence_Statemachine(ISerializationContext context, Statemachine semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -226,11 +244,13 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Transition returns Transition
 	 *
 	 * Constraint:
 	 *     (condition=Condition state=[State|QualifiedName])
+	 * </pre>
 	 */
 	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {
 		if (errorAcceptor != null) {

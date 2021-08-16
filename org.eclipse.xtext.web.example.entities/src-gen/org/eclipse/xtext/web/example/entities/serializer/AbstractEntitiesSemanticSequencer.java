@@ -346,11 +346,13 @@ public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSeq
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Entities returns Entities
 	 *
 	 * Constraint:
 	 *     ((importSection=XImportSection elements+=AbstractElement+) | elements+=AbstractElement+)?
+	 * </pre>
 	 */
 	protected void sequence_Entities(ISerializationContext context, Entities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -358,12 +360,14 @@ public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractElement returns Entity
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
 	 *     (name=ValidID superType=JvmParameterizedTypeReference? features+=Feature*)
+	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -371,12 +375,14 @@ public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature returns Operation
 	 *     Operation returns Operation
 	 *
 	 * Constraint:
 	 *     (name=ValidID (params+=FullJvmFormalParameter params+=FullJvmFormalParameter*)? type=JvmTypeReference? body=XBlockExpression)
+	 * </pre>
 	 */
 	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -384,12 +390,14 @@ public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractElement returns PackageDeclaration
 	 *     PackageDeclaration returns PackageDeclaration
 	 *
 	 * Constraint:
 	 *     (name=QualifiedName elements+=AbstractElement*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -397,12 +405,14 @@ public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature returns Property
 	 *     Property returns Property
 	 *
 	 * Constraint:
 	 *     (name=ValidID type=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		if (errorAcceptor != null) {
