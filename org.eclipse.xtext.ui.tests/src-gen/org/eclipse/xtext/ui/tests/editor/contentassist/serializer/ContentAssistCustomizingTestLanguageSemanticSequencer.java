@@ -49,11 +49,13 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     types+=Type+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -61,11 +63,13 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeRef returns TypeRef
 	 *
 	 * Constraint:
 	 *     type=[Type|FQN]
+	 * </pre>
 	 */
 	protected void sequence_TypeRef(ISerializationContext context, TypeRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -79,11 +83,13 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Type returns Type
 	 *
 	 * Constraint:
 	 *     ((name=FQN | name='FQN') superType=TypeRef?)
+	 * </pre>
 	 */
 	protected void sequence_Type(ISerializationContext context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -49,11 +49,14 @@ public class Bug309949TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('#1*' '{' '}') | ('#2*' '{' '}')
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_Model___NumberSignDigitOneAsteriskKeyword_1_0_0_LeftCurlyBracketKeyword_1_0_1_RightCurlyBracketKeyword_1_0_4___or___NumberSignDigitTwoAsteriskKeyword_1_2_0_LeftCurlyBracketKeyword_1_2_1_RightCurlyBracketKeyword_1_2_4__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

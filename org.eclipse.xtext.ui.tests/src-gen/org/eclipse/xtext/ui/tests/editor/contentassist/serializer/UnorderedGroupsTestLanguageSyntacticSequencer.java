@@ -48,6 +48,7 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('before' 'after'*)*
 	 *
@@ -116,6 +117,8 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 	 *     visibility+='public' (ambiguity) visibility+='private'
 	 *     visibility+='public' (ambiguity) visibility+='protected'
 	 *     visibility+='public' (ambiguity) visibility+='public'
+	 
+	 * </pre>
 	 */
 	protected void emit_LoopedAlternativeModel___BeforeKeyword_0_4_0_AfterKeyword_0_4_1_a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

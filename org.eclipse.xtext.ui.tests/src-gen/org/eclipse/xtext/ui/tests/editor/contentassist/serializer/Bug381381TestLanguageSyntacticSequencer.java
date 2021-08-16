@@ -52,6 +52,7 @@ public class Bug381381TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (',' 'TYPE' '=' 'REPLACE')*
 	 *
@@ -65,17 +66,22 @@ public class Bug381381TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name=ID (ambiguity) ',' 'SCREEN' '=' '(' line=INT
 	 *     name=ID (ambiguity) ',' 'VAR' '=' name=ID
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     (',' 'TYPE' '=' 'REPLACE')+
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'FIELD-NAME-TO-VARIABLE' (ambiguity) (rule start)
+	 
+	 * </pre>
 	 */
 	protected void emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

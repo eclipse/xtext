@@ -87,6 +87,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature2 returns Attribut
 	 *     Attribute2 returns Attribut
@@ -97,6 +98,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         name=ID 
 	 *         (shortDescription=STRING | longDescription=STRING | constraintDefinitions+=ConstraintDefinition | required?='required' | technical?='technical')*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Attribute2(ISerializationContext context, Attribut semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -104,12 +106,14 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature returns Attribute
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (type=ID name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -126,11 +130,13 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ConstraintDefinition returns ConstraintDefinition
 	 *
 	 * Constraint:
 	 *     (type=ID (parameters+=STRING | message=STRING)*)
+	 * </pre>
 	 */
 	protected void sequence_ConstraintDefinition(ISerializationContext context, ConstraintDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -138,11 +144,13 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (definition=PackageDefinition | definition=PackageDefinition2)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -150,6 +158,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Object2 returns Object
 	 *
@@ -160,6 +169,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         parent=[Object|ID]? 
 	 *         (shortDescription=STRING | longDescription=STRING | serialVersionUID=INT | cloneable?='cloneable' | features+=Feature2)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Object2(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -167,6 +177,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Object returns Object
 	 *
@@ -186,6 +197,7 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *             features+=Feature
 	 *         )*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Object(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -193,11 +205,13 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageDefinition2 returns PackageDefinition
 	 *
 	 * Constraint:
 	 *     (namespace=ID contents+=Object2*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDefinition2(ISerializationContext context, PackageDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -205,11 +219,13 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageDefinition returns PackageDefinition
 	 *
 	 * Constraint:
 	 *     (namespace=ID contents+=Object*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDefinition(ISerializationContext context, PackageDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -217,12 +233,14 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature2 returns Reference
 	 *     Reference2 returns Reference
 	 *
 	 * Constraint:
 	 *     (type=[Object|ID] many?='*'? name=ID (shortDescription=STRING | longDescription=STRING)*)
+	 * </pre>
 	 */
 	protected void sequence_Reference2(ISerializationContext context, Reference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -230,12 +248,14 @@ public class Bug304681TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Feature returns Reference
 	 *     Reference returns Reference
 	 *
 	 * Constraint:
 	 *     (type=[Object|ID] many?='*'? name=ID (shortDescription=STRING | longDescription=STRING)*)
+	 * </pre>
 	 */
 	protected void sequence_Reference(ISerializationContext context, Reference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

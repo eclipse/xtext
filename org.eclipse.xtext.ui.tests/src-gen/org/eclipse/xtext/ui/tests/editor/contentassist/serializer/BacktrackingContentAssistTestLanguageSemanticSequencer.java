@@ -312,11 +312,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Body returns Body
 	 *
 	 * Constraint:
 	 *     (constraintName=Identifier? expression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Body(ISerializationContext context, Body semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -324,6 +326,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns BooleanLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns BooleanLiteralExp
@@ -353,6 +356,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     isTrue?='true'?
+	 * </pre>
 	 */
 	protected void sequence_BooleanLiteralExp(ISerializationContext context, BooleanLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -360,12 +364,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassifierContextDecl returns ClassifierContextDecl
 	 *     ContextDecl returns ClassifierContextDecl
 	 *
 	 * Constraint:
 	 *     (selfName=Identifier? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*)
+	 * </pre>
 	 */
 	protected void sequence_ClassifierContextDecl(ISerializationContext context, ClassifierContextDecl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -373,6 +379,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns CollectionLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns CollectionLiteralExp
@@ -404,6 +411,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *         type=CollectionLiteralExp_CollectionLiteralExp_1_0 
 	 *         (collectionLiteralParts+=CollectionLiteralPart collectionLiteralParts+=CollectionLiteralPart*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_CollectionLiteralExp(ISerializationContext context, CollectionLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,11 +419,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CollectionLiteralPart returns CollectionLiteralPart
 	 *
 	 * Constraint:
 	 *     (expression=Expression lastExpression=Expression?)
+	 * </pre>
 	 */
 	protected void sequence_CollectionLiteralPart(ISerializationContext context, CollectionLiteralPart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -423,6 +433,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns CollectionType
 	 *     NavigationExp.InfixExp_1_0_0 returns CollectionType
@@ -454,6 +465,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (typeIdentifier=CollectionTypeIdentifier type=TypeExp?)
+	 * </pre>
 	 */
 	protected void sequence_CollectionType(ISerializationContext context, CollectionType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -461,6 +473,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Definition returns Definition
 	 *
@@ -473,6 +486,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *         type=TypeExp? 
 	 *         expression=Expression
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Definition(ISerializationContext context, Definition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -480,11 +494,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Der returns Der
 	 *
 	 * Constraint:
 	 *     expression=Expression
+	 * </pre>
 	 */
 	protected void sequence_Der(ISerializationContext context, Der semanticObject) {
 		if (errorAcceptor != null) {
@@ -498,11 +514,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Document returns Document
 	 *
 	 * Constraint:
 	 *     (packages+=PackageDeclaration | contexts+=ContextDecl)+
+	 * </pre>
 	 */
 	protected void sequence_Document(ISerializationContext context, Document semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -510,6 +528,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns IfExp
 	 *     NavigationExp.InfixExp_1_0_0 returns IfExp
@@ -538,6 +557,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (condition=Expression thenExpression=Expression elseExpression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_IfExp(ISerializationContext context, IfExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -557,11 +577,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Init returns Init
 	 *
 	 * Constraint:
 	 *     expression=Expression
+	 * </pre>
 	 */
 	protected void sequence_Init(ISerializationContext context, Init semanticObject) {
 		if (errorAcceptor != null) {
@@ -575,6 +597,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns InvalidLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns InvalidLiteralExp
@@ -604,6 +627,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     {InvalidLiteralExp}
+	 * </pre>
 	 */
 	protected void sequence_InvalidLiteralExp(ISerializationContext context, InvalidLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -611,11 +635,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Invariant returns Invariant
 	 *
 	 * Constraint:
 	 *     (constraintName=Identifier? expression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Invariant(ISerializationContext context, Invariant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -623,6 +649,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OclMessageArg returns LetExp
 	 *     Expression returns LetExp
@@ -630,6 +657,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (variable+=LetVariable variable+=LetVariable* in=Expression)
+	 * </pre>
 	 */
 	protected void sequence_LetExp(ISerializationContext context, LetExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -637,11 +665,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     LetVariable returns LetVariable
 	 *
 	 * Constraint:
 	 *     (name=Identifier type=TypeExp initExpression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_LetVariable(ISerializationContext context, LetVariable semanticObject) {
 		if (errorAcceptor != null) {
@@ -661,11 +691,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigatingExp returns InfixExp
 	 *
 	 * Constraint:
-	 *     (source=NavigatingExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp)
+	 *     (source=NavigatingExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp)
+	 * </pre>
 	 */
 	protected void sequence_NavigatingExp(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -673,11 +705,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigatingExp returns OclMessage
 	 *
 	 * Constraint:
 	 *     (source=NavigatingExp_OclMessage_1_1_0 (op='^^' | op='^') messageName=Identifier (arguments+=OclMessageArg arguments+=OclMessageArg*)?)
+	 * </pre>
 	 */
 	protected void sequence_NavigatingExp(ISerializationContext context, OclMessage semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -685,12 +719,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns InfixExp
 	 *     unary returns InfixExp
 	 *
 	 * Constraint:
-	 *     (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp)
+	 *     (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp)
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -698,6 +734,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns OclMessage
 	 *     OclMessageArg returns OclMessage
@@ -722,6 +759,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (source=NavigationExp_OclMessage_1_1_0 (op='^^' | op='^') messageName=Identifier (arguments+=OclMessageArg arguments+=OclMessageArg*)?)
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp(ISerializationContext context, OclMessage semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -729,6 +767,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OclMessageArg returns InfixExp
 	 *     Expression returns InfixExp
@@ -737,16 +776,17 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=implies_InfixExp_1_0 op='implies' (argument=xor | argument=LetExp)) | 
 	 *         (source=xor_InfixExp_1_0 op='xor' (argument=or | argument=LetExp)) | 
 	 *         (source=or_InfixExp_1_0 op='or' (argument=and | argument=LetExp)) | 
 	 *         (source=and_InfixExp_1_0 op='and' (argument=equality | argument=LetExp)) | 
-	 *         (source=equality_InfixExp_1_0 (op='=' | op='<>') (argument=relational | argument=LetExp)) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=equality_InfixExp_1_0 (op='=' | op='&lt;&gt;') (argument=relational | argument=LetExp)) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_and_equality_implies_multiplicative_or_relational_xor(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -754,20 +794,22 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     or returns InfixExp
 	 *     or.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=or_InfixExp_1_0 op='or' (argument=and | argument=LetExp)) | 
 	 *         (source=and_InfixExp_1_0 op='and' (argument=equality | argument=LetExp)) | 
-	 *         (source=equality_InfixExp_1_0 (op='=' | op='<>') (argument=relational | argument=LetExp)) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=equality_InfixExp_1_0 (op='=' | op='&lt;&gt;') (argument=relational | argument=LetExp)) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_and_equality_multiplicative_or_relational(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -775,21 +817,23 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     xor returns InfixExp
 	 *     xor.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=xor_InfixExp_1_0 op='xor' (argument=or | argument=LetExp)) | 
 	 *         (source=or_InfixExp_1_0 op='or' (argument=and | argument=LetExp)) | 
 	 *         (source=and_InfixExp_1_0 op='and' (argument=equality | argument=LetExp)) | 
-	 *         (source=equality_InfixExp_1_0 (op='=' | op='<>') (argument=relational | argument=LetExp)) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=equality_InfixExp_1_0 (op='=' | op='&lt;&gt;') (argument=relational | argument=LetExp)) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_and_equality_multiplicative_or_relational_xor(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -797,19 +841,21 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     and returns InfixExp
 	 *     and.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=and_InfixExp_1_0 op='and' (argument=equality | argument=LetExp)) | 
-	 *         (source=equality_InfixExp_1_0 (op='=' | op='<>') (argument=relational | argument=LetExp)) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=equality_InfixExp_1_0 (op='=' | op='&lt;&gt;') (argument=relational | argument=LetExp)) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_and_equality_multiplicative_relational(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -817,18 +863,20 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     equality returns InfixExp
 	 *     equality.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
-	 *         (source=equality_InfixExp_1_0 (op='=' | op='<>') (argument=relational | argument=LetExp)) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
+	 *         (source=equality_InfixExp_1_0 (op='=' | op='&lt;&gt;') (argument=relational | argument=LetExp)) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_equality_multiplicative_relational(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -836,16 +884,18 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     additive returns InfixExp
 	 *     additive.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_multiplicative(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -853,17 +903,19 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     relational returns InfixExp
 	 *     relational.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
-	 *         (source=relational_InfixExp_1_0 (op='>' | op='<' | op='>=' | op='<=') (argument=additive | argument=LetExp)) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
+	 *         (source=relational_InfixExp_1_0 (op='&gt;' | op='&lt;' | op='&gt;=' | op='&lt;=') (argument=additive | argument=LetExp)) | 
 	 *         (source=additive_InfixExp_1_0 (op='+' | op='-') (argument=multiplicative | argument=LetExp)) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_additive_multiplicative_relational(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -871,15 +923,17 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     multiplicative returns InfixExp
 	 *     multiplicative.InfixExp_1_0 returns InfixExp
 	 *
 	 * Constraint:
 	 *     (
-	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='->') argument=NavigatingExp) | 
+	 *         (source=NavigationExp_InfixExp_1_0_0 (op='.' | op='-&gt;') argument=NavigatingExp) | 
 	 *         (source=multiplicative_InfixExp_1_0 (op='*' | op='/') (argument=unary | argument=LetExp))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_NavigationExp_multiplicative(ISerializationContext context, InfixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -887,6 +941,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns NullLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns NullLiteralExp
@@ -916,6 +971,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     {NullLiteralExp}
+	 * </pre>
 	 */
 	protected void sequence_NullLiteralExp(ISerializationContext context, NullLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -923,6 +979,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns NumberLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns NumberLiteralExp
@@ -952,6 +1009,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     name=NUMBER_LITERAL
+	 * </pre>
 	 */
 	protected void sequence_NumberLiteralExp(ISerializationContext context, NumberLiteralExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -965,11 +1023,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OclMessageArg returns OclMessageArg
 	 *
 	 * Constraint:
 	 *     type=TypeExp?
+	 * </pre>
 	 */
 	protected void sequence_OclMessageArg(ISerializationContext context, OclMessageArg semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -977,12 +1037,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ContextDecl returns OperationContextDecl
 	 *     OperationContextDecl returns OperationContextDecl
 	 *
 	 * Constraint:
 	 *     (operation=OperationRef (parameters+=Parameter parameters+=Parameter*)? type=TypeExp? (pres+=Pre | posts+=Post | bodies+=Body)*)
+	 * </pre>
 	 */
 	protected void sequence_OperationContextDecl(ISerializationContext context, OperationContextDecl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -990,11 +1052,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageDeclaration returns PackageDeclaration
 	 *
 	 * Constraint:
 	 *     (package=PackageRef contexts+=ContextDecl*)
+	 * </pre>
 	 */
 	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1002,11 +1066,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
 	 *     (name=Identifier? type=TypeExp)
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1014,6 +1080,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns PathNameExp
 	 *     NavigationExp.InfixExp_1_0_0 returns PathNameExp
@@ -1048,6 +1115,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (namespace=Identifier element=NameExp)
+	 * </pre>
 	 */
 	protected void sequence_PathNameExp(ISerializationContext context, PathNameExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -1064,11 +1132,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Post returns Post
 	 *
 	 * Constraint:
 	 *     (constraintName=Identifier? expression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Post(ISerializationContext context, Post semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1076,6 +1146,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns PreExp
 	 *     NavigationExp.InfixExp_1_0_0 returns PreExp
@@ -1108,6 +1179,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     name=NameExp
+	 * </pre>
 	 */
 	protected void sequence_PreExp(ISerializationContext context, PreExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -1121,11 +1193,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Pre returns Pre
 	 *
 	 * Constraint:
 	 *     (constraintName=Identifier? expression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_Pre(ISerializationContext context, Pre semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1133,6 +1207,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns PrimitiveType
 	 *     NavigationExp.InfixExp_1_0_0 returns PrimitiveType
@@ -1162,6 +1237,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     name=PrimitiveTypeIdentifier
+	 * </pre>
 	 */
 	protected void sequence_PrimitiveType(ISerializationContext context, PrimitiveType semanticObject) {
 		if (errorAcceptor != null) {
@@ -1175,12 +1251,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ContextDecl returns PropertyContextDecl
 	 *     PropertyContextDecl returns PropertyContextDecl
 	 *
 	 * Constraint:
 	 *     (property=PropertyRef type=TypeExp ((init=Init der=Der?) | (der=Der init=Init?))?)
+	 * </pre>
 	 */
 	protected void sequence_PropertyContextDecl(ISerializationContext context, PropertyContextDecl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1188,12 +1266,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassifierRef returns QualifiedClassifierRef
 	 *     QualifiedClassifierRef returns QualifiedClassifierRef
 	 *
 	 * Constraint:
 	 *     (namespace=Identifier element=ClassifierRef)
+	 * </pre>
 	 */
 	protected void sequence_QualifiedClassifierRef(ISerializationContext context, QualifiedClassifierRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1210,12 +1290,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OperationRef returns QualifiedOperationRef
 	 *     QualifiedOperationRef returns QualifiedOperationRef
 	 *
 	 * Constraint:
 	 *     (namespace=Identifier element=OperationRef)
+	 * </pre>
 	 */
 	protected void sequence_QualifiedOperationRef(ISerializationContext context, QualifiedOperationRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1232,12 +1314,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageRef returns QualifiedPackageRef
 	 *     QualifiedPackageRef returns QualifiedPackageRef
 	 *
 	 * Constraint:
 	 *     (namespace=Identifier element=PackageRef)
+	 * </pre>
 	 */
 	protected void sequence_QualifiedPackageRef(ISerializationContext context, QualifiedPackageRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1254,12 +1338,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PropertyRef returns QualifiedPropertyRef
 	 *     QualifiedPropertyRef returns QualifiedPropertyRef
 	 *
 	 * Constraint:
 	 *     (namespace=Identifier element=PropertyRef)
+	 * </pre>
 	 */
 	protected void sequence_QualifiedPropertyRef(ISerializationContext context, QualifiedPropertyRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1276,6 +1362,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns RoundBracketExp
 	 *     NavigationExp.InfixExp_1_0_0 returns RoundBracketExp
@@ -1313,6 +1400,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *         (variable1=iteratorVariable (variable2=iteratorVariable | variable2=iteratorAccumulator)?)? 
 	 *         (arguments+=Expression arguments+=Expression*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_RoundBracketExp(ISerializationContext context, RoundBracketExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1320,6 +1408,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns SelfExp
 	 *     NavigationExp.InfixExp_1_0_0 returns SelfExp
@@ -1348,6 +1437,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     {SelfExp}
+	 * </pre>
 	 */
 	protected void sequence_SelfExp(ISerializationContext context, SelfExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1355,12 +1445,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ClassifierRef returns SimpleClassifierRef
 	 *     SimpleClassifierRef returns SimpleClassifierRef
 	 *
 	 * Constraint:
 	 *     classifier=Identifier
+	 * </pre>
 	 */
 	protected void sequence_SimpleClassifierRef(ISerializationContext context, SimpleClassifierRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1374,6 +1466,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns SimpleNameExp
 	 *     NavigationExp.InfixExp_1_0_0 returns SimpleNameExp
@@ -1408,6 +1501,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     element=Identifier
+	 * </pre>
 	 */
 	protected void sequence_SimpleNameExp(ISerializationContext context, SimpleNameExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -1421,12 +1515,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OperationRef returns SimpleOperationRef
 	 *     SimpleOperationRef returns SimpleOperationRef
 	 *
 	 * Constraint:
 	 *     operation=Identifier
+	 * </pre>
 	 */
 	protected void sequence_SimpleOperationRef(ISerializationContext context, SimpleOperationRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1440,12 +1536,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PackageRef returns SimplePackageRef
 	 *     SimplePackageRef returns SimplePackageRef
 	 *
 	 * Constraint:
 	 *     package=Identifier
+	 * </pre>
 	 */
 	protected void sequence_SimplePackageRef(ISerializationContext context, SimplePackageRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1459,12 +1557,14 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PropertyRef returns SimplePropertyRef
 	 *     SimplePropertyRef returns SimplePropertyRef
 	 *
 	 * Constraint:
 	 *     feature=Identifier
+	 * </pre>
 	 */
 	protected void sequence_SimplePropertyRef(ISerializationContext context, SimplePropertyRef semanticObject) {
 		if (errorAcceptor != null) {
@@ -1478,6 +1578,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns SquareBracketExp
 	 *     NavigationExp.InfixExp_1_0_0 returns SquareBracketExp
@@ -1510,6 +1611,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (name=NameExp arguments+=Expression arguments+=Expression* pre?='pre'?)
+	 * </pre>
 	 */
 	protected void sequence_SquareBracketExp(ISerializationContext context, SquareBracketExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1517,6 +1619,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns StringLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns StringLiteralExp
@@ -1546,6 +1649,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     values+=StringLiteral+
+	 * </pre>
 	 */
 	protected void sequence_StringLiteralExp(ISerializationContext context, StringLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1553,6 +1657,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns NestedExp
 	 *     NavigationExp.InfixExp_1_0_0 returns NestedExp
@@ -1580,6 +1685,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     source=Expression
+	 * </pre>
 	 */
 	protected void sequence_SubNavigationExp(ISerializationContext context, NestedExp semanticObject) {
 		if (errorAcceptor != null) {
@@ -1593,6 +1699,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns TupleLiteralExp
 	 *     NavigationExp.InfixExp_1_0_0 returns TupleLiteralExp
@@ -1621,6 +1728,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (part+=TupleLiteralPart part+=TupleLiteralPart*)?
+	 * </pre>
 	 */
 	protected void sequence_TupleLiteralExp(ISerializationContext context, TupleLiteralExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1628,11 +1736,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TupleLiteralPart returns TupleLiteralPart
 	 *
 	 * Constraint:
 	 *     (name=Identifier type=TypeExp? initExpression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_TupleLiteralPart(ISerializationContext context, TupleLiteralPart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1640,6 +1750,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NavigationExp returns TupleType
 	 *     NavigationExp.InfixExp_1_0_0 returns TupleType
@@ -1669,6 +1780,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     (name='Tuple' (part+=tuplePart part+=tuplePart*)?)
+	 * </pre>
 	 */
 	protected void sequence_TupleType(ISerializationContext context, TupleType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1676,11 +1788,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     iteratorAccumulator returns iteratorAccumulator
 	 *
 	 * Constraint:
 	 *     (name=Identifier type=TypeExp initExpression=Expression)
+	 * </pre>
 	 */
 	protected void sequence_iteratorAccumulator(ISerializationContext context, iteratorAccumulator semanticObject) {
 		if (errorAcceptor != null) {
@@ -1700,11 +1814,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     iteratorVariable returns iteratorVariable
 	 *
 	 * Constraint:
 	 *     (name=Identifier type=TypeExp?)
+	 * </pre>
 	 */
 	protected void sequence_iteratorVariable(ISerializationContext context, iteratorVariable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1712,11 +1828,13 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     tuplePart returns tuplePart
 	 *
 	 * Constraint:
 	 *     (name=Identifier type=TypeExp)
+	 * </pre>
 	 */
 	protected void sequence_tuplePart(ISerializationContext context, tuplePart semanticObject) {
 		if (errorAcceptor != null) {
@@ -1733,6 +1851,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     OclMessageArg returns PrefixExp
 	 *     Expression returns PrefixExp
@@ -1756,6 +1875,7 @@ public class BacktrackingContentAssistTestLanguageSemanticSequencer extends Abst
 	 *
 	 * Constraint:
 	 *     ((op='-' | op='not') source=unary)
+	 * </pre>
 	 */
 	protected void sequence_unary(ISerializationContext context, PrefixExp semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -51,6 +51,7 @@ public class Bug287941TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -58,12 +59,15 @@ public class Bug287941TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) (ambiguity) alias=[FromEntry|ID]
 	 *     (rule start) (ambiguity) {AndWhereEntry.entries+=}
 	 *     (rule start) (ambiguity) {OrWhereEntry.entries+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParWhereEntry_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -71,6 +75,8 @@ public class Bug287941TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     (rule start) (ambiguity) alias=[FromEntry|ID]
 	 *     (rule start) (ambiguity) {AndWhereEntry.entries+=}
 	 *     (rule start) (ambiguity) {OrWhereEntry.entries+=}
+	 
+	 * </pre>
 	 */
 	protected void emit_ParWhereEntry_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -89,11 +89,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     ident=ID
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -107,11 +109,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns BracketAttribute
 	 *
 	 * Constraint:
 	 *     expression=PostfixExpression
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, BracketAttribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -125,6 +129,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProgramDirective returns Block
 	 *     Block returns Block
@@ -132,6 +137,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     directives+=Statement*
+	 * </pre>
 	 */
 	protected void sequence_Block(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -139,12 +145,14 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProgramDirective returns FunctionDefinition
 	 *     FunctionDefinition returns FunctionDefinition
 	 *
 	 * Constraint:
 	 *     (attributes+=Attribute* name=ID params=Parameters body=Block)
+	 * </pre>
 	 */
 	protected void sequence_FunctionDefinition(ISerializationContext context, FunctionDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,11 +160,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ListExpression returns ListExpression
 	 *
 	 * Constraint:
 	 *     (expressions+=PostfixExpression expressions+=PostfixExpression*)
+	 * </pre>
 	 */
 	protected void sequence_ListExpression(ISerializationContext context, ListExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -164,11 +174,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Parameters returns Parameters
 	 *
 	 * Constraint:
 	 *     (params+=ID params+=ID*)?
+	 * </pre>
 	 */
 	protected void sequence_Parameters(ISerializationContext context, Parameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -176,6 +188,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PostfixExpression returns Invocation
 	 *     PostfixExpression.PostfixExpression_1_0_0 returns Invocation
@@ -183,6 +196,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (expression=PostfixExpression_Invocation_1_1_0 arguments=ListExpression?)
+	 * </pre>
 	 */
 	protected void sequence_PostfixExpression(ISerializationContext context, Invocation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -190,6 +204,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PostfixExpression returns PostfixExpression
 	 *     PostfixExpression.PostfixExpression_1_0_0 returns PostfixExpression
@@ -197,6 +212,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (expression=PostfixExpression_PostfixExpression_1_0_0 property=PropertyOperator)
+	 * </pre>
 	 */
 	protected void sequence_PostfixExpression(ISerializationContext context, PostfixExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -213,6 +229,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PostfixExpression returns FunctionExpression
 	 *     PostfixExpression.PostfixExpression_1_0_0 returns FunctionExpression
@@ -221,6 +238,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (params=Parameters body=Block)
+	 * </pre>
 	 */
 	protected void sequence_PrimaryExpression(ISerializationContext context, FunctionExpression semanticObject) {
 		if (errorAcceptor != null) {
@@ -237,6 +255,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PostfixExpression returns Identifier
 	 *     PostfixExpression.PostfixExpression_1_0_0 returns Identifier
@@ -245,6 +264,7 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_PrimaryExpression(ISerializationContext context, Identifier semanticObject) {
 		if (errorAcceptor != null) {
@@ -258,11 +278,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Program returns Program
 	 *
 	 * Constraint:
 	 *     directives+=ProgramDirective*
+	 * </pre>
 	 */
 	protected void sequence_Program(ISerializationContext context, Program semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -270,11 +292,13 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PropertyOperator returns PropertyOperator
 	 *
 	 * Constraint:
 	 *     (name=ID | expressions=ListExpression)
+	 * </pre>
 	 */
 	protected void sequence_PropertyOperator(ISerializationContext context, PropertyOperator semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -282,12 +306,14 @@ public class Bug303200TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ProgramDirective returns ExpressionStatement
 	 *     Statement returns ExpressionStatement
 	 *
 	 * Constraint:
 	 *     expression=PostfixExpression
+	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, ExpressionStatement semanticObject) {
 		if (errorAcceptor != null) {

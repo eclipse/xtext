@@ -90,11 +90,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Annotation returns Annotation
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Annotation(ISerializationContext context, Annotation semanticObject) {
 		if (errorAcceptor != null) {
@@ -108,11 +110,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Error_1 returns Error
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation* name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Error_1(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -120,11 +124,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Error_2 returns Error
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation+ name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Error_2(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -132,11 +138,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Error_3 returns Error
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Error_3(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -144,11 +152,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Error_4 returns Error
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Error_4(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -156,11 +166,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Error_5 returns Error
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Error_5(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error semanticObject) {
 		if (errorAcceptor != null) {
@@ -174,6 +186,7 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -190,6 +203,7 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         (name=ID errors+=Error_5* operations+=Operation_5*) | 
 	 *         (name=ID errors+=Error_5+ operations+=Operation_5+)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -197,11 +211,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation_1 returns Operation
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation* name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Operation_1(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,11 +225,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation_2 returns Operation
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation+ name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Operation_2(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,11 +239,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation_3 returns Operation
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Operation_3(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -233,11 +253,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation_4 returns Operation
 	 *
 	 * Constraint:
 	 *     (annotations+=Annotation name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Operation_4(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -245,11 +267,13 @@ public class Bug309949TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation_5 returns Operation
 	 *
 	 * Constraint:
 	 *     name=ID
+	 * </pre>
 	 */
 	protected void sequence_Operation_5(ISerializationContext context, Operation semanticObject) {
 		if (errorAcceptor != null) {

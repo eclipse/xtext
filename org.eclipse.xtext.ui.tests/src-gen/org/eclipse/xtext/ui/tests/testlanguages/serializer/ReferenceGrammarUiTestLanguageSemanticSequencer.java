@@ -61,12 +61,14 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Person returns Erwachsener
 	 *     Erwachsener returns Erwachsener
 	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
+	 * </pre>
 	 */
 	protected void sequence_Erwachsener(ISerializationContext context, Erwachsener semanticObject) {
 		if (errorAcceptor != null) {
@@ -83,11 +85,13 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Familie returns Familie
 	 *
 	 * Constraint:
 	 *     ((name='keyword' | name=STRING | name=ID) mutter=[Erwachsener|ID] vater=[Erwachsener|ID] kinder+=[Kind|ID] kinder+=[Kind|ID]*)
+	 * </pre>
 	 */
 	protected void sequence_Familie(ISerializationContext context, Familie semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -95,11 +99,13 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Farbe returns Farbe
 	 *
 	 * Constraint:
 	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRÜN')
+	 * </pre>
 	 */
 	protected void sequence_Farbe(ISerializationContext context, Farbe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -107,12 +113,14 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Person returns Kind
 	 *     Kind returns Kind
 	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
+	 * </pre>
 	 */
 	protected void sequence_Kind(ISerializationContext context, Kind semanticObject) {
 		if (errorAcceptor != null) {
@@ -129,11 +137,13 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Spielplatz returns Spielplatz
 	 *
 	 * Constraint:
 	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)
+	 * </pre>
 	 */
 	protected void sequence_Spielplatz(ISerializationContext context, Spielplatz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,11 +151,13 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Spielzeug returns Spielzeug
 	 *
 	 * Constraint:
 	 *     (name=ID farbe=Farbe)
+	 * </pre>
 	 */
 	protected void sequence_Spielzeug(ISerializationContext context, Spielzeug semanticObject) {
 		if (errorAcceptor != null) {

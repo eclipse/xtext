@@ -49,11 +49,13 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     value=ID
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
@@ -67,6 +69,7 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -77,6 +80,7 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	 *         (attribute+=Attribute* attribute+=Pair+) | 
 	 *         (attribute+=Attribute+ attribute+=Pair+)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -84,11 +88,13 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Pair returns Pair
 	 *
 	 * Constraint:
 	 *     (name=ID value=ID)
+	 * </pre>
 	 */
 	protected void sequence_Pair(ISerializationContext context, Pair semanticObject) {
 		if (errorAcceptor != null) {

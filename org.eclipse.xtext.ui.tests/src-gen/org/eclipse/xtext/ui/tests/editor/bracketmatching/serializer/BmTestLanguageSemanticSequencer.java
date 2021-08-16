@@ -49,12 +49,14 @@ public class BmTestLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns Atom
 	 *     Atom returns Atom
 	 *
 	 * Constraint:
 	 *     value=VALUE
+	 * </pre>
 	 */
 	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
 		if (errorAcceptor != null) {
@@ -68,11 +70,13 @@ public class BmTestLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     File returns File
 	 *
 	 * Constraint:
 	 *     expression+=Expression+
+	 * </pre>
 	 */
 	protected void sequence_File(ISerializationContext context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -80,12 +84,14 @@ public class BmTestLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns SExpression
 	 *     SExpression returns SExpression
 	 *
 	 * Constraint:
 	 *     (element+=Expression+ | element+=Expression+)?
+	 * </pre>
 	 */
 	protected void sequence_SExpression(ISerializationContext context, SExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

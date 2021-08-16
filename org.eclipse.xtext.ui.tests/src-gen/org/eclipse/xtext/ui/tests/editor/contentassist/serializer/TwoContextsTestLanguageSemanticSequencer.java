@@ -43,11 +43,13 @@ public class TwoContextsTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AnElement returns AnElement
 	 *
 	 * Constraint:
 	 *     (name=ID referred=[AnElement|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_AnElement(ISerializationContext context, AnElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class TwoContextsTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     MainModel returns MainModel
 	 *
 	 * Constraint:
 	 *     elements+=AnElement+
+	 * </pre>
 	 */
 	protected void sequence_MainModel(ISerializationContext context, MainModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

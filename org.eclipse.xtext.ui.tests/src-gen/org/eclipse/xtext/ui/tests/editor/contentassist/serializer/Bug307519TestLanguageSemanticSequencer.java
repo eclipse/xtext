@@ -49,11 +49,13 @@ public class Bug307519TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Elem1 returns Elem1
 	 *
 	 * Constraint:
 	 *     value=EnumT
+	 * </pre>
 	 */
 	protected void sequence_Elem1(ISerializationContext context, Elem1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -67,11 +69,13 @@ public class Bug307519TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Elem2 returns Elem2
 	 *
 	 * Constraint:
 	 *     value=EnumT
+	 * </pre>
 	 */
 	protected void sequence_Elem2(ISerializationContext context, Elem2 semanticObject) {
 		if (errorAcceptor != null) {
@@ -85,11 +89,13 @@ public class Bug307519TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (e1+=Elem1 | e2+=Elem2)+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

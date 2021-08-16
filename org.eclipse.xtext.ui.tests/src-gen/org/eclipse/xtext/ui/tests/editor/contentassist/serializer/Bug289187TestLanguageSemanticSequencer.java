@@ -50,11 +50,13 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
 	 *     (visibility=Visibility? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -62,6 +64,7 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Class returns Class
 	 *
@@ -78,6 +81,7 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         attributes+=Attribute* 
 	 *         operations+=Operation*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Class(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,11 +89,13 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     classes+=Class+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -97,11 +103,13 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Operation returns Operation
 	 *
 	 * Constraint:
 	 *     (visibility=Visibility? name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

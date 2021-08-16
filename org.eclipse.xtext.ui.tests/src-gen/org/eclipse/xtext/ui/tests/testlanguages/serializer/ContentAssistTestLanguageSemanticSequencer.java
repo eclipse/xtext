@@ -53,11 +53,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRuleCall returns AbstractRuleCall
 	 *
 	 * Constraint:
 	 *     rule=[AbstractRule|ID]
+	 * </pre>
 	 */
 	protected void sequence_AbstractRuleCall(ISerializationContext context, AbstractRuleCall semanticObject) {
 		if (errorAcceptor != null) {
@@ -71,12 +73,14 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns FirstAbstractRuleChild
 	 *     FirstAbstractRuleChild returns FirstAbstractRuleChild
 	 *
 	 * Constraint:
 	 *     (name=ID elements+=AbstractRule+)
+	 * </pre>
 	 */
 	protected void sequence_FirstAbstractRuleChild(ISerializationContext context, FirstAbstractRuleChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -84,12 +88,14 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractRule returns SecondAbstractRuleChild
 	 *     SecondAbstractRuleChild returns SecondAbstractRuleChild
 	 *
 	 * Constraint:
 	 *     (name=ID rule=AbstractRuleCall)
+	 * </pre>
 	 */
 	protected void sequence_SecondAbstractRuleChild(ISerializationContext context, SecondAbstractRuleChild semanticObject) {
 		if (errorAcceptor != null) {
@@ -106,11 +112,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Start returns Start
 	 *
 	 * Constraint:
 	 *     rules+=AbstractRule+
+	 * </pre>
 	 */
 	protected void sequence_Start(ISerializationContext context, Start semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -43,11 +43,13 @@ public class QuickfixCrossrefTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (doc=STRING? name=ID contained+=Element* referenced+=[Element|ID]*)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class QuickfixCrossrefTestLanguageSemanticSequencer extends AbstractDeleg
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Main returns Main
 	 *
 	 * Constraint:
 	 *     elements+=Element+
+	 * </pre>
 	 */
 	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

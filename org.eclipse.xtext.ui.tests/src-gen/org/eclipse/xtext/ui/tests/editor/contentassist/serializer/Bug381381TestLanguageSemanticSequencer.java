@@ -45,11 +45,13 @@ public class Bug381381TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     CopyFieldNameToVariableStmt returns CopyFieldNameToVariableStmt
 	 *
 	 * Constraint:
 	 *     (name=ID? (line=INT column=INT)?)+
+	 * </pre>
 	 */
 	protected void sequence_CopyFieldNameToVariableStmt(ISerializationContext context, CopyFieldNameToVariableStmt semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -57,11 +59,13 @@ public class Bug381381TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     stmt=CopyFieldNameToVariableStmt
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {

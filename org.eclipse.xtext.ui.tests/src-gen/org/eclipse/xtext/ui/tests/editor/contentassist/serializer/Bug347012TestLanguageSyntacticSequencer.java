@@ -138,206 +138,260 @@ public class Bug347012TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) ':' LT* type=FQN
+	 
+	 * </pre>
 	 */
 	protected void emit_MyBinding_LTTerminalRuleCall_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID LT* ':' (ambiguity) type=FQN
+	 
+	 * </pre>
 	 */
 	protected void emit_MyBinding_LTTerminalRuleCall_1_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) '=' LT* expression=MyPrimary
 	 *     type=FQN (ambiguity) '=' LT* expression=MyPrimary
+	 
+	 * </pre>
 	 */
 	protected void emit_MyBinding_LTTerminalRuleCall_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID LT* '=' (ambiguity) expression=MyPrimary
 	 *     type=FQN LT* '=' (ambiguity) expression=MyPrimary
+	 
+	 * </pre>
 	 */
 	protected void emit_MyBinding_LTTerminalRuleCall_2_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'public'? 'class' (ambiguity) name=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_MyClass_LTTerminalRuleCall_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) '{' LT* '}' (rule end)
 	 *     name=ID (ambiguity) '{' LT* directives+=MyField
+	 
+	 * </pre>
 	 */
 	protected void emit_MyClass_LTTerminalRuleCall_4_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID LT* '{' (ambiguity) '}' (rule end)
 	 *     name=ID LT* '{' (ambiguity) directives+=MyField
+	 
+	 * </pre>
 	 */
 	protected void emit_MyClass_LTTerminalRuleCall_6_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     directives+=MyField (ambiguity) '}' (rule end)
 	 *     directives+=MyField (ambiguity) directives+=MyField
+	 
+	 * </pre>
 	 */
 	protected void emit_MyClass_LTTerminalRuleCall_7_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     'public'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) 'class' LT* name=ID
+	 
+	 * </pre>
 	 */
 	protected void emit_MyClass_PublicKeyword_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     attr=MyAttributes 'var' (ambiguity) bindings+=MyBinding
+	 
+	 * </pre>
 	 */
 	protected void emit_MyField_LTTerminalRuleCall_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     bindings+=MyBinding (ambiguity) ',' LT* bindings+=MyBinding
+	 
+	 * </pre>
 	 */
 	protected void emit_MyField_LTTerminalRuleCall_4_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     bindings+=MyBinding LT* ',' (ambiguity) bindings+=MyBinding
+	 
+	 * </pre>
 	 */
 	protected void emit_MyField_LTTerminalRuleCall_4_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'package' (ambiguity) name=FQN
+	 
+	 * </pre>
 	 */
 	protected void emit_MyPackage_LTTerminalRuleCall_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=FQN (ambiguity) '{' LT* '}' (rule end)
 	 *     name=FQN (ambiguity) '{' LT* directives+=MyClass
+	 
+	 * </pre>
 	 */
 	protected void emit_MyPackage_LTTerminalRuleCall_3_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=FQN LT* '{' (ambiguity) '}' (rule end)
 	 *     name=FQN LT* '{' (ambiguity) directives+=MyClass
+	 
+	 * </pre>
 	 */
 	protected void emit_MyPackage_LTTerminalRuleCall_5_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     directives+=MyClass (ambiguity) '}' (rule end)
 	 *     directives+=MyClass (ambiguity) directives+=MyClass
+	 
+	 * </pre>
 	 */
 	protected void emit_MyPackage_LTTerminalRuleCall_6_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) package=MyPackage
+	 
+	 * </pre>
 	 */
 	protected void emit_MyProgram_LTTerminalRuleCall_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     LT*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     package=MyPackage (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_MyProgram_LTTerminalRuleCall_3_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -53,6 +53,7 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Abstract returns Concrete0
 	 *     Concrete0 returns Concrete0
@@ -60,6 +61,7 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	 *
 	 * Constraint:
 	 *     name=EString
+	 * </pre>
 	 */
 	protected void sequence_Concrete0_Impl(ISerializationContext context, Concrete0 semanticObject) {
 		if (errorAcceptor != null) {
@@ -73,12 +75,14 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Abstract returns Concrete1
 	 *     Concrete1_Impl returns Concrete1
 	 *
 	 * Constraint:
 	 *     name=EString
+	 * </pre>
 	 */
 	protected void sequence_Concrete1_Impl(ISerializationContext context, Concrete1 semanticObject) {
 		if (errorAcceptor != null) {
@@ -92,6 +96,7 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Abstract returns DiamondInheritance
 	 *     Concrete0 returns DiamondInheritance
@@ -99,6 +104,7 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	 *
 	 * Constraint:
 	 *     name=EString
+	 * </pre>
 	 */
 	protected void sequence_DiamondInheritance(ISerializationContext context, DiamondInheritance semanticObject) {
 		if (errorAcceptor != null) {
@@ -112,11 +118,13 @@ public class Ecore2XtextTestSemanticSequencer extends AbstractDelegatingSemantic
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
 	 * Constraint:
 	 *     (name=INT0 (classes+=Abstract classes+=Abstract*)? concrete0=Concrete0?)
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

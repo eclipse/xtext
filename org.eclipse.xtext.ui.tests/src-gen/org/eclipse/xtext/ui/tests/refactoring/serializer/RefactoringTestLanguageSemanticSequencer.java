@@ -49,12 +49,14 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractElement returns Element
 	 *     Element returns Element
 	 *
 	 * Constraint:
 	 *     (name=ID (contained+=Element | referenced+=[Element|FQN])*)
+	 * </pre>
 	 */
 	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -62,12 +64,14 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     AbstractElement returns Import
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importedNamespace=FQNWithWC
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -81,11 +85,13 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Main returns Main
 	 *
 	 * Constraint:
 	 *     elements+=AbstractElement+
+	 * </pre>
 	 */
 	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

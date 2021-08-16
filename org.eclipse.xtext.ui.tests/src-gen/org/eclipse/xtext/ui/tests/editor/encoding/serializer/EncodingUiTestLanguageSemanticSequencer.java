@@ -45,11 +45,13 @@ public class EncodingUiTestLanguageSemanticSequencer extends AbstractDelegatingS
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     words+=Word+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -57,11 +59,13 @@ public class EncodingUiTestLanguageSemanticSequencer extends AbstractDelegatingS
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Word returns Word
 	 *
 	 * Constraint:
 	 *     value=LEXEME
+	 * </pre>
 	 */
 	protected void sequence_Word(ISerializationContext context, Word semanticObject) {
 		if (errorAcceptor != null) {

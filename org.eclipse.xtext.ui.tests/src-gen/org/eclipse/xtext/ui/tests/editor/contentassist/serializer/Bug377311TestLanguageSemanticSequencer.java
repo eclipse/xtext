@@ -45,11 +45,13 @@ public class Bug377311TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Child returns Child
 	 *
 	 * Constraint:
 	 *     name=STRING
+	 * </pre>
 	 */
 	protected void sequence_Child(ISerializationContext context, Child semanticObject) {
 		if (errorAcceptor != null) {
@@ -63,11 +65,13 @@ public class Bug377311TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Root returns Root
 	 *
 	 * Constraint:
 	 *     childs+=Child+
+	 * </pre>
 	 */
 	protected void sequence_Root(ISerializationContext context, Root semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

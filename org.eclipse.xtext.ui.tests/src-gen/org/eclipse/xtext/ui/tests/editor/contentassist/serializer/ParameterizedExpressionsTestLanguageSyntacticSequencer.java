@@ -47,6 +47,7 @@ public class ParameterizedExpressionsTestLanguageSyntacticSequencer extends Abst
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
@@ -55,6 +56,8 @@ public class ParameterizedExpressionsTestLanguageSyntacticSequencer extends Abst
 	 *     body=Block (ambiguity) (rule end)
 	 *     generator?='*' '(' ')' (ambiguity) (rule end)
 	 *     name=Identifier '(' ')' (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_FunctionDeclaration_SemicolonKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

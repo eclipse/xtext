@@ -43,11 +43,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     File returns File
 	 *
 	 * Constraint:
 	 *     stuff+=Stuff+
+	 * </pre>
 	 */
 	protected void sequence_File(ISerializationContext context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -55,11 +57,13 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Stuff returns Stuff
 	 *
 	 * Constraint:
 	 *     (name=ID refs=[Stuff|ID]?)
+	 * </pre>
 	 */
 	protected void sequence_Stuff(ISerializationContext context, Stuff semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

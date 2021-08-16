@@ -111,6 +111,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ViewContentElement returns Cell
 	 *     Cell returns Cell
@@ -121,6 +122,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         iterator=CollectionIterator? 
 	 *         (text=ScalarExpression | details=ScalarExpression | image=ScalarExpression | action=ViewAction | accessory=CellAccessory)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -128,6 +130,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns StringSplit
 	 *     CollectionExpression returns StringSplit
@@ -135,6 +138,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (value=ScalarExpression delimiter=ScalarExpression)
+	 * </pre>
 	 */
 	protected void sequence_CollectionFunction(ISerializationContext context, StringSplit semanticObject) {
 		if (errorAcceptor != null) {
@@ -151,12 +155,14 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PropertyPathPart returns CollectionIterator
 	 *     CollectionIterator returns CollectionIterator
 	 *
 	 * Constraint:
 	 *     (name=ID collection=CollectionExpression)
+	 * </pre>
 	 */
 	protected void sequence_CollectionIterator(ISerializationContext context, CollectionIterator semanticObject) {
 		if (errorAcceptor != null) {
@@ -173,6 +179,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns CollectionLiteral
 	 *     CollectionExpression returns CollectionLiteral
@@ -180,6 +187,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (items+=ScalarExpression items+=ScalarExpression*)
+	 * </pre>
 	 */
 	protected void sequence_CollectionLiteral(ISerializationContext context, CollectionLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -187,12 +195,14 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ViewAction returns ExternalOpen
 	 *     ExternalOpen returns ExternalOpen
 	 *
 	 * Constraint:
 	 *     url=ScalarExpression
+	 * </pre>
 	 */
 	protected void sequence_ExternalOpen(ISerializationContext context, ExternalOpen semanticObject) {
 		if (errorAcceptor != null) {
@@ -206,11 +216,13 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     elements+=TableView+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -218,11 +230,13 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     NestedObjectReference returns ObjectReference
 	 *
 	 * Constraint:
 	 *     (object=[PropertyPathPart|ID] tail=NestedObjectReference?)
+	 * </pre>
 	 */
 	protected void sequence_NestedObjectReference(ISerializationContext context, ObjectReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -230,6 +244,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ObjectReference returns ObjectReference
 	 *     Expression returns ObjectReference
@@ -239,6 +254,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (object=[PropertyPathPart|ID] tail=NestedObjectReference?)
+	 * </pre>
 	 */
 	protected void sequence_ObjectReference(ISerializationContext context, ObjectReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -246,12 +262,14 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     PropertyPathPart returns Parameter
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
 	 *     (description=TypeDescription name=ID)
+	 * </pre>
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Parameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -268,12 +286,14 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ViewContentElement returns Section
 	 *     Section returns Section
 	 *
 	 * Constraint:
 	 *     (iterator=CollectionIterator? title=ScalarExpression? cells+=Cell+)
+	 * </pre>
 	 */
 	protected void sequence_Section(ISerializationContext context, Section semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -281,12 +301,14 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ViewAction returns Selector
 	 *     Selector returns Selector
 	 *
 	 * Constraint:
 	 *     name=SelectorName
+	 * </pre>
 	 */
 	protected void sequence_Selector(ISerializationContext context, Selector semanticObject) {
 		if (errorAcceptor != null) {
@@ -300,6 +322,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns StringConcat
 	 *     ImageExpression returns StringConcat
@@ -308,6 +331,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     values+=ScalarExpression+
+	 * </pre>
 	 */
 	protected void sequence_StringFunction(ISerializationContext context, StringConcat semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -315,6 +339,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns StringReplace
 	 *     ImageExpression returns StringReplace
@@ -323,6 +348,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     (value=ScalarExpression match=ScalarExpression replacement=ScalarExpression)
+	 * </pre>
 	 */
 	protected void sequence_StringFunction(ISerializationContext context, StringReplace semanticObject) {
 		if (errorAcceptor != null) {
@@ -342,6 +368,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns StringUrlConform
 	 *     ImageExpression returns StringUrlConform
@@ -350,6 +377,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     value=ScalarExpression
+	 * </pre>
 	 */
 	protected void sequence_StringFunction(ISerializationContext context, StringUrlConform semanticObject) {
 		if (errorAcceptor != null) {
@@ -363,6 +391,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Expression returns StringLiteral
 	 *     ImageExpression returns StringLiteral
@@ -371,6 +400,7 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *
 	 * Constraint:
 	 *     value=STRING
+	 * </pre>
 	 */
 	protected void sequence_StringLiteral(ISerializationContext context, StringLiteral semanticObject) {
 		if (errorAcceptor != null) {
@@ -384,11 +414,13 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TableView returns TableView
 	 *
 	 * Constraint:
 	 *     (name=ID content=Parameter? (title=ScalarExpression | titleImage=ImageExpression | style=TableViewStyle)* sections+=Section*)
+	 * </pre>
 	 */
 	protected void sequence_TableView(ISerializationContext context, TableView semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -396,11 +428,13 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TypeDescription returns TypeDescription
 	 *
 	 * Constraint:
 	 *     (type=ID many?='[]'?)
+	 * </pre>
 	 */
 	protected void sequence_TypeDescription(ISerializationContext context, TypeDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
