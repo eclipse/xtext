@@ -50,7 +50,6 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import com.google.common.base.CharMatcher;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
