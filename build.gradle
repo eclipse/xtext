@@ -34,9 +34,9 @@ subprojects {
 	}
 	apply plugin: 'maven-publish'
 	if (name != 'org.eclipse.xtext.dev-bom') {
-		apply plugin: 'java'
+		apply plugin: 'java-library'
 		dependencies {
-			compile platform(project(':org.eclipse.xtext.dev-bom'))
+			api platform(project(':org.eclipse.xtext.dev-bom'))
 		}
 		if (findProperty('compileXtend') == 'true') {
 			apply plugin: 'org.xtext.xtend'

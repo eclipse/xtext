@@ -5,7 +5,7 @@ description = 'The runtime library for Xtend for use with GWT. This library is d
 apply from: "${rootDir}/gradle/gwtProject.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtend.lib')
+	api project(':org.eclipse.xtend.lib')
 	prepareGwt project(path: ':org.eclipse.xtend.lib', configuration: 'sourceJar')
-	compile project(':org.eclipse.xtext.xbase.lib.gwt')
+	api project(':org.eclipse.xtext.xbase.lib.gwt')
 }

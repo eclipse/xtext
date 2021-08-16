@@ -14,4 +14,5 @@ fi
   -PignoreTestFailures=true \
   --refresh-dependencies \
   --continue \
+  --warning-mode all \
   $@

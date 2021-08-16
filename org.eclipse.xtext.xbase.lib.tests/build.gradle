@@ -1,11 +1,11 @@
 group = 'org.eclipse.xtext'
 
 dependencies {
-	compile project(':org.eclipse.xtext.xbase.lib')
-	compile project(':org.eclipse.xtend.lib')
-	compile 'com.google.guava:guava'
-	compile 'junit:junit'
-	compile 'com.google.guava:guava-testlib'
+	api project(':org.eclipse.xtext.xbase.lib')
+	api project(':org.eclipse.xtend.lib')
+	api 'com.google.guava:guava'
+	api 'junit:junit'
+	api 'com.google.guava:guava-testlib'
 }
 
 jar {
