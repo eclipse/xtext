@@ -6,7 +6,7 @@ Bundle-Version: 2.26.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse Xtext
 Bundle-ClassPath: .
-Require-Bundle: com.google.inject;bundle-version="3.0.0",
+Require-Bundle: com.google.inject;bundle-version="5.0.1",
  org.eclipse.emf.ecore;bundle-version="2.20.0",
  org.eclipse.emf.mwe2.lib;bundle-version="2.9.1",
  org.eclipse.emf.mwe2.runtime;bundle-version="2.9.1",
