@@ -27,9 +27,9 @@ subprojects {
 	group = 'org.eclipse.xtext'
 	version = rootProject.version
 	apply plugin: 'maven-publish'	
-	apply plugin: 'java'
+	apply plugin: 'java-library'
 	dependencies {
-		compile platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
+		api platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
 	}
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
