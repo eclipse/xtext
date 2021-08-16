@@ -10,6 +10,7 @@ if (findProperty('compileXtend') == 'true') {
 	// Defer the sources jar configuration to later when the source sets are set up completely
 	afterEvaluate {
 		sourcesJar {
+			dependsOn generateTestXtext
 			from (sourceSets.main.xtendOutputDir) {
 				include '**/*._trace'
 			}

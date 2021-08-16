@@ -2,8 +2,8 @@ ext.title = 'Xtend IDE Common'
 description = 'Additional platform-independent services for Xtend.'
 
 dependencies {
-	compile project(':org.eclipse.xtend.core')
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
+	api project(':org.eclipse.xtend.core')
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
 }
 
 sourceSets.main.java.srcDir 'deprecated'

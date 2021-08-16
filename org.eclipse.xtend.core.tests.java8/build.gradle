@@ -1,5 +1,6 @@
 dependencies {
-	compile project(':org.eclipse.xtend.core.tests')
+	testImplementation project(':org.eclipse.xtend.core.tests')
+	testImplementation project(':org.eclipse.xtend.core.tests').sourceSets.test.output // TODO is there a better way
 }
 
 sourceSets.test {
