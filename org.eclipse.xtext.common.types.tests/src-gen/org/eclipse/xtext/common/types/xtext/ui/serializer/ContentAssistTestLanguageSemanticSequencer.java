@@ -53,11 +53,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     GenerateDirective returns GenerateDirective
 	 *
 	 * Constraint:
 	 *     typeName=QN
+	 * </pre>
 	 */
 	protected void sequence_GenerateDirective(ISerializationContext context, GenerateDirective semanticObject) {
 		if (errorAcceptor != null) {
@@ -71,11 +73,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Import returns Import
 	 *
 	 * Constraint:
 	 *     importedNamespace=ImportedFQN
+	 * </pre>
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
@@ -89,6 +93,7 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
@@ -98,6 +103,7 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	 *         (imports+=Import* referenceHolder=ReferenceHolder) | 
 	 *         referenceHolder=ReferenceHolder
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -105,11 +111,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ReferenceHolder returns ReferenceHolder
 	 *
 	 * Constraint:
 	 *     (defaultReference=[JvmType|FQN] | customizedReference=[JvmType|FQN] | subtypeReference=[JvmType|FQN])
+	 * </pre>
 	 */
 	protected void sequence_ReferenceHolder(ISerializationContext context, ReferenceHolder semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

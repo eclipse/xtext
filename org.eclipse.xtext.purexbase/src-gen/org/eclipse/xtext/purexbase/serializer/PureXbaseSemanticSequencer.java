@@ -378,11 +378,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     InitialisedVariableDeclaration returns XVariableDeclaration
 	 *
 	 * Constraint:
 	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression)
+	 * </pre>
 	 */
 	protected void sequence_InitialisedVariableDeclaration(ISerializationContext context, XVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -390,11 +392,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmLowerBoundAnded returns JvmLowerBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmLowerBoundAnded(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -408,11 +412,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmLowerBound returns JvmLowerBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmLowerBound(ISerializationContext context, JvmLowerBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -426,6 +432,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmInnerTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmInnerTypeReference
@@ -439,6 +446,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         type=[JvmType|ValidID] 
 	 *         (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmInnerTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -446,11 +454,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmParameterizedTypeReference.JvmInnerTypeReference_1_4_0_0_0 returns JvmParameterizedTypeReference
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference_JvmInnerTypeReference_1_4_0_0_0(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -458,6 +468,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmParameterizedTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmParameterizedTypeReference
@@ -466,6 +477,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (type=[JvmType|QualifiedName] (arguments+=JvmArgumentTypeReference arguments+=JvmArgumentTypeReference*)?)
+	 * </pre>
 	 */
 	protected void sequence_JvmParameterizedTypeReference(ISerializationContext context, JvmParameterizedTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -473,11 +485,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeParameter returns JvmTypeParameter
 	 *
 	 * Constraint:
 	 *     (name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?)
+	 * </pre>
 	 */
 	protected void sequence_JvmTypeParameter(ISerializationContext context, JvmTypeParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -485,6 +499,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns JvmGenericArrayTypeReference
 	 *     JvmTypeReference.JvmGenericArrayTypeReference_0_1_0_0 returns JvmGenericArrayTypeReference
@@ -492,6 +507,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     componentType=JvmTypeReference_JvmGenericArrayTypeReference_0_1_0_0
+	 * </pre>
 	 */
 	protected void sequence_JvmTypeReference(ISerializationContext context, JvmGenericArrayTypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -505,11 +521,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmUpperBoundAnded returns JvmUpperBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmUpperBoundAnded(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -523,11 +541,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmUpperBound returns JvmUpperBound
 	 *
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
+	 * </pre>
 	 */
 	protected void sequence_JvmUpperBound(ISerializationContext context, JvmUpperBound semanticObject) {
 		if (errorAcceptor != null) {
@@ -541,12 +561,14 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmArgumentTypeReference returns JvmWildcardTypeReference
 	 *     JvmWildcardTypeReference returns JvmWildcardTypeReference
 	 *
 	 * Constraint:
 	 *     ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?
+	 * </pre>
 	 */
 	protected void sequence_JvmWildcardTypeReference(ISerializationContext context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -554,11 +576,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     (importSection=XImportSection? block=SpecialBlockExpression)
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -566,11 +590,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     SpecialBlockExpression returns XBlockExpression
 	 *
 	 * Constraint:
 	 *     expressions+=XExpressionOrVarDeclaration*
+	 * </pre>
 	 */
 	protected void sequence_SpecialBlockExpression(ISerializationContext context, XBlockExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -578,6 +604,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XBinaryOperation
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
@@ -622,6 +649,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         (leftOperand=XAdditiveExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpAdd] rightOperand=XMultiplicativeExpression) | 
 	 *         (leftOperand=XMultiplicativeExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpMulti] rightOperand=XUnaryOperation)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(ISerializationContext context, XBinaryOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -629,6 +657,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XAssignment
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XAssignment
@@ -667,6 +696,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
 	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAssignment_XMemberFeatureCall(ISerializationContext context, XAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -674,6 +704,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAssignment returns XIfExpression
 	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XIfExpression
@@ -712,6 +743,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         (if=XConditionalExpression_XIfExpression_1_0_0_0 conditionalExpression?='?' then=XExpression else=XExpression?) | 
 	 *         (if=XExpression then=XExpression else=XExpression?)
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XConditionalExpression_XIfExpression(ISerializationContext context, XIfExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -719,6 +751,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     JvmTypeReference returns XFunctionTypeRef
 	 *     XFunctionTypeRef returns XFunctionTypeRef
@@ -726,6 +759,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     ((paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)? returnType=JvmTypeReference)
+	 * </pre>
 	 */
 	protected void sequence_XFunctionTypeRef(ISerializationContext context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -733,6 +767,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XImportDeclaration returns XImportDeclaration
 	 *
@@ -742,6 +777,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         importedType=[JvmDeclaredType|QualifiedName] | 
 	 *         importedNamespace=QualifiedNameWithWildcard
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XImportDeclaration(ISerializationContext context, XImportDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -749,11 +785,13 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XImportSection returns XImportSection
 	 *
 	 * Constraint:
 	 *     importDeclarations+=XImportDeclaration+
+	 * </pre>
 	 */
 	protected void sequence_XImportSection(ISerializationContext context, XImportSection semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -761,6 +799,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XTryCatchFinallyExpression returns XTryCatchFinallyExpression
 	 *     XAssignment returns XTryCatchFinallyExpression
@@ -805,6 +844,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *         ) | 
 	 *         (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XTryCatchFinallyExpression(ISerializationContext context, XTryCatchFinallyExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

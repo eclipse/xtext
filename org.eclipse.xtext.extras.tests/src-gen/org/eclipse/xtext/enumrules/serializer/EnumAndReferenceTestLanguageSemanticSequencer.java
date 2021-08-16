@@ -41,11 +41,13 @@ public class EnumAndReferenceTestLanguageSemanticSequencer extends AbstractDeleg
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     EntityWithEnumAndReference returns EntityWithEnumAndReference
 	 *
 	 * Constraint:
 	 *     (type=KindOfKeyword name=ID ref=[EntityWithEnumAndReference|ID])
+	 * </pre>
 	 */
 	protected void sequence_EntityWithEnumAndReference(ISerializationContext context, EntityWithEnumAndReference semanticObject) {
 		if (errorAcceptor != null) {

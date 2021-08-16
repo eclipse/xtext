@@ -69,17 +69,21 @@ public abstract class AbstractXtypeSyntacticSequencer extends AbstractSyntacticS
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '=>' returnType=JvmTypeReference
+	 *     (rule start) (ambiguity) '=&gt;' returnType=JvmTypeReference
+	 
+	 * </pre>
 	 */
 	protected void emit_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
@@ -88,6 +92,8 @@ public abstract class AbstractXtypeSyntacticSequencer extends AbstractSyntacticS
 	 *     importedType=[JvmDeclaredType|QualifiedName] (ambiguity) (rule end)
 	 *     memberName=ValidID (ambiguity) (rule end)
 	 *     wildcard?='*' (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XImportDeclaration_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

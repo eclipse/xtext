@@ -45,11 +45,13 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
 	 *     referenceHolder+=ReferenceHolder+
+	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -57,11 +59,13 @@ public class RefactoringTestLanguageSemanticSequencer extends AbstractDelegating
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     ReferenceHolder returns ReferenceHolder
 	 *
 	 * Constraint:
 	 *     (name=ID defaultReference=[JvmType|FQN])
+	 * </pre>
 	 */
 	protected void sequence_ReferenceHolder(ISerializationContext context, ReferenceHolder semanticObject) {
 		if (errorAcceptor != null) {

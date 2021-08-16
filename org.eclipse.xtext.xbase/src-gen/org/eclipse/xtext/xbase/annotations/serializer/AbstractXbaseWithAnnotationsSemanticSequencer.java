@@ -386,6 +386,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAnnotationElementValueOrCommaList returns XListLiteral
 	 *
@@ -395,6 +396,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 *         (elements+=XAnnotationElementValueOrCommaList_XListLiteral_1_1_0 elements+=XAnnotationOrExpression+) | 
 	 *         (elements+=XExpression elements+=XExpression*)
 	 *     )?
+	 * </pre>
 	 */
 	protected void sequence_XAnnotationElementValueOrCommaList_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -406,11 +408,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAnnotationElementValuePair returns XAnnotationElementValuePair
 	 *
 	 * Constraint:
 	 *     (element=[JvmOperation|ValidID] value=XAnnotationElementValue)
+	 * </pre>
 	 */
 	protected void sequence_XAnnotationElementValuePair(ISerializationContext context, XAnnotationElementValuePair semanticObject) {
 		if (errorAcceptor != null) {
@@ -431,11 +435,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAnnotationElementValue returns XListLiteral
 	 *
 	 * Constraint:
 	 *     ((elements+=XAnnotationOrExpression elements+=XAnnotationOrExpression*) | (elements+=XExpression elements+=XExpression*))?
+	 * </pre>
 	 */
 	protected void sequence_XAnnotationElementValue_XListLiteral(ISerializationContext context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -447,6 +453,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XAnnotation returns XAnnotation
 	 *     XAnnotationElementValueOrCommaList returns XAnnotation
@@ -459,6 +466,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	 *         annotationType=[JvmAnnotationType|QualifiedName] 
 	 *         ((elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | value=XAnnotationElementValueOrCommaList)?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XAnnotation(ISerializationContext context, XAnnotation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

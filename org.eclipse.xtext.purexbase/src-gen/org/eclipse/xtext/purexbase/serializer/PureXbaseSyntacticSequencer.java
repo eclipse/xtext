@@ -101,18 +101,22 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) (rule end)
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) expressions+=XExpressionOrVarDeclaration
+	 
+	 * </pre>
 	 */
 	protected void emit_SpecialBlockExpression_SemicolonKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
@@ -120,35 +124,44 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) '}' ')' (rule end)
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) '}' (rule end)
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) expressions+=XExpressionOrVarDeclaration
+	 
+	 * </pre>
 	 */
 	protected void emit_XBlockExpression_SemicolonKeyword_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) (rule end)
 	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) expressions+=XExpressionOrVarDeclaration
+	 
+	 * </pre>
 	 */
 	protected void emit_XExpressionInClosure_SemicolonKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '=>' returnType=JvmTypeReference
+	 *     (rule start) (ambiguity) '=&gt;' returnType=JvmTypeReference
+	 
+	 * </pre>
 	 */
 	protected void emit_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
@@ -157,12 +170,15 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     importedType=[JvmDeclaredType|QualifiedName] (ambiguity) (rule end)
 	 *     memberName=ValidID (ambiguity) (rule end)
 	 *     wildcard?='*' (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XImportDeclaration_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('*
 	 *
@@ -171,7 +187,7 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) '#' '[' elements+=XExpression
 	 *     (rule start) (ambiguity) '#' '{' '}' (rule start)
 	 *     (rule start) (ambiguity) '#' '{' elements+=XExpression
-	 *     (rule start) (ambiguity) '<' typeArguments+=JvmArgumentTypeReference
+	 *     (rule start) (ambiguity) '&lt;' typeArguments+=JvmArgumentTypeReference
 	 *     (rule start) (ambiguity) '[' declaredFormalParameters+=JvmFormalParameter
 	 *     (rule start) (ambiguity) '[' explicitSyntax?='|'
 	 *     (rule start) (ambiguity) '[' expression=XExpressionInClosure
@@ -211,12 +227,15 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {XInstanceOfExpression.expression=}
 	 *     (rule start) (ambiguity) {XMemberFeatureCall.memberCallTarget=}
 	 *     (rule start) (ambiguity) {XPostfixOperation.operand=}
+	 
+	 * </pre>
 	 */
 	protected void emit_XParenthesizedExpression_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     '('+
 	 *
@@ -225,7 +244,7 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) '#' '[' elements+=XExpression
 	 *     (rule start) (ambiguity) '#' '{' '}' ')' (rule start)
 	 *     (rule start) (ambiguity) '#' '{' elements+=XExpression
-	 *     (rule start) (ambiguity) '<' typeArguments+=JvmArgumentTypeReference
+	 *     (rule start) (ambiguity) '&lt;' typeArguments+=JvmArgumentTypeReference
 	 *     (rule start) (ambiguity) '[' declaredFormalParameters+=JvmFormalParameter
 	 *     (rule start) (ambiguity) '[' explicitSyntax?='|'
 	 *     (rule start) (ambiguity) '[' expression=XExpressionInClosure
@@ -265,17 +284,22 @@ public class PureXbaseSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {XInstanceOfExpression.expression=}
 	 *     (rule start) (ambiguity) {XMemberFeatureCall.memberCallTarget=}
 	 *     (rule start) (ambiguity) {XPostfixOperation.operand=}
+	 
+	 * </pre>
 	 */
 	protected void emit_XParenthesizedExpression_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ';'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     resources+=InitialisedVariableDeclaration (ambiguity) ')' expression=XExpression
+	 
+	 * </pre>
 	 */
 	protected void emit_XTryCatchFinallyExpression_SemicolonKeyword_2_0_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
