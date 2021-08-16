@@ -6,7 +6,7 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.26.0.qualifier
 Require-Bundle: org.junit,
  org.eclipse.xtext.junit4,
- com.google.inject;bundle-version="3.0.0",
+ com.google.inject;bundle-version="5.0.1",
  org.eclipse.xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.xtext.junit4.tests
