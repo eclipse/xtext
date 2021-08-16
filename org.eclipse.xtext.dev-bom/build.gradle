@@ -79,10 +79,10 @@ dependencies {
         api "org.junit.platform:junit-platform-runner:1.7.1"
         api "org.junit.platform:junit-platform-suite-api:1.7.1"
         api "org.opentest4j:opentest4j:1.2.0"
-        api "org.ow2.asm:asm-analysis:9.1"
-        api "org.ow2.asm:asm-commons:9.1"
-        api "org.ow2.asm:asm-tree:9.1"
-        api "org.ow2.asm:asm:9.1"
+        api "org.ow2.asm:asm-analysis:9.2"
+        api "org.ow2.asm:asm-commons:9.2"
+        api "org.ow2.asm:asm-tree:9.2"
+        api "org.ow2.asm:asm:9.2"
     }
 }
 
