@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -820,24 +820,46 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	@Test
 	public void testMemberCount_16() {
-		String typeName = TestEnum.class.getName();
-		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
-		int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
-		// Nested
-		assertEquals(1, innerTypesCount);
-		int methodCount = TestEnum.class.getDeclaredMethods().length;
-		// TestEnum.values + TestEnum.valueOf
-		assertEquals(2, methodCount);
-		int constructorCount = TestEnum.class.getDeclaredConstructors().length;
-		// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
-		assertEquals(2, constructorCount);
-		int fieldCount = TestEnum.class.getDeclaredFields().length;
-		// FirstValue, SecondValue, string, ENUM$VALUES
-		assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
-		// ENUM$VALUES is synthetic
-		// TestEnum(String, String, EnumType) is synthetic
-		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2,
-				type.getMembers().size());
+		try {
+			String typeName = TestEnum.class.getName();
+			JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+			int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
+			// Nested
+			assertEquals(1, innerTypesCount);
+			int methodCount = TestEnum.class.getDeclaredMethods().length;
+			// TestEnum.values + TestEnum.valueOf
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredMethods()), 2, methodCount);
+			int constructorCount = TestEnum.class.getDeclaredConstructors().length;
+			// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 2, constructorCount);
+			int fieldCount = TestEnum.class.getDeclaredFields().length;
+			// FirstValue, SecondValue, string, ENUM$VALUES
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
+			// ENUM$VALUES is synthetic
+			// TestEnum(String, String, EnumType) is synthetic
+			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2,
+					type.getMembers().size());
+		} catch (AssertionError e) {
+			String typeName = TestEnum.class.getName();
+			JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+			int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
+			// Nested
+			assertEquals(1, innerTypesCount);
+			int methodCount = TestEnum.class.getDeclaredMethods().length;
+			// TestEnum.values + TestEnum.valueOf + TestEnum.$values
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredMethods()), 3, methodCount);
+			int constructorCount = TestEnum.class.getDeclaredConstructors().length;
+			// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 2, constructorCount);
+			int fieldCount = TestEnum.class.getDeclaredFields().length;
+			// FirstValue, SecondValue, string, ENUM$VALUES
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
+			// ENUM$VALUES is synthetic
+			// TestEnum(String, String, EnumType) is synthetic
+			// TestEnum$values is synthetic
+			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 3,
+					type.getMembers().size());
+		}
 	}
 
 	@Test
