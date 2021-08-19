@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -162,5 +162,29 @@ public class HoverTest extends AbstractHoverTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("getB() : String");
     this.hasHoverOver(_builder, "getB", _builder_1.toString());
+  }
+  
+  @Test
+  public void hover_over_operation2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("b : String");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("op : setB(String b) : void {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.b = b");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("setB(String b) : void");
+    this.hasHoverOver(_builder, "setB", _builder_1.toString());
   }
 }

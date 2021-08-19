@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
@@ -26,6 +27,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension IQualifiedNameProvider
 	@Inject extension DomainmodelJvmModelHelper
 	@Inject extension IJvmModelAssociations
+	@Inject extension IJvmModelAssociator
 
 	def dispatch infer(Entity entity, extension IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		accept(entity.toClass( entity.fullyQualifiedName )) [
@@ -87,8 +89,15 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 		inferredType.handleDuplicateJvmOperations[jvmOperations|
 			// we only remove getters/setters we created automatically
 			val getterOrSetter = jvmOperations.filter[primarySourceElement instanceof Property].head
-			if (getterOrSetter !== null)
+			if (getterOrSetter !== null) {
+				removeAllAssociation(getterOrSetter.returnType)
+				for (p : getterOrSetter.parameters) {
+					removeAllAssociation(p.parameterType)
+					removeAllAssociation(p)
+				}
+				removeAllAssociation(getterOrSetter)
 				inferredType.members.remove(getterOrSetter)
+			}
 			// other duplicated methods will be reported by the validator
 		]
 	}
