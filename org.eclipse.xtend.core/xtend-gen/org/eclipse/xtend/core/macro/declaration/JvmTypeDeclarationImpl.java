@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,7 +13,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.List;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -78,16 +77,18 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     };
     final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(Iterables.<JvmConstructor>filter(this.getDelegate().getMembers(), JvmConstructor.class), _function);
     if ((constructor != null)) {
-      EcoreUtil.remove(constructor);
+      MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(constructor);
+      final MutableConstructorDeclaration mutableConstructorDeclaration = ((MutableConstructorDeclaration) _memberDeclaration);
+      mutableConstructorDeclaration.remove();
     }
     final JvmConstructor newConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
     newConstructor.setVisibility(JvmVisibility.PUBLIC);
     newConstructor.setSimpleName(this.getSimpleName());
     this.getDelegate().getMembers().add(newConstructor);
-    MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(newConstructor);
-    final MutableConstructorDeclaration mutableConstructorDeclaration = ((MutableConstructorDeclaration) _memberDeclaration);
-    initializer.apply(mutableConstructorDeclaration);
-    return mutableConstructorDeclaration;
+    MemberDeclaration _memberDeclaration_1 = this.getCompilationUnit().toMemberDeclaration(newConstructor);
+    final MutableConstructorDeclaration mutableConstructorDeclaration_1 = ((MutableConstructorDeclaration) _memberDeclaration_1);
+    initializer.apply(mutableConstructorDeclaration_1);
+    return mutableConstructorDeclaration_1;
   }
   
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
