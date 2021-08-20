@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -122,18 +122,27 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	}
 
 	protected void pushKey(char c, int k) throws Exception {
+		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
 		String textBefore = editor.getDocument().get();
 		Event event = new Event();
 		event.type = SWT.KeyDown;
 		event.character = c;
 		event.keyCode = k;
-		myDisplay.post(event);
+		event.doit = true;
+		if (c == SWT.ESC) {
+			event.keyCode = 27;
+		}
+		textWidget.notifyListeners(SWT.KeyDown, event);
 		syncUtil.yieldToQueuedDisplayJobs(new NullProgressMonitor());
 		Event event2 = new Event();
 		event2.type = SWT.KeyUp;
 		event2.character = c;
 		event2.keyCode = k;
-		myDisplay.post(event2);
+		event2.doit = true;
+		if (c == SWT.ESC) {
+			event2.keyCode = 27;
+		}
+		textWidget.notifyListeners(SWT.KeyUp, event2);
 		int maxTries = 10;
 		while (maxTries-- > 0) {
 			if (!Objects.equal(editor.getDocument().get(), textBefore)) {
