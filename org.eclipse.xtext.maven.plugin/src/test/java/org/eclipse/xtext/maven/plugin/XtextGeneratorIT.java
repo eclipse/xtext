@@ -210,7 +210,6 @@ public class XtextGeneratorIT {
 			verifier.setMavenDebug(debug);
 			System.out.println("Modified Maven Opts: " + modMvnOpts);
 		}
-		verifier.setSystemProperty("aether.metadataResolver.threads", "1");
 		return verifier;
 	}
 
