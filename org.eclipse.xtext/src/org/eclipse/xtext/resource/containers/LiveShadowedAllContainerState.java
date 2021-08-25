@@ -8,7 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.containers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -51,14 +56,84 @@ public class LiveShadowedAllContainerState implements IAllContainersState {
 
 	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
-		Set<URI> result = Sets.newLinkedHashSet();
+		Set<URI> localContainedURIs = Sets.newLinkedHashSet();
 		for (IResourceDescription descriptions : localDescriptions.getAllResourceDescriptions()) {
 			String computedHandle = getContainerHandle(descriptions.getURI());
-			if (computedHandle != null && computedHandle.equals(containerHandle))
-				result.add(descriptions.getURI());
+			if (computedHandle != null && computedHandle.equals(containerHandle)) {
+				localContainedURIs.add(descriptions.getURI());
+			}
 		}
-		result.addAll(globalState.getContainedURIs(containerHandle));
-		return result;
+		Collection<URI> globalContainedURIs = globalState.getContainedURIs(containerHandle);
+		return new Collection<URI>() {
+
+			@Override
+			public int size() {
+				return localContainedURIs.size() + globalContainedURIs.size();
+			}
+
+			@Override
+			public boolean isEmpty() {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean contains(Object o) {
+				return localContainedURIs.contains(o) || globalContainedURIs.contains(o);
+			}
+
+			@Override
+			public Iterator<URI> iterator() {
+				return Iterators.concat(localContainedURIs.iterator(), globalContainedURIs.iterator());
+			}
+
+			@Override
+			public Object[] toArray() {
+				Set<URI> result = new LinkedHashSet<>();
+				result.addAll(localContainedURIs);
+				result.addAll(globalContainedURIs);
+				return result.toArray();
+			}
+
+			@Override
+			public <T> T[] toArray(T[] a) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean add(URI e) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean remove(Object o) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean containsAll(Collection<?> c) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean addAll(Collection<? extends URI> c) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean removeAll(Collection<?> c) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public boolean retainAll(Collection<?> c) {
+				throw new UnsupportedOperationException("not expected");
+			}
+
+			@Override
+			public void clear() {
+				throw new UnsupportedOperationException("not expected");
+			}
+		};
 	}
 	
 	@Override
