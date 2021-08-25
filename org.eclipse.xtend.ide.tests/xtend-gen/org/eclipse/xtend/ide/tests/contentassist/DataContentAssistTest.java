@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.testing.Flaky;
 import org.junit.Test;
@@ -22,11 +23,20 @@ public class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
   public void testDataAnnotation() throws Exception {
     boolean _isJava11OrLater = AbstractXtendUITestCase.isJava11OrLater();
     if (_isJava11OrLater) {
-      this.newBuilder().append("@Data").assertText(
-        "jdk.jfr.DataAmount", 
-        "org.eclipse.xtend.lib.annotations.Data", 
-        "org.junit.experimental.theories.DataPoint", 
-        "org.junit.experimental.theories.DataPoints");
+      final String typeFilter = PreferenceConstants.getPreferenceStore().getDefaultString(
+        "org.eclipse.jdt.ui.typefilter.enabled");
+      if (((typeFilter != null) && typeFilter.contains("jdk.*"))) {
+        this.newBuilder().append("@Data").assertText(
+          "org.eclipse.xtend.lib.annotations.Data", 
+          "org.junit.experimental.theories.DataPoint", 
+          "org.junit.experimental.theories.DataPoints");
+      } else {
+        this.newBuilder().append("@Data").assertText(
+          "jdk.jfr.DataAmount", 
+          "org.eclipse.xtend.lib.annotations.Data", 
+          "org.junit.experimental.theories.DataPoint", 
+          "org.junit.experimental.theories.DataPoints");
+      }
     } else {
       this.newBuilder().append("@Data").assertText(
         "org.eclipse.xtend.lib.annotations.Data", 

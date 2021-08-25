@@ -1,8 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtend.ide.tests.imports
 
 import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.jdt.ui.PreferenceConstants
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
@@ -14,7 +23,6 @@ import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import org.eclipse.jdt.ui.PreferenceConstants
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -24,9 +32,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
 	@After def void close() {
 		_workbenchTestHelper.tearDown
-		PreferenceConstants.initializeDefaultValues(PreferenceConstants.preferenceStore)
 	}
-	
 	
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
 		assertIsOrganizedTo(model, "Foo", expected)
@@ -246,17 +252,27 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test def testUnresolvedConstructorCallToEnum() {
-		'''
-			class Foo {
-				Object bar = new RetentionPolicy
+		val oldValue = PreferenceConstants.preferenceStore.getString(PreferenceConstants.TYPEFILTER_ENABLED)
+		try {
+			var newValue = oldValue
+			if (!newValue.contains(";java.awt.*")) {
+				newValue = "*.awt.*;*.sun.*;antlr.*";
+				PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
 			}
-		'''.assertIsOrganizedTo('''
-			import java.lang.annotation.RetentionPolicy
-			
-			class Foo {
-				Object bar = new RetentionPolicy
-			}
-		''')
+			'''
+				class Foo {
+					Object bar = new RetentionPolicy
+				}
+			'''.assertIsOrganizedTo('''
+				import java.lang.annotation.RetentionPolicy
+				
+				class Foo {
+					Object bar = new RetentionPolicy
+				}
+			''')
+		} finally {
+			PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
+		}
 	}
 	
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398623
@@ -802,19 +818,29 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	 */
 	@Test
 	def void testTypeFilter_ambiguous() {
-		'''
-			package p
-			
-			class Foo {
-				List l
+		val oldValue = PreferenceConstants.preferenceStore.getString(PreferenceConstants.TYPEFILTER_ENABLED)
+		try {
+			var newValue = oldValue
+			if (newValue.contains(";java.awt.*")) {
+				newValue = newValue.replace(";java.awt.*", "")
 			}
-		'''.assertIsOrganizedTo('''
-			package p
-			
-			class Foo {
-				List l
-			}
-		''')
+			PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
+			'''
+				package p
+				
+				class Foo {
+					List l
+				}
+			'''.assertIsOrganizedTo('''
+				package p
+				
+				class Foo {
+					List l
+				}
+			''')
+		} finally {
+			PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue)
+		}
 	}
 
 	/**
@@ -824,22 +850,32 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	 */
 	@Test
 	def void testTypeFilter_unique() {
-		PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
-		'''
-			package p
-			
-			class Foo {
-				List l
+		val oldValue = PreferenceConstants.preferenceStore.getString(PreferenceConstants.TYPEFILTER_ENABLED)
+		try {
+			var newValue = oldValue
+			if (!newValue.contains(";java.awt.*")) {
+				newValue = "*.awt.*;*.sun.*;antlr.*";
+				PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
 			}
-		'''.assertIsOrganizedTo('''
-			package p
+			'''
+				package p
+				
+				class Foo {
+					List l
+				}
+			'''.assertIsOrganizedTo('''
+				package p
+				
+				import java.util.List
+				
+				class Foo {
+					List l
+				}
+			''')
 			
-			import java.util.List
-
-			class Foo {
-				List l
-			}
-		''')
+		} finally {
+			PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue)
+		}
 	}
 
 }

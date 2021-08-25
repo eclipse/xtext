@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtend.ide.tests.imports;
 
 import com.google.inject.Inject;
@@ -38,7 +46,6 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   public void close() {
     try {
       this._workbenchTestHelper.tearDown();
-      PreferenceConstants.initializeDefaultValues(PreferenceConstants.getPreferenceStore());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -437,26 +444,38 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   @Test
   public void testUnresolvedConstructorCallToEnum() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("Object bar = new RetentionPolicy");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.lang.annotation.RetentionPolicy");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("Object bar = new RetentionPolicy");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    final String oldValue = PreferenceConstants.getPreferenceStore().getString(PreferenceConstants.TYPEFILTER_ENABLED);
+    try {
+      String newValue = oldValue;
+      boolean _contains = newValue.contains(";java.awt.*");
+      boolean _not = (!_contains);
+      if (_not) {
+        newValue = "*.awt.*;*.sun.*;antlr.*";
+        PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Object bar = new RetentionPolicy");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("import java.lang.annotation.RetentionPolicy");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("Object bar = new RetentionPolicy");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.assertIsOrganizedTo(_builder, _builder_1);
+    } finally {
+      PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
+    }
   }
   
   @Test
@@ -1450,29 +1469,40 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
    */
   @Test
   public void testTypeFilter_ambiguous() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package p");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("List l");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package p");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("List l");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    final String oldValue = PreferenceConstants.getPreferenceStore().getString(PreferenceConstants.TYPEFILTER_ENABLED);
+    try {
+      String newValue = oldValue;
+      boolean _contains = newValue.contains(";java.awt.*");
+      if (_contains) {
+        newValue = newValue.replace(";java.awt.*", "");
+      }
+      PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("List l");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("List l");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.assertIsOrganizedTo(_builder, _builder_1);
+    } finally {
+      PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
+    }
   }
   
   /**
@@ -1482,32 +1512,43 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
    */
   @Test
   public void testTypeFilter_unique() {
-    PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package p");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("List l");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("package p");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import java.util.List");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("class Foo {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("List l");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertIsOrganizedTo(_builder, _builder_1);
+    final String oldValue = PreferenceConstants.getPreferenceStore().getString(PreferenceConstants.TYPEFILTER_ENABLED);
+    try {
+      String newValue = oldValue;
+      boolean _contains = newValue.contains(";java.awt.*");
+      boolean _not = (!_contains);
+      if (_not) {
+        newValue = "*.awt.*;*.sun.*;antlr.*";
+        PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("List l");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import java.util.List");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("List l");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.assertIsOrganizedTo(_builder, _builder_1);
+    } finally {
+      PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
+    }
   }
 }
