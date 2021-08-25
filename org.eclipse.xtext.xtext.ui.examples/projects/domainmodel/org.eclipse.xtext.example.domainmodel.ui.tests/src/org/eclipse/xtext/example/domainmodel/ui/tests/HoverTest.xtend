@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -98,5 +98,16 @@ class HoverTest extends AbstractHoverTest {
 				}
 			}
 		'''.hasHoverOver("getB", '''getB() : String''')
+	}
+
+	@Test def hover_over_operation2() {
+		'''
+			entity Foo {
+				b : String
+				op : setB(String b) : void {
+					this.b = b
+				}
+			}
+		'''.hasHoverOver("setB", '''setB(String b) : void''')
 	}
 }

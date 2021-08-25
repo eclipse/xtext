@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -32,6 +32,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -55,6 +56,10 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
+  
+  @Inject
+  @Extension
+  private IJvmModelAssociator _iJvmModelAssociator;
   
   protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
@@ -147,6 +152,15 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
       };
       final JvmOperation getterOrSetter = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(jvmOperations, _function_1));
       if ((getterOrSetter != null)) {
+        this._iJvmModelAssociator.removeAllAssociation(getterOrSetter.getReturnType());
+        EList<JvmFormalParameter> _parameters = getterOrSetter.getParameters();
+        for (final JvmFormalParameter p : _parameters) {
+          {
+            this._iJvmModelAssociator.removeAllAssociation(p.getParameterType());
+            this._iJvmModelAssociator.removeAllAssociation(p);
+          }
+        }
+        this._iJvmModelAssociator.removeAllAssociation(getterOrSetter);
         inferredType.getMembers().remove(getterOrSetter);
       }
     };
