@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -236,7 +236,8 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		// remove default constructor
 		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
 		if (constructor !== null) {
-			EcoreUtil.remove(constructor)
+			val mutableConstructorDeclaration = compilationUnit.toMemberDeclaration(constructor) as MutableConstructorDeclaration
+			mutableConstructorDeclaration.remove
 		}
 		val newConstructor = TypesFactory.eINSTANCE.createJvmConstructor
 		newConstructor.visibility = JvmVisibility.PUBLIC
