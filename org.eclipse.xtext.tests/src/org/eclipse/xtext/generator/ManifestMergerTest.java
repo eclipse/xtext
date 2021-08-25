@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,13 +16,20 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
 import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.MethodRule;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -30,6 +37,40 @@ import org.junit.Test;
 @SuppressWarnings("deprecation")
 public class ManifestMergerTest extends Assert {
 	private static final String NL = Strings.newLine();
+	
+	private static final boolean isJava16OrLater = determineJava16OrLater();
+	
+	private static boolean determineJava16OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 16;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+	
+	@Rule
+	public MethodRule ignoreOnJava16OrLater = new MethodRule() {
+
+		@Override
+		public Statement apply(Statement base, FrameworkMethod method, Object target) {
+			return new Statement() {
+
+				@Override
+				public void evaluate() throws Throwable {
+					Assume.assumeFalse("Ignored on Java 16 and later", isJava16OrLater);
+					base.evaluate();
+				}
+			};
+		}
+	};
 
 	@Test public void testMergeRequiredBundles() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
