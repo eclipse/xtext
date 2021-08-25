@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -463,10 +463,14 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		checkLanguageResource(jvmElement.eResource());
 		checkSameResource(sourceElement.eResource(), jvmElement.eResource());
 		
-		Set<EObject> sources = targetToSourceMap(resource).get(jvmElement);
+		Map<EObject, Set<EObject>> targetToSourceMap = targetToSourceMap(resource);
+		Set<EObject> sources = targetToSourceMap.get(jvmElement);
 		if (sources != null && sources.remove(sourceElement)) {
 			Set<EObject> targets = sourceToTargetMap(resource).get(sourceElement);
 			targets.remove(jvmElement);
+			if (sources.isEmpty()) {
+				targetToSourceMap.remove(jvmElement);
+			}
 		}
 	}
 
