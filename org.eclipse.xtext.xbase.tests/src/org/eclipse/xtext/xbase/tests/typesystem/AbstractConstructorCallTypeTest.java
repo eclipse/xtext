@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -278,7 +279,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
 
 	@Test
 	public void testConstructorTypeInference_08() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesConstructorCallsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)",
 					"GenericType2<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer");
 		} else {
@@ -705,7 +706,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
 
 	@Test
 	public void testDeferredTypeArgumentResolution_084() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesConstructorCallsTo(
 				"{\n" +
 				"val list = new java.util.ArrayList\n" +
@@ -1268,7 +1269,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
 
 	@Test
 	public void testDeferredTypeArgumentResolution_130() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesConstructorCallsTo(
 					"{\n" +
 				"val list = new java.util.ArrayList\n" +

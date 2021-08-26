@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -1067,7 +1068,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
 
 	@Test
 	public void testBug_406425_01() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesFeatureCallsTo(
 				"(null as StringBuilder) => [\n" +
 				"	newArrayList(it, new Long(0))\n" +
@@ -1778,7 +1779,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
 
 	@Test
 	public void testFeatureCallWithOperatorOverloading_6() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesFeatureCallsTo(
 				"newHashMap( 5 -> '', '' -> 5 )",
 					"HashMap<Comparable<?> & Constable & ConstantDesc & Serializable, Comparable<?> & Constable & ConstantDesc & Serializable>",

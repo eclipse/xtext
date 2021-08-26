@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,6 +13,7 @@ import java.math.BigInteger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -102,7 +103,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testIfExpression_02() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable & java.lang.Comparable<? extends java.lang.Object>", "if (true) new StringBuilder() else new StringBuffer()");
 		} else {
 			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
@@ -135,7 +136,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 //		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			assertEquals("java.io.Serializable & java.lang.Comparable<? extends java.lang.Object> & java.lang.CharSequence", toString(getType(expression)));
 		} else{
 			assertEquals("java.io.Serializable & java.lang.CharSequence", toString(getType(expression)));
@@ -303,7 +304,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testListLiteral_5() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object> & java.lang.constant.Constable & java.lang.constant.ConstantDesc>", "#[1,2.0,3]");
 		} else {
 			assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#[1,2.0,3]");
@@ -331,7 +332,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testSetLiteral_5() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object> & java.lang.constant.Constable & java.lang.constant.ConstantDesc>", "#{1,2.0,3}");
 		} else {
 			assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#{1,2.0,3}");
@@ -375,7 +376,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object> & java.lang.constant.Constable & java.lang.constant.ConstantDesc & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
 		} else {
 			assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
@@ -387,7 +388,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<? extends java.lang.Object> & java.lang.constant.Constable & java.lang.constant.ConstantDesc>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
 		} else {
 			assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");

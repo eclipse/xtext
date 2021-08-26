@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Test;
 
 /**
@@ -72,7 +72,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testIfExpression_04() throws Exception {
-		if (AbstractXbaseTestCase.isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("if (true) return '' else new StringBuilder", "Serializable & Comparable<?> & CharSequence");
 		} else {
 			resolvesTo("if (true) return '' else new StringBuilder", "Serializable & CharSequence");
@@ -112,7 +112,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testIfExpression_28() throws Exception {
-		if (AbstractXbaseTestCase.isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("if (true) return '' else 1", "Comparable<?> & Constable & ConstantDesc & Serializable");
 		} else {
 			resolvesTo("if (true) return '' else 1", "Comparable<?> & Serializable");
@@ -258,7 +258,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_11() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'",
 					"Serializable & Comparable<?> & Constable");
 		} else {
@@ -270,7 +270,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_12() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}",
 					"Serializable & Comparable<?> & Constable");
 		} else {
@@ -283,7 +283,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_13() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try return 'literal' as Object as Boolean\n" +
 							"catch(NullPointerException e) return 'second thing is thrown'" +
@@ -303,7 +303,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_14() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try return 'literal' as Object as Boolean\n"+
 							"catch(ClassCastException e) throw new NullPointerException()\n" +
@@ -334,7 +334,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_19() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?>");
@@ -344,7 +344,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_20() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { return 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?>");
@@ -355,7 +355,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_21() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try return 'literal' as Object as Boolean\n" +
 							"catch(NullPointerException e) 'second thing is thrown'\n" +
@@ -375,7 +375,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_22() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try return 'literal' as Object as Boolean\n" +
 							"catch(ClassCastException e) throw new NullPointerException()\n" +
@@ -394,7 +394,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_25() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try true catch (Exception e) return 'bar' catch(RuntimeException e) return 'baz'", "Serializable & Comparable<?>");
@@ -404,7 +404,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_26() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try 'foo' catch (Exception e) 'bar' catch(RuntimeException e) return true finally true",
 					"Serializable & Comparable<?> & Constable");
 		} else {
@@ -416,7 +416,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_27() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) return 'caught'", "Serializable & Comparable<?>");
@@ -426,7 +426,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testTryCatchFinallyExpression_28() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {return 'caught'}", "Serializable & Comparable<?>");
@@ -437,7 +437,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_29() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try 'literal' as Object as Boolean\n" +
 							"catch(NullPointerException e) return 'second thing is thrown'\n" +
@@ -457,7 +457,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Override
 	public void testTryCatchFinallyExpression_30() throws Exception {
 		// @formatter:off
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try 'literal' as Object as Boolean\n" +
 							"catch(ClassCastException e) throw new NullPointerException()\n" +

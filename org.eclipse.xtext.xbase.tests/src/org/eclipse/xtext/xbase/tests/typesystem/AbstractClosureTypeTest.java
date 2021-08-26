@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -1830,7 +1831,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_056() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)" +
 				"	   val Object o = list.head " +
@@ -1850,7 +1851,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_057() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)" +
 				"	   val Object o = list.head " +
@@ -1870,7 +1871,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_058() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]" +
 				"	   val Object o = list.head " +
@@ -1962,7 +1963,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_067() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(new Double('-20'), new Integer('20')).map(v|v.intValue)" +
 				"	   val Object o = list.head " +
@@ -1982,7 +1983,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_068() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(new Double('-20'), new Integer('20')).map(v|v.intValue)" +
 				"	   val Object o = list.head " +
@@ -2002,7 +2003,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_069() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = $$ListExtensions::map(newArrayList(new Double('-20'), new Integer('20'))) [ v|v.intValue ]" +
 				"	   val Object o = list.head " +
@@ -2022,7 +2023,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_070() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = $$ListExtensions::map(newArrayList(new Double('-20'), new Integer('20'))) [ v| return v.intValue ]" +
 				"	   val Object o = list.head " +
@@ -2387,7 +2388,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_126() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v| return v.intValue)" +
 				"	   val Object o = list.head " +
@@ -2407,7 +2408,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_127() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v| return v.intValue)" +
 				"	   val Object o = list.head " +
@@ -2427,7 +2428,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_128() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v| return v.intValue ]" +
 				"	   val Object o = list.head " +
@@ -2520,7 +2521,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_137() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(new Double('-20'), new Integer('20')).map(v| return v.intValue)" +
 				"	   val Object o = list.head " +
@@ -2540,7 +2541,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_138() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			withEquivalents(resolvesClosuresTo(
 					"{ val list = newArrayList(new Double('-20'), new Integer('20')).map(v| return v.intValue)" +
 				"	   val Object o = list.head " +
@@ -2790,7 +2791,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testClosureWithReturnExpression_01() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			withEquivalents(resolvesClosuresTo("[ | if (true) return '' else return new StringBuilder ]",
 					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 		} else {
@@ -2802,7 +2803,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testClosureWithReturnExpression_02() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			withEquivalents(resolvesClosuresTo("[ | if (true) '' else return new StringBuilder ]",
 					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 		} else {
@@ -2813,7 +2814,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testClosureWithReturnExpression_03() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			withEquivalents(resolvesClosuresTo("[ | if (true) return '' else new StringBuilder ]",
 					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 		} else {
@@ -2824,7 +2825,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testClosureWithReturnExpression_04() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			withEquivalents(
 					resolvesClosuresTo("[ | if (true) '' else new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"),
 					"Function0<Serializable & Comparable<?> & CharSequence>");
