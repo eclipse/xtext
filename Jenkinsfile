@@ -167,7 +167,7 @@ def javaVersion() {
 
 /** returns true when this build was triggered by an upstream build */
 def isTriggeredByUpstream() {
-  return !"[]".equals(currentBuild.getBuildCauses('hudson.model.Cause$UpstreamCause').toString())
+  return !"[]".equals(currentBuild.getBuildCauses('org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamCause').toString())
 }
 
 /**
