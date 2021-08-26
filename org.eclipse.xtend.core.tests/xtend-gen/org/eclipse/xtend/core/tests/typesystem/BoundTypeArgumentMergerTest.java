@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -949,7 +949,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testMergeMultiType_01() {
-    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
     if (_isJava11OrLater) {
       Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
       Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
@@ -967,7 +967,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testMergeMultiType_02() {
-    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
     if (_isJava11OrLater) {
       Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
       Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
@@ -989,7 +989,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testMergeMultiType_03() {
-    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
     if (_isJava11OrLater) {
       Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
       Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
@@ -1022,7 +1022,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testBug470766_01() {
-    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    boolean _isJava12OrLater = JavaRuntimeVersion.isJava12OrLater();
     if (_isJava12OrLater) {
       Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
       Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -53,72 +53,6 @@ import com.google.inject.Provider;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractXtendTestCase extends Assert {
-
-	private static final boolean isJava11OrLater = determineJava11OrLater();
-
-	public static boolean isJava11OrLater() {
-		return isJava11OrLater;
-	}
-
-	private static final boolean isJava12OrLater = determineJava12OrLater();
-
-	public static boolean isJava12OrLater() {
-		return isJava12OrLater;
-	}
-	
-	private static final boolean isJava13OrLater = determineJava13OrLater();
-	
-	public static boolean isJava13OrLater() {
-		return isJava13OrLater;
-	}
-
-	private static boolean determineJava11OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 11;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
-
-	private static boolean determineJava12OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 12;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
-	
-	private static boolean determineJava13OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 13;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
 
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder;

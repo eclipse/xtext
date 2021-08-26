@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,6 +12,7 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -78,7 +79,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		int numChildren = 16;
-		if (isJava14OrLater()) {
+		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 15;
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
@@ -87,7 +88,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(counter++, "SubOfFoo - Super").hasTextRegion(false);
 		sub.child(counter++, "bar : String - Super").numChildren(0).hasTextRegion(false);
 		sub.child(counter++, "foo : int - Super").numChildren(0).hasTextRegion(false);
-		if (!isJava14OrLater()) {
+		if (!JavaRuntimeVersion.isJava14OrLater()) {
 			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
 		}
 		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
@@ -119,7 +120,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		int numChildren = 15;
-		if (isJava14OrLater()) {
+		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 14;
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren);
@@ -127,7 +128,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(counter++, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
 		sub.child(counter++, "bar() : String - Super").hasTextRegion(false);
 		sub.child(counter++, "foo(String) : int - Super").hasTextRegion(false);
-		if (!isJava14OrLater()) {
+		if (!JavaRuntimeVersion.isJava14OrLater()) {
 			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
 		}
 		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
@@ -154,13 +155,13 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		int numChildren = 13;
-		if (isJava14OrLater()) {
+		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 12;
 		}
 		sub = assertBuilder.child(1, "C - pack.name").numChildren(numChildren);
 		int counter = 0;
 		sub.child(counter++, "E - C").hasTextRegion(true);
-		if (!isJava14OrLater()) {
+		if (!JavaRuntimeVersion.isJava14OrLater()) {
 			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
 		}
 		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
@@ -191,7 +192,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		int numChildren = 13;
-		if (isJava14OrLater()) {
+		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 12;
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
@@ -200,7 +201,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		foo.child(counter++, "_foo(String) : void - Super").numChildren(0).hasTextRegion(false);
 		foo.child(counter++, "foo(Number) : void - Foo").numChildren(0).hasTextRegion(true);
 		counter = 1;
-		if (!isJava14OrLater()) {
+		if (!JavaRuntimeVersion.isJava14OrLater()) {
 			sub.child(counter++, "registerNatives() : void - Object").hasTextRegion(false);
 		}
 		sub.child(counter++, "clone() : Object - Object").hasTextRegion(false);
@@ -242,7 +243,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		int numChildren = 18;
-		if (isJava14OrLater()) {
+		if (JavaRuntimeVersion.isJava14OrLater()) {
 			numChildren = 17;
 		}
 		sub = assertBuilder.child(1, "Foo - test").numChildren(numChildren).hasTextRegion(true);
@@ -253,7 +254,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(i++, "c : Map<List<String>, String> - Super<String>").hasTextRegion(false);
 		sub.child(i++, "new(List<String>) - Super<String>").hasTextRegion(false);
 		sub.child(i++, "foo(List<String>) : String - Super<String>").hasTextRegion(false);
-		if (!isJava14OrLater()) {
+		if (!JavaRuntimeVersion.isJava14OrLater()) {
 			sub.child(i++, "registerNatives() : void - Object").hasTextRegion(false);
 		}
 		sub.child(i++, "clone() : Object - Object").hasTextRegion(false);

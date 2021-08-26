@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Sebastian Zarnekow
@@ -310,7 +311,7 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testUpperBound_11() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			'T'.mappedBy('java.util.Map<? extends T, ? extends T>', 'java.util.Map<String, Integer>')
 				.merge('T').to('Comparable<?> & Constable & ConstantDesc & Serializable', INVARIANT)
 		} else {

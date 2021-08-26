@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Level;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -732,7 +732,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotation() {
-    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
+    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
     Assert.assertTrue(this.batchCompiler.compile());
@@ -741,7 +741,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotationComment() {
-    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
+    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setGeneratedAnnotationComment("FooComment");
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
@@ -753,7 +753,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotationDate1() {
-    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
+    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setIncludeDateInGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");

@@ -12,6 +12,7 @@ import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTe
 import org.junit.Test
 import org.eclipse.xtext.testing.Flaky
 import org.eclipse.jdt.ui.PreferenceConstants
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -20,7 +21,7 @@ class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
 	
 	@Flaky
 	@Test def void testDataAnnotation() throws Exception {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			val typeFilter = PreferenceConstants.getPreferenceStore().getDefaultString(
 				"org.eclipse.jdt.ui.typefilter.enabled")
 			if (typeFilter !== null && typeFilter.contains("jdk.*")) {

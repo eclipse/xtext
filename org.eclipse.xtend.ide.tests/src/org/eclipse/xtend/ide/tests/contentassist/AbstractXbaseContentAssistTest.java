@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,7 +28,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
@@ -38,6 +37,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
@@ -249,7 +249,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		addMethods(stringType, features, staticFeatures, featuresOrTypes);
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
 		features.remove("compareTo()");
-		if (AbstractXtendUITestCase.isJava13OrLater()) {
+		if (JavaRuntimeVersion.isJava13OrLater()) {
 			// resolveConstantDesc(MethodHandles.Lookup) is there twice too
 			features.remove("resolveConstantDesc()");
 		}
@@ -309,7 +309,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
 		addMethods(classType, features, staticFeatures, featuresOrTypes);
-		if (AbstractXtendUITestCase.isJava13OrLater()) {
+		if (JavaRuntimeVersion.isJava13OrLater()) {
 			features.remove("componentType");
 			features.remove("arrayType");
 			features.add("getComponentType");

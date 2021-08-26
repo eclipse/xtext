@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
@@ -19,6 +27,7 @@ import org.junit.After
 import org.junit.Test
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
 import org.junit.Assume
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
@@ -530,7 +539,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
     // The necessary change was in org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider.isValidationDisabled(EObject)
     @Test
     def bug380551_TestLinkToNativeJavaType(){
-    	Assume.assumeFalse(isJava11OrLater)
+    	Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
         val xtendFile = parseHelper.parse('''
         package testpackage
         import javax.annotation.Resource

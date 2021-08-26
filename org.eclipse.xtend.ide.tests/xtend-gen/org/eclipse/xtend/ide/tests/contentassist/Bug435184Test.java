@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,9 +8,9 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Test;
 
 /**
@@ -54,7 +54,7 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.append("}");
     _builder.newLine();
     final ContentAssistProcessorTestBuilder b = _newBuilder.append(_builder.toString());
-    boolean _isJava11OrLater = AbstractXtendUITestCase.isJava11OrLater();
+    boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
     if (_isJava11OrLater) {
       b.assertTextAtCursorPosition("|", "read", "read()", "read()", "readAllBytes", "readNBytes()", "readNBytes()");
     } else {

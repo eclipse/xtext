@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,6 +12,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier
 import org.junit.Test
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -39,7 +40,7 @@ class Bug427440Test extends AbstractXtendContentAssistBugTest {
 		proposals.next.assertContains("annotations")
 		proposals.next.assertContains("anonymousClass")
 		proposals.next.assertContains("array")
-		if (isJava13OrLater) {
+		if (JavaRuntimeVersion.isJava13OrLater) {
 			proposals.next.assertContains("arrayType")
 		}
 		proposals.next.assertContains("asSubclass()")

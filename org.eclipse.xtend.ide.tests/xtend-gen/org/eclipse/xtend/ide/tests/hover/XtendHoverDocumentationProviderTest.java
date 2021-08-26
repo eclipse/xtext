@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.eclipse.xtend.ide.tests.hover;
 
 import com.google.common.collect.Iterables;
@@ -19,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -1030,7 +1039,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   @Test
   public void bug380551_TestLinkToNativeJavaType() {
     try {
-      Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
+      Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Sebastian Zarnekow
@@ -440,7 +441,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 
 	@Test def void testMergeMultiType_01() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
 		} else {
 			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
@@ -448,7 +449,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 
 	@Test def void testMergeMultiType_02() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
 		} else {
 			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
@@ -456,7 +457,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testMergeMultiType_03() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & Comparable<?> & CharSequence', INVARIANT)
 		} else {
 			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & CharSequence', INVARIANT)
@@ -468,7 +469,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testBug470766_01() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?> & Constable & ConstantDesc', INVARIANT)
 		} else {
 			merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?>', INVARIANT)
