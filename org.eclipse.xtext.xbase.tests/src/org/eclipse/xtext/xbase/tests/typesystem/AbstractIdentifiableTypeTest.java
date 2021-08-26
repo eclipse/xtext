@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -752,7 +753,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
 
 	@Test
 	public void testFeatureCall_26() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesIdentifiablesTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)\n" +
 				"   val Object o = list.head \n" +
@@ -771,7 +772,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
 
 	@Test
 	public void testFeatureCall_27() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesIdentifiablesTo(
 					"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]\n" +
 				"   val Object o = list.head \n" +

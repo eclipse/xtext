@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -237,7 +238,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testStringLiteral_05() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("newArrayList(null as Character, '1')", "ArrayList<Serializable & Comparable<?> & Constable>");
 		} else {
 			resolvesTo("newArrayList(null as Character, '1')", "ArrayList<Serializable & Comparable<?>>");
@@ -246,7 +247,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testStringLiteral_06() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("newArrayList(null as Character, '11')", "ArrayList<Serializable & Comparable<?> & Constable>");
 		} else {
 			resolvesTo("newArrayList(null as Character, '11')", "ArrayList<Serializable & Comparable<?>>");
@@ -420,7 +421,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testListLiteral_05() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
 			resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?>>");
@@ -499,7 +500,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testSetLiteral_05() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
 			resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?>>");
@@ -814,7 +815,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testOverloadedOperators_20() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
 					"Iterable<Serializable & Comparable<?> & CharSequence>");
 		} else {
@@ -856,7 +857,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTryCatchFinallyExpression_03() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) 'caught'", "Serializable & Comparable<?>");
@@ -865,7 +866,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTryCatchFinallyExpression_04() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?> & Constable");
 		} else {
 			resolvesTo("try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}", "Serializable & Comparable<?>");
@@ -874,7 +875,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTryCatchFinallyExpression_05() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try 'literal' as Object as Boolean\n" +
 							"  catch(NullPointerException e) 'second thing is thrown'		  \n" +
@@ -891,7 +892,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTryCatchFinallyExpression_06() throws Exception {
-		if (isJava15OrLater()) {
+		if (JavaRuntimeVersion.isJava15OrLater()) {
 			resolvesTo(
 					"try 'literal' as Object as Boolean\n" +
 							"  catch(ClassCastException e) throw new NullPointerException()\n" +
@@ -1703,7 +1704,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_02() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("if (true) new StringBuilder() else new StringBuffer()", "AbstractStringBuilder & Serializable & Comparable<?>");
 		} else {
 			resolvesTo("if (true) new StringBuilder() else new StringBuffer()", "AbstractStringBuilder & Serializable");
@@ -1745,7 +1746,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_09() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			this.isFunctionAndEquivalentTo(
 					resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]",
 							"(Object)=>AbstractStringBuilder & Serializable & Comparable<?>"),
@@ -1765,7 +1766,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_11() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')",
 					"AbstractStringBuilder & Serializable & Comparable<?>");
 		} else {
@@ -1780,7 +1781,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_13() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("if (true) <StringBuffer>newArrayList else <String>newHashSet",
 					"AbstractCollection<? extends Serializable & Comparable<?> & CharSequence> & Serializable & Cloneable");
 		} else {
@@ -2047,7 +2048,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTypeGuardedCase_0() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
 		} else {
 			resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
@@ -2073,7 +2074,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTypeGuardedCase_3() throws Exception {
-		if (isJava11OrLater()) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
 		} else {
 			resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & CharSequence");
@@ -2381,7 +2382,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testConstructorTypeInference_08() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)",
 					"GenericType2<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2431,7 +2432,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_01() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("newArrayList(new Double('-20'), new Integer('20'))",
 					"ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2441,7 +2442,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_02() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("newArrayList(if (true) new Double('-20') else new Integer('20'))",
 					"ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2451,7 +2452,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_03() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))",
 					"ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2462,7 +2463,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_04() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))",
 					"ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2473,7 +2474,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_05() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))",
 					"ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
 		} else {
@@ -2484,7 +2485,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testVarArgs_06() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("java::util::Arrays::asList(1, 3d, '4')", "List<Comparable<?> & Constable & ConstantDesc & Serializable>");
 		} else {
 			resolvesTo("java::util::Arrays::asList(1, 3d, '4')", "List<Comparable<?> & Serializable>");
@@ -2552,7 +2553,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testMemberFeatureCall_05() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 		} else {
 		}
 		resolvesTo("''.^class.superclass", "Class<?>");
@@ -2560,7 +2561,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testFeatureCall_04() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("new testdata.ClassWithVarArgs().toList('', 1)", "List<Comparable<?> & Constable & ConstantDesc & Serializable>");
 		} else {
 			resolvesTo("new testdata.ClassWithVarArgs().toList('', 1)", "List<Comparable<?> & Serializable>");
@@ -2569,7 +2570,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testFeatureCall_05() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo("new testdata.ClassWithVarArgs().toNumberList()", "List<Number>");
 			resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
 			resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
@@ -3916,7 +3917,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testDeferredTypeArgumentResolution_018() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo(
 				"{\n" +
 				"val list = newArrayList\n" +
@@ -4467,7 +4468,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testDeferredTypeArgumentResolution_064() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo(
 					"{\n" +
 				"val list = newArrayList\n" +
@@ -4695,7 +4696,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testDeferredTypeArgumentResolution_084() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo(
 				"{\n" +
 				"val list = new java.util.ArrayList\n" +
@@ -5254,7 +5255,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testDeferredTypeArgumentResolution_130() throws Exception {
-		if (isJava12OrLater()) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			resolvesTo(
 					"{\n" +
 				"val list = new java.util.ArrayList\n" +

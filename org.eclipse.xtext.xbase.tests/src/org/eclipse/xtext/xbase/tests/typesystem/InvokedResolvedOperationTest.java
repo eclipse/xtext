@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -100,8 +101,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
 	@Test
 	public void testTypeArguments_02() throws Exception {
 		InvokedResolvedOperation operation = toOperation("newArrayList(1, 1d)");
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			Assert.assertEquals("ArrayList<Number & Comparable<?> & Constable & ConstantDesc>",
 					operation.getResolvedReturnType().getSimpleName());
 			Assert.assertEquals("Number & Comparable<?> & Constable & ConstantDesc",

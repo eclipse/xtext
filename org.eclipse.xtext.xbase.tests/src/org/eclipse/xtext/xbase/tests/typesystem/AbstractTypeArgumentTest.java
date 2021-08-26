@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -398,8 +399,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testOverloadedOperators_20() throws Exception {
-		boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
-		if (_isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater()) {
 			done(
 					and(
 							bindTypeArgumentsTo(
@@ -1060,8 +1060,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testConstructorTypeInference_08() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1089,8 +1088,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testVarArgs_01() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("newArrayList(new Double('-20'), new Integer('20'))",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1100,8 +1098,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testVarArgs_02() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("newArrayList(if (true) new Double('-20') else new Integer('20'))",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1112,8 +1109,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testVarArgs_03() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1124,8 +1120,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testVarArgs_04() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1136,8 +1131,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testVarArgs_05() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo(
 					"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
@@ -1180,8 +1174,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_07() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toList('', 1)",
 					"Comparable<?> & Constable & ConstantDesc & Serializable"));
 		} else {
@@ -1206,8 +1199,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_11() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)",
 					"Number & Comparable<?> & Constable & ConstantDesc"));
 		} else {
@@ -1556,8 +1548,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_64() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(bindTypeArgumentsTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)\n" +
 				"	   val Object o = list.head \n" +
@@ -1577,8 +1568,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_65() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(and(bindTypeArgumentsTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)\n" +
 				"	   val Object o = list.head \n" +
@@ -1598,8 +1588,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_66() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(and(bindTypeArgumentsTo(
 					"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.compareTo(null))\n" +
 				"	   val Object o = list.head \n" +
@@ -1619,8 +1608,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testFeatureCall_67() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(bindTypeArgumentsTo(
 					"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]\n" +
 				"	   val Object o = list.head \n" +
@@ -2320,8 +2308,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testDeferredTypeArgumentResolution_018() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo(
 					"{\n" +
 				"val list = newArrayList\n" +
@@ -2775,8 +2762,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testDeferredTypeArgumentResolution_064() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(bindTypeArgumentsTo(
 					"{\n" +
 				"val list = newArrayList\n" +
@@ -2991,8 +2977,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testDeferredTypeArgumentResolution_084() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(bindTypeArgumentsTo(
 					"{\n" +
 				"val list = new java.util.ArrayList\n" +
@@ -3463,8 +3448,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testDeferredTypeArgumentResolution_130() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(and(bindTypeArgumentsTo(
 					"{\n" +
 				"val list = new java.util.ArrayList\n" +
@@ -3732,8 +3716,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testDeferredTypeArgumentResolution_161() throws Exception {
-		boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
-		if (_isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater()) {
 			done(and(bindTypeArgumentsTo(
 					"{\n" +
 				"val list = newArrayList\n" +

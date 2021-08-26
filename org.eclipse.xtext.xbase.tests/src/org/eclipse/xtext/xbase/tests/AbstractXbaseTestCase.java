@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,8 +9,6 @@
 package org.eclipse.xtext.xbase.tests;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,72 +32,6 @@ import com.google.inject.Provider;
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseInjectorProvider.class)
 public abstract class AbstractXbaseTestCase extends Assert {
-	
-	private static final boolean isJava11OrLater = determineJava11OrLater();
-	
-	public static boolean isJava11OrLater() {
-		return isJava11OrLater;
-	}
-	
-	private static final boolean isJava12OrLater = determineJava12OrLater();
-	
-	public static boolean isJava12OrLater() {
-		return isJava12OrLater;
-	}
-	
-	private static final boolean isJava15OrLater = determineJava15OrLater();
-	
-	public static boolean isJava15OrLater() {
-		return isJava15OrLater;
-	}
-
-	private static boolean determineJava11OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 11;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
-
-	private static boolean determineJava12OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 12;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
-
-	private static boolean determineJava15OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 15;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
 
 	@Inject
 	private Injector injector;
