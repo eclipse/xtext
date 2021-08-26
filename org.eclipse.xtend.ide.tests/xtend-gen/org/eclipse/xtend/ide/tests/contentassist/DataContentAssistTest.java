@@ -9,8 +9,8 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.jdt.ui.PreferenceConstants;
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.testing.Flaky;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Test;
 
 /**
@@ -21,7 +21,7 @@ public class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
   @Flaky
   @Test
   public void testDataAnnotation() throws Exception {
-    boolean _isJava11OrLater = AbstractXtendUITestCase.isJava11OrLater();
+    boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
     if (_isJava11OrLater) {
       final String typeFilter = PreferenceConstants.getPreferenceStore().getDefaultString(
         "org.eclipse.jdt.ui.typefilter.enabled");

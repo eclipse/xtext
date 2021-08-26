@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -15,11 +15,11 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -363,7 +363,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testUpperBound_11() {
-    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    boolean _isJava12OrLater = JavaRuntimeVersion.isJava12OrLater();
     if (_isJava12OrLater) {
       this.to(this.merge(this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>"), "T"), "Comparable<?> & Constable & ConstantDesc & Serializable", VarianceInfo.INVARIANT);
     } else {

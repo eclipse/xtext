@@ -11,6 +11,7 @@ package org.eclipse.xtend.core.tests.compiler
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.junit.Test
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -168,7 +169,7 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			'''
 				package foo;
 				
-				«IF !isJava11OrLater»
+				«IF !JavaRuntimeVersion.isJava11OrLater»
 				import javax.annotation.Generated;
 				
 				@Generated("org.eclipse.xtend.core.compiler.XtendGenerator")
@@ -194,7 +195,7 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			'''
 				package foo;
 				
-				«IF !isJava11OrLater»
+				«IF !JavaRuntimeVersion.isJava11OrLater»
 				import javax.annotation.Generated;
 				
 				@Generated(value = "org.eclipse.xtend.core.compiler.XtendGenerator", comments = "Source: Bar.xtend")

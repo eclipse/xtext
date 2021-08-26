@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,11 +11,11 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -60,7 +60,7 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     this.assertContains(proposals.next(), "annotations");
     this.assertContains(proposals.next(), "anonymousClass");
     this.assertContains(proposals.next(), "array");
-    boolean _isJava13OrLater = AbstractXtendUITestCase.isJava13OrLater();
+    boolean _isJava13OrLater = JavaRuntimeVersion.isJava13OrLater();
     if (_isJava13OrLater) {
       this.assertContains(proposals.next(), "arrayType");
     }

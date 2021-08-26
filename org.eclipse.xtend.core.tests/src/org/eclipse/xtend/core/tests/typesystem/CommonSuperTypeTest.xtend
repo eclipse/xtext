@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.junit.Test
+import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Sebastian Zarnekow
@@ -91,7 +92,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_01() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			"Serializable & Comparable<?> & CharSequence".isSuperTypeOf("String", "StringBuilder")
 		} else {
 			"Serializable & CharSequence".isSuperTypeOf("String", "StringBuilder")
@@ -125,7 +126,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_07() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			"Comparable<?> & Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
 		} else {
 			"Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
@@ -149,7 +150,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_11() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("String", "Integer")
 		} else {
 			"Comparable<?> & Serializable".isSuperTypeOf("String", "Integer")
@@ -158,7 +159,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_12() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("Double", "Integer")
 		} else {
 			"Number & Comparable<?>".isSuperTypeOf("Double", "Integer")
@@ -167,7 +168,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_13() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			"AbstractStringBuilder & Serializable & Comparable<?>".isSuperTypeOf("StringBuilder", "StringBuffer")
 		} else {
 			"AbstractStringBuilder & Serializable".isSuperTypeOf("StringBuilder", "StringBuffer")
@@ -230,7 +231,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_24() {
-		if (isJava11OrLater) {
+		if (JavaRuntimeVersion.isJava11OrLater) {
 			"Collection<? extends AbstractStringBuilder & Serializable & Comparable<?>>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
 		} else {
 			"Collection<? extends AbstractStringBuilder & Serializable>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
@@ -254,7 +255,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_28() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Number[] & Comparable<?>[] & Constable[] & ConstantDesc[]".isSuperTypeOf("Integer[]", "Double[]")
 		} else {
 			"Number[] & Comparable<?>[]".isSuperTypeOf("Integer[]", "Double[]")
@@ -313,7 +314,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_39() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Number[][][] & Comparable<?>[][][] & Constable[][][] & ConstantDesc[][][]".isSuperTypeOf("Integer[][][]", "Double[][][]")
 		} else {
 			"Number[][][] & Comparable<?>[][][]".isSuperTypeOf("Integer[][][]", "Double[][][]")
@@ -327,7 +328,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_41() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("String", "int")
 		} else {
 			"Comparable<?> & Serializable".isSuperTypeOf("String", "int")
@@ -381,7 +382,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_51() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"()=>Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>")
 		} else {
 			"()=>Number & Comparable<?>".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
@@ -390,7 +391,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_52() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"()=>Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>")
 		} else {
 			"()=>Number & Comparable<?>".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
@@ -469,7 +470,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_67() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("Integer", "String")
 		} else {
 			"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String")
@@ -478,7 +479,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_68() {
-		if (isJava12OrLater) {
+		if (JavaRuntimeVersion.isJava12OrLater) {
 			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("Integer", "String", "String")
 		} else {
 			"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String", "String")

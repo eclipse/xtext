@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.List;
 
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -57,9 +57,9 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	
 	@Override
 	@Test public void testForLoop_02() throws Exception {
-		if (AbstractXtendUITestCase.isJava13OrLater()) {
+		if (JavaRuntimeVersion.isJava13OrLater()) {
 			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string", "strip", "stripIndent", "stripLeading", "stripTrailing");
-		} else if (AbstractXtendUITestCase.isJava11OrLater()) {
+		} else if (JavaRuntimeVersion.isJava11OrLater()) {
 			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string", "strip", "stripLeading", "stripTrailing");
 		} else {
 			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string");

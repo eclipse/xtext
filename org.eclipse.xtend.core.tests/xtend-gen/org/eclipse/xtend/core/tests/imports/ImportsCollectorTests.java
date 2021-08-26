@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor;
 import org.eclipse.xtext.xbase.imports.ImportsCollector;
@@ -468,7 +469,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   
   @Test
   public void testEnum_01() {
-    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
+    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import javax.annotation.Resource");
     _builder.newLine();

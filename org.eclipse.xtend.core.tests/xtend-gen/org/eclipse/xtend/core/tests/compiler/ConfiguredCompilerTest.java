@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.junit.Test;
 
@@ -270,7 +270,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     {
-      boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+      boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
       boolean _not = (!_isJava11OrLater);
       if (_not) {
         _builder_1.append("import javax.annotation.Generated;");
@@ -306,7 +306,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.newLine();
     {
-      boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+      boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
       boolean _not = (!_isJava11OrLater);
       if (_not) {
         _builder_1.append("import javax.annotation.Generated;");

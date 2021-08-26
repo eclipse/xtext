@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.Collection;
 import java.util.List;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Ignore;
@@ -29,7 +29,7 @@ public class AllSuperTypesTest extends AbstractSuperTypesTest {
   @Test
   @Override
   public void testString() {
-    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    boolean _isJava12OrLater = JavaRuntimeVersion.isJava12OrLater();
     if (_isJava12OrLater) {
       this.assertSuperTypes(String.class, "Serializable", "Comparable<String>", "CharSequence", "Constable", "ConstantDesc", "Object");
     } else {
@@ -52,7 +52,7 @@ public class AllSuperTypesTest extends AbstractSuperTypesTest {
   @Test
   @Override
   public void testStringArray() {
-    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    boolean _isJava12OrLater = JavaRuntimeVersion.isJava12OrLater();
     if (_isJava12OrLater) {
       this.assertSuperTypes("String[]", "Serializable[]", "Comparable<String>[]", "CharSequence[]", "Constable[]", "ConstantDesc[]", "Object[]", "Cloneable", "Serializable", "Object");
     } else {
