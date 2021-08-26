@@ -81,10 +81,6 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 		return true;
 	}
 	
-	protected boolean isJava6(){
-		return System.getProperty("java.version","1.6.0").startsWith("1.6");
-	}
-	
 	@Test
 	public void testDefaultArrayList_01() throws Exception {
 		//FIXME this does not consider JDT type filter, i.e. TypeFilter#isFiltered(char[],char[]) is not called.
