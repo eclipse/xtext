@@ -16,9 +16,8 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
@@ -37,25 +36,7 @@ import org.junit.runners.model.Statement;
 @SuppressWarnings("deprecation")
 public class ManifestMergerTest extends Assert {
 	private static final String NL = Strings.newLine();
-	
-	private static final boolean isJava16OrLater = determineJava16OrLater();
-	
-	private static boolean determineJava16OrLater() {
-		String javaVersion = System.getProperty("java.version");
-		try {
-			Pattern p = Pattern.compile("(\\d+)(.)*");
-			Matcher matcher = p.matcher(javaVersion);
-			if (matcher.matches()) {
-				String first = matcher.group(1);
-				int version = Integer.parseInt(first);
-				return version >= 16;
-			}
-		} catch (NumberFormatException e) {
-			// ok
-		}
-		return false;
-	}
-	
+
 	@Rule
 	public MethodRule ignoreOnJava16OrLater = new MethodRule() {
 
@@ -65,7 +46,7 @@ public class ManifestMergerTest extends Assert {
 
 				@Override
 				public void evaluate() throws Throwable {
-					Assume.assumeFalse("Ignored on Java 16 and later", isJava16OrLater);
+					Assume.assumeFalse("Ignored on Java 16 and later", JavaRuntimeVersion.isJava16OrLater());
 					base.evaluate();
 				}
 			};
