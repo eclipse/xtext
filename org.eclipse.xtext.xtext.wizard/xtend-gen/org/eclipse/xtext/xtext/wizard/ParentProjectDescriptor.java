@@ -134,6 +134,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("\t\t");
       _builder.append("mavenCentral()");
       _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("gradlePluginPortal()");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -244,44 +247,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      {
-        boolean _isAtLeast = this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA11);
-        boolean _not = (!_isAtLeast);
-        if (_not) {
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("configurations.all {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("if (name.contains(\"Tooling\")) {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t\t");
-          _builder.append("dependencies {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t\t\t");
-          _builder.append("add(name, \"org.eclipse.xtend:org.eclipse.xtend.core:${xtextVersion}\")");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t\t\t");
-          _builder.append("add(name, platform(\"org.eclipse.xtext:xtext-dev-bom:${xtextVersion}\"))");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
       _builder.append("}");
       _builder.newLine();
       it.setAdditionalContent(_builder.toString());

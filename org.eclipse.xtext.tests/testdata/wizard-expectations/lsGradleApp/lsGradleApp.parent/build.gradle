@@ -1,9 +1,10 @@
 buildscript {
 	repositories {
 		mavenCentral()
+		gradlePluginPortal()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
+		classpath 'org.xtext:xtext-gradle-plugin:2.0.9'
 	}
 }
 
@@ -30,14 +31,5 @@ subprojects {
 	
 	configurations.all {
 		exclude group: 'asm'
-	}
-	
-	configurations.all {
-		if (name.contains("Tooling")) {
-			dependencies {
-				add(name, "org.eclipse.xtend:org.eclipse.xtend.core:${xtextVersion}")
-				add(name, platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}"))
-			}
-		}
 	}
 }
