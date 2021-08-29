@@ -87,6 +87,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				buildscript {
 					repositories {
 						mavenCentral()
+						gradlePluginPortal()
 					}
 					dependencies {
 						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
@@ -122,17 +123,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					configurations.all {
 						exclude group: 'asm'
 					}
-					«IF !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-						
-						configurations.all {
-							if (name.contains("Tooling")) {
-								dependencies {
-									add(name, "org.eclipse.xtend:org.eclipse.xtend.core:${xtextVersion}")
-									add(name, platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}"))
-								}
-							}
-						}
-					«ENDIF»
 				}
 			'''
 		]

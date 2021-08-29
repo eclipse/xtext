@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -45,7 +45,7 @@ public class XtextVersion {
 	}
 
 	public String getXtextGradlePluginVersion() {
-		return "2.0.8";
+		return "2.0.9";
 	}
 
 	/**
