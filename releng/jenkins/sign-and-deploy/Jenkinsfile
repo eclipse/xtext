@@ -151,6 +151,7 @@ spec:
           done
 
           ./gradlew -info \
+            --warning-mode all \
             --refresh-dependencies \
             -PJENKINS_URL=$JENKINS_URL \
             -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
