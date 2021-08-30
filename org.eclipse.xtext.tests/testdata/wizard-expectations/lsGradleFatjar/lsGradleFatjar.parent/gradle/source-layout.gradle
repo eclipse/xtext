@@ -5,7 +5,7 @@ if (name.endsWith(".tests")) {
 			resources.srcDirs = []
 		}
 		test {
-			java.srcDirs = ['src', 'src-gen']
+			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
 			resources.srcDirs = ['src', 'src-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
@@ -13,7 +13,7 @@ if (name.endsWith(".tests")) {
 } else {
 	sourceSets {
 		main {
-			java.srcDirs = ['src', 'src-gen']
+			java.srcDirs = ['src', 'src-gen', 'xtend-gen']
 			resources.srcDirs = ['src', 'src-gen']
 			xtendOutputDir = 'xtend-gen'
 		}
