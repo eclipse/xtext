@@ -12,6 +12,7 @@ sourceSets {
 	configure(isTestProject? test : main) {
 		java {
 			srcDirs = sourceDirs
+			srcDir 'xtend-gen'
 			include '**/*.java', '**/*.xtend'
 		}
 		resources {
