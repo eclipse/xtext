@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019, 2021 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -106,12 +106,15 @@ public class SocketServerLauncher {
 	}
 
 	protected int getPort(String... args) {
-		Integer port = Integer.getInteger(getValue(args, PORT));
-		if (port != null) {
-			return port;
-		} else {
-			return DEFAULT_PORT;
+		String value = getValue(args, PORT);
+		if (value != null) {
+			try {
+				return Integer.parseInt(value);
+			} catch (NumberFormatException e) {
+				return DEFAULT_PORT;
+			}
 		}
+		return DEFAULT_PORT;
 	}
 
 	protected String getValue(String[] args, String argName) {
