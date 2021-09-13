@@ -235,6 +235,64 @@
 
 <p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.</p>
 
+<p>If your language uses an <code>IJvmModelInferrer</code> (for example by using Xbase), the plug-in can create trace files for debugging purposes,<br />
+by using the specialized maven goals <code>install-debug-info</code> and <code>test-install-debug-info</code>.</p>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+	&lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;${xtext-version}&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+      &lt;id&gt;generate&lt;/id&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;generate&lt;/goal&gt;
+        &lt;goal&gt;testGenerate&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+    &lt;execution&gt;
+      &lt;id&gt;trace&lt;/id&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;install-debug-info&lt;/goal&gt;
+        &lt;goal&gt;test-install-debug-info&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;configuration&gt;
+    &lt;addOutputDirectoriesToCompileSourceRoots&gt;true&lt;/addOutputDirectoriesToCompileSourceRoots&gt;
+		&lt;languages&gt;
+			&lt;language&gt;
+				&lt;setup&gt;my.javalang.JavaLanguageStandaloneSetup&lt;/setup&gt;
+				&lt;outputConfigurations&gt;
+				&lt;outputConfigurations&gt;
+          &lt;outputConfiguration&gt;
+            &lt;installDslAsPrimarySource&gt;true&lt;/installDslAsPrimarySource&gt;
+            &lt;outputDirectory&gt;src-gen&lt;/outputDirectory&gt;
+            &lt;sourceMappings&gt;
+              &lt;sourceMapping&gt;
+                &lt;outputDirectory&gt;src-gen&lt;/outputDirectory&gt;
+                &lt;sourceFolder&gt;src&lt;/sourceFolder&gt;
+              &lt;/sourceMapping&gt;
+            &lt;/sourceMappings&gt;
+          &lt;/outputConfiguration&gt;
+        &lt;/outputConfigurations&gt;
+			&lt;/language&gt;
+		&lt;/languages&gt;
+	&lt;/configuration&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;my.javalang&lt;/groupId&gt;
+			&lt;artifactId&gt;my.javalanguage&lt;/artifactId&gt;
+			&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>In this example, the option <code>installDslAsPrimarySource</code> is used to create traces that hide the underlying Java source and map the source file lines to the lines in the byte code.<br />
+At least one source mapping is needed for the trace functionality to work as the plug-in has to map input to output folder locations.<br />
+If you add the optional property <code>addOutputDirectoriesToCompileSourceRoots</code>, the output directories specified in <code>sourceMappings</code> will be appended as (test)compile roots of the current Maven project, which means the <code>maven-compiler-plugin</code> will recognize them as Java source folders. Set to <code>false</code> to opt out, as <code>true</code> is the default.</p>
+
 <h2 id="maven-tycho-hints">Maven Tycho Hints</h2>
 
 <p>Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the <code>pom.xml</code> using maven <code>&lt;repositories&gt;</code> section. The p2 repositories need to be marked with layout=p2.<br />
