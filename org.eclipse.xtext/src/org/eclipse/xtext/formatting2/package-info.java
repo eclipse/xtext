@@ -19,11 +19,13 @@
  * <p>To implement a formatter or to understand how to implement a formatter, see
  * {@link org.eclipse.xtext.formatting2.AbstractFormatter2}.</p>
  * 
- * @see org.eclipse.xtext.formatting2.IFormatter2 Use the IFormatter2 to invoke the formatter
- * @see org.eclipse.xtext.formatting2.AbstractFormatter2 Extend the AbstractFormatter2 to implement a formatter
- * @see org.eclipse.xtext.formatting2.FormatterRequest The FormatterRequest is a per-execution scoped configuration for the formatter.  
+ * <ul>
+ * <li>{@link org.eclipse.xtext.formatting2.IFormatter2} Use the IFormatter2 to invoke the formatter</li>
+ * <li>{@link org.eclipse.xtext.formatting2.AbstractFormatter2} Extend the AbstractFormatter2 to implement a formatter</li>
+ * <li>{@link org.eclipse.xtext.formatting2.FormatterRequest} The FormatterRequest is a per-execution scoped configuration for the formatter.  
  *                         Per-language configuration is handled by the injector
- *                         or {@link org.eclipse.xtext.formatting2.AbstractFormatter2}. 
+ *                         or {@link org.eclipse.xtext.formatting2.AbstractFormatter2}.</li>
+ * </ul>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
