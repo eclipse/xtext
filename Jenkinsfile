@@ -8,7 +8,7 @@ pipeline {
   parameters {
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
-       'adoptopenjdk-hotspot-jdk8-latest', 'adoptopenjdk-hotspot-jdk11-latest', 'adoptopenjdk-hotspot-jdk16-latest'
+       'temurin-jdk8-latest', 'temurin-jdk11-latest', 'temurin-jdk17-latest'
     ])
   }
 
