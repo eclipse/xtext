@@ -570,7 +570,7 @@ Note that rules that do not call other parser rules and do neither contain any a
 
 Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters. The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.
 
-If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore](https://github.com/eclipse/emf/blob/master/plugins/org.eclipse.emf.ecore.change/model/Change.ecore) with *ADD*, *MOVE* and *REMOVE* you could write:
+If you want to define a `ChangeKind` from [org.eclipse.emf.ecore.change/model/Change.ecore]({{site.src.emf}}/plugins/org.eclipse.emf.ecore.change/model/Change.ecore) with *ADD*, *MOVE* and *REMOVE* you could write:
 
 ```xtext
 enum ChangeKind:
