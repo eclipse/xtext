@@ -41,8 +41,8 @@ src:
   xtext_extras: "https://github.com/eclipse/xtext-extras/blob/master"
   xtext_eclipse: "https://github.com/eclipse/xtext-eclipse/blob/master"
   xtext_web: "https://github.com/eclipse/xtext-web/blob/master"
-  mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
-  emf: "https://github.com/eclipse/emf/blob/R2_9_0"
+  mwe: "https://github.com/eclipse/mwe/blob/v2.12.1"
+  emf: "https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0"
 
 javadoc:
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
