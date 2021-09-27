@@ -40,6 +40,10 @@ public class AntlrToolFacade {
 		this.askBeforeDownload = shouldAsk;
 	}
 
+	/**
+	 * @deprecated use {@link #setSecureDownloadFrom(String)} instead
+	 */
+	@Deprecated
 	public void setDownloadFrom(String downloadURL) {
 		this.downloadURL = downloadURL;
 	}
