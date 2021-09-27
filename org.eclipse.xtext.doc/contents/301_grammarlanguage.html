@@ -41,7 +41,7 @@
 <pre><code class="language-xtext">generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 </code></pre>
 
-<p>That statement could actually be read as: generate an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> with the <em>name</em> <code>domainmodel</code> and the <em>nsURI</em> <code>"http://www.example.org/domainmodel/Domainmodel"</code>. Xtext will then add <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClasses</a> with <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> and <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> for the different parser rules in your grammar, as described in <a href="301_grammarlanguage.html#metamodel-inference">Ecore model inference</a>.</p>
+<p>That statement could actually be read as: generate an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> with the <em>name</em> <code>domainmodel</code> and the <em>nsURI</em> <code>"http://www.example.org/domainmodel/Domainmodel"</code>. Xtext will then add <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClasses</a> with <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> and <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> for the different parser rules in your grammar, as described in <a href="301_grammarlanguage.html#metamodel-inference">Ecore model inference</a>.</p>
 
 <h4 id="epackage-import">EPackage Import</h4>
 
@@ -50,7 +50,7 @@
 <pre><code class="language-xtext">import "http://www.xtext.org/example/Domainmodel"
 </code></pre>
 
-<p>A <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. It is also possible to import EPackages using resource URIs, but it is strongly recommended to use the namespace URI instead because it is independent from the concrete location in the file system, much more portable across different machines, easier to configure in the workflow, and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated and is only supported for backwards compatibility.</p>
+<p>A <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java">URI</a> (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. It is also possible to import EPackages using resource URIs, but it is strongly recommended to use the namespace URI instead because it is independent from the concrete location in the file system, much more portable across different machines, easier to configure in the workflow, and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated and is only supported for backwards compatibility.</p>
 
 <p>Using package imports usually requires some <a href="302_configuration.html#importing-metamodels">adaptations in the generator workflow</a>.</p>
 
@@ -64,7 +64,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (e.g. <code>another::SomeType</code>). Cases where such type references occur are explained below.</p>
 
-<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> with the same name. In that case none of them can be referenced. It is even possible to <code>import</code> multiple and <code>generate</code> one Ecore model and declare all of them with the same alias. If you do so, for a reference to an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> first the imported <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> are scanned before it is assumed that a type needs to be generated into the inferred package.</p>
+<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> with the same name. In that case none of them can be referenced. It is even possible to <code>import</code> multiple and <code>generate</code> one Ecore model and declare all of them with the same alias. If you do so, for a reference to an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifier</a> first the imported <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a> are scanned before it is assumed that a type needs to be generated into the inferred package.</p>
 
 <p>Note that using the same alias for multiple EPackages is not recommended, because it might cause problems that are hard to track down. For instance, a reference to <code>classA</code> could mistakenly be linked to a newly created EClass instead of an existing EClass <code>ClassA</code> because the latter is written with a capital letter.</p>
 
@@ -104,7 +104,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <h4 id="return-types">Return Types</h4>
 
-<p>Each terminal rule returns an atomic value (an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>). By default, it’s assumed that an instance of <code>ecore::EString</code> should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
+<p>Each terminal rule returns an atomic value (an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>). By default, it’s assumed that an instance of <code>ecore::EString</code> should be returned. However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:</p>
 
 <pre><code class="language-xtext">import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 //...
@@ -226,7 +226,7 @@ terminal STRING:
 
 <h3 id="parser-rules">Parser Rules</h3>
 
-<p>The parser is fed with a sequence of terminals and walks through the so-called <em>parser rules</em>. Hence a parser rule – contrary to a terminal rule – does not produce a single atomic terminal token, but a tree of non-terminal and terminal tokens. They lead to a so-called <em>parse tree</em> (in Xtext it is also referred as <em>node model</em>). Furthermore, parser rules are handled as kind of a building plan for the creation of the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a> that form the semantic model (the linked <em>abstract syntax tree</em> or AST). Due to this fact, parser rules are also called production or EObject rules. Different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly.</p>
+<p>The parser is fed with a sequence of terminals and walks through the so-called <em>parser rules</em>. Hence a parser rule – contrary to a terminal rule – does not produce a single atomic terminal token, but a tree of non-terminal and terminal tokens. They lead to a so-called <em>parse tree</em> (in Xtext it is also referred as <em>node model</em>). Furthermore, parser rules are handled as kind of a building plan for the creation of the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a> that form the semantic model (the linked <em>abstract syntax tree</em> or AST). Due to this fact, parser rules are also called production or EObject rules. Different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly.</p>
 
 <h4 id="extended-backus-naur-form-expressions-1">Extended Backus-Naur Form Expressions</h4>
 
@@ -245,7 +245,7 @@ terminal STRING:
 
 <h5 id="assignments">Assignments</h5>
 
-<p>Assignments are used to assign the consumed information to a feature of the currently produced object. The type of the current object, its <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type’s name equals the rule’s name. The type of the assigned feature is inferred from the right hand side of the assignment.</p>
+<p>Assignments are used to assign the consumed information to a feature of the currently produced object. The type of the current object, its <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type’s name equals the rule’s name. The type of the assigned feature is inferred from the right hand side of the assignment.</p>
 
 <p>Example:</p>
 
@@ -281,7 +281,7 @@ terminal STRING:
     (many ?= 'many')? name = ID ':' type = [Type];
 </code></pre>
 
-<p>It is important to understand that the text between the square brackets does not refer to another rule, but to an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> – which is a type and not a parser rule. This can be sometimes confusing because one usually uses the same name for the rules and for the returned types.</p>
+<p>It is important to understand that the text between the square brackets does not refer to another rule, but to an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> – which is a type and not a parser rule. This can be sometimes confusing because one usually uses the same name for the rules and for the returned types.</p>
 
 <p>Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by <em>CrossReferenceableTerminal</em>. This is the part describing the concrete text from which the cross-reference should be established. If the terminal is omitted, it is expected to be the rule with the name <em>ID</em> – if one can be found. The terminal is mandatory for languages that do not define a rule with the name <em>ID</em>.</p>
 
@@ -332,7 +332,7 @@ x 0 8 15
 
 <p>The object to be returned by a parser rule is usually created lazily on the first assignment. Its type is determined from the specified return type of the rule, which may have been inferred from the rule’s name if no explicit return type is specified.</p>
 
-<p>With Actions however, the creation of returned <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> can be made explicit. Xtext supports two kinds of Actions:</p>
+<p>With Actions however, the creation of returned <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> can be made explicit. Xtext supports two kinds of Actions:</p>
 
 <ol>
   <li><em>Simple</em> Actions</li>
@@ -358,13 +358,13 @@ MyOtherRule returns TypeB:
     "B" {TypeB} name=ID; 
 </code></pre>
 
-<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The notation <code>{TypeB}</code> will create an instance of <em>TypeB</em> and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.</p>
+<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a>. The notation <code>{TypeB}</code> will create an instance of <em>TypeB</em> and assign it to the result of the parser rule. This allows to define parser rules without any assignment and to create objects without the need to introduce unnecessary delegate rules.</p>
 
 <p>Note: If a parser rule does not instantiate any object because it does not contain an Action and no mandatory Assignment, you’ll likely end up with unexpected situations for valid input files. Xtext detects this situation and will raise a warning (with a corresponding quickfix) for the parser rules in question.</p>
 
 <h5 id="unassigned-rule-calls">Unassigned Rule Calls</h5>
 
-<p>We previously explained that the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> to be returned is created lazily when the first assignment occurs or as soon as a simple action is evaluated. There is another concept to find the EObject to be returned, called <em>unassigned rule call</em>. Unassigned rule calls, as the name suggests it, are rule calls to other parser rules which are not used within an assignment. The return value of the called rule becomes the return value of the calling parser rule if it is not assigned to a feature.</p>
+<p>We previously explained that the <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObject</a> to be returned is created lazily when the first assignment occurs or as soon as a simple action is evaluated. There is another concept to find the EObject to be returned, called <em>unassigned rule call</em>. Unassigned rule calls, as the name suggests it, are rule calls to other parser rules which are not used within an assignment. The return value of the called rule becomes the return value of the calling parser rule if it is not assigned to a feature.</p>
 
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch to other rules:</p>
 
@@ -438,7 +438,7 @@ TerminalExpression returns Expression:
     {IntLiteral} value=INT;
 </code></pre>
 
-<p>In the example above <code>{Operation.left=current}</code> is a so-called <em>tree rewrite action</em>, which creates a new instance of the stated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>Operation</em> and assigns the element currently to-be-returned (the <code>current</code> variable) to a feature of the newly created object. The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>. In Java these semantics could be expressed as:</p>
+<p>In the example above <code>{Operation.left=current}</code> is a so-called <em>tree rewrite action</em>, which creates a new instance of the stated <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>Operation</em> and assigns the element currently to-be-returned (the <code>current</code> variable) to a feature of the newly created object. The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>. In Java these semantics could be expressed as:</p>
 
 <pre><code class="language-java">Operation temp = new Operation();
 temp.setLeft(current);
@@ -515,7 +515,7 @@ Fullname:
 
 <h3 id="datatype-rules">Data Type Rules</h3>
 
-<p>Data type rules create instances of <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a> instead of <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>. They are quite similar to terminal rules, but they are actually parser rules and are therefore</p>
+<p>Data type rules create instances of <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a> instead of <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>. They are quite similar to terminal rules, but they are actually parser rules and are therefore</p>
 
 <ol>
   <li>context sensitive and</li>
@@ -546,7 +546,7 @@ Fullname:
 
 <p>Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters. The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.</p>
 
-<p>If you want to define a <code>ChangeKind</code> from <a href="https://github.com/eclipse/emf/blob/master/plugins/org.eclipse.emf.ecore.change/model/Change.ecore">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:</p>
+<p>If you want to define a <code>ChangeKind</code> from <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore.change/model/Change.ecore">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:</p>
 
 <pre><code class="language-xtext">enum ChangeKind:
     ADD | MOVE | REMOVE;
@@ -595,23 +595,23 @@ This will generate validations and the possibility to change the severity throug
 <p>Xtext creates</p>
 
 <ul>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a>
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a>
     <ul>
       <li>for each <code>generate</code> declaration. The <em>name</em> of the EPackage is set to the first parameter of such a declaration, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows to distinguish the generated EPackages later. Only one generated package declaration per alias is allowed.</li>
     </ul>
   </li>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a>
     <ul>
       <li>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify multiple rules that return the same type, but only one EClass is generated for each type name.</li>
       <li>for each type defined in an action or a cross-reference.</li>
     </ul>
   </li>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java">EEnum</a>
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnum.java">EEnum</a>
     <ul>
       <li>for each return type of an enum rule.</li>
     </ul>
   </li>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>
     <ul>
       <li>for each return type of a terminal rule or a data type rule.</li>
     </ul>
@@ -636,13 +636,13 @@ This will generate validations and the possibility to change the severity throug
 <p>While traversing the parser rules Xtext creates</p>
 
 <ul>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> in each current return type
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> in each current return type
     <ul>
       <li>of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further EReferences or EAttributes are generated from such an assignment.</li>
       <li>for each assignment with the <code>=</code> or <code>+=</code> operator calling a terminal rule or data type rule. Its type is the return type of the called rule.</li>
     </ul>
   </li>
-  <li>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> in each current return type
+  <li>an <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> in each current return type
     <ul>
       <li>for each assignment with the <code>=</code> or <code>+=</code> operator in a parser rule calling a parser rule. The type of the EReference is the return type of the called parser rule.</li>
       <li>for each assigned action. The type of the reference is the return type of the current rule containing the action.</li>
@@ -650,7 +650,7 @@ This will generate validations and the possibility to change the severity throug
   </li>
 </ul>
 
-<p>Each <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> takes its name from the assignment or action that caused it. Multiplicities are <code>0..1</code> for assignments with the <code>=</code> operator and <code>0..*</code> for assignments with the <code>+=</code> operator.</p>
+<p>Each <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> or <a href="https://git.eclipse.org/r/plugins/gitiles/emf/org.eclipse.emf/+/refs/tags/R2_20_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a> takes its name from the assignment or action that caused it. Multiplicities are <code>0..1</code> for assignments with the <code>=</code> operator and <code>0..*</code> for assignments with the <code>+=</code> operator.</p>
 
 <p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of “artificial” parser rules that are never called, e.g.</p>
 
