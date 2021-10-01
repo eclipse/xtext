@@ -23,10 +23,6 @@ pipeline {
     )
   }
 
-  triggers {
-    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk11-latest' : '')
-  }
-
   options {
     buildDiscarder(logRotator(numToKeepStr:'5'))
     disableConcurrentBuilds()
