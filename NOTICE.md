@@ -154,7 +154,7 @@ Caliper (0.5.0)
 * Project: http://code.google.com/p/caliper/
 * Source: http://code.google.com/p/caliper/source/browse/?name=v0.5-rc1
 
-classgraph (4.8.35)
+classgraph (4.8.117)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
