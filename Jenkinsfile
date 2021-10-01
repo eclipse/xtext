@@ -23,7 +23,11 @@ pipeline {
   }
 
   triggers {
-    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk11-latest' : '')
+    parameterizedCron(env.BRANCH_NAME == 'master' ? '''
+      H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk11-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      H H(6-7) * * * %TARGET_PLATFORM=oxygen;JDK_VERSION=temurin-jdk8-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      ''' : '')
   }
 
   options {
