@@ -159,11 +159,6 @@
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
-      name="p2.gef"
-      value="https://download.eclipse.org/tools/gef/updates/releases"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      type="URI"
       name="p2.xpand"
       value="${p2.xtext}"/>
   <setupTask
@@ -890,8 +885,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.8"/>
           <repository
               url="${p2.swtbot}"/>
@@ -924,8 +917,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.8"/>
           <repository
@@ -960,8 +951,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.8"/>
           <repository
               url="${p2.swtbot}"/>
@@ -994,8 +983,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.8"/>
           <repository
@@ -1030,8 +1017,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.8"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1064,8 +1049,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.12"/>
           <repository
@@ -1100,8 +1083,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.13"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1134,8 +1115,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.14"/>
           <repository
@@ -1170,8 +1149,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.15"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1204,8 +1181,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.16.0"/>
           <repository
@@ -1240,8 +1215,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.16.2"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1274,8 +1247,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.17.1"/>
           <repository
@@ -1310,8 +1281,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.17.2"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1344,8 +1313,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.18.0"/>
           <repository
@@ -1380,8 +1347,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.18.1"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1414,8 +1379,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.18.1"/>
           <repository
@@ -1777,8 +1740,6 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.gef}"/>
-          <repository
               url="${p2.m2e}/1.8"/>
           <repository
               url="${p2.swtbot}"/>
@@ -1803,8 +1764,6 @@
               url="${p2.mwe2}"/>
           <repository
               url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
           <repository
               url="${p2.m2e}/1.12"/>
           <repository
