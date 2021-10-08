@@ -45,13 +45,13 @@
     <content>
       &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
       &lt;section name=&quot;Workbench&quot;>
-      	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
-      		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
-      		&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
-      		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
-      		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
-      		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
-      	&lt;/section>
+        &lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
+          &lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
+          &lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>
+          &lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
+          &lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
+          &lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
+        &lt;/section>
       &lt;/section>
 
     </content>
@@ -461,7 +461,8 @@
         url="${p2.m2e.connector.tycho}"/>
   </setupTask>
   <setupTask
-      xsi:type="setup.workingsets:WorkingSetTask">
+      xsi:type="setup.workingsets:WorkingSetTask"
+      id="xtext.working.sets">
     <workingSet
         name="Root Projects"
         id="">
@@ -598,7 +599,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -670,7 +671,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -740,7 +741,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1427,7 +1428,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -1439,7 +1440,7 @@
               project="xtext-umbrella"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -1454,7 +1455,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -1534,7 +1535,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1590,7 +1591,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1678,7 +1679,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.29/@workingSets[name='Root%20Projects']"/>
+              excludedWorkingSet="//'xtext.working.sets'/@workingSets[name='Root%20Projects']"/>
         </predicate>
       </workingSet>
     </setupTask>
