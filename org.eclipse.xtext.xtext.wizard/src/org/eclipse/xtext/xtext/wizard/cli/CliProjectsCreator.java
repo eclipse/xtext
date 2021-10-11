@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,11 +11,14 @@ package org.eclipse.xtext.xtext.wizard.cli;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
+import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
 import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
@@ -26,10 +29,16 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
 public class CliProjectsCreator implements ProjectsCreator {
+
+	private final static Logger LOG = Logger.getLogger(CliProjectsCreator.class);
+
 	private String lineDelimiter;
 
 	@Override
 	public void createProjects(WizardConfiguration config) {
+		if (config.getProjectLayout() == ProjectLayout.FLAT && config.getPreferredBuildSystem() == BuildSystem.GRADLE) {
+			LOG.warn("The combination of Gradle + flat project layout will no longer be supported in Gradle 8.0: https://docs.gradle.org/7.1.1/userguide/upgrading_version_7.html#deprecated_flat_project_structure");
+		}
 		for (ProjectDescriptor p : config.getEnabledProjects()) {
 			createProject(p);
 		}
