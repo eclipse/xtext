@@ -20,11 +20,10 @@ jar.bnd (
 	'Bundle-vendor':'Eclipse Xtext',
 	'Export-Package': "!org.eclipse.xtext.web.server.test.*,org.eclipse.xtext.web.*;version=\"${version}\"",
 	'Import-Package': '!org.eclipse.xtext.web.*,*'
-	
 )
 
 node {
-	version = '14.17.6'
+	version = '14.18.1'
 	download = true
 }
 
