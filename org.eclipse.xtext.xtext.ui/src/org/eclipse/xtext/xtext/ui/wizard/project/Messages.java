@@ -15,6 +15,7 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_eeInfo_1;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageExtensions;
 	public static String WizardNewXtextProjectCreationPage_MessageAtLeastJava8;
+	public static String WizardNewXtextProjectCreationPage_MessageAtLeastJava11;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;
