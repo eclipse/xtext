@@ -625,8 +625,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	}		
-
+	}
 
 	@Test
 	def testVoidAndObjectTwoParametersButDifferentTypesGenerateElse() {
@@ -662,5 +661,80 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	}		
+	}
+
+	@Test
+	def void testSingleDispatchTwoParameters() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Object p0, Integer p1) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Object p0, final Integer p1) {
+			  }
+			  
+			  public void doThing(final Object p0, final Integer p1) {
+			    _doThing(p0, p1);
+			    return;
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def void testSingleDispatchTwoParametersOneVoid() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void p0, Integer p1) {}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void p0, final Integer p1) {
+			  }
+			  
+			  public void doThing(final Object p0, final Integer p1) {
+			    if (p0 == null) {
+			      _doThing((Void)null, p1);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(p0, p1).toString());
+			    }
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def void testSingleDispatchTwoParametersTwoVoid() {
+		assertCompilesTo('''
+			class Test {
+				def dispatch void doThing(Void p0, Void p1) {}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class Test {
+			  protected void _doThing(final Void p0, final Void p1) {
+			  }
+			  
+			  public void doThing(final Object p0, final Object p1) {
+			    if (p0 == null
+			         && p1 == null) {
+			      _doThing((Void)null, (Void)null);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(p0, p1).toString());
+			    }
+			  }
+			}
+		''')
+	}
 }

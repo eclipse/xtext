@@ -83,7 +83,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 			}
 		}
-		boolean needsElse = anyFalse(notNullIncluded) || (anyFalse(voidIncluded) && !(parameterCount == 1 && sortedDispatchOperations.size() == 1));
+		boolean needsElse = anyFalse(notNullIncluded) || (anyFalse(voidIncluded) && sortedDispatchOperations.size() != 1);
 		for (JvmOperation operation : sortedDispatchOperations) {
 			ITreeAppendable operationAppendable = treeAppendableUtil.traceSignificant(a, operation, true);
 			final List<Later> laters = newArrayList();
@@ -163,7 +163,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 				operationAppendable.append(";");
 			}
-			if (sortedDispatchOperations.size() != 1) {
+			if (sortedDispatchOperations.size() != 1 || anyTrue(voidIncluded)) {
 				operationAppendable.decreaseIndentation();
 				a.newLine().append("}");
 			}
@@ -230,6 +230,13 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	private boolean anyFalse(boolean[] list) {
 		for (boolean v : list)
 			if (!v)
+				return true;
+		return false;
+	}
+	
+	private boolean anyTrue(boolean[] list) {
+		for (boolean v : list)
+			if (v)
 				return true;
 		return false;
 	}
