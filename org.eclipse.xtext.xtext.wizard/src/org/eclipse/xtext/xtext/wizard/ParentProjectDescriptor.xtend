@@ -16,19 +16,19 @@ import org.eclipse.xtext.util.JavaVersion
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
 	String nameQualifier = '.parent'
-	
+
 	override getNameQualifier() {
 		nameQualifier
 	}
-	
+
 	def void setNameQualifier(String nameQualifier) {
 		this.nameQualifier = nameQualifier
 	}
-	
+
 	override isEnabled() {
 		config.needsGradleBuild || config.needsMavenBuild || config.projectLayout == ProjectLayout.HIERARCHICAL
 	}
-	
+
 	override setEnabled(boolean enabled) {
 		throw new UnsupportedOperationException("The parent project is automatically enabled depending on the build system")
 	}
@@ -40,11 +40,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	override isEclipsePluginProject() {
 		false
 	}
-	
+
 	override isPartOfGradleBuild() {
 		true
 	}
-	
+
 	override isPartOfMavenBuild() {
 		true
 	}
@@ -64,19 +64,19 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 		return files
 	}
-	
+
 	def String getJavaVersion() {
-		config.javaVersion.qualifier	
+		config.javaVersion.qualifier
 	}
-	
+
 	def String getTychoVersion() {
 		'2.5.0'
 	}
-	
+
 	def String getTychoVersionJ8() {
 		'1.7.0'
 	}
-	
+
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
@@ -93,7 +93,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
 					}
 				}
-				
+
 				subprojects {
 					ext.xtextVersion = '«config.xtextVersion»'
 					repositories {
@@ -104,7 +104,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							}
 						«ENDIF»
 					}
-					
+
 					apply plugin: 'java-library'
 					dependencies {
 						api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
@@ -113,13 +113,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					apply plugin: 'org.xtext.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
 					apply plugin: 'eclipse'
-					
+
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
-					
+
 					sourceCompatibility = '«javaVersion»'
 					targetCompatibility = '«javaVersion»'
-					
+
 					configurations.all {
 						exclude group: 'asm'
 					}
@@ -133,7 +133,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			«IF config.projectLayout == ProjectLayout.FLAT»includeFlat«ELSE»include«ENDIF» '«p.name»'
 		«ENDFOR»
 	'''
-	
+
 	def sourceLayoutGradle() '''
 		«IF config.sourceLayout == SourceLayout.PLAIN»
 			if (name.endsWith(".tests")) {
@@ -143,7 +143,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						resources.srcDirs = []
 					}
 					test {
-						java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+						java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»', '«Outlet.MAIN_XTEND_GEN.sourceFolder»']
 						resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
 						xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
 					}
@@ -151,7 +151,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			} else {
 				sourceSets {
 					main {
-						java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+						java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»', '«Outlet.TEST_XTEND_GEN.sourceFolder»']
 						resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
 						xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
 					}
@@ -161,25 +161,25 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 				}
 			}
-			
+
 			sourceSets.all {
 				resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
 			}
 		«ELSE»
 			sourceSets {
 				main {
-					java.srcDirs = ['«Outlet.MAIN_JAVA.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
-					resources.srcDirs = ['«Outlet.MAIN_RESOURCES.sourceFolder»', '«Outlet.MAIN_SRC_GEN.sourceFolder»']
+					java.srcDir '«Outlet.MAIN_SRC_GEN.sourceFolder»'
+					resources.srcDir '«Outlet.MAIN_SRC_GEN.sourceFolder»'
 					xtendOutputDir = '«Outlet.MAIN_XTEND_GEN.sourceFolder»'
 				}
 				test {
-					java.srcDirs = ['«Outlet.TEST_JAVA.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
-					resources.srcDirs = ['«Outlet.TEST_RESOURCES.sourceFolder»', '«Outlet.TEST_SRC_GEN.sourceFolder»']
+					java.srcDir '«Outlet.TEST_SRC_GEN.sourceFolder»'
+					resources.srcDir '«Outlet.TEST_SRC_GEN.sourceFolder»'
 					xtendOutputDir = '«Outlet.TEST_XTEND_GEN.sourceFolder»'
 				}
 			}
 		«ENDIF»
-		
+
 		jar {
 			from('model') {
 				into('model')
@@ -193,12 +193,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				attributes 'Bundle-SymbolicName': project.name
 			}
 		}
-		
+
 		plugins.withId('war') {
 			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
 		}
 	'''
-	
+
 	@Deprecated
 	def CharSequence mavenDeploymentGradle() {
 		throw new UnsupportedOperationException("Removed with 2.17")
@@ -330,8 +330,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 												<id>org.eclipse.xtext.logging</id>
 												<versionRange>1.2.15</versionRange>
 											</requirement>
-											<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target 
-												platform is Luna or later. (backward compatible with kepler and previous 
+											<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
+												platform is Luna or later. (backward compatible with kepler and previous
 												versions) see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->
 											<requirement>
 												<type>eclipse-feature</type>
@@ -491,7 +491,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							</plugin>
 							«IF config.needsTychoBuild»
 								<plugin>
-									<!-- 
+									<!--
 										Can be removed after first generator execution
 										https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
 									-->
@@ -596,9 +596,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			'''
 		]
 	}
-	
+
 	override getSourceFolders() {
 		#{}
 	}
-	
+
 }

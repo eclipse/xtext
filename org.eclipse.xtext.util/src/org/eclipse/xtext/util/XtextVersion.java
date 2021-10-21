@@ -41,11 +41,11 @@ public class XtextVersion {
 
 	public static XtextVersion getCurrent() {
 		String versionFromManifest = XtextVersion.readVersionFromManifest();
-		return new XtextVersion(versionFromManifest != null ? versionFromManifest : "unknown"); 
+		return new XtextVersion(versionFromManifest != null ? versionFromManifest : "unknown");
 	}
 
 	public String getXtextGradlePluginVersion() {
-		return "2.1.0";
+		return "3.0.0";
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class XtextVersion {
 	public String getMweVersion() {
 		return "2.12.2.M1";
 	}
-	
+
 	/**
 	 * @noreference
 	 */
