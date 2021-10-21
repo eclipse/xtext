@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 20201 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -42,6 +42,7 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
@@ -1757,5 +1758,28 @@ public class XtextGeneratorTemplates {
     };
     file.setContent(_client_1);
     return file;
+  }
+  
+  public TextFileAccess createMetaInfServices(final List<? extends IXtextGeneratorLanguage> languageConfigs) {
+    TextFileAccess _xblockexpression = null;
+    {
+      final TextFileAccess file = new TextFileAccess();
+      file.setPath("META-INF/services/org.eclipse.xtext.ISetup");
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          {
+            for(final IXtextGeneratorLanguage lang : languageConfigs) {
+              TypeReference _genericIdeSetup = XtextGeneratorTemplates.this.naming.getGenericIdeSetup(lang.getGrammar());
+              _builder.append(_genericIdeSetup);
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      };
+      file.setContent(_client);
+      _xblockexpression = file;
+    }
+    return _xblockexpression;
   }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 20201 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,6 +41,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 /**
  * Templates for generating the common language infrastructure.
@@ -573,6 +574,17 @@ class XtextGeneratorTemplates {
 			}
 		'''
 		return file
+	}
+	
+	def TextFileAccess createMetaInfServices(List<? extends IXtextGeneratorLanguage> languageConfigs) {
+		val file = new TextFileAccess()
+		file.path = "META-INF/services/org.eclipse.xtext.ISetup"
+		file.content = '''
+			«FOR lang : languageConfigs»
+				«naming.getGenericIdeSetup(lang.grammar)»
+			«ENDFOR»
+		'''
+		file
 	}
 	
 }
