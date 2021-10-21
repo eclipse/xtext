@@ -26,7 +26,6 @@ subprojects {
 	version = rootProject.version
 	
 	repositories {
-		mavenLocal()
 		mavenCentral()
 		// TODO remove this once we switched back to java platform plugin
 		// https://github.com/eclipse/xtext/issues/1388
