@@ -22,10 +22,7 @@ dependencies {
 }
 
 sourceSets.test {
-	java.srcDirs = ['src', 'src-gen', 'suites']
-	if (findProperty('compileXtend') != 'true') {
-		java.srcDir 'xtend-gen'
-	}
+    java.srcDirs = ['src', 'src-gen', 'suites', 'xtend-gen']
 }
 
 sourceSets.mwe2 {
@@ -34,9 +31,6 @@ sourceSets.mwe2 {
 }
 jar.from sourceSets.mwe2.output
 sourcesJar {
-	if (findProperty('compileXtend') == 'true') {
-		dependsOn(generateTestXtext)
-	}
 	from sourceSets.mwe2.allSource
 }
 task generateTestLanguages(type: XtextGeneratorTask) {
