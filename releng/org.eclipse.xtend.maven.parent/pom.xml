@@ -67,8 +67,8 @@
 							<exclude>org.apache.maven.plugins:maven-deploy-plugin</exclude>
 						</excludes>
 						<includes>
-							<include>org.apache.maven.plugins:maven-install-plugin:2.5.1</include>
-							<include>org.apache.maven.plugins:maven-deploy-plugin:2.8.1</include>
+							<include>org.apache.maven.plugins:maven-install-plugin:2.5.2</include>
+							<include>org.apache.maven.plugins:maven-deploy-plugin:2.8.2</include>
 						</includes>
 					</bannedPlugins>
 				</configuration>
@@ -137,7 +137,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>1.4.1</version>
+					<version>3.0.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
@@ -257,7 +257,7 @@
 										<artifactId>
 											maven-enforcer-plugin
 										</artifactId>
-										<versionRange>[1.0,)</versionRange>
+										<versionRange>[3.0,)</versionRange>
 										<goals>
 											<goal>enforce</goal>
 										</goals>
