@@ -11,6 +11,7 @@ sourceSets {
 	configure(isTestProject? test : main) {
 		java {
 			srcDirs = sourceDirs
+			srcDir 'xtend-gen'
 			include '**/*.java', '**/*.xtend'
 		}
 		resources {
@@ -19,8 +20,6 @@ sourceSets {
 		}
 		if (findProperty('compileXtend') == 'true') {
 			xtendOutputDir = 'xtend-gen'
-		} else {
-			java.srcDir 'xtend-gen'
 		}
 	}
 	configure(isTestProject? main : test) {

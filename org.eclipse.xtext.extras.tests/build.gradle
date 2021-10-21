@@ -14,9 +14,6 @@ dependencies {
 sourceSets.test {
 	java.srcDirs = ['src', 'src-gen', 'deprecated']
 	resources.srcDirs = ['src', 'src-gen', 'deprecated']
-	if (findProperty('compileXtend') != 'true') {
-		java.srcDir 'xtend-gen'
-	}
 }
 
 sourceSets.mwe2 {
