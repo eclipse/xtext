@@ -1476,6 +1476,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       if (_contains) {
         newValue = newValue.replace(";java.awt.*", "");
       }
+      boolean _contains_1 = newValue.contains(";java.awt.List");
+      if (_contains_1) {
+        newValue = newValue.replace(";java.awt.List", "");
+      }
+      System.err.println(newValue);
       PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package p");

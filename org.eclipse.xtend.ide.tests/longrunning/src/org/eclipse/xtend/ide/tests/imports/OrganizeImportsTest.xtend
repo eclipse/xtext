@@ -824,6 +824,10 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			if (newValue.contains(";java.awt.*")) {
 				newValue = newValue.replace(";java.awt.*", "")
 			}
+			if (newValue.contains(";java.awt.List")) {
+				newValue = newValue.replace(";java.awt.List", "")
+			}
+			System.err.println(newValue)
 			PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, newValue);
 			'''
 				package p
