@@ -92,7 +92,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
 						<unit id="javax.inject" version="1.0.0.v20091030"/>
 						<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
-						<unit id="org.junit" version="4.12.0.v201504281640"/>
+						<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 						«IF config.junitVersion == JUnitVersion.JUNIT_5»
 							<unit id="org.apiguardian" version="1.1.2.v20211018-1956"/>
 							<unit id="org.junit.jupiter.api" version="5.8.1.v20211018-1956"/>
