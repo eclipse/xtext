@@ -13,8 +13,8 @@
    <bundle id="javax.inject" version="1.0.0.qualifier"/>
    <bundle id="javax.inject.source" version="1.0.0.qualifier"/>
    <bundle id="org.aopalliance" version="1.0.0.qualifier"/>
-   <bundle id="org.junit" version="4.12.0.qualifier"/>
-   <bundle id="org.junit.source" version="4.12.0.qualifier"/>
+   <bundle id="org.junit" version="4.13.2.qualifier"/>
+   <bundle id="org.junit.source" version="4.13.2.qualifier"/>
    <bundle id="org.objectweb.asm" version="9.2.0.qualifier"/>
    <bundle id="org.objectweb.asm.source" version="9.2.0.qualifier"/>
    <bundle id="org.objectweb.asm.commons" version="9.2.0.qualifier"/>
