@@ -149,6 +149,7 @@ pipeline {
           // List all Maven plugin artifactIds in that POM
           def standardMavenPluginArtifactIds = ['maven-antrun-plugin','maven-compiler-plugin','maven-deploy-plugin','maven-enforcer-plugin','maven-install-plugin','maven-javadoc-plugin','maven-plugin-plugin','maven-source-plugin','maven-surefire-plugin']
           standardMavenPluginArtifactIds.each {
+            sleep(time:3, unit:"SECONDS")
             results.add([
               'Maven Plugins',
               it,
@@ -175,7 +176,7 @@ pipeline {
 }
 
 def getLatestArtifactVersion(groupId, artifactId) {
-  return sh (script: "curl -s http://search.maven.org/solrsearch/select?q=g:\"${groupId}\"+AND+a:\"${artifactId}\" |grep -Po 'latestVersion.:.\\K[^\"]*'", returnStdout: true).trim()
+  return sh (script: "curl -s https://search.maven.org/solrsearch/select?q=g:\"${groupId}\"+AND+a:\"${artifactId}\" |grep -Po 'latestVersion.:.\\K[^\"]*'", returnStdout: true).trim()
 }
 
 def getLatestReleaseFromGitHubRepository (owner, repository) {
