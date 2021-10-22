@@ -169,9 +169,9 @@
 		<unit id="org.objectweb.asm.commons.source" version="9.2.0.v20210813-1119"/>
 		<unit id="org.objectweb.asm.tree" version="9.2.0.v20210813-1119"/>
 		<unit id="org.objectweb.asm.tree.source" version="9.2.0.v20210813-1119"/>
-		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
-		<unit id="io.github.classgraph.source" version="4.8.35.v20190528-1517"/>
-		<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-09"/>
+		<unit id="io.github.classgraph" version="4.8.117.v20210930-0420"/>
+		<unit id="io.github.classgraph.source" version="4.8.117.v20210930-0420"/>
+		<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-12"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
