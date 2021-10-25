@@ -208,7 +208,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
+        _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20211018-1956\"/>");
         _builder.newLine();
         {
           JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
