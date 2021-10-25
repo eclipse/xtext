@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -7,6 +7,8 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.xbase.tests;
+
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +21,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
@@ -34,9 +34,6 @@ import com.google.common.collect.Lists;
 public class XbaseQualifiedNameConverterTest {
 	@Inject
 	private XbaseQualifiedNameConverter converter;
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void test_toQualifiedName() {
@@ -53,15 +50,13 @@ public class XbaseQualifiedNameConverterTest {
 
 	@Test
 	public void test_toQualifiedName_null() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Qualified name cannot be null");
-		converter.toQualifiedName(null);
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> converter.toQualifiedName(null));
+		assertEquals("Qualified name cannot be null", e.getMessage());
 	}
 
 	@Test
 	public void test_toQualifiedName_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Qualified name cannot be empty");
-		converter.toQualifiedName("");
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> converter.toQualifiedName(""));
+		assertEquals("Qualified name cannot be empty", e.getMessage());
 	}
 }
