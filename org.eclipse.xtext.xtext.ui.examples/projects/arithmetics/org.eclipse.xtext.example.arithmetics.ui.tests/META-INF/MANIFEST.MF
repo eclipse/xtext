@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.xbase.testing,
- org.junit;bundle-version="4.7.0"
+ org.junit;bundle-version="4.12.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.arithmetics.ui.tests;x-internal=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.autoedit;x-internal:=true,
@@ -24,10 +24,10 @@ Export-Package: org.eclipse.xtext.example.arithmetics.ui.tests;x-internal=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.hyperlinking;x-internal:=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.quickfix;x-internal:=true
 Import-Package: org.hamcrest.core,
- org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
+ org.junit;version="4.12.0",
+ org.junit.runner;version="4.12.0",
+ org.junit.runner.manipulation;version="4.12.0",
+ org.junit.runner.notification;version="4.12.0",
+ org.junit.runners;version="4.12.0",
+ org.junit.runners.model;version="4.12.0"
 Automatic-Module-Name: org.eclipse.xtext.example.arithmetics.ui.tests
