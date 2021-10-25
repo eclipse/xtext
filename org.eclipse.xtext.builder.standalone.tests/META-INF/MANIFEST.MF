@@ -25,7 +25,7 @@ Export-Package: org.eclipse.xtext.builder.standalone,
  org.eclipse.xtext.builder.tests.services,
  org.eclipse.xtext.builder.tests.validation
 Import-Package: org.apache.log4j,
- org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0"
+ org.junit;version="4.12.0",
+ org.junit.runner;version="4.12.0",
+ org.junit.runners;version="4.12.0"
 Automatic-Module-Name: org.eclipse.xtext.builder.standalone.tests
