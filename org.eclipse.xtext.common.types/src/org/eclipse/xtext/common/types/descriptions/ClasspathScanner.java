@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -166,7 +166,7 @@ public class ClasspathScanner {
 		ClassGraph classGraph = classGraphProvider.get()
 			.ignoreClassVisibility()
 			.enableClassInfo()
-			.whitelistPackages(packagePrefixes.toArray(new String[packagePrefixes.size()]))
+			.acceptPackages(packagePrefixes.toArray(new String[packagePrefixes.size()]))
 			.addClassLoader(classLoader);
 		if (bootstrap) {
 			classGraph.enableSystemJarsAndModules();
