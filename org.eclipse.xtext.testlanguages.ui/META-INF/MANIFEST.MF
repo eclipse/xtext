@@ -28,12 +28,12 @@ Require-Bundle: org.eclipse.xtext.testlanguages;visibility:=reexport,
  org.eclipse.xtext.ui.testing
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
- org.junit;version="4.5.0",
- org.junit.runners.model;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0"
+ org.junit;version="4.12.0",
+ org.junit.runners.model;version="4.12.0",
+ org.junit.runner;version="4.12.0",
+ org.junit.runners;version="4.12.0",
+ org.junit.runner.manipulation;version="4.12.0",
+ org.junit.runner.notification;version="4.12.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.backtracking.ui.contentassist,
