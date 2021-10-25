@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitPlatform.class)
 @UseTechnicalNames
 @SelectPackages("org.eclipse.xtext.testing.tests.junit5")
+@SuppressWarnings("deprecation")
 public class RunJUnit5Suite {
 
 }
