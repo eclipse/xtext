@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2021 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,9 +19,7 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStrea
 import org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import com.google.common.base.Function;
 
@@ -29,9 +27,6 @@ import com.google.common.base.Function;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class QualifiedNameTest extends Assert {
-    @Rule
-    public ExpectedException thrown= ExpectedException.none();
-    
 	@Test public void testBug354473() {
 		DefaultImpl impl = new IQualifiedNameConverter.DefaultImpl();
 		QualifiedName name = impl.toQualifiedName(".");
@@ -98,8 +93,7 @@ public class QualifiedNameTest extends Assert {
 		assertTrue(qn.startsWithIgnoreCase(qn2));
 		assertFalse(qn2.startsWithIgnoreCase(qn));
 		
-		thrown.expect(IllegalArgumentException.class);
-		qn1.startsWith(null);
+		assertThrows(IllegalArgumentException.class, ()->qn1.startsWith(null));
 	}
 	
 	@Test public void testSkip() throws Exception {
