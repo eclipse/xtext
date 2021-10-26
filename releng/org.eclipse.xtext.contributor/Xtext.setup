@@ -1381,7 +1381,7 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.m2e}/1.18.1"/>
+              url="${p2.m2e}/1.18.2"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
