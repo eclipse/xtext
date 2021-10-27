@@ -69,6 +69,7 @@ dependencies {
         api "org.eclipse.xpand:org.eclipse.xtend.typesystem.emf:2.0.0"
         api "org.eclipse.xpand:org.eclipse.xtend:2.0.0"
         api "org.eclipse.xtext:xtext-antlr-generator:2.1.1"
+        api "org.apiguardian:apiguardian-api:1.1.2"
         api "org.junit.jupiter:junit-jupiter-api:5.8.1"
         api "org.junit.jupiter:junit-jupiter-engine:5.8.1"
         api "org.junit.platform:junit-platform-commons:1.8.1"
