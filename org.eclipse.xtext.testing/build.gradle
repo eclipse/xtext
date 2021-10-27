@@ -6,6 +6,7 @@ dependencies {
 	api project(':org.eclipse.xtext.ide')
 	api 'org.eclipse.lsp4j:org.eclipse.lsp4j'
 	optional 'junit:junit'
+	optional 'org.apiguardian:apiguardian-api'
 	optional 'org.junit.jupiter:junit-jupiter-api'
 	optional 'org.junit.jupiter:junit-jupiter-engine'
 	// optional for the utilities but mandatory to run the tests
