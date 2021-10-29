@@ -89,52 +89,65 @@ public class SingleCodetemplateSyntacticSequencer extends AbstractSyntacticSeque
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '${' (ambiguity) ':' WS* type=ValidID
 	 *     (rule start) '${' (ambiguity) name=ValidID
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ValidID (ambiguity) ':' WS* type=ValidID
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_0_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '${' WS* ':' (ambiguity) type=ValidID
 	 *     name=ValidID WS* ':' (ambiguity) type=ValidID
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     type=ValidID (ambiguity) expectingParameters?='('
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_4_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
@@ -142,12 +155,15 @@ public class SingleCodetemplateSyntacticSequencer extends AbstractSyntacticSeque
 	 *     expectingParameters?='(' (ambiguity) ')' WS* '}' (rule end)
 	 *     expectingParameters?='(' (ambiguity) parameters+=FQN
 	 *     expectingParameters?='(' (ambiguity) parameters+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_4_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
@@ -156,12 +172,15 @@ public class SingleCodetemplateSyntacticSequencer extends AbstractSyntacticSeque
 	 *     parameters+=FQN (ambiguity) ',' WS* parameters+=STRING
 	 *     parameters+=STRING (ambiguity) ',' WS* parameters+=FQN
 	 *     parameters+=STRING (ambiguity) ',' WS* parameters+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_4_3_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
@@ -170,24 +189,30 @@ public class SingleCodetemplateSyntacticSequencer extends AbstractSyntacticSeque
 	 *     parameters+=FQN WS* ',' (ambiguity) parameters+=STRING
 	 *     parameters+=STRING WS* ',' (ambiguity) parameters+=FQN
 	 *     parameters+=STRING WS* ',' (ambiguity) parameters+=STRING
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_4_3_1_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     parameters+=FQN (ambiguity) ')' WS* '}' (rule end)
 	 *     parameters+=STRING (ambiguity) ')' WS* '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_2_1_4_3_2_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     WS*
 	 *
@@ -197,6 +222,8 @@ public class SingleCodetemplateSyntacticSequencer extends AbstractSyntacticSeque
 	 *     parameters+=FQN WS* ')' (ambiguity) '}' (rule end)
 	 *     parameters+=STRING WS* ')' (ambiguity) '}' (rule end)
 	 *     type=ValidID (ambiguity) '}' (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_Variable_WSTerminalRuleCall_3_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

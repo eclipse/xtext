@@ -61,11 +61,13 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Codetemplate returns Codetemplate
 	 *
 	 * Constraint:
 	 *     (name=ValidID id=ID description=STRING (context=[AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes)
+	 * </pre>
 	 */
 	protected void sequence_Codetemplate(ISerializationContext context, Codetemplate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -73,11 +75,13 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Codetemplates returns Codetemplates
 	 *
 	 * Constraint:
 	 *     (language=[Grammar|FQN] templates+=Codetemplate*)
+	 * </pre>
 	 */
 	protected void sequence_Codetemplates(ISerializationContext context, Codetemplates semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,6 +89,7 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TemplatePart returns Dollar
 	 *     VariableOrDollar returns Dollar
@@ -92,6 +97,7 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	 *
 	 * Constraint:
 	 *     escaped?='$$'?
+	 * </pre>
 	 */
 	protected void sequence_Dollar(ISerializationContext context, Dollar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -99,12 +105,14 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TemplatePart returns Literal
 	 *     Literal returns Literal
 	 *
 	 * Constraint:
 	 *     value=LiteralValue
+	 * </pre>
 	 */
 	protected void sequence_Literal(ISerializationContext context, Literal semanticObject) {
 		if (errorAcceptor != null) {
@@ -118,12 +126,14 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TemplateBodyWithQuotes returns TemplateBody
 	 *     TemplateBody returns TemplateBody
 	 *
 	 * Constraint:
 	 *     (parts+=Literal? (parts+=VariableOrDollar parts+=Literal?)*)
+	 * </pre>
 	 */
 	protected void sequence_TemplateBody(ISerializationContext context, TemplateBody semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -131,6 +141,7 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TemplatePart returns Variable
 	 *     VariableOrDollar returns Variable
@@ -148,6 +159,7 @@ public class CodetemplatesSemanticSequencer extends AbstractDelegatingSemanticSe
 	 *             )?
 	 *         )
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

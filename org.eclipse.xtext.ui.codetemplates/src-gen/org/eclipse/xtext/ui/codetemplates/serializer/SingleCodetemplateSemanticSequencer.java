@@ -58,11 +58,13 @@ public class SingleCodetemplateSemanticSequencer extends CodetemplatesSemanticSe
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Codetemplate returns Codetemplate
 	 *
 	 * Constraint:
 	 *     (name=STRING (context=[AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes)
+	 * </pre>
 	 */
 	protected void sequence_Codetemplate(ISerializationContext context, Codetemplate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -70,11 +72,13 @@ public class SingleCodetemplateSemanticSequencer extends CodetemplatesSemanticSe
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     Codetemplates returns Codetemplates
 	 *
 	 * Constraint:
 	 *     (language=[Grammar|FQN] templates+=Codetemplate)
+	 * </pre>
 	 */
 	protected void sequence_Codetemplates(ISerializationContext context, Codetemplates semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
