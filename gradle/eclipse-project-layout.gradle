@@ -30,12 +30,8 @@ sourceSets {
 }
 
 if (isTestProject) {
-	task cleanupEcoreFiles {
-		doLast {
-			fileTree(dir:sourceSets.test.output.resourcesDir, includes:['**/*.ecore','**/*.xtext']).each {
-				it.delete()
-			}
-		}
+	task cleanupEcoreFiles(type: Delete) {
+		delete(fileTree(dir:sourceSets.test.output.resourcesDir, includes:['**/*.ecore','**/*.xtext']))
 	}
 	test.finalizedBy(cleanupEcoreFiles)
 }
