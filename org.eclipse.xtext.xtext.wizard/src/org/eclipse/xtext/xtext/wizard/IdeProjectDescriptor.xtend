@@ -319,7 +319,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 			pluginsSection = '''
 				«IF config.languageServer === LanguageServer.FATJAR»
 					plugins {
-						id 'com.github.johnrengelman.shadow' version '7.0.0'
+						id 'com.github.johnrengelman.shadow' version '7.1.0'
 					}
 					
 				«ENDIF»
