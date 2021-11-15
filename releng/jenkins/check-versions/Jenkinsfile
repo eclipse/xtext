@@ -83,7 +83,7 @@ pipeline {
           // For Eclipse platform artifact versions there is a common pattern
           def eclipsePlatformProperties = [
             'core.commands','core.contenttype','core.expressions','core.filesystem','core.jobs','core.resources','core.runtime',
-            'equinox.app','equinox.common','equinox.preferences','equinox.registry',
+            'core.variables','debug.core','equinox.app','equinox.common','equinox.preferences','equinox.registry',
             'osgi','text'
           ]
           eclipsePlatformProperties.each {
@@ -95,7 +95,7 @@ pipeline {
             ])
           }
           // JDT
-          ['jdt.core','jdt.compiler.apt','jdt.compiler.tool'].each {
+          ['jdt.core','jdt.compiler.apt','jdt.compiler.tool','jdt.launching','jdt.debug'].each {
             results.add([
               'versions.BOM',
               "org.eclipse.${it}",
