@@ -75,7 +75,7 @@ pipeline {
             'versions.Gradle',
             'xtext-gradle-plugin',
             getXtextGradlePluginVersion(SOURCE_BRANCH),
-            getLatestArtifactVersion('org.xtext','xtext-gradle-plugin')
+            getLatestFromGradlePluginPortal('org.xtext.builder')
           ])
           
           // CHECK BOM
@@ -173,6 +173,12 @@ pipeline {
       archiveArtifacts artifacts: 'target/**'
     }
   }
+}
+
+
+//curl -s https://plugins.gradle.org/plugin/org.xtext.builder | grep -oP '(?<=Version ).+(?= \\(latest)'
+def getLatestFromGradlePluginPortal(name) {
+  return sh (script: "curl -s https://plugins.gradle.org/plugin/${name} |grep -Po '(?<=Version ).+(?= \\(latest)'", returnStdout: true).trim()
 }
 
 def getLatestArtifactVersion(groupId, artifactId) {
