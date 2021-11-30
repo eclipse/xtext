@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="org.eclipse.xtext.latest.target" sequenceNumber="7">
+<target name="org.eclipse.xtext.r202112.target" sequenceNumber="10">
 <locations>
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
@@ -64,15 +64,13 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/eclipse/updates/4.23-I-builds"/>
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
+		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/2021-12"/>
@@ -80,13 +78,7 @@
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/nightly/latest"/>
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
-		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S202108160852/"/>
+		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.28/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -104,6 +96,8 @@
 		<unit id="org.junit.jupiter.api" version="0.0.0"/>
 		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
 		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.suite.api" version="0.0.0"/>
+		<unit id="org.junit.platform.runner" version="0.0.0"/>
 		<unit id="org.junit.platform.commons" version="0.0.0"/>
 		<unit id="org.junit.platform.engine" version="0.0.0"/>
 		<unit id="org.opentest4j" version="0.0.0"/>
