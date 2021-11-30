@@ -31,6 +31,13 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>r202112</id>
+			<properties>
+				<tycho-version>2.5.0</tycho-version>
+				<target-platform-classifier>org.eclipse.xtend.target-r202112</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>r202109</id>
 			<properties>
 				<tycho-version>2.4.0</tycho-version>
