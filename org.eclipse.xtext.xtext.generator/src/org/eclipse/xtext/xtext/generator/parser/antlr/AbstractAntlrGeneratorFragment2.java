@@ -45,7 +45,6 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFragment {
-	@Inject
 	private AntlrToolFacade antlrTool;
 
 	@Inject
@@ -60,6 +59,16 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
 	private AntlrOptions options = new AntlrOptions();
 
 	private ArrayList<String> antlrParams = new ArrayList<>();
+
+	private String dowloadUrl;
+	
+	@Inject
+	private void setAntlrToolFacade(AntlrToolFacade antlrTool) {
+		if (dowloadUrl != null) {
+			antlrTool.setSecureDownloadFrom(dowloadUrl);
+		}
+		this.antlrTool = antlrTool;
+	}
 
 	public void addAntlrParam(String param) {
 		antlrParams.add(param);
@@ -310,5 +319,12 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
 
 	public void setOptions(AntlrOptions options) {
 		this.options = options;
+	}
+	
+	/**
+	 * @since 2.26
+	 */
+	public void setDownloadUrl(String url) {
+		this.dowloadUrl = url;
 	}
 }
