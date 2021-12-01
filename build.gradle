@@ -11,18 +11,11 @@ buildscript {
 	dependencies {
 		classpath "org.xtext:xtext-gradle-plugin:$versions.xtext_gradle_plugin"
 		classpath "biz.aQute.bnd:biz.aQute.bnd.gradle:$versions.bnd"
-		constraints {
-			classpath("org.eclipse.jgit:org.eclipse.jgit") {
-				version {
-					strictly "[5.13, 6.0["
-				}
-			}
-		}
 	}
 }
 
 plugins {
-  id 'org.ajoberstar.grgit' version '4.1.0'
+  id 'org.ajoberstar.grgit' version '4.1.1'
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
