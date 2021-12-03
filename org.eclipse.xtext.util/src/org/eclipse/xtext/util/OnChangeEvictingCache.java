@@ -197,7 +197,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private static final Object NULL = new Object();
 		
-		private final Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
+		private final Map<Object, Object> values;
 
 		private final Collection<Listener> listeners = Sets.newLinkedHashSet();
 		
@@ -211,6 +211,17 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		
 		private int misses = 0;
 		private int hits = 0;
+		
+		public CacheAdapter() {
+			this(500);
+		}
+		
+		/**
+		 * @since 2.26
+		 */
+		public CacheAdapter(int initialCapacity) {
+			values = new ConcurrentHashMap<Object, Object>(initialCapacity);
+		}
 
 		public void set(Object name, Object value) {
 			empty = false;
