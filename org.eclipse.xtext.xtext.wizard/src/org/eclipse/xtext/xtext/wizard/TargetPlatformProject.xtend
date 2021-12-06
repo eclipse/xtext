@@ -77,6 +77,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					«ENDIF»
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="io.github.classgraph" version="4.8.117.v20210930-0420"/>
 					<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 					«IF config.xtextVersion.isSnapshot»
 						<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
@@ -106,7 +107,6 @@ class TargetPlatformProject extends ProjectDescriptor {
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.2.0.v20210813-1119"/>
 						<unit id="org.objectweb.asm.tree" version="9.2.0.v20210813-1119"/>
-						<unit id="io.github.classgraph" version="4.8.117.v20210930-0420"/>
 						<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-12"/>
 					</location>
 				«ELSE»
