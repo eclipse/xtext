@@ -53,7 +53,11 @@ public enum JavaVersion {
 	/**
 	 * Well, Java 11
 	 */
-	JAVA11("Java 11", new String[] {"11", "1.11"}, "JavaSE-11", "-1.11", Constants.JAVA11)
+	JAVA11("Java 11", new String[] {"11", "1.11"}, "JavaSE-11", "-1.11", Constants.JAVA11),
+	/**
+	 * Well, Java 17, next LTS version
+	 */
+	JAVA17("Java 17", new String[] {"17", "1.17"}, "JavaSE-17", "-1.17", Constants.JAVA17)
 	;
 
 	private static final class Constants {
@@ -66,6 +70,7 @@ public enum JavaVersion {
 		private static final long JAVA9 = ((long)(MAJOR_VERSION_1_5 + 4) << 16) + MINOR_VERSION_0;
 		private static final long JAVA10 = ((long)(MAJOR_VERSION_1_5 + 5) << 16) + MINOR_VERSION_0;
 		private static final long JAVA11 = ((long)(MAJOR_VERSION_1_5 + 6) << 16) + MINOR_VERSION_0;
+		private static final long JAVA17 = ((long)(MAJOR_VERSION_1_5 + 12) << 16) + MINOR_VERSION_0;
 	}
 
 	//	 if you introduce a new JavaVersion don't forget to adapt
