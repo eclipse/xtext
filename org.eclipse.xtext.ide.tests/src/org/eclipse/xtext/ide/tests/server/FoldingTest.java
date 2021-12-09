@@ -24,4 +24,13 @@ public class FoldingTest extends AbstractTestLangLanguageServerTest {
 		});
 	}
 	
+	@Test
+	public void testFoldingService2() {
+		testFolding(it -> {
+			it.setModel("package a\n.b {\n\n}\n");// significate region with size > 1 line
+			String expectedText = "[null 0..3]\n";
+			it.setExpectedFoldings(expectedText);
+		});
+	}
+	
 }

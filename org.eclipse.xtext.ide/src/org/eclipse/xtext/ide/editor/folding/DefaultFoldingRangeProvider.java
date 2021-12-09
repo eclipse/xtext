@@ -112,8 +112,8 @@ public class DefaultFoldingRangeProvider implements IFoldingRangeProvider {
 		int endLine;
 		if (significantRegion instanceof ITextRegionWithLineInformation) {
 			ITextRegionWithLineInformation lineInfoRegion = (ITextRegionWithLineInformation) significantRegion;
-			startLine = lineInfoRegion.getLineNumber();
-			endLine = lineInfoRegion.getEndLineNumber();
+			startLine = lineInfoRegion.getLineNumber() + 1;
+			endLine = lineInfoRegion.getEndLineNumber() + 1;
 		} else {
 			startLine = NodeModelUtils.getLineAndColumn(node, offset).getLine();
 			endLine = NodeModelUtils.getLineAndColumn(node, endOffset).getLine();
