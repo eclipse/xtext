@@ -77,8 +77,8 @@ public class XtextPluginImages {
 	
 	public static final ImageDescriptor DESC_CORRECTION_CHANGE = create(PATH_OBJ, "correction_change.gif"); //$NON-NLS-1$
 
-	public static final ImageDescriptor DESC_FIXABLE_ERROR = create(PATH_OBJ, "quickfix_error_obj.gif"); //$NON-NLS-1$
-	public static final ImageDescriptor DESC_FIXABLE_WARNING = create(PATH_OBJ, "quickfix_warning_obj.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_FIXABLE_ERROR = create(PATH_OBJ, "quickfix_error_obj.png"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_FIXABLE_WARNING = create(PATH_OBJ, "quickfix_warning_obj.png"); //$NON-NLS-1$
 	/**
 	 * @since 2.3
 	 */
