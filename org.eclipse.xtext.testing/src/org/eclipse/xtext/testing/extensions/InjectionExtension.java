@@ -21,6 +21,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionConfigurationException;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
+import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store.CloseableResource;
 
@@ -38,7 +39,7 @@ import com.google.inject.Injector;
  * It takes care about JUnit5 {@link Nested nested} test classes. They are inner classes that might
  * be annotated as well and must be handled for injection.
  * </p>
- * 
+ *
  * @author Karsten Thoms - Initial contribution and API
  * @since 2.14
  */
@@ -52,7 +53,7 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 	 * </p>
 	 */
 	private static ClassToInstanceMap<IInjectorProvider> injectorProviderClassCache = MutableClassToInstanceMap.create();
-	
+
 	/**
 	 * @since 2.24
 	 */
@@ -64,7 +65,7 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 			this.resetter = resetter;
 			setup();
 		}
-		
+
 		public void setup() {
 			if (!didSetup) {
 				didSetup = true;
@@ -140,15 +141,16 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 	/**
 	 * Returns the {@link IInjectorProvider injector provider} for the given context. Tries to find an {@link InjectWith}
 	 * annotation on the required test classes along the {@link ExtensionContext#getParent() hierarchy} of contexts.
-	 * 
+	 *
 	 * If the injector provider can be found, it will be reflectively instantiated and cached. Only one instance of any
 	 * given injector provider will be created.
-	 * 
+	 *
 	 * @since 2.24
 	 */
 	protected static IInjectorProvider getOrCreateInjectorProvider(ExtensionContext context) {
-		InjectWith injectWith = context.getRequiredTestClass().getAnnotation(InjectWith.class);
-		if (injectWith != null) {
+		Optional<InjectWith> injectWithOpt = AnnotationSupport.findAnnotation(context.getRequiredTestClass(), InjectWith.class);
+		if (injectWithOpt.isPresent()) {
+			InjectWith injectWith = injectWithOpt.get();
 			Class<? extends IInjectorProvider> klass = injectWith.value();
 			IInjectorProvider injectorProvider = injectorProviderClassCache.get(klass);
 			if (injectorProvider == null) {
