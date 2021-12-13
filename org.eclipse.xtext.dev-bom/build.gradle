@@ -14,7 +14,7 @@ dependencies {
         api "com.google.guava:guava-testlib:30.1-jre"
         api "com.google.guava:guava:30.1-jre"
         api "com.google.inject:guice:5.0.1"
-        api "io.github.classgraph:classgraph:4.8.117"
+        api "io.github.classgraph:classgraph:4.8.138"
         api "javax.annotation:javax.annotation-api:1.3.2"
         api "junit:junit:4.13.2"
         api "org.hamcrest:hamcrest-core:1.3"
