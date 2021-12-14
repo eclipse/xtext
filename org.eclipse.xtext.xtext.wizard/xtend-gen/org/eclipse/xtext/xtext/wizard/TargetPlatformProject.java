@@ -157,9 +157,6 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.117.v20210930-0420\"/>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
     {
@@ -265,6 +262,10 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
+        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.138.v20211212-1642\"/>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
         _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2021-12\"/>");
         _builder.newLine();
         _builder.append("\t\t");
@@ -304,7 +305,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.117.v20210930-0420\"/>");
+        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.138.v20211212-1642\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
