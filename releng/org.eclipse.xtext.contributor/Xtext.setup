@@ -867,7 +867,7 @@
             versionRange="[9.2.0,9.3.0)"/>
         <requirement
             name="io.github.classgraph"
-            versionRange="[4.8.117,4.9.0)"/>
+            versionRange="[4.8.138,4.9.0)"/>
         <requirement
             name="org.eclipse.egit.feature.group"/>
         <requirement
