@@ -25,7 +25,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   private static final String JQUERY_VERSION = "3.6.0";
   
-  private static final String JETTY_VERSION = "9.4.43.v20210629";
+  private static final String JETTY_VERSION = "9.4.44.v20210927";
   
   private static final String SLF4J_VERSION = "1.7.32";
   
