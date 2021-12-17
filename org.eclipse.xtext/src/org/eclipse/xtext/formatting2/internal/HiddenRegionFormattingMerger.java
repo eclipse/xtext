@@ -14,6 +14,8 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.IMerger;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -28,13 +30,16 @@ public class HiddenRegionFormattingMerger implements IMerger<IHiddenRegionFormat
 
 	@Override
 	public IHiddenRegionFormatting merge(List<? extends IHiddenRegionFormatting> conflicting) {
+		// If there are only 2 conflicts,
+		// usages of this method expect the second value to be updated to the merge result
+		// TODO: Fix those usages so they no longer expect this method to edit its input
 		if (conflicting.size() == 2) {
-			// TODO: don't do this
 			conflicting.get(1).mergeValuesFrom(conflicting.get(0));
 			return conflicting.get(1);
 		}
 		IHiddenRegionFormatting result = formatter.createHiddenRegionFormatting();
-		for (IHiddenRegionFormatting conflict : conflicting)
+		// Reversed so the merging order is consistent with the special case above
+		for (IHiddenRegionFormatting conflict : Lists.reverse(conflicting))
 			result.mergeValuesFrom(conflict);
 		return result;
 	}

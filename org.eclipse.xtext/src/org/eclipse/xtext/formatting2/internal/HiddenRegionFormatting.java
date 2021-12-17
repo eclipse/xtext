@@ -107,7 +107,7 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatting {
 
 	@Override
 	public void mergeValuesFrom(IHiddenRegionFormatting other) throws ConflictingFormattingException {
-		int strategy = other.getPriority() - getPriority();
+		int strategy = Integer.compare(other.getPriority(), getPriority());
 		setSpace(merge(getSpace(), other.getSpace(), strategy, "space"));
 		setNewLinesMin(merge(getNewLineMin(), other.getNewLineMin(), strategy, "newLineMin"));
 		setNewLinesDefault(merge(getNewLineDefault(), other.getNewLineDefault(), strategy, "newLineDefault"));
@@ -115,6 +115,7 @@ public class HiddenRegionFormatting implements IHiddenRegionFormatting {
 		setAutowrap(merge(getAutowrap(), other.getAutowrap(), strategy, "autowrap"));
 		setOnAutowrap(merge(getOnAutowrap(), other.getOnAutowrap(), strategy, "onAutowrap"));
 		setNoIndentation(merge(getNoIndentation(), other.getNoIndentation(), strategy, "noIndentation"));
+		setPriority(merge(getPriority(), other.getPriority(), strategy, "priority"));
 
 		if (getIndentationIncrease() != null && other.getIndentationIncrease() != null)
 			setIndentationIncrease(getIndentationIncrease() + other.getIndentationIncrease());
