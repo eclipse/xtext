@@ -29,8 +29,6 @@ public class JavaVersionTest {
 	
 	@Test
 	public void testFromQualifier() {
-		assertEquals(JavaVersion.JAVA17, JavaVersion.fromQualifier("17"));
-		assertEquals(JavaVersion.JAVA17, JavaVersion.fromQualifier("1.17"));
 		assertEquals(JavaVersion.JAVA11, JavaVersion.fromQualifier("11"));
 		assertEquals(JavaVersion.JAVA11, JavaVersion.fromQualifier("1.11"));
 		assertEquals(JavaVersion.JAVA10, JavaVersion.fromQualifier("10"));
@@ -51,7 +49,6 @@ public class JavaVersionTest {
 	
 	@Test
 	public void test_getQualifier() {
-		assertEquals("17", JavaVersion.JAVA17.getQualifier());
 		assertEquals("11", JavaVersion.JAVA11.getQualifier());
 		assertEquals("10", JavaVersion.JAVA10.getQualifier());
 		assertEquals("9", JavaVersion.JAVA9.getQualifier());
@@ -68,8 +65,6 @@ public class JavaVersionTest {
 
 	@Test
 	public void test_toJdtClassFileConstant () {
-		assertEquals(3997696, JavaVersion.JAVA17.toJdtClassFileConstant());
-		assertEquals(3604480, JavaVersion.JAVA11.toJdtClassFileConstant());
 		assertEquals(3538944, JavaVersion.JAVA10.toJdtClassFileConstant());
 		assertEquals(3473408, JavaVersion.JAVA9.toJdtClassFileConstant());
 		assertEquals(3407872, JavaVersion.JAVA8.toJdtClassFileConstant());
