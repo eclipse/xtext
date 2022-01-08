@@ -213,7 +213,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.license"
-      value="http://download.eclipse.org/cbi/updates/license/"/>
+      value="https://download.eclipse.org/cbi/updates/license/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
