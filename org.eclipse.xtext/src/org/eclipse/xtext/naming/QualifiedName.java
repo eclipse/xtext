@@ -36,7 +36,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	private QualifiedName lowerCase;
 
-	private static boolean USE_INTERNING = Boolean.getBoolean("xtext.qn.interning");
+	static boolean USE_INTERNING = Boolean.getBoolean("xtext.qn.interning");
 
 	/**
 	 * The single existing empty QualifiedName.
@@ -128,18 +128,15 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	}
 
 	/**
-	 * Returns string internal instance from string pool, if a system property {@code xtext.qn.interning} is set to {@code true}, or the
-	 * same object otherwise.
+	 * Returns string internal instance from string pool, if {@link #USE_INTERNING} is true, or the same object
+	 * otherwise.
 	 * <p>
-	 * Implementation notes:
-	 * <ol>
-	 * <li>Interning {@link String} objects may affect performance, see bug 484215.
-	 * <li>Interning {@link String} objects is not recommended for older JVM's, because of possible perm gen memory explosion, see
-	 * http://java-performance.info/string-intern-in-java-6-7-8/.
-	 * </ol>
+	 * {@link #USE_INTERNING} can be set by using the system property {@code xtext.qn.interning} or by calling
+	 * {@link QualifiedNameInterning#enable()} / {@link QualifiedNameInterning#disable()}.<br/>
+	 * The default value is <code>false</code>.
 	 */
 	private static String intern(String string) {
-		return USE_INTERNING? CommonUtil.intern(string) : string;
+		return USE_INTERNING ? CommonUtil.intern(string) : string;
 	}
 
 	/**
