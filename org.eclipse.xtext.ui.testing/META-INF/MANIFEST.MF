@@ -7,7 +7,8 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.ui.testing.util
-Import-Package: org.junit;version="4.12.0",
+Import-Package: org.apache.log4j;version="1.2.15";resolution:=optional,
+ org.junit;version="4.12.0",
  org.junit.internal;version="4.12.0",
  org.junit.internal.builders;version="4.12.0",
  org.junit.jupiter.api;version="[5.0.0,6.0.0)";resolution:=optional,
@@ -24,7 +25,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.ui;bundle-version="3.13.100";resolution:=optional,
  org.eclipse.jdt.launching;bundle-version="3.9.100";resolution:=optional;x-installation:=greedy,
- org.apache.log4j;bundle-version="1.2.15";resolution:=optional,
  org.eclipse.xtext.builder.standalone,
  org.eclipse.emf.codegen.ecore;bundle-version="2.20.0";resolution:=optional,
  org.eclipse.pde.core;bundle-version="3.11.100";resolution:=optional,
