@@ -245,6 +245,18 @@ public class Indexer {
 	}
 
 	/**
+	 * Return a new resolved resource description from a {@link IResourceDescription}.
+	 *
+	 * @param description
+	 *            the resource description, must not be {@code null}
+	 * @return the new resolved resource description, never {@code null}
+	 * @since 2.26
+	 */
+	protected IResourceDescription getResolvedResourceDescription(IResourceDescription description) {
+		return new Indexer.ResolvedResourceDescription(description);
+	}
+
+	/**
 	 * Index the given resource.
 	 *
 	 * @param isPreIndexing
@@ -257,10 +269,8 @@ public class Indexer {
 		IResourceServiceProvider serviceProvider = context.getResourceServiceProvider(uri);
 		IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
 		IResourceDescription newDescription = manager.getResourceDescription(resource);
-		IResourceDescription toBeAdded = new Indexer.ResolvedResourceDescription(newDescription);
-		IResourceDescription.Delta delta = manager
-				.createDelta(oldIndex != null ? oldIndex.getResourceDescription(uri) : null, toBeAdded);
-		return delta;
+		IResourceDescription toBeAdded = getResolvedResourceDescription(newDescription);
+		return manager.createDelta(oldIndex != null ? oldIndex.getResourceDescription(uri) : null, toBeAdded);
 	}
 
 	/**
