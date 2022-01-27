@@ -37,7 +37,7 @@ pipeline {
       steps {
         dir("releng/docker/xtext-web-deploy/xtext-web") {
           sh """
-            docker build --no-cache -t xtext/xtext-web:latest .
+            docker build --pull --no-cache -t xtext/xtext-web:latest .
             docker push xtext/xtext-web:latest
           """
         }
