@@ -36,7 +36,7 @@ public class HiddenLeafNodeWithSyntaxError extends HiddenLeafNode {
 	}
 
 	@Override
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		super.readData(in, context);
 		
 		syntaxErrorMessage = SerializationUtil.readSyntaxErrorMessage(in, context); 
@@ -44,14 +44,14 @@ public class HiddenLeafNodeWithSyntaxError extends HiddenLeafNode {
 	}
 
 	@Override
-	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+	protected void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
 		super.write(out, scc);
 
 		SerializationUtil.writeSyntaxErrorMessage(out, scc, syntaxErrorMessage); 
 	}
 	
 	@Override
-	NodeType getNodeId() {
+	protected NodeType getNodeId() {
 		return NodeType.HiddenLeafNodeWithSyntaxError;  
 	}
 }

@@ -70,7 +70,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	}
 
 	@Override
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		super.readData(in, context);
 
 		boolean isNull = in.readBoolean();
@@ -84,7 +84,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	}
 
 	@Override
-	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+	protected void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
 		super.write(out, scc);
 
 		boolean isNull = semanticElement == null;
@@ -98,7 +98,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 	}
 
 	@Override
-	NodeType getNodeId() {
+	protected NodeType getNodeId() {
 		return NodeType.CompositeNodeWithSemanticElement;
 	}
 }

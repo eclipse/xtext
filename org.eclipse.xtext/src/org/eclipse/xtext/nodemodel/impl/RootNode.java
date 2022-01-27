@@ -153,7 +153,7 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	}
 	
 	@Override
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		super.readData(in, context);
 
 		basicSetCompleteContent(context.getCompleteContent());
@@ -196,7 +196,7 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	}
 
 	@Override
-	NodeType getNodeId() {
+	protected NodeType getNodeId() {
 		return NodeType.RootNode;
 	}
 
