@@ -68,21 +68,21 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 	}
 
 	@Override 
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		super.readData(in, context);
 		
 		totalLength = SerializationUtil.readInt(in, true);   
 	}
 	
 	@Override
-	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+	protected void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
 		super.write(out, scc);
 		
 		SerializationUtil.writeInt (out, totalLength, true); 
 	}
 
 	@Override
-	NodeType getNodeId() {
+	protected NodeType getNodeId() {
 		return NodeType.LeafNode;
 	}
 }

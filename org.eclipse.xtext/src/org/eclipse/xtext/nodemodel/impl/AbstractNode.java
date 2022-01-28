@@ -360,13 +360,13 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		return prev != this;
 	}
 
-	enum NodeType {
+	protected enum NodeType {
 		CompositeNode, LeafNode, CompositeNodeWithSemanticElement, CompositeNodeWithSyntaxError, CompositeNodeWithSemanticElementAndSyntaxError, RootNode, HiddenLeafNode, HiddenLeafNodeWithSyntaxError, LeafNodeWithSyntaxError
 	}
 
-	abstract NodeType getNodeId();
+	protected abstract NodeType getNodeId();
 	
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		int length = SerializationUtil.readInt(in, true);
 
 		if (length > 0) {
@@ -390,7 +390,7 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		}
 	}
 
-	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+	protected void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
 		if (grammarElementOrArray instanceof EObject) {
 			EObject eObject = (EObject) grammarElementOrArray;
 			SerializationUtil.writeInt(out, 1, true);

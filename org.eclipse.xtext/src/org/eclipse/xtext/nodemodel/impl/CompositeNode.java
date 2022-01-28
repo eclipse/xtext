@@ -175,7 +175,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	private static final NodeType[] NODE_TYPE_VALUES = NodeType.values();
 	
 	@Override 
-	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
+	protected void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		super.readData(in, context);
 
 		int childNodeCount = SerializationUtil.readInt(in, true);
@@ -244,7 +244,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 	
 	@Override
-	void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
+	protected void write(DataOutputStream out, SerializationConversionContext scc) throws IOException {
 		super.write(out, scc);
 
 		int childNodeCount = getChildCount();
@@ -295,7 +295,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 
 	@Override
-	NodeType getNodeId() {
+	protected NodeType getNodeId() {
 		return NodeType.CompositeNode;
 	}
 }
