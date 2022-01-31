@@ -192,7 +192,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.gson\" version=\"2.8.8.v20211029-0838\"/>");
+        _builder.append("<unit id=\"com.google.gson\" version=\"2.8.9.v20220111-1409\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -277,7 +277,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.gson\" version=\"2.8.8.v20211029-0838\"/>");
+        _builder.append("<unit id=\"com.google.gson\" version=\"2.8.9.v20220111-1409\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
