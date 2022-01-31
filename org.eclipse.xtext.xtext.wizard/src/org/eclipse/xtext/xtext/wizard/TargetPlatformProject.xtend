@@ -107,7 +107,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="org.objectweb.asm" version="9.2.0.v20210813-1119"/>
 						<unit id="org.objectweb.asm.tree" version="9.2.0.v20210813-1119"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-12"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-03"/>
 					</location>
 				«ELSE»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -119,7 +119,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="org.objectweb.asm" version="9.2.0.v20210813-1119"/>
 						<unit id="org.objectweb.asm.tree" version="9.2.0.v20210813-1119"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-12"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-03"/>
 					</location>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
 						<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
