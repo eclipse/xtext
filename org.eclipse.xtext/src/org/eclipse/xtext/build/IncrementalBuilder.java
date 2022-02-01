@@ -268,8 +268,7 @@ public class IncrementalBuilder {
 						IResourceServiceProvider serviceProvider = getResourceServiceProvider(resource);
 						IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
 						IResourceDescription description = manager.getResourceDescription(resource);
-						SerializableResourceDescription copiedDescription = SerializableResourceDescription
-								.createCopy(description);
+						IResourceDescription copiedDescription = getSerializableResourceDescription(description);
 						result.getNewIndex().addDescription(resource.getURI(), copiedDescription);
 						operationCanceledManager.checkCanceled(cancelIndicator);
 						if (!request.isIndexOnly() && validate(resource) && serviceProvider.get(IShouldGenerate.class)
@@ -286,6 +285,18 @@ public class IncrementalBuilder {
 			return new IncrementalBuilder.Result(request.getState(), resolvedDeltas);
 		}
 
+		/**
+	 	* Return a new Serializable resource description from a {@link IResourceDescription}.
+	 	*
+	 	* @param description
+	 	*            the serializable description, must not be {@code null}
+	 	* @return the new serializable resource description, never {@code null}
+	 	* @since 2.26
+	 	*/
+		protected IResourceDescription getSerializableResourceDescription(IResourceDescription description) {
+			return SerializableResourceDescription.createCopy(description);
+		}
+	
 		private IResourceServiceProvider getResourceServiceProvider(Resource resource) {
 			if (resource instanceof XtextResource) {
 				return ((XtextResource) resource).getResourceServiceProvider();
