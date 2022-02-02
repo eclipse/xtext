@@ -311,10 +311,6 @@ public class IncrementalBuilder {
 		 */
 		protected void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
 			IResourceServiceProvider serviceProvider = getResourceServiceProvider(resource);
-			GeneratorDelegate generator = serviceProvider.get(GeneratorDelegate.class);
-			if (generator == null) {
-				return;
-			}
 			Set<URI> previous = newMappings.deleteSource(resource.getURI());
 			URIBasedFileSystemAccess fileSystemAccess = createFileSystemAccess(serviceProvider, resource);
 			fileSystemAccess.setBeforeWrite((uri, outputCfgName, contents) -> {
@@ -338,6 +334,7 @@ public class IncrementalBuilder {
 			}
 			GeneratorContext generatorContext = new GeneratorContext();
 			generatorContext.setCancelIndicator(request.getCancelIndicator());
+			GeneratorDelegate generator = serviceProvider.get(GeneratorDelegate.class);
 			generator.generate(resource, fileSystemAccess, generatorContext);
 			XtextResourceSet resourceSet = request.getResourceSet();
 			for (URI noLongerCreated : previous) {
