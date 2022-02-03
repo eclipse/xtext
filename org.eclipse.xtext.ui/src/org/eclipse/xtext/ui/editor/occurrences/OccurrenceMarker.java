@@ -110,7 +110,7 @@ public class OccurrenceMarker {
 		try {
 			doMarkOccurrences(editor.getSelectionProvider().getSelection());
 			synchronized (this) {
-				wait(1);
+				wait(5);
 			}
 			this.markOccurrenceJob.join();
 			Display display = Display.getCurrent();
