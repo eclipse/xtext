@@ -11,9 +11,11 @@ package org.eclipse.xtext.xtext.generator.xbase;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
@@ -35,7 +37,7 @@ public class XbaseUsageDetector {
 		new UsedRulesFinder(usedRules).compute(grammar);
 		for (AbstractRule it : usedRules) {
 			if ("XImportSection".equals(it.getName())
-					&& "org.eclipse.xtext.xbase.Xtype".equals(GrammarUtil.getGrammar(it).getName())) {
+					&& EcoreUtil2.isAssignableFrom((EClass) it.eResource().getResourceSet().getEObject(URI.createURI("http://www.eclipse.org/xtext/xbase/Xtype#//XImportSection"), true), (EClass) it.getType().getClassifier())) {
 				return true;
 			}
 		}
