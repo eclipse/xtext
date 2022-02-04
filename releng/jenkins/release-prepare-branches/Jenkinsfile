@@ -131,7 +131,7 @@ pipeline {
  */
 def getCurrentXtextVersion (branch) {
   version = sh (returnStdout: true, 
-    script: """curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')" """)  
+    script: """curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')" """)  
   version = version.replace('-SNAPSHOT','').trim()
   return version
 }

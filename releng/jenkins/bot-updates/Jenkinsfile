@@ -111,7 +111,7 @@ pipeline {
           // cut#1: split text amongst single quotes, get content of version attribute
           // cut#2: strip off '-SNAPSHOT' when present
           // remove trailing newline from result
-          env.SOURCE_XTEXT_VERSION = sh (returnStdout: true, script: """curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${params.SOURCE_BRANCH}/gradle/versions.gradle | grep -m 1 "version =" | cut -d "'" -f 2 | cut -d '-' -f 1""").trim()
+          env.SOURCE_XTEXT_VERSION = sh (returnStdout: true, script: """curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${params.SOURCE_BRANCH}/gradle/versions.gradle | grep -m 1 "version =" | cut -d "'" -f 2 | cut -d '-' -f 1""").trim()
           // It is expected that a milestone with label 'Release_<MAJOR>.<MINOR>' exists. Compute the name.
           env.MILESTONE_NAME = "Release_"+env.SOURCE_XTEXT_VERSION.substring(0,env.SOURCE_XTEXT_VERSION.lastIndexOf('.'))
         } // script
@@ -444,7 +444,7 @@ pipeline {
                 // get the open milestones for the repository
                 // grep for the expected milestone name 'Release_<MAJOR>.<MINOR>' and get attributes around that line
                 // grep for the number attribute value
-                env.MILESTONE_NUMBER = sh (label: "Get number of milestone ${env.MILESTONE_NAME}", returnStdout: true, script: """curl -s https://api.github.com/repos/eclipse/${it}/milestones | grep -b4 -a4 ${env.MILESTONE_NAME} | grep number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
+                env.MILESTONE_NUMBER = sh (label: "Get number of milestone ${env.MILESTONE_NAME}", returnStdout: true, script: """curl -sS https://api.github.com/repos/eclipse/${it}/milestones | grep -b4 -a4 ${env.MILESTONE_NAME} | grep number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
                 
                 env.UPDATE_PR_RESULT = sh label: "Set labels, milestone ${env.MILESTONE_NUMBER} and assign to bot", returnStdout: true, script: """
                   curl -X "PATCH" -s "https://api.github.com/repos/eclipse/${it}/issues/${env.PR_NUMBER}" ${env.GITHUB_API_REQUEST_HEADERS} \

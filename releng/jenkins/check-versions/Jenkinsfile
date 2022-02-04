@@ -176,17 +176,17 @@ pipeline {
 }
 
 
-//curl -s https://plugins.gradle.org/plugin/org.xtext.builder | grep -oP '(?<=Version ).+(?= \\(latest)'
+//curl -sS https://plugins.gradle.org/plugin/org.xtext.builder | grep -oP '(?<=Version ).+(?= \\(latest)'
 def getLatestFromGradlePluginPortal(name) {
-  return sh (script: "curl -s https://plugins.gradle.org/plugin/${name} |grep -Po '(?<=Version ).+(?= \\(latest)'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://plugins.gradle.org/plugin/${name} |grep -Po '(?<=Version ).+(?= \\(latest)'", returnStdout: true).trim()
 }
 
 def getLatestArtifactVersion(groupId, artifactId) {
-  return sh (script: "curl -s https://search.maven.org/solrsearch/select?q=g:\"${groupId}\"+AND+a:\"${artifactId}\" |grep -Po 'latestVersion.:.\\K[^\"]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://search.maven.org/solrsearch/select?q=g:\"${groupId}\"+AND+a:\"${artifactId}\" |grep -Po 'latestVersion.:.\\K[^\"]*'", returnStdout: true).trim()
 }
 
 def getLatestReleaseFromGitHubRepository (owner, repository) {
-  return sh (script: "curl -s curl https://api.github.com/repos/${owner}/${repository}/releases/latest | grep -Po '\"name\"[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS curl https://api.github.com/repos/${owner}/${repository}/releases/latest | grep -Po '\"name\"[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
 }
 
 /**
@@ -195,17 +195,17 @@ def getLatestReleaseFromGitHubRepository (owner, repository) {
  */
 def getLatestOrbitUrl (buildType) {
   assert ['R','S','I'].contains(buildType)
-  def repoID= sh (script: "curl -s https://download.eclipse.org/tools/orbit/downloads/ |grep -m1 -Po 'drops/\\K${buildType}\\d+'", returnStdout: true).trim()
+  def repoID= sh (script: "curl -sS https://download.eclipse.org/tools/orbit/downloads/ |grep -m1 -Po 'drops/\\K${buildType}\\d+'", returnStdout: true).trim()
   def repoURL = "http://download.eclipse.org/tools/orbit/downloads/drops/${repoID}/repository"
   return repoURL
 }
 
 def getXtextTychoVersion (branch) {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/xtext-eclipse/${branch}/releng/org.eclipse.xtext.tycho.parent/pom.xml |grep -Po '<tycho-version>\\K[^<]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/xtext-eclipse/${branch}/releng/org.eclipse.xtext.tycho.parent/pom.xml |grep -Po '<tycho-version>\\K[^<]*'", returnStdout: true).trim()
 }
 
 def getXtextGradlePluginVersion (branch) {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle |grep -Po 'xtext_gradle_plugin[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle |grep -Po 'xtext_gradle_plugin[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
 }
 
 /**
@@ -215,7 +215,7 @@ def getXtextGradlePluginVersion (branch) {
  * @param repository (Optional) Xtext repository name on GH
  */
 def getVersionFromGradleVersions (id,branch='master',repository='xtext-lib') {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/${repository}/${branch}/gradle/versions.gradle |grep -Po \"${id}[^\\d]*\\K[^']*\"", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/${repository}/${branch}/gradle/versions.gradle |grep -Po \"${id}[^\\d]*\\K[^']*\"", returnStdout: true).trim()
 }
 
 /**
@@ -225,15 +225,15 @@ def getVersionFromGradleVersions (id,branch='master',repository='xtext-lib') {
 def getArtifactVersionFromPOM (url, artifactId) {
   // first grep for <artifactId> and the line after
   // then grep the result for <version> tag
-  return sh (script: "curl -s ${url} |grep \"<artifactId>${artifactId}</artifactId>\" -A 1 |grep -Po \"<version>\\K[^<]*\"", returnStdout: true).trim()
+  return sh (script: "curl -sS ${url} |grep \"<artifactId>${artifactId}</artifactId>\" -A 1 |grep -Po \"<version>\\K[^<]*\"", returnStdout: true).trim()
 }
 
 def getXtextGradleVersion (branch) {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/wrapper/gradle-wrapper.properties |grep -Po 'distributionUrl=.*/gradle-\\K[\\d\\.]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/wrapper/gradle-wrapper.properties |grep -Po 'distributionUrl=.*/gradle-\\K[\\d\\.]*'", returnStdout: true).trim()
 }
 
 def getXtextBootstrapVersion (branch) {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle |grep -Po 'xtext_bootstrap[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/gradle/versions.gradle |grep -Po 'xtext_bootstrap[^\\d]*\\K[\\d\\.]*'", returnStdout: true).trim()
 }
 
 /**
@@ -243,5 +243,5 @@ def getXtextBootstrapVersion (branch) {
  */
 
 def getVersionFromBOM (id, branch='master') {
-  return sh (script: "curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/org.eclipse.xtext.dev-bom/build.gradle |grep -Po 'api \\\"${id}:\\K[^\"]*'", returnStdout: true).trim()
+  return sh (script: "curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${branch}/org.eclipse.xtext.dev-bom/build.gradle |grep -Po 'api \\\"${id}:\\K[^\"]*'", returnStdout: true).trim()
 }
