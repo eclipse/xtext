@@ -26,7 +26,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.4.44.v20210927</version>
+				<version>9.4.45.v20220203</version>
 				<configuration>
 					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
 				</configuration>
@@ -106,7 +106,7 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-annotations</artifactId>
-			<version>9.4.44.v20210927</version>
+			<version>9.4.45.v20220203</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
