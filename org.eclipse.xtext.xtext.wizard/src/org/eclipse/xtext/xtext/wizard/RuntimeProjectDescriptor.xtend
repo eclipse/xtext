@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -434,7 +434,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>
-								<version>3.0.0</version>
+								<version>3.3.0</version>
 								<executions>
 									<execution>
 										<id>add-source</id>
@@ -486,7 +486,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«IF isPlainMavenBuild»
 								<plugin>
 									<artifactId>maven-assembly-plugin</artifactId>
-									<version>3.1.1</version>
+									<version>3.3.0</version>
 									<configuration>
 										<descriptors>
 											<descriptor>jar-with-ecore-model.xml</descriptor>

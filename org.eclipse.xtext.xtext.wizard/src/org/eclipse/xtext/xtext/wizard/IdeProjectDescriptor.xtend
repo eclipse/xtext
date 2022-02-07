@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -92,7 +92,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>
-								<version>3.0.0</version>
+								<version>3.3.0</version>
 								<executions>
 									<execution>
 										<id>add-source</id>
@@ -131,7 +131,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-dependency-plugin</artifactId>
-									<version>3.1.2</version>
+									<version>3.2.0</version>
 									<executions>
 										<execution>
 											<id>copy-dependencies</id>
@@ -319,7 +319,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 			pluginsSection = '''
 				«IF config.languageServer === LanguageServer.FATJAR»
 					plugins {
-						id 'com.github.johnrengelman.shadow' version '7.1.0'
+						id 'com.github.johnrengelman.shadow' version '7.1.2'
 					}
 					
 				«ENDIF»
