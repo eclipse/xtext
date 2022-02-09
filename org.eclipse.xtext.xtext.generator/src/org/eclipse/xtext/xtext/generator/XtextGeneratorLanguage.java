@@ -139,6 +139,13 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
 	}
 
 	/**
+	 * @since 2.26
+	 */
+	public final String getName() {
+		return this.name;
+	}
+
+	/**
 	 * Either a single file extension or a comma-separated list of extensions
 	 * for which the language shall be registered.
 	 */
