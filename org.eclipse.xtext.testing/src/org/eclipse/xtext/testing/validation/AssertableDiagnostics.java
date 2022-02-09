@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.testing.validation;
 
 import static org.eclipse.emf.common.util.Diagnostic.*;
 
@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;

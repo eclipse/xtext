@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
 import org.junit.Assert;
 import org.junit.Test;
 

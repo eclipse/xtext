@@ -14,8 +14,9 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.eclipse.xtext.validation.AssertableDiagnostics.DiagnosticPredicate;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.DiagnosticChainAcceptor;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider.ConcreteSyntaxFeatureDiagnostic;
 
