@@ -83,6 +83,7 @@ pipeline {
   post {
     always {
       junit testResults: '**/target/surefire-reports/*.xml'
+      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     success {
       archiveArtifacts artifacts: 'build/**, **/target/work/data/.metadata/.log'
@@ -97,9 +98,6 @@ pipeline {
           }
         }
       }
-    }
-    unsuccessful {
-      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
     cleanup {
       script {
