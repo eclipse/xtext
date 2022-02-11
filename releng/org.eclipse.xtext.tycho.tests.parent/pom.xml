@@ -102,7 +102,7 @@
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<!-- <forkedProcessTimeoutInSeconds>1200</forkedProcessTimeoutInSeconds> -->
+						<forkedProcessTimeoutInSeconds>2400</forkedProcessTimeoutInSeconds>
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
 						<argLine>${memory-settings} ${os-jvm-flags}</argLine>
