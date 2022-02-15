@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.xtext.testing.validation.AssertableDiagnostics;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

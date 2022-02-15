@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.validation.AssertableDiagnostics.*;
+import static org.eclipse.xtext.testing.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.*;
 
 import java.util.List;
