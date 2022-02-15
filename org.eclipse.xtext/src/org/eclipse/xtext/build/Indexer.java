@@ -198,10 +198,18 @@ public class Indexer {
 				.transform(IResourceDescription::getURI).copyInto(new HashSet<>());
 		remainingURIs.removeAll(FluentIterable.from(deltas).transform(Delta::getUri).toSet());
 		List<URI> allAffected = FluentIterable.from(remainingURIs).filter(it -> {
-			IResourceDescription.Manager manager = context.getResourceServiceProvider(it)
-					.getResourceDescriptionManager();
-			IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-			return isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
+			IResourceServiceProvider resourceServiceProvider = context.getResourceServiceProvider(it);
+			if (resourceServiceProvider != null) {
+				IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
+				IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
+				return isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
+			} else {
+				IResourceDescription.Delta delta = getDeltaForDeletedResource(it, previousIndex);
+				if (delta != null) {
+					deltas.add(delta);
+				}
+				return false;
+			}
 		}).toList();
 		deltas.addAll(getDeltasForChangedResources(allAffected, previousIndex, context));
 		return new Indexer.IndexResult(deltas, newIndex);
@@ -213,19 +221,33 @@ public class Indexer {
 	protected List<IResourceDescription.Delta> getDeltasForDeletedResources(BuildRequest request,
 			ResourceDescriptionsData oldIndex, BuildContext context) {
 		List<IResourceDescription.Delta> deltas = new ArrayList<>();
-		for (URI deleted : request.getDeletedFiles()) {
-			IResourceServiceProvider resourceServiceProvider = context.getResourceServiceProvider(deleted);
-			if (resourceServiceProvider != null) {
-				operationCanceledManager.checkCanceled(context.getCancelIndicator());
-				IResourceDescription oldDescription = oldIndex != null ? oldIndex.getResourceDescription(deleted)
-						: null;
-				if (oldDescription != null) {
-					DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
-					deltas.add(delta);
+		if (oldIndex != null) {
+			for (URI deleted : request.getDeletedFiles()) {
+				IResourceServiceProvider resourceServiceProvider = context.getResourceServiceProvider(deleted);
+				if (resourceServiceProvider != null) {
+					operationCanceledManager.checkCanceled(context.getCancelIndicator());
+					IResourceDescription.Delta delta = getDeltaForDeletedResource(deleted, oldIndex);
+					if (delta != null) {
+						deltas.add(delta);
+					}
 				}
 			}
 		}
 		return deltas;
+	}
+
+	/**
+	 * Gets a delta for a resource that shall be deleted.
+	 *
+	 * @since 2.26
+	 *
+	 */
+	protected IResourceDescription.Delta getDeltaForDeletedResource(URI uri, ResourceDescriptionsData oldIndex) {
+		IResourceDescription oldDescription = oldIndex.getResourceDescription(uri);
+		if (oldDescription != null) {
+			return new DefaultResourceDescriptionDelta(oldDescription, null);
+		}
+		return null;
 	}
 
 	/**
