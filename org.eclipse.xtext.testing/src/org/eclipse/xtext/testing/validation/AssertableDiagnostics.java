@@ -28,6 +28,7 @@ import com.google.common.collect.Iterables;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.26
  * 
  */
 public class AssertableDiagnostics {
