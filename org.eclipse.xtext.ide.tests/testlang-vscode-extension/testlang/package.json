@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "publisher": "TypeFox",
     "engines": {
-        "vscode": "^1.0.0"
+        "vscode": "^1.64.0"
     },
     "categories": [
         "Languages"
@@ -13,7 +13,7 @@
     "activationEvents": [
         "onLanguage:testlang"
     ],
-    "main": "./out/src/extension",
+    "main": "./out/extension",
     "contributes": {
         "languages": [{
             "id": "testlang",
@@ -28,15 +28,18 @@
         }]
     },
     "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "prepublish": "tsc -p ./src",
+        "compile": "tsc -p ./src",
+        "watch": "tsc -w -p ./src",
+        "update-vscode": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "@types/node": "^17.0.18",
+        "@types/vscode": "^1.64.0",
+        "typescript": "^4.5.5",
+        "vscode-test": "^1.5.2"
     },
     "dependencies": {
-        "vscode-languageclient": "^2.2.1"
+        "vscode-languageclient": "^7.0.0"
     }
 }

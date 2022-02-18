@@ -14,6 +14,7 @@ import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
@@ -35,8 +36,8 @@ public class CodeLensService implements ICodeLensService, ICodeLensResolver {
 		command.setTitle("Do Awesome Stuff");
 		command.setArguments(Lists.newArrayList("foo", Integer.valueOf(1), Boolean.valueOf(true)));
 		codeLens.setCommand(command);
-		Position _position = new Position(1, 2);
-		codeLens.setData(_position);
+		codeLens.setData(new Position(1, 2));
+		codeLens.setRange(new Range(new Position(1,1), new Position(1,2)));
 		return Lists.newArrayList(codeLens);
 	}
 
