@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -88,7 +88,6 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
 		public void initialize(ILanguageServerAccess access) {
 			this.access = access;
 			this.access.addBuildListener(this);
-			this.client = ServiceEndpoints.toServiceObject((Endpoint) access.getLanguageClient(), CustomClient.class);
 		}
 
 		@Override
@@ -96,6 +95,9 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
 			BuildNotification buildNotification = new BuildNotification();
 			buildNotification.message = "Built "
 					+ Joiner.on(", ").join(Lists.transform(deltas, d -> d.getUri().toString()), ", ");
+			if (client == null) {
+				client = ServiceEndpoints.toServiceObject((Endpoint) access.getLanguageClient(), CustomClient.class);
+			}
 			client.buildHappened(buildNotification);
 		}
 

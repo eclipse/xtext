@@ -124,8 +124,7 @@ public abstract class AbstractIdeQuickfixTest {
 	private <T> T createInMemoryFile(CharSequence content, EClass type) {
 		InMemoryURIHandler fs = new InMemoryURIHandler();
 		String fileName = "inmemory:/file1." + fileExtensionProvider.getPrimaryFileExtension();
-		Pair<String, String> _mappedTo = Pair.of(fileName, content.toString());
-		quickFixTestHelper.operator_add(fs, _mappedTo);
+		quickFixTestHelper.operator_add(fs, Pair.of(fileName, content.toString()));
 		ResourceSet rs = quickFixTestHelper.createResourceSet(fs);
 		Map<String, ResourceDescriptionsData> dataMap = new HashMap<>();
 		dataMap.put("project", ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(rs));

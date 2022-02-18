@@ -10,8 +10,9 @@
 
 import * as net from 'net';
 
-import { Disposable, ExtensionContext } from 'vscode';
-import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
+import {Trace} from 'vscode-jsonrpc';
+import { window, workspace, commands, ExtensionContext, Uri } from 'vscode';
+import { LanguageClient, LanguageClientOptions, StreamInfo, Position as LSPosition, Location as LSLocation } from 'vscode-languageclient/node';
 
 export function activate(context: ExtensionContext) {
 	let serverOptions = {
@@ -32,7 +33,15 @@ export function activate(context: ExtensionContext) {
 	}
 	
 	// Create the language client and start the client.
-	let disposable = new LanguageClient('xtext.server', 'Xtext Server', serverInfo, clientOptions).start();
+	
+
+	let client = new LanguageClient('xtext.server', 'Xtext Server', serverInfo, clientOptions)
+	client.onReady().then(() => {
+		client.onNotification("buildHappened", (o: any) => {
+			console.log(o);
+		});
+	});
+	let disposable = client.start();
 	
 	// Push the disposable to the context's subscriptions so that the 
 	// client can be deactivated on extension deactivation
