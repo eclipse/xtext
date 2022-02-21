@@ -11,7 +11,7 @@ pipeline {
   // execute from the directory that contains the xtext git repos below
   parameters {
       string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source branch for checkout & create the release branches from')
-      choice(name: 'RELEASE', choices: ['M1','M2','M3','GA','Beta'], description: 'Type of release to build')
+      choice(name: 'RELEASE', choices: ['M1','M2','M3','RC1','RC2','GA','Beta'], description: 'Type of release to build')
       booleanParam(name: 'VERBOSE', defaultValue: false, description: 'Print additional verbose output (e.g. git diff)')
       booleanParam(name: 'DRY_RUN', defaultValue: false, description: 'Dry run mode. Performs all actions, but does not push them. Changes are only printed out.')
   }
