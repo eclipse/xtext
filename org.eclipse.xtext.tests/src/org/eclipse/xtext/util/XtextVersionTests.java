@@ -18,7 +18,7 @@ import org.junit.Test;
  * @author dhuebner - Initial contribution and API
  */
 public class XtextVersionTests {
-	private static Pattern VERSION_MATCHER = Pattern.compile("\\d\\.\\d+\\.\\d+(?:(-SNAPSHOT)|(\\.M\\d)|(\\.Beta\\d?))?");
+	private static Pattern VERSION_MATCHER = Pattern.compile("\\d\\.\\d+\\.\\d+(?:(-SNAPSHOT)|(\\.M\\d)|(\\.Beta\\d?)|(\\.RC\\d?))?");
 
 	@Test
 	public void testVersionKinds() {
