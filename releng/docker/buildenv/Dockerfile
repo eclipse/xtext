@@ -9,7 +9,7 @@ RUN dnf -y update
 # ruby-devel required to install jekyll
 # redhat-rpm-config required during jekyll install: gcc: error: /usr/lib/rpm/redhat/redhat-hardened-cc1: No such file or directory
 
-RUN dnf  --assumeyes install ruby ruby-devel redhat-rpm-config gcc-c++ @development-tools
+RUN dnf  --assumeyes install jq ruby ruby-devel redhat-rpm-config gcc-c++ @development-tools
 RUN gem install therubyracer --source 'https://rubygems.org/'
 RUN gem install bundler jekyll jekyll-markdown-block execjs
 # Expose Jekyll serve default port
