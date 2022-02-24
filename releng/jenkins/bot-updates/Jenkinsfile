@@ -404,8 +404,6 @@ pipeline {
         script {
         withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
         sshagent([GENIE_XTEXT_CREDENTIALS]) {
-          // common headers to use for REST requests
-          env.GITHUB_API_REQUEST_HEADERS="-H 'Cookie: logged_in=no' -H 'Authorization: token ${GITHUB_API_TOKEN}' -H 'Content-Type: text/plain; charset=utf-8'"
 
           // publish for each repo
           REPOSITORY_NAMES.split(',').each {
@@ -421,8 +419,8 @@ pipeline {
               // Create a pull request, but only when there were changes made on the target branch
               if (OPEN_PULL_REQUEST && "${env.HAS_CHANGES}" != "0") {
                 // see https://developer.github.com/v3/pulls/#create-a-pull-request
-                env.CREATE_PR_RESULT = sh label: "Open Pull Request", returnStdout: true, script: """
-                  curl -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls" ${env.GITHUB_API_REQUEST_HEADERS} \
+                env.CREATE_PR_RESULT = sh label: "Open Pull Request", returnStdout: true, script: 'curl -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" ' + """\\
+                  -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls" \
                     -d '{ \
                       "title": "${env.PR_TITLE}", \
                       "body": "This change was brought to you by your friendly Xtext Genie.", \
@@ -438,18 +436,18 @@ pipeline {
                 
                 // see https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
                 // TODO: Use team_reviewers?
-                env.ADD_REVIEWERS_RESULT = sh label: "Request reviewers", returnStdout: true, script: """
-                  curl -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls/${env.PR_NUMBER}/requested_reviewers" ${env.GITHUB_API_REQUEST_HEADERS} \
+                env.ADD_REVIEWERS_RESULT = sh label: "Request reviewers", returnStdout: true, script: 'curl -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" ' + """\\
+                  -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls/${env.PR_NUMBER}/requested_reviewers"  \
                       -d '{ "reviewers": [ ${params.GITHUB_PR_REVIEWERS} ] }'
                 """
 
                 // get the open milestones for the repository
                 // grep for the expected milestone name 'Release_<MAJOR>.<MINOR>' and get attributes around that line
                 // grep for the number attribute value
-                env.MILESTONE_NUMBER = sh (label: "Get number of milestone ${env.MILESTONE_NAME}", returnStdout: true, script: """curl -sS https://api.github.com/repos/eclipse/${it}/milestones | grep -b4 -a4 ${env.MILESTONE_NAME} | grep number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
+                env.MILESTONE_NUMBER = sh (label: "Get number of milestone ${env.MILESTONE_NAME}", returnStdout: true, script: 'curl -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" ' + """-sS https://api.github.com/repos/eclipse/${it}/milestones | grep -b4 -a4 ${env.MILESTONE_NAME} | grep number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
                 
-                env.UPDATE_PR_RESULT = sh label: "Set labels, milestone ${env.MILESTONE_NUMBER} and assign to bot", returnStdout: true, script: """
-                  curl -X "PATCH" -s "https://api.github.com/repos/eclipse/${it}/issues/${env.PR_NUMBER}" ${env.GITHUB_API_REQUEST_HEADERS} \
+                env.UPDATE_PR_RESULT = sh label: "Set labels, milestone ${env.MILESTONE_NUMBER} and assign to bot", returnStdout: true, script: 'curl -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" ' + """\\
+                  -X "PATCH" -s "https://api.github.com/repos/eclipse/${it}/issues/${env.PR_NUMBER}" \
                       -d '{ "labels": [ "bot", "releng"], "assignees": [ "genie-xtext"], "milestone": ${env.MILESTONE_NUMBER} }'
                 """
               } // if has changes
