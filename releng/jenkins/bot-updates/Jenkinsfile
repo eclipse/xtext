@@ -78,6 +78,7 @@ pipeline {
     stage('Checkout') {
       steps {
         checkout scm
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
         script {
           // Check preconditions
           if (env.TARGET_BRANCH == 'master') {
@@ -111,10 +112,11 @@ pipeline {
           // cut#1: split text amongst single quotes, get content of version attribute
           // cut#2: strip off '-SNAPSHOT' when present
           // remove trailing newline from result
-          env.SOURCE_XTEXT_VERSION = sh (returnStdout: true, script: """curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/${params.SOURCE_BRANCH}/gradle/versions.gradle | grep -m 1 "version =" | cut -d "'" -f 2 | cut -d '-' -f 1""").trim()
+          env.SOURCE_XTEXT_VERSION = sh (returnStdout: true, script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$SOURCE_BRANCH | jq -r ".content" | base64 -d | grep -m 1 "version =" | cut -d "\'" -f 2 | cut -d "-" -f 1').trim()
           // It is expected that a milestone with label 'Release_<MAJOR>.<MINOR>' exists. Compute the name.
           env.MILESTONE_NAME = "Release_"+env.SOURCE_XTEXT_VERSION.substring(0,env.SOURCE_XTEXT_VERSION.lastIndexOf('.'))
         } // script
+        } // withCredentials
       } // steps
     } // stage
 

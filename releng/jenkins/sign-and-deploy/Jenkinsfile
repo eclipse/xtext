@@ -103,6 +103,7 @@ spec:
     DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
     KEYRING = credentials('secret-subkeys.asc')
     SCRIPTS = "$WORKSPACE/umbrella/releng/jenkins/sign-and-deploy/scripts"
+    GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
   }
 
   stages {
@@ -136,13 +137,26 @@ spec:
       }
     }
 
+    stage('Determine Xtext version') {
+      steps {
+        container ('jnlp') {
+          withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+            dir('publishing') {
+              sh('curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_TO_DEPLOY | jq -r ".content" | base64 -d | grep -Po "version = \\\'\\K([^\\\']*)(?=\\\')" > version.txt')
+              sh("cat version.txt")
+            } // END dir
+          } // END withCredentials
+        } // END container
+      } // END steps
+    } // END stage
+
     stage('Sign & Upload to OSSRH') {
       steps {
         container ('xtext-buildenv') {
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
         dir('publishing') {
         sh ''' 
-          XTEXT_VERSION=$(curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')")
+          XTEXT_VERSION=$(cat version.txt)
           echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
           gpg --batch --import "${KEYRING}"
           for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
@@ -178,7 +192,7 @@ spec:
           #
           # STEP 1: Get property values from publisher.properties/promote.properties
           #
-          XTEXT_VERSION=$(curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')")
+          XTEXT_VERSION=$(cat version.txt)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
@@ -205,7 +219,7 @@ spec:
         container ('jnlp') {
         dir('publishing') {
           sh '''
-          XTEXT_VERSION=$(curl -sS https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'[^\\']*" | cut -d "'" -f2)
+          XTEXT_VERSION=$(cat version.txt)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           if [ -z "$BUILD_ID" ]
