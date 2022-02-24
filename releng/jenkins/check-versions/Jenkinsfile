@@ -225,7 +225,10 @@ def getXtextGradlePluginVersion (branch) {
  */
 def getVersionFromGradleVersions (id,branch='master',repository='xtext-lib') {
   env.BRANCH_REF="${branch}"
-  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/${repository}/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "${id}[^\\d]*\\K[^\']*"', returnStdout: true).trim()
+  env.REPOSITORY_REF="${repository}"
+  env.ID_REF="${id}"
+  def result =  sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/$REPOSITORY_REF/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "$ID_REF[^\\d]*\\K[^\']*"', returnStdout: true).trim()
+  return result
 }
 
 /**
@@ -247,7 +250,8 @@ def getXtextGradleVersion (branch) {
 
 def getXtextBootstrapVersion (branch) {
   env.BRANCH_REF="${branch}"
-  return sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "xtext_bootstrap[^\\d]*\\K[\\d\\.]*"', returnStdout: true).trim()
+  def result = sh (script: 'curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_REF | jq -r ".content" | base64 -d | grep -Po "xtext_bootstrap[^\\d]*\\K[\\d\\.]*"', returnStdout: true).trim()
+  return result
 }
 
 /**
