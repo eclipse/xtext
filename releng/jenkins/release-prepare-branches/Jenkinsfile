@@ -47,7 +47,7 @@ pipeline {
 
           if (!xtextVersion.startsWith('2.')) {
             currentBuild.result = 'ABORTED'
-            error('XTEXT_VERSION invalid')
+            error('XTEXT_VERSION '+xtextVersion+' invalid')
           }
           currentBuild.displayName = "#${env.BUILD_NUMBER} ${xtextVersion}";
           if (params.DRY_RUN) {
