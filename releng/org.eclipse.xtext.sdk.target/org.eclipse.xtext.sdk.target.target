@@ -183,13 +183,20 @@
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 		<unit id="com.google.guava" version="0.0.0"/>
-		<unit id="org.eclipse.xpand" version="0.0.0"/>
-		<unit id="org.eclipse.xtend" version="0.0.0"/>
-		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xpand" version="0.0.0"/>
+		<unit id="org.eclipse.xpand.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtend" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
+		<unit id="org.eclipse.xtend.typesystem.emf.source" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201605260315/"/>
+	</location>
+	
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
