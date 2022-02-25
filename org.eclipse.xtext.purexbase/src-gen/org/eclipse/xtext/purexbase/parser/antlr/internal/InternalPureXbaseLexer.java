@@ -1646,10 +1646,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6879:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalPureXbase.g:6879:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalPureXbase.g:6884:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalPureXbase.g:6884:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalPureXbase.g:6879:12: ( '0x' | '0X' )
+            // InternalPureXbase.g:6884:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1677,7 +1677,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPureXbase.g:6879:13: '0x'
+                    // InternalPureXbase.g:6884:13: '0x'
                     {
                     match("0x"); 
 
@@ -1685,7 +1685,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPureXbase.g:6879:18: '0X'
+                    // InternalPureXbase.g:6884:18: '0X'
                     {
                     match("0X"); 
 
@@ -1695,7 +1695,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
             }
 
-            // InternalPureXbase.g:6879:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalPureXbase.g:6884:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1733,7 +1733,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalPureXbase.g:6879:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalPureXbase.g:6884:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1742,10 +1742,10 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalPureXbase.g:6879:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalPureXbase.g:6884:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalPureXbase.g:6879:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalPureXbase.g:6884:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1763,7 +1763,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalPureXbase.g:6879:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalPureXbase.g:6884:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1787,7 +1787,7 @@ public class InternalPureXbaseLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalPureXbase.g:6879:84: ( 'l' | 'L' )
+                            // InternalPureXbase.g:6884:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1826,11 +1826,11 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6881:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalPureXbase.g:6881:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalPureXbase.g:6886:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalPureXbase.g:6886:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalPureXbase.g:6881:21: ( '0' .. '9' | '_' )*
+            // InternalPureXbase.g:6886:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1879,11 +1879,11 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6883:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalPureXbase.g:6883:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalPureXbase.g:6888:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalPureXbase.g:6888:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalPureXbase.g:6883:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalPureXbase.g:6888:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1892,7 +1892,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalPureXbase.g:6883:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalPureXbase.g:6888:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1903,7 +1903,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalPureXbase.g:6883:36: ( '+' | '-' )?
+                    // InternalPureXbase.g:6888:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1936,7 +1936,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
             }
 
-            // InternalPureXbase.g:6883:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalPureXbase.g:6888:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1948,7 +1948,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalPureXbase.g:6883:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalPureXbase.g:6888:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1972,7 +1972,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPureXbase.g:6883:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalPureXbase.g:6888:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2005,10 +2005,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6885:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalPureXbase.g:6885:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalPureXbase.g:6890:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalPureXbase.g:6890:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalPureXbase.g:6885:11: ( '^' )?
+            // InternalPureXbase.g:6890:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2017,7 +2017,7 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalPureXbase.g:6885:11: '^'
+                    // InternalPureXbase.g:6890:11: '^'
                     {
                     match('^'); 
 
@@ -2035,7 +2035,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalPureXbase.g:6885:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalPureXbase.g:6890:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2084,10 +2084,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6887:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalPureXbase.g:6887:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalPureXbase.g:6892:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalPureXbase.g:6892:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalPureXbase.g:6887:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalPureXbase.g:6892:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2105,10 +2105,10 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalPureXbase.g:6887:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalPureXbase.g:6892:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalPureXbase.g:6887:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalPureXbase.g:6892:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2124,7 +2124,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalPureXbase.g:6887:21: '\\\\' .
+                    	    // InternalPureXbase.g:6892:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2132,7 +2132,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPureXbase.g:6887:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalPureXbase.g:6892:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2152,7 +2152,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalPureXbase.g:6887:44: ( '\"' )?
+                    // InternalPureXbase.g:6892:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2161,7 +2161,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalPureXbase.g:6887:44: '\"'
+                            // InternalPureXbase.g:6892:44: '\"'
                             {
                             match('\"'); 
 
@@ -2174,10 +2174,10 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPureXbase.g:6887:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalPureXbase.g:6892:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalPureXbase.g:6887:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalPureXbase.g:6892:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2193,7 +2193,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalPureXbase.g:6887:55: '\\\\' .
+                    	    // InternalPureXbase.g:6892:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2201,7 +2201,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPureXbase.g:6887:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalPureXbase.g:6892:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2221,7 +2221,7 @@ public class InternalPureXbaseLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalPureXbase.g:6887:79: ( '\\'' )?
+                    // InternalPureXbase.g:6892:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2230,7 +2230,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalPureXbase.g:6887:79: '\\''
+                            // InternalPureXbase.g:6892:79: '\\''
                             {
                             match('\''); 
 
@@ -2261,12 +2261,12 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6889:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalPureXbase.g:6889:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalPureXbase.g:6894:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalPureXbase.g:6894:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalPureXbase.g:6889:24: ( options {greedy=false; } : . )*
+            // InternalPureXbase.g:6894:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2291,7 +2291,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalPureXbase.g:6889:52: .
+            	    // InternalPureXbase.g:6894:52: .
             	    {
             	    matchAny(); 
 
@@ -2321,12 +2321,12 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6891:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalPureXbase.g:6891:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalPureXbase.g:6896:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalPureXbase.g:6896:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalPureXbase.g:6891:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalPureXbase.g:6896:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2339,7 +2339,7 @@ public class InternalPureXbaseLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalPureXbase.g:6891:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalPureXbase.g:6896:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2359,7 +2359,7 @@ public class InternalPureXbaseLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalPureXbase.g:6891:40: ( ( '\\r' )? '\\n' )?
+            // InternalPureXbase.g:6896:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2368,9 +2368,9 @@ public class InternalPureXbaseLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalPureXbase.g:6891:41: ( '\\r' )? '\\n'
+                    // InternalPureXbase.g:6896:41: ( '\\r' )? '\\n'
                     {
-                    // InternalPureXbase.g:6891:41: ( '\\r' )?
+                    // InternalPureXbase.g:6896:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2379,7 +2379,7 @@ public class InternalPureXbaseLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalPureXbase.g:6891:41: '\\r'
+                            // InternalPureXbase.g:6896:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2411,10 +2411,10 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6893:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalPureXbase.g:6893:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPureXbase.g:6898:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalPureXbase.g:6898:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalPureXbase.g:6893:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPureXbase.g:6898:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2468,8 +2468,8 @@ public class InternalPureXbaseLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPureXbase.g:6895:16: ( . )
-            // InternalPureXbase.g:6895:18: .
+            // InternalPureXbase.g:6900:16: ( . )
+            // InternalPureXbase.g:6900:18: .
             {
             matchAny(); 
 
