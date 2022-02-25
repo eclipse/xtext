@@ -345,11 +345,8 @@ The following is an example target platform definition for Xtext 2.26.0 and Ecli
     <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <unit id="org.eclipse.xpand" version="0.0.0"/>
-    <unit id="org.eclipse.xtend" version="0.0.0"/>
-    <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
     <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/releases/2021-06/"/>
+    <repository location="http://download.eclipse.org/releases/2022-03/"/>
   </location>
 </locations>
 </target>
