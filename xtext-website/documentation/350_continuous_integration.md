@@ -238,6 +238,65 @@ Now that we can build our language we need to be able to integrate our language 
 
 You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.
 
+If your language uses an `IJvmModelInferrer` (for example by using Xbase), the plug-in can create trace files for debugging purposes,
+by using the specialized maven goals `install-debug-info` and `test-install-debug-info`.
+
+```xml
+<plugin>
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>xtext-maven-plugin</artifactId>
+	<version>${xtext-version}</version>
+	<executions>
+		<execution>
+      <id>generate</id>
+      <goals>
+        <goal>generate</goal>
+        <goal>testGenerate</goal>
+      </goals>
+    </execution>
+    <execution>
+      <id>trace</id>
+      <goals>
+        <goal>install-debug-info</goal>
+        <goal>test-install-debug-info</goal>
+      </goals>
+    </execution>
+	</executions>
+	<configuration>
+    <addOutputDirectoriesToCompileSourceRoots>true</addOutputDirectoriesToCompileSourceRoots>
+		<languages>
+			<language>
+				<setup>my.javalang.JavaLanguageStandaloneSetup</setup>
+				<outputConfigurations>
+				<outputConfigurations>
+          <outputConfiguration>
+            <installDslAsPrimarySource>true</installDslAsPrimarySource>
+            <outputDirectory>src-gen</outputDirectory>
+            <sourceMappings>
+              <sourceMapping>
+                <outputDirectory>src-gen</outputDirectory>
+                <sourceFolder>src</sourceFolder>
+              </sourceMapping>
+            </sourceMappings>
+          </outputConfiguration>
+        </outputConfigurations>
+			</language>
+		</languages>
+	</configuration>
+	<dependencies>
+		<dependency>
+			<groupId>my.javalang</groupId>
+			<artifactId>my.javalanguage</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</plugin>
+```
+
+In this example, the option `installDslAsPrimarySource` is used to create traces that hide the underlying Java source and map the source file lines to the lines in the byte code.
+At least one source mapping is needed for the trace functionality to work as the plug-in has to map input to output folder locations.
+If you add the optional property `addOutputDirectoriesToCompileSourceRoots`, the output directories specified in `sourceMappings` will be appended as (test)compile roots of the current Maven project, which means the `maven-compiler-plugin` will recognize them as Java source folders. Set to `false` to opt out, as `true` is the default.
+
 ## Maven Tycho Hints
 
 Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the `pom.xml` using maven `<repositories>` section. The p2 repositories need to be marked with layout=p2.
@@ -247,6 +306,7 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 
 | Xtext         | EMF           | MWE2/MWE    | Xpand       | Eclipse     | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
+| [2.26.0]({{page.upsite.xtext}}releases/2.26.0/)           | [2.29.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.29) (2.20.0)     | [2.12.1]({{page.upsite.mwe}}releases/2.12.1/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.23.0]({{page.upsite.eclipse}}releases/2022-03) (4.7.3) | [2022-03]({{page.upsite.eclipse}}releases/2021-03)|
 | [2.25.0]({{page.upsite.xtext}}releases/2.25.0/)           | [2.25.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.25) (2.20.0)     | [2.12.1]({{page.upsite.mwe}}releases/2.12.1/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.19.0]({{page.upsite.eclipse}}releases/2021-03) (4.7.3) | [2021-03]({{page.upsite.eclipse}}releases/2021-03)|
 | [2.24.0]({{page.upsite.xtext}}releases/2.24.0/)           | [2.24.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.24) (2.20.0)     | [2.12.0]({{page.upsite.mwe}}releases/2.12.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.18.0]({{page.upsite.eclipse}}releases/2020-12) (4.7.3) | [2020-12]({{page.upsite.eclipse}}releases/2020-12)|
 | [2.23.0]({{page.upsite.xtext}}releases/2.23.0/)           | [2.23.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.23) (2.20.0)     | [2.11.3]({{page.upsite.mwe}}releases/2.11.3/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.17.0]({{page.upsite.eclipse}}releases/2020-09) (4.7.3) | [2020-09]({{page.upsite.eclipse}}releases/2020-09)|
@@ -268,7 +328,7 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 | [2.8.3]({{page.upsite.xtext}}releases/2.8.3/), [2.8.2]({{page.upsite.xtext}}releases/2.8.2/), [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) | [2.11.0]({{page.upsite.emf}}2.11/core/R201506010402/) (2.10.2)  	 | [2.8.0]({{page.upsite.mwe}}releases/2.8.0/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars R]({{page.upsite.eclipse}}releases/mars/201506241002/)|
 | [2.7.3]({{page.upsite.xtext}}releases/maintenance/R201411190455/) | [2.10.2]({{page.upsite.emf}}2.10.x/core/S201501230452/) (2.10) | [2.7.0]({{page.upsite.mwe}}releases/R201409021051/mwe2lang/) [1.3.4]({{page.upsite.mwe}}releases/R201409021027/mwe) (2.7.0/1.2)  | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4) | [4.4.2]({{page.upsite.eclipse}}eclipse/updates/4.4/R-4.4.2-201502041700) (3.6) |[Luna SR2]({{page.upsite.eclipse}}releases/luna/201502271000/)|
 
-The following is an example target platform definition for Xtext 2.25.0 and Eclipse 4.19 alias 2021-03.
+The following is an example target platform definition for Xtext 2.26.0 and Eclipse 4.20 alias 2021-06.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -277,7 +337,7 @@ The following is an example target platform definition for Xtext 2.25.0 and Ecli
 <locations>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.25.0/"/>
+    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.26.0/"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
@@ -285,11 +345,8 @@ The following is an example target platform definition for Xtext 2.25.0 and Ecli
     <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <unit id="org.eclipse.xpand" version="0.0.0"/>
-    <unit id="org.eclipse.xtend" version="0.0.0"/>
-    <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
     <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/releases/2021-03/"/>
+    <repository location="http://download.eclipse.org/releases/2022-03/"/>
   </location>
 </locations>
 </target>
