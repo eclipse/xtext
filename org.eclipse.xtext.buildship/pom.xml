@@ -48,6 +48,7 @@
 		<profile><id>r202106</id></profile>
 		<profile><id>r202109</id></profile>
 		<profile><id>r202112</id></profile>
+		<profile><id>r202203</id></profile>
 		<profile><id>latest</id></profile>
 	</profiles>
 </project>
