@@ -2,7 +2,7 @@
  * Base project version and versions of common dependencies.
  */
 
-version = '2.26.0-SNAPSHOT'
+version = '2.27.0-SNAPSHOT'
 
 ext.versions = [
 	'xtext': version,
