@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.sdk.parent</artifactId>
-		<version>2.26.0-SNAPSHOT</version>
+		<version>2.27.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.sdk.parent</relativePath>
 	</parent>
 
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.sdk.p2-repository</artifactId>
-	<version>2.26.0-SNAPSHOT</version>
+	<version>2.27.0-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
 	
 	<properties>
@@ -20,7 +20,7 @@
 			Usually this is the same as the (snaphsot) project version
 			but for releases it is set to the release version.
 		-->
-		<zipFileVersion>2.26.0-SNAPSHOT</zipFileVersion>
+		<zipFileVersion>2.27.0-SNAPSHOT</zipFileVersion>
 	</properties>
 
 	<build>
@@ -69,7 +69,7 @@
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
-									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.26.0-SNAPSHOT.zip"
+									file="${basedir}/target/org.eclipse.xtext.sdk.p2-repository-2.27.0-SNAPSHOT.zip"
 									tofile="${basedir}/../../build/org.eclipse.xtext.sdk.p2-repository-${zipFileVersion}.zip">
 								</copy>
 							</target>
