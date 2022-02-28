@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Standalone Builder
 Bundle-SymbolicName: org.eclipse.xtext.builder.standalone
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.27.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.26.0",
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.27.0",
  org.eclipse.xtext,
  org.eclipse.xtext.common.types,
  org.eclipse.xtend.lib,

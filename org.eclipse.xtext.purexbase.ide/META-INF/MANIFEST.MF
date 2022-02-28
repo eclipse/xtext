@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Pure Xbase Generic IDE Services
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.26.0.qualifier
+Bundle-Version: 2.27.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.ide;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,

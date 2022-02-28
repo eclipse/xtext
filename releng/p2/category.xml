@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<bundle id="org.eclipse.xtext.builder.standalone" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.builder.standalone" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.builder.standalone.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.builder.standalone.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.common.types" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.common.types" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.common.types.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.common.types.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.common.types.tests" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.common.types.tests" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.common.types.tests.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.common.types.tests.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ecore" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.ecore" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ecore.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.ecore.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.generator" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.generator" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.generator.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.generator.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.java" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.java" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.java.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.java.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase.ide" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase.ide" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase.ide.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase.ide.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase.tests" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase.tests" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.purexbase.tests.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.purexbase.tests.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.smap" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.smap" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.smap.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.smap.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.ide" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.ide" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.ide.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.ide.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testing" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testing" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testing.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testing.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testlanguages" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testlanguages" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testlanguages.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.testlanguages.ide.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.tests" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.tests" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xbase.tests.source" version="2.26.0.qualifier">
+	<bundle id="org.eclipse.xtext.xbase.tests.source" version="2.27.0.qualifier">
 		<category name="xtext-extras"/>
 	</bundle>
    <category-def name="xtext-extras" label="Xtext-extras"/>
