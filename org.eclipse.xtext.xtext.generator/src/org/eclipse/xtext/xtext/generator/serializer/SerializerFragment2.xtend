@@ -69,6 +69,7 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import com.google.common.collect.Iterables
 
 class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	
@@ -445,6 +446,9 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		val clazz = if (isGenerateStub) grammar.abstractSyntacticSequencerClass else grammar.syntacticSequencerClass
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(clazz)
 		javaFile.resourceSet = language.resourceSet
+    
+	    val elements = allAmbiguousTransitionsBySyntax
+	    val partitions = Iterables.partition(elements, 60)
 		
 		javaFile.content = '''
 			public «IF isGenerateStub»abstract «ENDIF»class «clazz.simpleName» extends «AbstractSyntacticSequencer» {
@@ -456,12 +460,29 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				
 				@«Inject»
 				protected void init(«IGrammarAccess» access) {
-					grammarAccess = («grammar.grammarAccess») access;
-					«FOR group : allAmbiguousTransitionsBySyntax»
-						match_«group.identifier» = «group.elementAlias.elementAliasToConstructor»;
-					«ENDFOR»
+					«IF partitions.size > 1»
+						«FOR partition : partitions.indexed»
+							init«partition.key»(access);
+						«ENDFOR»
+					«ELSE»
+						grammarAccess = («grammar.grammarAccess») access;
+						«FOR group : allAmbiguousTransitionsBySyntax»
+							match_«group.identifier» = «group.elementAlias.elementAliasToConstructor»;
+						«ENDFOR»
+					«ENDIF»
 				}
 				
+				«IF partitions.size > 1»
+					«FOR partition : partitions.indexed»
+						private void init«partition.key»(«IGrammarAccess» access) {
+							grammarAccess = («grammar.grammarAccess») access;
+							«FOR element : partition.value»
+								match_«element.identifier» = «element.elementAlias.elementAliasToConstructor»;
+							«ENDFOR»
+						}
+						
+					«ENDFOR»
+				«ENDIF»
 				«genGetUnassignedRuleCallTokens»
 				
 				«FOR rule : unassignedCalledTokenRules SEPARATOR "\n"»
