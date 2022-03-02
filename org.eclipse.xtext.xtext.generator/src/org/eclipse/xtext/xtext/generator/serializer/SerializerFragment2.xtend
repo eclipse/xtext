@@ -446,9 +446,8 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		val clazz = if (isGenerateStub) grammar.abstractSyntacticSequencerClass else grammar.syntacticSequencerClass
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(clazz)
 		javaFile.resourceSet = language.resourceSet
-    
-	    val elements = allAmbiguousTransitionsBySyntax
-	    val partitions = Iterables.partition(elements, 60)
+		val elements = allAmbiguousTransitionsBySyntax
+		val partitions = Iterables.partition(elements, 60)
 		
 		javaFile.content = '''
 			public «IF isGenerateStub»abstract «ENDIF»class «clazz.simpleName» extends «AbstractSyntacticSequencer» {
@@ -460,12 +459,12 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				
 				@«Inject»
 				protected void init(«IGrammarAccess» access) {
+					grammarAccess = («grammar.grammarAccess») access;
 					«IF partitions.size > 1»
 						«FOR partition : partitions.indexed»
-							init«partition.key»(access);
+							init«partition.key»();
 						«ENDFOR»
 					«ELSE»
-						grammarAccess = («grammar.grammarAccess») access;
 						«FOR group : allAmbiguousTransitionsBySyntax»
 							match_«group.identifier» = «group.elementAlias.elementAliasToConstructor»;
 						«ENDFOR»
@@ -474,8 +473,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				
 				«IF partitions.size > 1»
 					«FOR partition : partitions.indexed»
-						private void init«partition.key»(«IGrammarAccess» access) {
-							grammarAccess = («grammar.grammarAccess») access;
+						private void init«partition.key»() {
 							«FOR element : partition.value»
 								match_«element.identifier» = «element.elementAlias.elementAliasToConstructor»;
 							«ENDFOR»
