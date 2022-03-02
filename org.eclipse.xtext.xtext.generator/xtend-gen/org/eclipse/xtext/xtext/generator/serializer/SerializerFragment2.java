@@ -1231,6 +1231,12 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(IGrammarAccess.class, "\t");
         _builder.append(" access) {");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("grammarAccess = (");
+        TypeReference _grammarAccess_1 = SerializerFragment2.this._grammarAccessExtensions.getGrammarAccess(SerializerFragment2.this.getGrammar());
+        _builder.append(_grammarAccess_1, "\t\t");
+        _builder.append(") access;");
+        _builder.newLineIfNotEmpty();
         {
           int _size = IterableExtensions.size(partitions);
           boolean _greaterThan = (_size > 1);
@@ -1242,17 +1248,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 _builder.append("init");
                 Integer _key = partition.getKey();
                 _builder.append(_key, "\t\t");
-                _builder.append("(access);");
+                _builder.append("();");
                 _builder.newLineIfNotEmpty();
               }
             }
           } else {
-            _builder.append("\t\t");
-            _builder.append("grammarAccess = (");
-            TypeReference _grammarAccess_1 = SerializerFragment2.this._grammarAccessExtensions.getGrammarAccess(SerializerFragment2.this.getGrammar());
-            _builder.append(_grammarAccess_1, "\t\t");
-            _builder.append(") access;");
-            _builder.newLineIfNotEmpty();
             {
               List<EqualAmbiguousTransitions> _allAmbiguousTransitionsBySyntax_1 = SerializerFragment2.this._syntacticSequencerExtensions.getAllAmbiguousTransitionsBySyntax();
               for(final EqualAmbiguousTransitions group_1 : _allAmbiguousTransitionsBySyntax_1) {
@@ -1285,16 +1285,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 _builder.append("private void init");
                 Integer _key_1 = partition_1.getKey();
                 _builder.append(_key_1, "\t");
-                _builder.append("(");
-                _builder.append(IGrammarAccess.class, "\t");
-                _builder.append(" access) {");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("grammarAccess = (");
-                TypeReference _grammarAccess_2 = SerializerFragment2.this._grammarAccessExtensions.getGrammarAccess(SerializerFragment2.this.getGrammar());
-                _builder.append(_grammarAccess_2, "\t\t");
-                _builder.append(") access;");
+                _builder.append("() {");
                 _builder.newLineIfNotEmpty();
                 {
                   List<EqualAmbiguousTransitions> _value = partition_1.getValue();
