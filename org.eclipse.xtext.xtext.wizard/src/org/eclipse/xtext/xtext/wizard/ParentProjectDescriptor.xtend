@@ -547,12 +547,44 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							<enabled>false</enabled>
 						</snapshots>
 					</repository>
+					«IF config.needsTychoBuild»
+						<!-- This must be disabled explicitly, otherwise it is enabled by https://github.com/mojohaus/mojo-parent 
+							which is taken from exec-maven-plugin from at least version 1.6.0 -->
+						<repository>
+							<id>ossrh-snapshots</id>
+							<name>ossrh-snapshots</name>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>false</enabled>
+							</snapshots>
+							<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+						</repository>
+						<!-- This is enabled by /org/sonatype/oss/oss-parent/7 used as parent by 
+							org/xtext/antlr-generator/3.2.1 -->
+						<repository>
+							<id>sonatype-nexus-snapshots</id>
+							<name>Sonatype Nexus Snapshots</name>
+							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>false</enabled>
+							</snapshots>
+						</repository>
+					«ENDIF»
 					«IF config.xtextVersion.isSnapshot»
 						<repository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-							<releases><enabled>false</enabled></releases>
-							<snapshots><enabled>true</enabled></snapshots>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>true</enabled>
+							</snapshots>
 						</repository>
 					«ENDIF»
 				</repositories>
@@ -568,12 +600,40 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							<enabled>false</enabled>
 						</snapshots>
 					</pluginRepository>
+					«IF config.needsTychoBuild»
+						<pluginRepository>
+							<id>ossrh-snapshots</id>
+							<name>ossrh-snapshots</name>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>false</enabled>
+							</snapshots>
+							<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+						</pluginRepository>
+						<pluginRepository>
+							<id>sonatype-nexus-snapshots</id>
+							<name>Sonatype Nexus Snapshots</name>
+							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>false</enabled>
+							</snapshots>
+						</pluginRepository>
+					«ENDIF»
 					«IF config.xtextVersion.isSnapshot»
 						<pluginRepository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-							<releases><enabled>false</enabled></releases>
-							<snapshots><enabled>true</enabled></snapshots>
+							<releases>
+								<enabled>false</enabled>
+							</releases>
+							<snapshots>
+								<enabled>true</enabled>
+							</snapshots>
 						</pluginRepository>
 					«ENDIF»
 					«IF config.needsTychoBuild && tychoVersion.endsWith("-SNAPSHOT")»
