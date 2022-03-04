@@ -24,9 +24,6 @@ SPDX-License-Identifier: EPL-2.0
       %license
    </license>
    <requires>
-      <import plugin="org.eclipse.xtend"/>
-      <import plugin="org.eclipse.xpand"/>
-      <import plugin="org.eclipse.xtend.typesystem.emf"/>
       <import plugin="com.google.guava" version="30.1.0" match="compatible"/>
       <import plugin="javax.inject" version="1.0.0" match="compatible"/>
       <import plugin="com.google.inject" version="5.0.1" match="compatible"/>
@@ -44,20 +41,6 @@ SPDX-License-Identifier: EPL-2.0
          
    <plugin
          id="org.eclipse.xtext.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.generator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-   <plugin
-         id="org.eclipse.xtext.generator.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
