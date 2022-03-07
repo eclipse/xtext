@@ -33,7 +33,7 @@
 		<platformSystemProperties></platformSystemProperties>
 		<moduleProperties></moduleProperties>
 		<systemProperties></systemProperties>
-		<tycho.testArgLine></tycho.testArgLine>
+		<tycho.testArgLine>-Xmx512m</tycho.testArgLine>
 		<xtextVersion>${project.version}</xtextVersion>
 	</properties>
 	<modules>
