@@ -225,7 +225,7 @@ public class WizardConfigurationTest {
 		config.setPreferredBuildSystem(BuildSystem.GRADLE);
 		config.getUiProject().setEnabled(true);
 		config.setXtextVersion(new XtextVersion("2.9.0"));
-		String snapshotsRepo = "repositories/snapshots";
+		String snapshotsRepo = "<id>sonatype-snapshots</id>";
 		assertFalse(config.getParentProject().pom().getContent().contains(snapshotsRepo));
 		assertFalse(config.getParentProject().buildGradle().getContent().contains(snapshotsRepo));
 		String releaseUpdateSite = "xtext/updates/releases/2.9.0";
