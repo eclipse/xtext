@@ -339,7 +339,9 @@ public class IResourcesSetupUtil {
 		try {
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
 		} catch (CoreException e) {
-			throw new OperationCanceledException(e.getMessage());
+			OperationCanceledException operationCanceledException = new OperationCanceledException(e.getMessage());
+			operationCanceledException.addSuppressed(e);
+			throw operationCanceledException;
 		}
 	}
 
