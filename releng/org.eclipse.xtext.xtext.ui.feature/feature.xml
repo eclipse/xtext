@@ -53,6 +53,20 @@ SPDX-License-Identifier: EPL-2.0
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.xtext.xtext.generator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.eclipse.xtext.xtext.generator.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.xtext.xtext.ui"
          download-size="0"
          install-size="0"
@@ -61,6 +75,20 @@ SPDX-License-Identifier: EPL-2.0
 
    <plugin
          id="org.eclipse.xtext.xtext.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xtext.wizard"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+          
+   <plugin
+         id="org.eclipse.xtext.xtext.wizard.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
