@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -33,6 +33,7 @@ import org.junit.Test
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static extension org.eclipse.xtext.util.Strings.*
 import static org.junit.Assert.*
+import org.osgi.framework.Version
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -486,18 +487,33 @@ class BuildAffectionTest {
 				int foo;
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -514,19 +530,33 @@ class BuildAffectionTest {
 				protected int foo;
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -547,19 +577,33 @@ class BuildAffectionTest {
 				protected int foo;
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -596,18 +640,33 @@ class BuildAffectionTest {
 				}
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -641,19 +700,35 @@ class BuildAffectionTest {
 				}
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Bar.xtend
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Bar.xtend
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Bar.xtend
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	private def assertBuildLogs(CharSequence expected) {
@@ -662,7 +737,7 @@ class BuildAffectionTest {
 			logs.append(toString.trim + '\n')
 		]
 		autoBuild
-		assertTrue(logs.toString.trim, logs.toString.trim.matches(expected.toString.toUnixLineSeparator.trim))
+		assertTrue(expected.toString + "\n vs \n" + logs.toString.trim, logs.toString.trim.matches(expected.toString.toUnixLineSeparator.trim))
 	}
 	
 	private def autoBuild() {
@@ -677,6 +752,12 @@ class BuildAffectionTest {
 		clientProject = WorkbenchTestHelper.createPluginProject('test.client')
 		JavaProjectSetupUtil.addProjectReference(JavaCore.create(clientProject), JavaCore.create(project))
 		createFile(new Path('test.client/src/' + name + '.xtend'), content.toString)
+	}
+	
+	def private static boolean isCoreResourceGreaterOrEqual_3_17_0() {
+		var version_3_17_0 = new Version(3,17,0)
+		var installed = ResourcesPlugin.getPlugin().getBundle().getVersion()
+		return installed >= version_3_17_0
 	}
 	
 }
