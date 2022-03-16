@@ -57,7 +57,7 @@ public class BuildContext implements IBuildContext {
 	
 	@Override
 	public void needRebuild() {
-		builder.needRebuild();
+		builder.triggerRequestProjectRebuild();
 	}
 	
 	@Override

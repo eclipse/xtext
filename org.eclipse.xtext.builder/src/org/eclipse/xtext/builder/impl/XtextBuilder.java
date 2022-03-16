@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -9,6 +9,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -48,6 +50,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.osgi.framework.Version;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
@@ -62,6 +65,8 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - BuildData as blackboard for scheduled data
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
+
+	private static final Version VERSION_3_17_0 = new Version(3,17,0);
 
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
@@ -506,12 +511,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		// we reuse the isEmpty() implementation from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects).isEmpty())
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::triggerRequestProjectRebuild, removedProjects).isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::triggerRequestProjectRebuild, removedProjects);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
@@ -626,6 +631,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static Boolean mustCallDeprecatedDoClean = null;
 	@Deprecated
 	private static boolean wasDeprecationWarningLoggedForClean = false;
+
+	private Method requestProjectRebuildMethod;
+
+	private static Version installedCoreResourcesVersion;
 	
 	protected void addInfosFromTaskAndClean(ToBeBuilt toBeBuilt, Task task, IProgressMonitor monitor) throws CoreException {
 		addInfosFromTask(task, toBeBuilt);
@@ -663,7 +672,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 		}
 		if(needRebuild) {
-			needRebuild();
+			triggerRequestProjectRebuild();
 		}
 	}
 	
@@ -754,6 +763,33 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					.toArray(ISchedulingRule[]::new));
 			default: throw new IllegalArgumentException();
 		}
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	public void triggerRequestProjectRebuild() {
+		if (requestProjectRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
+			try {
+				if (requestProjectRebuildMethod == null) {
+					requestProjectRebuildMethod = getClass().getMethod("requestProjectRebuild", Boolean.TYPE);
+				}
+				requestProjectRebuildMethod.invoke(this, true);
+			} catch (Exception e) {
+				log.error("something went wrong in triggerRequestProjectRebuild", e);
+				needRebuild();
+			}
+		} else {
+			needRebuild();
+		}
+		
+	}
+	
+	private static boolean isCoreResourceGreaterOrEqual(Version version) {
+		if (installedCoreResourcesVersion == null) {
+			installedCoreResourcesVersion = ResourcesPlugin.getPlugin().getBundle().getVersion();
+		}
+		return version.compareTo(version) >= 0;
 	}
 
 }
