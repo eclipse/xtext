@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.validation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -36,28 +39,32 @@ public class MarkerCreator {
 	 * @since 2.0
 	 */
 	protected void setMarkerAttributes(Issue issue, IResource resource, IMarker marker) throws CoreException {
+		// Do this in one single setAttributes() call, as each set of an attribute is a workspace operation
+		Map<String, Object> attributes = new HashMap<>(16);
+
 		String lineNR = "";
 		if (issue.getLineNumber() != null) {
 			lineNR = "line: " + issue.getLineNumber() + " ";
 		}
-		marker.setAttribute(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
-		marker.setAttribute(Issue.CODE_KEY, issue.getCode());		
-		marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
-		marker.setAttribute(IMarker.CHAR_START, issue.getOffset());
+		attributes.put(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
+		attributes.put(Issue.CODE_KEY, issue.getCode());		
+		attributes.put(IMarker.SEVERITY, getSeverity(issue));
+		attributes.put(IMarker.CHAR_START, issue.getOffset());
 		if(issue.getOffset() != null && issue.getLength() != null)
-			marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
-		marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
-		marker.setAttribute(Issue.COLUMN_KEY, issue.getColumn());
-		marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
+			attributes.put(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
+		attributes.put(IMarker.LINE_NUMBER, issue.getLineNumber());
+		attributes.put(Issue.COLUMN_KEY, issue.getColumn());
+		attributes.put(IMarker.MESSAGE, issue.getMessage());
 
 		if (issue.getUriToProblem()!=null) 
-			marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem().toString());
+			attributes.put(Issue.URI_KEY, issue.getUriToProblem().toString());
 		if(issue.getData() != null && issue.getData().length > 0) {
-			marker.setAttribute(Issue.DATA_KEY, Strings.pack(issue.getData()));
+			attributes.put(Issue.DATA_KEY, Strings.pack(issue.getData()));
 		}
 		if (resolutionProvider != null && resolutionProvider.hasResolutionFor(issue.getCode())) {
-			marker.setAttribute(FIXABLE_KEY, true);
+			attributes.put(FIXABLE_KEY, true);
 		}
+		marker.setAttributes(attributes);
 	}
 
 	private Object getSeverity(Issue issue) {
