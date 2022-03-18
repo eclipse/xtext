@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalIndentationAwareTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -69,7 +77,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleNodeList"
-    // InternalIndentationAwareTestLanguage.g:64:1: entryRuleNodeList returns [EObject current=null] : iv_ruleNodeList= ruleNodeList EOF ;
+    // InternalIndentationAwareTestLanguage.g:69:1: entryRuleNodeList returns [EObject current=null] : iv_ruleNodeList= ruleNodeList EOF ;
     public final EObject entryRuleNodeList() throws RecognitionException {
         EObject current = null;
 
@@ -77,8 +85,8 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalIndentationAwareTestLanguage.g:64:49: (iv_ruleNodeList= ruleNodeList EOF )
-            // InternalIndentationAwareTestLanguage.g:65:2: iv_ruleNodeList= ruleNodeList EOF
+            // InternalIndentationAwareTestLanguage.g:69:49: (iv_ruleNodeList= ruleNodeList EOF )
+            // InternalIndentationAwareTestLanguage.g:70:2: iv_ruleNodeList= ruleNodeList EOF
             {
              newCompositeNode(grammarAccess.getNodeListRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -105,7 +113,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleNodeList"
-    // InternalIndentationAwareTestLanguage.g:71:1: ruleNodeList returns [EObject current=null] : ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) ;
+    // InternalIndentationAwareTestLanguage.g:76:1: ruleNodeList returns [EObject current=null] : ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) ;
     public final EObject ruleNodeList() throws RecognitionException {
         EObject current = null;
 
@@ -119,17 +127,17 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
         	enterRule();
 
         try {
-            // InternalIndentationAwareTestLanguage.g:77:2: ( ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) )
-            // InternalIndentationAwareTestLanguage.g:78:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
+            // InternalIndentationAwareTestLanguage.g:82:2: ( ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* ) )
+            // InternalIndentationAwareTestLanguage.g:83:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
             {
-            // InternalIndentationAwareTestLanguage.g:78:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
-            // InternalIndentationAwareTestLanguage.g:79:3: ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
+            // InternalIndentationAwareTestLanguage.g:83:2: ( ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )* )
+            // InternalIndentationAwareTestLanguage.g:84:3: ( (lv_children_0_0= ruleNode ) ) (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
             {
-            // InternalIndentationAwareTestLanguage.g:79:3: ( (lv_children_0_0= ruleNode ) )
-            // InternalIndentationAwareTestLanguage.g:80:4: (lv_children_0_0= ruleNode )
+            // InternalIndentationAwareTestLanguage.g:84:3: ( (lv_children_0_0= ruleNode ) )
+            // InternalIndentationAwareTestLanguage.g:85:4: (lv_children_0_0= ruleNode )
             {
-            // InternalIndentationAwareTestLanguage.g:80:4: (lv_children_0_0= ruleNode )
-            // InternalIndentationAwareTestLanguage.g:81:5: lv_children_0_0= ruleNode
+            // InternalIndentationAwareTestLanguage.g:85:4: (lv_children_0_0= ruleNode )
+            // InternalIndentationAwareTestLanguage.g:86:5: lv_children_0_0= ruleNode
             {
 
             					newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_0_0());
@@ -156,7 +164,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
             }
 
-            // InternalIndentationAwareTestLanguage.g:98:3: (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
+            // InternalIndentationAwareTestLanguage.g:103:3: (this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -169,17 +177,17 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalIndentationAwareTestLanguage.g:99:4: this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) )
+            	    // InternalIndentationAwareTestLanguage.g:104:4: this_NL_1= RULE_NL ( (lv_children_2_0= ruleNode ) )
             	    {
             	    this_NL_1=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_4); 
 
             	    				newLeafNode(this_NL_1, grammarAccess.getNodeListAccess().getNLTerminalRuleCall_1_0());
             	    			
-            	    // InternalIndentationAwareTestLanguage.g:103:4: ( (lv_children_2_0= ruleNode ) )
-            	    // InternalIndentationAwareTestLanguage.g:104:5: (lv_children_2_0= ruleNode )
+            	    // InternalIndentationAwareTestLanguage.g:108:4: ( (lv_children_2_0= ruleNode ) )
+            	    // InternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleNode )
             	    {
-            	    // InternalIndentationAwareTestLanguage.g:104:5: (lv_children_2_0= ruleNode )
-            	    // InternalIndentationAwareTestLanguage.g:105:6: lv_children_2_0= ruleNode
+            	    // InternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleNode )
+            	    // InternalIndentationAwareTestLanguage.g:110:6: lv_children_2_0= ruleNode
             	    {
 
             	    						newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_1_1_0());
@@ -238,7 +246,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleNode"
-    // InternalIndentationAwareTestLanguage.g:127:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // InternalIndentationAwareTestLanguage.g:132:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -246,8 +254,8 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalIndentationAwareTestLanguage.g:127:45: (iv_ruleNode= ruleNode EOF )
-            // InternalIndentationAwareTestLanguage.g:128:2: iv_ruleNode= ruleNode EOF
+            // InternalIndentationAwareTestLanguage.g:132:45: (iv_ruleNode= ruleNode EOF )
+            // InternalIndentationAwareTestLanguage.g:133:2: iv_ruleNode= ruleNode EOF
             {
              newCompositeNode(grammarAccess.getNodeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -274,7 +282,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleNode"
-    // InternalIndentationAwareTestLanguage.g:134:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) ;
+    // InternalIndentationAwareTestLanguage.g:139:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -290,17 +298,17 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
         	enterRule();
 
         try {
-            // InternalIndentationAwareTestLanguage.g:140:2: ( ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) )
-            // InternalIndentationAwareTestLanguage.g:141:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
+            // InternalIndentationAwareTestLanguage.g:145:2: ( ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? ) )
+            // InternalIndentationAwareTestLanguage.g:146:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
             {
-            // InternalIndentationAwareTestLanguage.g:141:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
-            // InternalIndentationAwareTestLanguage.g:142:3: ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
+            // InternalIndentationAwareTestLanguage.g:146:2: ( ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )? )
+            // InternalIndentationAwareTestLanguage.g:147:3: ( (lv_name_0_0= ruleString ) ) (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
             {
-            // InternalIndentationAwareTestLanguage.g:142:3: ( (lv_name_0_0= ruleString ) )
-            // InternalIndentationAwareTestLanguage.g:143:4: (lv_name_0_0= ruleString )
+            // InternalIndentationAwareTestLanguage.g:147:3: ( (lv_name_0_0= ruleString ) )
+            // InternalIndentationAwareTestLanguage.g:148:4: (lv_name_0_0= ruleString )
             {
-            // InternalIndentationAwareTestLanguage.g:143:4: (lv_name_0_0= ruleString )
-            // InternalIndentationAwareTestLanguage.g:144:5: lv_name_0_0= ruleString
+            // InternalIndentationAwareTestLanguage.g:148:4: (lv_name_0_0= ruleString )
+            // InternalIndentationAwareTestLanguage.g:149:5: lv_name_0_0= ruleString
             {
 
             					newCompositeNode(grammarAccess.getNodeAccess().getNameStringParserRuleCall_0_0());
@@ -327,7 +335,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
             }
 
-            // InternalIndentationAwareTestLanguage.g:161:3: (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
+            // InternalIndentationAwareTestLanguage.g:166:3: (this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -340,7 +348,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
             }
             switch (alt2) {
                 case 1 :
-                    // InternalIndentationAwareTestLanguage.g:162:4: this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END
+                    // InternalIndentationAwareTestLanguage.g:167:4: this_NL_1= RULE_NL this_BEGIN_2= RULE_BEGIN ( (lv_children_3_0= ruleNodeList ) ) this_END_4= RULE_END
                     {
                     this_NL_1=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_5); 
 
@@ -350,11 +358,11 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
                     				newLeafNode(this_BEGIN_2, grammarAccess.getNodeAccess().getBEGINTerminalRuleCall_1_1());
                     			
-                    // InternalIndentationAwareTestLanguage.g:170:4: ( (lv_children_3_0= ruleNodeList ) )
-                    // InternalIndentationAwareTestLanguage.g:171:5: (lv_children_3_0= ruleNodeList )
+                    // InternalIndentationAwareTestLanguage.g:175:4: ( (lv_children_3_0= ruleNodeList ) )
+                    // InternalIndentationAwareTestLanguage.g:176:5: (lv_children_3_0= ruleNodeList )
                     {
-                    // InternalIndentationAwareTestLanguage.g:171:5: (lv_children_3_0= ruleNodeList )
-                    // InternalIndentationAwareTestLanguage.g:172:6: lv_children_3_0= ruleNodeList
+                    // InternalIndentationAwareTestLanguage.g:176:5: (lv_children_3_0= ruleNodeList )
+                    // InternalIndentationAwareTestLanguage.g:177:6: lv_children_3_0= ruleNodeList
                     {
 
                     						newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeListParserRuleCall_1_2_0());
@@ -414,7 +422,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleString"
-    // InternalIndentationAwareTestLanguage.g:198:1: entryRuleString returns [String current=null] : iv_ruleString= ruleString EOF ;
+    // InternalIndentationAwareTestLanguage.g:203:1: entryRuleString returns [String current=null] : iv_ruleString= ruleString EOF ;
     public final String entryRuleString() throws RecognitionException {
         String current = null;
 
@@ -422,8 +430,8 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalIndentationAwareTestLanguage.g:198:46: (iv_ruleString= ruleString EOF )
-            // InternalIndentationAwareTestLanguage.g:199:2: iv_ruleString= ruleString EOF
+            // InternalIndentationAwareTestLanguage.g:203:46: (iv_ruleString= ruleString EOF )
+            // InternalIndentationAwareTestLanguage.g:204:2: iv_ruleString= ruleString EOF
             {
              newCompositeNode(grammarAccess.getStringRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -450,7 +458,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleString"
-    // InternalIndentationAwareTestLanguage.g:205:1: ruleString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_OTHER_0= RULE_OTHER )+ ;
+    // InternalIndentationAwareTestLanguage.g:210:1: ruleString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_OTHER_0= RULE_OTHER )+ ;
     public final AntlrDatatypeRuleToken ruleString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -460,10 +468,10 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
         	enterRule();
 
         try {
-            // InternalIndentationAwareTestLanguage.g:211:2: ( (this_OTHER_0= RULE_OTHER )+ )
-            // InternalIndentationAwareTestLanguage.g:212:2: (this_OTHER_0= RULE_OTHER )+
+            // InternalIndentationAwareTestLanguage.g:216:2: ( (this_OTHER_0= RULE_OTHER )+ )
+            // InternalIndentationAwareTestLanguage.g:217:2: (this_OTHER_0= RULE_OTHER )+
             {
-            // InternalIndentationAwareTestLanguage.g:212:2: (this_OTHER_0= RULE_OTHER )+
+            // InternalIndentationAwareTestLanguage.g:217:2: (this_OTHER_0= RULE_OTHER )+
             int cnt3=0;
             loop3:
             do {
@@ -477,7 +485,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalIndentationAwareTestLanguage.g:213:3: this_OTHER_0= RULE_OTHER
+            	    // InternalIndentationAwareTestLanguage.g:218:3: this_OTHER_0= RULE_OTHER
             	    {
             	    this_OTHER_0=(Token)match(input,RULE_OTHER,FollowSets000.FOLLOW_7); 
 

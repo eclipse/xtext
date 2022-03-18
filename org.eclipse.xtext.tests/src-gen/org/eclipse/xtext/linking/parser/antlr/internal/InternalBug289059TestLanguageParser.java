@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -73,7 +81,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug289059TestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug289059TestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +89,8 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug289059TestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug289059TestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalBug289059TestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug289059TestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,7 +117,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug289059TestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) ;
+    // InternalBug289059TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,17 +130,17 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug289059TestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) )
-            // InternalBug289059TestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
+            // InternalBug289059TestLanguage.g:82:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) )
+            // InternalBug289059TestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
             {
-            // InternalBug289059TestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
-            // InternalBug289059TestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )?
+            // InternalBug289059TestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
+            // InternalBug289059TestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )?
             {
-            // InternalBug289059TestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalBug289059TestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalBug289059TestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBug289059TestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalBug289059TestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
-            // InternalBug289059TestLanguage.g:81:5: lv_name_0_0= RULE_ID
+            // InternalBug289059TestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
+            // InternalBug289059TestLanguage.g:86:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -154,7 +162,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug289059TestLanguage.g:97:3: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
+            // InternalBug289059TestLanguage.g:102:3: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -163,10 +171,10 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBug289059TestLanguage.g:98:4: (lv_enabled_1_0= ruleUnassignedAction )
+                    // InternalBug289059TestLanguage.g:103:4: (lv_enabled_1_0= ruleUnassignedAction )
                     {
-                    // InternalBug289059TestLanguage.g:98:4: (lv_enabled_1_0= ruleUnassignedAction )
-                    // InternalBug289059TestLanguage.g:99:5: lv_enabled_1_0= ruleUnassignedAction
+                    // InternalBug289059TestLanguage.g:103:4: (lv_enabled_1_0= ruleUnassignedAction )
+                    // InternalBug289059TestLanguage.g:104:5: lv_enabled_1_0= ruleUnassignedAction
                     {
 
                     					newCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0());
@@ -196,7 +204,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug289059TestLanguage.g:116:3: ( (otherlv_2= RULE_ID ) )?
+            // InternalBug289059TestLanguage.g:121:3: ( (otherlv_2= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -205,10 +213,10 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // InternalBug289059TestLanguage.g:117:4: (otherlv_2= RULE_ID )
+                    // InternalBug289059TestLanguage.g:122:4: (otherlv_2= RULE_ID )
                     {
-                    // InternalBug289059TestLanguage.g:117:4: (otherlv_2= RULE_ID )
-                    // InternalBug289059TestLanguage.g:118:5: otherlv_2= RULE_ID
+                    // InternalBug289059TestLanguage.g:122:4: (otherlv_2= RULE_ID )
+                    // InternalBug289059TestLanguage.g:123:5: otherlv_2= RULE_ID
                     {
 
                     					if (current==null) {
@@ -251,7 +259,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleUnassignedAction"
-    // InternalBug289059TestLanguage.g:133:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
+    // InternalBug289059TestLanguage.g:138:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
     public final EObject entryRuleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -259,8 +267,8 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug289059TestLanguage.g:133:57: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
-            // InternalBug289059TestLanguage.g:134:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
+            // InternalBug289059TestLanguage.g:138:57: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
+            // InternalBug289059TestLanguage.g:139:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
             {
              newCompositeNode(grammarAccess.getUnassignedActionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -287,7 +295,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleUnassignedAction"
-    // InternalBug289059TestLanguage.g:140:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
+    // InternalBug289059TestLanguage.g:145:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
     public final EObject ruleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -297,14 +305,14 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug289059TestLanguage.g:146:2: ( ( () otherlv_1= 'enabled' ) )
-            // InternalBug289059TestLanguage.g:147:2: ( () otherlv_1= 'enabled' )
+            // InternalBug289059TestLanguage.g:151:2: ( ( () otherlv_1= 'enabled' ) )
+            // InternalBug289059TestLanguage.g:152:2: ( () otherlv_1= 'enabled' )
             {
-            // InternalBug289059TestLanguage.g:147:2: ( () otherlv_1= 'enabled' )
-            // InternalBug289059TestLanguage.g:148:3: () otherlv_1= 'enabled'
+            // InternalBug289059TestLanguage.g:152:2: ( () otherlv_1= 'enabled' )
+            // InternalBug289059TestLanguage.g:153:3: () otherlv_1= 'enabled'
             {
-            // InternalBug289059TestLanguage.g:148:3: ()
-            // InternalBug289059TestLanguage.g:149:4: 
+            // InternalBug289059TestLanguage.g:153:3: ()
+            // InternalBug289059TestLanguage.g:154:4: 
             {
 
             				current = forceCreateModelElement(

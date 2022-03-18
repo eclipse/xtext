@@ -364,10 +364,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1130:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalFragmentTestLanguageEx.g:1130:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFragmentTestLanguageEx.g:1135:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalFragmentTestLanguageEx.g:1135:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalFragmentTestLanguageEx.g:1130:11: ( '^' )?
+            // InternalFragmentTestLanguageEx.g:1135:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -376,7 +376,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFragmentTestLanguageEx.g:1130:11: '^'
+                    // InternalFragmentTestLanguageEx.g:1135:11: '^'
                     {
                     match('^'); 
 
@@ -394,7 +394,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalFragmentTestLanguageEx.g:1130:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFragmentTestLanguageEx.g:1135:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -443,10 +443,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1132:10: ( ( '0' .. '9' )+ )
-            // InternalFragmentTestLanguageEx.g:1132:12: ( '0' .. '9' )+
+            // InternalFragmentTestLanguageEx.g:1137:10: ( ( '0' .. '9' )+ )
+            // InternalFragmentTestLanguageEx.g:1137:12: ( '0' .. '9' )+
             {
-            // InternalFragmentTestLanguageEx.g:1132:12: ( '0' .. '9' )+
+            // InternalFragmentTestLanguageEx.g:1137:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -460,7 +460,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFragmentTestLanguageEx.g:1132:13: '0' .. '9'
+            	    // InternalFragmentTestLanguageEx.g:1137:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -492,10 +492,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1134:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalFragmentTestLanguageEx.g:1134:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFragmentTestLanguageEx.g:1139:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalFragmentTestLanguageEx.g:1139:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalFragmentTestLanguageEx.g:1134:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFragmentTestLanguageEx.g:1139:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -513,10 +513,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalFragmentTestLanguageEx.g:1134:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalFragmentTestLanguageEx.g:1139:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalFragmentTestLanguageEx.g:1134:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalFragmentTestLanguageEx.g:1139:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -532,7 +532,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFragmentTestLanguageEx.g:1134:21: '\\\\' .
+                    	    // InternalFragmentTestLanguageEx.g:1139:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -540,7 +540,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFragmentTestLanguageEx.g:1134:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalFragmentTestLanguageEx.g:1139:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -565,10 +565,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalFragmentTestLanguageEx.g:1134:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalFragmentTestLanguageEx.g:1139:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalFragmentTestLanguageEx.g:1134:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalFragmentTestLanguageEx.g:1139:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -584,7 +584,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalFragmentTestLanguageEx.g:1134:54: '\\\\' .
+                    	    // InternalFragmentTestLanguageEx.g:1139:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -592,7 +592,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFragmentTestLanguageEx.g:1134:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalFragmentTestLanguageEx.g:1139:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -635,12 +635,12 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1136:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalFragmentTestLanguageEx.g:1136:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalFragmentTestLanguageEx.g:1141:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalFragmentTestLanguageEx.g:1141:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalFragmentTestLanguageEx.g:1136:24: ( options {greedy=false; } : . )*
+            // InternalFragmentTestLanguageEx.g:1141:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -665,7 +665,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalFragmentTestLanguageEx.g:1136:52: .
+            	    // InternalFragmentTestLanguageEx.g:1141:52: .
             	    {
             	    matchAny(); 
 
@@ -695,12 +695,12 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1138:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalFragmentTestLanguageEx.g:1138:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalFragmentTestLanguageEx.g:1143:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalFragmentTestLanguageEx.g:1143:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalFragmentTestLanguageEx.g:1138:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalFragmentTestLanguageEx.g:1143:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -713,7 +713,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFragmentTestLanguageEx.g:1138:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalFragmentTestLanguageEx.g:1143:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -733,7 +733,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalFragmentTestLanguageEx.g:1138:40: ( ( '\\r' )? '\\n' )?
+            // InternalFragmentTestLanguageEx.g:1143:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -742,9 +742,9 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalFragmentTestLanguageEx.g:1138:41: ( '\\r' )? '\\n'
+                    // InternalFragmentTestLanguageEx.g:1143:41: ( '\\r' )? '\\n'
                     {
-                    // InternalFragmentTestLanguageEx.g:1138:41: ( '\\r' )?
+                    // InternalFragmentTestLanguageEx.g:1143:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -753,7 +753,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalFragmentTestLanguageEx.g:1138:41: '\\r'
+                            // InternalFragmentTestLanguageEx.g:1143:41: '\\r'
                             {
                             match('\r'); 
 
@@ -785,10 +785,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1140:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalFragmentTestLanguageEx.g:1140:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFragmentTestLanguageEx.g:1145:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalFragmentTestLanguageEx.g:1145:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalFragmentTestLanguageEx.g:1140:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFragmentTestLanguageEx.g:1145:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -842,8 +842,8 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageEx.g:1142:16: ( . )
-            // InternalFragmentTestLanguageEx.g:1142:18: .
+            // InternalFragmentTestLanguageEx.g:1147:16: ( . )
+            // InternalFragmentTestLanguageEx.g:1147:18: .
             {
             matchAny(); 
 

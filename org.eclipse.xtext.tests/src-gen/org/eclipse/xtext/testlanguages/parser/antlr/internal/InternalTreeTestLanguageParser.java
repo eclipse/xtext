@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -76,7 +84,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalTreeTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalTreeTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -84,8 +92,8 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalTreeTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalTreeTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalTreeTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalTreeTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -112,7 +120,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleModel"
-    // InternalTreeTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_children_0_0= ruleNode ) )* ;
+    // InternalTreeTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_children_0_0= ruleNode ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -123,10 +131,10 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalTreeTestLanguage.g:77:2: ( ( (lv_children_0_0= ruleNode ) )* )
-            // InternalTreeTestLanguage.g:78:2: ( (lv_children_0_0= ruleNode ) )*
+            // InternalTreeTestLanguage.g:82:2: ( ( (lv_children_0_0= ruleNode ) )* )
+            // InternalTreeTestLanguage.g:83:2: ( (lv_children_0_0= ruleNode ) )*
             {
-            // InternalTreeTestLanguage.g:78:2: ( (lv_children_0_0= ruleNode ) )*
+            // InternalTreeTestLanguage.g:83:2: ( (lv_children_0_0= ruleNode ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,10 +147,10 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalTreeTestLanguage.g:79:3: (lv_children_0_0= ruleNode )
+            	    // InternalTreeTestLanguage.g:84:3: (lv_children_0_0= ruleNode )
             	    {
-            	    // InternalTreeTestLanguage.g:79:3: (lv_children_0_0= ruleNode )
-            	    // InternalTreeTestLanguage.g:80:4: lv_children_0_0= ruleNode
+            	    // InternalTreeTestLanguage.g:84:3: (lv_children_0_0= ruleNode )
+            	    // InternalTreeTestLanguage.g:85:4: lv_children_0_0= ruleNode
             	    {
 
             	    				newCompositeNode(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0());
@@ -195,7 +203,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleNode"
-    // InternalTreeTestLanguage.g:100:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // InternalTreeTestLanguage.g:105:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -203,8 +211,8 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalTreeTestLanguage.g:100:45: (iv_ruleNode= ruleNode EOF )
-            // InternalTreeTestLanguage.g:101:2: iv_ruleNode= ruleNode EOF
+            // InternalTreeTestLanguage.g:105:45: (iv_ruleNode= ruleNode EOF )
+            // InternalTreeTestLanguage.g:106:2: iv_ruleNode= ruleNode EOF
             {
              newCompositeNode(grammarAccess.getNodeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -231,7 +239,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleNode"
-    // InternalTreeTestLanguage.g:107:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' ) ;
+    // InternalTreeTestLanguage.g:112:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -248,17 +256,17 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalTreeTestLanguage.g:113:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' ) )
-            // InternalTreeTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' )
+            // InternalTreeTestLanguage.g:118:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' ) )
+            // InternalTreeTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' )
             {
-            // InternalTreeTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' )
-            // InternalTreeTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};'
+            // InternalTreeTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};' )
+            // InternalTreeTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '(' ( (lv_attrib_2_0= RULE_STRING ) ) otherlv_3= ')' otherlv_4= '{' ( (lv_children_5_0= ruleNode ) )* otherlv_6= '};'
             {
-            // InternalTreeTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalTreeTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
+            // InternalTreeTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalTreeTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalTreeTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
-            // InternalTreeTestLanguage.g:117:5: lv_name_0_0= RULE_ID
+            // InternalTreeTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
+            // InternalTreeTestLanguage.g:122:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -284,11 +292,11 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_1, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1());
             		
-            // InternalTreeTestLanguage.g:137:3: ( (lv_attrib_2_0= RULE_STRING ) )
-            // InternalTreeTestLanguage.g:138:4: (lv_attrib_2_0= RULE_STRING )
+            // InternalTreeTestLanguage.g:142:3: ( (lv_attrib_2_0= RULE_STRING ) )
+            // InternalTreeTestLanguage.g:143:4: (lv_attrib_2_0= RULE_STRING )
             {
-            // InternalTreeTestLanguage.g:138:4: (lv_attrib_2_0= RULE_STRING )
-            // InternalTreeTestLanguage.g:139:5: lv_attrib_2_0= RULE_STRING
+            // InternalTreeTestLanguage.g:143:4: (lv_attrib_2_0= RULE_STRING )
+            // InternalTreeTestLanguage.g:144:5: lv_attrib_2_0= RULE_STRING
             {
             lv_attrib_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_6); 
 
@@ -318,7 +326,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_4, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4());
             		
-            // InternalTreeTestLanguage.g:163:3: ( (lv_children_5_0= ruleNode ) )*
+            // InternalTreeTestLanguage.g:168:3: ( (lv_children_5_0= ruleNode ) )*
             loop2:
             do {
                 int alt2=2;
@@ -331,10 +339,10 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalTreeTestLanguage.g:164:4: (lv_children_5_0= ruleNode )
+            	    // InternalTreeTestLanguage.g:169:4: (lv_children_5_0= ruleNode )
             	    {
-            	    // InternalTreeTestLanguage.g:164:4: (lv_children_5_0= ruleNode )
-            	    // InternalTreeTestLanguage.g:165:5: lv_children_5_0= ruleNode
+            	    // InternalTreeTestLanguage.g:169:4: (lv_children_5_0= ruleNode )
+            	    // InternalTreeTestLanguage.g:170:5: lv_children_5_0= ruleNode
             	    {
 
             	    					newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0());

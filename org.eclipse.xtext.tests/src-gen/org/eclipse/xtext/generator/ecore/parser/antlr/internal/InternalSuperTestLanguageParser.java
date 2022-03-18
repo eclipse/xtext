@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -73,7 +81,7 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleSuperMain"
-    // InternalSuperTestLanguage.g:64:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
+    // InternalSuperTestLanguage.g:69:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
     public final EObject entryRuleSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +89,8 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalSuperTestLanguage.g:64:50: (iv_ruleSuperMain= ruleSuperMain EOF )
-            // InternalSuperTestLanguage.g:65:2: iv_ruleSuperMain= ruleSuperMain EOF
+            // InternalSuperTestLanguage.g:69:50: (iv_ruleSuperMain= ruleSuperMain EOF )
+            // InternalSuperTestLanguage.g:70:2: iv_ruleSuperMain= ruleSuperMain EOF
             {
              newCompositeNode(grammarAccess.getSuperMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,7 +117,7 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleSuperMain"
-    // InternalSuperTestLanguage.g:71:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalSuperTestLanguage.g:76:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -120,21 +128,21 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalSuperTestLanguage.g:77:2: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalSuperTestLanguage.g:78:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSuperTestLanguage.g:82:2: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalSuperTestLanguage.g:83:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalSuperTestLanguage.g:78:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalSuperTestLanguage.g:79:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // InternalSuperTestLanguage.g:83:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSuperTestLanguage.g:84:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
             		
-            // InternalSuperTestLanguage.g:83:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalSuperTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalSuperTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSuperTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalSuperTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
-            // InternalSuperTestLanguage.g:85:5: lv_name_1_0= RULE_ID
+            // InternalSuperTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // InternalSuperTestLanguage.g:90:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 

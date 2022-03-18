@@ -10,6 +10,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug301935ExTestLanguageLexer extends Lexer {
     public static final int RULE_ID=6;
@@ -37,8 +45,8 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         try {
             int _type = LineFeed;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:14:10: ( '\\n' )
-            // InternalBug301935ExTestLanguageLexer.g:14:12: '\\n'
+            // InternalBug301935ExTestLanguageLexer.g:19:10: ( '\\n' )
+            // InternalBug301935ExTestLanguageLexer.g:19:12: '\\n'
             {
             match('\n'); 
 
@@ -57,8 +65,8 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         try {
             int _type = CarriageReturn;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:16:16: ( '\\r' )
-            // InternalBug301935ExTestLanguageLexer.g:16:18: '\\r'
+            // InternalBug301935ExTestLanguageLexer.g:21:16: ( '\\r' )
+            // InternalBug301935ExTestLanguageLexer.g:21:18: '\\r'
             {
             match('\r'); 
 
@@ -77,10 +85,10 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:18:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalBug301935ExTestLanguageLexer.g:18:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBug301935ExTestLanguageLexer.g:23:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBug301935ExTestLanguageLexer.g:23:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalBug301935ExTestLanguageLexer.g:18:11: ( '^' )?
+            // InternalBug301935ExTestLanguageLexer.g:23:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -89,7 +97,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBug301935ExTestLanguageLexer.g:18:11: '^'
+                    // InternalBug301935ExTestLanguageLexer.g:23:11: '^'
                     {
                     match('^'); 
 
@@ -107,7 +115,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBug301935ExTestLanguageLexer.g:18:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBug301935ExTestLanguageLexer.g:23:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -156,10 +164,10 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:20:9: ( ( ' ' | '\\t' )+ )
-            // InternalBug301935ExTestLanguageLexer.g:20:11: ( ' ' | '\\t' )+
+            // InternalBug301935ExTestLanguageLexer.g:25:9: ( ( ' ' | '\\t' )+ )
+            // InternalBug301935ExTestLanguageLexer.g:25:11: ( ' ' | '\\t' )+
             {
-            // InternalBug301935ExTestLanguageLexer.g:20:11: ( ' ' | '\\t' )+
+            // InternalBug301935ExTestLanguageLexer.g:25:11: ( ' ' | '\\t' )+
             int cnt3=0;
             loop3:
             do {
@@ -213,8 +221,8 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:22:16: ( . )
-            // InternalBug301935ExTestLanguageLexer.g:22:18: .
+            // InternalBug301935ExTestLanguageLexer.g:27:16: ( . )
+            // InternalBug301935ExTestLanguageLexer.g:27:18: .
             {
             matchAny(); 
 

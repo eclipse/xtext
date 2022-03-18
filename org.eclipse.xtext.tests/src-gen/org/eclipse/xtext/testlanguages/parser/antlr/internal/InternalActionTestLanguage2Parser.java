@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -74,7 +82,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleORing"
-    // InternalActionTestLanguage2.g:64:1: entryRuleORing returns [EObject current=null] : iv_ruleORing= ruleORing EOF ;
+    // InternalActionTestLanguage2.g:69:1: entryRuleORing returns [EObject current=null] : iv_ruleORing= ruleORing EOF ;
     public final EObject entryRuleORing() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +90,8 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalActionTestLanguage2.g:64:46: (iv_ruleORing= ruleORing EOF )
-            // InternalActionTestLanguage2.g:65:2: iv_ruleORing= ruleORing EOF
+            // InternalActionTestLanguage2.g:69:46: (iv_ruleORing= ruleORing EOF )
+            // InternalActionTestLanguage2.g:70:2: iv_ruleORing= ruleORing EOF
             {
              newCompositeNode(grammarAccess.getORingRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -110,7 +118,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleORing"
-    // InternalActionTestLanguage2.g:71:1: ruleORing returns [EObject current=null] : (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
+    // InternalActionTestLanguage2.g:76:1: ruleORing returns [EObject current=null] : (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
     public final EObject ruleORing() throws RecognitionException {
         EObject current = null;
 
@@ -124,11 +132,11 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
         	enterRule();
 
         try {
-            // InternalActionTestLanguage2.g:77:2: ( (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
-            // InternalActionTestLanguage2.g:78:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // InternalActionTestLanguage2.g:82:2: ( (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
+            // InternalActionTestLanguage2.g:83:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
             {
-            // InternalActionTestLanguage2.g:78:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
-            // InternalActionTestLanguage2.g:79:3: this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+            // InternalActionTestLanguage2.g:83:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // InternalActionTestLanguage2.g:84:3: this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getORingAccess().getValueParserRuleCall_0());
@@ -142,7 +150,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
             			current = this_Value_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalActionTestLanguage2.g:87:3: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+            // InternalActionTestLanguage2.g:92:3: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -155,10 +163,10 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalActionTestLanguage2.g:88:4: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // InternalActionTestLanguage2.g:93:4: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
             	    {
-            	    // InternalActionTestLanguage2.g:88:4: ()
-            	    // InternalActionTestLanguage2.g:89:5: 
+            	    // InternalActionTestLanguage2.g:93:4: ()
+            	    // InternalActionTestLanguage2.g:94:5: 
             	    {
 
             	    					current = forceCreateModelElementAndAdd(
@@ -172,11 +180,11 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
             	    				newLeafNode(otherlv_2, grammarAccess.getORingAccess().getVerticalLineKeyword_1_1());
             	    			
-            	    // InternalActionTestLanguage2.g:99:4: ( (lv_disjuncts_3_0= ruleValue ) )
-            	    // InternalActionTestLanguage2.g:100:5: (lv_disjuncts_3_0= ruleValue )
+            	    // InternalActionTestLanguage2.g:104:4: ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // InternalActionTestLanguage2.g:105:5: (lv_disjuncts_3_0= ruleValue )
             	    {
-            	    // InternalActionTestLanguage2.g:100:5: (lv_disjuncts_3_0= ruleValue )
-            	    // InternalActionTestLanguage2.g:101:6: lv_disjuncts_3_0= ruleValue
+            	    // InternalActionTestLanguage2.g:105:5: (lv_disjuncts_3_0= ruleValue )
+            	    // InternalActionTestLanguage2.g:106:6: lv_disjuncts_3_0= ruleValue
             	    {
 
             	    						newCompositeNode(grammarAccess.getORingAccess().getDisjunctsValueParserRuleCall_1_2_0());
@@ -235,7 +243,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleValue"
-    // InternalActionTestLanguage2.g:123:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
+    // InternalActionTestLanguage2.g:128:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
     public final EObject entryRuleValue() throws RecognitionException {
         EObject current = null;
 
@@ -243,8 +251,8 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalActionTestLanguage2.g:123:46: (iv_ruleValue= ruleValue EOF )
-            // InternalActionTestLanguage2.g:124:2: iv_ruleValue= ruleValue EOF
+            // InternalActionTestLanguage2.g:128:46: (iv_ruleValue= ruleValue EOF )
+            // InternalActionTestLanguage2.g:129:2: iv_ruleValue= ruleValue EOF
             {
              newCompositeNode(grammarAccess.getValueRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -271,7 +279,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleValue"
-    // InternalActionTestLanguage2.g:130:1: ruleValue returns [EObject current=null] : ( (lv_value_0_0= 'a' ) ) ;
+    // InternalActionTestLanguage2.g:135:1: ruleValue returns [EObject current=null] : ( (lv_value_0_0= 'a' ) ) ;
     public final EObject ruleValue() throws RecognitionException {
         EObject current = null;
 
@@ -281,14 +289,14 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
         	enterRule();
 
         try {
-            // InternalActionTestLanguage2.g:136:2: ( ( (lv_value_0_0= 'a' ) ) )
-            // InternalActionTestLanguage2.g:137:2: ( (lv_value_0_0= 'a' ) )
+            // InternalActionTestLanguage2.g:141:2: ( ( (lv_value_0_0= 'a' ) ) )
+            // InternalActionTestLanguage2.g:142:2: ( (lv_value_0_0= 'a' ) )
             {
-            // InternalActionTestLanguage2.g:137:2: ( (lv_value_0_0= 'a' ) )
-            // InternalActionTestLanguage2.g:138:3: (lv_value_0_0= 'a' )
+            // InternalActionTestLanguage2.g:142:2: ( (lv_value_0_0= 'a' ) )
+            // InternalActionTestLanguage2.g:143:3: (lv_value_0_0= 'a' )
             {
-            // InternalActionTestLanguage2.g:138:3: (lv_value_0_0= 'a' )
-            // InternalActionTestLanguage2.g:139:4: lv_value_0_0= 'a'
+            // InternalActionTestLanguage2.g:143:3: (lv_value_0_0= 'a' )
+            // InternalActionTestLanguage2.g:144:4: lv_value_0_0= 'a'
             {
             lv_value_0_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 

@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -75,7 +83,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug406914TestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug406914TestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +91,8 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug406914TestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug406914TestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalBug406914TestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug406914TestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -111,7 +119,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug406914TestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE ) ;
+    // InternalBug406914TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,17 +129,17 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug406914TestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE ) )
-            // InternalBug406914TestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE )
+            // InternalBug406914TestLanguage.g:82:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE ) )
+            // InternalBug406914TestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE )
             {
-            // InternalBug406914TestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE )
-            // InternalBug406914TestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE
+            // InternalBug406914TestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE )
+            // InternalBug406914TestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) ) ruleBS_ESCAPE
             {
-            // InternalBug406914TestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalBug406914TestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalBug406914TestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBug406914TestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalBug406914TestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
-            // InternalBug406914TestLanguage.g:81:5: lv_name_0_0= RULE_ID
+            // InternalBug406914TestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
+            // InternalBug406914TestLanguage.g:86:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -187,7 +195,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleBS_ESCAPE"
-    // InternalBug406914TestLanguage.g:108:1: entryRuleBS_ESCAPE returns [String current=null] : iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF ;
+    // InternalBug406914TestLanguage.g:113:1: entryRuleBS_ESCAPE returns [String current=null] : iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF ;
     public final String entryRuleBS_ESCAPE() throws RecognitionException {
         String current = null;
 
@@ -195,8 +203,8 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug406914TestLanguage.g:108:49: (iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF )
-            // InternalBug406914TestLanguage.g:109:2: iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF
+            // InternalBug406914TestLanguage.g:113:49: (iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF )
+            // InternalBug406914TestLanguage.g:114:2: iv_ruleBS_ESCAPE= ruleBS_ESCAPE EOF
             {
              newCompositeNode(grammarAccess.getBS_ESCAPERule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -223,7 +231,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleBS_ESCAPE"
-    // InternalBug406914TestLanguage.g:115:1: ruleBS_ESCAPE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' ) ;
+    // InternalBug406914TestLanguage.g:120:1: ruleBS_ESCAPE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' ) ;
     public final AntlrDatatypeRuleToken ruleBS_ESCAPE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -233,10 +241,10 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug406914TestLanguage.g:121:2: ( (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' ) )
-            // InternalBug406914TestLanguage.g:122:2: (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' )
+            // InternalBug406914TestLanguage.g:126:2: ( (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' ) )
+            // InternalBug406914TestLanguage.g:127:2: (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' )
             {
-            // InternalBug406914TestLanguage.g:122:2: (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' )
+            // InternalBug406914TestLanguage.g:127:2: (kw= '\\b' | kw= '\\f' | kw= '\\n' | kw= 'lineFeed' | kw= '\\r' | kw= '\\t' | kw= '\\\\' )
             int alt1=7;
             switch ( input.LA(1) ) {
             case 7:
@@ -283,7 +291,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt1) {
                 case 1 :
-                    // InternalBug406914TestLanguage.g:123:3: kw= '\\b'
+                    // InternalBug406914TestLanguage.g:128:3: kw= '\\b'
                     {
                     kw=(Token)match(input,7,FollowSets000.FOLLOW_2); 
 
@@ -294,7 +302,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug406914TestLanguage.g:129:3: kw= '\\f'
+                    // InternalBug406914TestLanguage.g:134:3: kw= '\\f'
                     {
                     kw=(Token)match(input,8,FollowSets000.FOLLOW_2); 
 
@@ -305,7 +313,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // InternalBug406914TestLanguage.g:135:3: kw= '\\n'
+                    // InternalBug406914TestLanguage.g:140:3: kw= '\\n'
                     {
                     kw=(Token)match(input,9,FollowSets000.FOLLOW_2); 
 
@@ -316,7 +324,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // InternalBug406914TestLanguage.g:141:3: kw= 'lineFeed'
+                    // InternalBug406914TestLanguage.g:146:3: kw= 'lineFeed'
                     {
                     kw=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -327,7 +335,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 5 :
-                    // InternalBug406914TestLanguage.g:147:3: kw= '\\r'
+                    // InternalBug406914TestLanguage.g:152:3: kw= '\\r'
                     {
                     kw=(Token)match(input,11,FollowSets000.FOLLOW_2); 
 
@@ -338,7 +346,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 6 :
-                    // InternalBug406914TestLanguage.g:153:3: kw= '\\t'
+                    // InternalBug406914TestLanguage.g:158:3: kw= '\\t'
                     {
                     kw=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
@@ -349,7 +357,7 @@ public class InternalBug406914TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 7 :
-                    // InternalBug406914TestLanguage.g:159:3: kw= '\\\\'
+                    // InternalBug406914TestLanguage.g:164:3: kw= '\\\\'
                     {
                     kw=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 

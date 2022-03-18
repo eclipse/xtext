@@ -666,11 +666,11 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_FRAGMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2325:15: ( '#' ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+ )
-            // InternalEpatchTestLanguage.g:2325:17: '#' ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+
+            // InternalEpatchTestLanguage.g:2330:15: ( '#' ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+ )
+            // InternalEpatchTestLanguage.g:2330:17: '#' ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+
             {
             match('#'); 
-            // InternalEpatchTestLanguage.g:2325:21: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+
+            // InternalEpatchTestLanguage.g:2330:21: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '/' | '[' | ']' | '{' | '}' | '.' | '@' )+
             int cnt1=0;
             loop1:
             do {
@@ -724,10 +724,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2327:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalEpatchTestLanguage.g:2327:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEpatchTestLanguage.g:2332:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalEpatchTestLanguage.g:2332:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalEpatchTestLanguage.g:2327:11: ( '^' )?
+            // InternalEpatchTestLanguage.g:2332:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -736,7 +736,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalEpatchTestLanguage.g:2327:11: '^'
+                    // InternalEpatchTestLanguage.g:2332:11: '^'
                     {
                     match('^'); 
 
@@ -754,7 +754,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalEpatchTestLanguage.g:2327:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEpatchTestLanguage.g:2332:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -803,10 +803,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2329:10: ( ( '0' .. '9' )+ )
-            // InternalEpatchTestLanguage.g:2329:12: ( '0' .. '9' )+
+            // InternalEpatchTestLanguage.g:2334:10: ( ( '0' .. '9' )+ )
+            // InternalEpatchTestLanguage.g:2334:12: ( '0' .. '9' )+
             {
-            // InternalEpatchTestLanguage.g:2329:12: ( '0' .. '9' )+
+            // InternalEpatchTestLanguage.g:2334:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -820,7 +820,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalEpatchTestLanguage.g:2329:13: '0' .. '9'
+            	    // InternalEpatchTestLanguage.g:2334:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -852,10 +852,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2331:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalEpatchTestLanguage.g:2331:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEpatchTestLanguage.g:2336:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalEpatchTestLanguage.g:2336:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalEpatchTestLanguage.g:2331:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEpatchTestLanguage.g:2336:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -873,10 +873,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalEpatchTestLanguage.g:2331:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalEpatchTestLanguage.g:2336:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalEpatchTestLanguage.g:2331:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalEpatchTestLanguage.g:2336:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -892,7 +892,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalEpatchTestLanguage.g:2331:21: '\\\\' .
+                    	    // InternalEpatchTestLanguage.g:2336:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -900,7 +900,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalEpatchTestLanguage.g:2331:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalEpatchTestLanguage.g:2336:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -925,10 +925,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalEpatchTestLanguage.g:2331:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalEpatchTestLanguage.g:2336:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalEpatchTestLanguage.g:2331:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalEpatchTestLanguage.g:2336:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -944,7 +944,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalEpatchTestLanguage.g:2331:54: '\\\\' .
+                    	    // InternalEpatchTestLanguage.g:2336:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -952,7 +952,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalEpatchTestLanguage.g:2331:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalEpatchTestLanguage.g:2336:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -995,12 +995,12 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2333:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalEpatchTestLanguage.g:2333:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalEpatchTestLanguage.g:2338:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalEpatchTestLanguage.g:2338:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalEpatchTestLanguage.g:2333:24: ( options {greedy=false; } : . )*
+            // InternalEpatchTestLanguage.g:2338:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -1025,7 +1025,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalEpatchTestLanguage.g:2333:52: .
+            	    // InternalEpatchTestLanguage.g:2338:52: .
             	    {
             	    matchAny(); 
 
@@ -1055,12 +1055,12 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2335:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalEpatchTestLanguage.g:2335:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalEpatchTestLanguage.g:2340:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalEpatchTestLanguage.g:2340:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalEpatchTestLanguage.g:2335:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalEpatchTestLanguage.g:2340:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1073,7 +1073,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalEpatchTestLanguage.g:2335:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalEpatchTestLanguage.g:2340:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1093,7 +1093,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalEpatchTestLanguage.g:2335:40: ( ( '\\r' )? '\\n' )?
+            // InternalEpatchTestLanguage.g:2340:40: ( ( '\\r' )? '\\n' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1102,9 +1102,9 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalEpatchTestLanguage.g:2335:41: ( '\\r' )? '\\n'
+                    // InternalEpatchTestLanguage.g:2340:41: ( '\\r' )? '\\n'
                     {
-                    // InternalEpatchTestLanguage.g:2335:41: ( '\\r' )?
+                    // InternalEpatchTestLanguage.g:2340:41: ( '\\r' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1113,7 +1113,7 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalEpatchTestLanguage.g:2335:41: '\\r'
+                            // InternalEpatchTestLanguage.g:2340:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1145,10 +1145,10 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2337:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalEpatchTestLanguage.g:2337:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEpatchTestLanguage.g:2342:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEpatchTestLanguage.g:2342:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalEpatchTestLanguage.g:2337:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEpatchTestLanguage.g:2342:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt12=0;
             loop12:
             do {
@@ -1202,8 +1202,8 @@ public class InternalEpatchTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEpatchTestLanguage.g:2339:16: ( . )
-            // InternalEpatchTestLanguage.g:2339:18: .
+            // InternalEpatchTestLanguage.g:2344:16: ( . )
+            // InternalEpatchTestLanguage.g:2344:18: .
             {
             matchAny(); 
 

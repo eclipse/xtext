@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -72,7 +80,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleFoo"
-    // InternalMetamodelRefTestLanguage.g:64:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
+    // InternalMetamodelRefTestLanguage.g:69:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
     public final EObject entryRuleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +88,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalMetamodelRefTestLanguage.g:64:44: (iv_ruleFoo= ruleFoo EOF )
-            // InternalMetamodelRefTestLanguage.g:65:2: iv_ruleFoo= ruleFoo EOF
+            // InternalMetamodelRefTestLanguage.g:69:44: (iv_ruleFoo= ruleFoo EOF )
+            // InternalMetamodelRefTestLanguage.g:70:2: iv_ruleFoo= ruleFoo EOF
             {
              newCompositeNode(grammarAccess.getFooRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -108,7 +116,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleFoo"
-    // InternalMetamodelRefTestLanguage.g:71:1: ruleFoo returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
+    // InternalMetamodelRefTestLanguage.g:76:1: ruleFoo returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
     public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -120,17 +128,17 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalMetamodelRefTestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
-            // InternalMetamodelRefTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // InternalMetamodelRefTestLanguage.g:82:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
+            // InternalMetamodelRefTestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
             {
-            // InternalMetamodelRefTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
-            // InternalMetamodelRefTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // InternalMetamodelRefTestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // InternalMetamodelRefTestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
             {
-            // InternalMetamodelRefTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalMetamodelRefTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalMetamodelRefTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
-            // InternalMetamodelRefTestLanguage.g:81:5: lv_name_0_0= RULE_ID
+            // InternalMetamodelRefTestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:86:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -152,7 +160,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // InternalMetamodelRefTestLanguage.g:97:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // InternalMetamodelRefTestLanguage.g:102:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
             loop1:
             do {
                 int alt1=2;
@@ -165,10 +173,10 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalMetamodelRefTestLanguage.g:98:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // InternalMetamodelRefTestLanguage.g:103:4: (lv_nameRefs_1_0= ruleNameRef )
             	    {
-            	    // InternalMetamodelRefTestLanguage.g:98:4: (lv_nameRefs_1_0= ruleNameRef )
-            	    // InternalMetamodelRefTestLanguage.g:99:5: lv_nameRefs_1_0= ruleNameRef
+            	    // InternalMetamodelRefTestLanguage.g:103:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // InternalMetamodelRefTestLanguage.g:104:5: lv_nameRefs_1_0= ruleNameRef
             	    {
 
             	    					newCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0());
@@ -224,7 +232,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleNameRef"
-    // InternalMetamodelRefTestLanguage.g:120:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
+    // InternalMetamodelRefTestLanguage.g:125:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
     public final EObject entryRuleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -232,8 +240,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalMetamodelRefTestLanguage.g:120:48: (iv_ruleNameRef= ruleNameRef EOF )
-            // InternalMetamodelRefTestLanguage.g:121:2: iv_ruleNameRef= ruleNameRef EOF
+            // InternalMetamodelRefTestLanguage.g:125:48: (iv_ruleNameRef= ruleNameRef EOF )
+            // InternalMetamodelRefTestLanguage.g:126:2: iv_ruleNameRef= ruleNameRef EOF
             {
              newCompositeNode(grammarAccess.getNameRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -260,7 +268,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleNameRef"
-    // InternalMetamodelRefTestLanguage.g:127:1: ruleNameRef returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // InternalMetamodelRefTestLanguage.g:132:1: ruleNameRef returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -270,14 +278,14 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalMetamodelRefTestLanguage.g:133:2: ( ( (otherlv_0= RULE_ID ) ) )
-            // InternalMetamodelRefTestLanguage.g:134:2: ( (otherlv_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:138:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalMetamodelRefTestLanguage.g:139:2: ( (otherlv_0= RULE_ID ) )
             {
-            // InternalMetamodelRefTestLanguage.g:134:2: ( (otherlv_0= RULE_ID ) )
-            // InternalMetamodelRefTestLanguage.g:135:3: (otherlv_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:139:2: ( (otherlv_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:140:3: (otherlv_0= RULE_ID )
             {
-            // InternalMetamodelRefTestLanguage.g:135:3: (otherlv_0= RULE_ID )
-            // InternalMetamodelRefTestLanguage.g:136:4: otherlv_0= RULE_ID
+            // InternalMetamodelRefTestLanguage.g:140:3: (otherlv_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:141:4: otherlv_0= RULE_ID
             {
 
             				if (current==null) {

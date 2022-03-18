@@ -10,6 +10,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     public static final int RULE_DEDENT=6;
@@ -41,12 +49,12 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:14:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
-            // InternalIndentationAwareTestLanguageLexer.g:14:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIndentationAwareTestLanguageLexer.g:19:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
+            // InternalIndentationAwareTestLanguageLexer.g:19:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
             {
             match("//"); 
 
-            // InternalIndentationAwareTestLanguageLexer.g:14:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIndentationAwareTestLanguageLexer.g:19:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -59,7 +67,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalIndentationAwareTestLanguageLexer.g:14:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalIndentationAwareTestLanguageLexer.g:19:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -93,8 +101,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INDENT"
     public final void mRULE_INDENT() throws RecognitionException {
         try {
-            // InternalIndentationAwareTestLanguageLexer.g:16:22: ()
-            // InternalIndentationAwareTestLanguageLexer.g:16:24: 
+            // InternalIndentationAwareTestLanguageLexer.g:21:22: ()
+            // InternalIndentationAwareTestLanguageLexer.g:21:24: 
             {
             }
 
@@ -107,8 +115,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DEDENT"
     public final void mRULE_DEDENT() throws RecognitionException {
         try {
-            // InternalIndentationAwareTestLanguageLexer.g:18:22: ()
-            // InternalIndentationAwareTestLanguageLexer.g:18:24: 
+            // InternalIndentationAwareTestLanguageLexer.g:23:22: ()
+            // InternalIndentationAwareTestLanguageLexer.g:23:24: 
             {
             }
 
@@ -123,10 +131,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:20:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalIndentationAwareTestLanguageLexer.g:20:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIndentationAwareTestLanguageLexer.g:25:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalIndentationAwareTestLanguageLexer.g:25:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalIndentationAwareTestLanguageLexer.g:20:11: ( '^' )?
+            // InternalIndentationAwareTestLanguageLexer.g:25:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -135,7 +143,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // InternalIndentationAwareTestLanguageLexer.g:20:11: '^'
+                    // InternalIndentationAwareTestLanguageLexer.g:25:11: '^'
                     {
                     match('^'); 
 
@@ -153,7 +161,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalIndentationAwareTestLanguageLexer.g:20:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIndentationAwareTestLanguageLexer.g:25:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -202,10 +210,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:22:10: ( ( '0' .. '9' )+ )
-            // InternalIndentationAwareTestLanguageLexer.g:22:12: ( '0' .. '9' )+
+            // InternalIndentationAwareTestLanguageLexer.g:27:10: ( ( '0' .. '9' )+ )
+            // InternalIndentationAwareTestLanguageLexer.g:27:12: ( '0' .. '9' )+
             {
-            // InternalIndentationAwareTestLanguageLexer.g:22:12: ( '0' .. '9' )+
+            // InternalIndentationAwareTestLanguageLexer.g:27:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -219,7 +227,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalIndentationAwareTestLanguageLexer.g:22:13: '0' .. '9'
+            	    // InternalIndentationAwareTestLanguageLexer.g:27:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -251,10 +259,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:24:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalIndentationAwareTestLanguageLexer.g:24:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIndentationAwareTestLanguageLexer.g:29:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalIndentationAwareTestLanguageLexer.g:29:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalIndentationAwareTestLanguageLexer.g:24:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIndentationAwareTestLanguageLexer.g:29:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -272,10 +280,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalIndentationAwareTestLanguageLexer.g:24:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalIndentationAwareTestLanguageLexer.g:29:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalIndentationAwareTestLanguageLexer.g:24:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalIndentationAwareTestLanguageLexer.g:29:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -291,7 +299,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalIndentationAwareTestLanguageLexer.g:24:21: '\\\\' .
+                    	    // InternalIndentationAwareTestLanguageLexer.g:29:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -299,7 +307,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalIndentationAwareTestLanguageLexer.g:24:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalIndentationAwareTestLanguageLexer.g:29:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -324,10 +332,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalIndentationAwareTestLanguageLexer.g:24:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalIndentationAwareTestLanguageLexer.g:29:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalIndentationAwareTestLanguageLexer.g:24:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalIndentationAwareTestLanguageLexer.g:29:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -343,7 +351,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalIndentationAwareTestLanguageLexer.g:24:54: '\\\\' .
+                    	    // InternalIndentationAwareTestLanguageLexer.g:29:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -351,7 +359,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalIndentationAwareTestLanguageLexer.g:24:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalIndentationAwareTestLanguageLexer.g:29:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -394,12 +402,12 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:26:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalIndentationAwareTestLanguageLexer.g:26:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalIndentationAwareTestLanguageLexer.g:31:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalIndentationAwareTestLanguageLexer.g:31:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalIndentationAwareTestLanguageLexer.g:26:24: ( options {greedy=false; } : . )*
+            // InternalIndentationAwareTestLanguageLexer.g:31:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -424,7 +432,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalIndentationAwareTestLanguageLexer.g:26:52: .
+            	    // InternalIndentationAwareTestLanguageLexer.g:31:52: .
             	    {
             	    matchAny(); 
 
@@ -454,10 +462,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:28:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalIndentationAwareTestLanguageLexer.g:28:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIndentationAwareTestLanguageLexer.g:33:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalIndentationAwareTestLanguageLexer.g:33:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalIndentationAwareTestLanguageLexer.g:28:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIndentationAwareTestLanguageLexer.g:33:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt9=0;
             loop9:
             do {
@@ -511,8 +519,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIndentationAwareTestLanguageLexer.g:30:16: ( . )
-            // InternalIndentationAwareTestLanguageLexer.g:30:18: .
+            // InternalIndentationAwareTestLanguageLexer.g:35:16: ( . )
+            // InternalIndentationAwareTestLanguageLexer.g:35:18: .
             {
             matchAny(); 
 

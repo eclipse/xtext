@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -81,7 +89,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalHiddenTerminalsTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -89,8 +97,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalHiddenTerminalsTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalHiddenTerminalsTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalHiddenTerminalsTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -117,7 +125,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleModel"
-    // InternalHiddenTerminalsTestLanguage.g:71:1: ruleModel returns [EObject current=null] : (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens ) ;
+    // InternalHiddenTerminalsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -136,10 +144,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:77:2: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens ) )
-            // InternalHiddenTerminalsTestLanguage.g:78:2: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens )
+            // InternalHiddenTerminalsTestLanguage.g:82:2: ( (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens ) )
+            // InternalHiddenTerminalsTestLanguage.g:83:2: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens )
             {
-            // InternalHiddenTerminalsTestLanguage.g:78:2: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens )
+            // InternalHiddenTerminalsTestLanguage.g:83:2: (this_WithoutHiddens_0= ruleWithoutHiddens | this_WithHiddens_1= ruleWithHiddens | this_OverridingHiddens_2= ruleOverridingHiddens | this_InheritingHiddens_3= ruleInheritingHiddens | this_DatatypeHiddens_4= ruleDatatypeHiddens )
             int alt1=5;
             switch ( input.LA(1) ) {
             case 8:
@@ -176,7 +184,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             switch (alt1) {
                 case 1 :
-                    // InternalHiddenTerminalsTestLanguage.g:79:3: this_WithoutHiddens_0= ruleWithoutHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:84:3: this_WithoutHiddens_0= ruleWithoutHiddens
                     {
 
                     			newCompositeNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0());
@@ -194,7 +202,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // InternalHiddenTerminalsTestLanguage.g:88:3: this_WithHiddens_1= ruleWithHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:93:3: this_WithHiddens_1= ruleWithHiddens
                     {
 
                     			newCompositeNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1());
@@ -212,7 +220,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 3 :
-                    // InternalHiddenTerminalsTestLanguage.g:97:3: this_OverridingHiddens_2= ruleOverridingHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:102:3: this_OverridingHiddens_2= ruleOverridingHiddens
                     {
 
                     			newCompositeNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2());
@@ -230,7 +238,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 4 :
-                    // InternalHiddenTerminalsTestLanguage.g:106:3: this_InheritingHiddens_3= ruleInheritingHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:111:3: this_InheritingHiddens_3= ruleInheritingHiddens
                     {
 
                     			newCompositeNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3());
@@ -248,7 +256,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 5 :
-                    // InternalHiddenTerminalsTestLanguage.g:115:3: this_DatatypeHiddens_4= ruleDatatypeHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:120:3: this_DatatypeHiddens_4= ruleDatatypeHiddens
                     {
 
                     			newCompositeNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4());
@@ -288,7 +296,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleWithoutHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:127:1: entryRuleWithoutHiddens returns [EObject current=null] : iv_ruleWithoutHiddens= ruleWithoutHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:132:1: entryRuleWithoutHiddens returns [EObject current=null] : iv_ruleWithoutHiddens= ruleWithoutHiddens EOF ;
     public final EObject entryRuleWithoutHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -296,8 +304,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:127:55: (iv_ruleWithoutHiddens= ruleWithoutHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:128:2: iv_ruleWithoutHiddens= ruleWithoutHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:132:55: (iv_ruleWithoutHiddens= ruleWithoutHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:133:2: iv_ruleWithoutHiddens= ruleWithoutHiddens EOF
             {
              newCompositeNode(grammarAccess.getWithoutHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -324,7 +332,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleWithoutHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:134:1: ruleWithoutHiddens returns [EObject current=null] : (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:139:1: ruleWithoutHiddens returns [EObject current=null] : (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) ) ;
     public final EObject ruleWithoutHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -338,21 +346,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:140:2: ( (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:141:2: (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:145:2: ( (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:146:2: (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:141:2: (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:142:3: otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:146:2: (otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:147:3: otherlv_0= 'without' ( (lv_spaces_1_0= RULE_WS ) ) otherlv_2= 'hiddens' ( (lv_spaces_3_0= RULE_WS ) )? ( (lv_valid_4_0= ';' ) )
             {
             otherlv_0=(Token)match(input,8,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0());
             		
-            // InternalHiddenTerminalsTestLanguage.g:146:3: ( (lv_spaces_1_0= RULE_WS ) )
-            // InternalHiddenTerminalsTestLanguage.g:147:4: (lv_spaces_1_0= RULE_WS )
+            // InternalHiddenTerminalsTestLanguage.g:151:3: ( (lv_spaces_1_0= RULE_WS ) )
+            // InternalHiddenTerminalsTestLanguage.g:152:4: (lv_spaces_1_0= RULE_WS )
             {
-            // InternalHiddenTerminalsTestLanguage.g:147:4: (lv_spaces_1_0= RULE_WS )
-            // InternalHiddenTerminalsTestLanguage.g:148:5: lv_spaces_1_0= RULE_WS
+            // InternalHiddenTerminalsTestLanguage.g:152:4: (lv_spaces_1_0= RULE_WS )
+            // InternalHiddenTerminalsTestLanguage.g:153:5: lv_spaces_1_0= RULE_WS
             {
             lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_4); 
 
@@ -378,7 +386,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_2, grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2());
             		
-            // InternalHiddenTerminalsTestLanguage.g:168:3: ( (lv_spaces_3_0= RULE_WS ) )?
+            // InternalHiddenTerminalsTestLanguage.g:173:3: ( (lv_spaces_3_0= RULE_WS ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -387,10 +395,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt2) {
                 case 1 :
-                    // InternalHiddenTerminalsTestLanguage.g:169:4: (lv_spaces_3_0= RULE_WS )
+                    // InternalHiddenTerminalsTestLanguage.g:174:4: (lv_spaces_3_0= RULE_WS )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:169:4: (lv_spaces_3_0= RULE_WS )
-                    // InternalHiddenTerminalsTestLanguage.g:170:5: lv_spaces_3_0= RULE_WS
+                    // InternalHiddenTerminalsTestLanguage.g:174:4: (lv_spaces_3_0= RULE_WS )
+                    // InternalHiddenTerminalsTestLanguage.g:175:5: lv_spaces_3_0= RULE_WS
                     {
                     lv_spaces_3_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
@@ -415,11 +423,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // InternalHiddenTerminalsTestLanguage.g:186:3: ( (lv_valid_4_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:187:4: (lv_valid_4_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:191:3: ( (lv_valid_4_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:192:4: (lv_valid_4_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:187:4: (lv_valid_4_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:188:5: lv_valid_4_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:192:4: (lv_valid_4_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:193:5: lv_valid_4_0= ';'
             {
             lv_valid_4_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -460,7 +468,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleWithHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:204:1: entryRuleWithHiddens returns [EObject current=null] : iv_ruleWithHiddens= ruleWithHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:209:1: entryRuleWithHiddens returns [EObject current=null] : iv_ruleWithHiddens= ruleWithHiddens EOF ;
     public final EObject entryRuleWithHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -471,8 +479,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:206:2: (iv_ruleWithHiddens= ruleWithHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:207:2: iv_ruleWithHiddens= ruleWithHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:211:2: (iv_ruleWithHiddens= ruleWithHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:212:2: iv_ruleWithHiddens= ruleWithHiddens EOF
             {
              newCompositeNode(grammarAccess.getWithHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -502,7 +510,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleWithHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:216:1: ruleWithHiddens returns [EObject current=null] : (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:221:1: ruleWithHiddens returns [EObject current=null] : (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) ) ;
     public final EObject ruleWithHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -515,11 +523,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:223:2: ( (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:224:2: (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:228:2: ( (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:229:2: (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:224:2: (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:225:3: otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:229:2: (otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:230:3: otherlv_0= 'with' otherlv_1= 'hiddens' ( (lv_valid_2_0= ';' ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
@@ -529,11 +537,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_1, grammarAccess.getWithHiddensAccess().getHiddensKeyword_1());
             		
-            // InternalHiddenTerminalsTestLanguage.g:233:3: ( (lv_valid_2_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:234:4: (lv_valid_2_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:238:3: ( (lv_valid_2_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:239:4: (lv_valid_2_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:234:4: (lv_valid_2_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:235:5: lv_valid_2_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:239:4: (lv_valid_2_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:240:5: lv_valid_2_0= ';'
             {
             lv_valid_2_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -577,7 +585,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleOverridingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:254:1: entryRuleOverridingHiddens returns [EObject current=null] : iv_ruleOverridingHiddens= ruleOverridingHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:259:1: entryRuleOverridingHiddens returns [EObject current=null] : iv_ruleOverridingHiddens= ruleOverridingHiddens EOF ;
     public final EObject entryRuleOverridingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -588,8 +596,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:256:2: (iv_ruleOverridingHiddens= ruleOverridingHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:257:2: iv_ruleOverridingHiddens= ruleOverridingHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:261:2: (iv_ruleOverridingHiddens= ruleOverridingHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:262:2: iv_ruleOverridingHiddens= ruleOverridingHiddens EOF
             {
              newCompositeNode(grammarAccess.getOverridingHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -619,7 +627,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleOverridingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:266:1: ruleOverridingHiddens returns [EObject current=null] : (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:271:1: ruleOverridingHiddens returns [EObject current=null] : (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) ) ;
     public final EObject ruleOverridingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -636,11 +644,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:273:2: ( (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:274:2: (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:278:2: ( (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:279:2: (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:274:2: (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:275:3: otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:279:2: (otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:280:3: otherlv_0= 'overriding' otherlv_1= 'hiddens' otherlv_2= '(' ( (lv_called_3_0= ruleOverridingHiddensCall ) ) otherlv_4= ')' ( (lv_valid_5_0= ';' ) )
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
@@ -654,11 +662,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_2, grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2());
             		
-            // InternalHiddenTerminalsTestLanguage.g:287:3: ( (lv_called_3_0= ruleOverridingHiddensCall ) )
-            // InternalHiddenTerminalsTestLanguage.g:288:4: (lv_called_3_0= ruleOverridingHiddensCall )
+            // InternalHiddenTerminalsTestLanguage.g:292:3: ( (lv_called_3_0= ruleOverridingHiddensCall ) )
+            // InternalHiddenTerminalsTestLanguage.g:293:4: (lv_called_3_0= ruleOverridingHiddensCall )
             {
-            // InternalHiddenTerminalsTestLanguage.g:288:4: (lv_called_3_0= ruleOverridingHiddensCall )
-            // InternalHiddenTerminalsTestLanguage.g:289:5: lv_called_3_0= ruleOverridingHiddensCall
+            // InternalHiddenTerminalsTestLanguage.g:293:4: (lv_called_3_0= ruleOverridingHiddensCall )
+            // InternalHiddenTerminalsTestLanguage.g:294:5: lv_called_3_0= ruleOverridingHiddensCall
             {
 
             					newCompositeNode(grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0());
@@ -689,11 +697,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_4, grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4());
             		
-            // InternalHiddenTerminalsTestLanguage.g:310:3: ( (lv_valid_5_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:311:4: (lv_valid_5_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:315:3: ( (lv_valid_5_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:316:4: (lv_valid_5_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:311:4: (lv_valid_5_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:312:5: lv_valid_5_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:316:4: (lv_valid_5_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:317:5: lv_valid_5_0= ';'
             {
             lv_valid_5_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -737,7 +745,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleOverridingHiddensCall"
-    // InternalHiddenTerminalsTestLanguage.g:331:1: entryRuleOverridingHiddensCall returns [EObject current=null] : iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:336:1: entryRuleOverridingHiddensCall returns [EObject current=null] : iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF ;
     public final EObject entryRuleOverridingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -748,8 +756,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:333:2: (iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF )
-            // InternalHiddenTerminalsTestLanguage.g:334:2: iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF
+            // InternalHiddenTerminalsTestLanguage.g:338:2: (iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF )
+            // InternalHiddenTerminalsTestLanguage.g:339:2: iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF
             {
              newCompositeNode(grammarAccess.getOverridingHiddensCallRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -779,7 +787,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleOverridingHiddensCall"
-    // InternalHiddenTerminalsTestLanguage.g:343:1: ruleOverridingHiddensCall returns [EObject current=null] : (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:348:1: ruleOverridingHiddensCall returns [EObject current=null] : (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) ) ;
     public final EObject ruleOverridingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -792,17 +800,17 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:350:2: ( (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:351:2: (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:355:2: ( (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:356:2: (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:351:2: (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:352:3: otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:356:2: (otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:357:3: otherlv_0= 'call' ( (lv_spaces_1_0= RULE_WS ) )? ( (lv_valid_2_0= ';' ) )
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0());
             		
-            // InternalHiddenTerminalsTestLanguage.g:356:3: ( (lv_spaces_1_0= RULE_WS ) )?
+            // InternalHiddenTerminalsTestLanguage.g:361:3: ( (lv_spaces_1_0= RULE_WS ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -811,10 +819,10 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt3) {
                 case 1 :
-                    // InternalHiddenTerminalsTestLanguage.g:357:4: (lv_spaces_1_0= RULE_WS )
+                    // InternalHiddenTerminalsTestLanguage.g:362:4: (lv_spaces_1_0= RULE_WS )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:357:4: (lv_spaces_1_0= RULE_WS )
-                    // InternalHiddenTerminalsTestLanguage.g:358:5: lv_spaces_1_0= RULE_WS
+                    // InternalHiddenTerminalsTestLanguage.g:362:4: (lv_spaces_1_0= RULE_WS )
+                    // InternalHiddenTerminalsTestLanguage.g:363:5: lv_spaces_1_0= RULE_WS
                     {
                     lv_spaces_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_6); 
 
@@ -839,11 +847,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // InternalHiddenTerminalsTestLanguage.g:374:3: ( (lv_valid_2_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:375:4: (lv_valid_2_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:379:3: ( (lv_valid_2_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:380:4: (lv_valid_2_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:375:4: (lv_valid_2_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:376:5: lv_valid_2_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:380:4: (lv_valid_2_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:381:5: lv_valid_2_0= ';'
             {
             lv_valid_2_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -887,7 +895,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleInheritingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:395:1: entryRuleInheritingHiddens returns [EObject current=null] : iv_ruleInheritingHiddens= ruleInheritingHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:400:1: entryRuleInheritingHiddens returns [EObject current=null] : iv_ruleInheritingHiddens= ruleInheritingHiddens EOF ;
     public final EObject entryRuleInheritingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -898,8 +906,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:397:2: (iv_ruleInheritingHiddens= ruleInheritingHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:398:2: iv_ruleInheritingHiddens= ruleInheritingHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:402:2: (iv_ruleInheritingHiddens= ruleInheritingHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:403:2: iv_ruleInheritingHiddens= ruleInheritingHiddens EOF
             {
              newCompositeNode(grammarAccess.getInheritingHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -929,7 +937,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleInheritingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:407:1: ruleInheritingHiddens returns [EObject current=null] : (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:412:1: ruleInheritingHiddens returns [EObject current=null] : (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) ) ;
     public final EObject ruleInheritingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -948,11 +956,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:414:2: ( (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:415:2: (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:419:2: ( (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:420:2: (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:415:2: (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:416:3: otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:420:2: (otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:421:3: otherlv_0= 'inheriting' otherlv_1= 'hiddens' otherlv_2= '(' ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) ) otherlv_5= ')' ( (lv_valid_6_0= ';' ) )
             {
             otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_4); 
 
@@ -966,7 +974,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_2, grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2());
             		
-            // InternalHiddenTerminalsTestLanguage.g:428:3: ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:433:3: ( ( (lv_called_3_0= ruleInheritingHiddensCall ) ) | ( (lv_hidingCalled_4_0= ruleHidingHiddens ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -984,13 +992,13 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             }
             switch (alt4) {
                 case 1 :
-                    // InternalHiddenTerminalsTestLanguage.g:429:4: ( (lv_called_3_0= ruleInheritingHiddensCall ) )
+                    // InternalHiddenTerminalsTestLanguage.g:434:4: ( (lv_called_3_0= ruleInheritingHiddensCall ) )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:429:4: ( (lv_called_3_0= ruleInheritingHiddensCall ) )
-                    // InternalHiddenTerminalsTestLanguage.g:430:5: (lv_called_3_0= ruleInheritingHiddensCall )
+                    // InternalHiddenTerminalsTestLanguage.g:434:4: ( (lv_called_3_0= ruleInheritingHiddensCall ) )
+                    // InternalHiddenTerminalsTestLanguage.g:435:5: (lv_called_3_0= ruleInheritingHiddensCall )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:430:5: (lv_called_3_0= ruleInheritingHiddensCall )
-                    // InternalHiddenTerminalsTestLanguage.g:431:6: lv_called_3_0= ruleInheritingHiddensCall
+                    // InternalHiddenTerminalsTestLanguage.g:435:5: (lv_called_3_0= ruleInheritingHiddensCall )
+                    // InternalHiddenTerminalsTestLanguage.g:436:6: lv_called_3_0= ruleInheritingHiddensCall
                     {
 
                     						newCompositeNode(grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0());
@@ -1021,13 +1029,13 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // InternalHiddenTerminalsTestLanguage.g:449:4: ( (lv_hidingCalled_4_0= ruleHidingHiddens ) )
+                    // InternalHiddenTerminalsTestLanguage.g:454:4: ( (lv_hidingCalled_4_0= ruleHidingHiddens ) )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:449:4: ( (lv_hidingCalled_4_0= ruleHidingHiddens ) )
-                    // InternalHiddenTerminalsTestLanguage.g:450:5: (lv_hidingCalled_4_0= ruleHidingHiddens )
+                    // InternalHiddenTerminalsTestLanguage.g:454:4: ( (lv_hidingCalled_4_0= ruleHidingHiddens ) )
+                    // InternalHiddenTerminalsTestLanguage.g:455:5: (lv_hidingCalled_4_0= ruleHidingHiddens )
                     {
-                    // InternalHiddenTerminalsTestLanguage.g:450:5: (lv_hidingCalled_4_0= ruleHidingHiddens )
-                    // InternalHiddenTerminalsTestLanguage.g:451:6: lv_hidingCalled_4_0= ruleHidingHiddens
+                    // InternalHiddenTerminalsTestLanguage.g:455:5: (lv_hidingCalled_4_0= ruleHidingHiddens )
+                    // InternalHiddenTerminalsTestLanguage.g:456:6: lv_hidingCalled_4_0= ruleHidingHiddens
                     {
 
                     						newCompositeNode(grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0());
@@ -1064,11 +1072,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_5, grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4());
             		
-            // InternalHiddenTerminalsTestLanguage.g:473:3: ( (lv_valid_6_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:474:4: (lv_valid_6_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:478:3: ( (lv_valid_6_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:479:4: (lv_valid_6_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:474:4: (lv_valid_6_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:475:5: lv_valid_6_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:479:4: (lv_valid_6_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:480:5: lv_valid_6_0= ';'
             {
             lv_valid_6_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 
@@ -1112,7 +1120,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleDatatypeHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:494:1: entryRuleDatatypeHiddens returns [EObject current=null] : iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:499:1: entryRuleDatatypeHiddens returns [EObject current=null] : iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF ;
     public final EObject entryRuleDatatypeHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1120,8 +1128,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:494:56: (iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:495:2: iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:499:56: (iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:500:2: iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF
             {
              newCompositeNode(grammarAccess.getDatatypeHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1148,7 +1156,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleDatatypeHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:501:1: ruleDatatypeHiddens returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:506:1: ruleDatatypeHiddens returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) ) ;
     public final EObject ruleDatatypeHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1160,21 +1168,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:507:2: ( (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:508:2: (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:512:2: ( (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:513:2: (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:508:2: (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:509:3: otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) )
+            // InternalHiddenTerminalsTestLanguage.g:513:2: (otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:514:3: otherlv_0= 'datatype' ( (lv_valid_1_0= ruleDatatypeRule ) )
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_11); 
 
             			newLeafNode(otherlv_0, grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0());
             		
-            // InternalHiddenTerminalsTestLanguage.g:513:3: ( (lv_valid_1_0= ruleDatatypeRule ) )
-            // InternalHiddenTerminalsTestLanguage.g:514:4: (lv_valid_1_0= ruleDatatypeRule )
+            // InternalHiddenTerminalsTestLanguage.g:518:3: ( (lv_valid_1_0= ruleDatatypeRule ) )
+            // InternalHiddenTerminalsTestLanguage.g:519:4: (lv_valid_1_0= ruleDatatypeRule )
             {
-            // InternalHiddenTerminalsTestLanguage.g:514:4: (lv_valid_1_0= ruleDatatypeRule )
-            // InternalHiddenTerminalsTestLanguage.g:515:5: lv_valid_1_0= ruleDatatypeRule
+            // InternalHiddenTerminalsTestLanguage.g:519:4: (lv_valid_1_0= ruleDatatypeRule )
+            // InternalHiddenTerminalsTestLanguage.g:520:5: lv_valid_1_0= ruleDatatypeRule
             {
 
             					newCompositeNode(grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0());
@@ -1224,7 +1232,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleDatatypeRule"
-    // InternalHiddenTerminalsTestLanguage.g:536:1: entryRuleDatatypeRule returns [String current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:541:1: entryRuleDatatypeRule returns [String current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
     public final String entryRuleDatatypeRule() throws RecognitionException {
         String current = null;
 
@@ -1235,8 +1243,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:538:2: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
-            // InternalHiddenTerminalsTestLanguage.g:539:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
+            // InternalHiddenTerminalsTestLanguage.g:543:2: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
+            // InternalHiddenTerminalsTestLanguage.g:544:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1266,7 +1274,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleDatatypeRule"
-    // InternalHiddenTerminalsTestLanguage.g:548:1: ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'rule' kw= ';' ) ;
+    // InternalHiddenTerminalsTestLanguage.g:553:1: ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'rule' kw= ';' ) ;
     public final AntlrDatatypeRuleToken ruleDatatypeRule() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1277,11 +1285,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:555:2: ( (kw= 'rule' kw= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:556:2: (kw= 'rule' kw= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:560:2: ( (kw= 'rule' kw= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:561:2: (kw= 'rule' kw= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:556:2: (kw= 'rule' kw= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:557:3: kw= 'rule' kw= ';'
+            // InternalHiddenTerminalsTestLanguage.g:561:2: (kw= 'rule' kw= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:562:3: kw= 'rule' kw= ';'
             {
             kw=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
@@ -1319,7 +1327,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleHidingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:574:1: entryRuleHidingHiddens returns [EObject current=null] : iv_ruleHidingHiddens= ruleHidingHiddens EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:579:1: entryRuleHidingHiddens returns [EObject current=null] : iv_ruleHidingHiddens= ruleHidingHiddens EOF ;
     public final EObject entryRuleHidingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1330,8 +1338,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:576:2: (iv_ruleHidingHiddens= ruleHidingHiddens EOF )
-            // InternalHiddenTerminalsTestLanguage.g:577:2: iv_ruleHidingHiddens= ruleHidingHiddens EOF
+            // InternalHiddenTerminalsTestLanguage.g:581:2: (iv_ruleHidingHiddens= ruleHidingHiddens EOF )
+            // InternalHiddenTerminalsTestLanguage.g:582:2: iv_ruleHidingHiddens= ruleHidingHiddens EOF
             {
              newCompositeNode(grammarAccess.getHidingHiddensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1361,7 +1369,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleHidingHiddens"
-    // InternalHiddenTerminalsTestLanguage.g:586:1: ruleHidingHiddens returns [EObject current=null] : (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:591:1: ruleHidingHiddens returns [EObject current=null] : (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) ) ;
     public final EObject ruleHidingHiddens() throws RecognitionException {
         EObject current = null;
 
@@ -1375,21 +1383,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:593:2: ( (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:594:2: (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:598:2: ( (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:599:2: (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:594:2: (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:595:3: otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) )
+            // InternalHiddenTerminalsTestLanguage.g:599:2: (otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:600:3: otherlv_0= 'hiding' ( (lv_space_1_0= RULE_WS ) ) ( (lv_called_2_0= ruleInheritingHiddensCall ) )
             {
             otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getHidingHiddensAccess().getHidingKeyword_0());
             		
-            // InternalHiddenTerminalsTestLanguage.g:599:3: ( (lv_space_1_0= RULE_WS ) )
-            // InternalHiddenTerminalsTestLanguage.g:600:4: (lv_space_1_0= RULE_WS )
+            // InternalHiddenTerminalsTestLanguage.g:604:3: ( (lv_space_1_0= RULE_WS ) )
+            // InternalHiddenTerminalsTestLanguage.g:605:4: (lv_space_1_0= RULE_WS )
             {
-            // InternalHiddenTerminalsTestLanguage.g:600:4: (lv_space_1_0= RULE_WS )
-            // InternalHiddenTerminalsTestLanguage.g:601:5: lv_space_1_0= RULE_WS
+            // InternalHiddenTerminalsTestLanguage.g:605:4: (lv_space_1_0= RULE_WS )
+            // InternalHiddenTerminalsTestLanguage.g:606:5: lv_space_1_0= RULE_WS
             {
             lv_space_1_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_8); 
 
@@ -1411,11 +1419,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             }
 
-            // InternalHiddenTerminalsTestLanguage.g:617:3: ( (lv_called_2_0= ruleInheritingHiddensCall ) )
-            // InternalHiddenTerminalsTestLanguage.g:618:4: (lv_called_2_0= ruleInheritingHiddensCall )
+            // InternalHiddenTerminalsTestLanguage.g:622:3: ( (lv_called_2_0= ruleInheritingHiddensCall ) )
+            // InternalHiddenTerminalsTestLanguage.g:623:4: (lv_called_2_0= ruleInheritingHiddensCall )
             {
-            // InternalHiddenTerminalsTestLanguage.g:618:4: (lv_called_2_0= ruleInheritingHiddensCall )
-            // InternalHiddenTerminalsTestLanguage.g:619:5: lv_called_2_0= ruleInheritingHiddensCall
+            // InternalHiddenTerminalsTestLanguage.g:623:4: (lv_called_2_0= ruleInheritingHiddensCall )
+            // InternalHiddenTerminalsTestLanguage.g:624:5: lv_called_2_0= ruleInheritingHiddensCall
             {
 
             					newCompositeNode(grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0());
@@ -1468,7 +1476,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleInheritingHiddensCall"
-    // InternalHiddenTerminalsTestLanguage.g:643:1: entryRuleInheritingHiddensCall returns [EObject current=null] : iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF ;
+    // InternalHiddenTerminalsTestLanguage.g:648:1: entryRuleInheritingHiddensCall returns [EObject current=null] : iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF ;
     public final EObject entryRuleInheritingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -1476,8 +1484,8 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:643:62: (iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF )
-            // InternalHiddenTerminalsTestLanguage.g:644:2: iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF
+            // InternalHiddenTerminalsTestLanguage.g:648:62: (iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF )
+            // InternalHiddenTerminalsTestLanguage.g:649:2: iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF
             {
              newCompositeNode(grammarAccess.getInheritingHiddensCallRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1504,7 +1512,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleInheritingHiddensCall"
-    // InternalHiddenTerminalsTestLanguage.g:650:1: ruleInheritingHiddensCall returns [EObject current=null] : (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) ) ;
+    // InternalHiddenTerminalsTestLanguage.g:655:1: ruleInheritingHiddensCall returns [EObject current=null] : (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) ) ;
     public final EObject ruleInheritingHiddensCall() throws RecognitionException {
         EObject current = null;
 
@@ -1515,21 +1523,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalHiddenTerminalsTestLanguage.g:656:2: ( (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:657:2: (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:661:2: ( (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:662:2: (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) )
             {
-            // InternalHiddenTerminalsTestLanguage.g:657:2: (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) )
-            // InternalHiddenTerminalsTestLanguage.g:658:3: otherlv_0= 'call' ( (lv_valid_1_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:662:2: (otherlv_0= 'call' ( (lv_valid_1_0= ';' ) ) )
+            // InternalHiddenTerminalsTestLanguage.g:663:3: otherlv_0= 'call' ( (lv_valid_1_0= ';' ) )
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0());
             		
-            // InternalHiddenTerminalsTestLanguage.g:662:3: ( (lv_valid_1_0= ';' ) )
-            // InternalHiddenTerminalsTestLanguage.g:663:4: (lv_valid_1_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:667:3: ( (lv_valid_1_0= ';' ) )
+            // InternalHiddenTerminalsTestLanguage.g:668:4: (lv_valid_1_0= ';' )
             {
-            // InternalHiddenTerminalsTestLanguage.g:663:4: (lv_valid_1_0= ';' )
-            // InternalHiddenTerminalsTestLanguage.g:664:5: lv_valid_1_0= ';'
+            // InternalHiddenTerminalsTestLanguage.g:668:4: (lv_valid_1_0= ';' )
+            // InternalHiddenTerminalsTestLanguage.g:669:5: lv_valid_1_0= ';'
             {
             lv_valid_1_0=(Token)match(input,10,FollowSets000.FOLLOW_2); 
 

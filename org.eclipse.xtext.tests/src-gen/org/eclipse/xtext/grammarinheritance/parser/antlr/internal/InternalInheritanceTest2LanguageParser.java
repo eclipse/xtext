@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -77,7 +85,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalInheritanceTest2Language.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalInheritanceTest2Language.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -85,8 +93,8 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalInheritanceTest2Language.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalInheritanceTest2Language.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalInheritanceTest2Language.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalInheritanceTest2Language.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -113,7 +121,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleModel"
-    // InternalInheritanceTest2Language.g:71:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' ) ;
+    // InternalInheritanceTest2Language.g:76:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -130,21 +138,21 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalInheritanceTest2Language.g:77:2: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' ) )
-            // InternalInheritanceTest2Language.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' )
+            // InternalInheritanceTest2Language.g:82:2: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' ) )
+            // InternalInheritanceTest2Language.g:83:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' )
             {
-            // InternalInheritanceTest2Language.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' )
-            // InternalInheritanceTest2Language.g:79:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}'
+            // InternalInheritanceTest2Language.g:83:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}' )
+            // InternalInheritanceTest2Language.g:84:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* ( (lv_ids_4_0= ruleFQN ) ) otherlv_5= '}'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
             		
-            // InternalInheritanceTest2Language.g:83:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalInheritanceTest2Language.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTest2Language.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTest2Language.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalInheritanceTest2Language.g:84:4: (lv_name_1_0= RULE_ID )
-            // InternalInheritanceTest2Language.g:85:5: lv_name_1_0= RULE_ID
+            // InternalInheritanceTest2Language.g:89:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTest2Language.g:90:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -170,7 +178,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
             			newLeafNode(otherlv_2, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_2());
             		
-            // InternalInheritanceTest2Language.g:105:3: ( (lv_elements_3_0= ruleElement ) )*
+            // InternalInheritanceTest2Language.g:110:3: ( (lv_elements_3_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -183,10 +191,10 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:106:4: (lv_elements_3_0= ruleElement )
+            	    // InternalInheritanceTest2Language.g:111:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // InternalInheritanceTest2Language.g:106:4: (lv_elements_3_0= ruleElement )
-            	    // InternalInheritanceTest2Language.g:107:5: lv_elements_3_0= ruleElement
+            	    // InternalInheritanceTest2Language.g:111:4: (lv_elements_3_0= ruleElement )
+            	    // InternalInheritanceTest2Language.g:112:5: lv_elements_3_0= ruleElement
             	    {
 
             	    					newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_3_0());
@@ -219,11 +227,11 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                 }
             } while (true);
 
-            // InternalInheritanceTest2Language.g:124:3: ( (lv_ids_4_0= ruleFQN ) )
-            // InternalInheritanceTest2Language.g:125:4: (lv_ids_4_0= ruleFQN )
+            // InternalInheritanceTest2Language.g:129:3: ( (lv_ids_4_0= ruleFQN ) )
+            // InternalInheritanceTest2Language.g:130:4: (lv_ids_4_0= ruleFQN )
             {
-            // InternalInheritanceTest2Language.g:125:4: (lv_ids_4_0= ruleFQN )
-            // InternalInheritanceTest2Language.g:126:5: lv_ids_4_0= ruleFQN
+            // InternalInheritanceTest2Language.g:130:4: (lv_ids_4_0= ruleFQN )
+            // InternalInheritanceTest2Language.g:131:5: lv_ids_4_0= ruleFQN
             {
 
             					newCompositeNode(grammarAccess.getModelAccess().getIdsFQNParserRuleCall_4_0());
@@ -277,7 +285,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalInheritanceTest2Language.g:151:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalInheritanceTest2Language.g:156:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -285,8 +293,8 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalInheritanceTest2Language.g:151:48: (iv_ruleElement= ruleElement EOF )
-            // InternalInheritanceTest2Language.g:152:2: iv_ruleElement= ruleElement EOF
+            // InternalInheritanceTest2Language.g:156:48: (iv_ruleElement= ruleElement EOF )
+            // InternalInheritanceTest2Language.g:157:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -313,7 +321,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleElement"
-    // InternalInheritanceTest2Language.g:158:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalInheritanceTest2Language.g:163:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -324,21 +332,21 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalInheritanceTest2Language.g:164:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalInheritanceTest2Language.g:165:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalInheritanceTest2Language.g:169:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalInheritanceTest2Language.g:170:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalInheritanceTest2Language.g:165:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalInheritanceTest2Language.g:166:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTest2Language.g:170:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalInheritanceTest2Language.g:171:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
             		
-            // InternalInheritanceTest2Language.g:170:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalInheritanceTest2Language.g:171:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTest2Language.g:175:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTest2Language.g:176:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalInheritanceTest2Language.g:171:4: (lv_name_1_0= RULE_ID )
-            // InternalInheritanceTest2Language.g:172:5: lv_name_1_0= RULE_ID
+            // InternalInheritanceTest2Language.g:176:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTest2Language.g:177:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -383,7 +391,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalInheritanceTest2Language.g:192:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalInheritanceTest2Language.g:197:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -391,8 +399,8 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalInheritanceTest2Language.g:192:43: (iv_ruleFQN= ruleFQN EOF )
-            // InternalInheritanceTest2Language.g:193:2: iv_ruleFQN= ruleFQN EOF
+            // InternalInheritanceTest2Language.g:197:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalInheritanceTest2Language.g:198:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -419,7 +427,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleFQN"
-    // InternalInheritanceTest2Language.g:199:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalInheritanceTest2Language.g:204:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -431,11 +439,11 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalInheritanceTest2Language.g:205:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalInheritanceTest2Language.g:206:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalInheritanceTest2Language.g:210:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalInheritanceTest2Language.g:211:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalInheritanceTest2Language.g:206:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalInheritanceTest2Language.g:207:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalInheritanceTest2Language.g:211:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalInheritanceTest2Language.g:212:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
@@ -444,7 +452,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
             			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
             		
-            // InternalInheritanceTest2Language.g:214:3: (kw= '.' this_ID_2= RULE_ID )*
+            // InternalInheritanceTest2Language.g:219:3: (kw= '.' this_ID_2= RULE_ID )*
             loop2:
             do {
                 int alt2=2;
@@ -457,7 +465,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:215:4: kw= '.' this_ID_2= RULE_ID
+            	    // InternalInheritanceTest2Language.g:220:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,15,FollowSets000.FOLLOW_3); 
 

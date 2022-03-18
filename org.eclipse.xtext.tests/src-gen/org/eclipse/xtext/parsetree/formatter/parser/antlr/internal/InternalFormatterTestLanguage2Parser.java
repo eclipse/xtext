@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalFormatterTestLanguage2Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -75,7 +83,7 @@ public class InternalFormatterTestLanguage2Parser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleRoot"
-    // InternalFormatterTestLanguage2.g:64:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalFormatterTestLanguage2.g:69:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +91,8 @@ public class InternalFormatterTestLanguage2Parser extends AbstractInternalAntlrP
 
 
         try {
-            // InternalFormatterTestLanguage2.g:64:45: (iv_ruleRoot= ruleRoot EOF )
-            // InternalFormatterTestLanguage2.g:65:2: iv_ruleRoot= ruleRoot EOF
+            // InternalFormatterTestLanguage2.g:69:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalFormatterTestLanguage2.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -111,7 +119,7 @@ public class InternalFormatterTestLanguage2Parser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleRoot"
-    // InternalFormatterTestLanguage2.g:71:1: ruleRoot returns [EObject current=null] : (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' ) ;
+    // InternalFormatterTestLanguage2.g:76:1: ruleRoot returns [EObject current=null] : (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -124,21 +132,21 @@ public class InternalFormatterTestLanguage2Parser extends AbstractInternalAntlrP
         	enterRule();
 
         try {
-            // InternalFormatterTestLanguage2.g:77:2: ( (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' ) )
-            // InternalFormatterTestLanguage2.g:78:2: (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' )
+            // InternalFormatterTestLanguage2.g:82:2: ( (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' ) )
+            // InternalFormatterTestLanguage2.g:83:2: (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' )
             {
-            // InternalFormatterTestLanguage2.g:78:2: (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' )
-            // InternalFormatterTestLanguage2.g:79:3: otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}'
+            // InternalFormatterTestLanguage2.g:83:2: (otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}' )
+            // InternalFormatterTestLanguage2.g:84:3: otherlv_0= 'test' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' otherlv_3= '}'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0());
             		
-            // InternalFormatterTestLanguage2.g:83:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalFormatterTestLanguage2.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalFormatterTestLanguage2.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage2.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage2.g:84:4: (lv_name_1_0= RULE_ID )
-            // InternalFormatterTestLanguage2.g:85:5: lv_name_1_0= RULE_ID
+            // InternalFormatterTestLanguage2.g:89:4: (lv_name_1_0= RULE_ID )
+            // InternalFormatterTestLanguage2.g:90:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 

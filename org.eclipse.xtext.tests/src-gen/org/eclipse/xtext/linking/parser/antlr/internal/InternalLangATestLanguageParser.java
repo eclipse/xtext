@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -77,7 +85,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleMain"
-    // InternalLangATestLanguage.g:64:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // InternalLangATestLanguage.g:69:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -85,8 +93,8 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalLangATestLanguage.g:64:45: (iv_ruleMain= ruleMain EOF )
-            // InternalLangATestLanguage.g:65:2: iv_ruleMain= ruleMain EOF
+            // InternalLangATestLanguage.g:69:45: (iv_ruleMain= ruleMain EOF )
+            // InternalLangATestLanguage.g:70:2: iv_ruleMain= ruleMain EOF
             {
              newCompositeNode(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -113,7 +121,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleMain"
-    // InternalLangATestLanguage.g:71:1: ruleMain returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) ;
+    // InternalLangATestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -126,13 +134,13 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalLangATestLanguage.g:77:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) )
-            // InternalLangATestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
+            // InternalLangATestLanguage.g:82:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) )
+            // InternalLangATestLanguage.g:83:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
             {
-            // InternalLangATestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
-            // InternalLangATestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )*
+            // InternalLangATestLanguage.g:83:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
+            // InternalLangATestLanguage.g:84:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )*
             {
-            // InternalLangATestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )*
+            // InternalLangATestLanguage.g:84:3: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -145,10 +153,10 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalLangATestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
+            	    // InternalLangATestLanguage.g:85:4: (lv_imports_0_0= ruleImport )
             	    {
-            	    // InternalLangATestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
-            	    // InternalLangATestLanguage.g:81:5: lv_imports_0_0= ruleImport
+            	    // InternalLangATestLanguage.g:85:4: (lv_imports_0_0= ruleImport )
+            	    // InternalLangATestLanguage.g:86:5: lv_imports_0_0= ruleImport
             	    {
 
             	    					newCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0());
@@ -181,7 +189,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
                 }
             } while (true);
 
-            // InternalLangATestLanguage.g:98:3: ( (lv_types_1_0= ruleType ) )*
+            // InternalLangATestLanguage.g:103:3: ( (lv_types_1_0= ruleType ) )*
             loop2:
             do {
                 int alt2=2;
@@ -194,10 +202,10 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalLangATestLanguage.g:99:4: (lv_types_1_0= ruleType )
+            	    // InternalLangATestLanguage.g:104:4: (lv_types_1_0= ruleType )
             	    {
-            	    // InternalLangATestLanguage.g:99:4: (lv_types_1_0= ruleType )
-            	    // InternalLangATestLanguage.g:100:5: lv_types_1_0= ruleType
+            	    // InternalLangATestLanguage.g:104:4: (lv_types_1_0= ruleType )
+            	    // InternalLangATestLanguage.g:105:5: lv_types_1_0= ruleType
             	    {
 
             	    					newCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0());
@@ -253,7 +261,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalLangATestLanguage.g:121:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalLangATestLanguage.g:126:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -261,8 +269,8 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalLangATestLanguage.g:121:47: (iv_ruleImport= ruleImport EOF )
-            // InternalLangATestLanguage.g:122:2: iv_ruleImport= ruleImport EOF
+            // InternalLangATestLanguage.g:126:47: (iv_ruleImport= ruleImport EOF )
+            // InternalLangATestLanguage.g:127:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -289,7 +297,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleImport"
-    // InternalLangATestLanguage.g:128:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) ) ;
+    // InternalLangATestLanguage.g:133:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -300,21 +308,21 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalLangATestLanguage.g:134:2: ( (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) ) )
-            // InternalLangATestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) )
+            // InternalLangATestLanguage.g:139:2: ( (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) ) )
+            // InternalLangATestLanguage.g:140:2: (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) )
             {
-            // InternalLangATestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) )
-            // InternalLangATestLanguage.g:136:3: otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) )
+            // InternalLangATestLanguage.g:140:2: (otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) ) )
+            // InternalLangATestLanguage.g:141:3: otherlv_0= 'import' ( (lv_uri_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
             		
-            // InternalLangATestLanguage.g:140:3: ( (lv_uri_1_0= RULE_STRING ) )
-            // InternalLangATestLanguage.g:141:4: (lv_uri_1_0= RULE_STRING )
+            // InternalLangATestLanguage.g:145:3: ( (lv_uri_1_0= RULE_STRING ) )
+            // InternalLangATestLanguage.g:146:4: (lv_uri_1_0= RULE_STRING )
             {
-            // InternalLangATestLanguage.g:141:4: (lv_uri_1_0= RULE_STRING )
-            // InternalLangATestLanguage.g:142:5: lv_uri_1_0= RULE_STRING
+            // InternalLangATestLanguage.g:146:4: (lv_uri_1_0= RULE_STRING )
+            // InternalLangATestLanguage.g:147:5: lv_uri_1_0= RULE_STRING
             {
             lv_uri_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -359,7 +367,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleType"
-    // InternalLangATestLanguage.g:162:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // InternalLangATestLanguage.g:167:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -367,8 +375,8 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalLangATestLanguage.g:162:45: (iv_ruleType= ruleType EOF )
-            // InternalLangATestLanguage.g:163:2: iv_ruleType= ruleType EOF
+            // InternalLangATestLanguage.g:167:45: (iv_ruleType= ruleType EOF )
+            // InternalLangATestLanguage.g:168:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -395,7 +403,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleType"
-    // InternalLangATestLanguage.g:169:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? ) ;
+    // InternalLangATestLanguage.g:174:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -412,21 +420,21 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalLangATestLanguage.g:175:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? ) )
-            // InternalLangATestLanguage.g:176:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? )
+            // InternalLangATestLanguage.g:180:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? ) )
+            // InternalLangATestLanguage.g:181:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? )
             {
-            // InternalLangATestLanguage.g:176:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? )
-            // InternalLangATestLanguage.g:177:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
+            // InternalLangATestLanguage.g:181:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? )
+            // InternalLangATestLanguage.g:182:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
             		
-            // InternalLangATestLanguage.g:181:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLangATestLanguage.g:182:4: (lv_name_1_0= RULE_ID )
+            // InternalLangATestLanguage.g:186:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLangATestLanguage.g:187:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLangATestLanguage.g:182:4: (lv_name_1_0= RULE_ID )
-            // InternalLangATestLanguage.g:183:5: lv_name_1_0= RULE_ID
+            // InternalLangATestLanguage.g:187:4: (lv_name_1_0= RULE_ID )
+            // InternalLangATestLanguage.g:188:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
@@ -448,7 +456,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // InternalLangATestLanguage.g:199:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
+            // InternalLangATestLanguage.g:204:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -457,17 +465,17 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt3) {
                 case 1 :
-                    // InternalLangATestLanguage.g:200:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
+                    // InternalLangATestLanguage.g:205:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
                     {
                     otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2_0());
                     			
-                    // InternalLangATestLanguage.g:204:4: ( (otherlv_3= RULE_ID ) )
-                    // InternalLangATestLanguage.g:205:5: (otherlv_3= RULE_ID )
+                    // InternalLangATestLanguage.g:209:4: ( (otherlv_3= RULE_ID ) )
+                    // InternalLangATestLanguage.g:210:5: (otherlv_3= RULE_ID )
                     {
-                    // InternalLangATestLanguage.g:205:5: (otherlv_3= RULE_ID )
-                    // InternalLangATestLanguage.g:206:6: otherlv_3= RULE_ID
+                    // InternalLangATestLanguage.g:210:5: (otherlv_3= RULE_ID )
+                    // InternalLangATestLanguage.g:211:6: otherlv_3= RULE_ID
                     {
 
                     						if (current==null) {
@@ -490,7 +498,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // InternalLangATestLanguage.g:218:3: (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
+            // InternalLangATestLanguage.g:223:3: (otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -499,17 +507,17 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt5) {
                 case 1 :
-                    // InternalLangATestLanguage.g:219:4: otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
+                    // InternalLangATestLanguage.g:224:4: otherlv_4= 'implements' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
                     {
                     otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getTypeAccess().getImplementsKeyword_3_0());
                     			
-                    // InternalLangATestLanguage.g:223:4: ( (otherlv_5= RULE_ID ) )
-                    // InternalLangATestLanguage.g:224:5: (otherlv_5= RULE_ID )
+                    // InternalLangATestLanguage.g:228:4: ( (otherlv_5= RULE_ID ) )
+                    // InternalLangATestLanguage.g:229:5: (otherlv_5= RULE_ID )
                     {
-                    // InternalLangATestLanguage.g:224:5: (otherlv_5= RULE_ID )
-                    // InternalLangATestLanguage.g:225:6: otherlv_5= RULE_ID
+                    // InternalLangATestLanguage.g:229:5: (otherlv_5= RULE_ID )
+                    // InternalLangATestLanguage.g:230:6: otherlv_5= RULE_ID
                     {
 
                     						if (current==null) {
@@ -526,7 +534,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
                     }
 
-                    // InternalLangATestLanguage.g:236:4: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
+                    // InternalLangATestLanguage.g:241:4: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -539,17 +547,17 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalLangATestLanguage.g:237:5: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
+                    	    // InternalLangATestLanguage.g:242:5: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
                     	    {
                     	    otherlv_6=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                     	    					newLeafNode(otherlv_6, grammarAccess.getTypeAccess().getCommaKeyword_3_2_0());
                     	    				
-                    	    // InternalLangATestLanguage.g:241:5: ( (otherlv_7= RULE_ID ) )
-                    	    // InternalLangATestLanguage.g:242:6: (otherlv_7= RULE_ID )
+                    	    // InternalLangATestLanguage.g:246:5: ( (otherlv_7= RULE_ID ) )
+                    	    // InternalLangATestLanguage.g:247:6: (otherlv_7= RULE_ID )
                     	    {
-                    	    // InternalLangATestLanguage.g:242:6: (otherlv_7= RULE_ID )
-                    	    // InternalLangATestLanguage.g:243:7: otherlv_7= RULE_ID
+                    	    // InternalLangATestLanguage.g:247:6: (otherlv_7= RULE_ID )
+                    	    // InternalLangATestLanguage.g:248:7: otherlv_7= RULE_ID
                     	    {
 
                     	    							if (current==null) {

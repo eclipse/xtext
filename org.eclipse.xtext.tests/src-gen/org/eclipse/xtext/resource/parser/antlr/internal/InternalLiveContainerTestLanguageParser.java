@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalLiveContainerTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -72,7 +80,7 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalLiveContainerTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalLiveContainerTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +88,8 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalLiveContainerTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalLiveContainerTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalLiveContainerTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalLiveContainerTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -108,7 +116,7 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalLiveContainerTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalLiveContainerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -118,14 +126,14 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalLiveContainerTestLanguage.g:77:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalLiveContainerTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:82:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalLiveContainerTestLanguage.g:83:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalLiveContainerTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalLiveContainerTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:83:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:84:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalLiveContainerTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
-            // InternalLiveContainerTestLanguage.g:80:4: lv_name_0_0= RULE_ID
+            // InternalLiveContainerTestLanguage.g:84:3: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:85:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 

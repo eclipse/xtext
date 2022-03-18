@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -74,7 +82,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug299237TestLanguageParser.g:57:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug299237TestLanguageParser.g:62:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +90,8 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug299237TestLanguageParser.g:57:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug299237TestLanguageParser.g:58:2: iv_ruleModel= ruleModel EOF
+            // InternalBug299237TestLanguageParser.g:62:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug299237TestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -110,7 +118,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug299237TestLanguageParser.g:64:1: ruleModel returns [EObject current=null] : (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) ;
+    // InternalBug299237TestLanguageParser.g:69:1: ruleModel returns [EObject current=null] : (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,21 +130,21 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug299237TestLanguageParser.g:70:2: ( (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) )
-            // InternalBug299237TestLanguageParser.g:71:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
+            // InternalBug299237TestLanguageParser.g:75:2: ( (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) )
+            // InternalBug299237TestLanguageParser.g:76:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
             {
-            // InternalBug299237TestLanguageParser.g:71:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
-            // InternalBug299237TestLanguageParser.g:72:3: otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon
+            // InternalBug299237TestLanguageParser.g:76:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
+            // InternalBug299237TestLanguageParser.g:77:3: otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon
             {
             otherlv_0=(Token)match(input,Model,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
             		
-            // InternalBug299237TestLanguageParser.g:76:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalBug299237TestLanguageParser.g:77:4: (lv_name_1_0= RULE_ID )
+            // InternalBug299237TestLanguageParser.g:81:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalBug299237TestLanguageParser.g:82:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalBug299237TestLanguageParser.g:77:4: (lv_name_1_0= RULE_ID )
-            // InternalBug299237TestLanguageParser.g:78:5: lv_name_1_0= RULE_ID
+            // InternalBug299237TestLanguageParser.g:82:4: (lv_name_1_0= RULE_ID )
+            // InternalBug299237TestLanguageParser.g:83:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 

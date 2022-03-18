@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -73,7 +81,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBaseInheritanceTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBaseInheritanceTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +89,8 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalBaseInheritanceTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBaseInheritanceTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalBaseInheritanceTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBaseInheritanceTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,7 +117,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleModel"
-    // InternalBaseInheritanceTestLanguage.g:71:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalBaseInheritanceTestLanguage.g:76:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -120,21 +128,21 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalBaseInheritanceTestLanguage.g:77:2: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalBaseInheritanceTestLanguage.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalBaseInheritanceTestLanguage.g:82:2: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalBaseInheritanceTestLanguage.g:83:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalBaseInheritanceTestLanguage.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalBaseInheritanceTestLanguage.g:79:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
+            // InternalBaseInheritanceTestLanguage.g:83:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalBaseInheritanceTestLanguage.g:84:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
             		
-            // InternalBaseInheritanceTestLanguage.g:83:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalBaseInheritanceTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalBaseInheritanceTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalBaseInheritanceTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalBaseInheritanceTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
-            // InternalBaseInheritanceTestLanguage.g:85:5: lv_name_1_0= RULE_ID
+            // InternalBaseInheritanceTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // InternalBaseInheritanceTestLanguage.g:90:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 

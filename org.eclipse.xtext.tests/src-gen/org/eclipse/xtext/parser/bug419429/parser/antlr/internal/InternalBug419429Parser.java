@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug419429Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -72,7 +80,7 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEReference"
-    // InternalBug419429.g:64:1: entryRuleEReference returns [EObject current=null] : iv_ruleEReference= ruleEReference EOF ;
+    // InternalBug419429.g:69:1: entryRuleEReference returns [EObject current=null] : iv_ruleEReference= ruleEReference EOF ;
     public final EObject entryRuleEReference() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +88,8 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug419429.g:64:51: (iv_ruleEReference= ruleEReference EOF )
-            // InternalBug419429.g:65:2: iv_ruleEReference= ruleEReference EOF
+            // InternalBug419429.g:69:51: (iv_ruleEReference= ruleEReference EOF )
+            // InternalBug419429.g:70:2: iv_ruleEReference= ruleEReference EOF
             {
              newCompositeNode(grammarAccess.getEReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -108,7 +116,7 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEReference"
-    // InternalBug419429.g:71:1: ruleEReference returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // InternalBug419429.g:76:1: ruleEReference returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleEReference() throws RecognitionException {
         EObject current = null;
 
@@ -118,14 +126,14 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug419429.g:77:2: ( ( (otherlv_0= RULE_ID ) ) )
-            // InternalBug419429.g:78:2: ( (otherlv_0= RULE_ID ) )
+            // InternalBug419429.g:82:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalBug419429.g:83:2: ( (otherlv_0= RULE_ID ) )
             {
-            // InternalBug419429.g:78:2: ( (otherlv_0= RULE_ID ) )
-            // InternalBug419429.g:79:3: (otherlv_0= RULE_ID )
+            // InternalBug419429.g:83:2: ( (otherlv_0= RULE_ID ) )
+            // InternalBug419429.g:84:3: (otherlv_0= RULE_ID )
             {
-            // InternalBug419429.g:79:3: (otherlv_0= RULE_ID )
-            // InternalBug419429.g:80:4: otherlv_0= RULE_ID
+            // InternalBug419429.g:84:3: (otherlv_0= RULE_ID )
+            // InternalBug419429.g:85:4: otherlv_0= RULE_ID
             {
 
             				if (current==null) {

@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug250313Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -84,7 +92,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug250313.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug250313.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -92,8 +100,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug250313.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalBug250313.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug250313.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -120,7 +128,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug250313.g:71:1: ruleModel returns [EObject current=null] : ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) ) ;
+    // InternalBug250313.g:76:1: ruleModel returns [EObject current=null] : ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -164,10 +172,10 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:77:2: ( ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) ) )
-            // InternalBug250313.g:78:2: ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) )
+            // InternalBug250313.g:82:2: ( ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) ) )
+            // InternalBug250313.g:83:2: ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) )
             {
-            // InternalBug250313.g:78:2: ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) )
+            // InternalBug250313.g:83:2: ( ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) ) | (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) ) | (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) ) )
             int alt4=9;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -227,12 +235,12 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
             switch (alt4) {
                 case 1 :
-                    // InternalBug250313.g:79:3: ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) )
+                    // InternalBug250313.g:84:3: ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) )
                     {
-                    // InternalBug250313.g:79:3: ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) )
-                    // InternalBug250313.g:80:4: (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) )
+                    // InternalBug250313.g:84:3: ( (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) )
+                    // InternalBug250313.g:85:4: (otherlv_0= '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) )
                     {
-                    // InternalBug250313.g:80:4: (otherlv_0= '1' )?
+                    // InternalBug250313.g:85:4: (otherlv_0= '1' )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -241,7 +249,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     switch (alt1) {
                         case 1 :
-                            // InternalBug250313.g:81:5: otherlv_0= '1'
+                            // InternalBug250313.g:86:5: otherlv_0= '1'
                             {
                             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
@@ -253,13 +261,13 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalBug250313.g:86:4: ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) )
-                    // InternalBug250313.g:87:5: ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) )
+                    // InternalBug250313.g:91:4: ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) )
+                    // InternalBug250313.g:92:5: ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) )
                     {
-                    // InternalBug250313.g:87:5: ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) )
-                    // InternalBug250313.g:88:6: (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID )
+                    // InternalBug250313.g:92:5: ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) )
+                    // InternalBug250313.g:93:6: (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID )
                     {
-                    // InternalBug250313.g:88:6: (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID )
+                    // InternalBug250313.g:93:6: (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID )
                     int alt2=5;
                     switch ( input.LA(1) ) {
                     case 12:
@@ -308,7 +316,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
                     switch (alt2) {
                         case 1 :
-                            // InternalBug250313.g:89:7: lv_value_1_1= 'mykeyword1'
+                            // InternalBug250313.g:94:7: lv_value_1_1= 'mykeyword1'
                             {
                             lv_value_1_1=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
@@ -324,7 +332,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalBug250313.g:100:7: lv_value_1_2= RULE_STRING
+                            // InternalBug250313.g:105:7: lv_value_1_2= RULE_STRING
                             {
                             lv_value_1_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -344,7 +352,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalBug250313.g:115:7: lv_value_1_3= ruleNestedDatatype
+                            // InternalBug250313.g:120:7: lv_value_1_3= ruleNestedDatatype
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_0_1_0_2());
@@ -369,7 +377,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalBug250313.g:131:7: lv_value_1_4= ruleDatatype
+                            // InternalBug250313.g:136:7: lv_value_1_4= ruleDatatype
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_0_1_0_3());
@@ -394,7 +402,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalBug250313.g:147:7: lv_value_1_5= RULE_ID
+                            // InternalBug250313.g:152:7: lv_value_1_5= RULE_ID
                             {
                             lv_value_1_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -429,22 +437,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBug250313.g:166:3: (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) )
+                    // InternalBug250313.g:171:3: (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) )
                     {
-                    // InternalBug250313.g:166:3: (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) )
-                    // InternalBug250313.g:167:4: otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) )
+                    // InternalBug250313.g:171:3: (otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) )
+                    // InternalBug250313.g:172:4: otherlv_2= '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) )
                     {
                     otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDigitOnePlusSignKeyword_1_0());
                     			
-                    // InternalBug250313.g:171:4: ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) )
-                    // InternalBug250313.g:172:5: ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) )
+                    // InternalBug250313.g:176:4: ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) )
+                    // InternalBug250313.g:177:5: ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) )
                     {
-                    // InternalBug250313.g:172:5: ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) )
-                    // InternalBug250313.g:173:6: (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID )
+                    // InternalBug250313.g:177:5: ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) )
+                    // InternalBug250313.g:178:6: (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID )
                     {
-                    // InternalBug250313.g:173:6: (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID )
+                    // InternalBug250313.g:178:6: (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID )
                     int alt3=5;
                     switch ( input.LA(1) ) {
                     case 12:
@@ -493,7 +501,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
                     switch (alt3) {
                         case 1 :
-                            // InternalBug250313.g:174:7: lv_multiValue_3_1= 'mykeyword1'
+                            // InternalBug250313.g:179:7: lv_multiValue_3_1= 'mykeyword1'
                             {
                             lv_multiValue_3_1=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
@@ -509,7 +517,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalBug250313.g:185:7: lv_multiValue_3_2= RULE_STRING
+                            // InternalBug250313.g:190:7: lv_multiValue_3_2= RULE_STRING
                             {
                             lv_multiValue_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -529,7 +537,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalBug250313.g:200:7: lv_multiValue_3_3= ruleNestedDatatype
+                            // InternalBug250313.g:205:7: lv_multiValue_3_3= ruleNestedDatatype
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_1_1_0_2());
@@ -554,7 +562,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalBug250313.g:216:7: lv_multiValue_3_4= ruleDatatype
+                            // InternalBug250313.g:221:7: lv_multiValue_3_4= ruleDatatype
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_1_1_0_3());
@@ -579,7 +587,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalBug250313.g:232:7: lv_multiValue_3_5= RULE_ID
+                            // InternalBug250313.g:237:7: lv_multiValue_3_5= RULE_ID
                             {
                             lv_multiValue_3_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -614,20 +622,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalBug250313.g:251:3: (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalBug250313.g:256:3: (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // InternalBug250313.g:251:3: (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // InternalBug250313.g:252:4: otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalBug250313.g:256:3: (otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalBug250313.g:257:4: otherlv_4= '2' ( (lv_value_5_0= RULE_STRING ) )
                     {
                     otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDigitTwoKeyword_2_0());
                     			
-                    // InternalBug250313.g:256:4: ( (lv_value_5_0= RULE_STRING ) )
-                    // InternalBug250313.g:257:5: (lv_value_5_0= RULE_STRING )
+                    // InternalBug250313.g:261:4: ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalBug250313.g:262:5: (lv_value_5_0= RULE_STRING )
                     {
-                    // InternalBug250313.g:257:5: (lv_value_5_0= RULE_STRING )
-                    // InternalBug250313.g:258:6: lv_value_5_0= RULE_STRING
+                    // InternalBug250313.g:262:5: (lv_value_5_0= RULE_STRING )
+                    // InternalBug250313.g:263:6: lv_value_5_0= RULE_STRING
                     {
                     lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -656,20 +664,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalBug250313.g:276:3: (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) )
+                    // InternalBug250313.g:281:3: (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) )
                     {
-                    // InternalBug250313.g:276:3: (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) )
-                    // InternalBug250313.g:277:4: otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) )
+                    // InternalBug250313.g:281:3: (otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) )
+                    // InternalBug250313.g:282:4: otherlv_6= '2+' ( (lv_multiValue_7_0= RULE_STRING ) )
                     {
                     otherlv_6=(Token)match(input,15,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_6, grammarAccess.getModelAccess().getDigitTwoPlusSignKeyword_3_0());
                     			
-                    // InternalBug250313.g:281:4: ( (lv_multiValue_7_0= RULE_STRING ) )
-                    // InternalBug250313.g:282:5: (lv_multiValue_7_0= RULE_STRING )
+                    // InternalBug250313.g:286:4: ( (lv_multiValue_7_0= RULE_STRING ) )
+                    // InternalBug250313.g:287:5: (lv_multiValue_7_0= RULE_STRING )
                     {
-                    // InternalBug250313.g:282:5: (lv_multiValue_7_0= RULE_STRING )
-                    // InternalBug250313.g:283:6: lv_multiValue_7_0= RULE_STRING
+                    // InternalBug250313.g:287:5: (lv_multiValue_7_0= RULE_STRING )
+                    // InternalBug250313.g:288:6: lv_multiValue_7_0= RULE_STRING
                     {
                     lv_multiValue_7_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -698,20 +706,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalBug250313.g:301:3: (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) )
+                    // InternalBug250313.g:306:3: (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) )
                     {
-                    // InternalBug250313.g:301:3: (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) )
-                    // InternalBug250313.g:302:4: otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) )
+                    // InternalBug250313.g:306:3: (otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) ) )
+                    // InternalBug250313.g:307:4: otherlv_8= '3' ( (lv_value_9_0= ruleDatatype ) )
                     {
                     otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_8, grammarAccess.getModelAccess().getDigitThreeKeyword_4_0());
                     			
-                    // InternalBug250313.g:306:4: ( (lv_value_9_0= ruleDatatype ) )
-                    // InternalBug250313.g:307:5: (lv_value_9_0= ruleDatatype )
+                    // InternalBug250313.g:311:4: ( (lv_value_9_0= ruleDatatype ) )
+                    // InternalBug250313.g:312:5: (lv_value_9_0= ruleDatatype )
                     {
-                    // InternalBug250313.g:307:5: (lv_value_9_0= ruleDatatype )
-                    // InternalBug250313.g:308:6: lv_value_9_0= ruleDatatype
+                    // InternalBug250313.g:312:5: (lv_value_9_0= ruleDatatype )
+                    // InternalBug250313.g:313:6: lv_value_9_0= ruleDatatype
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_4_1_0());
@@ -745,20 +753,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalBug250313.g:327:3: (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) )
+                    // InternalBug250313.g:332:3: (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) )
                     {
-                    // InternalBug250313.g:327:3: (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) )
-                    // InternalBug250313.g:328:4: otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) )
+                    // InternalBug250313.g:332:3: (otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) )
+                    // InternalBug250313.g:333:4: otherlv_10= '3+' ( (lv_multiValue_11_0= ruleDatatype ) )
                     {
                     otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_10, grammarAccess.getModelAccess().getDigitThreePlusSignKeyword_5_0());
                     			
-                    // InternalBug250313.g:332:4: ( (lv_multiValue_11_0= ruleDatatype ) )
-                    // InternalBug250313.g:333:5: (lv_multiValue_11_0= ruleDatatype )
+                    // InternalBug250313.g:337:4: ( (lv_multiValue_11_0= ruleDatatype ) )
+                    // InternalBug250313.g:338:5: (lv_multiValue_11_0= ruleDatatype )
                     {
-                    // InternalBug250313.g:333:5: (lv_multiValue_11_0= ruleDatatype )
-                    // InternalBug250313.g:334:6: lv_multiValue_11_0= ruleDatatype
+                    // InternalBug250313.g:338:5: (lv_multiValue_11_0= ruleDatatype )
+                    // InternalBug250313.g:339:6: lv_multiValue_11_0= ruleDatatype
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_5_1_0());
@@ -792,20 +800,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // InternalBug250313.g:353:3: (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) )
+                    // InternalBug250313.g:358:3: (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) )
                     {
-                    // InternalBug250313.g:353:3: (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) )
-                    // InternalBug250313.g:354:4: otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) )
+                    // InternalBug250313.g:358:3: (otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) ) )
+                    // InternalBug250313.g:359:4: otherlv_12= '4' ( (lv_value_13_0= ruleNestedDatatype ) )
                     {
                     otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_12, grammarAccess.getModelAccess().getDigitFourKeyword_6_0());
                     			
-                    // InternalBug250313.g:358:4: ( (lv_value_13_0= ruleNestedDatatype ) )
-                    // InternalBug250313.g:359:5: (lv_value_13_0= ruleNestedDatatype )
+                    // InternalBug250313.g:363:4: ( (lv_value_13_0= ruleNestedDatatype ) )
+                    // InternalBug250313.g:364:5: (lv_value_13_0= ruleNestedDatatype )
                     {
-                    // InternalBug250313.g:359:5: (lv_value_13_0= ruleNestedDatatype )
-                    // InternalBug250313.g:360:6: lv_value_13_0= ruleNestedDatatype
+                    // InternalBug250313.g:364:5: (lv_value_13_0= ruleNestedDatatype )
+                    // InternalBug250313.g:365:6: lv_value_13_0= ruleNestedDatatype
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_6_1_0());
@@ -839,20 +847,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // InternalBug250313.g:379:3: (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) )
+                    // InternalBug250313.g:384:3: (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) )
                     {
-                    // InternalBug250313.g:379:3: (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) )
-                    // InternalBug250313.g:380:4: otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) )
+                    // InternalBug250313.g:384:3: (otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) )
+                    // InternalBug250313.g:385:4: otherlv_14= '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) )
                     {
                     otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_14, grammarAccess.getModelAccess().getDigitFourPlusSignKeyword_7_0());
                     			
-                    // InternalBug250313.g:384:4: ( (lv_multiValue_15_0= ruleNestedDatatype ) )
-                    // InternalBug250313.g:385:5: (lv_multiValue_15_0= ruleNestedDatatype )
+                    // InternalBug250313.g:389:4: ( (lv_multiValue_15_0= ruleNestedDatatype ) )
+                    // InternalBug250313.g:390:5: (lv_multiValue_15_0= ruleNestedDatatype )
                     {
-                    // InternalBug250313.g:385:5: (lv_multiValue_15_0= ruleNestedDatatype )
-                    // InternalBug250313.g:386:6: lv_multiValue_15_0= ruleNestedDatatype
+                    // InternalBug250313.g:390:5: (lv_multiValue_15_0= ruleNestedDatatype )
+                    // InternalBug250313.g:391:6: lv_multiValue_15_0= ruleNestedDatatype
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_7_1_0());
@@ -886,20 +894,20 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // InternalBug250313.g:405:3: (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) )
+                    // InternalBug250313.g:410:3: (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) )
                     {
-                    // InternalBug250313.g:405:3: (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) )
-                    // InternalBug250313.g:406:4: otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) )
+                    // InternalBug250313.g:410:3: (otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) ) )
+                    // InternalBug250313.g:411:4: otherlv_16= 'content' ( (lv_children_17_0= ruleChild ) )
                     {
                     otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_16, grammarAccess.getModelAccess().getContentKeyword_8_0());
                     			
-                    // InternalBug250313.g:410:4: ( (lv_children_17_0= ruleChild ) )
-                    // InternalBug250313.g:411:5: (lv_children_17_0= ruleChild )
+                    // InternalBug250313.g:415:4: ( (lv_children_17_0= ruleChild ) )
+                    // InternalBug250313.g:416:5: (lv_children_17_0= ruleChild )
                     {
-                    // InternalBug250313.g:411:5: (lv_children_17_0= ruleChild )
-                    // InternalBug250313.g:412:6: lv_children_17_0= ruleChild
+                    // InternalBug250313.g:416:5: (lv_children_17_0= ruleChild )
+                    // InternalBug250313.g:417:6: lv_children_17_0= ruleChild
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getChildrenChildParserRuleCall_8_1_0());
@@ -955,7 +963,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDatatype"
-    // InternalBug250313.g:434:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
+    // InternalBug250313.g:439:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
     public final String entryRuleDatatype() throws RecognitionException {
         String current = null;
 
@@ -963,8 +971,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:434:48: (iv_ruleDatatype= ruleDatatype EOF )
-            // InternalBug250313.g:435:2: iv_ruleDatatype= ruleDatatype EOF
+            // InternalBug250313.g:439:48: (iv_ruleDatatype= ruleDatatype EOF )
+            // InternalBug250313.g:440:2: iv_ruleDatatype= ruleDatatype EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -991,7 +999,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDatatype"
-    // InternalBug250313.g:441:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID ) ;
+    // InternalBug250313.g:446:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1003,11 +1011,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:447:2: ( (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID ) )
-            // InternalBug250313.g:448:2: (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID )
+            // InternalBug250313.g:452:2: ( (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID ) )
+            // InternalBug250313.g:453:2: (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID )
             {
-            // InternalBug250313.g:448:2: (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID )
-            // InternalBug250313.g:449:3: this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID
+            // InternalBug250313.g:453:2: (this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID )
+            // InternalBug250313.g:454:3: this_ID_0= RULE_ID kw= '-' this_ID_2= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
@@ -1051,7 +1059,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNestedDatatype"
-    // InternalBug250313.g:472:1: entryRuleNestedDatatype returns [String current=null] : iv_ruleNestedDatatype= ruleNestedDatatype EOF ;
+    // InternalBug250313.g:477:1: entryRuleNestedDatatype returns [String current=null] : iv_ruleNestedDatatype= ruleNestedDatatype EOF ;
     public final String entryRuleNestedDatatype() throws RecognitionException {
         String current = null;
 
@@ -1059,8 +1067,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:472:54: (iv_ruleNestedDatatype= ruleNestedDatatype EOF )
-            // InternalBug250313.g:473:2: iv_ruleNestedDatatype= ruleNestedDatatype EOF
+            // InternalBug250313.g:477:54: (iv_ruleNestedDatatype= ruleNestedDatatype EOF )
+            // InternalBug250313.g:478:2: iv_ruleNestedDatatype= ruleNestedDatatype EOF
             {
              newCompositeNode(grammarAccess.getNestedDatatypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1087,7 +1095,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNestedDatatype"
-    // InternalBug250313.g:479:1: ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? ) ;
+    // InternalBug250313.g:484:1: ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? ) ;
     public final AntlrDatatypeRuleToken ruleNestedDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1100,11 +1108,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:485:2: ( (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? ) )
-            // InternalBug250313.g:486:2: (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? )
+            // InternalBug250313.g:490:2: ( (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? ) )
+            // InternalBug250313.g:491:2: (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? )
             {
-            // InternalBug250313.g:486:2: (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? )
-            // InternalBug250313.g:487:3: this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )?
+            // InternalBug250313.g:491:2: (this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )? )
+            // InternalBug250313.g:492:3: this_ID_0= RULE_ID kw= '+' (this_Datatype_2= ruleDatatype )?
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -1118,7 +1126,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             			current.merge(kw);
             			newLeafNode(kw, grammarAccess.getNestedDatatypeAccess().getPlusSignKeyword_1());
             		
-            // InternalBug250313.g:499:3: (this_Datatype_2= ruleDatatype )?
+            // InternalBug250313.g:504:3: (this_Datatype_2= ruleDatatype )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1127,7 +1135,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalBug250313.g:500:4: this_Datatype_2= ruleDatatype
+                    // InternalBug250313.g:505:4: this_Datatype_2= ruleDatatype
                     {
 
                     				newCompositeNode(grammarAccess.getNestedDatatypeAccess().getDatatypeParserRuleCall_2());
@@ -1172,7 +1180,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleChild"
-    // InternalBug250313.g:515:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
+    // InternalBug250313.g:520:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
     public final EObject entryRuleChild() throws RecognitionException {
         EObject current = null;
 
@@ -1180,8 +1188,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:515:46: (iv_ruleChild= ruleChild EOF )
-            // InternalBug250313.g:516:2: iv_ruleChild= ruleChild EOF
+            // InternalBug250313.g:520:46: (iv_ruleChild= ruleChild EOF )
+            // InternalBug250313.g:521:2: iv_ruleChild= ruleChild EOF
             {
              newCompositeNode(grammarAccess.getChildRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1208,7 +1216,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleChild"
-    // InternalBug250313.g:522:1: ruleChild returns [EObject current=null] : (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) ;
+    // InternalBug250313.g:527:1: ruleChild returns [EObject current=null] : (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) ;
     public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
@@ -1221,10 +1229,10 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:528:2: ( (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) )
-            // InternalBug250313.g:529:2: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
+            // InternalBug250313.g:533:2: ( (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) )
+            // InternalBug250313.g:534:2: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
             {
-            // InternalBug250313.g:529:2: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
+            // InternalBug250313.g:534:2: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1242,7 +1250,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBug250313.g:530:3: this_Child1_0= ruleChild1
+                    // InternalBug250313.g:535:3: this_Child1_0= ruleChild1
                     {
 
                     			newCompositeNode(grammarAccess.getChildAccess().getChild1ParserRuleCall_0());
@@ -1260,7 +1268,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBug250313.g:539:3: this_Child2_1= ruleChild2
+                    // InternalBug250313.g:544:3: this_Child2_1= ruleChild2
                     {
 
                     			newCompositeNode(grammarAccess.getChildAccess().getChild2ParserRuleCall_1());
@@ -1300,7 +1308,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleChild1"
-    // InternalBug250313.g:551:1: entryRuleChild1 returns [EObject current=null] : iv_ruleChild1= ruleChild1 EOF ;
+    // InternalBug250313.g:556:1: entryRuleChild1 returns [EObject current=null] : iv_ruleChild1= ruleChild1 EOF ;
     public final EObject entryRuleChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1308,8 +1316,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:551:47: (iv_ruleChild1= ruleChild1 EOF )
-            // InternalBug250313.g:552:2: iv_ruleChild1= ruleChild1 EOF
+            // InternalBug250313.g:556:47: (iv_ruleChild1= ruleChild1 EOF )
+            // InternalBug250313.g:557:2: iv_ruleChild1= ruleChild1 EOF
             {
              newCompositeNode(grammarAccess.getChild1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1336,7 +1344,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleChild1"
-    // InternalBug250313.g:558:1: ruleChild1 returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalBug250313.g:563:1: ruleChild1 returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1346,14 +1354,14 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:564:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalBug250313.g:565:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBug250313.g:569:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalBug250313.g:570:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalBug250313.g:565:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalBug250313.g:566:3: (lv_name_0_0= RULE_ID )
+            // InternalBug250313.g:570:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBug250313.g:571:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalBug250313.g:566:3: (lv_name_0_0= RULE_ID )
-            // InternalBug250313.g:567:4: lv_name_0_0= RULE_ID
+            // InternalBug250313.g:571:3: (lv_name_0_0= RULE_ID )
+            // InternalBug250313.g:572:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1395,7 +1403,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleChild2"
-    // InternalBug250313.g:586:1: entryRuleChild2 returns [EObject current=null] : iv_ruleChild2= ruleChild2 EOF ;
+    // InternalBug250313.g:591:1: entryRuleChild2 returns [EObject current=null] : iv_ruleChild2= ruleChild2 EOF ;
     public final EObject entryRuleChild2() throws RecognitionException {
         EObject current = null;
 
@@ -1403,8 +1411,8 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug250313.g:586:47: (iv_ruleChild2= ruleChild2 EOF )
-            // InternalBug250313.g:587:2: iv_ruleChild2= ruleChild2 EOF
+            // InternalBug250313.g:591:47: (iv_ruleChild2= ruleChild2 EOF )
+            // InternalBug250313.g:592:2: iv_ruleChild2= ruleChild2 EOF
             {
              newCompositeNode(grammarAccess.getChild2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1431,7 +1439,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleChild2"
-    // InternalBug250313.g:593:1: ruleChild2 returns [EObject current=null] : ( (lv_name_0_0= RULE_STRING ) ) ;
+    // InternalBug250313.g:598:1: ruleChild2 returns [EObject current=null] : ( (lv_name_0_0= RULE_STRING ) ) ;
     public final EObject ruleChild2() throws RecognitionException {
         EObject current = null;
 
@@ -1441,14 +1449,14 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBug250313.g:599:2: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // InternalBug250313.g:600:2: ( (lv_name_0_0= RULE_STRING ) )
+            // InternalBug250313.g:604:2: ( ( (lv_name_0_0= RULE_STRING ) ) )
+            // InternalBug250313.g:605:2: ( (lv_name_0_0= RULE_STRING ) )
             {
-            // InternalBug250313.g:600:2: ( (lv_name_0_0= RULE_STRING ) )
-            // InternalBug250313.g:601:3: (lv_name_0_0= RULE_STRING )
+            // InternalBug250313.g:605:2: ( (lv_name_0_0= RULE_STRING ) )
+            // InternalBug250313.g:606:3: (lv_name_0_0= RULE_STRING )
             {
-            // InternalBug250313.g:601:3: (lv_name_0_0= RULE_STRING )
-            // InternalBug250313.g:602:4: lv_name_0_0= RULE_STRING
+            // InternalBug250313.g:606:3: (lv_name_0_0= RULE_STRING )
+            // InternalBug250313.g:607:4: lv_name_0_0= RULE_STRING
             {
             lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 

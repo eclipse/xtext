@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -84,7 +92,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleCompositeModel"
-    // InternalDatatypeRulesTestLanguage.g:64:1: entryRuleCompositeModel returns [EObject current=null] : iv_ruleCompositeModel= ruleCompositeModel EOF ;
+    // InternalDatatypeRulesTestLanguage.g:69:1: entryRuleCompositeModel returns [EObject current=null] : iv_ruleCompositeModel= ruleCompositeModel EOF ;
     public final EObject entryRuleCompositeModel() throws RecognitionException {
         EObject current = null;
 
@@ -92,8 +100,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:64:55: (iv_ruleCompositeModel= ruleCompositeModel EOF )
-            // InternalDatatypeRulesTestLanguage.g:65:2: iv_ruleCompositeModel= ruleCompositeModel EOF
+            // InternalDatatypeRulesTestLanguage.g:69:55: (iv_ruleCompositeModel= ruleCompositeModel EOF )
+            // InternalDatatypeRulesTestLanguage.g:70:2: iv_ruleCompositeModel= ruleCompositeModel EOF
             {
              newCompositeNode(grammarAccess.getCompositeModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -120,7 +128,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleCompositeModel"
-    // InternalDatatypeRulesTestLanguage.g:71:1: ruleCompositeModel returns [EObject current=null] : ( (lv_model_0_0= ruleModel ) )+ ;
+    // InternalDatatypeRulesTestLanguage.g:76:1: ruleCompositeModel returns [EObject current=null] : ( (lv_model_0_0= ruleModel ) )+ ;
     public final EObject ruleCompositeModel() throws RecognitionException {
         EObject current = null;
 
@@ -131,10 +139,10 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:77:2: ( ( (lv_model_0_0= ruleModel ) )+ )
-            // InternalDatatypeRulesTestLanguage.g:78:2: ( (lv_model_0_0= ruleModel ) )+
+            // InternalDatatypeRulesTestLanguage.g:82:2: ( ( (lv_model_0_0= ruleModel ) )+ )
+            // InternalDatatypeRulesTestLanguage.g:83:2: ( (lv_model_0_0= ruleModel ) )+
             {
-            // InternalDatatypeRulesTestLanguage.g:78:2: ( (lv_model_0_0= ruleModel ) )+
+            // InternalDatatypeRulesTestLanguage.g:83:2: ( (lv_model_0_0= ruleModel ) )+
             int cnt1=0;
             loop1:
             do {
@@ -148,10 +156,10 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalDatatypeRulesTestLanguage.g:79:3: (lv_model_0_0= ruleModel )
+            	    // InternalDatatypeRulesTestLanguage.g:84:3: (lv_model_0_0= ruleModel )
             	    {
-            	    // InternalDatatypeRulesTestLanguage.g:79:3: (lv_model_0_0= ruleModel )
-            	    // InternalDatatypeRulesTestLanguage.g:80:4: lv_model_0_0= ruleModel
+            	    // InternalDatatypeRulesTestLanguage.g:84:3: (lv_model_0_0= ruleModel )
+            	    // InternalDatatypeRulesTestLanguage.g:85:4: lv_model_0_0= ruleModel
             	    {
 
             	    				newCompositeNode(grammarAccess.getCompositeModelAccess().getModelModelParserRuleCall_0());
@@ -208,7 +216,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalDatatypeRulesTestLanguage.g:100:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalDatatypeRulesTestLanguage.g:105:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -216,8 +224,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:100:46: (iv_ruleModel= ruleModel EOF )
-            // InternalDatatypeRulesTestLanguage.g:101:2: iv_ruleModel= ruleModel EOF
+            // InternalDatatypeRulesTestLanguage.g:105:46: (iv_ruleModel= ruleModel EOF )
+            // InternalDatatypeRulesTestLanguage.g:106:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -244,7 +252,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalDatatypeRulesTestLanguage.g:107:1: ruleModel returns [EObject current=null] : ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' ) ;
+    // InternalDatatypeRulesTestLanguage.g:112:1: ruleModel returns [EObject current=null] : ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -268,17 +276,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:113:2: ( ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' ) )
-            // InternalDatatypeRulesTestLanguage.g:114:2: ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' )
+            // InternalDatatypeRulesTestLanguage.g:118:2: ( ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' ) )
+            // InternalDatatypeRulesTestLanguage.g:119:2: ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' )
             {
-            // InternalDatatypeRulesTestLanguage.g:114:2: ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' )
-            // InternalDatatypeRulesTestLanguage.g:115:3: ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';'
+            // InternalDatatypeRulesTestLanguage.g:119:2: ( ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';' )
+            // InternalDatatypeRulesTestLanguage.g:120:3: ( (lv_id_0_0= ruleNestedModelId ) ) (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )? (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )? (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )? (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )? otherlv_9= ';'
             {
-            // InternalDatatypeRulesTestLanguage.g:115:3: ( (lv_id_0_0= ruleNestedModelId ) )
-            // InternalDatatypeRulesTestLanguage.g:116:4: (lv_id_0_0= ruleNestedModelId )
+            // InternalDatatypeRulesTestLanguage.g:120:3: ( (lv_id_0_0= ruleNestedModelId ) )
+            // InternalDatatypeRulesTestLanguage.g:121:4: (lv_id_0_0= ruleNestedModelId )
             {
-            // InternalDatatypeRulesTestLanguage.g:116:4: (lv_id_0_0= ruleNestedModelId )
-            // InternalDatatypeRulesTestLanguage.g:117:5: lv_id_0_0= ruleNestedModelId
+            // InternalDatatypeRulesTestLanguage.g:121:4: (lv_id_0_0= ruleNestedModelId )
+            // InternalDatatypeRulesTestLanguage.g:122:5: lv_id_0_0= ruleNestedModelId
             {
 
             					newCompositeNode(grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0());
@@ -305,7 +313,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalDatatypeRulesTestLanguage.g:134:3: (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )?
+            // InternalDatatypeRulesTestLanguage.g:139:3: (otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -314,17 +322,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt2) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:135:4: otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) )
+                    // InternalDatatypeRulesTestLanguage.g:140:4: otherlv_1= ':' ( (lv_value_2_0= ruleFraction ) )
                     {
                     otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getModelAccess().getColonKeyword_1_0());
                     			
-                    // InternalDatatypeRulesTestLanguage.g:139:4: ( (lv_value_2_0= ruleFraction ) )
-                    // InternalDatatypeRulesTestLanguage.g:140:5: (lv_value_2_0= ruleFraction )
+                    // InternalDatatypeRulesTestLanguage.g:144:4: ( (lv_value_2_0= ruleFraction ) )
+                    // InternalDatatypeRulesTestLanguage.g:145:5: (lv_value_2_0= ruleFraction )
                     {
-                    // InternalDatatypeRulesTestLanguage.g:140:5: (lv_value_2_0= ruleFraction )
-                    // InternalDatatypeRulesTestLanguage.g:141:6: lv_value_2_0= ruleFraction
+                    // InternalDatatypeRulesTestLanguage.g:145:5: (lv_value_2_0= ruleFraction )
+                    // InternalDatatypeRulesTestLanguage.g:146:6: lv_value_2_0= ruleFraction
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0());
@@ -357,7 +365,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalDatatypeRulesTestLanguage.g:159:3: (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )?
+            // InternalDatatypeRulesTestLanguage.g:164:3: (otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -366,17 +374,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt3) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:160:4: otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) )
+                    // InternalDatatypeRulesTestLanguage.g:165:4: otherlv_3= '#' ( (lv_vector_4_0= ruleVector ) )
                     {
                     otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_7); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getModelAccess().getNumberSignKeyword_2_0());
                     			
-                    // InternalDatatypeRulesTestLanguage.g:164:4: ( (lv_vector_4_0= ruleVector ) )
-                    // InternalDatatypeRulesTestLanguage.g:165:5: (lv_vector_4_0= ruleVector )
+                    // InternalDatatypeRulesTestLanguage.g:169:4: ( (lv_vector_4_0= ruleVector ) )
+                    // InternalDatatypeRulesTestLanguage.g:170:5: (lv_vector_4_0= ruleVector )
                     {
-                    // InternalDatatypeRulesTestLanguage.g:165:5: (lv_vector_4_0= ruleVector )
-                    // InternalDatatypeRulesTestLanguage.g:166:6: lv_vector_4_0= ruleVector
+                    // InternalDatatypeRulesTestLanguage.g:170:5: (lv_vector_4_0= ruleVector )
+                    // InternalDatatypeRulesTestLanguage.g:171:6: lv_vector_4_0= ruleVector
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0());
@@ -409,7 +417,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalDatatypeRulesTestLanguage.g:184:3: (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )?
+            // InternalDatatypeRulesTestLanguage.g:189:3: (otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -418,17 +426,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt4) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:185:4: otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) )
+                    // InternalDatatypeRulesTestLanguage.g:190:4: otherlv_5= '+' ( (lv_dots_6_0= ruleDots ) )
                     {
                     otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_9); 
 
                     				newLeafNode(otherlv_5, grammarAccess.getModelAccess().getPlusSignKeyword_3_0());
                     			
-                    // InternalDatatypeRulesTestLanguage.g:189:4: ( (lv_dots_6_0= ruleDots ) )
-                    // InternalDatatypeRulesTestLanguage.g:190:5: (lv_dots_6_0= ruleDots )
+                    // InternalDatatypeRulesTestLanguage.g:194:4: ( (lv_dots_6_0= ruleDots ) )
+                    // InternalDatatypeRulesTestLanguage.g:195:5: (lv_dots_6_0= ruleDots )
                     {
-                    // InternalDatatypeRulesTestLanguage.g:190:5: (lv_dots_6_0= ruleDots )
-                    // InternalDatatypeRulesTestLanguage.g:191:6: lv_dots_6_0= ruleDots
+                    // InternalDatatypeRulesTestLanguage.g:195:5: (lv_dots_6_0= ruleDots )
+                    // InternalDatatypeRulesTestLanguage.g:196:6: lv_dots_6_0= ruleDots
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0());
@@ -461,7 +469,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalDatatypeRulesTestLanguage.g:209:3: (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )?
+            // InternalDatatypeRulesTestLanguage.g:214:3: (otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -470,17 +478,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt5) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:210:4: otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) )
+                    // InternalDatatypeRulesTestLanguage.g:215:4: otherlv_7= '*' ( (lv_double_8_0= ruleDouble ) )
                     {
                     otherlv_7=(Token)match(input,14,FollowSets000.FOLLOW_11); 
 
                     				newLeafNode(otherlv_7, grammarAccess.getModelAccess().getAsteriskKeyword_4_0());
                     			
-                    // InternalDatatypeRulesTestLanguage.g:214:4: ( (lv_double_8_0= ruleDouble ) )
-                    // InternalDatatypeRulesTestLanguage.g:215:5: (lv_double_8_0= ruleDouble )
+                    // InternalDatatypeRulesTestLanguage.g:219:4: ( (lv_double_8_0= ruleDouble ) )
+                    // InternalDatatypeRulesTestLanguage.g:220:5: (lv_double_8_0= ruleDouble )
                     {
-                    // InternalDatatypeRulesTestLanguage.g:215:5: (lv_double_8_0= ruleDouble )
-                    // InternalDatatypeRulesTestLanguage.g:216:6: lv_double_8_0= ruleDouble
+                    // InternalDatatypeRulesTestLanguage.g:220:5: (lv_double_8_0= ruleDouble )
+                    // InternalDatatypeRulesTestLanguage.g:221:6: lv_double_8_0= ruleDouble
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getDoubleDoubleParserRuleCall_4_1_0());
@@ -540,7 +548,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModelId"
-    // InternalDatatypeRulesTestLanguage.g:242:1: entryRuleModelId returns [String current=null] : iv_ruleModelId= ruleModelId EOF ;
+    // InternalDatatypeRulesTestLanguage.g:247:1: entryRuleModelId returns [String current=null] : iv_ruleModelId= ruleModelId EOF ;
     public final String entryRuleModelId() throws RecognitionException {
         String current = null;
 
@@ -548,8 +556,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:242:47: (iv_ruleModelId= ruleModelId EOF )
-            // InternalDatatypeRulesTestLanguage.g:243:2: iv_ruleModelId= ruleModelId EOF
+            // InternalDatatypeRulesTestLanguage.g:247:47: (iv_ruleModelId= ruleModelId EOF )
+            // InternalDatatypeRulesTestLanguage.g:248:2: iv_ruleModelId= ruleModelId EOF
             {
              newCompositeNode(grammarAccess.getModelIdRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -576,7 +584,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModelId"
-    // InternalDatatypeRulesTestLanguage.g:249:1: ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) ;
+    // InternalDatatypeRulesTestLanguage.g:254:1: ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleModelId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -588,11 +596,11 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:255:2: ( (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) )
-            // InternalDatatypeRulesTestLanguage.g:256:2: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
+            // InternalDatatypeRulesTestLanguage.g:260:2: ( (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) )
+            // InternalDatatypeRulesTestLanguage.g:261:2: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
             {
-            // InternalDatatypeRulesTestLanguage.g:256:2: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
-            // InternalDatatypeRulesTestLanguage.g:257:3: this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID
+            // InternalDatatypeRulesTestLanguage.g:261:2: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
+            // InternalDatatypeRulesTestLanguage.g:262:3: this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
@@ -636,7 +644,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedModelId"
-    // InternalDatatypeRulesTestLanguage.g:280:1: entryRuleNestedModelId returns [String current=null] : iv_ruleNestedModelId= ruleNestedModelId EOF ;
+    // InternalDatatypeRulesTestLanguage.g:285:1: entryRuleNestedModelId returns [String current=null] : iv_ruleNestedModelId= ruleNestedModelId EOF ;
     public final String entryRuleNestedModelId() throws RecognitionException {
         String current = null;
 
@@ -644,8 +652,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:280:53: (iv_ruleNestedModelId= ruleNestedModelId EOF )
-            // InternalDatatypeRulesTestLanguage.g:281:2: iv_ruleNestedModelId= ruleNestedModelId EOF
+            // InternalDatatypeRulesTestLanguage.g:285:53: (iv_ruleNestedModelId= ruleNestedModelId EOF )
+            // InternalDatatypeRulesTestLanguage.g:286:2: iv_ruleNestedModelId= ruleNestedModelId EOF
             {
              newCompositeNode(grammarAccess.getNestedModelIdRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -672,7 +680,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedModelId"
-    // InternalDatatypeRulesTestLanguage.g:287:1: ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) ;
+    // InternalDatatypeRulesTestLanguage.g:292:1: ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) ;
     public final AntlrDatatypeRuleToken ruleNestedModelId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -686,11 +694,11 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:293:2: ( (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) )
-            // InternalDatatypeRulesTestLanguage.g:294:2: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
+            // InternalDatatypeRulesTestLanguage.g:298:2: ( (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) )
+            // InternalDatatypeRulesTestLanguage.g:299:2: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
             {
-            // InternalDatatypeRulesTestLanguage.g:294:2: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
-            // InternalDatatypeRulesTestLanguage.g:295:3: this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId
+            // InternalDatatypeRulesTestLanguage.g:299:2: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
+            // InternalDatatypeRulesTestLanguage.g:300:3: this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId
             {
 
             			newCompositeNode(grammarAccess.getNestedModelIdAccess().getModelIdParserRuleCall_0());
@@ -748,7 +756,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleFraction"
-    // InternalDatatypeRulesTestLanguage.g:324:1: entryRuleFraction returns [String current=null] : iv_ruleFraction= ruleFraction EOF ;
+    // InternalDatatypeRulesTestLanguage.g:329:1: entryRuleFraction returns [String current=null] : iv_ruleFraction= ruleFraction EOF ;
     public final String entryRuleFraction() throws RecognitionException {
         String current = null;
 
@@ -756,8 +764,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:324:48: (iv_ruleFraction= ruleFraction EOF )
-            // InternalDatatypeRulesTestLanguage.g:325:2: iv_ruleFraction= ruleFraction EOF
+            // InternalDatatypeRulesTestLanguage.g:329:48: (iv_ruleFraction= ruleFraction EOF )
+            // InternalDatatypeRulesTestLanguage.g:330:2: iv_ruleFraction= ruleFraction EOF
             {
              newCompositeNode(grammarAccess.getFractionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -784,7 +792,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleFraction"
-    // InternalDatatypeRulesTestLanguage.g:331:1: ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? ) ;
+    // InternalDatatypeRulesTestLanguage.g:336:1: ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? ) ;
     public final AntlrDatatypeRuleToken ruleFraction() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -796,11 +804,11 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:337:2: ( (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? ) )
-            // InternalDatatypeRulesTestLanguage.g:338:2: (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? )
+            // InternalDatatypeRulesTestLanguage.g:342:2: ( (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? ) )
+            // InternalDatatypeRulesTestLanguage.g:343:2: (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? )
             {
-            // InternalDatatypeRulesTestLanguage.g:338:2: (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? )
-            // InternalDatatypeRulesTestLanguage.g:339:3: this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )?
+            // InternalDatatypeRulesTestLanguage.g:343:2: (this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )? )
+            // InternalDatatypeRulesTestLanguage.g:344:3: this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )?
             {
             this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_15); 
 
@@ -809,7 +817,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(this_INT_0, grammarAccess.getFractionAccess().getINTTerminalRuleCall_0());
             		
-            // InternalDatatypeRulesTestLanguage.g:346:3: (kw= '/' this_INT_2= RULE_INT )?
+            // InternalDatatypeRulesTestLanguage.g:351:3: (kw= '/' this_INT_2= RULE_INT )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -818,7 +826,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt6) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:347:4: kw= '/' this_INT_2= RULE_INT
+                    // InternalDatatypeRulesTestLanguage.g:352:4: kw= '/' this_INT_2= RULE_INT
                     {
                     kw=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
@@ -861,7 +869,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleVector"
-    // InternalDatatypeRulesTestLanguage.g:364:1: entryRuleVector returns [String current=null] : iv_ruleVector= ruleVector EOF ;
+    // InternalDatatypeRulesTestLanguage.g:369:1: entryRuleVector returns [String current=null] : iv_ruleVector= ruleVector EOF ;
     public final String entryRuleVector() throws RecognitionException {
         String current = null;
 
@@ -869,8 +877,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:364:46: (iv_ruleVector= ruleVector EOF )
-            // InternalDatatypeRulesTestLanguage.g:365:2: iv_ruleVector= ruleVector EOF
+            // InternalDatatypeRulesTestLanguage.g:369:46: (iv_ruleVector= ruleVector EOF )
+            // InternalDatatypeRulesTestLanguage.g:370:2: iv_ruleVector= ruleVector EOF
             {
              newCompositeNode(grammarAccess.getVectorRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -897,7 +905,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleVector"
-    // InternalDatatypeRulesTestLanguage.g:371:1: ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) ;
+    // InternalDatatypeRulesTestLanguage.g:376:1: ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) ;
     public final AntlrDatatypeRuleToken ruleVector() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -909,11 +917,11 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:377:2: ( (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) )
-            // InternalDatatypeRulesTestLanguage.g:378:2: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
+            // InternalDatatypeRulesTestLanguage.g:382:2: ( (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) )
+            // InternalDatatypeRulesTestLanguage.g:383:2: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
             {
-            // InternalDatatypeRulesTestLanguage.g:378:2: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
-            // InternalDatatypeRulesTestLanguage.g:379:3: kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')'
+            // InternalDatatypeRulesTestLanguage.g:383:2: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
+            // InternalDatatypeRulesTestLanguage.g:384:3: kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')'
             {
             kw=(Token)match(input,18,FollowSets000.FOLLOW_5); 
 
@@ -962,7 +970,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleDots"
-    // InternalDatatypeRulesTestLanguage.g:407:1: entryRuleDots returns [String current=null] : iv_ruleDots= ruleDots EOF ;
+    // InternalDatatypeRulesTestLanguage.g:412:1: entryRuleDots returns [String current=null] : iv_ruleDots= ruleDots EOF ;
     public final String entryRuleDots() throws RecognitionException {
         String current = null;
 
@@ -970,8 +978,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:407:44: (iv_ruleDots= ruleDots EOF )
-            // InternalDatatypeRulesTestLanguage.g:408:2: iv_ruleDots= ruleDots EOF
+            // InternalDatatypeRulesTestLanguage.g:412:44: (iv_ruleDots= ruleDots EOF )
+            // InternalDatatypeRulesTestLanguage.g:413:2: iv_ruleDots= ruleDots EOF
             {
              newCompositeNode(grammarAccess.getDotsRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -998,7 +1006,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleDots"
-    // InternalDatatypeRulesTestLanguage.g:414:1: ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '.' kw= '.' ) | kw= '..' ) ;
+    // InternalDatatypeRulesTestLanguage.g:419:1: ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '.' kw= '.' ) | kw= '..' ) ;
     public final AntlrDatatypeRuleToken ruleDots() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1008,10 +1016,10 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:420:2: ( ( (kw= '.' kw= '.' ) | kw= '..' ) )
-            // InternalDatatypeRulesTestLanguage.g:421:2: ( (kw= '.' kw= '.' ) | kw= '..' )
+            // InternalDatatypeRulesTestLanguage.g:425:2: ( ( (kw= '.' kw= '.' ) | kw= '..' ) )
+            // InternalDatatypeRulesTestLanguage.g:426:2: ( (kw= '.' kw= '.' ) | kw= '..' )
             {
-            // InternalDatatypeRulesTestLanguage.g:421:2: ( (kw= '.' kw= '.' ) | kw= '..' )
+            // InternalDatatypeRulesTestLanguage.g:426:2: ( (kw= '.' kw= '.' ) | kw= '..' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1029,10 +1037,10 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt7) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:422:3: (kw= '.' kw= '.' )
+                    // InternalDatatypeRulesTestLanguage.g:427:3: (kw= '.' kw= '.' )
                     {
-                    // InternalDatatypeRulesTestLanguage.g:422:3: (kw= '.' kw= '.' )
-                    // InternalDatatypeRulesTestLanguage.g:423:4: kw= '.' kw= '.'
+                    // InternalDatatypeRulesTestLanguage.g:427:3: (kw= '.' kw= '.' )
+                    // InternalDatatypeRulesTestLanguage.g:428:4: kw= '.' kw= '.'
                     {
                     kw=(Token)match(input,16,FollowSets000.FOLLOW_13); 
 
@@ -1051,7 +1059,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalDatatypeRulesTestLanguage.g:435:3: kw= '..'
+                    // InternalDatatypeRulesTestLanguage.g:440:3: kw= '..'
                     {
                     kw=(Token)match(input,20,FollowSets000.FOLLOW_2); 
 
@@ -1084,7 +1092,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleDouble"
-    // InternalDatatypeRulesTestLanguage.g:444:1: entryRuleDouble returns [String current=null] : iv_ruleDouble= ruleDouble EOF ;
+    // InternalDatatypeRulesTestLanguage.g:449:1: entryRuleDouble returns [String current=null] : iv_ruleDouble= ruleDouble EOF ;
     public final String entryRuleDouble() throws RecognitionException {
         String current = null;
 
@@ -1092,8 +1100,8 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:444:46: (iv_ruleDouble= ruleDouble EOF )
-            // InternalDatatypeRulesTestLanguage.g:445:2: iv_ruleDouble= ruleDouble EOF
+            // InternalDatatypeRulesTestLanguage.g:449:46: (iv_ruleDouble= ruleDouble EOF )
+            // InternalDatatypeRulesTestLanguage.g:450:2: iv_ruleDouble= ruleDouble EOF
             {
              newCompositeNode(grammarAccess.getDoubleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1120,7 +1128,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleDouble"
-    // InternalDatatypeRulesTestLanguage.g:451:1: ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? ) ;
+    // InternalDatatypeRulesTestLanguage.g:456:1: ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? ) ;
     public final AntlrDatatypeRuleToken ruleDouble() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1133,13 +1141,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalDatatypeRulesTestLanguage.g:457:2: ( ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? ) )
-            // InternalDatatypeRulesTestLanguage.g:458:2: ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? )
+            // InternalDatatypeRulesTestLanguage.g:462:2: ( ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? ) )
+            // InternalDatatypeRulesTestLanguage.g:463:2: ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? )
             {
-            // InternalDatatypeRulesTestLanguage.g:458:2: ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? )
-            // InternalDatatypeRulesTestLanguage.g:459:3: (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )?
+            // InternalDatatypeRulesTestLanguage.g:463:2: ( (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )? )
+            // InternalDatatypeRulesTestLanguage.g:464:3: (kw= '-' )? (this_INT_1= RULE_INT )? kw= '.' this_INT_3= RULE_INT (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )?
             {
-            // InternalDatatypeRulesTestLanguage.g:459:3: (kw= '-' )?
+            // InternalDatatypeRulesTestLanguage.g:464:3: (kw= '-' )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1148,7 +1156,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt8) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:460:4: kw= '-'
+                    // InternalDatatypeRulesTestLanguage.g:465:4: kw= '-'
                     {
                     kw=(Token)match(input,21,FollowSets000.FOLLOW_17); 
 
@@ -1161,7 +1169,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalDatatypeRulesTestLanguage.g:466:3: (this_INT_1= RULE_INT )?
+            // InternalDatatypeRulesTestLanguage.g:471:3: (this_INT_1= RULE_INT )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1170,7 +1178,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt9) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:467:4: this_INT_1= RULE_INT
+                    // InternalDatatypeRulesTestLanguage.g:472:4: this_INT_1= RULE_INT
                     {
                     this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_13); 
 
@@ -1197,7 +1205,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(this_INT_3, grammarAccess.getDoubleAccess().getINTTerminalRuleCall_3());
             		
-            // InternalDatatypeRulesTestLanguage.g:487:3: (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )?
+            // InternalDatatypeRulesTestLanguage.g:492:3: (kw= 'E' (kw= '-' )? this_INT_6= RULE_INT )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1206,14 +1214,14 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt11) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:488:4: kw= 'E' (kw= '-' )? this_INT_6= RULE_INT
+                    // InternalDatatypeRulesTestLanguage.g:493:4: kw= 'E' (kw= '-' )? this_INT_6= RULE_INT
                     {
                     kw=(Token)match(input,22,FollowSets000.FOLLOW_19); 
 
                     				current.merge(kw);
                     				newLeafNode(kw, grammarAccess.getDoubleAccess().getEKeyword_4_0());
                     			
-                    // InternalDatatypeRulesTestLanguage.g:493:4: (kw= '-' )?
+                    // InternalDatatypeRulesTestLanguage.g:498:4: (kw= '-' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1222,7 +1230,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalDatatypeRulesTestLanguage.g:494:5: kw= '-'
+                            // InternalDatatypeRulesTestLanguage.g:499:5: kw= '-'
                             {
                             kw=(Token)match(input,21,FollowSets000.FOLLOW_5); 
 

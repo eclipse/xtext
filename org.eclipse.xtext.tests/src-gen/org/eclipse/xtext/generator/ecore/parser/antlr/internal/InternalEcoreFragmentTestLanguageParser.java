@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -73,7 +81,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleSecond"
-    // InternalEcoreFragmentTestLanguage.g:64:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
+    // InternalEcoreFragmentTestLanguage.g:69:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
     public final EObject entryRuleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +89,8 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalEcoreFragmentTestLanguage.g:64:47: (iv_ruleSecond= ruleSecond EOF )
-            // InternalEcoreFragmentTestLanguage.g:65:2: iv_ruleSecond= ruleSecond EOF
+            // InternalEcoreFragmentTestLanguage.g:69:47: (iv_ruleSecond= ruleSecond EOF )
+            // InternalEcoreFragmentTestLanguage.g:70:2: iv_ruleSecond= ruleSecond EOF
             {
              newCompositeNode(grammarAccess.getSecondRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,7 +117,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleSecond"
-    // InternalEcoreFragmentTestLanguage.g:71:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
+    // InternalEcoreFragmentTestLanguage.g:76:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -121,17 +129,17 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalEcoreFragmentTestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
-            // InternalEcoreFragmentTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:82:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
+            // InternalEcoreFragmentTestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
             {
-            // InternalEcoreFragmentTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
-            // InternalEcoreFragmentTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:83:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
             {
-            // InternalEcoreFragmentTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalEcoreFragmentTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:84:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalEcoreFragmentTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
-            // InternalEcoreFragmentTestLanguage.g:81:5: lv_name_0_0= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:85:4: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:86:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
@@ -157,11 +165,11 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
             		
-            // InternalEcoreFragmentTestLanguage.g:101:3: ( (otherlv_2= RULE_ID ) )
-            // InternalEcoreFragmentTestLanguage.g:102:4: (otherlv_2= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:106:3: ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:107:4: (otherlv_2= RULE_ID )
             {
-            // InternalEcoreFragmentTestLanguage.g:102:4: (otherlv_2= RULE_ID )
-            // InternalEcoreFragmentTestLanguage.g:103:5: otherlv_2= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:107:4: (otherlv_2= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:108:5: otherlv_2= RULE_ID
             {
 
             					if (current==null) {
