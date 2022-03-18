@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -79,7 +87,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug443221TestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug443221TestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -87,8 +95,8 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug443221TestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalBug443221TestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalBug443221TestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug443221TestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -115,7 +123,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug443221TestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) ;
+    // InternalBug443221TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -132,14 +140,14 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
         	enterRule();
 
         try {
-            // InternalBug443221TestLanguage.g:77:2: ( ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) )
-            // InternalBug443221TestLanguage.g:78:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
+            // InternalBug443221TestLanguage.g:82:2: ( ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) )
+            // InternalBug443221TestLanguage.g:83:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
             {
-            // InternalBug443221TestLanguage.g:78:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
-            // InternalBug443221TestLanguage.g:79:3: () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign'
+            // InternalBug443221TestLanguage.g:83:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
+            // InternalBug443221TestLanguage.g:84:3: () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign'
             {
-            // InternalBug443221TestLanguage.g:79:3: ()
-            // InternalBug443221TestLanguage.g:80:4: 
+            // InternalBug443221TestLanguage.g:84:3: ()
+            // InternalBug443221TestLanguage.g:85:4: 
             {
 
             				current = forceCreateModelElement(
@@ -153,11 +161,11 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
             			newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDummyKeyword_1());
             		
-            // InternalBug443221TestLanguage.g:90:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBug443221TestLanguage.g:91:4: (lv_name_2_0= RULE_ID )
+            // InternalBug443221TestLanguage.g:95:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBug443221TestLanguage.g:96:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalBug443221TestLanguage.g:91:4: (lv_name_2_0= RULE_ID )
-            // InternalBug443221TestLanguage.g:92:5: lv_name_2_0= RULE_ID
+            // InternalBug443221TestLanguage.g:96:4: (lv_name_2_0= RULE_ID )
+            // InternalBug443221TestLanguage.g:97:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 

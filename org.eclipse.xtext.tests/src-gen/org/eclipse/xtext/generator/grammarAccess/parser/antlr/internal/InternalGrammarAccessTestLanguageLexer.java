@@ -83,10 +83,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:195:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalGrammarAccessTestLanguage.g:195:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalGrammarAccessTestLanguage.g:200:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalGrammarAccessTestLanguage.g:200:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalGrammarAccessTestLanguage.g:195:11: ( '^' )?
+            // InternalGrammarAccessTestLanguage.g:200:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -95,7 +95,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalGrammarAccessTestLanguage.g:195:11: '^'
+                    // InternalGrammarAccessTestLanguage.g:200:11: '^'
                     {
                     match('^'); 
 
@@ -113,7 +113,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalGrammarAccessTestLanguage.g:195:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalGrammarAccessTestLanguage.g:200:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -162,10 +162,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:197:10: ( ( '0' .. '9' )+ )
-            // InternalGrammarAccessTestLanguage.g:197:12: ( '0' .. '9' )+
+            // InternalGrammarAccessTestLanguage.g:202:10: ( ( '0' .. '9' )+ )
+            // InternalGrammarAccessTestLanguage.g:202:12: ( '0' .. '9' )+
             {
-            // InternalGrammarAccessTestLanguage.g:197:12: ( '0' .. '9' )+
+            // InternalGrammarAccessTestLanguage.g:202:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -179,7 +179,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalGrammarAccessTestLanguage.g:197:13: '0' .. '9'
+            	    // InternalGrammarAccessTestLanguage.g:202:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -211,10 +211,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:199:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalGrammarAccessTestLanguage.g:199:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalGrammarAccessTestLanguage.g:204:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalGrammarAccessTestLanguage.g:204:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalGrammarAccessTestLanguage.g:199:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalGrammarAccessTestLanguage.g:204:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -232,10 +232,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalGrammarAccessTestLanguage.g:199:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalGrammarAccessTestLanguage.g:204:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalGrammarAccessTestLanguage.g:199:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalGrammarAccessTestLanguage.g:204:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -251,7 +251,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalGrammarAccessTestLanguage.g:199:21: '\\\\' .
+                    	    // InternalGrammarAccessTestLanguage.g:204:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -259,7 +259,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalGrammarAccessTestLanguage.g:199:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalGrammarAccessTestLanguage.g:204:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -284,10 +284,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalGrammarAccessTestLanguage.g:199:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalGrammarAccessTestLanguage.g:204:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalGrammarAccessTestLanguage.g:199:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalGrammarAccessTestLanguage.g:204:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -303,7 +303,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalGrammarAccessTestLanguage.g:199:54: '\\\\' .
+                    	    // InternalGrammarAccessTestLanguage.g:204:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -311,7 +311,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalGrammarAccessTestLanguage.g:199:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalGrammarAccessTestLanguage.g:204:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -354,12 +354,12 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:201:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalGrammarAccessTestLanguage.g:201:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalGrammarAccessTestLanguage.g:206:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalGrammarAccessTestLanguage.g:206:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalGrammarAccessTestLanguage.g:201:24: ( options {greedy=false; } : . )*
+            // InternalGrammarAccessTestLanguage.g:206:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -384,7 +384,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalGrammarAccessTestLanguage.g:201:52: .
+            	    // InternalGrammarAccessTestLanguage.g:206:52: .
             	    {
             	    matchAny(); 
 
@@ -414,12 +414,12 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:203:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalGrammarAccessTestLanguage.g:203:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalGrammarAccessTestLanguage.g:208:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalGrammarAccessTestLanguage.g:208:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalGrammarAccessTestLanguage.g:203:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalGrammarAccessTestLanguage.g:208:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -432,7 +432,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalGrammarAccessTestLanguage.g:203:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalGrammarAccessTestLanguage.g:208:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -452,7 +452,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalGrammarAccessTestLanguage.g:203:40: ( ( '\\r' )? '\\n' )?
+            // InternalGrammarAccessTestLanguage.g:208:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -461,9 +461,9 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalGrammarAccessTestLanguage.g:203:41: ( '\\r' )? '\\n'
+                    // InternalGrammarAccessTestLanguage.g:208:41: ( '\\r' )? '\\n'
                     {
-                    // InternalGrammarAccessTestLanguage.g:203:41: ( '\\r' )?
+                    // InternalGrammarAccessTestLanguage.g:208:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -472,7 +472,7 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalGrammarAccessTestLanguage.g:203:41: '\\r'
+                            // InternalGrammarAccessTestLanguage.g:208:41: '\\r'
                             {
                             match('\r'); 
 
@@ -504,10 +504,10 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:205:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalGrammarAccessTestLanguage.g:205:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalGrammarAccessTestLanguage.g:210:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalGrammarAccessTestLanguage.g:210:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalGrammarAccessTestLanguage.g:205:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalGrammarAccessTestLanguage.g:210:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -561,8 +561,8 @@ public class InternalGrammarAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGrammarAccessTestLanguage.g:207:16: ( . )
-            // InternalGrammarAccessTestLanguage.g:207:18: .
+            // InternalGrammarAccessTestLanguage.g:212:16: ( . )
+            // InternalGrammarAccessTestLanguage.g:212:18: .
             {
             matchAny(); 
 

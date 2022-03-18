@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -75,7 +83,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalTerminalRulesTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalTerminalRulesTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +91,8 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalTerminalRulesTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalTerminalRulesTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalTerminalRulesTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalTerminalRulesTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -111,7 +119,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalTerminalRulesTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
+    // InternalTerminalRulesTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -128,10 +136,10 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalTerminalRulesTestLanguage.g:77:2: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
-            // InternalTerminalRulesTestLanguage.g:78:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // InternalTerminalRulesTestLanguage.g:82:2: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
+            // InternalTerminalRulesTestLanguage.g:83:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             {
-            // InternalTerminalRulesTestLanguage.g:78:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // InternalTerminalRulesTestLanguage.g:83:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             int alt1=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -183,13 +191,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
             switch (alt1) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:79:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // InternalTerminalRulesTestLanguage.g:84:3: ( (lv_idValue_0_0= RULE_ID ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:79:3: ( (lv_idValue_0_0= RULE_ID ) )
-                    // InternalTerminalRulesTestLanguage.g:80:4: (lv_idValue_0_0= RULE_ID )
+                    // InternalTerminalRulesTestLanguage.g:84:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // InternalTerminalRulesTestLanguage.g:85:4: (lv_idValue_0_0= RULE_ID )
                     {
-                    // InternalTerminalRulesTestLanguage.g:80:4: (lv_idValue_0_0= RULE_ID )
-                    // InternalTerminalRulesTestLanguage.g:81:5: lv_idValue_0_0= RULE_ID
+                    // InternalTerminalRulesTestLanguage.g:85:4: (lv_idValue_0_0= RULE_ID )
+                    // InternalTerminalRulesTestLanguage.g:86:5: lv_idValue_0_0= RULE_ID
                     {
                     lv_idValue_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -215,13 +223,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:98:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // InternalTerminalRulesTestLanguage.g:103:3: ( (lv_intValue_1_0= RULE_INT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:98:3: ( (lv_intValue_1_0= RULE_INT ) )
-                    // InternalTerminalRulesTestLanguage.g:99:4: (lv_intValue_1_0= RULE_INT )
+                    // InternalTerminalRulesTestLanguage.g:103:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // InternalTerminalRulesTestLanguage.g:104:4: (lv_intValue_1_0= RULE_INT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:99:4: (lv_intValue_1_0= RULE_INT )
-                    // InternalTerminalRulesTestLanguage.g:100:5: lv_intValue_1_0= RULE_INT
+                    // InternalTerminalRulesTestLanguage.g:104:4: (lv_intValue_1_0= RULE_INT )
+                    // InternalTerminalRulesTestLanguage.g:105:5: lv_intValue_1_0= RULE_INT
                     {
                     lv_intValue_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
@@ -247,13 +255,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 3 :
-                    // InternalTerminalRulesTestLanguage.g:117:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:122:3: ( (lv_stringValue_2_0= RULE_STRING ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:117:3: ( (lv_stringValue_2_0= RULE_STRING ) )
-                    // InternalTerminalRulesTestLanguage.g:118:4: (lv_stringValue_2_0= RULE_STRING )
+                    // InternalTerminalRulesTestLanguage.g:122:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:123:4: (lv_stringValue_2_0= RULE_STRING )
                     {
-                    // InternalTerminalRulesTestLanguage.g:118:4: (lv_stringValue_2_0= RULE_STRING )
-                    // InternalTerminalRulesTestLanguage.g:119:5: lv_stringValue_2_0= RULE_STRING
+                    // InternalTerminalRulesTestLanguage.g:123:4: (lv_stringValue_2_0= RULE_STRING )
+                    // InternalTerminalRulesTestLanguage.g:124:5: lv_stringValue_2_0= RULE_STRING
                     {
                     lv_stringValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
@@ -279,13 +287,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 4 :
-                    // InternalTerminalRulesTestLanguage.g:136:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:141:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:136:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
-                    // InternalTerminalRulesTestLanguage.g:137:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // InternalTerminalRulesTestLanguage.g:141:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:142:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
                     {
-                    // InternalTerminalRulesTestLanguage.g:137:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
-                    // InternalTerminalRulesTestLanguage.g:138:5: lv_richStringValue_3_0= RULE_RICH_STRING
+                    // InternalTerminalRulesTestLanguage.g:142:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // InternalTerminalRulesTestLanguage.g:143:5: lv_richStringValue_3_0= RULE_RICH_STRING
                     {
                     lv_richStringValue_3_0=(Token)match(input,RULE_RICH_STRING,FollowSets000.FOLLOW_2); 
 
@@ -311,13 +319,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 5 :
-                    // InternalTerminalRulesTestLanguage.g:155:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:160:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:155:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
-                    // InternalTerminalRulesTestLanguage.g:156:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:160:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:161:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:156:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
-                    // InternalTerminalRulesTestLanguage.g:157:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
+                    // InternalTerminalRulesTestLanguage.g:161:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:162:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
                     {
                     lv_mlCommentValue_4_0=(Token)match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_2); 
 
@@ -343,13 +351,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 6 :
-                    // InternalTerminalRulesTestLanguage.g:174:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:179:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:174:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
-                    // InternalTerminalRulesTestLanguage.g:175:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:179:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:180:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:175:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
-                    // InternalTerminalRulesTestLanguage.g:176:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
+                    // InternalTerminalRulesTestLanguage.g:180:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:181:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
                     {
                     lv_slCommentValue_5_0=(Token)match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_2); 
 
@@ -375,13 +383,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 7 :
-                    // InternalTerminalRulesTestLanguage.g:193:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // InternalTerminalRulesTestLanguage.g:198:3: ( (lv_wsValue_6_0= RULE_WS ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:193:3: ( (lv_wsValue_6_0= RULE_WS ) )
-                    // InternalTerminalRulesTestLanguage.g:194:4: (lv_wsValue_6_0= RULE_WS )
+                    // InternalTerminalRulesTestLanguage.g:198:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // InternalTerminalRulesTestLanguage.g:199:4: (lv_wsValue_6_0= RULE_WS )
                     {
-                    // InternalTerminalRulesTestLanguage.g:194:4: (lv_wsValue_6_0= RULE_WS )
-                    // InternalTerminalRulesTestLanguage.g:195:5: lv_wsValue_6_0= RULE_WS
+                    // InternalTerminalRulesTestLanguage.g:199:4: (lv_wsValue_6_0= RULE_WS )
+                    // InternalTerminalRulesTestLanguage.g:200:5: lv_wsValue_6_0= RULE_WS
                     {
                     lv_wsValue_6_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_2); 
 
@@ -407,13 +415,13 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 8 :
-                    // InternalTerminalRulesTestLanguage.g:212:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // InternalTerminalRulesTestLanguage.g:217:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:212:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
-                    // InternalTerminalRulesTestLanguage.g:213:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // InternalTerminalRulesTestLanguage.g:217:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // InternalTerminalRulesTestLanguage.g:218:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
                     {
-                    // InternalTerminalRulesTestLanguage.g:213:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
-                    // InternalTerminalRulesTestLanguage.g:214:5: lv_anyValue_7_0= RULE_ANY_OTHER
+                    // InternalTerminalRulesTestLanguage.g:218:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // InternalTerminalRulesTestLanguage.g:219:5: lv_anyValue_7_0= RULE_ANY_OTHER
                     {
                     lv_anyValue_7_0=(Token)match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_2); 
 

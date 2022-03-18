@@ -189,10 +189,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:660:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalLookaheadTestLanguage.g:660:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLookaheadTestLanguage.g:665:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalLookaheadTestLanguage.g:665:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalLookaheadTestLanguage.g:660:11: ( '^' )?
+            // InternalLookaheadTestLanguage.g:665:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -201,7 +201,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:660:11: '^'
+                    // InternalLookaheadTestLanguage.g:665:11: '^'
                     {
                     match('^'); 
 
@@ -219,7 +219,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalLookaheadTestLanguage.g:660:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLookaheadTestLanguage.g:665:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -268,10 +268,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:662:10: ( ( '0' .. '9' )+ )
-            // InternalLookaheadTestLanguage.g:662:12: ( '0' .. '9' )+
+            // InternalLookaheadTestLanguage.g:667:10: ( ( '0' .. '9' )+ )
+            // InternalLookaheadTestLanguage.g:667:12: ( '0' .. '9' )+
             {
-            // InternalLookaheadTestLanguage.g:662:12: ( '0' .. '9' )+
+            // InternalLookaheadTestLanguage.g:667:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -285,7 +285,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalLookaheadTestLanguage.g:662:13: '0' .. '9'
+            	    // InternalLookaheadTestLanguage.g:667:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -317,10 +317,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:664:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalLookaheadTestLanguage.g:664:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLookaheadTestLanguage.g:669:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalLookaheadTestLanguage.g:669:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalLookaheadTestLanguage.g:664:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLookaheadTestLanguage.g:669:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -338,10 +338,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:664:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalLookaheadTestLanguage.g:669:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalLookaheadTestLanguage.g:664:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalLookaheadTestLanguage.g:669:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -357,7 +357,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalLookaheadTestLanguage.g:664:21: '\\\\' .
+                    	    // InternalLookaheadTestLanguage.g:669:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -365,7 +365,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLookaheadTestLanguage.g:664:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalLookaheadTestLanguage.g:669:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -390,10 +390,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalLookaheadTestLanguage.g:664:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalLookaheadTestLanguage.g:669:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalLookaheadTestLanguage.g:664:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalLookaheadTestLanguage.g:669:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -409,7 +409,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalLookaheadTestLanguage.g:664:54: '\\\\' .
+                    	    // InternalLookaheadTestLanguage.g:669:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -417,7 +417,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLookaheadTestLanguage.g:664:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalLookaheadTestLanguage.g:669:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -460,12 +460,12 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:666:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalLookaheadTestLanguage.g:666:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalLookaheadTestLanguage.g:671:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalLookaheadTestLanguage.g:671:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalLookaheadTestLanguage.g:666:24: ( options {greedy=false; } : . )*
+            // InternalLookaheadTestLanguage.g:671:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -490,7 +490,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalLookaheadTestLanguage.g:666:52: .
+            	    // InternalLookaheadTestLanguage.g:671:52: .
             	    {
             	    matchAny(); 
 
@@ -520,12 +520,12 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:668:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalLookaheadTestLanguage.g:668:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalLookaheadTestLanguage.g:673:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalLookaheadTestLanguage.g:673:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalLookaheadTestLanguage.g:668:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalLookaheadTestLanguage.g:673:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -538,7 +538,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalLookaheadTestLanguage.g:668:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalLookaheadTestLanguage.g:673:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -558,7 +558,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalLookaheadTestLanguage.g:668:40: ( ( '\\r' )? '\\n' )?
+            // InternalLookaheadTestLanguage.g:673:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -567,9 +567,9 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:668:41: ( '\\r' )? '\\n'
+                    // InternalLookaheadTestLanguage.g:673:41: ( '\\r' )? '\\n'
                     {
-                    // InternalLookaheadTestLanguage.g:668:41: ( '\\r' )?
+                    // InternalLookaheadTestLanguage.g:673:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -578,7 +578,7 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalLookaheadTestLanguage.g:668:41: '\\r'
+                            // InternalLookaheadTestLanguage.g:673:41: '\\r'
                             {
                             match('\r'); 
 
@@ -610,10 +610,10 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:670:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalLookaheadTestLanguage.g:670:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLookaheadTestLanguage.g:675:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalLookaheadTestLanguage.g:675:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalLookaheadTestLanguage.g:670:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLookaheadTestLanguage.g:675:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -667,8 +667,8 @@ public class InternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLookaheadTestLanguage.g:672:16: ( . )
-            // InternalLookaheadTestLanguage.g:672:18: .
+            // InternalLookaheadTestLanguage.g:677:16: ( . )
+            // InternalLookaheadTestLanguage.g:677:18: .
             {
             matchAny(); 
 

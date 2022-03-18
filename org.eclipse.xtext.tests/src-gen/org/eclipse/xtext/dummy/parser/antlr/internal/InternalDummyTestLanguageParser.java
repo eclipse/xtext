@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -75,7 +83,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalDummyTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalDummyTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +91,8 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalDummyTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalDummyTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalDummyTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalDummyTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -111,7 +119,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleModel"
-    // InternalDummyTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalDummyTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,10 +130,10 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalDummyTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // InternalDummyTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalDummyTestLanguage.g:82:2: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalDummyTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // InternalDummyTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalDummyTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -138,10 +146,10 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalDummyTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalDummyTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalDummyTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
-            	    // InternalDummyTestLanguage.g:80:4: lv_elements_0_0= ruleElement
+            	    // InternalDummyTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
+            	    // InternalDummyTestLanguage.g:85:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
@@ -194,7 +202,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalDummyTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalDummyTestLanguage.g:105:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -202,8 +210,8 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalDummyTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
-            // InternalDummyTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
+            // InternalDummyTestLanguage.g:105:48: (iv_ruleElement= ruleElement EOF )
+            // InternalDummyTestLanguage.g:106:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -230,7 +238,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleElement"
-    // InternalDummyTestLanguage.g:107:1: ruleElement returns [EObject current=null] : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
+    // InternalDummyTestLanguage.g:112:1: ruleElement returns [EObject current=null] : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -244,13 +252,13 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         	enterRule();
 
         try {
-            // InternalDummyTestLanguage.g:113:2: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
-            // InternalDummyTestLanguage.g:114:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // InternalDummyTestLanguage.g:118:2: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
+            // InternalDummyTestLanguage.g:119:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
             {
-            // InternalDummyTestLanguage.g:114:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
-            // InternalDummyTestLanguage.g:115:3: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
+            // InternalDummyTestLanguage.g:119:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // InternalDummyTestLanguage.g:120:3: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
             {
-            // InternalDummyTestLanguage.g:115:3: ( (lv_optional_0_0= 'optional' ) )?
+            // InternalDummyTestLanguage.g:120:3: ( (lv_optional_0_0= 'optional' ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -259,10 +267,10 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt2) {
                 case 1 :
-                    // InternalDummyTestLanguage.g:116:4: (lv_optional_0_0= 'optional' )
+                    // InternalDummyTestLanguage.g:121:4: (lv_optional_0_0= 'optional' )
                     {
-                    // InternalDummyTestLanguage.g:116:4: (lv_optional_0_0= 'optional' )
-                    // InternalDummyTestLanguage.g:117:5: lv_optional_0_0= 'optional'
+                    // InternalDummyTestLanguage.g:121:4: (lv_optional_0_0= 'optional' )
+                    // InternalDummyTestLanguage.g:122:5: lv_optional_0_0= 'optional'
                     {
                     lv_optional_0_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
@@ -287,11 +295,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             			newLeafNode(otherlv_1, grammarAccess.getElementAccess().getElementKeyword_1());
             		
-            // InternalDummyTestLanguage.g:133:3: ( (lv_name_2_0= RULE_ID ) )
-            // InternalDummyTestLanguage.g:134:4: (lv_name_2_0= RULE_ID )
+            // InternalDummyTestLanguage.g:138:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalDummyTestLanguage.g:139:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalDummyTestLanguage.g:134:4: (lv_name_2_0= RULE_ID )
-            // InternalDummyTestLanguage.g:135:5: lv_name_2_0= RULE_ID
+            // InternalDummyTestLanguage.g:139:4: (lv_name_2_0= RULE_ID )
+            // InternalDummyTestLanguage.g:140:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
@@ -313,7 +321,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // InternalDummyTestLanguage.g:151:3: ( (lv_descriptions_3_0= RULE_STRING ) )*
+            // InternalDummyTestLanguage.g:156:3: ( (lv_descriptions_3_0= RULE_STRING ) )*
             loop3:
             do {
                 int alt3=2;
@@ -326,10 +334,10 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalDummyTestLanguage.g:152:4: (lv_descriptions_3_0= RULE_STRING )
+            	    // InternalDummyTestLanguage.g:157:4: (lv_descriptions_3_0= RULE_STRING )
             	    {
-            	    // InternalDummyTestLanguage.g:152:4: (lv_descriptions_3_0= RULE_STRING )
-            	    // InternalDummyTestLanguage.g:153:5: lv_descriptions_3_0= RULE_STRING
+            	    // InternalDummyTestLanguage.g:157:4: (lv_descriptions_3_0= RULE_STRING )
+            	    // InternalDummyTestLanguage.g:158:5: lv_descriptions_3_0= RULE_STRING
             	    {
             	    lv_descriptions_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_6); 
 

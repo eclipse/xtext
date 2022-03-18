@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalMultiValueFeatureTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -72,7 +80,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleStart"
-    // InternalMultiValueFeatureTestLanguage.g:64:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
+    // InternalMultiValueFeatureTestLanguage.g:69:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
     public final EObject entryRuleStart() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +88,8 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalMultiValueFeatureTestLanguage.g:64:46: (iv_ruleStart= ruleStart EOF )
-            // InternalMultiValueFeatureTestLanguage.g:65:2: iv_ruleStart= ruleStart EOF
+            // InternalMultiValueFeatureTestLanguage.g:69:46: (iv_ruleStart= ruleStart EOF )
+            // InternalMultiValueFeatureTestLanguage.g:70:2: iv_ruleStart= ruleStart EOF
             {
              newCompositeNode(grammarAccess.getStartRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -108,7 +116,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleStart"
-    // InternalMultiValueFeatureTestLanguage.g:71:1: ruleStart returns [EObject current=null] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
+    // InternalMultiValueFeatureTestLanguage.g:76:1: ruleStart returns [EObject current=null] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
     public final EObject ruleStart() throws RecognitionException {
         EObject current = null;
 
@@ -118,10 +126,10 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalMultiValueFeatureTestLanguage.g:77:2: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
-            // InternalMultiValueFeatureTestLanguage.g:78:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // InternalMultiValueFeatureTestLanguage.g:82:2: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
+            // InternalMultiValueFeatureTestLanguage.g:83:2: ( (lv_featureA_0_0= RULE_ID ) )+
             {
-            // InternalMultiValueFeatureTestLanguage.g:78:2: ( (lv_featureA_0_0= RULE_ID ) )+
+            // InternalMultiValueFeatureTestLanguage.g:83:2: ( (lv_featureA_0_0= RULE_ID ) )+
             int cnt1=0;
             loop1:
             do {
@@ -135,10 +143,10 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalMultiValueFeatureTestLanguage.g:79:3: (lv_featureA_0_0= RULE_ID )
+            	    // InternalMultiValueFeatureTestLanguage.g:84:3: (lv_featureA_0_0= RULE_ID )
             	    {
-            	    // InternalMultiValueFeatureTestLanguage.g:79:3: (lv_featureA_0_0= RULE_ID )
-            	    // InternalMultiValueFeatureTestLanguage.g:80:4: lv_featureA_0_0= RULE_ID
+            	    // InternalMultiValueFeatureTestLanguage.g:84:3: (lv_featureA_0_0= RULE_ID )
+            	    // InternalMultiValueFeatureTestLanguage.g:85:4: lv_featureA_0_0= RULE_ID
             	    {
             	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 

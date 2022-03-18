@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -69,7 +77,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalIgnoreCaseLexerTestLanguageParser.g:57:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalIgnoreCaseLexerTestLanguageParser.g:62:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -77,8 +85,8 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:57:46: (iv_ruleModel= ruleModel EOF )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:58:2: iv_ruleModel= ruleModel EOF
+            // InternalIgnoreCaseLexerTestLanguageParser.g:62:46: (iv_ruleModel= ruleModel EOF )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -105,7 +113,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleModel"
-    // InternalIgnoreCaseLexerTestLanguageParser.g:64:1: ruleModel returns [EObject current=null] : (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) ;
+    // InternalIgnoreCaseLexerTestLanguageParser.g:69:1: ruleModel returns [EObject current=null] : (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -117,17 +125,17 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:70:2: ( (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:71:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:75:2: ( (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:76:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
             {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:71:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:72:3: otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:76:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:77:3: otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) )
             {
             otherlv_0=(Token)match(input,Case,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
             		
-            // InternalIgnoreCaseLexerTestLanguageParser.g:76:3: (otherlv_1= Foo )?
+            // InternalIgnoreCaseLexerTestLanguageParser.g:81:3: (otherlv_1= Foo )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -136,7 +144,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             }
             switch (alt1) {
                 case 1 :
-                    // InternalIgnoreCaseLexerTestLanguageParser.g:77:4: otherlv_1= Foo
+                    // InternalIgnoreCaseLexerTestLanguageParser.g:82:4: otherlv_1= Foo
                     {
                     otherlv_1=(Token)match(input,Foo,FollowSets000.FOLLOW_4); 
 
@@ -148,11 +156,11 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
             }
 
-            // InternalIgnoreCaseLexerTestLanguageParser.g:82:3: ( (lv_value_2_0= Case ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:83:4: (lv_value_2_0= Case )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:87:3: ( (lv_value_2_0= Case ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:88:4: (lv_value_2_0= Case )
             {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:83:4: (lv_value_2_0= Case )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:84:5: lv_value_2_0= Case
+            // InternalIgnoreCaseLexerTestLanguageParser.g:88:4: (lv_value_2_0= Case )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:89:5: lv_value_2_0= Case
             {
             lv_value_2_0=(Token)match(input,Case,FollowSets000.FOLLOW_2); 
 

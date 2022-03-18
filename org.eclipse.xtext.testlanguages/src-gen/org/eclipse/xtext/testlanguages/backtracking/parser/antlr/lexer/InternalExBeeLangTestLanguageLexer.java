@@ -10,6 +10,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalExBeeLangTestLanguageLexer extends Lexer {
     public static final int Val=30;
@@ -106,8 +114,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RequiresMax;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:14:13: ( 'requires-max' )
-            // InternalExBeeLangTestLanguageLexer.g:14:15: 'requires-max'
+            // InternalExBeeLangTestLanguageLexer.g:19:13: ( 'requires-max' )
+            // InternalExBeeLangTestLanguageLexer.g:19:15: 'requires-max'
             {
             match("requires-max"); 
 
@@ -127,8 +135,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RequiresMin;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:16:13: ( 'requires-min' )
-            // InternalExBeeLangTestLanguageLexer.g:16:15: 'requires-min'
+            // InternalExBeeLangTestLanguageLexer.g:21:13: ( 'requires-min' )
+            // InternalExBeeLangTestLanguageLexer.g:21:15: 'requires-min'
             {
             match("requires-min"); 
 
@@ -148,8 +156,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Implements;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:18:12: ( 'implements' )
-            // InternalExBeeLangTestLanguageLexer.g:18:14: 'implements'
+            // InternalExBeeLangTestLanguageLexer.g:23:12: ( 'implements' )
+            // InternalExBeeLangTestLanguageLexer.g:23:14: 'implements'
             {
             match("implements"); 
 
@@ -169,8 +177,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Properties;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:20:12: ( 'properties' )
-            // InternalExBeeLangTestLanguageLexer.g:20:14: 'properties'
+            // InternalExBeeLangTestLanguageLexer.g:25:12: ( 'properties' )
+            // InternalExBeeLangTestLanguageLexer.g:25:14: 'properties'
             {
             match("properties"); 
 
@@ -190,8 +198,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Function;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:22:10: ( 'function' )
-            // InternalExBeeLangTestLanguageLexer.g:22:12: 'function'
+            // InternalExBeeLangTestLanguageLexer.g:27:10: ( 'function' )
+            // InternalExBeeLangTestLanguageLexer.g:27:12: 'function'
             {
             match("function"); 
 
@@ -211,8 +219,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Provides;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:24:10: ( 'provides' )
-            // InternalExBeeLangTestLanguageLexer.g:24:12: 'provides'
+            // InternalExBeeLangTestLanguageLexer.g:29:10: ( 'provides' )
+            // InternalExBeeLangTestLanguageLexer.g:29:12: 'provides'
             {
             match("provides"); 
 
@@ -232,8 +240,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Requires;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:26:10: ( 'requires' )
-            // InternalExBeeLangTestLanguageLexer.g:26:12: 'requires'
+            // InternalExBeeLangTestLanguageLexer.g:31:10: ( 'requires' )
+            // InternalExBeeLangTestLanguageLexer.g:31:12: 'requires'
             {
             match("requires"); 
 
@@ -253,8 +261,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Builder;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:28:9: ( 'builder' )
-            // InternalExBeeLangTestLanguageLexer.g:28:11: 'builder'
+            // InternalExBeeLangTestLanguageLexer.g:33:9: ( 'builder' )
+            // InternalExBeeLangTestLanguageLexer.g:33:11: 'builder'
             {
             match("builder"); 
 
@@ -274,8 +282,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Context;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:30:9: ( 'context' )
-            // InternalExBeeLangTestLanguageLexer.g:30:11: 'context'
+            // InternalExBeeLangTestLanguageLexer.g:35:9: ( 'context' )
+            // InternalExBeeLangTestLanguageLexer.g:35:11: 'context'
             {
             match("context"); 
 
@@ -295,8 +303,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Version;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:32:9: ( 'version' )
-            // InternalExBeeLangTestLanguageLexer.g:32:11: 'version'
+            // InternalExBeeLangTestLanguageLexer.g:37:9: ( 'version' )
+            // InternalExBeeLangTestLanguageLexer.g:37:11: 'version'
             {
             match("version"); 
 
@@ -316,8 +324,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Cached;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:34:8: ( 'cached' )
-            // InternalExBeeLangTestLanguageLexer.g:34:10: 'cached'
+            // InternalExBeeLangTestLanguageLexer.g:39:8: ( 'cached' )
+            // InternalExBeeLangTestLanguageLexer.g:39:10: 'cached'
             {
             match("cached"); 
 
@@ -337,8 +345,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Greedy;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:36:8: ( 'greedy' )
-            // InternalExBeeLangTestLanguageLexer.g:36:10: 'greedy'
+            // InternalExBeeLangTestLanguageLexer.g:41:8: ( 'greedy' )
+            // InternalExBeeLangTestLanguageLexer.g:41:10: 'greedy'
             {
             match("greedy"); 
 
@@ -358,8 +366,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Output;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:38:8: ( 'output' )
-            // InternalExBeeLangTestLanguageLexer.g:38:10: 'output'
+            // InternalExBeeLangTestLanguageLexer.g:43:8: ( 'output' )
+            // InternalExBeeLangTestLanguageLexer.g:43:10: 'output'
             {
             match("output"); 
 
@@ -379,8 +387,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Source;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:40:8: ( 'source' )
-            // InternalExBeeLangTestLanguageLexer.g:40:10: 'source'
+            // InternalExBeeLangTestLanguageLexer.g:45:8: ( 'source' )
+            // InternalExBeeLangTestLanguageLexer.g:45:10: 'source'
             {
             match("source"); 
 
@@ -400,8 +408,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Final;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:42:7: ( 'final' )
-            // InternalExBeeLangTestLanguageLexer.g:42:9: 'final'
+            // InternalExBeeLangTestLanguageLexer.g:47:7: ( 'final' )
+            // InternalExBeeLangTestLanguageLexer.g:47:9: 'final'
             {
             match("final"); 
 
@@ -421,8 +429,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Input;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:44:7: ( 'input' )
-            // InternalExBeeLangTestLanguageLexer.g:44:9: 'input'
+            // InternalExBeeLangTestLanguageLexer.g:49:7: ( 'input' )
+            // InternalExBeeLangTestLanguageLexer.g:49:9: 'input'
             {
             match("input"); 
 
@@ -442,8 +450,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Name;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:46:6: ( 'name' )
-            // InternalExBeeLangTestLanguageLexer.g:46:8: 'name'
+            // InternalExBeeLangTestLanguageLexer.g:51:6: ( 'name' )
+            // InternalExBeeLangTestLanguageLexer.g:51:8: 'name'
             {
             match("name"); 
 
@@ -463,8 +471,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = This;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:48:6: ( 'this' )
-            // InternalExBeeLangTestLanguageLexer.g:48:8: 'this'
+            // InternalExBeeLangTestLanguageLexer.g:53:6: ( 'this' )
+            // InternalExBeeLangTestLanguageLexer.g:53:8: 'this'
             {
             match("this"); 
 
@@ -484,8 +492,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Unit;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:50:6: ( 'unit' )
-            // InternalExBeeLangTestLanguageLexer.g:50:8: 'unit'
+            // InternalExBeeLangTestLanguageLexer.g:55:6: ( 'unit' )
+            // InternalExBeeLangTestLanguageLexer.g:55:8: 'unit'
             {
             match("unit"); 
 
@@ -505,8 +513,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = When;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:52:6: ( 'when' )
-            // InternalExBeeLangTestLanguageLexer.g:52:8: 'when'
+            // InternalExBeeLangTestLanguageLexer.g:57:6: ( 'when' )
+            // InternalExBeeLangTestLanguageLexer.g:57:8: 'when'
             {
             match("when"); 
 
@@ -526,8 +534,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = With;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:54:6: ( 'with' )
-            // InternalExBeeLangTestLanguageLexer.g:54:8: 'with'
+            // InternalExBeeLangTestLanguageLexer.g:59:6: ( 'with' )
+            // InternalExBeeLangTestLanguageLexer.g:59:8: 'with'
             {
             match("with"); 
 
@@ -547,8 +555,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = ExclamationMarkEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:56:37: ( '!==' )
-            // InternalExBeeLangTestLanguageLexer.g:56:39: '!=='
+            // InternalExBeeLangTestLanguageLexer.g:61:37: ( '!==' )
+            // InternalExBeeLangTestLanguageLexer.g:61:39: '!=='
             {
             match("!=="); 
 
@@ -568,8 +576,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = FullStopFullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:58:26: ( '...' )
-            // InternalExBeeLangTestLanguageLexer.g:58:28: '...'
+            // InternalExBeeLangTestLanguageLexer.g:63:26: ( '...' )
+            // InternalExBeeLangTestLanguageLexer.g:63:28: '...'
             {
             match("..."); 
 
@@ -589,8 +597,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = EqualsSignEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:60:32: ( '===' )
-            // InternalExBeeLangTestLanguageLexer.g:60:34: '==='
+            // InternalExBeeLangTestLanguageLexer.g:65:32: ( '===' )
+            // InternalExBeeLangTestLanguageLexer.g:65:34: '==='
             {
             match("==="); 
 
@@ -610,8 +618,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Env;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:62:5: ( 'env' )
-            // InternalExBeeLangTestLanguageLexer.g:62:7: 'env'
+            // InternalExBeeLangTestLanguageLexer.g:67:5: ( 'env' )
+            // InternalExBeeLangTestLanguageLexer.g:67:7: 'env'
             {
             match("env"); 
 
@@ -631,8 +639,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = New;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:64:5: ( 'new' )
-            // InternalExBeeLangTestLanguageLexer.g:64:7: 'new'
+            // InternalExBeeLangTestLanguageLexer.g:69:5: ( 'new' )
+            // InternalExBeeLangTestLanguageLexer.g:69:7: 'new'
             {
             match("new"); 
 
@@ -652,8 +660,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Val;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:66:5: ( 'val' )
-            // InternalExBeeLangTestLanguageLexer.g:66:7: 'val'
+            // InternalExBeeLangTestLanguageLexer.g:71:5: ( 'val' )
+            // InternalExBeeLangTestLanguageLexer.g:71:7: 'val'
             {
             match("val"); 
 
@@ -673,8 +681,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Var;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:68:5: ( 'var' )
-            // InternalExBeeLangTestLanguageLexer.g:68:7: 'var'
+            // InternalExBeeLangTestLanguageLexer.g:73:5: ( 'var' )
+            // InternalExBeeLangTestLanguageLexer.g:73:7: 'var'
             {
             match("var"); 
 
@@ -694,8 +702,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = ExclamationMarkEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:70:27: ( '!=' )
-            // InternalExBeeLangTestLanguageLexer.g:70:29: '!='
+            // InternalExBeeLangTestLanguageLexer.g:75:27: ( '!=' )
+            // InternalExBeeLangTestLanguageLexer.g:75:29: '!='
             {
             match("!="); 
 
@@ -715,8 +723,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = PercentSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:72:23: ( '%=' )
-            // InternalExBeeLangTestLanguageLexer.g:72:25: '%='
+            // InternalExBeeLangTestLanguageLexer.g:77:23: ( '%=' )
+            // InternalExBeeLangTestLanguageLexer.g:77:25: '%='
             {
             match("%="); 
 
@@ -736,8 +744,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = AmpersandAmpersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:74:20: ( '&&' )
-            // InternalExBeeLangTestLanguageLexer.g:74:22: '&&'
+            // InternalExBeeLangTestLanguageLexer.g:79:20: ( '&&' )
+            // InternalExBeeLangTestLanguageLexer.g:79:22: '&&'
             {
             match("&&"); 
 
@@ -757,8 +765,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = AsteriskEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:76:20: ( '*=' )
-            // InternalExBeeLangTestLanguageLexer.g:76:22: '*='
+            // InternalExBeeLangTestLanguageLexer.g:81:20: ( '*=' )
+            // InternalExBeeLangTestLanguageLexer.g:81:22: '*='
             {
             match("*="); 
 
@@ -778,8 +786,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = PlusSignPlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:78:18: ( '++' )
-            // InternalExBeeLangTestLanguageLexer.g:78:20: '++'
+            // InternalExBeeLangTestLanguageLexer.g:83:18: ( '++' )
+            // InternalExBeeLangTestLanguageLexer.g:83:20: '++'
             {
             match("++"); 
 
@@ -799,8 +807,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = PlusSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:80:20: ( '+=' )
-            // InternalExBeeLangTestLanguageLexer.g:80:22: '+='
+            // InternalExBeeLangTestLanguageLexer.g:85:20: ( '+=' )
+            // InternalExBeeLangTestLanguageLexer.g:85:22: '+='
             {
             match("+="); 
 
@@ -820,8 +828,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = HyphenMinusHyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:82:24: ( '--' )
-            // InternalExBeeLangTestLanguageLexer.g:82:26: '--'
+            // InternalExBeeLangTestLanguageLexer.g:87:24: ( '--' )
+            // InternalExBeeLangTestLanguageLexer.g:87:26: '--'
             {
             match("--"); 
 
@@ -841,8 +849,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = HyphenMinusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:84:23: ( '-=' )
-            // InternalExBeeLangTestLanguageLexer.g:84:25: '-='
+            // InternalExBeeLangTestLanguageLexer.g:89:23: ( '-=' )
+            // InternalExBeeLangTestLanguageLexer.g:89:25: '-='
             {
             match("-="); 
 
@@ -862,8 +870,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = FullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:86:18: ( '..' )
-            // InternalExBeeLangTestLanguageLexer.g:86:20: '..'
+            // InternalExBeeLangTestLanguageLexer.g:91:18: ( '..' )
+            // InternalExBeeLangTestLanguageLexer.g:91:20: '..'
             {
             match(".."); 
 
@@ -883,8 +891,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = SolidusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:88:19: ( '/=' )
-            // InternalExBeeLangTestLanguageLexer.g:88:21: '/='
+            // InternalExBeeLangTestLanguageLexer.g:93:19: ( '/=' )
+            // InternalExBeeLangTestLanguageLexer.g:93:21: '/='
             {
             match("/="); 
 
@@ -904,8 +912,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = LessThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:90:24: ( '<=' )
-            // InternalExBeeLangTestLanguageLexer.g:90:26: '<='
+            // InternalExBeeLangTestLanguageLexer.g:95:24: ( '<=' )
+            // InternalExBeeLangTestLanguageLexer.g:95:26: '<='
             {
             match("<="); 
 
@@ -925,8 +933,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = EqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:92:22: ( '==' )
-            // InternalExBeeLangTestLanguageLexer.g:92:24: '=='
+            // InternalExBeeLangTestLanguageLexer.g:97:22: ( '==' )
+            // InternalExBeeLangTestLanguageLexer.g:97:24: '=='
             {
             match("=="); 
 
@@ -946,8 +954,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = EqualsSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:94:27: ( '=>' )
-            // InternalExBeeLangTestLanguageLexer.g:94:29: '=>'
+            // InternalExBeeLangTestLanguageLexer.g:99:27: ( '=>' )
+            // InternalExBeeLangTestLanguageLexer.g:99:29: '=>'
             {
             match("=>"); 
 
@@ -967,8 +975,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = GreaterThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:96:27: ( '>=' )
-            // InternalExBeeLangTestLanguageLexer.g:96:29: '>='
+            // InternalExBeeLangTestLanguageLexer.g:101:27: ( '>=' )
+            // InternalExBeeLangTestLanguageLexer.g:101:29: '>='
             {
             match(">="); 
 
@@ -988,8 +996,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = As;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:98:4: ( 'as' )
-            // InternalExBeeLangTestLanguageLexer.g:98:6: 'as'
+            // InternalExBeeLangTestLanguageLexer.g:103:4: ( 'as' )
+            // InternalExBeeLangTestLanguageLexer.g:103:6: 'as'
             {
             match("as"); 
 
@@ -1009,8 +1017,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = VerticalLineVerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:100:26: ( '||' )
-            // InternalExBeeLangTestLanguageLexer.g:100:28: '||'
+            // InternalExBeeLangTestLanguageLexer.g:105:26: ( '||' )
+            // InternalExBeeLangTestLanguageLexer.g:105:28: '||'
             {
             match("||"); 
 
@@ -1030,8 +1038,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = TildeEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:102:17: ( '~=' )
-            // InternalExBeeLangTestLanguageLexer.g:102:19: '~='
+            // InternalExBeeLangTestLanguageLexer.g:107:17: ( '~=' )
+            // InternalExBeeLangTestLanguageLexer.g:107:19: '~='
             {
             match("~="); 
 
@@ -1051,8 +1059,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = ExclamationMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:104:17: ( '!' )
-            // InternalExBeeLangTestLanguageLexer.g:104:19: '!'
+            // InternalExBeeLangTestLanguageLexer.g:109:17: ( '!' )
+            // InternalExBeeLangTestLanguageLexer.g:109:19: '!'
             {
             match('!'); 
 
@@ -1071,8 +1079,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = PercentSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:106:13: ( '%' )
-            // InternalExBeeLangTestLanguageLexer.g:106:15: '%'
+            // InternalExBeeLangTestLanguageLexer.g:111:13: ( '%' )
+            // InternalExBeeLangTestLanguageLexer.g:111:15: '%'
             {
             match('%'); 
 
@@ -1091,8 +1099,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:108:17: ( '(' )
-            // InternalExBeeLangTestLanguageLexer.g:108:19: '('
+            // InternalExBeeLangTestLanguageLexer.g:113:17: ( '(' )
+            // InternalExBeeLangTestLanguageLexer.g:113:19: '('
             {
             match('('); 
 
@@ -1111,8 +1119,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:110:18: ( ')' )
-            // InternalExBeeLangTestLanguageLexer.g:110:20: ')'
+            // InternalExBeeLangTestLanguageLexer.g:115:18: ( ')' )
+            // InternalExBeeLangTestLanguageLexer.g:115:20: ')'
             {
             match(')'); 
 
@@ -1131,8 +1139,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Asterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:112:10: ( '*' )
-            // InternalExBeeLangTestLanguageLexer.g:112:12: '*'
+            // InternalExBeeLangTestLanguageLexer.g:117:10: ( '*' )
+            // InternalExBeeLangTestLanguageLexer.g:117:12: '*'
             {
             match('*'); 
 
@@ -1151,8 +1159,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = PlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:114:10: ( '+' )
-            // InternalExBeeLangTestLanguageLexer.g:114:12: '+'
+            // InternalExBeeLangTestLanguageLexer.g:119:10: ( '+' )
+            // InternalExBeeLangTestLanguageLexer.g:119:12: '+'
             {
             match('+'); 
 
@@ -1171,8 +1179,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:116:7: ( ',' )
-            // InternalExBeeLangTestLanguageLexer.g:116:9: ','
+            // InternalExBeeLangTestLanguageLexer.g:121:7: ( ',' )
+            // InternalExBeeLangTestLanguageLexer.g:121:9: ','
             {
             match(','); 
 
@@ -1191,8 +1199,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = HyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:118:13: ( '-' )
-            // InternalExBeeLangTestLanguageLexer.g:118:15: '-'
+            // InternalExBeeLangTestLanguageLexer.g:123:13: ( '-' )
+            // InternalExBeeLangTestLanguageLexer.g:123:15: '-'
             {
             match('-'); 
 
@@ -1211,8 +1219,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:120:10: ( '.' )
-            // InternalExBeeLangTestLanguageLexer.g:120:12: '.'
+            // InternalExBeeLangTestLanguageLexer.g:125:10: ( '.' )
+            // InternalExBeeLangTestLanguageLexer.g:125:12: '.'
             {
             match('.'); 
 
@@ -1231,8 +1239,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Solidus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:122:9: ( '/' )
-            // InternalExBeeLangTestLanguageLexer.g:122:11: '/'
+            // InternalExBeeLangTestLanguageLexer.g:127:9: ( '/' )
+            // InternalExBeeLangTestLanguageLexer.g:127:11: '/'
             {
             match('/'); 
 
@@ -1251,8 +1259,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:124:7: ( ':' )
-            // InternalExBeeLangTestLanguageLexer.g:124:9: ':'
+            // InternalExBeeLangTestLanguageLexer.g:129:7: ( ':' )
+            // InternalExBeeLangTestLanguageLexer.g:129:9: ':'
             {
             match(':'); 
 
@@ -1271,8 +1279,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = Semicolon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:126:11: ( ';' )
-            // InternalExBeeLangTestLanguageLexer.g:126:13: ';'
+            // InternalExBeeLangTestLanguageLexer.g:131:11: ( ';' )
+            // InternalExBeeLangTestLanguageLexer.g:131:13: ';'
             {
             match(';'); 
 
@@ -1291,8 +1299,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = LessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:128:14: ( '<' )
-            // InternalExBeeLangTestLanguageLexer.g:128:16: '<'
+            // InternalExBeeLangTestLanguageLexer.g:133:14: ( '<' )
+            // InternalExBeeLangTestLanguageLexer.g:133:16: '<'
             {
             match('<'); 
 
@@ -1311,8 +1319,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = EqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:130:12: ( '=' )
-            // InternalExBeeLangTestLanguageLexer.g:130:14: '='
+            // InternalExBeeLangTestLanguageLexer.g:135:12: ( '=' )
+            // InternalExBeeLangTestLanguageLexer.g:135:14: '='
             {
             match('='); 
 
@@ -1331,8 +1339,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = GreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:132:17: ( '>' )
-            // InternalExBeeLangTestLanguageLexer.g:132:19: '>'
+            // InternalExBeeLangTestLanguageLexer.g:137:17: ( '>' )
+            // InternalExBeeLangTestLanguageLexer.g:137:19: '>'
             {
             match('>'); 
 
@@ -1351,8 +1359,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = LeftSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:134:19: ( '[' )
-            // InternalExBeeLangTestLanguageLexer.g:134:21: '['
+            // InternalExBeeLangTestLanguageLexer.g:139:19: ( '[' )
+            // InternalExBeeLangTestLanguageLexer.g:139:21: '['
             {
             match('['); 
 
@@ -1371,8 +1379,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RightSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:136:20: ( ']' )
-            // InternalExBeeLangTestLanguageLexer.g:136:22: ']'
+            // InternalExBeeLangTestLanguageLexer.g:141:20: ( ']' )
+            // InternalExBeeLangTestLanguageLexer.g:141:22: ']'
             {
             match(']'); 
 
@@ -1391,8 +1399,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = LeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:138:18: ( '{' )
-            // InternalExBeeLangTestLanguageLexer.g:138:20: '{'
+            // InternalExBeeLangTestLanguageLexer.g:143:18: ( '{' )
+            // InternalExBeeLangTestLanguageLexer.g:143:20: '{'
             {
             match('{'); 
 
@@ -1411,8 +1419,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = VerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:140:14: ( '|' )
-            // InternalExBeeLangTestLanguageLexer.g:140:16: '|'
+            // InternalExBeeLangTestLanguageLexer.g:145:14: ( '|' )
+            // InternalExBeeLangTestLanguageLexer.g:145:16: '|'
             {
             match('|'); 
 
@@ -1431,8 +1439,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:142:19: ( '}' )
-            // InternalExBeeLangTestLanguageLexer.g:142:21: '}'
+            // InternalExBeeLangTestLanguageLexer.g:147:19: ( '}' )
+            // InternalExBeeLangTestLanguageLexer.g:147:21: '}'
             {
             match('}'); 
 
@@ -1451,12 +1459,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOCUMENTATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:144:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
-            // InternalExBeeLangTestLanguageLexer.g:144:22: '/**' ( options {greedy=false; } : . )* '*/'
+            // InternalExBeeLangTestLanguageLexer.g:149:20: ( '/**' ( options {greedy=false; } : . )* '*/' )
+            // InternalExBeeLangTestLanguageLexer.g:149:22: '/**' ( options {greedy=false; } : . )* '*/'
             {
             match("/**"); 
 
-            // InternalExBeeLangTestLanguageLexer.g:144:28: ( options {greedy=false; } : . )*
+            // InternalExBeeLangTestLanguageLexer.g:149:28: ( options {greedy=false; } : . )*
             loop1:
             do {
                 int alt1=2;
@@ -1481,7 +1489,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalExBeeLangTestLanguageLexer.g:144:56: .
+            	    // InternalExBeeLangTestLanguageLexer.g:149:56: .
             	    {
             	    matchAny(); 
 
@@ -1511,8 +1519,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:146:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // InternalExBeeLangTestLanguageLexer.g:146:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalExBeeLangTestLanguageLexer.g:151:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // InternalExBeeLangTestLanguageLexer.g:151:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
             match('0'); 
             if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -1524,7 +1532,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalExBeeLangTestLanguageLexer.g:146:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalExBeeLangTestLanguageLexer.g:151:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -1578,10 +1586,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:148:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalExBeeLangTestLanguageLexer.g:148:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExBeeLangTestLanguageLexer.g:153:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalExBeeLangTestLanguageLexer.g:153:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalExBeeLangTestLanguageLexer.g:148:11: ( '^' )?
+            // InternalExBeeLangTestLanguageLexer.g:153:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1590,7 +1598,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalExBeeLangTestLanguageLexer.g:148:11: '^'
+                    // InternalExBeeLangTestLanguageLexer.g:153:11: '^'
                     {
                     match('^'); 
 
@@ -1608,7 +1616,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalExBeeLangTestLanguageLexer.g:148:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExBeeLangTestLanguageLexer.g:153:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -1657,10 +1665,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:150:10: ( ( '0' .. '9' )+ )
-            // InternalExBeeLangTestLanguageLexer.g:150:12: ( '0' .. '9' )+
+            // InternalExBeeLangTestLanguageLexer.g:155:10: ( ( '0' .. '9' )+ )
+            // InternalExBeeLangTestLanguageLexer.g:155:12: ( '0' .. '9' )+
             {
-            // InternalExBeeLangTestLanguageLexer.g:150:12: ( '0' .. '9' )+
+            // InternalExBeeLangTestLanguageLexer.g:155:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -1674,7 +1682,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalExBeeLangTestLanguageLexer.g:150:13: '0' .. '9'
+            	    // InternalExBeeLangTestLanguageLexer.g:155:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1706,10 +1714,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:152:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalExBeeLangTestLanguageLexer.g:152:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExBeeLangTestLanguageLexer.g:157:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalExBeeLangTestLanguageLexer.g:157:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalExBeeLangTestLanguageLexer.g:152:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExBeeLangTestLanguageLexer.g:157:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1727,10 +1735,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalExBeeLangTestLanguageLexer.g:152:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalExBeeLangTestLanguageLexer.g:157:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalExBeeLangTestLanguageLexer.g:152:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalExBeeLangTestLanguageLexer.g:157:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1746,7 +1754,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalExBeeLangTestLanguageLexer.g:152:21: '\\\\' .
+                    	    // InternalExBeeLangTestLanguageLexer.g:157:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1754,7 +1762,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalExBeeLangTestLanguageLexer.g:152:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalExBeeLangTestLanguageLexer.g:157:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1779,10 +1787,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalExBeeLangTestLanguageLexer.g:152:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalExBeeLangTestLanguageLexer.g:157:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalExBeeLangTestLanguageLexer.g:152:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalExBeeLangTestLanguageLexer.g:157:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1798,7 +1806,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalExBeeLangTestLanguageLexer.g:152:54: '\\\\' .
+                    	    // InternalExBeeLangTestLanguageLexer.g:157:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1806,7 +1814,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalExBeeLangTestLanguageLexer.g:152:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalExBeeLangTestLanguageLexer.g:157:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1849,12 +1857,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:154:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalExBeeLangTestLanguageLexer.g:154:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalExBeeLangTestLanguageLexer.g:159:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalExBeeLangTestLanguageLexer.g:159:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalExBeeLangTestLanguageLexer.g:154:24: ( options {greedy=false; } : . )*
+            // InternalExBeeLangTestLanguageLexer.g:159:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1879,7 +1887,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalExBeeLangTestLanguageLexer.g:154:52: .
+            	    // InternalExBeeLangTestLanguageLexer.g:159:52: .
             	    {
             	    matchAny(); 
 
@@ -1909,12 +1917,12 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:156:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalExBeeLangTestLanguageLexer.g:156:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalExBeeLangTestLanguageLexer.g:161:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalExBeeLangTestLanguageLexer.g:161:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalExBeeLangTestLanguageLexer.g:156:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalExBeeLangTestLanguageLexer.g:161:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1927,7 +1935,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalExBeeLangTestLanguageLexer.g:156:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalExBeeLangTestLanguageLexer.g:161:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1947,7 +1955,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalExBeeLangTestLanguageLexer.g:156:40: ( ( '\\r' )? '\\n' )?
+            // InternalExBeeLangTestLanguageLexer.g:161:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1956,9 +1964,9 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalExBeeLangTestLanguageLexer.g:156:41: ( '\\r' )? '\\n'
+                    // InternalExBeeLangTestLanguageLexer.g:161:41: ( '\\r' )? '\\n'
                     {
-                    // InternalExBeeLangTestLanguageLexer.g:156:41: ( '\\r' )?
+                    // InternalExBeeLangTestLanguageLexer.g:161:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1967,7 +1975,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalExBeeLangTestLanguageLexer.g:156:41: '\\r'
+                            // InternalExBeeLangTestLanguageLexer.g:161:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1999,10 +2007,10 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:158:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalExBeeLangTestLanguageLexer.g:158:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExBeeLangTestLanguageLexer.g:163:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalExBeeLangTestLanguageLexer.g:163:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalExBeeLangTestLanguageLexer.g:158:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExBeeLangTestLanguageLexer.g:163:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -2056,8 +2064,8 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBeeLangTestLanguageLexer.g:160:16: ( . )
-            // InternalExBeeLangTestLanguageLexer.g:160:18: .
+            // InternalExBeeLangTestLanguageLexer.g:165:16: ( . )
+            // InternalExBeeLangTestLanguageLexer.g:165:18: .
             {
             matchAny(); 
 

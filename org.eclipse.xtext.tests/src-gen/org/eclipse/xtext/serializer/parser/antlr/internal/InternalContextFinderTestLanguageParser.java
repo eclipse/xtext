@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContextFinderTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -89,7 +97,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalContextFinderTestLanguage.g:65:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalContextFinderTestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -97,8 +105,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:65:46: (iv_ruleModel= ruleModel EOF )
-            // InternalContextFinderTestLanguage.g:66:2: iv_ruleModel= ruleModel EOF
+            // InternalContextFinderTestLanguage.g:70:46: (iv_ruleModel= ruleModel EOF )
+            // InternalContextFinderTestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -125,7 +133,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalContextFinderTestLanguage.g:72:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) ;
+    // InternalContextFinderTestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -179,10 +187,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:78:2: ( ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) )
-            // InternalContextFinderTestLanguage.g:79:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
+            // InternalContextFinderTestLanguage.g:83:2: ( ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) )
+            // InternalContextFinderTestLanguage.g:84:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
             {
-            // InternalContextFinderTestLanguage.g:79:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
+            // InternalContextFinderTestLanguage.g:84:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
             int alt9=9;
             switch ( input.LA(1) ) {
             case 11:
@@ -239,20 +247,20 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             switch (alt9) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:80:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
+                    // InternalContextFinderTestLanguage.g:85:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:80:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
-                    // InternalContextFinderTestLanguage.g:81:4: otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) )
+                    // InternalContextFinderTestLanguage.g:85:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
+                    // InternalContextFinderTestLanguage.g:86:4: otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) )
                     {
                     otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroKeyword_0_0());
                     			
-                    // InternalContextFinderTestLanguage.g:85:4: ( (lv_model_1_0= ruleModel2 ) )
-                    // InternalContextFinderTestLanguage.g:86:5: (lv_model_1_0= ruleModel2 )
+                    // InternalContextFinderTestLanguage.g:90:4: ( (lv_model_1_0= ruleModel2 ) )
+                    // InternalContextFinderTestLanguage.g:91:5: (lv_model_1_0= ruleModel2 )
                     {
-                    // InternalContextFinderTestLanguage.g:86:5: (lv_model_1_0= ruleModel2 )
-                    // InternalContextFinderTestLanguage.g:87:6: lv_model_1_0= ruleModel2
+                    // InternalContextFinderTestLanguage.g:91:5: (lv_model_1_0= ruleModel2 )
+                    // InternalContextFinderTestLanguage.g:92:6: lv_model_1_0= ruleModel2
                     {
 
                     						newCompositeNode(grammarAccess.getModelAccess().getModelModel2ParserRuleCall_0_1_0());
@@ -286,22 +294,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalContextFinderTestLanguage.g:106:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:111:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:106:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:107:4: otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:111:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:112:4: otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitOneKeyword_1_0());
                     			
-                    // InternalContextFinderTestLanguage.g:111:4: ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:112:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:116:4: ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:117:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:112:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
-                    // InternalContextFinderTestLanguage.g:113:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:117:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:118:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:113:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:118:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -319,7 +327,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt1) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:114:7: lv_attributeExclusion_3_1= ruleAttributeExclusionTest1
+                            // InternalContextFinderTestLanguage.g:119:7: lv_attributeExclusion_3_1= ruleAttributeExclusionTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0());
@@ -344,7 +352,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:130:7: lv_attributeExclusion_3_2= ruleAttributeExclusionTest2
+                            // InternalContextFinderTestLanguage.g:135:7: lv_attributeExclusion_3_2= ruleAttributeExclusionTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1());
@@ -384,22 +392,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 3 :
-                    // InternalContextFinderTestLanguage.g:150:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:155:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:150:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:151:4: otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:155:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:156:4: otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
                     {
                     otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitTwoKeyword_2_0());
                     			
-                    // InternalContextFinderTestLanguage.g:155:4: ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:156:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
+                    // InternalContextFinderTestLanguage.g:160:4: ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:161:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:156:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
-                    // InternalContextFinderTestLanguage.g:157:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
+                    // InternalContextFinderTestLanguage.g:161:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
+                    // InternalContextFinderTestLanguage.g:162:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:157:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
+                    // InternalContextFinderTestLanguage.g:162:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -417,7 +425,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt2) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:158:7: lv_nestedType_5_1= ruleNestedTypeTest1
+                            // InternalContextFinderTestLanguage.g:163:7: lv_nestedType_5_1= ruleNestedTypeTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0());
@@ -442,7 +450,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:174:7: lv_nestedType_5_2= ruleNestedTypeTest2
+                            // InternalContextFinderTestLanguage.g:179:7: lv_nestedType_5_2= ruleNestedTypeTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1());
@@ -482,22 +490,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 4 :
-                    // InternalContextFinderTestLanguage.g:194:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:199:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:194:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:195:4: otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:199:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:200:4: otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
                     {
                     otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitThreeKeyword_3_0());
                     			
-                    // InternalContextFinderTestLanguage.g:199:4: ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:200:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
+                    // InternalContextFinderTestLanguage.g:204:4: ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:205:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:200:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
-                    // InternalContextFinderTestLanguage.g:201:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
+                    // InternalContextFinderTestLanguage.g:205:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
+                    // InternalContextFinderTestLanguage.g:206:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:201:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
+                    // InternalContextFinderTestLanguage.g:206:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -515,7 +523,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:202:7: lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1
+                            // InternalContextFinderTestLanguage.g:207:7: lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0());
@@ -540,7 +548,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:218:7: lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2
+                            // InternalContextFinderTestLanguage.g:223:7: lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1());
@@ -580,22 +588,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 5 :
-                    // InternalContextFinderTestLanguage.g:238:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:243:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:238:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:239:4: otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:243:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:244:4: otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
                     {
                     otherlv_8=(Token)match(input,15,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitFourKeyword_4_0());
                     			
-                    // InternalContextFinderTestLanguage.g:243:4: ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:244:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
+                    // InternalContextFinderTestLanguage.g:248:4: ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:249:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:244:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
-                    // InternalContextFinderTestLanguage.g:245:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
+                    // InternalContextFinderTestLanguage.g:249:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
+                    // InternalContextFinderTestLanguage.g:250:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:245:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
+                    // InternalContextFinderTestLanguage.g:250:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -613,7 +621,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt4) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:246:7: lv_parentRef_9_1= ruleParentRefTest1
+                            // InternalContextFinderTestLanguage.g:251:7: lv_parentRef_9_1= ruleParentRefTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getParentRefParentRefTest1ParserRuleCall_4_1_0_0());
@@ -638,7 +646,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:262:7: lv_parentRef_9_2= ruleParentRefTest2
+                            // InternalContextFinderTestLanguage.g:267:7: lv_parentRef_9_2= ruleParentRefTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getParentRefParentRefTest2ParserRuleCall_4_1_0_1());
@@ -678,22 +686,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 6 :
-                    // InternalContextFinderTestLanguage.g:282:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:287:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:282:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:283:4: otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:287:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:288:4: otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
                     {
                     otherlv_10=(Token)match(input,16,FollowSets000.FOLLOW_4); 
 
                     				newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitFiveKeyword_5_0());
                     			
-                    // InternalContextFinderTestLanguage.g:287:4: ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:288:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:292:4: ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:293:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:288:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
-                    // InternalContextFinderTestLanguage.g:289:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:293:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:294:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:289:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:294:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -711,7 +719,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:290:7: lv_quantityExclusion_11_1= ruleQuantityExclusionTest1
+                            // InternalContextFinderTestLanguage.g:295:7: lv_quantityExclusion_11_1= ruleQuantityExclusionTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0());
@@ -736,7 +744,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:306:7: lv_quantityExclusion_11_2= ruleQuantityExclusionTest2
+                            // InternalContextFinderTestLanguage.g:311:7: lv_quantityExclusion_11_2= ruleQuantityExclusionTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getQuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1());
@@ -776,22 +784,22 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 7 :
-                    // InternalContextFinderTestLanguage.g:326:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:331:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:326:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:327:4: otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:331:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:332:4: otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
                     {
                     otherlv_12=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
                     				newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitSixKeyword_6_0());
                     			
-                    // InternalContextFinderTestLanguage.g:331:4: ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
-                    // InternalContextFinderTestLanguage.g:332:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:336:4: ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
+                    // InternalContextFinderTestLanguage.g:337:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:332:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
-                    // InternalContextFinderTestLanguage.g:333:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:337:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
+                    // InternalContextFinderTestLanguage.g:338:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
                     {
-                    // InternalContextFinderTestLanguage.g:333:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
+                    // InternalContextFinderTestLanguage.g:338:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -809,7 +817,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:334:7: lv_valueExclusion_13_1= ruleValueExclusionTest1
+                            // InternalContextFinderTestLanguage.g:339:7: lv_valueExclusion_13_1= ruleValueExclusionTest1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0());
@@ -834,7 +842,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:350:7: lv_valueExclusion_13_2= ruleValueExclusionTest2
+                            // InternalContextFinderTestLanguage.g:355:7: lv_valueExclusion_13_2= ruleValueExclusionTest2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1());
@@ -874,20 +882,20 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 8 :
-                    // InternalContextFinderTestLanguage.g:370:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:375:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:370:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
-                    // InternalContextFinderTestLanguage.g:371:4: otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
+                    // InternalContextFinderTestLanguage.g:375:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
+                    // InternalContextFinderTestLanguage.g:376:4: otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
                     {
                     otherlv_14=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitSevenKeyword_7_0());
                     			
-                    // InternalContextFinderTestLanguage.g:375:4: ( (lv_name_15_0= RULE_STRING ) )
-                    // InternalContextFinderTestLanguage.g:376:5: (lv_name_15_0= RULE_STRING )
+                    // InternalContextFinderTestLanguage.g:380:4: ( (lv_name_15_0= RULE_STRING ) )
+                    // InternalContextFinderTestLanguage.g:381:5: (lv_name_15_0= RULE_STRING )
                     {
-                    // InternalContextFinderTestLanguage.g:376:5: (lv_name_15_0= RULE_STRING )
-                    // InternalContextFinderTestLanguage.g:377:6: lv_name_15_0= RULE_STRING
+                    // InternalContextFinderTestLanguage.g:381:5: (lv_name_15_0= RULE_STRING )
+                    // InternalContextFinderTestLanguage.g:382:6: lv_name_15_0= RULE_STRING
                     {
                     lv_name_15_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_7); 
 
@@ -909,13 +917,13 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                     }
 
-                    // InternalContextFinderTestLanguage.g:393:4: ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
-                    // InternalContextFinderTestLanguage.g:394:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
+                    // InternalContextFinderTestLanguage.g:398:4: ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
+                    // InternalContextFinderTestLanguage.g:399:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
                     {
-                    // InternalContextFinderTestLanguage.g:394:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
-                    // InternalContextFinderTestLanguage.g:395:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
+                    // InternalContextFinderTestLanguage.g:399:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
+                    // InternalContextFinderTestLanguage.g:400:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
                     {
-                    // InternalContextFinderTestLanguage.g:395:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
+                    // InternalContextFinderTestLanguage.g:400:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -933,7 +941,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt7) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:396:7: lv_nodeExclusion_16_1= ruleNodeExclusion1
+                            // InternalContextFinderTestLanguage.g:401:7: lv_nodeExclusion_16_1= ruleNodeExclusion1
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionNodeExclusion1ParserRuleCall_7_2_0_0());
@@ -958,7 +966,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:412:7: lv_nodeExclusion_16_2= ruleNodeExclusion2
+                            // InternalContextFinderTestLanguage.g:417:7: lv_nodeExclusion_16_2= ruleNodeExclusion2
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionNodeExclusion2ParserRuleCall_7_2_0_1());
@@ -998,20 +1006,20 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 9 :
-                    // InternalContextFinderTestLanguage.g:432:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
+                    // InternalContextFinderTestLanguage.g:437:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
                     {
-                    // InternalContextFinderTestLanguage.g:432:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
-                    // InternalContextFinderTestLanguage.g:433:4: otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
+                    // InternalContextFinderTestLanguage.g:437:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
+                    // InternalContextFinderTestLanguage.g:438:4: otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
                     {
                     otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
                     				newLeafNode(otherlv_17, grammarAccess.getModelAccess().getNumberSignDigitEightKeyword_8_0());
                     			
-                    // InternalContextFinderTestLanguage.g:437:4: ( (lv_name_18_0= RULE_STRING ) )
-                    // InternalContextFinderTestLanguage.g:438:5: (lv_name_18_0= RULE_STRING )
+                    // InternalContextFinderTestLanguage.g:442:4: ( (lv_name_18_0= RULE_STRING ) )
+                    // InternalContextFinderTestLanguage.g:443:5: (lv_name_18_0= RULE_STRING )
                     {
-                    // InternalContextFinderTestLanguage.g:438:5: (lv_name_18_0= RULE_STRING )
-                    // InternalContextFinderTestLanguage.g:439:6: lv_name_18_0= RULE_STRING
+                    // InternalContextFinderTestLanguage.g:443:5: (lv_name_18_0= RULE_STRING )
+                    // InternalContextFinderTestLanguage.g:444:6: lv_name_18_0= RULE_STRING
                     {
                     lv_name_18_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_7); 
 
@@ -1033,13 +1041,13 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                     }
 
-                    // InternalContextFinderTestLanguage.g:455:4: ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
-                    // InternalContextFinderTestLanguage.g:456:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
+                    // InternalContextFinderTestLanguage.g:460:4: ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
+                    // InternalContextFinderTestLanguage.g:461:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
                     {
-                    // InternalContextFinderTestLanguage.g:456:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
-                    // InternalContextFinderTestLanguage.g:457:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
+                    // InternalContextFinderTestLanguage.g:461:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
+                    // InternalContextFinderTestLanguage.g:462:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
                     {
-                    // InternalContextFinderTestLanguage.g:457:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
+                    // InternalContextFinderTestLanguage.g:462:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1057,7 +1065,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                     }
                     switch (alt8) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:458:7: lv_nodeExclusionList_19_1= ruleNodeExclusion1List
+                            // InternalContextFinderTestLanguage.g:463:7: lv_nodeExclusionList_19_1= ruleNodeExclusion1List
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionListNodeExclusion1ListParserRuleCall_8_2_0_0());
@@ -1082,7 +1090,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
                             }
                             break;
                         case 2 :
-                            // InternalContextFinderTestLanguage.g:474:7: lv_nodeExclusionList_19_2= ruleNodeExclusion2List
+                            // InternalContextFinderTestLanguage.g:479:7: lv_nodeExclusionList_19_2= ruleNodeExclusion2List
                             {
 
                             							newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionListNodeExclusion2ListParserRuleCall_8_2_0_1());
@@ -1144,7 +1152,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel2"
-    // InternalContextFinderTestLanguage.g:497:1: entryRuleModel2 returns [EObject current=null] : iv_ruleModel2= ruleModel2 EOF ;
+    // InternalContextFinderTestLanguage.g:502:1: entryRuleModel2 returns [EObject current=null] : iv_ruleModel2= ruleModel2 EOF ;
     public final EObject entryRuleModel2() throws RecognitionException {
         EObject current = null;
 
@@ -1152,8 +1160,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:497:47: (iv_ruleModel2= ruleModel2 EOF )
-            // InternalContextFinderTestLanguage.g:498:2: iv_ruleModel2= ruleModel2 EOF
+            // InternalContextFinderTestLanguage.g:502:47: (iv_ruleModel2= ruleModel2 EOF )
+            // InternalContextFinderTestLanguage.g:503:2: iv_ruleModel2= ruleModel2 EOF
             {
              newCompositeNode(grammarAccess.getModel2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1180,7 +1188,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel2"
-    // InternalContextFinderTestLanguage.g:504:1: ruleModel2 returns [EObject current=null] : ( () otherlv_1= 'model' ) ;
+    // InternalContextFinderTestLanguage.g:509:1: ruleModel2 returns [EObject current=null] : ( () otherlv_1= 'model' ) ;
     public final EObject ruleModel2() throws RecognitionException {
         EObject current = null;
 
@@ -1190,14 +1198,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:510:2: ( ( () otherlv_1= 'model' ) )
-            // InternalContextFinderTestLanguage.g:511:2: ( () otherlv_1= 'model' )
+            // InternalContextFinderTestLanguage.g:515:2: ( ( () otherlv_1= 'model' ) )
+            // InternalContextFinderTestLanguage.g:516:2: ( () otherlv_1= 'model' )
             {
-            // InternalContextFinderTestLanguage.g:511:2: ( () otherlv_1= 'model' )
-            // InternalContextFinderTestLanguage.g:512:3: () otherlv_1= 'model'
+            // InternalContextFinderTestLanguage.g:516:2: ( () otherlv_1= 'model' )
+            // InternalContextFinderTestLanguage.g:517:3: () otherlv_1= 'model'
             {
-            // InternalContextFinderTestLanguage.g:512:3: ()
-            // InternalContextFinderTestLanguage.g:513:4: 
+            // InternalContextFinderTestLanguage.g:517:3: ()
+            // InternalContextFinderTestLanguage.g:518:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1234,7 +1242,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAttributeExclusionTest1"
-    // InternalContextFinderTestLanguage.g:527:1: entryRuleAttributeExclusionTest1 returns [EObject current=null] : iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:532:1: entryRuleAttributeExclusionTest1 returns [EObject current=null] : iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF ;
     public final EObject entryRuleAttributeExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1242,8 +1250,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:527:64: (iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF )
-            // InternalContextFinderTestLanguage.g:528:2: iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF
+            // InternalContextFinderTestLanguage.g:532:64: (iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF )
+            // InternalContextFinderTestLanguage.g:533:2: iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF
             {
              newCompositeNode(grammarAccess.getAttributeExclusionTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1270,7 +1278,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAttributeExclusionTest1"
-    // InternalContextFinderTestLanguage.g:534:1: ruleAttributeExclusionTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) ;
+    // InternalContextFinderTestLanguage.g:539:1: ruleAttributeExclusionTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) ;
     public final EObject ruleAttributeExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1281,21 +1289,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:540:2: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) )
-            // InternalContextFinderTestLanguage.g:541:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:545:2: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) )
+            // InternalContextFinderTestLanguage.g:546:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
             {
-            // InternalContextFinderTestLanguage.g:541:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:542:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:546:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:547:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAttributeExclusionTest1Access().getKw1Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:546:3: ( (lv_attr1_1_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:547:4: (lv_attr1_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:551:3: ( (lv_attr1_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:552:4: (lv_attr1_1_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:547:4: (lv_attr1_1_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:548:5: lv_attr1_1_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:552:4: (lv_attr1_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:553:5: lv_attr1_1_0= RULE_ID
             {
             lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1340,7 +1348,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAttributeExclusionTest2"
-    // InternalContextFinderTestLanguage.g:568:1: entryRuleAttributeExclusionTest2 returns [EObject current=null] : iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:573:1: entryRuleAttributeExclusionTest2 returns [EObject current=null] : iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF ;
     public final EObject entryRuleAttributeExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -1348,8 +1356,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:568:64: (iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF )
-            // InternalContextFinderTestLanguage.g:569:2: iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF
+            // InternalContextFinderTestLanguage.g:573:64: (iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF )
+            // InternalContextFinderTestLanguage.g:574:2: iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF
             {
              newCompositeNode(grammarAccess.getAttributeExclusionTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1376,7 +1384,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAttributeExclusionTest2"
-    // InternalContextFinderTestLanguage.g:575:1: ruleAttributeExclusionTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) ;
+    // InternalContextFinderTestLanguage.g:580:1: ruleAttributeExclusionTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) ;
     public final EObject ruleAttributeExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -1387,21 +1395,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:581:2: ( (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) )
-            // InternalContextFinderTestLanguage.g:582:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:586:2: ( (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) )
+            // InternalContextFinderTestLanguage.g:587:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
             {
-            // InternalContextFinderTestLanguage.g:582:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:583:3: otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:587:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:588:3: otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAttributeExclusionTest2Access().getKw2Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:587:3: ( (lv_attr2_1_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:588:4: (lv_attr2_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:592:3: ( (lv_attr2_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:593:4: (lv_attr2_1_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:588:4: (lv_attr2_1_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:589:5: lv_attr2_1_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:593:4: (lv_attr2_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:594:5: lv_attr2_1_0= RULE_ID
             {
             lv_attr2_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1446,7 +1454,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeTest1"
-    // InternalContextFinderTestLanguage.g:609:1: entryRuleNestedTypeTest1 returns [EObject current=null] : iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:614:1: entryRuleNestedTypeTest1 returns [EObject current=null] : iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF ;
     public final EObject entryRuleNestedTypeTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1454,8 +1462,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:609:56: (iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF )
-            // InternalContextFinderTestLanguage.g:610:2: iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF
+            // InternalContextFinderTestLanguage.g:614:56: (iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF )
+            // InternalContextFinderTestLanguage.g:615:2: iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1482,7 +1490,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeTest1"
-    // InternalContextFinderTestLanguage.g:616:1: ruleNestedTypeTest1 returns [EObject current=null] : ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) ;
+    // InternalContextFinderTestLanguage.g:621:1: ruleNestedTypeTest1 returns [EObject current=null] : ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) ;
     public final EObject ruleNestedTypeTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1493,14 +1501,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:622:2: ( ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) )
-            // InternalContextFinderTestLanguage.g:623:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
+            // InternalContextFinderTestLanguage.g:627:2: ( ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) )
+            // InternalContextFinderTestLanguage.g:628:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
             {
-            // InternalContextFinderTestLanguage.g:623:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
-            // InternalContextFinderTestLanguage.g:624:3: (lv_nested_0_0= ruleNestedTypeChild1 )
+            // InternalContextFinderTestLanguage.g:628:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
+            // InternalContextFinderTestLanguage.g:629:3: (lv_nested_0_0= ruleNestedTypeChild1 )
             {
-            // InternalContextFinderTestLanguage.g:624:3: (lv_nested_0_0= ruleNestedTypeChild1 )
-            // InternalContextFinderTestLanguage.g:625:4: lv_nested_0_0= ruleNestedTypeChild1
+            // InternalContextFinderTestLanguage.g:629:3: (lv_nested_0_0= ruleNestedTypeChild1 )
+            // InternalContextFinderTestLanguage.g:630:4: lv_nested_0_0= ruleNestedTypeChild1
             {
 
             				newCompositeNode(grammarAccess.getNestedTypeTest1Access().getNestedNestedTypeChild1ParserRuleCall_0());
@@ -1547,7 +1555,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeTest2"
-    // InternalContextFinderTestLanguage.g:645:1: entryRuleNestedTypeTest2 returns [EObject current=null] : iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:650:1: entryRuleNestedTypeTest2 returns [EObject current=null] : iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF ;
     public final EObject entryRuleNestedTypeTest2() throws RecognitionException {
         EObject current = null;
 
@@ -1555,8 +1563,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:645:56: (iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF )
-            // InternalContextFinderTestLanguage.g:646:2: iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF
+            // InternalContextFinderTestLanguage.g:650:56: (iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF )
+            // InternalContextFinderTestLanguage.g:651:2: iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1583,7 +1591,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeTest2"
-    // InternalContextFinderTestLanguage.g:652:1: ruleNestedTypeTest2 returns [EObject current=null] : ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) ;
+    // InternalContextFinderTestLanguage.g:657:1: ruleNestedTypeTest2 returns [EObject current=null] : ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) ;
     public final EObject ruleNestedTypeTest2() throws RecognitionException {
         EObject current = null;
 
@@ -1594,14 +1602,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:658:2: ( ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) )
-            // InternalContextFinderTestLanguage.g:659:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
+            // InternalContextFinderTestLanguage.g:663:2: ( ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) )
+            // InternalContextFinderTestLanguage.g:664:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
             {
-            // InternalContextFinderTestLanguage.g:659:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
-            // InternalContextFinderTestLanguage.g:660:3: (lv_nested_0_0= ruleNestedTypeChild2 )
+            // InternalContextFinderTestLanguage.g:664:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
+            // InternalContextFinderTestLanguage.g:665:3: (lv_nested_0_0= ruleNestedTypeChild2 )
             {
-            // InternalContextFinderTestLanguage.g:660:3: (lv_nested_0_0= ruleNestedTypeChild2 )
-            // InternalContextFinderTestLanguage.g:661:4: lv_nested_0_0= ruleNestedTypeChild2
+            // InternalContextFinderTestLanguage.g:665:3: (lv_nested_0_0= ruleNestedTypeChild2 )
+            // InternalContextFinderTestLanguage.g:666:4: lv_nested_0_0= ruleNestedTypeChild2
             {
 
             				newCompositeNode(grammarAccess.getNestedTypeTest2Access().getNestedNestedTypeChild2ParserRuleCall_0());
@@ -1648,7 +1656,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeChild1"
-    // InternalContextFinderTestLanguage.g:681:1: entryRuleNestedTypeChild1 returns [EObject current=null] : iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF ;
+    // InternalContextFinderTestLanguage.g:686:1: entryRuleNestedTypeChild1 returns [EObject current=null] : iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF ;
     public final EObject entryRuleNestedTypeChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1656,8 +1664,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:681:57: (iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF )
-            // InternalContextFinderTestLanguage.g:682:2: iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF
+            // InternalContextFinderTestLanguage.g:686:57: (iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF )
+            // InternalContextFinderTestLanguage.g:687:2: iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeChild1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1684,7 +1692,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeChild1"
-    // InternalContextFinderTestLanguage.g:688:1: ruleNestedTypeChild1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) ;
+    // InternalContextFinderTestLanguage.g:693:1: ruleNestedTypeChild1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) ;
     public final EObject ruleNestedTypeChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1695,21 +1703,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:694:2: ( (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) )
-            // InternalContextFinderTestLanguage.g:695:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:699:2: ( (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) )
+            // InternalContextFinderTestLanguage.g:700:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
             {
-            // InternalContextFinderTestLanguage.g:695:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:696:3: otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:700:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:701:3: otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getNestedTypeChild1Access().getKw1Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:700:3: ( (lv_val_1_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:701:4: (lv_val_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:705:3: ( (lv_val_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:706:4: (lv_val_1_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:701:4: (lv_val_1_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:702:5: lv_val_1_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:706:4: (lv_val_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:707:5: lv_val_1_0= RULE_ID
             {
             lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1754,7 +1762,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeChild2"
-    // InternalContextFinderTestLanguage.g:722:1: entryRuleNestedTypeChild2 returns [EObject current=null] : iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF ;
+    // InternalContextFinderTestLanguage.g:727:1: entryRuleNestedTypeChild2 returns [EObject current=null] : iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF ;
     public final EObject entryRuleNestedTypeChild2() throws RecognitionException {
         EObject current = null;
 
@@ -1762,8 +1770,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:722:57: (iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF )
-            // InternalContextFinderTestLanguage.g:723:2: iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF
+            // InternalContextFinderTestLanguage.g:727:57: (iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF )
+            // InternalContextFinderTestLanguage.g:728:2: iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeChild2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1790,7 +1798,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeChild2"
-    // InternalContextFinderTestLanguage.g:729:1: ruleNestedTypeChild2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) ;
+    // InternalContextFinderTestLanguage.g:734:1: ruleNestedTypeChild2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) ;
     public final EObject ruleNestedTypeChild2() throws RecognitionException {
         EObject current = null;
 
@@ -1801,21 +1809,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:735:2: ( (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) )
-            // InternalContextFinderTestLanguage.g:736:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:740:2: ( (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) )
+            // InternalContextFinderTestLanguage.g:741:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
             {
-            // InternalContextFinderTestLanguage.g:736:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:737:3: otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:741:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:742:3: otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getNestedTypeChild2Access().getKw2Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:741:3: ( (lv_val_1_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:742:4: (lv_val_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:746:3: ( (lv_val_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:747:4: (lv_val_1_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:742:4: (lv_val_1_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:743:5: lv_val_1_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:747:4: (lv_val_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:748:5: lv_val_1_0= RULE_ID
             {
             lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1860,7 +1868,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeRecursiveTest1"
-    // InternalContextFinderTestLanguage.g:763:1: entryRuleNestedTypeRecursiveTest1 returns [EObject current=null] : iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:768:1: entryRuleNestedTypeRecursiveTest1 returns [EObject current=null] : iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF ;
     public final EObject entryRuleNestedTypeRecursiveTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1868,8 +1876,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:763:65: (iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF )
-            // InternalContextFinderTestLanguage.g:764:2: iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF
+            // InternalContextFinderTestLanguage.g:768:65: (iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF )
+            // InternalContextFinderTestLanguage.g:769:2: iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeRecursiveTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1896,7 +1904,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeRecursiveTest1"
-    // InternalContextFinderTestLanguage.g:770:1: ruleNestedTypeRecursiveTest1 returns [EObject current=null] : ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) ;
+    // InternalContextFinderTestLanguage.g:775:1: ruleNestedTypeRecursiveTest1 returns [EObject current=null] : ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) ;
     public final EObject ruleNestedTypeRecursiveTest1() throws RecognitionException {
         EObject current = null;
 
@@ -1907,14 +1915,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:776:2: ( ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) )
-            // InternalContextFinderTestLanguage.g:777:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
+            // InternalContextFinderTestLanguage.g:781:2: ( ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) )
+            // InternalContextFinderTestLanguage.g:782:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
             {
-            // InternalContextFinderTestLanguage.g:777:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
-            // InternalContextFinderTestLanguage.g:778:3: () otherlv_1= 'kw1' ( () otherlv_3= '.' )+
+            // InternalContextFinderTestLanguage.g:782:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
+            // InternalContextFinderTestLanguage.g:783:3: () otherlv_1= 'kw1' ( () otherlv_3= '.' )+
             {
-            // InternalContextFinderTestLanguage.g:778:3: ()
-            // InternalContextFinderTestLanguage.g:779:4: 
+            // InternalContextFinderTestLanguage.g:783:3: ()
+            // InternalContextFinderTestLanguage.g:784:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1928,7 +1936,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(otherlv_1, grammarAccess.getNestedTypeRecursiveTest1Access().getKw1Keyword_1());
             		
-            // InternalContextFinderTestLanguage.g:789:3: ( () otherlv_3= '.' )+
+            // InternalContextFinderTestLanguage.g:794:3: ( () otherlv_3= '.' )+
             int cnt10=0;
             loop10:
             do {
@@ -1942,10 +1950,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:790:4: () otherlv_3= '.'
+            	    // InternalContextFinderTestLanguage.g:795:4: () otherlv_3= '.'
             	    {
-            	    // InternalContextFinderTestLanguage.g:790:4: ()
-            	    // InternalContextFinderTestLanguage.g:791:5: 
+            	    // InternalContextFinderTestLanguage.g:795:4: ()
+            	    // InternalContextFinderTestLanguage.g:796:5: 
             	    {
 
             	    					current = forceCreateModelElementAndSet(
@@ -1995,7 +2003,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNestedTypeRecursiveTest2"
-    // InternalContextFinderTestLanguage.g:806:1: entryRuleNestedTypeRecursiveTest2 returns [EObject current=null] : iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:811:1: entryRuleNestedTypeRecursiveTest2 returns [EObject current=null] : iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF ;
     public final EObject entryRuleNestedTypeRecursiveTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2003,8 +2011,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:806:65: (iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF )
-            // InternalContextFinderTestLanguage.g:807:2: iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF
+            // InternalContextFinderTestLanguage.g:811:65: (iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF )
+            // InternalContextFinderTestLanguage.g:812:2: iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF
             {
              newCompositeNode(grammarAccess.getNestedTypeRecursiveTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2031,7 +2039,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNestedTypeRecursiveTest2"
-    // InternalContextFinderTestLanguage.g:813:1: ruleNestedTypeRecursiveTest2 returns [EObject current=null] : ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) ;
+    // InternalContextFinderTestLanguage.g:818:1: ruleNestedTypeRecursiveTest2 returns [EObject current=null] : ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) ;
     public final EObject ruleNestedTypeRecursiveTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2042,14 +2050,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:819:2: ( ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) )
-            // InternalContextFinderTestLanguage.g:820:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
+            // InternalContextFinderTestLanguage.g:824:2: ( ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) )
+            // InternalContextFinderTestLanguage.g:825:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
             {
-            // InternalContextFinderTestLanguage.g:820:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
-            // InternalContextFinderTestLanguage.g:821:3: () otherlv_1= 'kw2' ( () otherlv_3= '.' )+
+            // InternalContextFinderTestLanguage.g:825:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
+            // InternalContextFinderTestLanguage.g:826:3: () otherlv_1= 'kw2' ( () otherlv_3= '.' )+
             {
-            // InternalContextFinderTestLanguage.g:821:3: ()
-            // InternalContextFinderTestLanguage.g:822:4: 
+            // InternalContextFinderTestLanguage.g:826:3: ()
+            // InternalContextFinderTestLanguage.g:827:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2063,7 +2071,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(otherlv_1, grammarAccess.getNestedTypeRecursiveTest2Access().getKw2Keyword_1());
             		
-            // InternalContextFinderTestLanguage.g:832:3: ( () otherlv_3= '.' )+
+            // InternalContextFinderTestLanguage.g:837:3: ( () otherlv_3= '.' )+
             int cnt11=0;
             loop11:
             do {
@@ -2077,10 +2085,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:833:4: () otherlv_3= '.'
+            	    // InternalContextFinderTestLanguage.g:838:4: () otherlv_3= '.'
             	    {
-            	    // InternalContextFinderTestLanguage.g:833:4: ()
-            	    // InternalContextFinderTestLanguage.g:834:5: 
+            	    // InternalContextFinderTestLanguage.g:838:4: ()
+            	    // InternalContextFinderTestLanguage.g:839:5: 
             	    {
 
             	    					current = forceCreateModelElementAndSet(
@@ -2130,7 +2138,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleParentRefTest1"
-    // InternalContextFinderTestLanguage.g:849:1: entryRuleParentRefTest1 returns [EObject current=null] : iv_ruleParentRefTest1= ruleParentRefTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:854:1: entryRuleParentRefTest1 returns [EObject current=null] : iv_ruleParentRefTest1= ruleParentRefTest1 EOF ;
     public final EObject entryRuleParentRefTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2138,8 +2146,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:849:55: (iv_ruleParentRefTest1= ruleParentRefTest1 EOF )
-            // InternalContextFinderTestLanguage.g:850:2: iv_ruleParentRefTest1= ruleParentRefTest1 EOF
+            // InternalContextFinderTestLanguage.g:854:55: (iv_ruleParentRefTest1= ruleParentRefTest1 EOF )
+            // InternalContextFinderTestLanguage.g:855:2: iv_ruleParentRefTest1= ruleParentRefTest1 EOF
             {
              newCompositeNode(grammarAccess.getParentRefTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2166,7 +2174,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleParentRefTest1"
-    // InternalContextFinderTestLanguage.g:856:1: ruleParentRefTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) ;
+    // InternalContextFinderTestLanguage.g:861:1: ruleParentRefTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) ;
     public final EObject ruleParentRefTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2178,21 +2186,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:862:2: ( (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) )
-            // InternalContextFinderTestLanguage.g:863:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
+            // InternalContextFinderTestLanguage.g:867:2: ( (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) )
+            // InternalContextFinderTestLanguage.g:868:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
             {
-            // InternalContextFinderTestLanguage.g:863:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
-            // InternalContextFinderTestLanguage.g:864:3: otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
+            // InternalContextFinderTestLanguage.g:868:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
+            // InternalContextFinderTestLanguage.g:869:3: otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
             {
             otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_11); 
 
             			newLeafNode(otherlv_0, grammarAccess.getParentRefTest1Access().getKw1Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:868:3: ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
-            // InternalContextFinderTestLanguage.g:869:4: (lv_child1_1_0= ruleParentRefTestChild1 )
+            // InternalContextFinderTestLanguage.g:873:3: ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
+            // InternalContextFinderTestLanguage.g:874:4: (lv_child1_1_0= ruleParentRefTestChild1 )
             {
-            // InternalContextFinderTestLanguage.g:869:4: (lv_child1_1_0= ruleParentRefTestChild1 )
-            // InternalContextFinderTestLanguage.g:870:5: lv_child1_1_0= ruleParentRefTestChild1
+            // InternalContextFinderTestLanguage.g:874:4: (lv_child1_1_0= ruleParentRefTestChild1 )
+            // InternalContextFinderTestLanguage.g:875:5: lv_child1_1_0= ruleParentRefTestChild1
             {
 
             					newCompositeNode(grammarAccess.getParentRefTest1Access().getChild1ParentRefTestChild1ParserRuleCall_1_0());
@@ -2242,7 +2250,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleParentRefTest2"
-    // InternalContextFinderTestLanguage.g:891:1: entryRuleParentRefTest2 returns [EObject current=null] : iv_ruleParentRefTest2= ruleParentRefTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:896:1: entryRuleParentRefTest2 returns [EObject current=null] : iv_ruleParentRefTest2= ruleParentRefTest2 EOF ;
     public final EObject entryRuleParentRefTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2250,8 +2258,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:891:55: (iv_ruleParentRefTest2= ruleParentRefTest2 EOF )
-            // InternalContextFinderTestLanguage.g:892:2: iv_ruleParentRefTest2= ruleParentRefTest2 EOF
+            // InternalContextFinderTestLanguage.g:896:55: (iv_ruleParentRefTest2= ruleParentRefTest2 EOF )
+            // InternalContextFinderTestLanguage.g:897:2: iv_ruleParentRefTest2= ruleParentRefTest2 EOF
             {
              newCompositeNode(grammarAccess.getParentRefTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2278,7 +2286,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleParentRefTest2"
-    // InternalContextFinderTestLanguage.g:898:1: ruleParentRefTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) ;
+    // InternalContextFinderTestLanguage.g:903:1: ruleParentRefTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) ;
     public final EObject ruleParentRefTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2290,21 +2298,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:904:2: ( (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) )
-            // InternalContextFinderTestLanguage.g:905:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
+            // InternalContextFinderTestLanguage.g:909:2: ( (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) )
+            // InternalContextFinderTestLanguage.g:910:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
             {
-            // InternalContextFinderTestLanguage.g:905:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
-            // InternalContextFinderTestLanguage.g:906:3: otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
+            // InternalContextFinderTestLanguage.g:910:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
+            // InternalContextFinderTestLanguage.g:911:3: otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_11); 
 
             			newLeafNode(otherlv_0, grammarAccess.getParentRefTest2Access().getKw2Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:910:3: ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
-            // InternalContextFinderTestLanguage.g:911:4: (lv_child2_1_0= ruleParentRefTestChild2 )
+            // InternalContextFinderTestLanguage.g:915:3: ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
+            // InternalContextFinderTestLanguage.g:916:4: (lv_child2_1_0= ruleParentRefTestChild2 )
             {
-            // InternalContextFinderTestLanguage.g:911:4: (lv_child2_1_0= ruleParentRefTestChild2 )
-            // InternalContextFinderTestLanguage.g:912:5: lv_child2_1_0= ruleParentRefTestChild2
+            // InternalContextFinderTestLanguage.g:916:4: (lv_child2_1_0= ruleParentRefTestChild2 )
+            // InternalContextFinderTestLanguage.g:917:5: lv_child2_1_0= ruleParentRefTestChild2
             {
 
             					newCompositeNode(grammarAccess.getParentRefTest2Access().getChild2ParentRefTestChild2ParserRuleCall_1_0());
@@ -2354,7 +2362,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleParentRefTestChild1"
-    // InternalContextFinderTestLanguage.g:933:1: entryRuleParentRefTestChild1 returns [EObject current=null] : iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF ;
+    // InternalContextFinderTestLanguage.g:938:1: entryRuleParentRefTestChild1 returns [EObject current=null] : iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF ;
     public final EObject entryRuleParentRefTestChild1() throws RecognitionException {
         EObject current = null;
 
@@ -2362,8 +2370,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:933:60: (iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF )
-            // InternalContextFinderTestLanguage.g:934:2: iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF
+            // InternalContextFinderTestLanguage.g:938:60: (iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF )
+            // InternalContextFinderTestLanguage.g:939:2: iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF
             {
              newCompositeNode(grammarAccess.getParentRefTestChild1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2390,7 +2398,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleParentRefTestChild1"
-    // InternalContextFinderTestLanguage.g:940:1: ruleParentRefTestChild1 returns [EObject current=null] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) ;
+    // InternalContextFinderTestLanguage.g:945:1: ruleParentRefTestChild1 returns [EObject current=null] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) ;
     public final EObject ruleParentRefTestChild1() throws RecognitionException {
         EObject current = null;
 
@@ -2402,14 +2410,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:946:2: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) )
-            // InternalContextFinderTestLanguage.g:947:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
+            // InternalContextFinderTestLanguage.g:951:2: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) )
+            // InternalContextFinderTestLanguage.g:952:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
             {
-            // InternalContextFinderTestLanguage.g:947:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
-            // InternalContextFinderTestLanguage.g:948:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
+            // InternalContextFinderTestLanguage.g:952:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
+            // InternalContextFinderTestLanguage.g:953:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
             {
-            // InternalContextFinderTestLanguage.g:948:3: ()
-            // InternalContextFinderTestLanguage.g:949:4: 
+            // InternalContextFinderTestLanguage.g:953:3: ()
+            // InternalContextFinderTestLanguage.g:954:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2423,7 +2431,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(otherlv_1, grammarAccess.getParentRefTestChild1Access().getFooKeyword_1());
             		
-            // InternalContextFinderTestLanguage.g:959:3: ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
+            // InternalContextFinderTestLanguage.g:964:3: ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2432,10 +2440,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt12) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:960:4: (lv_child_2_0= ruleParentRefTestChild1 )
+                    // InternalContextFinderTestLanguage.g:965:4: (lv_child_2_0= ruleParentRefTestChild1 )
                     {
-                    // InternalContextFinderTestLanguage.g:960:4: (lv_child_2_0= ruleParentRefTestChild1 )
-                    // InternalContextFinderTestLanguage.g:961:5: lv_child_2_0= ruleParentRefTestChild1
+                    // InternalContextFinderTestLanguage.g:965:4: (lv_child_2_0= ruleParentRefTestChild1 )
+                    // InternalContextFinderTestLanguage.g:966:5: lv_child_2_0= ruleParentRefTestChild1
                     {
 
                     					newCompositeNode(grammarAccess.getParentRefTestChild1Access().getChildParentRefTestChild1ParserRuleCall_2_0());
@@ -2488,7 +2496,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleParentRefTestChild2"
-    // InternalContextFinderTestLanguage.g:982:1: entryRuleParentRefTestChild2 returns [EObject current=null] : iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF ;
+    // InternalContextFinderTestLanguage.g:987:1: entryRuleParentRefTestChild2 returns [EObject current=null] : iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF ;
     public final EObject entryRuleParentRefTestChild2() throws RecognitionException {
         EObject current = null;
 
@@ -2496,8 +2504,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:982:60: (iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF )
-            // InternalContextFinderTestLanguage.g:983:2: iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF
+            // InternalContextFinderTestLanguage.g:987:60: (iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF )
+            // InternalContextFinderTestLanguage.g:988:2: iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF
             {
              newCompositeNode(grammarAccess.getParentRefTestChild2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2524,7 +2532,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleParentRefTestChild2"
-    // InternalContextFinderTestLanguage.g:989:1: ruleParentRefTestChild2 returns [EObject current=null] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) ;
+    // InternalContextFinderTestLanguage.g:994:1: ruleParentRefTestChild2 returns [EObject current=null] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) ;
     public final EObject ruleParentRefTestChild2() throws RecognitionException {
         EObject current = null;
 
@@ -2536,14 +2544,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:995:2: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) )
-            // InternalContextFinderTestLanguage.g:996:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
+            // InternalContextFinderTestLanguage.g:1000:2: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) )
+            // InternalContextFinderTestLanguage.g:1001:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
             {
-            // InternalContextFinderTestLanguage.g:996:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
-            // InternalContextFinderTestLanguage.g:997:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
+            // InternalContextFinderTestLanguage.g:1001:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
+            // InternalContextFinderTestLanguage.g:1002:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
             {
-            // InternalContextFinderTestLanguage.g:997:3: ()
-            // InternalContextFinderTestLanguage.g:998:4: 
+            // InternalContextFinderTestLanguage.g:1002:3: ()
+            // InternalContextFinderTestLanguage.g:1003:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2557,7 +2565,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             			newLeafNode(otherlv_1, grammarAccess.getParentRefTestChild2Access().getFooKeyword_1());
             		
-            // InternalContextFinderTestLanguage.g:1008:3: ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
+            // InternalContextFinderTestLanguage.g:1013:3: ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2566,10 +2574,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt13) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1009:4: (lv_child_2_0= ruleParentRefTestChild2 )
+                    // InternalContextFinderTestLanguage.g:1014:4: (lv_child_2_0= ruleParentRefTestChild2 )
                     {
-                    // InternalContextFinderTestLanguage.g:1009:4: (lv_child_2_0= ruleParentRefTestChild2 )
-                    // InternalContextFinderTestLanguage.g:1010:5: lv_child_2_0= ruleParentRefTestChild2
+                    // InternalContextFinderTestLanguage.g:1014:4: (lv_child_2_0= ruleParentRefTestChild2 )
+                    // InternalContextFinderTestLanguage.g:1015:5: lv_child_2_0= ruleParentRefTestChild2
                     {
 
                     					newCompositeNode(grammarAccess.getParentRefTestChild2Access().getChildParentRefTestChild2ParserRuleCall_2_0());
@@ -2622,7 +2630,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleQuantityExclusionTest1"
-    // InternalContextFinderTestLanguage.g:1031:1: entryRuleQuantityExclusionTest1 returns [EObject current=null] : iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:1036:1: entryRuleQuantityExclusionTest1 returns [EObject current=null] : iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF ;
     public final EObject entryRuleQuantityExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2630,8 +2638,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1031:63: (iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF )
-            // InternalContextFinderTestLanguage.g:1032:2: iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF
+            // InternalContextFinderTestLanguage.g:1036:63: (iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF )
+            // InternalContextFinderTestLanguage.g:1037:2: iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF
             {
              newCompositeNode(grammarAccess.getQuantityExclusionTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2658,7 +2666,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleQuantityExclusionTest1"
-    // InternalContextFinderTestLanguage.g:1038:1: ruleQuantityExclusionTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) ;
+    // InternalContextFinderTestLanguage.g:1043:1: ruleQuantityExclusionTest1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) ;
     public final EObject ruleQuantityExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2670,21 +2678,21 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1044:2: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) )
-            // InternalContextFinderTestLanguage.g:1045:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
+            // InternalContextFinderTestLanguage.g:1049:2: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) )
+            // InternalContextFinderTestLanguage.g:1050:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
             {
-            // InternalContextFinderTestLanguage.g:1045:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
-            // InternalContextFinderTestLanguage.g:1046:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )?
+            // InternalContextFinderTestLanguage.g:1050:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
+            // InternalContextFinderTestLanguage.g:1051:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )?
             {
             otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getQuantityExclusionTest1Access().getKw1Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:1050:3: ( (lv_attr1_1_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:1051:4: (lv_attr1_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1055:3: ( (lv_attr1_1_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:1056:4: (lv_attr1_1_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:1051:4: (lv_attr1_1_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:1052:5: lv_attr1_1_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:1056:4: (lv_attr1_1_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1057:5: lv_attr1_1_0= RULE_ID
             {
             lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
@@ -2706,7 +2714,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalContextFinderTestLanguage.g:1068:3: ( (lv_attr2_2_0= RULE_ID ) )?
+            // InternalContextFinderTestLanguage.g:1073:3: ( (lv_attr2_2_0= RULE_ID ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2715,10 +2723,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt14) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1069:4: (lv_attr2_2_0= RULE_ID )
+                    // InternalContextFinderTestLanguage.g:1074:4: (lv_attr2_2_0= RULE_ID )
                     {
-                    // InternalContextFinderTestLanguage.g:1069:4: (lv_attr2_2_0= RULE_ID )
-                    // InternalContextFinderTestLanguage.g:1070:5: lv_attr2_2_0= RULE_ID
+                    // InternalContextFinderTestLanguage.g:1074:4: (lv_attr2_2_0= RULE_ID )
+                    // InternalContextFinderTestLanguage.g:1075:5: lv_attr2_2_0= RULE_ID
                     {
                     lv_attr2_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -2766,7 +2774,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleQuantityExclusionTest2"
-    // InternalContextFinderTestLanguage.g:1090:1: entryRuleQuantityExclusionTest2 returns [EObject current=null] : iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:1095:1: entryRuleQuantityExclusionTest2 returns [EObject current=null] : iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF ;
     public final EObject entryRuleQuantityExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2774,8 +2782,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1090:63: (iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF )
-            // InternalContextFinderTestLanguage.g:1091:2: iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF
+            // InternalContextFinderTestLanguage.g:1095:63: (iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF )
+            // InternalContextFinderTestLanguage.g:1096:2: iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF
             {
              newCompositeNode(grammarAccess.getQuantityExclusionTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2802,7 +2810,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleQuantityExclusionTest2"
-    // InternalContextFinderTestLanguage.g:1097:1: ruleQuantityExclusionTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) ;
+    // InternalContextFinderTestLanguage.g:1102:1: ruleQuantityExclusionTest2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) ;
     public final EObject ruleQuantityExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -2814,17 +2822,17 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1103:2: ( (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) )
-            // InternalContextFinderTestLanguage.g:1104:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:1108:2: ( (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) )
+            // InternalContextFinderTestLanguage.g:1109:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
             {
-            // InternalContextFinderTestLanguage.g:1104:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:1105:3: otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:1109:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:1110:3: otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getQuantityExclusionTest2Access().getKw2Keyword_0());
             		
-            // InternalContextFinderTestLanguage.g:1109:3: ( (lv_attr1_1_0= RULE_ID ) )?
+            // InternalContextFinderTestLanguage.g:1114:3: ( (lv_attr1_1_0= RULE_ID ) )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2837,10 +2845,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt15) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1110:4: (lv_attr1_1_0= RULE_ID )
+                    // InternalContextFinderTestLanguage.g:1115:4: (lv_attr1_1_0= RULE_ID )
                     {
-                    // InternalContextFinderTestLanguage.g:1110:4: (lv_attr1_1_0= RULE_ID )
-                    // InternalContextFinderTestLanguage.g:1111:5: lv_attr1_1_0= RULE_ID
+                    // InternalContextFinderTestLanguage.g:1115:4: (lv_attr1_1_0= RULE_ID )
+                    // InternalContextFinderTestLanguage.g:1116:5: lv_attr1_1_0= RULE_ID
                     {
                     lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
@@ -2865,11 +2873,11 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            // InternalContextFinderTestLanguage.g:1127:3: ( (lv_attr2_2_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:1128:4: (lv_attr2_2_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1132:3: ( (lv_attr2_2_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:1133:4: (lv_attr2_2_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:1128:4: (lv_attr2_2_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:1129:5: lv_attr2_2_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:1133:4: (lv_attr2_2_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1134:5: lv_attr2_2_0= RULE_ID
             {
             lv_attr2_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -2914,7 +2922,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleValueExclusionTest1"
-    // InternalContextFinderTestLanguage.g:1149:1: entryRuleValueExclusionTest1 returns [EObject current=null] : iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF ;
+    // InternalContextFinderTestLanguage.g:1154:1: entryRuleValueExclusionTest1 returns [EObject current=null] : iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF ;
     public final EObject entryRuleValueExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2922,8 +2930,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1149:60: (iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF )
-            // InternalContextFinderTestLanguage.g:1150:2: iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF
+            // InternalContextFinderTestLanguage.g:1154:60: (iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF )
+            // InternalContextFinderTestLanguage.g:1155:2: iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF
             {
              newCompositeNode(grammarAccess.getValueExclusionTest1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2950,7 +2958,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleValueExclusionTest1"
-    // InternalContextFinderTestLanguage.g:1156:1: ruleValueExclusionTest1 returns [EObject current=null] : ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) ;
+    // InternalContextFinderTestLanguage.g:1161:1: ruleValueExclusionTest1 returns [EObject current=null] : ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) ;
     public final EObject ruleValueExclusionTest1() throws RecognitionException {
         EObject current = null;
 
@@ -2961,14 +2969,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1162:2: ( ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) )
-            // InternalContextFinderTestLanguage.g:1163:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
+            // InternalContextFinderTestLanguage.g:1167:2: ( ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) )
+            // InternalContextFinderTestLanguage.g:1168:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
             {
-            // InternalContextFinderTestLanguage.g:1163:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
-            // InternalContextFinderTestLanguage.g:1164:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
+            // InternalContextFinderTestLanguage.g:1168:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
+            // InternalContextFinderTestLanguage.g:1169:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
             {
-            // InternalContextFinderTestLanguage.g:1164:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
-            // InternalContextFinderTestLanguage.g:1165:4: lv_val_0_0= ruleValueExclusionTestEn1
+            // InternalContextFinderTestLanguage.g:1169:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
+            // InternalContextFinderTestLanguage.g:1170:4: lv_val_0_0= ruleValueExclusionTestEn1
             {
 
             				newCompositeNode(grammarAccess.getValueExclusionTest1Access().getValValueExclusionTestEn1EnumRuleCall_0());
@@ -3015,7 +3023,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleValueExclusionTest2"
-    // InternalContextFinderTestLanguage.g:1185:1: entryRuleValueExclusionTest2 returns [EObject current=null] : iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF ;
+    // InternalContextFinderTestLanguage.g:1190:1: entryRuleValueExclusionTest2 returns [EObject current=null] : iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF ;
     public final EObject entryRuleValueExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -3023,8 +3031,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1185:60: (iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF )
-            // InternalContextFinderTestLanguage.g:1186:2: iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF
+            // InternalContextFinderTestLanguage.g:1190:60: (iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF )
+            // InternalContextFinderTestLanguage.g:1191:2: iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF
             {
              newCompositeNode(grammarAccess.getValueExclusionTest2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3051,7 +3059,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleValueExclusionTest2"
-    // InternalContextFinderTestLanguage.g:1192:1: ruleValueExclusionTest2 returns [EObject current=null] : ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) ;
+    // InternalContextFinderTestLanguage.g:1197:1: ruleValueExclusionTest2 returns [EObject current=null] : ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) ;
     public final EObject ruleValueExclusionTest2() throws RecognitionException {
         EObject current = null;
 
@@ -3062,14 +3070,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1198:2: ( ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) )
-            // InternalContextFinderTestLanguage.g:1199:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
+            // InternalContextFinderTestLanguage.g:1203:2: ( ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) )
+            // InternalContextFinderTestLanguage.g:1204:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
             {
-            // InternalContextFinderTestLanguage.g:1199:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
-            // InternalContextFinderTestLanguage.g:1200:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
+            // InternalContextFinderTestLanguage.g:1204:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
+            // InternalContextFinderTestLanguage.g:1205:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
             {
-            // InternalContextFinderTestLanguage.g:1200:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
-            // InternalContextFinderTestLanguage.g:1201:4: lv_val_0_0= ruleValueExclusionTestEn2
+            // InternalContextFinderTestLanguage.g:1205:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
+            // InternalContextFinderTestLanguage.g:1206:4: lv_val_0_0= ruleValueExclusionTestEn2
             {
 
             				newCompositeNode(grammarAccess.getValueExclusionTest2Access().getValValueExclusionTestEn2EnumRuleCall_0());
@@ -3116,7 +3124,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNodeExclusion1"
-    // InternalContextFinderTestLanguage.g:1221:1: entryRuleNodeExclusion1 returns [EObject current=null] : iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF ;
+    // InternalContextFinderTestLanguage.g:1226:1: entryRuleNodeExclusion1 returns [EObject current=null] : iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF ;
     public final EObject entryRuleNodeExclusion1() throws RecognitionException {
         EObject current = null;
 
@@ -3124,8 +3132,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1221:55: (iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF )
-            // InternalContextFinderTestLanguage.g:1222:2: iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF
+            // InternalContextFinderTestLanguage.g:1226:55: (iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF )
+            // InternalContextFinderTestLanguage.g:1227:2: iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF
             {
              newCompositeNode(grammarAccess.getNodeExclusion1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3152,7 +3160,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNodeExclusion1"
-    // InternalContextFinderTestLanguage.g:1228:1: ruleNodeExclusion1 returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // InternalContextFinderTestLanguage.g:1233:1: ruleNodeExclusion1 returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleNodeExclusion1() throws RecognitionException {
         EObject current = null;
 
@@ -3162,14 +3170,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1234:2: ( ( (otherlv_0= RULE_ID ) ) )
-            // InternalContextFinderTestLanguage.g:1235:2: ( (otherlv_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:1239:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalContextFinderTestLanguage.g:1240:2: ( (otherlv_0= RULE_ID ) )
             {
-            // InternalContextFinderTestLanguage.g:1235:2: ( (otherlv_0= RULE_ID ) )
-            // InternalContextFinderTestLanguage.g:1236:3: (otherlv_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1240:2: ( (otherlv_0= RULE_ID ) )
+            // InternalContextFinderTestLanguage.g:1241:3: (otherlv_0= RULE_ID )
             {
-            // InternalContextFinderTestLanguage.g:1236:3: (otherlv_0= RULE_ID )
-            // InternalContextFinderTestLanguage.g:1237:4: otherlv_0= RULE_ID
+            // InternalContextFinderTestLanguage.g:1241:3: (otherlv_0= RULE_ID )
+            // InternalContextFinderTestLanguage.g:1242:4: otherlv_0= RULE_ID
             {
 
             				if (current==null) {
@@ -3206,7 +3214,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNodeExclusion2"
-    // InternalContextFinderTestLanguage.g:1251:1: entryRuleNodeExclusion2 returns [EObject current=null] : iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF ;
+    // InternalContextFinderTestLanguage.g:1256:1: entryRuleNodeExclusion2 returns [EObject current=null] : iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF ;
     public final EObject entryRuleNodeExclusion2() throws RecognitionException {
         EObject current = null;
 
@@ -3214,8 +3222,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1251:55: (iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF )
-            // InternalContextFinderTestLanguage.g:1252:2: iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF
+            // InternalContextFinderTestLanguage.g:1256:55: (iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF )
+            // InternalContextFinderTestLanguage.g:1257:2: iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF
             {
              newCompositeNode(grammarAccess.getNodeExclusion2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3242,7 +3250,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNodeExclusion2"
-    // InternalContextFinderTestLanguage.g:1258:1: ruleNodeExclusion2 returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) ) ;
+    // InternalContextFinderTestLanguage.g:1263:1: ruleNodeExclusion2 returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) ) ;
     public final EObject ruleNodeExclusion2() throws RecognitionException {
         EObject current = null;
 
@@ -3252,14 +3260,14 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1264:2: ( ( (otherlv_0= RULE_STRING ) ) )
-            // InternalContextFinderTestLanguage.g:1265:2: ( (otherlv_0= RULE_STRING ) )
+            // InternalContextFinderTestLanguage.g:1269:2: ( ( (otherlv_0= RULE_STRING ) ) )
+            // InternalContextFinderTestLanguage.g:1270:2: ( (otherlv_0= RULE_STRING ) )
             {
-            // InternalContextFinderTestLanguage.g:1265:2: ( (otherlv_0= RULE_STRING ) )
-            // InternalContextFinderTestLanguage.g:1266:3: (otherlv_0= RULE_STRING )
+            // InternalContextFinderTestLanguage.g:1270:2: ( (otherlv_0= RULE_STRING ) )
+            // InternalContextFinderTestLanguage.g:1271:3: (otherlv_0= RULE_STRING )
             {
-            // InternalContextFinderTestLanguage.g:1266:3: (otherlv_0= RULE_STRING )
-            // InternalContextFinderTestLanguage.g:1267:4: otherlv_0= RULE_STRING
+            // InternalContextFinderTestLanguage.g:1271:3: (otherlv_0= RULE_STRING )
+            // InternalContextFinderTestLanguage.g:1272:4: otherlv_0= RULE_STRING
             {
 
             				if (current==null) {
@@ -3296,7 +3304,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNodeExclusion1List"
-    // InternalContextFinderTestLanguage.g:1281:1: entryRuleNodeExclusion1List returns [EObject current=null] : iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF ;
+    // InternalContextFinderTestLanguage.g:1286:1: entryRuleNodeExclusion1List returns [EObject current=null] : iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF ;
     public final EObject entryRuleNodeExclusion1List() throws RecognitionException {
         EObject current = null;
 
@@ -3304,8 +3312,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1281:59: (iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF )
-            // InternalContextFinderTestLanguage.g:1282:2: iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF
+            // InternalContextFinderTestLanguage.g:1286:59: (iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF )
+            // InternalContextFinderTestLanguage.g:1287:2: iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF
             {
              newCompositeNode(grammarAccess.getNodeExclusion1ListRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3332,7 +3340,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNodeExclusion1List"
-    // InternalContextFinderTestLanguage.g:1288:1: ruleNodeExclusion1List returns [EObject current=null] : ( (otherlv_0= RULE_ID ) )+ ;
+    // InternalContextFinderTestLanguage.g:1293:1: ruleNodeExclusion1List returns [EObject current=null] : ( (otherlv_0= RULE_ID ) )+ ;
     public final EObject ruleNodeExclusion1List() throws RecognitionException {
         EObject current = null;
 
@@ -3342,10 +3350,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1294:2: ( ( (otherlv_0= RULE_ID ) )+ )
-            // InternalContextFinderTestLanguage.g:1295:2: ( (otherlv_0= RULE_ID ) )+
+            // InternalContextFinderTestLanguage.g:1299:2: ( ( (otherlv_0= RULE_ID ) )+ )
+            // InternalContextFinderTestLanguage.g:1300:2: ( (otherlv_0= RULE_ID ) )+
             {
-            // InternalContextFinderTestLanguage.g:1295:2: ( (otherlv_0= RULE_ID ) )+
+            // InternalContextFinderTestLanguage.g:1300:2: ( (otherlv_0= RULE_ID ) )+
             int cnt16=0;
             loop16:
             do {
@@ -3359,10 +3367,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:1296:3: (otherlv_0= RULE_ID )
+            	    // InternalContextFinderTestLanguage.g:1301:3: (otherlv_0= RULE_ID )
             	    {
-            	    // InternalContextFinderTestLanguage.g:1296:3: (otherlv_0= RULE_ID )
-            	    // InternalContextFinderTestLanguage.g:1297:4: otherlv_0= RULE_ID
+            	    // InternalContextFinderTestLanguage.g:1301:3: (otherlv_0= RULE_ID )
+            	    // InternalContextFinderTestLanguage.g:1302:4: otherlv_0= RULE_ID
             	    {
 
             	    				if (current==null) {
@@ -3409,7 +3417,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleNodeExclusion2List"
-    // InternalContextFinderTestLanguage.g:1311:1: entryRuleNodeExclusion2List returns [EObject current=null] : iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF ;
+    // InternalContextFinderTestLanguage.g:1316:1: entryRuleNodeExclusion2List returns [EObject current=null] : iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF ;
     public final EObject entryRuleNodeExclusion2List() throws RecognitionException {
         EObject current = null;
 
@@ -3417,8 +3425,8 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalContextFinderTestLanguage.g:1311:59: (iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF )
-            // InternalContextFinderTestLanguage.g:1312:2: iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF
+            // InternalContextFinderTestLanguage.g:1316:59: (iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF )
+            // InternalContextFinderTestLanguage.g:1317:2: iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF
             {
              newCompositeNode(grammarAccess.getNodeExclusion2ListRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3445,7 +3453,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleNodeExclusion2List"
-    // InternalContextFinderTestLanguage.g:1318:1: ruleNodeExclusion2List returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) )+ ;
+    // InternalContextFinderTestLanguage.g:1323:1: ruleNodeExclusion2List returns [EObject current=null] : ( (otherlv_0= RULE_STRING ) )+ ;
     public final EObject ruleNodeExclusion2List() throws RecognitionException {
         EObject current = null;
 
@@ -3455,10 +3463,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1324:2: ( ( (otherlv_0= RULE_STRING ) )+ )
-            // InternalContextFinderTestLanguage.g:1325:2: ( (otherlv_0= RULE_STRING ) )+
+            // InternalContextFinderTestLanguage.g:1329:2: ( ( (otherlv_0= RULE_STRING ) )+ )
+            // InternalContextFinderTestLanguage.g:1330:2: ( (otherlv_0= RULE_STRING ) )+
             {
-            // InternalContextFinderTestLanguage.g:1325:2: ( (otherlv_0= RULE_STRING ) )+
+            // InternalContextFinderTestLanguage.g:1330:2: ( (otherlv_0= RULE_STRING ) )+
             int cnt17=0;
             loop17:
             do {
@@ -3472,10 +3480,10 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:1326:3: (otherlv_0= RULE_STRING )
+            	    // InternalContextFinderTestLanguage.g:1331:3: (otherlv_0= RULE_STRING )
             	    {
-            	    // InternalContextFinderTestLanguage.g:1326:3: (otherlv_0= RULE_STRING )
-            	    // InternalContextFinderTestLanguage.g:1327:4: otherlv_0= RULE_STRING
+            	    // InternalContextFinderTestLanguage.g:1331:3: (otherlv_0= RULE_STRING )
+            	    // InternalContextFinderTestLanguage.g:1332:4: otherlv_0= RULE_STRING
             	    {
 
             	    				if (current==null) {
@@ -3522,7 +3530,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleValueExclusionTestEn1"
-    // InternalContextFinderTestLanguage.g:1341:1: ruleValueExclusionTestEn1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
+    // InternalContextFinderTestLanguage.g:1346:1: ruleValueExclusionTestEn1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
     public final Enumerator ruleValueExclusionTestEn1() throws RecognitionException {
         Enumerator current = null;
 
@@ -3532,11 +3540,11 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1347:2: ( (enumLiteral_0= 'lit1' ) )
-            // InternalContextFinderTestLanguage.g:1348:2: (enumLiteral_0= 'lit1' )
+            // InternalContextFinderTestLanguage.g:1352:2: ( (enumLiteral_0= 'lit1' ) )
+            // InternalContextFinderTestLanguage.g:1353:2: (enumLiteral_0= 'lit1' )
             {
-            // InternalContextFinderTestLanguage.g:1348:2: (enumLiteral_0= 'lit1' )
-            // InternalContextFinderTestLanguage.g:1349:3: enumLiteral_0= 'lit1'
+            // InternalContextFinderTestLanguage.g:1353:2: (enumLiteral_0= 'lit1' )
+            // InternalContextFinderTestLanguage.g:1354:3: enumLiteral_0= 'lit1'
             {
             enumLiteral_0=(Token)match(input,25,FollowSets000.FOLLOW_2); 
 
@@ -3566,7 +3574,7 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleValueExclusionTestEn2"
-    // InternalContextFinderTestLanguage.g:1358:1: ruleValueExclusionTestEn2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
+    // InternalContextFinderTestLanguage.g:1363:1: ruleValueExclusionTestEn2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
     public final Enumerator ruleValueExclusionTestEn2() throws RecognitionException {
         Enumerator current = null;
 
@@ -3576,11 +3584,11 @@ public class InternalContextFinderTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalContextFinderTestLanguage.g:1364:2: ( (enumLiteral_0= 'lit2' ) )
-            // InternalContextFinderTestLanguage.g:1365:2: (enumLiteral_0= 'lit2' )
+            // InternalContextFinderTestLanguage.g:1369:2: ( (enumLiteral_0= 'lit2' ) )
+            // InternalContextFinderTestLanguage.g:1370:2: (enumLiteral_0= 'lit2' )
             {
-            // InternalContextFinderTestLanguage.g:1365:2: (enumLiteral_0= 'lit2' )
-            // InternalContextFinderTestLanguage.g:1366:3: enumLiteral_0= 'lit2'
+            // InternalContextFinderTestLanguage.g:1370:2: (enumLiteral_0= 'lit2' )
+            // InternalContextFinderTestLanguage.g:1371:3: enumLiteral_0= 'lit2'
             {
             enumLiteral_0=(Token)match(input,26,FollowSets000.FOLLOW_2); 
 

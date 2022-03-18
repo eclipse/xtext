@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -73,7 +81,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalOptionalEmptyTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalOptionalEmptyTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +89,8 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalOptionalEmptyTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalOptionalEmptyTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalOptionalEmptyTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -109,7 +117,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalOptionalEmptyTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_child_0_0= ruleGreeting ) )? ;
+    // InternalOptionalEmptyTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_child_0_0= ruleGreeting ) )? ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -120,10 +128,10 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:77:2: ( ( (lv_child_0_0= ruleGreeting ) )? )
-            // InternalOptionalEmptyTestLanguage.g:78:2: ( (lv_child_0_0= ruleGreeting ) )?
+            // InternalOptionalEmptyTestLanguage.g:82:2: ( ( (lv_child_0_0= ruleGreeting ) )? )
+            // InternalOptionalEmptyTestLanguage.g:83:2: ( (lv_child_0_0= ruleGreeting ) )?
             {
-            // InternalOptionalEmptyTestLanguage.g:78:2: ( (lv_child_0_0= ruleGreeting ) )?
+            // InternalOptionalEmptyTestLanguage.g:83:2: ( (lv_child_0_0= ruleGreeting ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -132,10 +140,10 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt1) {
                 case 1 :
-                    // InternalOptionalEmptyTestLanguage.g:79:3: (lv_child_0_0= ruleGreeting )
+                    // InternalOptionalEmptyTestLanguage.g:84:3: (lv_child_0_0= ruleGreeting )
                     {
-                    // InternalOptionalEmptyTestLanguage.g:79:3: (lv_child_0_0= ruleGreeting )
-                    // InternalOptionalEmptyTestLanguage.g:80:4: lv_child_0_0= ruleGreeting
+                    // InternalOptionalEmptyTestLanguage.g:84:3: (lv_child_0_0= ruleGreeting )
+                    // InternalOptionalEmptyTestLanguage.g:85:4: lv_child_0_0= ruleGreeting
                     {
 
                     				newCompositeNode(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0());
@@ -185,7 +193,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleGreeting"
-    // InternalOptionalEmptyTestLanguage.g:100:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
+    // InternalOptionalEmptyTestLanguage.g:105:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
     public final EObject entryRuleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -193,8 +201,8 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:100:49: (iv_ruleGreeting= ruleGreeting EOF )
-            // InternalOptionalEmptyTestLanguage.g:101:2: iv_ruleGreeting= ruleGreeting EOF
+            // InternalOptionalEmptyTestLanguage.g:105:49: (iv_ruleGreeting= ruleGreeting EOF )
+            // InternalOptionalEmptyTestLanguage.g:106:2: iv_ruleGreeting= ruleGreeting EOF
             {
              newCompositeNode(grammarAccess.getGreetingRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -221,7 +229,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleGreeting"
-    // InternalOptionalEmptyTestLanguage.g:107:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalOptionalEmptyTestLanguage.g:112:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -232,21 +240,21 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:113:2: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalOptionalEmptyTestLanguage.g:114:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalOptionalEmptyTestLanguage.g:118:2: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalOptionalEmptyTestLanguage.g:119:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalOptionalEmptyTestLanguage.g:114:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalOptionalEmptyTestLanguage.g:115:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
+            // InternalOptionalEmptyTestLanguage.g:119:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalOptionalEmptyTestLanguage.g:120:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHalloKeyword_0());
             		
-            // InternalOptionalEmptyTestLanguage.g:119:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalOptionalEmptyTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
+            // InternalOptionalEmptyTestLanguage.g:124:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalOptionalEmptyTestLanguage.g:125:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalOptionalEmptyTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
-            // InternalOptionalEmptyTestLanguage.g:121:5: lv_name_1_0= RULE_ID
+            // InternalOptionalEmptyTestLanguage.g:125:4: (lv_name_1_0= RULE_ID )
+            // InternalOptionalEmptyTestLanguage.g:126:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 

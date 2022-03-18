@@ -190,10 +190,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:745:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalFileAwareTestLanguage.g:745:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFileAwareTestLanguage.g:750:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalFileAwareTestLanguage.g:750:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalFileAwareTestLanguage.g:745:11: ( '^' )?
+            // InternalFileAwareTestLanguage.g:750:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -202,7 +202,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFileAwareTestLanguage.g:745:11: '^'
+                    // InternalFileAwareTestLanguage.g:750:11: '^'
                     {
                     match('^'); 
 
@@ -220,7 +220,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalFileAwareTestLanguage.g:745:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFileAwareTestLanguage.g:750:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -269,10 +269,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:747:10: ( ( '0' .. '9' )+ )
-            // InternalFileAwareTestLanguage.g:747:12: ( '0' .. '9' )+
+            // InternalFileAwareTestLanguage.g:752:10: ( ( '0' .. '9' )+ )
+            // InternalFileAwareTestLanguage.g:752:12: ( '0' .. '9' )+
             {
-            // InternalFileAwareTestLanguage.g:747:12: ( '0' .. '9' )+
+            // InternalFileAwareTestLanguage.g:752:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -286,7 +286,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:747:13: '0' .. '9'
+            	    // InternalFileAwareTestLanguage.g:752:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -318,10 +318,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:749:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalFileAwareTestLanguage.g:749:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFileAwareTestLanguage.g:754:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalFileAwareTestLanguage.g:754:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalFileAwareTestLanguage.g:749:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFileAwareTestLanguage.g:754:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -339,10 +339,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalFileAwareTestLanguage.g:749:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalFileAwareTestLanguage.g:754:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalFileAwareTestLanguage.g:749:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalFileAwareTestLanguage.g:754:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -358,7 +358,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFileAwareTestLanguage.g:749:21: '\\\\' .
+                    	    // InternalFileAwareTestLanguage.g:754:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -366,7 +366,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFileAwareTestLanguage.g:749:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalFileAwareTestLanguage.g:754:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -391,10 +391,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalFileAwareTestLanguage.g:749:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalFileAwareTestLanguage.g:754:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalFileAwareTestLanguage.g:749:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalFileAwareTestLanguage.g:754:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -410,7 +410,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalFileAwareTestLanguage.g:749:54: '\\\\' .
+                    	    // InternalFileAwareTestLanguage.g:754:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -418,7 +418,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFileAwareTestLanguage.g:749:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalFileAwareTestLanguage.g:754:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -461,12 +461,12 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:751:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalFileAwareTestLanguage.g:751:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalFileAwareTestLanguage.g:756:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalFileAwareTestLanguage.g:756:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalFileAwareTestLanguage.g:751:24: ( options {greedy=false; } : . )*
+            // InternalFileAwareTestLanguage.g:756:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -491,7 +491,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:751:52: .
+            	    // InternalFileAwareTestLanguage.g:756:52: .
             	    {
             	    matchAny(); 
 
@@ -521,12 +521,12 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:753:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalFileAwareTestLanguage.g:753:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalFileAwareTestLanguage.g:758:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalFileAwareTestLanguage.g:758:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalFileAwareTestLanguage.g:753:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalFileAwareTestLanguage.g:758:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -539,7 +539,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:753:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalFileAwareTestLanguage.g:758:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -559,7 +559,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalFileAwareTestLanguage.g:753:40: ( ( '\\r' )? '\\n' )?
+            // InternalFileAwareTestLanguage.g:758:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -568,9 +568,9 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalFileAwareTestLanguage.g:753:41: ( '\\r' )? '\\n'
+                    // InternalFileAwareTestLanguage.g:758:41: ( '\\r' )? '\\n'
                     {
-                    // InternalFileAwareTestLanguage.g:753:41: ( '\\r' )?
+                    // InternalFileAwareTestLanguage.g:758:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -579,7 +579,7 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalFileAwareTestLanguage.g:753:41: '\\r'
+                            // InternalFileAwareTestLanguage.g:758:41: '\\r'
                             {
                             match('\r'); 
 
@@ -611,10 +611,10 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:755:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalFileAwareTestLanguage.g:755:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFileAwareTestLanguage.g:760:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalFileAwareTestLanguage.g:760:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalFileAwareTestLanguage.g:755:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFileAwareTestLanguage.g:760:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -668,8 +668,8 @@ public class InternalFileAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFileAwareTestLanguage.g:757:16: ( . )
-            // InternalFileAwareTestLanguage.g:757:18: .
+            // InternalFileAwareTestLanguage.g:762:16: ( . )
+            // InternalFileAwareTestLanguage.g:762:18: .
             {
             matchAny(); 
 

@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -74,7 +82,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +90,8 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:69:46: (iv_ruleModel= ruleModel EOF )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -110,7 +118,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleModel"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )+ ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )+ ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,10 +129,10 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
         	enterRule();
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )+ )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )+
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:82:2: ( ( (lv_elements_0_0= ruleElement ) )+ )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )+
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )+
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:83:2: ( (lv_elements_0_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -138,10 +146,10 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:80:4: lv_elements_0_0= ruleElement
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:84:3: (lv_elements_0_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:85:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
@@ -198,7 +206,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:105:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -206,8 +214,8 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:105:48: (iv_ruleElement= ruleElement EOF )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:106:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -234,7 +242,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleElement"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:107:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:112:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -249,17 +257,17 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
         	enterRule();
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:113:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:118:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:120:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:117:5: lv_name_0_0= RULE_ID
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:121:4: (lv_name_0_0= RULE_ID )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:122:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
@@ -281,7 +289,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
             }
 
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:133:3: ( (otherlv_1= RULE_ID ) )?
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:138:3: ( (otherlv_1= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -290,10 +298,10 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             }
             switch (alt2) {
                 case 1 :
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:134:4: (otherlv_1= RULE_ID )
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:139:4: (otherlv_1= RULE_ID )
                     {
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:134:4: (otherlv_1= RULE_ID )
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:135:5: otherlv_1= RULE_ID
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:139:4: (otherlv_1= RULE_ID )
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:140:5: otherlv_1= RULE_ID
                     {
 
                     					if (current==null) {
@@ -317,7 +325,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
             			newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
             		
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:150:3: ( (lv_elements_3_0= ruleElement ) )*
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:155:3: ( (lv_elements_3_0= ruleElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -330,10 +338,10 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:151:4: (lv_elements_3_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:156:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:151:4: (lv_elements_3_0= ruleElement )
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:152:5: lv_elements_3_0= ruleElement
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:156:4: (lv_elements_3_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:157:5: lv_elements_3_0= ruleElement
             	    {
 
             	    					newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0());

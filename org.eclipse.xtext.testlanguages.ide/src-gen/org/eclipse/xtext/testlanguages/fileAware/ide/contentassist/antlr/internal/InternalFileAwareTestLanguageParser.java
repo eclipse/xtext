@@ -19,6 +19,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalFileAwareTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
@@ -76,11 +84,11 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRulePackageDeclaration"
-    // InternalFileAwareTestLanguage.g:53:1: entryRulePackageDeclaration : rulePackageDeclaration EOF ;
+    // InternalFileAwareTestLanguage.g:58:1: entryRulePackageDeclaration : rulePackageDeclaration EOF ;
     public final void entryRulePackageDeclaration() throws RecognitionException {
         try {
-            // InternalFileAwareTestLanguage.g:54:1: ( rulePackageDeclaration EOF )
-            // InternalFileAwareTestLanguage.g:55:1: rulePackageDeclaration EOF
+            // InternalFileAwareTestLanguage.g:59:1: ( rulePackageDeclaration EOF )
+            // InternalFileAwareTestLanguage.g:60:1: rulePackageDeclaration EOF
             {
              before(grammarAccess.getPackageDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -106,21 +114,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rulePackageDeclaration"
-    // InternalFileAwareTestLanguage.g:62:1: rulePackageDeclaration : ( ( rule__PackageDeclaration__Group__0 ) ) ;
+    // InternalFileAwareTestLanguage.g:67:1: rulePackageDeclaration : ( ( rule__PackageDeclaration__Group__0 ) ) ;
     public final void rulePackageDeclaration() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:66:2: ( ( ( rule__PackageDeclaration__Group__0 ) ) )
-            // InternalFileAwareTestLanguage.g:67:2: ( ( rule__PackageDeclaration__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:71:2: ( ( ( rule__PackageDeclaration__Group__0 ) ) )
+            // InternalFileAwareTestLanguage.g:72:2: ( ( rule__PackageDeclaration__Group__0 ) )
             {
-            // InternalFileAwareTestLanguage.g:67:2: ( ( rule__PackageDeclaration__Group__0 ) )
-            // InternalFileAwareTestLanguage.g:68:3: ( rule__PackageDeclaration__Group__0 )
+            // InternalFileAwareTestLanguage.g:72:2: ( ( rule__PackageDeclaration__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:73:3: ( rule__PackageDeclaration__Group__0 )
             {
              before(grammarAccess.getPackageDeclarationAccess().getGroup()); 
-            // InternalFileAwareTestLanguage.g:69:3: ( rule__PackageDeclaration__Group__0 )
-            // InternalFileAwareTestLanguage.g:69:4: rule__PackageDeclaration__Group__0
+            // InternalFileAwareTestLanguage.g:74:3: ( rule__PackageDeclaration__Group__0 )
+            // InternalFileAwareTestLanguage.g:74:4: rule__PackageDeclaration__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__PackageDeclaration__Group__0();
@@ -153,11 +161,11 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalFileAwareTestLanguage.g:78:1: entryRuleImport : ruleImport EOF ;
+    // InternalFileAwareTestLanguage.g:83:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // InternalFileAwareTestLanguage.g:79:1: ( ruleImport EOF )
-            // InternalFileAwareTestLanguage.g:80:1: ruleImport EOF
+            // InternalFileAwareTestLanguage.g:84:1: ( ruleImport EOF )
+            // InternalFileAwareTestLanguage.g:85:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_1);
@@ -183,21 +191,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleImport"
-    // InternalFileAwareTestLanguage.g:87:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalFileAwareTestLanguage.g:92:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:91:2: ( ( ( rule__Import__Group__0 ) ) )
-            // InternalFileAwareTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:96:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalFileAwareTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
             {
-            // InternalFileAwareTestLanguage.g:92:2: ( ( rule__Import__Group__0 ) )
-            // InternalFileAwareTestLanguage.g:93:3: ( rule__Import__Group__0 )
+            // InternalFileAwareTestLanguage.g:97:2: ( ( rule__Import__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:98:3: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // InternalFileAwareTestLanguage.g:94:3: ( rule__Import__Group__0 )
-            // InternalFileAwareTestLanguage.g:94:4: rule__Import__Group__0
+            // InternalFileAwareTestLanguage.g:99:3: ( rule__Import__Group__0 )
+            // InternalFileAwareTestLanguage.g:99:4: rule__Import__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Import__Group__0();
@@ -230,11 +238,11 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalFileAwareTestLanguage.g:103:1: entryRuleElement : ruleElement EOF ;
+    // InternalFileAwareTestLanguage.g:108:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // InternalFileAwareTestLanguage.g:104:1: ( ruleElement EOF )
-            // InternalFileAwareTestLanguage.g:105:1: ruleElement EOF
+            // InternalFileAwareTestLanguage.g:109:1: ( ruleElement EOF )
+            // InternalFileAwareTestLanguage.g:110:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FOLLOW_1);
@@ -260,21 +268,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleElement"
-    // InternalFileAwareTestLanguage.g:112:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalFileAwareTestLanguage.g:117:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:116:2: ( ( ( rule__Element__Group__0 ) ) )
-            // InternalFileAwareTestLanguage.g:117:2: ( ( rule__Element__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:121:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalFileAwareTestLanguage.g:122:2: ( ( rule__Element__Group__0 ) )
             {
-            // InternalFileAwareTestLanguage.g:117:2: ( ( rule__Element__Group__0 ) )
-            // InternalFileAwareTestLanguage.g:118:3: ( rule__Element__Group__0 )
+            // InternalFileAwareTestLanguage.g:122:2: ( ( rule__Element__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:123:3: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // InternalFileAwareTestLanguage.g:119:3: ( rule__Element__Group__0 )
-            // InternalFileAwareTestLanguage.g:119:4: rule__Element__Group__0
+            // InternalFileAwareTestLanguage.g:124:3: ( rule__Element__Group__0 )
+            // InternalFileAwareTestLanguage.g:124:4: rule__Element__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Element__Group__0();
@@ -307,11 +315,11 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalFileAwareTestLanguage.g:128:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
+    // InternalFileAwareTestLanguage.g:133:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // InternalFileAwareTestLanguage.g:129:1: ( ruleQualifiedName EOF )
-            // InternalFileAwareTestLanguage.g:130:1: ruleQualifiedName EOF
+            // InternalFileAwareTestLanguage.g:134:1: ( ruleQualifiedName EOF )
+            // InternalFileAwareTestLanguage.g:135:1: ruleQualifiedName EOF
             {
              before(grammarAccess.getQualifiedNameRule()); 
             pushFollow(FOLLOW_1);
@@ -337,21 +345,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalFileAwareTestLanguage.g:137:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
+    // InternalFileAwareTestLanguage.g:142:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
     public final void ruleQualifiedName() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:141:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
-            // InternalFileAwareTestLanguage.g:142:2: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:146:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
+            // InternalFileAwareTestLanguage.g:147:2: ( ( rule__QualifiedName__Group__0 ) )
             {
-            // InternalFileAwareTestLanguage.g:142:2: ( ( rule__QualifiedName__Group__0 ) )
-            // InternalFileAwareTestLanguage.g:143:3: ( rule__QualifiedName__Group__0 )
+            // InternalFileAwareTestLanguage.g:147:2: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalFileAwareTestLanguage.g:148:3: ( rule__QualifiedName__Group__0 )
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup()); 
-            // InternalFileAwareTestLanguage.g:144:3: ( rule__QualifiedName__Group__0 )
-            // InternalFileAwareTestLanguage.g:144:4: rule__QualifiedName__Group__0
+            // InternalFileAwareTestLanguage.g:149:3: ( rule__QualifiedName__Group__0 )
+            // InternalFileAwareTestLanguage.g:149:4: rule__QualifiedName__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__0();
@@ -384,13 +392,13 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Alternatives_3"
-    // InternalFileAwareTestLanguage.g:152:1: rule__Element__Alternatives_3 : ( ( ( rule__Element__ContentsAssignment_3_0 ) ) | ( ( rule__Element__Group_3_1__0 ) ) );
+    // InternalFileAwareTestLanguage.g:157:1: rule__Element__Alternatives_3 : ( ( ( rule__Element__ContentsAssignment_3_0 ) ) | ( ( rule__Element__Group_3_1__0 ) ) );
     public final void rule__Element__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:156:1: ( ( ( rule__Element__ContentsAssignment_3_0 ) ) | ( ( rule__Element__Group_3_1__0 ) ) )
+            // InternalFileAwareTestLanguage.g:161:1: ( ( ( rule__Element__ContentsAssignment_3_0 ) ) | ( ( rule__Element__Group_3_1__0 ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -408,14 +416,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFileAwareTestLanguage.g:157:2: ( ( rule__Element__ContentsAssignment_3_0 ) )
+                    // InternalFileAwareTestLanguage.g:162:2: ( ( rule__Element__ContentsAssignment_3_0 ) )
                     {
-                    // InternalFileAwareTestLanguage.g:157:2: ( ( rule__Element__ContentsAssignment_3_0 ) )
-                    // InternalFileAwareTestLanguage.g:158:3: ( rule__Element__ContentsAssignment_3_0 )
+                    // InternalFileAwareTestLanguage.g:162:2: ( ( rule__Element__ContentsAssignment_3_0 ) )
+                    // InternalFileAwareTestLanguage.g:163:3: ( rule__Element__ContentsAssignment_3_0 )
                     {
                      before(grammarAccess.getElementAccess().getContentsAssignment_3_0()); 
-                    // InternalFileAwareTestLanguage.g:159:3: ( rule__Element__ContentsAssignment_3_0 )
-                    // InternalFileAwareTestLanguage.g:159:4: rule__Element__ContentsAssignment_3_0
+                    // InternalFileAwareTestLanguage.g:164:3: ( rule__Element__ContentsAssignment_3_0 )
+                    // InternalFileAwareTestLanguage.g:164:4: rule__Element__ContentsAssignment_3_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Element__ContentsAssignment_3_0();
@@ -433,14 +441,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // InternalFileAwareTestLanguage.g:163:2: ( ( rule__Element__Group_3_1__0 ) )
+                    // InternalFileAwareTestLanguage.g:168:2: ( ( rule__Element__Group_3_1__0 ) )
                     {
-                    // InternalFileAwareTestLanguage.g:163:2: ( ( rule__Element__Group_3_1__0 ) )
-                    // InternalFileAwareTestLanguage.g:164:3: ( rule__Element__Group_3_1__0 )
+                    // InternalFileAwareTestLanguage.g:168:2: ( ( rule__Element__Group_3_1__0 ) )
+                    // InternalFileAwareTestLanguage.g:169:3: ( rule__Element__Group_3_1__0 )
                     {
                      before(grammarAccess.getElementAccess().getGroup_3_1()); 
-                    // InternalFileAwareTestLanguage.g:165:3: ( rule__Element__Group_3_1__0 )
-                    // InternalFileAwareTestLanguage.g:165:4: rule__Element__Group_3_1__0
+                    // InternalFileAwareTestLanguage.g:170:3: ( rule__Element__Group_3_1__0 )
+                    // InternalFileAwareTestLanguage.g:170:4: rule__Element__Group_3_1__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Element__Group_3_1__0();
@@ -475,14 +483,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__0"
-    // InternalFileAwareTestLanguage.g:173:1: rule__PackageDeclaration__Group__0 : rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1 ;
+    // InternalFileAwareTestLanguage.g:178:1: rule__PackageDeclaration__Group__0 : rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1 ;
     public final void rule__PackageDeclaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:177:1: ( rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1 )
-            // InternalFileAwareTestLanguage.g:178:2: rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1
+            // InternalFileAwareTestLanguage.g:182:1: ( rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1 )
+            // InternalFileAwareTestLanguage.g:183:2: rule__PackageDeclaration__Group__0__Impl rule__PackageDeclaration__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__PackageDeclaration__Group__0__Impl();
@@ -513,17 +521,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__0__Impl"
-    // InternalFileAwareTestLanguage.g:185:1: rule__PackageDeclaration__Group__0__Impl : ( 'package' ) ;
+    // InternalFileAwareTestLanguage.g:190:1: rule__PackageDeclaration__Group__0__Impl : ( 'package' ) ;
     public final void rule__PackageDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:189:1: ( ( 'package' ) )
-            // InternalFileAwareTestLanguage.g:190:1: ( 'package' )
+            // InternalFileAwareTestLanguage.g:194:1: ( ( 'package' ) )
+            // InternalFileAwareTestLanguage.g:195:1: ( 'package' )
             {
-            // InternalFileAwareTestLanguage.g:190:1: ( 'package' )
-            // InternalFileAwareTestLanguage.g:191:2: 'package'
+            // InternalFileAwareTestLanguage.g:195:1: ( 'package' )
+            // InternalFileAwareTestLanguage.g:196:2: 'package'
             {
              before(grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0()); 
             match(input,11,FOLLOW_2); 
@@ -550,14 +558,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__1"
-    // InternalFileAwareTestLanguage.g:200:1: rule__PackageDeclaration__Group__1 : rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2 ;
+    // InternalFileAwareTestLanguage.g:205:1: rule__PackageDeclaration__Group__1 : rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2 ;
     public final void rule__PackageDeclaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:204:1: ( rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2 )
-            // InternalFileAwareTestLanguage.g:205:2: rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2
+            // InternalFileAwareTestLanguage.g:209:1: ( rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2 )
+            // InternalFileAwareTestLanguage.g:210:2: rule__PackageDeclaration__Group__1__Impl rule__PackageDeclaration__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__PackageDeclaration__Group__1__Impl();
@@ -588,21 +596,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__1__Impl"
-    // InternalFileAwareTestLanguage.g:212:1: rule__PackageDeclaration__Group__1__Impl : ( ( rule__PackageDeclaration__NameAssignment_1 ) ) ;
+    // InternalFileAwareTestLanguage.g:217:1: rule__PackageDeclaration__Group__1__Impl : ( ( rule__PackageDeclaration__NameAssignment_1 ) ) ;
     public final void rule__PackageDeclaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:216:1: ( ( ( rule__PackageDeclaration__NameAssignment_1 ) ) )
-            // InternalFileAwareTestLanguage.g:217:1: ( ( rule__PackageDeclaration__NameAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:221:1: ( ( ( rule__PackageDeclaration__NameAssignment_1 ) ) )
+            // InternalFileAwareTestLanguage.g:222:1: ( ( rule__PackageDeclaration__NameAssignment_1 ) )
             {
-            // InternalFileAwareTestLanguage.g:217:1: ( ( rule__PackageDeclaration__NameAssignment_1 ) )
-            // InternalFileAwareTestLanguage.g:218:2: ( rule__PackageDeclaration__NameAssignment_1 )
+            // InternalFileAwareTestLanguage.g:222:1: ( ( rule__PackageDeclaration__NameAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:223:2: ( rule__PackageDeclaration__NameAssignment_1 )
             {
              before(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1()); 
-            // InternalFileAwareTestLanguage.g:219:2: ( rule__PackageDeclaration__NameAssignment_1 )
-            // InternalFileAwareTestLanguage.g:219:3: rule__PackageDeclaration__NameAssignment_1
+            // InternalFileAwareTestLanguage.g:224:2: ( rule__PackageDeclaration__NameAssignment_1 )
+            // InternalFileAwareTestLanguage.g:224:3: rule__PackageDeclaration__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__PackageDeclaration__NameAssignment_1();
@@ -635,14 +643,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__2"
-    // InternalFileAwareTestLanguage.g:227:1: rule__PackageDeclaration__Group__2 : rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3 ;
+    // InternalFileAwareTestLanguage.g:232:1: rule__PackageDeclaration__Group__2 : rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3 ;
     public final void rule__PackageDeclaration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:231:1: ( rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3 )
-            // InternalFileAwareTestLanguage.g:232:2: rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3
+            // InternalFileAwareTestLanguage.g:236:1: ( rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3 )
+            // InternalFileAwareTestLanguage.g:237:2: rule__PackageDeclaration__Group__2__Impl rule__PackageDeclaration__Group__3
             {
             pushFollow(FOLLOW_4);
             rule__PackageDeclaration__Group__2__Impl();
@@ -673,20 +681,20 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__2__Impl"
-    // InternalFileAwareTestLanguage.g:239:1: rule__PackageDeclaration__Group__2__Impl : ( ( rule__PackageDeclaration__ImportsAssignment_2 )* ) ;
+    // InternalFileAwareTestLanguage.g:244:1: rule__PackageDeclaration__Group__2__Impl : ( ( rule__PackageDeclaration__ImportsAssignment_2 )* ) ;
     public final void rule__PackageDeclaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:243:1: ( ( ( rule__PackageDeclaration__ImportsAssignment_2 )* ) )
-            // InternalFileAwareTestLanguage.g:244:1: ( ( rule__PackageDeclaration__ImportsAssignment_2 )* )
+            // InternalFileAwareTestLanguage.g:248:1: ( ( ( rule__PackageDeclaration__ImportsAssignment_2 )* ) )
+            // InternalFileAwareTestLanguage.g:249:1: ( ( rule__PackageDeclaration__ImportsAssignment_2 )* )
             {
-            // InternalFileAwareTestLanguage.g:244:1: ( ( rule__PackageDeclaration__ImportsAssignment_2 )* )
-            // InternalFileAwareTestLanguage.g:245:2: ( rule__PackageDeclaration__ImportsAssignment_2 )*
+            // InternalFileAwareTestLanguage.g:249:1: ( ( rule__PackageDeclaration__ImportsAssignment_2 )* )
+            // InternalFileAwareTestLanguage.g:250:2: ( rule__PackageDeclaration__ImportsAssignment_2 )*
             {
              before(grammarAccess.getPackageDeclarationAccess().getImportsAssignment_2()); 
-            // InternalFileAwareTestLanguage.g:246:2: ( rule__PackageDeclaration__ImportsAssignment_2 )*
+            // InternalFileAwareTestLanguage.g:251:2: ( rule__PackageDeclaration__ImportsAssignment_2 )*
             loop2:
             do {
                 int alt2=2;
@@ -699,7 +707,7 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:246:3: rule__PackageDeclaration__ImportsAssignment_2
+            	    // InternalFileAwareTestLanguage.g:251:3: rule__PackageDeclaration__ImportsAssignment_2
             	    {
             	    pushFollow(FOLLOW_5);
             	    rule__PackageDeclaration__ImportsAssignment_2();
@@ -738,14 +746,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__3"
-    // InternalFileAwareTestLanguage.g:254:1: rule__PackageDeclaration__Group__3 : rule__PackageDeclaration__Group__3__Impl ;
+    // InternalFileAwareTestLanguage.g:259:1: rule__PackageDeclaration__Group__3 : rule__PackageDeclaration__Group__3__Impl ;
     public final void rule__PackageDeclaration__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:258:1: ( rule__PackageDeclaration__Group__3__Impl )
-            // InternalFileAwareTestLanguage.g:259:2: rule__PackageDeclaration__Group__3__Impl
+            // InternalFileAwareTestLanguage.g:263:1: ( rule__PackageDeclaration__Group__3__Impl )
+            // InternalFileAwareTestLanguage.g:264:2: rule__PackageDeclaration__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__PackageDeclaration__Group__3__Impl();
@@ -771,20 +779,20 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__Group__3__Impl"
-    // InternalFileAwareTestLanguage.g:265:1: rule__PackageDeclaration__Group__3__Impl : ( ( rule__PackageDeclaration__ContentsAssignment_3 )* ) ;
+    // InternalFileAwareTestLanguage.g:270:1: rule__PackageDeclaration__Group__3__Impl : ( ( rule__PackageDeclaration__ContentsAssignment_3 )* ) ;
     public final void rule__PackageDeclaration__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:269:1: ( ( ( rule__PackageDeclaration__ContentsAssignment_3 )* ) )
-            // InternalFileAwareTestLanguage.g:270:1: ( ( rule__PackageDeclaration__ContentsAssignment_3 )* )
+            // InternalFileAwareTestLanguage.g:274:1: ( ( ( rule__PackageDeclaration__ContentsAssignment_3 )* ) )
+            // InternalFileAwareTestLanguage.g:275:1: ( ( rule__PackageDeclaration__ContentsAssignment_3 )* )
             {
-            // InternalFileAwareTestLanguage.g:270:1: ( ( rule__PackageDeclaration__ContentsAssignment_3 )* )
-            // InternalFileAwareTestLanguage.g:271:2: ( rule__PackageDeclaration__ContentsAssignment_3 )*
+            // InternalFileAwareTestLanguage.g:275:1: ( ( rule__PackageDeclaration__ContentsAssignment_3 )* )
+            // InternalFileAwareTestLanguage.g:276:2: ( rule__PackageDeclaration__ContentsAssignment_3 )*
             {
              before(grammarAccess.getPackageDeclarationAccess().getContentsAssignment_3()); 
-            // InternalFileAwareTestLanguage.g:272:2: ( rule__PackageDeclaration__ContentsAssignment_3 )*
+            // InternalFileAwareTestLanguage.g:277:2: ( rule__PackageDeclaration__ContentsAssignment_3 )*
             loop3:
             do {
                 int alt3=2;
@@ -797,7 +805,7 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:272:3: rule__PackageDeclaration__ContentsAssignment_3
+            	    // InternalFileAwareTestLanguage.g:277:3: rule__PackageDeclaration__ContentsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__PackageDeclaration__ContentsAssignment_3();
@@ -836,14 +844,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // InternalFileAwareTestLanguage.g:281:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalFileAwareTestLanguage.g:286:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:285:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // InternalFileAwareTestLanguage.g:286:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalFileAwareTestLanguage.g:290:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalFileAwareTestLanguage.g:291:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__Import__Group__0__Impl();
@@ -874,17 +882,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // InternalFileAwareTestLanguage.g:293:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalFileAwareTestLanguage.g:298:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:297:1: ( ( 'import' ) )
-            // InternalFileAwareTestLanguage.g:298:1: ( 'import' )
+            // InternalFileAwareTestLanguage.g:302:1: ( ( 'import' ) )
+            // InternalFileAwareTestLanguage.g:303:1: ( 'import' )
             {
-            // InternalFileAwareTestLanguage.g:298:1: ( 'import' )
-            // InternalFileAwareTestLanguage.g:299:2: 'import'
+            // InternalFileAwareTestLanguage.g:303:1: ( 'import' )
+            // InternalFileAwareTestLanguage.g:304:2: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,12,FOLLOW_2); 
@@ -911,14 +919,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // InternalFileAwareTestLanguage.g:308:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalFileAwareTestLanguage.g:313:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:312:1: ( rule__Import__Group__1__Impl )
-            // InternalFileAwareTestLanguage.g:313:2: rule__Import__Group__1__Impl
+            // InternalFileAwareTestLanguage.g:317:1: ( rule__Import__Group__1__Impl )
+            // InternalFileAwareTestLanguage.g:318:2: rule__Import__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Import__Group__1__Impl();
@@ -944,21 +952,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // InternalFileAwareTestLanguage.g:319:1: rule__Import__Group__1__Impl : ( ( rule__Import__ElementAssignment_1 ) ) ;
+    // InternalFileAwareTestLanguage.g:324:1: rule__Import__Group__1__Impl : ( ( rule__Import__ElementAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:323:1: ( ( ( rule__Import__ElementAssignment_1 ) ) )
-            // InternalFileAwareTestLanguage.g:324:1: ( ( rule__Import__ElementAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:328:1: ( ( ( rule__Import__ElementAssignment_1 ) ) )
+            // InternalFileAwareTestLanguage.g:329:1: ( ( rule__Import__ElementAssignment_1 ) )
             {
-            // InternalFileAwareTestLanguage.g:324:1: ( ( rule__Import__ElementAssignment_1 ) )
-            // InternalFileAwareTestLanguage.g:325:2: ( rule__Import__ElementAssignment_1 )
+            // InternalFileAwareTestLanguage.g:329:1: ( ( rule__Import__ElementAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:330:2: ( rule__Import__ElementAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getElementAssignment_1()); 
-            // InternalFileAwareTestLanguage.g:326:2: ( rule__Import__ElementAssignment_1 )
-            // InternalFileAwareTestLanguage.g:326:3: rule__Import__ElementAssignment_1
+            // InternalFileAwareTestLanguage.g:331:2: ( rule__Import__ElementAssignment_1 )
+            // InternalFileAwareTestLanguage.g:331:3: rule__Import__ElementAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Import__ElementAssignment_1();
@@ -991,14 +999,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // InternalFileAwareTestLanguage.g:335:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalFileAwareTestLanguage.g:340:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:339:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // InternalFileAwareTestLanguage.g:340:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalFileAwareTestLanguage.g:344:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalFileAwareTestLanguage.g:345:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__Element__Group__0__Impl();
@@ -1029,17 +1037,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // InternalFileAwareTestLanguage.g:347:1: rule__Element__Group__0__Impl : ( 'element' ) ;
+    // InternalFileAwareTestLanguage.g:352:1: rule__Element__Group__0__Impl : ( 'element' ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:351:1: ( ( 'element' ) )
-            // InternalFileAwareTestLanguage.g:352:1: ( 'element' )
+            // InternalFileAwareTestLanguage.g:356:1: ( ( 'element' ) )
+            // InternalFileAwareTestLanguage.g:357:1: ( 'element' )
             {
-            // InternalFileAwareTestLanguage.g:352:1: ( 'element' )
-            // InternalFileAwareTestLanguage.g:353:2: 'element'
+            // InternalFileAwareTestLanguage.g:357:1: ( 'element' )
+            // InternalFileAwareTestLanguage.g:358:2: 'element'
             {
              before(grammarAccess.getElementAccess().getElementKeyword_0()); 
             match(input,13,FOLLOW_2); 
@@ -1066,14 +1074,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // InternalFileAwareTestLanguage.g:362:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
+    // InternalFileAwareTestLanguage.g:367:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:366:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
-            // InternalFileAwareTestLanguage.g:367:2: rule__Element__Group__1__Impl rule__Element__Group__2
+            // InternalFileAwareTestLanguage.g:371:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // InternalFileAwareTestLanguage.g:372:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__Element__Group__1__Impl();
@@ -1104,21 +1112,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // InternalFileAwareTestLanguage.g:374:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
+    // InternalFileAwareTestLanguage.g:379:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:378:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
-            // InternalFileAwareTestLanguage.g:379:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:383:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
+            // InternalFileAwareTestLanguage.g:384:1: ( ( rule__Element__NameAssignment_1 ) )
             {
-            // InternalFileAwareTestLanguage.g:379:1: ( ( rule__Element__NameAssignment_1 ) )
-            // InternalFileAwareTestLanguage.g:380:2: ( rule__Element__NameAssignment_1 )
+            // InternalFileAwareTestLanguage.g:384:1: ( ( rule__Element__NameAssignment_1 ) )
+            // InternalFileAwareTestLanguage.g:385:2: ( rule__Element__NameAssignment_1 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_1()); 
-            // InternalFileAwareTestLanguage.g:381:2: ( rule__Element__NameAssignment_1 )
-            // InternalFileAwareTestLanguage.g:381:3: rule__Element__NameAssignment_1
+            // InternalFileAwareTestLanguage.g:386:2: ( rule__Element__NameAssignment_1 )
+            // InternalFileAwareTestLanguage.g:386:3: rule__Element__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Element__NameAssignment_1();
@@ -1151,14 +1159,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__2"
-    // InternalFileAwareTestLanguage.g:389:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
+    // InternalFileAwareTestLanguage.g:394:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:393:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
-            // InternalFileAwareTestLanguage.g:394:2: rule__Element__Group__2__Impl rule__Element__Group__3
+            // InternalFileAwareTestLanguage.g:398:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // InternalFileAwareTestLanguage.g:399:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
             pushFollow(FOLLOW_8);
             rule__Element__Group__2__Impl();
@@ -1189,17 +1197,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__2__Impl"
-    // InternalFileAwareTestLanguage.g:401:1: rule__Element__Group__2__Impl : ( '{' ) ;
+    // InternalFileAwareTestLanguage.g:406:1: rule__Element__Group__2__Impl : ( '{' ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:405:1: ( ( '{' ) )
-            // InternalFileAwareTestLanguage.g:406:1: ( '{' )
+            // InternalFileAwareTestLanguage.g:410:1: ( ( '{' ) )
+            // InternalFileAwareTestLanguage.g:411:1: ( '{' )
             {
-            // InternalFileAwareTestLanguage.g:406:1: ( '{' )
-            // InternalFileAwareTestLanguage.g:407:2: '{'
+            // InternalFileAwareTestLanguage.g:411:1: ( '{' )
+            // InternalFileAwareTestLanguage.g:412:2: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2()); 
             match(input,14,FOLLOW_2); 
@@ -1226,14 +1234,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__3"
-    // InternalFileAwareTestLanguage.g:416:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
+    // InternalFileAwareTestLanguage.g:421:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:420:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
-            // InternalFileAwareTestLanguage.g:421:2: rule__Element__Group__3__Impl rule__Element__Group__4
+            // InternalFileAwareTestLanguage.g:425:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
+            // InternalFileAwareTestLanguage.g:426:2: rule__Element__Group__3__Impl rule__Element__Group__4
             {
             pushFollow(FOLLOW_8);
             rule__Element__Group__3__Impl();
@@ -1264,20 +1272,20 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__3__Impl"
-    // InternalFileAwareTestLanguage.g:428:1: rule__Element__Group__3__Impl : ( ( rule__Element__Alternatives_3 )* ) ;
+    // InternalFileAwareTestLanguage.g:433:1: rule__Element__Group__3__Impl : ( ( rule__Element__Alternatives_3 )* ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:432:1: ( ( ( rule__Element__Alternatives_3 )* ) )
-            // InternalFileAwareTestLanguage.g:433:1: ( ( rule__Element__Alternatives_3 )* )
+            // InternalFileAwareTestLanguage.g:437:1: ( ( ( rule__Element__Alternatives_3 )* ) )
+            // InternalFileAwareTestLanguage.g:438:1: ( ( rule__Element__Alternatives_3 )* )
             {
-            // InternalFileAwareTestLanguage.g:433:1: ( ( rule__Element__Alternatives_3 )* )
-            // InternalFileAwareTestLanguage.g:434:2: ( rule__Element__Alternatives_3 )*
+            // InternalFileAwareTestLanguage.g:438:1: ( ( rule__Element__Alternatives_3 )* )
+            // InternalFileAwareTestLanguage.g:439:2: ( rule__Element__Alternatives_3 )*
             {
              before(grammarAccess.getElementAccess().getAlternatives_3()); 
-            // InternalFileAwareTestLanguage.g:435:2: ( rule__Element__Alternatives_3 )*
+            // InternalFileAwareTestLanguage.g:440:2: ( rule__Element__Alternatives_3 )*
             loop4:
             do {
                 int alt4=2;
@@ -1290,7 +1298,7 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:435:3: rule__Element__Alternatives_3
+            	    // InternalFileAwareTestLanguage.g:440:3: rule__Element__Alternatives_3
             	    {
             	    pushFollow(FOLLOW_9);
             	    rule__Element__Alternatives_3();
@@ -1329,14 +1337,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__4"
-    // InternalFileAwareTestLanguage.g:443:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
+    // InternalFileAwareTestLanguage.g:448:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
     public final void rule__Element__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:447:1: ( rule__Element__Group__4__Impl )
-            // InternalFileAwareTestLanguage.g:448:2: rule__Element__Group__4__Impl
+            // InternalFileAwareTestLanguage.g:452:1: ( rule__Element__Group__4__Impl )
+            // InternalFileAwareTestLanguage.g:453:2: rule__Element__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Element__Group__4__Impl();
@@ -1362,17 +1370,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group__4__Impl"
-    // InternalFileAwareTestLanguage.g:454:1: rule__Element__Group__4__Impl : ( '}' ) ;
+    // InternalFileAwareTestLanguage.g:459:1: rule__Element__Group__4__Impl : ( '}' ) ;
     public final void rule__Element__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:458:1: ( ( '}' ) )
-            // InternalFileAwareTestLanguage.g:459:1: ( '}' )
+            // InternalFileAwareTestLanguage.g:463:1: ( ( '}' ) )
+            // InternalFileAwareTestLanguage.g:464:1: ( '}' )
             {
-            // InternalFileAwareTestLanguage.g:459:1: ( '}' )
-            // InternalFileAwareTestLanguage.g:460:2: '}'
+            // InternalFileAwareTestLanguage.g:464:1: ( '}' )
+            // InternalFileAwareTestLanguage.g:465:2: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4()); 
             match(input,15,FOLLOW_2); 
@@ -1399,14 +1407,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group_3_1__0"
-    // InternalFileAwareTestLanguage.g:470:1: rule__Element__Group_3_1__0 : rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1 ;
+    // InternalFileAwareTestLanguage.g:475:1: rule__Element__Group_3_1__0 : rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1 ;
     public final void rule__Element__Group_3_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:474:1: ( rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1 )
-            // InternalFileAwareTestLanguage.g:475:2: rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1
+            // InternalFileAwareTestLanguage.g:479:1: ( rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1 )
+            // InternalFileAwareTestLanguage.g:480:2: rule__Element__Group_3_1__0__Impl rule__Element__Group_3_1__1
             {
             pushFollow(FOLLOW_3);
             rule__Element__Group_3_1__0__Impl();
@@ -1437,17 +1445,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group_3_1__0__Impl"
-    // InternalFileAwareTestLanguage.g:482:1: rule__Element__Group_3_1__0__Impl : ( 'ref' ) ;
+    // InternalFileAwareTestLanguage.g:487:1: rule__Element__Group_3_1__0__Impl : ( 'ref' ) ;
     public final void rule__Element__Group_3_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:486:1: ( ( 'ref' ) )
-            // InternalFileAwareTestLanguage.g:487:1: ( 'ref' )
+            // InternalFileAwareTestLanguage.g:491:1: ( ( 'ref' ) )
+            // InternalFileAwareTestLanguage.g:492:1: ( 'ref' )
             {
-            // InternalFileAwareTestLanguage.g:487:1: ( 'ref' )
-            // InternalFileAwareTestLanguage.g:488:2: 'ref'
+            // InternalFileAwareTestLanguage.g:492:1: ( 'ref' )
+            // InternalFileAwareTestLanguage.g:493:2: 'ref'
             {
              before(grammarAccess.getElementAccess().getRefKeyword_3_1_0()); 
             match(input,16,FOLLOW_2); 
@@ -1474,14 +1482,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group_3_1__1"
-    // InternalFileAwareTestLanguage.g:497:1: rule__Element__Group_3_1__1 : rule__Element__Group_3_1__1__Impl ;
+    // InternalFileAwareTestLanguage.g:502:1: rule__Element__Group_3_1__1 : rule__Element__Group_3_1__1__Impl ;
     public final void rule__Element__Group_3_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:501:1: ( rule__Element__Group_3_1__1__Impl )
-            // InternalFileAwareTestLanguage.g:502:2: rule__Element__Group_3_1__1__Impl
+            // InternalFileAwareTestLanguage.g:506:1: ( rule__Element__Group_3_1__1__Impl )
+            // InternalFileAwareTestLanguage.g:507:2: rule__Element__Group_3_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Element__Group_3_1__1__Impl();
@@ -1507,21 +1515,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__Group_3_1__1__Impl"
-    // InternalFileAwareTestLanguage.g:508:1: rule__Element__Group_3_1__1__Impl : ( ( rule__Element__RefAssignment_3_1_1 ) ) ;
+    // InternalFileAwareTestLanguage.g:513:1: rule__Element__Group_3_1__1__Impl : ( ( rule__Element__RefAssignment_3_1_1 ) ) ;
     public final void rule__Element__Group_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:512:1: ( ( ( rule__Element__RefAssignment_3_1_1 ) ) )
-            // InternalFileAwareTestLanguage.g:513:1: ( ( rule__Element__RefAssignment_3_1_1 ) )
+            // InternalFileAwareTestLanguage.g:517:1: ( ( ( rule__Element__RefAssignment_3_1_1 ) ) )
+            // InternalFileAwareTestLanguage.g:518:1: ( ( rule__Element__RefAssignment_3_1_1 ) )
             {
-            // InternalFileAwareTestLanguage.g:513:1: ( ( rule__Element__RefAssignment_3_1_1 ) )
-            // InternalFileAwareTestLanguage.g:514:2: ( rule__Element__RefAssignment_3_1_1 )
+            // InternalFileAwareTestLanguage.g:518:1: ( ( rule__Element__RefAssignment_3_1_1 ) )
+            // InternalFileAwareTestLanguage.g:519:2: ( rule__Element__RefAssignment_3_1_1 )
             {
              before(grammarAccess.getElementAccess().getRefAssignment_3_1_1()); 
-            // InternalFileAwareTestLanguage.g:515:2: ( rule__Element__RefAssignment_3_1_1 )
-            // InternalFileAwareTestLanguage.g:515:3: rule__Element__RefAssignment_3_1_1
+            // InternalFileAwareTestLanguage.g:520:2: ( rule__Element__RefAssignment_3_1_1 )
+            // InternalFileAwareTestLanguage.g:520:3: rule__Element__RefAssignment_3_1_1
             {
             pushFollow(FOLLOW_2);
             rule__Element__RefAssignment_3_1_1();
@@ -1554,14 +1562,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // InternalFileAwareTestLanguage.g:524:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalFileAwareTestLanguage.g:529:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:528:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // InternalFileAwareTestLanguage.g:529:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalFileAwareTestLanguage.g:533:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalFileAwareTestLanguage.g:534:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
             pushFollow(FOLLOW_10);
             rule__QualifiedName__Group__0__Impl();
@@ -1592,17 +1600,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // InternalFileAwareTestLanguage.g:536:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
+    // InternalFileAwareTestLanguage.g:541:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:540:1: ( ( RULE_ID ) )
-            // InternalFileAwareTestLanguage.g:541:1: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:545:1: ( ( RULE_ID ) )
+            // InternalFileAwareTestLanguage.g:546:1: ( RULE_ID )
             {
-            // InternalFileAwareTestLanguage.g:541:1: ( RULE_ID )
-            // InternalFileAwareTestLanguage.g:542:2: RULE_ID
+            // InternalFileAwareTestLanguage.g:546:1: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:547:2: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -1629,14 +1637,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // InternalFileAwareTestLanguage.g:551:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalFileAwareTestLanguage.g:556:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:555:1: ( rule__QualifiedName__Group__1__Impl )
-            // InternalFileAwareTestLanguage.g:556:2: rule__QualifiedName__Group__1__Impl
+            // InternalFileAwareTestLanguage.g:560:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalFileAwareTestLanguage.g:561:2: rule__QualifiedName__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
@@ -1662,20 +1670,20 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // InternalFileAwareTestLanguage.g:562:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalFileAwareTestLanguage.g:567:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:566:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // InternalFileAwareTestLanguage.g:567:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalFileAwareTestLanguage.g:571:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalFileAwareTestLanguage.g:572:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // InternalFileAwareTestLanguage.g:567:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // InternalFileAwareTestLanguage.g:568:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalFileAwareTestLanguage.g:572:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalFileAwareTestLanguage.g:573:2: ( rule__QualifiedName__Group_1__0 )*
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
-            // InternalFileAwareTestLanguage.g:569:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalFileAwareTestLanguage.g:574:2: ( rule__QualifiedName__Group_1__0 )*
             loop5:
             do {
                 int alt5=2;
@@ -1688,7 +1696,7 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalFileAwareTestLanguage.g:569:3: rule__QualifiedName__Group_1__0
+            	    // InternalFileAwareTestLanguage.g:574:3: rule__QualifiedName__Group_1__0
             	    {
             	    pushFollow(FOLLOW_11);
             	    rule__QualifiedName__Group_1__0();
@@ -1727,14 +1735,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // InternalFileAwareTestLanguage.g:578:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalFileAwareTestLanguage.g:583:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:582:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // InternalFileAwareTestLanguage.g:583:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalFileAwareTestLanguage.g:587:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalFileAwareTestLanguage.g:588:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
             pushFollow(FOLLOW_3);
             rule__QualifiedName__Group_1__0__Impl();
@@ -1765,17 +1773,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // InternalFileAwareTestLanguage.g:590:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalFileAwareTestLanguage.g:595:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:594:1: ( ( '.' ) )
-            // InternalFileAwareTestLanguage.g:595:1: ( '.' )
+            // InternalFileAwareTestLanguage.g:599:1: ( ( '.' ) )
+            // InternalFileAwareTestLanguage.g:600:1: ( '.' )
             {
-            // InternalFileAwareTestLanguage.g:595:1: ( '.' )
-            // InternalFileAwareTestLanguage.g:596:2: '.'
+            // InternalFileAwareTestLanguage.g:600:1: ( '.' )
+            // InternalFileAwareTestLanguage.g:601:2: '.'
             {
              before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             match(input,17,FOLLOW_2); 
@@ -1802,14 +1810,14 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // InternalFileAwareTestLanguage.g:605:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalFileAwareTestLanguage.g:610:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:609:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // InternalFileAwareTestLanguage.g:610:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalFileAwareTestLanguage.g:614:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalFileAwareTestLanguage.g:615:2: rule__QualifiedName__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
@@ -1835,17 +1843,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // InternalFileAwareTestLanguage.g:616:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalFileAwareTestLanguage.g:621:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:620:1: ( ( RULE_ID ) )
-            // InternalFileAwareTestLanguage.g:621:1: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:625:1: ( ( RULE_ID ) )
+            // InternalFileAwareTestLanguage.g:626:1: ( RULE_ID )
             {
-            // InternalFileAwareTestLanguage.g:621:1: ( RULE_ID )
-            // InternalFileAwareTestLanguage.g:622:2: RULE_ID
+            // InternalFileAwareTestLanguage.g:626:1: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:627:2: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -1872,17 +1880,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__NameAssignment_1"
-    // InternalFileAwareTestLanguage.g:632:1: rule__PackageDeclaration__NameAssignment_1 : ( ruleQualifiedName ) ;
+    // InternalFileAwareTestLanguage.g:637:1: rule__PackageDeclaration__NameAssignment_1 : ( ruleQualifiedName ) ;
     public final void rule__PackageDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:636:1: ( ( ruleQualifiedName ) )
-            // InternalFileAwareTestLanguage.g:637:2: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:641:1: ( ( ruleQualifiedName ) )
+            // InternalFileAwareTestLanguage.g:642:2: ( ruleQualifiedName )
             {
-            // InternalFileAwareTestLanguage.g:637:2: ( ruleQualifiedName )
-            // InternalFileAwareTestLanguage.g:638:3: ruleQualifiedName
+            // InternalFileAwareTestLanguage.g:642:2: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:643:3: ruleQualifiedName
             {
              before(grammarAccess.getPackageDeclarationAccess().getNameQualifiedNameParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -1913,17 +1921,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__ImportsAssignment_2"
-    // InternalFileAwareTestLanguage.g:647:1: rule__PackageDeclaration__ImportsAssignment_2 : ( ruleImport ) ;
+    // InternalFileAwareTestLanguage.g:652:1: rule__PackageDeclaration__ImportsAssignment_2 : ( ruleImport ) ;
     public final void rule__PackageDeclaration__ImportsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:651:1: ( ( ruleImport ) )
-            // InternalFileAwareTestLanguage.g:652:2: ( ruleImport )
+            // InternalFileAwareTestLanguage.g:656:1: ( ( ruleImport ) )
+            // InternalFileAwareTestLanguage.g:657:2: ( ruleImport )
             {
-            // InternalFileAwareTestLanguage.g:652:2: ( ruleImport )
-            // InternalFileAwareTestLanguage.g:653:3: ruleImport
+            // InternalFileAwareTestLanguage.g:657:2: ( ruleImport )
+            // InternalFileAwareTestLanguage.g:658:3: ruleImport
             {
              before(grammarAccess.getPackageDeclarationAccess().getImportsImportParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -1954,17 +1962,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__PackageDeclaration__ContentsAssignment_3"
-    // InternalFileAwareTestLanguage.g:662:1: rule__PackageDeclaration__ContentsAssignment_3 : ( ruleElement ) ;
+    // InternalFileAwareTestLanguage.g:667:1: rule__PackageDeclaration__ContentsAssignment_3 : ( ruleElement ) ;
     public final void rule__PackageDeclaration__ContentsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:666:1: ( ( ruleElement ) )
-            // InternalFileAwareTestLanguage.g:667:2: ( ruleElement )
+            // InternalFileAwareTestLanguage.g:671:1: ( ( ruleElement ) )
+            // InternalFileAwareTestLanguage.g:672:2: ( ruleElement )
             {
-            // InternalFileAwareTestLanguage.g:667:2: ( ruleElement )
-            // InternalFileAwareTestLanguage.g:668:3: ruleElement
+            // InternalFileAwareTestLanguage.g:672:2: ( ruleElement )
+            // InternalFileAwareTestLanguage.g:673:3: ruleElement
             {
              before(grammarAccess.getPackageDeclarationAccess().getContentsElementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -1995,21 +2003,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Import__ElementAssignment_1"
-    // InternalFileAwareTestLanguage.g:677:1: rule__Import__ElementAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalFileAwareTestLanguage.g:682:1: rule__Import__ElementAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Import__ElementAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:681:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalFileAwareTestLanguage.g:682:2: ( ( ruleQualifiedName ) )
+            // InternalFileAwareTestLanguage.g:686:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalFileAwareTestLanguage.g:687:2: ( ( ruleQualifiedName ) )
             {
-            // InternalFileAwareTestLanguage.g:682:2: ( ( ruleQualifiedName ) )
-            // InternalFileAwareTestLanguage.g:683:3: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:687:2: ( ( ruleQualifiedName ) )
+            // InternalFileAwareTestLanguage.g:688:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getImportAccess().getElementElementCrossReference_1_0()); 
-            // InternalFileAwareTestLanguage.g:684:3: ( ruleQualifiedName )
-            // InternalFileAwareTestLanguage.g:685:4: ruleQualifiedName
+            // InternalFileAwareTestLanguage.g:689:3: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:690:4: ruleQualifiedName
             {
              before(grammarAccess.getImportAccess().getElementElementQualifiedNameParserRuleCall_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -2044,17 +2052,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__NameAssignment_1"
-    // InternalFileAwareTestLanguage.g:696:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalFileAwareTestLanguage.g:701:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:700:1: ( ( RULE_ID ) )
-            // InternalFileAwareTestLanguage.g:701:2: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:705:1: ( ( RULE_ID ) )
+            // InternalFileAwareTestLanguage.g:706:2: ( RULE_ID )
             {
-            // InternalFileAwareTestLanguage.g:701:2: ( RULE_ID )
-            // InternalFileAwareTestLanguage.g:702:3: RULE_ID
+            // InternalFileAwareTestLanguage.g:706:2: ( RULE_ID )
+            // InternalFileAwareTestLanguage.g:707:3: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -2081,17 +2089,17 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__ContentsAssignment_3_0"
-    // InternalFileAwareTestLanguage.g:711:1: rule__Element__ContentsAssignment_3_0 : ( ruleElement ) ;
+    // InternalFileAwareTestLanguage.g:716:1: rule__Element__ContentsAssignment_3_0 : ( ruleElement ) ;
     public final void rule__Element__ContentsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:715:1: ( ( ruleElement ) )
-            // InternalFileAwareTestLanguage.g:716:2: ( ruleElement )
+            // InternalFileAwareTestLanguage.g:720:1: ( ( ruleElement ) )
+            // InternalFileAwareTestLanguage.g:721:2: ( ruleElement )
             {
-            // InternalFileAwareTestLanguage.g:716:2: ( ruleElement )
-            // InternalFileAwareTestLanguage.g:717:3: ruleElement
+            // InternalFileAwareTestLanguage.g:721:2: ( ruleElement )
+            // InternalFileAwareTestLanguage.g:722:3: ruleElement
             {
              before(grammarAccess.getElementAccess().getContentsElementParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -2122,21 +2130,21 @@ public class InternalFileAwareTestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Element__RefAssignment_3_1_1"
-    // InternalFileAwareTestLanguage.g:726:1: rule__Element__RefAssignment_3_1_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalFileAwareTestLanguage.g:731:1: rule__Element__RefAssignment_3_1_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Element__RefAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFileAwareTestLanguage.g:730:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalFileAwareTestLanguage.g:731:2: ( ( ruleQualifiedName ) )
+            // InternalFileAwareTestLanguage.g:735:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalFileAwareTestLanguage.g:736:2: ( ( ruleQualifiedName ) )
             {
-            // InternalFileAwareTestLanguage.g:731:2: ( ( ruleQualifiedName ) )
-            // InternalFileAwareTestLanguage.g:732:3: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:736:2: ( ( ruleQualifiedName ) )
+            // InternalFileAwareTestLanguage.g:737:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getElementAccess().getRefElementCrossReference_3_1_1_0()); 
-            // InternalFileAwareTestLanguage.g:733:3: ( ruleQualifiedName )
-            // InternalFileAwareTestLanguage.g:734:4: ruleQualifiedName
+            // InternalFileAwareTestLanguage.g:738:3: ( ruleQualifiedName )
+            // InternalFileAwareTestLanguage.g:739:4: ruleQualifiedName
             {
              before(grammarAccess.getElementAccess().getRefElementQualifiedNameParserRuleCall_3_1_1_0_1()); 
             pushFollow(FOLLOW_2);

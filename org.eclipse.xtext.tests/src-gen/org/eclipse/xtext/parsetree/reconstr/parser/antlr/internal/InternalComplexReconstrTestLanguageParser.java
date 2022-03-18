@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalComplexReconstrTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -81,7 +89,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleRoot"
-    // InternalComplexReconstrTestLanguage.g:64:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalComplexReconstrTestLanguage.g:69:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -89,8 +97,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:64:45: (iv_ruleRoot= ruleRoot EOF )
-            // InternalComplexReconstrTestLanguage.g:65:2: iv_ruleRoot= ruleRoot EOF
+            // InternalComplexReconstrTestLanguage.g:69:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalComplexReconstrTestLanguage.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -117,7 +125,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleRoot"
-    // InternalComplexReconstrTestLanguage.g:71:1: ruleRoot returns [EObject current=null] : (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) ;
+    // InternalComplexReconstrTestLanguage.g:76:1: ruleRoot returns [EObject current=null] : (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -130,10 +138,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:77:2: ( (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) )
-            // InternalComplexReconstrTestLanguage.g:78:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
+            // InternalComplexReconstrTestLanguage.g:82:2: ( (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) )
+            // InternalComplexReconstrTestLanguage.g:83:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
             {
-            // InternalComplexReconstrTestLanguage.g:78:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
+            // InternalComplexReconstrTestLanguage.g:83:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -151,7 +159,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt1) {
                 case 1 :
-                    // InternalComplexReconstrTestLanguage.g:79:3: this_Op_0= ruleOp
+                    // InternalComplexReconstrTestLanguage.g:84:3: this_Op_0= ruleOp
                     {
 
                     			newCompositeNode(grammarAccess.getRootAccess().getOpParserRuleCall_0());
@@ -169,7 +177,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // InternalComplexReconstrTestLanguage.g:88:3: this_TrickyG_1= ruleTrickyG
+                    // InternalComplexReconstrTestLanguage.g:93:3: this_TrickyG_1= ruleTrickyG
                     {
 
                     			newCompositeNode(grammarAccess.getRootAccess().getTrickyGParserRuleCall_1());
@@ -209,7 +217,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleOp"
-    // InternalComplexReconstrTestLanguage.g:100:1: entryRuleOp returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
+    // InternalComplexReconstrTestLanguage.g:105:1: entryRuleOp returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
     public final EObject entryRuleOp() throws RecognitionException {
         EObject current = null;
 
@@ -217,8 +225,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:100:43: (iv_ruleOp= ruleOp EOF )
-            // InternalComplexReconstrTestLanguage.g:101:2: iv_ruleOp= ruleOp EOF
+            // InternalComplexReconstrTestLanguage.g:105:43: (iv_ruleOp= ruleOp EOF )
+            // InternalComplexReconstrTestLanguage.g:106:2: iv_ruleOp= ruleOp EOF
             {
              newCompositeNode(grammarAccess.getOpRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -245,7 +253,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleOp"
-    // InternalComplexReconstrTestLanguage.g:107:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) ;
+    // InternalComplexReconstrTestLanguage.g:112:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) ;
     public final EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
@@ -262,11 +270,11 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:113:2: ( (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
-            // InternalComplexReconstrTestLanguage.g:114:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
+            // InternalComplexReconstrTestLanguage.g:118:2: ( (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
+            // InternalComplexReconstrTestLanguage.g:119:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
             {
-            // InternalComplexReconstrTestLanguage.g:114:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
-            // InternalComplexReconstrTestLanguage.g:115:3: this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
+            // InternalComplexReconstrTestLanguage.g:119:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
+            // InternalComplexReconstrTestLanguage.g:120:3: this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getOpAccess().getTermParserRuleCall_0());
@@ -280,7 +288,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             			current = this_Term_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalComplexReconstrTestLanguage.g:123:3: ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
+            // InternalComplexReconstrTestLanguage.g:128:3: ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -296,13 +304,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalComplexReconstrTestLanguage.g:124:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
+            	    // InternalComplexReconstrTestLanguage.g:129:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:124:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
-            	    // InternalComplexReconstrTestLanguage.g:125:5: () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) )
+            	    // InternalComplexReconstrTestLanguage.g:129:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
+            	    // InternalComplexReconstrTestLanguage.g:130:5: () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:125:5: ()
-            	    // InternalComplexReconstrTestLanguage.g:126:6: 
+            	    // InternalComplexReconstrTestLanguage.g:130:5: ()
+            	    // InternalComplexReconstrTestLanguage.g:131:6: 
             	    {
 
             	    						current = forceCreateModelElementAndAdd(
@@ -316,11 +324,11 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	    					newLeafNode(otherlv_2, grammarAccess.getOpAccess().getPlusSignKeyword_1_0_1());
             	    				
-            	    // InternalComplexReconstrTestLanguage.g:136:5: ( (lv_addOperands_3_0= ruleTerm ) )
-            	    // InternalComplexReconstrTestLanguage.g:137:6: (lv_addOperands_3_0= ruleTerm )
+            	    // InternalComplexReconstrTestLanguage.g:141:5: ( (lv_addOperands_3_0= ruleTerm ) )
+            	    // InternalComplexReconstrTestLanguage.g:142:6: (lv_addOperands_3_0= ruleTerm )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:137:6: (lv_addOperands_3_0= ruleTerm )
-            	    // InternalComplexReconstrTestLanguage.g:138:7: lv_addOperands_3_0= ruleTerm
+            	    // InternalComplexReconstrTestLanguage.g:142:6: (lv_addOperands_3_0= ruleTerm )
+            	    // InternalComplexReconstrTestLanguage.g:143:7: lv_addOperands_3_0= ruleTerm
             	    {
 
             	    							newCompositeNode(grammarAccess.getOpAccess().getAddOperandsTermParserRuleCall_1_0_2_0());
@@ -354,13 +362,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    }
             	    break;
             	case 2 :
-            	    // InternalComplexReconstrTestLanguage.g:157:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
+            	    // InternalComplexReconstrTestLanguage.g:162:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:157:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
-            	    // InternalComplexReconstrTestLanguage.g:158:5: () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) )
+            	    // InternalComplexReconstrTestLanguage.g:162:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
+            	    // InternalComplexReconstrTestLanguage.g:163:5: () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:158:5: ()
-            	    // InternalComplexReconstrTestLanguage.g:159:6: 
+            	    // InternalComplexReconstrTestLanguage.g:163:5: ()
+            	    // InternalComplexReconstrTestLanguage.g:164:6: 
             	    {
 
             	    						current = forceCreateModelElementAndAdd(
@@ -374,11 +382,11 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	    					newLeafNode(otherlv_5, grammarAccess.getOpAccess().getHyphenMinusKeyword_1_1_1());
             	    				
-            	    // InternalComplexReconstrTestLanguage.g:169:5: ( (lv_minusOperands_6_0= ruleTerm ) )
-            	    // InternalComplexReconstrTestLanguage.g:170:6: (lv_minusOperands_6_0= ruleTerm )
+            	    // InternalComplexReconstrTestLanguage.g:174:5: ( (lv_minusOperands_6_0= ruleTerm ) )
+            	    // InternalComplexReconstrTestLanguage.g:175:6: (lv_minusOperands_6_0= ruleTerm )
             	    {
-            	    // InternalComplexReconstrTestLanguage.g:170:6: (lv_minusOperands_6_0= ruleTerm )
-            	    // InternalComplexReconstrTestLanguage.g:171:7: lv_minusOperands_6_0= ruleTerm
+            	    // InternalComplexReconstrTestLanguage.g:175:6: (lv_minusOperands_6_0= ruleTerm )
+            	    // InternalComplexReconstrTestLanguage.g:176:7: lv_minusOperands_6_0= ruleTerm
             	    {
 
             	    							newCompositeNode(grammarAccess.getOpAccess().getMinusOperandsTermParserRuleCall_1_1_2_0());
@@ -440,7 +448,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleTerm"
-    // InternalComplexReconstrTestLanguage.g:194:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
+    // InternalComplexReconstrTestLanguage.g:199:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
     public final EObject entryRuleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -448,8 +456,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:194:45: (iv_ruleTerm= ruleTerm EOF )
-            // InternalComplexReconstrTestLanguage.g:195:2: iv_ruleTerm= ruleTerm EOF
+            // InternalComplexReconstrTestLanguage.g:199:45: (iv_ruleTerm= ruleTerm EOF )
+            // InternalComplexReconstrTestLanguage.g:200:2: iv_ruleTerm= ruleTerm EOF
             {
              newCompositeNode(grammarAccess.getTermRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -476,7 +484,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleTerm"
-    // InternalComplexReconstrTestLanguage.g:201:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
+    // InternalComplexReconstrTestLanguage.g:206:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
     public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -489,10 +497,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:207:2: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
-            // InternalComplexReconstrTestLanguage.g:208:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
+            // InternalComplexReconstrTestLanguage.g:212:2: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
+            // InternalComplexReconstrTestLanguage.g:213:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             {
-            // InternalComplexReconstrTestLanguage.g:208:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
+            // InternalComplexReconstrTestLanguage.g:213:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -510,7 +518,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt3) {
                 case 1 :
-                    // InternalComplexReconstrTestLanguage.g:209:3: this_Atom_0= ruleAtom
+                    // InternalComplexReconstrTestLanguage.g:214:3: this_Atom_0= ruleAtom
                     {
 
                     			newCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0());
@@ -528,7 +536,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // InternalComplexReconstrTestLanguage.g:218:3: this_Parens_1= ruleParens
+                    // InternalComplexReconstrTestLanguage.g:223:3: this_Parens_1= ruleParens
                     {
 
                     			newCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1());
@@ -568,7 +576,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleAtom"
-    // InternalComplexReconstrTestLanguage.g:230:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // InternalComplexReconstrTestLanguage.g:235:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -576,8 +584,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:230:45: (iv_ruleAtom= ruleAtom EOF )
-            // InternalComplexReconstrTestLanguage.g:231:2: iv_ruleAtom= ruleAtom EOF
+            // InternalComplexReconstrTestLanguage.g:235:45: (iv_ruleAtom= ruleAtom EOF )
+            // InternalComplexReconstrTestLanguage.g:236:2: iv_ruleAtom= ruleAtom EOF
             {
              newCompositeNode(grammarAccess.getAtomRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -604,7 +612,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleAtom"
-    // InternalComplexReconstrTestLanguage.g:237:1: ruleAtom returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalComplexReconstrTestLanguage.g:242:1: ruleAtom returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -614,14 +622,14 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:243:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalComplexReconstrTestLanguage.g:244:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalComplexReconstrTestLanguage.g:248:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalComplexReconstrTestLanguage.g:249:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalComplexReconstrTestLanguage.g:244:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalComplexReconstrTestLanguage.g:245:3: (lv_name_0_0= RULE_ID )
+            // InternalComplexReconstrTestLanguage.g:249:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalComplexReconstrTestLanguage.g:250:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalComplexReconstrTestLanguage.g:245:3: (lv_name_0_0= RULE_ID )
-            // InternalComplexReconstrTestLanguage.g:246:4: lv_name_0_0= RULE_ID
+            // InternalComplexReconstrTestLanguage.g:250:3: (lv_name_0_0= RULE_ID )
+            // InternalComplexReconstrTestLanguage.g:251:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -663,7 +671,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleParens"
-    // InternalComplexReconstrTestLanguage.g:265:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
+    // InternalComplexReconstrTestLanguage.g:270:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
     public final EObject entryRuleParens() throws RecognitionException {
         EObject current = null;
 
@@ -671,8 +679,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:265:47: (iv_ruleParens= ruleParens EOF )
-            // InternalComplexReconstrTestLanguage.g:266:2: iv_ruleParens= ruleParens EOF
+            // InternalComplexReconstrTestLanguage.g:270:47: (iv_ruleParens= ruleParens EOF )
+            // InternalComplexReconstrTestLanguage.g:271:2: iv_ruleParens= ruleParens EOF
             {
              newCompositeNode(grammarAccess.getParensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -699,7 +707,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleParens"
-    // InternalComplexReconstrTestLanguage.g:272:1: ruleParens returns [EObject current=null] : (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
+    // InternalComplexReconstrTestLanguage.g:277:1: ruleParens returns [EObject current=null] : (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
     public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
@@ -713,11 +721,11 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:278:2: ( (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
-            // InternalComplexReconstrTestLanguage.g:279:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // InternalComplexReconstrTestLanguage.g:283:2: ( (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
+            // InternalComplexReconstrTestLanguage.g:284:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
             {
-            // InternalComplexReconstrTestLanguage.g:279:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
-            // InternalComplexReconstrTestLanguage.g:280:3: otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
+            // InternalComplexReconstrTestLanguage.g:284:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // InternalComplexReconstrTestLanguage.g:285:3: otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
@@ -739,7 +747,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             			newLeafNode(otherlv_2, grammarAccess.getParensAccess().getRightParenthesisKeyword_2());
             		
-            // InternalComplexReconstrTestLanguage.g:296:3: ( (lv_em_3_0= '!' ) )?
+            // InternalComplexReconstrTestLanguage.g:301:3: ( (lv_em_3_0= '!' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -748,10 +756,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt4) {
                 case 1 :
-                    // InternalComplexReconstrTestLanguage.g:297:4: (lv_em_3_0= '!' )
+                    // InternalComplexReconstrTestLanguage.g:302:4: (lv_em_3_0= '!' )
                     {
-                    // InternalComplexReconstrTestLanguage.g:297:4: (lv_em_3_0= '!' )
-                    // InternalComplexReconstrTestLanguage.g:298:5: lv_em_3_0= '!'
+                    // InternalComplexReconstrTestLanguage.g:302:4: (lv_em_3_0= '!' )
+                    // InternalComplexReconstrTestLanguage.g:303:5: lv_em_3_0= '!'
                     {
                     lv_em_3_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
@@ -795,7 +803,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleTrickyG"
-    // InternalComplexReconstrTestLanguage.g:314:1: entryRuleTrickyG returns [EObject current=null] : iv_ruleTrickyG= ruleTrickyG EOF ;
+    // InternalComplexReconstrTestLanguage.g:319:1: entryRuleTrickyG returns [EObject current=null] : iv_ruleTrickyG= ruleTrickyG EOF ;
     public final EObject entryRuleTrickyG() throws RecognitionException {
         EObject current = null;
 
@@ -803,8 +811,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:314:48: (iv_ruleTrickyG= ruleTrickyG EOF )
-            // InternalComplexReconstrTestLanguage.g:315:2: iv_ruleTrickyG= ruleTrickyG EOF
+            // InternalComplexReconstrTestLanguage.g:319:48: (iv_ruleTrickyG= ruleTrickyG EOF )
+            // InternalComplexReconstrTestLanguage.g:320:2: iv_ruleTrickyG= ruleTrickyG EOF
             {
              newCompositeNode(grammarAccess.getTrickyGRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -831,7 +839,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleTrickyG"
-    // InternalComplexReconstrTestLanguage.g:321:1: ruleTrickyG returns [EObject current=null] : (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) ;
+    // InternalComplexReconstrTestLanguage.g:326:1: ruleTrickyG returns [EObject current=null] : (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) ;
     public final EObject ruleTrickyG() throws RecognitionException {
         EObject current = null;
 
@@ -843,21 +851,21 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:327:2: ( (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
-            // InternalComplexReconstrTestLanguage.g:328:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
+            // InternalComplexReconstrTestLanguage.g:332:2: ( (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
+            // InternalComplexReconstrTestLanguage.g:333:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
             {
-            // InternalComplexReconstrTestLanguage.g:328:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
-            // InternalComplexReconstrTestLanguage.g:329:3: otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
+            // InternalComplexReconstrTestLanguage.g:333:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
+            // InternalComplexReconstrTestLanguage.g:334:3: otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
             {
             otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_7); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTrickyGAccess().getTGKeyword_0());
             		
-            // InternalComplexReconstrTestLanguage.g:333:3: ( (lv_tree_1_0= ruleTrickyG1 ) )
-            // InternalComplexReconstrTestLanguage.g:334:4: (lv_tree_1_0= ruleTrickyG1 )
+            // InternalComplexReconstrTestLanguage.g:338:3: ( (lv_tree_1_0= ruleTrickyG1 ) )
+            // InternalComplexReconstrTestLanguage.g:339:4: (lv_tree_1_0= ruleTrickyG1 )
             {
-            // InternalComplexReconstrTestLanguage.g:334:4: (lv_tree_1_0= ruleTrickyG1 )
-            // InternalComplexReconstrTestLanguage.g:335:5: lv_tree_1_0= ruleTrickyG1
+            // InternalComplexReconstrTestLanguage.g:339:4: (lv_tree_1_0= ruleTrickyG1 )
+            // InternalComplexReconstrTestLanguage.g:340:5: lv_tree_1_0= ruleTrickyG1
             {
 
             					newCompositeNode(grammarAccess.getTrickyGAccess().getTreeTrickyG1ParserRuleCall_1_0());
@@ -907,7 +915,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleTrickyG1"
-    // InternalComplexReconstrTestLanguage.g:356:1: entryRuleTrickyG1 returns [EObject current=null] : iv_ruleTrickyG1= ruleTrickyG1 EOF ;
+    // InternalComplexReconstrTestLanguage.g:361:1: entryRuleTrickyG1 returns [EObject current=null] : iv_ruleTrickyG1= ruleTrickyG1 EOF ;
     public final EObject entryRuleTrickyG1() throws RecognitionException {
         EObject current = null;
 
@@ -915,8 +923,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:356:49: (iv_ruleTrickyG1= ruleTrickyG1 EOF )
-            // InternalComplexReconstrTestLanguage.g:357:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
+            // InternalComplexReconstrTestLanguage.g:361:49: (iv_ruleTrickyG1= ruleTrickyG1 EOF )
+            // InternalComplexReconstrTestLanguage.g:362:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
             {
              newCompositeNode(grammarAccess.getTrickyG1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -943,7 +951,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleTrickyG1"
-    // InternalComplexReconstrTestLanguage.g:363:1: ruleTrickyG1 returns [EObject current=null] : (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) ;
+    // InternalComplexReconstrTestLanguage.g:368:1: ruleTrickyG1 returns [EObject current=null] : (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) ;
     public final EObject ruleTrickyG1() throws RecognitionException {
         EObject current = null;
 
@@ -959,17 +967,17 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:369:2: ( (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) )
-            // InternalComplexReconstrTestLanguage.g:370:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
+            // InternalComplexReconstrTestLanguage.g:374:2: ( (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) )
+            // InternalComplexReconstrTestLanguage.g:375:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
             {
-            // InternalComplexReconstrTestLanguage.g:370:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
-            // InternalComplexReconstrTestLanguage.g:371:3: otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']'
+            // InternalComplexReconstrTestLanguage.g:375:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
+            // InternalComplexReconstrTestLanguage.g:376:3: otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']'
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTrickyG1Access().getLeftSquareBracketKeyword_0());
             		
-            // InternalComplexReconstrTestLanguage.g:375:3: ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )?
+            // InternalComplexReconstrTestLanguage.g:380:3: ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -978,13 +986,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt6) {
                 case 1 :
-                    // InternalComplexReconstrTestLanguage.g:376:4: ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
+                    // InternalComplexReconstrTestLanguage.g:381:4: ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     {
-                    // InternalComplexReconstrTestLanguage.g:376:4: ( (lv_vals_1_0= ruleTrickyG2 ) )
-                    // InternalComplexReconstrTestLanguage.g:377:5: (lv_vals_1_0= ruleTrickyG2 )
+                    // InternalComplexReconstrTestLanguage.g:381:4: ( (lv_vals_1_0= ruleTrickyG2 ) )
+                    // InternalComplexReconstrTestLanguage.g:382:5: (lv_vals_1_0= ruleTrickyG2 )
                     {
-                    // InternalComplexReconstrTestLanguage.g:377:5: (lv_vals_1_0= ruleTrickyG2 )
-                    // InternalComplexReconstrTestLanguage.g:378:6: lv_vals_1_0= ruleTrickyG2
+                    // InternalComplexReconstrTestLanguage.g:382:5: (lv_vals_1_0= ruleTrickyG2 )
+                    // InternalComplexReconstrTestLanguage.g:383:6: lv_vals_1_0= ruleTrickyG2
                     {
 
                     						newCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_0_0());
@@ -1011,7 +1019,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                     }
 
-                    // InternalComplexReconstrTestLanguage.g:395:4: (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
+                    // InternalComplexReconstrTestLanguage.g:400:4: (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1024,17 +1032,17 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalComplexReconstrTestLanguage.g:396:5: otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
+                    	    // InternalComplexReconstrTestLanguage.g:401:5: otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
                     	    {
                     	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_10); 
 
                     	    					newLeafNode(otherlv_2, grammarAccess.getTrickyG1Access().getCommaKeyword_1_1_0());
                     	    				
-                    	    // InternalComplexReconstrTestLanguage.g:400:5: ( (lv_vals_3_0= ruleTrickyG2 ) )
-                    	    // InternalComplexReconstrTestLanguage.g:401:6: (lv_vals_3_0= ruleTrickyG2 )
+                    	    // InternalComplexReconstrTestLanguage.g:405:5: ( (lv_vals_3_0= ruleTrickyG2 ) )
+                    	    // InternalComplexReconstrTestLanguage.g:406:6: (lv_vals_3_0= ruleTrickyG2 )
                     	    {
-                    	    // InternalComplexReconstrTestLanguage.g:401:6: (lv_vals_3_0= ruleTrickyG2 )
-                    	    // InternalComplexReconstrTestLanguage.g:402:7: lv_vals_3_0= ruleTrickyG2
+                    	    // InternalComplexReconstrTestLanguage.g:406:6: (lv_vals_3_0= ruleTrickyG2 )
+                    	    // InternalComplexReconstrTestLanguage.g:407:7: lv_vals_3_0= ruleTrickyG2
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_1_1_0());
@@ -1103,7 +1111,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "entryRuleTrickyG2"
-    // InternalComplexReconstrTestLanguage.g:429:1: entryRuleTrickyG2 returns [EObject current=null] : iv_ruleTrickyG2= ruleTrickyG2 EOF ;
+    // InternalComplexReconstrTestLanguage.g:434:1: entryRuleTrickyG2 returns [EObject current=null] : iv_ruleTrickyG2= ruleTrickyG2 EOF ;
     public final EObject entryRuleTrickyG2() throws RecognitionException {
         EObject current = null;
 
@@ -1111,8 +1119,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalComplexReconstrTestLanguage.g:429:49: (iv_ruleTrickyG2= ruleTrickyG2 EOF )
-            // InternalComplexReconstrTestLanguage.g:430:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
+            // InternalComplexReconstrTestLanguage.g:434:49: (iv_ruleTrickyG2= ruleTrickyG2 EOF )
+            // InternalComplexReconstrTestLanguage.g:435:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
             {
              newCompositeNode(grammarAccess.getTrickyG2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1139,7 +1147,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleTrickyG2"
-    // InternalComplexReconstrTestLanguage.g:436:1: ruleTrickyG2 returns [EObject current=null] : (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) ;
+    // InternalComplexReconstrTestLanguage.g:441:1: ruleTrickyG2 returns [EObject current=null] : (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final EObject ruleTrickyG2() throws RecognitionException {
         EObject current = null;
 
@@ -1151,10 +1159,10 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
         	enterRule();
 
         try {
-            // InternalComplexReconstrTestLanguage.g:442:2: ( (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )
-            // InternalComplexReconstrTestLanguage.g:443:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
+            // InternalComplexReconstrTestLanguage.g:447:2: ( (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )
+            // InternalComplexReconstrTestLanguage.g:448:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // InternalComplexReconstrTestLanguage.g:443:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
+            // InternalComplexReconstrTestLanguage.g:448:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1172,7 +1180,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             }
             switch (alt7) {
                 case 1 :
-                    // InternalComplexReconstrTestLanguage.g:444:3: this_TrickyG1_0= ruleTrickyG1
+                    // InternalComplexReconstrTestLanguage.g:449:3: this_TrickyG1_0= ruleTrickyG1
                     {
 
                     			newCompositeNode(grammarAccess.getTrickyG2Access().getTrickyG1ParserRuleCall_0());
@@ -1190,13 +1198,13 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     }
                     break;
                 case 2 :
-                    // InternalComplexReconstrTestLanguage.g:453:3: ( (lv_val_1_0= RULE_INT ) )
+                    // InternalComplexReconstrTestLanguage.g:458:3: ( (lv_val_1_0= RULE_INT ) )
                     {
-                    // InternalComplexReconstrTestLanguage.g:453:3: ( (lv_val_1_0= RULE_INT ) )
-                    // InternalComplexReconstrTestLanguage.g:454:4: (lv_val_1_0= RULE_INT )
+                    // InternalComplexReconstrTestLanguage.g:458:3: ( (lv_val_1_0= RULE_INT ) )
+                    // InternalComplexReconstrTestLanguage.g:459:4: (lv_val_1_0= RULE_INT )
                     {
-                    // InternalComplexReconstrTestLanguage.g:454:4: (lv_val_1_0= RULE_INT )
-                    // InternalComplexReconstrTestLanguage.g:455:5: lv_val_1_0= RULE_INT
+                    // InternalComplexReconstrTestLanguage.g:459:4: (lv_val_1_0= RULE_INT )
+                    // InternalComplexReconstrTestLanguage.g:460:5: lv_val_1_0= RULE_INT
                     {
                     lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
