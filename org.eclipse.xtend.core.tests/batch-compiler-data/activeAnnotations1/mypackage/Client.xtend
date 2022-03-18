@@ -1,5 +1,3 @@
-package mypackage
-
 /*******************************************************************************
  * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
@@ -8,6 +6,7 @@ package mypackage
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
+package mypackage
 
 import mypackage.Annotation
 /**
