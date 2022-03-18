@@ -473,10 +473,10 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageLexer extends L
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:271:9: ( ( ' ' )+ )
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:271:11: ( ' ' )+
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:276:9: ( ( ' ' )+ )
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:276:11: ( ' ' )+
             {
-            // InternalContentAssistNoTerminalExtensionTestLanguage.g:271:11: ( ' ' )+
+            // InternalContentAssistNoTerminalExtensionTestLanguage.g:276:11: ( ' ' )+
             int cnt1=0;
             loop1:
             do {
@@ -490,7 +490,7 @@ public class InternalContentAssistNoTerminalExtensionTestLanguageLexer extends L
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:271:11: ' '
+            	    // InternalContentAssistNoTerminalExtensionTestLanguage.g:276:11: ' '
             	    {
             	    match(' '); 
 

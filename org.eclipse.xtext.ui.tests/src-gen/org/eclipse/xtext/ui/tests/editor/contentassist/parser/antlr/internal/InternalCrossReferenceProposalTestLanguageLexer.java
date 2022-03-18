@@ -147,10 +147,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:245:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalCrossReferenceProposalTestLanguage.g:245:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalCrossReferenceProposalTestLanguage.g:250:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalCrossReferenceProposalTestLanguage.g:250:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalCrossReferenceProposalTestLanguage.g:245:11: ( '^' )?
+            // InternalCrossReferenceProposalTestLanguage.g:250:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -159,7 +159,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalCrossReferenceProposalTestLanguage.g:245:11: '^'
+                    // InternalCrossReferenceProposalTestLanguage.g:250:11: '^'
                     {
                     match('^'); 
 
@@ -177,7 +177,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalCrossReferenceProposalTestLanguage.g:245:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalCrossReferenceProposalTestLanguage.g:250:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -226,10 +226,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:247:10: ( ( '0' .. '9' )+ )
-            // InternalCrossReferenceProposalTestLanguage.g:247:12: ( '0' .. '9' )+
+            // InternalCrossReferenceProposalTestLanguage.g:252:10: ( ( '0' .. '9' )+ )
+            // InternalCrossReferenceProposalTestLanguage.g:252:12: ( '0' .. '9' )+
             {
-            // InternalCrossReferenceProposalTestLanguage.g:247:12: ( '0' .. '9' )+
+            // InternalCrossReferenceProposalTestLanguage.g:252:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -243,7 +243,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalCrossReferenceProposalTestLanguage.g:247:13: '0' .. '9'
+            	    // InternalCrossReferenceProposalTestLanguage.g:252:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -275,10 +275,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:249:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalCrossReferenceProposalTestLanguage.g:249:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalCrossReferenceProposalTestLanguage.g:254:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalCrossReferenceProposalTestLanguage.g:254:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalCrossReferenceProposalTestLanguage.g:249:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalCrossReferenceProposalTestLanguage.g:254:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -296,10 +296,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalCrossReferenceProposalTestLanguage.g:249:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalCrossReferenceProposalTestLanguage.g:254:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalCrossReferenceProposalTestLanguage.g:249:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalCrossReferenceProposalTestLanguage.g:254:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -315,7 +315,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalCrossReferenceProposalTestLanguage.g:249:21: '\\\\' .
+                    	    // InternalCrossReferenceProposalTestLanguage.g:254:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -323,7 +323,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalCrossReferenceProposalTestLanguage.g:249:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalCrossReferenceProposalTestLanguage.g:254:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -348,10 +348,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalCrossReferenceProposalTestLanguage.g:249:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalCrossReferenceProposalTestLanguage.g:254:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalCrossReferenceProposalTestLanguage.g:249:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalCrossReferenceProposalTestLanguage.g:254:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -367,7 +367,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalCrossReferenceProposalTestLanguage.g:249:54: '\\\\' .
+                    	    // InternalCrossReferenceProposalTestLanguage.g:254:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -375,7 +375,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalCrossReferenceProposalTestLanguage.g:249:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalCrossReferenceProposalTestLanguage.g:254:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -418,12 +418,12 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:251:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalCrossReferenceProposalTestLanguage.g:251:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalCrossReferenceProposalTestLanguage.g:256:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalCrossReferenceProposalTestLanguage.g:256:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalCrossReferenceProposalTestLanguage.g:251:24: ( options {greedy=false; } : . )*
+            // InternalCrossReferenceProposalTestLanguage.g:256:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -448,7 +448,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalCrossReferenceProposalTestLanguage.g:251:52: .
+            	    // InternalCrossReferenceProposalTestLanguage.g:256:52: .
             	    {
             	    matchAny(); 
 
@@ -478,12 +478,12 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:253:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalCrossReferenceProposalTestLanguage.g:253:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalCrossReferenceProposalTestLanguage.g:258:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalCrossReferenceProposalTestLanguage.g:258:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalCrossReferenceProposalTestLanguage.g:253:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalCrossReferenceProposalTestLanguage.g:258:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -496,7 +496,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalCrossReferenceProposalTestLanguage.g:253:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalCrossReferenceProposalTestLanguage.g:258:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -516,7 +516,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalCrossReferenceProposalTestLanguage.g:253:40: ( ( '\\r' )? '\\n' )?
+            // InternalCrossReferenceProposalTestLanguage.g:258:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -525,9 +525,9 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalCrossReferenceProposalTestLanguage.g:253:41: ( '\\r' )? '\\n'
+                    // InternalCrossReferenceProposalTestLanguage.g:258:41: ( '\\r' )? '\\n'
                     {
-                    // InternalCrossReferenceProposalTestLanguage.g:253:41: ( '\\r' )?
+                    // InternalCrossReferenceProposalTestLanguage.g:258:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -536,7 +536,7 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalCrossReferenceProposalTestLanguage.g:253:41: '\\r'
+                            // InternalCrossReferenceProposalTestLanguage.g:258:41: '\\r'
                             {
                             match('\r'); 
 
@@ -568,10 +568,10 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:255:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalCrossReferenceProposalTestLanguage.g:255:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalCrossReferenceProposalTestLanguage.g:260:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalCrossReferenceProposalTestLanguage.g:260:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalCrossReferenceProposalTestLanguage.g:255:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalCrossReferenceProposalTestLanguage.g:260:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -625,8 +625,8 @@ public class InternalCrossReferenceProposalTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCrossReferenceProposalTestLanguage.g:257:16: ( . )
-            // InternalCrossReferenceProposalTestLanguage.g:257:18: .
+            // InternalCrossReferenceProposalTestLanguage.g:262:16: ( . )
+            // InternalCrossReferenceProposalTestLanguage.g:262:18: .
             {
             matchAny(); 
 

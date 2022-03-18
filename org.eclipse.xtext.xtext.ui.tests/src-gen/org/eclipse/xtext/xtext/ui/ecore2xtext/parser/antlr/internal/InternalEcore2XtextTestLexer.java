@@ -256,10 +256,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:487:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalEcore2XtextTest.g:487:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEcore2XtextTest.g:492:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalEcore2XtextTest.g:492:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalEcore2XtextTest.g:487:11: ( '^' )?
+            // InternalEcore2XtextTest.g:492:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -268,7 +268,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:487:11: '^'
+                    // InternalEcore2XtextTest.g:492:11: '^'
                     {
                     match('^'); 
 
@@ -286,7 +286,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalEcore2XtextTest.g:487:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEcore2XtextTest.g:492:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -335,10 +335,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:489:10: ( ( '0' .. '9' )+ )
-            // InternalEcore2XtextTest.g:489:12: ( '0' .. '9' )+
+            // InternalEcore2XtextTest.g:494:10: ( ( '0' .. '9' )+ )
+            // InternalEcore2XtextTest.g:494:12: ( '0' .. '9' )+
             {
-            // InternalEcore2XtextTest.g:489:12: ( '0' .. '9' )+
+            // InternalEcore2XtextTest.g:494:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -352,7 +352,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalEcore2XtextTest.g:489:13: '0' .. '9'
+            	    // InternalEcore2XtextTest.g:494:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -384,10 +384,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:491:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalEcore2XtextTest.g:491:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEcore2XtextTest.g:496:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalEcore2XtextTest.g:496:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalEcore2XtextTest.g:491:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEcore2XtextTest.g:496:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -405,10 +405,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:491:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalEcore2XtextTest.g:496:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalEcore2XtextTest.g:491:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalEcore2XtextTest.g:496:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -424,7 +424,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalEcore2XtextTest.g:491:21: '\\\\' .
+                    	    // InternalEcore2XtextTest.g:496:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -432,7 +432,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalEcore2XtextTest.g:491:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalEcore2XtextTest.g:496:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -457,10 +457,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalEcore2XtextTest.g:491:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalEcore2XtextTest.g:496:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalEcore2XtextTest.g:491:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalEcore2XtextTest.g:496:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -476,7 +476,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalEcore2XtextTest.g:491:54: '\\\\' .
+                    	    // InternalEcore2XtextTest.g:496:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -484,7 +484,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalEcore2XtextTest.g:491:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalEcore2XtextTest.g:496:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -527,12 +527,12 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:493:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalEcore2XtextTest.g:493:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalEcore2XtextTest.g:498:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalEcore2XtextTest.g:498:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalEcore2XtextTest.g:493:24: ( options {greedy=false; } : . )*
+            // InternalEcore2XtextTest.g:498:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -557,7 +557,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalEcore2XtextTest.g:493:52: .
+            	    // InternalEcore2XtextTest.g:498:52: .
             	    {
             	    matchAny(); 
 
@@ -587,12 +587,12 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:495:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalEcore2XtextTest.g:495:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalEcore2XtextTest.g:500:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalEcore2XtextTest.g:500:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalEcore2XtextTest.g:495:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalEcore2XtextTest.g:500:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -605,7 +605,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalEcore2XtextTest.g:495:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalEcore2XtextTest.g:500:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -625,7 +625,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalEcore2XtextTest.g:495:40: ( ( '\\r' )? '\\n' )?
+            // InternalEcore2XtextTest.g:500:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -634,9 +634,9 @@ public class InternalEcore2XtextTestLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalEcore2XtextTest.g:495:41: ( '\\r' )? '\\n'
+                    // InternalEcore2XtextTest.g:500:41: ( '\\r' )? '\\n'
                     {
-                    // InternalEcore2XtextTest.g:495:41: ( '\\r' )?
+                    // InternalEcore2XtextTest.g:500:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -645,7 +645,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalEcore2XtextTest.g:495:41: '\\r'
+                            // InternalEcore2XtextTest.g:500:41: '\\r'
                             {
                             match('\r'); 
 
@@ -677,10 +677,10 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:497:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalEcore2XtextTest.g:497:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcore2XtextTest.g:502:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEcore2XtextTest.g:502:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalEcore2XtextTest.g:497:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcore2XtextTest.g:502:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -734,8 +734,8 @@ public class InternalEcore2XtextTestLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEcore2XtextTest.g:499:16: ( . )
-            // InternalEcore2XtextTest.g:499:18: .
+            // InternalEcore2XtextTest.g:504:16: ( . )
+            // InternalEcore2XtextTest.g:504:18: .
             {
             matchAny(); 
 

@@ -168,10 +168,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:728:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalRefactoringTestLanguage.g:728:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRefactoringTestLanguage.g:733:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalRefactoringTestLanguage.g:733:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalRefactoringTestLanguage.g:728:11: ( '^' )?
+            // InternalRefactoringTestLanguage.g:733:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -180,7 +180,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:728:11: '^'
+                    // InternalRefactoringTestLanguage.g:733:11: '^'
                     {
                     match('^'); 
 
@@ -198,7 +198,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalRefactoringTestLanguage.g:728:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRefactoringTestLanguage.g:733:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -247,10 +247,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:730:10: ( ( '0' .. '9' )+ )
-            // InternalRefactoringTestLanguage.g:730:12: ( '0' .. '9' )+
+            // InternalRefactoringTestLanguage.g:735:10: ( ( '0' .. '9' )+ )
+            // InternalRefactoringTestLanguage.g:735:12: ( '0' .. '9' )+
             {
-            // InternalRefactoringTestLanguage.g:730:12: ( '0' .. '9' )+
+            // InternalRefactoringTestLanguage.g:735:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -264,7 +264,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:730:13: '0' .. '9'
+            	    // InternalRefactoringTestLanguage.g:735:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -296,10 +296,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:732:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalRefactoringTestLanguage.g:732:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRefactoringTestLanguage.g:737:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalRefactoringTestLanguage.g:737:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalRefactoringTestLanguage.g:732:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRefactoringTestLanguage.g:737:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -317,10 +317,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:732:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalRefactoringTestLanguage.g:737:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalRefactoringTestLanguage.g:732:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalRefactoringTestLanguage.g:737:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -336,7 +336,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalRefactoringTestLanguage.g:732:21: '\\\\' .
+                    	    // InternalRefactoringTestLanguage.g:737:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -344,7 +344,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRefactoringTestLanguage.g:732:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalRefactoringTestLanguage.g:737:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -369,10 +369,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRefactoringTestLanguage.g:732:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalRefactoringTestLanguage.g:737:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalRefactoringTestLanguage.g:732:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalRefactoringTestLanguage.g:737:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -388,7 +388,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalRefactoringTestLanguage.g:732:54: '\\\\' .
+                    	    // InternalRefactoringTestLanguage.g:737:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -396,7 +396,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRefactoringTestLanguage.g:732:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalRefactoringTestLanguage.g:737:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -439,12 +439,12 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:734:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalRefactoringTestLanguage.g:734:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalRefactoringTestLanguage.g:739:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalRefactoringTestLanguage.g:739:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalRefactoringTestLanguage.g:734:24: ( options {greedy=false; } : . )*
+            // InternalRefactoringTestLanguage.g:739:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -469,7 +469,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:734:52: .
+            	    // InternalRefactoringTestLanguage.g:739:52: .
             	    {
             	    matchAny(); 
 
@@ -499,12 +499,12 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:736:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalRefactoringTestLanguage.g:736:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalRefactoringTestLanguage.g:741:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalRefactoringTestLanguage.g:741:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalRefactoringTestLanguage.g:736:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalRefactoringTestLanguage.g:741:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -517,7 +517,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalRefactoringTestLanguage.g:736:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalRefactoringTestLanguage.g:741:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -537,7 +537,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalRefactoringTestLanguage.g:736:40: ( ( '\\r' )? '\\n' )?
+            // InternalRefactoringTestLanguage.g:741:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -546,9 +546,9 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalRefactoringTestLanguage.g:736:41: ( '\\r' )? '\\n'
+                    // InternalRefactoringTestLanguage.g:741:41: ( '\\r' )? '\\n'
                     {
-                    // InternalRefactoringTestLanguage.g:736:41: ( '\\r' )?
+                    // InternalRefactoringTestLanguage.g:741:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -557,7 +557,7 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalRefactoringTestLanguage.g:736:41: '\\r'
+                            // InternalRefactoringTestLanguage.g:741:41: '\\r'
                             {
                             match('\r'); 
 
@@ -589,10 +589,10 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:738:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalRefactoringTestLanguage.g:738:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRefactoringTestLanguage.g:743:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalRefactoringTestLanguage.g:743:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalRefactoringTestLanguage.g:738:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRefactoringTestLanguage.g:743:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -646,8 +646,8 @@ public class InternalRefactoringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRefactoringTestLanguage.g:740:16: ( . )
-            // InternalRefactoringTestLanguage.g:740:18: .
+            // InternalRefactoringTestLanguage.g:745:16: ( . )
+            // InternalRefactoringTestLanguage.g:745:18: .
             {
             matchAny(); 
 
