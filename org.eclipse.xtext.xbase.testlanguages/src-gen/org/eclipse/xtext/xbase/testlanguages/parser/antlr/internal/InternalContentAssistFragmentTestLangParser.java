@@ -19,6 +19,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+/*******************************************************************************
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalContentAssistFragmentTestLangParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -149,7 +157,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleContentAssistFragmentTestLanguageRoot"
-    // InternalContentAssistFragmentTestLang.g:64:1: entryRuleContentAssistFragmentTestLanguageRoot returns [EObject current=null] : iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF ;
+    // InternalContentAssistFragmentTestLang.g:69:1: entryRuleContentAssistFragmentTestLanguageRoot returns [EObject current=null] : iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF ;
     public final EObject entryRuleContentAssistFragmentTestLanguageRoot() throws RecognitionException {
         EObject current = null;
 
@@ -157,8 +165,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:64:78: (iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF )
-            // InternalContentAssistFragmentTestLang.g:65:2: iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF
+            // InternalContentAssistFragmentTestLang.g:69:78: (iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF )
+            // InternalContentAssistFragmentTestLang.g:70:2: iv_ruleContentAssistFragmentTestLanguageRoot= ruleContentAssistFragmentTestLanguageRoot EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getContentAssistFragmentTestLanguageRootRule()); 
@@ -189,7 +197,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleContentAssistFragmentTestLanguageRoot"
-    // InternalContentAssistFragmentTestLang.g:71:1: ruleContentAssistFragmentTestLanguageRoot returns [EObject current=null] : ( (lv_expression_0_0= ruleXExpression ) ) ;
+    // InternalContentAssistFragmentTestLang.g:76:1: ruleContentAssistFragmentTestLanguageRoot returns [EObject current=null] : ( (lv_expression_0_0= ruleXExpression ) ) ;
     public final EObject ruleContentAssistFragmentTestLanguageRoot() throws RecognitionException {
         EObject current = null;
 
@@ -200,14 +208,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:77:2: ( ( (lv_expression_0_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:78:2: ( (lv_expression_0_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:82:2: ( ( (lv_expression_0_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:83:2: ( (lv_expression_0_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:78:2: ( (lv_expression_0_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:79:3: (lv_expression_0_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:83:2: ( (lv_expression_0_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:84:3: (lv_expression_0_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:79:3: (lv_expression_0_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:80:4: lv_expression_0_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:84:3: (lv_expression_0_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:85:4: lv_expression_0_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -260,7 +268,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXVariableDeclaration"
-    // InternalContentAssistFragmentTestLang.g:100:1: entryRuleXVariableDeclaration returns [EObject current=null] : iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF ;
+    // InternalContentAssistFragmentTestLang.g:105:1: entryRuleXVariableDeclaration returns [EObject current=null] : iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF ;
     public final EObject entryRuleXVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -268,8 +276,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:100:61: (iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF )
-            // InternalContentAssistFragmentTestLang.g:101:2: iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF
+            // InternalContentAssistFragmentTestLang.g:105:61: (iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF )
+            // InternalContentAssistFragmentTestLang.g:106:2: iv_ruleXVariableDeclaration= ruleXVariableDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXVariableDeclarationRule()); 
@@ -300,7 +308,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXVariableDeclaration"
-    // InternalContentAssistFragmentTestLang.g:107:1: ruleXVariableDeclaration returns [EObject current=null] : ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:112:1: ruleXVariableDeclaration returns [EObject current=null] : ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) ;
     public final EObject ruleXVariableDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -320,14 +328,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:113:2: ( ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:114:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:118:2: ( ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:119:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:114:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
-            // InternalContentAssistFragmentTestLang.g:115:3: () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:119:2: ( () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:120:3: () ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' ) ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) ) (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:115:3: ()
-            // InternalContentAssistFragmentTestLang.g:116:4: 
+            // InternalContentAssistFragmentTestLang.g:120:3: ()
+            // InternalContentAssistFragmentTestLang.g:121:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -339,7 +347,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:122:3: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' )
+            // InternalContentAssistFragmentTestLang.g:127:3: ( ( (lv_writeable_1_0= 'var' ) ) | otherlv_2= 'val' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -358,13 +366,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt1) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:123:4: ( (lv_writeable_1_0= 'var' ) )
+                    // InternalContentAssistFragmentTestLang.g:128:4: ( (lv_writeable_1_0= 'var' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:123:4: ( (lv_writeable_1_0= 'var' ) )
-                    // InternalContentAssistFragmentTestLang.g:124:5: (lv_writeable_1_0= 'var' )
+                    // InternalContentAssistFragmentTestLang.g:128:4: ( (lv_writeable_1_0= 'var' ) )
+                    // InternalContentAssistFragmentTestLang.g:129:5: (lv_writeable_1_0= 'var' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:124:5: (lv_writeable_1_0= 'var' )
-                    // InternalContentAssistFragmentTestLang.g:125:6: lv_writeable_1_0= 'var'
+                    // InternalContentAssistFragmentTestLang.g:129:5: (lv_writeable_1_0= 'var' )
+                    // InternalContentAssistFragmentTestLang.g:130:6: lv_writeable_1_0= 'var'
                     {
                     lv_writeable_1_0=(Token)match(input,13,FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -390,7 +398,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:138:4: otherlv_2= 'val'
+                    // InternalContentAssistFragmentTestLang.g:143:4: otherlv_2= 'val'
                     {
                     otherlv_2=(Token)match(input,14,FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -404,7 +412,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:143:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) )
+            // InternalContentAssistFragmentTestLang.g:148:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) ) | ( (lv_name_5_0= ruleValidID ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -440,19 +448,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt2) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:144:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
+                    // InternalContentAssistFragmentTestLang.g:149:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:144:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
-                    // InternalContentAssistFragmentTestLang.g:145:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
+                    // InternalContentAssistFragmentTestLang.g:149:4: ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) ) )
+                    // InternalContentAssistFragmentTestLang.g:150:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )=> ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:158:5: ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
-                    // InternalContentAssistFragmentTestLang.g:159:6: ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) )
+                    // InternalContentAssistFragmentTestLang.g:163:5: ( ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) ) )
+                    // InternalContentAssistFragmentTestLang.g:164:6: ( (lv_type_3_0= ruleJvmTypeReference ) ) ( (lv_name_4_0= ruleValidID ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:159:6: ( (lv_type_3_0= ruleJvmTypeReference ) )
-                    // InternalContentAssistFragmentTestLang.g:160:7: (lv_type_3_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:164:6: ( (lv_type_3_0= ruleJvmTypeReference ) )
+                    // InternalContentAssistFragmentTestLang.g:165:7: (lv_type_3_0= ruleJvmTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:160:7: (lv_type_3_0= ruleJvmTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:161:8: lv_type_3_0= ruleJvmTypeReference
+                    // InternalContentAssistFragmentTestLang.g:165:7: (lv_type_3_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:166:8: lv_type_3_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -483,11 +491,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:178:6: ( (lv_name_4_0= ruleValidID ) )
-                    // InternalContentAssistFragmentTestLang.g:179:7: (lv_name_4_0= ruleValidID )
+                    // InternalContentAssistFragmentTestLang.g:183:6: ( (lv_name_4_0= ruleValidID ) )
+                    // InternalContentAssistFragmentTestLang.g:184:7: (lv_name_4_0= ruleValidID )
                     {
-                    // InternalContentAssistFragmentTestLang.g:179:7: (lv_name_4_0= ruleValidID )
-                    // InternalContentAssistFragmentTestLang.g:180:8: lv_name_4_0= ruleValidID
+                    // InternalContentAssistFragmentTestLang.g:184:7: (lv_name_4_0= ruleValidID )
+                    // InternalContentAssistFragmentTestLang.g:185:8: lv_name_4_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -528,13 +536,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:200:4: ( (lv_name_5_0= ruleValidID ) )
+                    // InternalContentAssistFragmentTestLang.g:205:4: ( (lv_name_5_0= ruleValidID ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:200:4: ( (lv_name_5_0= ruleValidID ) )
-                    // InternalContentAssistFragmentTestLang.g:201:5: (lv_name_5_0= ruleValidID )
+                    // InternalContentAssistFragmentTestLang.g:205:4: ( (lv_name_5_0= ruleValidID ) )
+                    // InternalContentAssistFragmentTestLang.g:206:5: (lv_name_5_0= ruleValidID )
                     {
-                    // InternalContentAssistFragmentTestLang.g:201:5: (lv_name_5_0= ruleValidID )
-                    // InternalContentAssistFragmentTestLang.g:202:6: lv_name_5_0= ruleValidID
+                    // InternalContentAssistFragmentTestLang.g:206:5: (lv_name_5_0= ruleValidID )
+                    // InternalContentAssistFragmentTestLang.g:207:6: lv_name_5_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -571,7 +579,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:220:3: (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:225:3: (otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -580,7 +588,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt3) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:221:4: otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:226:4: otherlv_6= '=' ( (lv_right_7_0= ruleXExpression ) )
                     {
                     otherlv_6=(Token)match(input,15,FOLLOW_6); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -588,11 +596,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_6, grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:225:4: ( (lv_right_7_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:226:5: (lv_right_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:230:4: ( (lv_right_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:231:5: (lv_right_7_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:226:5: (lv_right_7_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:227:6: lv_right_7_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:231:5: (lv_right_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:232:6: lv_right_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -654,7 +662,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXExpression"
-    // InternalContentAssistFragmentTestLang.g:249:1: entryRuleXExpression returns [EObject current=null] : iv_ruleXExpression= ruleXExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:254:1: entryRuleXExpression returns [EObject current=null] : iv_ruleXExpression= ruleXExpression EOF ;
     public final EObject entryRuleXExpression() throws RecognitionException {
         EObject current = null;
 
@@ -662,8 +670,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:249:52: (iv_ruleXExpression= ruleXExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:250:2: iv_ruleXExpression= ruleXExpression EOF
+            // InternalContentAssistFragmentTestLang.g:254:52: (iv_ruleXExpression= ruleXExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:255:2: iv_ruleXExpression= ruleXExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionRule()); 
@@ -694,7 +702,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXExpression"
-    // InternalContentAssistFragmentTestLang.g:256:1: ruleXExpression returns [EObject current=null] : this_XAssignment_0= ruleXAssignment ;
+    // InternalContentAssistFragmentTestLang.g:261:1: ruleXExpression returns [EObject current=null] : this_XAssignment_0= ruleXAssignment ;
     public final EObject ruleXExpression() throws RecognitionException {
         EObject current = null;
 
@@ -705,8 +713,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:262:2: (this_XAssignment_0= ruleXAssignment )
-            // InternalContentAssistFragmentTestLang.g:263:2: this_XAssignment_0= ruleXAssignment
+            // InternalContentAssistFragmentTestLang.g:267:2: (this_XAssignment_0= ruleXAssignment )
+            // InternalContentAssistFragmentTestLang.g:268:2: this_XAssignment_0= ruleXAssignment
             {
             if ( state.backtracking==0 ) {
 
@@ -746,7 +754,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXAssignment"
-    // InternalContentAssistFragmentTestLang.g:274:1: entryRuleXAssignment returns [EObject current=null] : iv_ruleXAssignment= ruleXAssignment EOF ;
+    // InternalContentAssistFragmentTestLang.g:279:1: entryRuleXAssignment returns [EObject current=null] : iv_ruleXAssignment= ruleXAssignment EOF ;
     public final EObject entryRuleXAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -754,8 +762,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:274:52: (iv_ruleXAssignment= ruleXAssignment EOF )
-            // InternalContentAssistFragmentTestLang.g:275:2: iv_ruleXAssignment= ruleXAssignment EOF
+            // InternalContentAssistFragmentTestLang.g:279:52: (iv_ruleXAssignment= ruleXAssignment EOF )
+            // InternalContentAssistFragmentTestLang.g:280:2: iv_ruleXAssignment= ruleXAssignment EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAssignmentRule()); 
@@ -786,7 +794,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXAssignment"
-    // InternalContentAssistFragmentTestLang.g:281:1: ruleXAssignment returns [EObject current=null] : ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) ;
+    // InternalContentAssistFragmentTestLang.g:286:1: ruleXAssignment returns [EObject current=null] : ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) ;
     public final EObject ruleXAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -801,10 +809,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:287:2: ( ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) )
-            // InternalContentAssistFragmentTestLang.g:288:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:292:2: ( ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) ) )
+            // InternalContentAssistFragmentTestLang.g:293:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             {
-            // InternalContentAssistFragmentTestLang.g:288:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:293:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )
             int alt5=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -943,13 +951,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt5) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:289:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
+                    // InternalContentAssistFragmentTestLang.g:294:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:289:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
-                    // InternalContentAssistFragmentTestLang.g:290:4: () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) )
+                    // InternalContentAssistFragmentTestLang.g:294:3: ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) )
+                    // InternalContentAssistFragmentTestLang.g:295:4: () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:290:4: ()
-                    // InternalContentAssistFragmentTestLang.g:291:5: 
+                    // InternalContentAssistFragmentTestLang.g:295:4: ()
+                    // InternalContentAssistFragmentTestLang.g:296:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -961,11 +969,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:297:4: ( ( ruleFeatureCallID ) )
-                    // InternalContentAssistFragmentTestLang.g:298:5: ( ruleFeatureCallID )
+                    // InternalContentAssistFragmentTestLang.g:302:4: ( ( ruleFeatureCallID ) )
+                    // InternalContentAssistFragmentTestLang.g:303:5: ( ruleFeatureCallID )
                     {
-                    // InternalContentAssistFragmentTestLang.g:298:5: ( ruleFeatureCallID )
-                    // InternalContentAssistFragmentTestLang.g:299:6: ruleFeatureCallID
+                    // InternalContentAssistFragmentTestLang.g:303:5: ( ruleFeatureCallID )
+                    // InternalContentAssistFragmentTestLang.g:304:6: ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1010,11 +1018,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:320:4: ( (lv_value_3_0= ruleXAssignment ) )
-                    // InternalContentAssistFragmentTestLang.g:321:5: (lv_value_3_0= ruleXAssignment )
+                    // InternalContentAssistFragmentTestLang.g:325:4: ( (lv_value_3_0= ruleXAssignment ) )
+                    // InternalContentAssistFragmentTestLang.g:326:5: (lv_value_3_0= ruleXAssignment )
                     {
-                    // InternalContentAssistFragmentTestLang.g:321:5: (lv_value_3_0= ruleXAssignment )
-                    // InternalContentAssistFragmentTestLang.g:322:6: lv_value_3_0= ruleXAssignment
+                    // InternalContentAssistFragmentTestLang.g:326:5: (lv_value_3_0= ruleXAssignment )
+                    // InternalContentAssistFragmentTestLang.g:327:6: lv_value_3_0= ruleXAssignment
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1052,10 +1060,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:341:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
+                    // InternalContentAssistFragmentTestLang.g:346:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
                     {
-                    // InternalContentAssistFragmentTestLang.g:341:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
-                    // InternalContentAssistFragmentTestLang.g:342:4: this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
+                    // InternalContentAssistFragmentTestLang.g:346:3: (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? )
+                    // InternalContentAssistFragmentTestLang.g:347:4: this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     {
                     if ( state.backtracking==0 ) {
 
@@ -1073,21 +1081,21 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:350:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
+                    // InternalContentAssistFragmentTestLang.g:355:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
                     int alt4=2;
                     alt4 = dfa4.predict(input);
                     switch (alt4) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:351:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) )
+                            // InternalContentAssistFragmentTestLang.g:356:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:351:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) )
-                            // InternalContentAssistFragmentTestLang.g:352:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) )
+                            // InternalContentAssistFragmentTestLang.g:356:5: ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) )
+                            // InternalContentAssistFragmentTestLang.g:357:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:362:6: ( () ( ( ruleOpMultiAssign ) ) )
-                            // InternalContentAssistFragmentTestLang.g:363:7: () ( ( ruleOpMultiAssign ) )
+                            // InternalContentAssistFragmentTestLang.g:367:6: ( () ( ( ruleOpMultiAssign ) ) )
+                            // InternalContentAssistFragmentTestLang.g:368:7: () ( ( ruleOpMultiAssign ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:363:7: ()
-                            // InternalContentAssistFragmentTestLang.g:364:8: 
+                            // InternalContentAssistFragmentTestLang.g:368:7: ()
+                            // InternalContentAssistFragmentTestLang.g:369:8: 
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1099,11 +1107,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:370:7: ( ( ruleOpMultiAssign ) )
-                            // InternalContentAssistFragmentTestLang.g:371:8: ( ruleOpMultiAssign )
+                            // InternalContentAssistFragmentTestLang.g:375:7: ( ( ruleOpMultiAssign ) )
+                            // InternalContentAssistFragmentTestLang.g:376:8: ( ruleOpMultiAssign )
                             {
-                            // InternalContentAssistFragmentTestLang.g:371:8: ( ruleOpMultiAssign )
-                            // InternalContentAssistFragmentTestLang.g:372:9: ruleOpMultiAssign
+                            // InternalContentAssistFragmentTestLang.g:376:8: ( ruleOpMultiAssign )
+                            // InternalContentAssistFragmentTestLang.g:377:9: ruleOpMultiAssign
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1139,11 +1147,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:388:5: ( (lv_rightOperand_7_0= ruleXAssignment ) )
-                            // InternalContentAssistFragmentTestLang.g:389:6: (lv_rightOperand_7_0= ruleXAssignment )
+                            // InternalContentAssistFragmentTestLang.g:393:5: ( (lv_rightOperand_7_0= ruleXAssignment ) )
+                            // InternalContentAssistFragmentTestLang.g:394:6: (lv_rightOperand_7_0= ruleXAssignment )
                             {
-                            // InternalContentAssistFragmentTestLang.g:389:6: (lv_rightOperand_7_0= ruleXAssignment )
-                            // InternalContentAssistFragmentTestLang.g:390:7: lv_rightOperand_7_0= ruleXAssignment
+                            // InternalContentAssistFragmentTestLang.g:394:6: (lv_rightOperand_7_0= ruleXAssignment )
+                            // InternalContentAssistFragmentTestLang.g:395:7: lv_rightOperand_7_0= ruleXAssignment
                             {
                             if ( state.backtracking==0 ) {
 
@@ -1211,7 +1219,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpSingleAssign"
-    // InternalContentAssistFragmentTestLang.g:413:1: entryRuleOpSingleAssign returns [String current=null] : iv_ruleOpSingleAssign= ruleOpSingleAssign EOF ;
+    // InternalContentAssistFragmentTestLang.g:418:1: entryRuleOpSingleAssign returns [String current=null] : iv_ruleOpSingleAssign= ruleOpSingleAssign EOF ;
     public final String entryRuleOpSingleAssign() throws RecognitionException {
         String current = null;
 
@@ -1219,8 +1227,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:413:54: (iv_ruleOpSingleAssign= ruleOpSingleAssign EOF )
-            // InternalContentAssistFragmentTestLang.g:414:2: iv_ruleOpSingleAssign= ruleOpSingleAssign EOF
+            // InternalContentAssistFragmentTestLang.g:418:54: (iv_ruleOpSingleAssign= ruleOpSingleAssign EOF )
+            // InternalContentAssistFragmentTestLang.g:419:2: iv_ruleOpSingleAssign= ruleOpSingleAssign EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpSingleAssignRule()); 
@@ -1251,7 +1259,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpSingleAssign"
-    // InternalContentAssistFragmentTestLang.g:420:1: ruleOpSingleAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '=' ;
+    // InternalContentAssistFragmentTestLang.g:425:1: ruleOpSingleAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '=' ;
     public final AntlrDatatypeRuleToken ruleOpSingleAssign() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1261,8 +1269,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:426:2: (kw= '=' )
-            // InternalContentAssistFragmentTestLang.g:427:2: kw= '='
+            // InternalContentAssistFragmentTestLang.g:431:2: (kw= '=' )
+            // InternalContentAssistFragmentTestLang.g:432:2: kw= '='
             {
             kw=(Token)match(input,15,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1293,7 +1301,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpMultiAssign"
-    // InternalContentAssistFragmentTestLang.g:435:1: entryRuleOpMultiAssign returns [String current=null] : iv_ruleOpMultiAssign= ruleOpMultiAssign EOF ;
+    // InternalContentAssistFragmentTestLang.g:440:1: entryRuleOpMultiAssign returns [String current=null] : iv_ruleOpMultiAssign= ruleOpMultiAssign EOF ;
     public final String entryRuleOpMultiAssign() throws RecognitionException {
         String current = null;
 
@@ -1301,8 +1309,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:435:53: (iv_ruleOpMultiAssign= ruleOpMultiAssign EOF )
-            // InternalContentAssistFragmentTestLang.g:436:2: iv_ruleOpMultiAssign= ruleOpMultiAssign EOF
+            // InternalContentAssistFragmentTestLang.g:440:53: (iv_ruleOpMultiAssign= ruleOpMultiAssign EOF )
+            // InternalContentAssistFragmentTestLang.g:441:2: iv_ruleOpMultiAssign= ruleOpMultiAssign EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpMultiAssignRule()); 
@@ -1333,7 +1341,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpMultiAssign"
-    // InternalContentAssistFragmentTestLang.g:442:1: ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) ;
+    // InternalContentAssistFragmentTestLang.g:447:1: ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) ;
     public final AntlrDatatypeRuleToken ruleOpMultiAssign() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1343,10 +1351,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:448:2: ( (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) )
-            // InternalContentAssistFragmentTestLang.g:449:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
+            // InternalContentAssistFragmentTestLang.g:453:2: ( (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) ) )
+            // InternalContentAssistFragmentTestLang.g:454:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             {
-            // InternalContentAssistFragmentTestLang.g:449:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
+            // InternalContentAssistFragmentTestLang.g:454:2: (kw= '+=' | kw= '-=' | kw= '*=' | kw= '/=' | kw= '%=' | (kw= '<' kw= '<' kw= '=' ) | (kw= '>' (kw= '>' )? kw= '>=' ) )
             int alt7=7;
             switch ( input.LA(1) ) {
             case 16:
@@ -1394,7 +1402,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt7) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:450:3: kw= '+='
+                    // InternalContentAssistFragmentTestLang.g:455:3: kw= '+='
                     {
                     kw=(Token)match(input,16,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1407,7 +1415,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:456:3: kw= '-='
+                    // InternalContentAssistFragmentTestLang.g:461:3: kw= '-='
                     {
                     kw=(Token)match(input,17,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1420,7 +1428,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:462:3: kw= '*='
+                    // InternalContentAssistFragmentTestLang.g:467:3: kw= '*='
                     {
                     kw=(Token)match(input,18,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1433,7 +1441,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:468:3: kw= '/='
+                    // InternalContentAssistFragmentTestLang.g:473:3: kw= '/='
                     {
                     kw=(Token)match(input,19,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1446,7 +1454,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistFragmentTestLang.g:474:3: kw= '%='
+                    // InternalContentAssistFragmentTestLang.g:479:3: kw= '%='
                     {
                     kw=(Token)match(input,20,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1459,10 +1467,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalContentAssistFragmentTestLang.g:480:3: (kw= '<' kw= '<' kw= '=' )
+                    // InternalContentAssistFragmentTestLang.g:485:3: (kw= '<' kw= '<' kw= '=' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:480:3: (kw= '<' kw= '<' kw= '=' )
-                    // InternalContentAssistFragmentTestLang.g:481:4: kw= '<' kw= '<' kw= '='
+                    // InternalContentAssistFragmentTestLang.g:485:3: (kw= '<' kw= '<' kw= '=' )
+                    // InternalContentAssistFragmentTestLang.g:486:4: kw= '<' kw= '<' kw= '='
                     {
                     kw=(Token)match(input,21,FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1492,10 +1500,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 7 :
-                    // InternalContentAssistFragmentTestLang.g:498:3: (kw= '>' (kw= '>' )? kw= '>=' )
+                    // InternalContentAssistFragmentTestLang.g:503:3: (kw= '>' (kw= '>' )? kw= '>=' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:498:3: (kw= '>' (kw= '>' )? kw= '>=' )
-                    // InternalContentAssistFragmentTestLang.g:499:4: kw= '>' (kw= '>' )? kw= '>='
+                    // InternalContentAssistFragmentTestLang.g:503:3: (kw= '>' (kw= '>' )? kw= '>=' )
+                    // InternalContentAssistFragmentTestLang.g:504:4: kw= '>' (kw= '>' )? kw= '>='
                     {
                     kw=(Token)match(input,22,FOLLOW_10); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1504,7 +1512,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getGreaterThanSignKeyword_6_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:504:4: (kw= '>' )?
+                    // InternalContentAssistFragmentTestLang.g:509:4: (kw= '>' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1513,7 +1521,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:505:5: kw= '>'
+                            // InternalContentAssistFragmentTestLang.g:510:5: kw= '>'
                             {
                             kw=(Token)match(input,22,FOLLOW_11); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1566,7 +1574,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXOrExpression"
-    // InternalContentAssistFragmentTestLang.g:521:1: entryRuleXOrExpression returns [EObject current=null] : iv_ruleXOrExpression= ruleXOrExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:526:1: entryRuleXOrExpression returns [EObject current=null] : iv_ruleXOrExpression= ruleXOrExpression EOF ;
     public final EObject entryRuleXOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1574,8 +1582,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:521:54: (iv_ruleXOrExpression= ruleXOrExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:522:2: iv_ruleXOrExpression= ruleXOrExpression EOF
+            // InternalContentAssistFragmentTestLang.g:526:54: (iv_ruleXOrExpression= ruleXOrExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:527:2: iv_ruleXOrExpression= ruleXOrExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXOrExpressionRule()); 
@@ -1606,7 +1614,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXOrExpression"
-    // InternalContentAssistFragmentTestLang.g:528:1: ruleXOrExpression returns [EObject current=null] : (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:533:1: ruleXOrExpression returns [EObject current=null] : (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) ;
     public final EObject ruleXOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1619,11 +1627,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:534:2: ( (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:535:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:539:2: ( (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:540:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:535:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:536:3: this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:540:2: (this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:541:3: this_XAndExpression_0= ruleXAndExpression ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1641,7 +1649,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:544:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:549:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1660,16 +1668,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:545:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:550:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:545:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:546:5: ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:550:4: ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:551:5: ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:556:5: ( () ( ( ruleOpOr ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:557:6: () ( ( ruleOpOr ) )
+            	    // InternalContentAssistFragmentTestLang.g:561:5: ( () ( ( ruleOpOr ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:562:6: () ( ( ruleOpOr ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:557:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:558:7: 
+            	    // InternalContentAssistFragmentTestLang.g:562:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:563:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1681,11 +1689,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:564:6: ( ( ruleOpOr ) )
-            	    // InternalContentAssistFragmentTestLang.g:565:7: ( ruleOpOr )
+            	    // InternalContentAssistFragmentTestLang.g:569:6: ( ( ruleOpOr ) )
+            	    // InternalContentAssistFragmentTestLang.g:570:7: ( ruleOpOr )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:565:7: ( ruleOpOr )
-            	    // InternalContentAssistFragmentTestLang.g:566:8: ruleOpOr
+            	    // InternalContentAssistFragmentTestLang.g:570:7: ( ruleOpOr )
+            	    // InternalContentAssistFragmentTestLang.g:571:8: ruleOpOr
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1721,11 +1729,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:582:4: ( (lv_rightOperand_3_0= ruleXAndExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:583:5: (lv_rightOperand_3_0= ruleXAndExpression )
+            	    // InternalContentAssistFragmentTestLang.g:587:4: ( (lv_rightOperand_3_0= ruleXAndExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:588:5: (lv_rightOperand_3_0= ruleXAndExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:583:5: (lv_rightOperand_3_0= ruleXAndExpression )
-            	    // InternalContentAssistFragmentTestLang.g:584:6: lv_rightOperand_3_0= ruleXAndExpression
+            	    // InternalContentAssistFragmentTestLang.g:588:5: (lv_rightOperand_3_0= ruleXAndExpression )
+            	    // InternalContentAssistFragmentTestLang.g:589:6: lv_rightOperand_3_0= ruleXAndExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1790,7 +1798,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpOr"
-    // InternalContentAssistFragmentTestLang.g:606:1: entryRuleOpOr returns [String current=null] : iv_ruleOpOr= ruleOpOr EOF ;
+    // InternalContentAssistFragmentTestLang.g:611:1: entryRuleOpOr returns [String current=null] : iv_ruleOpOr= ruleOpOr EOF ;
     public final String entryRuleOpOr() throws RecognitionException {
         String current = null;
 
@@ -1798,8 +1806,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:606:44: (iv_ruleOpOr= ruleOpOr EOF )
-            // InternalContentAssistFragmentTestLang.g:607:2: iv_ruleOpOr= ruleOpOr EOF
+            // InternalContentAssistFragmentTestLang.g:611:44: (iv_ruleOpOr= ruleOpOr EOF )
+            // InternalContentAssistFragmentTestLang.g:612:2: iv_ruleOpOr= ruleOpOr EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpOrRule()); 
@@ -1830,7 +1838,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpOr"
-    // InternalContentAssistFragmentTestLang.g:613:1: ruleOpOr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '||' ;
+    // InternalContentAssistFragmentTestLang.g:618:1: ruleOpOr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '||' ;
     public final AntlrDatatypeRuleToken ruleOpOr() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1840,8 +1848,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:619:2: (kw= '||' )
-            // InternalContentAssistFragmentTestLang.g:620:2: kw= '||'
+            // InternalContentAssistFragmentTestLang.g:624:2: (kw= '||' )
+            // InternalContentAssistFragmentTestLang.g:625:2: kw= '||'
             {
             kw=(Token)match(input,24,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1872,7 +1880,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXAndExpression"
-    // InternalContentAssistFragmentTestLang.g:628:1: entryRuleXAndExpression returns [EObject current=null] : iv_ruleXAndExpression= ruleXAndExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:633:1: entryRuleXAndExpression returns [EObject current=null] : iv_ruleXAndExpression= ruleXAndExpression EOF ;
     public final EObject entryRuleXAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1880,8 +1888,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:628:55: (iv_ruleXAndExpression= ruleXAndExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:629:2: iv_ruleXAndExpression= ruleXAndExpression EOF
+            // InternalContentAssistFragmentTestLang.g:633:55: (iv_ruleXAndExpression= ruleXAndExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:634:2: iv_ruleXAndExpression= ruleXAndExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAndExpressionRule()); 
@@ -1912,7 +1920,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXAndExpression"
-    // InternalContentAssistFragmentTestLang.g:635:1: ruleXAndExpression returns [EObject current=null] : (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:640:1: ruleXAndExpression returns [EObject current=null] : (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) ;
     public final EObject ruleXAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1925,11 +1933,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:641:2: ( (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:642:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:646:2: ( (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:647:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:642:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:643:3: this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:647:2: (this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:648:3: this_XEqualityExpression_0= ruleXEqualityExpression ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -1947,7 +1955,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:651:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:656:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1966,16 +1974,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:652:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:657:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:652:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:653:5: ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:657:4: ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:658:5: ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:663:5: ( () ( ( ruleOpAnd ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:664:6: () ( ( ruleOpAnd ) )
+            	    // InternalContentAssistFragmentTestLang.g:668:5: ( () ( ( ruleOpAnd ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:669:6: () ( ( ruleOpAnd ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:664:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:665:7: 
+            	    // InternalContentAssistFragmentTestLang.g:669:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:670:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -1987,11 +1995,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:671:6: ( ( ruleOpAnd ) )
-            	    // InternalContentAssistFragmentTestLang.g:672:7: ( ruleOpAnd )
+            	    // InternalContentAssistFragmentTestLang.g:676:6: ( ( ruleOpAnd ) )
+            	    // InternalContentAssistFragmentTestLang.g:677:7: ( ruleOpAnd )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:672:7: ( ruleOpAnd )
-            	    // InternalContentAssistFragmentTestLang.g:673:8: ruleOpAnd
+            	    // InternalContentAssistFragmentTestLang.g:677:7: ( ruleOpAnd )
+            	    // InternalContentAssistFragmentTestLang.g:678:8: ruleOpAnd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2027,11 +2035,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:689:4: ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:690:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
+            	    // InternalContentAssistFragmentTestLang.g:694:4: ( (lv_rightOperand_3_0= ruleXEqualityExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:695:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:690:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
-            	    // InternalContentAssistFragmentTestLang.g:691:6: lv_rightOperand_3_0= ruleXEqualityExpression
+            	    // InternalContentAssistFragmentTestLang.g:695:5: (lv_rightOperand_3_0= ruleXEqualityExpression )
+            	    // InternalContentAssistFragmentTestLang.g:696:6: lv_rightOperand_3_0= ruleXEqualityExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2096,7 +2104,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpAnd"
-    // InternalContentAssistFragmentTestLang.g:713:1: entryRuleOpAnd returns [String current=null] : iv_ruleOpAnd= ruleOpAnd EOF ;
+    // InternalContentAssistFragmentTestLang.g:718:1: entryRuleOpAnd returns [String current=null] : iv_ruleOpAnd= ruleOpAnd EOF ;
     public final String entryRuleOpAnd() throws RecognitionException {
         String current = null;
 
@@ -2104,8 +2112,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:713:45: (iv_ruleOpAnd= ruleOpAnd EOF )
-            // InternalContentAssistFragmentTestLang.g:714:2: iv_ruleOpAnd= ruleOpAnd EOF
+            // InternalContentAssistFragmentTestLang.g:718:45: (iv_ruleOpAnd= ruleOpAnd EOF )
+            // InternalContentAssistFragmentTestLang.g:719:2: iv_ruleOpAnd= ruleOpAnd EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpAndRule()); 
@@ -2136,7 +2144,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpAnd"
-    // InternalContentAssistFragmentTestLang.g:720:1: ruleOpAnd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '&&' ;
+    // InternalContentAssistFragmentTestLang.g:725:1: ruleOpAnd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= '&&' ;
     public final AntlrDatatypeRuleToken ruleOpAnd() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2146,8 +2154,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:726:2: (kw= '&&' )
-            // InternalContentAssistFragmentTestLang.g:727:2: kw= '&&'
+            // InternalContentAssistFragmentTestLang.g:731:2: (kw= '&&' )
+            // InternalContentAssistFragmentTestLang.g:732:2: kw= '&&'
             {
             kw=(Token)match(input,25,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -2178,7 +2186,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXEqualityExpression"
-    // InternalContentAssistFragmentTestLang.g:735:1: entryRuleXEqualityExpression returns [EObject current=null] : iv_ruleXEqualityExpression= ruleXEqualityExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:740:1: entryRuleXEqualityExpression returns [EObject current=null] : iv_ruleXEqualityExpression= ruleXEqualityExpression EOF ;
     public final EObject entryRuleXEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2186,8 +2194,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:735:60: (iv_ruleXEqualityExpression= ruleXEqualityExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:736:2: iv_ruleXEqualityExpression= ruleXEqualityExpression EOF
+            // InternalContentAssistFragmentTestLang.g:740:60: (iv_ruleXEqualityExpression= ruleXEqualityExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:741:2: iv_ruleXEqualityExpression= ruleXEqualityExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXEqualityExpressionRule()); 
@@ -2218,7 +2226,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXEqualityExpression"
-    // InternalContentAssistFragmentTestLang.g:742:1: ruleXEqualityExpression returns [EObject current=null] : (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:747:1: ruleXEqualityExpression returns [EObject current=null] : (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) ;
     public final EObject ruleXEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2231,11 +2239,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:748:2: ( (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:749:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:753:2: ( (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:754:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:749:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:750:3: this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:754:2: (this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:755:3: this_XRelationalExpression_0= ruleXRelationalExpression ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -2253,7 +2261,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:758:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:763:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -2307,16 +2315,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:759:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:764:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:759:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:760:5: ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:764:4: ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:765:5: ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:770:5: ( () ( ( ruleOpEquality ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:771:6: () ( ( ruleOpEquality ) )
+            	    // InternalContentAssistFragmentTestLang.g:775:5: ( () ( ( ruleOpEquality ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:776:6: () ( ( ruleOpEquality ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:771:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:772:7: 
+            	    // InternalContentAssistFragmentTestLang.g:776:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:777:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2328,11 +2336,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:778:6: ( ( ruleOpEquality ) )
-            	    // InternalContentAssistFragmentTestLang.g:779:7: ( ruleOpEquality )
+            	    // InternalContentAssistFragmentTestLang.g:783:6: ( ( ruleOpEquality ) )
+            	    // InternalContentAssistFragmentTestLang.g:784:7: ( ruleOpEquality )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:779:7: ( ruleOpEquality )
-            	    // InternalContentAssistFragmentTestLang.g:780:8: ruleOpEquality
+            	    // InternalContentAssistFragmentTestLang.g:784:7: ( ruleOpEquality )
+            	    // InternalContentAssistFragmentTestLang.g:785:8: ruleOpEquality
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2368,11 +2376,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:796:4: ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:797:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
+            	    // InternalContentAssistFragmentTestLang.g:801:4: ( (lv_rightOperand_3_0= ruleXRelationalExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:802:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:797:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
-            	    // InternalContentAssistFragmentTestLang.g:798:6: lv_rightOperand_3_0= ruleXRelationalExpression
+            	    // InternalContentAssistFragmentTestLang.g:802:5: (lv_rightOperand_3_0= ruleXRelationalExpression )
+            	    // InternalContentAssistFragmentTestLang.g:803:6: lv_rightOperand_3_0= ruleXRelationalExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2437,7 +2445,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpEquality"
-    // InternalContentAssistFragmentTestLang.g:820:1: entryRuleOpEquality returns [String current=null] : iv_ruleOpEquality= ruleOpEquality EOF ;
+    // InternalContentAssistFragmentTestLang.g:825:1: entryRuleOpEquality returns [String current=null] : iv_ruleOpEquality= ruleOpEquality EOF ;
     public final String entryRuleOpEquality() throws RecognitionException {
         String current = null;
 
@@ -2445,8 +2453,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:820:50: (iv_ruleOpEquality= ruleOpEquality EOF )
-            // InternalContentAssistFragmentTestLang.g:821:2: iv_ruleOpEquality= ruleOpEquality EOF
+            // InternalContentAssistFragmentTestLang.g:825:50: (iv_ruleOpEquality= ruleOpEquality EOF )
+            // InternalContentAssistFragmentTestLang.g:826:2: iv_ruleOpEquality= ruleOpEquality EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpEqualityRule()); 
@@ -2477,7 +2485,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpEquality"
-    // InternalContentAssistFragmentTestLang.g:827:1: ruleOpEquality returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) ;
+    // InternalContentAssistFragmentTestLang.g:832:1: ruleOpEquality returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) ;
     public final AntlrDatatypeRuleToken ruleOpEquality() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2487,10 +2495,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:833:2: ( (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) )
-            // InternalContentAssistFragmentTestLang.g:834:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
+            // InternalContentAssistFragmentTestLang.g:838:2: ( (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' ) )
+            // InternalContentAssistFragmentTestLang.g:839:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             {
-            // InternalContentAssistFragmentTestLang.g:834:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
+            // InternalContentAssistFragmentTestLang.g:839:2: (kw= '==' | kw= '!=' | kw= '===' | kw= '!==' )
             int alt11=4;
             switch ( input.LA(1) ) {
             case 26:
@@ -2523,7 +2531,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt11) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:835:3: kw= '=='
+                    // InternalContentAssistFragmentTestLang.g:840:3: kw= '=='
                     {
                     kw=(Token)match(input,26,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2536,7 +2544,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:841:3: kw= '!='
+                    // InternalContentAssistFragmentTestLang.g:846:3: kw= '!='
                     {
                     kw=(Token)match(input,27,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2549,7 +2557,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:847:3: kw= '==='
+                    // InternalContentAssistFragmentTestLang.g:852:3: kw= '==='
                     {
                     kw=(Token)match(input,28,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2562,7 +2570,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:853:3: kw= '!=='
+                    // InternalContentAssistFragmentTestLang.g:858:3: kw= '!=='
                     {
                     kw=(Token)match(input,29,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2599,7 +2607,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXRelationalExpression"
-    // InternalContentAssistFragmentTestLang.g:862:1: entryRuleXRelationalExpression returns [EObject current=null] : iv_ruleXRelationalExpression= ruleXRelationalExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:867:1: entryRuleXRelationalExpression returns [EObject current=null] : iv_ruleXRelationalExpression= ruleXRelationalExpression EOF ;
     public final EObject entryRuleXRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2607,8 +2615,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:862:62: (iv_ruleXRelationalExpression= ruleXRelationalExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:863:2: iv_ruleXRelationalExpression= ruleXRelationalExpression EOF
+            // InternalContentAssistFragmentTestLang.g:867:62: (iv_ruleXRelationalExpression= ruleXRelationalExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:868:2: iv_ruleXRelationalExpression= ruleXRelationalExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXRelationalExpressionRule()); 
@@ -2639,7 +2647,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXRelationalExpression"
-    // InternalContentAssistFragmentTestLang.g:869:1: ruleXRelationalExpression returns [EObject current=null] : (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:874:1: ruleXRelationalExpression returns [EObject current=null] : (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) ;
     public final EObject ruleXRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2655,11 +2663,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:875:2: ( (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:876:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:880:2: ( (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:881:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:876:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:877:3: this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
+            // InternalContentAssistFragmentTestLang.g:881:2: (this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:882:3: this_XOtherOperatorExpression_0= ruleXOtherOperatorExpression ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -2677,7 +2685,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:885:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
+            // InternalContentAssistFragmentTestLang.g:890:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
             loop12:
             do {
                 int alt12=3;
@@ -2731,19 +2739,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:886:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:891:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:886:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:887:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalContentAssistFragmentTestLang.g:891:4: ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:892:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:887:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) )
-            	    // InternalContentAssistFragmentTestLang.g:888:6: ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' )
+            	    // InternalContentAssistFragmentTestLang.g:892:5: ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) )
+            	    // InternalContentAssistFragmentTestLang.g:893:6: ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:894:6: ( () otherlv_2= 'instanceof' )
-            	    // InternalContentAssistFragmentTestLang.g:895:7: () otherlv_2= 'instanceof'
+            	    // InternalContentAssistFragmentTestLang.g:899:6: ( () otherlv_2= 'instanceof' )
+            	    // InternalContentAssistFragmentTestLang.g:900:7: () otherlv_2= 'instanceof'
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:895:7: ()
-            	    // InternalContentAssistFragmentTestLang.g:896:8: 
+            	    // InternalContentAssistFragmentTestLang.g:900:7: ()
+            	    // InternalContentAssistFragmentTestLang.g:901:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2767,11 +2775,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:908:5: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // InternalContentAssistFragmentTestLang.g:909:6: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalContentAssistFragmentTestLang.g:913:5: ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalContentAssistFragmentTestLang.g:914:6: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:909:6: (lv_type_3_0= ruleJvmTypeReference )
-            	    // InternalContentAssistFragmentTestLang.g:910:7: lv_type_3_0= ruleJvmTypeReference
+            	    // InternalContentAssistFragmentTestLang.g:914:6: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalContentAssistFragmentTestLang.g:915:7: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2809,19 +2817,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    break;
             	case 2 :
-            	    // InternalContentAssistFragmentTestLang.g:929:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:934:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:929:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:930:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:934:4: ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:935:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:930:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:931:6: ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:935:5: ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:936:6: ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:941:6: ( () ( ( ruleOpCompare ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:942:7: () ( ( ruleOpCompare ) )
+            	    // InternalContentAssistFragmentTestLang.g:946:6: ( () ( ( ruleOpCompare ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:947:7: () ( ( ruleOpCompare ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:942:7: ()
-            	    // InternalContentAssistFragmentTestLang.g:943:8: 
+            	    // InternalContentAssistFragmentTestLang.g:947:7: ()
+            	    // InternalContentAssistFragmentTestLang.g:948:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2833,11 +2841,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:949:7: ( ( ruleOpCompare ) )
-            	    // InternalContentAssistFragmentTestLang.g:950:8: ( ruleOpCompare )
+            	    // InternalContentAssistFragmentTestLang.g:954:7: ( ( ruleOpCompare ) )
+            	    // InternalContentAssistFragmentTestLang.g:955:8: ( ruleOpCompare )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:950:8: ( ruleOpCompare )
-            	    // InternalContentAssistFragmentTestLang.g:951:9: ruleOpCompare
+            	    // InternalContentAssistFragmentTestLang.g:955:8: ( ruleOpCompare )
+            	    // InternalContentAssistFragmentTestLang.g:956:9: ruleOpCompare
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2873,11 +2881,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:967:5: ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:968:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
+            	    // InternalContentAssistFragmentTestLang.g:972:5: ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:973:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:968:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
-            	    // InternalContentAssistFragmentTestLang.g:969:7: lv_rightOperand_6_0= ruleXOtherOperatorExpression
+            	    // InternalContentAssistFragmentTestLang.g:973:6: (lv_rightOperand_6_0= ruleXOtherOperatorExpression )
+            	    // InternalContentAssistFragmentTestLang.g:974:7: lv_rightOperand_6_0= ruleXOtherOperatorExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -2945,7 +2953,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpCompare"
-    // InternalContentAssistFragmentTestLang.g:992:1: entryRuleOpCompare returns [String current=null] : iv_ruleOpCompare= ruleOpCompare EOF ;
+    // InternalContentAssistFragmentTestLang.g:997:1: entryRuleOpCompare returns [String current=null] : iv_ruleOpCompare= ruleOpCompare EOF ;
     public final String entryRuleOpCompare() throws RecognitionException {
         String current = null;
 
@@ -2953,8 +2961,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:992:49: (iv_ruleOpCompare= ruleOpCompare EOF )
-            // InternalContentAssistFragmentTestLang.g:993:2: iv_ruleOpCompare= ruleOpCompare EOF
+            // InternalContentAssistFragmentTestLang.g:997:49: (iv_ruleOpCompare= ruleOpCompare EOF )
+            // InternalContentAssistFragmentTestLang.g:998:2: iv_ruleOpCompare= ruleOpCompare EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpCompareRule()); 
@@ -2985,7 +2993,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpCompare"
-    // InternalContentAssistFragmentTestLang.g:999:1: ruleOpCompare returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) ;
+    // InternalContentAssistFragmentTestLang.g:1004:1: ruleOpCompare returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) ;
     public final AntlrDatatypeRuleToken ruleOpCompare() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2995,10 +3003,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1005:2: ( (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) )
-            // InternalContentAssistFragmentTestLang.g:1006:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
+            // InternalContentAssistFragmentTestLang.g:1010:2: ( (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' ) )
+            // InternalContentAssistFragmentTestLang.g:1011:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             {
-            // InternalContentAssistFragmentTestLang.g:1006:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
+            // InternalContentAssistFragmentTestLang.g:1011:2: (kw= '>=' | (kw= '<' kw= '=' ) | kw= '>' | kw= '<' )
             int alt13=4;
             switch ( input.LA(1) ) {
             case 23:
@@ -3040,7 +3048,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt13) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1007:3: kw= '>='
+                    // InternalContentAssistFragmentTestLang.g:1012:3: kw= '>='
                     {
                     kw=(Token)match(input,23,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3053,10 +3061,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1013:3: (kw= '<' kw= '=' )
+                    // InternalContentAssistFragmentTestLang.g:1018:3: (kw= '<' kw= '=' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1013:3: (kw= '<' kw= '=' )
-                    // InternalContentAssistFragmentTestLang.g:1014:4: kw= '<' kw= '='
+                    // InternalContentAssistFragmentTestLang.g:1018:3: (kw= '<' kw= '=' )
+                    // InternalContentAssistFragmentTestLang.g:1019:4: kw= '<' kw= '='
                     {
                     kw=(Token)match(input,21,FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3079,7 +3087,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:1026:3: kw= '>'
+                    // InternalContentAssistFragmentTestLang.g:1031:3: kw= '>'
                     {
                     kw=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3092,7 +3100,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:1032:3: kw= '<'
+                    // InternalContentAssistFragmentTestLang.g:1037:3: kw= '<'
                     {
                     kw=(Token)match(input,21,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3129,7 +3137,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXOtherOperatorExpression"
-    // InternalContentAssistFragmentTestLang.g:1041:1: entryRuleXOtherOperatorExpression returns [EObject current=null] : iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:1046:1: entryRuleXOtherOperatorExpression returns [EObject current=null] : iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF ;
     public final EObject entryRuleXOtherOperatorExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3137,8 +3145,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1041:65: (iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:1042:2: iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF
+            // InternalContentAssistFragmentTestLang.g:1046:65: (iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:1047:2: iv_ruleXOtherOperatorExpression= ruleXOtherOperatorExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXOtherOperatorExpressionRule()); 
@@ -3169,7 +3177,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXOtherOperatorExpression"
-    // InternalContentAssistFragmentTestLang.g:1048:1: ruleXOtherOperatorExpression returns [EObject current=null] : (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:1053:1: ruleXOtherOperatorExpression returns [EObject current=null] : (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) ;
     public final EObject ruleXOtherOperatorExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3182,11 +3190,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1054:2: ( (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:1055:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1059:2: ( (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:1060:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:1055:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:1056:3: this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1060:2: (this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1061:3: this_XAdditiveExpression_0= ruleXAdditiveExpression ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -3204,23 +3212,23 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1064:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1069:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
             loop14:
             do {
                 int alt14=2;
                 alt14 = dfa14.predict(input);
                 switch (alt14) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:1065:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:1070:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1065:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1066:5: ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1070:4: ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1071:5: ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1076:5: ( () ( ( ruleOpOther ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1077:6: () ( ( ruleOpOther ) )
+            	    // InternalContentAssistFragmentTestLang.g:1081:5: ( () ( ( ruleOpOther ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1082:6: () ( ( ruleOpOther ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1077:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:1078:7: 
+            	    // InternalContentAssistFragmentTestLang.g:1082:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:1083:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3232,11 +3240,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1084:6: ( ( ruleOpOther ) )
-            	    // InternalContentAssistFragmentTestLang.g:1085:7: ( ruleOpOther )
+            	    // InternalContentAssistFragmentTestLang.g:1089:6: ( ( ruleOpOther ) )
+            	    // InternalContentAssistFragmentTestLang.g:1090:7: ( ruleOpOther )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1085:7: ( ruleOpOther )
-            	    // InternalContentAssistFragmentTestLang.g:1086:8: ruleOpOther
+            	    // InternalContentAssistFragmentTestLang.g:1090:7: ( ruleOpOther )
+            	    // InternalContentAssistFragmentTestLang.g:1091:8: ruleOpOther
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3272,11 +3280,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1102:4: ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:1103:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
+            	    // InternalContentAssistFragmentTestLang.g:1107:4: ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:1108:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1103:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
-            	    // InternalContentAssistFragmentTestLang.g:1104:6: lv_rightOperand_3_0= ruleXAdditiveExpression
+            	    // InternalContentAssistFragmentTestLang.g:1108:5: (lv_rightOperand_3_0= ruleXAdditiveExpression )
+            	    // InternalContentAssistFragmentTestLang.g:1109:6: lv_rightOperand_3_0= ruleXAdditiveExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3341,7 +3349,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpOther"
-    // InternalContentAssistFragmentTestLang.g:1126:1: entryRuleOpOther returns [String current=null] : iv_ruleOpOther= ruleOpOther EOF ;
+    // InternalContentAssistFragmentTestLang.g:1131:1: entryRuleOpOther returns [String current=null] : iv_ruleOpOther= ruleOpOther EOF ;
     public final String entryRuleOpOther() throws RecognitionException {
         String current = null;
 
@@ -3349,8 +3357,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1126:47: (iv_ruleOpOther= ruleOpOther EOF )
-            // InternalContentAssistFragmentTestLang.g:1127:2: iv_ruleOpOther= ruleOpOther EOF
+            // InternalContentAssistFragmentTestLang.g:1131:47: (iv_ruleOpOther= ruleOpOther EOF )
+            // InternalContentAssistFragmentTestLang.g:1132:2: iv_ruleOpOther= ruleOpOther EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpOtherRule()); 
@@ -3381,7 +3389,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpOther"
-    // InternalContentAssistFragmentTestLang.g:1133:1: ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) ;
+    // InternalContentAssistFragmentTestLang.g:1138:1: ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) ;
     public final AntlrDatatypeRuleToken ruleOpOther() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3391,15 +3399,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1139:2: ( (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) )
-            // InternalContentAssistFragmentTestLang.g:1140:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
+            // InternalContentAssistFragmentTestLang.g:1144:2: ( (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' ) )
+            // InternalContentAssistFragmentTestLang.g:1145:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             {
-            // InternalContentAssistFragmentTestLang.g:1140:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
+            // InternalContentAssistFragmentTestLang.g:1145:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )
             int alt17=9;
             alt17 = dfa17.predict(input);
             switch (alt17) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1141:3: kw= '->'
+                    // InternalContentAssistFragmentTestLang.g:1146:3: kw= '->'
                     {
                     kw=(Token)match(input,31,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3412,7 +3420,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1147:3: kw= '..<'
+                    // InternalContentAssistFragmentTestLang.g:1152:3: kw= '..<'
                     {
                     kw=(Token)match(input,32,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3425,10 +3433,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:1153:3: (kw= '>' kw= '..' )
+                    // InternalContentAssistFragmentTestLang.g:1158:3: (kw= '>' kw= '..' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1153:3: (kw= '>' kw= '..' )
-                    // InternalContentAssistFragmentTestLang.g:1154:4: kw= '>' kw= '..'
+                    // InternalContentAssistFragmentTestLang.g:1158:3: (kw= '>' kw= '..' )
+                    // InternalContentAssistFragmentTestLang.g:1159:4: kw= '>' kw= '..'
                     {
                     kw=(Token)match(input,22,FOLLOW_17); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3451,7 +3459,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:1166:3: kw= '..'
+                    // InternalContentAssistFragmentTestLang.g:1171:3: kw= '..'
                     {
                     kw=(Token)match(input,33,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3464,7 +3472,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistFragmentTestLang.g:1172:3: kw= '=>'
+                    // InternalContentAssistFragmentTestLang.g:1177:3: kw= '=>'
                     {
                     kw=(Token)match(input,34,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3477,10 +3485,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalContentAssistFragmentTestLang.g:1178:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
+                    // InternalContentAssistFragmentTestLang.g:1183:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1178:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
-                    // InternalContentAssistFragmentTestLang.g:1179:4: kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
+                    // InternalContentAssistFragmentTestLang.g:1183:3: (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) )
+                    // InternalContentAssistFragmentTestLang.g:1184:4: kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     {
                     kw=(Token)match(input,22,FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3489,7 +3497,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:1184:4: ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
+                    // InternalContentAssistFragmentTestLang.g:1189:4: ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' )
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -3519,13 +3527,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt15) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:1185:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
+                            // InternalContentAssistFragmentTestLang.g:1190:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:1185:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
-                            // InternalContentAssistFragmentTestLang.g:1186:6: ( ( '>' '>' ) )=> (kw= '>' kw= '>' )
+                            // InternalContentAssistFragmentTestLang.g:1190:5: ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) )
+                            // InternalContentAssistFragmentTestLang.g:1191:6: ( ( '>' '>' ) )=> (kw= '>' kw= '>' )
                             {
-                            // InternalContentAssistFragmentTestLang.g:1191:6: (kw= '>' kw= '>' )
-                            // InternalContentAssistFragmentTestLang.g:1192:7: kw= '>' kw= '>'
+                            // InternalContentAssistFragmentTestLang.g:1196:6: (kw= '>' kw= '>' )
+                            // InternalContentAssistFragmentTestLang.g:1197:7: kw= '>' kw= '>'
                             {
                             kw=(Token)match(input,22,FOLLOW_18); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -3551,7 +3559,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:1205:5: kw= '>'
+                            // InternalContentAssistFragmentTestLang.g:1210:5: kw= '>'
                             {
                             kw=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -3573,10 +3581,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 7 :
-                    // InternalContentAssistFragmentTestLang.g:1213:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
+                    // InternalContentAssistFragmentTestLang.g:1218:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1213:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
-                    // InternalContentAssistFragmentTestLang.g:1214:4: kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
+                    // InternalContentAssistFragmentTestLang.g:1218:3: (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) )
+                    // InternalContentAssistFragmentTestLang.g:1219:4: kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     {
                     kw=(Token)match(input,21,FOLLOW_19); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3585,7 +3593,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:1219:4: ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
+                    // InternalContentAssistFragmentTestLang.g:1224:4: ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' )
                     int alt16=3;
                     int LA16_0 = input.LA(1);
 
@@ -3618,13 +3626,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt16) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:1220:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
+                            // InternalContentAssistFragmentTestLang.g:1225:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:1220:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
-                            // InternalContentAssistFragmentTestLang.g:1221:6: ( ( '<' '<' ) )=> (kw= '<' kw= '<' )
+                            // InternalContentAssistFragmentTestLang.g:1225:5: ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) )
+                            // InternalContentAssistFragmentTestLang.g:1226:6: ( ( '<' '<' ) )=> (kw= '<' kw= '<' )
                             {
-                            // InternalContentAssistFragmentTestLang.g:1226:6: (kw= '<' kw= '<' )
-                            // InternalContentAssistFragmentTestLang.g:1227:7: kw= '<' kw= '<'
+                            // InternalContentAssistFragmentTestLang.g:1231:6: (kw= '<' kw= '<' )
+                            // InternalContentAssistFragmentTestLang.g:1232:7: kw= '<' kw= '<'
                             {
                             kw=(Token)match(input,21,FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -3650,7 +3658,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:1240:5: kw= '<'
+                            // InternalContentAssistFragmentTestLang.g:1245:5: kw= '<'
                             {
                             kw=(Token)match(input,21,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -3663,7 +3671,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 3 :
-                            // InternalContentAssistFragmentTestLang.g:1246:5: kw= '=>'
+                            // InternalContentAssistFragmentTestLang.g:1251:5: kw= '=>'
                             {
                             kw=(Token)match(input,34,FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -3685,7 +3693,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 8 :
-                    // InternalContentAssistFragmentTestLang.g:1254:3: kw= '<>'
+                    // InternalContentAssistFragmentTestLang.g:1259:3: kw= '<>'
                     {
                     kw=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3698,7 +3706,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 9 :
-                    // InternalContentAssistFragmentTestLang.g:1260:3: kw= '?:'
+                    // InternalContentAssistFragmentTestLang.g:1265:3: kw= '?:'
                     {
                     kw=(Token)match(input,36,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -3735,7 +3743,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXAdditiveExpression"
-    // InternalContentAssistFragmentTestLang.g:1269:1: entryRuleXAdditiveExpression returns [EObject current=null] : iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:1274:1: entryRuleXAdditiveExpression returns [EObject current=null] : iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF ;
     public final EObject entryRuleXAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3743,8 +3751,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1269:60: (iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:1270:2: iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF
+            // InternalContentAssistFragmentTestLang.g:1274:60: (iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:1275:2: iv_ruleXAdditiveExpression= ruleXAdditiveExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXAdditiveExpressionRule()); 
@@ -3775,7 +3783,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXAdditiveExpression"
-    // InternalContentAssistFragmentTestLang.g:1276:1: ruleXAdditiveExpression returns [EObject current=null] : (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:1281:1: ruleXAdditiveExpression returns [EObject current=null] : (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) ;
     public final EObject ruleXAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3788,11 +3796,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1282:2: ( (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:1283:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1287:2: ( (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:1288:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:1283:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:1284:3: this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1288:2: (this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1289:3: this_XMultiplicativeExpression_0= ruleXMultiplicativeExpression ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -3810,7 +3818,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1292:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1297:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
             loop18:
             do {
                 int alt18=2;
@@ -3838,16 +3846,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:1293:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:1298:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1293:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1294:5: ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1298:4: ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1299:5: ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1304:5: ( () ( ( ruleOpAdd ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1305:6: () ( ( ruleOpAdd ) )
+            	    // InternalContentAssistFragmentTestLang.g:1309:5: ( () ( ( ruleOpAdd ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1310:6: () ( ( ruleOpAdd ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1305:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:1306:7: 
+            	    // InternalContentAssistFragmentTestLang.g:1310:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:1311:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3859,11 +3867,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1312:6: ( ( ruleOpAdd ) )
-            	    // InternalContentAssistFragmentTestLang.g:1313:7: ( ruleOpAdd )
+            	    // InternalContentAssistFragmentTestLang.g:1317:6: ( ( ruleOpAdd ) )
+            	    // InternalContentAssistFragmentTestLang.g:1318:7: ( ruleOpAdd )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1313:7: ( ruleOpAdd )
-            	    // InternalContentAssistFragmentTestLang.g:1314:8: ruleOpAdd
+            	    // InternalContentAssistFragmentTestLang.g:1318:7: ( ruleOpAdd )
+            	    // InternalContentAssistFragmentTestLang.g:1319:8: ruleOpAdd
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3899,11 +3907,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1330:4: ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
-            	    // InternalContentAssistFragmentTestLang.g:1331:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
+            	    // InternalContentAssistFragmentTestLang.g:1335:4: ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) )
+            	    // InternalContentAssistFragmentTestLang.g:1336:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1331:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
-            	    // InternalContentAssistFragmentTestLang.g:1332:6: lv_rightOperand_3_0= ruleXMultiplicativeExpression
+            	    // InternalContentAssistFragmentTestLang.g:1336:5: (lv_rightOperand_3_0= ruleXMultiplicativeExpression )
+            	    // InternalContentAssistFragmentTestLang.g:1337:6: lv_rightOperand_3_0= ruleXMultiplicativeExpression
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -3968,7 +3976,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpAdd"
-    // InternalContentAssistFragmentTestLang.g:1354:1: entryRuleOpAdd returns [String current=null] : iv_ruleOpAdd= ruleOpAdd EOF ;
+    // InternalContentAssistFragmentTestLang.g:1359:1: entryRuleOpAdd returns [String current=null] : iv_ruleOpAdd= ruleOpAdd EOF ;
     public final String entryRuleOpAdd() throws RecognitionException {
         String current = null;
 
@@ -3976,8 +3984,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1354:45: (iv_ruleOpAdd= ruleOpAdd EOF )
-            // InternalContentAssistFragmentTestLang.g:1355:2: iv_ruleOpAdd= ruleOpAdd EOF
+            // InternalContentAssistFragmentTestLang.g:1359:45: (iv_ruleOpAdd= ruleOpAdd EOF )
+            // InternalContentAssistFragmentTestLang.g:1360:2: iv_ruleOpAdd= ruleOpAdd EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpAddRule()); 
@@ -4008,7 +4016,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpAdd"
-    // InternalContentAssistFragmentTestLang.g:1361:1: ruleOpAdd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+' | kw= '-' ) ;
+    // InternalContentAssistFragmentTestLang.g:1366:1: ruleOpAdd returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '+' | kw= '-' ) ;
     public final AntlrDatatypeRuleToken ruleOpAdd() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4018,10 +4026,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1367:2: ( (kw= '+' | kw= '-' ) )
-            // InternalContentAssistFragmentTestLang.g:1368:2: (kw= '+' | kw= '-' )
+            // InternalContentAssistFragmentTestLang.g:1372:2: ( (kw= '+' | kw= '-' ) )
+            // InternalContentAssistFragmentTestLang.g:1373:2: (kw= '+' | kw= '-' )
             {
-            // InternalContentAssistFragmentTestLang.g:1368:2: (kw= '+' | kw= '-' )
+            // InternalContentAssistFragmentTestLang.g:1373:2: (kw= '+' | kw= '-' )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -4040,7 +4048,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt19) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1369:3: kw= '+'
+                    // InternalContentAssistFragmentTestLang.g:1374:3: kw= '+'
                     {
                     kw=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4053,7 +4061,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1375:3: kw= '-'
+                    // InternalContentAssistFragmentTestLang.g:1380:3: kw= '-'
                     {
                     kw=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4090,7 +4098,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXMultiplicativeExpression"
-    // InternalContentAssistFragmentTestLang.g:1384:1: entryRuleXMultiplicativeExpression returns [EObject current=null] : iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:1389:1: entryRuleXMultiplicativeExpression returns [EObject current=null] : iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF ;
     public final EObject entryRuleXMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4098,8 +4106,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1384:66: (iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:1385:2: iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF
+            // InternalContentAssistFragmentTestLang.g:1389:66: (iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:1390:2: iv_ruleXMultiplicativeExpression= ruleXMultiplicativeExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXMultiplicativeExpressionRule()); 
@@ -4130,7 +4138,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXMultiplicativeExpression"
-    // InternalContentAssistFragmentTestLang.g:1391:1: ruleXMultiplicativeExpression returns [EObject current=null] : (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:1396:1: ruleXMultiplicativeExpression returns [EObject current=null] : (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) ;
     public final EObject ruleXMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4143,11 +4151,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1397:2: ( (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:1398:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1402:2: ( (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:1403:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:1398:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:1399:3: this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1403:2: (this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1404:3: this_XUnaryOperation_0= ruleXUnaryOperation ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -4165,7 +4173,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1407:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1412:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
             loop20:
             do {
                 int alt20=2;
@@ -4219,16 +4227,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:1408:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
+            	    // InternalContentAssistFragmentTestLang.g:1413:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1408:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1409:5: ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1413:4: ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1414:5: ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1419:5: ( () ( ( ruleOpMulti ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1420:6: () ( ( ruleOpMulti ) )
+            	    // InternalContentAssistFragmentTestLang.g:1424:5: ( () ( ( ruleOpMulti ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1425:6: () ( ( ruleOpMulti ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1420:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:1421:7: 
+            	    // InternalContentAssistFragmentTestLang.g:1425:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:1426:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4240,11 +4248,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1427:6: ( ( ruleOpMulti ) )
-            	    // InternalContentAssistFragmentTestLang.g:1428:7: ( ruleOpMulti )
+            	    // InternalContentAssistFragmentTestLang.g:1432:6: ( ( ruleOpMulti ) )
+            	    // InternalContentAssistFragmentTestLang.g:1433:7: ( ruleOpMulti )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1428:7: ( ruleOpMulti )
-            	    // InternalContentAssistFragmentTestLang.g:1429:8: ruleOpMulti
+            	    // InternalContentAssistFragmentTestLang.g:1433:7: ( ruleOpMulti )
+            	    // InternalContentAssistFragmentTestLang.g:1434:8: ruleOpMulti
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4280,11 +4288,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1445:4: ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
-            	    // InternalContentAssistFragmentTestLang.g:1446:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
+            	    // InternalContentAssistFragmentTestLang.g:1450:4: ( (lv_rightOperand_3_0= ruleXUnaryOperation ) )
+            	    // InternalContentAssistFragmentTestLang.g:1451:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1446:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
-            	    // InternalContentAssistFragmentTestLang.g:1447:6: lv_rightOperand_3_0= ruleXUnaryOperation
+            	    // InternalContentAssistFragmentTestLang.g:1451:5: (lv_rightOperand_3_0= ruleXUnaryOperation )
+            	    // InternalContentAssistFragmentTestLang.g:1452:6: lv_rightOperand_3_0= ruleXUnaryOperation
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4349,7 +4357,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpMulti"
-    // InternalContentAssistFragmentTestLang.g:1469:1: entryRuleOpMulti returns [String current=null] : iv_ruleOpMulti= ruleOpMulti EOF ;
+    // InternalContentAssistFragmentTestLang.g:1474:1: entryRuleOpMulti returns [String current=null] : iv_ruleOpMulti= ruleOpMulti EOF ;
     public final String entryRuleOpMulti() throws RecognitionException {
         String current = null;
 
@@ -4357,8 +4365,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1469:47: (iv_ruleOpMulti= ruleOpMulti EOF )
-            // InternalContentAssistFragmentTestLang.g:1470:2: iv_ruleOpMulti= ruleOpMulti EOF
+            // InternalContentAssistFragmentTestLang.g:1474:47: (iv_ruleOpMulti= ruleOpMulti EOF )
+            // InternalContentAssistFragmentTestLang.g:1475:2: iv_ruleOpMulti= ruleOpMulti EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpMultiRule()); 
@@ -4389,7 +4397,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpMulti"
-    // InternalContentAssistFragmentTestLang.g:1476:1: ruleOpMulti returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) ;
+    // InternalContentAssistFragmentTestLang.g:1481:1: ruleOpMulti returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) ;
     public final AntlrDatatypeRuleToken ruleOpMulti() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4399,10 +4407,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1482:2: ( (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) )
-            // InternalContentAssistFragmentTestLang.g:1483:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
+            // InternalContentAssistFragmentTestLang.g:1487:2: ( (kw= '*' | kw= '**' | kw= '/' | kw= '%' ) )
+            // InternalContentAssistFragmentTestLang.g:1488:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             {
-            // InternalContentAssistFragmentTestLang.g:1483:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
+            // InternalContentAssistFragmentTestLang.g:1488:2: (kw= '*' | kw= '**' | kw= '/' | kw= '%' )
             int alt21=4;
             switch ( input.LA(1) ) {
             case 39:
@@ -4435,7 +4443,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt21) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1484:3: kw= '*'
+                    // InternalContentAssistFragmentTestLang.g:1489:3: kw= '*'
                     {
                     kw=(Token)match(input,39,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4448,7 +4456,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1490:3: kw= '**'
+                    // InternalContentAssistFragmentTestLang.g:1495:3: kw= '**'
                     {
                     kw=(Token)match(input,40,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4461,7 +4469,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:1496:3: kw= '/'
+                    // InternalContentAssistFragmentTestLang.g:1501:3: kw= '/'
                     {
                     kw=(Token)match(input,41,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4474,7 +4482,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:1502:3: kw= '%'
+                    // InternalContentAssistFragmentTestLang.g:1507:3: kw= '%'
                     {
                     kw=(Token)match(input,42,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4511,7 +4519,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXUnaryOperation"
-    // InternalContentAssistFragmentTestLang.g:1511:1: entryRuleXUnaryOperation returns [EObject current=null] : iv_ruleXUnaryOperation= ruleXUnaryOperation EOF ;
+    // InternalContentAssistFragmentTestLang.g:1516:1: entryRuleXUnaryOperation returns [EObject current=null] : iv_ruleXUnaryOperation= ruleXUnaryOperation EOF ;
     public final EObject entryRuleXUnaryOperation() throws RecognitionException {
         EObject current = null;
 
@@ -4519,8 +4527,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1511:56: (iv_ruleXUnaryOperation= ruleXUnaryOperation EOF )
-            // InternalContentAssistFragmentTestLang.g:1512:2: iv_ruleXUnaryOperation= ruleXUnaryOperation EOF
+            // InternalContentAssistFragmentTestLang.g:1516:56: (iv_ruleXUnaryOperation= ruleXUnaryOperation EOF )
+            // InternalContentAssistFragmentTestLang.g:1517:2: iv_ruleXUnaryOperation= ruleXUnaryOperation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXUnaryOperationRule()); 
@@ -4551,7 +4559,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXUnaryOperation"
-    // InternalContentAssistFragmentTestLang.g:1518:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
+    // InternalContentAssistFragmentTestLang.g:1523:1: ruleXUnaryOperation returns [EObject current=null] : ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) ;
     public final EObject ruleXUnaryOperation() throws RecognitionException {
         EObject current = null;
 
@@ -4564,10 +4572,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1524:2: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
-            // InternalContentAssistFragmentTestLang.g:1525:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // InternalContentAssistFragmentTestLang.g:1529:2: ( ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression ) )
+            // InternalContentAssistFragmentTestLang.g:1530:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:1525:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
+            // InternalContentAssistFragmentTestLang.g:1530:2: ( ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) ) | this_XCastedExpression_3= ruleXCastedExpression )
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -4586,13 +4594,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt22) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1526:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
+                    // InternalContentAssistFragmentTestLang.g:1531:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1526:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
-                    // InternalContentAssistFragmentTestLang.g:1527:4: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
+                    // InternalContentAssistFragmentTestLang.g:1531:3: ( () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) ) )
+                    // InternalContentAssistFragmentTestLang.g:1532:4: () ( ( ruleOpUnary ) ) ( (lv_operand_2_0= ruleXUnaryOperation ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1527:4: ()
-                    // InternalContentAssistFragmentTestLang.g:1528:5: 
+                    // InternalContentAssistFragmentTestLang.g:1532:4: ()
+                    // InternalContentAssistFragmentTestLang.g:1533:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4604,11 +4612,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:1534:4: ( ( ruleOpUnary ) )
-                    // InternalContentAssistFragmentTestLang.g:1535:5: ( ruleOpUnary )
+                    // InternalContentAssistFragmentTestLang.g:1539:4: ( ( ruleOpUnary ) )
+                    // InternalContentAssistFragmentTestLang.g:1540:5: ( ruleOpUnary )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1535:5: ( ruleOpUnary )
-                    // InternalContentAssistFragmentTestLang.g:1536:6: ruleOpUnary
+                    // InternalContentAssistFragmentTestLang.g:1540:5: ( ruleOpUnary )
+                    // InternalContentAssistFragmentTestLang.g:1541:6: ruleOpUnary
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4638,11 +4646,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:1550:4: ( (lv_operand_2_0= ruleXUnaryOperation ) )
-                    // InternalContentAssistFragmentTestLang.g:1551:5: (lv_operand_2_0= ruleXUnaryOperation )
+                    // InternalContentAssistFragmentTestLang.g:1555:4: ( (lv_operand_2_0= ruleXUnaryOperation ) )
+                    // InternalContentAssistFragmentTestLang.g:1556:5: (lv_operand_2_0= ruleXUnaryOperation )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1551:5: (lv_operand_2_0= ruleXUnaryOperation )
-                    // InternalContentAssistFragmentTestLang.g:1552:6: lv_operand_2_0= ruleXUnaryOperation
+                    // InternalContentAssistFragmentTestLang.g:1556:5: (lv_operand_2_0= ruleXUnaryOperation )
+                    // InternalContentAssistFragmentTestLang.g:1557:6: lv_operand_2_0= ruleXUnaryOperation
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4680,7 +4688,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1571:3: this_XCastedExpression_3= ruleXCastedExpression
+                    // InternalContentAssistFragmentTestLang.g:1576:3: this_XCastedExpression_3= ruleXCastedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4726,7 +4734,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpUnary"
-    // InternalContentAssistFragmentTestLang.g:1583:1: entryRuleOpUnary returns [String current=null] : iv_ruleOpUnary= ruleOpUnary EOF ;
+    // InternalContentAssistFragmentTestLang.g:1588:1: entryRuleOpUnary returns [String current=null] : iv_ruleOpUnary= ruleOpUnary EOF ;
     public final String entryRuleOpUnary() throws RecognitionException {
         String current = null;
 
@@ -4734,8 +4742,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1583:47: (iv_ruleOpUnary= ruleOpUnary EOF )
-            // InternalContentAssistFragmentTestLang.g:1584:2: iv_ruleOpUnary= ruleOpUnary EOF
+            // InternalContentAssistFragmentTestLang.g:1588:47: (iv_ruleOpUnary= ruleOpUnary EOF )
+            // InternalContentAssistFragmentTestLang.g:1589:2: iv_ruleOpUnary= ruleOpUnary EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpUnaryRule()); 
@@ -4766,7 +4774,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpUnary"
-    // InternalContentAssistFragmentTestLang.g:1590:1: ruleOpUnary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '-' | kw= '+' ) ;
+    // InternalContentAssistFragmentTestLang.g:1595:1: ruleOpUnary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '-' | kw= '+' ) ;
     public final AntlrDatatypeRuleToken ruleOpUnary() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4776,10 +4784,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1596:2: ( (kw= '!' | kw= '-' | kw= '+' ) )
-            // InternalContentAssistFragmentTestLang.g:1597:2: (kw= '!' | kw= '-' | kw= '+' )
+            // InternalContentAssistFragmentTestLang.g:1601:2: ( (kw= '!' | kw= '-' | kw= '+' ) )
+            // InternalContentAssistFragmentTestLang.g:1602:2: (kw= '!' | kw= '-' | kw= '+' )
             {
-            // InternalContentAssistFragmentTestLang.g:1597:2: (kw= '!' | kw= '-' | kw= '+' )
+            // InternalContentAssistFragmentTestLang.g:1602:2: (kw= '!' | kw= '-' | kw= '+' )
             int alt23=3;
             switch ( input.LA(1) ) {
             case 43:
@@ -4807,7 +4815,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt23) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1598:3: kw= '!'
+                    // InternalContentAssistFragmentTestLang.g:1603:3: kw= '!'
                     {
                     kw=(Token)match(input,43,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4820,7 +4828,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1604:3: kw= '-'
+                    // InternalContentAssistFragmentTestLang.g:1609:3: kw= '-'
                     {
                     kw=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4833,7 +4841,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:1610:3: kw= '+'
+                    // InternalContentAssistFragmentTestLang.g:1615:3: kw= '+'
                     {
                     kw=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4870,7 +4878,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXCastedExpression"
-    // InternalContentAssistFragmentTestLang.g:1619:1: entryRuleXCastedExpression returns [EObject current=null] : iv_ruleXCastedExpression= ruleXCastedExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:1624:1: entryRuleXCastedExpression returns [EObject current=null] : iv_ruleXCastedExpression= ruleXCastedExpression EOF ;
     public final EObject entryRuleXCastedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4878,8 +4886,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1619:58: (iv_ruleXCastedExpression= ruleXCastedExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:1620:2: iv_ruleXCastedExpression= ruleXCastedExpression EOF
+            // InternalContentAssistFragmentTestLang.g:1624:58: (iv_ruleXCastedExpression= ruleXCastedExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:1625:2: iv_ruleXCastedExpression= ruleXCastedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCastedExpressionRule()); 
@@ -4910,7 +4918,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXCastedExpression"
-    // InternalContentAssistFragmentTestLang.g:1626:1: ruleXCastedExpression returns [EObject current=null] : (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:1631:1: ruleXCastedExpression returns [EObject current=null] : (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) ;
     public final EObject ruleXCastedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -4924,11 +4932,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1632:2: ( (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:1633:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1637:2: ( (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:1638:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:1633:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
-            // InternalContentAssistFragmentTestLang.g:1634:3: this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1638:2: (this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )* )
+            // InternalContentAssistFragmentTestLang.g:1639:3: this_XPostfixOperation_0= ruleXPostfixOperation ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -4946,7 +4954,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1642:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
+            // InternalContentAssistFragmentTestLang.g:1647:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
             loop24:
             do {
                 int alt24=2;
@@ -4965,16 +4973,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:1643:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalContentAssistFragmentTestLang.g:1648:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1643:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) )
-            	    // InternalContentAssistFragmentTestLang.g:1644:5: ( ( () 'as' ) )=> ( () otherlv_2= 'as' )
+            	    // InternalContentAssistFragmentTestLang.g:1648:4: ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) )
+            	    // InternalContentAssistFragmentTestLang.g:1649:5: ( ( () 'as' ) )=> ( () otherlv_2= 'as' )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1650:5: ( () otherlv_2= 'as' )
-            	    // InternalContentAssistFragmentTestLang.g:1651:6: () otherlv_2= 'as'
+            	    // InternalContentAssistFragmentTestLang.g:1655:5: ( () otherlv_2= 'as' )
+            	    // InternalContentAssistFragmentTestLang.g:1656:6: () otherlv_2= 'as'
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1651:6: ()
-            	    // InternalContentAssistFragmentTestLang.g:1652:7: 
+            	    // InternalContentAssistFragmentTestLang.g:1656:6: ()
+            	    // InternalContentAssistFragmentTestLang.g:1657:7: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4998,11 +5006,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1664:4: ( (lv_type_3_0= ruleJvmTypeReference ) )
-            	    // InternalContentAssistFragmentTestLang.g:1665:5: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalContentAssistFragmentTestLang.g:1669:4: ( (lv_type_3_0= ruleJvmTypeReference ) )
+            	    // InternalContentAssistFragmentTestLang.g:1670:5: (lv_type_3_0= ruleJvmTypeReference )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1665:5: (lv_type_3_0= ruleJvmTypeReference )
-            	    // InternalContentAssistFragmentTestLang.g:1666:6: lv_type_3_0= ruleJvmTypeReference
+            	    // InternalContentAssistFragmentTestLang.g:1670:5: (lv_type_3_0= ruleJvmTypeReference )
+            	    // InternalContentAssistFragmentTestLang.g:1671:6: lv_type_3_0= ruleJvmTypeReference
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5067,7 +5075,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXPostfixOperation"
-    // InternalContentAssistFragmentTestLang.g:1688:1: entryRuleXPostfixOperation returns [EObject current=null] : iv_ruleXPostfixOperation= ruleXPostfixOperation EOF ;
+    // InternalContentAssistFragmentTestLang.g:1693:1: entryRuleXPostfixOperation returns [EObject current=null] : iv_ruleXPostfixOperation= ruleXPostfixOperation EOF ;
     public final EObject entryRuleXPostfixOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5075,8 +5083,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1688:58: (iv_ruleXPostfixOperation= ruleXPostfixOperation EOF )
-            // InternalContentAssistFragmentTestLang.g:1689:2: iv_ruleXPostfixOperation= ruleXPostfixOperation EOF
+            // InternalContentAssistFragmentTestLang.g:1693:58: (iv_ruleXPostfixOperation= ruleXPostfixOperation EOF )
+            // InternalContentAssistFragmentTestLang.g:1694:2: iv_ruleXPostfixOperation= ruleXPostfixOperation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPostfixOperationRule()); 
@@ -5107,7 +5115,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXPostfixOperation"
-    // InternalContentAssistFragmentTestLang.g:1695:1: ruleXPostfixOperation returns [EObject current=null] : (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:1700:1: ruleXPostfixOperation returns [EObject current=null] : (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) ;
     public final EObject ruleXPostfixOperation() throws RecognitionException {
         EObject current = null;
 
@@ -5118,11 +5126,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1701:2: ( (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:1702:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:1706:2: ( (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:1707:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:1702:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
-            // InternalContentAssistFragmentTestLang.g:1703:3: this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
+            // InternalContentAssistFragmentTestLang.g:1707:2: (this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:1708:3: this_XMemberFeatureCall_0= ruleXMemberFeatureCall ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             {
             if ( state.backtracking==0 ) {
 
@@ -5140,7 +5148,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1711:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
+            // InternalContentAssistFragmentTestLang.g:1716:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -5160,13 +5168,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt25) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1712:4: ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) )
+                    // InternalContentAssistFragmentTestLang.g:1717:4: ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1722:4: ( () ( ( ruleOpPostfix ) ) )
-                    // InternalContentAssistFragmentTestLang.g:1723:5: () ( ( ruleOpPostfix ) )
+                    // InternalContentAssistFragmentTestLang.g:1727:4: ( () ( ( ruleOpPostfix ) ) )
+                    // InternalContentAssistFragmentTestLang.g:1728:5: () ( ( ruleOpPostfix ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1723:5: ()
-                    // InternalContentAssistFragmentTestLang.g:1724:6: 
+                    // InternalContentAssistFragmentTestLang.g:1728:5: ()
+                    // InternalContentAssistFragmentTestLang.g:1729:6: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5178,11 +5186,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:1730:5: ( ( ruleOpPostfix ) )
-                    // InternalContentAssistFragmentTestLang.g:1731:6: ( ruleOpPostfix )
+                    // InternalContentAssistFragmentTestLang.g:1735:5: ( ( ruleOpPostfix ) )
+                    // InternalContentAssistFragmentTestLang.g:1736:6: ( ruleOpPostfix )
                     {
-                    // InternalContentAssistFragmentTestLang.g:1731:6: ( ruleOpPostfix )
-                    // InternalContentAssistFragmentTestLang.g:1732:7: ruleOpPostfix
+                    // InternalContentAssistFragmentTestLang.g:1736:6: ( ruleOpPostfix )
+                    // InternalContentAssistFragmentTestLang.g:1737:7: ruleOpPostfix
                     {
                     if ( state.backtracking==0 ) {
 
@@ -5246,7 +5254,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleOpPostfix"
-    // InternalContentAssistFragmentTestLang.g:1752:1: entryRuleOpPostfix returns [String current=null] : iv_ruleOpPostfix= ruleOpPostfix EOF ;
+    // InternalContentAssistFragmentTestLang.g:1757:1: entryRuleOpPostfix returns [String current=null] : iv_ruleOpPostfix= ruleOpPostfix EOF ;
     public final String entryRuleOpPostfix() throws RecognitionException {
         String current = null;
 
@@ -5254,8 +5262,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1752:49: (iv_ruleOpPostfix= ruleOpPostfix EOF )
-            // InternalContentAssistFragmentTestLang.g:1753:2: iv_ruleOpPostfix= ruleOpPostfix EOF
+            // InternalContentAssistFragmentTestLang.g:1757:49: (iv_ruleOpPostfix= ruleOpPostfix EOF )
+            // InternalContentAssistFragmentTestLang.g:1758:2: iv_ruleOpPostfix= ruleOpPostfix EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getOpPostfixRule()); 
@@ -5286,7 +5294,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleOpPostfix"
-    // InternalContentAssistFragmentTestLang.g:1759:1: ruleOpPostfix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '++' | kw= '--' ) ;
+    // InternalContentAssistFragmentTestLang.g:1764:1: ruleOpPostfix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '++' | kw= '--' ) ;
     public final AntlrDatatypeRuleToken ruleOpPostfix() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5296,10 +5304,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1765:2: ( (kw= '++' | kw= '--' ) )
-            // InternalContentAssistFragmentTestLang.g:1766:2: (kw= '++' | kw= '--' )
+            // InternalContentAssistFragmentTestLang.g:1770:2: ( (kw= '++' | kw= '--' ) )
+            // InternalContentAssistFragmentTestLang.g:1771:2: (kw= '++' | kw= '--' )
             {
-            // InternalContentAssistFragmentTestLang.g:1766:2: (kw= '++' | kw= '--' )
+            // InternalContentAssistFragmentTestLang.g:1771:2: (kw= '++' | kw= '--' )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -5318,7 +5326,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt26) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:1767:3: kw= '++'
+                    // InternalContentAssistFragmentTestLang.g:1772:3: kw= '++'
                     {
                     kw=(Token)match(input,45,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5331,7 +5339,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:1773:3: kw= '--'
+                    // InternalContentAssistFragmentTestLang.g:1778:3: kw= '--'
                     {
                     kw=(Token)match(input,46,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -5368,7 +5376,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXMemberFeatureCall"
-    // InternalContentAssistFragmentTestLang.g:1782:1: entryRuleXMemberFeatureCall returns [EObject current=null] : iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF ;
+    // InternalContentAssistFragmentTestLang.g:1787:1: entryRuleXMemberFeatureCall returns [EObject current=null] : iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF ;
     public final EObject entryRuleXMemberFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -5376,8 +5384,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1782:59: (iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF )
-            // InternalContentAssistFragmentTestLang.g:1783:2: iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF
+            // InternalContentAssistFragmentTestLang.g:1787:59: (iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF )
+            // InternalContentAssistFragmentTestLang.g:1788:2: iv_ruleXMemberFeatureCall= ruleXMemberFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXMemberFeatureCallRule()); 
@@ -5408,7 +5416,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXMemberFeatureCall"
-    // InternalContentAssistFragmentTestLang.g:1789:1: ruleXMemberFeatureCall returns [EObject current=null] : (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) ;
+    // InternalContentAssistFragmentTestLang.g:1794:1: ruleXMemberFeatureCall returns [EObject current=null] : (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) ;
     public final EObject ruleXMemberFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -5444,11 +5452,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:1795:2: ( (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) )
-            // InternalContentAssistFragmentTestLang.g:1796:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
+            // InternalContentAssistFragmentTestLang.g:1800:2: ( (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* ) )
+            // InternalContentAssistFragmentTestLang.g:1801:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
             {
-            // InternalContentAssistFragmentTestLang.g:1796:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
-            // InternalContentAssistFragmentTestLang.g:1797:3: this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
+            // InternalContentAssistFragmentTestLang.g:1801:2: (this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )* )
+            // InternalContentAssistFragmentTestLang.g:1802:3: this_XPrimaryExpression_0= ruleXPrimaryExpression ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             {
             if ( state.backtracking==0 ) {
 
@@ -5466,7 +5474,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:1805:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
+            // InternalContentAssistFragmentTestLang.g:1810:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
             loop35:
             do {
                 int alt35=3;
@@ -5515,19 +5523,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt35) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:1806:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1811:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1806:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1807:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) )
+            	    // InternalContentAssistFragmentTestLang.g:1811:4: ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1812:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1807:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-            	    // InternalContentAssistFragmentTestLang.g:1808:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+            	    // InternalContentAssistFragmentTestLang.g:1812:5: ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
+            	    // InternalContentAssistFragmentTestLang.g:1813:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1828:6: ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-            	    // InternalContentAssistFragmentTestLang.g:1829:7: () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
+            	    // InternalContentAssistFragmentTestLang.g:1833:6: ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+            	    // InternalContentAssistFragmentTestLang.g:1834:7: () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1829:7: ()
-            	    // InternalContentAssistFragmentTestLang.g:1830:8: 
+            	    // InternalContentAssistFragmentTestLang.g:1834:7: ()
+            	    // InternalContentAssistFragmentTestLang.g:1835:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5539,7 +5547,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1836:7: (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1841:7: (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) )
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
 
@@ -5558,7 +5566,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    switch (alt27) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:1837:8: otherlv_2= '.'
+            	            // InternalContentAssistFragmentTestLang.g:1842:8: otherlv_2= '.'
             	            {
             	            otherlv_2=(Token)match(input,47,FOLLOW_25); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5570,13 +5578,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	            }
             	            break;
             	        case 2 :
-            	            // InternalContentAssistFragmentTestLang.g:1842:8: ( (lv_explicitStatic_3_0= '::' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1847:8: ( (lv_explicitStatic_3_0= '::' ) )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1842:8: ( (lv_explicitStatic_3_0= '::' ) )
-            	            // InternalContentAssistFragmentTestLang.g:1843:9: (lv_explicitStatic_3_0= '::' )
+            	            // InternalContentAssistFragmentTestLang.g:1847:8: ( (lv_explicitStatic_3_0= '::' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1848:9: (lv_explicitStatic_3_0= '::' )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1843:9: (lv_explicitStatic_3_0= '::' )
-            	            // InternalContentAssistFragmentTestLang.g:1844:10: lv_explicitStatic_3_0= '::'
+            	            // InternalContentAssistFragmentTestLang.g:1848:9: (lv_explicitStatic_3_0= '::' )
+            	            // InternalContentAssistFragmentTestLang.g:1849:10: lv_explicitStatic_3_0= '::'
             	            {
             	            lv_explicitStatic_3_0=(Token)match(input,48,FOLLOW_25); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5604,11 +5612,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1857:7: ( ( ruleFeatureCallID ) )
-            	    // InternalContentAssistFragmentTestLang.g:1858:8: ( ruleFeatureCallID )
+            	    // InternalContentAssistFragmentTestLang.g:1862:7: ( ( ruleFeatureCallID ) )
+            	    // InternalContentAssistFragmentTestLang.g:1863:8: ( ruleFeatureCallID )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1858:8: ( ruleFeatureCallID )
-            	    // InternalContentAssistFragmentTestLang.g:1859:9: ruleFeatureCallID
+            	    // InternalContentAssistFragmentTestLang.g:1863:8: ( ruleFeatureCallID )
+            	    // InternalContentAssistFragmentTestLang.g:1864:9: ruleFeatureCallID
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5659,11 +5667,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1882:5: ( (lv_value_6_0= ruleXAssignment ) )
-            	    // InternalContentAssistFragmentTestLang.g:1883:6: (lv_value_6_0= ruleXAssignment )
+            	    // InternalContentAssistFragmentTestLang.g:1887:5: ( (lv_value_6_0= ruleXAssignment ) )
+            	    // InternalContentAssistFragmentTestLang.g:1888:6: (lv_value_6_0= ruleXAssignment )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1883:6: (lv_value_6_0= ruleXAssignment )
-            	    // InternalContentAssistFragmentTestLang.g:1884:7: lv_value_6_0= ruleXAssignment
+            	    // InternalContentAssistFragmentTestLang.g:1888:6: (lv_value_6_0= ruleXAssignment )
+            	    // InternalContentAssistFragmentTestLang.g:1889:7: lv_value_6_0= ruleXAssignment
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5701,19 +5709,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    break;
             	case 2 :
-            	    // InternalContentAssistFragmentTestLang.g:1903:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
+            	    // InternalContentAssistFragmentTestLang.g:1908:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1903:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
-            	    // InternalContentAssistFragmentTestLang.g:1904:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
+            	    // InternalContentAssistFragmentTestLang.g:1908:4: ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? )
+            	    // InternalContentAssistFragmentTestLang.g:1909:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1904:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1905:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1909:5: ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1910:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1925:6: ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
-            	    // InternalContentAssistFragmentTestLang.g:1926:7: () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1930:6: ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1931:7: () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:1926:7: ()
-            	    // InternalContentAssistFragmentTestLang.g:1927:8: 
+            	    // InternalContentAssistFragmentTestLang.g:1931:7: ()
+            	    // InternalContentAssistFragmentTestLang.g:1932:8: 
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -5725,7 +5733,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1933:7: (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
+            	    // InternalContentAssistFragmentTestLang.g:1938:7: (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) )
             	    int alt28=3;
             	    switch ( input.LA(1) ) {
             	    case 47:
@@ -5753,7 +5761,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    switch (alt28) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:1934:8: otherlv_8= '.'
+            	            // InternalContentAssistFragmentTestLang.g:1939:8: otherlv_8= '.'
             	            {
             	            otherlv_8=(Token)match(input,47,FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5765,13 +5773,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	            }
             	            break;
             	        case 2 :
-            	            // InternalContentAssistFragmentTestLang.g:1939:8: ( (lv_nullSafe_9_0= '?.' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1944:8: ( (lv_nullSafe_9_0= '?.' ) )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1939:8: ( (lv_nullSafe_9_0= '?.' ) )
-            	            // InternalContentAssistFragmentTestLang.g:1940:9: (lv_nullSafe_9_0= '?.' )
+            	            // InternalContentAssistFragmentTestLang.g:1944:8: ( (lv_nullSafe_9_0= '?.' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1945:9: (lv_nullSafe_9_0= '?.' )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1940:9: (lv_nullSafe_9_0= '?.' )
-            	            // InternalContentAssistFragmentTestLang.g:1941:10: lv_nullSafe_9_0= '?.'
+            	            // InternalContentAssistFragmentTestLang.g:1945:9: (lv_nullSafe_9_0= '?.' )
+            	            // InternalContentAssistFragmentTestLang.g:1946:10: lv_nullSafe_9_0= '?.'
             	            {
             	            lv_nullSafe_9_0=(Token)match(input,49,FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5797,13 +5805,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	            }
             	            break;
             	        case 3 :
-            	            // InternalContentAssistFragmentTestLang.g:1954:8: ( (lv_explicitStatic_10_0= '::' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1959:8: ( (lv_explicitStatic_10_0= '::' ) )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1954:8: ( (lv_explicitStatic_10_0= '::' ) )
-            	            // InternalContentAssistFragmentTestLang.g:1955:9: (lv_explicitStatic_10_0= '::' )
+            	            // InternalContentAssistFragmentTestLang.g:1959:8: ( (lv_explicitStatic_10_0= '::' ) )
+            	            // InternalContentAssistFragmentTestLang.g:1960:9: (lv_explicitStatic_10_0= '::' )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1955:9: (lv_explicitStatic_10_0= '::' )
-            	            // InternalContentAssistFragmentTestLang.g:1956:10: lv_explicitStatic_10_0= '::'
+            	            // InternalContentAssistFragmentTestLang.g:1960:9: (lv_explicitStatic_10_0= '::' )
+            	            // InternalContentAssistFragmentTestLang.g:1961:10: lv_explicitStatic_10_0= '::'
             	            {
             	            lv_explicitStatic_10_0=(Token)match(input,48,FOLLOW_26); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5837,7 +5845,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:1971:5: (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )?
+            	    // InternalContentAssistFragmentTestLang.g:1976:5: (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )?
             	    int alt30=2;
             	    int LA30_0 = input.LA(1);
 
@@ -5846,7 +5854,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    switch (alt30) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:1972:6: otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>'
+            	            // InternalContentAssistFragmentTestLang.g:1977:6: otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>'
             	            {
             	            otherlv_11=(Token)match(input,21,FOLLOW_27); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -5854,11 +5862,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	              						newLeafNode(otherlv_11, grammarAccess.getXMemberFeatureCallAccess().getLessThanSignKeyword_1_1_1_0());
             	              					
             	            }
-            	            // InternalContentAssistFragmentTestLang.g:1976:6: ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) )
-            	            // InternalContentAssistFragmentTestLang.g:1977:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
+            	            // InternalContentAssistFragmentTestLang.g:1981:6: ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) )
+            	            // InternalContentAssistFragmentTestLang.g:1982:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:1977:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
-            	            // InternalContentAssistFragmentTestLang.g:1978:8: lv_typeArguments_12_0= ruleJvmArgumentTypeReference
+            	            // InternalContentAssistFragmentTestLang.g:1982:7: (lv_typeArguments_12_0= ruleJvmArgumentTypeReference )
+            	            // InternalContentAssistFragmentTestLang.g:1983:8: lv_typeArguments_12_0= ruleJvmArgumentTypeReference
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -5889,7 +5897,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	            }
 
-            	            // InternalContentAssistFragmentTestLang.g:1995:6: (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )*
+            	            // InternalContentAssistFragmentTestLang.g:2000:6: (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )*
             	            loop29:
             	            do {
             	                int alt29=2;
@@ -5902,7 +5910,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	                switch (alt29) {
             	            	case 1 :
-            	            	    // InternalContentAssistFragmentTestLang.g:1996:7: otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
+            	            	    // InternalContentAssistFragmentTestLang.g:2001:7: otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
             	            	    {
             	            	    otherlv_13=(Token)match(input,50,FOLLOW_27); if (state.failed) return current;
             	            	    if ( state.backtracking==0 ) {
@@ -5910,11 +5918,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	            	      							newLeafNode(otherlv_13, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_1_2_0());
             	            	      						
             	            	    }
-            	            	    // InternalContentAssistFragmentTestLang.g:2000:7: ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
-            	            	    // InternalContentAssistFragmentTestLang.g:2001:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
+            	            	    // InternalContentAssistFragmentTestLang.g:2005:7: ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) )
+            	            	    // InternalContentAssistFragmentTestLang.g:2006:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
             	            	    {
-            	            	    // InternalContentAssistFragmentTestLang.g:2001:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
-            	            	    // InternalContentAssistFragmentTestLang.g:2002:9: lv_typeArguments_14_0= ruleJvmArgumentTypeReference
+            	            	    // InternalContentAssistFragmentTestLang.g:2006:8: (lv_typeArguments_14_0= ruleJvmArgumentTypeReference )
+            	            	    // InternalContentAssistFragmentTestLang.g:2007:9: lv_typeArguments_14_0= ruleJvmArgumentTypeReference
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
@@ -5966,11 +5974,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:2025:5: ( ( ruleIdOrSuper ) )
-            	    // InternalContentAssistFragmentTestLang.g:2026:6: ( ruleIdOrSuper )
+            	    // InternalContentAssistFragmentTestLang.g:2030:5: ( ( ruleIdOrSuper ) )
+            	    // InternalContentAssistFragmentTestLang.g:2031:6: ( ruleIdOrSuper )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:2026:6: ( ruleIdOrSuper )
-            	    // InternalContentAssistFragmentTestLang.g:2027:7: ruleIdOrSuper
+            	    // InternalContentAssistFragmentTestLang.g:2031:6: ( ruleIdOrSuper )
+            	    // InternalContentAssistFragmentTestLang.g:2032:7: ruleIdOrSuper
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -6000,18 +6008,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:2041:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?
+            	    // InternalContentAssistFragmentTestLang.g:2046:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?
             	    int alt33=2;
             	    alt33 = dfa33.predict(input);
             	    switch (alt33) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:2042:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')'
+            	            // InternalContentAssistFragmentTestLang.g:2047:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')'
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:2042:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) )
-            	            // InternalContentAssistFragmentTestLang.g:2043:7: ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' )
+            	            // InternalContentAssistFragmentTestLang.g:2047:6: ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) )
+            	            // InternalContentAssistFragmentTestLang.g:2048:7: ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:2047:7: (lv_explicitOperationCall_17_0= '(' )
-            	            // InternalContentAssistFragmentTestLang.g:2048:8: lv_explicitOperationCall_17_0= '('
+            	            // InternalContentAssistFragmentTestLang.g:2052:7: (lv_explicitOperationCall_17_0= '(' )
+            	            // InternalContentAssistFragmentTestLang.g:2053:8: lv_explicitOperationCall_17_0= '('
             	            {
             	            lv_explicitOperationCall_17_0=(Token)match(input,51,FOLLOW_30); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -6033,18 +6041,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	            }
 
-            	            // InternalContentAssistFragmentTestLang.g:2060:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?
+            	            // InternalContentAssistFragmentTestLang.g:2065:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?
             	            int alt32=3;
             	            alt32 = dfa32.predict(input);
             	            switch (alt32) {
             	                case 1 :
-            	                    // InternalContentAssistFragmentTestLang.g:2061:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
+            	                    // InternalContentAssistFragmentTestLang.g:2066:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
             	                    {
-            	                    // InternalContentAssistFragmentTestLang.g:2061:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
-            	                    // InternalContentAssistFragmentTestLang.g:2062:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure )
+            	                    // InternalContentAssistFragmentTestLang.g:2066:7: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) )
+            	                    // InternalContentAssistFragmentTestLang.g:2067:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure )
             	                    {
-            	                    // InternalContentAssistFragmentTestLang.g:2087:8: (lv_memberCallArguments_18_0= ruleXShortClosure )
-            	                    // InternalContentAssistFragmentTestLang.g:2088:9: lv_memberCallArguments_18_0= ruleXShortClosure
+            	                    // InternalContentAssistFragmentTestLang.g:2092:8: (lv_memberCallArguments_18_0= ruleXShortClosure )
+            	                    // InternalContentAssistFragmentTestLang.g:2093:9: lv_memberCallArguments_18_0= ruleXShortClosure
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -6079,16 +6087,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	                    }
             	                    break;
             	                case 2 :
-            	                    // InternalContentAssistFragmentTestLang.g:2106:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
+            	                    // InternalContentAssistFragmentTestLang.g:2111:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
             	                    {
-            	                    // InternalContentAssistFragmentTestLang.g:2106:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
-            	                    // InternalContentAssistFragmentTestLang.g:2107:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
+            	                    // InternalContentAssistFragmentTestLang.g:2111:7: ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* )
+            	                    // InternalContentAssistFragmentTestLang.g:2112:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    {
-            	                    // InternalContentAssistFragmentTestLang.g:2107:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) )
-            	                    // InternalContentAssistFragmentTestLang.g:2108:9: (lv_memberCallArguments_19_0= ruleXExpression )
+            	                    // InternalContentAssistFragmentTestLang.g:2112:8: ( (lv_memberCallArguments_19_0= ruleXExpression ) )
+            	                    // InternalContentAssistFragmentTestLang.g:2113:9: (lv_memberCallArguments_19_0= ruleXExpression )
             	                    {
-            	                    // InternalContentAssistFragmentTestLang.g:2108:9: (lv_memberCallArguments_19_0= ruleXExpression )
-            	                    // InternalContentAssistFragmentTestLang.g:2109:10: lv_memberCallArguments_19_0= ruleXExpression
+            	                    // InternalContentAssistFragmentTestLang.g:2113:9: (lv_memberCallArguments_19_0= ruleXExpression )
+            	                    // InternalContentAssistFragmentTestLang.g:2114:10: lv_memberCallArguments_19_0= ruleXExpression
             	                    {
             	                    if ( state.backtracking==0 ) {
 
@@ -6119,7 +6127,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	                    }
 
-            	                    // InternalContentAssistFragmentTestLang.g:2126:8: (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
+            	                    // InternalContentAssistFragmentTestLang.g:2131:8: (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )*
             	                    loop31:
             	                    do {
             	                        int alt31=2;
@@ -6132,7 +6140,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	                        switch (alt31) {
             	                    	case 1 :
-            	                    	    // InternalContentAssistFragmentTestLang.g:2127:9: otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) )
+            	                    	    // InternalContentAssistFragmentTestLang.g:2132:9: otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) )
             	                    	    {
             	                    	    otherlv_20=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
             	                    	    if ( state.backtracking==0 ) {
@@ -6140,11 +6148,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	                    	      									newLeafNode(otherlv_20, grammarAccess.getXMemberFeatureCallAccess().getCommaKeyword_1_1_3_1_1_1_0());
             	                    	      								
             	                    	    }
-            	                    	    // InternalContentAssistFragmentTestLang.g:2131:9: ( (lv_memberCallArguments_21_0= ruleXExpression ) )
-            	                    	    // InternalContentAssistFragmentTestLang.g:2132:10: (lv_memberCallArguments_21_0= ruleXExpression )
+            	                    	    // InternalContentAssistFragmentTestLang.g:2136:9: ( (lv_memberCallArguments_21_0= ruleXExpression ) )
+            	                    	    // InternalContentAssistFragmentTestLang.g:2137:10: (lv_memberCallArguments_21_0= ruleXExpression )
             	                    	    {
-            	                    	    // InternalContentAssistFragmentTestLang.g:2132:10: (lv_memberCallArguments_21_0= ruleXExpression )
-            	                    	    // InternalContentAssistFragmentTestLang.g:2133:11: lv_memberCallArguments_21_0= ruleXExpression
+            	                    	    // InternalContentAssistFragmentTestLang.g:2137:10: (lv_memberCallArguments_21_0= ruleXExpression )
+            	                    	    // InternalContentAssistFragmentTestLang.g:2138:11: lv_memberCallArguments_21_0= ruleXExpression
             	                    	    {
             	                    	    if ( state.backtracking==0 ) {
 
@@ -6205,15 +6213,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:2158:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
+            	    // InternalContentAssistFragmentTestLang.g:2163:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?
             	    int alt34=2;
             	    alt34 = dfa34.predict(input);
             	    switch (alt34) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:2159:6: ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure )
+            	            // InternalContentAssistFragmentTestLang.g:2164:6: ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure )
             	            {
-            	            // InternalContentAssistFragmentTestLang.g:2165:6: (lv_memberCallArguments_23_0= ruleXClosure )
-            	            // InternalContentAssistFragmentTestLang.g:2166:7: lv_memberCallArguments_23_0= ruleXClosure
+            	            // InternalContentAssistFragmentTestLang.g:2170:6: (lv_memberCallArguments_23_0= ruleXClosure )
+            	            // InternalContentAssistFragmentTestLang.g:2171:7: lv_memberCallArguments_23_0= ruleXClosure
             	            {
             	            if ( state.backtracking==0 ) {
 
@@ -6284,7 +6292,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXPrimaryExpression"
-    // InternalContentAssistFragmentTestLang.g:2189:1: entryRuleXPrimaryExpression returns [EObject current=null] : iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:2194:1: entryRuleXPrimaryExpression returns [EObject current=null] : iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF ;
     public final EObject entryRuleXPrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6292,8 +6300,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2189:59: (iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:2190:2: iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF
+            // InternalContentAssistFragmentTestLang.g:2194:59: (iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:2195:2: iv_ruleXPrimaryExpression= ruleXPrimaryExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPrimaryExpressionRule()); 
@@ -6324,7 +6332,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXPrimaryExpression"
-    // InternalContentAssistFragmentTestLang.g:2196:1: ruleXPrimaryExpression returns [EObject current=null] : (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) ;
+    // InternalContentAssistFragmentTestLang.g:2201:1: ruleXPrimaryExpression returns [EObject current=null] : (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) ;
     public final EObject ruleXPrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6363,15 +6371,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2202:2: ( (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) )
-            // InternalContentAssistFragmentTestLang.g:2203:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
+            // InternalContentAssistFragmentTestLang.g:2207:2: ( (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression ) )
+            // InternalContentAssistFragmentTestLang.g:2208:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:2203:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
+            // InternalContentAssistFragmentTestLang.g:2208:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )
             int alt36=15;
             alt36 = dfa36.predict(input);
             switch (alt36) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2204:3: this_XConstructorCall_0= ruleXConstructorCall
+                    // InternalContentAssistFragmentTestLang.g:2209:3: this_XConstructorCall_0= ruleXConstructorCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6393,7 +6401,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:2213:3: this_XBlockExpression_1= ruleXBlockExpression
+                    // InternalContentAssistFragmentTestLang.g:2218:3: this_XBlockExpression_1= ruleXBlockExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6415,7 +6423,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:2222:3: this_XSwitchExpression_2= ruleXSwitchExpression
+                    // InternalContentAssistFragmentTestLang.g:2227:3: this_XSwitchExpression_2= ruleXSwitchExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6437,10 +6445,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:2231:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
+                    // InternalContentAssistFragmentTestLang.g:2236:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2231:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
-                    // InternalContentAssistFragmentTestLang.g:2232:4: ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression
+                    // InternalContentAssistFragmentTestLang.g:2236:3: ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression )
+                    // InternalContentAssistFragmentTestLang.g:2237:4: ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6465,7 +6473,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistFragmentTestLang.g:2249:3: this_XFeatureCall_4= ruleXFeatureCall
+                    // InternalContentAssistFragmentTestLang.g:2254:3: this_XFeatureCall_4= ruleXFeatureCall
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6487,7 +6495,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalContentAssistFragmentTestLang.g:2258:3: this_XLiteral_5= ruleXLiteral
+                    // InternalContentAssistFragmentTestLang.g:2263:3: this_XLiteral_5= ruleXLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6509,7 +6517,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 7 :
-                    // InternalContentAssistFragmentTestLang.g:2267:3: this_XIfExpression_6= ruleXIfExpression
+                    // InternalContentAssistFragmentTestLang.g:2272:3: this_XIfExpression_6= ruleXIfExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6531,10 +6539,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 8 :
-                    // InternalContentAssistFragmentTestLang.g:2276:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
+                    // InternalContentAssistFragmentTestLang.g:2281:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2276:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
-                    // InternalContentAssistFragmentTestLang.g:2277:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression
+                    // InternalContentAssistFragmentTestLang.g:2281:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression )
+                    // InternalContentAssistFragmentTestLang.g:2282:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6559,7 +6567,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 9 :
-                    // InternalContentAssistFragmentTestLang.g:2300:3: this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression
+                    // InternalContentAssistFragmentTestLang.g:2305:3: this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6581,7 +6589,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 10 :
-                    // InternalContentAssistFragmentTestLang.g:2309:3: this_XWhileExpression_9= ruleXWhileExpression
+                    // InternalContentAssistFragmentTestLang.g:2314:3: this_XWhileExpression_9= ruleXWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6603,7 +6611,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 11 :
-                    // InternalContentAssistFragmentTestLang.g:2318:3: this_XDoWhileExpression_10= ruleXDoWhileExpression
+                    // InternalContentAssistFragmentTestLang.g:2323:3: this_XDoWhileExpression_10= ruleXDoWhileExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6625,7 +6633,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 12 :
-                    // InternalContentAssistFragmentTestLang.g:2327:3: this_XThrowExpression_11= ruleXThrowExpression
+                    // InternalContentAssistFragmentTestLang.g:2332:3: this_XThrowExpression_11= ruleXThrowExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6647,7 +6655,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 13 :
-                    // InternalContentAssistFragmentTestLang.g:2336:3: this_XReturnExpression_12= ruleXReturnExpression
+                    // InternalContentAssistFragmentTestLang.g:2341:3: this_XReturnExpression_12= ruleXReturnExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6669,7 +6677,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 14 :
-                    // InternalContentAssistFragmentTestLang.g:2345:3: this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression
+                    // InternalContentAssistFragmentTestLang.g:2350:3: this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6691,7 +6699,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 15 :
-                    // InternalContentAssistFragmentTestLang.g:2354:3: this_XParenthesizedExpression_14= ruleXParenthesizedExpression
+                    // InternalContentAssistFragmentTestLang.g:2359:3: this_XParenthesizedExpression_14= ruleXParenthesizedExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6737,7 +6745,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXLiteral"
-    // InternalContentAssistFragmentTestLang.g:2366:1: entryRuleXLiteral returns [EObject current=null] : iv_ruleXLiteral= ruleXLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:2371:1: entryRuleXLiteral returns [EObject current=null] : iv_ruleXLiteral= ruleXLiteral EOF ;
     public final EObject entryRuleXLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -6745,8 +6753,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2366:49: (iv_ruleXLiteral= ruleXLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:2367:2: iv_ruleXLiteral= ruleXLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:2371:49: (iv_ruleXLiteral= ruleXLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:2372:2: iv_ruleXLiteral= ruleXLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXLiteralRule()); 
@@ -6777,7 +6785,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXLiteral"
-    // InternalContentAssistFragmentTestLang.g:2373:1: ruleXLiteral returns [EObject current=null] : (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) ;
+    // InternalContentAssistFragmentTestLang.g:2378:1: ruleXLiteral returns [EObject current=null] : (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) ;
     public final EObject ruleXLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -6800,10 +6808,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2379:2: ( (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) )
-            // InternalContentAssistFragmentTestLang.g:2380:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
+            // InternalContentAssistFragmentTestLang.g:2384:2: ( (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral ) )
+            // InternalContentAssistFragmentTestLang.g:2385:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
             {
-            // InternalContentAssistFragmentTestLang.g:2380:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
+            // InternalContentAssistFragmentTestLang.g:2385:2: (this_XCollectionLiteral_0= ruleXCollectionLiteral | ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure ) | this_XBooleanLiteral_2= ruleXBooleanLiteral | this_XNumberLiteral_3= ruleXNumberLiteral | this_XNullLiteral_4= ruleXNullLiteral | this_XStringLiteral_5= ruleXStringLiteral | this_XTypeLiteral_6= ruleXTypeLiteral )
             int alt37=7;
             int LA37_0 = input.LA(1);
 
@@ -6837,7 +6845,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt37) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2381:3: this_XCollectionLiteral_0= ruleXCollectionLiteral
+                    // InternalContentAssistFragmentTestLang.g:2386:3: this_XCollectionLiteral_0= ruleXCollectionLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6859,10 +6867,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:2390:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:2395:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2390:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
-                    // InternalContentAssistFragmentTestLang.g:2391:4: ( ( () '[' ) )=>this_XClosure_1= ruleXClosure
+                    // InternalContentAssistFragmentTestLang.g:2395:3: ( ( ( () '[' ) )=>this_XClosure_1= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:2396:4: ( ( () '[' ) )=>this_XClosure_1= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6887,7 +6895,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:2407:3: this_XBooleanLiteral_2= ruleXBooleanLiteral
+                    // InternalContentAssistFragmentTestLang.g:2412:3: this_XBooleanLiteral_2= ruleXBooleanLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6909,7 +6917,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:2416:3: this_XNumberLiteral_3= ruleXNumberLiteral
+                    // InternalContentAssistFragmentTestLang.g:2421:3: this_XNumberLiteral_3= ruleXNumberLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6931,7 +6939,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistFragmentTestLang.g:2425:3: this_XNullLiteral_4= ruleXNullLiteral
+                    // InternalContentAssistFragmentTestLang.g:2430:3: this_XNullLiteral_4= ruleXNullLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6953,7 +6961,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalContentAssistFragmentTestLang.g:2434:3: this_XStringLiteral_5= ruleXStringLiteral
+                    // InternalContentAssistFragmentTestLang.g:2439:3: this_XStringLiteral_5= ruleXStringLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -6975,7 +6983,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 7 :
-                    // InternalContentAssistFragmentTestLang.g:2443:3: this_XTypeLiteral_6= ruleXTypeLiteral
+                    // InternalContentAssistFragmentTestLang.g:2448:3: this_XTypeLiteral_6= ruleXTypeLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7021,7 +7029,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXCollectionLiteral"
-    // InternalContentAssistFragmentTestLang.g:2455:1: entryRuleXCollectionLiteral returns [EObject current=null] : iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:2460:1: entryRuleXCollectionLiteral returns [EObject current=null] : iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF ;
     public final EObject entryRuleXCollectionLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7029,8 +7037,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2455:59: (iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:2456:2: iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:2460:59: (iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:2461:2: iv_ruleXCollectionLiteral= ruleXCollectionLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCollectionLiteralRule()); 
@@ -7061,7 +7069,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXCollectionLiteral"
-    // InternalContentAssistFragmentTestLang.g:2462:1: ruleXCollectionLiteral returns [EObject current=null] : (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) ;
+    // InternalContentAssistFragmentTestLang.g:2467:1: ruleXCollectionLiteral returns [EObject current=null] : (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) ;
     public final EObject ruleXCollectionLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7074,10 +7082,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2468:2: ( (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) )
-            // InternalContentAssistFragmentTestLang.g:2469:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
+            // InternalContentAssistFragmentTestLang.g:2473:2: ( (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral ) )
+            // InternalContentAssistFragmentTestLang.g:2474:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
             {
-            // InternalContentAssistFragmentTestLang.g:2469:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
+            // InternalContentAssistFragmentTestLang.g:2474:2: (this_XSetLiteral_0= ruleXSetLiteral | this_XListLiteral_1= ruleXListLiteral )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -7107,7 +7115,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt38) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2470:3: this_XSetLiteral_0= ruleXSetLiteral
+                    // InternalContentAssistFragmentTestLang.g:2475:3: this_XSetLiteral_0= ruleXSetLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7129,7 +7137,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:2479:3: this_XListLiteral_1= ruleXListLiteral
+                    // InternalContentAssistFragmentTestLang.g:2484:3: this_XListLiteral_1= ruleXListLiteral
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7175,7 +7183,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXSetLiteral"
-    // InternalContentAssistFragmentTestLang.g:2491:1: entryRuleXSetLiteral returns [EObject current=null] : iv_ruleXSetLiteral= ruleXSetLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:2496:1: entryRuleXSetLiteral returns [EObject current=null] : iv_ruleXSetLiteral= ruleXSetLiteral EOF ;
     public final EObject entryRuleXSetLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7183,8 +7191,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2491:52: (iv_ruleXSetLiteral= ruleXSetLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:2492:2: iv_ruleXSetLiteral= ruleXSetLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:2496:52: (iv_ruleXSetLiteral= ruleXSetLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:2497:2: iv_ruleXSetLiteral= ruleXSetLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSetLiteralRule()); 
@@ -7215,7 +7223,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXSetLiteral"
-    // InternalContentAssistFragmentTestLang.g:2498:1: ruleXSetLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) ;
+    // InternalContentAssistFragmentTestLang.g:2503:1: ruleXSetLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) ;
     public final EObject ruleXSetLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7232,14 +7240,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2504:2: ( ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) )
-            // InternalContentAssistFragmentTestLang.g:2505:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
+            // InternalContentAssistFragmentTestLang.g:2509:2: ( ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' ) )
+            // InternalContentAssistFragmentTestLang.g:2510:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
             {
-            // InternalContentAssistFragmentTestLang.g:2505:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
-            // InternalContentAssistFragmentTestLang.g:2506:3: () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}'
+            // InternalContentAssistFragmentTestLang.g:2510:2: ( () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}' )
+            // InternalContentAssistFragmentTestLang.g:2511:3: () otherlv_1= '#' otherlv_2= '{' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= '}'
             {
-            // InternalContentAssistFragmentTestLang.g:2506:3: ()
-            // InternalContentAssistFragmentTestLang.g:2507:4: 
+            // InternalContentAssistFragmentTestLang.g:2511:3: ()
+            // InternalContentAssistFragmentTestLang.g:2512:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -7263,7 +7271,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXSetLiteralAccess().getLeftCurlyBracketKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:2521:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
+            // InternalContentAssistFragmentTestLang.g:2526:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -7272,13 +7280,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt40) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2522:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2527:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:2522:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:2523:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:2527:4: ( (lv_elements_3_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:2528:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2523:5: (lv_elements_3_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:2524:6: lv_elements_3_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:2528:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:2529:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7309,7 +7317,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:2541:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2546:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop39:
                     do {
                         int alt39=2;
@@ -7322,7 +7330,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt39) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:2542:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2547:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    otherlv_4=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -7330,11 +7338,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_4, grammarAccess.getXSetLiteralAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:2546:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // InternalContentAssistFragmentTestLang.g:2547:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:2551:5: ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2552:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:2547:6: (lv_elements_5_0= ruleXExpression )
-                    	    // InternalContentAssistFragmentTestLang.g:2548:7: lv_elements_5_0= ruleXExpression
+                    	    // InternalContentAssistFragmentTestLang.g:2552:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:2553:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7411,7 +7419,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXListLiteral"
-    // InternalContentAssistFragmentTestLang.g:2575:1: entryRuleXListLiteral returns [EObject current=null] : iv_ruleXListLiteral= ruleXListLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:2580:1: entryRuleXListLiteral returns [EObject current=null] : iv_ruleXListLiteral= ruleXListLiteral EOF ;
     public final EObject entryRuleXListLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7419,8 +7427,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2575:53: (iv_ruleXListLiteral= ruleXListLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:2576:2: iv_ruleXListLiteral= ruleXListLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:2580:53: (iv_ruleXListLiteral= ruleXListLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:2581:2: iv_ruleXListLiteral= ruleXListLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXListLiteralRule()); 
@@ -7451,7 +7459,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXListLiteral"
-    // InternalContentAssistFragmentTestLang.g:2582:1: ruleXListLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) ;
+    // InternalContentAssistFragmentTestLang.g:2587:1: ruleXListLiteral returns [EObject current=null] : ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) ;
     public final EObject ruleXListLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -7468,14 +7476,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2588:2: ( ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) )
-            // InternalContentAssistFragmentTestLang.g:2589:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
+            // InternalContentAssistFragmentTestLang.g:2593:2: ( ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' ) )
+            // InternalContentAssistFragmentTestLang.g:2594:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
             {
-            // InternalContentAssistFragmentTestLang.g:2589:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
-            // InternalContentAssistFragmentTestLang.g:2590:3: () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']'
+            // InternalContentAssistFragmentTestLang.g:2594:2: ( () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']' )
+            // InternalContentAssistFragmentTestLang.g:2595:3: () otherlv_1= '#' otherlv_2= '[' ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )? otherlv_6= ']'
             {
-            // InternalContentAssistFragmentTestLang.g:2590:3: ()
-            // InternalContentAssistFragmentTestLang.g:2591:4: 
+            // InternalContentAssistFragmentTestLang.g:2595:3: ()
+            // InternalContentAssistFragmentTestLang.g:2596:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -7499,7 +7507,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXListLiteralAccess().getLeftSquareBracketKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:2605:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
+            // InternalContentAssistFragmentTestLang.g:2610:3: ( ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )* )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -7508,13 +7516,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt42) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2606:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2611:4: ( (lv_elements_3_0= ruleXExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:2606:4: ( (lv_elements_3_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:2607:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:2611:4: ( (lv_elements_3_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:2612:5: (lv_elements_3_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2607:5: (lv_elements_3_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:2608:6: lv_elements_3_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:2612:5: (lv_elements_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:2613:6: lv_elements_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7545,7 +7553,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:2625:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2630:4: (otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) ) )*
                     loop41:
                     do {
                         int alt41=2;
@@ -7558,7 +7566,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt41) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:2626:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2631:5: otherlv_4= ',' ( (lv_elements_5_0= ruleXExpression ) )
                     	    {
                     	    otherlv_4=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -7566,11 +7574,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_4, grammarAccess.getXListLiteralAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:2630:5: ( (lv_elements_5_0= ruleXExpression ) )
-                    	    // InternalContentAssistFragmentTestLang.g:2631:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:2635:5: ( (lv_elements_5_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2636:6: (lv_elements_5_0= ruleXExpression )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:2631:6: (lv_elements_5_0= ruleXExpression )
-                    	    // InternalContentAssistFragmentTestLang.g:2632:7: lv_elements_5_0= ruleXExpression
+                    	    // InternalContentAssistFragmentTestLang.g:2636:6: (lv_elements_5_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:2637:7: lv_elements_5_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -7647,7 +7655,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXClosure"
-    // InternalContentAssistFragmentTestLang.g:2659:1: entryRuleXClosure returns [EObject current=null] : iv_ruleXClosure= ruleXClosure EOF ;
+    // InternalContentAssistFragmentTestLang.g:2664:1: entryRuleXClosure returns [EObject current=null] : iv_ruleXClosure= ruleXClosure EOF ;
     public final EObject entryRuleXClosure() throws RecognitionException {
         EObject current = null;
 
@@ -7655,8 +7663,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2659:49: (iv_ruleXClosure= ruleXClosure EOF )
-            // InternalContentAssistFragmentTestLang.g:2660:2: iv_ruleXClosure= ruleXClosure EOF
+            // InternalContentAssistFragmentTestLang.g:2664:49: (iv_ruleXClosure= ruleXClosure EOF )
+            // InternalContentAssistFragmentTestLang.g:2665:2: iv_ruleXClosure= ruleXClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXClosureRule()); 
@@ -7687,7 +7695,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXClosure"
-    // InternalContentAssistFragmentTestLang.g:2666:1: ruleXClosure returns [EObject current=null] : ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) ;
+    // InternalContentAssistFragmentTestLang.g:2671:1: ruleXClosure returns [EObject current=null] : ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) ;
     public final EObject ruleXClosure() throws RecognitionException {
         EObject current = null;
 
@@ -7706,20 +7714,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2672:2: ( ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) )
-            // InternalContentAssistFragmentTestLang.g:2673:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
+            // InternalContentAssistFragmentTestLang.g:2677:2: ( ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' ) )
+            // InternalContentAssistFragmentTestLang.g:2678:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
             {
-            // InternalContentAssistFragmentTestLang.g:2673:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
-            // InternalContentAssistFragmentTestLang.g:2674:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']'
+            // InternalContentAssistFragmentTestLang.g:2678:2: ( ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']' )
+            // InternalContentAssistFragmentTestLang.g:2679:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) ) ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )? ( (lv_expression_6_0= ruleXExpressionInClosure ) ) otherlv_7= ']'
             {
-            // InternalContentAssistFragmentTestLang.g:2674:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) )
-            // InternalContentAssistFragmentTestLang.g:2675:4: ( ( () '[' ) )=> ( () otherlv_1= '[' )
+            // InternalContentAssistFragmentTestLang.g:2679:3: ( ( ( () '[' ) )=> ( () otherlv_1= '[' ) )
+            // InternalContentAssistFragmentTestLang.g:2680:4: ( ( () '[' ) )=> ( () otherlv_1= '[' )
             {
-            // InternalContentAssistFragmentTestLang.g:2681:4: ( () otherlv_1= '[' )
-            // InternalContentAssistFragmentTestLang.g:2682:5: () otherlv_1= '['
+            // InternalContentAssistFragmentTestLang.g:2686:4: ( () otherlv_1= '[' )
+            // InternalContentAssistFragmentTestLang.g:2687:5: () otherlv_1= '['
             {
-            // InternalContentAssistFragmentTestLang.g:2682:5: ()
-            // InternalContentAssistFragmentTestLang.g:2683:6: 
+            // InternalContentAssistFragmentTestLang.g:2687:5: ()
+            // InternalContentAssistFragmentTestLang.g:2688:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -7743,17 +7751,17 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2695:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?
+            // InternalContentAssistFragmentTestLang.g:2700:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?
             int alt45=2;
             alt45 = dfa45.predict(input);
             switch (alt45) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2696:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
+                    // InternalContentAssistFragmentTestLang.g:2701:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2719:4: ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
-                    // InternalContentAssistFragmentTestLang.g:2720:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) )
+                    // InternalContentAssistFragmentTestLang.g:2724:4: ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) )
+                    // InternalContentAssistFragmentTestLang.g:2725:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2720:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )?
+                    // InternalContentAssistFragmentTestLang.g:2725:5: ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )?
                     int alt44=2;
                     int LA44_0 = input.LA(1);
 
@@ -7762,13 +7770,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt44) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:2721:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:2726:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             {
-                            // InternalContentAssistFragmentTestLang.g:2721:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) )
-                            // InternalContentAssistFragmentTestLang.g:2722:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
+                            // InternalContentAssistFragmentTestLang.g:2726:6: ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) )
+                            // InternalContentAssistFragmentTestLang.g:2727:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
                             {
-                            // InternalContentAssistFragmentTestLang.g:2722:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
-                            // InternalContentAssistFragmentTestLang.g:2723:8: lv_declaredFormalParameters_2_0= ruleJvmFormalParameter
+                            // InternalContentAssistFragmentTestLang.g:2727:7: (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter )
+                            // InternalContentAssistFragmentTestLang.g:2728:8: lv_declaredFormalParameters_2_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -7799,7 +7807,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:2740:6: (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:2745:6: (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )*
                             loop43:
                             do {
                                 int alt43=2;
@@ -7812,7 +7820,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                                 switch (alt43) {
                             	case 1 :
-                            	    // InternalContentAssistFragmentTestLang.g:2741:7: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
+                            	    // InternalContentAssistFragmentTestLang.g:2746:7: otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
                             	    {
                             	    otherlv_3=(Token)match(input,50,FOLLOW_3); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -7820,11 +7828,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             	      							newLeafNode(otherlv_3, grammarAccess.getXClosureAccess().getCommaKeyword_1_0_0_1_0());
                             	      						
                             	    }
-                            	    // InternalContentAssistFragmentTestLang.g:2745:7: ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
-                            	    // InternalContentAssistFragmentTestLang.g:2746:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
+                            	    // InternalContentAssistFragmentTestLang.g:2750:7: ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) )
+                            	    // InternalContentAssistFragmentTestLang.g:2751:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
                             	    {
-                            	    // InternalContentAssistFragmentTestLang.g:2746:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
-                            	    // InternalContentAssistFragmentTestLang.g:2747:9: lv_declaredFormalParameters_4_0= ruleJvmFormalParameter
+                            	    // InternalContentAssistFragmentTestLang.g:2751:8: (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter )
+                            	    // InternalContentAssistFragmentTestLang.g:2752:9: lv_declaredFormalParameters_4_0= ruleJvmFormalParameter
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -7870,11 +7878,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:2766:5: ( (lv_explicitSyntax_5_0= '|' ) )
-                    // InternalContentAssistFragmentTestLang.g:2767:6: (lv_explicitSyntax_5_0= '|' )
+                    // InternalContentAssistFragmentTestLang.g:2771:5: ( (lv_explicitSyntax_5_0= '|' ) )
+                    // InternalContentAssistFragmentTestLang.g:2772:6: (lv_explicitSyntax_5_0= '|' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2767:6: (lv_explicitSyntax_5_0= '|' )
-                    // InternalContentAssistFragmentTestLang.g:2768:7: lv_explicitSyntax_5_0= '|'
+                    // InternalContentAssistFragmentTestLang.g:2772:6: (lv_explicitSyntax_5_0= '|' )
+                    // InternalContentAssistFragmentTestLang.g:2773:7: lv_explicitSyntax_5_0= '|'
                     {
                     lv_explicitSyntax_5_0=(Token)match(input,58,FOLLOW_42); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7905,11 +7913,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2782:3: ( (lv_expression_6_0= ruleXExpressionInClosure ) )
-            // InternalContentAssistFragmentTestLang.g:2783:4: (lv_expression_6_0= ruleXExpressionInClosure )
+            // InternalContentAssistFragmentTestLang.g:2787:3: ( (lv_expression_6_0= ruleXExpressionInClosure ) )
+            // InternalContentAssistFragmentTestLang.g:2788:4: (lv_expression_6_0= ruleXExpressionInClosure )
             {
-            // InternalContentAssistFragmentTestLang.g:2783:4: (lv_expression_6_0= ruleXExpressionInClosure )
-            // InternalContentAssistFragmentTestLang.g:2784:5: lv_expression_6_0= ruleXExpressionInClosure
+            // InternalContentAssistFragmentTestLang.g:2788:4: (lv_expression_6_0= ruleXExpressionInClosure )
+            // InternalContentAssistFragmentTestLang.g:2789:5: lv_expression_6_0= ruleXExpressionInClosure
             {
             if ( state.backtracking==0 ) {
 
@@ -7971,7 +7979,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXExpressionInClosure"
-    // InternalContentAssistFragmentTestLang.g:2809:1: entryRuleXExpressionInClosure returns [EObject current=null] : iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF ;
+    // InternalContentAssistFragmentTestLang.g:2814:1: entryRuleXExpressionInClosure returns [EObject current=null] : iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF ;
     public final EObject entryRuleXExpressionInClosure() throws RecognitionException {
         EObject current = null;
 
@@ -7979,8 +7987,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2809:61: (iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF )
-            // InternalContentAssistFragmentTestLang.g:2810:2: iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF
+            // InternalContentAssistFragmentTestLang.g:2814:61: (iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF )
+            // InternalContentAssistFragmentTestLang.g:2815:2: iv_ruleXExpressionInClosure= ruleXExpressionInClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionInClosureRule()); 
@@ -8011,7 +8019,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXExpressionInClosure"
-    // InternalContentAssistFragmentTestLang.g:2816:1: ruleXExpressionInClosure returns [EObject current=null] : ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) ;
+    // InternalContentAssistFragmentTestLang.g:2821:1: ruleXExpressionInClosure returns [EObject current=null] : ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) ;
     public final EObject ruleXExpressionInClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8023,14 +8031,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2822:2: ( ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) )
-            // InternalContentAssistFragmentTestLang.g:2823:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
+            // InternalContentAssistFragmentTestLang.g:2827:2: ( ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* ) )
+            // InternalContentAssistFragmentTestLang.g:2828:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
             {
-            // InternalContentAssistFragmentTestLang.g:2823:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
-            // InternalContentAssistFragmentTestLang.g:2824:3: () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
+            // InternalContentAssistFragmentTestLang.g:2828:2: ( () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )* )
+            // InternalContentAssistFragmentTestLang.g:2829:3: () ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             {
-            // InternalContentAssistFragmentTestLang.g:2824:3: ()
-            // InternalContentAssistFragmentTestLang.g:2825:4: 
+            // InternalContentAssistFragmentTestLang.g:2829:3: ()
+            // InternalContentAssistFragmentTestLang.g:2830:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8042,7 +8050,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2831:3: ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
+            // InternalContentAssistFragmentTestLang.g:2836:3: ( ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )? )*
             loop47:
             do {
                 int alt47=2;
@@ -8055,13 +8063,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt47) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:2832:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )?
+            	    // InternalContentAssistFragmentTestLang.g:2837:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_2= ';' )?
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:2832:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) )
-            	    // InternalContentAssistFragmentTestLang.g:2833:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalContentAssistFragmentTestLang.g:2837:4: ( (lv_expressions_1_0= ruleXExpressionOrVarDeclaration ) )
+            	    // InternalContentAssistFragmentTestLang.g:2838:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:2833:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
-            	    // InternalContentAssistFragmentTestLang.g:2834:6: lv_expressions_1_0= ruleXExpressionOrVarDeclaration
+            	    // InternalContentAssistFragmentTestLang.g:2838:5: (lv_expressions_1_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalContentAssistFragmentTestLang.g:2839:6: lv_expressions_1_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -8092,7 +8100,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:2851:4: (otherlv_2= ';' )?
+            	    // InternalContentAssistFragmentTestLang.g:2856:4: (otherlv_2= ';' )?
             	    int alt46=2;
             	    int LA46_0 = input.LA(1);
 
@@ -8101,7 +8109,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    switch (alt46) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:2852:5: otherlv_2= ';'
+            	            // InternalContentAssistFragmentTestLang.g:2857:5: otherlv_2= ';'
             	            {
             	            otherlv_2=(Token)match(input,59,FOLLOW_45); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -8149,7 +8157,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXShortClosure"
-    // InternalContentAssistFragmentTestLang.g:2862:1: entryRuleXShortClosure returns [EObject current=null] : iv_ruleXShortClosure= ruleXShortClosure EOF ;
+    // InternalContentAssistFragmentTestLang.g:2867:1: entryRuleXShortClosure returns [EObject current=null] : iv_ruleXShortClosure= ruleXShortClosure EOF ;
     public final EObject entryRuleXShortClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8157,8 +8165,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2862:54: (iv_ruleXShortClosure= ruleXShortClosure EOF )
-            // InternalContentAssistFragmentTestLang.g:2863:2: iv_ruleXShortClosure= ruleXShortClosure EOF
+            // InternalContentAssistFragmentTestLang.g:2867:54: (iv_ruleXShortClosure= ruleXShortClosure EOF )
+            // InternalContentAssistFragmentTestLang.g:2868:2: iv_ruleXShortClosure= ruleXShortClosure EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXShortClosureRule()); 
@@ -8189,7 +8197,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXShortClosure"
-    // InternalContentAssistFragmentTestLang.g:2869:1: ruleXShortClosure returns [EObject current=null] : ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:2874:1: ruleXShortClosure returns [EObject current=null] : ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXShortClosure() throws RecognitionException {
         EObject current = null;
 
@@ -8206,20 +8214,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2875:2: ( ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:2876:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:2880:2: ( ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:2881:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:2876:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:2877:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:2881:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:2882:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) ) ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:2877:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:2878:4: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
+            // InternalContentAssistFragmentTestLang.g:2882:3: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:2883:4: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:2903:4: ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
-            // InternalContentAssistFragmentTestLang.g:2904:5: () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) )
+            // InternalContentAssistFragmentTestLang.g:2908:4: ( () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) ) )
+            // InternalContentAssistFragmentTestLang.g:2909:5: () ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_4_0= '|' ) )
             {
-            // InternalContentAssistFragmentTestLang.g:2904:5: ()
-            // InternalContentAssistFragmentTestLang.g:2905:6: 
+            // InternalContentAssistFragmentTestLang.g:2909:5: ()
+            // InternalContentAssistFragmentTestLang.g:2910:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8231,7 +8239,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2911:5: ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )?
+            // InternalContentAssistFragmentTestLang.g:2916:5: ( ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )* )?
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -8240,13 +8248,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt49) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:2912:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2917:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) ) (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:2912:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) )
-                    // InternalContentAssistFragmentTestLang.g:2913:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
+                    // InternalContentAssistFragmentTestLang.g:2917:6: ( (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter ) )
+                    // InternalContentAssistFragmentTestLang.g:2918:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
                     {
-                    // InternalContentAssistFragmentTestLang.g:2913:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
-                    // InternalContentAssistFragmentTestLang.g:2914:8: lv_declaredFormalParameters_1_0= ruleJvmFormalParameter
+                    // InternalContentAssistFragmentTestLang.g:2918:7: (lv_declaredFormalParameters_1_0= ruleJvmFormalParameter )
+                    // InternalContentAssistFragmentTestLang.g:2919:8: lv_declaredFormalParameters_1_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8277,7 +8285,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:2931:6: (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:2936:6: (otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) ) )*
                     loop48:
                     do {
                         int alt48=2;
@@ -8290,7 +8298,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt48) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:2932:7: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2937:7: otherlv_2= ',' ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
                     	    {
                     	    otherlv_2=(Token)match(input,50,FOLLOW_3); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -8298,11 +8306,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      							newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess().getCommaKeyword_0_0_1_1_0());
                     	      						
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:2936:7: ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
-                    	    // InternalContentAssistFragmentTestLang.g:2937:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
+                    	    // InternalContentAssistFragmentTestLang.g:2941:7: ( (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter ) )
+                    	    // InternalContentAssistFragmentTestLang.g:2942:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:2937:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
-                    	    // InternalContentAssistFragmentTestLang.g:2938:9: lv_declaredFormalParameters_3_0= ruleJvmFormalParameter
+                    	    // InternalContentAssistFragmentTestLang.g:2942:8: (lv_declaredFormalParameters_3_0= ruleJvmFormalParameter )
+                    	    // InternalContentAssistFragmentTestLang.g:2943:9: lv_declaredFormalParameters_3_0= ruleJvmFormalParameter
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -8348,11 +8356,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2957:5: ( (lv_explicitSyntax_4_0= '|' ) )
-            // InternalContentAssistFragmentTestLang.g:2958:6: (lv_explicitSyntax_4_0= '|' )
+            // InternalContentAssistFragmentTestLang.g:2962:5: ( (lv_explicitSyntax_4_0= '|' ) )
+            // InternalContentAssistFragmentTestLang.g:2963:6: (lv_explicitSyntax_4_0= '|' )
             {
-            // InternalContentAssistFragmentTestLang.g:2958:6: (lv_explicitSyntax_4_0= '|' )
-            // InternalContentAssistFragmentTestLang.g:2959:7: lv_explicitSyntax_4_0= '|'
+            // InternalContentAssistFragmentTestLang.g:2963:6: (lv_explicitSyntax_4_0= '|' )
+            // InternalContentAssistFragmentTestLang.g:2964:7: lv_explicitSyntax_4_0= '|'
             {
             lv_explicitSyntax_4_0=(Token)match(input,58,FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8380,11 +8388,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:2973:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:2974:4: (lv_expression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:2978:3: ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:2979:4: (lv_expression_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:2974:4: (lv_expression_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:2975:5: lv_expression_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:2979:4: (lv_expression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:2980:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -8440,7 +8448,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXParenthesizedExpression"
-    // InternalContentAssistFragmentTestLang.g:2996:1: entryRuleXParenthesizedExpression returns [EObject current=null] : iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3001:1: entryRuleXParenthesizedExpression returns [EObject current=null] : iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF ;
     public final EObject entryRuleXParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8448,8 +8456,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:2996:65: (iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:2997:2: iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3001:65: (iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3002:2: iv_ruleXParenthesizedExpression= ruleXParenthesizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXParenthesizedExpressionRule()); 
@@ -8480,7 +8488,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXParenthesizedExpression"
-    // InternalContentAssistFragmentTestLang.g:3003:1: ruleXParenthesizedExpression returns [EObject current=null] : (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) ;
+    // InternalContentAssistFragmentTestLang.g:3008:1: ruleXParenthesizedExpression returns [EObject current=null] : (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) ;
     public final EObject ruleXParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8493,11 +8501,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3009:2: ( (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) )
-            // InternalContentAssistFragmentTestLang.g:3010:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
+            // InternalContentAssistFragmentTestLang.g:3014:2: ( (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' ) )
+            // InternalContentAssistFragmentTestLang.g:3015:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
             {
-            // InternalContentAssistFragmentTestLang.g:3010:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
-            // InternalContentAssistFragmentTestLang.g:3011:3: otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')'
+            // InternalContentAssistFragmentTestLang.g:3015:2: (otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')' )
+            // InternalContentAssistFragmentTestLang.g:3016:3: otherlv_0= '(' this_XExpression_1= ruleXExpression otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,51,FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8552,7 +8560,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXIfExpression"
-    // InternalContentAssistFragmentTestLang.g:3031:1: entryRuleXIfExpression returns [EObject current=null] : iv_ruleXIfExpression= ruleXIfExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3036:1: entryRuleXIfExpression returns [EObject current=null] : iv_ruleXIfExpression= ruleXIfExpression EOF ;
     public final EObject entryRuleXIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8560,8 +8568,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3031:54: (iv_ruleXIfExpression= ruleXIfExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3032:2: iv_ruleXIfExpression= ruleXIfExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3036:54: (iv_ruleXIfExpression= ruleXIfExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3037:2: iv_ruleXIfExpression= ruleXIfExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXIfExpressionRule()); 
@@ -8592,7 +8600,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXIfExpression"
-    // InternalContentAssistFragmentTestLang.g:3038:1: ruleXIfExpression returns [EObject current=null] : ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:3043:1: ruleXIfExpression returns [EObject current=null] : ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) ;
     public final EObject ruleXIfExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8611,14 +8619,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3044:2: ( ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:3045:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:3049:2: ( ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:3050:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:3045:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
-            // InternalContentAssistFragmentTestLang.g:3046:3: () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:3050:2: ( () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:3051:3: () otherlv_1= 'if' otherlv_2= '(' ( (lv_if_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_then_5_0= ruleXExpression ) ) ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:3046:3: ()
-            // InternalContentAssistFragmentTestLang.g:3047:4: 
+            // InternalContentAssistFragmentTestLang.g:3051:3: ()
+            // InternalContentAssistFragmentTestLang.g:3052:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8642,11 +8650,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXIfExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3061:3: ( (lv_if_3_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3062:4: (lv_if_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3066:3: ( (lv_if_3_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3067:4: (lv_if_3_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3062:4: (lv_if_3_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3063:5: lv_if_3_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3067:4: (lv_if_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3068:5: lv_if_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -8683,11 +8691,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_4, grammarAccess.getXIfExpressionAccess().getRightParenthesisKeyword_4());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3084:3: ( (lv_then_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3085:4: (lv_then_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3089:3: ( (lv_then_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3090:4: (lv_then_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3085:4: (lv_then_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3086:5: lv_then_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3090:4: (lv_then_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3091:5: lv_then_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -8718,7 +8726,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:3103:3: ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:3108:3: ( ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) ) )?
             int alt50=2;
             int LA50_0 = input.LA(1);
 
@@ -8731,10 +8739,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt50) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3104:4: ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3109:4: ( ( 'else' )=>otherlv_6= 'else' ) ( (lv_else_7_0= ruleXExpression ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3104:4: ( ( 'else' )=>otherlv_6= 'else' )
-                    // InternalContentAssistFragmentTestLang.g:3105:5: ( 'else' )=>otherlv_6= 'else'
+                    // InternalContentAssistFragmentTestLang.g:3109:4: ( ( 'else' )=>otherlv_6= 'else' )
+                    // InternalContentAssistFragmentTestLang.g:3110:5: ( 'else' )=>otherlv_6= 'else'
                     {
                     otherlv_6=(Token)match(input,61,FOLLOW_6); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8745,11 +8753,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:3111:4: ( (lv_else_7_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3112:5: (lv_else_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3116:4: ( (lv_else_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3117:5: (lv_else_7_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3112:5: (lv_else_7_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3113:6: lv_else_7_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3117:5: (lv_else_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3118:6: lv_else_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8811,7 +8819,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXSwitchExpression"
-    // InternalContentAssistFragmentTestLang.g:3135:1: entryRuleXSwitchExpression returns [EObject current=null] : iv_ruleXSwitchExpression= ruleXSwitchExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3140:1: entryRuleXSwitchExpression returns [EObject current=null] : iv_ruleXSwitchExpression= ruleXSwitchExpression EOF ;
     public final EObject entryRuleXSwitchExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8819,8 +8827,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3135:58: (iv_ruleXSwitchExpression= ruleXSwitchExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3136:2: iv_ruleXSwitchExpression= ruleXSwitchExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3140:58: (iv_ruleXSwitchExpression= ruleXSwitchExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3141:2: iv_ruleXSwitchExpression= ruleXSwitchExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSwitchExpressionRule()); 
@@ -8851,7 +8859,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXSwitchExpression"
-    // InternalContentAssistFragmentTestLang.g:3142:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
+    // InternalContentAssistFragmentTestLang.g:3147:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
     public final EObject ruleXSwitchExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8881,14 +8889,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3148:2: ( ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
-            // InternalContentAssistFragmentTestLang.g:3149:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // InternalContentAssistFragmentTestLang.g:3153:2: ( ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
+            // InternalContentAssistFragmentTestLang.g:3154:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
             {
-            // InternalContentAssistFragmentTestLang.g:3149:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
-            // InternalContentAssistFragmentTestLang.g:3150:3: () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
+            // InternalContentAssistFragmentTestLang.g:3154:2: ( () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // InternalContentAssistFragmentTestLang.g:3155:3: () otherlv_1= 'switch' ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
             {
-            // InternalContentAssistFragmentTestLang.g:3150:3: ()
-            // InternalContentAssistFragmentTestLang.g:3151:4: 
+            // InternalContentAssistFragmentTestLang.g:3155:3: ()
+            // InternalContentAssistFragmentTestLang.g:3156:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -8906,21 +8914,21 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXSwitchExpressionAccess().getSwitchKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3161:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3166:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )
             int alt52=2;
             alt52 = dfa52.predict(input);
             switch (alt52) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3162:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
+                    // InternalContentAssistFragmentTestLang.g:3167:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3162:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
-                    // InternalContentAssistFragmentTestLang.g:3163:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')'
+                    // InternalContentAssistFragmentTestLang.g:3167:4: ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' )
+                    // InternalContentAssistFragmentTestLang.g:3168:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')'
                     {
-                    // InternalContentAssistFragmentTestLang.g:3163:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-                    // InternalContentAssistFragmentTestLang.g:3164:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+                    // InternalContentAssistFragmentTestLang.g:3168:5: ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
+                    // InternalContentAssistFragmentTestLang.g:3169:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3174:6: (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-                    // InternalContentAssistFragmentTestLang.g:3175:7: otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
+                    // InternalContentAssistFragmentTestLang.g:3179:6: (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+                    // InternalContentAssistFragmentTestLang.g:3180:7: otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
                     {
                     otherlv_2=(Token)match(input,51,FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8928,11 +8936,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       							newLeafNode(otherlv_2, grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_0_0_0_0());
                       						
                     }
-                    // InternalContentAssistFragmentTestLang.g:3179:7: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-                    // InternalContentAssistFragmentTestLang.g:3180:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+                    // InternalContentAssistFragmentTestLang.g:3184:7: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
+                    // InternalContentAssistFragmentTestLang.g:3185:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3180:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-                    // InternalContentAssistFragmentTestLang.g:3181:9: lv_declaredParam_3_0= ruleJvmFormalParameter
+                    // InternalContentAssistFragmentTestLang.g:3185:8: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+                    // InternalContentAssistFragmentTestLang.g:3186:9: lv_declaredParam_3_0= ruleJvmFormalParameter
                     {
                     if ( state.backtracking==0 ) {
 
@@ -8975,11 +8983,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:3204:5: ( (lv_switch_5_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3205:6: (lv_switch_5_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3209:5: ( (lv_switch_5_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3210:6: (lv_switch_5_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3205:6: (lv_switch_5_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3206:7: lv_switch_5_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3210:6: (lv_switch_5_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3211:7: lv_switch_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9023,26 +9031,26 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:3229:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:3234:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3229:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
-                    // InternalContentAssistFragmentTestLang.g:3230:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3234:4: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:3235:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3230:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?
+                    // InternalContentAssistFragmentTestLang.g:3235:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?
                     int alt51=2;
                     alt51 = dfa51.predict(input);
                     switch (alt51) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:3231:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
+                            // InternalContentAssistFragmentTestLang.g:3236:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
                             {
-                            // InternalContentAssistFragmentTestLang.g:3240:6: ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
-                            // InternalContentAssistFragmentTestLang.g:3241:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':'
+                            // InternalContentAssistFragmentTestLang.g:3245:6: ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' )
+                            // InternalContentAssistFragmentTestLang.g:3246:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':'
                             {
-                            // InternalContentAssistFragmentTestLang.g:3241:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) )
-                            // InternalContentAssistFragmentTestLang.g:3242:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
+                            // InternalContentAssistFragmentTestLang.g:3246:7: ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) )
+                            // InternalContentAssistFragmentTestLang.g:3247:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
                             {
-                            // InternalContentAssistFragmentTestLang.g:3242:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
-                            // InternalContentAssistFragmentTestLang.g:3243:9: lv_declaredParam_7_0= ruleJvmFormalParameter
+                            // InternalContentAssistFragmentTestLang.g:3247:8: (lv_declaredParam_7_0= ruleJvmFormalParameter )
+                            // InternalContentAssistFragmentTestLang.g:3248:9: lv_declaredParam_7_0= ruleJvmFormalParameter
                             {
                             if ( state.backtracking==0 ) {
 
@@ -9088,11 +9096,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:3266:5: ( (lv_switch_9_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3267:6: (lv_switch_9_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3271:5: ( (lv_switch_9_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3272:6: (lv_switch_9_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3267:6: (lv_switch_9_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3268:7: lv_switch_9_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3272:6: (lv_switch_9_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3273:7: lv_switch_9_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9138,7 +9146,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess().getLeftCurlyBracketKeyword_3());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3291:3: ( (lv_cases_11_0= ruleXCasePart ) )*
+            // InternalContentAssistFragmentTestLang.g:3296:3: ( (lv_cases_11_0= ruleXCasePart ) )*
             loop53:
             do {
                 int alt53=2;
@@ -9151,10 +9159,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt53) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:3292:4: (lv_cases_11_0= ruleXCasePart )
+            	    // InternalContentAssistFragmentTestLang.g:3297:4: (lv_cases_11_0= ruleXCasePart )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:3292:4: (lv_cases_11_0= ruleXCasePart )
-            	    // InternalContentAssistFragmentTestLang.g:3293:5: lv_cases_11_0= ruleXCasePart
+            	    // InternalContentAssistFragmentTestLang.g:3297:4: (lv_cases_11_0= ruleXCasePart )
+            	    // InternalContentAssistFragmentTestLang.g:3298:5: lv_cases_11_0= ruleXCasePart
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -9191,7 +9199,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                 }
             } while (true);
 
-            // InternalContentAssistFragmentTestLang.g:3310:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:3315:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
             int alt54=2;
             int LA54_0 = input.LA(1);
 
@@ -9200,7 +9208,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt54) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3311:4: otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3316:4: otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) )
                     {
                     otherlv_12=(Token)match(input,64,FOLLOW_49); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9214,11 +9222,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_13, grammarAccess.getXSwitchExpressionAccess().getColonKeyword_5_1());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:3319:4: ( (lv_default_14_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3320:5: (lv_default_14_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3324:4: ( (lv_default_14_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3325:5: (lv_default_14_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3320:5: (lv_default_14_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3321:6: lv_default_14_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3325:5: (lv_default_14_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3326:6: lv_default_14_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9286,7 +9294,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXCasePart"
-    // InternalContentAssistFragmentTestLang.g:3347:1: entryRuleXCasePart returns [EObject current=null] : iv_ruleXCasePart= ruleXCasePart EOF ;
+    // InternalContentAssistFragmentTestLang.g:3352:1: entryRuleXCasePart returns [EObject current=null] : iv_ruleXCasePart= ruleXCasePart EOF ;
     public final EObject entryRuleXCasePart() throws RecognitionException {
         EObject current = null;
 
@@ -9294,8 +9302,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3347:50: (iv_ruleXCasePart= ruleXCasePart EOF )
-            // InternalContentAssistFragmentTestLang.g:3348:2: iv_ruleXCasePart= ruleXCasePart EOF
+            // InternalContentAssistFragmentTestLang.g:3352:50: (iv_ruleXCasePart= ruleXCasePart EOF )
+            // InternalContentAssistFragmentTestLang.g:3353:2: iv_ruleXCasePart= ruleXCasePart EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCasePartRule()); 
@@ -9326,7 +9334,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXCasePart"
-    // InternalContentAssistFragmentTestLang.g:3354:1: ruleXCasePart returns [EObject current=null] : ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:3359:1: ruleXCasePart returns [EObject current=null] : ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) ;
     public final EObject ruleXCasePart() throws RecognitionException {
         EObject current = null;
 
@@ -9344,14 +9352,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3360:2: ( ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:3361:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3365:2: ( ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3366:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3361:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:3362:3: () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
+            // InternalContentAssistFragmentTestLang.g:3366:2: ( () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3367:3: () ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )? (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )? ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3362:3: ()
-            // InternalContentAssistFragmentTestLang.g:3363:4: 
+            // InternalContentAssistFragmentTestLang.g:3367:3: ()
+            // InternalContentAssistFragmentTestLang.g:3368:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9363,7 +9371,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:3369:3: ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )?
+            // InternalContentAssistFragmentTestLang.g:3374:3: ( (lv_typeGuard_1_0= ruleJvmTypeReference ) )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -9372,10 +9380,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt55) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3370:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:3375:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3370:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:3371:5: lv_typeGuard_1_0= ruleJvmTypeReference
+                    // InternalContentAssistFragmentTestLang.g:3375:4: (lv_typeGuard_1_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:3376:5: lv_typeGuard_1_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9409,7 +9417,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:3388:3: (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )?
+            // InternalContentAssistFragmentTestLang.g:3393:3: (otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) ) )?
             int alt56=2;
             int LA56_0 = input.LA(1);
 
@@ -9418,7 +9426,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt56) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3389:4: otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3394:4: otherlv_2= 'case' ( (lv_case_3_0= ruleXExpression ) )
                     {
                     otherlv_2=(Token)match(input,65,FOLLOW_6); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9426,11 +9434,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_2, grammarAccess.getXCasePartAccess().getCaseKeyword_2_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:3393:4: ( (lv_case_3_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3394:5: (lv_case_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3398:4: ( (lv_case_3_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3399:5: (lv_case_3_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3394:5: (lv_case_3_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3395:6: lv_case_3_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3399:5: (lv_case_3_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3400:6: lv_case_3_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9467,7 +9475,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:3413:3: ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
+            // InternalContentAssistFragmentTestLang.g:3418:3: ( (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) ) | ( (lv_fallThrough_6_0= ',' ) ) )
             int alt57=2;
             int LA57_0 = input.LA(1);
 
@@ -9486,10 +9494,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt57) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3414:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:3419:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3414:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
-                    // InternalContentAssistFragmentTestLang.g:3415:5: otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3419:4: (otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:3420:5: otherlv_4= ':' ( (lv_then_5_0= ruleXExpression ) )
                     {
                     otherlv_4=(Token)match(input,63,FOLLOW_6); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9497,11 +9505,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       					newLeafNode(otherlv_4, grammarAccess.getXCasePartAccess().getColonKeyword_3_0_0());
                       				
                     }
-                    // InternalContentAssistFragmentTestLang.g:3419:5: ( (lv_then_5_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3420:6: (lv_then_5_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3424:5: ( (lv_then_5_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3425:6: (lv_then_5_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3420:6: (lv_then_5_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3421:7: lv_then_5_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3425:6: (lv_then_5_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3426:7: lv_then_5_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9539,13 +9547,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:3440:4: ( (lv_fallThrough_6_0= ',' ) )
+                    // InternalContentAssistFragmentTestLang.g:3445:4: ( (lv_fallThrough_6_0= ',' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3440:4: ( (lv_fallThrough_6_0= ',' ) )
-                    // InternalContentAssistFragmentTestLang.g:3441:5: (lv_fallThrough_6_0= ',' )
+                    // InternalContentAssistFragmentTestLang.g:3445:4: ( (lv_fallThrough_6_0= ',' ) )
+                    // InternalContentAssistFragmentTestLang.g:3446:5: (lv_fallThrough_6_0= ',' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3441:5: (lv_fallThrough_6_0= ',' )
-                    // InternalContentAssistFragmentTestLang.g:3442:6: lv_fallThrough_6_0= ','
+                    // InternalContentAssistFragmentTestLang.g:3446:5: (lv_fallThrough_6_0= ',' )
+                    // InternalContentAssistFragmentTestLang.g:3447:6: lv_fallThrough_6_0= ','
                     {
                     lv_fallThrough_6_0=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9598,7 +9606,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXForLoopExpression"
-    // InternalContentAssistFragmentTestLang.g:3459:1: entryRuleXForLoopExpression returns [EObject current=null] : iv_ruleXForLoopExpression= ruleXForLoopExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3464:1: entryRuleXForLoopExpression returns [EObject current=null] : iv_ruleXForLoopExpression= ruleXForLoopExpression EOF ;
     public final EObject entryRuleXForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9606,8 +9614,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3459:59: (iv_ruleXForLoopExpression= ruleXForLoopExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3460:2: iv_ruleXForLoopExpression= ruleXForLoopExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3464:59: (iv_ruleXForLoopExpression= ruleXForLoopExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3465:2: iv_ruleXForLoopExpression= ruleXForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXForLoopExpressionRule()); 
@@ -9638,7 +9646,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXForLoopExpression"
-    // InternalContentAssistFragmentTestLang.g:3466:1: ruleXForLoopExpression returns [EObject current=null] : ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:3471:1: ruleXForLoopExpression returns [EObject current=null] : ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) ;
     public final EObject ruleXForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9657,20 +9665,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3472:2: ( ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:3473:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3477:2: ( ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3478:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3473:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:3474:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3478:2: ( ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3479:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_forExpression_5_0= ruleXExpression ) ) otherlv_6= ')' ( (lv_eachExpression_7_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3474:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
-            // InternalContentAssistFragmentTestLang.g:3475:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+            // InternalContentAssistFragmentTestLang.g:3479:3: ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) )
+            // InternalContentAssistFragmentTestLang.g:3480:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
             {
-            // InternalContentAssistFragmentTestLang.g:3488:4: ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
-            // InternalContentAssistFragmentTestLang.g:3489:5: () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
+            // InternalContentAssistFragmentTestLang.g:3493:4: ( () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' )
+            // InternalContentAssistFragmentTestLang.g:3494:5: () otherlv_1= 'for' otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':'
             {
-            // InternalContentAssistFragmentTestLang.g:3489:5: ()
-            // InternalContentAssistFragmentTestLang.g:3490:6: 
+            // InternalContentAssistFragmentTestLang.g:3494:5: ()
+            // InternalContentAssistFragmentTestLang.g:3495:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9694,11 +9702,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               					newLeafNode(otherlv_2, grammarAccess.getXForLoopExpressionAccess().getLeftParenthesisKeyword_0_0_2());
               				
             }
-            // InternalContentAssistFragmentTestLang.g:3504:5: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
-            // InternalContentAssistFragmentTestLang.g:3505:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+            // InternalContentAssistFragmentTestLang.g:3509:5: ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) )
+            // InternalContentAssistFragmentTestLang.g:3510:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
             {
-            // InternalContentAssistFragmentTestLang.g:3505:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
-            // InternalContentAssistFragmentTestLang.g:3506:7: lv_declaredParam_3_0= ruleJvmFormalParameter
+            // InternalContentAssistFragmentTestLang.g:3510:6: (lv_declaredParam_3_0= ruleJvmFormalParameter )
+            // InternalContentAssistFragmentTestLang.g:3511:7: lv_declaredParam_3_0= ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -9741,11 +9749,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:3529:3: ( (lv_forExpression_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3530:4: (lv_forExpression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3534:3: ( (lv_forExpression_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3535:4: (lv_forExpression_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3530:4: (lv_forExpression_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3531:5: lv_forExpression_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3535:4: (lv_forExpression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3536:5: lv_forExpression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -9782,11 +9790,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_6, grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3552:3: ( (lv_eachExpression_7_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3553:4: (lv_eachExpression_7_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3557:3: ( (lv_eachExpression_7_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3558:4: (lv_eachExpression_7_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3553:4: (lv_eachExpression_7_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3554:5: lv_eachExpression_7_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3558:4: (lv_eachExpression_7_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3559:5: lv_eachExpression_7_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -9842,7 +9850,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXBasicForLoopExpression"
-    // InternalContentAssistFragmentTestLang.g:3575:1: entryRuleXBasicForLoopExpression returns [EObject current=null] : iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3580:1: entryRuleXBasicForLoopExpression returns [EObject current=null] : iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF ;
     public final EObject entryRuleXBasicForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9850,8 +9858,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3575:64: (iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3576:2: iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3580:64: (iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3581:2: iv_ruleXBasicForLoopExpression= ruleXBasicForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBasicForLoopExpressionRule()); 
@@ -9882,7 +9890,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXBasicForLoopExpression"
-    // InternalContentAssistFragmentTestLang.g:3582:1: ruleXBasicForLoopExpression returns [EObject current=null] : ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:3587:1: ruleXBasicForLoopExpression returns [EObject current=null] : ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) ;
     public final EObject ruleXBasicForLoopExpression() throws RecognitionException {
         EObject current = null;
 
@@ -9910,14 +9918,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3588:2: ( ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:3589:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3593:2: ( ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3594:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3589:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:3590:3: () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3594:2: ( () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3595:3: () otherlv_1= 'for' otherlv_2= '(' ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )? otherlv_6= ';' ( (lv_expression_7_0= ruleXExpression ) )? otherlv_8= ';' ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )? otherlv_12= ')' ( (lv_eachExpression_13_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3590:3: ()
-            // InternalContentAssistFragmentTestLang.g:3591:4: 
+            // InternalContentAssistFragmentTestLang.g:3595:3: ()
+            // InternalContentAssistFragmentTestLang.g:3596:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -9941,7 +9949,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXBasicForLoopExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3605:3: ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )?
+            // InternalContentAssistFragmentTestLang.g:3610:3: ( ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )* )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -9950,13 +9958,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt59) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3606:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:3611:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:3606:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) )
-                    // InternalContentAssistFragmentTestLang.g:3607:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
+                    // InternalContentAssistFragmentTestLang.g:3611:4: ( (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration ) )
+                    // InternalContentAssistFragmentTestLang.g:3612:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3607:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
-                    // InternalContentAssistFragmentTestLang.g:3608:6: lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration
+                    // InternalContentAssistFragmentTestLang.g:3612:5: (lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration )
+                    // InternalContentAssistFragmentTestLang.g:3613:6: lv_initExpressions_3_0= ruleXExpressionOrVarDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -9987,7 +9995,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:3625:4: (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:3630:4: (otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) ) )*
                     loop58:
                     do {
                         int alt58=2;
@@ -10000,7 +10008,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt58) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:3626:5: otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
+                    	    // InternalContentAssistFragmentTestLang.g:3631:5: otherlv_4= ',' ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
                     	    {
                     	    otherlv_4=(Token)match(input,50,FOLLOW_56); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -10008,11 +10016,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_4, grammarAccess.getXBasicForLoopExpressionAccess().getCommaKeyword_3_1_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:3630:5: ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
-                    	    // InternalContentAssistFragmentTestLang.g:3631:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
+                    	    // InternalContentAssistFragmentTestLang.g:3635:5: ( (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration ) )
+                    	    // InternalContentAssistFragmentTestLang.g:3636:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:3631:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
-                    	    // InternalContentAssistFragmentTestLang.g:3632:7: lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration
+                    	    // InternalContentAssistFragmentTestLang.g:3636:6: (lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration )
+                    	    // InternalContentAssistFragmentTestLang.g:3637:7: lv_initExpressions_5_0= ruleXExpressionOrVarDeclaration
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -10064,7 +10072,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_6, grammarAccess.getXBasicForLoopExpressionAccess().getSemicolonKeyword_4());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3655:3: ( (lv_expression_7_0= ruleXExpression ) )?
+            // InternalContentAssistFragmentTestLang.g:3660:3: ( (lv_expression_7_0= ruleXExpression ) )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -10073,10 +10081,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt60) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3656:4: (lv_expression_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3661:4: (lv_expression_7_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3656:4: (lv_expression_7_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3657:5: lv_expression_7_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3661:4: (lv_expression_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3662:5: lv_expression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10116,7 +10124,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_8, grammarAccess.getXBasicForLoopExpressionAccess().getSemicolonKeyword_6());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3678:3: ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )?
+            // InternalContentAssistFragmentTestLang.g:3683:3: ( ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )* )?
             int alt62=2;
             int LA62_0 = input.LA(1);
 
@@ -10125,13 +10133,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt62) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3679:4: ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:3684:4: ( (lv_updateExpressions_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:3679:4: ( (lv_updateExpressions_9_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:3680:5: (lv_updateExpressions_9_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3684:4: ( (lv_updateExpressions_9_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:3685:5: (lv_updateExpressions_9_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:3680:5: (lv_updateExpressions_9_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:3681:6: lv_updateExpressions_9_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3685:5: (lv_updateExpressions_9_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:3686:6: lv_updateExpressions_9_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10162,7 +10170,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:3698:4: (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:3703:4: (otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) ) )*
                     loop61:
                     do {
                         int alt61=2;
@@ -10175,7 +10183,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt61) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:3699:5: otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:3704:5: otherlv_10= ',' ( (lv_updateExpressions_11_0= ruleXExpression ) )
                     	    {
                     	    otherlv_10=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -10183,11 +10191,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_10, grammarAccess.getXBasicForLoopExpressionAccess().getCommaKeyword_7_1_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:3703:5: ( (lv_updateExpressions_11_0= ruleXExpression ) )
-                    	    // InternalContentAssistFragmentTestLang.g:3704:6: (lv_updateExpressions_11_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:3708:5: ( (lv_updateExpressions_11_0= ruleXExpression ) )
+                    	    // InternalContentAssistFragmentTestLang.g:3709:6: (lv_updateExpressions_11_0= ruleXExpression )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:3704:6: (lv_updateExpressions_11_0= ruleXExpression )
-                    	    // InternalContentAssistFragmentTestLang.g:3705:7: lv_updateExpressions_11_0= ruleXExpression
+                    	    // InternalContentAssistFragmentTestLang.g:3709:6: (lv_updateExpressions_11_0= ruleXExpression )
+                    	    // InternalContentAssistFragmentTestLang.g:3710:7: lv_updateExpressions_11_0= ruleXExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -10239,11 +10247,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_12, grammarAccess.getXBasicForLoopExpressionAccess().getRightParenthesisKeyword_8());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3728:3: ( (lv_eachExpression_13_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3729:4: (lv_eachExpression_13_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3733:3: ( (lv_eachExpression_13_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3734:4: (lv_eachExpression_13_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3729:4: (lv_eachExpression_13_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3730:5: lv_eachExpression_13_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3734:4: (lv_eachExpression_13_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3735:5: lv_eachExpression_13_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10299,7 +10307,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXWhileExpression"
-    // InternalContentAssistFragmentTestLang.g:3751:1: entryRuleXWhileExpression returns [EObject current=null] : iv_ruleXWhileExpression= ruleXWhileExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3756:1: entryRuleXWhileExpression returns [EObject current=null] : iv_ruleXWhileExpression= ruleXWhileExpression EOF ;
     public final EObject entryRuleXWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10307,8 +10315,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3751:57: (iv_ruleXWhileExpression= ruleXWhileExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3752:2: iv_ruleXWhileExpression= ruleXWhileExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3756:57: (iv_ruleXWhileExpression= ruleXWhileExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3757:2: iv_ruleXWhileExpression= ruleXWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXWhileExpressionRule()); 
@@ -10339,7 +10347,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXWhileExpression"
-    // InternalContentAssistFragmentTestLang.g:3758:1: ruleXWhileExpression returns [EObject current=null] : ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:3763:1: ruleXWhileExpression returns [EObject current=null] : ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10355,14 +10363,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3764:2: ( ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:3765:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3769:2: ( ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:3770:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3765:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:3766:3: () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3770:2: ( () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:3771:3: () otherlv_1= 'while' otherlv_2= '(' ( (lv_predicate_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_body_5_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:3766:3: ()
-            // InternalContentAssistFragmentTestLang.g:3767:4: 
+            // InternalContentAssistFragmentTestLang.g:3771:3: ()
+            // InternalContentAssistFragmentTestLang.g:3772:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10386,11 +10394,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXWhileExpressionAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3781:3: ( (lv_predicate_3_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3782:4: (lv_predicate_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3786:3: ( (lv_predicate_3_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3787:4: (lv_predicate_3_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3782:4: (lv_predicate_3_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3783:5: lv_predicate_3_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3787:4: (lv_predicate_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3788:5: lv_predicate_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10427,11 +10435,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_4, grammarAccess.getXWhileExpressionAccess().getRightParenthesisKeyword_4());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3804:3: ( (lv_body_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3805:4: (lv_body_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3809:3: ( (lv_body_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3810:4: (lv_body_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3805:4: (lv_body_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3806:5: lv_body_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3810:4: (lv_body_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3811:5: lv_body_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10487,7 +10495,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXDoWhileExpression"
-    // InternalContentAssistFragmentTestLang.g:3827:1: entryRuleXDoWhileExpression returns [EObject current=null] : iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3832:1: entryRuleXDoWhileExpression returns [EObject current=null] : iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF ;
     public final EObject entryRuleXDoWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10495,8 +10503,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3827:59: (iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3828:2: iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3832:59: (iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3833:2: iv_ruleXDoWhileExpression= ruleXDoWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXDoWhileExpressionRule()); 
@@ -10527,7 +10535,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXDoWhileExpression"
-    // InternalContentAssistFragmentTestLang.g:3834:1: ruleXDoWhileExpression returns [EObject current=null] : ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) ;
+    // InternalContentAssistFragmentTestLang.g:3839:1: ruleXDoWhileExpression returns [EObject current=null] : ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) ;
     public final EObject ruleXDoWhileExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10544,14 +10552,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3840:2: ( ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) )
-            // InternalContentAssistFragmentTestLang.g:3841:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
+            // InternalContentAssistFragmentTestLang.g:3845:2: ( ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' ) )
+            // InternalContentAssistFragmentTestLang.g:3846:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
             {
-            // InternalContentAssistFragmentTestLang.g:3841:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
-            // InternalContentAssistFragmentTestLang.g:3842:3: () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')'
+            // InternalContentAssistFragmentTestLang.g:3846:2: ( () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')' )
+            // InternalContentAssistFragmentTestLang.g:3847:3: () otherlv_1= 'do' ( (lv_body_2_0= ruleXExpression ) ) otherlv_3= 'while' otherlv_4= '(' ( (lv_predicate_5_0= ruleXExpression ) ) otherlv_6= ')'
             {
-            // InternalContentAssistFragmentTestLang.g:3842:3: ()
-            // InternalContentAssistFragmentTestLang.g:3843:4: 
+            // InternalContentAssistFragmentTestLang.g:3847:3: ()
+            // InternalContentAssistFragmentTestLang.g:3848:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10569,11 +10577,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXDoWhileExpressionAccess().getDoKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3853:3: ( (lv_body_2_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3854:4: (lv_body_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3858:3: ( (lv_body_2_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3859:4: (lv_body_2_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3854:4: (lv_body_2_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3855:5: lv_body_2_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3859:4: (lv_body_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3860:5: lv_body_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10616,11 +10624,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_4, grammarAccess.getXDoWhileExpressionAccess().getLeftParenthesisKeyword_4());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3880:3: ( (lv_predicate_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3881:4: (lv_predicate_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3885:3: ( (lv_predicate_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3886:4: (lv_predicate_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3881:4: (lv_predicate_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:3882:5: lv_predicate_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:3886:4: (lv_predicate_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3887:5: lv_predicate_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -10682,7 +10690,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXBlockExpression"
-    // InternalContentAssistFragmentTestLang.g:3907:1: entryRuleXBlockExpression returns [EObject current=null] : iv_ruleXBlockExpression= ruleXBlockExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:3912:1: entryRuleXBlockExpression returns [EObject current=null] : iv_ruleXBlockExpression= ruleXBlockExpression EOF ;
     public final EObject entryRuleXBlockExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10690,8 +10698,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3907:57: (iv_ruleXBlockExpression= ruleXBlockExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:3908:2: iv_ruleXBlockExpression= ruleXBlockExpression EOF
+            // InternalContentAssistFragmentTestLang.g:3912:57: (iv_ruleXBlockExpression= ruleXBlockExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:3913:2: iv_ruleXBlockExpression= ruleXBlockExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBlockExpressionRule()); 
@@ -10722,7 +10730,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXBlockExpression"
-    // InternalContentAssistFragmentTestLang.g:3914:1: ruleXBlockExpression returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) ;
+    // InternalContentAssistFragmentTestLang.g:3919:1: ruleXBlockExpression returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) ;
     public final EObject ruleXBlockExpression() throws RecognitionException {
         EObject current = null;
 
@@ -10736,14 +10744,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3920:2: ( ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) )
-            // InternalContentAssistFragmentTestLang.g:3921:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
+            // InternalContentAssistFragmentTestLang.g:3925:2: ( ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' ) )
+            // InternalContentAssistFragmentTestLang.g:3926:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
             {
-            // InternalContentAssistFragmentTestLang.g:3921:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
-            // InternalContentAssistFragmentTestLang.g:3922:3: () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}'
+            // InternalContentAssistFragmentTestLang.g:3926:2: ( () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}' )
+            // InternalContentAssistFragmentTestLang.g:3927:3: () otherlv_1= '{' ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )* otherlv_4= '}'
             {
-            // InternalContentAssistFragmentTestLang.g:3922:3: ()
-            // InternalContentAssistFragmentTestLang.g:3923:4: 
+            // InternalContentAssistFragmentTestLang.g:3927:3: ()
+            // InternalContentAssistFragmentTestLang.g:3928:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -10761,7 +10769,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:3933:3: ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )*
+            // InternalContentAssistFragmentTestLang.g:3938:3: ( ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )? )*
             loop64:
             do {
                 int alt64=2;
@@ -10774,13 +10782,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt64) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:3934:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )?
+            	    // InternalContentAssistFragmentTestLang.g:3939:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) ) (otherlv_3= ';' )?
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:3934:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) )
-            	    // InternalContentAssistFragmentTestLang.g:3935:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalContentAssistFragmentTestLang.g:3939:4: ( (lv_expressions_2_0= ruleXExpressionOrVarDeclaration ) )
+            	    // InternalContentAssistFragmentTestLang.g:3940:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:3935:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
-            	    // InternalContentAssistFragmentTestLang.g:3936:6: lv_expressions_2_0= ruleXExpressionOrVarDeclaration
+            	    // InternalContentAssistFragmentTestLang.g:3940:5: (lv_expressions_2_0= ruleXExpressionOrVarDeclaration )
+            	    // InternalContentAssistFragmentTestLang.g:3941:6: lv_expressions_2_0= ruleXExpressionOrVarDeclaration
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -10811,7 +10819,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             	    }
 
-            	    // InternalContentAssistFragmentTestLang.g:3953:4: (otherlv_3= ';' )?
+            	    // InternalContentAssistFragmentTestLang.g:3958:4: (otherlv_3= ';' )?
             	    int alt63=2;
             	    int LA63_0 = input.LA(1);
 
@@ -10820,7 +10828,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             	    }
             	    switch (alt63) {
             	        case 1 :
-            	            // InternalContentAssistFragmentTestLang.g:3954:5: otherlv_3= ';'
+            	            // InternalContentAssistFragmentTestLang.g:3959:5: otherlv_3= ';'
             	            {
             	            otherlv_3=(Token)match(input,59,FOLLOW_61); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
@@ -10874,7 +10882,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXExpressionOrVarDeclaration"
-    // InternalContentAssistFragmentTestLang.g:3968:1: entryRuleXExpressionOrVarDeclaration returns [EObject current=null] : iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF ;
+    // InternalContentAssistFragmentTestLang.g:3973:1: entryRuleXExpressionOrVarDeclaration returns [EObject current=null] : iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF ;
     public final EObject entryRuleXExpressionOrVarDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -10882,8 +10890,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3968:68: (iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF )
-            // InternalContentAssistFragmentTestLang.g:3969:2: iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF
+            // InternalContentAssistFragmentTestLang.g:3973:68: (iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF )
+            // InternalContentAssistFragmentTestLang.g:3974:2: iv_ruleXExpressionOrVarDeclaration= ruleXExpressionOrVarDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExpressionOrVarDeclarationRule()); 
@@ -10914,7 +10922,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXExpressionOrVarDeclaration"
-    // InternalContentAssistFragmentTestLang.g:3975:1: ruleXExpressionOrVarDeclaration returns [EObject current=null] : (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) ;
+    // InternalContentAssistFragmentTestLang.g:3980:1: ruleXExpressionOrVarDeclaration returns [EObject current=null] : (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) ;
     public final EObject ruleXExpressionOrVarDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -10927,10 +10935,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:3981:2: ( (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:3982:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3986:2: ( (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:3987:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:3982:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:3987:2: (this_XVariableDeclaration_0= ruleXVariableDeclaration | this_XExpression_1= ruleXExpression )
             int alt65=2;
             int LA65_0 = input.LA(1);
 
@@ -10949,7 +10957,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt65) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:3983:3: this_XVariableDeclaration_0= ruleXVariableDeclaration
+                    // InternalContentAssistFragmentTestLang.g:3988:3: this_XVariableDeclaration_0= ruleXVariableDeclaration
                     {
                     if ( state.backtracking==0 ) {
 
@@ -10971,7 +10979,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:3992:3: this_XExpression_1= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:3997:3: this_XExpression_1= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11017,7 +11025,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmFormalParameter"
-    // InternalContentAssistFragmentTestLang.g:4004:1: entryRuleJvmFormalParameter returns [EObject current=null] : iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF ;
+    // InternalContentAssistFragmentTestLang.g:4009:1: entryRuleJvmFormalParameter returns [EObject current=null] : iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF ;
     public final EObject entryRuleJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -11025,8 +11033,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4004:59: (iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF )
-            // InternalContentAssistFragmentTestLang.g:4005:2: iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF
+            // InternalContentAssistFragmentTestLang.g:4009:59: (iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF )
+            // InternalContentAssistFragmentTestLang.g:4010:2: iv_ruleJvmFormalParameter= ruleJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmFormalParameterRule()); 
@@ -11057,7 +11065,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmFormalParameter"
-    // InternalContentAssistFragmentTestLang.g:4011:1: ruleJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4016:1: ruleJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) ;
     public final EObject ruleJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -11070,13 +11078,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4017:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4018:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalContentAssistFragmentTestLang.g:4022:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4023:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4018:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
-            // InternalContentAssistFragmentTestLang.g:4019:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) )
+            // InternalContentAssistFragmentTestLang.g:4023:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalContentAssistFragmentTestLang.g:4024:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )? ( (lv_name_1_0= ruleValidID ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4019:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )?
+            // InternalContentAssistFragmentTestLang.g:4024:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )?
             int alt66=2;
             int LA66_0 = input.LA(1);
 
@@ -11092,10 +11100,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt66) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4020:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4025:4: (lv_parameterType_0_0= ruleJvmTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4020:4: (lv_parameterType_0_0= ruleJvmTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:4021:5: lv_parameterType_0_0= ruleJvmTypeReference
+                    // InternalContentAssistFragmentTestLang.g:4025:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4026:5: lv_parameterType_0_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11129,11 +11137,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4038:3: ( (lv_name_1_0= ruleValidID ) )
-            // InternalContentAssistFragmentTestLang.g:4039:4: (lv_name_1_0= ruleValidID )
+            // InternalContentAssistFragmentTestLang.g:4043:3: ( (lv_name_1_0= ruleValidID ) )
+            // InternalContentAssistFragmentTestLang.g:4044:4: (lv_name_1_0= ruleValidID )
             {
-            // InternalContentAssistFragmentTestLang.g:4039:4: (lv_name_1_0= ruleValidID )
-            // InternalContentAssistFragmentTestLang.g:4040:5: lv_name_1_0= ruleValidID
+            // InternalContentAssistFragmentTestLang.g:4044:4: (lv_name_1_0= ruleValidID )
+            // InternalContentAssistFragmentTestLang.g:4045:5: lv_name_1_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -11189,7 +11197,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleFullJvmFormalParameter"
-    // InternalContentAssistFragmentTestLang.g:4061:1: entryRuleFullJvmFormalParameter returns [EObject current=null] : iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF ;
+    // InternalContentAssistFragmentTestLang.g:4066:1: entryRuleFullJvmFormalParameter returns [EObject current=null] : iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF ;
     public final EObject entryRuleFullJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -11197,8 +11205,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4061:63: (iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF )
-            // InternalContentAssistFragmentTestLang.g:4062:2: iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF
+            // InternalContentAssistFragmentTestLang.g:4066:63: (iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF )
+            // InternalContentAssistFragmentTestLang.g:4067:2: iv_ruleFullJvmFormalParameter= ruleFullJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFullJvmFormalParameterRule()); 
@@ -11229,7 +11237,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleFullJvmFormalParameter"
-    // InternalContentAssistFragmentTestLang.g:4068:1: ruleFullJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4073:1: ruleFullJvmFormalParameter returns [EObject current=null] : ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) ;
     public final EObject ruleFullJvmFormalParameter() throws RecognitionException {
         EObject current = null;
 
@@ -11242,17 +11250,17 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4074:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4075:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalContentAssistFragmentTestLang.g:4079:2: ( ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4080:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4075:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
-            // InternalContentAssistFragmentTestLang.g:4076:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) )
+            // InternalContentAssistFragmentTestLang.g:4080:2: ( ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) ) )
+            // InternalContentAssistFragmentTestLang.g:4081:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) ) ( (lv_name_1_0= ruleValidID ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4076:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:4077:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:4081:3: ( (lv_parameterType_0_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:4082:4: (lv_parameterType_0_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:4077:4: (lv_parameterType_0_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:4078:5: lv_parameterType_0_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:4082:4: (lv_parameterType_0_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:4083:5: lv_parameterType_0_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -11283,11 +11291,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4095:3: ( (lv_name_1_0= ruleValidID ) )
-            // InternalContentAssistFragmentTestLang.g:4096:4: (lv_name_1_0= ruleValidID )
+            // InternalContentAssistFragmentTestLang.g:4100:3: ( (lv_name_1_0= ruleValidID ) )
+            // InternalContentAssistFragmentTestLang.g:4101:4: (lv_name_1_0= ruleValidID )
             {
-            // InternalContentAssistFragmentTestLang.g:4096:4: (lv_name_1_0= ruleValidID )
-            // InternalContentAssistFragmentTestLang.g:4097:5: lv_name_1_0= ruleValidID
+            // InternalContentAssistFragmentTestLang.g:4101:4: (lv_name_1_0= ruleValidID )
+            // InternalContentAssistFragmentTestLang.g:4102:5: lv_name_1_0= ruleValidID
             {
             if ( state.backtracking==0 ) {
 
@@ -11343,7 +11351,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXFeatureCall"
-    // InternalContentAssistFragmentTestLang.g:4118:1: entryRuleXFeatureCall returns [EObject current=null] : iv_ruleXFeatureCall= ruleXFeatureCall EOF ;
+    // InternalContentAssistFragmentTestLang.g:4123:1: entryRuleXFeatureCall returns [EObject current=null] : iv_ruleXFeatureCall= ruleXFeatureCall EOF ;
     public final EObject entryRuleXFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -11351,8 +11359,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4118:53: (iv_ruleXFeatureCall= ruleXFeatureCall EOF )
-            // InternalContentAssistFragmentTestLang.g:4119:2: iv_ruleXFeatureCall= ruleXFeatureCall EOF
+            // InternalContentAssistFragmentTestLang.g:4123:53: (iv_ruleXFeatureCall= ruleXFeatureCall EOF )
+            // InternalContentAssistFragmentTestLang.g:4124:2: iv_ruleXFeatureCall= ruleXFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFeatureCallRule()); 
@@ -11383,7 +11391,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXFeatureCall"
-    // InternalContentAssistFragmentTestLang.g:4125:1: ruleXFeatureCall returns [EObject current=null] : ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:4130:1: ruleXFeatureCall returns [EObject current=null] : ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) ;
     public final EObject ruleXFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -11410,14 +11418,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4131:2: ( ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:4132:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
+            // InternalContentAssistFragmentTestLang.g:4136:2: ( ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:4137:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:4132:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
-            // InternalContentAssistFragmentTestLang.g:4133:3: () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
+            // InternalContentAssistFragmentTestLang.g:4137:2: ( () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )? )
+            // InternalContentAssistFragmentTestLang.g:4138:3: () (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )? ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:4133:3: ()
-            // InternalContentAssistFragmentTestLang.g:4134:4: 
+            // InternalContentAssistFragmentTestLang.g:4138:3: ()
+            // InternalContentAssistFragmentTestLang.g:4139:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -11429,7 +11437,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4140:3: (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
+            // InternalContentAssistFragmentTestLang.g:4145:3: (otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?
             int alt68=2;
             int LA68_0 = input.LA(1);
 
@@ -11438,7 +11446,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt68) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4141:4: otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
+                    // InternalContentAssistFragmentTestLang.g:4146:4: otherlv_1= '<' ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>'
                     {
                     otherlv_1=(Token)match(input,21,FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11446,11 +11454,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_1, grammarAccess.getXFeatureCallAccess().getLessThanSignKeyword_1_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:4145:4: ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // InternalContentAssistFragmentTestLang.g:4146:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4150:4: ( (lv_typeArguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // InternalContentAssistFragmentTestLang.g:4151:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4146:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:4147:6: lv_typeArguments_2_0= ruleJvmArgumentTypeReference
+                    // InternalContentAssistFragmentTestLang.g:4151:5: (lv_typeArguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4152:6: lv_typeArguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11481,7 +11489,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:4164:4: (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:4169:4: (otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop67:
                     do {
                         int alt67=2;
@@ -11494,7 +11502,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt67) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:4165:5: otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:4170:5: otherlv_3= ',' ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_3=(Token)match(input,50,FOLLOW_27); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -11502,11 +11510,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_3, grammarAccess.getXFeatureCallAccess().getCommaKeyword_1_2_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:4169:5: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalContentAssistFragmentTestLang.g:4170:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:4174:5: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:4175:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:4170:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // InternalContentAssistFragmentTestLang.g:4171:7: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
+                    	    // InternalContentAssistFragmentTestLang.g:4175:6: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:4176:7: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -11558,11 +11566,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4194:3: ( ( ruleIdOrSuper ) )
-            // InternalContentAssistFragmentTestLang.g:4195:4: ( ruleIdOrSuper )
+            // InternalContentAssistFragmentTestLang.g:4199:3: ( ( ruleIdOrSuper ) )
+            // InternalContentAssistFragmentTestLang.g:4200:4: ( ruleIdOrSuper )
             {
-            // InternalContentAssistFragmentTestLang.g:4195:4: ( ruleIdOrSuper )
-            // InternalContentAssistFragmentTestLang.g:4196:5: ruleIdOrSuper
+            // InternalContentAssistFragmentTestLang.g:4200:4: ( ruleIdOrSuper )
+            // InternalContentAssistFragmentTestLang.g:4201:5: ruleIdOrSuper
             {
             if ( state.backtracking==0 ) {
 
@@ -11592,18 +11600,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4210:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?
+            // InternalContentAssistFragmentTestLang.g:4215:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?
             int alt71=2;
             alt71 = dfa71.predict(input);
             switch (alt71) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4211:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')'
+                    // InternalContentAssistFragmentTestLang.g:4216:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')'
                     {
-                    // InternalContentAssistFragmentTestLang.g:4211:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) )
-                    // InternalContentAssistFragmentTestLang.g:4212:5: ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' )
+                    // InternalContentAssistFragmentTestLang.g:4216:4: ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) )
+                    // InternalContentAssistFragmentTestLang.g:4217:5: ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4216:5: (lv_explicitOperationCall_7_0= '(' )
-                    // InternalContentAssistFragmentTestLang.g:4217:6: lv_explicitOperationCall_7_0= '('
+                    // InternalContentAssistFragmentTestLang.g:4221:5: (lv_explicitOperationCall_7_0= '(' )
+                    // InternalContentAssistFragmentTestLang.g:4222:6: lv_explicitOperationCall_7_0= '('
                     {
                     lv_explicitOperationCall_7_0=(Token)match(input,51,FOLLOW_30); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11625,18 +11633,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:4229:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?
+                    // InternalContentAssistFragmentTestLang.g:4234:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?
                     int alt70=3;
                     alt70 = dfa70.predict(input);
                     switch (alt70) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:4230:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
+                            // InternalContentAssistFragmentTestLang.g:4235:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4230:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
-                            // InternalContentAssistFragmentTestLang.g:4231:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure )
+                            // InternalContentAssistFragmentTestLang.g:4235:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) )
+                            // InternalContentAssistFragmentTestLang.g:4236:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4256:6: (lv_featureCallArguments_8_0= ruleXShortClosure )
-                            // InternalContentAssistFragmentTestLang.g:4257:7: lv_featureCallArguments_8_0= ruleXShortClosure
+                            // InternalContentAssistFragmentTestLang.g:4261:6: (lv_featureCallArguments_8_0= ruleXShortClosure )
+                            // InternalContentAssistFragmentTestLang.g:4262:7: lv_featureCallArguments_8_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11671,16 +11679,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:4275:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
+                            // InternalContentAssistFragmentTestLang.g:4280:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4275:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
-                            // InternalContentAssistFragmentTestLang.g:4276:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:4280:5: ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* )
+                            // InternalContentAssistFragmentTestLang.g:4281:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             {
-                            // InternalContentAssistFragmentTestLang.g:4276:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) )
-                            // InternalContentAssistFragmentTestLang.g:4277:7: (lv_featureCallArguments_9_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:4281:6: ( (lv_featureCallArguments_9_0= ruleXExpression ) )
+                            // InternalContentAssistFragmentTestLang.g:4282:7: (lv_featureCallArguments_9_0= ruleXExpression )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4277:7: (lv_featureCallArguments_9_0= ruleXExpression )
-                            // InternalContentAssistFragmentTestLang.g:4278:8: lv_featureCallArguments_9_0= ruleXExpression
+                            // InternalContentAssistFragmentTestLang.g:4282:7: (lv_featureCallArguments_9_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:4283:8: lv_featureCallArguments_9_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -11711,7 +11719,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:4295:6: (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:4300:6: (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )*
                             loop69:
                             do {
                                 int alt69=2;
@@ -11724,7 +11732,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                                 switch (alt69) {
                             	case 1 :
-                            	    // InternalContentAssistFragmentTestLang.g:4296:7: otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) )
+                            	    // InternalContentAssistFragmentTestLang.g:4301:7: otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) )
                             	    {
                             	    otherlv_10=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -11732,11 +11740,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             	      							newLeafNode(otherlv_10, grammarAccess.getXFeatureCallAccess().getCommaKeyword_3_1_1_1_0());
                             	      						
                             	    }
-                            	    // InternalContentAssistFragmentTestLang.g:4300:7: ( (lv_featureCallArguments_11_0= ruleXExpression ) )
-                            	    // InternalContentAssistFragmentTestLang.g:4301:8: (lv_featureCallArguments_11_0= ruleXExpression )
+                            	    // InternalContentAssistFragmentTestLang.g:4305:7: ( (lv_featureCallArguments_11_0= ruleXExpression ) )
+                            	    // InternalContentAssistFragmentTestLang.g:4306:8: (lv_featureCallArguments_11_0= ruleXExpression )
                             	    {
-                            	    // InternalContentAssistFragmentTestLang.g:4301:8: (lv_featureCallArguments_11_0= ruleXExpression )
-                            	    // InternalContentAssistFragmentTestLang.g:4302:9: lv_featureCallArguments_11_0= ruleXExpression
+                            	    // InternalContentAssistFragmentTestLang.g:4306:8: (lv_featureCallArguments_11_0= ruleXExpression )
+                            	    // InternalContentAssistFragmentTestLang.g:4307:9: lv_featureCallArguments_11_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -11797,15 +11805,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4327:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
+            // InternalContentAssistFragmentTestLang.g:4332:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?
             int alt72=2;
             alt72 = dfa72.predict(input);
             switch (alt72) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4328:4: ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:4333:4: ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4334:4: (lv_featureCallArguments_13_0= ruleXClosure )
-                    // InternalContentAssistFragmentTestLang.g:4335:5: lv_featureCallArguments_13_0= ruleXClosure
+                    // InternalContentAssistFragmentTestLang.g:4339:4: (lv_featureCallArguments_13_0= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:4340:5: lv_featureCallArguments_13_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11864,7 +11872,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleFeatureCallID"
-    // InternalContentAssistFragmentTestLang.g:4356:1: entryRuleFeatureCallID returns [String current=null] : iv_ruleFeatureCallID= ruleFeatureCallID EOF ;
+    // InternalContentAssistFragmentTestLang.g:4361:1: entryRuleFeatureCallID returns [String current=null] : iv_ruleFeatureCallID= ruleFeatureCallID EOF ;
     public final String entryRuleFeatureCallID() throws RecognitionException {
         String current = null;
 
@@ -11872,8 +11880,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4356:53: (iv_ruleFeatureCallID= ruleFeatureCallID EOF )
-            // InternalContentAssistFragmentTestLang.g:4357:2: iv_ruleFeatureCallID= ruleFeatureCallID EOF
+            // InternalContentAssistFragmentTestLang.g:4361:53: (iv_ruleFeatureCallID= ruleFeatureCallID EOF )
+            // InternalContentAssistFragmentTestLang.g:4362:2: iv_ruleFeatureCallID= ruleFeatureCallID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFeatureCallIDRule()); 
@@ -11904,7 +11912,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleFeatureCallID"
-    // InternalContentAssistFragmentTestLang.g:4363:1: ruleFeatureCallID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) ;
+    // InternalContentAssistFragmentTestLang.g:4368:1: ruleFeatureCallID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) ;
     public final AntlrDatatypeRuleToken ruleFeatureCallID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -11916,10 +11924,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4369:2: ( (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) )
-            // InternalContentAssistFragmentTestLang.g:4370:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
+            // InternalContentAssistFragmentTestLang.g:4374:2: ( (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' ) )
+            // InternalContentAssistFragmentTestLang.g:4375:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
             {
-            // InternalContentAssistFragmentTestLang.g:4370:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
+            // InternalContentAssistFragmentTestLang.g:4375:2: (this_ValidID_0= ruleValidID | kw= 'extends' | kw= 'static' | kw= 'import' | kw= 'extension' )
             int alt73=5;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -11957,7 +11965,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             switch (alt73) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4371:3: this_ValidID_0= ruleValidID
+                    // InternalContentAssistFragmentTestLang.g:4376:3: this_ValidID_0= ruleValidID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -11983,7 +11991,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:4382:3: kw= 'extends'
+                    // InternalContentAssistFragmentTestLang.g:4387:3: kw= 'extends'
                     {
                     kw=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11996,7 +12004,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:4388:3: kw= 'static'
+                    // InternalContentAssistFragmentTestLang.g:4393:3: kw= 'static'
                     {
                     kw=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12009,7 +12017,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalContentAssistFragmentTestLang.g:4394:3: kw= 'import'
+                    // InternalContentAssistFragmentTestLang.g:4399:3: kw= 'import'
                     {
                     kw=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12022,7 +12030,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalContentAssistFragmentTestLang.g:4400:3: kw= 'extension'
+                    // InternalContentAssistFragmentTestLang.g:4405:3: kw= 'extension'
                     {
                     kw=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12059,7 +12067,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleIdOrSuper"
-    // InternalContentAssistFragmentTestLang.g:4409:1: entryRuleIdOrSuper returns [String current=null] : iv_ruleIdOrSuper= ruleIdOrSuper EOF ;
+    // InternalContentAssistFragmentTestLang.g:4414:1: entryRuleIdOrSuper returns [String current=null] : iv_ruleIdOrSuper= ruleIdOrSuper EOF ;
     public final String entryRuleIdOrSuper() throws RecognitionException {
         String current = null;
 
@@ -12067,8 +12075,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4409:49: (iv_ruleIdOrSuper= ruleIdOrSuper EOF )
-            // InternalContentAssistFragmentTestLang.g:4410:2: iv_ruleIdOrSuper= ruleIdOrSuper EOF
+            // InternalContentAssistFragmentTestLang.g:4414:49: (iv_ruleIdOrSuper= ruleIdOrSuper EOF )
+            // InternalContentAssistFragmentTestLang.g:4415:2: iv_ruleIdOrSuper= ruleIdOrSuper EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdOrSuperRule()); 
@@ -12099,7 +12107,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleIdOrSuper"
-    // InternalContentAssistFragmentTestLang.g:4416:1: ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) ;
+    // InternalContentAssistFragmentTestLang.g:4421:1: ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) ;
     public final AntlrDatatypeRuleToken ruleIdOrSuper() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -12111,10 +12119,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4422:2: ( (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) )
-            // InternalContentAssistFragmentTestLang.g:4423:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
+            // InternalContentAssistFragmentTestLang.g:4427:2: ( (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' ) )
+            // InternalContentAssistFragmentTestLang.g:4428:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
             {
-            // InternalContentAssistFragmentTestLang.g:4423:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
+            // InternalContentAssistFragmentTestLang.g:4428:2: (this_FeatureCallID_0= ruleFeatureCallID | kw= 'super' )
             int alt74=2;
             int LA74_0 = input.LA(1);
 
@@ -12133,7 +12141,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt74) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4424:3: this_FeatureCallID_0= ruleFeatureCallID
+                    // InternalContentAssistFragmentTestLang.g:4429:3: this_FeatureCallID_0= ruleFeatureCallID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12159,7 +12167,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:4435:3: kw= 'super'
+                    // InternalContentAssistFragmentTestLang.g:4440:3: kw= 'super'
                     {
                     kw=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12196,7 +12204,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXConstructorCall"
-    // InternalContentAssistFragmentTestLang.g:4444:1: entryRuleXConstructorCall returns [EObject current=null] : iv_ruleXConstructorCall= ruleXConstructorCall EOF ;
+    // InternalContentAssistFragmentTestLang.g:4449:1: entryRuleXConstructorCall returns [EObject current=null] : iv_ruleXConstructorCall= ruleXConstructorCall EOF ;
     public final EObject entryRuleXConstructorCall() throws RecognitionException {
         EObject current = null;
 
@@ -12204,8 +12212,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4444:57: (iv_ruleXConstructorCall= ruleXConstructorCall EOF )
-            // InternalContentAssistFragmentTestLang.g:4445:2: iv_ruleXConstructorCall= ruleXConstructorCall EOF
+            // InternalContentAssistFragmentTestLang.g:4449:57: (iv_ruleXConstructorCall= ruleXConstructorCall EOF )
+            // InternalContentAssistFragmentTestLang.g:4450:2: iv_ruleXConstructorCall= ruleXConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXConstructorCallRule()); 
@@ -12236,7 +12244,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXConstructorCall"
-    // InternalContentAssistFragmentTestLang.g:4451:1: ruleXConstructorCall returns [EObject current=null] : ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:4456:1: ruleXConstructorCall returns [EObject current=null] : ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) ;
     public final EObject ruleXConstructorCall() throws RecognitionException {
         EObject current = null;
 
@@ -12264,14 +12272,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4457:2: ( ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:4458:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
+            // InternalContentAssistFragmentTestLang.g:4462:2: ( ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:4463:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:4458:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
-            // InternalContentAssistFragmentTestLang.g:4459:3: () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
+            // InternalContentAssistFragmentTestLang.g:4463:2: ( () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )? )
+            // InternalContentAssistFragmentTestLang.g:4464:3: () otherlv_1= 'new' ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )? ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )? ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:4459:3: ()
-            // InternalContentAssistFragmentTestLang.g:4460:4: 
+            // InternalContentAssistFragmentTestLang.g:4464:3: ()
+            // InternalContentAssistFragmentTestLang.g:4465:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12289,11 +12297,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXConstructorCallAccess().getNewKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:4470:3: ( ( ruleQualifiedName ) )
-            // InternalContentAssistFragmentTestLang.g:4471:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:4475:3: ( ( ruleQualifiedName ) )
+            // InternalContentAssistFragmentTestLang.g:4476:4: ( ruleQualifiedName )
             {
-            // InternalContentAssistFragmentTestLang.g:4471:4: ( ruleQualifiedName )
-            // InternalContentAssistFragmentTestLang.g:4472:5: ruleQualifiedName
+            // InternalContentAssistFragmentTestLang.g:4476:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:4477:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -12323,15 +12331,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4486:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?
+            // InternalContentAssistFragmentTestLang.g:4491:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?
             int alt76=2;
             alt76 = dfa76.predict(input);
             switch (alt76) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4487:4: ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
+                    // InternalContentAssistFragmentTestLang.g:4492:4: ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>'
                     {
-                    // InternalContentAssistFragmentTestLang.g:4487:4: ( ( '<' )=>otherlv_3= '<' )
-                    // InternalContentAssistFragmentTestLang.g:4488:5: ( '<' )=>otherlv_3= '<'
+                    // InternalContentAssistFragmentTestLang.g:4492:4: ( ( '<' )=>otherlv_3= '<' )
+                    // InternalContentAssistFragmentTestLang.g:4493:5: ( '<' )=>otherlv_3= '<'
                     {
                     otherlv_3=(Token)match(input,21,FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12342,11 +12350,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:4494:4: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
-                    // InternalContentAssistFragmentTestLang.g:4495:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4499:4: ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) )
+                    // InternalContentAssistFragmentTestLang.g:4500:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4495:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:4496:6: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
+                    // InternalContentAssistFragmentTestLang.g:4500:5: (lv_typeArguments_4_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:4501:6: lv_typeArguments_4_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12377,7 +12385,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:4513:4: (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:4518:4: (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )*
                     loop75:
                     do {
                         int alt75=2;
@@ -12390,7 +12398,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt75) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:4514:5: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:4519:5: otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_5=(Token)match(input,50,FOLLOW_27); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -12398,11 +12406,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_5, grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_2_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:4518:5: ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalContentAssistFragmentTestLang.g:4519:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:4523:5: ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:4524:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:4519:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
-                    	    // InternalContentAssistFragmentTestLang.g:4520:7: lv_typeArguments_6_0= ruleJvmArgumentTypeReference
+                    	    // InternalContentAssistFragmentTestLang.g:4524:6: (lv_typeArguments_6_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:4525:7: lv_typeArguments_6_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -12454,18 +12462,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4543:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?
+            // InternalContentAssistFragmentTestLang.g:4548:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?
             int alt79=2;
             alt79 = dfa79.predict(input);
             switch (alt79) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4544:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')'
+                    // InternalContentAssistFragmentTestLang.g:4549:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')'
                     {
-                    // InternalContentAssistFragmentTestLang.g:4544:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) )
-                    // InternalContentAssistFragmentTestLang.g:4545:5: ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' )
+                    // InternalContentAssistFragmentTestLang.g:4549:4: ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) )
+                    // InternalContentAssistFragmentTestLang.g:4550:5: ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4549:5: (lv_explicitConstructorCall_8_0= '(' )
-                    // InternalContentAssistFragmentTestLang.g:4550:6: lv_explicitConstructorCall_8_0= '('
+                    // InternalContentAssistFragmentTestLang.g:4554:5: (lv_explicitConstructorCall_8_0= '(' )
+                    // InternalContentAssistFragmentTestLang.g:4555:6: lv_explicitConstructorCall_8_0= '('
                     {
                     lv_explicitConstructorCall_8_0=(Token)match(input,51,FOLLOW_30); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12487,18 +12495,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:4562:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?
+                    // InternalContentAssistFragmentTestLang.g:4567:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?
                     int alt78=3;
                     alt78 = dfa78.predict(input);
                     switch (alt78) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:4563:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
+                            // InternalContentAssistFragmentTestLang.g:4568:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4563:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
-                            // InternalContentAssistFragmentTestLang.g:4564:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure )
+                            // InternalContentAssistFragmentTestLang.g:4568:5: ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) )
+                            // InternalContentAssistFragmentTestLang.g:4569:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4589:6: (lv_arguments_9_0= ruleXShortClosure )
-                            // InternalContentAssistFragmentTestLang.g:4590:7: lv_arguments_9_0= ruleXShortClosure
+                            // InternalContentAssistFragmentTestLang.g:4594:6: (lv_arguments_9_0= ruleXShortClosure )
+                            // InternalContentAssistFragmentTestLang.g:4595:7: lv_arguments_9_0= ruleXShortClosure
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12533,16 +12541,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:4608:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
+                            // InternalContentAssistFragmentTestLang.g:4613:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4608:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
-                            // InternalContentAssistFragmentTestLang.g:4609:6: ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:4613:5: ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* )
+                            // InternalContentAssistFragmentTestLang.g:4614:6: ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             {
-                            // InternalContentAssistFragmentTestLang.g:4609:6: ( (lv_arguments_10_0= ruleXExpression ) )
-                            // InternalContentAssistFragmentTestLang.g:4610:7: (lv_arguments_10_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:4614:6: ( (lv_arguments_10_0= ruleXExpression ) )
+                            // InternalContentAssistFragmentTestLang.g:4615:7: (lv_arguments_10_0= ruleXExpression )
                             {
-                            // InternalContentAssistFragmentTestLang.g:4610:7: (lv_arguments_10_0= ruleXExpression )
-                            // InternalContentAssistFragmentTestLang.g:4611:8: lv_arguments_10_0= ruleXExpression
+                            // InternalContentAssistFragmentTestLang.g:4615:7: (lv_arguments_10_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:4616:8: lv_arguments_10_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -12573,7 +12581,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:4628:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:4633:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )*
                             loop77:
                             do {
                                 int alt77=2;
@@ -12586,7 +12594,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                                 switch (alt77) {
                             	case 1 :
-                            	    // InternalContentAssistFragmentTestLang.g:4629:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
+                            	    // InternalContentAssistFragmentTestLang.g:4634:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) )
                             	    {
                             	    otherlv_11=(Token)match(input,50,FOLLOW_6); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -12594,11 +12602,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             	      							newLeafNode(otherlv_11, grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_1_1_0());
                             	      						
                             	    }
-                            	    // InternalContentAssistFragmentTestLang.g:4633:7: ( (lv_arguments_12_0= ruleXExpression ) )
-                            	    // InternalContentAssistFragmentTestLang.g:4634:8: (lv_arguments_12_0= ruleXExpression )
+                            	    // InternalContentAssistFragmentTestLang.g:4638:7: ( (lv_arguments_12_0= ruleXExpression ) )
+                            	    // InternalContentAssistFragmentTestLang.g:4639:8: (lv_arguments_12_0= ruleXExpression )
                             	    {
-                            	    // InternalContentAssistFragmentTestLang.g:4634:8: (lv_arguments_12_0= ruleXExpression )
-                            	    // InternalContentAssistFragmentTestLang.g:4635:9: lv_arguments_12_0= ruleXExpression
+                            	    // InternalContentAssistFragmentTestLang.g:4639:8: (lv_arguments_12_0= ruleXExpression )
+                            	    // InternalContentAssistFragmentTestLang.g:4640:9: lv_arguments_12_0= ruleXExpression
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -12659,15 +12667,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4660:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
+            // InternalContentAssistFragmentTestLang.g:4665:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?
             int alt80=2;
             alt80 = dfa80.predict(input);
             switch (alt80) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4661:4: ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:4666:4: ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4667:4: (lv_arguments_14_0= ruleXClosure )
-                    // InternalContentAssistFragmentTestLang.g:4668:5: lv_arguments_14_0= ruleXClosure
+                    // InternalContentAssistFragmentTestLang.g:4672:4: (lv_arguments_14_0= ruleXClosure )
+                    // InternalContentAssistFragmentTestLang.g:4673:5: lv_arguments_14_0= ruleXClosure
                     {
                     if ( state.backtracking==0 ) {
 
@@ -12726,7 +12734,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXBooleanLiteral"
-    // InternalContentAssistFragmentTestLang.g:4689:1: entryRuleXBooleanLiteral returns [EObject current=null] : iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:4694:1: entryRuleXBooleanLiteral returns [EObject current=null] : iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF ;
     public final EObject entryRuleXBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -12734,8 +12742,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4689:56: (iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:4690:2: iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:4694:56: (iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:4695:2: iv_ruleXBooleanLiteral= ruleXBooleanLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXBooleanLiteralRule()); 
@@ -12766,7 +12774,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXBooleanLiteral"
-    // InternalContentAssistFragmentTestLang.g:4696:1: ruleXBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4701:1: ruleXBooleanLiteral returns [EObject current=null] : ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) ;
     public final EObject ruleXBooleanLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -12777,14 +12785,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4702:2: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4703:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4707:2: ( ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4708:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4703:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4704:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalContentAssistFragmentTestLang.g:4708:2: ( () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4709:3: () (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4704:3: ()
-            // InternalContentAssistFragmentTestLang.g:4705:4: 
+            // InternalContentAssistFragmentTestLang.g:4709:3: ()
+            // InternalContentAssistFragmentTestLang.g:4710:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12796,7 +12804,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4711:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
+            // InternalContentAssistFragmentTestLang.g:4716:3: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
             int alt81=2;
             int LA81_0 = input.LA(1);
 
@@ -12815,7 +12823,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt81) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:4712:4: otherlv_1= 'false'
+                    // InternalContentAssistFragmentTestLang.g:4717:4: otherlv_1= 'false'
                     {
                     otherlv_1=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12827,13 +12835,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:4717:4: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalContentAssistFragmentTestLang.g:4722:4: ( (lv_isTrue_2_0= 'true' ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4717:4: ( (lv_isTrue_2_0= 'true' ) )
-                    // InternalContentAssistFragmentTestLang.g:4718:5: (lv_isTrue_2_0= 'true' )
+                    // InternalContentAssistFragmentTestLang.g:4722:4: ( (lv_isTrue_2_0= 'true' ) )
+                    // InternalContentAssistFragmentTestLang.g:4723:5: (lv_isTrue_2_0= 'true' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:4718:5: (lv_isTrue_2_0= 'true' )
-                    // InternalContentAssistFragmentTestLang.g:4719:6: lv_isTrue_2_0= 'true'
+                    // InternalContentAssistFragmentTestLang.g:4723:5: (lv_isTrue_2_0= 'true' )
+                    // InternalContentAssistFragmentTestLang.g:4724:6: lv_isTrue_2_0= 'true'
                     {
                     lv_isTrue_2_0=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -12886,7 +12894,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXNullLiteral"
-    // InternalContentAssistFragmentTestLang.g:4736:1: entryRuleXNullLiteral returns [EObject current=null] : iv_ruleXNullLiteral= ruleXNullLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:4741:1: entryRuleXNullLiteral returns [EObject current=null] : iv_ruleXNullLiteral= ruleXNullLiteral EOF ;
     public final EObject entryRuleXNullLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -12894,8 +12902,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4736:53: (iv_ruleXNullLiteral= ruleXNullLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:4737:2: iv_ruleXNullLiteral= ruleXNullLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:4741:53: (iv_ruleXNullLiteral= ruleXNullLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:4742:2: iv_ruleXNullLiteral= ruleXNullLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXNullLiteralRule()); 
@@ -12926,7 +12934,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXNullLiteral"
-    // InternalContentAssistFragmentTestLang.g:4743:1: ruleXNullLiteral returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
+    // InternalContentAssistFragmentTestLang.g:4748:1: ruleXNullLiteral returns [EObject current=null] : ( () otherlv_1= 'null' ) ;
     public final EObject ruleXNullLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -12936,14 +12944,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4749:2: ( ( () otherlv_1= 'null' ) )
-            // InternalContentAssistFragmentTestLang.g:4750:2: ( () otherlv_1= 'null' )
+            // InternalContentAssistFragmentTestLang.g:4754:2: ( ( () otherlv_1= 'null' ) )
+            // InternalContentAssistFragmentTestLang.g:4755:2: ( () otherlv_1= 'null' )
             {
-            // InternalContentAssistFragmentTestLang.g:4750:2: ( () otherlv_1= 'null' )
-            // InternalContentAssistFragmentTestLang.g:4751:3: () otherlv_1= 'null'
+            // InternalContentAssistFragmentTestLang.g:4755:2: ( () otherlv_1= 'null' )
+            // InternalContentAssistFragmentTestLang.g:4756:3: () otherlv_1= 'null'
             {
-            // InternalContentAssistFragmentTestLang.g:4751:3: ()
-            // InternalContentAssistFragmentTestLang.g:4752:4: 
+            // InternalContentAssistFragmentTestLang.g:4756:3: ()
+            // InternalContentAssistFragmentTestLang.g:4757:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -12986,7 +12994,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXNumberLiteral"
-    // InternalContentAssistFragmentTestLang.g:4766:1: entryRuleXNumberLiteral returns [EObject current=null] : iv_ruleXNumberLiteral= ruleXNumberLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:4771:1: entryRuleXNumberLiteral returns [EObject current=null] : iv_ruleXNumberLiteral= ruleXNumberLiteral EOF ;
     public final EObject entryRuleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -12994,8 +13002,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4766:55: (iv_ruleXNumberLiteral= ruleXNumberLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:4767:2: iv_ruleXNumberLiteral= ruleXNumberLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:4771:55: (iv_ruleXNumberLiteral= ruleXNumberLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:4772:2: iv_ruleXNumberLiteral= ruleXNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXNumberLiteralRule()); 
@@ -13026,7 +13034,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXNumberLiteral"
-    // InternalContentAssistFragmentTestLang.g:4773:1: ruleXNumberLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4778:1: ruleXNumberLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= ruleNumber ) ) ) ;
     public final EObject ruleXNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13037,14 +13045,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4779:2: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4780:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
+            // InternalContentAssistFragmentTestLang.g:4784:2: ( ( () ( (lv_value_1_0= ruleNumber ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4785:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4780:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
-            // InternalContentAssistFragmentTestLang.g:4781:3: () ( (lv_value_1_0= ruleNumber ) )
+            // InternalContentAssistFragmentTestLang.g:4785:2: ( () ( (lv_value_1_0= ruleNumber ) ) )
+            // InternalContentAssistFragmentTestLang.g:4786:3: () ( (lv_value_1_0= ruleNumber ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4781:3: ()
-            // InternalContentAssistFragmentTestLang.g:4782:4: 
+            // InternalContentAssistFragmentTestLang.g:4786:3: ()
+            // InternalContentAssistFragmentTestLang.g:4787:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13056,11 +13064,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4788:3: ( (lv_value_1_0= ruleNumber ) )
-            // InternalContentAssistFragmentTestLang.g:4789:4: (lv_value_1_0= ruleNumber )
+            // InternalContentAssistFragmentTestLang.g:4793:3: ( (lv_value_1_0= ruleNumber ) )
+            // InternalContentAssistFragmentTestLang.g:4794:4: (lv_value_1_0= ruleNumber )
             {
-            // InternalContentAssistFragmentTestLang.g:4789:4: (lv_value_1_0= ruleNumber )
-            // InternalContentAssistFragmentTestLang.g:4790:5: lv_value_1_0= ruleNumber
+            // InternalContentAssistFragmentTestLang.g:4794:4: (lv_value_1_0= ruleNumber )
+            // InternalContentAssistFragmentTestLang.g:4795:5: lv_value_1_0= ruleNumber
             {
             if ( state.backtracking==0 ) {
 
@@ -13116,7 +13124,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXStringLiteral"
-    // InternalContentAssistFragmentTestLang.g:4811:1: entryRuleXStringLiteral returns [EObject current=null] : iv_ruleXStringLiteral= ruleXStringLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:4816:1: entryRuleXStringLiteral returns [EObject current=null] : iv_ruleXStringLiteral= ruleXStringLiteral EOF ;
     public final EObject entryRuleXStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13124,8 +13132,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4811:55: (iv_ruleXStringLiteral= ruleXStringLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:4812:2: iv_ruleXStringLiteral= ruleXStringLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:4816:55: (iv_ruleXStringLiteral= ruleXStringLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:4817:2: iv_ruleXStringLiteral= ruleXStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXStringLiteralRule()); 
@@ -13156,7 +13164,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXStringLiteral"
-    // InternalContentAssistFragmentTestLang.g:4818:1: ruleXStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4823:1: ruleXStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleXStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13166,14 +13174,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4824:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4825:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalContentAssistFragmentTestLang.g:4829:2: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4830:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4825:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // InternalContentAssistFragmentTestLang.g:4826:3: () ( (lv_value_1_0= RULE_STRING ) )
+            // InternalContentAssistFragmentTestLang.g:4830:2: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalContentAssistFragmentTestLang.g:4831:3: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4826:3: ()
-            // InternalContentAssistFragmentTestLang.g:4827:4: 
+            // InternalContentAssistFragmentTestLang.g:4831:3: ()
+            // InternalContentAssistFragmentTestLang.g:4832:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13185,11 +13193,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4833:3: ( (lv_value_1_0= RULE_STRING ) )
-            // InternalContentAssistFragmentTestLang.g:4834:4: (lv_value_1_0= RULE_STRING )
+            // InternalContentAssistFragmentTestLang.g:4838:3: ( (lv_value_1_0= RULE_STRING ) )
+            // InternalContentAssistFragmentTestLang.g:4839:4: (lv_value_1_0= RULE_STRING )
             {
-            // InternalContentAssistFragmentTestLang.g:4834:4: (lv_value_1_0= RULE_STRING )
-            // InternalContentAssistFragmentTestLang.g:4835:5: lv_value_1_0= RULE_STRING
+            // InternalContentAssistFragmentTestLang.g:4839:4: (lv_value_1_0= RULE_STRING )
+            // InternalContentAssistFragmentTestLang.g:4840:5: lv_value_1_0= RULE_STRING
             {
             lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -13240,7 +13248,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXTypeLiteral"
-    // InternalContentAssistFragmentTestLang.g:4855:1: entryRuleXTypeLiteral returns [EObject current=null] : iv_ruleXTypeLiteral= ruleXTypeLiteral EOF ;
+    // InternalContentAssistFragmentTestLang.g:4860:1: entryRuleXTypeLiteral returns [EObject current=null] : iv_ruleXTypeLiteral= ruleXTypeLiteral EOF ;
     public final EObject entryRuleXTypeLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13248,8 +13256,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4855:53: (iv_ruleXTypeLiteral= ruleXTypeLiteral EOF )
-            // InternalContentAssistFragmentTestLang.g:4856:2: iv_ruleXTypeLiteral= ruleXTypeLiteral EOF
+            // InternalContentAssistFragmentTestLang.g:4860:53: (iv_ruleXTypeLiteral= ruleXTypeLiteral EOF )
+            // InternalContentAssistFragmentTestLang.g:4861:2: iv_ruleXTypeLiteral= ruleXTypeLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTypeLiteralRule()); 
@@ -13280,7 +13288,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXTypeLiteral"
-    // InternalContentAssistFragmentTestLang.g:4862:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
+    // InternalContentAssistFragmentTestLang.g:4867:1: ruleXTypeLiteral returns [EObject current=null] : ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) ;
     public final EObject ruleXTypeLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -13294,14 +13302,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4868:2: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
-            // InternalContentAssistFragmentTestLang.g:4869:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
+            // InternalContentAssistFragmentTestLang.g:4873:2: ( ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' ) )
+            // InternalContentAssistFragmentTestLang.g:4874:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
             {
-            // InternalContentAssistFragmentTestLang.g:4869:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
-            // InternalContentAssistFragmentTestLang.g:4870:3: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
+            // InternalContentAssistFragmentTestLang.g:4874:2: ( () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')' )
+            // InternalContentAssistFragmentTestLang.g:4875:3: () otherlv_1= 'typeof' otherlv_2= '(' ( ( ruleQualifiedName ) ) ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )* otherlv_5= ')'
             {
-            // InternalContentAssistFragmentTestLang.g:4870:3: ()
-            // InternalContentAssistFragmentTestLang.g:4871:4: 
+            // InternalContentAssistFragmentTestLang.g:4875:3: ()
+            // InternalContentAssistFragmentTestLang.g:4876:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13325,11 +13333,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_2, grammarAccess.getXTypeLiteralAccess().getLeftParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:4885:3: ( ( ruleQualifiedName ) )
-            // InternalContentAssistFragmentTestLang.g:4886:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:4890:3: ( ( ruleQualifiedName ) )
+            // InternalContentAssistFragmentTestLang.g:4891:4: ( ruleQualifiedName )
             {
-            // InternalContentAssistFragmentTestLang.g:4886:4: ( ruleQualifiedName )
-            // InternalContentAssistFragmentTestLang.g:4887:5: ruleQualifiedName
+            // InternalContentAssistFragmentTestLang.g:4891:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:4892:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -13359,7 +13367,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:4901:3: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
+            // InternalContentAssistFragmentTestLang.g:4906:3: ( (lv_arrayDimensions_4_0= ruleArrayBrackets ) )*
             loop82:
             do {
                 int alt82=2;
@@ -13372,10 +13380,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt82) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:4902:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    // InternalContentAssistFragmentTestLang.g:4907:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:4902:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
-            	    // InternalContentAssistFragmentTestLang.g:4903:5: lv_arrayDimensions_4_0= ruleArrayBrackets
+            	    // InternalContentAssistFragmentTestLang.g:4907:4: (lv_arrayDimensions_4_0= ruleArrayBrackets )
+            	    // InternalContentAssistFragmentTestLang.g:4908:5: lv_arrayDimensions_4_0= ruleArrayBrackets
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -13443,7 +13451,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXThrowExpression"
-    // InternalContentAssistFragmentTestLang.g:4928:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:4933:1: entryRuleXThrowExpression returns [EObject current=null] : iv_ruleXThrowExpression= ruleXThrowExpression EOF ;
     public final EObject entryRuleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13451,8 +13459,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4928:57: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:4929:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
+            // InternalContentAssistFragmentTestLang.g:4933:57: (iv_ruleXThrowExpression= ruleXThrowExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:4934:2: iv_ruleXThrowExpression= ruleXThrowExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXThrowExpressionRule()); 
@@ -13483,7 +13491,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXThrowExpression"
-    // InternalContentAssistFragmentTestLang.g:4935:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:4940:1: ruleXThrowExpression returns [EObject current=null] : ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) ;
     public final EObject ruleXThrowExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13495,14 +13503,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4941:2: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:4942:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:4946:2: ( ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:4947:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4942:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:4943:3: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:4947:2: ( () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:4948:3: () otherlv_1= 'throw' ( (lv_expression_2_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:4943:3: ()
-            // InternalContentAssistFragmentTestLang.g:4944:4: 
+            // InternalContentAssistFragmentTestLang.g:4948:3: ()
+            // InternalContentAssistFragmentTestLang.g:4949:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13520,11 +13528,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXThrowExpressionAccess().getThrowKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:4954:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:4955:4: (lv_expression_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:4959:3: ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:4960:4: (lv_expression_2_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:4955:4: (lv_expression_2_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:4956:5: lv_expression_2_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:4960:4: (lv_expression_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:4961:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -13580,7 +13588,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXReturnExpression"
-    // InternalContentAssistFragmentTestLang.g:4977:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:4982:1: entryRuleXReturnExpression returns [EObject current=null] : iv_ruleXReturnExpression= ruleXReturnExpression EOF ;
     public final EObject entryRuleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13588,8 +13596,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4977:58: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:4978:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
+            // InternalContentAssistFragmentTestLang.g:4982:58: (iv_ruleXReturnExpression= ruleXReturnExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:4983:2: iv_ruleXReturnExpression= ruleXReturnExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXReturnExpressionRule()); 
@@ -13620,7 +13628,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXReturnExpression"
-    // InternalContentAssistFragmentTestLang.g:4984:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:4989:1: ruleXReturnExpression returns [EObject current=null] : ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) ;
     public final EObject ruleXReturnExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13632,14 +13640,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:4990:2: ( ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:4991:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // InternalContentAssistFragmentTestLang.g:4995:2: ( ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:4996:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:4991:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
-            // InternalContentAssistFragmentTestLang.g:4992:3: () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
+            // InternalContentAssistFragmentTestLang.g:4996:2: ( () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )? )
+            // InternalContentAssistFragmentTestLang.g:4997:3: () otherlv_1= 'return' ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:4992:3: ()
-            // InternalContentAssistFragmentTestLang.g:4993:4: 
+            // InternalContentAssistFragmentTestLang.g:4997:3: ()
+            // InternalContentAssistFragmentTestLang.g:4998:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13657,15 +13665,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5003:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
+            // InternalContentAssistFragmentTestLang.g:5008:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?
             int alt83=2;
             alt83 = dfa83.predict(input);
             switch (alt83) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5004:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:5009:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5005:4: (lv_expression_2_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:5006:5: lv_expression_2_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:5010:4: (lv_expression_2_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:5011:5: lv_expression_2_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -13724,7 +13732,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXTryCatchFinallyExpression"
-    // InternalContentAssistFragmentTestLang.g:5027:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:5032:1: entryRuleXTryCatchFinallyExpression returns [EObject current=null] : iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF ;
     public final EObject entryRuleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13732,8 +13740,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5027:67: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:5028:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
+            // InternalContentAssistFragmentTestLang.g:5032:67: (iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:5033:2: iv_ruleXTryCatchFinallyExpression= ruleXTryCatchFinallyExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionRule()); 
@@ -13764,7 +13772,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXTryCatchFinallyExpression"
-    // InternalContentAssistFragmentTestLang.g:5034:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5039:1: ruleXTryCatchFinallyExpression returns [EObject current=null] : ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) ;
     public final EObject ruleXTryCatchFinallyExpression() throws RecognitionException {
         EObject current = null;
 
@@ -13784,14 +13792,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5040:2: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5041:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5045:2: ( ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5046:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5041:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5042:3: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5046:2: ( () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5047:3: () otherlv_1= 'try' ( (lv_expression_2_0= ruleXExpression ) ) ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5042:3: ()
-            // InternalContentAssistFragmentTestLang.g:5043:4: 
+            // InternalContentAssistFragmentTestLang.g:5047:3: ()
+            // InternalContentAssistFragmentTestLang.g:5048:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -13809,11 +13817,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5053:3: ( (lv_expression_2_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:5054:4: (lv_expression_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5058:3: ( (lv_expression_2_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5059:4: (lv_expression_2_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:5054:4: (lv_expression_2_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:5055:5: lv_expression_2_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:5059:4: (lv_expression_2_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5060:5: lv_expression_2_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -13844,7 +13852,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:5072:3: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5077:3: ( ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? ) | (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) ) )
             int alt86=2;
             int LA86_0 = input.LA(1);
 
@@ -13863,12 +13871,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt86) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5073:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // InternalContentAssistFragmentTestLang.g:5078:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5073:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
-                    // InternalContentAssistFragmentTestLang.g:5074:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    // InternalContentAssistFragmentTestLang.g:5078:4: ( ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )? )
+                    // InternalContentAssistFragmentTestLang.g:5079:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+ ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     {
-                    // InternalContentAssistFragmentTestLang.g:5074:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
+                    // InternalContentAssistFragmentTestLang.g:5079:5: ( ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause ) )+
                     int cnt84=0;
                     loop84:
                     do {
@@ -13888,10 +13896,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt84) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5075:6: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // InternalContentAssistFragmentTestLang.g:5080:6: ( 'catch' )=> (lv_catchClauses_3_0= ruleXCatchClause )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5076:6: (lv_catchClauses_3_0= ruleXCatchClause )
-                    	    // InternalContentAssistFragmentTestLang.g:5077:7: lv_catchClauses_3_0= ruleXCatchClause
+                    	    // InternalContentAssistFragmentTestLang.g:5081:6: (lv_catchClauses_3_0= ruleXCatchClause )
+                    	    // InternalContentAssistFragmentTestLang.g:5082:7: lv_catchClauses_3_0= ruleXCatchClause
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -13933,7 +13941,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         cnt84++;
                     } while (true);
 
-                    // InternalContentAssistFragmentTestLang.g:5094:5: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
+                    // InternalContentAssistFragmentTestLang.g:5099:5: ( ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) ) )?
                     int alt85=2;
                     int LA85_0 = input.LA(1);
 
@@ -13946,10 +13954,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt85) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:5095:6: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // InternalContentAssistFragmentTestLang.g:5100:6: ( ( 'finally' )=>otherlv_4= 'finally' ) ( (lv_finallyExpression_5_0= ruleXExpression ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:5095:6: ( ( 'finally' )=>otherlv_4= 'finally' )
-                            // InternalContentAssistFragmentTestLang.g:5096:7: ( 'finally' )=>otherlv_4= 'finally'
+                            // InternalContentAssistFragmentTestLang.g:5100:6: ( ( 'finally' )=>otherlv_4= 'finally' )
+                            // InternalContentAssistFragmentTestLang.g:5101:7: ( 'finally' )=>otherlv_4= 'finally'
                             {
                             otherlv_4=(Token)match(input,82,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -13960,11 +13968,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:5102:6: ( (lv_finallyExpression_5_0= ruleXExpression ) )
-                            // InternalContentAssistFragmentTestLang.g:5103:7: (lv_finallyExpression_5_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:5107:6: ( (lv_finallyExpression_5_0= ruleXExpression ) )
+                            // InternalContentAssistFragmentTestLang.g:5108:7: (lv_finallyExpression_5_0= ruleXExpression )
                             {
-                            // InternalContentAssistFragmentTestLang.g:5103:7: (lv_finallyExpression_5_0= ruleXExpression )
-                            // InternalContentAssistFragmentTestLang.g:5104:8: lv_finallyExpression_5_0= ruleXExpression
+                            // InternalContentAssistFragmentTestLang.g:5108:7: (lv_finallyExpression_5_0= ruleXExpression )
+                            // InternalContentAssistFragmentTestLang.g:5109:8: lv_finallyExpression_5_0= ruleXExpression
                             {
                             if ( state.backtracking==0 ) {
 
@@ -14008,10 +14016,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:5124:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:5129:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5124:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
-                    // InternalContentAssistFragmentTestLang.g:5125:5: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:5129:4: (otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) ) )
+                    // InternalContentAssistFragmentTestLang.g:5130:5: otherlv_6= 'finally' ( (lv_finallyExpression_7_0= ruleXExpression ) )
                     {
                     otherlv_6=(Token)match(input,82,FOLLOW_6); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14019,11 +14027,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       					newLeafNode(otherlv_6, grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_1_0());
                       				
                     }
-                    // InternalContentAssistFragmentTestLang.g:5129:5: ( (lv_finallyExpression_7_0= ruleXExpression ) )
-                    // InternalContentAssistFragmentTestLang.g:5130:6: (lv_finallyExpression_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:5134:5: ( (lv_finallyExpression_7_0= ruleXExpression ) )
+                    // InternalContentAssistFragmentTestLang.g:5135:6: (lv_finallyExpression_7_0= ruleXExpression )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5130:6: (lv_finallyExpression_7_0= ruleXExpression )
-                    // InternalContentAssistFragmentTestLang.g:5131:7: lv_finallyExpression_7_0= ruleXExpression
+                    // InternalContentAssistFragmentTestLang.g:5135:6: (lv_finallyExpression_7_0= ruleXExpression )
+                    // InternalContentAssistFragmentTestLang.g:5136:7: lv_finallyExpression_7_0= ruleXExpression
                     {
                     if ( state.backtracking==0 ) {
 
@@ -14088,7 +14096,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXSynchronizedExpression"
-    // InternalContentAssistFragmentTestLang.g:5154:1: entryRuleXSynchronizedExpression returns [EObject current=null] : iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF ;
+    // InternalContentAssistFragmentTestLang.g:5159:1: entryRuleXSynchronizedExpression returns [EObject current=null] : iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF ;
     public final EObject entryRuleXSynchronizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14096,8 +14104,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5154:64: (iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF )
-            // InternalContentAssistFragmentTestLang.g:5155:2: iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF
+            // InternalContentAssistFragmentTestLang.g:5159:64: (iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF )
+            // InternalContentAssistFragmentTestLang.g:5160:2: iv_ruleXSynchronizedExpression= ruleXSynchronizedExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXSynchronizedExpressionRule()); 
@@ -14128,7 +14136,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXSynchronizedExpression"
-    // InternalContentAssistFragmentTestLang.g:5161:1: ruleXSynchronizedExpression returns [EObject current=null] : ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5166:1: ruleXSynchronizedExpression returns [EObject current=null] : ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) ;
     public final EObject ruleXSynchronizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -14144,20 +14152,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5167:2: ( ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5168:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:5172:2: ( ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5173:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5168:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:5169:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5173:2: ( ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:5174:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) ) ( (lv_param_3_0= ruleXExpression ) ) otherlv_4= ')' ( (lv_expression_5_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5169:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) )
-            // InternalContentAssistFragmentTestLang.g:5170:4: ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' )
+            // InternalContentAssistFragmentTestLang.g:5174:3: ( ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' ) )
+            // InternalContentAssistFragmentTestLang.g:5175:4: ( ( () 'synchronized' '(' ) )=> ( () otherlv_1= 'synchronized' otherlv_2= '(' )
             {
-            // InternalContentAssistFragmentTestLang.g:5177:4: ( () otherlv_1= 'synchronized' otherlv_2= '(' )
-            // InternalContentAssistFragmentTestLang.g:5178:5: () otherlv_1= 'synchronized' otherlv_2= '('
+            // InternalContentAssistFragmentTestLang.g:5182:4: ( () otherlv_1= 'synchronized' otherlv_2= '(' )
+            // InternalContentAssistFragmentTestLang.g:5183:5: () otherlv_1= 'synchronized' otherlv_2= '('
             {
-            // InternalContentAssistFragmentTestLang.g:5178:5: ()
-            // InternalContentAssistFragmentTestLang.g:5179:6: 
+            // InternalContentAssistFragmentTestLang.g:5183:5: ()
+            // InternalContentAssistFragmentTestLang.g:5184:6: 
             {
             if ( state.backtracking==0 ) {
 
@@ -14187,11 +14195,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:5195:3: ( (lv_param_3_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:5196:4: (lv_param_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5200:3: ( (lv_param_3_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5201:4: (lv_param_3_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:5196:4: (lv_param_3_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:5197:5: lv_param_3_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:5201:4: (lv_param_3_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5202:5: lv_param_3_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -14228,11 +14236,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_4, grammarAccess.getXSynchronizedExpressionAccess().getRightParenthesisKeyword_2());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5218:3: ( (lv_expression_5_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:5219:4: (lv_expression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5223:3: ( (lv_expression_5_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5224:4: (lv_expression_5_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:5219:4: (lv_expression_5_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:5220:5: lv_expression_5_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:5224:4: (lv_expression_5_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5225:5: lv_expression_5_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -14288,7 +14296,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXCatchClause"
-    // InternalContentAssistFragmentTestLang.g:5241:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
+    // InternalContentAssistFragmentTestLang.g:5246:1: entryRuleXCatchClause returns [EObject current=null] : iv_ruleXCatchClause= ruleXCatchClause EOF ;
     public final EObject entryRuleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -14296,8 +14304,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5241:53: (iv_ruleXCatchClause= ruleXCatchClause EOF )
-            // InternalContentAssistFragmentTestLang.g:5242:2: iv_ruleXCatchClause= ruleXCatchClause EOF
+            // InternalContentAssistFragmentTestLang.g:5246:53: (iv_ruleXCatchClause= ruleXCatchClause EOF )
+            // InternalContentAssistFragmentTestLang.g:5247:2: iv_ruleXCatchClause= ruleXCatchClause EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXCatchClauseRule()); 
@@ -14328,7 +14336,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXCatchClause"
-    // InternalContentAssistFragmentTestLang.g:5248:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5253:1: ruleXCatchClause returns [EObject current=null] : ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) ;
     public final EObject ruleXCatchClause() throws RecognitionException {
         EObject current = null;
 
@@ -14344,14 +14352,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5254:2: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5255:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:5259:2: ( ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5260:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5255:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
-            // InternalContentAssistFragmentTestLang.g:5256:3: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5260:2: ( ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) ) )
+            // InternalContentAssistFragmentTestLang.g:5261:3: ( ( 'catch' )=>otherlv_0= 'catch' ) otherlv_1= '(' ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) ) otherlv_3= ')' ( (lv_expression_4_0= ruleXExpression ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5256:3: ( ( 'catch' )=>otherlv_0= 'catch' )
-            // InternalContentAssistFragmentTestLang.g:5257:4: ( 'catch' )=>otherlv_0= 'catch'
+            // InternalContentAssistFragmentTestLang.g:5261:3: ( ( 'catch' )=>otherlv_0= 'catch' )
+            // InternalContentAssistFragmentTestLang.g:5262:4: ( 'catch' )=>otherlv_0= 'catch'
             {
             otherlv_0=(Token)match(input,84,FOLLOW_46); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -14368,11 +14376,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5267:3: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
-            // InternalContentAssistFragmentTestLang.g:5268:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // InternalContentAssistFragmentTestLang.g:5272:3: ( (lv_declaredParam_2_0= ruleFullJvmFormalParameter ) )
+            // InternalContentAssistFragmentTestLang.g:5273:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
             {
-            // InternalContentAssistFragmentTestLang.g:5268:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
-            // InternalContentAssistFragmentTestLang.g:5269:5: lv_declaredParam_2_0= ruleFullJvmFormalParameter
+            // InternalContentAssistFragmentTestLang.g:5273:4: (lv_declaredParam_2_0= ruleFullJvmFormalParameter )
+            // InternalContentAssistFragmentTestLang.g:5274:5: lv_declaredParam_2_0= ruleFullJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
 
@@ -14409,11 +14417,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_3, grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5290:3: ( (lv_expression_4_0= ruleXExpression ) )
-            // InternalContentAssistFragmentTestLang.g:5291:4: (lv_expression_4_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5295:3: ( (lv_expression_4_0= ruleXExpression ) )
+            // InternalContentAssistFragmentTestLang.g:5296:4: (lv_expression_4_0= ruleXExpression )
             {
-            // InternalContentAssistFragmentTestLang.g:5291:4: (lv_expression_4_0= ruleXExpression )
-            // InternalContentAssistFragmentTestLang.g:5292:5: lv_expression_4_0= ruleXExpression
+            // InternalContentAssistFragmentTestLang.g:5296:4: (lv_expression_4_0= ruleXExpression )
+            // InternalContentAssistFragmentTestLang.g:5297:5: lv_expression_4_0= ruleXExpression
             {
             if ( state.backtracking==0 ) {
 
@@ -14469,7 +14477,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalContentAssistFragmentTestLang.g:5313:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalContentAssistFragmentTestLang.g:5318:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -14477,8 +14485,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5313:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalContentAssistFragmentTestLang.g:5314:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalContentAssistFragmentTestLang.g:5318:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalContentAssistFragmentTestLang.g:5319:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
@@ -14509,7 +14517,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalContentAssistFragmentTestLang.g:5320:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
+    // InternalContentAssistFragmentTestLang.g:5325:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -14523,11 +14531,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5326:2: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
-            // InternalContentAssistFragmentTestLang.g:5327:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // InternalContentAssistFragmentTestLang.g:5331:2: ( (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* ) )
+            // InternalContentAssistFragmentTestLang.g:5332:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
             {
-            // InternalContentAssistFragmentTestLang.g:5327:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
-            // InternalContentAssistFragmentTestLang.g:5328:3: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            // InternalContentAssistFragmentTestLang.g:5332:2: (this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )* )
+            // InternalContentAssistFragmentTestLang.g:5333:3: this_ValidID_0= ruleValidID ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
             {
             if ( state.backtracking==0 ) {
 
@@ -14549,7 +14557,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5338:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
+            // InternalContentAssistFragmentTestLang.g:5343:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*
             loop87:
             do {
                 int alt87=2;
@@ -14574,10 +14582,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt87) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:5339:4: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
+            	    // InternalContentAssistFragmentTestLang.g:5344:4: ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID
             	    {
-            	    // InternalContentAssistFragmentTestLang.g:5339:4: ( ( '.' )=>kw= '.' )
-            	    // InternalContentAssistFragmentTestLang.g:5340:5: ( '.' )=>kw= '.'
+            	    // InternalContentAssistFragmentTestLang.g:5344:4: ( ( '.' )=>kw= '.' )
+            	    // InternalContentAssistFragmentTestLang.g:5345:5: ( '.' )=>kw= '.'
             	    {
             	    kw=(Token)match(input,47,FOLLOW_4); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -14643,7 +14651,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleNumber"
-    // InternalContentAssistFragmentTestLang.g:5362:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
+    // InternalContentAssistFragmentTestLang.g:5367:1: entryRuleNumber returns [String current=null] : iv_ruleNumber= ruleNumber EOF ;
     public final String entryRuleNumber() throws RecognitionException {
         String current = null;
 
@@ -14654,8 +14662,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5364:2: (iv_ruleNumber= ruleNumber EOF )
-            // InternalContentAssistFragmentTestLang.g:5365:2: iv_ruleNumber= ruleNumber EOF
+            // InternalContentAssistFragmentTestLang.g:5369:2: (iv_ruleNumber= ruleNumber EOF )
+            // InternalContentAssistFragmentTestLang.g:5370:2: iv_ruleNumber= ruleNumber EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNumberRule()); 
@@ -14689,7 +14697,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleNumber"
-    // InternalContentAssistFragmentTestLang.g:5374:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5379:1: ruleNumber returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) ;
     public final AntlrDatatypeRuleToken ruleNumber() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -14705,10 +14713,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5381:2: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
-            // InternalContentAssistFragmentTestLang.g:5382:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:5386:2: ( (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) ) )
+            // InternalContentAssistFragmentTestLang.g:5387:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5382:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:5387:2: (this_HEX_0= RULE_HEX | ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? ) )
             int alt91=2;
             int LA91_0 = input.LA(1);
 
@@ -14727,7 +14735,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt91) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5383:3: this_HEX_0= RULE_HEX
+                    // InternalContentAssistFragmentTestLang.g:5388:3: this_HEX_0= RULE_HEX
                     {
                     this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -14744,12 +14752,12 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:5391:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // InternalContentAssistFragmentTestLang.g:5396:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5391:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
-                    // InternalContentAssistFragmentTestLang.g:5392:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    // InternalContentAssistFragmentTestLang.g:5396:3: ( (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )? )
+                    // InternalContentAssistFragmentTestLang.g:5397:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL ) (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     {
-                    // InternalContentAssistFragmentTestLang.g:5392:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
+                    // InternalContentAssistFragmentTestLang.g:5397:4: (this_INT_1= RULE_INT | this_DECIMAL_2= RULE_DECIMAL )
                     int alt88=2;
                     int LA88_0 = input.LA(1);
 
@@ -14768,7 +14776,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt88) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:5393:5: this_INT_1= RULE_INT
+                            // InternalContentAssistFragmentTestLang.g:5398:5: this_INT_1= RULE_INT
                             {
                             this_INT_1=(Token)match(input,RULE_INT,FOLLOW_70); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -14785,7 +14793,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:5401:5: this_DECIMAL_2= RULE_DECIMAL
+                            // InternalContentAssistFragmentTestLang.g:5406:5: this_DECIMAL_2= RULE_DECIMAL
                             {
                             this_DECIMAL_2=(Token)match(input,RULE_DECIMAL,FOLLOW_70); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -14804,7 +14812,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:5409:4: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
+                    // InternalContentAssistFragmentTestLang.g:5414:4: (kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL ) )?
                     int alt90=2;
                     int LA90_0 = input.LA(1);
 
@@ -14817,7 +14825,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt90) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:5410:5: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            // InternalContentAssistFragmentTestLang.g:5415:5: kw= '.' (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             {
                             kw=(Token)match(input,47,FOLLOW_71); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -14826,7 +14834,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                               					newLeafNode(kw, grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0());
                               				
                             }
-                            // InternalContentAssistFragmentTestLang.g:5415:5: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
+                            // InternalContentAssistFragmentTestLang.g:5420:5: (this_INT_4= RULE_INT | this_DECIMAL_5= RULE_DECIMAL )
                             int alt89=2;
                             int LA89_0 = input.LA(1);
 
@@ -14845,7 +14853,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             switch (alt89) {
                                 case 1 :
-                                    // InternalContentAssistFragmentTestLang.g:5416:6: this_INT_4= RULE_INT
+                                    // InternalContentAssistFragmentTestLang.g:5421:6: this_INT_4= RULE_INT
                                     {
                                     this_INT_4=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
@@ -14862,7 +14870,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                                     }
                                     break;
                                 case 2 :
-                                    // InternalContentAssistFragmentTestLang.g:5424:6: this_DECIMAL_5= RULE_DECIMAL
+                                    // InternalContentAssistFragmentTestLang.g:5429:6: this_DECIMAL_5= RULE_DECIMAL
                                     {
                                     this_DECIMAL_5=(Token)match(input,RULE_DECIMAL,FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
@@ -14921,7 +14929,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5441:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
+    // InternalContentAssistFragmentTestLang.g:5446:1: entryRuleJvmTypeReference returns [EObject current=null] : iv_ruleJvmTypeReference= ruleJvmTypeReference EOF ;
     public final EObject entryRuleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14929,8 +14937,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5441:57: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
-            // InternalContentAssistFragmentTestLang.g:5442:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
+            // InternalContentAssistFragmentTestLang.g:5446:57: (iv_ruleJvmTypeReference= ruleJvmTypeReference EOF )
+            // InternalContentAssistFragmentTestLang.g:5447:2: iv_ruleJvmTypeReference= ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmTypeReferenceRule()); 
@@ -14961,7 +14969,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5448:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) ;
+    // InternalContentAssistFragmentTestLang.g:5453:1: ruleJvmTypeReference returns [EObject current=null] : ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) ;
     public final EObject ruleJvmTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -14974,10 +14982,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5454:2: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) )
-            // InternalContentAssistFragmentTestLang.g:5455:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
+            // InternalContentAssistFragmentTestLang.g:5459:2: ( ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef ) )
+            // InternalContentAssistFragmentTestLang.g:5460:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
             {
-            // InternalContentAssistFragmentTestLang.g:5455:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
+            // InternalContentAssistFragmentTestLang.g:5460:2: ( (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | this_XFunctionTypeRef_3= ruleXFunctionTypeRef )
             int alt93=2;
             int LA93_0 = input.LA(1);
 
@@ -14996,10 +15004,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt93) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5456:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5461:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5456:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
-                    // InternalContentAssistFragmentTestLang.g:5457:4: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
+                    // InternalContentAssistFragmentTestLang.g:5461:3: (this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5462:4: this_JvmParameterizedTypeReference_0= ruleJvmParameterizedTypeReference ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15017,7 +15025,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				afterParserOrEnumRuleCall();
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:5465:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
+                    // InternalContentAssistFragmentTestLang.g:5470:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
                     loop92:
                     do {
                         int alt92=2;
@@ -15042,13 +15050,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt92) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5466:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
+                    	    // InternalContentAssistFragmentTestLang.g:5471:5: ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5472:5: ( () ruleArrayBrackets )
-                    	    // InternalContentAssistFragmentTestLang.g:5473:6: () ruleArrayBrackets
+                    	    // InternalContentAssistFragmentTestLang.g:5477:5: ( () ruleArrayBrackets )
+                    	    // InternalContentAssistFragmentTestLang.g:5478:6: () ruleArrayBrackets
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5473:6: ()
-                    	    // InternalContentAssistFragmentTestLang.g:5474:7: 
+                    	    // InternalContentAssistFragmentTestLang.g:5478:6: ()
+                    	    // InternalContentAssistFragmentTestLang.g:5479:7: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -15094,7 +15102,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:5491:3: this_XFunctionTypeRef_3= ruleXFunctionTypeRef
+                    // InternalContentAssistFragmentTestLang.g:5496:3: this_XFunctionTypeRef_3= ruleXFunctionTypeRef
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15140,7 +15148,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleArrayBrackets"
-    // InternalContentAssistFragmentTestLang.g:5503:1: entryRuleArrayBrackets returns [String current=null] : iv_ruleArrayBrackets= ruleArrayBrackets EOF ;
+    // InternalContentAssistFragmentTestLang.g:5508:1: entryRuleArrayBrackets returns [String current=null] : iv_ruleArrayBrackets= ruleArrayBrackets EOF ;
     public final String entryRuleArrayBrackets() throws RecognitionException {
         String current = null;
 
@@ -15148,8 +15156,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5503:53: (iv_ruleArrayBrackets= ruleArrayBrackets EOF )
-            // InternalContentAssistFragmentTestLang.g:5504:2: iv_ruleArrayBrackets= ruleArrayBrackets EOF
+            // InternalContentAssistFragmentTestLang.g:5508:53: (iv_ruleArrayBrackets= ruleArrayBrackets EOF )
+            // InternalContentAssistFragmentTestLang.g:5509:2: iv_ruleArrayBrackets= ruleArrayBrackets EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getArrayBracketsRule()); 
@@ -15180,7 +15188,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleArrayBrackets"
-    // InternalContentAssistFragmentTestLang.g:5510:1: ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '[' kw= ']' ) ;
+    // InternalContentAssistFragmentTestLang.g:5515:1: ruleArrayBrackets returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '[' kw= ']' ) ;
     public final AntlrDatatypeRuleToken ruleArrayBrackets() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -15190,11 +15198,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5516:2: ( (kw= '[' kw= ']' ) )
-            // InternalContentAssistFragmentTestLang.g:5517:2: (kw= '[' kw= ']' )
+            // InternalContentAssistFragmentTestLang.g:5521:2: ( (kw= '[' kw= ']' ) )
+            // InternalContentAssistFragmentTestLang.g:5522:2: (kw= '[' kw= ']' )
             {
-            // InternalContentAssistFragmentTestLang.g:5517:2: (kw= '[' kw= ']' )
-            // InternalContentAssistFragmentTestLang.g:5518:3: kw= '[' kw= ']'
+            // InternalContentAssistFragmentTestLang.g:5522:2: (kw= '[' kw= ']' )
+            // InternalContentAssistFragmentTestLang.g:5523:3: kw= '[' kw= ']'
             {
             kw=(Token)match(input,56,FOLLOW_43); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -15235,7 +15243,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXFunctionTypeRef"
-    // InternalContentAssistFragmentTestLang.g:5532:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
+    // InternalContentAssistFragmentTestLang.g:5537:1: entryRuleXFunctionTypeRef returns [EObject current=null] : iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF ;
     public final EObject entryRuleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -15243,8 +15251,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5532:57: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
-            // InternalContentAssistFragmentTestLang.g:5533:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
+            // InternalContentAssistFragmentTestLang.g:5537:57: (iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF )
+            // InternalContentAssistFragmentTestLang.g:5538:2: iv_ruleXFunctionTypeRef= ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionTypeRefRule()); 
@@ -15275,7 +15283,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXFunctionTypeRef"
-    // InternalContentAssistFragmentTestLang.g:5539:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5544:1: ruleXFunctionTypeRef returns [EObject current=null] : ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleXFunctionTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -15294,13 +15302,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5545:2: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5546:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:5550:2: ( ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5551:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5546:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
-            // InternalContentAssistFragmentTestLang.g:5547:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:5551:2: ( (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:5552:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )? otherlv_5= '=>' ( (lv_returnType_6_0= ruleJvmTypeReference ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5547:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
+            // InternalContentAssistFragmentTestLang.g:5552:3: (otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')' )?
             int alt96=2;
             int LA96_0 = input.LA(1);
 
@@ -15309,7 +15317,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt96) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5548:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
+                    // InternalContentAssistFragmentTestLang.g:5553:4: otherlv_0= '(' ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )? otherlv_4= ')'
                     {
                     otherlv_0=(Token)match(input,51,FOLLOW_72); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15317,7 +15325,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_0, grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:5552:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
+                    // InternalContentAssistFragmentTestLang.g:5557:4: ( ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )* )?
                     int alt95=2;
                     int LA95_0 = input.LA(1);
 
@@ -15326,13 +15334,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt95) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:5553:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:5558:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) ) (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             {
-                            // InternalContentAssistFragmentTestLang.g:5553:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
-                            // InternalContentAssistFragmentTestLang.g:5554:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // InternalContentAssistFragmentTestLang.g:5558:5: ( (lv_paramTypes_1_0= ruleJvmTypeReference ) )
+                            // InternalContentAssistFragmentTestLang.g:5559:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
                             {
-                            // InternalContentAssistFragmentTestLang.g:5554:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
-                            // InternalContentAssistFragmentTestLang.g:5555:7: lv_paramTypes_1_0= ruleJvmTypeReference
+                            // InternalContentAssistFragmentTestLang.g:5559:6: (lv_paramTypes_1_0= ruleJvmTypeReference )
+                            // InternalContentAssistFragmentTestLang.g:5560:7: lv_paramTypes_1_0= ruleJvmTypeReference
                             {
                             if ( state.backtracking==0 ) {
 
@@ -15363,7 +15371,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                             }
 
-                            // InternalContentAssistFragmentTestLang.g:5572:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
+                            // InternalContentAssistFragmentTestLang.g:5577:5: (otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) ) )*
                             loop94:
                             do {
                                 int alt94=2;
@@ -15376,7 +15384,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                                 switch (alt94) {
                             	case 1 :
-                            	    // InternalContentAssistFragmentTestLang.g:5573:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // InternalContentAssistFragmentTestLang.g:5578:6: otherlv_2= ',' ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
                             	    {
                             	    otherlv_2=(Token)match(input,50,FOLLOW_3); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -15384,11 +15392,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             	      						newLeafNode(otherlv_2, grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_1_1_0());
                             	      					
                             	    }
-                            	    // InternalContentAssistFragmentTestLang.g:5577:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
-                            	    // InternalContentAssistFragmentTestLang.g:5578:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // InternalContentAssistFragmentTestLang.g:5582:6: ( (lv_paramTypes_3_0= ruleJvmTypeReference ) )
+                            	    // InternalContentAssistFragmentTestLang.g:5583:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
                             	    {
-                            	    // InternalContentAssistFragmentTestLang.g:5578:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
-                            	    // InternalContentAssistFragmentTestLang.g:5579:8: lv_paramTypes_3_0= ruleJvmTypeReference
+                            	    // InternalContentAssistFragmentTestLang.g:5583:7: (lv_paramTypes_3_0= ruleJvmTypeReference )
+                            	    // InternalContentAssistFragmentTestLang.g:5584:8: lv_paramTypes_3_0= ruleJvmTypeReference
                             	    {
                             	    if ( state.backtracking==0 ) {
 
@@ -15452,11 +15460,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_5, grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5607:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:5608:4: (lv_returnType_6_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5612:3: ( (lv_returnType_6_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:5613:4: (lv_returnType_6_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:5608:4: (lv_returnType_6_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:5609:5: lv_returnType_6_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:5613:4: (lv_returnType_6_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5614:5: lv_returnType_6_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -15512,7 +15520,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmParameterizedTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5630:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
+    // InternalContentAssistFragmentTestLang.g:5635:1: entryRuleJvmParameterizedTypeReference returns [EObject current=null] : iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF ;
     public final EObject entryRuleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -15520,8 +15528,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5630:70: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
-            // InternalContentAssistFragmentTestLang.g:5631:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
+            // InternalContentAssistFragmentTestLang.g:5635:70: (iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF )
+            // InternalContentAssistFragmentTestLang.g:5636:2: iv_ruleJvmParameterizedTypeReference= ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule()); 
@@ -15552,7 +15560,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmParameterizedTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5637:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
+    // InternalContentAssistFragmentTestLang.g:5642:1: ruleJvmParameterizedTypeReference returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) ;
     public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -15576,17 +15584,17 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5643:2: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
-            // InternalContentAssistFragmentTestLang.g:5644:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
+            // InternalContentAssistFragmentTestLang.g:5648:2: ( ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? ) )
+            // InternalContentAssistFragmentTestLang.g:5649:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
             {
-            // InternalContentAssistFragmentTestLang.g:5644:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
-            // InternalContentAssistFragmentTestLang.g:5645:3: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
+            // InternalContentAssistFragmentTestLang.g:5649:2: ( ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )? )
+            // InternalContentAssistFragmentTestLang.g:5650:3: ( ( ruleQualifiedName ) ) ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             {
-            // InternalContentAssistFragmentTestLang.g:5645:3: ( ( ruleQualifiedName ) )
-            // InternalContentAssistFragmentTestLang.g:5646:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:5650:3: ( ( ruleQualifiedName ) )
+            // InternalContentAssistFragmentTestLang.g:5651:4: ( ruleQualifiedName )
             {
-            // InternalContentAssistFragmentTestLang.g:5646:4: ( ruleQualifiedName )
-            // InternalContentAssistFragmentTestLang.g:5647:5: ruleQualifiedName
+            // InternalContentAssistFragmentTestLang.g:5651:4: ( ruleQualifiedName )
+            // InternalContentAssistFragmentTestLang.g:5652:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -15616,15 +15624,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:5661:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
+            // InternalContentAssistFragmentTestLang.g:5666:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?
             int alt101=2;
             alt101 = dfa101.predict(input);
             switch (alt101) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5662:4: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
+                    // InternalContentAssistFragmentTestLang.g:5667:4: ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:5662:4: ( ( '<' )=>otherlv_1= '<' )
-                    // InternalContentAssistFragmentTestLang.g:5663:5: ( '<' )=>otherlv_1= '<'
+                    // InternalContentAssistFragmentTestLang.g:5667:4: ( ( '<' )=>otherlv_1= '<' )
+                    // InternalContentAssistFragmentTestLang.g:5668:5: ( '<' )=>otherlv_1= '<'
                     {
                     otherlv_1=(Token)match(input,21,FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -15635,11 +15643,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:5669:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
-                    // InternalContentAssistFragmentTestLang.g:5670:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:5674:4: ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) )
+                    // InternalContentAssistFragmentTestLang.g:5675:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5670:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
-                    // InternalContentAssistFragmentTestLang.g:5671:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
+                    // InternalContentAssistFragmentTestLang.g:5675:5: (lv_arguments_2_0= ruleJvmArgumentTypeReference )
+                    // InternalContentAssistFragmentTestLang.g:5676:6: lv_arguments_2_0= ruleJvmArgumentTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -15670,7 +15678,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:5688:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:5693:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )*
                     loop97:
                     do {
                         int alt97=2;
@@ -15683,7 +15691,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt97) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5689:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:5694:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
                     	    {
                     	    otherlv_3=(Token)match(input,50,FOLLOW_27); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -15691,11 +15699,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	      					newLeafNode(otherlv_3, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0());
                     	      				
                     	    }
-                    	    // InternalContentAssistFragmentTestLang.g:5693:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
-                    	    // InternalContentAssistFragmentTestLang.g:5694:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:5698:5: ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) )
+                    	    // InternalContentAssistFragmentTestLang.g:5699:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5694:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
-                    	    // InternalContentAssistFragmentTestLang.g:5695:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
+                    	    // InternalContentAssistFragmentTestLang.g:5699:6: (lv_arguments_4_0= ruleJvmArgumentTypeReference )
+                    	    // InternalContentAssistFragmentTestLang.g:5700:7: lv_arguments_4_0= ruleJvmArgumentTypeReference
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -15741,7 +15749,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                       				newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3());
                       			
                     }
-                    // InternalContentAssistFragmentTestLang.g:5717:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
+                    // InternalContentAssistFragmentTestLang.g:5722:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*
                     loop100:
                     do {
                         int alt100=2;
@@ -15766,16 +15774,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt100) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5718:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    // InternalContentAssistFragmentTestLang.g:5723:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5718:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
-                    	    // InternalContentAssistFragmentTestLang.g:5719:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
+                    	    // InternalContentAssistFragmentTestLang.g:5723:5: ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) )
+                    	    // InternalContentAssistFragmentTestLang.g:5724:6: ( ( () '.' ) )=> ( () otherlv_7= '.' )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5725:6: ( () otherlv_7= '.' )
-                    	    // InternalContentAssistFragmentTestLang.g:5726:7: () otherlv_7= '.'
+                    	    // InternalContentAssistFragmentTestLang.g:5730:6: ( () otherlv_7= '.' )
+                    	    // InternalContentAssistFragmentTestLang.g:5731:7: () otherlv_7= '.'
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5726:7: ()
-                    	    // InternalContentAssistFragmentTestLang.g:5727:8: 
+                    	    // InternalContentAssistFragmentTestLang.g:5731:7: ()
+                    	    // InternalContentAssistFragmentTestLang.g:5732:8: 
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -15799,11 +15807,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     	    }
 
-                    	    // InternalContentAssistFragmentTestLang.g:5739:5: ( ( ruleValidID ) )
-                    	    // InternalContentAssistFragmentTestLang.g:5740:6: ( ruleValidID )
+                    	    // InternalContentAssistFragmentTestLang.g:5744:5: ( ( ruleValidID ) )
+                    	    // InternalContentAssistFragmentTestLang.g:5745:6: ( ruleValidID )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5740:6: ( ruleValidID )
-                    	    // InternalContentAssistFragmentTestLang.g:5741:7: ruleValidID
+                    	    // InternalContentAssistFragmentTestLang.g:5745:6: ( ruleValidID )
+                    	    // InternalContentAssistFragmentTestLang.g:5746:7: ruleValidID
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -15833,15 +15841,15 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     	    }
 
-                    	    // InternalContentAssistFragmentTestLang.g:5755:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
+                    	    // InternalContentAssistFragmentTestLang.g:5760:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?
                     	    int alt99=2;
                     	    alt99 = dfa99.predict(input);
                     	    switch (alt99) {
                     	        case 1 :
-                    	            // InternalContentAssistFragmentTestLang.g:5756:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
+                    	            // InternalContentAssistFragmentTestLang.g:5761:6: ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>'
                     	            {
-                    	            // InternalContentAssistFragmentTestLang.g:5756:6: ( ( '<' )=>otherlv_9= '<' )
-                    	            // InternalContentAssistFragmentTestLang.g:5757:7: ( '<' )=>otherlv_9= '<'
+                    	            // InternalContentAssistFragmentTestLang.g:5761:6: ( ( '<' )=>otherlv_9= '<' )
+                    	            // InternalContentAssistFragmentTestLang.g:5762:7: ( '<' )=>otherlv_9= '<'
                     	            {
                     	            otherlv_9=(Token)match(input,21,FOLLOW_27); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
@@ -15852,11 +15860,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     	            }
 
-                    	            // InternalContentAssistFragmentTestLang.g:5763:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
-                    	            // InternalContentAssistFragmentTestLang.g:5764:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            // InternalContentAssistFragmentTestLang.g:5768:6: ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) )
+                    	            // InternalContentAssistFragmentTestLang.g:5769:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
                     	            {
-                    	            // InternalContentAssistFragmentTestLang.g:5764:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
-                    	            // InternalContentAssistFragmentTestLang.g:5765:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
+                    	            // InternalContentAssistFragmentTestLang.g:5769:7: (lv_arguments_10_0= ruleJvmArgumentTypeReference )
+                    	            // InternalContentAssistFragmentTestLang.g:5770:8: lv_arguments_10_0= ruleJvmArgumentTypeReference
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -15887,7 +15895,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     	            }
 
-                    	            // InternalContentAssistFragmentTestLang.g:5782:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
+                    	            // InternalContentAssistFragmentTestLang.g:5787:6: (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )*
                     	            loop98:
                     	            do {
                     	                int alt98=2;
@@ -15900,7 +15908,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     	                switch (alt98) {
                     	            	case 1 :
-                    	            	    // InternalContentAssistFragmentTestLang.g:5783:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    // InternalContentAssistFragmentTestLang.g:5788:7: otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
                     	            	    {
                     	            	    otherlv_11=(Token)match(input,50,FOLLOW_27); if (state.failed) return current;
                     	            	    if ( state.backtracking==0 ) {
@@ -15908,11 +15916,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     	            	      							newLeafNode(otherlv_11, grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_4_2_2_0());
                     	            	      						
                     	            	    }
-                    	            	    // InternalContentAssistFragmentTestLang.g:5787:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
-                    	            	    // InternalContentAssistFragmentTestLang.g:5788:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    // InternalContentAssistFragmentTestLang.g:5792:7: ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) )
+                    	            	    // InternalContentAssistFragmentTestLang.g:5793:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
                     	            	    {
-                    	            	    // InternalContentAssistFragmentTestLang.g:5788:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
-                    	            	    // InternalContentAssistFragmentTestLang.g:5789:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
+                    	            	    // InternalContentAssistFragmentTestLang.g:5793:8: (lv_arguments_12_0= ruleJvmArgumentTypeReference )
+                    	            	    // InternalContentAssistFragmentTestLang.g:5794:9: lv_arguments_12_0= ruleJvmArgumentTypeReference
                     	            	    {
                     	            	    if ( state.backtracking==0 ) {
 
@@ -16004,7 +16012,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmArgumentTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5818:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
+    // InternalContentAssistFragmentTestLang.g:5823:1: entryRuleJvmArgumentTypeReference returns [EObject current=null] : iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF ;
     public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16012,8 +16020,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5818:65: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
-            // InternalContentAssistFragmentTestLang.g:5819:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
+            // InternalContentAssistFragmentTestLang.g:5823:65: (iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF )
+            // InternalContentAssistFragmentTestLang.g:5824:2: iv_ruleJvmArgumentTypeReference= ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule()); 
@@ -16044,7 +16052,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5825:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
+    // InternalContentAssistFragmentTestLang.g:5830:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16057,10 +16065,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5831:2: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:5832:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5836:2: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:5837:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:5832:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5837:2: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             int alt102=2;
             int LA102_0 = input.LA(1);
 
@@ -16079,7 +16087,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt102) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5833:3: this_JvmTypeReference_0= ruleJvmTypeReference
+                    // InternalContentAssistFragmentTestLang.g:5838:3: this_JvmTypeReference_0= ruleJvmTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16101,7 +16109,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:5842:3: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
+                    // InternalContentAssistFragmentTestLang.g:5847:3: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16147,7 +16155,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmWildcardTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5854:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    // InternalContentAssistFragmentTestLang.g:5859:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
     public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16155,8 +16163,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5854:65: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
-            // InternalContentAssistFragmentTestLang.g:5855:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
+            // InternalContentAssistFragmentTestLang.g:5859:65: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // InternalContentAssistFragmentTestLang.g:5860:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule()); 
@@ -16187,7 +16195,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmWildcardTypeReference"
-    // InternalContentAssistFragmentTestLang.g:5861:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
+    // InternalContentAssistFragmentTestLang.g:5866:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) ;
     public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
 
@@ -16205,14 +16213,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5867:2: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
-            // InternalContentAssistFragmentTestLang.g:5868:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // InternalContentAssistFragmentTestLang.g:5872:2: ( ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? ) )
+            // InternalContentAssistFragmentTestLang.g:5873:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
             {
-            // InternalContentAssistFragmentTestLang.g:5868:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
-            // InternalContentAssistFragmentTestLang.g:5869:3: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            // InternalContentAssistFragmentTestLang.g:5873:2: ( () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )? )
+            // InternalContentAssistFragmentTestLang.g:5874:3: () otherlv_1= '?' ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:5869:3: ()
-            // InternalContentAssistFragmentTestLang.g:5870:4: 
+            // InternalContentAssistFragmentTestLang.g:5874:3: ()
+            // InternalContentAssistFragmentTestLang.g:5875:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -16230,7 +16238,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5880:3: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
+            // InternalContentAssistFragmentTestLang.g:5885:3: ( ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* ) | ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* ) )?
             int alt105=3;
             int LA105_0 = input.LA(1);
 
@@ -16242,16 +16250,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt105) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:5881:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5886:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5881:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
-                    // InternalContentAssistFragmentTestLang.g:5882:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    // InternalContentAssistFragmentTestLang.g:5886:4: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5887:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) ) ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:5882:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
-                    // InternalContentAssistFragmentTestLang.g:5883:6: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // InternalContentAssistFragmentTestLang.g:5887:5: ( (lv_constraints_2_0= ruleJvmUpperBound ) )
+                    // InternalContentAssistFragmentTestLang.g:5888:6: (lv_constraints_2_0= ruleJvmUpperBound )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5883:6: (lv_constraints_2_0= ruleJvmUpperBound )
-                    // InternalContentAssistFragmentTestLang.g:5884:7: lv_constraints_2_0= ruleJvmUpperBound
+                    // InternalContentAssistFragmentTestLang.g:5888:6: (lv_constraints_2_0= ruleJvmUpperBound )
+                    // InternalContentAssistFragmentTestLang.g:5889:7: lv_constraints_2_0= ruleJvmUpperBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16282,7 +16290,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:5901:5: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
+                    // InternalContentAssistFragmentTestLang.g:5906:5: ( (lv_constraints_3_0= ruleJvmUpperBoundAnded ) )*
                     loop103:
                     do {
                         int alt103=2;
@@ -16295,10 +16303,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt103) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5902:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // InternalContentAssistFragmentTestLang.g:5907:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5902:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
-                    	    // InternalContentAssistFragmentTestLang.g:5903:7: lv_constraints_3_0= ruleJvmUpperBoundAnded
+                    	    // InternalContentAssistFragmentTestLang.g:5907:6: (lv_constraints_3_0= ruleJvmUpperBoundAnded )
+                    	    // InternalContentAssistFragmentTestLang.g:5908:7: lv_constraints_3_0= ruleJvmUpperBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -16342,16 +16350,16 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:5922:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5927:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5922:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
-                    // InternalContentAssistFragmentTestLang.g:5923:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    // InternalContentAssistFragmentTestLang.g:5927:4: ( ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )* )
+                    // InternalContentAssistFragmentTestLang.g:5928:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) ) ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     {
-                    // InternalContentAssistFragmentTestLang.g:5923:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
-                    // InternalContentAssistFragmentTestLang.g:5924:6: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // InternalContentAssistFragmentTestLang.g:5928:5: ( (lv_constraints_4_0= ruleJvmLowerBound ) )
+                    // InternalContentAssistFragmentTestLang.g:5929:6: (lv_constraints_4_0= ruleJvmLowerBound )
                     {
-                    // InternalContentAssistFragmentTestLang.g:5924:6: (lv_constraints_4_0= ruleJvmLowerBound )
-                    // InternalContentAssistFragmentTestLang.g:5925:7: lv_constraints_4_0= ruleJvmLowerBound
+                    // InternalContentAssistFragmentTestLang.g:5929:6: (lv_constraints_4_0= ruleJvmLowerBound )
+                    // InternalContentAssistFragmentTestLang.g:5930:7: lv_constraints_4_0= ruleJvmLowerBound
                     {
                     if ( state.backtracking==0 ) {
 
@@ -16382,7 +16390,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:5942:5: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
+                    // InternalContentAssistFragmentTestLang.g:5947:5: ( (lv_constraints_5_0= ruleJvmLowerBoundAnded ) )*
                     loop104:
                     do {
                         int alt104=2;
@@ -16395,10 +16403,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                         switch (alt104) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:5943:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // InternalContentAssistFragmentTestLang.g:5948:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
                     	    {
-                    	    // InternalContentAssistFragmentTestLang.g:5943:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
-                    	    // InternalContentAssistFragmentTestLang.g:5944:7: lv_constraints_5_0= ruleJvmLowerBoundAnded
+                    	    // InternalContentAssistFragmentTestLang.g:5948:6: (lv_constraints_5_0= ruleJvmLowerBoundAnded )
+                    	    // InternalContentAssistFragmentTestLang.g:5949:7: lv_constraints_5_0= ruleJvmLowerBoundAnded
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -16469,7 +16477,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
-    // InternalContentAssistFragmentTestLang.g:5967:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
+    // InternalContentAssistFragmentTestLang.g:5972:1: entryRuleJvmUpperBound returns [EObject current=null] : iv_ruleJvmUpperBound= ruleJvmUpperBound EOF ;
     public final EObject entryRuleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -16477,8 +16485,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5967:54: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
-            // InternalContentAssistFragmentTestLang.g:5968:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
+            // InternalContentAssistFragmentTestLang.g:5972:54: (iv_ruleJvmUpperBound= ruleJvmUpperBound EOF )
+            // InternalContentAssistFragmentTestLang.g:5973:2: iv_ruleJvmUpperBound= ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundRule()); 
@@ -16509,7 +16517,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmUpperBound"
-    // InternalContentAssistFragmentTestLang.g:5974:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:5979:1: ruleJvmUpperBound returns [EObject current=null] : (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBound() throws RecognitionException {
         EObject current = null;
 
@@ -16521,11 +16529,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:5980:2: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:5981:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:5985:2: ( (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:5986:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:5981:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalContentAssistFragmentTestLang.g:5982:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:5986:2: (otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:5987:3: otherlv_0= 'extends' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,69,FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16533,11 +16541,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:5986:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:5987:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5991:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:5992:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:5987:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:5988:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:5992:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:5993:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -16593,7 +16601,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmUpperBoundAnded"
-    // InternalContentAssistFragmentTestLang.g:6009:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
+    // InternalContentAssistFragmentTestLang.g:6014:1: entryRuleJvmUpperBoundAnded returns [EObject current=null] : iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF ;
     public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -16601,8 +16609,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6009:59: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
-            // InternalContentAssistFragmentTestLang.g:6010:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
+            // InternalContentAssistFragmentTestLang.g:6014:59: (iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF )
+            // InternalContentAssistFragmentTestLang.g:6015:2: iv_ruleJvmUpperBoundAnded= ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule()); 
@@ -16633,7 +16641,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmUpperBoundAnded"
-    // InternalContentAssistFragmentTestLang.g:6016:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:6021:1: ruleJvmUpperBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -16645,11 +16653,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6022:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:6023:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6027:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:6028:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:6023:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalContentAssistFragmentTestLang.g:6024:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6028:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6029:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,86,FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16657,11 +16665,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:6028:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:6029:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6033:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6034:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:6029:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:6030:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:6034:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6035:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -16717,7 +16725,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmLowerBound"
-    // InternalContentAssistFragmentTestLang.g:6051:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
+    // InternalContentAssistFragmentTestLang.g:6056:1: entryRuleJvmLowerBound returns [EObject current=null] : iv_ruleJvmLowerBound= ruleJvmLowerBound EOF ;
     public final EObject entryRuleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -16725,8 +16733,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6051:54: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
-            // InternalContentAssistFragmentTestLang.g:6052:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
+            // InternalContentAssistFragmentTestLang.g:6056:54: (iv_ruleJvmLowerBound= ruleJvmLowerBound EOF )
+            // InternalContentAssistFragmentTestLang.g:6057:2: iv_ruleJvmLowerBound= ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundRule()); 
@@ -16757,7 +16765,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmLowerBound"
-    // InternalContentAssistFragmentTestLang.g:6058:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:6063:1: ruleJvmLowerBound returns [EObject current=null] : (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBound() throws RecognitionException {
         EObject current = null;
 
@@ -16769,11 +16777,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6064:2: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:6065:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6069:2: ( (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:6070:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:6065:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalContentAssistFragmentTestLang.g:6066:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6070:2: (otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6071:3: otherlv_0= 'super' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,73,FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16781,11 +16789,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:6070:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:6071:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6075:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6076:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:6071:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:6072:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:6076:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6077:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -16841,7 +16849,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleJvmLowerBoundAnded"
-    // InternalContentAssistFragmentTestLang.g:6093:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
+    // InternalContentAssistFragmentTestLang.g:6098:1: entryRuleJvmLowerBoundAnded returns [EObject current=null] : iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF ;
     public final EObject entryRuleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -16849,8 +16857,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6093:59: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
-            // InternalContentAssistFragmentTestLang.g:6094:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
+            // InternalContentAssistFragmentTestLang.g:6098:59: (iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF )
+            // InternalContentAssistFragmentTestLang.g:6099:2: iv_ruleJvmLowerBoundAnded= ruleJvmLowerBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getJvmLowerBoundAndedRule()); 
@@ -16881,7 +16889,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleJvmLowerBoundAnded"
-    // InternalContentAssistFragmentTestLang.g:6100:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
+    // InternalContentAssistFragmentTestLang.g:6105:1: ruleJvmLowerBoundAnded returns [EObject current=null] : (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) ;
     public final EObject ruleJvmLowerBoundAnded() throws RecognitionException {
         EObject current = null;
 
@@ -16893,11 +16901,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6106:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
-            // InternalContentAssistFragmentTestLang.g:6107:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6111:2: ( (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) ) )
+            // InternalContentAssistFragmentTestLang.g:6112:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
             {
-            // InternalContentAssistFragmentTestLang.g:6107:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
-            // InternalContentAssistFragmentTestLang.g:6108:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6112:2: (otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) ) )
+            // InternalContentAssistFragmentTestLang.g:6113:3: otherlv_0= '&' ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
             {
             otherlv_0=(Token)match(input,86,FOLLOW_3); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -16905,11 +16913,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAndedAccess().getAmpersandKeyword_0());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:6112:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
-            // InternalContentAssistFragmentTestLang.g:6113:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6117:3: ( (lv_typeReference_1_0= ruleJvmTypeReference ) )
+            // InternalContentAssistFragmentTestLang.g:6118:4: (lv_typeReference_1_0= ruleJvmTypeReference )
             {
-            // InternalContentAssistFragmentTestLang.g:6113:4: (lv_typeReference_1_0= ruleJvmTypeReference )
-            // InternalContentAssistFragmentTestLang.g:6114:5: lv_typeReference_1_0= ruleJvmTypeReference
+            // InternalContentAssistFragmentTestLang.g:6118:4: (lv_typeReference_1_0= ruleJvmTypeReference )
+            // InternalContentAssistFragmentTestLang.g:6119:5: lv_typeReference_1_0= ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
 
@@ -16965,7 +16973,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildcard"
-    // InternalContentAssistFragmentTestLang.g:6135:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
+    // InternalContentAssistFragmentTestLang.g:6140:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
     public final String entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         String current = null;
 
@@ -16973,8 +16981,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6135:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
-            // InternalContentAssistFragmentTestLang.g:6136:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
+            // InternalContentAssistFragmentTestLang.g:6140:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
+            // InternalContentAssistFragmentTestLang.g:6141:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameWithWildcardRule()); 
@@ -17005,7 +17013,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleQualifiedNameWithWildcard"
-    // InternalContentAssistFragmentTestLang.g:6142:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
+    // InternalContentAssistFragmentTestLang.g:6147:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildcard() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -17017,11 +17025,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6148:2: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
-            // InternalContentAssistFragmentTestLang.g:6149:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // InternalContentAssistFragmentTestLang.g:6153:2: ( (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' ) )
+            // InternalContentAssistFragmentTestLang.g:6154:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
             {
-            // InternalContentAssistFragmentTestLang.g:6149:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
-            // InternalContentAssistFragmentTestLang.g:6150:3: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
+            // InternalContentAssistFragmentTestLang.g:6154:2: (this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*' )
+            // InternalContentAssistFragmentTestLang.g:6155:3: this_QualifiedName_0= ruleQualifiedName kw= '.' kw= '*'
             {
             if ( state.backtracking==0 ) {
 
@@ -17082,7 +17090,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleValidID"
-    // InternalContentAssistFragmentTestLang.g:6174:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
+    // InternalContentAssistFragmentTestLang.g:6179:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
     public final String entryRuleValidID() throws RecognitionException {
         String current = null;
 
@@ -17090,8 +17098,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6174:47: (iv_ruleValidID= ruleValidID EOF )
-            // InternalContentAssistFragmentTestLang.g:6175:2: iv_ruleValidID= ruleValidID EOF
+            // InternalContentAssistFragmentTestLang.g:6179:47: (iv_ruleValidID= ruleValidID EOF )
+            // InternalContentAssistFragmentTestLang.g:6180:2: iv_ruleValidID= ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getValidIDRule()); 
@@ -17122,7 +17130,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleValidID"
-    // InternalContentAssistFragmentTestLang.g:6181:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalContentAssistFragmentTestLang.g:6186:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -17132,8 +17140,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6187:2: (this_ID_0= RULE_ID )
-            // InternalContentAssistFragmentTestLang.g:6188:2: this_ID_0= RULE_ID
+            // InternalContentAssistFragmentTestLang.g:6192:2: (this_ID_0= RULE_ID )
+            // InternalContentAssistFragmentTestLang.g:6193:2: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -17168,7 +17176,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleXImportDeclaration"
-    // InternalContentAssistFragmentTestLang.g:6198:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
+    // InternalContentAssistFragmentTestLang.g:6203:1: entryRuleXImportDeclaration returns [EObject current=null] : iv_ruleXImportDeclaration= ruleXImportDeclaration EOF ;
     public final EObject entryRuleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -17176,8 +17184,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6198:59: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
-            // InternalContentAssistFragmentTestLang.g:6199:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
+            // InternalContentAssistFragmentTestLang.g:6203:59: (iv_ruleXImportDeclaration= ruleXImportDeclaration EOF )
+            // InternalContentAssistFragmentTestLang.g:6204:2: iv_ruleXImportDeclaration= ruleXImportDeclaration EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXImportDeclarationRule()); 
@@ -17208,7 +17216,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleXImportDeclaration"
-    // InternalContentAssistFragmentTestLang.g:6205:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
+    // InternalContentAssistFragmentTestLang.g:6210:1: ruleXImportDeclaration returns [EObject current=null] : (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) ;
     public final EObject ruleXImportDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -17226,11 +17234,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6211:2: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
-            // InternalContentAssistFragmentTestLang.g:6212:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // InternalContentAssistFragmentTestLang.g:6216:2: ( (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? ) )
+            // InternalContentAssistFragmentTestLang.g:6217:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
             {
-            // InternalContentAssistFragmentTestLang.g:6212:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
-            // InternalContentAssistFragmentTestLang.g:6213:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
+            // InternalContentAssistFragmentTestLang.g:6217:2: (otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )? )
+            // InternalContentAssistFragmentTestLang.g:6218:3: otherlv_0= 'import' ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) ) (otherlv_8= ';' )?
             {
             otherlv_0=(Token)match(input,71,FOLLOW_80); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -17238,21 +17246,21 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
               			newLeafNode(otherlv_0, grammarAccess.getXImportDeclarationAccess().getImportKeyword_0());
               		
             }
-            // InternalContentAssistFragmentTestLang.g:6217:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
+            // InternalContentAssistFragmentTestLang.g:6222:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )
             int alt108=3;
             alt108 = dfa108.predict(input);
             switch (alt108) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6218:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // InternalContentAssistFragmentTestLang.g:6223:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6218:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
-                    // InternalContentAssistFragmentTestLang.g:6219:5: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    // InternalContentAssistFragmentTestLang.g:6223:4: ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) )
+                    // InternalContentAssistFragmentTestLang.g:6224:5: ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6219:5: ( (lv_static_1_0= 'static' ) )
-                    // InternalContentAssistFragmentTestLang.g:6220:6: (lv_static_1_0= 'static' )
+                    // InternalContentAssistFragmentTestLang.g:6224:5: ( (lv_static_1_0= 'static' ) )
+                    // InternalContentAssistFragmentTestLang.g:6225:6: (lv_static_1_0= 'static' )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6220:6: (lv_static_1_0= 'static' )
-                    // InternalContentAssistFragmentTestLang.g:6221:7: lv_static_1_0= 'static'
+                    // InternalContentAssistFragmentTestLang.g:6225:6: (lv_static_1_0= 'static' )
+                    // InternalContentAssistFragmentTestLang.g:6226:7: lv_static_1_0= 'static'
                     {
                     lv_static_1_0=(Token)match(input,70,FOLLOW_81); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -17274,7 +17282,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:6233:5: ( (lv_extension_2_0= 'extension' ) )?
+                    // InternalContentAssistFragmentTestLang.g:6238:5: ( (lv_extension_2_0= 'extension' ) )?
                     int alt106=2;
                     int LA106_0 = input.LA(1);
 
@@ -17283,10 +17291,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt106) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6234:6: (lv_extension_2_0= 'extension' )
+                            // InternalContentAssistFragmentTestLang.g:6239:6: (lv_extension_2_0= 'extension' )
                             {
-                            // InternalContentAssistFragmentTestLang.g:6234:6: (lv_extension_2_0= 'extension' )
-                            // InternalContentAssistFragmentTestLang.g:6235:7: lv_extension_2_0= 'extension'
+                            // InternalContentAssistFragmentTestLang.g:6239:6: (lv_extension_2_0= 'extension' )
+                            // InternalContentAssistFragmentTestLang.g:6240:7: lv_extension_2_0= 'extension'
                             {
                             lv_extension_2_0=(Token)match(input,72,FOLLOW_81); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -17311,11 +17319,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:6247:5: ( ( ruleQualifiedNameInStaticImport ) )
-                    // InternalContentAssistFragmentTestLang.g:6248:6: ( ruleQualifiedNameInStaticImport )
+                    // InternalContentAssistFragmentTestLang.g:6252:5: ( ( ruleQualifiedNameInStaticImport ) )
+                    // InternalContentAssistFragmentTestLang.g:6253:6: ( ruleQualifiedNameInStaticImport )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6248:6: ( ruleQualifiedNameInStaticImport )
-                    // InternalContentAssistFragmentTestLang.g:6249:7: ruleQualifiedNameInStaticImport
+                    // InternalContentAssistFragmentTestLang.g:6253:6: ( ruleQualifiedNameInStaticImport )
+                    // InternalContentAssistFragmentTestLang.g:6254:7: ruleQualifiedNameInStaticImport
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17345,7 +17353,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     }
 
-                    // InternalContentAssistFragmentTestLang.g:6263:5: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
+                    // InternalContentAssistFragmentTestLang.g:6268:5: ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) )
                     int alt107=2;
                     int LA107_0 = input.LA(1);
 
@@ -17364,13 +17372,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     switch (alt107) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:6264:6: ( (lv_wildcard_4_0= '*' ) )
+                            // InternalContentAssistFragmentTestLang.g:6269:6: ( (lv_wildcard_4_0= '*' ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:6264:6: ( (lv_wildcard_4_0= '*' ) )
-                            // InternalContentAssistFragmentTestLang.g:6265:7: (lv_wildcard_4_0= '*' )
+                            // InternalContentAssistFragmentTestLang.g:6269:6: ( (lv_wildcard_4_0= '*' ) )
+                            // InternalContentAssistFragmentTestLang.g:6270:7: (lv_wildcard_4_0= '*' )
                             {
-                            // InternalContentAssistFragmentTestLang.g:6265:7: (lv_wildcard_4_0= '*' )
-                            // InternalContentAssistFragmentTestLang.g:6266:8: lv_wildcard_4_0= '*'
+                            // InternalContentAssistFragmentTestLang.g:6270:7: (lv_wildcard_4_0= '*' )
+                            // InternalContentAssistFragmentTestLang.g:6271:8: lv_wildcard_4_0= '*'
                             {
                             lv_wildcard_4_0=(Token)match(input,39,FOLLOW_83); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -17396,13 +17404,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:6279:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // InternalContentAssistFragmentTestLang.g:6284:6: ( (lv_memberName_5_0= ruleValidID ) )
                             {
-                            // InternalContentAssistFragmentTestLang.g:6279:6: ( (lv_memberName_5_0= ruleValidID ) )
-                            // InternalContentAssistFragmentTestLang.g:6280:7: (lv_memberName_5_0= ruleValidID )
+                            // InternalContentAssistFragmentTestLang.g:6284:6: ( (lv_memberName_5_0= ruleValidID ) )
+                            // InternalContentAssistFragmentTestLang.g:6285:7: (lv_memberName_5_0= ruleValidID )
                             {
-                            // InternalContentAssistFragmentTestLang.g:6280:7: (lv_memberName_5_0= ruleValidID )
-                            // InternalContentAssistFragmentTestLang.g:6281:8: lv_memberName_5_0= ruleValidID
+                            // InternalContentAssistFragmentTestLang.g:6285:7: (lv_memberName_5_0= ruleValidID )
+                            // InternalContentAssistFragmentTestLang.g:6286:8: lv_memberName_5_0= ruleValidID
                             {
                             if ( state.backtracking==0 ) {
 
@@ -17446,13 +17454,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:6301:4: ( ( ruleQualifiedName ) )
+                    // InternalContentAssistFragmentTestLang.g:6306:4: ( ( ruleQualifiedName ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6301:4: ( ( ruleQualifiedName ) )
-                    // InternalContentAssistFragmentTestLang.g:6302:5: ( ruleQualifiedName )
+                    // InternalContentAssistFragmentTestLang.g:6306:4: ( ( ruleQualifiedName ) )
+                    // InternalContentAssistFragmentTestLang.g:6307:5: ( ruleQualifiedName )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6302:5: ( ruleQualifiedName )
-                    // InternalContentAssistFragmentTestLang.g:6303:6: ruleQualifiedName
+                    // InternalContentAssistFragmentTestLang.g:6307:5: ( ruleQualifiedName )
+                    // InternalContentAssistFragmentTestLang.g:6308:6: ruleQualifiedName
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17486,13 +17494,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalContentAssistFragmentTestLang.g:6318:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // InternalContentAssistFragmentTestLang.g:6323:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6318:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
-                    // InternalContentAssistFragmentTestLang.g:6319:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // InternalContentAssistFragmentTestLang.g:6323:4: ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) )
+                    // InternalContentAssistFragmentTestLang.g:6324:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
                     {
-                    // InternalContentAssistFragmentTestLang.g:6319:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
-                    // InternalContentAssistFragmentTestLang.g:6320:6: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
+                    // InternalContentAssistFragmentTestLang.g:6324:5: (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard )
+                    // InternalContentAssistFragmentTestLang.g:6325:6: lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard
                     {
                     if ( state.backtracking==0 ) {
 
@@ -17529,7 +17537,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:6338:3: (otherlv_8= ';' )?
+            // InternalContentAssistFragmentTestLang.g:6343:3: (otherlv_8= ';' )?
             int alt109=2;
             int LA109_0 = input.LA(1);
 
@@ -17538,7 +17546,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             }
             switch (alt109) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:6339:4: otherlv_8= ';'
+                    // InternalContentAssistFragmentTestLang.g:6344:4: otherlv_8= ';'
                     {
                     otherlv_8=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -17577,7 +17585,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleQualifiedNameInStaticImport"
-    // InternalContentAssistFragmentTestLang.g:6348:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
+    // InternalContentAssistFragmentTestLang.g:6353:1: entryRuleQualifiedNameInStaticImport returns [String current=null] : iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF ;
     public final String entryRuleQualifiedNameInStaticImport() throws RecognitionException {
         String current = null;
 
@@ -17585,8 +17593,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6348:67: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
-            // InternalContentAssistFragmentTestLang.g:6349:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
+            // InternalContentAssistFragmentTestLang.g:6353:67: (iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF )
+            // InternalContentAssistFragmentTestLang.g:6354:2: iv_ruleQualifiedNameInStaticImport= ruleQualifiedNameInStaticImport EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameInStaticImportRule()); 
@@ -17617,7 +17625,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
 
     // $ANTLR start "ruleQualifiedNameInStaticImport"
-    // InternalContentAssistFragmentTestLang.g:6355:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
+    // InternalContentAssistFragmentTestLang.g:6360:1: ruleQualifiedNameInStaticImport returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidID_0= ruleValidID kw= '.' )+ ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameInStaticImport() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -17629,10 +17637,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalContentAssistFragmentTestLang.g:6361:2: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
-            // InternalContentAssistFragmentTestLang.g:6362:2: (this_ValidID_0= ruleValidID kw= '.' )+
+            // InternalContentAssistFragmentTestLang.g:6366:2: ( (this_ValidID_0= ruleValidID kw= '.' )+ )
+            // InternalContentAssistFragmentTestLang.g:6367:2: (this_ValidID_0= ruleValidID kw= '.' )+
             {
-            // InternalContentAssistFragmentTestLang.g:6362:2: (this_ValidID_0= ruleValidID kw= '.' )+
+            // InternalContentAssistFragmentTestLang.g:6367:2: (this_ValidID_0= ruleValidID kw= '.' )+
             int cnt110=0;
             loop110:
             do {
@@ -17652,7 +17660,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 switch (alt110) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:6363:3: this_ValidID_0= ruleValidID kw= '.'
+            	    // InternalContentAssistFragmentTestLang.g:6368:3: this_ValidID_0= ruleValidID kw= '.'
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -17717,17 +17725,17 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred1_InternalContentAssistFragmentTestLang
     public final void synpred1_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:145:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:145:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
+        // InternalContentAssistFragmentTestLang.g:150:5: ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:150:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:145:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
-        // InternalContentAssistFragmentTestLang.g:146:6: ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) )
+        // InternalContentAssistFragmentTestLang.g:150:6: ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) )
+        // InternalContentAssistFragmentTestLang.g:151:6: ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) )
         {
-        // InternalContentAssistFragmentTestLang.g:146:6: ( ( ruleJvmTypeReference ) )
-        // InternalContentAssistFragmentTestLang.g:147:7: ( ruleJvmTypeReference )
+        // InternalContentAssistFragmentTestLang.g:151:6: ( ( ruleJvmTypeReference ) )
+        // InternalContentAssistFragmentTestLang.g:152:7: ( ruleJvmTypeReference )
         {
-        // InternalContentAssistFragmentTestLang.g:147:7: ( ruleJvmTypeReference )
-        // InternalContentAssistFragmentTestLang.g:148:8: ruleJvmTypeReference
+        // InternalContentAssistFragmentTestLang.g:152:7: ( ruleJvmTypeReference )
+        // InternalContentAssistFragmentTestLang.g:153:8: ruleJvmTypeReference
         {
         pushFollow(FOLLOW_4);
         ruleJvmTypeReference();
@@ -17740,11 +17748,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:151:6: ( ( ruleValidID ) )
-        // InternalContentAssistFragmentTestLang.g:152:7: ( ruleValidID )
+        // InternalContentAssistFragmentTestLang.g:156:6: ( ( ruleValidID ) )
+        // InternalContentAssistFragmentTestLang.g:157:7: ( ruleValidID )
         {
-        // InternalContentAssistFragmentTestLang.g:152:7: ( ruleValidID )
-        // InternalContentAssistFragmentTestLang.g:153:8: ruleValidID
+        // InternalContentAssistFragmentTestLang.g:157:7: ( ruleValidID )
+        // InternalContentAssistFragmentTestLang.g:158:8: ruleValidID
         {
         pushFollow(FOLLOW_2);
         ruleValidID();
@@ -17767,22 +17775,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred2_InternalContentAssistFragmentTestLang
     public final void synpred2_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:352:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:352:7: ( () ( ( ruleOpMultiAssign ) ) )
+        // InternalContentAssistFragmentTestLang.g:357:6: ( ( () ( ( ruleOpMultiAssign ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:357:7: ( () ( ( ruleOpMultiAssign ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:352:7: ( () ( ( ruleOpMultiAssign ) ) )
-        // InternalContentAssistFragmentTestLang.g:353:7: () ( ( ruleOpMultiAssign ) )
+        // InternalContentAssistFragmentTestLang.g:357:7: ( () ( ( ruleOpMultiAssign ) ) )
+        // InternalContentAssistFragmentTestLang.g:358:7: () ( ( ruleOpMultiAssign ) )
         {
-        // InternalContentAssistFragmentTestLang.g:353:7: ()
-        // InternalContentAssistFragmentTestLang.g:354:7: 
+        // InternalContentAssistFragmentTestLang.g:358:7: ()
+        // InternalContentAssistFragmentTestLang.g:359:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:355:7: ( ( ruleOpMultiAssign ) )
-        // InternalContentAssistFragmentTestLang.g:356:8: ( ruleOpMultiAssign )
+        // InternalContentAssistFragmentTestLang.g:360:7: ( ( ruleOpMultiAssign ) )
+        // InternalContentAssistFragmentTestLang.g:361:8: ( ruleOpMultiAssign )
         {
-        // InternalContentAssistFragmentTestLang.g:356:8: ( ruleOpMultiAssign )
-        // InternalContentAssistFragmentTestLang.g:357:9: ruleOpMultiAssign
+        // InternalContentAssistFragmentTestLang.g:361:8: ( ruleOpMultiAssign )
+        // InternalContentAssistFragmentTestLang.g:362:9: ruleOpMultiAssign
         {
         pushFollow(FOLLOW_2);
         ruleOpMultiAssign();
@@ -17805,22 +17813,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred3_InternalContentAssistFragmentTestLang
     public final void synpred3_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:546:5: ( ( () ( ( ruleOpOr ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:546:6: ( () ( ( ruleOpOr ) ) )
+        // InternalContentAssistFragmentTestLang.g:551:5: ( ( () ( ( ruleOpOr ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:551:6: ( () ( ( ruleOpOr ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:546:6: ( () ( ( ruleOpOr ) ) )
-        // InternalContentAssistFragmentTestLang.g:547:6: () ( ( ruleOpOr ) )
+        // InternalContentAssistFragmentTestLang.g:551:6: ( () ( ( ruleOpOr ) ) )
+        // InternalContentAssistFragmentTestLang.g:552:6: () ( ( ruleOpOr ) )
         {
-        // InternalContentAssistFragmentTestLang.g:547:6: ()
-        // InternalContentAssistFragmentTestLang.g:548:6: 
+        // InternalContentAssistFragmentTestLang.g:552:6: ()
+        // InternalContentAssistFragmentTestLang.g:553:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:549:6: ( ( ruleOpOr ) )
-        // InternalContentAssistFragmentTestLang.g:550:7: ( ruleOpOr )
+        // InternalContentAssistFragmentTestLang.g:554:6: ( ( ruleOpOr ) )
+        // InternalContentAssistFragmentTestLang.g:555:7: ( ruleOpOr )
         {
-        // InternalContentAssistFragmentTestLang.g:550:7: ( ruleOpOr )
-        // InternalContentAssistFragmentTestLang.g:551:8: ruleOpOr
+        // InternalContentAssistFragmentTestLang.g:555:7: ( ruleOpOr )
+        // InternalContentAssistFragmentTestLang.g:556:8: ruleOpOr
         {
         pushFollow(FOLLOW_2);
         ruleOpOr();
@@ -17843,22 +17851,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred4_InternalContentAssistFragmentTestLang
     public final void synpred4_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:653:5: ( ( () ( ( ruleOpAnd ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:653:6: ( () ( ( ruleOpAnd ) ) )
+        // InternalContentAssistFragmentTestLang.g:658:5: ( ( () ( ( ruleOpAnd ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:658:6: ( () ( ( ruleOpAnd ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:653:6: ( () ( ( ruleOpAnd ) ) )
-        // InternalContentAssistFragmentTestLang.g:654:6: () ( ( ruleOpAnd ) )
+        // InternalContentAssistFragmentTestLang.g:658:6: ( () ( ( ruleOpAnd ) ) )
+        // InternalContentAssistFragmentTestLang.g:659:6: () ( ( ruleOpAnd ) )
         {
-        // InternalContentAssistFragmentTestLang.g:654:6: ()
-        // InternalContentAssistFragmentTestLang.g:655:6: 
+        // InternalContentAssistFragmentTestLang.g:659:6: ()
+        // InternalContentAssistFragmentTestLang.g:660:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:656:6: ( ( ruleOpAnd ) )
-        // InternalContentAssistFragmentTestLang.g:657:7: ( ruleOpAnd )
+        // InternalContentAssistFragmentTestLang.g:661:6: ( ( ruleOpAnd ) )
+        // InternalContentAssistFragmentTestLang.g:662:7: ( ruleOpAnd )
         {
-        // InternalContentAssistFragmentTestLang.g:657:7: ( ruleOpAnd )
-        // InternalContentAssistFragmentTestLang.g:658:8: ruleOpAnd
+        // InternalContentAssistFragmentTestLang.g:662:7: ( ruleOpAnd )
+        // InternalContentAssistFragmentTestLang.g:663:8: ruleOpAnd
         {
         pushFollow(FOLLOW_2);
         ruleOpAnd();
@@ -17881,22 +17889,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred5_InternalContentAssistFragmentTestLang
     public final void synpred5_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:760:5: ( ( () ( ( ruleOpEquality ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:760:6: ( () ( ( ruleOpEquality ) ) )
+        // InternalContentAssistFragmentTestLang.g:765:5: ( ( () ( ( ruleOpEquality ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:765:6: ( () ( ( ruleOpEquality ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:760:6: ( () ( ( ruleOpEquality ) ) )
-        // InternalContentAssistFragmentTestLang.g:761:6: () ( ( ruleOpEquality ) )
+        // InternalContentAssistFragmentTestLang.g:765:6: ( () ( ( ruleOpEquality ) ) )
+        // InternalContentAssistFragmentTestLang.g:766:6: () ( ( ruleOpEquality ) )
         {
-        // InternalContentAssistFragmentTestLang.g:761:6: ()
-        // InternalContentAssistFragmentTestLang.g:762:6: 
+        // InternalContentAssistFragmentTestLang.g:766:6: ()
+        // InternalContentAssistFragmentTestLang.g:767:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:763:6: ( ( ruleOpEquality ) )
-        // InternalContentAssistFragmentTestLang.g:764:7: ( ruleOpEquality )
+        // InternalContentAssistFragmentTestLang.g:768:6: ( ( ruleOpEquality ) )
+        // InternalContentAssistFragmentTestLang.g:769:7: ( ruleOpEquality )
         {
-        // InternalContentAssistFragmentTestLang.g:764:7: ( ruleOpEquality )
-        // InternalContentAssistFragmentTestLang.g:765:8: ruleOpEquality
+        // InternalContentAssistFragmentTestLang.g:769:7: ( ruleOpEquality )
+        // InternalContentAssistFragmentTestLang.g:770:8: ruleOpEquality
         {
         pushFollow(FOLLOW_2);
         ruleOpEquality();
@@ -17919,14 +17927,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred6_InternalContentAssistFragmentTestLang
     public final void synpred6_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:888:6: ( ( () 'instanceof' ) )
-        // InternalContentAssistFragmentTestLang.g:888:7: ( () 'instanceof' )
+        // InternalContentAssistFragmentTestLang.g:893:6: ( ( () 'instanceof' ) )
+        // InternalContentAssistFragmentTestLang.g:893:7: ( () 'instanceof' )
         {
-        // InternalContentAssistFragmentTestLang.g:888:7: ( () 'instanceof' )
-        // InternalContentAssistFragmentTestLang.g:889:7: () 'instanceof'
+        // InternalContentAssistFragmentTestLang.g:893:7: ( () 'instanceof' )
+        // InternalContentAssistFragmentTestLang.g:894:7: () 'instanceof'
         {
-        // InternalContentAssistFragmentTestLang.g:889:7: ()
-        // InternalContentAssistFragmentTestLang.g:890:7: 
+        // InternalContentAssistFragmentTestLang.g:894:7: ()
+        // InternalContentAssistFragmentTestLang.g:895:7: 
         {
         }
 
@@ -17941,22 +17949,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred7_InternalContentAssistFragmentTestLang
     public final void synpred7_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:931:6: ( ( () ( ( ruleOpCompare ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:931:7: ( () ( ( ruleOpCompare ) ) )
+        // InternalContentAssistFragmentTestLang.g:936:6: ( ( () ( ( ruleOpCompare ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:936:7: ( () ( ( ruleOpCompare ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:931:7: ( () ( ( ruleOpCompare ) ) )
-        // InternalContentAssistFragmentTestLang.g:932:7: () ( ( ruleOpCompare ) )
+        // InternalContentAssistFragmentTestLang.g:936:7: ( () ( ( ruleOpCompare ) ) )
+        // InternalContentAssistFragmentTestLang.g:937:7: () ( ( ruleOpCompare ) )
         {
-        // InternalContentAssistFragmentTestLang.g:932:7: ()
-        // InternalContentAssistFragmentTestLang.g:933:7: 
+        // InternalContentAssistFragmentTestLang.g:937:7: ()
+        // InternalContentAssistFragmentTestLang.g:938:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:934:7: ( ( ruleOpCompare ) )
-        // InternalContentAssistFragmentTestLang.g:935:8: ( ruleOpCompare )
+        // InternalContentAssistFragmentTestLang.g:939:7: ( ( ruleOpCompare ) )
+        // InternalContentAssistFragmentTestLang.g:940:8: ( ruleOpCompare )
         {
-        // InternalContentAssistFragmentTestLang.g:935:8: ( ruleOpCompare )
-        // InternalContentAssistFragmentTestLang.g:936:9: ruleOpCompare
+        // InternalContentAssistFragmentTestLang.g:940:8: ( ruleOpCompare )
+        // InternalContentAssistFragmentTestLang.g:941:9: ruleOpCompare
         {
         pushFollow(FOLLOW_2);
         ruleOpCompare();
@@ -17979,22 +17987,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred8_InternalContentAssistFragmentTestLang
     public final void synpred8_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1066:5: ( ( () ( ( ruleOpOther ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1066:6: ( () ( ( ruleOpOther ) ) )
+        // InternalContentAssistFragmentTestLang.g:1071:5: ( ( () ( ( ruleOpOther ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1071:6: ( () ( ( ruleOpOther ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1066:6: ( () ( ( ruleOpOther ) ) )
-        // InternalContentAssistFragmentTestLang.g:1067:6: () ( ( ruleOpOther ) )
+        // InternalContentAssistFragmentTestLang.g:1071:6: ( () ( ( ruleOpOther ) ) )
+        // InternalContentAssistFragmentTestLang.g:1072:6: () ( ( ruleOpOther ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1067:6: ()
-        // InternalContentAssistFragmentTestLang.g:1068:6: 
+        // InternalContentAssistFragmentTestLang.g:1072:6: ()
+        // InternalContentAssistFragmentTestLang.g:1073:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1069:6: ( ( ruleOpOther ) )
-        // InternalContentAssistFragmentTestLang.g:1070:7: ( ruleOpOther )
+        // InternalContentAssistFragmentTestLang.g:1074:6: ( ( ruleOpOther ) )
+        // InternalContentAssistFragmentTestLang.g:1075:7: ( ruleOpOther )
         {
-        // InternalContentAssistFragmentTestLang.g:1070:7: ( ruleOpOther )
-        // InternalContentAssistFragmentTestLang.g:1071:8: ruleOpOther
+        // InternalContentAssistFragmentTestLang.g:1075:7: ( ruleOpOther )
+        // InternalContentAssistFragmentTestLang.g:1076:8: ruleOpOther
         {
         pushFollow(FOLLOW_2);
         ruleOpOther();
@@ -18017,11 +18025,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred9_InternalContentAssistFragmentTestLang
     public final void synpred9_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1186:6: ( ( '>' '>' ) )
-        // InternalContentAssistFragmentTestLang.g:1186:7: ( '>' '>' )
+        // InternalContentAssistFragmentTestLang.g:1191:6: ( ( '>' '>' ) )
+        // InternalContentAssistFragmentTestLang.g:1191:7: ( '>' '>' )
         {
-        // InternalContentAssistFragmentTestLang.g:1186:7: ( '>' '>' )
-        // InternalContentAssistFragmentTestLang.g:1187:7: '>' '>'
+        // InternalContentAssistFragmentTestLang.g:1191:7: ( '>' '>' )
+        // InternalContentAssistFragmentTestLang.g:1192:7: '>' '>'
         {
         match(input,22,FOLLOW_18); if (state.failed) return ;
         match(input,22,FOLLOW_2); if (state.failed) return ;
@@ -18035,11 +18043,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred10_InternalContentAssistFragmentTestLang
     public final void synpred10_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1221:6: ( ( '<' '<' ) )
-        // InternalContentAssistFragmentTestLang.g:1221:7: ( '<' '<' )
+        // InternalContentAssistFragmentTestLang.g:1226:6: ( ( '<' '<' ) )
+        // InternalContentAssistFragmentTestLang.g:1226:7: ( '<' '<' )
         {
-        // InternalContentAssistFragmentTestLang.g:1221:7: ( '<' '<' )
-        // InternalContentAssistFragmentTestLang.g:1222:7: '<' '<'
+        // InternalContentAssistFragmentTestLang.g:1226:7: ( '<' '<' )
+        // InternalContentAssistFragmentTestLang.g:1227:7: '<' '<'
         {
         match(input,21,FOLLOW_9); if (state.failed) return ;
         match(input,21,FOLLOW_2); if (state.failed) return ;
@@ -18053,22 +18061,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred11_InternalContentAssistFragmentTestLang
     public final void synpred11_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1294:5: ( ( () ( ( ruleOpAdd ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1294:6: ( () ( ( ruleOpAdd ) ) )
+        // InternalContentAssistFragmentTestLang.g:1299:5: ( ( () ( ( ruleOpAdd ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1299:6: ( () ( ( ruleOpAdd ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1294:6: ( () ( ( ruleOpAdd ) ) )
-        // InternalContentAssistFragmentTestLang.g:1295:6: () ( ( ruleOpAdd ) )
+        // InternalContentAssistFragmentTestLang.g:1299:6: ( () ( ( ruleOpAdd ) ) )
+        // InternalContentAssistFragmentTestLang.g:1300:6: () ( ( ruleOpAdd ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1295:6: ()
-        // InternalContentAssistFragmentTestLang.g:1296:6: 
+        // InternalContentAssistFragmentTestLang.g:1300:6: ()
+        // InternalContentAssistFragmentTestLang.g:1301:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1297:6: ( ( ruleOpAdd ) )
-        // InternalContentAssistFragmentTestLang.g:1298:7: ( ruleOpAdd )
+        // InternalContentAssistFragmentTestLang.g:1302:6: ( ( ruleOpAdd ) )
+        // InternalContentAssistFragmentTestLang.g:1303:7: ( ruleOpAdd )
         {
-        // InternalContentAssistFragmentTestLang.g:1298:7: ( ruleOpAdd )
-        // InternalContentAssistFragmentTestLang.g:1299:8: ruleOpAdd
+        // InternalContentAssistFragmentTestLang.g:1303:7: ( ruleOpAdd )
+        // InternalContentAssistFragmentTestLang.g:1304:8: ruleOpAdd
         {
         pushFollow(FOLLOW_2);
         ruleOpAdd();
@@ -18091,22 +18099,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred12_InternalContentAssistFragmentTestLang
     public final void synpred12_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1409:5: ( ( () ( ( ruleOpMulti ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1409:6: ( () ( ( ruleOpMulti ) ) )
+        // InternalContentAssistFragmentTestLang.g:1414:5: ( ( () ( ( ruleOpMulti ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1414:6: ( () ( ( ruleOpMulti ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1409:6: ( () ( ( ruleOpMulti ) ) )
-        // InternalContentAssistFragmentTestLang.g:1410:6: () ( ( ruleOpMulti ) )
+        // InternalContentAssistFragmentTestLang.g:1414:6: ( () ( ( ruleOpMulti ) ) )
+        // InternalContentAssistFragmentTestLang.g:1415:6: () ( ( ruleOpMulti ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1410:6: ()
-        // InternalContentAssistFragmentTestLang.g:1411:6: 
+        // InternalContentAssistFragmentTestLang.g:1415:6: ()
+        // InternalContentAssistFragmentTestLang.g:1416:6: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1412:6: ( ( ruleOpMulti ) )
-        // InternalContentAssistFragmentTestLang.g:1413:7: ( ruleOpMulti )
+        // InternalContentAssistFragmentTestLang.g:1417:6: ( ( ruleOpMulti ) )
+        // InternalContentAssistFragmentTestLang.g:1418:7: ( ruleOpMulti )
         {
-        // InternalContentAssistFragmentTestLang.g:1413:7: ( ruleOpMulti )
-        // InternalContentAssistFragmentTestLang.g:1414:8: ruleOpMulti
+        // InternalContentAssistFragmentTestLang.g:1418:7: ( ruleOpMulti )
+        // InternalContentAssistFragmentTestLang.g:1419:8: ruleOpMulti
         {
         pushFollow(FOLLOW_2);
         ruleOpMulti();
@@ -18129,14 +18137,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred13_InternalContentAssistFragmentTestLang
     public final void synpred13_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1644:5: ( ( () 'as' ) )
-        // InternalContentAssistFragmentTestLang.g:1644:6: ( () 'as' )
+        // InternalContentAssistFragmentTestLang.g:1649:5: ( ( () 'as' ) )
+        // InternalContentAssistFragmentTestLang.g:1649:6: ( () 'as' )
         {
-        // InternalContentAssistFragmentTestLang.g:1644:6: ( () 'as' )
-        // InternalContentAssistFragmentTestLang.g:1645:6: () 'as'
+        // InternalContentAssistFragmentTestLang.g:1649:6: ( () 'as' )
+        // InternalContentAssistFragmentTestLang.g:1650:6: () 'as'
         {
-        // InternalContentAssistFragmentTestLang.g:1645:6: ()
-        // InternalContentAssistFragmentTestLang.g:1646:6: 
+        // InternalContentAssistFragmentTestLang.g:1650:6: ()
+        // InternalContentAssistFragmentTestLang.g:1651:6: 
         {
         }
 
@@ -18151,22 +18159,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred14_InternalContentAssistFragmentTestLang
     public final void synpred14_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1712:4: ( ( () ( ( ruleOpPostfix ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1712:5: ( () ( ( ruleOpPostfix ) ) )
+        // InternalContentAssistFragmentTestLang.g:1717:4: ( ( () ( ( ruleOpPostfix ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1717:5: ( () ( ( ruleOpPostfix ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1712:5: ( () ( ( ruleOpPostfix ) ) )
-        // InternalContentAssistFragmentTestLang.g:1713:5: () ( ( ruleOpPostfix ) )
+        // InternalContentAssistFragmentTestLang.g:1717:5: ( () ( ( ruleOpPostfix ) ) )
+        // InternalContentAssistFragmentTestLang.g:1718:5: () ( ( ruleOpPostfix ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1713:5: ()
-        // InternalContentAssistFragmentTestLang.g:1714:5: 
+        // InternalContentAssistFragmentTestLang.g:1718:5: ()
+        // InternalContentAssistFragmentTestLang.g:1719:5: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1715:5: ( ( ruleOpPostfix ) )
-        // InternalContentAssistFragmentTestLang.g:1716:6: ( ruleOpPostfix )
+        // InternalContentAssistFragmentTestLang.g:1720:5: ( ( ruleOpPostfix ) )
+        // InternalContentAssistFragmentTestLang.g:1721:6: ( ruleOpPostfix )
         {
-        // InternalContentAssistFragmentTestLang.g:1716:6: ( ruleOpPostfix )
-        // InternalContentAssistFragmentTestLang.g:1717:7: ruleOpPostfix
+        // InternalContentAssistFragmentTestLang.g:1721:6: ( ruleOpPostfix )
+        // InternalContentAssistFragmentTestLang.g:1722:7: ruleOpPostfix
         {
         pushFollow(FOLLOW_2);
         ruleOpPostfix();
@@ -18189,18 +18197,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred15_InternalContentAssistFragmentTestLang
     public final void synpred15_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1808:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
-        // InternalContentAssistFragmentTestLang.g:1808:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+        // InternalContentAssistFragmentTestLang.g:1813:6: ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )
+        // InternalContentAssistFragmentTestLang.g:1813:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
         {
-        // InternalContentAssistFragmentTestLang.g:1808:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
-        // InternalContentAssistFragmentTestLang.g:1809:7: () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
+        // InternalContentAssistFragmentTestLang.g:1813:7: ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign )
+        // InternalContentAssistFragmentTestLang.g:1814:7: () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign
         {
-        // InternalContentAssistFragmentTestLang.g:1809:7: ()
-        // InternalContentAssistFragmentTestLang.g:1810:7: 
+        // InternalContentAssistFragmentTestLang.g:1814:7: ()
+        // InternalContentAssistFragmentTestLang.g:1815:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1811:7: ( '.' | ( ( '::' ) ) )
+        // InternalContentAssistFragmentTestLang.g:1816:7: ( '.' | ( ( '::' ) ) )
         int alt111=2;
         int LA111_0 = input.LA(1);
 
@@ -18219,20 +18227,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
         switch (alt111) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:1812:8: '.'
+                // InternalContentAssistFragmentTestLang.g:1817:8: '.'
                 {
                 match(input,47,FOLLOW_25); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // InternalContentAssistFragmentTestLang.g:1814:8: ( ( '::' ) )
+                // InternalContentAssistFragmentTestLang.g:1819:8: ( ( '::' ) )
                 {
-                // InternalContentAssistFragmentTestLang.g:1814:8: ( ( '::' ) )
-                // InternalContentAssistFragmentTestLang.g:1815:9: ( '::' )
+                // InternalContentAssistFragmentTestLang.g:1819:8: ( ( '::' ) )
+                // InternalContentAssistFragmentTestLang.g:1820:9: ( '::' )
                 {
-                // InternalContentAssistFragmentTestLang.g:1815:9: ( '::' )
-                // InternalContentAssistFragmentTestLang.g:1816:10: '::'
+                // InternalContentAssistFragmentTestLang.g:1820:9: ( '::' )
+                // InternalContentAssistFragmentTestLang.g:1821:10: '::'
                 {
                 match(input,48,FOLLOW_25); if (state.failed) return ;
 
@@ -18247,11 +18255,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:1820:7: ( ( ruleFeatureCallID ) )
-        // InternalContentAssistFragmentTestLang.g:1821:8: ( ruleFeatureCallID )
+        // InternalContentAssistFragmentTestLang.g:1825:7: ( ( ruleFeatureCallID ) )
+        // InternalContentAssistFragmentTestLang.g:1826:8: ( ruleFeatureCallID )
         {
-        // InternalContentAssistFragmentTestLang.g:1821:8: ( ruleFeatureCallID )
-        // InternalContentAssistFragmentTestLang.g:1822:9: ruleFeatureCallID
+        // InternalContentAssistFragmentTestLang.g:1826:8: ( ruleFeatureCallID )
+        // InternalContentAssistFragmentTestLang.g:1827:9: ruleFeatureCallID
         {
         pushFollow(FOLLOW_7);
         ruleFeatureCallID();
@@ -18279,18 +18287,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred16_InternalContentAssistFragmentTestLang
     public final void synpred16_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:1905:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1905:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1910:6: ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1910:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1905:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:1906:7: () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
+        // InternalContentAssistFragmentTestLang.g:1910:7: ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:1911:7: () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:1906:7: ()
-        // InternalContentAssistFragmentTestLang.g:1907:7: 
+        // InternalContentAssistFragmentTestLang.g:1911:7: ()
+        // InternalContentAssistFragmentTestLang.g:1912:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:1908:7: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
+        // InternalContentAssistFragmentTestLang.g:1913:7: ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) )
         int alt112=3;
         switch ( input.LA(1) ) {
         case 47:
@@ -18318,20 +18326,20 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         switch (alt112) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:1909:8: '.'
+                // InternalContentAssistFragmentTestLang.g:1914:8: '.'
                 {
                 match(input,47,FOLLOW_2); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
-                // InternalContentAssistFragmentTestLang.g:1911:8: ( ( '?.' ) )
+                // InternalContentAssistFragmentTestLang.g:1916:8: ( ( '?.' ) )
                 {
-                // InternalContentAssistFragmentTestLang.g:1911:8: ( ( '?.' ) )
-                // InternalContentAssistFragmentTestLang.g:1912:9: ( '?.' )
+                // InternalContentAssistFragmentTestLang.g:1916:8: ( ( '?.' ) )
+                // InternalContentAssistFragmentTestLang.g:1917:9: ( '?.' )
                 {
-                // InternalContentAssistFragmentTestLang.g:1912:9: ( '?.' )
-                // InternalContentAssistFragmentTestLang.g:1913:10: '?.'
+                // InternalContentAssistFragmentTestLang.g:1917:9: ( '?.' )
+                // InternalContentAssistFragmentTestLang.g:1918:10: '?.'
                 {
                 match(input,49,FOLLOW_2); if (state.failed) return ;
 
@@ -18344,13 +18352,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                 }
                 break;
             case 3 :
-                // InternalContentAssistFragmentTestLang.g:1917:8: ( ( '::' ) )
+                // InternalContentAssistFragmentTestLang.g:1922:8: ( ( '::' ) )
                 {
-                // InternalContentAssistFragmentTestLang.g:1917:8: ( ( '::' ) )
-                // InternalContentAssistFragmentTestLang.g:1918:9: ( '::' )
+                // InternalContentAssistFragmentTestLang.g:1922:8: ( ( '::' ) )
+                // InternalContentAssistFragmentTestLang.g:1923:9: ( '::' )
                 {
-                // InternalContentAssistFragmentTestLang.g:1918:9: ( '::' )
-                // InternalContentAssistFragmentTestLang.g:1919:10: '::'
+                // InternalContentAssistFragmentTestLang.g:1923:9: ( '::' )
+                // InternalContentAssistFragmentTestLang.g:1924:10: '::'
                 {
                 match(input,48,FOLLOW_2); if (state.failed) return ;
 
@@ -18375,11 +18383,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred17_InternalContentAssistFragmentTestLang
     public final void synpred17_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2043:7: ( ( '(' ) )
-        // InternalContentAssistFragmentTestLang.g:2043:8: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:2048:7: ( ( '(' ) )
+        // InternalContentAssistFragmentTestLang.g:2048:8: ( '(' )
         {
-        // InternalContentAssistFragmentTestLang.g:2043:8: ( '(' )
-        // InternalContentAssistFragmentTestLang.g:2044:8: '('
+        // InternalContentAssistFragmentTestLang.g:2048:8: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:2049:8: '('
         {
         match(input,51,FOLLOW_2); if (state.failed) return ;
 
@@ -18392,18 +18400,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred18_InternalContentAssistFragmentTestLang
     public final void synpred18_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2062:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:2062:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:2067:8: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:2067:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:2062:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalContentAssistFragmentTestLang.g:2063:9: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:2067:9: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:2068:9: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalContentAssistFragmentTestLang.g:2063:9: ()
-        // InternalContentAssistFragmentTestLang.g:2064:9: 
+        // InternalContentAssistFragmentTestLang.g:2068:9: ()
+        // InternalContentAssistFragmentTestLang.g:2069:9: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:2065:9: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalContentAssistFragmentTestLang.g:2070:9: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt114=2;
         int LA114_0 = input.LA(1);
 
@@ -18412,13 +18420,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
         switch (alt114) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:2066:10: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:2071:10: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalContentAssistFragmentTestLang.g:2066:10: ( ( ruleJvmFormalParameter ) )
-                // InternalContentAssistFragmentTestLang.g:2067:11: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:2071:10: ( ( ruleJvmFormalParameter ) )
+                // InternalContentAssistFragmentTestLang.g:2072:11: ( ruleJvmFormalParameter )
                 {
-                // InternalContentAssistFragmentTestLang.g:2067:11: ( ruleJvmFormalParameter )
-                // InternalContentAssistFragmentTestLang.g:2068:12: ruleJvmFormalParameter
+                // InternalContentAssistFragmentTestLang.g:2072:11: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:2073:12: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_41);
                 ruleJvmFormalParameter();
@@ -18431,7 +18439,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 }
 
-                // InternalContentAssistFragmentTestLang.g:2071:10: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:2076:10: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop113:
                 do {
                     int alt113=2;
@@ -18444,14 +18452,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     switch (alt113) {
                 	case 1 :
-                	    // InternalContentAssistFragmentTestLang.g:2072:11: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:2077:11: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,50,FOLLOW_3); if (state.failed) return ;
-                	    // InternalContentAssistFragmentTestLang.g:2073:11: ( ( ruleJvmFormalParameter ) )
-                	    // InternalContentAssistFragmentTestLang.g:2074:12: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:2078:11: ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:2079:12: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalContentAssistFragmentTestLang.g:2074:12: ( ruleJvmFormalParameter )
-                	    // InternalContentAssistFragmentTestLang.g:2075:13: ruleJvmFormalParameter
+                	    // InternalContentAssistFragmentTestLang.g:2079:12: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:2080:13: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_41);
                 	    ruleJvmFormalParameter();
@@ -18479,11 +18487,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:2080:9: ( ( '|' ) )
-        // InternalContentAssistFragmentTestLang.g:2081:10: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:2085:9: ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:2086:10: ( '|' )
         {
-        // InternalContentAssistFragmentTestLang.g:2081:10: ( '|' )
-        // InternalContentAssistFragmentTestLang.g:2082:11: '|'
+        // InternalContentAssistFragmentTestLang.g:2086:10: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:2087:11: '|'
         {
         match(input,58,FOLLOW_2); if (state.failed) return ;
 
@@ -18502,14 +18510,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred19_InternalContentAssistFragmentTestLang
     public final void synpred19_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2159:6: ( ( () '[' ) )
-        // InternalContentAssistFragmentTestLang.g:2159:7: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:2164:6: ( ( () '[' ) )
+        // InternalContentAssistFragmentTestLang.g:2164:7: ( () '[' )
         {
-        // InternalContentAssistFragmentTestLang.g:2159:7: ( () '[' )
-        // InternalContentAssistFragmentTestLang.g:2160:7: () '['
+        // InternalContentAssistFragmentTestLang.g:2164:7: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:2165:7: () '['
         {
-        // InternalContentAssistFragmentTestLang.g:2160:7: ()
-        // InternalContentAssistFragmentTestLang.g:2161:7: 
+        // InternalContentAssistFragmentTestLang.g:2165:7: ()
+        // InternalContentAssistFragmentTestLang.g:2166:7: 
         {
         }
 
@@ -18524,14 +18532,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred20_InternalContentAssistFragmentTestLang
     public final void synpred20_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2232:4: ( ( () 'synchronized' '(' ) )
-        // InternalContentAssistFragmentTestLang.g:2232:5: ( () 'synchronized' '(' )
+        // InternalContentAssistFragmentTestLang.g:2237:4: ( ( () 'synchronized' '(' ) )
+        // InternalContentAssistFragmentTestLang.g:2237:5: ( () 'synchronized' '(' )
         {
-        // InternalContentAssistFragmentTestLang.g:2232:5: ( () 'synchronized' '(' )
-        // InternalContentAssistFragmentTestLang.g:2233:5: () 'synchronized' '('
+        // InternalContentAssistFragmentTestLang.g:2237:5: ( () 'synchronized' '(' )
+        // InternalContentAssistFragmentTestLang.g:2238:5: () 'synchronized' '('
         {
-        // InternalContentAssistFragmentTestLang.g:2233:5: ()
-        // InternalContentAssistFragmentTestLang.g:2234:5: 
+        // InternalContentAssistFragmentTestLang.g:2238:5: ()
+        // InternalContentAssistFragmentTestLang.g:2239:5: 
         {
         }
 
@@ -18547,24 +18555,24 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred21_InternalContentAssistFragmentTestLang
     public final void synpred21_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2277:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalContentAssistFragmentTestLang.g:2277:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:2282:4: ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalContentAssistFragmentTestLang.g:2282:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalContentAssistFragmentTestLang.g:2277:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalContentAssistFragmentTestLang.g:2278:5: () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalContentAssistFragmentTestLang.g:2282:5: ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:2283:5: () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // InternalContentAssistFragmentTestLang.g:2278:5: ()
-        // InternalContentAssistFragmentTestLang.g:2279:5: 
+        // InternalContentAssistFragmentTestLang.g:2283:5: ()
+        // InternalContentAssistFragmentTestLang.g:2284:5: 
         {
         }
 
         match(input,66,FOLLOW_46); if (state.failed) return ;
         match(input,51,FOLLOW_3); if (state.failed) return ;
-        // InternalContentAssistFragmentTestLang.g:2282:5: ( ( ruleJvmFormalParameter ) )
-        // InternalContentAssistFragmentTestLang.g:2283:6: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:2287:5: ( ( ruleJvmFormalParameter ) )
+        // InternalContentAssistFragmentTestLang.g:2288:6: ( ruleJvmFormalParameter )
         {
-        // InternalContentAssistFragmentTestLang.g:2283:6: ( ruleJvmFormalParameter )
-        // InternalContentAssistFragmentTestLang.g:2284:7: ruleJvmFormalParameter
+        // InternalContentAssistFragmentTestLang.g:2288:6: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:2289:7: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_49);
         ruleJvmFormalParameter();
@@ -18588,14 +18596,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred22_InternalContentAssistFragmentTestLang
     public final void synpred22_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2391:4: ( ( () '[' ) )
-        // InternalContentAssistFragmentTestLang.g:2391:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:2396:4: ( ( () '[' ) )
+        // InternalContentAssistFragmentTestLang.g:2396:5: ( () '[' )
         {
-        // InternalContentAssistFragmentTestLang.g:2391:5: ( () '[' )
-        // InternalContentAssistFragmentTestLang.g:2392:5: () '['
+        // InternalContentAssistFragmentTestLang.g:2396:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:2397:5: () '['
         {
-        // InternalContentAssistFragmentTestLang.g:2392:5: ()
-        // InternalContentAssistFragmentTestLang.g:2393:5: 
+        // InternalContentAssistFragmentTestLang.g:2397:5: ()
+        // InternalContentAssistFragmentTestLang.g:2398:5: 
         {
         }
 
@@ -18610,13 +18618,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred24_InternalContentAssistFragmentTestLang
     public final void synpred24_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:2696:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:2696:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:2701:4: ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:2701:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:2696:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalContentAssistFragmentTestLang.g:2697:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:2701:5: ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:2702:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalContentAssistFragmentTestLang.g:2697:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalContentAssistFragmentTestLang.g:2702:5: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt116=2;
         int LA116_0 = input.LA(1);
 
@@ -18625,13 +18633,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
         switch (alt116) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:2698:6: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:2703:6: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalContentAssistFragmentTestLang.g:2698:6: ( ( ruleJvmFormalParameter ) )
-                // InternalContentAssistFragmentTestLang.g:2699:7: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:2703:6: ( ( ruleJvmFormalParameter ) )
+                // InternalContentAssistFragmentTestLang.g:2704:7: ( ruleJvmFormalParameter )
                 {
-                // InternalContentAssistFragmentTestLang.g:2699:7: ( ruleJvmFormalParameter )
-                // InternalContentAssistFragmentTestLang.g:2700:8: ruleJvmFormalParameter
+                // InternalContentAssistFragmentTestLang.g:2704:7: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:2705:8: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_41);
                 ruleJvmFormalParameter();
@@ -18644,7 +18652,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 }
 
-                // InternalContentAssistFragmentTestLang.g:2703:6: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:2708:6: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop115:
                 do {
                     int alt115=2;
@@ -18657,14 +18665,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     switch (alt115) {
                 	case 1 :
-                	    // InternalContentAssistFragmentTestLang.g:2704:7: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:2709:7: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,50,FOLLOW_3); if (state.failed) return ;
-                	    // InternalContentAssistFragmentTestLang.g:2705:7: ( ( ruleJvmFormalParameter ) )
-                	    // InternalContentAssistFragmentTestLang.g:2706:8: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:2710:7: ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:2711:8: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalContentAssistFragmentTestLang.g:2706:8: ( ruleJvmFormalParameter )
-                	    // InternalContentAssistFragmentTestLang.g:2707:9: ruleJvmFormalParameter
+                	    // InternalContentAssistFragmentTestLang.g:2711:8: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:2712:9: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_41);
                 	    ruleJvmFormalParameter();
@@ -18692,11 +18700,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:2712:5: ( ( '|' ) )
-        // InternalContentAssistFragmentTestLang.g:2713:6: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:2717:5: ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:2718:6: ( '|' )
         {
-        // InternalContentAssistFragmentTestLang.g:2713:6: ( '|' )
-        // InternalContentAssistFragmentTestLang.g:2714:7: '|'
+        // InternalContentAssistFragmentTestLang.g:2718:6: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:2719:7: '|'
         {
         match(input,58,FOLLOW_2); if (state.failed) return ;
 
@@ -18715,8 +18723,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred26_InternalContentAssistFragmentTestLang
     public final void synpred26_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:3105:5: ( 'else' )
-        // InternalContentAssistFragmentTestLang.g:3105:6: 'else'
+        // InternalContentAssistFragmentTestLang.g:3110:5: ( 'else' )
+        // InternalContentAssistFragmentTestLang.g:3110:6: 'else'
         {
         match(input,61,FOLLOW_2); if (state.failed) return ;
 
@@ -18726,18 +18734,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred27_InternalContentAssistFragmentTestLang
     public final void synpred27_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:3164:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalContentAssistFragmentTestLang.g:3164:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:3169:6: ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalContentAssistFragmentTestLang.g:3169:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalContentAssistFragmentTestLang.g:3164:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalContentAssistFragmentTestLang.g:3165:7: '(' ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalContentAssistFragmentTestLang.g:3169:7: ( '(' ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:3170:7: '(' ( ( ruleJvmFormalParameter ) ) ':'
         {
         match(input,51,FOLLOW_3); if (state.failed) return ;
-        // InternalContentAssistFragmentTestLang.g:3166:7: ( ( ruleJvmFormalParameter ) )
-        // InternalContentAssistFragmentTestLang.g:3167:8: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:3171:7: ( ( ruleJvmFormalParameter ) )
+        // InternalContentAssistFragmentTestLang.g:3172:8: ( ruleJvmFormalParameter )
         {
-        // InternalContentAssistFragmentTestLang.g:3167:8: ( ruleJvmFormalParameter )
-        // InternalContentAssistFragmentTestLang.g:3168:9: ruleJvmFormalParameter
+        // InternalContentAssistFragmentTestLang.g:3172:8: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:3173:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_49);
         ruleJvmFormalParameter();
@@ -18761,17 +18769,17 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred28_InternalContentAssistFragmentTestLang
     public final void synpred28_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:3231:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )
-        // InternalContentAssistFragmentTestLang.g:3231:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:3236:6: ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )
+        // InternalContentAssistFragmentTestLang.g:3236:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
         {
-        // InternalContentAssistFragmentTestLang.g:3231:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
-        // InternalContentAssistFragmentTestLang.g:3232:7: ( ( ruleJvmFormalParameter ) ) ':'
+        // InternalContentAssistFragmentTestLang.g:3236:7: ( ( ( ruleJvmFormalParameter ) ) ':' )
+        // InternalContentAssistFragmentTestLang.g:3237:7: ( ( ruleJvmFormalParameter ) ) ':'
         {
-        // InternalContentAssistFragmentTestLang.g:3232:7: ( ( ruleJvmFormalParameter ) )
-        // InternalContentAssistFragmentTestLang.g:3233:8: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:3237:7: ( ( ruleJvmFormalParameter ) )
+        // InternalContentAssistFragmentTestLang.g:3238:8: ( ruleJvmFormalParameter )
         {
-        // InternalContentAssistFragmentTestLang.g:3233:8: ( ruleJvmFormalParameter )
-        // InternalContentAssistFragmentTestLang.g:3234:9: ruleJvmFormalParameter
+        // InternalContentAssistFragmentTestLang.g:3238:8: ( ruleJvmFormalParameter )
+        // InternalContentAssistFragmentTestLang.g:3239:9: ruleJvmFormalParameter
         {
         pushFollow(FOLLOW_49);
         ruleJvmFormalParameter();
@@ -18795,11 +18803,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred30_InternalContentAssistFragmentTestLang
     public final void synpred30_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4212:5: ( ( '(' ) )
-        // InternalContentAssistFragmentTestLang.g:4212:6: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:4217:5: ( ( '(' ) )
+        // InternalContentAssistFragmentTestLang.g:4217:6: ( '(' )
         {
-        // InternalContentAssistFragmentTestLang.g:4212:6: ( '(' )
-        // InternalContentAssistFragmentTestLang.g:4213:6: '('
+        // InternalContentAssistFragmentTestLang.g:4217:6: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:4218:6: '('
         {
         match(input,51,FOLLOW_2); if (state.failed) return ;
 
@@ -18812,18 +18820,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred31_InternalContentAssistFragmentTestLang
     public final void synpred31_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4231:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:4231:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:4236:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:4236:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:4231:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalContentAssistFragmentTestLang.g:4232:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:4236:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:4237:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalContentAssistFragmentTestLang.g:4232:7: ()
-        // InternalContentAssistFragmentTestLang.g:4233:7: 
+        // InternalContentAssistFragmentTestLang.g:4237:7: ()
+        // InternalContentAssistFragmentTestLang.g:4238:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:4234:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalContentAssistFragmentTestLang.g:4239:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt120=2;
         int LA120_0 = input.LA(1);
 
@@ -18832,13 +18840,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
         switch (alt120) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:4235:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:4240:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalContentAssistFragmentTestLang.g:4235:8: ( ( ruleJvmFormalParameter ) )
-                // InternalContentAssistFragmentTestLang.g:4236:9: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:4240:8: ( ( ruleJvmFormalParameter ) )
+                // InternalContentAssistFragmentTestLang.g:4241:9: ( ruleJvmFormalParameter )
                 {
-                // InternalContentAssistFragmentTestLang.g:4236:9: ( ruleJvmFormalParameter )
-                // InternalContentAssistFragmentTestLang.g:4237:10: ruleJvmFormalParameter
+                // InternalContentAssistFragmentTestLang.g:4241:9: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:4242:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_41);
                 ruleJvmFormalParameter();
@@ -18851,7 +18859,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 }
 
-                // InternalContentAssistFragmentTestLang.g:4240:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:4245:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop119:
                 do {
                     int alt119=2;
@@ -18864,14 +18872,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     switch (alt119) {
                 	case 1 :
-                	    // InternalContentAssistFragmentTestLang.g:4241:9: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:4246:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,50,FOLLOW_3); if (state.failed) return ;
-                	    // InternalContentAssistFragmentTestLang.g:4242:9: ( ( ruleJvmFormalParameter ) )
-                	    // InternalContentAssistFragmentTestLang.g:4243:10: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:4247:9: ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:4248:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalContentAssistFragmentTestLang.g:4243:10: ( ruleJvmFormalParameter )
-                	    // InternalContentAssistFragmentTestLang.g:4244:11: ruleJvmFormalParameter
+                	    // InternalContentAssistFragmentTestLang.g:4248:10: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:4249:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_41);
                 	    ruleJvmFormalParameter();
@@ -18899,11 +18907,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:4249:7: ( ( '|' ) )
-        // InternalContentAssistFragmentTestLang.g:4250:8: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:4254:7: ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:4255:8: ( '|' )
         {
-        // InternalContentAssistFragmentTestLang.g:4250:8: ( '|' )
-        // InternalContentAssistFragmentTestLang.g:4251:9: '|'
+        // InternalContentAssistFragmentTestLang.g:4255:8: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:4256:9: '|'
         {
         match(input,58,FOLLOW_2); if (state.failed) return ;
 
@@ -18922,14 +18930,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred32_InternalContentAssistFragmentTestLang
     public final void synpred32_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4328:4: ( ( () '[' ) )
-        // InternalContentAssistFragmentTestLang.g:4328:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:4333:4: ( ( () '[' ) )
+        // InternalContentAssistFragmentTestLang.g:4333:5: ( () '[' )
         {
-        // InternalContentAssistFragmentTestLang.g:4328:5: ( () '[' )
-        // InternalContentAssistFragmentTestLang.g:4329:5: () '['
+        // InternalContentAssistFragmentTestLang.g:4333:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:4334:5: () '['
         {
-        // InternalContentAssistFragmentTestLang.g:4329:5: ()
-        // InternalContentAssistFragmentTestLang.g:4330:5: 
+        // InternalContentAssistFragmentTestLang.g:4334:5: ()
+        // InternalContentAssistFragmentTestLang.g:4335:5: 
         {
         }
 
@@ -18944,8 +18952,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred33_InternalContentAssistFragmentTestLang
     public final void synpred33_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4488:5: ( '<' )
-        // InternalContentAssistFragmentTestLang.g:4488:6: '<'
+        // InternalContentAssistFragmentTestLang.g:4493:5: ( '<' )
+        // InternalContentAssistFragmentTestLang.g:4493:6: '<'
         {
         match(input,21,FOLLOW_2); if (state.failed) return ;
 
@@ -18955,11 +18963,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred34_InternalContentAssistFragmentTestLang
     public final void synpred34_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4545:5: ( ( '(' ) )
-        // InternalContentAssistFragmentTestLang.g:4545:6: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:4550:5: ( ( '(' ) )
+        // InternalContentAssistFragmentTestLang.g:4550:6: ( '(' )
         {
-        // InternalContentAssistFragmentTestLang.g:4545:6: ( '(' )
-        // InternalContentAssistFragmentTestLang.g:4546:6: '('
+        // InternalContentAssistFragmentTestLang.g:4550:6: ( '(' )
+        // InternalContentAssistFragmentTestLang.g:4551:6: '('
         {
         match(input,51,FOLLOW_2); if (state.failed) return ;
 
@@ -18972,18 +18980,18 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred35_InternalContentAssistFragmentTestLang
     public final void synpred35_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4564:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
-        // InternalContentAssistFragmentTestLang.g:4564:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:4569:6: ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )
+        // InternalContentAssistFragmentTestLang.g:4569:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
         {
-        // InternalContentAssistFragmentTestLang.g:4564:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
-        // InternalContentAssistFragmentTestLang.g:4565:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:4569:7: ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) )
+        // InternalContentAssistFragmentTestLang.g:4570:7: () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) )
         {
-        // InternalContentAssistFragmentTestLang.g:4565:7: ()
-        // InternalContentAssistFragmentTestLang.g:4566:7: 
+        // InternalContentAssistFragmentTestLang.g:4570:7: ()
+        // InternalContentAssistFragmentTestLang.g:4571:7: 
         {
         }
 
-        // InternalContentAssistFragmentTestLang.g:4567:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
+        // InternalContentAssistFragmentTestLang.g:4572:7: ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )?
         int alt122=2;
         int LA122_0 = input.LA(1);
 
@@ -18992,13 +19000,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
         switch (alt122) {
             case 1 :
-                // InternalContentAssistFragmentTestLang.g:4568:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:4573:8: ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 {
-                // InternalContentAssistFragmentTestLang.g:4568:8: ( ( ruleJvmFormalParameter ) )
-                // InternalContentAssistFragmentTestLang.g:4569:9: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:4573:8: ( ( ruleJvmFormalParameter ) )
+                // InternalContentAssistFragmentTestLang.g:4574:9: ( ruleJvmFormalParameter )
                 {
-                // InternalContentAssistFragmentTestLang.g:4569:9: ( ruleJvmFormalParameter )
-                // InternalContentAssistFragmentTestLang.g:4570:10: ruleJvmFormalParameter
+                // InternalContentAssistFragmentTestLang.g:4574:9: ( ruleJvmFormalParameter )
+                // InternalContentAssistFragmentTestLang.g:4575:10: ruleJvmFormalParameter
                 {
                 pushFollow(FOLLOW_41);
                 ruleJvmFormalParameter();
@@ -19011,7 +19019,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                 }
 
-                // InternalContentAssistFragmentTestLang.g:4573:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
+                // InternalContentAssistFragmentTestLang.g:4578:8: ( ',' ( ( ruleJvmFormalParameter ) ) )*
                 loop121:
                 do {
                     int alt121=2;
@@ -19024,14 +19032,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                     switch (alt121) {
                 	case 1 :
-                	    // InternalContentAssistFragmentTestLang.g:4574:9: ',' ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:4579:9: ',' ( ( ruleJvmFormalParameter ) )
                 	    {
                 	    match(input,50,FOLLOW_3); if (state.failed) return ;
-                	    // InternalContentAssistFragmentTestLang.g:4575:9: ( ( ruleJvmFormalParameter ) )
-                	    // InternalContentAssistFragmentTestLang.g:4576:10: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:4580:9: ( ( ruleJvmFormalParameter ) )
+                	    // InternalContentAssistFragmentTestLang.g:4581:10: ( ruleJvmFormalParameter )
                 	    {
-                	    // InternalContentAssistFragmentTestLang.g:4576:10: ( ruleJvmFormalParameter )
-                	    // InternalContentAssistFragmentTestLang.g:4577:11: ruleJvmFormalParameter
+                	    // InternalContentAssistFragmentTestLang.g:4581:10: ( ruleJvmFormalParameter )
+                	    // InternalContentAssistFragmentTestLang.g:4582:11: ruleJvmFormalParameter
                 	    {
                 	    pushFollow(FOLLOW_41);
                 	    ruleJvmFormalParameter();
@@ -19059,11 +19067,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
         }
 
-        // InternalContentAssistFragmentTestLang.g:4582:7: ( ( '|' ) )
-        // InternalContentAssistFragmentTestLang.g:4583:8: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:4587:7: ( ( '|' ) )
+        // InternalContentAssistFragmentTestLang.g:4588:8: ( '|' )
         {
-        // InternalContentAssistFragmentTestLang.g:4583:8: ( '|' )
-        // InternalContentAssistFragmentTestLang.g:4584:9: '|'
+        // InternalContentAssistFragmentTestLang.g:4588:8: ( '|' )
+        // InternalContentAssistFragmentTestLang.g:4589:9: '|'
         {
         match(input,58,FOLLOW_2); if (state.failed) return ;
 
@@ -19082,14 +19090,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred36_InternalContentAssistFragmentTestLang
     public final void synpred36_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:4661:4: ( ( () '[' ) )
-        // InternalContentAssistFragmentTestLang.g:4661:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:4666:4: ( ( () '[' ) )
+        // InternalContentAssistFragmentTestLang.g:4666:5: ( () '[' )
         {
-        // InternalContentAssistFragmentTestLang.g:4661:5: ( () '[' )
-        // InternalContentAssistFragmentTestLang.g:4662:5: () '['
+        // InternalContentAssistFragmentTestLang.g:4666:5: ( () '[' )
+        // InternalContentAssistFragmentTestLang.g:4667:5: () '['
         {
-        // InternalContentAssistFragmentTestLang.g:4662:5: ()
-        // InternalContentAssistFragmentTestLang.g:4663:5: 
+        // InternalContentAssistFragmentTestLang.g:4667:5: ()
+        // InternalContentAssistFragmentTestLang.g:4668:5: 
         {
         }
 
@@ -19104,7 +19112,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred37_InternalContentAssistFragmentTestLang
     public final void synpred37_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5004:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )
+        // InternalContentAssistFragmentTestLang.g:5009:4: ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )
         // InternalContentAssistFragmentTestLang.g:
         {
         if ( (input.LA(1)>=RULE_STRING && input.LA(1)<=RULE_ID)||input.LA(1)==21||(input.LA(1)>=37 && input.LA(1)<=38)||input.LA(1)==43||input.LA(1)==51||(input.LA(1)>=53 && input.LA(1)<=54)||input.LA(1)==56||input.LA(1)==60||input.LA(1)==62||(input.LA(1)>=66 && input.LA(1)<=81)||input.LA(1)==83 ) {
@@ -19124,8 +19132,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred38_InternalContentAssistFragmentTestLang
     public final void synpred38_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5075:6: ( 'catch' )
-        // InternalContentAssistFragmentTestLang.g:5075:7: 'catch'
+        // InternalContentAssistFragmentTestLang.g:5080:6: ( 'catch' )
+        // InternalContentAssistFragmentTestLang.g:5080:7: 'catch'
         {
         match(input,84,FOLLOW_2); if (state.failed) return ;
 
@@ -19135,8 +19143,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred39_InternalContentAssistFragmentTestLang
     public final void synpred39_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5096:7: ( 'finally' )
-        // InternalContentAssistFragmentTestLang.g:5096:8: 'finally'
+        // InternalContentAssistFragmentTestLang.g:5101:7: ( 'finally' )
+        // InternalContentAssistFragmentTestLang.g:5101:8: 'finally'
         {
         match(input,82,FOLLOW_2); if (state.failed) return ;
 
@@ -19146,8 +19154,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred42_InternalContentAssistFragmentTestLang
     public final void synpred42_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5340:5: ( '.' )
-        // InternalContentAssistFragmentTestLang.g:5340:6: '.'
+        // InternalContentAssistFragmentTestLang.g:5345:5: ( '.' )
+        // InternalContentAssistFragmentTestLang.g:5345:6: '.'
         {
         match(input,47,FOLLOW_2); if (state.failed) return ;
 
@@ -19157,14 +19165,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred43_InternalContentAssistFragmentTestLang
     public final void synpred43_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5466:5: ( ( () ruleArrayBrackets ) )
-        // InternalContentAssistFragmentTestLang.g:5466:6: ( () ruleArrayBrackets )
+        // InternalContentAssistFragmentTestLang.g:5471:5: ( ( () ruleArrayBrackets ) )
+        // InternalContentAssistFragmentTestLang.g:5471:6: ( () ruleArrayBrackets )
         {
-        // InternalContentAssistFragmentTestLang.g:5466:6: ( () ruleArrayBrackets )
-        // InternalContentAssistFragmentTestLang.g:5467:6: () ruleArrayBrackets
+        // InternalContentAssistFragmentTestLang.g:5471:6: ( () ruleArrayBrackets )
+        // InternalContentAssistFragmentTestLang.g:5472:6: () ruleArrayBrackets
         {
-        // InternalContentAssistFragmentTestLang.g:5467:6: ()
-        // InternalContentAssistFragmentTestLang.g:5468:6: 
+        // InternalContentAssistFragmentTestLang.g:5472:6: ()
+        // InternalContentAssistFragmentTestLang.g:5473:6: 
         {
         }
 
@@ -19183,8 +19191,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred44_InternalContentAssistFragmentTestLang
     public final void synpred44_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5663:5: ( '<' )
-        // InternalContentAssistFragmentTestLang.g:5663:6: '<'
+        // InternalContentAssistFragmentTestLang.g:5668:5: ( '<' )
+        // InternalContentAssistFragmentTestLang.g:5668:6: '<'
         {
         match(input,21,FOLLOW_2); if (state.failed) return ;
 
@@ -19194,14 +19202,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred45_InternalContentAssistFragmentTestLang
     public final void synpred45_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5719:6: ( ( () '.' ) )
-        // InternalContentAssistFragmentTestLang.g:5719:7: ( () '.' )
+        // InternalContentAssistFragmentTestLang.g:5724:6: ( ( () '.' ) )
+        // InternalContentAssistFragmentTestLang.g:5724:7: ( () '.' )
         {
-        // InternalContentAssistFragmentTestLang.g:5719:7: ( () '.' )
-        // InternalContentAssistFragmentTestLang.g:5720:7: () '.'
+        // InternalContentAssistFragmentTestLang.g:5724:7: ( () '.' )
+        // InternalContentAssistFragmentTestLang.g:5725:7: () '.'
         {
-        // InternalContentAssistFragmentTestLang.g:5720:7: ()
-        // InternalContentAssistFragmentTestLang.g:5721:7: 
+        // InternalContentAssistFragmentTestLang.g:5725:7: ()
+        // InternalContentAssistFragmentTestLang.g:5726:7: 
         {
         }
 
@@ -19216,8 +19224,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // $ANTLR start synpred46_InternalContentAssistFragmentTestLang
     public final void synpred46_InternalContentAssistFragmentTestLang_fragment() throws RecognitionException {   
-        // InternalContentAssistFragmentTestLang.g:5757:7: ( '<' )
-        // InternalContentAssistFragmentTestLang.g:5757:8: '<'
+        // InternalContentAssistFragmentTestLang.g:5762:7: ( '<' )
+        // InternalContentAssistFragmentTestLang.g:5762:8: '<'
         {
         match(input,21,FOLLOW_2); if (state.failed) return ;
 
@@ -19865,7 +19873,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "350:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
+            return "355:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20026,7 +20034,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_14;
         }
         public String getDescription() {
-            return "()* loopback of 1064:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
+            return "()* loopback of 1069:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20197,7 +20205,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "1140:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
+            return "1145:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
         }
     }
     static final String dfa_20s = "\116\uffff";
@@ -20309,7 +20317,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "2041:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
+            return "2046:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20403,7 +20411,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_32;
         }
         public String getDescription() {
-            return "2060:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
+            return "2065:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20566,7 +20574,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_33;
         }
         public String getDescription() {
-            return "2158:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
+            return "2163:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20656,7 +20664,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_39;
         }
         public String getDescription() {
-            return "2203:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
+            return "2208:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20791,7 +20799,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_45;
         }
         public String getDescription() {
-            return "2695:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
+            return "2700:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20920,7 +20928,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_51;
         }
         public String getDescription() {
-            return "3161:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )";
+            return "3166:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpression ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21012,7 +21020,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_57;
         }
         public String getDescription() {
-            return "3230:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
+            return "3235:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21090,7 +21098,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "4210:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
+            return "4215:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21134,7 +21142,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_32;
         }
         public String getDescription() {
-            return "4229:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
+            return "4234:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21216,7 +21224,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_33;
         }
         public String getDescription() {
-            return "4327:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
+            return "4332:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21341,7 +21349,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_58;
         }
         public String getDescription() {
-            return "4486:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
+            return "4491:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21385,7 +21393,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "4543:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+            return "4548:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21429,7 +21437,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_32;
         }
         public String getDescription() {
-            return "4562:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
+            return "4567:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21511,7 +21519,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_33;
         }
         public String getDescription() {
-            return "4660:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
+            return "4665:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21646,7 +21654,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_64;
         }
         public String getDescription() {
-            return "5003:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?";
+            return "5008:3: ( ( 'extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING )=> (lv_expression_2_0= ruleXExpression ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22250,7 +22258,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_71;
         }
         public String getDescription() {
-            return "5661:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
+            return "5666:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22294,7 +22302,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_71;
         }
         public String getDescription() {
-            return "5755:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "5760:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -22361,7 +22369,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             this.transition = dfa_78;
         }
         public String getDescription() {
-            return "6217:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+            return "6222:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
         }
     }
  
