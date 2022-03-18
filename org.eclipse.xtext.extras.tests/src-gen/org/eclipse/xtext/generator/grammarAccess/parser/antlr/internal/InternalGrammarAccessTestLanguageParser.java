@@ -18,6 +18,14 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+/*******************************************************************************
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -74,7 +82,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleRoot"
-    // InternalGrammarAccessTestLanguage.g:64:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalGrammarAccessTestLanguage.g:69:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +90,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalGrammarAccessTestLanguage.g:64:45: (iv_ruleRoot= ruleRoot EOF )
-            // InternalGrammarAccessTestLanguage.g:65:2: iv_ruleRoot= ruleRoot EOF
+            // InternalGrammarAccessTestLanguage.g:69:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalGrammarAccessTestLanguage.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -110,7 +118,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleRoot"
-    // InternalGrammarAccessTestLanguage.g:71:1: ruleRoot returns [EObject current=null] : ( (lv_elements_0_0= ruleType ) )* ;
+    // InternalGrammarAccessTestLanguage.g:76:1: ruleRoot returns [EObject current=null] : ( (lv_elements_0_0= ruleType ) )* ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -121,10 +129,10 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalGrammarAccessTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleType ) )* )
-            // InternalGrammarAccessTestLanguage.g:78:2: ( (lv_elements_0_0= ruleType ) )*
+            // InternalGrammarAccessTestLanguage.g:82:2: ( ( (lv_elements_0_0= ruleType ) )* )
+            // InternalGrammarAccessTestLanguage.g:83:2: ( (lv_elements_0_0= ruleType ) )*
             {
-            // InternalGrammarAccessTestLanguage.g:78:2: ( (lv_elements_0_0= ruleType ) )*
+            // InternalGrammarAccessTestLanguage.g:83:2: ( (lv_elements_0_0= ruleType ) )*
             loop1:
             do {
                 int alt1=2;
@@ -137,10 +145,10 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalGrammarAccessTestLanguage.g:79:3: (lv_elements_0_0= ruleType )
+            	    // InternalGrammarAccessTestLanguage.g:84:3: (lv_elements_0_0= ruleType )
             	    {
-            	    // InternalGrammarAccessTestLanguage.g:79:3: (lv_elements_0_0= ruleType )
-            	    // InternalGrammarAccessTestLanguage.g:80:4: lv_elements_0_0= ruleType
+            	    // InternalGrammarAccessTestLanguage.g:84:3: (lv_elements_0_0= ruleType )
+            	    // InternalGrammarAccessTestLanguage.g:85:4: lv_elements_0_0= ruleType
             	    {
 
             	    				newCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0());
@@ -193,7 +201,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleType"
-    // InternalGrammarAccessTestLanguage.g:100:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // InternalGrammarAccessTestLanguage.g:105:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -201,8 +209,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalGrammarAccessTestLanguage.g:100:45: (iv_ruleType= ruleType EOF )
-            // InternalGrammarAccessTestLanguage.g:101:2: iv_ruleType= ruleType EOF
+            // InternalGrammarAccessTestLanguage.g:105:45: (iv_ruleType= ruleType EOF )
+            // InternalGrammarAccessTestLanguage.g:106:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -229,7 +237,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleType"
-    // InternalGrammarAccessTestLanguage.g:107:1: ruleType returns [EObject current=null] : (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) ;
+    // InternalGrammarAccessTestLanguage.g:112:1: ruleType returns [EObject current=null] : (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -242,10 +250,10 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalGrammarAccessTestLanguage.g:113:2: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
-            // InternalGrammarAccessTestLanguage.g:114:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
+            // InternalGrammarAccessTestLanguage.g:118:2: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
+            // InternalGrammarAccessTestLanguage.g:119:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             {
-            // InternalGrammarAccessTestLanguage.g:114:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
+            // InternalGrammarAccessTestLanguage.g:119:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -263,7 +271,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt2) {
                 case 1 :
-                    // InternalGrammarAccessTestLanguage.g:115:3: this_AType_0= ruleAType
+                    // InternalGrammarAccessTestLanguage.g:120:3: this_AType_0= ruleAType
                     {
 
                     			newCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0());
@@ -281,7 +289,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalGrammarAccessTestLanguage.g:124:3: this_AnotherType_1= ruleAnotherType
+                    // InternalGrammarAccessTestLanguage.g:129:3: this_AnotherType_1= ruleAnotherType
                     {
 
                     			newCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1());
@@ -321,7 +329,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAType"
-    // InternalGrammarAccessTestLanguage.g:136:1: entryRuleAType returns [EObject current=null] : iv_ruleAType= ruleAType EOF ;
+    // InternalGrammarAccessTestLanguage.g:141:1: entryRuleAType returns [EObject current=null] : iv_ruleAType= ruleAType EOF ;
     public final EObject entryRuleAType() throws RecognitionException {
         EObject current = null;
 
@@ -329,8 +337,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalGrammarAccessTestLanguage.g:136:46: (iv_ruleAType= ruleAType EOF )
-            // InternalGrammarAccessTestLanguage.g:137:2: iv_ruleAType= ruleAType EOF
+            // InternalGrammarAccessTestLanguage.g:141:46: (iv_ruleAType= ruleAType EOF )
+            // InternalGrammarAccessTestLanguage.g:142:2: iv_ruleAType= ruleAType EOF
             {
              newCompositeNode(grammarAccess.getATypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -357,7 +365,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAType"
-    // InternalGrammarAccessTestLanguage.g:143:1: ruleAType returns [EObject current=null] : (otherlv_0= 'foo' () ) ;
+    // InternalGrammarAccessTestLanguage.g:148:1: ruleAType returns [EObject current=null] : (otherlv_0= 'foo' () ) ;
     public final EObject ruleAType() throws RecognitionException {
         EObject current = null;
 
@@ -367,18 +375,18 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalGrammarAccessTestLanguage.g:149:2: ( (otherlv_0= 'foo' () ) )
-            // InternalGrammarAccessTestLanguage.g:150:2: (otherlv_0= 'foo' () )
+            // InternalGrammarAccessTestLanguage.g:154:2: ( (otherlv_0= 'foo' () ) )
+            // InternalGrammarAccessTestLanguage.g:155:2: (otherlv_0= 'foo' () )
             {
-            // InternalGrammarAccessTestLanguage.g:150:2: (otherlv_0= 'foo' () )
-            // InternalGrammarAccessTestLanguage.g:151:3: otherlv_0= 'foo' ()
+            // InternalGrammarAccessTestLanguage.g:155:2: (otherlv_0= 'foo' () )
+            // InternalGrammarAccessTestLanguage.g:156:3: otherlv_0= 'foo' ()
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0());
             		
-            // InternalGrammarAccessTestLanguage.g:155:3: ()
-            // InternalGrammarAccessTestLanguage.g:156:4: 
+            // InternalGrammarAccessTestLanguage.g:160:3: ()
+            // InternalGrammarAccessTestLanguage.g:161:4: 
             {
 
             				current = forceCreateModelElement(
@@ -411,7 +419,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleAnotherType"
-    // InternalGrammarAccessTestLanguage.g:166:1: entryRuleAnotherType returns [EObject current=null] : iv_ruleAnotherType= ruleAnotherType EOF ;
+    // InternalGrammarAccessTestLanguage.g:171:1: entryRuleAnotherType returns [EObject current=null] : iv_ruleAnotherType= ruleAnotherType EOF ;
     public final EObject entryRuleAnotherType() throws RecognitionException {
         EObject current = null;
 
@@ -419,8 +427,8 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalGrammarAccessTestLanguage.g:166:52: (iv_ruleAnotherType= ruleAnotherType EOF )
-            // InternalGrammarAccessTestLanguage.g:167:2: iv_ruleAnotherType= ruleAnotherType EOF
+            // InternalGrammarAccessTestLanguage.g:171:52: (iv_ruleAnotherType= ruleAnotherType EOF )
+            // InternalGrammarAccessTestLanguage.g:172:2: iv_ruleAnotherType= ruleAnotherType EOF
             {
              newCompositeNode(grammarAccess.getAnotherTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -447,7 +455,7 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleAnotherType"
-    // InternalGrammarAccessTestLanguage.g:173:1: ruleAnotherType returns [EObject current=null] : (otherlv_0= 'bar' () ) ;
+    // InternalGrammarAccessTestLanguage.g:178:1: ruleAnotherType returns [EObject current=null] : (otherlv_0= 'bar' () ) ;
     public final EObject ruleAnotherType() throws RecognitionException {
         EObject current = null;
 
@@ -457,18 +465,18 @@ public class InternalGrammarAccessTestLanguageParser extends AbstractInternalAnt
         	enterRule();
 
         try {
-            // InternalGrammarAccessTestLanguage.g:179:2: ( (otherlv_0= 'bar' () ) )
-            // InternalGrammarAccessTestLanguage.g:180:2: (otherlv_0= 'bar' () )
+            // InternalGrammarAccessTestLanguage.g:184:2: ( (otherlv_0= 'bar' () ) )
+            // InternalGrammarAccessTestLanguage.g:185:2: (otherlv_0= 'bar' () )
             {
-            // InternalGrammarAccessTestLanguage.g:180:2: (otherlv_0= 'bar' () )
-            // InternalGrammarAccessTestLanguage.g:181:3: otherlv_0= 'bar' ()
+            // InternalGrammarAccessTestLanguage.g:185:2: (otherlv_0= 'bar' () )
+            // InternalGrammarAccessTestLanguage.g:186:3: otherlv_0= 'bar' ()
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0());
             		
-            // InternalGrammarAccessTestLanguage.g:185:3: ()
-            // InternalGrammarAccessTestLanguage.g:186:4: 
+            // InternalGrammarAccessTestLanguage.g:190:3: ()
+            // InternalGrammarAccessTestLanguage.g:191:4: 
             {
 
             				current = forceCreateModelElement(
