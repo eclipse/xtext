@@ -789,7 +789,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (installedCoreResourcesVersion == null) {
 			installedCoreResourcesVersion = ResourcesPlugin.getPlugin().getBundle().getVersion();
 		}
-		return version.compareTo(version) >= 0;
+		return installedCoreResourcesVersion.compareTo(version) >= 0;
 	}
 
 }
