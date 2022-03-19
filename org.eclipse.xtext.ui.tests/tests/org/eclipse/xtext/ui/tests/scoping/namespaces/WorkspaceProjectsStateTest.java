@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -103,17 +104,17 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 	
 	@Test public void testGetContainedURIs_01() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 2, containedURIs.size());
+		assertEquals(containedURIs.toString(), isCoreResourceGreaterOrEqual_3_17_0() ? 3 : 2, containedURIs.size());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(uri2));
 	}
 	
 	@Test public void testGetContainedURIs_02() throws CoreException, InvocationTargetException, InterruptedException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 2, containedURIs.size());
+		assertEquals(containedURIs.toString(), isCoreResourceGreaterOrEqual_3_17_0() ? 3 : 2, containedURIs.size());
 		URI uri = createFileAndRegisterResource(project1, "file3");
 		containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 3, containedURIs.size());
+		assertEquals(containedURIs.toString(), isCoreResourceGreaterOrEqual_3_17_0() ? 4 : 3, containedURIs.size());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(uri2));
 		assertTrue(containedURIs.contains(uri));
@@ -122,10 +123,15 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 	@Override
 	@Test public void testRemoveNature() throws CoreException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(2, containedURIs.size());
+		assertEquals(isCoreResourceGreaterOrEqual_3_17_0() ? 3 : 2, containedURIs.size());
 		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);
 		containedURIs = projectsState.getContainedURIs(project1.getName());
 		assertTrue(containedURIs.isEmpty());
+	}
+	
+	private static boolean isCoreResourceGreaterOrEqual_3_17_0() {
+		Version	installedCoreResourcesVersion = ResourcesPlugin.getPlugin().getBundle().getVersion();
+		return installedCoreResourcesVersion.compareTo(new Version(3,17,0)) >= 0;
 	}
 	
 }
