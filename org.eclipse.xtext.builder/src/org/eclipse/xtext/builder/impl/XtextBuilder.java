@@ -11,6 +11,7 @@ package org.eclipse.xtext.builder.impl;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -633,6 +634,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static boolean wasDeprecationWarningLoggedForClean = false;
 
 	private Method requestProjectRebuildMethod;
+	private Method requestProjectsRebuildMethod;
 
 	private static Version installedCoreResourcesVersion;
 	
@@ -782,7 +784,25 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} else {
 			needRebuild();
 		}
-		
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	public void triggerRequestProjectsRebuild(IProject project) {
+		if (requestProjectsRebuildMethod != null || isCoreResourceGreaterOrEqual(VERSION_3_17_0)) {
+			try {
+				if (requestProjectsRebuildMethod == null) {
+					requestProjectsRebuildMethod = getClass().getMethod("requestProjectsRebuild", Collection.class);
+				}
+				requestProjectsRebuildMethod.invoke(this, Collections.singletonList(project));
+			} catch (Exception e) {
+				log.error("something went wrong in triggerRequestProjectRebuild", e);
+				needRebuild();
+			}
+		} else {
+			needRebuild();
+		}
 	}
 	
 	private static boolean isCoreResourceGreaterOrEqual(Version version) {
