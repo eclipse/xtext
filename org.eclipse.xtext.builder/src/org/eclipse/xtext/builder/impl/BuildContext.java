@@ -55,9 +55,19 @@ public class BuildContext implements IBuildContext {
 		return sourceLevelURIs.contains(uri);
 	}
 	
+	@Deprecated
 	@Override
 	public void needRebuild() {
 		builder.triggerRequestProjectRebuild();
+	}
+	
+	@Override
+	public void needRebuild(IProject project) {
+		if (BuildContext.class == getClass()) {
+			builder.triggerRequestProjectsRebuild(project);
+		} else {
+			needRebuild();
+		}
 	}
 	
 	@Override

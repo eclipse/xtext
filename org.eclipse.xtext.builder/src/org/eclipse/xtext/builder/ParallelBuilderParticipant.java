@@ -127,9 +127,19 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			return buildContextDelegate.getBuildType();
 		}
 
+		@Deprecated
 		@Override
 		public void needRebuild() {
 			buildContextDelegate.needRebuild();
+		}
+		
+		@Override
+		public void needRebuild(IProject project) {
+			if (ParallelBuildContext.class == getClass()) {
+				buildContextDelegate.needRebuild(project);
+			} else {
+				needRebuild();
+			}
 		}
 		
 		@Override
