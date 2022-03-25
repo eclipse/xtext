@@ -58,13 +58,17 @@ public class BuildContext implements IBuildContext {
 	@Deprecated
 	@Override
 	public void needRebuild() {
-		builder.triggerRequestProjectRebuild();
+		builder.needRebuild();
 	}
 	
 	@Override
 	public void needRebuild(IProject project) {
 		if (BuildContext.class == getClass()) {
-			builder.triggerRequestProjectsRebuild(project);
+			if (getBuiltProject().equals(project)) {
+				builder.triggerRequestProjectRebuild();
+			} else {
+				builder.triggerRequestProjectsRebuild(project);
+			}
 		} else {
 			needRebuild();
 		}
