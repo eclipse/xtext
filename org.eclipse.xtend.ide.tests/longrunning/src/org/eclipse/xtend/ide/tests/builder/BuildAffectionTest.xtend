@@ -487,18 +487,33 @@ class BuildAffectionTest {
 				int foo;
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -625,18 +640,33 @@ class BuildAffectionTest {
 				}
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	@Test
@@ -670,19 +700,35 @@ class BuildAffectionTest {
 				}
 			}
 		''')
-		assertBuildLogs('''
-			Building test.project
-			indexing platform:/resource/test.project/src/Bar.xtend
-			indexing platform:/resource/test.project/src/Foo.xtend
-			Built test.project in \d+ ms
-			Building test.client
-			indexing platform:/resource/test.client/src/Client.xtend
-			Built test.client in \d+ ms
-			Building test.project
-			Built test.project in \d+ ms
-			Building test.client
-			Built test.client in \d+ ms
-		''')
+		if (isCoreResourceGreaterOrEqual_3_17_0) {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Bar.xtend
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		} else {
+			assertBuildLogs('''
+				Building test.project
+				indexing platform:/resource/test.project/src/Bar.xtend
+				indexing platform:/resource/test.project/src/Foo.xtend
+				Built test.project in \d+ ms
+				Building test.client
+				indexing platform:/resource/test.client/src/Client.xtend
+				Built test.client in \d+ ms
+				Building test.project
+				Built test.project in \d+ ms
+				Building test.client
+				Built test.client in \d+ ms
+			''')
+		}
 	}
 	
 	private def assertBuildLogs(CharSequence expected) {
