@@ -99,6 +99,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		Iterator<UnconfirmedStructuralChangesDelta> ucDeltas = unconfirmedDeltas.iterator();
 		int buildNumber = javaBuilderState.getBuildNumber().intValue();
 		IProject project = javaBuilderState.getProject();
+		boolean result = false;
 		while (ucDeltas.hasNext()) {
 			UnconfirmedStructuralChangesDelta ucDelta = ucDeltas.next();
 			if ((ucDelta.getBuildNumber() < buildNumber)
@@ -107,9 +108,11 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 				if (processor != null) {
 					processor.apply(ucDelta);
 				}
+			} else if (ucDelta.getProject().equals(project)) {
+				result = true;
 			}
 		}
-		return !unconfirmedDeltas.isEmpty();
+		return result;
 	}
 
 	protected boolean namesIntersect(IResourceDescription resourceDescription, Set<QualifiedName> names) {
