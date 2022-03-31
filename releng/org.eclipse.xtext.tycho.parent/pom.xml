@@ -9,8 +9,6 @@
 
 	<properties>
 		<tycho-version>1.7.0</tycho-version>
-		<!-- version of the "bootstrap" plugin; used to compile xtend sources in xtend -->
-		<xtend-maven-plugin-version>2.26.0</xtend-maven-plugin-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -260,23 +258,6 @@
 							</excludes>
 						</fileset>
 					</filesets>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-				<version>${xtend-maven-plugin-version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>xtend-install-debug-info</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<showEmptyDirWarning>false</showEmptyDirWarning>
-					<outputDirectory>${basedir}/xtend-gen</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
