@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2622,10 +2622,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Function1<T, Boolean> _function = new Function1<T, Boolean>() {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("public Boolean apply(final T it) {");
+    _builder_1.append("public Boolean apply(final T it_1) {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("return Boolean.valueOf((!Objects.equal(it, null)));");
+    _builder_1.append("return Boolean.valueOf((!Objects.equal(it_1, null)));");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");
@@ -8976,10 +8976,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("public String apply(final String it) {");
+    _builder_1.append("public String apply(final String it_1) {");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("return it;");
+    _builder_1.append("return it_1;");
     _builder_1.newLine();
     _builder_1.append("            ");
     _builder_1.append("}");
@@ -9680,10 +9680,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Function1<T, Boolean> _function = new Function1<T, Boolean>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public Boolean apply(final T it) {");
+    _builder_1.append("public Boolean apply(final T it_1) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return Boolean.valueOf((it != null));");
+    _builder_1.append("return Boolean.valueOf((it_1 != null));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

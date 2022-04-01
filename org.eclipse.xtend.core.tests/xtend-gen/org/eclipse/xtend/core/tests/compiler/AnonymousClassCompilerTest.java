@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -5731,6 +5731,109 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXtendIssue1301() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.emf.ecore.EObject");
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.common.notify.impl.AdapterImpl");
+    _builder.newLine();
+    _builder.append("class Sample {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def getMyAdapter(extension EObject it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eAdapters.filter(AdapterImpl).head ?: (new AdapterImpl() => [eAdapters += it])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.collect.Iterables;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.common.notify.Adapter;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.common.notify.impl.AdapterImpl;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.common.util.EList;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.EObject;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Sample {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public AdapterImpl getMyAdapter(@Extension final EObject it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("AdapterImpl _elvis = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("AdapterImpl _head = IterableExtensions.<AdapterImpl>head(Iterables.<AdapterImpl>filter(it.eAdapters(), AdapterImpl.class));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (_head != null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_elvis = _head;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("AdapterImpl _adapterImpl = new AdapterImpl();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("final Procedure1<AdapterImpl> _function = new Procedure1<AdapterImpl>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void apply(final AdapterImpl it_1) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("EList<Adapter> _eAdapters = it.eAdapters();");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("_eAdapters.add(it_1);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("AdapterImpl _doubleArrow = ObjectExtensions.<AdapterImpl>operator_doubleArrow(_adapterImpl, _function);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_elvis = _doubleArrow;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _elvis;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

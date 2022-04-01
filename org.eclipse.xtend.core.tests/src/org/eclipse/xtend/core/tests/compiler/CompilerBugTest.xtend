@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1131,12 +1131,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  
 			  public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {
 			    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-			      public void apply(final LoopParams it) {
+			      public void apply(final LoopParams it_1) {
 			      }
 			    };
 			    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
-			      public void apply(final JvmTypeReference it, final ITreeAppendable app) {
-			        app.trace(it).append(it.getType());
+			      public void apply(final JvmTypeReference it_1, final ITreeAppendable app) {
+			        app.trace(it_1).append(it_1.getType());
 			      }
 			    };
 			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);

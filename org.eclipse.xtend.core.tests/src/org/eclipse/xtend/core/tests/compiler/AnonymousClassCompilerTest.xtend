@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2424,6 +2424,51 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		        return null;
 		      }
 		    };
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def void testXtendIssue1301() {
+		'''
+		import org.eclipse.emf.ecore.EObject
+		import org.eclipse.emf.common.notify.impl.AdapterImpl
+		class Sample {
+			def getMyAdapter(extension EObject it) {
+				eAdapters.filter(AdapterImpl).head ?: (new AdapterImpl() => [eAdapters += it])
+			}
+		}
+		'''.assertCompilesTo('''
+		import com.google.common.collect.Iterables;
+		import org.eclipse.emf.common.notify.Adapter;
+		import org.eclipse.emf.common.notify.impl.AdapterImpl;
+		import org.eclipse.emf.common.util.EList;
+		import org.eclipse.emf.ecore.EObject;
+		import org.eclipse.xtext.xbase.lib.Extension;
+		import org.eclipse.xtext.xbase.lib.IterableExtensions;
+		import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+		import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+		
+		@SuppressWarnings("all")
+		public class Sample {
+		  public AdapterImpl getMyAdapter(@Extension final EObject it) {
+		    AdapterImpl _elvis = null;
+		    AdapterImpl _head = IterableExtensions.<AdapterImpl>head(Iterables.<AdapterImpl>filter(it.eAdapters(), AdapterImpl.class));
+		    if (_head != null) {
+		      _elvis = _head;
+		    } else {
+		      AdapterImpl _adapterImpl = new AdapterImpl();
+		      final Procedure1<AdapterImpl> _function = new Procedure1<AdapterImpl>() {
+		        public void apply(final AdapterImpl it_1) {
+		          EList<Adapter> _eAdapters = it.eAdapters();
+		          _eAdapters.add(it_1);
+		        }
+		      };
+		      AdapterImpl _doubleArrow = ObjectExtensions.<AdapterImpl>operator_doubleArrow(_adapterImpl, _function);
+		      _elvis = _doubleArrow;
+		    }
+		    return _elvis;
 		  }
 		}
 		''')
