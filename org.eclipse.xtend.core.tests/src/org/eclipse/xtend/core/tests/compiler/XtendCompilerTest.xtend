@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1133,8 +1133,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      protected T computeNext() {
 				        T _elvis = null;
 				        final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
-				          public Boolean apply(final T it) {
-				            return Boolean.valueOf((!Objects.equal(it, null)));
+				          public Boolean apply(final T it_1) {
+				            return Boolean.valueOf((!Objects.equal(it_1, null)));
 				          }
 				        };
 				        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
@@ -3957,8 +3957,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      final Function1<String, String> _function = new Function1<String, String>() {
 			        public String apply(final String it) {
 			          final Function1<String, String> _function = new Function1<String, String>() {
-			            public String apply(final String it) {
-			              return it;
+			            public String apply(final String it_1) {
+			              return it_1;
 			            }
 			          };
 			          return _function.apply(it);
@@ -4287,8 +4287,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				public class FindFirstOnIt {
 				  public <T extends Object> T useExtension(final Iterable<T> it) {
 				    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
-				      public Boolean apply(final T it) {
-				        return Boolean.valueOf((it != null));
+				      public Boolean apply(final T it_1) {
+				        return Boolean.valueOf((it_1 != null));
 				      }
 				    };
 				    return IterableExtensions.<T>findFirst(it, _function);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -82,8 +82,8 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			public class EitherTest {
 			  public Boolean m(final Either<Integer, Boolean> it) {
 			    final Function<Integer, Boolean> _function = new Function<Integer, Boolean>() {
-			      public Boolean apply(final Integer it) {
-			        int _intValue = it.intValue();
+			      public Boolean apply(final Integer it_1) {
+			        int _intValue = it_1.intValue();
 			        return Boolean.valueOf((_intValue == 0));
 			      }
 			    };
@@ -152,8 +152,8 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			public class EitherTest {
 			  public Either<String, Integer> m(final Either<Integer, Boolean> it) {
 			    final Function<Boolean, String> _function = new Function<Boolean, String>() {
-			      public String apply(final Boolean it) {
-			        return it.toString();
+			      public String apply(final Boolean it_1) {
+			        return it_1.toString();
 			      }
 			    };
 			    return it.<String>map(_function).swap();

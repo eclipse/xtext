@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2566,7 +2566,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final LoopParams it) {");
+    _builder_1.append("public void apply(final LoopParams it_1) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -2578,10 +2578,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final JvmTypeReference it, final ITreeAppendable app) {");
+    _builder_1.append("public void apply(final JvmTypeReference it_1, final ITreeAppendable app) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("app.trace(it).append(it.getType());");
+    _builder_1.append("app.trace(it_1).append(it_1.getType());");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
