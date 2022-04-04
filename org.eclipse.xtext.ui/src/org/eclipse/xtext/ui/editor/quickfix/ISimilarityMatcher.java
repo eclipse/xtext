@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.quickfix;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.ImplementedBy;
@@ -28,7 +27,7 @@ public interface ISimilarityMatcher {
 			if(Strings.isEmpty(s0) || Strings.isEmpty(s1)) {
 				return false;
 			}
-			double levenshteinDistance = StringUtils.getLevenshteinDistance(s0, s1);
+			double levenshteinDistance = Strings.getLevenshteinDistance(s0, s1);
 			return levenshteinDistance <= 1;
 		}
 
