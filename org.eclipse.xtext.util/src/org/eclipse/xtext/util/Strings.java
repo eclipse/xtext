@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 /**
@@ -471,6 +472,68 @@ public class Strings {
 			document.append(word);
 		}
 		return document.toString();
+	}
+	
+	/**
+	 * Calculates the Levenshtein text edit distance
+	 * 
+	 * copied & adapted (cost = 1) from org.eclipse.jdt.internal.ui.text.spelling.engine.DefaultPhoneticDistanceAlgorithm
+	 * 
+	 * @param from source string, may not be null
+	 * @param to target string, may not be null
+	 * @return Levenshtein distance between from and to
+	 * 
+	 * @since 2.27
+	 */
+	public static int getLevenshteinDistance(String from, String to) {
+		Preconditions.checkNotNull(from, "from");
+		Preconditions.checkNotNull(to, "to");
+		final int COST=1;
+		final char[] first = (" " + from).toCharArray(); //$NON-NLS-1$
+		final char[] second = (" " + to).toCharArray(); //$NON-NLS-1$
+		final int rows = first.length;
+		final int columns = second.length;
+		final int[][] metric = new int[rows][columns];
+		for (int column = 1; column < columns; column++) {
+			metric[0][column]= metric[0][column - 1] + COST;
+		}
+		for (int row = 1; row < rows; row++) {
+			metric[row][0] = metric[row - 1][0] + COST;
+		}
+		char source, target;
+		int swap= Integer.MAX_VALUE;
+		int change= Integer.MAX_VALUE;
+		int minimum, diagonal, insert, remove;
+		for (int row = 1; row < rows; row++) {
+			source = first[row];
+			for (int column = 1; column < columns; column++) {
+				target= second[column];
+				diagonal= metric[row - 1][column - 1];
+				if (source == target) {
+					metric[row][column] = diagonal;
+					continue;
+				}
+				change = Integer.MAX_VALUE;
+				if (Character.toLowerCase(source) == Character.toLowerCase(target))
+					change = COST + diagonal;
+				swap = Integer.MAX_VALUE;
+				if (row != 1 && column != 1 && source == second[column - 1] && first[row - 1] == target)
+					swap= COST + metric[row - 2][column - 2];
+				minimum = COST + diagonal;
+				if (swap < minimum)
+					minimum = swap;
+				remove = metric[row][column - 1];
+				if (COST + remove < minimum)
+					minimum = COST + remove;
+				insert = metric[row - 1][column];
+				if (COST + insert < minimum)
+					minimum = COST + insert;
+				if (change < minimum)
+					minimum = change;
+				metric[row][column] = minimum;
+			}
+		}
+		return metric[rows - 1][columns - 1];
 	}
 
 }
