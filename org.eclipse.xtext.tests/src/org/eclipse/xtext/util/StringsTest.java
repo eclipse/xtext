@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -284,5 +284,30 @@ public class StringsTest extends Assert {
 			Assert.assertTrue((char)c +  " \\u" + Integer.toString(c, 16), ref.test(c) == JavaStringConverter.isHex((char) c));
 		}
 	}
-	
+
+	@Test
+	public void testGetLevenshteinDistance() {
+		assertEquals(0, Strings.getLevenshteinDistance("", ""));
+		try {
+			Strings.getLevenshteinDistance(null, "");
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// OK
+		}
+		try {
+			Strings.getLevenshteinDistance("", null);
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// OK
+		}
+		assertEquals(1, Strings.getLevenshteinDistance("", "a"));
+		assertEquals(7, Strings.getLevenshteinDistance("aaapppp", ""));
+		assertEquals(1, Strings.getLevenshteinDistance("frog", "fog"));
+		assertEquals(3, Strings.getLevenshteinDistance("fly", "ant"));
+		assertEquals(7, Strings.getLevenshteinDistance("elephant", "hippo"));
+		assertEquals(7, Strings.getLevenshteinDistance("hippo", "elephant"));
+		assertEquals(8, Strings.getLevenshteinDistance("hippo", "zzzzzzzz"));
+		assertEquals(1, Strings.getLevenshteinDistance("hello", "hallo"));
+	}
+
 }
