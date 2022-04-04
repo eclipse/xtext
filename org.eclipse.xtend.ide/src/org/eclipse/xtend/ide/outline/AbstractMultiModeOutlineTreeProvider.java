@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.outline;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
@@ -44,6 +43,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeature;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xtype.XtypePackage;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 /**
@@ -280,7 +280,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				qualifier = getPackageFreeNameForType((JvmDeclaredType) jvmMember.eContainer());
 			} else {
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) jvmMember;
-				if (StringUtils.isEmpty(jvmDeclaredType.getPackageName())) {
+				if (Strings.isNullOrEmpty(jvmDeclaredType.getPackageName())) {
 					qualifier = "(default package)";
 				} else {
 					qualifier = jvmDeclaredType.getPackageName();
