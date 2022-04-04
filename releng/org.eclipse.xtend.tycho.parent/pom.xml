@@ -277,7 +277,6 @@
 								<plugin id="org.eclipse.xtext.ide" />
 								<plugin id="org.antlr.runtime" />
 								<plugin id="org.apache.log4j" />
-								<plugin id="org.apache.commons.lang" />
 								<plugin id="org.eclipse.xtext.doc" />
 								<plugin id="org.eclipse.xtext.xbase" />
 								<plugin id="org.eclipse.xtext.xbase.ide" />
