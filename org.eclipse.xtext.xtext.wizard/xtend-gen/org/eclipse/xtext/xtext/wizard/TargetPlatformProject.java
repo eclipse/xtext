@@ -291,10 +291,16 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
-        _builder.newLine();
+        {
+          JUnitVersion _junitVersion_1 = this.getConfig().getJunitVersion();
+          boolean _equals_1 = Objects.equal(_junitVersion_1, JUnitVersion.JUNIT_4);
+          if (_equals_1) {
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<unit id=\"org.junit\" version=\"4.13.2.v20211018-1956\"/>");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t\t");
         _builder.append("\t");
         _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.2.0.v20210813-1119\"/>");
@@ -315,11 +321,15 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.append("</location>");
         _builder.newLine();
         {
-          JUnitVersion _junitVersion_1 = this.getConfig().getJunitVersion();
-          boolean _equals_1 = Objects.equal(_junitVersion_1, JUnitVersion.JUNIT_5);
-          if (_equals_1) {
+          JUnitVersion _junitVersion_2 = this.getConfig().getJunitVersion();
+          boolean _equals_2 = Objects.equal(_junitVersion_2, JUnitVersion.JUNIT_5);
+          if (_equals_2) {
             _builder.append("\t\t");
             _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
