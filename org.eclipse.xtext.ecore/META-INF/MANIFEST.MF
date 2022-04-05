@@ -16,6 +16,6 @@ Export-Package: org.eclipse.xtext.ecore;
    org.eclipse.xtext.naming,
    org.eclipse.xtext.util,
    org.eclipse.xtext"
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"
 Automatic-Module-Name: org.eclipse.xtext.ecore
 Eclipse-SourceReferences: eclipseSourceReferences

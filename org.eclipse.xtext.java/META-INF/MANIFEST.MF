@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.20.0"
 Export-Package: org.eclipse.xtext.java,
  org.eclipse.xtext.java.resource
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"
 Automatic-Module-Name: org.eclipse.xtext.java
 Eclipse-SourceReferences: eclipseSourceReferences
