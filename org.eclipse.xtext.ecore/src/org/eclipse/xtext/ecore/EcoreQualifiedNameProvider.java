@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,6 +11,7 @@ package org.eclipse.xtext.ecore;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -82,6 +83,10 @@ public class EcoreQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 
 	protected String name(EStructuralFeature eStructuralFeature) {
 		return eStructuralFeature.getName();
+	}
+
+	protected String name(EEnumLiteral enumLiteral) {
+		return enumLiteral.getName();
 	}
 
 	protected String name(EOperation eOperation) {
