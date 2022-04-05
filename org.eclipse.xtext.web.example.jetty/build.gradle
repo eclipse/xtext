@@ -15,7 +15,7 @@ dependencies {
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.4.+'
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-rewrite', version: '9.4.+'
 	api group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
-	api group: 'log4j', name: 'log4j'
+	api group: 'ch.qos.reload4j', name: 'reload4j'
 }
 
 /* 
