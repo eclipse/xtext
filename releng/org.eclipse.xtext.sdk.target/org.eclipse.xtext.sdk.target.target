@@ -144,8 +144,8 @@
 		<unit id="com.google.inject.source" version="5.0.1.v20210324-2015"/>
 		<unit id="javax.inject" version="1.0.0.v20091030"/>
 		<unit id="javax.inject.source" version="1.0.0.v20091030"/>
-		<unit id="org.apache.log4j" version="1.2.15.v201012070815"/>
-		<unit id="org.apache.log4j.source" version="1.2.15.v201012070815"/>
+		<unit id="org.apache.log4j" version="1.2.19.v20220208-1728"/>
+		<unit id="org.apache.log4j.source" version="1.2.19.v20220208-1728"/>
 		<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 		<unit id="org.antlr.runtime.source" version="3.2.0.v201101311130"/>
 		<unit id="org.junit" version="4.13.2.v20211018-1956"/>

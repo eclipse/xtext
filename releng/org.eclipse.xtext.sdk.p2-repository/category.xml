@@ -23,8 +23,8 @@
    <bundle id="com.google.inject.source" version="5.0.1.qualifier"/>
    <bundle id="javax.inject" version="1.0.0.qualifier"/>
    <bundle id="javax.inject.source" version="1.0.0.qualifier"/>
-   <bundle id="org.apache.log4j" version="1.2.15.qualifier"/>
-   <bundle id="org.apache.log4j.source" version="1.2.15.qualifier"/>
+   <bundle id="org.apache.log4j" version="1.2.19.qualifier"/>
+   <bundle id="org.apache.log4j.source" version="1.2.19.qualifier"/>
    <bundle id="org.aopalliance" version="1.0.0.qualifier"/>
    <bundle id="org.junit" version="4.13.2.qualifier"/>
    <bundle id="org.junit.source" version="4.13.2.qualifier"/>
