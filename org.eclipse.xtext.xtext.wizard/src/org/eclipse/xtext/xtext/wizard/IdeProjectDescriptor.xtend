@@ -49,8 +49,8 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 				«IF config.languageServer!=LanguageServer.NONE && isEclipsePluginProject»
 					<dependencies>
 						<dependency>
-							<groupId>log4j</groupId>
-							<artifactId>log4j</artifactId>
+							<groupId>ch.qos.reload4j</groupId>
+							<artifactId>reload4j</artifactId>
 						</dependency>
 						<dependency>
 							<groupId>org.eclipse.lsp4j</groupId>
@@ -227,6 +227,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 													<exclude>*:«config.ideProject.name»-com.google.guava*</exclude>
 													<exclude>*:«config.ideProject.name»-asm*</exclude>
 													<exclude>*:«config.ideProject.name»-log4j*</exclude>
+													<exclude>*:«config.ideProject.name»-reload4j*</exclude>
 													<exclude>*:«config.ideProject.name»-org.objectweb.asm*</exclude>
 													<exclude>*:«config.ideProject.name»-org.apache.log4j*</exclude>
 												</excludes>

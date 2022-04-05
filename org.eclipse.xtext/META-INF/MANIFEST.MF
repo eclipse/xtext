@@ -203,7 +203,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.16.0";visibility:=re
  org.eclipse.core.runtime;bundle-version="3.13.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.equinox.common;bundle-version="3.9.0"
-Import-Package: org.apache.log4j;version="1.2.15",org.osgi.framework
+Import-Package: org.apache.log4j;version="1.2.19",org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.internal.Activator
 Automatic-Module-Name: org.eclipse.xtext

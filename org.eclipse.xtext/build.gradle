@@ -4,7 +4,7 @@ description = 'Core component of Xtext.'
 dependencies {
 	api project(':org.eclipse.xtext.util')
 	api "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-	api 'log4j:log4j'
+	api 'ch.qos.reload4j:reload4j'
 	api 'org.eclipse.platform:org.eclipse.equinox.common'
 	// remove me, once the following is fixed : https://bugs.eclipse.org/bugs/show_bug.cgi?id=510504
 	api 'org.eclipse.platform:org.eclipse.osgi'

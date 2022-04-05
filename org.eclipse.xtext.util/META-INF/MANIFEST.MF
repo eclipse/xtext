@@ -46,6 +46,6 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.20.0",
  com.google.inject;bundle-version="5.0.1";visibility:=reexport,
  javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtend.lib
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"
 Automatic-Module-Name: org.eclipse.xtext.util
 Eclipse-SourceReferences: eclipseSourceReferences

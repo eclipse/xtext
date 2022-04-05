@@ -77,10 +77,10 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("<dependency>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<groupId>log4j</groupId>");
+          _builder.append("<groupId>ch.qos.reload4j</groupId>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<artifactId>log4j</artifactId>");
+          _builder.append("<artifactId>reload4j</artifactId>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
@@ -779,7 +779,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_6 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_6, "\t\t\t\t\t\t");
-                  _builder.append("-org.objectweb.asm*</exclude>");
+                  _builder.append("-reload4j*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");
                   _builder.append("\t\t");
@@ -787,6 +787,14 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
                   _builder.append("<exclude>*:");
                   String _name_7 = this.getConfig().getIdeProject().getName();
                   _builder.append(_name_7, "\t\t\t\t\t\t");
+                  _builder.append("-org.objectweb.asm*</exclude>");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t\t");
+                  _builder.append("\t\t");
+                  _builder.append("\t\t");
+                  _builder.append("<exclude>*:");
+                  String _name_8 = this.getConfig().getIdeProject().getName();
+                  _builder.append(_name_8, "\t\t\t\t\t\t");
                   _builder.append("-org.apache.log4j*</exclude>");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t\t");

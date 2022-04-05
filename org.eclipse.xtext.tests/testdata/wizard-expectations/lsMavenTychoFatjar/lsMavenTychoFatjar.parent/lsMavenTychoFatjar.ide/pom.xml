@@ -11,8 +11,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>ch.qos.reload4j</groupId>
+			<artifactId>reload4j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lsp4j</groupId>
@@ -140,6 +140,7 @@
 							<exclude>*:lsMavenTychoFatjar.ide-com.google.guava*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-asm*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-log4j*</exclude>
+							<exclude>*:lsMavenTychoFatjar.ide-reload4j*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-org.objectweb.asm*</exclude>
 							<exclude>*:lsMavenTychoFatjar.ide-org.apache.log4j*</exclude>
 						</excludes>
