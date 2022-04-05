@@ -10,4 +10,4 @@ Require-Bundle: org.eclipse.xtend.core;visibility:=reexport,
  org.eclipse.xtext.xbase.junit;visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.13.102";visibility:=reexport,
  org.eclipse.emf.codegen;bundle-version="2.19.0";visibility:=reexport
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"
