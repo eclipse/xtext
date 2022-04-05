@@ -1030,7 +1030,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t\t\t\t\t\t");
-          _builder.append("<versionRange>1.2.15</versionRange>");
+          _builder.append("<versionRange>1.2.19</versionRange>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t\t\t\t\t");
