@@ -33,7 +33,7 @@ Require-Bundle: org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtend.lib;bundle-version="2.14.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XbaseActivator
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"
 Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.xbase.annotations.ui.labeling;x-internal:=true,

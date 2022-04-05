@@ -12,4 +12,4 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.builder,
  org.eclipse.buildship.core;bundle-version="3.0.0";resolution:=optional,
  org.eclipse.xtext.ui.shared
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.19"

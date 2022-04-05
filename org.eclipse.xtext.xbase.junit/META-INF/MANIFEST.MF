@@ -30,6 +30,6 @@ Export-Package: org.eclipse.xtext.xbase.compiler,
  testdata.ordersensitivity;x-internal:=true
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Import-Package: org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j;version="1.2.19",
  org.junit;version="[4.0.0,5.0.0)"
 Automatic-Module-Name: org.eclipse.xtext.xbase.junit
