@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import com.google.common.base.Preconditions;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
@@ -18,6 +19,11 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
  * <p>
  * Instances of this delta type could be rejected during confirmation of structural changes.
  * </p>
+ * 
+ * They are created by the {@link org.eclipse.xtext.common.types.ui.notification.DeltaConverter} which is
+ * producing deltas based on {@link IJavaElementDelta jdt deltas}. After the Java compiler ran, the 
+ * old state of the class files for the changed types can be compared to the new state for these files
+ * and the unconfirmed delta can be confirmed or discarded.
  */
 public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptionDelta {
 	private int buildNumber = -1;

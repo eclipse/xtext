@@ -58,7 +58,7 @@ import com.google.inject.Inject;
 public class DeltaConverter {
 
 	/**
-	 * Wraps an exception that occured during event conversion. Events that cannot be converted are assumed to have
+	 * Wraps an exception that occurred during event conversion. Events that cannot be converted are assumed to have
 	 * changes but the {@link #getUri()} may be misleading.
 	 * 
 	 * @since 2.4
