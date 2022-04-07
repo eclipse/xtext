@@ -143,7 +143,7 @@ class JvmModelGenerator implements IGenerator {
 		generateBody(type, bodyAppendable, config)
 		bodyAppendable.closeScope
 		val importAppendable = createAppendable(type, importManager, config)
-        generateFileHeader(type, importAppendable, config)
+		generateFileHeader(type, importAppendable, config)
 		if (type.packageName !== null) {
 			importAppendable.append("package ").append(type.packageName).append(";");
 			importAppendable.newLine.newLine
@@ -758,7 +758,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.increaseIndentation
 		errors.forEach[appendable.newLine.append('+ "\\n').append(doConvertToJavaString(message)).append('"')]
 		appendable.append(');').decreaseIndentation.decreaseIndentation.newLine
-		    .append('}')
+			.append('}')
 	}
 	
 	/**
@@ -770,11 +770,12 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-        val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
-        if(fileHeaderAdapter !== null && !fileHeaderAdapter.headerText.nullOrEmpty) {
-			generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
-        }
-    }
+		val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
+		if (fileHeaderAdapter !== null && !fileHeaderAdapter.headerText.nullOrEmpty) {
+			generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource),
+				appendable, config)
+		}
+	}
 
 	def void generateJavaDoc(EObject it, ITreeAppendable appendable, GeneratorConfig config) {
 		val adapter = it.eAdapters.filter(DocumentationAdapter).head
