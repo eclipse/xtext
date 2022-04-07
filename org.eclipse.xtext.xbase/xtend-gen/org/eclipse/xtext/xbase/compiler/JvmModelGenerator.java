@@ -270,10 +270,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       appendable.append("{").increaseIndentation();
       final Procedure1<LoopParams> _function = (LoopParams it_1) -> {
-        final Function1<ITreeAppendable, ITreeAppendable> _function_1 = (ITreeAppendable it_2) -> {
-          return it_2.newLine();
-        };
-        it_1.setSeparator(_function_1);
+        it_1.setSeparator(this.memberSeparator());
       };
       final Procedure1<JvmMember> _function_1 = (JvmMember it_1) -> {
         final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(appendable, it_1);
@@ -285,6 +282,13 @@ public class JvmModelGenerator implements IGenerator {
       _xblockexpression = appendable.decreaseIndentation().newLine().append("}");
     }
     return _xblockexpression;
+  }
+  
+  private Function1<? super ITreeAppendable, ? extends ITreeAppendable> memberSeparator() {
+    final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
+      return it.decreaseIndentation().newLine().increaseIndentation();
+    };
+    return _function;
   }
   
   /**
@@ -343,10 +347,7 @@ public class JvmModelGenerator implements IGenerator {
         return Boolean.valueOf((!(it_1 instanceof JvmEnumerationLiteral)));
       };
       final Procedure1<LoopParams> _function_3 = (LoopParams it_1) -> {
-        final Function1<ITreeAppendable, ITreeAppendable> _function_4 = (ITreeAppendable it_2) -> {
-          return it_2.newLine();
-        };
-        it_1.setSeparator(_function_4);
+        it_1.setSeparator(this.memberSeparator());
       };
       final Procedure1<JvmMember> _function_4 = (JvmMember it_1) -> {
         this.generateMember(it_1, childAppendable.trace(it_1), config);
