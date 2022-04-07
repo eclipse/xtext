@@ -27,7 +27,7 @@ import org.eclipse.xtext.ide.editor.quickfix.QuickFix;
 import com.google.common.annotations.Beta;
 
 /**
- * {@link ICodeActionService2} handling quick-fixes annoted with {@link CodeActionKind#QuickFix}.
+ * {@link ICodeActionService2} handling quick-fixes annotated with {@link CodeActionKind#QuickFix}.
  * 
  * @author Heinrich Weichert
  * 
