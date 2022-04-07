@@ -81,6 +81,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 
 		final Procedure1<UnconfirmedStructuralChangesDelta> processor;
 		if (oldState == null || oldState.getLastStructuralBuildTime() != newState.getLastStructuralBuildTime()) {
+			// If the JDT compiler ran in the meantime, we can start confirming deltas or discarding them
 			processor = (delta) -> {
 				Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
 				if (namesIntersect(delta.getNew(), structurallyChangedTypes) //
@@ -99,17 +100,49 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		Iterator<UnconfirmedStructuralChangesDelta> ucDeltas = unconfirmedDeltas.iterator();
 		int buildNumber = javaBuilderState.getBuildNumber().intValue();
 		IProject project = javaBuilderState.getProject();
+		boolean result = false;
+
+		/*
+		 * Unconfirmed deltas have been recorded meaning there were some changes detected and announced as IJavaElementDeltas.
+		 * These could have been caused by edits to Java files or code generation. // TODO is the second part true?
+		 * 
+		 * All unconfirmed deltas are being processed and the ones belonging to the current project are being selected.
+		 * 
+		 * If these are deltas and *no* newer JDT build number is available, a rebuild is necessary for the current
+		 * project to confirm the deltas.
+		 * 
+		 * If a new JDT build number is available, the deltas can be confirmed or discarded, effectively emptying the unconfirmed
+		 * delta queue for the current project.
+		 * 
+		 * Assuming we have a build configuration for the current project of the shape:
+		 * 1. XtextBuilder
+		 * 2. JdtBuilder
+		 * and there are unconfirmed deltas present when the XtextBuilder starts.
+		 * It will trigger requestProjectsRebuild(List.of(thisProject)).
+		 * The JDT builder will run and increase the builder number.
+		 * The next build round will now allow to confirm or discard all deltas for this project.
+		 * 
+		 * Assuming we have a build configuration for the current project of the shape:
+		 * 1. JdtBuilder
+		 * 2. XtextBuilder
+		 * and there are unconfirmed deltas present when the JdtBuilder starts.
+		 * The JDT builder will run and increase the builder number.
+		 * The XtextBuilder will now allow to confirm or discard all deltas for this project. A rebuild is not necessary.
+		 */
 		while (ucDeltas.hasNext()) {
 			UnconfirmedStructuralChangesDelta ucDelta = ucDeltas.next();
-			if ((ucDelta.getBuildNumber() < buildNumber)
-					&& ucDelta.getProject().equals(project)) {
-				ucDeltas.remove();
-				if (processor != null) {
-					processor.apply(ucDelta);
+			if (ucDelta.getProject().equals(project)) {
+				if (ucDelta.getBuildNumber() < buildNumber) {
+					ucDeltas.remove();
+					if (processor != null) {
+						processor.apply(ucDelta);
+					}
+				} else {
+					result = true;
 				}
 			}
 		}
-		return !unconfirmedDeltas.isEmpty();
+		return result;
 	}
 
 	protected boolean namesIntersect(IResourceDescription resourceDescription, Set<QualifiedName> names) {

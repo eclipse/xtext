@@ -662,19 +662,15 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @since 2.19
 	 */
 	protected void pollQueuedBuildData() {
-		boolean needRebuild = false;
 		if (pollQueuedBuildData(getProject())) {
-			needRebuild = true;
+			triggerRequestProjectRebuild();
 		}
 		for(IProject project: interestingProjects) {
 			if (!XtextProjectHelper.hasNature(project)) {
 				if (pollQueuedBuildData(project)) {
-					needRebuild = true;
+					triggerRequestProjectsRebuild(project);
 				}	
 			}
-		}
-		if(needRebuild) {
-			triggerRequestProjectRebuild();
 		}
 	}
 	
