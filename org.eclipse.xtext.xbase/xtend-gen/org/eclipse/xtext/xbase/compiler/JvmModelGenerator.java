@@ -284,9 +284,9 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  private Function1<? super ITreeAppendable, ? extends ITreeAppendable> memberSeparator() {
+  protected Function1<? super ITreeAppendable, ? extends ITreeAppendable> memberSeparator() {
     final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
-      return it.decreaseIndentation().newLine().increaseIndentation();
+      return it.blankLine();
     };
     return _function;
   }
@@ -334,7 +334,7 @@ public class JvmModelGenerator implements IGenerator {
       childAppendable.append("{").increaseIndentation();
       final Procedure1<LoopParams> _function = (LoopParams it_1) -> {
         final Function1<ITreeAppendable, ITreeAppendable> _function_1 = (ITreeAppendable it_2) -> {
-          return it_2.append(",").newLine();
+          return it_2.append(",").blankLine();
         };
         it_1.setSeparator(_function_1);
         it_1.setSuffix(";");

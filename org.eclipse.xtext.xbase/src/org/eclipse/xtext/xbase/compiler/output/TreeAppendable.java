@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,6 +41,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - blankLine
  */
 public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence {
 
@@ -404,6 +405,18 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	public TreeAppendable newLine() {
 		closeLastChild();
 		state.appendNewLineAndIndentation(this);
+		return this;
+	}
+
+	/**
+	 * Inserts a blank line, without indentation
+	 * 
+	 * @since 2.27
+	 */
+	@Override
+	public ITreeAppendable blankLine() {
+		closeLastChild();
+		state.appendNewLine(this);
 		return this;
 	}
 

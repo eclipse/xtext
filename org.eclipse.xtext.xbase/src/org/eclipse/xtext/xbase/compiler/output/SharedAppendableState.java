@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.compiler.ScopeStack;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - appendNewLine
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
@@ -50,12 +51,19 @@ public class SharedAppendableState {
 	}
 	
 	public void appendNewLineAndIndentation(IAcceptor<String> content) {
-		content.accept(lineSeparator);
+		appendNewLine(content);
 		for(int i = 0; i < indentationlevel; i++) {
 			content.accept(indentation);
 		}
 	}
-	
+
+	/**
+	 * @since 2.27
+	 */
+	public void appendNewLine(IAcceptor<String> content) {
+		content.accept(lineSeparator);
+	}
+
 	public void increaseIndentation() {
 		indentationlevel++;
 	}

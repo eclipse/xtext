@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * A specialized appendable that can be used to trace the source location
  * for the written output.
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - blankLine
  */
 public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 
@@ -77,4 +78,14 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	@Override
 	ITreeAppendable newLine();
 
+	/**
+	 * Defaults to {@link #newLine()} but can be customized
+	 * to behave differently, for example, to insert a blank line
+	 * without indentation.
+	 * 
+	 * @since 2.27
+	 */
+	default ITreeAppendable blankLine() {
+		return newLine();
+	}
 }

@@ -191,12 +191,12 @@ class JvmModelGenerator implements IGenerator {
 		appendable.decreaseIndentation.newLine.append('}')
 	}
 	
-	private def (ITreeAppendable)=>ITreeAppendable memberSeparator() {
+	protected def (ITreeAppendable)=>ITreeAppendable memberSeparator() {
 		[
 			ITreeAppendable it |
 			// avoid generating empty lines with just two spaces
 			// https://github.com/eclipse/xtext-extras/issues/772
-			decreaseIndentation.newLine.increaseIndentation
+			blankLine
 		]
 	}
 	
@@ -222,7 +222,13 @@ class JvmModelGenerator implements IGenerator {
 		generateExtendsClause(childAppendable, config)
 		childAppendable.append("{").increaseIndentation
 		childAppendable.forEach(literals, [
-				separator = [ITreeAppendable it | append(',').newLine]  suffix = ';'
+				separator = [
+					ITreeAppendable it |
+					// avoid generating empty lines with just two spaces
+					// https://github.com/eclipse/xtext-extras/issues/772
+					append(',').blankLine
+				]
+				suffix = ';'
 			], [
 				generateEnumLiteral(childAppendable.trace(it), config)
 			])
