@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2021, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -191,11 +191,12 @@ class JvmModelGenerator implements IGenerator {
 		appendable.decreaseIndentation.newLine.append('}')
 	}
 	
+	/**
+	 * @since 2.27
+	 */
 	protected def (ITreeAppendable)=>ITreeAppendable memberSeparator() {
 		[
 			ITreeAppendable it |
-			// avoid generating empty lines with just two spaces
-			// https://github.com/eclipse/xtext-extras/issues/772
 			blankLine
 		]
 	}
@@ -224,8 +225,6 @@ class JvmModelGenerator implements IGenerator {
 		childAppendable.forEach(literals, [
 				separator = [
 					ITreeAppendable it |
-					// avoid generating empty lines with just two spaces
-					// https://github.com/eclipse/xtext-extras/issues/772
 					append(',').blankLine
 				]
 				suffix = ';'
