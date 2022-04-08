@@ -865,9 +865,6 @@
             name="org.objectweb.asm"
             versionRange="[9.3.0,9.4.0)"/>
         <requirement
-            name="org.objectweb.asm.tree"
-            versionRange="[9.3.0,9.4.0)"/>
-        <requirement
             name="io.github.classgraph"
             versionRange="[4.8.138,4.9.0)"/>
         <requirement
