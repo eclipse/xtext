@@ -81,21 +81,21 @@ class CompilerTest {
 			public class Foo {
 			  public Foo() {
 			  }
-			  
+			
 			  public Foo(final Procedure1<Foo> initializer) {
 			    initializer.apply(this);
 			  }
-			  
+			
 			  private String name;
-			  
+			
 			  public String getName() {
 			    return this.name;
 			  }
-			  
+			
 			  public void setName(final String name) {
 			    this.name = name;
 			  }
-			  
+			
 			  @Override
 			  public String toString() {
 			    String result = new ToStringBuilder(this).addAllFields().toString();
@@ -142,24 +142,24 @@ class CompilerTest {
 				public class Foo {
 				  public Foo() {
 				  }
-				  
+				
 				  public Foo(final Procedure1<Foo> initializer) {
 				    initializer.apply(this);
 				  }
-				  
+				
 				  private String name;
-				  
+				
 				  public void setName(final String name) {
 				    this.name = name;
 				  }
-				  
+				
 				  /**
 				   * explicit getter will replace the generated one
 				   */
 				  public String getName() {
 				    return StringExtensions.toFirstUpper(this.name);
 				  }
-				  
+				
 				  @Override
 				  public String toString() {
 				    String result = new ToStringBuilder(this).addAllFields().toString();
@@ -195,17 +195,17 @@ class CompilerTest {
 				public class Foo {
 				  public Foo() {
 				  }
-				  
+				
 				  public Foo(final Procedure1<Foo> initializer) {
 				    initializer.apply(this);
 				  }
-				  
+				
 				  private String name;
-				  
+				
 				  public String getName() {
 				    return this.name;
 				  }
-				  
+				
 				  /**
 				   * explicit setter will replace the generated one,
 				   * even if it's not void
@@ -213,7 +213,7 @@ class CompilerTest {
 				  public String setName(final String name) {
 				    return this.name = StringExtensions.toFirstUpper(name);
 				  }
-				  
+				
 				  @Override
 				  public String toString() {
 				    String result = new ToStringBuilder(this).addAllFields().toString();
@@ -253,20 +253,20 @@ class CompilerTest {
 				public class Foo {
 				  public Foo() {
 				  }
-				  
+				
 				  public Foo(final Procedure1<Foo> initializer) {
 				    initializer.apply(this);
 				  }
-				  
+				
 				  private String name;
-				  
+				
 				  /**
 				   * explicit getter will replace the generated one
 				   */
 				  public String getName() {
 				    return this.name.toUpperCase();
 				  }
-				  
+				
 				  /**
 				   * explicit setter will replace the generated one,
 				   * even if it's not void
@@ -274,7 +274,7 @@ class CompilerTest {
 				  public String setName(final String name) {
 				    return this.name = StringExtensions.toFirstUpper(name);
 				  }
-				  
+				
 				  @Override
 				  public String toString() {
 				    String result = new ToStringBuilder(this).addAllFields().toString();
