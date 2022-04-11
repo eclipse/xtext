@@ -16,18 +16,18 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Contents extends ContentNode {
   private final CharSequence text;
-  
+
   public Contents(final CharSequence text) {
     super();
     this.text = text;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * super.hashCode() + ((this.text== null) ? 0 : this.text.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -47,7 +47,7 @@ public class Contents extends ContentNode {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -55,7 +55,7 @@ public class Contents extends ContentNode {
     	.addAllFields()
     	.toString();
   }
-  
+
   @Pure
   public CharSequence getText() {
     return this.text;

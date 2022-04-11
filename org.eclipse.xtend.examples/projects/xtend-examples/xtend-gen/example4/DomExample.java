@@ -24,16 +24,16 @@ import org.junit.Test;
 public class DomExample {
   @Extension
   private DomBuilder db = new DomBuilder();
-  
+
   @Extension
   private DomSerializer ds = new DomSerializer();
-  
+
   @Test
   public void processDom() {
     final Html dom = this.buildDom();
     InputOutput.<CharSequence>println(this.ds.toText(dom));
   }
-  
+
   public Html buildDom() {
     Html _html = new Html();
     final Procedure1<Html> _function = (Html it) -> {

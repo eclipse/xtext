@@ -26,7 +26,7 @@ import org.junit.Test;
 public class ExtractTest {
   @Extension
   private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
-  
+
   @Test
   public void testExtractAnnotation() {
     StringConcatenation _builder = new StringConcatenation();

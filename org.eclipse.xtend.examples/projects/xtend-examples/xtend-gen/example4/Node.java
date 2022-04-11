@@ -18,17 +18,17 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Node {
   private final ArrayList<Node> contents = CollectionLiterals.<Node>newArrayList();
-  
+
   public String tagName() {
     return this.getClass().getSimpleName().toLowerCase();
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + ((this.contents== null) ? 0 : this.contents.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -46,7 +46,7 @@ public class Node {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -54,7 +54,7 @@ public class Node {
     b.add("contents", this.contents);
     return b.toString();
   }
-  
+
   @Pure
   public ArrayList<Node> getContents() {
     return this.contents;

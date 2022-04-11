@@ -20,57 +20,57 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Distance {
   private final BigDecimal mm;
-  
+
   public Distance operator_plus(final Distance other) {
     BigDecimal _plus = this.mm.add(other.mm);
     return new Distance(_plus);
   }
-  
+
   public Distance operator_minus(final Distance other) {
     BigDecimal _minus = this.mm.subtract(other.mm);
     return new Distance(_minus);
   }
-  
+
   public Distance operator_multiply(final int times) {
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _multiply = this.mm.multiply(_bigDecimal);
     return new Distance(_multiply);
   }
-  
+
   public Distance operator_divide(final int times) {
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _divide = this.mm.divide(_bigDecimal, MathContext.DECIMAL128);
     return new Distance(_divide);
   }
-  
+
   public static Distance mm(final int millimeters) {
     BigDecimal _bigDecimal = new BigDecimal(millimeters);
     return new Distance(_bigDecimal);
   }
-  
+
   public static Distance cm(final int centimeters) {
     return Distance.mm((centimeters * 10));
   }
-  
+
   public static Distance m(final int meters) {
     return Distance.cm((meters * 100));
   }
-  
+
   public static Distance km(final int kilometers) {
     return Distance.m((kilometers * 1000));
   }
-  
+
   public Distance(final BigDecimal mm) {
     super();
     this.mm = mm;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + ((this.mm== null) ? 0 : this.mm.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -88,7 +88,7 @@ public class Distance {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -96,7 +96,7 @@ public class Distance {
     b.add("mm", this.mm);
     return b.toString();
   }
-  
+
   @Pure
   public BigDecimal getMm() {
     return this.mm;

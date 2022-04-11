@@ -34,11 +34,11 @@ public class Solution_002 extends AbstractIterator<Long> {
     };
     InputOutput.<Long>println(IteratorExtensions.<Long>reduce(new Solution_002(), _function));
   }
-  
+
   private long l0 = 0;
-  
+
   private long l1 = 1;
-  
+
   @Override
   protected Long computeNext() {
     Long _xblockexpression = null;

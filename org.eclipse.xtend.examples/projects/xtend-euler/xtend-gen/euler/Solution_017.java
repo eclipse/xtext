@@ -33,13 +33,13 @@ public class Solution_017 {
   public static void main(final String[] args) {
     InputOutput.<Integer>println(new Solution_017(1000).solve());
   }
-  
+
   private int upper;
-  
+
   public Solution_017(final int upper) {
     this.upper = upper;
   }
-  
+
   public Integer solve() {
     final Function1<Integer, Integer> _function = (Integer it) -> {
       return Integer.valueOf(this.word((it).intValue()).replace(" ", "").length());
@@ -49,7 +49,7 @@ public class Solution_017 {
     };
     return IterableExtensions.<Integer>reduce(IterableExtensions.<Integer, Integer>map(new IntegerRange(1, this.upper), _function), _function_1);
   }
-  
+
   public String word(final int number) {
     String _xifexpression = null;
     if ((number >= 1000)) {
@@ -82,7 +82,7 @@ public class Solution_017 {
     }
     return _xifexpression;
   }
-  
+
   public String wordToHundred(final int number) {
     String _switchResult = null;
     boolean _matched = false;

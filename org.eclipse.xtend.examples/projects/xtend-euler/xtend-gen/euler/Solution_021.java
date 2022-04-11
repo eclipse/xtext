@@ -57,7 +57,7 @@ public class Solution_021 {
     };
     InputOutput.<Integer>println(IterableExtensions.<Integer>reduce(result, _function));
   }
-  
+
   public static Integer sumOfDivisors(final int input) {
     Integer _xblockexpression = null;
     {

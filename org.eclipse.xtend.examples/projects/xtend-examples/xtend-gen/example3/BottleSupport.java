@@ -33,7 +33,7 @@ public class BottleSupport {
     }
     return _switchResult.toString();
   }
-  
+
   public static String Bottles(final int i) {
     return StringExtensions.toFirstUpper(BottleSupport.bottles(i));
   }

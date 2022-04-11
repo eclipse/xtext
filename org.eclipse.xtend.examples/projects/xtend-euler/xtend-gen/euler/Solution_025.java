@@ -47,15 +47,15 @@ public class Solution_025 extends AbstractIterator<Integer> {
   public static void main(final String[] args) {
     InputOutput.<Integer>println(IteratorExtensions.<Integer>last(new Solution_025()));
   }
-  
+
   private BigInteger max = BigInteger.TEN.pow(999);
-  
+
   private BigInteger f1 = BigInteger.ONE;
-  
+
   private BigInteger f2 = BigInteger.ONE;
-  
+
   private int idx = 2;
-  
+
   @Override
   public Integer computeNext() {
     boolean _greaterEqualsThan = (this.f2.compareTo(this.max) >= 0);

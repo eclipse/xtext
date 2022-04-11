@@ -19,15 +19,15 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Movie {
   private final String title;
-  
+
   private final int year;
-  
+
   private final double rating;
-  
+
   private final long numberOfVotes;
-  
+
   private final Set<String> categories;
-  
+
   public Movie(final String title, final int year, final double rating, final long numberOfVotes, final Set<String> categories) {
     super();
     this.title = title;
@@ -36,7 +36,7 @@ public class Movie {
     this.numberOfVotes = numberOfVotes;
     this.categories = categories;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
@@ -48,7 +48,7 @@ public class Movie {
     result = prime * result + (int) (this.numberOfVotes ^ (this.numberOfVotes >>> 32));
     return prime * result + ((this.categories== null) ? 0 : this.categories.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -77,7 +77,7 @@ public class Movie {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -89,27 +89,27 @@ public class Movie {
     b.add("categories", this.categories);
     return b.toString();
   }
-  
+
   @Pure
   public String getTitle() {
     return this.title;
   }
-  
+
   @Pure
   public int getYear() {
     return this.year;
   }
-  
+
   @Pure
   public double getRating() {
     return this.rating;
   }
-  
+
   @Pure
   public long getNumberOfVotes() {
     return this.numberOfVotes;
   }
-  
+
   @Pure
   public Set<String> getCategories() {
     return this.categories;

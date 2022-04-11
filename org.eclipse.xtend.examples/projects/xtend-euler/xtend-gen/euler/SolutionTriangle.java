@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class SolutionTriangle {
   private int result;
-  
+
   public SolutionTriangle(final String triangle) {
     final Function1<String, ArrayList<Integer>> _function = (String it) -> {
       final Function1<String, Integer> _function_1 = (String it_1) -> {
@@ -47,13 +47,13 @@ public class SolutionTriangle {
     new IntegerRange(_minus, 1).forEach(_function_1);
     this.result = (it.get(0).get(0)).intValue();
   }
-  
+
   public Integer addValue(final List<Integer> list, final int idx, final int value) {
     Integer _get = list.get(idx);
     int _plus = ((_get).intValue() + value);
     return list.set(idx, Integer.valueOf(_plus));
   }
-  
+
   @Override
   public String toString() {
     return Integer.valueOf(this.result).toString();

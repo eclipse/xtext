@@ -20,25 +20,25 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Speed {
   private final BigDecimal mmPerMsec;
-  
+
   public static Speed operator_divide(final Distance d, final Time t) {
     BigDecimal _mm = d.getMm();
     BigDecimal _msec = t.getMsec();
     BigDecimal _divide = _mm.divide(_msec, MathContext.DECIMAL128);
     return new Speed(_divide);
   }
-  
+
   public Speed(final BigDecimal mmPerMsec) {
     super();
     this.mmPerMsec = mmPerMsec;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + ((this.mmPerMsec== null) ? 0 : this.mmPerMsec.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -56,7 +56,7 @@ public class Speed {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -64,7 +64,7 @@ public class Speed {
     b.add("mmPerMsec", this.mmPerMsec);
     return b.toString();
   }
-  
+
   @Pure
   public BigDecimal getMmPerMsec() {
     return this.mmPerMsec;

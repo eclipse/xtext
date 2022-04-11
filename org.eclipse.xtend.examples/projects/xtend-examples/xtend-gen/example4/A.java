@@ -16,18 +16,18 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class A extends ContentNode {
   private final String href;
-  
+
   public A(final String href) {
     super();
     this.href = href;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * super.hashCode() + ((this.href== null) ? 0 : this.href.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -47,7 +47,7 @@ public class A extends ContentNode {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -55,7 +55,7 @@ public class A extends ContentNode {
     	.addAllFields()
     	.toString();
   }
-  
+
   @Pure
   public String getHref() {
     return this.href;

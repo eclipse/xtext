@@ -56,7 +56,7 @@ public class Solution_007 {
       }
     }
   }
-  
+
   public static void markAsNotPrime(final int prime, final List<Integer> numbers) {
     Iterator<Integer> iter = numbers.iterator();
     while (iter.hasNext()) {

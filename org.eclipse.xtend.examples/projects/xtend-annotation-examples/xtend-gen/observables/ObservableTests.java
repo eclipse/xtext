@@ -17,7 +17,7 @@ import org.junit.Test;
 public class ObservableTests {
   @Extension
   private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
-  
+
   @Test
   public void testObservable() {
     StringConcatenation _builder = new StringConcatenation();

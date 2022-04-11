@@ -29,11 +29,11 @@ class LazyTest {
 			public class Person {
 			  @Lazy
 			  private String name;
-			  
+			
 			  private String _initname() {
 			    return "foo";
 			  }
-			  
+			
 			  public String getName() {
 			    if (name==null)
 			      name = _initname();
