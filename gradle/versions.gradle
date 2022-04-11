@@ -5,7 +5,7 @@
 version = '2.27.0-SNAPSHOT'
 
 ext.versions = [
-	'xtext_bootstrap': '2.26.0',
+	'xtext_bootstrap': '2.27.0.M1',
 	'xtext_gradle_plugin': '3.0.2',
 	'gwt': '2.8.2'
 ]
