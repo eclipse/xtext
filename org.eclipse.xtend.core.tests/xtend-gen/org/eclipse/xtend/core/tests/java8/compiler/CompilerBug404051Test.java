@@ -87,7 +87,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Object> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -167,7 +166,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Number> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -247,7 +245,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -331,7 +328,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -415,7 +411,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -495,7 +490,6 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends A> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");

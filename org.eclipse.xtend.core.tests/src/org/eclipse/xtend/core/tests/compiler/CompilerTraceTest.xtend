@@ -685,10 +685,10 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			public class Zonk {
 			  protected void #_method#(final String s) {
 			  }
-			  
+			
 			  protected void _method(final Integer i) {
 			  }
-			  
+			
 			  public void method(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);
@@ -719,10 +719,10 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			public class Zonk {
 			  protected void _method(final String s) {
 			  }
-			  
+			
 			  protected void _method(final Integer i) {
 			  }
-			  
+			
 			  public void #method#(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);
@@ -753,10 +753,10 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			public class Zonk {
 			  protected void _method(final String s) {
 			  }
-			  
+			
 			  protected void _method(final Integer i) {
 			  }
-			  
+			
 			  public void method(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);

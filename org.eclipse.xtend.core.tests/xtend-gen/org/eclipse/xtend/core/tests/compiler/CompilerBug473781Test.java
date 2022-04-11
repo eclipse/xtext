@@ -49,7 +49,6 @@ public class CompilerBug473781Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void someMethod() {");
@@ -103,7 +102,6 @@ public class CompilerBug473781Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void someMethod() {");
@@ -164,7 +162,6 @@ public class CompilerBug473781Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void someMethod() {");
@@ -234,7 +231,6 @@ public class CompilerBug473781Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void someMethod() {");
@@ -304,7 +300,6 @@ public class CompilerBug473781Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void someMethod() {");

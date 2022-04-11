@@ -68,21 +68,21 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements Foo.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements Foo.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public abstract <E extends Exception> void throwsSomething() throws E;
-			  
+			
 			  public void m() {
 			    try {
 			      try {
@@ -129,19 +129,19 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements C.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements C.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public void m(final Object a) {
 			    boolean _matched = false;
 			    if (a instanceof C.E1 || a instanceof C.E2) {
@@ -181,19 +181,19 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements C.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements C.E {
 			    @Override
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public void m(final Object a) {
 			    boolean _matched = false;
 			    if (a instanceof C.E1 || a instanceof C.E2) {
@@ -466,7 +466,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public String b(final A a) {
 			    return a.a();
 			  }
-			  
+			
 			  public String test() {
 			    final A _function = () -> {
 			      final A _function_1 = new A() {
@@ -606,7 +606,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  }), ((Function1<Exception, Exception>) (Exception it) -> {
 			    return new IllegalArgumentException(it);
 			  }));
-			  
+			
 			  public String foo() {
 			    return this.uri.toString();
 			  }
@@ -863,7 +863,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Foo {
 			  public abstract Object getFoo(final String x) throws Exception;
-			  
+			
 			  public Map<Object, String> bar() {
 			    final Function1<String, Object> _function = (String it) -> {
 			      try {
@@ -1123,7 +1123,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public String client(final CharSequence c) {
 			    return this.client(this.m());
 			  }
-			  
+			
 			  @Override
 			  public CharSequence m() {
 			    return "";
@@ -1519,12 +1519,12 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public C(final ITypeReferenceOwner owner) {
 			    super(null, owner);
 			  }
-			  
+			
 			  @Override
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
 			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
 			  }
-			  
+			
 			  @Override
 			  protected Set<JvmTypeParameter> createVisiting() {
 			    return CollectionLiterals.<JvmTypeParameter>newHashSet();

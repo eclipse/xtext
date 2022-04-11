@@ -89,7 +89,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface ChoiceIn<P extends Object> {");
@@ -97,7 +96,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifiable<T extends Object> {");
@@ -105,7 +103,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {");
@@ -113,7 +110,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {");
@@ -121,7 +117,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {");
@@ -129,7 +124,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifier<T extends Object> {");
@@ -137,7 +131,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifierBuilder<T extends Object> {");
@@ -145,7 +138,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("<C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("<N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);");
@@ -153,7 +145,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<Object> b) {");
@@ -247,7 +238,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface ChoiceIn<P extends Object> {");
@@ -255,7 +245,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifiable<T extends Object> {");
@@ -263,7 +252,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {");
@@ -271,7 +259,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {");
@@ -279,7 +266,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {");
@@ -287,7 +273,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifier<T extends Object> {");
@@ -295,7 +280,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifierBuilder<T extends Object> {");
@@ -303,12 +287,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("<C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("<N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("<C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);");
@@ -316,7 +298,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <X extends Object> void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {");
@@ -410,7 +391,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface ChoiceIn<P extends Object> {");
@@ -418,7 +398,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifiable<T extends Object> {");
@@ -426,7 +405,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifier<T, N>> {");
@@ -434,7 +412,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey> {");
@@ -442,7 +419,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {");
@@ -450,7 +426,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifier<T extends Object> {");
@@ -458,7 +433,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface InstanceIdentifierBuilder<T extends Object> {");
@@ -466,12 +440,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("<C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("<N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("<C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);");
@@ -479,7 +451,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <X extends Object> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<IdentifiedInterfaceWithAclBuilder.Interface> identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {");
@@ -533,7 +504,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean m(final List<String> items, final String s) {");
@@ -659,7 +629,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String n() {");
@@ -715,7 +684,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object n() {");
@@ -764,7 +732,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final CharSequence t) {");
@@ -772,7 +739,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final Iterable<String> it) {");
@@ -824,7 +790,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final CharSequence t) {");
@@ -832,7 +797,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final Iterable<String> it) {");
@@ -1191,7 +1155,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Predicate<String> myGuavaPredicate() {");
@@ -1380,7 +1343,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Number n;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Number test() {");
@@ -1546,7 +1508,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public B bar(final Object x) {");
@@ -1557,7 +1518,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C baz(final Object x) {");
@@ -1606,7 +1566,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug other) {");
@@ -1655,7 +1614,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug other) {");
@@ -1704,7 +1662,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug it) {");
@@ -1753,7 +1710,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug it) {");
@@ -1802,7 +1758,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug it) {");
@@ -1851,7 +1806,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2(final Bug it) {");
@@ -1954,7 +1908,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Foo foo;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bar() {");
@@ -2005,7 +1958,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object foo(final Bug bug, final int i) {");
@@ -2059,7 +2011,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object foo(final Bug bug, final int i) {");
@@ -2070,7 +2021,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object foo(final int i) {");
@@ -2269,7 +2219,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void newInstance() {");
@@ -2321,7 +2270,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {");
@@ -2332,7 +2280,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String build(final Factory<String> f, final T it) {");
@@ -2387,7 +2334,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa, final Procedure1<? super F> configurator) {");
@@ -2398,7 +2344,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {");
@@ -2409,7 +2354,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void build(final Factory<String> f) {");
@@ -2557,7 +2501,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private ErrorSafeExtensions _errorSafeExtensions;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {");
@@ -2773,7 +2716,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("List<String> list = newArrayList");
     _builder.newLine();
-    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("def doSomething(Map<String, String> mapping) {");
@@ -2803,7 +2745,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private List<String> list = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<String> doSomething(final Map<String, String> mapping) {");
@@ -2873,7 +2814,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilder m() {");
@@ -2968,7 +2908,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -3027,7 +2966,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -3086,7 +3024,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -3145,7 +3082,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -3204,7 +3140,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -3261,7 +3196,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Comparable<T>> void m(final T t) {");
@@ -3321,7 +3255,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Injector i, final Class<? extends CharSequence> c) {");
@@ -3393,7 +3326,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3465,7 +3397,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3537,7 +3468,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3609,7 +3539,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3681,7 +3610,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3753,7 +3681,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3825,7 +3752,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -3897,7 +3823,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {");
@@ -4068,7 +3993,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -4158,7 +4082,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -4248,7 +4171,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
@@ -4400,7 +4322,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final T _weight;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int compareTo(final Weight w) {");
@@ -4411,7 +4332,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Weight(final T weight) {");
@@ -4425,7 +4345,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4442,7 +4361,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4495,7 +4413,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4515,7 +4432,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -4572,7 +4488,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final T _weight;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int compareTo(final Weight<T> w) {");
@@ -4583,7 +4498,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Weight(final T weight) {");
@@ -4597,7 +4511,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4614,7 +4527,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4667,7 +4579,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4687,7 +4598,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -4744,7 +4654,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final T _weight;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int compareTo(final Weight<T> w) {");
@@ -4755,7 +4664,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Weight(final T weight) {");
@@ -4769,7 +4677,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4786,7 +4693,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4839,7 +4745,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4859,7 +4764,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -4916,7 +4820,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final T _weight;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int compareTo(final Weight w) {");
@@ -4927,7 +4830,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Weight(final T weight) {");
@@ -4941,7 +4843,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -4958,7 +4859,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -5011,7 +4911,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -5031,7 +4930,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -5503,7 +5401,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void something(final CharSequence c) {");
@@ -5706,7 +5603,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<? extends O> operation = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public ListenableFuture<O> run() {");
@@ -6170,7 +6066,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <P extends Object> Test<P> newInstance(final Function0<? extends P> arg) {");
@@ -6333,7 +6228,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void logSomething() {");
@@ -6588,7 +6482,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String s;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Foo(final String new_) {");
@@ -6631,7 +6524,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String staticField;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6648,7 +6540,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6683,7 +6574,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6738,12 +6628,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String staticField;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final String _nonStaticField;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Foo(final String nonStaticField) {");
@@ -6757,7 +6645,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6774,7 +6661,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6827,7 +6713,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6847,7 +6732,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -6898,7 +6782,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String __string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public UsesExtension(final String _string) {");
@@ -6912,7 +6795,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6929,7 +6811,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -6982,7 +6863,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -7002,7 +6882,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");
@@ -7035,7 +6914,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("def void sampleMethod() {");
@@ -7077,7 +6955,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void sampleMethod() {");
@@ -7171,12 +7048,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private HeaderAccess<?> unboundedMockHeaderAccess;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void test() {");
@@ -7458,12 +7333,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private XList<T> gen;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private T item;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public XItem(final XList<T> gen, final T item) {");
@@ -7548,7 +7421,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final LinkedList<XItem<T>> items = new LinkedList<XItem<T>>();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean add(final T item) {");
@@ -7625,7 +7497,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static int operator_minus(final Foo x, final Foo y) {");
@@ -7687,7 +7558,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static int operator_minus(final Foo x, final Foo y) {");
@@ -7773,7 +7643,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {");
@@ -7784,7 +7653,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String client(final ArrayList<Long> arrayList) {");
@@ -7887,7 +7755,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {");
@@ -7898,7 +7765,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String client(final Iterable<Long> iterable) {");
@@ -8005,7 +7871,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {");
@@ -8016,7 +7881,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String client(final LinkedList<String> linkedList) {");
@@ -8123,7 +7987,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {");
@@ -8134,7 +7997,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String client(final Set<Integer> set) {");
@@ -8235,7 +8097,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <A extends Number & Comparable<?>> Map<A, NumberExpression<A>> then(final NumberExpression<A> expr) {");
@@ -8246,7 +8107,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -8301,7 +8161,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String text;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean handleEvent(final Bug e) {");
@@ -8368,7 +8227,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String text;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String handleEvent(final Bug e) {");
@@ -8453,7 +8311,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bug(final Bar bar) {");
@@ -8464,7 +8321,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object test() {");

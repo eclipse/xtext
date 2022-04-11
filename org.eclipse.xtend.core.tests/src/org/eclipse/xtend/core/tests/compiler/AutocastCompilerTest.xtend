@@ -37,7 +37,7 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			      this.n(((CharSequence)o));
 			    }
 			  }
-			  
+			
 			  public void n(final CharSequence s) {
 			  }
 			}
@@ -68,7 +68,7 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			      this.n(((CharSequence)o));
 			    }
 			  }
-			  
+			
 			  public void n(final CharSequence s) {
 			  }
 			}
@@ -95,7 +95,7 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			      this.n(((CharSequence)o));
 			    }
 			  }
-			  
+			
 			  public void n(final CharSequence s) {
 			  }
 			}
@@ -119,13 +119,13 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final Object o = null;
-			  
+			
 			  public void m() {
 			    if ((this.o instanceof String)) {
 			      this.n(((CharSequence)this.o));
 			    }
 			  }
-			  
+			
 			  public void n(final CharSequence s) {
 			  }
 			}
@@ -149,13 +149,13 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final Object o = null;
-			  
+			
 			  public void m() {
 			    if ((this.o instanceof String)) {
 			      this.n(((CharSequence)this.o));
 			    }
 			  }
-			  
+			
 			  public void n(final CharSequence s) {
 			  }
 			}

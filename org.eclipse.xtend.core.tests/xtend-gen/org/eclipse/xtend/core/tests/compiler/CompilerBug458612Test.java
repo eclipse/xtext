@@ -70,7 +70,6 @@ public class CompilerBug458612Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E {");
@@ -84,7 +83,6 @@ public class CompilerBug458612Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void doit(final List<C.B> list) {");
@@ -150,7 +148,6 @@ public class CompilerBug458612Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class Foo {");
@@ -164,7 +161,6 @@ public class CompilerBug458612Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void doit(final Test.B[] arr) {");

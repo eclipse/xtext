@@ -140,7 +140,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m() {
 			  }
-			  
+			
 			  public void m(final ExecutorService service) {
 			    final Runnable _function = new Runnable() {
 			      public void run() {
@@ -171,10 +171,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void bind(final Runnable r);
 			  }
-			  
+			
 			  public void m(final Bug.I... i) {
 			  }
-			  
+			
 			  public void m(final Iterable<Bug.I> i) {
 			    final Bug.I _function = new Bug.I() {
 			      public void bind(final Runnable it) {
@@ -205,10 +205,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void bind(final Runnable r);
 			  }
-			  
+			
 			  public void m(final Bug.I i) {
 			  }
-			  
+			
 			  public void m(final Iterable<Bug.I> i) {
 			    final Bug.I _function = new Bug.I() {
 			      public void bind(final Runnable it) {
@@ -239,10 +239,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void bind(final Runnable r);
 			  }
-			  
+			
 			  public void m(final Bug.I... i) {
 			  }
-			  
+			
 			  public void m(final Iterable<Bug.I>... i) {
 			    final Bug.I _function = new Bug.I() {
 			      public void bind(final Runnable it) {
@@ -272,7 +272,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Procedure2<? super String, ? super String> f) {
 			  }
-			  
+			
 			  public void m(final Function0<? extends String> f) {
 			    final Function0<String> _function = new Function0<String>() {
 			      public String apply() {
@@ -302,7 +302,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Function2<? super String, ? super String, ? extends String> f) {
 			  }
-			  
+			
 			  public void m(final Procedure0 f) {
 			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
 			      public String apply(final String $0, final String $1) {
@@ -332,7 +332,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Procedure2<? super String, ? super String> f) {
 			  }
-			  
+			
 			  public void m(final Function0<? extends String>... f) {
 			    final Function0<String> _function = new Function0<String>() {
 			      public String apply() {
@@ -362,7 +362,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Function2<? super String, ? super String, ? extends String>... f) {
 			  }
-			  
+			
 			  public void m(final Procedure0 f) {
 			    final Function2<String, String, String> _function = new Function2<String, String, String>() {
 			      public String apply(final String $0, final String $1) {
@@ -396,10 +396,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList(Integer.valueOf(1)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}
@@ -427,10 +427,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}
@@ -461,10 +461,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			    List<Number> arr = Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2));
 			    this.m(arr);
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}
@@ -492,10 +492,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x(final Integer[] ints) {
 			    this.m(Arrays.<Number>asList(ints));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}
@@ -523,10 +523,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList());
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}
@@ -554,10 +554,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Integer>asList(Integer.valueOf(1)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? extends Number> ln) {
 			  }
 			}
@@ -585,10 +585,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Integer>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? extends Number> ln) {
 			  }
 			}
@@ -616,10 +616,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList());
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? extends Number> ln) {
 			  }
 			}
@@ -646,10 +646,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList(Integer.valueOf(1)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? super Number> ln) {
 			  }
 			}
@@ -677,10 +677,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? super Number> ln) {
 			  }
 			}
@@ -708,10 +708,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			  public void x() {
 			    this.m(Arrays.<Number>asList());
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<? super Number> ln) {
 			  }
 			}
@@ -742,10 +742,10 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			    List<Number> arr = Arrays.<Number>asList(Integer.valueOf(1));
 			    this.m(arr);
 			  }
-			  
+			
 			  public void m(final Object o) {
 			  }
-			  
+			
 			  public void m(final List<Number> ln) {
 			  }
 			}

@@ -34,9 +34,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -67,9 +67,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b");
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -101,9 +101,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -134,9 +134,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b");
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -168,9 +168,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -179,7 +179,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -206,9 +206,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -217,7 +217,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<? extends T> iterable) {
 			    return null;
 			  }
@@ -245,9 +245,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -256,7 +256,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -279,7 +279,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -288,7 +288,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -315,9 +315,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -326,7 +326,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -353,9 +353,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -364,7 +364,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -391,9 +391,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -402,7 +402,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<? extends T> iterable) {
 			    return null;
 			  }
@@ -430,9 +430,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -441,7 +441,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -464,7 +464,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -473,7 +473,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -500,9 +500,9 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -511,7 +511,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -538,7 +538,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -548,7 +548,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    Function0<?> x = _function;
 			    x.apply();
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -585,7 +585,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -620,7 +620,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -643,7 +643,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -652,7 +652,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -675,7 +675,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -684,7 +684,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Comparable<T>[] iterable) {
 			    return null;
 			  }
@@ -707,7 +707,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -716,7 +716,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {
 			    return null;
 			  }
@@ -739,7 +739,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = new Function0<Object>() {
 			      public Object apply() {
@@ -748,7 +748,7 @@ class CompilerBug465058Test extends AbstractXtendCompilerTest {
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {
 			    return null;
 			  }

@@ -102,7 +102,7 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private CharSequence mySeq;
-			  
+			
 			  public CharSequence m() {
 			    CharSequence _xblockexpression = null;
 			    {
@@ -117,11 +117,11 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public List<CharSequence> all(final String s, final String s2) {
 			    return null;
 			  }
-			  
+			
 			  public String ext(final String s) {
 			    return s;
 			  }
@@ -150,18 +150,18 @@ class CompilerBug472142Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private boolean b;
-			  
+			
 			  public boolean m() {
 			    StringConcatenation _builder = new StringConcatenation();
 			    _builder.append("s2");
 			    CharSequence _head = IterableExtensions.<CharSequence>head(this.all("s", _builder.toString()).subList(1, 1));
 			    return this.b = this.ext((_head instanceof String));
 			  }
-			  
+			
 			  public List<CharSequence> all(final String s, final String s2) {
 			    return null;
 			  }
-			  
+			
 			  public boolean ext(final boolean b) {
 			    return b;
 			  }

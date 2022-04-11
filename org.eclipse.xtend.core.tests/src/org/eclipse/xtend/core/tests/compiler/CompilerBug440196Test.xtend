@@ -35,7 +35,7 @@ class CompilerBug440196Test extends AbstractXtendCompilerTest {
 			    }
 			    return false;
 			  }
-			  
+			
 			  public void invoke() {
 			    final boolean b = this.bug();
 			  }
@@ -70,7 +70,7 @@ class CompilerBug440196Test extends AbstractXtendCompilerTest {
 			    };
 			    return _function.apply();
 			  }
-			  
+			
 			  public void invoke() {
 			    final boolean b = (this.m()).booleanValue();
 			  }

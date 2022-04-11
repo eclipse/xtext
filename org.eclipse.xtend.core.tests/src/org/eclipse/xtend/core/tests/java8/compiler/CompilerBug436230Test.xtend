@@ -39,7 +39,7 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final List<CharSequence> list = CollectionLiterals.<CharSequence>newArrayList();
-			  
+			
 			  public boolean foo(final List<?> source) {
 			    final Function1<Object, String> _function = (Object it) -> {
 			      return "";

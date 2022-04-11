@@ -66,7 +66,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				      registerGlobalsContext.registerClass(packageName + ".OtherTopLevelClass")
 				      registerGlobalsContext.registerClass(packageName + ".OtherTopLevelClass.NestedType")
 				   }
-				   
+				
 				   def String getPackageName(ClassDeclaration it) {
 				   	  qualifiedName.substring(0,qualifiedName.lastIndexOf('.'))
 				   }
@@ -1756,7 +1756,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				  protected String _m(final Integer i) {
 				    return null;
 				  }
-				  
+				
 				  public String m(final Object i) {
 				    if (i instanceof Integer) {
 				      return _m((Integer)i);
@@ -1767,7 +1767,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				        Arrays.<Object>asList(i).toString());
 				    }
 				  }
-				  
+				
 				  protected String _m(final String foo) {
 				    return null;
 				  }
@@ -1861,7 +1861,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				public class D1 {
 				  protected void _m(final Base b) {
 				  }
-				  
+				
 				  public void m(final Base b) {
 				    _m(b);
 				    return;
@@ -1878,13 +1878,13 @@ abstract class AbstractReusableActiveAnnotationTests {
 				public class D2 extends D1 {
 				  protected void _m(final Derived1 d) {
 				  }
-				  
+				
 				  protected void _m(final Derived2 d) {
 				  }
-				  
+				
 				  protected void _m(final Derived3 d) {
 				  }
-				  
+				
 				  public void m(final Base d) {
 				    if (d instanceof Derived1) {
 				      _m((Derived1)d);
@@ -3021,7 +3021,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				@SuppressWarnings("all")
 				public class MyClass {
 				  private Timer t = new Timer();
-				  
+				
 				  private MyClass child = new MyClass();
 				}
 			'''

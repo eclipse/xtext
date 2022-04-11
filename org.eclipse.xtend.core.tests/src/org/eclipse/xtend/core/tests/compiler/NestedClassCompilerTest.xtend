@@ -26,7 +26,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public static class X {
 			  }
-			  
+			
 			  private C.X x;
 			}
 		''')
@@ -109,7 +109,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			      this.m("");
 			    }
 			  }
-			  
+			
 			  public static void m(final String s) {
 			  }
 			}
@@ -134,7 +134,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			      A.m("");
 			    }
 			  }
-			  
+			
 			  public static void m(final String s) {
 			  }
 			}
@@ -170,33 +170,33 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			    class C {
 			      public static class D {
 			        private A a;
-			        
+			
 			        private A.B b = new A.B() {
 			        };
-			        
+			
 			        private A.B.C c = new A.B.C();
-			        
+			
 			        private A.B.C.D d = new A.B.C.D() {
 			        };
 			      }
-			      
+			
 			      private A a;
-			      
+			
 			      private A.B b;
-			      
+			
 			      private A.B.C c;
-			      
+			
 			      private A.B.C.D d;
 			    }
 			  }
-			  
+			
 			  private A a;
-			  
+			
 			  private A.B b = new A.B() {
 			  };
-			  
+			
 			  private A.B.C c;
-			  
+			
 			  private A.B.C.D d;
 			}
 		''')
@@ -231,34 +231,34 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			    class C {
 			      public static class D {
 			        private A a;
-			        
+			
 			        private A.B b = new A.B() {
 			        };
-			        
+			
 			        private A.B.C c = new A.B.C();
-			        
+			
 			        private A.B.C.D d = new A.B.C.D() {
 			        };
 			      }
-			      
+			
 			      private A a;
-			      
+			
 			      private A.B b;
-			      
+			
 			      private A.B.C c;
-			      
+			
 			      private A.B.C.D d;
 			    }
 			  }
-			  
+			
 			  private A a;
-			  
+			
 			  private A.B b = new A.B() {
 			  };
-			  
+			
 			  private A.B.C c = new A.B.C() {
 			  };
-			  
+			
 			  private A.B.C.D d = new A.B.C.D();
 			}
 		''')
@@ -282,7 +282,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			      c.m();
 			    }
 			  }
-			  
+			
 			  private void m() {
 			  }
 			}
@@ -309,7 +309,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			      y.m();
 			    }
 			  }
-			  
+			
 			  private static class Y {
 			    private void m() {
 			    }
@@ -398,20 +398,20 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			  public Iterable<Boolean> transferAReq(final int _amount, final Account _account) {
 			    abstract class __Account_1 implements Iterable<Boolean> {
 			      final __Account_1 _this__Account_1 = this;
-			      
+			
 			      __Account_1 dis;
-			      
+			
 			      AbstractIterator<Boolean> depositExceptionHandler;
-			      
+			
 			      public abstract void send(final Procedure1<? super Object> p);
-			      
+			
 			      public abstract void processAsyncResponse(final boolean o);
 			    }
-			    
+			
 			    return new __Account_1() {
 			      {
 			        dis = this;
-			        
+			
 			        depositExceptionHandler = new AbstractIterator<Boolean>() {
 			          public Boolean computeNext() {
 			            return Boolean.valueOf(false);
@@ -431,15 +431,15 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			        return ((Iterator<Boolean>)_xblockexpression);
 			      }
-			      
+			
 			      public void send(final Procedure1<? super Object> p) {
 			      }
-			      
+			
 			      public void processAsyncResponse(final boolean o) {
 			      }
 			    };
 			  }
-			  
+			
 			  public Object depositSReq(final int amount) {
 			    return null;
 			  }
@@ -473,23 +473,23 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void m1(final int i);
 			  }
-			  
+			
 			  public void m1(final String s) {
 			  }
-			  
+			
 			  public void m2() {
 			    abstract class __C_1 {
 			      final __C_1 _this__C_1 = this;
-			      
+			
 			      public abstract void m1(final int i);
-			      
+			
 			      public abstract void m2();
 			    }
-			    
+			
 			    new __C_1() {
 			      public void m1(final int i) {
 			      }
-			      
+			
 			      public void m2() {
 			        final C.I _function = new C.I() {
 			          public void m1(final int it) {
@@ -534,23 +534,23 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void m1();
 			  }
-			  
+			
 			  public void m1(final String s) {
 			  }
-			  
+			
 			  public void m2() {
 			    abstract class __C_1 {
 			      final __C_1 _this__C_1 = this;
-			      
+			
 			      public abstract void m1(final int i);
-			      
+			
 			      public abstract void m2();
 			    }
-			    
+			
 			    new __C_1() {
 			      public void m1(final int i) {
 			      }
-			      
+			
 			      public void m2() {
 			        final C.I i = new C.I() {
 			          public void m1() {
@@ -602,22 +602,22 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void m1(final int i);
 			  }
-			  
+			
 			  public static class D {
 			    public void m1(final int i) {
 			    }
 			  }
-			  
+			
 			  public void m1(final String s) {
 			  }
-			  
+			
 			  public void m2() {
 			    abstract class __C_1 extends C.D {
 			      final __C_1 _this__C_1 = this;
-			      
+			
 			      public abstract void m2();
 			    }
-			    
+			
 			    new __C_1() {
 			      public void m2() {
 			        final C.I _function = new C.I() {

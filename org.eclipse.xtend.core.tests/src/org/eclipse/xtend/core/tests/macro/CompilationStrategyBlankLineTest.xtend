@@ -39,31 +39,31 @@ class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 				  public void blank() {
 				    
 				  }
-				  
+				
 				  public void blank_1() {
 				    				
 				  }
-				  
+				
 				  public void blank_2() {
 				    
 				  }
-				  
+				
 				  public void blank_3() {
 				    
 				  }
-				  
+				
 				  public void blank_4() {
 				    int foo = 42;
 				  }
-				  
+				
 				  public void blank_5() {
 				    int foo = 42;
 				  }
-				  
+				
 				  public void blank_6() {
 				    int foo = 42;
 				  }
-				  
+				
 				  public void blank_7() {
 				    List<? extends Object> list = new ArrayList<BigDecimal>();
 				  }

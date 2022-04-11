@@ -32,7 +32,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static Integer[] m() {
 			    return C.<Integer>newArray(Integer.valueOf(1), Integer.valueOf(1));
 			  }
@@ -57,7 +57,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static Number[] m() {
 			    return C.<Number>newArray(Integer.valueOf(1), Double.valueOf(1.1));
 			  }
@@ -82,7 +82,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static Object[] m() {
 			    return C.<Object>newArray(Integer.valueOf(1), "1");
 			  }
@@ -107,7 +107,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static Object[] m() {
 			    return C.<Object>newArray(Integer.valueOf(1), Double.valueOf(1.1), "1");
 			  }
@@ -145,12 +145,12 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static <E extends Object> Class<? extends E[]> getClass(final E[] arr) {
 			    Class<?> _class = ((Object) arr).getClass();
 			    return ((Class<? extends E[]>) _class);
 			  }
-			  
+			
 			  public static void main(final String... args) {
 			    final Integer[] arr1 = C.<Integer>newArray(Integer.valueOf(1), Integer.valueOf(1));
 			    final Number[] arr2 = C.<Number>newArray(Integer.valueOf(1), Double.valueOf(1.1));
@@ -183,7 +183,7 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			  public static <E extends Object> E[] newArray(final E... arr) {
 			    return arr;
 			  }
-			  
+			
 			  public static int m() {
 			    return ((Comparable<?>)(C.<Object>newArray(Integer.valueOf(1), "1")[0])).compareTo(null);
 			  }

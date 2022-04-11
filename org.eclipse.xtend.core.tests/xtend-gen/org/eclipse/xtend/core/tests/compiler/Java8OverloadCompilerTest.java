@@ -278,7 +278,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final ExecutorService service) {");
@@ -351,7 +350,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Bug.I... i) {");
@@ -359,7 +357,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Iterable<Bug.I> i) {");
@@ -432,7 +429,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Bug.I i) {");
@@ -440,7 +436,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Iterable<Bug.I> i) {");
@@ -513,7 +508,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Bug.I... i) {");
@@ -521,7 +515,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Iterable<Bug.I>... i) {");
@@ -587,7 +580,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Function0<? extends String> f) {");
@@ -653,7 +645,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Procedure0 f) {");
@@ -719,7 +710,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Function0<? extends String>... f) {");
@@ -785,7 +775,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Procedure0 f) {");
@@ -861,7 +850,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -869,7 +857,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");
@@ -927,7 +914,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -935,7 +921,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");
@@ -1000,7 +985,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1008,7 +992,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");
@@ -1066,7 +1049,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1074,7 +1056,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");
@@ -1132,7 +1113,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1140,7 +1120,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");
@@ -1198,7 +1177,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1206,7 +1184,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? extends Number> ln) {");
@@ -1264,7 +1241,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1272,7 +1248,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? extends Number> ln) {");
@@ -1330,7 +1305,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1338,7 +1312,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? extends Number> ln) {");
@@ -1396,7 +1369,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1404,7 +1376,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? super Number> ln) {");
@@ -1462,7 +1433,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1470,7 +1440,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? super Number> ln) {");
@@ -1528,7 +1497,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1536,7 +1504,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<? super Number> ln) {");
@@ -1601,7 +1568,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -1609,7 +1575,6 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final List<Number> ln) {");

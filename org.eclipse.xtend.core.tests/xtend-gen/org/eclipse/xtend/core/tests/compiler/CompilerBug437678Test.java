@@ -43,7 +43,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String s;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static String m() {");
@@ -116,7 +115,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -124,7 +122,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static C.A _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m() {");
@@ -194,7 +191,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -202,7 +198,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static C.A _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -275,7 +270,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class B {");
@@ -283,7 +277,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -291,7 +284,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static C.A _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m(final C.B b) {");
@@ -364,7 +356,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class B {");
@@ -372,7 +363,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -380,7 +370,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static C.A _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m(final C.B it) {");
@@ -426,7 +415,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static final int privateField = 1;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private static int privateMethod() {");
@@ -437,7 +425,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static int m() {");
@@ -489,7 +476,6 @@ public class CompilerBug437678Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m2(final Object o) {");

@@ -141,7 +141,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      final StringReader reader1 = new StringReader(this.s);
@@ -394,7 +394,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 		'''

@@ -27,7 +27,7 @@ class CompilerBug424839Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final Class<List> a = List.class;
-			  
+			
 			  private final Class<java.awt.List> b = java.awt.List.class;
 			}
 		''')

@@ -53,7 +53,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    return ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
 			  }
-			  
+			
 			  public static <T extends Object> Matcher<T> nullValue() {
 			    return null;
 			  }
@@ -86,7 +86,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -126,7 +126,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -165,7 +165,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -204,7 +204,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -243,7 +243,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -282,7 +282,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -321,7 +321,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -360,7 +360,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -400,7 +400,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -440,7 +440,7 @@ class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = (StringBuilderLike it) -> {

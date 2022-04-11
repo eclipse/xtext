@@ -70,7 +70,7 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
-			  
+			
 			  public CancelIndicator newCancelIndiciator(final ResourceSet rs) {
 			    return null;
 			  }
@@ -118,36 +118,36 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			public class Main {
 			  public interface Named {
 			    String getName();
-			    
+			
 			    void setName(final String name);
 			  }
-			  
+			
 			  public interface A extends Main.Named {
 			    int getNumber();
-			    
+			
 			    void setNumber(final int n);
 			  }
-			  
+			
 			  public interface B extends Main.Named {
 			    int getCount();
-			    
+			
 			    void setCount(final int c);
 			  }
-			  
+			
 			  public interface C extends Main.A, Main.B {
 			  }
-			  
+			
 			  public interface D extends Main.A, Main.B {
 			  }
-			  
+			
 			  public Main.C pc() {
 			    return null;
 			  }
-			  
+			
 			  public Main.D pd() {
 			    return null;
 			  }
-			  
+			
 			  public Main.A p(final String label, final int num, final boolean flag) {
 			    final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(label, num, flag);
 			    final Main.Named _result;
@@ -167,9 +167,9 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			    _init_p(_result, label, num, flag);
 			    return (Main.A)_result;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, Main.A> _createCache_p = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_p(final Main.Named it, final String label, final int num, final boolean flag) {
 			    it.setName(label);
 			    ((Main.A)it).setNumber(num);
@@ -219,36 +219,36 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			public class Main {
 			  public interface Named {
 			    String getName();
-			    
+			
 			    void setName(final String name);
 			  }
-			  
+			
 			  public interface A extends Main.Named {
 			    int getNumber();
-			    
+			
 			    void setNumber(final int n);
 			  }
-			  
+			
 			  public interface B extends Main.Named {
 			    int getCount();
-			    
+			
 			    void setCount(final int c);
 			  }
-			  
+			
 			  public interface C extends Main.A, Main.B {
 			  }
-			  
+			
 			  public interface D extends Main.A, Main.B {
 			  }
-			  
+			
 			  public Main.C pc() {
 			    return null;
 			  }
-			  
+			
 			  public Main.D pd() {
 			    return null;
 			  }
-			  
+			
 			  public Main.Named p(final String label, final int num, final boolean flag) {
 			    final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(label, num, flag);
 			    final Main.Named _result;
@@ -268,9 +268,9 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			    _init_p(_result, label, num, flag);
 			    return _result;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, Main.Named> _createCache_p = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_p(final Main.Named it, final String label, final int num, final boolean flag) {
 			    it.setName(label);
 			    ((Main.A)it).setNumber(num);
@@ -314,9 +314,9 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			    _init_p(_result, value, sync);
 			    return _result;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, Object> _createCache_p = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_p(final Object it, final String value, final boolean sync) {
 			    it.append(value); // missing cast to Appendable also missing try catch for IOException
 			  }

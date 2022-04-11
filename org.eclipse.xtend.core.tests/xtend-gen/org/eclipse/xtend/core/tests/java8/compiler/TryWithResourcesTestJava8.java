@@ -240,7 +240,6 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String s = \"line1\\nline2\\nline3\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void fooMethod() {");
@@ -761,7 +760,6 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("private final String s = \"line1\\nline2\\nline3\";");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("public void fooMethod() {");

@@ -39,10 +39,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			public class A<T extends Object> {
 			  public <E extends T> void f(final Iterable<E> iterable) {
 			  }
-			  
+			
 			  public <E extends T> void f(final Iterator<E> iterable) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("abc", "def"));
 			    final A<String> a = new A<String>();
@@ -76,10 +76,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			public class A<T extends Object> {
 			  public <E extends T> void f(final Iterable<E> iterable) {
 			  }
-			  
+			
 			  public <E extends T> void f(final Iterator<E> iterable) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("abc", "def"));
 			    final A<CharSequence> a = new A<CharSequence>();
@@ -113,10 +113,10 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			public class A<T extends Object> {
 			  public <E extends T> void f(final Iterable<E> iterable) {
 			  }
-			  
+			
 			  public <E extends T> void f(final Iterator<E> iterable) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
 			    final A<String> a = new A<String>();

@@ -52,9 +52,9 @@ class InferredTypeReferencesTestCase extends AbstractActiveAnnotationTest {
 				@SuppressWarnings("all")
 				public class Foo<T> {
 				  private final String foo = "foo";
-				  
+
 				  public <T> String bar();
-				  
+
 				  private String bar2;
 				}
 				

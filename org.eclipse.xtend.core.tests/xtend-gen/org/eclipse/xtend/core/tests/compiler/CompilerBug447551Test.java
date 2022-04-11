@@ -227,7 +227,6 @@ public class CompilerBug447551Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E<T extends Object> extends C.D<T> {");
@@ -244,7 +243,6 @@ public class CompilerBug447551Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public final C.E<Object> e = new Function0<C.E<Object>>() {");

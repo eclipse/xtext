@@ -54,15 +54,15 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class NoConstructor<JAVA_TYPE extends Object> implements Function0<JAVA_TYPE> {
 			  private final String type;
-			  
+			
 			  public NoConstructor(final String theTypeName) {
 			    this.type = Preconditions.<String>checkNotNull(theTypeName, "theTypeName");
 			  }
-			  
+			
 			  public NoConstructor(final Class<JAVA_TYPE> theType) {
 			    this.type = Preconditions.<Class<JAVA_TYPE>>checkNotNull(theType, "theType").getName();
 			  }
-			  
+			
 			  public JAVA_TYPE apply() {
 			    throw new UnsupportedOperationException(
 			      (("Instances of type " + this.type) + " cannot be created (without parameters?)"));
@@ -113,9 +113,9 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Test<JAVA_TYPE extends Object> {
 			  private final Function0<JAVA_TYPE> constructor;
-			  
+			
 			  private final ArrayList<Object> list = new ArrayList<Object>(1);
-			  
+			
 			  public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {
 			    Function0<JAVA_TYPE> _xifexpression = null;
 			    boolean _equals = Objects.equal(theConstructor, null);
@@ -126,7 +126,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			    }
 			    this.constructor = _xifexpression;
 			  }
-			  
+			
 			  public static Test<String> test() {
 			    return new Test<String>(null, String.class);
 			  }
@@ -150,7 +150,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  private final Function0<T> constructor;
-			  
+			
 			  public C(final C<T> theConstructor) {
 			    Function0<T> _constructor = null;
 			    if (theConstructor!=null) {
@@ -182,7 +182,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  private final Function0<T> constructor;
-			  
+			
 			  public C(final C<T> theConstructor) {
 			    Function0<T> _doGetConstructor = null;
 			    if (theConstructor!=null) {
@@ -195,7 +195,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			    }
 			    this.constructor = _doGetConstructor;
 			  }
-			  
+			
 			  public Function0<T> doGetConstructor(final String s) {
 			    return this.constructor;
 			  }
@@ -243,7 +243,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Test<JAVA_TYPE extends Object> {
 			  private final Function0<JAVA_TYPE> constructor;
-			  
+			
 			  public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {
 			    Function0<JAVA_TYPE> _xifexpression = null;
 			    boolean _equals = Objects.equal(theConstructor, null);
@@ -259,7 +259,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			    }
 			    this.constructor = _xifexpression;
 			  }
-			  
+			
 			  public static Test<String> test() {
 			    return new Test<String>(null, String.class);
 			  }
@@ -286,7 +286,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  private final Function0<T> constructor;
-			  
+			
 			  public C(final C<T> theConstructor) {
 			    this(new Function0<Function0<T>>() {
 			      public Function0<T> apply() {
@@ -298,7 +298,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			      }
 			    }.apply());
 			  }
-			  
+			
 			  public C(final Function0<T> f) {
 			    this.constructor = f;
 			  }
@@ -326,7 +326,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  private final Function0<T> constructor;
-			  
+			
 			  public C(final C<T> theConstructor) {
 			    String _xtrycatchfinallyexpression = null;
 			    try {
@@ -335,7 +335,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			    }
 			    this.constructor = theConstructor.doGetConstructor(_xtrycatchfinallyexpression);
 			  }
-			  
+			
 			  public Function0<T> doGetConstructor(final String s) {
 			    return this.constructor;
 			  }
@@ -366,7 +366,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  private final Function0<T> constructor;
-			  
+			
 			  public C(final C<T> theConstructor) {
 			    this(theConstructor.doGetConstructor(new Function0<String>() {
 			      public String apply() {
@@ -379,11 +379,11 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			      }
 			    }.apply()));
 			  }
-			  
+			
 			  public C(final Function0<T> f) {
 			    this.constructor = f;
 			  }
-			  
+			
 			  public Function0<T> doGetConstructor(final String s) {
 			    return this.constructor;
 			  }

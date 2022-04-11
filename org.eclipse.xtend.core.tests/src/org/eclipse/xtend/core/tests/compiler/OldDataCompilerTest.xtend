@@ -37,18 +37,18 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String _name;
-			  
+			
 			  private final boolean _myFlag;
-			  
+			
 			  private final Iterable<? extends Foo> _references;
-			  
+			
 			  public Foo(final String name, final boolean myFlag, final Iterable<? extends Foo> references) {
 			    super();
 			    this._name = name;
 			    this._myFlag = myFlag;
 			    this._references = references;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
@@ -58,7 +58,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			    result = prime * result + (this._myFlag ? 1231 : 1237);
 			    return prime * result + ((this._references== null) ? 0 : this._references.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -83,24 +83,24 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public String getName() {
 			    return this._name;
 			  }
-			  
+			
 			  @Pure
 			  public boolean isMyFlag() {
 			    return this._myFlag;
 			  }
-			  
+			
 			  @Pure
 			  public Iterable<? extends Foo> getReferences() {
 			    return this._references;
@@ -124,13 +124,13 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String _name = "foo";
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._name== null) ? 0 : this._name.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -148,14 +148,14 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public String getName() {
 			    return this._name;
@@ -179,13 +179,13 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String _name = "foo";
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._name== null) ? 0 : this._name.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -203,14 +203,14 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public String getName() {
 			    return this._name;
@@ -376,17 +376,17 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Node {
 			  private final ArrayList<Node> _contents = CollectionLiterals.<Node>newArrayList();
-			  
+			
 			  public String tagName() {
 			    return this.getClass().getSimpleName().toLowerCase();
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._contents== null) ? 0 : this._contents.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -404,14 +404,14 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public ArrayList<Node> getContents() {
 			    return this._contents;

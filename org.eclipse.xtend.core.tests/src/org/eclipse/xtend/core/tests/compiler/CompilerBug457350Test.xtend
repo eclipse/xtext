@@ -148,10 +148,10 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			  public void test() {
 			    abstract class __Test_1 implements Runnable {
 			      final __Test_1 _this__Test_1 = this;
-			      
+			
 			      public abstract Object blub();
 			    }
-			    
+			
 			    new __Test_1() {
 			      public void run() {
 			        final Runnable _function = new Runnable() {
@@ -162,7 +162,7 @@ class CompilerBug457350Test extends AbstractXtendCompilerTest {
 			        };
 			        final Runnable r1 = _function;
 			      }
-			      
+			
 			      public Object blub() {
 			        return null;
 			      }

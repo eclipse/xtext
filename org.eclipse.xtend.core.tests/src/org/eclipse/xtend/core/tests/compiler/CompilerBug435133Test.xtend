@@ -38,7 +38,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final Optional<Object> idx = C.valueOf(null, Integer.valueOf(1));
 			    idx.isPresent();
@@ -74,7 +74,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final RetentionPolicy idx = Enum.<RetentionPolicy>valueOf(RetentionPolicy.class, "");
 			    idx.toString();
@@ -105,7 +105,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final Enum idx = Enum.<Enum>valueOf(null, null);
 			    return null;
@@ -137,7 +137,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final RetentionPolicy idx = Enum.<RetentionPolicy>valueOf(null, null);
 			    return null;
@@ -169,7 +169,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final Enum<RetentionPolicy> idx = Enum.<RetentionPolicy>valueOf(null, null);
 			    return null;
@@ -200,7 +200,7 @@ class CompilerBug435133Test extends AbstractXtendCompilerTest {
 			  public static Optional<Object> valueOf(final Object o, final Object context) {
 			    return null;
 			  }
-			  
+			
 			  public Optional<Object> m() {
 			    final Enum idx = Enum.<Enum>valueOf(null, null);
 			    return null;

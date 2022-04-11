@@ -40,7 +40,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private C.X x;");
@@ -218,7 +217,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m(final String s) {");
@@ -276,7 +274,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m(final String s) {");
@@ -367,7 +364,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B b = new A.B() {");
@@ -375,12 +371,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B.C c = new A.B.C();");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B.C.D d = new A.B.C.D() {");
@@ -391,22 +385,18 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B b;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B.C c;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B.C.D d;");
@@ -417,12 +407,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B b = new A.B() {");
@@ -430,12 +418,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B.C c;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B.C.D d;");
@@ -523,7 +509,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B b = new A.B() {");
@@ -531,12 +516,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B.C c = new A.B.C();");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("private A.B.C.D d = new A.B.C.D() {");
@@ -547,22 +530,18 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B b;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B.C c;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("private A.B.C.D d;");
@@ -573,12 +552,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B b = new A.B() {");
@@ -586,7 +563,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B.C c = new A.B.C() {");
@@ -594,7 +570,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private A.B.C.D d = new A.B.C.D();");
@@ -649,7 +624,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void m() {");
@@ -713,7 +687,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private static class Y {");
@@ -907,22 +880,18 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __Account_1 _this__Account_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("__Account_1 dis;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("AbstractIterator<Boolean> depositExceptionHandler;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void send(final Procedure1<? super Object> p);");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void processAsyncResponse(final boolean o);");
@@ -930,7 +899,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __Account_1() {");
@@ -941,7 +909,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("dis = this;");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("depositExceptionHandler = new AbstractIterator<Boolean>() {");
@@ -1000,7 +967,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void send(final Procedure1<? super Object> p) {");
@@ -1008,7 +974,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void processAsyncResponse(final boolean o) {");
@@ -1022,7 +987,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object depositSReq(final int amount) {");
@@ -1104,7 +1068,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m1(final String s) {");
@@ -1112,7 +1075,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2() {");
@@ -1123,12 +1085,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __C_1 _this__C_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m1(final int i);");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m2();");
@@ -1136,7 +1096,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("new __C_1() {");
@@ -1147,7 +1106,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m2() {");
@@ -1262,7 +1220,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m1(final String s) {");
@@ -1270,7 +1227,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2() {");
@@ -1281,12 +1237,10 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __C_1 _this__C_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m1(final int i);");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m2();");
@@ -1294,7 +1248,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("new __C_1() {");
@@ -1305,7 +1258,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m2() {");
@@ -1439,7 +1391,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class D {");
@@ -1453,7 +1404,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m1(final String s) {");
@@ -1461,7 +1411,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2() {");
@@ -1472,7 +1421,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __C_1 _this__C_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m2();");
@@ -1480,7 +1428,6 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("new __C_1() {");

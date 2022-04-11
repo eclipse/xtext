@@ -448,13 +448,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<?>> x = Collections.<Function0<?>>unmodifiableList(CollectionLiterals.<Function0<?>>newArrayList(((Function0<Object>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Object>) () -> {
@@ -484,13 +484,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -520,13 +520,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -556,13 +556,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableList(CollectionLiterals.<Function0<Outer.A>>newArrayList(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -592,13 +592,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -628,13 +628,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -664,13 +664,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -700,13 +700,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(((Function0<Outer.A>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.A>) () -> {
@@ -735,13 +735,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<?>> x = CollectionLiterals.<Function0<?>>newArrayList(((Function0<Outer.B>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.C>) () -> {
@@ -770,13 +770,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.C>) () -> {
@@ -805,13 +805,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.C>) () -> {
@@ -841,13 +841,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.C>) () -> {
@@ -876,13 +876,13 @@ class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final ArrayList<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {
 			    return ((Outer.B) null);
 			  }), ((Function0<Outer.C>) () -> {

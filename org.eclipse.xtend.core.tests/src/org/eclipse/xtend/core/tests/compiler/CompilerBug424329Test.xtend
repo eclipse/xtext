@@ -29,7 +29,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir("D:");
 			  }
@@ -51,7 +51,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir("D:");
 			  }
@@ -72,7 +72,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(A.class, "D:");
 			  }
@@ -94,7 +94,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, "D:");
 			  }
@@ -116,7 +116,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, new String[] { "D:" });
 			  }
@@ -138,7 +138,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir("D:");
 			  }
@@ -160,7 +160,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir("D:");
 			  }
@@ -181,7 +181,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(A.class, "D:");
 			  }
@@ -203,7 +203,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, "D:");
 			  }
@@ -225,7 +225,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, new String[] { "D:" });
 			  }
@@ -247,7 +247,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, "D:");
 			  }
@@ -269,7 +269,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class, "D:", "E:");
 			  }
@@ -291,7 +291,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    B.setMainDir(null);
 			  }
@@ -313,7 +313,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class);
 			  }
@@ -335,7 +335,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    A.setMainDir(B.class);
 			  }
@@ -357,7 +357,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			public class A {
 			  public static void setMainDir(final Class<? extends A> c, final String... s) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    B.setMainDir(null, null);
 			  }

@@ -32,10 +32,10 @@ class CompilerBug452821Test extends AbstractXtendCompilerTest {
 			      __AnonymousClassTest_1(final String arg0) {
 			        super(arg0);
 			      }
-			      
+			
 			      String field;
 			    }
-			    
+			
 			    return new __AnonymousClassTest_1("") {
 			    };
 			  }

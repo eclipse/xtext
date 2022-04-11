@@ -70,7 +70,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final CharSequence s) {");
@@ -143,7 +142,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final CharSequence s) {");
@@ -204,7 +202,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final CharSequence s) {");
@@ -256,7 +253,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Object o = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -273,7 +269,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final CharSequence s) {");
@@ -325,7 +320,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Object o = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -342,7 +336,6 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void n(final CharSequence s) {");

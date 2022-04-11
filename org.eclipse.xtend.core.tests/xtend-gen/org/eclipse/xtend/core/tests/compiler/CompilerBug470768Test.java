@@ -81,7 +81,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class CustomItr implements Iterable<SOE.A> {");
@@ -98,7 +97,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
@@ -109,7 +107,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final Object it) {");
@@ -120,7 +117,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<SOE.A> getList(final Object it) {");
@@ -228,7 +224,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<C> _getList(final C it) {");
@@ -239,7 +234,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<C> _getList(final Object it) {");
@@ -250,7 +244,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<C> getList(final Object it) {");
@@ -354,7 +347,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class CustomItr implements Iterable<SOE.A> {");
@@ -371,7 +363,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final Object it) {");
@@ -382,7 +373,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
@@ -393,7 +383,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<SOE.A> getList(final Object it) {");
@@ -495,7 +484,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class CustomItr implements Iterable<SOE.A> {");
@@ -512,7 +500,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final SOE.A it) {");
@@ -523,7 +510,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected List<SOE.A> _getList(final Object it) {");
@@ -534,7 +520,6 @@ public class CompilerBug470768Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<SOE.A> getList(final Object it) {");

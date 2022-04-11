@@ -68,12 +68,10 @@ public class InferredTypeReferencesTestCase extends AbstractActiveAnnotationTest
     _builder_1.append("  ");
     _builder_1.append("private final String foo = \"foo\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T> String bar();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String bar2;");

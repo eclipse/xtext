@@ -73,7 +73,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
 			    void sort(final Comparator<? super T> c);
 			  }
-			  
+			
 			  public void m(final C.Sortable<String> sortMe) {
 			    final Function<String, Integer> _function = (String s) -> {
 			      return Integer.valueOf(s.length());
@@ -113,21 +113,21 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
 			    void sort(final C.MyComparator<? super T> c);
 			  }
-			  
+			
 			  public static abstract class MyComparator<T extends Object> {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			    
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public interface ToIntFunction<T extends Object> {
 			    int apply(final T t);
 			  }
-			  
+			
 			  public void m(final C.Sortable<String> sortMe) {
 			    final C.ToIntFunction<String> _function = (String s) -> {
 			      return s.length();
@@ -167,21 +167,21 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
 			    void sort(final C.MyComparator<? super T> c);
 			  }
-			  
+			
 			  public static abstract class MyComparator<T extends Object> {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			    
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public interface ToIntFunction<T extends Object> {
 			    int apply(final T t);
 			  }
-			  
+			
 			  public void m(final C.Sortable<String> sortMe) {
 			    final C.ToIntFunction<String> _function = (String s) -> {
 			      return s.length();
@@ -221,21 +221,21 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
 			    void sort(final C.MyComparator<? super T> c);
 			  }
-			  
+			
 			  public static abstract class MyComparator<T extends Object> {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			    
+			
 			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public interface ToIntFunction<T extends Object> {
 			    int apply(final T t);
 			  }
-			  
+			
 			  public void m(final C.Sortable<String> sortMe) {
 			    final C.ToIntFunction<String> _function = (String s) -> {
 			      return s.length();
@@ -279,22 +279,22 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
-			    
+			
 			    public abstract <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final C.Function<? super T, ? extends U> keyExtractor, final C.MyComparator<? super U> keyComparator);
-			    
+			
 			    public abstract C.MyComparator<T> thenComparing(final C.MyComparator<? super T> other);
-			    
+			
 			    public abstract <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final C.Function<? super T, ? extends U> keyExtractor);
 			  }
-			  
+			
 			  public interface ToIntFunction<T extends Object> {
 			    int apply(final T t);
 			  }
-			  
+			
 			  public interface Function<T extends Object, R extends Object> {
 			    R apply(final T t);
 			  }
-			  
+			
 			  public C.MyComparator<String> m() {
 			    final C.ToIntFunction<String> _function = (String s) -> {
 			      return s.length();

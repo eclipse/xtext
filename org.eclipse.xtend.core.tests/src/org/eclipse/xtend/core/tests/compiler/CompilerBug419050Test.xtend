@@ -62,7 +62,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			    }
 			    return false;
 			  }
-			  
+			
 			  public Boolean m2(final boolean x) {
 			    while (x) {
 			      return Boolean.valueOf(true);

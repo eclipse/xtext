@@ -591,13 +591,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<?>> x = Collections.<Function0<?>>unmodifiableList(CollectionLiterals.<Function0<?>>newArrayList(new Function0<Object>() {
 			    public Object apply() {
 			      return ((Outer.B) null);
@@ -631,13 +631,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -671,13 +671,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -711,13 +711,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableList(CollectionLiterals.<Function0<Outer.A>>newArrayList(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -751,13 +751,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -791,13 +791,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -831,13 +831,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -871,13 +871,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final Set<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(new Function0<Outer.A>() {
 			    public Outer.A apply() {
 			      return ((Outer.B) null);
@@ -910,13 +910,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<?>> x = CollectionLiterals.<Function0<?>>newArrayList(new Function0<Outer.B>() {
 			    public Outer.B apply() {
 			      return ((Outer.B) null);
@@ -949,13 +949,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.B>() {
 			    public Outer.B apply() {
 			      return ((Outer.B) null);
@@ -988,13 +988,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.B>() {
 			    public Outer.B apply() {
 			      return ((Outer.B) null);
@@ -1044,13 +1044,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.B>() {
 			    public Outer.B apply() {
 			      return ((Outer.B) null);
@@ -1083,13 +1083,13 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface A {
 			  }
-			  
+			
 			  public interface B extends Outer.A {
 			  }
-			  
+			
 			  public interface C extends Outer.A {
 			  }
-			  
+			
 			  private final ArrayList<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(new Function0<Outer.B>() {
 			    public Outer.B apply() {
 			      return ((Outer.B) null);

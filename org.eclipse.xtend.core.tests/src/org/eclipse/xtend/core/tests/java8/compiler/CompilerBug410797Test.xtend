@@ -71,7 +71,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public D d(final F f, final G g) {
 			    return new D();
 			  }
@@ -127,7 +127,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public D d(final F f, final G g) {
 			    return new D();
 			  }
@@ -178,7 +178,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    };
 			    return IterableExtensions.<F, D>map(Iterables.<F>concat(ListExtensions.<E, ArrayList<F>>map(CollectionLiterals.<E>newArrayList(), _function)), _function_1);
 			  }
-			  
+			
 			  public D d(final F f, final G g) {
 			    return new D();
 			  }
@@ -238,13 +238,13 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class HiddenLeafs {
 			  private final int _offset;
-			  
+			
 			  private final List<LeafInfo> _leafs = CollectionLiterals.<LeafInfo>newArrayList();
-			  
+			
 			  public boolean isSingleWhitespace() {
 			    return (this.getLeafs().isEmpty() || ((this.getLeafs().size() == 1) && (IterableExtensions.<LeafInfo>head(this.getLeafs()) instanceof WhitespaceInfo)));
 			  }
-			  
+			
 			  public int getLenght() {
 			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
 			      ILeafNode _node = i.getNode();
@@ -256,7 +256,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    };
 			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
-			  
+			
 			  public int getNewLines() {
 			    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
 			      int _newLines = i.getNewLines();
@@ -264,7 +264,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    };
 			    return (int) IterableExtensions.<LeafInfo, Integer>fold(this.getLeafs(), Integer.valueOf(0), _function);
 			  }
-			  
+			
 			  public int getNewLinesInComments() {
 			    final Function2<Integer, CommentInfo, Integer> _function = (Integer x, CommentInfo i) -> {
 			      int _newLines = i.getNewLines();
@@ -272,17 +272,17 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    };
 			    return (int) IterableExtensions.<CommentInfo, Integer>fold(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class), Integer.valueOf(0), _function);
 			  }
-			  
+			
 			  public boolean containsComment() {
 			    int _size = IterableExtensions.size(Iterables.<CommentInfo>filter(this.getLeafs(), CommentInfo.class));
 			    return (_size > 0);
 			  }
-			  
+			
 			  public HiddenLeafs(final int offset) {
 			    super();
 			    this._offset = offset;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
@@ -291,7 +291,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    result = prime * result + this._offset;
 			    return prime * result + ((this._leafs== null) ? 0 : this._leafs.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -311,19 +311,19 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public int getOffset() {
 			    return this._offset;
 			  }
-			  
+			
 			  @Pure
 			  public List<LeafInfo> getLeafs() {
 			    return this._leafs;

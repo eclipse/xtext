@@ -32,11 +32,11 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  public Object m(final Procedure1<? super String> foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final Object foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m2() {
 			    final Procedure1<String> _function = new Procedure1<String>() {
 			      public void apply(final String s) {
@@ -66,11 +66,11 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  public Object m(final Function1<? super String, ?> foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final Object foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m2() {
 			    final Function1<String, Object> _function = new Function1<String, Object>() {
 			      public Object apply(final String s) {
@@ -100,11 +100,11 @@ class CompilerBug461568Test extends AbstractXtendCompilerTest {
 			  public Object m(final Procedure1<? super String> foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final Object foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object m2() {
 			    final Procedure1<String> _function = new Procedure1<String>() {
 			      public void apply(final String it) {

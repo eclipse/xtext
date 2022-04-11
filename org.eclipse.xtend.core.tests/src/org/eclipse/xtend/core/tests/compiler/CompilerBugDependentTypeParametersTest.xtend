@@ -34,7 +34,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <I extends Iterable<?>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public Collection<String> m(final Collection<String> c) {
 			    return this.<Collection<String>>nonEmpty(c);
 			  }
@@ -60,7 +60,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <E extends Object, I extends Iterable<E>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public Collection<String> m(final Collection<String> c) {
 			    return this.<String, Collection<String>>nonEmpty(c);
 			  }
@@ -86,7 +86,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <K extends Object, V extends Object, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
-			  
+			
 			  public Map<String, Integer> m(final Map<String, Integer> m) {
 			    return this.<String, Integer, Map<String, Integer>>nonEmpty(m);
 			  }
@@ -116,7 +116,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <K extends Object, V extends K, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
-			  
+			
 			  public HashMap<String, String> m() {
 			    HashMap<String, String> _xblockexpression = null;
 			    {
@@ -152,7 +152,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <K extends Object, V extends K, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
-			  
+			
 			  public HashMap<String, String> m() {
 			    HashMap<String, String> _xblockexpression = null;
 			    {
@@ -188,7 +188,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <K extends Object, V extends K, M extends Map<? extends K, ? extends V>> M nonEmpty(final M m) {
 			    return m;
 			  }
-			  
+			
 			  public HashMap<String, String> m() {
 			    HashMap<String, String> _xblockexpression = null;
 			    {
@@ -220,7 +220,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <E extends Object, I extends Iterable<? extends E>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public Collection<? extends String> m(final Collection<? extends String> c) {
 			    return this.<String, Collection<? extends String>>nonEmpty(c);
 			  }
@@ -246,7 +246,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <E extends Object, I extends Iterable<? extends E>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public Collection<? super String> m(final Collection<? super String> c) {
 			    return this.<Object, Collection<? super String>>nonEmpty(c);
 			  }
@@ -275,11 +275,11 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <E extends Object, I extends Iterable<E>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public String nonEmpty(final String s) {
 			    return s;
 			  }
-			  
+			
 			  public List<Iterable<?>> m(final List<Iterable<?>> o) {
 			    return this.<Iterable<?>, List<Iterable<?>>>nonEmpty(o);
 			  }
@@ -306,11 +306,11 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <E extends Object, I extends Iterable<E>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public String nonEmpty(final String s) {
 			    return s;
 			  }
-			  
+			
 			  public <T extends Object> Iterable<? extends T> m(final Iterable<? extends T> o) {
 			    return this.nonEmpty(o);
 			  }
@@ -337,7 +337,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <I extends Iterable<?>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public List<Object> m(final Object[] o) {
 			    return this.<List<Object>>nonEmpty(((List<Object>) Conversions.doWrapArray(o)));
 			  }
@@ -364,7 +364,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  public <I extends Iterable<?>> I nonEmpty(final I i) {
 			    return i;
 			  }
-			  
+			
 			  public Collection<String> m(final CharSequence[] o) {
 			    return this.<Collection<String>>nonEmpty(((Collection<String>) Conversions.doWrapArray(o)));
 			  }

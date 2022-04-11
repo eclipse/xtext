@@ -53,7 +53,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_1() {");
@@ -63,7 +62,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_2() {");
@@ -73,7 +71,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_3() {");
@@ -83,7 +80,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_4() {");
@@ -94,7 +90,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_5() {");
@@ -105,7 +100,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_6() {");
@@ -116,7 +110,6 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void blank_7() {");

@@ -42,7 +42,7 @@ class Bug446364Test extends AbstractActiveAnnotationTest {
 			  public String prefix_test() {
 			    return "code";
 			  }
-			  
+			
 			  public StringBuilder prefix_createMethod(final String p) {
 			    final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(p);
 			    final StringBuilder _result;
@@ -57,9 +57,9 @@ class Bug446364Test extends AbstractActiveAnnotationTest {
 			    prefix__init_createMethod(_result, p);
 			    return _result;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, StringBuilder> _createCache_createMethod = CollectionLiterals.newHashMap();
-			  
+			
 			  private void prefix__init_createMethod(final StringBuilder it, final String p) {
 			    it.append(p);
 			  }
@@ -92,13 +92,13 @@ class Bug446364Test extends AbstractActiveAnnotationTest {
 			  public String test() {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilder createMethod(final String p) {
 			    return null;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, StringBuilder> _createCache_createMethod = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_createMethod(final Object/* type is 'null' */ it, final String p) {
 			    return null;
 			  }

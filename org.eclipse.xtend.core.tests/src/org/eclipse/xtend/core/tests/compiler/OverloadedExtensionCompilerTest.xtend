@@ -41,7 +41,7 @@ class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    list.m(_function);
 			  }
-			  
+			
 			  public void process(final Number value) {
 			  }
 			}
@@ -74,7 +74,7 @@ class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public void process(final Number value) {
 			  }
 			}

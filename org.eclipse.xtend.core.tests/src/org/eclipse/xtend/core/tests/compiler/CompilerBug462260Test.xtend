@@ -38,7 +38,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
-			  
+			
 			  public Map<String, String> test() {
 			    Pair<String, List<String>> _mappedTo = Pair.<String, List<String>>of("a", Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
 			    return this.<String>graph(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("a")), Collections.<String, List<String>>unmodifiableMap(CollectionLiterals.<String, List<String>>newHashMap(_mappedTo)));
@@ -69,7 +69,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);
-			  
+			
 			  public Map<Object, Object> test() {
 			    return this.<Object>graph(Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet()), Collections.<Object, List<Object>>unmodifiableMap(CollectionLiterals.<Object, List<Object>>newHashMap()));
 			  }
@@ -100,7 +100,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);
-			  
+			
 			  public Map<String, String> test() {
 			    Pair<String, List<String>> _mappedTo = Pair.<String, List<String>>of("a", Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
 			    return this.<String, Map<String, List<String>>>graph(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("a")), Collections.<String, List<String>>unmodifiableMap(CollectionLiterals.<String, List<String>>newHashMap(_mappedTo)));
@@ -131,7 +131,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);
-			  
+			
 			  public Map<Object, Object> test() {
 			    return this.<Object, Map<Object, List<Object>>>graph(Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet()), Collections.<Object, List<Object>>unmodifiableMap(CollectionLiterals.<Object, List<Object>>newHashMap()));
 			  }
@@ -159,7 +159,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract <E extends Object> void graph(final E e1, final E e2);
-			  
+			
 			  public void test() {
 			    this.<Map<Object, Object>>graph(CollectionLiterals.<Object, Object>newHashMap(), Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap()));
 			  }

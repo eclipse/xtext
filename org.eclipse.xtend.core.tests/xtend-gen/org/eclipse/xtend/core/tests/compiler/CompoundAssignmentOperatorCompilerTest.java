@@ -919,7 +919,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("private int i = 2;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int foo() {");
@@ -970,7 +969,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("private int i = 2;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int foo() {");
@@ -1031,7 +1029,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("private int _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static int withinStaticContext() {");
@@ -1104,7 +1101,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("private int _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int withinInstanceContext() {");
@@ -1174,7 +1170,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("private int _a;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int withinInstanceContext() {");

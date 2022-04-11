@@ -64,7 +64,6 @@ public class CompilerXtendIssue256Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Inline(\"\\\"bar\\\"\")");
@@ -131,7 +130,6 @@ public class CompilerXtendIssue256Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Inline(value = \"\\\"bar\\\"\")");
@@ -204,7 +202,6 @@ public class CompilerXtendIssue256Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Inline(value = \"new ArrayList<String>()\", imported = { ArrayList.class })");

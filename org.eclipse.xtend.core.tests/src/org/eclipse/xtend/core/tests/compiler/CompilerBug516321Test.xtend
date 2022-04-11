@@ -91,11 +91,11 @@ class CompilerBug516321Test extends AbstractXtendCompilerTest {
 			      this.baz("x"), this.baz("x"), this.baz("x"), 
 			      this.baz("x"), this.baz("x"), this.baz("x")));
 			  }
-			  
+			
 			  public String bar(final Iterable<String> a, final Iterable<String> b) {
 			    return null;
 			  }
-			  
+			
 			  public String baz(final String foo) {
 			    return "";
 			  }

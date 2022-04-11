@@ -355,7 +355,6 @@ public class CompilerBug457350Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __Test_1 _this__Test_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract Object blub();");
@@ -363,7 +362,6 @@ public class CompilerBug457350Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("new __Test_1() {");
@@ -395,7 +393,6 @@ public class CompilerBug457350Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Object blub() {");

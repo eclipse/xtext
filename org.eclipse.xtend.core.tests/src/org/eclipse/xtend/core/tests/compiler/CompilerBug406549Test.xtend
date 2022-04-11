@@ -30,7 +30,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m(final T t) {
 			    return null;
 			  }
-			  
+			
 			  public void n() {
 			    new Test<Object>().m(Long.valueOf(1L));
 			  }
@@ -58,7 +58,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m() {
 			    return null;
 			  }
-			  
+			
 			  public void m(final T a, final T b) {
 			    final Procedure1<Test<T>> _function = new Procedure1<Test<T>>() {
 			      public void apply(final Test<T> it) {
@@ -91,7 +91,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilder m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
@@ -122,7 +122,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m() {
 			    Test<Object> _test = new Test<Object>();
 			    Long _long = new Long(0);
@@ -147,7 +147,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m() {
 			    Test<Object> _test = new Test<Object>();
 			    Long _long = new Long(0);

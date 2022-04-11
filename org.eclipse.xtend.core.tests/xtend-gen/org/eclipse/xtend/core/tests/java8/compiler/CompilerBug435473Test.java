@@ -882,7 +882,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -890,7 +889,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -898,7 +896,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<Function0<?>> x = Collections.<Function0<?>>unmodifiableList(CollectionLiterals.<Function0<?>>newArrayList(((Function0<Object>) () -> {");
@@ -962,7 +959,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -970,7 +966,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -978,7 +973,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.A>) () -> {");
@@ -1042,7 +1036,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1050,7 +1043,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1058,7 +1050,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.A>) () -> {");
@@ -1122,7 +1113,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1130,7 +1120,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1138,7 +1127,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableList(CollectionLiterals.<Function0<Outer.A>>newArrayList(((Function0<Outer.A>) () -> {");
@@ -1202,7 +1190,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1210,7 +1197,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1218,7 +1204,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(((Function0<Outer.A>) () -> {");
@@ -1282,7 +1267,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1290,7 +1274,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1298,7 +1281,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(((Function0<Outer.A>) () -> {");
@@ -1362,7 +1344,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1370,7 +1351,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1378,7 +1358,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<? extends Outer.A>>newHashSet(((Function0<Outer.A>) () -> {");
@@ -1442,7 +1421,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1450,7 +1428,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1458,7 +1435,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Set<? extends Function0<Outer.A>> x = Collections.<Function0<Outer.A>>unmodifiableSet(CollectionLiterals.<Function0<Outer.A>>newHashSet(((Function0<Outer.A>) () -> {");
@@ -1520,7 +1496,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1528,7 +1503,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1536,7 +1510,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<Function0<?>> x = CollectionLiterals.<Function0<?>>newArrayList(((Function0<Outer.B>) () -> {");
@@ -1598,7 +1571,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1606,7 +1578,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1614,7 +1585,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {");
@@ -1676,7 +1646,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1684,7 +1653,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1692,7 +1660,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<? extends Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {");
@@ -1756,7 +1723,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1764,7 +1730,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1772,7 +1737,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final List<? extends Function0<? extends Outer.A>> x = Collections.<Function0<? extends Outer.A>>unmodifiableList(CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {");
@@ -1834,7 +1798,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Outer.A {");
@@ -1842,7 +1805,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Outer.A {");
@@ -1850,7 +1812,6 @@ public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final ArrayList<Function0<? extends Outer.A>> x = CollectionLiterals.<Function0<? extends Outer.A>>newArrayList(((Function0<Outer.B>) () -> {");

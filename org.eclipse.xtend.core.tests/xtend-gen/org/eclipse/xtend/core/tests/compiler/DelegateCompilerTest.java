@@ -1133,7 +1133,6 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
         _builder_1.append("  ");
         _builder_1.append("private A a;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public void a() {");
@@ -1144,7 +1143,6 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public void b() {");
@@ -1155,7 +1153,6 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public void c() {");

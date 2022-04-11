@@ -42,19 +42,19 @@ class CompilerBug441099Test extends AbstractXtendCompilerTest {
 			public class C {
 			  @Accessors(AccessorType.PUBLIC_GETTER)
 			  private String string;
-			  
+			
 			  protected Object _m(final String x) {
 			    return null;
 			  }
-			  
+			
 			  public D m() {
 			    return new D("");
 			  }
-			  
+			
 			  public Object m(final String x) {
 			    return _m(x);
 			  }
-			  
+			
 			  @Pure
 			  public String getString() {
 			    return this.string;

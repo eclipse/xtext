@@ -45,31 +45,31 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class IdentifiedInterfaceWithAclBuilder {
 			  public interface ChildOf<P extends Object> {
 			  }
-			  
+			
 			  public interface ChoiceIn<P extends Object> {
 			  }
-			  
+			
 			  public interface Identifiable<T extends Object> {
 			  }
-			  
+			
 			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {
 			  }
-			  
+			
 			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {
 			  }
-			  
+			
 			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
 			  }
-			  
+			
 			  public interface InstanceIdentifier<T extends Object> {
 			  }
-			  
+			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			    
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
 			  }
-			  
+			
 			  public void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<Object> b) {
 			    b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
 			  }
@@ -108,33 +108,33 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class IdentifiedInterfaceWithAclBuilder {
 			  public interface ChildOf<P extends Object> {
 			  }
-			  
+			
 			  public interface ChoiceIn<P extends Object> {
 			  }
-			  
+			
 			  public interface Identifiable<T extends Object> {
 			  }
-			  
+			
 			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {
 			  }
-			  
+			
 			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {
 			  }
-			  
+			
 			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
 			  }
-			  
+			
 			  public interface InstanceIdentifier<T extends Object> {
 			  }
-			  
+			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			    
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
-			    
+			
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
 			  }
-			  
+			
 			  public <X extends Object> void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {
 			    b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
 			  }
@@ -173,33 +173,33 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class IdentifiedInterfaceWithAclBuilder {
 			  public interface ChildOf<P extends Object> {
 			  }
-			  
+			
 			  public interface ChoiceIn<P extends Object> {
 			  }
-			  
+			
 			  public interface Identifiable<T extends Object> {
 			  }
-			  
+			
 			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifier<T, N>> {
 			  }
-			  
+			
 			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
 			  }
-			  
+			
 			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
 			  }
-			  
+			
 			  public interface InstanceIdentifier<T extends Object> {
 			  }
-			  
+			
 			  public interface InstanceIdentifierBuilder<T extends Object> {
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
-			    
+			
 			    <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
-			    
+			
 			    <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
 			  }
-			  
+			
 			  public <X extends Object> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<IdentifiedInterfaceWithAclBuilder.Interface> identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {
 			    return b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
 			  }
@@ -224,7 +224,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object operator_plus(final List<T> list, final T value) {
 			    return null;
 			  }
-			  
+			
 			  public boolean m(final List<String> items, final String s) {
 			    return items.add(s);
 			  }
@@ -281,7 +281,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public String[] m(final List<String[]> arg) {
 			    return IterableExtensions.<String[]>head(arg);
 			  }
-			  
+			
 			  public String n() {
 			    return this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList()))[5];
 			  }
@@ -307,7 +307,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object m(final List<String[]> arg) {
 			    return null;
 			  }
-			  
+			
 			  public Object n() {
 			    return this.m(Collections.<String[]>unmodifiableList(CollectionLiterals.<String[]>newArrayList(new String[] { "a", "a" })));
 			  }
@@ -329,10 +329,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public <T extends Object> void m(final T t) {
 			  }
-			  
+			
 			  public void m(final CharSequence t) {
 			  }
-			  
+			
 			  public void n(final Iterable<String> it) {
 			    this.m(it.iterator().next());
 			  }
@@ -356,10 +356,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public <T extends Object> void m(final T t) {
 			  }
-			  
+			
 			  public void m(final CharSequence t) {
 			  }
-			  
+			
 			  public void n(final Iterable<String> it) {
 			    this.m(IterableExtensions.<String>head(it));
 			  }
@@ -507,7 +507,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return _function;
 			    }
 			  }
-			  
+			
 			  public Predicate<String> myGuavaPredicate() {
 			    return null;
 			  }
@@ -592,7 +592,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class BugSwitch {
 			  private Number n;
-			  
+			
 			  public Number test() {
 			    Number _switchResult = null;
 			    final Number n = this.n;
@@ -655,11 +655,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public B bar(final Object x) {
 			    return ((B) x);
 			  }
-			  
+			
 			  public C baz(final Object x) {
 			    return ((C) x);
 			  }
@@ -682,7 +682,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug other) {
 			    this.m(other);
 			  }
@@ -705,7 +705,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug other) {
 			    this.m();
 			  }
@@ -728,7 +728,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug it) {
 			    this.m();
 			  }
@@ -751,7 +751,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug it) {
 			    this.m(it);
 			  }
@@ -774,7 +774,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug it) {
 			    it.m(it);
 			  }
@@ -797,7 +797,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  public void m(final Bug... otherInstances) {
 			  }
-			  
+			
 			  public void m2(final Bug it) {
 			    it.m();
 			  }
@@ -848,7 +848,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Bug {
 			  @Extension
 			  private Foo foo;
-			  
+			
 			  public Object bar() {
 			    return this.foo.foo(this, 1);
 			  }
@@ -871,7 +871,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object bar() {
 			    return this.foo(this, 1);
 			  }
-			  
+			
 			  public Object foo(final Bug bug, final int i) {
 			    return null;
 			  }
@@ -895,11 +895,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object bar() {
 			    return this.foo(1);
 			  }
-			  
+			
 			  public Object foo(final Bug bug, final int i) {
 			    return null;
 			  }
-			  
+			
 			  public Object foo(final int i) {
 			    return null;
 			  }
@@ -996,7 +996,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
-			  
+			
 			  public void newInstance() {
 			  }
 			}
@@ -1021,11 +1021,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa, final Procedure1<? super F> configurator) {
 			    return null;
 			  }
-			  
+			
 			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {
 			    return null;
 			  }
-			  
+			
 			  public String build(final Factory<String> f, final T it) {
 			    return this.<String, Factory<String>>buildChild(f);
 			  }
@@ -1051,15 +1051,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Factory<T extends Object> {
 			  public void fill(final Procedure1<? super T> configurator) {
 			  }
-			  
+			
 			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa, final Procedure1<? super F> configurator) {
 			    return null;
 			  }
-			  
+			
 			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {
 			    return null;
 			  }
-			  
+			
 			  public void build(final Factory<String> f) {
 			    final Procedure1<T> _function = new Procedure1<T>() {
 			      public void apply(final T it) {
@@ -1128,7 +1128,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @Extension
 			  private ErrorSafeExtensions _errorSafeExtensions;
-			  
+			
 			  public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {
 			    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
 			      public void apply(final LoopParams it_1) {
@@ -1229,7 +1229,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			class Bug {
 			    List<String> list = newArrayList
-			    
+			
 			    def doSomething(Map<String, String> mapping) {
 			        list = mapping.values.sort
 			    }
@@ -1243,7 +1243,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private List<String> list = CollectionLiterals.<String>newArrayList();
-			  
+			
 			  public List<String> doSomething(final Map<String, String> mapping) {
 			    return this.list = IterableExtensions.<String>sort(mapping.values());
 			  }
@@ -1275,7 +1275,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public List<CharSequence> getChildren() {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilder m() {
 			    StringBuilder _xblockexpression = null;
 			    {
@@ -1314,7 +1314,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object, F extends Factory<T>> T build(final Factory<T> f) {
 			    return null;
 			  }
-			  
+			
 			  public String test() {
 			    StringFactory _stringFactory = new StringFactory();
 			    return this.<String, Factory<String>>build(_stringFactory);
@@ -1341,7 +1341,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object> T build(final Factory<? extends T> factory) {
 			    return null;
 			  }
-			  
+			
 			  public String test() {
 			    StringFactory _stringFactory = new StringFactory();
 			    return this.<String>build(_stringFactory);
@@ -1368,7 +1368,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object, F extends Factory<T>> T build(final F xfactory) {
 			    return null;
 			  }
-			  
+			
 			  public String test() {
 			    StringFactory _stringFactory = new StringFactory();
 			    return this.<String, StringFactory>build(_stringFactory);
@@ -1395,7 +1395,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object> T build(final Factory<T> xfactory) {
 			    return null;
 			  }
-			  
+			
 			  public String test() {
 			    StringFactory _stringFactory = new StringFactory();
 			    return this.<String>build(_stringFactory);
@@ -1422,7 +1422,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Object, F extends Factory<T>> T build(final F xfactory) {
 			    return null;
 			  }
-			  
+			
 			  public String test() {
 			    StringFactory _stringFactory = new StringFactory();
 			    return this.<String, StringFactory>build(_stringFactory);
@@ -1449,7 +1449,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final Injector i) {
 			  }
-			  
+			
 			  public <T extends Comparable<T>> void m(final T t) {
 			    this.<String>m("");
 			  }
@@ -1477,7 +1477,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <T extends Comparable<T>, X extends T> void m(final T t, final X x) {
 			    this.<String, String>m("", "");
 			  }
-			  
+			
 			  public void m(final Injector i, final Class<? extends CharSequence> c) {
 			    this.<String, String>m("", "");
 			  }
@@ -1509,7 +1509,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1541,7 +1541,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1573,7 +1573,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1605,7 +1605,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1637,7 +1637,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1669,7 +1669,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1701,7 +1701,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1733,7 +1733,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
 			    return null;
 			  }
@@ -1811,7 +1811,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    };
 			    return IterableExtensions.sortBy(this.<String, Object>flatMap(iterable, _function), _function_1);
 			  }
-			  
+			
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
 			    return null;
 			  }
@@ -1849,7 +1849,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    };
 			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
-			  
+			
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
 			    return null;
 			  }
@@ -1887,7 +1887,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    };
 			    IterableExtensions.sortBy(this.<String, String>flatMap(iterable, _function), _function_1);
 			  }
-			  
+			
 			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {
 			    return null;
 			  }
@@ -1961,22 +1961,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
+			
 			  public int compareTo(final Weight w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
-			  
+			
 			  public Weight(final T weight) {
 			    super();
 			    this._weight = weight;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -1994,14 +1994,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public T getWeight() {
 			    return this._weight;
@@ -2029,22 +2029,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
+			
 			  public int compareTo(final Weight<T> w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
-			  
+			
 			  public Weight(final T weight) {
 			    super();
 			    this._weight = weight;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -2062,14 +2062,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public T getWeight() {
 			    return this._weight;
@@ -2097,22 +2097,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
+			
 			  public int compareTo(final Weight<T> w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
-			  
+			
 			  public Weight(final T weight) {
 			    super();
 			    this._weight = weight;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -2130,14 +2130,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public T getWeight() {
 			    return this._weight;
@@ -2165,22 +2165,22 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight> {
 			  private final T _weight;
-			  
+			
 			  public int compareTo(final Weight w) {
 			    return this.getWeight().compareTo(w.getWeight());
 			  }
-			  
+			
 			  public Weight(final T weight) {
 			    super();
 			    this._weight = weight;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -2198,14 +2198,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public T getWeight() {
 			    return this._weight;
@@ -2414,7 +2414,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    this.something(s);
 			    this.getSomething(s);
 			  }
-			  
+			
 			  public void something(final CharSequence c) {
 			  }
 			}
@@ -2506,7 +2506,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo<O extends Object> {
 			  private final Function0<? extends O> operation = null;
-			  
+			
 			  public ListenableFuture<O> run() {
 			    final ListenableFuture<O> result = MoreExecutors.newDirectExecutorService().<O>submit(new Callable<O>() {
 			        public O call() {
@@ -2709,7 +2709,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class Test<T extends Object> {
 			  public Test(final Function0<? extends T> arg) {
 			  }
-			  
+			
 			  public static <P extends Object> Test<P> newInstance(final Function0<? extends P> arg) {
 			    return new Test<P>(arg);
 			  }
@@ -2784,7 +2784,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				    this.logSomething();
 				    return _builder;
 				  }
-				  
+				
 				  public void logSomething() {
 				    InputOutput.<String>println("zonk");
 				  }
@@ -2906,7 +2906,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo<T extends Object> {
 			  private final String s;
-			  
+			
 			  public Foo(final String new_) {
 			    this.s = new_;
 			  }
@@ -2928,13 +2928,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private static String staticField;
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 1;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -2946,7 +2946,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
@@ -2972,20 +2972,20 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private static String staticField;
-			  
+			
 			  private final String _nonStaticField;
-			  
+			
 			  public Foo(final String nonStaticField) {
 			    super();
 			    this._nonStaticField = nonStaticField;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this._nonStaticField== null) ? 0 : this._nonStaticField.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -3003,14 +3003,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public String getNonStaticField() {
 			    return this._nonStaticField;
@@ -3035,18 +3035,18 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class UsesExtension {
 			  @Extension
 			  private final String __string;
-			  
+			
 			  public UsesExtension(final String _string) {
 			    super();
 			    this.__string = _string;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
 			    return 31 * 1 + ((this.__string== null) ? 0 : this.__string.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -3064,14 +3064,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
 			  }
-			  
+			
 			  @Pure
 			  public String get_string() {
 			    return this.__string;
@@ -3088,7 +3088,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			class TestError {
 			    def Void voidObjectReturned() {
 			    }
-			    
+			
 			    def void sampleMethod() {
 			        try {
 			            voidObjectReturned
@@ -3105,7 +3105,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Void voidObjectReturned() {
 			    return null;
 			  }
-			  
+			
 			  public void sampleMethod() {
 			    try {
 			      this.voidObjectReturned();
@@ -3143,9 +3143,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public static <T extends Object> IExpectationSetters<T> expect(final T value) {
 			    return null;
 			  }
-			  
+			
 			  private HeaderAccess<?> unboundedMockHeaderAccess;
-			  
+			
 			  public void test() {
 			    final Object header = this.unboundedMockHeaderAccess.getHeader();
 			    final IExpectationSetters<Object> exp1 = Y.<Object>expect(header);
@@ -3282,9 +3282,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class XItem<T extends XType> {
 			  private XList<T> gen;
-			  
+			
 			  private T item;
-			  
+			
 			  public XItem(final XList<T> gen, final T item) {
 			    this.gen = gen;
 			    this.item = item;
@@ -3323,7 +3323,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class XList<T extends XType> {
 			  private final LinkedList<XItem<T>> items = new LinkedList<XItem<T>>();
-			  
+			
 			  public boolean add(final T item) {
 			    boolean _xblockexpression = false;
 			    {
@@ -3356,7 +3356,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int foo() {
 			    return Foo.operator_minus(this, this);
 			  }
-			  
+			
 			  public static int operator_minus(final Foo x, final Foo y) {
 			    return 1;
 			  }
@@ -3384,7 +3384,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int foo() {
 			    return Foo.operator_minus(this, this);
 			  }
-			  
+			
 			  public static int operator_minus(final Foo x, final Foo y) {
 			    return 1;
 			  }
@@ -3421,11 +3421,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <A extends Object> Map<A, Iterable<A>> then(final Iterable<A> iter) {
 			    return null;
 			  }
-			  
+			
 			  public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public String client(final ArrayList<Long> arrayList) {
 			    String _xblockexpression = null;
 			    {
@@ -3467,11 +3467,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <A extends Object> Map<A, Iterable<A>> then(final Iterable<A> iter) {
 			    return null;
 			  }
-			  
+			
 			  public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public String client(final Iterable<Long> iterable) {
 			    String _xblockexpression = null;
 			    {
@@ -3515,11 +3515,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <A extends Object> Map<A, Iterable<A>> then(final Iterable<A> iter) {
 			    return null;
 			  }
-			  
+			
 			  public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public String client(final LinkedList<String> linkedList) {
 			    String _xblockexpression = null;
 			    {
@@ -3563,11 +3563,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <A extends Object> Map<A, Iterable<A>> then(final Iterable<A> iter) {
 			    return null;
 			  }
-			  
+			
 			  public <A extends Number & Comparable<?>> Map<A, List<A>> then(final List<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public String client(final Set<Integer> set) {
 			    String _xblockexpression = null;
 			    {
@@ -3611,11 +3611,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <A extends Object> Map<A, Expression<A>> then(final Expression<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public <A extends Number & Comparable<?>> Map<A, NumberExpression<A>> then(final NumberExpression<A> expr) {
 			    return null;
 			  }
-			  
+			
 			  public void m() {
 			    final NumberPath<Long> count = null;
 			    final Map<Long, NumberExpression<Long>> y = this.<Long>then(count);
@@ -3642,7 +3642,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private String text;
-			  
+			
 			  public boolean handleEvent(final Bug e) {
 			    String _text = null;
 			    if (e!=null) {
@@ -3670,7 +3670,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private String text;
-			  
+			
 			  public String handleEvent(final Bug e) {
 			    String _text = null;
 			    if (e!=null) {
@@ -3708,11 +3708,11 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public Object bug(final Foo foo) {
 			    return null;
 			  }
-			  
+			
 			  public Object bug(final Bar bar) {
 			    return null;
 			  }
-			  
+			
 			  public Object test() {
 			    Object _xblockexpression = null;
 			    {

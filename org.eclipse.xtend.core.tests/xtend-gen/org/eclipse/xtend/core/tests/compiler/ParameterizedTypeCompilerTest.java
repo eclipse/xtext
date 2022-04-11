@@ -210,7 +210,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public MyRef(final Object o) {");
@@ -426,7 +425,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public MyRef(final Iterable<AA> iter) {");
@@ -536,7 +534,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("override woot(List<U> list) {");
@@ -563,7 +560,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object woot(final List<T> list) {");
@@ -595,7 +591,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("override woot(List<U> list) {");
@@ -635,7 +630,6 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object woot(final List<U> list) {");

@@ -55,7 +55,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static int m(final String s) {");
@@ -104,7 +103,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m(final CharSequence s) {");
@@ -164,7 +162,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public static int d(final String s) {");
@@ -178,7 +175,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int m(final C.D it) {");
@@ -227,7 +223,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void operator_plus(final String s1, final String s2) {");
@@ -267,7 +262,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String getString() {");
@@ -482,7 +476,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Ext _ext;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object m(final C c) {");
@@ -537,7 +530,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Function1<? super Number, ? extends Number> field;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setField(final Function1<? super Number, ? extends Number> field) {");
@@ -548,7 +540,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setField(final String field) {");
@@ -606,7 +597,6 @@ public class CompilerBug434424Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private CharSequence field;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setField(final String field) {");

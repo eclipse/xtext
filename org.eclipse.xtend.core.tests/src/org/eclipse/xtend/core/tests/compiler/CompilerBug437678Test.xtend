@@ -28,7 +28,7 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private static String s;
-			  
+			
 			  public static String m() {
 			    String _m = C.m();
 			    return (C.s + _m);
@@ -60,10 +60,10 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private static C.A _a;
-			  
+			
 			  public static void m() {
 			    C._a.methodA();
 			  }
@@ -94,10 +94,10 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private static C.A _a;
-			  
+			
 			  public void m() {
 			    C._a.methodA();
 			  }
@@ -129,13 +129,13 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public static class B {
 			  }
-			  
+			
 			  @Extension
 			  private static C.A _a;
-			  
+			
 			  public static void m(final C.B b) {
 			    C._a.methodA(b);
 			  }
@@ -167,13 +167,13 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public static class B {
 			  }
-			  
+			
 			  @Extension
 			  private static C.A _a;
-			  
+			
 			  public static void m(final C.B it) {
 			    C._a.methodA(it);
 			  }
@@ -195,11 +195,11 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private static final int privateField = 1;
-			  
+			
 			  private static int privateMethod() {
 			    return 2;
 			  }
-			  
+			
 			  public static int m() {
 			    int _privateMethod = C.privateMethod();
 			    return (C.privateField + _privateMethod);
@@ -223,7 +223,7 @@ class CompilerBug437678Test extends AbstractXtendCompilerTest {
 			  public static void m(final Object it) {
 			    C.m2(it);
 			  }
-			  
+			
 			  public static void m2(final Object o) {
 			  }
 			}

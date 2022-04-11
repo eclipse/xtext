@@ -118,11 +118,11 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			  protected Object _m(final A a) {
 			    return null;
 			  }
-			  
+			
 			  protected Object _m(final B b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final A a) {
 			    if (a instanceof B) {
 			      return _m((B)a);
@@ -165,11 +165,11 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			  protected Object _m(final A a) {
 			    return null;
 			  }
-			  
+			
 			  protected Object _m(final B b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final A a) {
 			    if (a instanceof B) {
 			      return _m((B)a);
@@ -215,11 +215,11 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			  protected Object _m(final A a) {
 			    return null;
 			  }
-			  
+			
 			  protected Object _m(final B b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final A a) {
 			    if (a instanceof B) {
 			      return _m((B)a);
@@ -274,11 +274,11 @@ class CompilerBug422864Test extends AbstractXtendCompilerTest {
 			  protected Object _m(final A a) {
 			    return null;
 			  }
-			  
+			
 			  protected Object _m(final B b) {
 			    return null;
 			  }
-			  
+			
 			  public Object m(final A a) {
 			    if (a instanceof B) {
 			      return _m((B)a);

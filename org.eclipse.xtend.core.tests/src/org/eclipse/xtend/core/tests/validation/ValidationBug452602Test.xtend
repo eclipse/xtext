@@ -32,7 +32,7 @@ class ValidationBug452602Test extends AbstractXtendTestCase {
 			    new(String s) {
 			    	attrName = s
 			    }
-			    
+			
 			    def boolean test(Object o) {
 			        val x = o as Test
 			        if (attrName != x.attrName) 
@@ -51,7 +51,7 @@ class ValidationBug452602Test extends AbstractXtendTestCase {
 			    new(String s) {
 			    	attrName = s
 			    }
-			    
+			
 			    def boolean test(Object o) {
 			        val x = o as Test
 			        if ((o as Test).attrName != x.attrName) 
@@ -72,7 +72,7 @@ class ValidationBug452602Test extends AbstractXtendTestCase {
 			    	attrName = s1
 			    	attrName2 = s2
 			    }
-			    
+			
 			    def boolean test() {
 			        if (attrName === attrName2) 
 			        	return false 

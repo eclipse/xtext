@@ -157,7 +157,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public CancelIndicator newCancelIndiciator(final ResourceSet rs) {");
@@ -279,7 +278,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("String getName();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setName(final String name);");
@@ -287,7 +285,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface A extends Main.Named {");
@@ -295,7 +292,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getNumber();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setNumber(final int n);");
@@ -303,7 +299,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Main.Named {");
@@ -311,7 +306,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getCount();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setCount(final int c);");
@@ -319,7 +313,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Main.A, Main.B {");
@@ -327,7 +320,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface D extends Main.A, Main.B {");
@@ -335,7 +327,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.C pc() {");
@@ -346,7 +337,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.D pd() {");
@@ -357,7 +347,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.A p(final String label, final int num, final boolean flag) {");
@@ -416,12 +405,10 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, Main.A> _createCache_p = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_p(final Main.Named it, final String label, final int num, final boolean flag) {");
@@ -549,7 +536,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("String getName();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setName(final String name);");
@@ -557,7 +543,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface A extends Main.Named {");
@@ -565,7 +550,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getNumber();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setNumber(final int n);");
@@ -573,7 +557,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface B extends Main.Named {");
@@ -581,7 +564,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("int getCount();");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("void setCount(final int c);");
@@ -589,7 +571,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface C extends Main.A, Main.B {");
@@ -597,7 +578,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public interface D extends Main.A, Main.B {");
@@ -605,7 +585,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.C pc() {");
@@ -616,7 +595,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.D pd() {");
@@ -627,7 +605,6 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Main.Named p(final String label, final int num, final boolean flag) {");
@@ -686,12 +663,10 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, Main.Named> _createCache_p = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_p(final Main.Named it, final String label, final int num, final boolean flag) {");
@@ -799,12 +774,10 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, Object> _createCache_p = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_p(final Object it, final String value, final boolean sync) {");

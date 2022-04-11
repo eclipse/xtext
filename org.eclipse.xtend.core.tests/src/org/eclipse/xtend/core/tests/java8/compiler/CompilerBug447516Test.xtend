@@ -69,7 +69,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			  public interface I<P extends Object> {
 			    <T extends P> T exec(final Function1<? super P, ? extends T> arg);
 			  }
-			  
+			
 			  private final C.I<CharSequence> readAccess = new C.I<CharSequence>() {
 			    @Override
 			    public <T extends CharSequence> T exec(final Function1<? super CharSequence, ? extends T> it) {
@@ -100,7 +100,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			  public interface I<P extends Object, W extends P> {
 			    <T extends P, V extends T> T exec(final W w, final Function1<? super P, ? extends T> arg);
 			  }
-			  
+			
 			  private final C.I<CharSequence, String> i = new C.I<CharSequence, String>() {
 			    @Override
 			    public <T extends CharSequence, V extends T> T exec(final String $0, final Function1<? super CharSequence, ? extends T> $1) {

@@ -102,7 +102,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object> Matcher<T> nullValue() {");
@@ -175,7 +174,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static StringBuilderLike m() {");
@@ -269,7 +267,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilderLike m() {");
@@ -360,7 +357,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilderLike m() {");
@@ -451,7 +447,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilderLike m() {");
@@ -542,7 +537,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -633,7 +627,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilderLike m() {");
@@ -724,7 +717,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static StringBuilderLike m() {");
@@ -815,7 +807,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m() {");
@@ -909,7 +900,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m() {");
@@ -1003,7 +993,6 @@ public class CompilerBug406425Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static void m() {");

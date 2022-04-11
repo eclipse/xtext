@@ -35,7 +35,7 @@ class CompilerXtendIssue256Test	extends AbstractXtendCompilerTest {
 		  public String foo() {
 		    return "bar";
 		  }
-		  
+		
 		  @Inline("\"bar\"")
 		  public static String bar() {
 		    throw new IllegalStateException();
@@ -65,7 +65,7 @@ class CompilerXtendIssue256Test	extends AbstractXtendCompilerTest {
 		  public String foo() {
 		    return "bar";
 		  }
-		  
+		
 		  @Inline(value = "\"bar\"")
 		  public static String bar() {
 		    throw new IllegalStateException();
@@ -98,7 +98,7 @@ class CompilerXtendIssue256Test	extends AbstractXtendCompilerTest {
 		  public List<String> foo() {
 		    return new ArrayList<String>();
 		  }
-		  
+		
 		  @Inline(value = "new ArrayList<String>()", imported = { ArrayList.class })
 		  public static List<String> bar() {
 		    throw new IllegalStateException();

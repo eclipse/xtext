@@ -107,7 +107,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String type;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public NoConstructor(final String theTypeName) {");
@@ -118,7 +117,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public NoConstructor(final Class<JAVA_TYPE> theType) {");
@@ -129,7 +127,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public JAVA_TYPE apply() {");
@@ -247,12 +244,10 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<JAVA_TYPE> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final ArrayList<Object> list = new ArrayList<Object>(1);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {");
@@ -284,7 +279,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static Test<String> test() {");
@@ -332,7 +326,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<T> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final C<T> theConstructor) {");
@@ -403,7 +396,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<T> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final C<T> theConstructor) {");
@@ -441,7 +433,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function0<T> doGetConstructor(final String s) {");
@@ -551,7 +542,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<JAVA_TYPE> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {");
@@ -598,7 +588,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static Test<String> test() {");
@@ -655,7 +644,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<T> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final C<T> theConstructor) {");
@@ -690,7 +678,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final Function0<T> f) {");
@@ -749,7 +736,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<T> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final C<T> theConstructor) {");
@@ -775,7 +761,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function0<T> doGetConstructor(final String s) {");
@@ -843,7 +828,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Function0<T> constructor;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final C<T> theConstructor) {");
@@ -881,7 +865,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C(final Function0<T> f) {");
@@ -892,7 +875,6 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Function0<T> doGetConstructor(final String s) {");

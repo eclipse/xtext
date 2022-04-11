@@ -274,13 +274,11 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         String _simpleName = it.getSimpleName();
         String _plus = ("_this" + _simpleName);
         final String thisName = childAppendable.declareSyntheticVariable(_mappedTo, _plus);
-        childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;").newLine();
+        childAppendable.newLine().append("final ").append(it.getSimpleName()).append(" ").append(thisName).append(" = this;");
+        childAppendable.blankLine();
       }
       final Procedure1<LoopParams> _function_2 = (LoopParams it_1) -> {
-        final Function1<ITreeAppendable, ITreeAppendable> _function_3 = (ITreeAppendable it_2) -> {
-          return it_2.newLine();
-        };
-        it_1.setSeparator(_function_3);
+        it_1.setSeparator(this.memberSeparator());
       };
       final Procedure1<JvmMember> _function_3 = (JvmMember it_1) -> {
         final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(childAppendable, it_1);
@@ -349,7 +347,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       };
       this._loopExtensions.<JvmMember>forEach(childAppendable, this.getAddedDeclarations(it, anonymousClass), _function_2, _function_3);
       childAppendable.decreaseIndentation().newLine().append("}");
-      appendable.newLine();
+      appendable.blankLine();
     };
     IterableExtensions.<JvmGenericType>filter(feature.getLocalClasses(), _function).forEach(_function_1);
   }
@@ -543,10 +541,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         if (_not) {
           appendable.newLine().append("{").increaseIndentation();
           final Procedure1<LoopParams> _function_1 = (LoopParams it_1) -> {
-            final Function1<ITreeAppendable, ITreeAppendable> _function_2 = (ITreeAppendable it_2) -> {
-              return it_2.newLine();
-            };
-            it_1.setSeparator(_function_2);
+            it_1.setSeparator(this.memberSeparator());
           };
           final Procedure1<JvmField> _function_2 = (JvmField it_1) -> {
             final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(appendable, it_1);
@@ -562,10 +557,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           appendable.decreaseIndentation().newLine().append("}");
         }
         final Procedure1<LoopParams> _function_3 = (LoopParams it_1) -> {
-          final Function1<ITreeAppendable, ITreeAppendable> _function_4 = (ITreeAppendable it_2) -> {
-            return it_2.newLine();
-          };
-          it_1.setSeparator(_function_4);
+          it_1.setSeparator(this.memberSeparator());
         };
         final Procedure1<JvmMember> _function_4 = (JvmMember it_1) -> {
           final ITreeAppendable memberAppendable = this._treeAppendableUtil.traceWithComments(appendable, it_1);

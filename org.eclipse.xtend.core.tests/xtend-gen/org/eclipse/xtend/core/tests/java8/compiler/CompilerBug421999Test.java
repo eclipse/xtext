@@ -320,7 +320,6 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends EObject> Iterable<Pair<QualifiedName, T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription, ? extends Boolean> p) {");

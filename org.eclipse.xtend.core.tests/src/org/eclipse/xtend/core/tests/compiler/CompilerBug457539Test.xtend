@@ -44,7 +44,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    this.<Object>forEach2(list, _function);
 			  }
-			  
+			
 			  public <T extends Object> void forEach2(final Iterable<T> it, final Procedure1<? super T> f) {
 			  }
 			}
@@ -74,12 +74,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<Object> list = C.<Object>newIterable();
 			    final Procedure1<Object> _function = new Procedure1<Object>() {
@@ -91,7 +91,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -122,12 +122,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
@@ -136,7 +136,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -167,12 +167,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<String> list = C.<String>newIterable();
 			    list.add("");
@@ -182,7 +182,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -214,12 +214,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
@@ -230,7 +230,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -262,12 +262,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
@@ -280,7 +280,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -311,12 +311,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
@@ -328,7 +328,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -359,12 +359,12 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
-			    
+			
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Procedure1<CharSequence> _function = new Procedure1<CharSequence>() {
@@ -376,7 +376,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    list.forEach2(_function);
 			  }
-			  
+			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -411,7 +411,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
 			  }
-			  
+			
 			  public void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -423,11 +423,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			    };
 			    C.<StringBuilderLike>newIterable(_stringBuilderLike).forEach2(_function);
 			  }
-			  
+			
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -453,7 +453,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
 			  }
-			  
+			
 			  public <V extends Object> void m(final C.MyIterable<? super V> list) {
 			    final Procedure1<Object> _function = new Procedure1<Object>() {
 			      public void apply(final Object it) {

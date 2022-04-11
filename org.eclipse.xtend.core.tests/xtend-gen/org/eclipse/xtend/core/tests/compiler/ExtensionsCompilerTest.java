@@ -268,7 +268,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {");
@@ -339,7 +338,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {");
@@ -416,7 +414,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {");
@@ -487,7 +484,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {");
@@ -553,7 +549,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private D _d;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<String> m(final List<String> list) {");
@@ -630,7 +625,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private D _d;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<String> m(final List<String> list) {");
@@ -827,7 +821,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String _string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String useExtension() {");
@@ -1005,7 +998,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected String local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m(final int it) {");
@@ -1061,7 +1053,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected CharSequence local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public char m(final int it) {");
@@ -1131,7 +1122,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected A local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final CharSequence it) {");
@@ -1201,7 +1191,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected A local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final String it) {");
@@ -1271,7 +1260,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected B local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final CharSequence it) {");
@@ -1341,7 +1329,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("protected A local;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final String it) {");
@@ -1390,7 +1377,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String _string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m(final int it, @Extension final String s) {");
@@ -1441,7 +1427,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String _string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m(final int it, @Extension final String s) {");
@@ -1938,7 +1923,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m2() {");
@@ -1949,7 +1933,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public ArrayList<String> m3() {");
@@ -1978,7 +1961,6 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T at(final T[] obj, final int index) {");

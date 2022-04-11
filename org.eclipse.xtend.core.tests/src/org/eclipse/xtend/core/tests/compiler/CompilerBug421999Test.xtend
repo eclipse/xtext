@@ -167,7 +167,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			  private <T extends EObject> T resolve(final IEObjectDescription it, final ResourceSet resourceSet) {
 			    return null;
 			  }
-			  
+			
 			  public <T extends EObject> Iterable<Pair<QualifiedName, T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription, ? extends Boolean> p) {
 			    List<Pair<QualifiedName, T>> _xblockexpression = null;
 			    {

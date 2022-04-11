@@ -35,12 +35,12 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 			public class C<T extends Object> {
 			  @Property
 			  private Procedure1<? super T> _s;
-			  
+			
 			  @Pure
 			  public Procedure1<? super T> getS() {
 			    return this._s;
 			  }
-			  
+			
 			  public void setS(final Procedure1<? super T> s) {
 			    this._s = s;
 			  }
@@ -63,12 +63,12 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @Property
 			  private Procedure1<? super String> _s;
-			  
+			
 			  @Pure
 			  public Procedure1<? super String> getS() {
 			    return this._s;
 			  }
-			  
+			
 			  public void setS(final Procedure1<? super String> s) {
 			    this._s = s;
 			  }
@@ -97,12 +97,12 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				public class Bar {
 				  @Property
 				  private boolean _generateExpressions = true;
-				  
+				
 				  @Pure
 				  public boolean isGenerateExpressions() {
 				    return this._generateExpressions;
 				  }
-				  
+				
 				  public void setGenerateExpressions(final boolean generateExpressions) {
 				    this._generateExpressions = generateExpressions;
 				  }
@@ -127,7 +127,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				public class C {
 				  @Property
 				  private final String _string = "";
-				  
+				
 				  @Pure
 				  public String getString() {
 				    return this._string;
@@ -164,12 +164,12 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				public class C<T extends Object> {
 				  @Property
 				  private T _t;
-				  
+				
 				  @Pure
 				  public T getT() {
 				    return this._t;
 				  }
-				  
+				
 				  public void setT(final T t) {
 				    this._t = t;
 				  }
@@ -205,12 +205,12 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				public class C<T extends Object> {
 				  @Property
 				  private String[] _array = { "a" };
-				  
+				
 				  @Pure
 				  public String[] getArray() {
 				    return this._array;
 				  }
-				  
+				
 				  public void setArray(final String[] array) {
 				    this._array = array;
 				  }
@@ -233,7 +233,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				public class X {
 				  @Property
 				  private final String _x = "hello";
-				  
+				
 				  @Pure
 				  public String getX() {
 				    return this._x;

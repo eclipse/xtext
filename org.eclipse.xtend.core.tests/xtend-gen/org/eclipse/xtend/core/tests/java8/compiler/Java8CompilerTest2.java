@@ -137,7 +137,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements Foo.E {");
@@ -154,7 +153,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements Foo.E {");
@@ -171,12 +169,10 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Exception> void throwsSomething() throws E;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -301,7 +297,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements C.E {");
@@ -318,7 +313,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements C.E {");
@@ -335,7 +329,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object a) {");
@@ -439,7 +432,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements C.E {");
@@ -456,7 +448,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements C.E {");
@@ -473,7 +464,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object a) {");
@@ -1067,7 +1057,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test() {");
@@ -1386,7 +1375,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String foo() {");
@@ -2003,7 +1991,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract Object getFoo(final String x) throws Exception;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, String> bar() {");
@@ -2613,7 +2600,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -3463,7 +3449,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -3477,7 +3462,6 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");

@@ -562,15 +562,15 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 				public class C implements A {
 				  @Delegate
 				  private A a;
-				  
+				
 				  public void a() {
 				    this.a.a();
 				  }
-				  
+				
 				  public void b() {
 				    this.a.b();
 				  }
-				  
+				
 				  public void c() {
 				    this.a.c();
 				  }

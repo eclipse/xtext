@@ -63,7 +63,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<String, String> test() {");
@@ -127,7 +126,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Object> Map<E, E> graph(final Set<E> vertices, final Map<E, List<E>> edges);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, Object> test() {");
@@ -190,7 +188,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<String, String> test() {");
@@ -254,7 +251,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Object, M extends Map<E, List<E>>> Map<E, E> graph(final Set<E> vertices, final M edges);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, Object> test() {");
@@ -311,7 +307,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Object> void graph(final E e1, final E e2);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void test() {");

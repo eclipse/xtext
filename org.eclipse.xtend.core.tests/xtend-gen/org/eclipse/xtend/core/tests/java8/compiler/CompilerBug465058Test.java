@@ -61,12 +61,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -131,12 +129,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"a\", \"b\");");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -203,12 +199,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -273,12 +267,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"a\", \"b\");");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -346,12 +338,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -371,7 +361,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final Iterable<T> iterable) {");
@@ -430,12 +419,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -455,7 +442,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final Iterable<? extends T> iterable) {");
@@ -516,12 +502,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -541,7 +525,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final T[] iterable) {");
@@ -591,7 +574,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -611,7 +593,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final T[] iterable) {");
@@ -670,12 +651,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -695,7 +674,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final Iterable<T> iterable) {");
@@ -754,12 +732,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -779,7 +755,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final Iterable<T> iterable) {");
@@ -838,12 +813,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -863,7 +836,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final Iterable<? extends T> iterable) {");
@@ -924,12 +896,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -949,7 +919,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final T[] iterable) {");
@@ -999,7 +968,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1019,7 +987,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final T[] iterable) {");
@@ -1078,12 +1045,10 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1103,7 +1068,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final Iterable<T> iterable) {");
@@ -1162,7 +1126,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"one\", \"two\", \"three\"));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1185,7 +1148,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final Iterable<T> iterable) {");
@@ -1269,7 +1231,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final Iterable<T> iterable) {");
@@ -1349,7 +1310,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends CharSequence> T head2(final T[] iterable) {");
@@ -1399,7 +1359,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1419,7 +1378,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final T[] iterable) {");
@@ -1469,7 +1427,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1489,7 +1446,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T head2(final Comparable<T>[] iterable) {");
@@ -1539,7 +1495,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1559,7 +1514,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {");
@@ -1609,7 +1563,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("public abstract void foo(final Function0<?> f);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -1629,7 +1582,6 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {");

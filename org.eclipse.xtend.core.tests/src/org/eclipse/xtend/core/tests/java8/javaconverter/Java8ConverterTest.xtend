@@ -85,7 +85,7 @@ class Java8ConverterTest extends JavaConverterTest {
 		  public default String foo() {
 		    return "- Hi, I\'m a default impl";
 		  }
-		  
+		
 		  public abstract String baar();
 		}''')
 

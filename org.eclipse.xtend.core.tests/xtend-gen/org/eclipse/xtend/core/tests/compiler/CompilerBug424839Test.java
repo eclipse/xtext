@@ -40,7 +40,6 @@ public class CompilerBug424839Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Class<List> a = List.class;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Class<java.awt.List> b = java.awt.List.class;");

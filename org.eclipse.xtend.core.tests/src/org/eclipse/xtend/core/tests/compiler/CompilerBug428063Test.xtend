@@ -36,7 +36,7 @@ class CompilerBug428063Test extends AbstractXtendCompilerTest {
 			    };
 			    C.<Integer>m(_function);
 			  }
-			  
+			
 			  public static <T extends Number> Object m(final Procedure1<? super T> block) {
 			    return null;
 			  }
@@ -65,7 +65,7 @@ class CompilerBug428063Test extends AbstractXtendCompilerTest {
 			    };
 			    C.<Integer>m(_function);
 			  }
-			  
+			
 			  public static <T extends Number> Object m(final Procedure1<? super T> block) {
 			    return null;
 			  }

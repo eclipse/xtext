@@ -38,7 +38,7 @@ class InlineInXtendTest extends AbstractXtendCompilerTest {
 			  public int fct() {
 			    return 3;
 			  }
-			  
+			
 			  public int fct2() {
 			    int _fct = 3;
 			    return (_fct + 1);

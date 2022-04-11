@@ -66,10 +66,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      return "Hello";
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private Test.Util _util;
-			  
+			
 			  public Runnable getRunnable() {
 			    return new Runnable() {
 			      public void run() {
@@ -109,7 +109,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      return "Hello";
 			    }
 			  }
-			  
+			
 			  public Runnable getRunnable() {
 			    Runnable _xblockexpression = null;
 			    {
@@ -147,12 +147,12 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class Test {
 			  public static class Util {
 			  }
-			  
+			
 			  public Runnable getRunnable() {
 			    abstract class __Test_1 implements Runnable {
 			      public abstract void sayHello(final Test.Util u);
 			    }
-			    
+			
 			    __Test_1 _xblockexpression = null;
 			    {
 			      final Test.Util it = null;
@@ -160,7 +160,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        public void run() {
 			          this.sayHello(it);
 			        }
-			        
+			
 			        public void sayHello(final Test.Util u) {
 			        }
 			      };
@@ -197,10 +197,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    public void sayHello(final String s) {
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private Test.Util _util = null;
-			  
+			
 			  public Runnable getRunnable() {
 			    Runnable _xblockexpression = null;
 			    {
@@ -350,10 +350,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    public void sayHello(final Runnable r) {
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private Test.Util u;
-			  
+			
 			  public Runnable getRunnable() {
 			    return new Runnable() {
 			      public void run() {
@@ -390,14 +390,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public static class Util {
 			    public void sayHello(final Runnable r) {
 			    }
-			    
+			
 			    public void sayHello(final Test t) {
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private Test.Util u;
-			  
+			
 			  public Runnable getRunnable() {
 			    return new Runnable() {
 			      public void run() {
@@ -434,10 +434,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    public void sayHello(final Test t) {
 			    }
 			  }
-			  
+			
 			  @Extension
 			  private Test.Util u;
-			  
+			
 			  public Runnable getRunnable() {
 			    return new Runnable() {
 			      public void run() {
@@ -470,7 +470,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      InputOutput.<Integer>println(Integer.valueOf(Bar.this.x));
 			    }
 			  };
-			  
+			
 			  public final int x = 1;
 			}
 		''')
@@ -504,19 +504,19 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public static class D {
 			  }
-			  
+			
 			  public C.D m() {
 			    abstract class __C_1 extends C.D {
 			      /**
 			       * comment
 			       */
 			      public abstract Object op1();
-			      
+			
 			      public abstract Object op2();
-			      
+			
 			      abstract Object op3();
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final __C_1 d = new __C_1() {
@@ -526,15 +526,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        public final Object op1() {
 			          return null;
 			        }
-			        
+			
 			        public Object op2() {
 			          return null;
 			        }
-			        
+			
 			        Object op3() {
 			          return null;
 			        }
-			        
+			
 			        public String toString() {
 			          return "";
 			        }
@@ -571,16 +571,16 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    public D(final boolean b, final int i) {
 			    }
 			  }
-			  
+			
 			  public C.D m() {
 			    abstract class __C_1 extends C.D {
 			      __C_1(final boolean b, final int i) {
 			        super(b, i);
 			      }
-			      
+			
 			      public abstract Object op1();
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final __C_1 d = new __C_1(true, 1) {
@@ -618,12 +618,12 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public interface I {
 			  }
-			  
+			
 			  public Object m() {
 			    abstract class __C_1 implements C.I {
 			      public abstract Object op();
 			    }
-			    
+			
 			    Object _xblockexpression = null;
 			    {
 			      __C_1 _xblockexpression_1 = null;
@@ -696,22 +696,22 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    abstract class __C_2 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    new __C_1() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
 			    new __C_2() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
@@ -739,11 +739,11 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public static class D {
 			    public D(final boolean b) {
 			    }
-			    
+			
 			    public D(final int i) {
 			    }
 			  }
-			  
+			
 			  public C.D m() {
 			    return new C.D(true) {
 			    };
@@ -772,20 +772,20 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public static class D {
 			    public D(final boolean b) {
 			    }
-			    
+			
 			    public D(final int i) {
 			    }
 			  }
-			  
+			
 			  public C.D m() {
 			    abstract class __C_1 extends C.D {
 			      __C_1(final boolean b) {
 			        super(b);
 			      }
-			      
+			
 			      public abstract void n();
 			    }
-			    
+			
 			    return new __C_1(true) {
 			      public void n() {
 			      }
@@ -862,11 +862,11 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
@@ -897,22 +897,22 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    abstract class __C_2 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
 			    __C_2 ___C_2 = new __C_2() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
@@ -940,11 +940,11 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      public abstract void m();
 			    }
-			    
+			
 			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m() {
 			      }
 			    };
@@ -999,7 +999,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Runnable {
 			      String x;
 			    }
-			    
+			
 			    String x = "";
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
@@ -1030,7 +1030,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Runnable {
 			      String x;
 			    }
-			    
+			
 			    final String x = "";
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
@@ -1065,14 +1065,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String x = "";
-			  
+			
 			  public void foo() {
 			    abstract class __Foo_1 implements Runnable {
 			      final __Foo_1 _this__Foo_1 = this;
-			      
+			
 			      String x;
 			    }
-			    
+			
 			    final String x = "";
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
@@ -1111,12 +1111,12 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String x = "";
-			  
+			
 			  public void foo() {
 			    abstract class __Foo_1 implements Runnable {
 			      String x;
 			    }
-			    
+			
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
 			        final String x = "";
@@ -1152,7 +1152,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Runnable {
 			      String x;
 			    }
-			    
+			
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
 			        this.x.toString();
@@ -1184,14 +1184,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public void foo() {
 			    abstract class __Foo_1 implements Runnable {
 			      String x;
-			      
+			
 			      public abstract void m(final String x);
 			    }
-			    
+			
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
 			      }
-			      
+			
 			      public void m(final String x) {
 			        x.toString();
 			      }
@@ -1218,7 +1218,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private Object x;
-			  
+			
 			  public Object m(final String x) {
 			    return new Object() {
 			      public String toString() {
@@ -1259,7 +1259,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Function0<String> {
 			      String name;
 			    }
-			    
+			
 			    Object _xblockexpression = null;
 			    {
 			      String name = null;
@@ -1272,7 +1272,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public Object bar(final Function0<? extends String> f) {
 			    return null;
 			  }
@@ -1499,7 +1499,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 extends D {
 			      public abstract __C_1 m();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public __C_1 m() {
 			        return this;
@@ -1530,7 +1530,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 extends D {
 			      public abstract String m();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public String m() {
 			        return this.toString();
@@ -1562,14 +1562,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 extends D {
 			      public abstract void m();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public void m() {
 			        C.this.m2();
 			      }
 			    };
 			  }
-			  
+			
 			  public void m2() {
 			  }
 			}
@@ -1597,14 +1597,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 extends D {
 			      public abstract void m();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public void m() {
 			        C.this.m();
 			      }
 			    };
 			  }
-			  
+			
 			  public void m() {
 			  }
 			}
@@ -1637,7 +1637,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    };
 			  }
-			  
+			
 			  public void m() {
 			  }
 			}
@@ -1670,7 +1670,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    };
 			  }
-			  
+			
 			  public void m() {
 			  }
 			}
@@ -1695,7 +1695,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Runnable {
 			      int baz;
 			    }
-			    
+			
 			    final __Foo_1 bar = new __Foo_1() {
 			      public void run() {
 			      }
@@ -1723,7 +1723,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __Foo_1 implements Runnable {
 			      int baz;
 			    }
-			    
+			
 			    return new __Foo_1() {
 			      public void run() {
 			      }
@@ -1825,7 +1825,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      abstract class __Foo_1 implements Runnable {
 			        int baz;
 			      }
-			      
+			
 			      __Foo_1 ___Foo_1 = new __Foo_1() {
 			        public void run() {
 			        }
@@ -1854,13 +1854,13 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private final int secondOuterField = 1;
-			  
+			
 			  private final Object outerField = new Function0<Object>() {
 			    public Object apply() {
 			      abstract class __C_1 {
 			        int localField;
 			      }
-			      
+			
 			      __C_1 ___C_1 = new __C_1() {
 			      };
 			      final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
@@ -1898,7 +1898,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      String s2;
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final String s1 = "";
@@ -1947,7 +1947,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Runnable {
 			      int idx;
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final String s = "";
@@ -2001,7 +2001,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 {
 			      int f;
 			    }
-			    
+			
 			    __C_1 ___C_1 = new __C_1() {
 			    };
 			    final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
@@ -2178,7 +2178,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 {
 			      public abstract <T extends Object> T m2();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public <T extends Object> T m2() {
 			        return null;
@@ -2215,18 +2215,18 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    abstract class __C_1 {
 			      public abstract <V extends Object> AbstractMap<K, V> m2();
 			    }
-			    
+			
 			    return new __C_1() {
 			      public <V extends Object> AbstractMap<K, V> m2() {
 			        abstract class ____C_1 extends AbstractMap<K, V> {
 			          public abstract Map.Entry<K, V> m();
 			        }
-			        
+			
 			        return new ____C_1() {
 			          public Map.Entry<K, V> m() {
 			            return null;
 			          }
-			          
+			
 			          public Set<Map.Entry<K, V>> entrySet() {
 			            return null;
 			          }
@@ -2259,7 +2259,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public interface Bar<V extends Foo<V>> {
 			    V bar();
 			  }
-			  
+			
 			  public <W extends Foo<W>> void foo() {
 			    final Foo.Bar<W> bar = new Foo.Bar<W>() {
 			      public W bar() {
@@ -2293,10 +2293,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public void foo() {
 			    abstract class __Foo_1 {
 			      int x;
-			      
+			
 			      public abstract void bar();
 			    }
-			    
+			
 			    final int y = 1;
 			    new __Foo_1() {
 			      {
@@ -2333,10 +2333,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public void foo() {
 			    abstract class __Foo_1 {
 			      static final int x = 1;
-			      
+			
 			      public abstract void bar();
 			    }
-			    
+			
 			    final int y = 1;
 			    new __Foo_1() {
 			      public void bar() {
@@ -2393,9 +2393,9 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		class InstanceTest {
 		
 		    def doSomething() {
-		        
+		
 		        var MyConfiguration config = new MyConfiguration() {
-		             
+		
 		             override annotationType() {
 		                 null
 		             }
@@ -2419,7 +2419,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		      public Class<? extends Annotation> annotationType() {
 		        return null;
 		      }
-		      
+		
 		      public String name() {
 		        return null;
 		      }

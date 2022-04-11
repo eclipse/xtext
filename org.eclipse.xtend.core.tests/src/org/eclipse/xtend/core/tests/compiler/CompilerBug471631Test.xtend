@@ -31,7 +31,7 @@ class CompilerBug471631Test extends AbstractXtendCompilerTest {
 			    for (final Integer i : _m2) {
 			    }
 			  }
-			  
+			
 			  public <T extends Object> T m2() {
 			    return null;
 			  }
@@ -55,7 +55,7 @@ class CompilerBug471631Test extends AbstractXtendCompilerTest {
 			    for (final Integer i : _m2) {
 			    }
 			  }
-			  
+			
 			  public <T extends Object> Iterable<T> m2() {
 			    return null;
 			  }
@@ -79,7 +79,7 @@ class CompilerBug471631Test extends AbstractXtendCompilerTest {
 			    for (final C c : _m2) {
 			    }
 			  }
-			  
+			
 			  public <T extends Object> Iterable<T> m2() {
 			    return null;
 			  }
@@ -103,7 +103,7 @@ class CompilerBug471631Test extends AbstractXtendCompilerTest {
 			    for (final C c : _m2) {
 			    }
 			  }
-			  
+			
 			  public <T extends Object> T m2() {
 			    return null;
 			  }
@@ -128,7 +128,7 @@ class CompilerBug471631Test extends AbstractXtendCompilerTest {
 			    for (final C c : this) {
 			    }
 			  }
-			  
+			
 			  public C m2() {
 			    return null;
 			  }

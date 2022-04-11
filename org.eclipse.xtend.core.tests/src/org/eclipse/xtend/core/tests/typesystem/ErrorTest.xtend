@@ -1219,7 +1219,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			class C {
 				def m() {
 					try return 'literal' as as Boolean
-					  catch(NullPointerException e) return 'second thing is thrown'		  
+					  catch(NullPointerException e) return 'second thing is thrown'		
 					  catch(ClassCastException e) throw new NullPointerException()
 			    }
 			}

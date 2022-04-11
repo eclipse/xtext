@@ -33,7 +33,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public D m() {
 			    return super.m();
 			  }
@@ -59,7 +59,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public Iterable<D> m() {
 			    return super.m();
 			  }
@@ -85,7 +85,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public D m() {
 			    return super.m2();
 			  }
@@ -113,7 +113,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public Iterable<D> m() {
 			    Iterable<D> _m2 = super.m2();
 			    Iterable<D> _m2_1 = this.m2();
@@ -141,7 +141,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public D m() {
 			    return super.<D>m2();
 			  }
@@ -168,7 +168,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public E m() {
 			    return super.<E>m2();
 			  }
@@ -194,7 +194,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public Iterable<D> m() {
 			    return super.<Iterable<D>>m2();
 			  }
@@ -221,7 +221,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public D() {
 			    super();
 			  }
-			  
+			
 			  public DIter m() {
 			    return super.<DIter>m2();
 			  }

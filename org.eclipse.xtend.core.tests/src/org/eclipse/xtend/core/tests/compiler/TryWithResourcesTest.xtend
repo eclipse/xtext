@@ -108,7 +108,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    List<Throwable> _ts = new ArrayList<Throwable>();
 			    StringReader a = null;
@@ -186,7 +186,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      final StringReader reader1 = new StringReader(this.s);
@@ -236,7 +236,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      List<Throwable> _ts = new ArrayList<Throwable>();
@@ -296,7 +296,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      List<Throwable> _ts = new ArrayList<Throwable>();
@@ -348,7 +348,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      List<Throwable> _ts = new ArrayList<Throwable>();
@@ -392,7 +392,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      final StringReader sr = new StringReader(this.s);
@@ -438,7 +438,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      List<Throwable> _ts = new ArrayList<Throwable>();
@@ -599,7 +599,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		@SuppressWarnings("all")
 		public class FooClass {
 		  private final String s = "line1\nline2\nline3";
-		  
+		
 		  public void fooMethod() {
 		    try {
 		      final ArrayList<String> myList = CollectionLiterals.<String>newArrayList();
@@ -672,7 +672,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  private final String s = "line1\nline2\nline3";
-			  
+			
 			  public void fooMethod() {
 			    try {
 			      «expected»

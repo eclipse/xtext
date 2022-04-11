@@ -90,7 +90,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Accessors(AccessorType.PUBLIC_GETTER)");
@@ -98,7 +97,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _m(final Void expr, final String seq) {");
@@ -106,7 +104,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _m(final Void expr, final StringBuilder seq) {");
@@ -114,7 +111,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final C.I i) {");
@@ -122,7 +118,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final C.I x = new C.I() {");
@@ -136,7 +131,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object expr, final Object seq) {");
@@ -180,7 +174,6 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");

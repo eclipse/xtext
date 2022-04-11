@@ -35,7 +35,7 @@ class CompilerBug440902Test extends AbstractXtendCompilerTest {
 			  public String m2(final Object o) {
 			    return this.m().toString();
 			  }
-			  
+			
 			  public String m() {
 			    throw new RuntimeException();
 			  }

@@ -352,15 +352,15 @@ class MoreActiveAnnotationsTest {
 			@SuppressWarnings("all")
 			public class B {
 			  public static final int CONSTANT_INT = 42;
-			  
+			
 			  public static final long CONSTANT_LONG = 42L;
-			  
+			
 			  public static final float CONSTANT_FLOAT = 42.34f;
-			  
+			
 			  public static final double CONSTANT_DOUBLE = 42.11d;
-			  
+			
 			  public static final char CONSTANT_CHAR = '\n';
-			  
+			
 			  public static final String CONSTANT_STRING = "\n\t\\all";
 			}
 		'''.toString, contents)

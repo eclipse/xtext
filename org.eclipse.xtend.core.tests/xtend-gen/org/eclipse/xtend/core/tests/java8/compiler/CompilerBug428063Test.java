@@ -66,7 +66,6 @@ public class CompilerBug428063Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Number> Object m(final Procedure1<? super T> block) {");
@@ -127,7 +126,6 @@ public class CompilerBug428063Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <T extends Number> Object m(final Procedure1<? super T> block) {");

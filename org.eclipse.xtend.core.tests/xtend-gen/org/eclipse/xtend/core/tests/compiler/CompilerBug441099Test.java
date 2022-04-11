@@ -75,7 +75,6 @@ public class CompilerBug441099Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String string;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Object _m(final String x) {");
@@ -86,7 +85,6 @@ public class CompilerBug441099Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public D m() {");
@@ -97,7 +95,6 @@ public class CompilerBug441099Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object m(final String x) {");
@@ -108,7 +105,6 @@ public class CompilerBug441099Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Pure");

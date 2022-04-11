@@ -134,7 +134,7 @@ class CompilerBug492072Test extends AbstractXtendCompilerTest {
 			  public String foo(final Bar a, final Bar b) {
 			    return this.bar(a.getName());
 			  }
-			  
+			
 			  public String bar(final String n) {
 			    return n;
 			  }
@@ -174,7 +174,7 @@ class CompilerBug492072Test extends AbstractXtendCompilerTest {
 			    }
 			    return this.bar(_name);
 			  }
-			  
+			
 			  public String bar(final String n) {
 			    return n;
 			  }

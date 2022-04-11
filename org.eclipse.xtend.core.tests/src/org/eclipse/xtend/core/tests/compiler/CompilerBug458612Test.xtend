@@ -38,12 +38,12 @@ class CompilerBug458612Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public static class B {
 			  }
-			  
+			
 			  public static class E {
 			    public static void ext(final C.B[] arr) {
 			    }
 			  }
-			  
+			
 			  public void doit(final List<C.B> list) {
 			    C.E.ext(((C.B[])Conversions.unwrapArray(list, C.B.class)));
 			  }
@@ -72,12 +72,12 @@ class CompilerBug458612Test extends AbstractXtendCompilerTest {
 			public class Test {
 			  public static class B {
 			  }
-			  
+			
 			  public static class Foo {
 			    public static void ext(final Iterable<Test.B> iter) {
 			    }
 			  }
-			  
+			
 			  public void doit(final Test.B[] arr) {
 			    Test.Foo.ext(((Iterable<Test.B>)Conversions.doWrapArray(arr)));
 			  }

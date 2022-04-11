@@ -1344,7 +1344,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _method(final Integer i) {");
@@ -1352,7 +1351,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void method(final Object i) {");
@@ -1422,7 +1420,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _method(final Integer i) {");
@@ -1430,7 +1427,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void #method#(final Object i) {");
@@ -1500,7 +1496,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _method(final Integer i) {");
@@ -1508,7 +1503,6 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void method(final Object i) {");

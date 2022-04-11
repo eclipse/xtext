@@ -38,7 +38,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Foo {
 			  public abstract <E extends Exception> void throwsSomething() throws E;
-			  
+			
 			  public void m() {
 			    try {
 			      try {
@@ -92,19 +92,19 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements Foo.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements Foo.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public abstract <E extends Exception> void throwsSomething() throws E;
-			  
+			
 			  public void m() {
 			    try {
 			      try {
@@ -215,7 +215,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				@SuppressWarnings("all")
 				public class Foo {
 				  private final Class<Bug424839> a = Bug424839.class;
-				  
+				
 				  private final Class<bug424839.sub.Bug424839.Inner> b = bug424839.sub.Bug424839.Inner.class;
 				}
 			'''
@@ -235,7 +235,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				@SuppressWarnings("all")
 				public class Foo {
 				  private final Class<Bug424839.Inner> b = Bug424839.Inner.class;
-				  
+				
 				  private final Class<bug424839.Bug424839> a = bug424839.Bug424839.class;
 				}
 			'''
@@ -255,7 +255,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return value
 			  }
-			  
+			
 			  // does not work, Java error
 			  def <T> nonWorkingExample2(T... list) {
 			    var value = 0
@@ -264,7 +264,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return value
 			  }
-			  
+			
 			  // does not work, Java error
 			  def <T> nonWorkingExample3(T[] list) {
 			    var value = 0
@@ -286,7 +286,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return value;
 			  }
-			  
+			
 			  public <T extends Object> int nonWorkingExample2(final T... list) {
 			    int value = 0;
 			    for (final T loc_item : list) {
@@ -294,7 +294,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return value;
 			  }
-			  
+			
 			  public <T extends Object> int nonWorkingExample3(final T[] list) {
 			    int value = 0;
 			    for (final T loc_item : list) {
@@ -364,11 +364,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public C(final ITypeReferenceOwner owner) {
 			    super(null, owner);
 			  }
-			  
+			
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
 			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, CollectionLiterals.<JvmTypeParameter>newHashSet());
 			  }
-			  
+			
 			  protected Set<JvmTypeParameter> createVisiting() {
 			    return CollectionLiterals.<JvmTypeParameter>newHashSet();
 			  }
@@ -395,11 +395,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _testFunction1(final CharSequence i) {
 			    return 42;
 			  }
-			  
+			
 			  protected int _testFunction1(final String s) {
 			    return s.length();
 			  }
-			  
+			
 			  public int testFunction1(final CharSequence s) {
 			    if (s instanceof String) {
 			      return _testFunction1((String)s);
@@ -441,11 +441,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _testFunction1(final String s) {
 			    return s.length();
 			  }
-			  
+			
 			  protected int _testFunction1(final Integer i) {
 			    return i.intValue();
 			  }
-			  
+			
 			  public int testFunction1(final Object i) {
 			    if (i instanceof Integer) {
 			      return _testFunction1((Integer)i);
@@ -484,7 +484,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _testFunction1(final Double d) {
 			    return d.intValue();
 			  }
-			  
+			
 			  public int testFunction1(final Object d) {
 			    if (d instanceof Double) {
 			      return _testFunction1((Double)d);
@@ -528,11 +528,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _testFunction1(final Double d) {
 			    return d.intValue();
 			  }
-			  
+			
 			  protected int _testFunction1(final Number n) {
 			    return n.intValue();
 			  }
-			  
+			
 			  public int testFunction1(final Object d) {
 			    if (d instanceof Double) {
 			      return _testFunction1((Double)d);
@@ -578,11 +578,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _testFunction1(final String s) {
 			    return s.length();
 			  }
-			  
+			
 			  protected int _testFunction1(final Integer i) {
 			    return i.intValue();
 			  }
-			  
+			
 			  public int testFunction1(final Object i) {
 			    if (i instanceof Integer) {
 			      return _testFunction1((Integer)i);
@@ -772,7 +772,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    final Object x = _xifexpression;
 			    this.voidFunction(x);
 			  }
-			  
+			
 			  public void voidFunction(final Object o) {
 			  }
 			}
@@ -855,7 +855,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    final Object x = _switchResult;
 			    this.voidFunction(x);
 			  }
-			  
+			
 			  public void voidFunction(final Object o) {
 			  }
 			}
@@ -1322,7 +1322,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo {
 			  int foo();
-			  
+			
 			  static final int bar = 42;
 			}
 		''')
@@ -1337,9 +1337,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public enum Foo {
 			  FOO,
-			  
+			
 			  BAR,
-			  
+			
 			  BAZ;
 			}
 		''')
@@ -1370,12 +1370,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			   * This is FOO
 			   */
 			  FOO,
-			  
+			
 			  /**
 			   * This is BAR
 			   */
 			  BAR,
-			  
+			
 			  /**
 			   * This is BAZ
 			   */
@@ -1394,10 +1394,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public enum Foo {
 			  @Deprecated
 			  FOO,
-			  
+			
 			  @SuppressWarnings("just-a-test")
 			  BAR,
-			  
+			
 			  BAZ;
 			}
 		''')
@@ -1412,7 +1412,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public enum E {
 			  AFTER,
-			  
+			
 			  BEFORE;
 			}
 		''')
@@ -1640,17 +1640,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements C.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements C.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public void m(final Object a) {
 			    boolean _matched = false;
 			    if (a instanceof C.E1 || a instanceof C.E2) {
@@ -1690,17 +1690,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public interface E {
 			    void m();
 			  }
-			  
+			
 			  public static class E1 extends Exception implements C.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public static class E2 extends Exception implements C.E {
 			    public void m() {
 			    }
 			  }
-			  
+			
 			  public void m(final Object a) {
 			    boolean _matched = false;
 			    if (a instanceof C.E1 || a instanceof C.E2) {
@@ -2760,7 +2760,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Foo {
 			  public abstract Object getFoo(final String x) throws Exception;
-			  
+			
 			  public Map<Object, String> bar() {
 			    final Function1<String, Object> _function = new Function1<String, Object>() {
 			      public Object apply(final String it) {
@@ -2792,9 +2792,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  private String s1 = null;
-			  
+			
 			  protected String s2 = "";
-			  
+			
 			  public String s3 = this.s2;
 			}
 		''')
@@ -2816,11 +2816,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  private String s0 = Bar.s1;
-			  
+			
 			  private static String s1 = null;
-			  
+			
 			  protected static String s2 = "";
-			  
+			
 			  public static String s3 = Bar.s2;
 			}
 		''')
@@ -2903,7 +2903,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Bar() {
 			    this(123);
 			  }
-			  
+			
 			  public Bar(final int a) {
 			    super();
 			  }
@@ -2929,7 +2929,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Bar() {
 			    this(Integer.valueOf(123).toString());
 			  }
-			  
+			
 			  public Bar(final String s) {
 			  }
 			}
@@ -3165,10 +3165,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class NoSuchElementException {
 			  protected void _foo(final String s) {
 			  }
-			  
+			
 			  protected void _foo(final Object s) {
 			  }
-			  
+			
 			  public void foo(final Object s) {
 			    if (s instanceof String) {
 			      _foo((String)s);
@@ -3203,13 +3203,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class MyType {
 			  protected void _foo(final String s, final CharSequence other) {
 			  }
-			  
+			
 			  protected void _foo(final String s, final Void other) {
 			  }
-			  
+			
 			  protected void _foo(final Object s, final Object other) {
 			  }
-			  
+			
 			  public void foo(final Object s, final Object other) {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
@@ -3250,13 +3250,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class MyType {
 			  protected void _foo(final Object s, final Object other) {
 			  }
-			  
+			
 			  protected void _foo(final String s, final Void other) {
 			  }
-			  
+			
 			  protected void _foo(final String s, final CharSequence other) {
 			  }
-			  
+			
 			  public void foo(final Object s, final Object other) {
 			    if (s instanceof String
 			         && other instanceof CharSequence) {
@@ -3296,10 +3296,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class MyType {
 			  protected void _foo(final StringBuilder s, final boolean b, final String other) {
 			  }
-			  
+			
 			  protected void _foo(final StringBuffer s, final boolean b, final String other) {
 			  }
-			  
+			
 			  public void foo(final Object s, final boolean b, final String other) {
 			    if (s instanceof StringBuffer) {
 			      _foo((StringBuffer)s, b, other);
@@ -3406,7 +3406,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class C<X extends IOException> {
 			  public C() throws X {
 			  }
-			  
+			
 			  public C<IOException> m() {
 			    try {
 			      return new C<IOException>();
@@ -3436,7 +3436,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class C<X extends IOException> {
 			  public C() throws X {
 			  }
-			  
+			
 			  public void m() {
 			    try {
 			      new C<IOException>();
@@ -3476,7 +3476,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      throw Exceptions.sneakyThrow(_e);
 				    }
 				  }
-				  
+				
 				  public Object foo() throws Exception {
 				    return null;
 				  }
@@ -3505,7 +3505,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public Foo() throws Exception {
 				    this("Hello world!");
 				  }
-				  
+				
 				  public Foo(final String foo) throws Exception {
 				  }
 				}
@@ -3586,7 +3586,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  protected String getThing(final String s) {
 			    return s;
 			  }
@@ -3677,9 +3677,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _init_aBuilder(_result, x);
 			    return _result;
 			  }
-			  
+			
 			  private final HashMap<ArrayList<?>, StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_aBuilder(final StringBuilder result, final String x) {
 			    result.append(x);
 			  }
@@ -3716,7 +3716,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Object foo() {
 			    return null;
 			  }
-			  
+			
 			  /**
 			   * I am bar,
 			   * really!
@@ -3874,11 +3874,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public static Bar<CharSequence> factory() {
 			    return new Bar<CharSequence>();
 			  }
-			  
+			
 			  public static Bar<StringBuilder> concreteFactory() {
 			    return new Bar<StringBuilder>();
 			  }
-			  
+			
 			  public static <X extends String> Bar<X> parameterizedFactory() {
 			    return new Bar<X>();
 			  }
@@ -3904,15 +3904,15 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Bar<CharSequence> factory() {
 			    return new Bar<CharSequence>();
 			  }
-			  
+			
 			  public Bar<String> concreteFactory() {
 			    return new Bar<String>();
 			  }
-			  
+			
 			  public Bar<T> parameterizedFactory() {
 			    return new Bar<T>();
 			  }
-			  
+			
 			  public <X extends T> Bar<X> concreteParameterizedFactory() {
 			    return new Bar<X>();
 			  }
@@ -4061,7 +4061,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xifexpression;
 			  }
-			  
+			
 			  public Object bar(final long o) {
 			    return null;
 			  }
@@ -4094,7 +4094,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _switchResult;
 			  }
-			  
+			
 			  public Object bar(final long o) {
 			    return null;
 			  }
@@ -4122,7 +4122,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int bar;
-			  
+			
 			  private File baz;
 			}
 		''')
@@ -4144,7 +4144,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private static String FOO = "Holla";
-			  
+			
 			  private String baz = Foo.FOO;
 			}
 		''')
@@ -4169,9 +4169,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private static String FOO = "Holla";
-			  
+			
 			  private String foo = "Holla";
-			  
+			
 			  public void test(final String x, final String y, final int integer) {
 			    new Foo().test(this.foo, Foo.FOO, Integer.MAX_VALUE);
 			  }
@@ -4377,7 +4377,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public String client(final CharSequence c) {
 			    return this.client(this.m());
 			  }
-			  
+			
 			  public CharSequence m() {
 			    return "";
 			  }
@@ -4583,7 +4583,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _builder.append("Hello World");
 			    this.setX(_builder.toString());
 			  }
-			  
+			
 			  public void setX(final String s) {
 			  }
 			}
@@ -4612,7 +4612,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _builder.append("Hello World");
 			    this.setX(_builder.toString().trim());
 			  }
-			  
+			
 			  public void setX(final String s) {
 			  }
 			}
@@ -5065,7 +5065,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					public class Foo {
 					  @Extension
 					  private ReflectExtensions _reflectExtensions;
-					  
+					
 					  public Object bar() throws Throwable {
 					    Object _get = this._reflectExtensions.<Object>get(new String(), "toString");
 					    Object _get_1 = null;
@@ -5091,7 +5091,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					@SuppressWarnings("all")
 					public class Foo {
 					  private String field;
-					  
+					
 					  public String bar(final String str) {
 					    String _elvis = null;
 					    String _field = new Foo().field;
@@ -5247,7 +5247,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug412642 {
 			  private final Pair<String, Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
-			  
+			
 			  public void bar() {
 			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
 			    final Pair<String, Integer> _pair = pair;
@@ -5259,7 +5259,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
 			    final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
-			  
+			
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
 			    return null;
 			  }
@@ -5317,7 +5317,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug412642 {
 			  private final Pair<String, Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
-			  
+			
 			  public void bar() {
 			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
 			    final Pair<String, Integer> _pair = pair;
@@ -5329,7 +5329,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
 			    final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
-			  
+			
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
 			    return null;
 			  }
@@ -5357,11 +5357,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  protected int _bug(final A a) {
 			    return 1;
 			  }
-			  
+			
 			  protected int _bug(final B b) {
 			    return 1;
 			  }
-			  
+			
 			  public int bug(final Element<?> a) {
 			    if (a instanceof A) {
 			      return _bug((A)a);
@@ -5386,25 +5386,25 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Set
 			
 			class EmptyCollections {
-			  
+			
 			  def emptyList() {
 			    val List<String> result = #[];  // Erroneous type error here
 			    result;
 			  }
-			  
+			
 			  def List<String> emptyList2 () {
 			    #[]  // Erroneous type error here
 			  }
-			  
+			
 			  def emptySet() {
 			    val Set<String> result = #{};  // Erroneous type error here
 			    result;
 			  }
-			  
+			
 			  def Set<String> emptySet2 () {
 			    #{} // Erroneous type error here
 			  }
-			  
+			
 			}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
@@ -5422,11 +5422,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public List<String> emptyList2() {
 			    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
 			  }
-			  
+			
 			  public Set<String> emptySet() {
 			    Set<String> _xblockexpression = null;
 			    {
@@ -5435,7 +5435,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public Set<String> emptySet2() {
 			    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
 			  }
@@ -5604,7 +5604,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    this.intExpectation(((Integer)x));
 			    return ((String)x);
 			  }
-			  
+			
 			  public void intExpectation(final Integer s) {
 			  }
 			}
@@ -5642,7 +5642,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    final Object x = this.<Object>identity(_xifexpression);
 			    return x;
 			  }
-			  
+			
 			  public <T extends Object> T identity(final T t) {
 			    return t;
 			  }
@@ -5924,7 +5924,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Object getLock() {
 			    return this;
 			  }
-			  
+			
 			  public void doStuff() {
 			    synchronized (this.getLock()) {
 			      InputOutput.<String>println("hello");
@@ -5955,9 +5955,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final int X = 42;
-			  
+			
 			  private static final int Y = (-7);
-			  
+			
 			  public void foo(final int x) {
 			    boolean _matched = false;
 			    if (Objects.equal(x, this.X)) {
@@ -5994,7 +5994,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    public void bar() {
 			    }
 			  }
-			  
+			
 			  void bar();
 			}
 		''')

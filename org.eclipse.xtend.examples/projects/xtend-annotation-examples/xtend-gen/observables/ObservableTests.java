@@ -50,7 +50,6 @@ public class ObservableTests {
     _builder_1.append("  ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String getName() {");
@@ -61,7 +60,6 @@ public class ObservableTests {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setName(final String name) {");
@@ -78,12 +76,10 @@ public class ObservableTests {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private PropertyChangeSupport _propertyChangeSupport = new PropertyChangeSupport(this);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void addPropertyChangeListener(final PropertyChangeListener listener) {");
@@ -94,7 +90,6 @@ public class ObservableTests {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void removePropertyChangeListener(final PropertyChangeListener listener) {");

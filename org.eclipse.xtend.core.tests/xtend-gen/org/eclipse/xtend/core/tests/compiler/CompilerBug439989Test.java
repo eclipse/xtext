@@ -53,7 +53,6 @@ public class CompilerBug439989Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private List<Integer> aList;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int getDelta() {");
@@ -110,7 +109,6 @@ public class CompilerBug439989Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private List<Integer> aList;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int getDelta() {");
@@ -169,7 +167,6 @@ public class CompilerBug439989Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private List<Integer> aList;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int getDelta() {");

@@ -37,9 +37,9 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return IterableExtensions.<String>head(this.list);
@@ -68,9 +68,9 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b");
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return IterableExtensions.<String>head(this.list);
@@ -100,9 +100,9 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return IterableExtensions.<String>head(this.list);
@@ -131,9 +131,9 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b");
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return IterableExtensions.<String>head(this.list);
@@ -163,16 +163,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -199,16 +199,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<? extends T> iterable) {
 			    return null;
 			  }
@@ -236,16 +236,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(((String[])Conversions.unwrapArray(this.list, String.class)));
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -268,14 +268,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(new String[] { "one", "two", "three" });
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -302,16 +302,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -338,16 +338,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -374,16 +374,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<? extends T> iterable) {
 			    return null;
 			  }
@@ -411,16 +411,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(((String[])Conversions.unwrapArray(this.list, String.class)));
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -443,14 +443,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(new String[] { "one", "two", "three" });
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -477,16 +477,16 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -513,7 +513,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  private final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("one", "two", "three"));
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(this.list);
@@ -521,7 +521,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    Function0<?> x = _function;
 			    x.apply();
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -556,7 +556,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final Iterable<T> iterable) {
 			    return null;
 			  }
@@ -589,7 +589,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public <T extends CharSequence> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -612,14 +612,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return ((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final T[] iterable) {
 			    return null;
 			  }
@@ -642,14 +642,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return this.<String>head2(new Comparable[] { "", "" });
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Object> T head2(final Comparable<T>[] iterable) {
 			    return null;
 			  }
@@ -672,14 +672,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return ((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {
 			    return null;
 			  }
@@ -702,14 +702,14 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public abstract class Bug {
 			  public abstract void foo(final Function0<?> f);
-			  
+			
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
 			      return ((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }
-			  
+			
 			  public <T extends Number> T head2(final Comparable<? extends T>[] iterable) {
 			    return null;
 			  }

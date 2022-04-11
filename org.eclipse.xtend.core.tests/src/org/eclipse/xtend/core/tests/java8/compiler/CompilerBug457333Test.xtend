@@ -64,7 +64,7 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 			  public interface Action<T extends Object> {
 			    void exec(final T t);
 			  }
-			  
+			
 			  @Override
 			  public void apply(final String project) {
 			    final Consumer<String> _function = (String sourceSet) -> {
@@ -84,13 +84,13 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 			    };
 			    Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("")).forEach(_function);
 			  }
-			  
+			
 			  public static void conventionMapping(final Object task, final Map<String, ? extends Function0<?>> mappings) {
 			  }
-			  
+			
 			  public <T extends Object> void create(final String s, final Class<? extends T> c, final XtendPlugin.Action<? super T> a) {
 			  }
-			  
+			
 			  public <T extends Object> void all(final XtendPlugin.Action<T> action) {
 			  }
 			}

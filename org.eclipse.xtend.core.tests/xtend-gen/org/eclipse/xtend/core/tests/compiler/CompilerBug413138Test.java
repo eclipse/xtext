@@ -63,7 +63,6 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private StringRepository repository;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m() {");
@@ -143,7 +142,6 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private StringRepository repository;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Iterable<String> m() {");
@@ -203,7 +201,6 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private CharSeqRepository repository;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Iterable<String> m() {");
@@ -265,7 +262,6 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private CharSeqRepository repository;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Iterable<String> m() {");

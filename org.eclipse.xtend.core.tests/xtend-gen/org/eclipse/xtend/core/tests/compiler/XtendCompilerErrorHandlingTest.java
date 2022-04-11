@@ -619,12 +619,10 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final /* HashMap<ArrayList<?>, Object> */Object _createCache_m = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_m(final Object it, final String s) {");

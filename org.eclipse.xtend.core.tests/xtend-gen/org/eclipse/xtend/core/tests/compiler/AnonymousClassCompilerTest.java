@@ -135,7 +135,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -143,7 +142,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Test.Util _util;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -240,7 +238,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -334,7 +331,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -348,7 +344,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__Test_1 _xblockexpression = null;");
@@ -371,7 +366,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public void sayHello(final Test.Util u) {");
@@ -459,7 +453,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -467,7 +460,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Test.Util _util = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -828,7 +820,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -836,7 +827,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Test.Util u;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -924,7 +914,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public void sayHello(final Test t) {");
@@ -935,7 +924,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -943,7 +931,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Test.Util u;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -1031,7 +1018,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Extension");
@@ -1039,7 +1025,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Test.Util u;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Runnable getRunnable() {");
@@ -1115,7 +1100,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public final int x = 1;");
@@ -1197,7 +1181,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C.D m() {");
@@ -1217,12 +1200,10 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("public abstract Object op1();");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract Object op2();");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("abstract Object op3();");
@@ -1230,7 +1211,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -1259,7 +1239,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public Object op2() {");
@@ -1270,7 +1249,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("Object op3() {");
@@ -1281,7 +1259,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public String toString() {");
@@ -1372,7 +1349,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C.D m() {");
@@ -1389,7 +1365,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract Object op1();");
@@ -1397,7 +1372,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -1491,7 +1465,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object m() {");
@@ -1505,7 +1478,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("Object _xblockexpression = null;");
@@ -1685,7 +1657,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("abstract class __C_2 implements Runnable {");
@@ -1696,7 +1667,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("new __C_1() {");
@@ -1707,7 +1677,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -1727,7 +1696,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -1791,7 +1759,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public D(final int i) {");
@@ -1802,7 +1769,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C.D m() {");
@@ -1869,7 +1835,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("public D(final int i) {");
@@ -1880,7 +1845,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C.D m() {");
@@ -1897,7 +1861,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void n();");
@@ -1905,7 +1868,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1(true) {");
@@ -2067,7 +2029,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 ___C_1 = new __C_1() {");
@@ -2078,7 +2039,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -2147,7 +2107,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("abstract class __C_2 implements Runnable {");
@@ -2158,7 +2117,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 ___C_1 = new __C_1() {");
@@ -2169,7 +2127,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -2189,7 +2146,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -2249,7 +2205,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 ___C_1 = new __C_1() {");
@@ -2260,7 +2215,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m() {");
@@ -2386,7 +2340,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("String x = \"\";");
@@ -2459,7 +2412,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final String x = \"\";");
@@ -2544,7 +2496,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String x = \"\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo() {");
@@ -2555,7 +2506,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("final __Foo_1 _this__Foo_1 = this;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("String x;");
@@ -2563,7 +2513,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final String x = \"\";");
@@ -2660,7 +2609,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final String x = \"\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo() {");
@@ -2674,7 +2622,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final __Foo_1 bar = new __Foo_1() {");
@@ -2762,7 +2709,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final __Foo_1 bar = new __Foo_1() {");
@@ -2838,7 +2784,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("String x;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void m(final String x);");
@@ -2846,7 +2791,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final __Foo_1 bar = new __Foo_1() {");
@@ -2857,7 +2801,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void m(final String x) {");
@@ -2918,7 +2861,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Object x;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object m(final String x) {");
@@ -3013,7 +2955,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("Object _xblockexpression = null;");
@@ -3051,7 +2992,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bar(final Function0<? extends String> f) {");
@@ -3572,7 +3512,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -3644,7 +3583,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -3719,7 +3657,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -3739,7 +3676,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m2() {");
@@ -3802,7 +3738,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -3822,7 +3757,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -3898,7 +3832,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -3974,7 +3907,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -4029,7 +3961,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final __Foo_1 bar = new __Foo_1() {");
@@ -4093,7 +4024,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __Foo_1() {");
@@ -4314,7 +4244,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("__Foo_1 ___Foo_1 = new __Foo_1() {");
@@ -4376,7 +4305,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final int secondOuterField = 1;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Object outerField = new Function0<Object>() {");
@@ -4393,7 +4321,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("__C_1 ___C_1 = new __C_1() {");
@@ -4487,7 +4414,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -4610,7 +4536,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -4748,7 +4673,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 ___C_1 = new __C_1() {");
@@ -5144,7 +5068,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -5230,7 +5153,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return new __C_1() {");
@@ -5247,7 +5169,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("return new ____C_1() {");
@@ -5261,7 +5182,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("          ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("public Set<Map.Entry<K, V>> entrySet() {");
@@ -5340,7 +5260,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <W extends Foo<W>> void foo() {");
@@ -5419,7 +5338,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("int x;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void bar();");
@@ -5427,7 +5345,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final int y = 1;");
@@ -5515,7 +5432,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("static final int x = 1;");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public abstract void bar();");
@@ -5523,7 +5439,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final int y = 1;");
@@ -5654,12 +5569,10 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("    ");
     _builder.append("def doSomething() {");
     _builder.newLine();
-    _builder.append("        ");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("var MyConfiguration config = new MyConfiguration() {");
     _builder.newLine();
-    _builder.append("             ");
     _builder.newLine();
     _builder.append("             ");
     _builder.append("override annotationType() {");
@@ -5718,7 +5631,6 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String name() {");

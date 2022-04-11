@@ -70,7 +70,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    new BugTypeInference<Object>(Object.class);
 			  }
@@ -94,7 +94,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final BugTypeInference<Object> b = new BugTypeInference<Object>(Object.class);
 			    b.toString();
@@ -119,7 +119,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final BugTypeInference<Iterable<String>> b = new BugTypeInference(Iterable.class);
 			    b.toString();
@@ -144,7 +144,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
 			    final BugTypeInference<? extends Class> b = new BugTypeInference(_class);
@@ -170,7 +170,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final BugTypeInference<Iterable> b = new BugTypeInference<Iterable>(Iterable.class);
 			    b.toString();
@@ -195,7 +195,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
 			    final BugTypeInference<Class> b = new BugTypeInference(_class);
@@ -221,7 +221,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			public class BugTypeInference<T extends Object> {
 			  public BugTypeInference(final Class<T> c) {
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
 			    final BugTypeInference b = new BugTypeInference(_class);

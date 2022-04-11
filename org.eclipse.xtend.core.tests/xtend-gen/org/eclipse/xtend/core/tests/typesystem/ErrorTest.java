@@ -2226,7 +2226,7 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("try return \'literal\' as as Boolean");
     _builder.newLine();
     _builder.append("\t\t  ");
-    _builder.append("catch(NullPointerException e) return \'second thing is thrown\'\t\t  ");
+    _builder.append("catch(NullPointerException e) return \'second thing is thrown\'\t\t");
     _builder.newLine();
     _builder.append("\t\t  ");
     _builder.append("catch(ClassCastException e) throw new NullPointerException()");

@@ -34,7 +34,7 @@ class CompilerBug381162Test extends AbstractXtendCompilerTest {
 			    _builder.append("foo");
 			    return this.m(_builder.toString());
 			  }
-			  
+			
 			  public Object m(final String... x) {
 			    return null;
 			  }
@@ -63,7 +63,7 @@ class CompilerBug381162Test extends AbstractXtendCompilerTest {
 			    _builder_1.append("b");
 			    return this.m(_builder.toString(), _builder_1.toString());
 			  }
-			  
+			
 			  public Object m(final String... x) {
 			    return null;
 			  }

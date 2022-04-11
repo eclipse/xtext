@@ -32,7 +32,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  private Either<Integer, Boolean> either;
-			  
+			
 			  public Boolean m() {
 			    return this.either.right().get();
 			  }
@@ -57,7 +57,7 @@ class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class EitherTest {
 			  private Either<Integer, Boolean> either;
-			  
+			
 			  public Integer m() {
 			    return this.either.left().get();
 			  }

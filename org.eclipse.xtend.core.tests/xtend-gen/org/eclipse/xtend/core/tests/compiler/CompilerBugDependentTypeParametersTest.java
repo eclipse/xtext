@@ -60,7 +60,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<String> m(final Collection<String> c) {");
@@ -118,7 +117,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<String> m(final Collection<String> c) {");
@@ -176,7 +174,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<String, Integer> m(final Map<String, Integer> m) {");
@@ -244,7 +241,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public HashMap<String, String> m() {");
@@ -330,7 +326,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public HashMap<String, String> m() {");
@@ -416,7 +411,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public HashMap<String, String> m() {");
@@ -492,7 +486,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<? extends String> m(final Collection<? extends String> c) {");
@@ -550,7 +543,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<? super String> m(final Collection<? super String> c) {");
@@ -617,7 +609,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String nonEmpty(final String s) {");
@@ -628,7 +619,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<Iterable<?>> m(final List<Iterable<?>> o) {");
@@ -692,7 +682,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String nonEmpty(final String s) {");
@@ -703,7 +692,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> Iterable<? extends T> m(final Iterable<? extends T> o) {");
@@ -763,7 +751,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<Object> m(final Object[] o) {");
@@ -823,7 +810,6 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Collection<String> m(final CharSequence[] o) {");

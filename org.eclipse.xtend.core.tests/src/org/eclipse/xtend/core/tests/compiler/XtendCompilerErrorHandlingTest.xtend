@@ -365,9 +365,9 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			      + "\nDoesNotExists cannot be resolved to a type."
 			      + "\ncreateZonk cannot be resolved");
 			  }
-			  
+			
 			  private final /* HashMap<ArrayList<?>, Object> */Object _createCache_m = CollectionLiterals.newHashMap();
-			  
+			
 			  private void _init_m(final Object it, final String s) {
 			  }
 			}

@@ -63,7 +63,6 @@ public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTe
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@Override");
@@ -146,7 +145,6 @@ public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTe
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object x) {");

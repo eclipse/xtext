@@ -117,7 +117,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			  public MyRef(final U u) {
 			    this(((Object) u));
 			  }
-			  
+			
 			  public MyRef(final Object o) {
 			    super(o.toString());
 			  }
@@ -232,7 +232,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			  public MyRef(final AAA a) {
 			    this(CollectionLiterals.<AA>newArrayList(((AA) a)));
 			  }
-			  
+			
 			  public MyRef(final Iterable<AA> iter) {
 			    super(iter);
 			  }
@@ -290,7 +290,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			    new(List<U> list) {
 			        super(list)
 			    }
-			    
+			
 			    override woot(List<U> list) {
 			        super.woot(list)
 			    }
@@ -302,7 +302,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			public class TestA<T extends Object> {
 			  public TestA(final List<T> list) {
 			  }
-			  
+			
 			  public Object woot(final List<T> list) {
 			    return null;
 			  }
@@ -317,7 +317,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			    new(List<U> list) {
 			        super(list)
 			    }
-			    
+			
 			    override woot(List<U> list) {
 			        super.woot(list)
 			    }
@@ -334,7 +334,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			  public TestB(final List<U> list) {
 			    super(list);
 			  }
-			  
+			
 			  public Object woot(final List<U> list) {
 			    return super.woot(list);
 			  }

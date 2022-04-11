@@ -72,7 +72,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Exception> void throwsSomething() throws E;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -211,7 +210,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements Foo.E {");
@@ -225,7 +223,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements Foo.E {");
@@ -239,12 +236,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public abstract <E extends Exception> void throwsSomething() throws E;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -474,7 +469,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Class<Bug424839> a = Bug424839.class;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Class<bug424839.sub.Bug424839.Inner> b = bug424839.sub.Bug424839.Inner.class;");
@@ -508,7 +502,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Class<Bug424839.Inner> b = Bug424839.Inner.class;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final Class<bug424839.Bug424839> a = bug424839.Bug424839.class;");
@@ -550,7 +543,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("// does not work, Java error");
@@ -576,7 +568,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("// does not work, Java error");
@@ -633,7 +624,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> int nonWorkingExample2(final T... list) {");
@@ -656,7 +646,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> int nonWorkingExample3(final T[] list) {");
@@ -803,7 +792,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public LightweightTypeReference substitute(final LightweightTypeReference original) {");
@@ -814,7 +802,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Set<JvmTypeParameter> createVisiting() {");
@@ -872,7 +859,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected int _testFunction1(final String s) {");
@@ -883,7 +869,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final CharSequence s) {");
@@ -978,7 +963,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected int _testFunction1(final Integer i) {");
@@ -989,7 +973,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object i) {");
@@ -1081,7 +1064,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object d) {");
@@ -1188,7 +1170,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected int _testFunction1(final Number n) {");
@@ -1199,7 +1180,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object d) {");
@@ -1312,7 +1292,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected int _testFunction1(final Integer i) {");
@@ -1323,7 +1302,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object i) {");
@@ -1764,7 +1742,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void voidFunction(final Object o) {");
@@ -1964,7 +1941,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void voidFunction(final Object o) {");
@@ -3061,7 +3037,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("int foo();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("static final int bar = 42;");
@@ -3089,12 +3064,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("FOO,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("BAR,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("BAZ;");
@@ -3168,7 +3141,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("FOO,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("/**");
@@ -3182,7 +3154,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("BAR,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("/**");
@@ -3222,7 +3193,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("FOO,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("@SuppressWarnings(\"just-a-test\")");
@@ -3230,7 +3200,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("BAR,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("BAZ;");
@@ -3258,7 +3227,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("AFTER,");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("BEFORE;");
@@ -3773,7 +3741,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements C.E {");
@@ -3787,7 +3754,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements C.E {");
@@ -3801,7 +3767,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object a) {");
@@ -3904,7 +3869,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E1 extends Exception implements C.E {");
@@ -3918,7 +3882,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static class E2 extends Exception implements C.E {");
@@ -3932,7 +3895,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object a) {");
@@ -6488,7 +6450,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("public abstract Object getFoo(final String x) throws Exception;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Map<Object, String> bar() {");
@@ -6560,12 +6521,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String s1 = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected String s2 = \"\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String s3 = this.s2;");
@@ -6607,17 +6566,14 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String s0 = Bar.s1;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private static String s1 = null;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected static String s2 = \"\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static String s3 = Bar.s2;");
@@ -6770,7 +6726,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Bar(final int a) {");
@@ -6824,7 +6779,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Bar(final String s) {");
@@ -7266,7 +7220,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final Object s) {");
@@ -7274,7 +7227,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s) {");
@@ -7352,7 +7304,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final String s, final Void other) {");
@@ -7360,7 +7311,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final Object s, final Object other) {");
@@ -7368,7 +7318,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final Object other) {");
@@ -7464,7 +7413,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final String s, final Void other) {");
@@ -7472,7 +7420,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final String s, final CharSequence other) {");
@@ -7480,7 +7427,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final Object other) {");
@@ -7573,7 +7519,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _foo(final StringBuffer s, final boolean b, final String other) {");
@@ -7581,7 +7526,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final boolean b, final String other) {");
@@ -7774,7 +7718,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public C<IOException> m() {");
@@ -7840,7 +7783,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m() {");
@@ -7928,7 +7870,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object foo() throws Exception {");
@@ -7983,7 +7924,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Foo(final String foo) throws Exception {");
@@ -8172,7 +8112,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected String getThing(final String s) {");
@@ -8391,12 +8330,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_aBuilder(final StringBuilder result, final String x) {");
@@ -8480,7 +8417,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("/**");
@@ -8799,7 +8735,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static Bar<StringBuilder> concreteFactory() {");
@@ -8810,7 +8745,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public static <X extends String> Bar<X> parameterizedFactory() {");
@@ -8864,7 +8798,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Bar<String> concreteFactory() {");
@@ -8875,7 +8808,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Bar<T> parameterizedFactory() {");
@@ -8886,7 +8818,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <X extends T> Bar<X> concreteParameterizedFactory() {");
@@ -9212,7 +9143,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bar(final long o) {");
@@ -9292,7 +9222,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bar(final long o) {");
@@ -9343,7 +9272,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private int bar;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private File baz;");
@@ -9382,7 +9310,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String FOO = \"Holla\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String baz = Foo.FOO;");
@@ -9430,12 +9357,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private static String FOO = \"Holla\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String foo = \"Holla\";");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void test(final String x, final String y, final int integer) {");
@@ -9863,7 +9788,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public CharSequence m() {");
@@ -10249,7 +10173,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setX(final String s) {");
@@ -10315,7 +10238,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setX(final String s) {");
@@ -11159,7 +11081,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private ReflectExtensions _reflectExtensions;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object bar() throws Throwable {");
@@ -11217,7 +11138,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private String field;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String bar(final String str) {");
@@ -11592,7 +11512,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Pair<String, Integer> pairField = Pair.<String, Integer>of(\"Orange\", Integer.valueOf(3));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -11627,7 +11546,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Pair<Object, Object> operator_plus(final int operant, final int operand2) {");
@@ -11758,7 +11676,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final Pair<String, Integer> pairField = Pair.<String, Integer>of(\"Orange\", Integer.valueOf(3));");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void bar() {");
@@ -11793,7 +11710,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Pair<Object, Object> operator_plus(final int operant, final int operand2) {");
@@ -11848,7 +11764,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected int _bug(final B b) {");
@@ -11859,7 +11774,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int bug(final Element<?> a) {");
@@ -11909,7 +11823,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     _builder.append("class EmptyCollections {");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("def emptyList() {");
@@ -11923,7 +11836,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("def List<String> emptyList2 () {");
@@ -11934,7 +11846,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("def emptySet() {");
@@ -11948,7 +11859,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("def Set<String> emptySet2 () {");
@@ -11959,7 +11869,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -12001,7 +11910,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<String> emptyList2() {");
@@ -12012,7 +11920,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Set<String> emptySet() {");
@@ -12038,7 +11945,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Set<String> emptySet2() {");
@@ -12424,7 +12330,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void intExpectation(final Integer s) {");
@@ -12514,7 +12419,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public <T extends Object> T identity(final T t) {");
@@ -13079,7 +12983,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void doStuff() {");
@@ -13152,12 +13055,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final int X = 42;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private static final int Y = (-7);");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final int x) {");
@@ -13245,7 +13146,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("void bar();");

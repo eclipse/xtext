@@ -124,7 +124,6 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final C.I<CharSequence> readAccess = new C.I<CharSequence>() {");
@@ -192,7 +191,6 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final C.I<CharSequence, String> i = new C.I<CharSequence, String>() {");

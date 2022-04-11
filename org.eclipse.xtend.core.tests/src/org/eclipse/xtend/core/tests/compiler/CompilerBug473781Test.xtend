@@ -29,7 +29,7 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void foo() throws AssertionError {
 			  }
-			  
+			
 			  public void someMethod() {
 			    this.foo();
 			  }
@@ -54,7 +54,7 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void foo() throws IOException {
 			  }
-			  
+			
 			  public void someMethod() {
 			    try {
 			      this.foo();
@@ -80,7 +80,7 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public void foo() throws NullPointerException {
 			  }
-			  
+			
 			  public void someMethod() {
 			    this.foo();
 			  }
@@ -110,7 +110,7 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
-			  
+			
 			  public void someMethod() {
 			    Throwable _throwable = new Throwable();
 			    this.foo(_throwable);
@@ -139,7 +139,7 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 			      throw ((Error)t);
 			    }
 			  }
-			  
+			
 			  public void someMethod() {
 			    Throwable _throwable = new Throwable();
 			    this.foo(_throwable);

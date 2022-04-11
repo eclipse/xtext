@@ -34,7 +34,7 @@ class CompilerBug439989Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private List<Integer> aList;
-			  
+			
 			  public int getDelta() {
 			    Integer _max = Collections.<Integer>max(this.aList);
 			    Integer _min = Collections.<Integer>min(this.aList);
@@ -62,7 +62,7 @@ class CompilerBug439989Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private List<Integer> aList;
-			  
+			
 			  public int getDelta() {
 			    Integer _max = IterableExtensions.<Integer>max(this.aList);
 			    Integer _min = IterableExtensions.<Integer>min(this.aList);
@@ -91,7 +91,7 @@ class CompilerBug439989Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private List<Integer> aList;
-			  
+			
 			  public int getDelta() {
 			    Integer _max = Collections.<Integer>max(this.aList);
 			    return ((_max).intValue() + 1);

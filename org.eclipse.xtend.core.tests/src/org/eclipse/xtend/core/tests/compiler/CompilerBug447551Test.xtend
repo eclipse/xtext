@@ -124,13 +124,13 @@ class CompilerBug447551Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public static class E<T extends Object> extends C.D<T> {
 			    public static <T extends Object> C.E<T> copy(final Iterable<T> it) throws IOException {
 			      return null;
 			    }
 			  }
-			  
+			
 			  public final C.E<Object> e = new Function0<C.E<Object>>() {
 			    public C.E<Object> apply() {
 			      try {

@@ -64,7 +64,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected void _m(final CharSequence o) {");
@@ -72,7 +71,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -221,7 +219,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected T _test(final Fallunterscheidung a) {");
@@ -232,7 +229,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public T test(final Ausdruck a) {");
@@ -348,7 +344,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test(final Ausdruck a) {");

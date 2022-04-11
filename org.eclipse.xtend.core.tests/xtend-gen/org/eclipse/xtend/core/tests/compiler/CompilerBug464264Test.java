@@ -69,7 +69,6 @@ public class CompilerBug464264Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<CharSequence> m(final C.I i, final List<CharSequence> list) {");

@@ -178,10 +178,13 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			
 			if (needSyntheticThisVariable(anonymousClass, it)) {
 				val thisName = childAppendable.declareSyntheticVariable('this' -> it, '_this' + it.simpleName)
-				childAppendable.newLine.append("final ").append(simpleName).append(' ').append(thisName).append(' = this;').newLine
+				childAppendable.newLine.append("final ").append(simpleName).append(' ').append(thisName).append(' = this;')
+				// avoid generating empty lines with just two spaces
+				// https://github.com/eclipse/xtext-extras/issues/772
+				childAppendable.blankLine
 			}
 			childAppendable.forEach(getAddedDeclarations(anonymousClass), [
-					separator = [newLine]
+					separator = memberSeparator()
 				], [
 					val memberAppendable = childAppendable.traceWithComments(it)
 					memberAppendable.openScope
@@ -235,7 +238,9 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 					memberAppendable.closeScope
 				])
 			childAppendable.decreaseIndentation.newLine.append('}')
-			appendable.newLine
+			// avoid generating empty lines with just two spaces
+			// https://github.com/eclipse/xtext-extras/issues/772
+			appendable.blankLine
 		]
 	}
 	
@@ -353,7 +358,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 			if (!fieldsWithInitializer.empty) {
 				appendable.newLine.append('{').increaseIndentation
 				appendable.forEach(fieldsWithInitializer, [
-					separator = [ITreeAppendable it | newLine]
+					separator = memberSeparator()
 				], [
 					val memberAppendable = appendable.traceWithComments(it)
 					memberAppendable.openScope
@@ -368,7 +373,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 				appendable.decreaseIndentation.newLine.append('}')
 			}
 			appendable.forEach(membersToBeCompiled, [
-					separator = [ITreeAppendable it | newLine]
+					separator = memberSeparator()
 				], [
 					val memberAppendable = appendable.traceWithComments(it)
 					memberAppendable.openScope

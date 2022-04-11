@@ -173,7 +173,7 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class B {
 			  private C c = new C();
-			  
+			
 			  protected Object doX(final Runnable r) {
 			    final Runnable _function = new Runnable() {
 			      public void run() {
@@ -206,7 +206,7 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class B {
 			  private C c = new C();
-			  
+			
 			  protected Object doX(final Runnable r) {
 			    return this.doX(new Runnable() {
 			      public void run() {

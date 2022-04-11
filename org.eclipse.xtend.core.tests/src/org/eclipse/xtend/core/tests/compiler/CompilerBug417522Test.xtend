@@ -85,7 +85,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  private Instance<Bug> instance;
-			  
+			
 			  public Instance<Bug> demo() {
 			    Instance<Bug> _xblockexpression = null;
 			    {

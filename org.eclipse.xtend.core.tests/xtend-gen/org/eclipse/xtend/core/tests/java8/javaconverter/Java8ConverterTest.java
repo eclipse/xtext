@@ -178,7 +178,6 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("public abstract String baar();");

@@ -42,7 +42,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			
 			    final Iterable<String> _function = new Iterable<String>() {
 			      public Iterator<String> iterator() {
 			        return null;
@@ -56,11 +56,11 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			      public boolean hasNext() {
 			        return this.delegate.hasNext();
 			      }
-			      
+			
 			      public String next() {
 			        return this.delegate.next();
 			      }
-			      
+			
 			      public void remove() {
 			      }
 			    };
@@ -96,7 +96,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final Iterable<String> _function = new Iterable<String>() {
@@ -112,11 +112,11 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			        public boolean hasNext() {
 			          return this.delegate.hasNext();
 			        }
-			        
+			
 			        public String next() {
 			          return this.delegate.next();
 			        }
-			        
+			
 			        public void remove() {
 			        }
 			      };
@@ -154,7 +154,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			
 			    __C_1 _xblockexpression = null;
 			    {
 			      final Iterable<String> _function = new Iterable<String>() {
@@ -170,11 +170,11 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			        public boolean hasNext() {
 			          return this.delegate.hasNext();
 			        }
-			        
+			
 			        public String next() {
 			          return this.delegate.next();
 			        }
-			        
+			
 			        public void remove() {
 			        }
 			      };
@@ -212,7 +212,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			    abstract class __C_1 implements Iterator<String> {
 			      Iterator<String> delegate;
 			    }
-			    
+			
 			    final Iterable<String> _function = new Iterable<String>() {
 			      public Iterator<String> iterator() {
 			        return null;
@@ -226,11 +226,11 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			      public boolean hasNext() {
 			        return this.delegate.hasNext();
 			      }
-			      
+			
 			      public String next() {
 			        return this.delegate.next();
 			      }
-			      
+			
 			      public void remove() {
 			      }
 			    };
@@ -268,7 +268,7 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			      abstract class __C_1 implements Iterator<String> {
 			        Iterator<String> delegate;
 			      }
-			      
+			
 			      __C_1 _xblockexpression = null;
 			      {
 			        final Iterable<String> _function = new Iterable<String>() {
@@ -284,11 +284,11 @@ class CompilerBug462845Test extends AbstractXtendCompilerTest {
 			          public boolean hasNext() {
 			            return this.delegate.hasNext();
 			          }
-			          
+			
 			          public String next() {
 			            return this.delegate.next();
 			          }
-			          
+			
 			          public void remove() {
 			          }
 			        };

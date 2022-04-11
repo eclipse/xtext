@@ -46,24 +46,24 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			  public interface I {
 			    void m();
 			  }
-			  
+			
 			  @Accessors(AccessorType.PUBLIC_GETTER)
 			  private String string;
-			  
+			
 			  protected void _m(final Void expr, final String seq) {
 			  }
-			  
+			
 			  protected void _m(final Void expr, final StringBuilder seq) {
 			  }
-			  
+			
 			  public void m(final C.I i) {
 			  }
-			  
+			
 			  private final C.I x = new C.I() {
 			    public void m() {
 			    }
 			  };
-			  
+			
 			  public void m(final Object expr, final Object seq) {
 			    if (expr == null
 			         && seq instanceof StringBuilder) {
@@ -78,7 +78,7 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			        Arrays.<Object>asList(expr, seq).toString());
 			    }
 			  }
-			  
+			
 			  @Pure
 			  public String getString() {
 			    return this.string;

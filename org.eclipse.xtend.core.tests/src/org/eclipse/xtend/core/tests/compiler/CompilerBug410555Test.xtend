@@ -100,14 +100,14 @@ class CompilerBug410555Test extends AbstractXtendCompilerTest {
 			public class BugSAM {
 			  public BugSAM(final SAMInterface e) {
 			  }
-			  
+			
 			  public BugSAM() {
 			    this(new SAMInterface() {
 			      public void test() {
 			      }
 			    });
 			  }
-			  
+			
 			  public static void main(final String[] args) {
 			    final SAMInterface _function = new SAMInterface() {
 			      public void test() {

@@ -38,7 +38,7 @@ class CompilerBug464264Test extends AbstractXtendCompilerTest {
 			  public interface I {
 			    List<String> getStrings();
 			  }
-			  
+			
 			  public List<CharSequence> m(final C.I i, final List<CharSequence> list) {
 			    List<CharSequence> _xblockexpression = null;
 			    {

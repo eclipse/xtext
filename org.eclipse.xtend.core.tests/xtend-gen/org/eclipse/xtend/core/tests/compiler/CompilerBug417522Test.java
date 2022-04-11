@@ -163,7 +163,6 @@ public class CompilerBug417522Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private Instance<Bug> instance;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Instance<Bug> demo() {");

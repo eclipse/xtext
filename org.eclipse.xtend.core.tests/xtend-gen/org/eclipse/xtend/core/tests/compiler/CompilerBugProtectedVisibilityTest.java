@@ -336,7 +336,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("  ");
     _builder_1.append("private C c = new C();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Object doX(final Runnable r) {");
@@ -416,7 +415,6 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.append("  ");
     _builder_1.append("private C c = new C();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Object doX(final Runnable r) {");

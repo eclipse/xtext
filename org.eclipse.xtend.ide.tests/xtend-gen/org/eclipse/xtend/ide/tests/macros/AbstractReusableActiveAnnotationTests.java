@@ -131,7 +131,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("   ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("   ");
     _builder.newLine();
     _builder.append("   ");
     _builder.append("def String getPackageName(ClassDeclaration it) {");
@@ -3340,7 +3339,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.append("  ");
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("  ");
     _builder_2.newLine();
     _builder_2.append("  ");
     _builder_2.append("public String m(final Object i) {");
@@ -3372,7 +3370,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.append("  ");
     _builder_2.append("}");
     _builder_2.newLine();
-    _builder_2.append("  ");
     _builder_2.newLine();
     _builder_2.append("  ");
     _builder_2.append("protected String _m(final String foo) {");
@@ -3544,7 +3541,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_5.append("  ");
     _builder_5.append("}");
     _builder_5.newLine();
-    _builder_5.append("  ");
     _builder_5.newLine();
     _builder_5.append("  ");
     _builder_5.append("public void m(final Base b) {");
@@ -3579,7 +3575,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.append("  ");
     _builder_6.append("}");
     _builder_6.newLine();
-    _builder_6.append("  ");
     _builder_6.newLine();
     _builder_6.append("  ");
     _builder_6.append("protected void _m(final Derived2 d) {");
@@ -3587,7 +3582,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.append("  ");
     _builder_6.append("}");
     _builder_6.newLine();
-    _builder_6.append("  ");
     _builder_6.newLine();
     _builder_6.append("  ");
     _builder_6.append("protected void _m(final Derived3 d) {");
@@ -3595,7 +3589,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.append("  ");
     _builder_6.append("}");
     _builder_6.newLine();
-    _builder_6.append("  ");
     _builder_6.newLine();
     _builder_6.append("  ");
     _builder_6.append("public void m(final Base d) {");
@@ -5456,7 +5449,6 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.append("  ");
     _builder_1.append("private Timer t = new Timer();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private MyClass child = new MyClass();");

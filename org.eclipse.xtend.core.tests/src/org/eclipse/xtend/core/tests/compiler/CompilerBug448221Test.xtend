@@ -41,17 +41,17 @@ class CompilerBug448221Test extends AbstractXtendCompilerTest {
 			  public enum E {
 			    V;
 			  }
-			  
+			
 			  private Object[] arr = {};
-			  
+			
 			  public int build() {
 			    return this.m(this.arr);
 			  }
-			  
+			
 			  private int m(final Object... styles) {
 			    return 0;
 			  }
-			  
+			
 			  private int m(final C.E e) {
 			    int _switchResult = (int) 0;
 			    if (e != null) {

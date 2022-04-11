@@ -42,7 +42,7 @@ class CompilerBug436886Test extends AbstractXtendCompilerTest {
 			public class Test {
 			  public Test(final Function1<? super Super, ? extends Boolean> lambda) {
 			  }
-			  
+			
 			  public Test method() {
 			    final Function1<Super, Boolean> _function = new Function1<Super, Boolean>() {
 			      public Boolean apply(final Super it) {

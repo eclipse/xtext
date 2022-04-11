@@ -422,7 +422,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int i = 2;
-			  
+			
 			  public int foo() {
 			    int _i = this.i;
 			    return this.i = (_i + 2);
@@ -448,7 +448,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int i = 2;
-			  
+			
 			  public int foo() {
 			    int _i = this.i;
 			    int _i_1 = this.i;
@@ -477,7 +477,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int _a;
-			  
+			
 			  public static int withinStaticContext() {
 			    int _xblockexpression = (int) 0;
 			    {
@@ -510,7 +510,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int _a;
-			  
+			
 			  public int withinInstanceContext() {
 			    int _xblockexpression = (int) 0;
 			    {
@@ -542,7 +542,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private int _a;
-			  
+			
 			  public int withinInstanceContext() {
 			    int _xblockexpression = (int) 0;
 			    {

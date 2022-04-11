@@ -68,7 +68,6 @@ public class Bug446364Test extends AbstractActiveAnnotationTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilder prefix_createMethod(final String p) {");
@@ -112,12 +111,10 @@ public class Bug446364Test extends AbstractActiveAnnotationTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, StringBuilder> _createCache_createMethod = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void prefix__init_createMethod(final StringBuilder it, final String p) {");
@@ -185,7 +182,6 @@ public class Bug446364Test extends AbstractActiveAnnotationTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public StringBuilder createMethod(final String p) {");
@@ -196,12 +192,10 @@ public class Bug446364Test extends AbstractActiveAnnotationTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final HashMap<ArrayList<?>, StringBuilder> _createCache_createMethod = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private void _init_createMethod(final Object/* type is \'null\' */ it, final String p) {");

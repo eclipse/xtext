@@ -32,7 +32,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			    final int i = C.m("");
 			    return String.valueOf(i);
 			  }
-			  
+			
 			  public static int m(final String s) {
 			    return 1;
 			  }
@@ -55,7 +55,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			  public String m(final String c) {
 			    return this.m("");
 			  }
-			  
+			
 			  public static void m(final CharSequence s) {
 			  }
 			}
@@ -82,12 +82,12 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			    public String d(final CharSequence c) {
 			      return null;
 			    }
-			    
+			
 			    public static int d(final String s) {
 			      return 0;
 			    }
 			  }
-			  
+			
 			  public int m(final C.D it) {
 			    return C.D.d("");
 			  }
@@ -110,7 +110,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			  public void n(final String s) {
 			    C.operator_plus(s, s);
 			  }
-			  
+			
 			  public static void operator_plus(final String s1, final String s2) {
 			  }
 			}
@@ -130,7 +130,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private static String string;
-			  
+			
 			  public String getString() {
 			    return C.string;
 			  }
@@ -234,7 +234,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			public class Client {
 			  @Extension
 			  private Ext _ext;
-			  
+			
 			  public Object m(final C c) {
 			    return this._ext.m(c, "");
 			  }
@@ -260,11 +260,11 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private Function1<? super Number, ? extends Number> field;
-			  
+			
 			  public void setField(final Function1<? super Number, ? extends Number> field) {
 			    this.field = field;
 			  }
-			  
+			
 			  public void setField(final String field) {
 			    final Function1<Number, Number> _function = new Function1<Number, Number>() {
 			      public Number apply(final Number it) {
@@ -290,7 +290,7 @@ class CompilerBug434424Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private CharSequence field;
-			  
+			
 			  public void setField(final String field) {
 			    this.field = field;
 			  }

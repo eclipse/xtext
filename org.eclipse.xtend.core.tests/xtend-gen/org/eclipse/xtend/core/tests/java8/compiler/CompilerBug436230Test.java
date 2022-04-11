@@ -61,7 +61,6 @@ public class CompilerBug436230Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private final List<CharSequence> list = CollectionLiterals.<CharSequence>newArrayList();");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean foo(final List<?> source) {");

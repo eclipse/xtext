@@ -36,18 +36,18 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String name;
-			  
+			
 			  private final boolean myFlag;
-			  
+			
 			  private final Iterable<? extends Foo> references;
-			  
+			
 			  public Foo(final String name, final boolean myFlag, final Iterable<? extends Foo> references) {
 			    super();
 			    this.name = name;
 			    this.myFlag = myFlag;
 			    this.references = references;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public int hashCode() {
@@ -57,7 +57,7 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			    result = prime * result + (this.myFlag ? 1231 : 1237);
 			    return prime * result + ((this.references== null) ? 0 : this.references.hashCode());
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public boolean equals(final Object obj) {
@@ -82,7 +82,7 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			      return false;
 			    return true;
 			  }
-			  
+			
 			  @Override
 			  @Pure
 			  public String toString() {
@@ -92,17 +92,17 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			    b.add("references", this.references);
 			    return b.toString();
 			  }
-			  
+			
 			  @Pure
 			  public String getName() {
 			    return this.name;
 			  }
-			  
+			
 			  @Pure
 			  public boolean isMyFlag() {
 			    return this.myFlag;
 			  }
-			  
+			
 			  @Pure
 			  public Iterable<? extends Foo> getReferences() {
 			    return this.references;

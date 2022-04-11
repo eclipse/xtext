@@ -35,7 +35,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @A(E.NAME)
 			  private String s1;
-			  
+			
 			  @A(value = E.NAME)
 			  private String s2;
 			}
@@ -68,16 +68,16 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @A(E.NAME)
 			  private String s1;
-			  
+			
 			  @A({ E.NAME, E.NAME })
 			  private String s2;
-			  
+			
 			  @A({ E.NAME })
 			  private String s3;
-			  
+			
 			  @A(value = E.NAME)
 			  private String s4;
-			  
+			
 			  @A(value = { E.NAME })
 			  private String s5;
 			}
@@ -336,7 +336,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class TestXtend {
 			  private static final int a = 4;
-			  
+			
 			  @Click({ TestXtend.a, TestXtend.a })
 			  public Object meth() {
 			    return null;
@@ -361,7 +361,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class TestXtend {
 			  private static final int a = 4;
-			  
+			
 			  @Click({ TestXtend.a, ((TestXtend.a & 3) << 1) })
 			  public Object meth() {
 			    return null;

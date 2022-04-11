@@ -97,14 +97,14 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Consumer<CharSequence> _function = (CharSequence it) -> {
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -134,10 +134,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<String> list = C.<String>newIterable();
 			    list.add("");
@@ -145,7 +145,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -176,10 +176,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
@@ -188,7 +188,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -219,10 +219,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    list.get().toString();
@@ -233,7 +233,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -263,10 +263,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Consumer<CharSequence> _function = (CharSequence it) -> {
@@ -276,7 +276,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends CharSequence> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -306,10 +306,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void add(final T t);
-			    
+			
 			    T get();
 			  }
-			  
+			
 			  public void m() {
 			    final C.MyIterable<CharSequence> list = C.<CharSequence>newIterable();
 			    final Consumer<CharSequence> _function = (CharSequence it) -> {
@@ -319,7 +319,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    list.forEach(_function);
 			  }
-			  
+			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -354,7 +354,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
 			  }
-			  
+			
 			  public void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
@@ -364,11 +364,11 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    };
 			    C.<StringBuilderLike>newIterable(_stringBuilderLike).forEach2(_function);
 			  }
-			  
+			
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static <T extends Object> C.MyIterable<T> newIterable(final T... initial) {
 			    return null;
 			  }
@@ -394,7 +394,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
 			    void forEach2(final Procedure1<? super T> f);
 			  }
-			  
+			
 			  public <V extends Object> void m(final C.MyIterable<? super V> list) {
 			    final Procedure1<Object> _function = (Object it) -> {
 			    };

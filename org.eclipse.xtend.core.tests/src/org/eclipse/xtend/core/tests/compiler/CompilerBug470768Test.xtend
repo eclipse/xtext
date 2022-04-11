@@ -42,21 +42,21 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			public class SOE {
 			  public static class A {
 			  }
-			  
+			
 			  public static class CustomItr implements Iterable<SOE.A> {
 			    public Iterator<SOE.A> iterator() {
 			      throw new UnsupportedOperationException();
 			    }
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final SOE.A it) {
 			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final Object it) {
 			    return CollectionLiterals.<SOE.A>emptyList();
 			  }
-			  
+			
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);
@@ -100,15 +100,15 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			      return null;
 			    }
 			  }
-			  
+			
 			  protected List<C> _getList(final C it) {
 			    return IterableExtensions.<C>toList(new C.CustomItr());
 			  }
-			  
+			
 			  protected List<C> _getList(final Object it) {
 			    return CollectionLiterals.<C>emptyList();
 			  }
-			  
+			
 			  public List<C> getList(final Object it) {
 			    if (it instanceof C) {
 			      return _getList((C)it);
@@ -151,21 +151,21 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			public class SOE {
 			  public static class A {
 			  }
-			  
+			
 			  public static class CustomItr implements Iterable<SOE.A> {
 			    public Iterator<SOE.A> iterator() {
 			      return null;
 			    }
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final Object it) {
 			    return CollectionLiterals.<SOE.A>emptyList();
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final SOE.A it) {
 			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
-			  
+			
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);
@@ -207,21 +207,21 @@ class CompilerBug470768Test extends AbstractXtendCompilerTest {
 			public class SOE {
 			  public static class A {
 			  }
-			  
+			
 			  public static class CustomItr implements Iterable<SOE.A> {
 			    public Iterator<SOE.A> iterator() {
 			      return null;
 			    }
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final SOE.A it) {
 			    return IterableExtensions.<SOE.A>toList(new SOE.CustomItr());
 			  }
-			  
+			
 			  protected List<SOE.A> _getList(final Object it) {
 			    return CollectionLiterals.<SOE.A>emptyList();
 			  }
-			  
+			
 			  public List<SOE.A> getList(final Object it) {
 			    if (it instanceof SOE.A) {
 			      return _getList((SOE.A)it);

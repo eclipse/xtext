@@ -2191,7 +2191,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("  ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("  ");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("static def void getFoo(String x) {");
@@ -2213,7 +2212,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("static def void getFoo(String x) {");

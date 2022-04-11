@@ -232,7 +232,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private CharSequence mySeq;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public CharSequence m() {");
@@ -276,7 +275,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<CharSequence> all(final String s, final String s2) {");
@@ -287,7 +285,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String ext(final String s) {");
@@ -354,7 +351,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("private boolean b;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean m() {");
@@ -374,7 +370,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public List<CharSequence> all(final String s, final String s2) {");
@@ -385,7 +380,6 @@ public class CompilerBug472142Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean ext(final boolean b) {");

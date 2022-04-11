@@ -25,7 +25,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val x = #{ C0, C1 }
 			}
 		''', '''
@@ -37,22 +37,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final Set<? extends Class<? extends Outer.C>> x = Collections.<Class<? extends Outer.C>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.C>>newHashSet(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -68,7 +68,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val x = #[ C0, C1 ]
 			}
 		''', '''
@@ -80,22 +80,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final List<? extends Class<? extends Outer.C>> x = Collections.<Class<? extends Outer.C>>unmodifiableList(CollectionLiterals.<Class<? extends Outer.C>>newArrayList(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -112,7 +112,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C implements I {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val Set<? extends Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -124,22 +124,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C implements Outer.I {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final Set<? extends Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -156,7 +156,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C implements I {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val Set<Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -168,22 +168,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C implements Outer.I {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final Set<Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -201,7 +201,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val Set<? extends Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -213,22 +213,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final Set<? extends Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.C>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.C>>newHashSet(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -246,7 +246,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val Set<Class<? extends I>> w = #{ C0, C1 }
 			}
 		''', '''
@@ -258,22 +258,22 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 			public class Outer {
 			  public interface I {
 			  }
-			  
+			
 			  public interface I0 extends Outer.I {
 			  }
-			  
+			
 			  public interface I1 extends Outer.I {
 			  }
-			  
+			
 			  public static class C {
 			  }
-			  
+			
 			  public static class C0 extends Outer.C implements Outer.I0 {
 			  }
-			  
+			
 			  public static class C1 extends Outer.C implements Outer.I1 {
 			  }
-			  
+			
 			  private final Set<Class<? extends Outer.I>> w = Collections.<Class<? extends Outer.I>>unmodifiableSet(CollectionLiterals.<Class<? extends Outer.I>>newHashSet(Outer.C0.class, Outer.C1.class));
 			}
 		''')
@@ -291,7 +291,7 @@ class CompilerBug455317Test extends AbstractXtendCompilerTest {
 				static class C {}
 				static class C0 extends C implements I0 {}
 				static class C1 extends C implements I1 {}
-			    
+			
 			    val Class<? extends C> x1 = C0
 			    val Class<? extends I> x2 = C0
 			    val x = #{ C0, C1 }

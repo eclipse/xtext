@@ -44,7 +44,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			  @Override
 			  protected void _m(final String x) {
 			  }
-			  
+			
 			  @Override
 			  public void m(final Object x) {
 			    if (x instanceof Integer) {
@@ -85,7 +85,7 @@ class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTest {
 			public class Something extends AbstractSomething {
 			  protected void _m(final String x) {
 			  }
-			  
+			
 			  public void m(final Object x) {
 			    if (x instanceof Integer) {
 			      _m((Integer)x);

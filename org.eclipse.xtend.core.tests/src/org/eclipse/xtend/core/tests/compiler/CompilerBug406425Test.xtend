@@ -52,7 +52,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    };
 			    return ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
 			  }
-			  
+			
 			  public static <T extends Object> Matcher<T> nullValue() {
 			    return null;
 			  }
@@ -86,7 +86,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -129,7 +129,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -171,7 +171,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -213,7 +213,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -255,7 +255,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {
@@ -297,7 +297,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -339,7 +339,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static StringBuilderLike m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Procedure1<StringBuilderLike> _function = new Procedure1<StringBuilderLike>() {
@@ -381,7 +381,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {
@@ -424,7 +424,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {
@@ -467,7 +467,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static <T extends Object> Object m(final T a, final T b) {
 			    return null;
 			  }
-			  
+			
 			  public static void m() {
 			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
 			    final Consumer<StringBuilderLike> _function = new Consumer<StringBuilderLike>() {

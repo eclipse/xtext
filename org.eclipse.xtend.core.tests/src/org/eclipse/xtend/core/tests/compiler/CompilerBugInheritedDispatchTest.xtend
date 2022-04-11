@@ -37,10 +37,10 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			public class D extends C {
 			  protected void _m(final Integer o) {
 			  }
-			  
+			
 			  protected void _m(final CharSequence o) {
 			  }
-			  
+			
 			  public void m(final Object o) {
 			    if (o instanceof Integer) {
 			      _m((Integer)o);
@@ -99,11 +99,11 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			  protected T _test(final Ausdruck a) {
 			    return null;
 			  }
-			  
+			
 			  protected T _test(final Fallunterscheidung a) {
 			    return this.test(a.getDann());
 			  }
-			  
+			
 			  public T test(final Ausdruck a) {
 			    if (a instanceof Fallunterscheidung) {
 			      return _test((Fallunterscheidung)a);
@@ -151,7 +151,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			  protected String _test(final StringAusdruck a) {
 			    return null;
 			  }
-			  
+			
 			  public String test(final Ausdruck a) {
 			    if (a instanceof Fallunterscheidung) {
 			      return _test((Fallunterscheidung)a);

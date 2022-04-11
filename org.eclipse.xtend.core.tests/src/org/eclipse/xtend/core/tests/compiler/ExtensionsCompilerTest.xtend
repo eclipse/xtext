@@ -132,7 +132,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    return this.<String, String>map(list, _function);
 			  }
-			  
+			
 			  public <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {
 			    return null;
 			  }
@@ -164,7 +164,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    return this.<String, String>map(list, _function);
 			  }
-			  
+			
 			  public <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {
 			    return null;
 			  }
@@ -199,7 +199,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    return ListExtensions.<String, String>map(list, _function);
 			  }
-			  
+			
 			  public static <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {
 			    return null;
 			  }
@@ -231,7 +231,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    return C.<String, String>map(list, _function);
 			  }
-			  
+			
 			  public static <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {
 			    return null;
 			  }
@@ -263,7 +263,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @Extension
 			  private D _d;
-			  
+			
 			  public Collection<String> m(final List<String> list) {
 			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String it) {
@@ -298,7 +298,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  @Extension
 			  private D _d;
-			  
+			
 			  public List<String> m(final List<String> list) {
 			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String it) {
@@ -381,7 +381,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class NoNPE {
 				  @Extension
 				  private String _string;
-				  
+				
 				  public String useExtension() {
 				    return this._string.toString();
 				  }
@@ -466,7 +466,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected String local;
-				  
+				
 				  public String m(final int it) {
 				    return this.local.substring(it);
 				  }
@@ -494,7 +494,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected CharSequence local;
-				  
+				
 				  public char m(final int it) {
 				    return this.local.charAt(it);
 				  }
@@ -528,7 +528,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected A local;
-				  
+				
 				  public void m(final CharSequence it) {
 				    this.inherited.ext(it);
 				  }
@@ -562,7 +562,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected A local;
-				  
+				
 				  public void m(final String it) {
 				    this.local.ext(it);
 				  }
@@ -596,7 +596,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected B local;
-				  
+				
 				  public void m(final CharSequence it) {
 				    this.local.ext(it);
 				  }
@@ -630,7 +630,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C extends D {
 				  @Extension
 				  protected A local;
-				  
+				
 				  public void m(final String it) {
 				    this.local.ext(it);
 				  }
@@ -655,7 +655,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C {
 				  @Extension
 				  private String _string;
-				  
+				
 				  public String m(final int it, @Extension final String s) {
 				    return s.substring(it);
 				  }
@@ -681,7 +681,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				public class C {
 				  @Extension
 				  private String _string;
-				  
+				
 				  public String m(final int it, @Extension final String s) {
 				    return s.substring(it);
 				  }
@@ -907,11 +907,11 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    return _xblockexpression;
 			  }
-			  
+			
 			  public String m2() {
 			    return this.<String>at(((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("foo", "bar"), String.class)), 2);
 			  }
-			  
+			
 			  public ArrayList<String> m3() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
 			    final Procedure1<ArrayList<String>> _function = new Procedure1<ArrayList<String>>() {
@@ -921,7 +921,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    };
 			    return ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
 			  }
-			  
+			
 			  public <T extends Object> T at(final T[] obj, final int index) {
 			    return obj[index];
 			  }

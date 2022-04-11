@@ -84,7 +84,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Iterable<String> _function = new Iterable<String>() {");
@@ -125,7 +124,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String next() {");
@@ -136,7 +134,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void remove() {");
@@ -223,7 +220,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -270,7 +266,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public String next() {");
@@ -281,7 +276,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public void remove() {");
@@ -374,7 +368,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -421,7 +414,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public String next() {");
@@ -432,7 +424,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("        ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public void remove() {");
@@ -525,7 +516,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Iterable<String> _function = new Iterable<String>() {");
@@ -566,7 +556,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String next() {");
@@ -577,7 +566,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void remove() {");
@@ -669,7 +657,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("      ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("      ");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("__C_1 _xblockexpression = null;");
@@ -716,7 +703,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("          ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("public String next() {");
@@ -727,7 +713,6 @@ public class CompilerBug462845Test extends AbstractXtendCompilerTest {
     _builder_1.append("          ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("          ");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("public void remove() {");

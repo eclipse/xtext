@@ -49,7 +49,6 @@ public class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTe
     _builder_1.append("  ");
     _builder_1.append("private Either<Integer, Boolean> either;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Boolean m() {");
@@ -98,7 +97,6 @@ public class ParameterizedInnerTypesCompilerTest extends AbstractXtendCompilerTe
     _builder_1.append("  ");
     _builder_1.append("private Either<Integer, Boolean> either;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Integer m() {");

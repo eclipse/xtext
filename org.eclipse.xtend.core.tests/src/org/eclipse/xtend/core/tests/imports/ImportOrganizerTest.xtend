@@ -1119,7 +1119,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  static def void test() {
 			    "".foo
 			  }
-			  
+			
 			  static def void getFoo(String x) {
 			  } 
 			}
@@ -1128,7 +1128,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  static def void test() {
 			    "".foo
 			  }
-			  
+			
 			  static def void getFoo(String x) {
 			  } 
 			}

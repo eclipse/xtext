@@ -36,7 +36,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private StringRepository repository;
-			  
+			
 			  public String m() {
 			    String _xblockexpression = null;
 			    {
@@ -72,7 +72,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private StringRepository repository;
-			  
+			
 			  public Iterable<String> m() {
 			    return this.repository.<String>save(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
 			  }
@@ -101,7 +101,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private CharSeqRepository repository;
-			  
+			
 			  public Iterable<String> m() {
 			    return this.repository.<String>save(CollectionLiterals.<String>newArrayList());
 			  }
@@ -131,7 +131,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  private CharSeqRepository repository;
-			  
+			
 			  public Iterable<String> m() {
 			    return this.repository.<String>save(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")));
 			  }
