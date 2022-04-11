@@ -140,7 +140,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -151,12 +150,10 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("private String name;");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public String getName() {");
@@ -167,7 +164,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("public void setName(final String name) {");
@@ -178,7 +174,6 @@ public class CompilerTest {
       _builder_1.append("  ");
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("  ");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("@Override");
@@ -281,7 +276,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -292,12 +286,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public void setName(final String name) {");
@@ -308,7 +300,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -328,7 +319,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");
@@ -403,7 +393,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -414,12 +403,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public String getName() {");
@@ -430,7 +417,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -453,7 +439,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");
@@ -540,7 +525,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("public Foo(final Procedure1<Foo> initializer) {");
@@ -551,12 +535,10 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("private String name;");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -576,7 +558,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("/**");
@@ -599,7 +580,6 @@ public class CompilerTest {
         _builder_1.append("  ");
         _builder_1.append("}");
         _builder_1.newLine();
-        _builder_1.append("  ");
         _builder_1.newLine();
         _builder_1.append("  ");
         _builder_1.append("@Override");
