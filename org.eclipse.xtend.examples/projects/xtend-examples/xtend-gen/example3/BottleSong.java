@@ -27,7 +27,7 @@ public class BottleSong {
   public void singIt() {
     InputOutput.<CharSequence>println(this.singTheSong(99));
   }
-  
+
   public CharSequence singTheSong(final int all) {
     StringConcatenation _builder = new StringConcatenation();
     {

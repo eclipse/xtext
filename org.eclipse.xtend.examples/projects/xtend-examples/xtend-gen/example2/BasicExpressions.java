@@ -38,7 +38,7 @@ public class BasicExpressions {
     Assert.assertEquals(Boolean.valueOf(true), Boolean.valueOf((!false)));
     Assert.assertEquals(this.getClass(), BasicExpressions.class);
   }
-  
+
   @Test
   public void operators() {
     int i = 5;
@@ -60,7 +60,7 @@ public class BasicExpressions {
     Assert.assertEquals(3, _plusPlus);
     Assert.assertEquals(4, j);
   }
-  
+
   @Test
   public void collections() {
     final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Hello", "World"));
@@ -85,7 +85,7 @@ public class BasicExpressions {
     final HashMap<String, String> mutableMap = CollectionLiterals.<String, String>newHashMap();
     mutableMap.put("Fizz", "Buzz");
   }
-  
+
   @Test
   public void controlStructures() {
     int _length = "text".length();
@@ -148,7 +148,7 @@ public class BasicExpressions {
     }
     Assert.assertEquals("not a divisor of 4", _switchResult_2);
   }
-  
+
   @Test
   public void loops() {
     int counter = 1;

@@ -174,7 +174,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
     };
     annotatedClass.addField("RESOURCE_BUNDLE", _function_1);
   }
-  
+
   @Override
   public void doGenerateCode(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
     for (final ClassDeclaration clazz : annotatedSourceElements) {
@@ -200,7 +200,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
       }
     }
   }
-  
+
   public String getInitializerAsString(final FieldDeclaration f) {
     Expression _initializer = f.getInitializer();
     String _string = null;

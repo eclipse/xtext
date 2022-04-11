@@ -42,7 +42,7 @@ public class Units {
     }
     Assert.assertEquals(Distance.km(65), distance);
   }
-  
+
   @Test
   public void time() {
     Time _h = Time.h(1);
@@ -53,7 +53,7 @@ public class Units {
     Time _minus = _plus.operator_minus(_msec);
     Assert.assertEquals(_h, _minus);
   }
-  
+
   @Test
   public void speed() {
     Distance _km = Distance.km(42);

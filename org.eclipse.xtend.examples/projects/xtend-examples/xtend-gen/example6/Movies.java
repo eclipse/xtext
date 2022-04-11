@@ -39,7 +39,7 @@ public class Movies {
     };
     Assert.assertEquals(828, IterableExtensions.size(IterableExtensions.<Movie>filter(this.movies, _function)));
   }
-  
+
   /**
    * @return the year the best rated movie of 80ies (1980-1989) was released.
    */
@@ -53,7 +53,7 @@ public class Movies {
     };
     Assert.assertEquals(1989, IterableExtensions.<Movie, Double>maxBy(IterableExtensions.<Movie>filter(this.movies, _function), _function_1).getYear());
   }
-  
+
   /**
    * @return the sum of the number of votes of the two top rated movies.
    */
@@ -72,7 +72,7 @@ public class Movies {
     final long movies = (long) IterableExtensions.<Long>reduce(IterableExtensions.<Movie, Long>map(IterableExtensions.<Movie>take(IterableExtensions.<Movie, Double>sortBy(this.movies, _function), 2), _function_1), _function_2);
     Assert.assertEquals(47_229, movies);
   }
-  
+
   private final List<Movie> movies = new Function0<List<Movie>>() {
     @Override
     public List<Movie> apply() {

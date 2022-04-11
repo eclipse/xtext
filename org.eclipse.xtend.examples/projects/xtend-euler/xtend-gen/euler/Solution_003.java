@@ -29,13 +29,13 @@ public class Solution_003 extends AbstractIterator<Long> {
   public static void main(final String[] args) {
     InputOutput.<Long>println(IteratorExtensions.<Long>last(new Solution_003()));
   }
-  
+
   private long compound = 600851475143L;
-  
+
   private long sqrt = Double.valueOf(Math.sqrt(this.compound)).longValue();
-  
+
   private long current = 2;
-  
+
   @Override
   protected Long computeNext() {
     Long _xblockexpression = null;
@@ -54,7 +54,7 @@ public class Solution_003 extends AbstractIterator<Long> {
     }
     return _xblockexpression;
   }
-  
+
   public boolean isPrime(final long l) {
     int _intValue = Double.valueOf(Math.sqrt(l)).intValue();
     final Function1<Integer, Boolean> _function = (Integer i) -> {

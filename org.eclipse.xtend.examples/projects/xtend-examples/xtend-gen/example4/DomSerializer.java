@@ -58,7 +58,7 @@ public class DomSerializer {
     }
     return _switchResult;
   }
-  
+
   private String applyContents(final Node n) {
     ArrayList<Node> _contents = n.getContents();
     List<CharSequence> _map = null;

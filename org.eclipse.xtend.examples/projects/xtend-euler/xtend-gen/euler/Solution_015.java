@@ -28,13 +28,13 @@ public class Solution_015 {
   public static void main(final String[] args) {
     InputOutput.<Long>println(new Solution_015(20).solve());
   }
-  
+
   private List<Long> solutions;
-  
+
   private int internalGridSize;
-  
+
   private int numberOfNodes;
-  
+
   public Solution_015(final int gridSize) {
     this.internalGridSize = (gridSize + 1);
     this.numberOfNodes = (this.internalGridSize * this.internalGridSize);
@@ -45,11 +45,11 @@ public class Solution_015 {
     new IntegerRange(0, (this.numberOfNodes - 2)).forEach(_function);
     this.solutions.add(Long.valueOf(1L));
   }
-  
+
   public Long solve() {
     return this.solve(0);
   }
-  
+
   public Long solve(final int position) {
     boolean _isValid = this.isValid(position);
     if (_isValid) {
@@ -72,11 +72,11 @@ public class Solution_015 {
     }
     return Long.valueOf(0L);
   }
-  
+
   public int moveDown(final int atIndex) {
     return (atIndex + this.internalGridSize);
   }
-  
+
   public int moveRight(final int atIndex) {
     int _xblockexpression = (int) 0;
     {
@@ -87,11 +87,11 @@ public class Solution_015 {
     }
     return _xblockexpression;
   }
-  
+
   public boolean isValid(final int index) {
     return ((index >= 0) && (index < this.numberOfNodes));
   }
-  
+
   public boolean done(final int index) {
     Long _get = this.solutions.get(index);
     return ((_get).longValue() != (-1));

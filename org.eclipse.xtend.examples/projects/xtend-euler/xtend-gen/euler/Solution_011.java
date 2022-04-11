@@ -55,7 +55,7 @@ public class Solution_011 {
   public static void main(final String[] args) {
     new Solution_011().solve();
   }
-  
+
   public void solve() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08");
@@ -142,11 +142,11 @@ public class Solution_011 {
     }
     InputOutput.<Integer>println(Integer.valueOf(result));
   }
-  
+
   public Integer $(final List<List<Integer>> lists, final int column, final int row) {
     return lists.get(column).get(row);
   }
-  
+
   public int max(final int current, final int a, final int b, final int c, final int d) {
     return Math.max(current, (((a * b) * c) * d));
   }

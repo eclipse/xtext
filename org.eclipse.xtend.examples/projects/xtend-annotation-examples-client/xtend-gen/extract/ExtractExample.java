@@ -17,7 +17,7 @@ public class ExtractExample implements ExtractExampleInterface {
   @Override
   public void myPublicMethod() {
   }
-  
+
   /**
    * This method is not extracted
    */

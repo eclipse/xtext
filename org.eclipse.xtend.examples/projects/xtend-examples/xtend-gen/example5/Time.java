@@ -20,61 +20,61 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Time {
   private final BigDecimal msec;
-  
+
   public Time operator_plus(final Time other) {
     BigDecimal _plus = this.msec.add(other.msec);
     return new Time(_plus);
   }
-  
+
   public Time operator_minus(final Time other) {
     BigDecimal _minus = this.msec.subtract(other.msec);
     return new Time(_minus);
   }
-  
+
   public Time operator_multiply(final int times) {
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _multiply = this.msec.multiply(_bigDecimal);
     return new Time(_multiply);
   }
-  
+
   public Time operator_divide(final int times) {
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _divide = this.msec.divide(_bigDecimal, MathContext.DECIMAL128);
     return new Time(_divide);
   }
-  
+
   public static Time msec(final int msec) {
     BigDecimal _bigDecimal = new BigDecimal(msec);
     return new Time(_bigDecimal);
   }
-  
+
   public static Time sec(final int sec) {
     return Time.msec((sec * 1000));
   }
-  
+
   public static Time min(final int min) {
     return Time.sec((min * 60));
   }
-  
+
   public static Time h(final int h) {
     return Time.min((h * 60));
   }
-  
+
   public static Time h() {
     return Time.h(1);
   }
-  
+
   public Time(final BigDecimal msec) {
     super();
     this.msec = msec;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + ((this.msec== null) ? 0 : this.msec.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -92,7 +92,7 @@ public class Time {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -100,7 +100,7 @@ public class Time {
     b.add("msec", this.msec);
     return b.toString();
   }
-  
+
   @Pure
   public BigDecimal getMsec() {
     return this.msec;

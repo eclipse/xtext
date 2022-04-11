@@ -20,7 +20,7 @@ public class H2 extends ContentNode {
   public int hashCode() {
     return super.hashCode();
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -34,7 +34,7 @@ public class H2 extends ContentNode {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {

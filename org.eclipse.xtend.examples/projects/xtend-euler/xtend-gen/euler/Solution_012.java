@@ -53,7 +53,7 @@ public class Solution_012 {
       }
     }
   }
-  
+
   public static long numberOfDivisors(final long triangle) {
     long max = Double.valueOf(Math.sqrt(triangle)).longValue();
     long result = 0L;

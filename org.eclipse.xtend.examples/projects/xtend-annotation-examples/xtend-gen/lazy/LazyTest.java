@@ -17,7 +17,7 @@ import org.junit.Test;
 public class LazyTest {
   @Extension
   private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
-  
+
   @Test
   public void testLazy() {
     StringConcatenation _builder = new StringConcatenation();
@@ -45,7 +45,6 @@ public class LazyTest {
     _builder_1.append("  ");
     _builder_1.append("private String name;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private String _initname() {");
@@ -56,7 +55,6 @@ public class LazyTest {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String getName() {");

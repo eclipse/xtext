@@ -63,11 +63,11 @@ public class Solution_014 extends AbstractIterator<Long> {
     InputOutput.<Integer>println(
       IterableExtensions.<Pair<Integer, Integer>>reduce(IterableExtensions.<Integer, Pair<Integer, Integer>>map(new IntegerRange(1_000_000, 1), _function), _function_1).getKey());
   }
-  
+
   private Long current;
-  
+
   private BitSet numbersSeen;
-  
+
   public Solution_014(final long start, final BitSet numbersSeen) {
     this.current = Long.valueOf(start);
     boolean _get = numbersSeen.get(this.current.intValue());
@@ -76,7 +76,7 @@ public class Solution_014 extends AbstractIterator<Long> {
     }
     this.numbersSeen = numbersSeen;
   }
-  
+
   @Override
   protected Long computeNext() {
     final Long result = this.current;

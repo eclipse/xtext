@@ -48,7 +48,7 @@ public class Solution_023 {
     };
     InputOutput.<Integer>println(IterableExtensions.<Integer>reduce(IterableExtensions.<Integer>filter(new IntegerRange(28123, 1), _function_1), _function_2));
   }
-  
+
   public static boolean isSumOfAbundantNumbers(final int input, final Set<Integer> allAmbundantNumbers) {
     for (final Integer i : allAmbundantNumbers) {
       boolean _contains = allAmbundantNumbers.contains(Integer.valueOf((input - (i).intValue())));
@@ -58,7 +58,7 @@ public class Solution_023 {
     }
     return false;
   }
-  
+
   public static boolean isAbundant(final int input) {
     final int sqrt = Double.valueOf(Math.floor(Math.sqrt(input))).intValue();
     final Function1<Integer, Boolean> _function = (Integer div) -> {

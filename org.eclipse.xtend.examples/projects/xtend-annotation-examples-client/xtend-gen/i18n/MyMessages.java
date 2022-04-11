@@ -29,7 +29,7 @@ public class MyMessages {
     _builder.newLineIfNotEmpty();
     InputOutput.<String>println(_builder.toString());
   }
-  
+
   /**
    * Hello {0}!
    */
@@ -43,7 +43,7 @@ public class MyMessages {
     	return "Hello {0}!";
     }
   }
-  
+
   /**
    * Today is {0,date} and you are in {1}
    */
@@ -57,6 +57,6 @@ public class MyMessages {
     	return "Today is {0,date} and you are in {1}";
     }
   }
-  
+
   private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("i18n.MyMessages");
 }
