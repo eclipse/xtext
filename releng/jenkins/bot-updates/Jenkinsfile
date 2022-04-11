@@ -470,7 +470,10 @@ def commitChanges (String commitMessage) {
   REPOSITORY_NAMES.split(',').each {
     dir (it) {
       // Avoid commit when no change has happened. This would make the pipeline fail.
-      sh """git diff-index --quiet HEAD || git commit --signoff -a -m '${commitMessage}' """
+      sh """
+      git diff
+      git diff-index --quiet HEAD || git commit --signoff -a -m '${commitMessage}'
+      """
     }
   }
   if (params.DRY_RUN) {
