@@ -126,8 +126,6 @@ import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.BufferedCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
@@ -1137,10 +1135,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		@Override
 		public ResourceSet newLiveScopeResourceSet(URI uri) {
 			ProjectManager projectManager = workspaceManager.getProjectManager(uri);
-			XtextResourceSet resourceSet = projectManager
-					.createNewResourceSet(projectManager.getIndexState().getResourceDescriptions());
-			resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, true);
-			return resourceSet;
+			return projectManager.createLiveScopeResourceSet();
 		}
 
 		@Override

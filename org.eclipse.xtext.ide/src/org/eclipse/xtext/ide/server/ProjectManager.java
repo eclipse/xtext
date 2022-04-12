@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IFileSystemScanner;
 import org.eclipse.xtext.validation.Issue;
@@ -159,6 +160,17 @@ public class ProjectManager {
 			}
 			resDescs.setContainer(projectDescription.getName(), newIndex);
 		}
+		return resourceSet;
+	}
+
+	/**
+	 * Create and configure a new live resource set for this project.
+	 *
+	 * @since 2.27
+	 */
+	public XtextResourceSet createLiveScopeResourceSet() {
+		XtextResourceSet resourceSet = createNewResourceSet(getIndexState().getResourceDescriptions());
+		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, true);
 		return resourceSet;
 	}
 
