@@ -2,12 +2,12 @@
 pipeline {
   agent {
     kubernetes {
-      inheritFrom 'centos-7'
+      inheritFrom 'centos-8'
     }
   }
 
   // for testing shell commands use
-  //    docker run -it -v $(pwd):/xtext docker.io/eclipsecbi/jiro-agent-centos-7:remoting-4.5 bash
+  //    docker run -it -v $(pwd):/xtext docker.io/eclipsecbi/jiro-agent-centos-8:remoting-4.5 bash
   // execute from the directory that contains the xtext git repos below
   parameters {
       string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source branch for checkout & create the release branches from')
