@@ -50,7 +50,7 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder_1.newLine();
     this.testCodeMining(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void explicit_return_type_is_not_presented_as_code_mining() {
     StringConcatenation _builder = new StringConcatenation();
@@ -79,7 +79,7 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder_1.newLine();
     this.testCodeMining(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void several_entities_001() {
     StringConcatenation _builder = new StringConcatenation();
@@ -106,7 +106,7 @@ public class CodeMiningTest extends AbstractCodeMiningTest {
     _builder_1.newLine();
     this.testCodeMining(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void several_entities_002() {
     StringConcatenation _builder = new StringConcatenation();

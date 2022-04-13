@@ -37,14 +37,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTemplate {
   private final BooleanTemplateVariable advanced = this.check("Advanced:", false);
-  
+
   private final GroupTemplateVariable advancedGroup = this.group("Properties");
-  
+
   private final StringTemplateVariable path = this.text("Package:", "mydsl", "The package path to place the files in", this.advancedGroup);
-  
+
   @Inject
   private PluginImageHelper pluginImageHelper;
-  
+
   @Override
   protected void updateVariables() {
     this.path.setEnabled(this.advanced.getValue());
@@ -54,7 +54,7 @@ public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTem
       this.path.setValue("statemachine");
     }
   }
-  
+
   @Override
   protected IStatus validate() {
     Status _xifexpression = null;
@@ -66,7 +66,7 @@ public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTem
     }
     return _xifexpression;
   }
-  
+
   @Override
   public void generateProjects(final IProjectGenerator generator) {
     PluginProjectFactory _pluginProjectFactory = new PluginProjectFactory();
@@ -90,13 +90,13 @@ public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTem
     PluginProjectFactory _doubleArrow = ObjectExtensions.<PluginProjectFactory>operator_doubleArrow(_pluginProjectFactory, _function);
     generator.generate(_doubleArrow);
   }
-  
+
   @Override
   protected List<Pair<String, Image>> getImages() {
     Pair<String, Image> _image = this.image("mrsgrantssecretcompartment.png");
     return Collections.<Pair<String, Image>>unmodifiableList(CollectionLiterals.<Pair<String, Image>>newArrayList(_image));
   }
-  
+
   private Pair<String, Image> image(final String id) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("platform:/plugin/");

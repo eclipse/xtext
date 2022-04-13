@@ -39,15 +39,15 @@ public class DomainmodelParsingTest {
   @Inject
   @Extension
   private ParseHelper<DomainModel> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
-  
+
   @Test
   public void testParsing() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -76,7 +76,7 @@ public class DomainmodelParsingTest {
     Assert.assertEquals("property", property.getName());
     Assert.assertEquals("java.lang.String", property.getType().getIdentifier());
   }
-  
+
   @Test
   public void testJvmTypeReferencesValidator() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -100,7 +100,7 @@ public class DomainmodelParsingTest {
       IssueCodes.INVALID_USE_OF_TYPE, 
       "The primitive \'int\' cannot be a type argument");
   }
-  
+
   @Test
   public void testParsingAndLinking() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -131,7 +131,7 @@ public class DomainmodelParsingTest {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testParsingAndLinkingWithImports() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -152,7 +152,7 @@ public class DomainmodelParsingTest {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testReturnTypeInference() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

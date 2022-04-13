@@ -47,7 +47,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "events", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void end_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -72,7 +72,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "end", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void resetEvents_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -105,7 +105,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "resetEvents", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void commands_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -127,7 +127,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "commands", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void state_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -229,7 +229,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "state", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void actions_keyword() {
     StringConcatenation _builder = new StringConcatenation();
@@ -331,7 +331,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "actions", SWT.BOLD, 127, 0, 85);
   }
-  
+
   @Test
   public void single_line_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -340,7 +340,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     this.testHighlighting(_builder, "An implementation of Martin Fowler\'s secret compartment state machine", 
       SWT.NORMAL, 63, 127, 95);
   }
-  
+
   @Test
   public void multi_line_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -375,7 +375,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder_1.newLine();
     this.testHighlighting(_builder, _builder_1.toString(), SWT.NORMAL, 63, 127, 95);
   }
-  
+
   @Test
   public void fixme_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -383,7 +383,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "FIXME", SWT.BOLD, 127, 159, 191);
   }
-  
+
   @Test
   public void todo_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -391,7 +391,7 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder.newLine();
     this.testHighlighting(_builder, "TODO", SWT.BOLD, 127, 159, 191);
   }
-  
+
   @Test
   public void xxx_task_in_comment() {
     StringConcatenation _builder = new StringConcatenation();

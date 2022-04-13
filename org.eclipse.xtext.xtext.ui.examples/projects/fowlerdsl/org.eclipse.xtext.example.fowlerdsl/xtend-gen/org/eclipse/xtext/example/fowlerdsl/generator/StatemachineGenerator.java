@@ -39,12 +39,12 @@ public class StatemachineGenerator extends AbstractGenerator {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     fsa.generateFile(_plus, this.toJavaCode(((Statemachine) _head)));
   }
-  
+
   protected String className(final Resource res) {
     String name = res.getURI().lastSegment();
     return StringExtensions.toFirstUpper(name.substring(0, name.indexOf(".")));
   }
-  
+
   protected CharSequence toJavaCode(final Statemachine sm) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.BufferedReader;");
@@ -194,7 +194,7 @@ public class StatemachineGenerator extends AbstractGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected CharSequence declareCommand(final Command command) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("protected void do");
@@ -215,7 +215,7 @@ public class StatemachineGenerator extends AbstractGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected CharSequence generateCode(final State state) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (currentState.equals(\"");

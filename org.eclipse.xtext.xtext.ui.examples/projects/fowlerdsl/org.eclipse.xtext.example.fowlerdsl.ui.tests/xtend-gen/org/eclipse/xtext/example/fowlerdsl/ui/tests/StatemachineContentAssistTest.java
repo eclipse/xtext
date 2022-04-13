@@ -35,7 +35,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
       return _builder.toString();
     }
   }.apply();
-  
+
   @Test
   public void empty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -47,7 +47,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("commands", "events", "resetEvents", "state")), "resetEvents", _builder_1.toString());
   }
-  
+
   @Test
   public void statemachine_resetEvents() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -109,7 +109,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed")), "doorOpened", _builder_1.toString());
   }
-  
+
   @Test
   public void state_actions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -167,7 +167,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("unlockPanel", "lockPanel", "lockDoor", "unlockDoor", "{")), "unlockDoor", _builder_1.toString());
   }
-  
+
   @Test
   public void transition_event() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -285,7 +285,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Transition - Template for a Transition", "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "end")), "doorClosed", _builder_1.toString());
   }
-  
+
   @Test
   public void transition_state() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -480,7 +480,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("idle", "active", "waitingForLight", "waitingForDrawer", "unlockedPanel")), "idle", _builder_1.toString());
   }
-  
+
   @Test
   public void transition_template() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -552,7 +552,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "actions", "end", "Transition - Template for a Transition")), "Transition - Template for a Transition", _builder_1.toString());
   }
-  
+
   private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
     final int cursorPosition = text.toString().indexOf(this.c);
     final String content = text.toString().replace(this.c, "");

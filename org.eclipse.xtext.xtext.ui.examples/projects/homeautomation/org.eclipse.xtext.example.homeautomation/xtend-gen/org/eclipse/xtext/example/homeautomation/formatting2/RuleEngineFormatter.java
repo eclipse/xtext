@@ -79,7 +79,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       document.<Declaration>append(document.<Declaration>format(declaration), _function_1);
     }
   }
-  
+
   protected void _format(final Device device, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -100,7 +100,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       document.append(document.prepend(this.textRegionExtensions.immediatelyPreceding(document.<State>format(state)).keyword(","), _function_2), _function_3);
     }
   }
-  
+
   protected void _format(final Rule rule, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -115,7 +115,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     };
     document.<XExpression>prepend(document.<XExpression>format(rule.getThenPart()), _function_2);
   }
-  
+
   @Override
   protected void _format(final XBlockExpression expr, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -153,7 +153,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       }
     }
   }
-  
+
   @Override
   protected void _format(final XSwitchExpression expr, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -227,7 +227,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       this.formatBody(expr.getDefault(), true, document);
     }
   }
-  
+
   @Override
   protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -256,7 +256,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -288,7 +288,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected void formatBodyParagraph(final XExpression expr, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -307,7 +307,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   public void format(final Object device, final IFormattableDocument document) {
     if (device instanceof JvmTypeParameter) {

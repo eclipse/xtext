@@ -31,13 +31,13 @@ public class AutoEditTest extends AbstractAutoEditTest {
   @Inject
   @Extension
   private FileExtensionProvider _fileExtensionProvider;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
     this.createTestProjectWithXtextNature();
   }
-  
+
   @Test
   public void fantasting_autoedit() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -128,15 +128,15 @@ public class AutoEditTest extends AbstractAutoEditTest {
     _builder_1.newLine();
     this.testAutoEdit(_builder, 't', _builder_1);
   }
-  
+
   private void testAutoEdit(final CharSequence it, final char key, final CharSequence newContent) throws Exception {
     this.dslFileHasContent(this.press(this.dslFile(it), key), newContent);
   }
-  
+
   private XtextEditor dslFile(final CharSequence it) throws Exception {
     return this.openEditor(it.toString());
   }
-  
+
   private XtextEditor press(final XtextEditor it, final char c) throws Exception {
     XtextEditor _xblockexpression = null;
     {
@@ -145,15 +145,15 @@ public class AutoEditTest extends AbstractAutoEditTest {
     }
     return _xblockexpression;
   }
-  
+
   private void dslFileHasContent(final XtextEditor editor, final CharSequence it) {
     this.assertState(it.toString(), editor);
   }
-  
+
   private void createTestProjectWithXtextNature() throws Exception {
     IResourcesSetupUtil.addNature(IResourcesSetupUtil.createProject("foo"), XtextProjectHelper.NATURE_ID);
   }
-  
+
   @Override
   protected String getFileExtension() {
     return this._fileExtensionProvider.getPrimaryFileExtension();
