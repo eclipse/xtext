@@ -200,11 +200,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20091030\"/>");
+        _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
+        _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20220404-1927\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -254,11 +254,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         }
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.2.0.v20210813-1119\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.3.0.v20220409-0157\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"9.2.0.v20210813-1119\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"9.3.0.v20220409-0157\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -266,7 +266,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-03\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-06\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
@@ -285,11 +285,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20091030\"/>");
+        _builder.append("<unit id=\"javax.inject\" version=\"1.0.0.v20220405-0441\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
+        _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v20220404-1927\"/>");
         _builder.newLine();
         {
           JUnitVersion _junitVersion_1 = this.getConfig().getJunitVersion();
@@ -303,11 +303,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         }
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.2.0.v20210813-1119\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.3.0.v20220409-0157\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"9.2.0.v20210813-1119\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"9.3.0.v20220409-0157\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -315,7 +315,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-03\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-06\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
