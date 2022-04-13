@@ -51,44 +51,44 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private CodeConfig codeConfig;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateMwe = false;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateJavaMain = false;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateXtendMain = false;
-  
+
   @Override
   public boolean isGenerateStub() {
     return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && super.isGenerateStub());
   }
-  
+
   public boolean isGenerateJavaMain() {
     return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateJavaMain);
   }
-  
+
   public boolean isGenerateXtendMain() {
     return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateXtendMain);
   }
-  
+
   public boolean isGenerateMwe() {
     return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateMwe);
   }
-  
+
   protected TypeReference getGeneratorStub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".generator.");
@@ -97,13 +97,13 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     String _plus_2 = (_plus_1 + "Generator");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getJavaMain(final Grammar grammar) {
     String _packageName = this.getGeneratorStub(grammar).getPackageName();
     String _plus = (_packageName + ".Main");
     return new TypeReference(_plus);
   }
-  
+
   @Override
   public void checkConfiguration(final Issues issues) {
     if ((this.generateJavaMain && this.generateXtendMain)) {
@@ -112,7 +112,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       this.generateJavaMain = false;
     }
   }
-  
+
   @Override
   public void generate() {
     boolean _isGenerateStub = this.isGenerateStub();
@@ -168,7 +168,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       this.contributeEclipsePluginExtensions();
     }
   }
-  
+
   protected void contributeEclipsePluginGuiceBindings() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -204,7 +204,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     new GuiceModuleAccess.BindingFactory().addTypeToType(TypeReference.typeRef("org.eclipse.xtext.builder.IXtextBuilderParticipant"), 
       TypeReference.typeRef("org.eclipse.xtext.builder.BuilderParticipant")).addTypeToInstance(TypeReference.typeRef("org.eclipse.core.resources.IWorkspaceRoot"), expression).addConfiguredBinding("BuilderPreferenceStoreInitializer", statement).contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
-  
+
   protected void doGenerateXtendStubFile() {
     TypeReference _generatorStub = this.getGeneratorStub(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -260,7 +260,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createXtendFile(_generatorStub, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void doGenerateJavaStubFile() {
     TypeReference _generatorStub = this.getGeneratorStub(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -329,7 +329,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createJavaFile(_generatorStub, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void doGenerateJavaMain() {
     TypeReference _javaMain = this.getJavaMain(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -497,7 +497,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createJavaFile(_javaMain, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void doGenerateXtendMain() {
     TypeReference _javaMain = this.getJavaMain(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -643,7 +643,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createXtendFile(_javaMain, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void doGenerateMweFile() {
     String _path = this.getGeneratorStub(this.getLanguage().getGrammar()).getPath();
     String _plus = (_path + "MWE.mwe2");
@@ -744,7 +744,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createTextFile(_plus, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
@@ -930,15 +930,15 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   public void setGenerateMwe(final boolean generateMwe) {
     this.generateMwe = generateMwe;
   }
-  
+
   public void setGenerateJavaMain(final boolean generateJavaMain) {
     this.generateJavaMain = generateJavaMain;
   }
-  
+
   public void setGenerateXtendMain(final boolean generateXtendMain) {
     this.generateXtendMain = generateXtendMain;
   }

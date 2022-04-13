@@ -29,21 +29,21 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 @SuppressWarnings("all")
 public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
   private static final Logger LOG = Logger.getLogger(PluginXmlAccess.class);
-  
+
   @Inject
   private CodeConfig codeConfig;
-  
+
   public PluginXmlAccess() {
     this.setPath("plugin.xml");
   }
-  
+
   private final List<CharSequence> entries = CollectionLiterals.<CharSequence>newArrayList();
-  
+
   @Override
   public void setContent(final StringConcatenationClient content) {
     throw new UnsupportedOperationException("cannot directly set contents on a plugin.xml. Use entries property instead");
   }
-  
+
   @Override
   public CharSequence getContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -73,7 +73,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
     _builder.newLine();
     return _builder;
   }
-  
+
   /**
    * Merge the contents of the given plugin.xml into this one.
    */
@@ -95,7 +95,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     boolean _isEmpty = this.entries.isEmpty();
@@ -104,21 +104,21 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
       super.writeTo(fileSystemAccess);
     }
   }
-  
+
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
   }
-  
+
   @Pure
   public CodeConfig getCodeConfig() {
     return this.codeConfig;
   }
-  
+
   public void setCodeConfig(final CodeConfig codeConfig) {
     this.codeConfig = codeConfig;
   }
-  
+
   @Pure
   public List<CharSequence> getEntries() {
     return this.entries;

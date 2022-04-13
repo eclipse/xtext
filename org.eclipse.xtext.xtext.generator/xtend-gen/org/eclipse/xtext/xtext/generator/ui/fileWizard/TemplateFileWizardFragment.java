@@ -57,16 +57,16 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Accessors
   private boolean generate = false;
-  
+
   @Accessors
   private boolean generateToolbarButton = false;
-  
+
   @Override
   public void generate() {
     if ((!this.generate)) {
@@ -292,7 +292,7 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
     this.generateProjectTemplateProvider();
     this.generateDefaultIcons();
   }
-  
+
   public void generateProjectTemplateProvider() {
     final TypeReference initialContentsClass = TypeReference.typeRef(this.getFileTemplateProviderClassName());
     final String quotes = "\'\'\'";
@@ -401,7 +401,7 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   public void generateDefaultIcons() {
     final BinaryFileAccess projectTemplate = this.fileAccessFactory.createBinaryFile("file_template.png");
     boolean _existIn = projectTemplate.existIn(this.getProjectConfig().getEclipsePlugin().getIcons());
@@ -421,7 +421,7 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
       newProject.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
     }
   }
-  
+
   private byte[] readBinaryFileFromPackage(final String fileName) {
     try {
       final InputStream stream = TemplateFileWizardFragment.class.getResourceAsStream(fileName);
@@ -434,33 +434,33 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected String getFileTemplateProviderClassName() {
     String _fileWizardPackage = this.getFileWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_fileWizardPackage + _simpleName);
     return (_plus + "FileTemplateProvider");
   }
-  
+
   protected String getFileWizardClassName() {
     String _fileWizardPackage = this.getFileWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_fileWizardPackage + _simpleName);
     return (_plus + "NewFileWizard");
   }
-  
+
   protected String getFileWizardPackage() {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
     return (_eclipsePluginBasePackage + ".wizard.");
   }
-  
+
   /**
    * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
    */
   public boolean setGenerate(final boolean value) {
     return this.generate = value;
   }
-  
+
   /**
    * Generate a new file wizard toolbar button. Set to 'false' by default. Change to 'true' to add the new file wizard button to the toolbar.
    * 
@@ -469,12 +469,12 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
   public boolean setGenerateToolbarButton(final boolean value) {
     return this.generateToolbarButton = value;
   }
-  
+
   @Pure
   public boolean isGenerate() {
     return this.generate;
   }
-  
+
   @Pure
   public boolean isGenerateToolbarButton() {
     return this.generateToolbarButton;

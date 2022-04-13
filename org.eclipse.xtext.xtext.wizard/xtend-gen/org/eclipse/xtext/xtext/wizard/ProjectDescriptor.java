@@ -32,17 +32,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public abstract class ProjectDescriptor {
   private final WizardConfiguration config;
-  
+
   private boolean enabled;
-  
+
   public String getName() {
     String _baseName = this.config.getBaseName();
     String _nameQualifier = this.getNameQualifier();
     return (_baseName + _nameQualifier);
   }
-  
+
   public abstract String getNameQualifier();
-  
+
   public String getLocation() {
     String _xifexpression = null;
     ProjectLayout _projectLayout = this.config.getProjectLayout();
@@ -60,11 +60,11 @@ public abstract class ProjectDescriptor {
     }
     return _xifexpression;
   }
-  
+
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     return CollectionLiterals.<ProjectDescriptor>emptySet();
   }
-  
+
   /**
    * @since 2.15 (changed return value use 'path' of 'SourceFolderDescriptor' to get same result as before)
    */
@@ -76,7 +76,7 @@ public abstract class ProjectDescriptor {
     };
     return IterableExtensions.<SourceFolderDescriptor>toSet(ListExtensions.<Outlet, SourceFolderDescriptor>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function));
   }
-  
+
   public Iterable<? extends AbstractFile> getFiles() {
     final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
@@ -101,17 +101,17 @@ public abstract class ProjectDescriptor {
     }
     return files;
   }
-  
+
   public abstract boolean isPartOfGradleBuild();
-  
+
   public abstract boolean isPartOfMavenBuild();
-  
+
   public abstract boolean isEclipsePluginProject();
-  
+
   public boolean isEclipseFeatureProject() {
     return false;
   }
-  
+
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();
     final Function1<SourceFolderDescriptor, String> _function = (SourceFolderDescriptor it) -> {
@@ -132,7 +132,7 @@ public abstract class ProjectDescriptor {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   public Set<String> getBinIncludes() {
     StringConcatenation _builder = new StringConcatenation();
     String _sourceFolder = this.sourceFolder(Outlet.META_INF);
@@ -140,18 +140,18 @@ public abstract class ProjectDescriptor {
     _builder.append("/");
     return CollectionLiterals.<String>newLinkedHashSet(".", _builder.toString());
   }
-  
+
   /**
    * @since 2.11
    */
   public Set<String> getBinExcludes() {
     return CollectionLiterals.<String>newLinkedHashSet("**/*.xtend");
   }
-  
+
   public Set<String> getDevelopmentBundles() {
     return CollectionLiterals.<String>emptySet();
   }
-  
+
   private String buildPropertiesEntry(final String key, final Iterable<String> value) {
     String _xblockexpression = null;
     {
@@ -166,7 +166,7 @@ public abstract class ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   public String manifest() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Manifest-Version: 1.0");
@@ -214,11 +214,11 @@ public abstract class ProjectDescriptor {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   public String getBree() {
     return this.config.getJavaVersion().getBree();
   }
-  
+
   private String manifestEntry(final String key, final Iterable<String> value) {
     boolean _isEmpty = IterableExtensions.isEmpty(value);
     if (_isEmpty) {
@@ -231,7 +231,7 @@ public abstract class ProjectDescriptor {
     _builder.append(_join);
     return _builder.toString();
   }
-  
+
   public Set<String> getRequiredBundles() {
     LinkedHashSet<String> _xblockexpression = null;
     {
@@ -268,14 +268,14 @@ public abstract class ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   public Set<String> getImportedPackages() {
     final Function1<ExternalDependency, Set<String>> _function = (ExternalDependency it) -> {
       return it.getP2().getPackages();
     };
     return IterableExtensions.<String>toSet(Iterables.<String>concat(IterableExtensions.<ExternalDependency, Set<String>>map(this.getExternalDependencies(), _function)));
   }
-  
+
   public Set<ExternalDependency> getExternalDependencies() {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
     Set<EPackageInfo> _ePackageInfos = this.config.getEcore2Xtext().getEPackageInfos();
@@ -285,63 +285,63 @@ public abstract class ProjectDescriptor {
     }
     return deps;
   }
-  
+
   public Object getActivatorClassName() {
     return null;
   }
-  
+
   protected boolean isAtLeastJava9() {
     return this.config.getJavaVersion().isAtLeast(JavaVersion.JAVA9);
   }
-  
+
   public GradleBuildFile buildGradle() {
     return new GradleBuildFile(this);
   }
-  
+
   public PomFile pom() {
     return new PomFile(this);
   }
-  
+
   public String sourceFolder(final Outlet outlet) {
     return this.config.getSourceLayout().getPathFor(outlet);
   }
-  
+
   public boolean isTest(final Outlet outlet) {
     return Arrays.<Outlet>asList(Outlet.testOutlets()).contains(outlet);
   }
-  
+
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content) {
     return new PlainTextFile(outlet, relativePath, this, content);
   }
-  
+
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content, final boolean executable) {
     return new PlainTextFile(outlet, relativePath, this, content, executable);
   }
-  
+
   protected BinaryFile binaryFile(final Outlet outlet, final String relativePath, final URL url) {
     return new BinaryFile(outlet, relativePath, this, false, url);
   }
-  
+
   protected boolean isFromExistingEcoreModels() {
     boolean _isEmpty = this.config.getEcore2Xtext().getEPackageInfos().isEmpty();
     return (!_isEmpty);
   }
-  
+
   public ProjectDescriptor(final WizardConfiguration config) {
     super();
     this.config = config;
   }
-  
+
   @Pure
   public WizardConfiguration getConfig() {
     return this.config;
   }
-  
+
   @Pure
   public boolean isEnabled() {
     return this.enabled;
   }
-  
+
   public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
   }

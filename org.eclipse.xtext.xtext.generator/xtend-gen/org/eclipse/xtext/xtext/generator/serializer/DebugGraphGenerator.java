@@ -40,35 +40,35 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 public class DebugGraphGenerator {
   @Inject
   private Grammar grammar;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private IContextPDAProvider contextPDAProvider;
-  
+
   @Inject
   private IContextTypePDAProvider contextTypePDAProvider;
-  
+
   @Inject
   private ISyntacticSequencerPDAProvider syntacticSequencerPDAProvider;
-  
+
   @Inject
   private ISemanticSequencerNfaProvider semanticSequencerNFAProvider;
-  
+
   @Inject
   private SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot;
-  
+
   @Inject
   private SyntacticSequencerExtensions syntacticSequencerUtil;
-  
+
   @Inject
   private PdaToDot<?, ?> pdaToDot;
-  
+
   @Inject
   private NfaToDot<?> nfaToDot;
-  
+
   public Iterable<Pair<String, String>> generateDebugGraphs() {
     final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
     @Extension
@@ -215,7 +215,7 @@ public class DebugGraphGenerator {
     }
     return result;
   }
-  
+
   private String drawSafe(final GraphvizDotBuilder builder, final Object graph) {
     String _xtrycatchfinallyexpression = null;
     try {
@@ -232,7 +232,7 @@ public class DebugGraphGenerator {
     }
     return _xtrycatchfinallyexpression;
   }
-  
+
   private String directory(final String name) {
     String _replace = this._xtextGeneratorNaming.getRuntimeBasePackage(this.grammar).replace(".", "/");
     String _plus = (_replace + "/serializer/");

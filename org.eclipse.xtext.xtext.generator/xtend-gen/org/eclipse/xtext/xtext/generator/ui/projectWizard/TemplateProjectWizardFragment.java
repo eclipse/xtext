@@ -58,19 +58,19 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Accessors
   private boolean generate = false;
-  
+
   @Accessors
   private boolean generateToolbarButton = false;
-  
+
   @Accessors
   private boolean pluginProject = true;
-  
+
   @Override
   public void generate() {
     if ((!this.generate)) {
@@ -307,7 +307,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     this.generateProjectTemplateProvider();
     this.generateDefaultIcons();
   }
-  
+
   public void generateProjectTemplateProvider() {
     final TypeReference initialContentsClass = TypeReference.typeRef(this.getProjectTemplateProviderClassName());
     final String quotes = "\'\'\'";
@@ -604,7 +604,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   public void generateDefaultIcons() {
     final BinaryFileAccess projectTemplate = this.fileAccessFactory.createBinaryFile("project_template.png");
     boolean _existIn = projectTemplate.existIn(this.getProjectConfig().getEclipsePlugin().getIcons());
@@ -624,7 +624,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
       newProject.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
     }
   }
-  
+
   private byte[] readBinaryFileFromPackage(final String fileName) {
     try {
       final InputStream stream = TemplateProjectWizardFragment.class.getResourceAsStream(fileName);
@@ -637,33 +637,33 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected String getProjectTemplateProviderClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "ProjectTemplateProvider");
   }
-  
+
   protected String getProjectWizardClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "NewProjectWizard");
   }
-  
+
   protected String getProjectWizardPackage() {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
     return (_eclipsePluginBasePackage + ".wizard.");
   }
-  
+
   /**
    * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
    */
   public boolean setGenerate(final boolean value) {
     return this.generate = value;
   }
-  
+
   /**
    * Generate a new project wizard toolbar button. Set to 'false' by default. Change to 'true' to add the new project wizard button to the toolbar.
    * 
@@ -672,7 +672,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
   public boolean setGenerateToolbarButton(final boolean value) {
     return this.generateToolbarButton = value;
   }
-  
+
   /**
    * Generate the projects as eclipse plugins. Affects only the example content of the templates. Can be changed
    * manually afterwards.
@@ -680,17 +680,17 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
   public boolean setPluginProject(final boolean value) {
     return this.pluginProject = value;
   }
-  
+
   @Pure
   public boolean isGenerate() {
     return this.generate;
   }
-  
+
   @Pure
   public boolean isGenerateToolbarButton() {
     return this.generateToolbarButton;
   }
-  
+
   @Pure
   public boolean isPluginProject() {
     return this.pluginProject;

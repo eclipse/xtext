@@ -55,15 +55,15 @@ import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
-  
+
   protected TypeReference getFormatter2Stub(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".formatting2.");
@@ -72,7 +72,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     String _plus_2 = (_plus_1 + "Formatter");
     return new TypeReference(_plus_2);
   }
-  
+
   @Override
   public void generate() {
     boolean _isGenerateStub = this.isGenerateStub();
@@ -106,14 +106,14 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     }
     this.doGenerateStubFile();
   }
-  
+
   protected void doGenerateStubFile() {
     final JavaFileAccess file = this.doGetStubFile();
     if (file!=null) {
       file.writeTo(this.getProjectConfig().getRuntime().getSrc());
     }
   }
-  
+
   protected JavaFileAccess doGetStubFile() {
     boolean _isGenerateStub = this.isGenerateStub();
     boolean _not = (!_isGenerateStub);
@@ -234,7 +234,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       return javaFile;
     }
   }
-  
+
   protected StringConcatenationClient generateFormatMethod(final EClass clazz, final Collection<EReference> containmentRefs, final boolean isOverriding) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -303,7 +303,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient generateJavaFormatMethod(final EClass clazz, final Collection<EReference> containmentRefs, final boolean isOverriding) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -376,7 +376,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     };
     return _client;
   }
-  
+
   protected void getLocallyAssignedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref) {
     List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(grammar);
     for (final Assignment assignment : _containedAssignments) {
@@ -406,7 +406,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       }
     }
   }
-  
+
   protected void getInheritedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref, final Set<Grammar> visitedGrammars) {
     visitedGrammars.add(grammar);
     EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
@@ -419,7 +419,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       }
     }
   }
-  
+
   protected TypeReference getStubSuperClass() {
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(this.getLanguage().getGrammar());
     if ((superGrammar != null)) {
@@ -433,7 +433,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       }
     }
   }
-  
+
   protected String toVarName(final ENamedElement element, final String... reservedNames) {
     String _xblockexpression = null;
     {
@@ -453,11 +453,11 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected String getGetAccessor(final EStructuralFeature feature) {
     return GenModelUtil2.getGenFeature(feature, this.getLanguage().getResourceSet()).getName();
   }
-  
+
   protected String getGetAccessorType(final EStructuralFeature feature) {
     String _xifexpression = null;
     boolean _isMany = feature.isMany();

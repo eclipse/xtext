@@ -22,42 +22,42 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class WebProjectDescriptor extends ProjectDescriptor {
   private static final String REQUIREJS_VERSION = "2.3.6";
-  
+
   private static final String JQUERY_VERSION = "3.6.0";
-  
+
   private static final String JETTY_VERSION = "9.4.45.v20220203";
-  
+
   private static final String SLF4J_VERSION = "1.7.33";
-  
+
   private static final String ACE_VERSION = "1.3.3";
-  
+
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     return CollectionLiterals.<ProjectDescriptor>newLinkedHashSet(this.getConfig().getRuntimeProject(), this.getConfig().getIdeProject());
   }
-  
+
   @Override
   public String getNameQualifier() {
     return ".web";
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.GRADLE);
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     BuildSystem _preferredBuildSystem = this.getConfig().getPreferredBuildSystem();
     return Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
   }
-  
+
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
@@ -91,7 +91,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     deps.add(_doubleArrow_1);
     return deps;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();
@@ -135,7 +135,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -363,7 +363,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public WebProjectDescriptor(final WizardConfiguration config) {
     super(config);
   }

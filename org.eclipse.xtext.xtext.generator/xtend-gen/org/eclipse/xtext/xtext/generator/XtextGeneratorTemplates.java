@@ -56,14 +56,14 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 public class XtextGeneratorTemplates {
   @Inject
   private CodeConfig codeConfig;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming naming;
-  
+
   public JavaFileAccess createRuntimeSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -147,7 +147,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_runtimeSetup_1, _client_1);
     }
   }
-  
+
   @Deprecated
   private static void addBackwardsCompabibleImportsTo(final IXtextGeneratorLanguage langConfig, final GeneratedJavaFileAccess file) {
     Set<TypeReference> _imports = langConfig.getRuntimeGenSetup().getImports();
@@ -155,7 +155,7 @@ public class XtextGeneratorTemplates {
       file.importType(type);
     }
   }
-  
+
   public JavaFileAccess createRuntimeGenSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(this.naming.getRuntimeGenSetup(it));
@@ -331,7 +331,7 @@ public class XtextGeneratorTemplates {
     file.setContent(_client);
     return file;
   }
-  
+
   private CharSequence getBindMethodName(final GuiceModuleAccess.Binding it) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -366,7 +366,7 @@ public class XtextGeneratorTemplates {
     }
     return _builder;
   }
-  
+
   private String getSimpleMethodName(final TypeReference type) {
     String _join = IterableExtensions.join(type.getSimpleNames(), "$");
     final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
@@ -375,7 +375,7 @@ public class XtextGeneratorTemplates {
     String _join_1 = IterableExtensions.<TypeReference>join(type.getTypeArguments(), "$", "$", "", _function);
     return (_join + _join_1);
   }
-  
+
   private StringConcatenationClient createBindingMethod(final GuiceModuleAccess.Binding it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -529,7 +529,7 @@ public class XtextGeneratorTemplates {
     };
     return _client;
   }
-  
+
   public JavaFileAccess createRuntimeModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -587,7 +587,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_runtimeModule_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createRuntimeGenModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     TypeReference _elvis = null;
@@ -722,7 +722,7 @@ public class XtextGeneratorTemplates {
     file.setMarkedAsGenerated(true);
     return file;
   }
-  
+
   public JavaFileAccess createIdeModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -780,7 +780,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_genericIdeModule_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createIdeGenModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     TypeReference _elvis = null;
@@ -844,7 +844,7 @@ public class XtextGeneratorTemplates {
     file.setMarkedAsGenerated(true);
     return file;
   }
-  
+
   public JavaFileAccess createIdeSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -950,7 +950,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_genericIdeSetup_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createEclipsePluginModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -1027,7 +1027,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_eclipsePluginModule_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createEclipsePluginGenModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     TypeReference _elvis = null;
@@ -1108,7 +1108,7 @@ public class XtextGeneratorTemplates {
     file.setMarkedAsGenerated(true);
     return file;
   }
-  
+
   public JavaFileAccess createWebModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -1166,7 +1166,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_webModule_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createWebGenModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     TypeReference _elvis = null;
@@ -1230,7 +1230,7 @@ public class XtextGeneratorTemplates {
     file.setMarkedAsGenerated(true);
     return file;
   }
-  
+
   public JavaFileAccess createWebSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
@@ -1347,7 +1347,7 @@ public class XtextGeneratorTemplates {
       return this.fileAccessFactory.createJavaFile(_webSetup_1, _client_1);
     }
   }
-  
+
   public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final IXtextGeneratorLanguage langConfig, final IXtextGeneratorLanguage activatorLanguage) {
     final Grammar grammar = langConfig.getGrammar();
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(this.naming.getEclipsePluginExecutableExtensionFactory(grammar));
@@ -1439,7 +1439,7 @@ public class XtextGeneratorTemplates {
     file.setContent(_client_1);
     return file;
   }
-  
+
   public JavaFileAccess createEclipsePluginActivator(final IXtextProjectConfig projectConfig, final List<? extends IXtextGeneratorLanguage> langConfigs) {
     final TypeReference activator = this.naming.getEclipsePluginActivator();
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(activator);
@@ -1759,7 +1759,7 @@ public class XtextGeneratorTemplates {
     file.setContent(_client_1);
     return file;
   }
-  
+
   public TextFileAccess createMetaInfServices(final List<? extends IXtextGeneratorLanguage> languageConfigs) {
     TextFileAccess _xblockexpression = null;
     {

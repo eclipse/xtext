@@ -75,32 +75,32 @@ public class GrammarAccessExtensions {
   @FinalFieldsConstructor
   protected static class LineSeparatorModule extends XtextRuntimeModule {
     private final ILineSeparatorInformation lineSeparatorInformation;
-    
+
     @Override
     public void configure(final Binder binder) {
       final CompoundModule compound = this.getBindings();
       compound.configure(binder);
     }
-    
+
     public ILineSeparatorInformation bindILineSeparatorInformation() {
       return this.lineSeparatorInformation;
     }
-    
+
     public LineSeparatorModule(final ILineSeparatorInformation lineSeparatorInformation) {
       super();
       this.lineSeparatorInformation = lineSeparatorInformation;
     }
   }
-  
+
   private static Map<String, String> SPECIAL_CHARS = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("\b", "backspace"), Pair.<String, String>of("\f", "formFeed"), Pair.<String, String>of("\n", "lineFeed"), Pair.<String, String>of("\r", "carriageReturn"), Pair.<String, String>of("\t", "tab"), Pair.<String, String>of("\\", "backslash")));
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private CodeConfig codeConfig;
-  
+
   /**
    * Returns a reference to the GrammarAccess implementation for a grammar.
    */
@@ -112,7 +112,7 @@ public class GrammarAccessExtensions {
     String _plus_2 = (_plus_1 + "GrammarAccess");
     return new TypeReference(_plus_2);
   }
-  
+
   /**
    * Returns the invocation of the element accessor method as fully qualified Java statement.
    * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
@@ -130,7 +130,7 @@ public class GrammarAccessExtensions {
     };
     return _client;
   }
-  
+
   /**
    * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
    * The string is split up along the characters that are not valid as java
@@ -152,7 +152,7 @@ public class GrammarAccessExtensions {
       }
     }
   }
-  
+
   private String toJavaIdentifier(final List<String> text, final boolean uppercaseFirst) {
     final Iterator<String> i = text.iterator();
     String _javaIdentifierSegment = this.toJavaIdentifierSegment(i.next(), true, uppercaseFirst);
@@ -162,7 +162,7 @@ public class GrammarAccessExtensions {
     }
     return b.toString();
   }
-  
+
   private String toJavaIdentifierSegment(final String text, final boolean isFirst, final boolean uppercaseFirst) {
     final String special = GrammarAccessExtensions.SPECIAL_CHARS.get(text);
     if ((special != null)) {
@@ -192,14 +192,14 @@ public class GrammarAccessExtensions {
     }
     return this.toJavaIdentifierSegmentInt(builder.toString().toLowerCase().trim(), isFirst, true);
   }
-  
+
   /**
    * Returns the Unicode string name for a character.
    */
   public String getUnicodeName(final char character) {
     return Character.getName(character);
   }
-  
+
   private String toJavaIdentifierSegmentInt(final String text, final boolean isFirst, final boolean uppercaseFirst) {
     boolean start = isFirst;
     boolean up = true;
@@ -235,7 +235,7 @@ public class GrammarAccessExtensions {
     }
     return builder.toString();
   }
-  
+
   public boolean isValidJavaLatinIdentifier(final char c, final boolean start) {
     boolean valid = ((c >= 'A') && (c <= 'Z'));
     valid = (valid || ((c >= 'a') && (c <= 'z')));
@@ -246,11 +246,11 @@ public class GrammarAccessExtensions {
     }
     return valid;
   }
-  
+
   private static boolean eq(final char c1, final char c2) {
     return (c1 == c2);
   }
-  
+
   /**
    * Creates an identifier for a Rule which is a valid Java identifier and unique within
    * the Rule's grammar and its super grammars.
@@ -259,7 +259,7 @@ public class GrammarAccessExtensions {
     final String plainName = RuleNames.getRuleNames(rule).getUniqueRuleName(rule);
     return this.toJavaIdentifier(plainName, true);
   }
-  
+
   /**
    * Creates an identifier for a Rule which is a valid Java identifier and unique within
    * the grammar that defines the rule.
@@ -267,7 +267,7 @@ public class GrammarAccessExtensions {
   public String gaBaseRuleIdentifier(final AbstractRule rule) {
     return this.toJavaIdentifier(rule.getName(), true);
   }
-  
+
   /**
    * Creates an identifier for an AbstractElement which is a valid Java identifier and
    * which is unique within the element's rule. The identifier tries to be as
@@ -293,7 +293,7 @@ public class GrammarAccessExtensions {
       }
     }
   }
-  
+
   private List<String> getElementDescription(final AbstractElement element) {
     final ArrayList<String> result = new ArrayList<String>();
     AbstractElement container = element;
@@ -312,7 +312,7 @@ public class GrammarAccessExtensions {
     }
     return result;
   }
-  
+
   private List<String> getSingleElementDescription(final AbstractElement ele) {
     final ArrayList<String> r = new ArrayList<String>(2);
     boolean _matched = false;
@@ -380,7 +380,7 @@ public class GrammarAccessExtensions {
     }
     return r;
   }
-  
+
   private String getElementTypeDescription(final AbstractElement ele) {
     String _xifexpression = null;
     if ((ele instanceof RuleCall)) {
@@ -391,7 +391,7 @@ public class GrammarAccessExtensions {
     }
     return _xifexpression;
   }
-  
+
   private String getElementPath(final AbstractElement ele) {
     EObject obj = ele;
     final StringBuilder result = new StringBuilder();
@@ -405,7 +405,7 @@ public class GrammarAccessExtensions {
     }
     return result.toString();
   }
-  
+
   /**
    * Returns the method name for accessing a rule via a GrammarAccess implementation.
    */
@@ -414,7 +414,7 @@ public class GrammarAccessExtensions {
     String _plus = ("get" + _gaRuleIdentifier);
     return (_plus + "Rule");
   }
-  
+
   /**
    * Returns the method name for accessing a rule via a GrammarAccess implementation.
    */
@@ -423,7 +423,7 @@ public class GrammarAccessExtensions {
     String _plus = ("get" + _gaBaseRuleIdentifier);
     return (_plus + "Rule");
   }
-  
+
   /**
    * Returns the method name for accessing a rule's content via a ParserRuleAccess implementation.
    */
@@ -432,7 +432,7 @@ public class GrammarAccessExtensions {
     String _plus = ("get" + _gaRuleIdentifier);
     return (_plus + "Access");
   }
-  
+
   /**
    * Returns the method name for accessing a rule's content via a ParserRuleAccess implementation.
    */
@@ -441,7 +441,7 @@ public class GrammarAccessExtensions {
     String _plus = ("get" + _gaBaseRuleIdentifier);
     return (_plus + "Access");
   }
-  
+
   /**
    * Returns the method name for accessing an element via a GrammarAccess implementation.
    */
@@ -449,7 +449,7 @@ public class GrammarAccessExtensions {
     String _gaElementIdentifier = this.gaElementIdentifier(element);
     return ("get" + _gaElementIdentifier);
   }
-  
+
   /**
    * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
    * a facade for each parser rule, which contains the methods for accessing the rule's elements.
@@ -458,7 +458,7 @@ public class GrammarAccessExtensions {
     String _gaRuleIdentifier = this.gaRuleIdentifier(rule);
     return (_gaRuleIdentifier + "Elements");
   }
-  
+
   /**
    * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
    * a facade for each parser rule, which contains the methods for accessing the rule's elements.
@@ -467,7 +467,7 @@ public class GrammarAccessExtensions {
     String _gaBaseRuleIdentifier = this.gaBaseRuleIdentifier(rule);
     return (_gaBaseRuleIdentifier + "Elements");
   }
-  
+
   /**
    * Returns the invocation of the rule accessor method as Java statement.
    */
@@ -475,7 +475,7 @@ public class GrammarAccessExtensions {
     String _gaRuleAccessMethodName = this.gaRuleAccessMethodName(rule);
     return (_gaRuleAccessMethodName + "()");
   }
-  
+
   /**
    * Returns the invocation of a ParserRule Parameter as Java expression.
    */
@@ -490,7 +490,7 @@ public class GrammarAccessExtensions {
     String _plus_3 = (_plus_2 + _name);
     return (_plus_3 + "*/)");
   }
-  
+
   /**
    * Returns the invocation of the rule accessor method as Java statement.
    */
@@ -498,7 +498,7 @@ public class GrammarAccessExtensions {
     String _gaBaseRuleAccessMethodName = this.gaBaseRuleAccessMethodName(rule);
     return (_gaBaseRuleAccessMethodName + "()");
   }
-  
+
   /**
    * Returns the invocation of the rule's content accessor method as Java statement.
    */
@@ -506,7 +506,7 @@ public class GrammarAccessExtensions {
     String _gaRuleElementsMethodName = this.gaRuleElementsMethodName(rule);
     return (_gaRuleElementsMethodName + "()");
   }
-  
+
   /**
    * Returns the invocation of the rule's content accessor method as Java statement.
    */
@@ -514,7 +514,7 @@ public class GrammarAccessExtensions {
     String _gaBaseRuleElementsMethodName = this.gaBaseRuleElementsMethodName(rule);
     return (_gaBaseRuleElementsMethodName + "()");
   }
-  
+
   /**
    * Returns the invocation of the element accessor method as Java statement.
    * The called method is implemented by the rule's facade.
@@ -524,7 +524,7 @@ public class GrammarAccessExtensions {
     String _gaElementAccessMethodName = this.gaElementAccessMethodName(ele);
     return (_gaElementAccessMethodName + "()");
   }
-  
+
   /**
    * Returns the invocation of the element accessor method for a GrammarAccess
    * as Java statement.
@@ -536,7 +536,7 @@ public class GrammarAccessExtensions {
     String _gaElementAccessor = this.gaElementAccessor(ele);
     return (_plus + _gaElementAccessor);
   }
-  
+
   /**
    * Returns the invocation of an element or rule accessor, including the .getType() call.
    * Example1: getFooRule().getType()
@@ -566,7 +566,7 @@ public class GrammarAccessExtensions {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns the invocation of an element or rule accessor.
    * Example1: getFooRule()
@@ -598,7 +598,7 @@ public class GrammarAccessExtensions {
     }
     return _switchResult;
   }
-  
+
   public String grammarFragmentToString(final EObject object, final String prefix) {
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(object);
     if ((node == null)) {
@@ -621,7 +621,7 @@ public class GrammarAccessExtensions {
       return this.process(node.getText(), prefix);
     }
   }
-  
+
   private String process(final String input, final String prefix) {
     String[] lines = input.split("\\s*(\\r?\\n)");
     int first = 0;
@@ -652,11 +652,11 @@ public class GrammarAccessExtensions {
     final String[] _converted_lines_3 = (String[])lines;
     return IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_converted_lines_3)), this.codeConfig.getLineDelimiter());
   }
-  
+
   private boolean isBlank(final String line) {
     return line.trim().isEmpty();
   }
-  
+
   private String commonLeadingWhitespace(final List<String> lines) {
     int _size = lines.size();
     boolean _lessThan = (_size < 2);
@@ -685,7 +685,7 @@ public class GrammarAccessExtensions {
     }
     return current;
   }
-  
+
   /**
    * @noreference
    */
@@ -707,36 +707,36 @@ public class GrammarAccessExtensions {
     s = _plus;
     return s;
   }
-  
+
   protected String _grammarElementIdentifier(final EObject it) {
     String _string = it.toString();
     return ("Unsupported : grammarElementIdentifier for: " + _string);
   }
-  
+
   protected String _grammarElementIdentifier(final AbstractRule it) {
     return this.gaRuleIdentifier(it);
   }
-  
+
   protected String _grammarElementIdentifier(final AbstractElement it) {
     String _grammarElementIdentifier = this.grammarElementIdentifier(GrammarUtil.containingRule(it));
     String _plus = (_grammarElementIdentifier + "_");
     String _gaElementIdentifier = this.gaElementIdentifier(it);
     return (_plus + _gaElementIdentifier);
   }
-  
+
   protected String _grammarElementAccess(final EObject it) {
     String _string = it.toString();
     return ("Unsupported : grammarElementAccess for: " + _string);
   }
-  
+
   protected String _grammarElementAccess(final AbstractRule it) {
     return this.gaRuleAccessor(it);
   }
-  
+
   protected String _grammarElementAccess(final AbstractElement it) {
     return this.gaRuleElementAccessor(it);
   }
-  
+
   public List<String> initialHiddenTokens(final Grammar it) {
     List<String> _xblockexpression = null;
     {
@@ -756,7 +756,7 @@ public class GrammarAccessExtensions {
     }
     return _xblockexpression;
   }
-  
+
   public String ruleName(final AbstractRule rule) {
     final RuleNames ruleNames = RuleNames.tryGetRuleNames(rule);
     String _elvis = null;
@@ -772,11 +772,11 @@ public class GrammarAccessExtensions {
     }
     return _elvis;
   }
-  
+
   public String entryRuleName(final ParserRule rule) {
     return AntlrGrammarGenUtil.getEntryRuleName(rule);
   }
-  
+
   public boolean isCalled(final AbstractRule rule, final Grammar grammar) {
     boolean _xblockexpression = false;
     {
@@ -790,19 +790,19 @@ public class GrammarAccessExtensions {
     }
     return _xblockexpression;
   }
-  
+
   public boolean definesUnorderedGroups(final ParserRule it, final AntlrOptions options) {
     return (options.isBacktrack() && (!EcoreUtil2.<UnorderedGroup>typeSelect(EcoreUtil2.eAllContentsAsList(it), UnorderedGroup.class).isEmpty()));
   }
-  
+
   protected boolean _predicated(final AbstractElement it) {
     return it.isPredicated();
   }
-  
+
   protected boolean _predicated(final Assignment it) {
     return (it.isPredicated() || this.predicated(it.getTerminal()));
   }
-  
+
   protected boolean _predicated(final RuleCall it) {
     boolean _or = false;
     boolean _isPredicated = it.isPredicated();
@@ -824,11 +824,11 @@ public class GrammarAccessExtensions {
     }
     return _or;
   }
-  
+
   public AbstractElement predicatedElement(final AbstractElement it) {
     return AntlrGrammarGenUtil.getPredicatedElement(it);
   }
-  
+
   public String localVar(final Assignment it, final AbstractElement terminal) {
     String _feature = it.getFeature();
     String _plus = ("lv_" + _feature);
@@ -839,7 +839,7 @@ public class GrammarAccessExtensions {
     int _indexOf_1 = EcoreUtil2.eAllContentsAsList(it).indexOf(terminal);
     return (_plus_3 + Integer.valueOf(_indexOf_1));
   }
-  
+
   protected String _localVar(final RuleCall it) {
     String _name = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it.getRule()).getName();
     String _plus = ("this_" + _name);
@@ -847,7 +847,7 @@ public class GrammarAccessExtensions {
     int _indexOf = this.contentsAsList(GrammarUtil.containingParserRule(it)).indexOf(it);
     return (_plus_1 + Integer.valueOf(_indexOf));
   }
-  
+
   protected String _localVar(final AbstractElement it) {
     String _xblockexpression = null;
     {
@@ -857,27 +857,27 @@ public class GrammarAccessExtensions {
     }
     return _xblockexpression;
   }
-  
+
   protected String _localVar(final EnumLiteralDeclaration it) {
     int _indexOf = this.contentsAsList(GrammarUtil.containingEnumRule(it).getAlternatives()).indexOf(it);
     return ("enumLiteral_" + Integer.valueOf(_indexOf));
   }
-  
+
   protected List<AbstractElement> _contentsAsList(final ParserRule it) {
     return this.contentsAsList(it.getAlternatives());
   }
-  
+
   protected List<AbstractElement> _contentsAsList(final AbstractElement it) {
     return CollectionLiterals.<AbstractElement>newArrayList(it);
   }
-  
+
   protected List<AbstractElement> _contentsAsList(final CompoundElement it) {
     final Function1<AbstractElement, List<AbstractElement>> _function = (AbstractElement it_1) -> {
       return this.contentsAsList(it_1);
     };
     return IterableExtensions.<AbstractElement>toList(Iterables.<AbstractElement>concat(ListExtensions.<AbstractElement, List<AbstractElement>>map(it.getElements(), _function)));
   }
-  
+
   protected List<AbstractElement> _contentsAsList(final UnorderedGroup it) {
     ArrayList<AbstractElement> _xblockexpression = null;
     {
@@ -891,7 +891,7 @@ public class GrammarAccessExtensions {
     }
     return _xblockexpression;
   }
-  
+
   public String setOrAdd(final Action it) {
     String _xifexpression = null;
     String _operator = it.getOperator();
@@ -903,7 +903,7 @@ public class GrammarAccessExtensions {
     }
     return _xifexpression;
   }
-  
+
   public String setOrAdd(final Assignment it) {
     String _xifexpression = null;
     String _operator = it.getOperator();
@@ -915,7 +915,7 @@ public class GrammarAccessExtensions {
     }
     return _xifexpression;
   }
-  
+
   public CharSequence toStringLiteral(final AbstractElement it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -943,7 +943,7 @@ public class GrammarAccessExtensions {
     }
     return _switchResult;
   }
-  
+
   public String grammarElementIdentifier(final EObject it) {
     if (it instanceof AbstractElement) {
       return _grammarElementIdentifier((AbstractElement)it);
@@ -956,7 +956,7 @@ public class GrammarAccessExtensions {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public String grammarElementAccess(final EObject it) {
     if (it instanceof AbstractElement) {
       return _grammarElementAccess((AbstractElement)it);
@@ -969,7 +969,7 @@ public class GrammarAccessExtensions {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public boolean predicated(final AbstractElement it) {
     if (it instanceof Assignment) {
       return _predicated((Assignment)it);
@@ -982,7 +982,7 @@ public class GrammarAccessExtensions {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public String localVar(final AbstractElement it) {
     if (it instanceof EnumLiteralDeclaration) {
       return _localVar((EnumLiteralDeclaration)it);
@@ -995,7 +995,7 @@ public class GrammarAccessExtensions {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public List<AbstractElement> contentsAsList(final EObject it) {
     if (it instanceof UnorderedGroup) {
       return _contentsAsList((UnorderedGroup)it);

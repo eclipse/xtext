@@ -31,26 +31,26 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 public class SyntacticSequencerExtensions {
   @Inject
   private ISyntacticSequencerPDAProvider pdaProvider;
-  
+
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
-  
+
   @Inject
   private Grammar grammar;
-  
+
   @Inject
   private InjectableRuleNames ruleNames;
-  
+
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
-  
+
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
     final Function1<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState> _function = (SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState> it) -> {
       return it.getValue();
     };
     return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(ListExtensions.<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState>map(this.pdaProvider.getSyntacticSequencerPDAs(this.grammar).values(), _function), ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }
-  
+
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {
     boolean _add = visited.add(state);
     boolean _not = (!_add);
@@ -72,7 +72,7 @@ public class SyntacticSequencerExtensions {
       }
     }
   }
-  
+
   public Set<ISyntacticSequencerPDAProvider.ISynTransition> getAllAmbiguousTransitions() {
     final Set<ISyntacticSequencerPDAProvider.ISynTransition> result = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynTransition>newLinkedHashSet();
     List<ISyntacticSequencerPDAProvider.ISynAbsorberState> _allPDAs = this.getAllPDAs();
@@ -81,7 +81,7 @@ public class SyntacticSequencerExtensions {
     }
     return result;
   }
-  
+
   public List<EqualAmbiguousTransitions> getAllAmbiguousTransitionsBySyntax() {
     if ((this.ambiguousTransitions != null)) {
       return this.ambiguousTransitions;
@@ -107,7 +107,7 @@ public class SyntacticSequencerExtensions {
     ListExtensions.<EqualAmbiguousTransitions>sortInplace(this.ambiguousTransitions);
     return this.ambiguousTransitions;
   }
-  
+
   protected String elementAliasToIdentifier(final GrammarAlias.AbstractElementAlias alias, final Set<String> rules, final boolean isNested) {
     String _xifexpression = null;
     if ((alias.isMany() && alias.isOptional())) {
@@ -185,7 +185,7 @@ public class SyntacticSequencerExtensions {
     }
     throw new RuntimeException("unknown element");
   }
-  
+
   public StringConcatenationClient elementAliasToConstructor(final GrammarAlias.AbstractElementAlias alias) {
     final String many = String.valueOf(alias.isMany());
     final String optional = String.valueOf(alias.isOptional());
@@ -281,7 +281,7 @@ public class SyntacticSequencerExtensions {
     }
     throw new RuntimeException("unknown element");
   }
-  
+
   protected String elementAliasToIdentifier(final GrammarAlias.AbstractElementAlias alias) {
     final Set<String> rulesSet = CollectionLiterals.<String>newHashSet();
     final String body = this.elementAliasToIdentifier(alias, rulesSet, false);

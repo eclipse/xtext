@@ -55,83 +55,83 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public enum Framework {
     ORION,
-    
+
     ACE,
-    
+
     CODEMIRROR;
   }
-  
+
   private static final String REQUIREJS_VERSION = "2.3.6";
-  
+
   private static final String REQUIREJS_TEXT_VERSION = "2.0.15";
-  
+
   private static final String JQUERY_VERSION = "3.6.0";
-  
+
   private static final String ACE_VERSION = "1.3.3";
-  
+
   private static final String CODEMIRROR_VERSION = "5.41.0";
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   private CodeConfig codeConfig;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   private final HashSet<String> enabledPatterns = new HashSet<String>();
-  
+
   private final HashSet<String> suppressedPatterns = new HashSet<String>();
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final GeneratorOption<WebIntegrationFragment.Framework> framework = new GeneratorOption<WebIntegrationFragment.Framework>();
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BooleanGeneratorOption generateJsHighlighting = new BooleanGeneratorOption(true);
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BooleanGeneratorOption generateServlet = new BooleanGeneratorOption(false);
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BooleanGeneratorOption generateJettyLauncher = new BooleanGeneratorOption(false);
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BooleanGeneratorOption generateWebXml = new BooleanGeneratorOption(false);
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BooleanGeneratorOption generateHtmlExample = new BooleanGeneratorOption(false);
-  
+
   private String highlightingModuleName;
-  
+
   private String highlightingPath;
-  
+
   private String keywordsFilter = "\\w+";
-  
+
   private boolean useServlet3Api = true;
-  
+
   private boolean ignoreCase = false;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String requireJsVersion = WebIntegrationFragment.REQUIREJS_VERSION;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String requireJsTextVersion = WebIntegrationFragment.REQUIREJS_TEXT_VERSION;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String jQueryVersion = WebIntegrationFragment.JQUERY_VERSION;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String aceVersion = WebIntegrationFragment.ACE_VERSION;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String codeMirrorVersion = WebIntegrationFragment.CODEMIRROR_VERSION;
-  
+
   /**
    * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
    */
@@ -139,21 +139,21 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setFramework(final String frameworkName) {
     this.framework.set(WebIntegrationFragment.Framework.valueOf(frameworkName.toUpperCase()));
   }
-  
+
   /**
    * Whether JavaScript-based syntax highlighting should be generated. The default is {@code true}.
    */
   public void setGenerateJsHighlighting(final boolean generateJsHighlighting) {
     this.generateJsHighlighting.set(generateJsHighlighting);
   }
-  
+
   /**
    * Name of the syntax highlighting RequireJS module to be generated.
    */
   public void setHighlightingModuleName(final String moduleName) {
     this.highlightingModuleName = moduleName;
   }
-  
+
   /**
    * The path of the syntax highlighting JavaScript file to be generated. The default is to
    * derive the path from the {@code highlightingModuleName} property.
@@ -161,7 +161,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setHighlightingPath(final String path) {
     this.highlightingPath = path;
   }
-  
+
   /**
    * Regular expression for filtering those language keywords that should be highlighted. The default
    * is {@code \w+}, i.e. keywords consisting only of letters and digits.
@@ -169,21 +169,21 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setKeywordsFilter(final String keywordsFilter) {
     this.keywordsFilter = keywordsFilter;
   }
-  
+
   /**
    * Whether a servlet for DSL-specific services should be generated. The default is {@code false}.
    */
   public void setGenerateServlet(final boolean generateServlet) {
     this.generateServlet.set(generateServlet);
   }
-  
+
   /**
    * Whether a web.xml file should be generated. The default is {@code false} (not necessary for Servlet 3 compatible containers).
    */
   public void setGenerateWebXml(final boolean generateWebXml) {
     this.generateWebXml.set(generateWebXml);
   }
-  
+
   /**
    * Whether the Servlet 3 API ({@code WebServlet} annotation) should be used for the generated servlet.
    * The default is {@code true}.
@@ -191,14 +191,14 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setUseServlet3Api(final boolean useServlet3Api) {
     this.useServlet3Api = useServlet3Api;
   }
-  
+
   /**
    * Whether the generated syntax highlighting should ignore case for language keywords.
    */
   public void setIgnoreCase(final boolean ignoreCase) {
     this.ignoreCase = ignoreCase;
   }
-  
+
   /**
    * Whether a Java main-class for launching a local Jetty server should be generated. The default
    * is {@code false}.
@@ -206,7 +206,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setGenerateJettyLauncher(final boolean generateJettyLauncher) {
     this.generateJettyLauncher.set(generateJettyLauncher);
   }
-  
+
   /**
    * Whether an example {@code index.html} file for testing the web-based editor should be generated.
    * The default is {@code false}.
@@ -214,7 +214,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void setGenerateHtmlExample(final boolean generateHtmlExample) {
     this.generateHtmlExample.set(generateHtmlExample);
   }
-  
+
   /**
    * Enable a default pattern for syntax highlighting. See the documentation of the chosen
    * framework for details.
@@ -222,7 +222,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void addEnablePattern(final String pattern) {
     this.enabledPatterns.add(pattern);
   }
-  
+
   /**
    * Suppress a default pattern for syntax highlighting. See the documentation of the chosen
    * framework for details.
@@ -230,14 +230,14 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   public void addSuppressPattern(final String pattern) {
     this.suppressedPatterns.add(pattern);
   }
-  
+
   protected TypeReference getServerLauncherClass(final Grammar grammar) {
     String _webBasePackage = this._xtextGeneratorNaming.getWebBasePackage(grammar);
     String _plus = (_webBasePackage + ".");
     String _plus_1 = (_plus + "ServerLauncher");
     return new TypeReference(_plus_1);
   }
-  
+
   protected TypeReference getServletClass(final Grammar grammar) {
     String _webBasePackage = this._xtextGeneratorNaming.getWebBasePackage(grammar);
     String _plus = (_webBasePackage + ".");
@@ -246,7 +246,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     String _plus_2 = (_plus_1 + "Servlet");
     return new TypeReference(_plus_2);
   }
-  
+
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
@@ -263,7 +263,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       issues.addError((("The pattern \'" + pattern) + "\' cannot be enabled and suppressed."));
     }
   }
-  
+
   @Override
   public void generate() {
     if (((this.highlightingModuleName != null) && this.highlightingModuleName.endsWith(".js"))) {
@@ -315,7 +315,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       this.generateWebXml();
     }
   }
-  
+
   private static final String DELIMITERS_PATTERN = new Function0<String>() {
     @Override
     public String apply() {
@@ -324,7 +324,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       return _builder.toString();
     }
   }.apply();
-  
+
   protected void generateJsHighlighting(final String langId) {
     final Set<String> allKeywords = GrammarUtil.getAllKeywords(this.getGrammar());
     final ArrayList<String> wordKeywords = CollectionLiterals.<String>newArrayList();
@@ -680,7 +680,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     jsFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
-  
+
   protected CharSequence generateKeywords(final List<String> wordKeywords, final List<String> nonWordKeywords) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -727,7 +727,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     return _builder;
   }
-  
+
   protected CharSequence generateKeywordsRegExp() {
     CharSequence _xifexpression = null;
     if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
@@ -741,7 +741,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     return _xifexpression;
   }
-  
+
   protected CharSequence generateExtraKeywordsRegExp() {
     CharSequence _xifexpression = null;
     if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
@@ -759,7 +759,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     return _xifexpression;
   }
-  
+
   protected Collection<String> createOrionPatterns(final String langId, final Set<String> keywords) {
     final boolean inheritsTerminals = GrammarUtil2.inherits(this.getGrammar(), GrammarUtil2.TERMINALS);
     final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
@@ -806,7 +806,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     return patterns;
   }
-  
+
   protected Multimap<String, String> createCodeMirrorPatterns(final String langId, final Set<String> keywords) {
     final boolean inheritsTerminals = GrammarUtil2.inherits(this.getGrammar(), GrammarUtil2.TERMINALS);
     final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
@@ -908,7 +908,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     return patterns;
   }
-  
+
   protected void generateIndexDoc(final String hlModName) {
     boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("index.html");
     if (_isFile) {
@@ -1316,7 +1316,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     indexFile.setContent(_client);
     indexFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
-  
+
   protected void generateStyleSheet() {
     boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("style.css");
     if (_isFile) {
@@ -1517,7 +1517,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     styleFile.setContent(_client);
     styleFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
-  
+
   protected void generateServerLauncher() {
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
     if (_isPreferXtendStubs) {
@@ -1884,7 +1884,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       this.fileAccessFactory.createJavaFile(_serverLauncherClass_1, _client_1).writeTo(this.getProjectConfig().getWeb().getSrc());
     }
   }
-  
+
   protected void generateServlet() {
     boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
     if (_isPreferXtendStubs) {
@@ -2080,7 +2080,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       this.fileAccessFactory.createJavaFile(_servletClass_1, _client_1).writeTo(this.getProjectConfig().getWeb().getSrc());
     }
   }
-  
+
   protected void generateWebXml() {
     boolean _isFile = this.getProjectConfig().getWeb().getAssets().isFile("WEB-INF/web.xml");
     if (_isFile) {
@@ -2270,53 +2270,53 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     xmlFile.setContent(_client);
     xmlFile.writeTo(this.getProjectConfig().getWeb().getAssets());
   }
-  
+
   @Pure
   public GeneratorOption<WebIntegrationFragment.Framework> getFramework() {
     return this.framework;
   }
-  
+
   @Pure
   public BooleanGeneratorOption getGenerateJsHighlighting() {
     return this.generateJsHighlighting;
   }
-  
+
   @Pure
   public BooleanGeneratorOption getGenerateServlet() {
     return this.generateServlet;
   }
-  
+
   @Pure
   public BooleanGeneratorOption getGenerateJettyLauncher() {
     return this.generateJettyLauncher;
   }
-  
+
   @Pure
   public BooleanGeneratorOption getGenerateWebXml() {
     return this.generateWebXml;
   }
-  
+
   @Pure
   public BooleanGeneratorOption getGenerateHtmlExample() {
     return this.generateHtmlExample;
   }
-  
+
   public void setRequireJsVersion(final String requireJsVersion) {
     this.requireJsVersion = requireJsVersion;
   }
-  
+
   public void setRequireJsTextVersion(final String requireJsTextVersion) {
     this.requireJsTextVersion = requireJsTextVersion;
   }
-  
+
   public void setJQueryVersion(final String jQueryVersion) {
     this.jQueryVersion = jQueryVersion;
   }
-  
+
   public void setAceVersion(final String aceVersion) {
     this.aceVersion = aceVersion;
   }
-  
+
   public void setCodeMirrorVersion(final String codeMirrorVersion) {
     this.codeMirrorVersion = codeMirrorVersion;
   }

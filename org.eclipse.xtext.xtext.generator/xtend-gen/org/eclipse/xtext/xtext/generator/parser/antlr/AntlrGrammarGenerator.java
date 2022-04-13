@@ -42,12 +42,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   @Inject
   @Extension
   private GrammarNaming naming;
-  
+
   @Override
   protected GrammarNaming getGrammarNaming() {
     return this.naming;
   }
-  
+
   @Override
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -97,7 +97,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   @Override
   protected String compileParserMembers(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -193,7 +193,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   @Override
   protected String compileRuleCatch(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -216,12 +216,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   @Override
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
     return false;
   }
-  
+
   @Override
   protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -239,7 +239,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected String compileEntryRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Entry rule ");
@@ -292,7 +292,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String compileEntryReturns(final ParserRule it, final AntlrOptions options) {
     boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(it));
     if (_isDatatypeRule) {
@@ -306,7 +306,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       return _builder.toString();
     }
   }
-  
+
   @Override
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
@@ -345,7 +345,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("}");
     return _builder.toString();
   }
-  
+
   protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -392,7 +392,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _switchResult;
   }
-  
+
   @Override
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
     String _xifexpression = null;
@@ -419,7 +419,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String _xifexpression = null;
@@ -531,7 +531,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -581,7 +581,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -626,7 +626,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -658,7 +658,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -825,7 +825,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _xifexpression = null;
@@ -894,7 +894,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _crossrefEbnf(final Keyword it, final CrossReference ref, final boolean supportActions) {
     String _xifexpression = null;
@@ -920,7 +920,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -962,7 +962,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -1016,7 +1016,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -1175,12 +1175,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected boolean isPassCurrentIntoFragment() {
     return true;
   }
-  
+
   protected CharSequence createModelElement(final EObject grammarElement) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("createModelElement(grammarAccess.");
@@ -1189,7 +1189,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append(")");
     return _builder;
   }
-  
+
   protected CharSequence createModelElementForParent(final EObject grammarElement) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("createModelElementForParent(grammarAccess.");
@@ -1198,7 +1198,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append(")");
     return _builder;
   }
-  
+
   protected CharSequence newCompositeNode(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("newCompositeNode(grammarAccess.");
@@ -1207,7 +1207,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append(");");
     return _builder;
   }
-  
+
   protected CharSequence newLeafNode(final EObject it, final String token) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("newLeafNode(");
@@ -1218,7 +1218,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append(");");
     return _builder;
   }
-  
+
   @Override
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof EnumRule) {

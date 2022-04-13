@@ -35,12 +35,12 @@ import org.eclipse.xtext.xtext.generator.CodeConfig;
 public class JavaFileAccess extends TextFileAccess {
   protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {
     private final JavaFileAccess access;
-    
+
     public JavaTypeAwareStringConcatenation(final JavaFileAccess access) {
       super(access.codeConfig.getLineDelimiter());
       this.access = access;
     }
-    
+
     @Override
     public String getStringRepresentation(final Object object) {
       String _xifexpression = null;
@@ -73,32 +73,32 @@ public class JavaFileAccess extends TextFileAccess {
       return _xifexpression;
     }
   }
-  
+
   /**
    * A list of keywords in the Java language. Use this to avoid illegal variable names.
    */
   public static final Set<String> JAVA_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "const", "float", "native", "super", "while"));
-  
+
   /**
    * Set this value for the 'importNestedTypeThreshold' property to disable importing of nested types
    */
   public static final int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
-  
+
   protected final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
-  
+
   protected final TypeReference javaType;
-  
+
   protected final CodeConfig codeConfig;
-  
+
   @Accessors
   private int importNestedTypeThreshold = 8;
-  
+
   @Accessors
   private boolean markedAsGenerated;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private ResourceSet resourceSet;
-  
+
   protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
     int _length = ((Object[])Conversions.unwrapArray(typeRef.getSimpleNames(), Object.class)).length;
     boolean _greaterThan = (_length > 1);
@@ -113,11 +113,11 @@ public class JavaFileAccess extends TextFileAccess {
     String _plus_1 = (_plus + _fileExtension);
     this.setPath(_plus_1);
   }
-  
+
   protected String getFileExtension() {
     return "java";
   }
-  
+
   public String importType(final TypeReference typeRef) {
     final List<String> simpleNames = typeRef.getSimpleNames();
     String usableName = null;
@@ -161,18 +161,18 @@ public class JavaFileAccess extends TextFileAccess {
     String _join = IterableExtensions.<TypeReference>join(typeRef.getTypeArguments(), "<", ", ", ">", _function);
     return (usableName + _join);
   }
-  
+
   @Override
   public void setContent(final StringConcatenationClient javaContent) {
     final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
     javaStringConcat.append(javaContent);
     this.internalContents = javaStringConcat;
   }
-  
+
   protected boolean appendSemicolons() {
     return true;
   }
-  
+
   @Override
   public CharSequence getContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -210,29 +210,29 @@ public class JavaFileAccess extends TextFileAccess {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected CharSequence getInternalContent() {
     return this.internalContents;
   }
-  
+
   @Pure
   public int getImportNestedTypeThreshold() {
     return this.importNestedTypeThreshold;
   }
-  
+
   public void setImportNestedTypeThreshold(final int importNestedTypeThreshold) {
     this.importNestedTypeThreshold = importNestedTypeThreshold;
   }
-  
+
   @Pure
   public boolean isMarkedAsGenerated() {
     return this.markedAsGenerated;
   }
-  
+
   public void setMarkedAsGenerated(final boolean markedAsGenerated) {
     this.markedAsGenerated = markedAsGenerated;
   }
-  
+
   public void setResourceSet(final ResourceSet resourceSet) {
     this.resourceSet = resourceSet;
   }

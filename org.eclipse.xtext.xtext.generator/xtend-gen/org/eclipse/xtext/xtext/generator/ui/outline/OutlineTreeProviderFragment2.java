@@ -29,11 +29,11 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   protected TypeReference getOutlineTreeProviderClass(final Grammar grammar) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(grammar);
     String _plus = (_eclipsePluginBasePackage + ".outline.");
@@ -42,7 +42,7 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     String _plus_2 = (_plus_1 + "OutlineTreeProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
@@ -74,7 +74,7 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     _addTypeToType.addTypeToType(_typeReference_1, 
       this.getOutlineTreeProviderClass(this.getGrammar())).contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
-  
+
   protected void generateJavaOutlineTreeProvider() {
     TypeReference _outlineTreeProviderClass = this.getOutlineTreeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -109,7 +109,7 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     };
     this.fileAccessFactory.createJavaFile(_outlineTreeProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateXtendOutlineTreeProvider() {
     TypeReference _outlineTreeProviderClass = this.getOutlineTreeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {

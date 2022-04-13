@@ -28,32 +28,32 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 @SuppressWarnings("all")
 public class GeneratedJavaFileAccess extends JavaFileAccess {
   private CharSequence typeComment;
-  
+
   @Accessors
   private final List<IClassAnnotation> annotations = CollectionLiterals.<IClassAnnotation>newArrayList();
-  
+
   protected GeneratedJavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
     super(typeRef, codeConfig);
   }
-  
+
   @Override
   public boolean isMarkedAsGenerated() {
     return true;
   }
-  
+
   @Override
   public void setMarkedAsGenerated(final boolean markedAsGenerated) {
     if ((!markedAsGenerated)) {
       throw new IllegalArgumentException("It\'s always generated");
     }
   }
-  
+
   public void setTypeComment(final StringConcatenationClient javaContent) {
     final JavaFileAccess.JavaTypeAwareStringConcatenation javaStringConcat = new JavaFileAccess.JavaTypeAwareStringConcatenation(this);
     javaStringConcat.append(javaContent);
     this.typeComment = javaStringConcat;
   }
-  
+
   /**
    * Prepends the addition of required imports of the employed annotations.
    * Since the 'typeComment' is a {@link JavaFileAccess.JavaTypeAwareStringConcatenation}
@@ -71,7 +71,7 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     }
     return _xblockexpression;
   }
-  
+
   private Set<IClassAnnotation> getClassAnnotations() {
     final Function1<IClassAnnotation, Boolean> _function = (IClassAnnotation it) -> {
       return Boolean.valueOf(it.appliesTo(this));
@@ -79,7 +79,7 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(this.codeConfig.getClassAnnotations(), _function);
     return IterableExtensions.<IClassAnnotation>toSet(Iterables.<IClassAnnotation>concat(this.annotations, _filter));
   }
-  
+
   @Override
   public CharSequence getInternalContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -98,7 +98,7 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   @Pure
   public List<IClassAnnotation> getAnnotations() {
     return this.annotations;

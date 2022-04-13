@@ -55,7 +55,7 @@ public class TracingSugarTest {
       this.append(result, provider.apply(IterableExtensions.<Type>head(it.getType())));
       return result;
     }
-    
+
     public IGeneratorNode _name(final Property target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -63,7 +63,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final Property target, final boolean useForDebugging) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -71,7 +71,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final Property target, final Function<String, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -79,7 +79,7 @@ public class TracingSugarTest {
       this.append(trace, stringProvider.apply(target.getName()));
       return trace;
     }
-    
+
     public IGeneratorNode _extends(final Type target, final Function<Type, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("extends");
       ILocationData location = this.location(target, feature, -1);
@@ -87,7 +87,7 @@ public class TracingSugarTest {
       this.append(trace, stringProvider.apply(target.getExtends()));
       return trace;
     }
-    
+
     public IGeneratorNode _name(final Type target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -95,7 +95,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final Type target, final boolean useForDebugging) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -103,7 +103,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final Type target, final Function<String, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -111,7 +111,7 @@ public class TracingSugarTest {
       this.append(trace, stringProvider.apply(target.getName()));
       return trace;
     }
-    
+
     public IGeneratorNode _parentId(final Type target, final Function<Property, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("parentId");
       ILocationData location = this.location(target, feature, -1);
@@ -119,7 +119,7 @@ public class TracingSugarTest {
       this.append(trace, stringProvider.apply(target.getParentId()));
       return trace;
     }
-    
+
     public IGeneratorNode _name(final UnresolvedProxyProperty target) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -127,7 +127,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final UnresolvedProxyProperty target, final boolean useForDebugging) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -135,7 +135,7 @@ public class TracingSugarTest {
       this.append(trace, target.getName());
       return trace;
     }
-    
+
     public IGeneratorNode _name(final UnresolvedProxyProperty target, final Function<String, String> stringProvider) {
       EStructuralFeature feature = target.eClass().getEStructuralFeature("name");
       ILocationData location = this.location(target, feature, -1);
@@ -144,14 +144,14 @@ public class TracingSugarTest {
       return trace;
     }
   }
-  
+
   @Inject
   @Extension
   private TracingSugarTest.MyExtensions _myExtensions;
-  
+
   @Inject
   private ParseHelper<Model> parseHelper;
-  
+
   @Test
   public void testCodeGeneration() {
     try {
@@ -279,7 +279,7 @@ public class TracingSugarTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCodeGenerationWithDebug() {
     try {
@@ -407,7 +407,7 @@ public class TracingSugarTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCodeGenerationWithDebug_02() {
     try {
@@ -535,7 +535,7 @@ public class TracingSugarTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Traced
   public IGeneratorNode _generateType(final Type it) {
     ILocationData _location = this._myExtensions.location(it);
@@ -543,7 +543,7 @@ public class TracingSugarTest {
     this._myExtensions.appendTemplate(_traceNode, __generateType(it));
     return _traceNode;
   }
-  
+
   @Traced(useForDebugging = true)
   public IGeneratorNode _generateTypeWithDebugging(final Type it) {
     ILocationData _location = this._myExtensions.location(it);
@@ -551,7 +551,7 @@ public class TracingSugarTest {
     this._myExtensions.appendTemplate(_traceNode, __generateTypeWithDebugging(it));
     return _traceNode;
   }
-  
+
   @Traced
   public IGeneratorNode _generateTypeWithDebugging02(final Type it) {
     ILocationData _location = this._myExtensions.location(it);
@@ -559,7 +559,7 @@ public class TracingSugarTest {
     this._myExtensions.appendTemplate(_traceNode, __generateTypeWithDebugging02(it));
     return _traceNode;
   }
-  
+
   @Traced
   public IGeneratorNode _generateProperty(final Property it) {
     ILocationData _location = this._myExtensions.location(it);
@@ -567,7 +567,7 @@ public class TracingSugarTest {
     this._myExtensions.appendTemplate(_traceNode, __generateProperty(it));
     return _traceNode;
   }
-  
+
   @Traced(useForDebugging = true)
   public IGeneratorNode _generatePropertyWithDebugging(final Property it) {
     ILocationData _location = this._myExtensions.location(it);
@@ -575,7 +575,7 @@ public class TracingSugarTest {
     this._myExtensions.appendTemplate(_traceNode, __generatePropertyWithDebugging(it));
     return _traceNode;
   }
-  
+
   public CharSequence generateType(final Type it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Class ");
@@ -596,7 +596,7 @@ public class TracingSugarTest {
     _builder.newLine();
     return _builder;
   }
-  
+
   public CharSequence generateTypeWithDebugging(final Type it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Class ");
@@ -617,7 +617,7 @@ public class TracingSugarTest {
     _builder.newLine();
     return _builder;
   }
-  
+
   public CharSequence generateProperty(final Property it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Property ");
@@ -629,7 +629,7 @@ public class TracingSugarTest {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   public StringConcatenationClient __generateType(final Type it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -654,7 +654,7 @@ public class TracingSugarTest {
     };
     return _client;
   }
-  
+
   public StringConcatenationClient __generateTypeWithDebugging(final Type it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -679,7 +679,7 @@ public class TracingSugarTest {
     };
     return _client;
   }
-  
+
   public StringConcatenationClient __generateTypeWithDebugging02(final Type it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -704,7 +704,7 @@ public class TracingSugarTest {
     };
     return _client;
   }
-  
+
   public StringConcatenationClient __generateProperty(final Property it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -723,7 +723,7 @@ public class TracingSugarTest {
     };
     return _client;
   }
-  
+
   public StringConcatenationClient __generatePropertyWithDebugging(final Property it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

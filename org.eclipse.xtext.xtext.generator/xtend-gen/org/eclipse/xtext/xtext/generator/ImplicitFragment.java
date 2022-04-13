@@ -34,11 +34,11 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming naming;
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
@@ -96,7 +96,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     }
     bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
-  
+
   public CharSequence getImplicitPluginXmlEnties(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<extension");

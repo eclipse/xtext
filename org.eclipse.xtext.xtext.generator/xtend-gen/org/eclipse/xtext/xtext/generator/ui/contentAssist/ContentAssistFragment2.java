@@ -59,10 +59,10 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   protected TypeReference getProposalProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".contentassist.");
@@ -71,7 +71,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     String _plus_2 = (_plus_1 + "ProposalProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getGenProposalProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".contentassist.Abstract");
@@ -80,7 +80,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     String _plus_2 = (_plus_1 + "ProposalProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getGenProposalProviderSuperClass(final Grammar g) {
     TypeReference _xblockexpression = null;
     {
@@ -95,14 +95,14 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * Extra getter facilitates customization by overriding.
    */
   protected TypeReference getDefaultGenProposalProviderSuperClass() {
     return new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider");
   }
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
@@ -147,7 +147,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       _exportedPackages.add(_packageName);
     }
   }
-  
+
   public void generateXtendProposalProviderStub() {
     TypeReference _proposalProviderClass = this.getProposalProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -178,7 +178,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createXtendFile(_proposalProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateJavaProposalProviderStub() {
     TypeReference _proposalProviderClass = this.getProposalProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -209,7 +209,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createJavaFile(_proposalProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateGenJavaProposalProvider() {
     final Set<String> excludedFqnFeatureNames = this.getFQFeatureNamesToExclude(this.getGrammar());
     final HashSet<String> processedNames = CollectionLiterals.<String>newHashSet();
@@ -217,7 +217,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     final List<AbstractRule> remainingRules = this.getRules(processedNames, excludedFqnFeatureNames);
     this.generateGenJavaProposalProvider(assignments, remainingRules);
   }
-  
+
   /**
    * @since 2.23
    */
@@ -236,7 +236,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return IterableExtensions.<Assignment, ArrayList<Assignment>>fold(GrammarUtil.containedAssignments(this.getGrammar()), CollectionLiterals.<Assignment>newArrayList(), _function);
   }
-  
+
   /**
    * @since 2.23
    */
@@ -255,7 +255,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(this.getGrammar().getRules(), CollectionLiterals.<AbstractRule>newArrayList(), _function);
   }
-  
+
   /**
    * @since 2.23
    */
@@ -271,7 +271,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     final TypeReference superClass = this.getGenProposalProviderSuperClass(this.getGrammar());
     this.generateGenJavaProposalProvider(assignments, rules, genClass, superClass);
   }
-  
+
   /**
    * @since 2.23
    */
@@ -369,7 +369,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function);
   }
-  
+
   private StringConcatenationClient handleAssignment(final Assignment assignment) {
     StringConcatenationClient _xblockexpression = null;
     {
@@ -434,7 +434,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   private StringConcatenationClient handleAssignmentOptions(final Iterable<AbstractElement> terminals) {
     StringConcatenationClient _xblockexpression = null;
     {
@@ -484,7 +484,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   private StringConcatenationClient _assignmentTerminal(final AbstractElement element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -495,7 +495,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return _client;
   }
-  
+
   private StringConcatenationClient _assignmentTerminal(final CrossReference element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -510,7 +510,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return _client;
   }
-  
+
   private StringConcatenationClient _assignmentTerminal(final RuleCall element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -525,7 +525,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return _client;
   }
-  
+
   private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -555,27 +555,27 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     };
     return _client;
   }
-  
+
   private TypeReference getContentAssistContextClass() {
     return new TypeReference("org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext");
   }
-  
+
   private TypeReference getICompletionProposalAcceptorClass() {
     return new TypeReference("org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor");
   }
-  
+
   private String getFQFeatureName(final AbstractRule r) {
     String _name = r.getName();
     return ("_" + _name);
   }
-  
+
   private String getFQFeatureName(final Assignment a) {
     String _firstUpper = StringExtensions.toFirstUpper(GrammarUtil.containingParserRule(a).getName());
     String _plus = (_firstUpper + "_");
     String _firstUpper_1 = StringExtensions.toFirstUpper(a.getFeature());
     return (_plus + _firstUpper_1);
   }
-  
+
   private Iterable<String> computeFQFeatureNames(final Grammar g) {
     final Function1<Assignment, String> _function = (Assignment it) -> {
       return this.getFQFeatureName(it);
@@ -587,7 +587,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     List<String> _map_1 = ListExtensions.<AbstractRule, String>map(g.getRules(), _function_1);
     return Iterables.<String>concat(_map, _map_1);
   }
-  
+
   public Set<String> getFQFeatureNamesToExclude(final Grammar g) {
     Set<String> _xifexpression = null;
     Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
@@ -608,7 +608,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     }
     return _xifexpression;
   }
-  
+
   private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final StringConcatenationClient accessor) {
     if (alternatives instanceof Alternatives) {
       return _assignmentTerminal((Alternatives)alternatives, accessor);

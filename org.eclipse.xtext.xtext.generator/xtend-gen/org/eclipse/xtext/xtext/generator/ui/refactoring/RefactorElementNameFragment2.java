@@ -39,15 +39,15 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   private final BooleanGeneratorOption useJdtRefactoring = new BooleanGeneratorOption();
-  
+
   private final BooleanGeneratorOption useChangeSerializer = new BooleanGeneratorOption();
-  
+
   protected boolean isUseJdtRefactoring(final Grammar grammar) {
     boolean _xifexpression = false;
     boolean _isSet = this.useJdtRefactoring.isSet();
@@ -58,11 +58,11 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
     }
     return _xifexpression;
   }
-  
+
   public void setUseJdtRefactoring(final boolean useJdtRefactoring) {
     this.useJdtRefactoring.set(useJdtRefactoring);
   }
-  
+
   protected boolean isUseChangeSerializer(final Grammar grammer) {
     boolean _xifexpression = false;
     boolean _isSet = this.useChangeSerializer.isSet();
@@ -73,7 +73,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
     }
     return _xifexpression;
   }
-  
+
   /**
    * Use the newer rename infrastructure based on the change serializer also in Eclipse.
    * This is only applicable for non-Xbase languages.
@@ -81,7 +81,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
   public void setUseChangeSerializer(final boolean useChangeSerializer) {
     this.useChangeSerializer.set(useChangeSerializer);
   }
-  
+
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
@@ -89,7 +89,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       issues.addError("IChangeSerializer-based refactoring doesn\'t work with JDT");
     }
   }
-  
+
   @Override
   public void generate() {
     IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();

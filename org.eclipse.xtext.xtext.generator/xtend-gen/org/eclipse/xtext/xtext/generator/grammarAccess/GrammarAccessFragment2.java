@@ -66,21 +66,21 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotat
 @SuppressWarnings("all")
 public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   private static final Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String xmlVersion;
-  
+
   @Override
   public void generate() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
@@ -109,14 +109,14 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     this.doGenerateGrammarAccess();
     this.writeGrammar();
   }
-  
+
   protected String getQualifiedName(final AbstractRule rule) {
     String _name = GrammarUtil.getGrammar(rule).getName();
     String _plus = (_name + ".");
     String _name_1 = rule.getName();
     return (_plus + _name_1);
   }
-  
+
   protected void writeGrammar() {
     final Wrapper<Boolean> isSaving = Wrapper.<Boolean>wrap(Boolean.valueOf(false));
     final ResourceSet cloneInto = new ResourceSetImpl();
@@ -175,7 +175,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       isSaving.set(Boolean.valueOf(false));
     }
   }
-  
+
   protected void addAllGrammarsToResource(final Resource resource, final Grammar grammar, final Set<Grammar> visitedGrammars) {
     boolean _add = visitedGrammars.add(grammar);
     boolean _not = (!_add);
@@ -221,7 +221,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       this.addAllGrammarsToResource(resource, usedGrammar, visitedGrammars);
     }
   }
-  
+
   protected void moveSubpackagesToNewResource(final EPackage pack, final ResourceSet set) {
     for (int i = (pack.getESubpackages().size() - 1); (i >= 0); i--) {
       {
@@ -241,7 +241,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   protected void movePackageToNewResource(final EPackage pack, final ResourceSet set) {
     final Resource resource = set.createResource(
       URI.createURI(("___temp___." + FragmentFakingEcoreResource.FactoryImpl.ECORE_SUFFIX)), 
@@ -249,7 +249,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     resource.setURI(URI.createURI(pack.getNsURI()));
     resource.getContents().add(pack);
   }
-  
+
   protected void doGenerateGrammarAccess() {
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this._grammarAccessExtensions.getGrammarAccess(this.getGrammar()));
     javaFile.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
@@ -500,7 +500,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     javaFile.setContent(_client);
     javaFile.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
-  
+
   protected StringConcatenationClient parserRuleClasses(final ParserRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -579,7 +579,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient parserRuleClasses(final EnumRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -658,7 +658,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _cache(final ParserRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -675,7 +675,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _cache(final EnumRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -692,7 +692,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _cache(final TerminalRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -708,7 +708,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _initializer(final ParserRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -725,7 +725,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _initializer(final EnumRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -742,7 +742,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _initializer(final TerminalRule it) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -763,7 +763,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _getter(final ParserRule it, final Grammar original) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -834,7 +834,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _getter(final EnumRule it, final Grammar original) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -907,7 +907,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected StringConcatenationClient _getter(final TerminalRule it, final Grammar original) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -950,32 +950,32 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected String gaGrammarAccessLocalVarName(final Grammar g) {
     String _simpleName = GrammarUtil.getSimpleName(g);
     return ("ga" + _simpleName);
   }
-  
+
   protected String gaElementAccessorLocalVarName(final AbstractElement ele) {
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(ele);
     return ("c" + _gaElementIdentifier);
   }
-  
+
   protected String _gaRuleAccessorLocalVarName(final ParserRule rule) {
     String _gaRuleIdentifier = this._grammarAccessExtensions.gaRuleIdentifier(rule);
     return ("p" + _gaRuleIdentifier);
   }
-  
+
   protected String _gaRuleAccessorLocalVarName(final TerminalRule rule) {
     String _gaRuleIdentifier = this._grammarAccessExtensions.gaRuleIdentifier(rule);
     return ("t" + _gaRuleIdentifier);
   }
-  
+
   protected String _gaRuleAccessorLocalVarName(final EnumRule rule) {
     String _gaRuleIdentifier = this._grammarAccessExtensions.gaRuleIdentifier(rule);
     return ("e" + _gaRuleIdentifier);
   }
-  
+
   protected StringConcatenationClient loadElementStatement(final AbstractElement ele) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -994,7 +994,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return _client;
   }
-  
+
   protected String loadElementParentStatement(final AbstractElement ele) {
     String _xifexpression = null;
     EObject _eContainer = ele.eContainer();
@@ -1006,7 +1006,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xifexpression;
   }
-  
+
   /**
    * Returns all grammars from the hierarchy that are used from rules of this grammar.
    */
@@ -1019,7 +1019,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     };
     return IterableExtensions.<Grammar>toList(IterableExtensions.<Grammar>toSet(IterableExtensions.<Grammar>filter(ListExtensions.<AbstractRule, Grammar>map(GrammarUtil.allRules(grammar), _function), _function_1)));
   }
-  
+
   protected StringConcatenationClient cache(final AbstractRule it) {
     if (it instanceof EnumRule) {
       return _cache((EnumRule)it);
@@ -1032,7 +1032,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   protected StringConcatenationClient initializer(final AbstractRule it) {
     if (it instanceof EnumRule) {
       return _initializer((EnumRule)it);
@@ -1045,7 +1045,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   protected StringConcatenationClient getter(final AbstractRule it, final Grammar original) {
     if (it instanceof EnumRule) {
       return _getter((EnumRule)it, original);
@@ -1058,7 +1058,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Arrays.<Object>asList(it, original).toString());
     }
   }
-  
+
   protected String gaRuleAccessorLocalVarName(final AbstractRule rule) {
     if (rule instanceof EnumRule) {
       return _gaRuleAccessorLocalVarName((EnumRule)rule);
@@ -1071,7 +1071,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Arrays.<Object>asList(rule).toString());
     }
   }
-  
+
   public void setXmlVersion(final String xmlVersion) {
     this.xmlVersion = xmlVersion;
   }

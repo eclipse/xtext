@@ -120,7 +120,7 @@ public class TestLanguageGenerator extends AbstractGenerator {
       fsa.generateFile(_plus, _builder);
     }
   }
-  
+
   protected String _toJava(final TypeReference type) {
     String _name = type.getTypeRef().getName();
     final Function1<String, String> _function = (String it) -> {
@@ -129,7 +129,7 @@ public class TestLanguageGenerator extends AbstractGenerator {
     String _join = IterableExtensions.join(ListExtensions.<String, String>map(type.getArrayDiemensions(), _function), "");
     return (_name + _join);
   }
-  
+
   protected String _toJava(final PrimitiveType type) {
     String _name = type.getName();
     final Function1<String, String> _function = (String it) -> {
@@ -138,7 +138,7 @@ public class TestLanguageGenerator extends AbstractGenerator {
     String _join = IterableExtensions.join(ListExtensions.<String, String>map(type.getArrayDiemensions(), _function), "");
     return (_name + _join);
   }
-  
+
   public String toJava(final Type type) {
     if (type instanceof PrimitiveType) {
       return _toJava((PrimitiveType)type);

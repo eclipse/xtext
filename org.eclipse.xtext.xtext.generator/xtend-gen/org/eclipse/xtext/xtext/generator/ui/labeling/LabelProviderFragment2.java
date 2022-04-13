@@ -30,20 +30,20 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 @SuppressWarnings("all")
 public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   private static final String XBASE_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider";
-  
+
   private static final String XBASE_DESCRIPTION_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider";
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   protected TypeReference getEObjectLabelProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".labeling.");
@@ -52,7 +52,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     String _plus_2 = (_plus_1 + "LabelProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getEObjectLabelProviderSuperClass(final Grammar g) {
     TypeReference _xifexpression = null;
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(g);
@@ -63,14 +63,14 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     }
     return _xifexpression;
   }
-  
+
   /**
    * Extra getter facilitates customization by overriding.
    */
   protected TypeReference getDefaultEObjectLabelProviderSuperClass() {
     return new TypeReference("org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider");
   }
-  
+
   protected TypeReference getDescriptionLabelProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".labeling.");
@@ -79,7 +79,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     String _plus_2 = (_plus_1 + "DescriptionLabelProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getDescriptionLabelProviderSuperClass(final Grammar g) {
     TypeReference _xifexpression = null;
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(g);
@@ -90,14 +90,14 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     }
     return _xifexpression;
   }
-  
+
   /**
    * Extra getter facilitates customization by overriding.
    */
   protected TypeReference getDefaultDescriptionLabelProviderSuperClass() {
     return new TypeReference("org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider");
   }
-  
+
   @Override
   public void generate() {
     if ((this.isGenerateStub() || this._xbaseUsageDetector.inheritsXbase(this.getGrammar()))) {
@@ -152,7 +152,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
       }
     }
   }
-  
+
   protected void generateXtendEObjectLabelProvider() {
     TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -223,7 +223,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createXtendFile(_eObjectLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateXtendDescriptionLabelProvider() {
     TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -277,7 +277,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createXtendFile(_descriptionLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateJavaEObjectLabelProvider() {
     TypeReference _eObjectLabelProviderClass = this.getEObjectLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -351,7 +351,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createJavaFile(_eObjectLabelProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateJavaDescriptionLabelProvider() {
     TypeReference _descriptionLabelProviderClass = this.getDescriptionLabelProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {

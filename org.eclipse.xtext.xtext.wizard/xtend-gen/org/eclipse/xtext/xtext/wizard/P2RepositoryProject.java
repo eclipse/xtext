@@ -28,27 +28,27 @@ public class P2RepositoryProject extends ProjectDescriptor {
   public String getNameQualifier() {
     return ".repository";
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isEnabled() {
     return (super.isEnabled() && this.getConfig().getRuntimeProject().isEclipsePluginProject());
   }
-  
+
   @Override
   public Iterable<? extends AbstractFile> getFiles() {
     ArrayList<AbstractFile> _xblockexpression = null;
@@ -62,12 +62,12 @@ public class P2RepositoryProject extends ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<SourceFolderDescriptor> getSourceFolders() {
     return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
-  
+
   public CharSequence categoryXml() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -114,12 +114,12 @@ public class P2RepositoryProject extends ProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     throw new UnsupportedOperationException("Eclipse repositories are not yet supported in Gradle");
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -236,7 +236,7 @@ public class P2RepositoryProject extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public P2RepositoryProject(final WizardConfiguration config) {
     super(config);
   }

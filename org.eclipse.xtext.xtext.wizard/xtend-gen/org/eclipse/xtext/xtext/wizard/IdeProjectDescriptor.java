@@ -26,28 +26,28 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   public String getNameQualifier() {
     return ".ide";
   }
-  
+
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     RuntimeProjectDescriptor _runtimeProject = this.getConfig().getRuntimeProject();
     return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(_runtimeProject));
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return (Objects.equal(this.getConfig().getPreferredBuildSystem(), BuildSystem.NONE) || this.getConfig().getUiProject().isEnabled());
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
     LinkedHashSet<ExternalDependency> _xblockexpression = null;
@@ -63,7 +63,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -1116,7 +1116,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();
@@ -1196,7 +1196,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
-  
+
   public IdeProjectDescriptor(final WizardConfiguration config) {
     super(config);
   }

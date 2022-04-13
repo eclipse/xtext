@@ -97,91 +97,91 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 @SuppressWarnings("all")
 public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   private static final Logger LOG = Logger.getLogger(EMFGeneratorFragment2.class);
-  
+
   @Inject
   private CodeConfig codeConfig;
-  
+
   /**
    * The java package into which the generated Java classes shall be placed.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String basePackage;
-  
+
   /**
    * Sets the ID of the generated EMF model plug-in. Only needed if you want to generate the EMF code into a separate plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String modelPluginID;
-  
+
   /**
    * Sets the target directory for the generated EMF model code. Only needed if you want to generate the EMF code into
    * a separate plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String javaModelDirectory;
-  
+
   /**
    * Whether EMF edit code shall be generated.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateEdit = false;
-  
+
   /**
    * The plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF edit plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String editPluginID;
-  
+
   /**
    * The target directory for the generated EMF edit code. Only needed if you want to generate an EMF edit plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String editDirectory;
-  
+
   /**
    * Whether EMF editor code shall be generated.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateEditor = false;
-  
+
   /**
    * The plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String editorPluginID;
-  
+
   /**
    * The target directory for the generated EMF editor code. Only needed if you want to generate an EMF editor plug-in.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String editorDirectory;
-  
+
   /**
    * If an existing EMF GenModel should be used, set the path to that file in this property.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String genModel;
-  
+
   /**
    * Whether the Java class generation should be skipped. If <code>true</code> only the ecore file is generated.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean skipGenerate = false;
-  
+
   /**
    * Whether the build.properties should be updated. Skipped if the model code is generated into a separate
    * plugin or if no manifest is configured for the runtime project (see {@code WizardConfig#createEclipseMetaData}).
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean updateBuildProperties = true;
-  
+
   /**
    * Whether to use a qualified name for the xmi files, e.g.
    * <code>org_eclipse_xtext_Xtext.ecore</code> rather than <code>Xtext.ecore</code>.
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean longFileNames = false;
-  
+
   /**
    * The generated package implementation uses 'load initialization' if it becomes very large, which means
    * that an additional ecore file is generated and the package content is loaded at runtime from that file.
@@ -190,16 +190,16 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
    */
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean suppressLoadInitialization = false;
-  
+
   /**
    * Default to 2.20 if available, otherwise #get will return null
    */
   private GenRuntimeVersion emfRuntimeVersion = GenRuntimeVersion.get(GenRuntimeVersion.EMF220_VALUE);
-  
+
   private GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL;
-  
+
   private String rootExtendsClass = "org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container";
-  
+
   /**
    * Sets the target EMF runtime version to generate for to the specified value.
    * Defaults to 2.20.
@@ -210,7 +210,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       EMFGeneratorFragment2.LOG.warn(("Illegal EMF runtime version: " + emfRuntimeVersion));
     }
   }
-  
+
   /**
    * Set the JDK compatibility level. The following values are valid:
    * <ul>
@@ -228,7 +228,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       EMFGeneratorFragment2.LOG.warn(("Illegal JDK level: " + jdkLevel));
     }
   }
-  
+
   /**
    * Sets the BaseClass for the EClasses in the inferred GenModel.
    * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container}.
@@ -238,9 +238,9 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   public void setRootExtendsClass(final String rootExtendsClass) {
     this.rootExtendsClass = rootExtendsClass;
   }
-  
+
   private boolean bindEPackageAndEFactory = false;
-  
+
   /**
    * If set generated {@link EPackage} and {@link EFactory} interfaces are bound to their <code>eINSTANCE</code> instance.
    * @since 2.11
@@ -248,7 +248,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   public void setBindEPackageAndEFactory(final boolean bindEPackageAndEFactory) {
     this.bindEPackageAndEFactory = bindEPackageAndEFactory;
   }
-  
+
   protected String getModelPluginID() {
     String _elvis = null;
     if (this.modelPluginID != null) {
@@ -259,7 +259,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected String getJavaModelDirectory() {
     if ((this.javaModelDirectory != null)) {
       return this.javaModelDirectory;
@@ -275,7 +275,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     throw new RuntimeException(
       "Could not derive the Java model directory from the project configuration. Please set the property \'javaModelDirectory\' explicitly.");
   }
-  
+
   protected String getModelName(final Grammar grammar) {
     String _xifexpression = null;
     if (this.longFileNames) {
@@ -285,7 +285,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xifexpression;
   }
-  
+
   protected String getEcoreFilePath(final Grammar grammar) {
     String _xblockexpression = null;
     {
@@ -301,11 +301,11 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected URI getEcoreFileUri(final Grammar grammar) {
     return URI.createPlatformResourceURI(this.getEcoreFilePath(grammar), true);
   }
-  
+
   protected String getGenModelPath(final Grammar grammar) {
     String _elvis = null;
     if (this.genModel != null) {
@@ -327,11 +327,11 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected URI getGenModelUri(final Grammar grammar) {
     return URI.createPlatformResourceURI(this.getGenModelPath(grammar), true);
   }
-  
+
   protected String getRelativePath(final String pathInRoot) {
     String _xblockexpression = null;
     {
@@ -350,7 +350,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected String getEditPluginID() {
     String _elvis = null;
     if (this.editPluginID != null) {
@@ -362,7 +362,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected String getEditDirectory() {
     String _elvis = null;
     if (this.editDirectory != null) {
@@ -375,7 +375,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected String getEditorPluginID() {
     String _elvis = null;
     if (this.editorPluginID != null) {
@@ -387,7 +387,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected String getEditorDirectory() {
     String _elvis = null;
     if (this.editorDirectory != null) {
@@ -399,7 +399,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   protected String getBasePackage(final Grammar grammar) {
     String _elvis = null;
     if (this.basePackage != null) {
@@ -410,7 +410,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _elvis;
   }
-  
+
   @Override
   public void initialize(final Injector injector) {
     super.initialize(injector);
@@ -423,7 +423,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     GenModelPackage.eINSTANCE.getGenAnnotation();
   }
-  
+
   @Override
   public void generate() {
     boolean _isEmpty = IterableExtensions.isEmpty(Iterables.<GeneratedMetamodel>filter(this.getGrammar().getMetamodelDeclarations(), GeneratedMetamodel.class));
@@ -514,7 +514,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   protected void addProjectContributions(final Grammar grammar, final List<EPackage> generatedPackages, final ResourceSet rs) {
     PluginXmlAccess _pluginXml = this.getProjectConfig().getRuntime().getPluginXml();
     boolean _tripleNotEquals = (_pluginXml != null);
@@ -599,7 +599,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   /**
    * Create a clone of the original grammar. The clone will not refer to a node model.
    */
@@ -611,7 +611,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     EObject _head = IterableExtensions.<EObject>head(clonedResource.getContents());
     return ((Grammar) _head);
   }
-  
+
   private void registerUsedGenModel(final URIConverter converter, final Grammar grammar) {
     final URI genModelUri = this.getGenModelUri(grammar);
     boolean _exists = converter.exists(genModelUri, null);
@@ -630,7 +630,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   private Map<String, EPackage> findAllUsedEPackages(final List<EPackage> generatedPackages) {
     final HashMap<String, EPackage> result = CollectionLiterals.<String, EPackage>newHashMap();
     final TreeIterator<EObject> packageContentIterator = EcoreUtil.<EObject>getAllContents(generatedPackages);
@@ -658,7 +658,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return result;
   }
-  
+
   private Map<String, EPackage> findEPackagesInGenPackages(final Collection<String> packageNsURIs, final ResourceSet resourceSet) {
     final HashMap<String, EPackage> result = CollectionLiterals.<String, EPackage>newHashMap();
     for (final String nsURI : packageNsURIs) {
@@ -675,7 +675,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return result;
   }
-  
+
   private GenPackage findGenPackageByNsURI(final GenModel genModel, final String nsURI) {
     final List<GenPackage> allGenPackages = genModel.getAllGenUsedAndStaticGenPackagesWithClassifiers();
     for (final GenPackage genPackage : allGenPackages) {
@@ -697,7 +697,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     String _plus = ((("No GenPackage for NsURI " + nsURI) + " found in ") + _uRI);
     throw new RuntimeException(_plus);
   }
-  
+
   private Map<EObject, EObject> createENamedElementMapping(final Map<String, EPackage> usedEPackages, final Map<String, EPackage> loadedEPackages) {
     final HashMap<EObject, EObject> result = CollectionLiterals.<EObject, EObject>newHashMap();
     Set<Map.Entry<String, EPackage>> _entrySet = usedEPackages.entrySet();
@@ -706,7 +706,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return result;
   }
-  
+
   private void putMappingData(final Map<EObject, EObject> result, final EPackage usedEPackage, final EPackage loadedEPackage) {
     if (((loadedEPackage != null) && (!Objects.equal(usedEPackage, loadedEPackage)))) {
       result.put(usedEPackage, loadedEPackage);
@@ -741,7 +741,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   private void replaceReferencesInGeneratedPackages(final List<EPackage> generatedPackages, final Map<EObject, EObject> eNamedElementMapping) {
     final TreeIterator<EObject> packageContentIterator = EcoreUtil.<EObject>getAllContents(generatedPackages);
     while (packageContentIterator.hasNext()) {
@@ -778,7 +778,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   protected Resource createResourceForEPackages(final Grammar grammar, final List<EPackage> packs, final ResourceSet rs) {
     final URI ecoreFileUri = this.getEcoreFileUri(grammar);
     final Resource existing = rs.getResource(ecoreFileUri, false);
@@ -790,7 +790,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     ecoreFile.getContents().addAll(packs);
     return ecoreFile;
   }
-  
+
   protected GenModel getSaveAndReconcileGenModel(final Grammar grammar, final List<EPackage> packs, final ResourceSet rs) {
     final GenModel genModel = this.getGenModel(rs, grammar);
     genModel.initialize(packs);
@@ -814,7 +814,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     new GenModelHelper().registerGenModel(genModel);
     return genModel;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -832,7 +832,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   protected GenModel getGenModel(final ResourceSet rs, final Grammar grammar) {
     try {
       final URI genModelUri = this.getGenModelUri(grammar);
@@ -899,11 +899,11 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public String trimMultiLineComment(final String string) {
     return string.replace(" * ", "").replaceAll("/\\*+\\s*|\\s*\\*+/", "").replaceAll("(?m)^ \\*$", "").trim();
   }
-  
+
   protected Set<EPackage> getReferencedEPackages(final List<EPackage> packs) {
     final HashSet<EPackage> result = CollectionLiterals.<EPackage>newHashSet();
     for (final EPackage pkg : packs) {
@@ -937,7 +937,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     result.remove(XMLNamespacePackage.eINSTANCE);
     return result;
   }
-  
+
   protected List<GenPackage> getGenPackagesForPackages(final GenModel existingGenModel, final Collection<EPackage> packs) {
     final ArrayList<GenPackage> result = CollectionLiterals.<GenPackage>newArrayList();
     for (final EPackage pkg : packs) {
@@ -962,7 +962,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     Collections.<GenPackage>sort(result, _function_1);
     return result;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -998,7 +998,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void doGenerate(final GenModel genModel) {
     final Generator generator = new Generator() {
       @Override
@@ -1043,7 +1043,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       }
     }
   }
-  
+
   private void updateBuildProperties() {
     try {
       if ((((!this.updateBuildProperties) || (this.modelPluginID != null)) || (this.getProjectConfig().getRuntime().getManifest() == null))) {
@@ -1102,59 +1102,59 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void setBasePackage(final String basePackage) {
     this.basePackage = basePackage;
   }
-  
+
   public void setModelPluginID(final String modelPluginID) {
     this.modelPluginID = modelPluginID;
   }
-  
+
   public void setJavaModelDirectory(final String javaModelDirectory) {
     this.javaModelDirectory = javaModelDirectory;
   }
-  
+
   public void setGenerateEdit(final boolean generateEdit) {
     this.generateEdit = generateEdit;
   }
-  
+
   public void setEditPluginID(final String editPluginID) {
     this.editPluginID = editPluginID;
   }
-  
+
   public void setEditDirectory(final String editDirectory) {
     this.editDirectory = editDirectory;
   }
-  
+
   public void setGenerateEditor(final boolean generateEditor) {
     this.generateEditor = generateEditor;
   }
-  
+
   public void setEditorPluginID(final String editorPluginID) {
     this.editorPluginID = editorPluginID;
   }
-  
+
   public void setEditorDirectory(final String editorDirectory) {
     this.editorDirectory = editorDirectory;
   }
-  
+
   public void setGenModel(final String genModel) {
     this.genModel = genModel;
   }
-  
+
   public void setSkipGenerate(final boolean skipGenerate) {
     this.skipGenerate = skipGenerate;
   }
-  
+
   public void setUpdateBuildProperties(final boolean updateBuildProperties) {
     this.updateBuildProperties = updateBuildProperties;
   }
-  
+
   public void setLongFileNames(final boolean longFileNames) {
     this.longFileNames = longFileNames;
   }
-  
+
   public void setSuppressLoadInitialization(final boolean suppressLoadInitialization) {
     this.suppressLoadInitialization = suppressLoadInitialization;
   }
