@@ -44,23 +44,23 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
-  
+
   @Inject
   @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
-  
+
   @Inject
   @Extension
   private DomainmodelJvmModelHelper _domainmodelJvmModelHelper;
-  
+
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
-  
+
   @Inject
   @Extension
   private IJvmModelAssociator _iJvmModelAssociator;
-  
+
   protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
       this._jvmTypesBuilder.setDocumentation(it, this._jvmTypesBuilder.getDocumentation(entity));
@@ -143,7 +143,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     };
     acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(entity, this._iQualifiedNameProvider.getFullyQualifiedName(entity)), _function);
   }
-  
+
   private void removeDuplicateGettersSetters(final JvmDeclaredType inferredType) {
     final Consumer<Collection<JvmOperation>> _function = (Collection<JvmOperation> jvmOperations) -> {
       final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
@@ -166,7 +166,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     };
     this._domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredType, _function);
   }
-  
+
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (entity instanceof Entity) {
       _infer((Entity)entity, acceptor, prelinkingPhase);

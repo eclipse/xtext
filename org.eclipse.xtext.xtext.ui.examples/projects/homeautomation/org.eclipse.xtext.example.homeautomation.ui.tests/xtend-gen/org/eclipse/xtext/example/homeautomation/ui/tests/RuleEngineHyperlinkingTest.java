@@ -28,7 +28,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
   public void setup() throws Exception {
     JavaProjectSetupUtil.createJavaProject(this.getProjectName());
   }
-  
+
   @Test
   public void hyperlink_on_rule_when_part() {
     StringConcatenation _builder = new StringConcatenation();
@@ -48,7 +48,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "Window.open");
   }
-  
+
   @Test
   public void hyperlink_on_device_name_in_rule_then_part() {
     StringConcatenation _builder = new StringConcatenation();
@@ -68,7 +68,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLineIfNotEmpty();
     this.hasHyperlinkTo(_builder, "Heater");
   }
-  
+
   @Test
   public void hyperlink_on_device_state_in_rule_then_part() {
     StringConcatenation _builder = new StringConcatenation();
@@ -88,7 +88,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLineIfNotEmpty();
     this.hasHyperlinkTo(_builder, "Heater.off");
   }
-  
+
   @Test
   public void hyperlink_on_link_in_javadoc1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -116,7 +116,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "Window");
   }
-  
+
   @Test
   public void hyperlink_on_link_in_javadoc2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -144,7 +144,7 @@ public class RuleEngineHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "Heater");
   }
-  
+
   @Test
   public void hyperlink_on_link_in_javadoc3() {
     StringConcatenation _builder = new StringConcatenation();

@@ -32,11 +32,11 @@ public class ValidationTests {
   @Inject
   @Extension
   private ParseHelper<DomainModel> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testImportUnused() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -46,7 +46,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
-  
+
   @Test
   public void testImportUnused_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -61,7 +61,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
-  
+
   @Test
   public void testImportUnused_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -85,7 +85,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportUnused_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -109,7 +109,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportUnused_4() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -133,7 +133,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportUnused_5() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -157,7 +157,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportUnused_6() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -169,7 +169,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportUnused_7() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -181,7 +181,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoIssues(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testImportDuplicate() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -207,7 +207,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
-  
+
   @Test
   public void testImportCollision() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -233,7 +233,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_COLLISION);
   }
-  
+
   @Test
   public void testImportWildcard() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -259,7 +259,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertWarning(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
   }
-  
+
   @Test
   public void testImportConflictWithTypeInSameFile() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -273,7 +273,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertError(this._parseHelper.parse(_builder), XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_CONFLICT);
   }
-  
+
   @Test
   public void testImportNoConflictWithTypeInSameFile() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -285,7 +285,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testDuplicatedProperty() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -308,7 +308,7 @@ public class ValidationTests {
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
-  
+
   @Test
   public void testDuplicatedOperation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -331,7 +331,7 @@ public class ValidationTests {
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
-  
+
   @Test
   public void testDuplicatedOperationWithDifferentSignatureIsAllowed() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -347,7 +347,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testFeatureAndOperationWithSameNameIsAllowed() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -363,7 +363,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testExplicitGetterReplacesTheGeneratedOne() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -385,7 +385,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testExplicitSetterReplacesTheGeneratedOne() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -410,7 +410,7 @@ public class ValidationTests {
     _builder.newLine();
     this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
   }
-  
+
   @Test
   public void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -433,7 +433,7 @@ public class ValidationTests {
     };
     ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
   }
-  
+
   private void assertNumberOfIssues(final DomainModel domainModel, final int expectedNumberOfIssues) {
     Assert.assertEquals(expectedNumberOfIssues, this._validationTestHelper.validate(domainModel).size());
   }

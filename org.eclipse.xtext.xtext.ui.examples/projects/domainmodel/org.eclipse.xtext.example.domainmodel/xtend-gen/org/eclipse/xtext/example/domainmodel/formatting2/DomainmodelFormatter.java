@@ -82,7 +82,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       this.format(element, document);
     }
   }
-  
+
   protected void _format(final PackageDeclaration pkg, @Extension final IFormattableDocument document) {
     final ISemanticRegion open = this.textRegionExtensions.regionFor(pkg).keyword("{");
     final ISemanticRegion close = this.textRegionExtensions.regionFor(pkg).keyword("}");
@@ -109,7 +109,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       }
     }
   }
-  
+
   protected void _format(final Entity entity, @Extension final IFormattableDocument document) {
     final ISemanticRegion open = this.textRegionExtensions.regionFor(entity).keyword("{");
     final ISemanticRegion close = this.textRegionExtensions.regionFor(entity).keyword("}");
@@ -141,7 +141,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       }
     }
   }
-  
+
   protected void _format(final Property property, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -149,7 +149,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     document.surround(this.textRegionExtensions.regionFor(property).keyword(":"), _function);
     document.<JvmTypeReference>format(property.getType());
   }
-  
+
   protected void _format(final Operation operation, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -204,7 +204,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     }
     document.<XExpression>format(operation.getBody());
   }
-  
+
   public void format(final Object entity, final IFormattableDocument document) {
     if (entity instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)entity, document);

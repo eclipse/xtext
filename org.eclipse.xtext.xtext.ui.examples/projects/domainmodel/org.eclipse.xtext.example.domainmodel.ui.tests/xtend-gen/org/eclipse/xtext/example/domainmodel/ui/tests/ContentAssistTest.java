@@ -36,22 +36,22 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       return _builder.toString();
     }
   }.apply();
-  
+
   @Test
   public void testImportCompletion() throws Exception {
     this.newBuilder().append("import java.util.Da").assertText("java.util.Date");
   }
-  
+
   @Test
   public void testImportCompletion_1() throws Exception {
     this.newBuilder().append("import LinkedHashSet").assertText("java.util.LinkedHashSet");
   }
-  
+
   @Test
   public void testTypeCompletion() throws Exception {
     this.newBuilder().append("entity Foo { bar: LinkedHashSet").assertText("java.util.LinkedHashSet");
   }
-  
+
   @Test
   public void testEntityTemplateProposal() throws Exception {
     ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Entity - template for an Entity");
@@ -63,7 +63,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
     _builder.append("}");
     _applyProposal.expectContent(_builder.toString());
   }
-  
+
   @Test
   public void testPackageTemplateProposal() throws Exception {
     ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Package - template for a Package");
@@ -75,7 +75,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
     _builder.append("}");
     _applyProposal.expectContent(_builder.toString());
   }
-  
+
   @Test
   public void testPropertyTemplateProposal() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -97,7 +97,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Operation - template for an Operation", "Property - template for a Property", "op")), "Property - template for a Property", _builder_1.toString());
   }
-  
+
   @Test
   public void testOperationTemplateProposal() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -124,7 +124,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Operation - template for an Operation", "Property - template for a Property", "op")), "Operation - template for an Operation", _builder_1.toString());
   }
-  
+
   private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) throws Exception {
     final int cursorPosition = text.toString().indexOf(this.c);
     final String content = text.toString().replace(this.c, "");
