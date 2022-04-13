@@ -22,12 +22,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsFloatTest {
   private float[] data;
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private float[] createData() {
     final float[] array = new float[3];
     array[0] = 10.0f;
@@ -35,14 +35,14 @@ public class ArrayExtensionsFloatTest {
     array[2] = 30.0f;
     return array;
   }
-  
+
   @Test
   public void testSetGet__float() {
     Assert.assertEquals(10.0f, this.data[0], 0.001f);
     Assert.assertEquals(20.0f, this.data[1], 0.001f);
     Assert.assertEquals(30.0f, this.data[2], 0.001f);
   }
-  
+
   @Test
   public void testClone__float() {
     final float[] clonedData = this.data.clone();
@@ -50,17 +50,17 @@ public class ArrayExtensionsFloatTest {
     Assert.assertEquals(20.0f, clonedData[1], 0.001f);
     Assert.assertEquals(30.0f, clonedData[2], 0.001f);
   }
-  
+
   @Test
   public void testLength__float() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__float() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__float() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -74,7 +74,7 @@ public class ArrayExtensionsFloatTest {
     final float[] newData = ObjectExtensions.<float[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__float() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, 10.0f));
@@ -82,7 +82,7 @@ public class ArrayExtensionsFloatTest {
     Assert.assertTrue(ArrayExtensions.contains(this.data, 30.0f));
     Assert.assertFalse(ArrayExtensions.contains(this.data, 40.0f));
   }
-  
+
   @Test
   public void testContains__float_NaN() {
     final float[] nanData = { 1.0f, Float.NaN };
@@ -93,7 +93,7 @@ public class ArrayExtensionsFloatTest {
     Assert.assertFalse(ArrayExtensions.contains(nanData, Float.NEGATIVE_INFINITY));
     Assert.assertFalse(ArrayExtensions.contains(nanData, Float.POSITIVE_INFINITY));
   }
-  
+
   @Test
   public void testContains__float_posInfinity() {
     final float[] nanData = { 1.0f, Float.POSITIVE_INFINITY };
@@ -105,7 +105,7 @@ public class ArrayExtensionsFloatTest {
     Assert.assertFalse(ArrayExtensions.contains(nanData, ((float) _log)));
     Assert.assertFalse(ArrayExtensions.contains(nanData, Float.NEGATIVE_INFINITY));
   }
-  
+
   @Test
   public void testContains__float_negInfinity() {
     final float[] nanData = { 1.0f, Float.NEGATIVE_INFINITY };

@@ -22,12 +22,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsBooleanTest {
   private boolean[] data;
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private boolean[] createData() {
     final boolean[] array = new boolean[3];
     array[0] = true;
@@ -35,14 +35,14 @@ public class ArrayExtensionsBooleanTest {
     array[2] = true;
     return array;
   }
-  
+
   @Test
   public void testSetGet__boolean() {
     Assert.assertTrue(this.data[0]);
     Assert.assertFalse(this.data[1]);
     Assert.assertTrue(this.data[2]);
   }
-  
+
   @Test
   public void testClone__boolean() {
     final boolean[] clonedData = this.data.clone();
@@ -50,17 +50,17 @@ public class ArrayExtensionsBooleanTest {
     Assert.assertFalse(clonedData[1]);
     Assert.assertTrue(clonedData[2]);
   }
-  
+
   @Test
   public void testLength__boolean() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__boolean() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__boolean() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -74,7 +74,7 @@ public class ArrayExtensionsBooleanTest {
     final boolean[] newData = ObjectExtensions.<boolean[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__boolean() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, true));

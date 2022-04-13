@@ -59,11 +59,11 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public Visibility toVisibility(final AccessorType type) {
       Visibility _switchResult = null;
       if (type != null) {
@@ -106,7 +106,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
       return _switchResult;
     }
-    
+
     public boolean hasGetter(final FieldDeclaration it) {
       final Function1<String, Boolean> _function = (String name) -> {
         MethodDeclaration _findDeclaredMethod = it.getDeclaringType().findDeclaredMethod(name);
@@ -114,11 +114,11 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       };
       return IterableExtensions.<String>exists(this.getPossibleGetterNames(it), _function);
     }
-    
+
     public boolean shouldAddGetter(final FieldDeclaration it) {
       return ((!this.hasGetter(it)) && (this.getGetterType(it) != AccessorType.NONE));
     }
-    
+
     @SuppressWarnings("unchecked")
     public AccessorType getGetterType(final FieldDeclaration it) {
       AnnotationReference _elvis = null;
@@ -149,27 +149,27 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
       return null;
     }
-    
+
     public AnnotationReference getAccessorsAnnotation(final AnnotationTarget it) {
       return it.findAnnotation(this.context.findTypeGlobally(Accessors.class));
     }
-    
+
     public AnnotationReference getDeprecatedAnnotation(final AnnotationTarget it) {
       return it.findAnnotation(this.context.findTypeGlobally(Deprecated.class));
     }
-    
+
     public AccessorsDeprecationPolicy getDeprecationPolicyAsEnum(final AnnotationReference annot) {
       return AccessorsDeprecationPolicy.valueOf(annot.getEnumValue("deprecationPolicy").getSimpleName());
     }
-    
+
     public Object validateGetter(final MutableFieldDeclaration field) {
       return null;
     }
-    
+
     public String getGetterName(final FieldDeclaration it) {
       return IterableExtensions.<String>head(this.getPossibleGetterNames(it));
     }
-    
+
     public List<String> getPossibleGetterNames(final FieldDeclaration it) {
       final ArrayList<String> names = CollectionLiterals.<String>newArrayList();
       if ((((this.isBooleanType(this.orObject(it.getType())) && it.getSimpleName().startsWith("is")) && (it.getSimpleName().length() > 2)) && Character.isUpperCase(it.getSimpleName().charAt(2)))) {
@@ -190,11 +190,11 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       names.addAll(ListExtensions.<String, String>map(_xifexpression, _function));
       return names;
     }
-    
+
     public boolean isBooleanType(final TypeReference it) {
       return ((!it.isInferred()) && Objects.equal(it, this.context.getPrimitiveBoolean()));
     }
-    
+
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateGetter(field);
       field.markAsRead();
@@ -273,7 +273,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       };
       field.getDeclaringType().addMethod(this.getGetterName(field), _function);
     }
-    
+
     @SuppressWarnings("unchecked")
     public AccessorType getSetterType(final FieldDeclaration it) {
       AnnotationReference _elvis = null;
@@ -304,7 +304,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
       return null;
     }
-    
+
     private Object fieldOwner(final MutableFieldDeclaration it) {
       Object _xifexpression = null;
       boolean _isStatic = it.isStatic();
@@ -315,21 +315,21 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
       return _xifexpression;
     }
-    
+
     public boolean hasSetter(final FieldDeclaration it) {
       MethodDeclaration _findDeclaredMethod = it.getDeclaringType().findDeclaredMethod(this.getSetterName(it), this.orObject(it.getType()));
       return (_findDeclaredMethod != null);
     }
-    
+
     public String getSetterName(final FieldDeclaration it) {
       String _firstUpper = StringExtensions.toFirstUpper(it.getSimpleName());
       return ("set" + _firstUpper);
     }
-    
+
     public boolean shouldAddSetter(final FieldDeclaration it) {
       return (((!it.isFinal()) && (!this.hasSetter(it))) && (this.getSetterType(it) != AccessorType.NONE));
     }
-    
+
     public void validateSetter(final MutableFieldDeclaration field) {
       boolean _isFinal = field.isFinal();
       if (_isFinal) {
@@ -340,7 +340,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         return;
       }
     }
-    
+
     public void addSetter(final MutableFieldDeclaration field, final Visibility visibility) {
       this.validateSetter(field);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
@@ -420,7 +420,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       };
       field.getDeclaringType().addMethod(this.getSetterName(field), _function);
     }
-    
+
     private TypeReference orObject(final TypeReference ref) {
       TypeReference _xifexpression = null;
       if ((ref == null)) {
@@ -431,7 +431,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       return _xifexpression;
     }
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
     final Consumer<MutableMemberDeclaration> _function = (MutableMemberDeclaration it) -> {
@@ -439,7 +439,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     };
     elements.forEach(_function);
   }
-  
+
   protected void _transform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final AccessorsProcessor.Util util = new AccessorsProcessor.Util(context);
@@ -481,7 +481,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
     }
   }
-  
+
   protected void _transform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
@@ -501,7 +501,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     };
     IterableExtensions.filter(it.getDeclaredFields(), _function).forEach(_function_1);
   }
-  
+
   public void transform(final MutableMemberDeclaration it, final TransformationContext context) {
     if (it instanceof MutableClassDeclaration) {
       _transform((MutableClassDeclaration)it, context);

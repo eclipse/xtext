@@ -45,16 +45,16 @@ public class ToStringProcessor extends AbstractClassProcessor {
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public boolean hasToString(final ClassDeclaration it) {
       MethodDeclaration _findDeclaredMethod = it.findDeclaredMethod("toString");
       return (_findDeclaredMethod != null);
     }
-    
+
     public ToStringConfiguration getToStringConfig(final ClassDeclaration it) {
       ToStringConfiguration _xblockexpression = null;
       {
@@ -69,7 +69,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
       }
       return _xblockexpression;
     }
-    
+
     public void addReflectiveToString(final MutableClassDeclaration cls, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
@@ -127,7 +127,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
       };
       cls.addMethod("toString", _function);
     }
-    
+
     public void addToString(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> fields, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
@@ -191,7 +191,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
       cls.addMethod("toString", _function);
     }
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));

@@ -26,35 +26,35 @@ import org.junit.Test;
 public class ToStringBuilderTest {
   public static class OtherClass {
     public ToStringBuilderTest.OtherClass other;
-    
+
     public String name;
   }
-  
+
   @Accessors
   @ToString
   public static class DataClass {
     public ToStringBuilderTest.DataClass other;
-    
+
     public String name;
-    
+
     @Pure
     public ToStringBuilderTest.DataClass getOther() {
       return this.other;
     }
-    
+
     public void setOther(final ToStringBuilderTest.DataClass other) {
       this.other = other;
     }
-    
+
     @Pure
     public String getName() {
       return this.name;
     }
-    
+
     public void setName(final String name) {
       this.name = name;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -64,26 +64,26 @@ public class ToStringBuilderTest {
       return b.toString();
     }
   }
-  
+
   public static class MyEntity {
     private final boolean boolProp = true;
-    
+
     private final int intProp = 42;
-    
+
     private final ArrayList<String> myList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-    
+
     private final ToStringBuilderTest.MyEntity friend;
-    
+
     private final RetentionPolicy policy = RetentionPolicy.CLASS;
-    
+
     public MyEntity() {
       this.friend = null;
     }
-    
+
     public MyEntity(final ToStringBuilderTest.MyEntity friend) {
       this.friend = friend;
     }
-    
+
     @Override
     public String toString() {
       String _plus = (Boolean.valueOf(this.boolProp) + "\n");
@@ -96,7 +96,7 @@ public class ToStringBuilderTest {
       return (_plus_6 + this.policy);
     }
   }
-  
+
   @Test
   public void testToString() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
@@ -148,7 +148,7 @@ public class ToStringBuilderTest {
     Assert.assertEquals(
       ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
-  
+
   @Test
   public void testSingleLine() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
@@ -157,14 +157,14 @@ public class ToStringBuilderTest {
       "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", 
       builder.toString());
   }
-  
+
   @Test
   public void testHideFieldNames() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
     final ToStringBuilder builder = new ToStringBuilder(_myEntity).singleLine().hideFieldNames().addAllFields();
     Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", builder.toString());
   }
-  
+
   @Test
   public void testSkipNulls() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
@@ -200,7 +200,7 @@ public class ToStringBuilderTest {
     Assert.assertEquals(
       ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
-  
+
   @Test
   public void testExplicitFieldListing() {
     ToStringBuilderTest.MyEntity _myEntity = new ToStringBuilderTest.MyEntity();
@@ -218,7 +218,7 @@ public class ToStringBuilderTest {
     Assert.assertEquals(
       ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
-  
+
   @Test
   public void recursionHandling() {
     final ToStringBuilderTest.OtherClass obj = new ToStringBuilderTest.OtherClass();
@@ -240,7 +240,7 @@ public class ToStringBuilderTest {
     Assert.assertEquals(
       ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
-  
+
   @Test
   public void recursionHandling_02() {
     final ToStringBuilderTest.DataClass obj = new ToStringBuilderTest.DataClass();
@@ -262,7 +262,7 @@ public class ToStringBuilderTest {
     Assert.assertEquals(
       ToStringBuilderTest.toUnix(_builder.toString()), builder.toString());
   }
-  
+
   public static String toUnix(final String s) {
     StringConcatenation result = new StringConcatenation("\n");
     result.append(s);

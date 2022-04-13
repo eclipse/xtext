@@ -65,19 +65,19 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     protected boolean _isValidDelegate(final FieldDeclaration it) {
       return ((this.hasValidType(it) && (!this.hasDelegationConflicts(it))) && this.areListedInterfacesValid(it));
     }
-    
+
     protected boolean _isValidDelegate(final MethodDeclaration it) {
       return (((this.hasValidType(it) && this.hasValidSignature(it)) && (!this.hasDelegationConflicts(it))) && this.areListedInterfacesValid(it));
     }
-    
+
     public boolean hasValidType(final MemberDeclaration it) {
       boolean _xifexpression = false;
       if (((this.getType(it) == null) || this.getType(it).isInferred())) {
@@ -92,15 +92,15 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xifexpression;
     }
-    
+
     protected TypeReference _getType(final FieldDeclaration it) {
       return it.getType();
     }
-    
+
     protected TypeReference _getType(final MethodDeclaration it) {
       return it.getReturnType();
     }
-    
+
     public boolean hasValidSignature(final MethodDeclaration it) {
       boolean _switchResult = false;
       final Function1<ParameterDeclaration, TypeReference> _function = (ParameterDeclaration it_1) -> {
@@ -138,7 +138,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _switchResult;
     }
-    
+
     public boolean hasDelegationConflicts(final MemberDeclaration delegate) {
       boolean _xblockexpression = false;
       {
@@ -168,14 +168,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     public Iterable<? extends MemberDeclaration> otherDelegates(final MemberDeclaration delegate) {
       final Function1<MemberDeclaration, Boolean> _function = (MemberDeclaration it) -> {
         return Boolean.valueOf((!Objects.equal(it, delegate)));
       };
       return IterableExtensions.filter(this.getDelegates(delegate.getDeclaringType()), _function);
     }
-    
+
     public boolean areListedInterfacesValid(final MemberDeclaration delegate) {
       boolean _xblockexpression = false;
       {
@@ -237,7 +237,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     public Iterable<? extends MemberDeclaration> getDelegates(final TypeDeclaration it) {
       final Function1<MemberDeclaration, Boolean> _function = (MemberDeclaration it_1) -> {
         AnnotationReference _findAnnotation = it_1.findAnnotation(this.context.findTypeGlobally(Delegate.class));
@@ -245,11 +245,11 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       return IterableExtensions.filter(it.getDeclaredMembers(), _function);
     }
-    
+
     public Set<TypeReference> listedInterfaces(final MemberDeclaration it) {
       return IterableExtensions.<TypeReference>toSet(((Iterable<TypeReference>)Conversions.doWrapArray(it.findAnnotation(this.context.findTypeGlobally(Delegate.class)).getClassArrayValue("value"))));
     }
-    
+
     public Set<TypeReference> getImplementedInterfaces(final TypeReference it) {
       Set<TypeReference> _xblockexpression = null;
       {
@@ -263,7 +263,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     private void collectAllSuperTypes(final TypeReference it, final Set<TypeReference> seen) {
       boolean _add = seen.add(it);
       final boolean cycle = (!_add);
@@ -275,7 +275,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       it.getDeclaredSuperTypes().forEach(_function);
     }
-    
+
     public Set<TypeReference> getDelegatedInterfaces(final MemberDeclaration delegate) {
       Set<TypeReference> _xblockexpression = null;
       {
@@ -291,7 +291,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     public Set<ResolvedMethod> getMethodsToImplement(final MemberDeclaration delegate) {
       final Function1<TypeReference, Iterable<? extends ResolvedMethod>> _function = (TypeReference it) -> {
         return it.getDeclaredResolvedMethods();
@@ -322,7 +322,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<ResolvedMethod, String>sortBy(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3), _function_4).values(), _function_5), _function_6));
     }
-    
+
     public boolean isObjectMethod(final ResolvedMethod it) {
       boolean _xblockexpression = false;
       {
@@ -335,11 +335,11 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     public boolean isStatic(final ResolvedMethod it) {
       return it.getDeclaration().isStatic();
     }
-    
+
     public MutableMethodDeclaration implementMethod(final MutableMemberDeclaration delegate, final ResolvedMethod resolvedMethod) {
       MutableMethodDeclaration _xblockexpression = null;
       {
@@ -393,14 +393,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xblockexpression;
     }
-    
+
     public TypeReference replace(final TypeReference target, final Map<? extends TypeReference, ? extends TypeReference> mappings) {
       final Function2<TypeReference, Map.Entry<? extends TypeReference, ? extends TypeReference>, TypeReference> _function = (TypeReference result, Map.Entry<? extends TypeReference, ? extends TypeReference> mapping) -> {
         return this.replace(result, mapping.getKey(), mapping.getValue());
       };
       return IterableExtensions.fold(mappings.entrySet(), target, _function);
     }
-    
+
     public TypeReference replace(final TypeReference target, final TypeReference oldType, final TypeReference newType) {
       boolean _equals = Objects.equal(target, oldType);
       if (_equals) {
@@ -435,7 +435,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return target;
     }
-    
+
     protected CharSequence _delegateAccess(final FieldDeclaration it, final MethodDeclaration method) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("this.");
@@ -443,7 +443,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       _builder.append(_simpleName);
       return _builder;
     }
-    
+
     protected CharSequence _delegateAccess(final MethodDeclaration it, final MethodDeclaration method) {
       CharSequence _switchResult = null;
       final Function1<ParameterDeclaration, TypeReference> _function = (ParameterDeclaration it_1) -> {
@@ -510,7 +510,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _switchResult;
     }
-    
+
     public String returnIfNeeded(final ResolvedMethod it) {
       String _xifexpression = null;
       boolean _isVoid = it.getResolvedReturnType().isVoid();
@@ -521,7 +521,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       return _xifexpression;
     }
-    
+
     public boolean isValidDelegate(final MemberDeclaration it) {
       if (it instanceof MethodDeclaration) {
         return _isValidDelegate((MethodDeclaration)it);
@@ -532,7 +532,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           Arrays.<Object>asList(it).toString());
       }
     }
-    
+
     public TypeReference getType(final MemberDeclaration it) {
       if (it instanceof MethodDeclaration) {
         return _getType((MethodDeclaration)it);
@@ -543,7 +543,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           Arrays.<Object>asList(it).toString());
       }
     }
-    
+
     public CharSequence delegateAccess(final MemberDeclaration it, final MethodDeclaration method) {
       if (it instanceof MethodDeclaration) {
         return _delegateAccess((MethodDeclaration)it, method);
@@ -555,7 +555,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
     }
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
     @Extension

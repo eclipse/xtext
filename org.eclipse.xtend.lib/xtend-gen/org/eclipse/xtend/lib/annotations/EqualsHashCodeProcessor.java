@@ -48,26 +48,26 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   @Beta
   public static class Util {
     private static final int PRIME_VALUE = 31;
-    
+
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public boolean hasHashCode(final ClassDeclaration it) {
       MethodDeclaration _findDeclaredMethod = it.findDeclaredMethod("hashCode");
       return (_findDeclaredMethod != null);
     }
-    
+
     public boolean hasEquals(final ClassDeclaration it) {
       final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration it_1) -> {
         return Boolean.valueOf(((Objects.equal(it_1.getSimpleName(), "equals") && (IterableExtensions.size(it_1.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it_1.getParameters()).getType(), this.context.getObject())));
       };
       return IterableExtensions.exists(it.getDeclaredMethods(), _function);
     }
-    
+
     public boolean hasSuperEquals(final ClassDeclaration cls) {
       boolean _xblockexpression = false;
       {
@@ -91,7 +91,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _xblockexpression;
     }
-    
+
     public boolean hasSuperHashCode(final ClassDeclaration cls) {
       boolean _xblockexpression = false;
       {
@@ -115,7 +115,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _xblockexpression;
     }
-    
+
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
@@ -178,14 +178,14 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       };
       cls.addMethod("equals", _function);
     }
-    
+
     private TypeReference newWildCardSelfTypeReference(final ClassDeclaration cls) {
       final Function1<TypeParameterDeclaration, TypeReference> _function = (TypeParameterDeclaration it) -> {
         return this.context.newWildcardTypeReference(this.context.getObject());
       };
       return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(IterableExtensions.map(cls.getTypeParameters(), _function), TypeReference.class)));
     }
-    
+
     public StringConcatenationClient contributeToEquals(final FieldDeclaration it) {
       StringConcatenationClient _switchResult = null;
       String _name = this.orObject(it.getType()).getName();
@@ -329,7 +329,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _switchResult;
     }
-    
+
     public StringConcatenationClient deepEquals(final FieldDeclaration it) {
       StringConcatenationClient _xifexpression = null;
       boolean _isArray = it.getType().isArray();
@@ -385,7 +385,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _xifexpression;
     }
-    
+
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       String _xifexpression = null;
       if (includeSuper) {
@@ -455,7 +455,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       };
       cls.addMethod("hashCode", _function);
     }
-    
+
     public StringConcatenationClient contributeToHashCode(final FieldDeclaration it) {
       StringConcatenationClient _switchResult = null;
       String _name = this.orObject(it.getType()).getName();
@@ -585,7 +585,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _switchResult;
     }
-    
+
     public StringConcatenationClient deepHashCode(final FieldDeclaration it) {
       StringConcatenationClient _xblockexpression = null;
       {
@@ -637,7 +637,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       }
       return _xblockexpression;
     }
-    
+
     private TypeReference orObject(final TypeReference ref) {
       TypeReference _elvis = null;
       if (ref != null) {
@@ -649,7 +649,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       return _elvis;
     }
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
