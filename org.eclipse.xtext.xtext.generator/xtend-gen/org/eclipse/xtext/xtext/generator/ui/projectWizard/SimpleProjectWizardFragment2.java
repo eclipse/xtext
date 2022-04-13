@@ -43,16 +43,16 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Accessors
   private boolean generate = false;
-  
+
   @Accessors
   private boolean pluginProject = true;
-  
+
   @Override
   public void generate() {
     if ((!this.generate)) {
@@ -130,7 +130,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     this.generateProjectCreator();
     this.generateNewProjectWizard();
   }
-  
+
   public void generateProjectInfo() {
     final TypeReference projectInfoClass = TypeReference.typeRef(this.getProjectInfoClassName());
     final JavaFileAccess file = this.fileAccessFactory.createJavaFile(projectInfoClass);
@@ -153,7 +153,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   public void generateWizardNewProjectCreationPage() {
     final TypeReference mainPageClass = TypeReference.typeRef(this.getProjectWizardCreationPageClassName());
     final JavaFileAccess file = this.fileAccessFactory.createJavaFile(mainPageClass);
@@ -189,7 +189,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   public void generateNewProjectWizardInitialContents() {
     final TypeReference initialContentsClass = TypeReference.typeRef(this.getProjectWizardInitialContentsClassName());
     final XtendFileAccess file = this.fileAccessFactory.createXtendFile(initialContentsClass);
@@ -257,7 +257,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   public void generateProjectCreator() {
     final TypeReference genClass = TypeReference.typeRef(this.getProjectCreatorClassName());
     final TypeReference projectInfoClass = TypeReference.typeRef(this.getProjectInfoClassName());
@@ -570,7 +570,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
   }
-  
+
   public void generateNewProjectWizard() {
     final TypeReference genClass = TypeReference.typeRef(this.getProjectWizardClassName());
     final TypeReference projectInfoClass = TypeReference.typeRef(this.getProjectInfoClassName());
@@ -738,59 +738,59 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
   }
-  
+
   protected String getProjectWizardInitialContentsClassName() {
     String _projectWizardClassName = this.getProjectWizardClassName();
     return (_projectWizardClassName + "InitialContents");
   }
-  
+
   protected String getProjectWizardClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "NewProjectWizard");
   }
-  
+
   protected String getProjectWizardCreationPageClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "WizardNewProjectCreationPage");
   }
-  
+
   protected String getProjectCreatorClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "ProjectCreator");
   }
-  
+
   protected String getProjectInfoClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "ProjectInfo");
   }
-  
+
   protected String getProjectWizardPackage() {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
     return (_eclipsePluginBasePackage + ".wizard.");
   }
-  
+
   @Pure
   public boolean isGenerate() {
     return this.generate;
   }
-  
+
   public void setGenerate(final boolean generate) {
     this.generate = generate;
   }
-  
+
   @Pure
   public boolean isPluginProject() {
     return this.pluginProject;
   }
-  
+
   public void setPluginProject(final boolean pluginProject) {
     this.pluginProject = pluginProject;
   }

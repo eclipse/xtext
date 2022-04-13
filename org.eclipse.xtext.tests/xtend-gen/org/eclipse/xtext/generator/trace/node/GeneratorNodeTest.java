@@ -24,7 +24,7 @@ import org.junit.Test;
 public class GeneratorNodeTest {
   @Extension
   private GeneratorNodeExtensions exts = new GeneratorNodeExtensions();
-  
+
   @Test
   public void testBasicCreationAndProcessing() {
     final LocationData root = this.loc(0);
@@ -64,7 +64,7 @@ public class GeneratorNodeTest {
     _builder_1.append("}");
     this.assertEquals(_builder_1.toString(), result.getTraceRegion().toString());
   }
-  
+
   @Test
   public void testEmptyIndent() {
     final LocationData root = this.loc(0);
@@ -84,7 +84,7 @@ public class GeneratorNodeTest {
     _builder.newLine();
     this.assertEquals(_builder.toString(), processor.process(node).toString());
   }
-  
+
   @Test
   public void testTemplateProcessing() {
     final LocationData root = this.loc(0);
@@ -148,7 +148,7 @@ public class GeneratorNodeTest {
     _builder.append("}");
     this.assertEquals(_builder.toString(), result.getTraceRegion().toString());
   }
-  
+
   private StringConcatenationClient someCodeGen(final int n) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -171,7 +171,7 @@ public class GeneratorNodeTest {
     };
     return _client;
   }
-  
+
   private String someCodeGen_noTrace(final int n) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -189,12 +189,12 @@ public class GeneratorNodeTest {
     }
     return _builder.toString();
   }
-  
+
   private LocationData loc(final int idx) {
     SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI("foo/mymodel.dsl");
     return new LocationData(idx, (100 - idx), 0, 0, _sourceRelativeURI);
   }
-  
+
   @Test
   public void testAppendVariants() {
     final CompositeGeneratorNode node = new CompositeGeneratorNode();
@@ -269,7 +269,7 @@ public class GeneratorNodeTest {
     _builder_3.newLine();
     this.assertEquals(_builder_3.toString(), processor.process(node).toString());
   }
-  
+
   @Test
   public void testIndentVariants() {
     final CompositeGeneratorNode node = new CompositeGeneratorNode();
@@ -333,7 +333,7 @@ public class GeneratorNodeTest {
     _builder.newLine();
     this.assertEquals(_builder.toString(), processor.process(node).toString());
   }
-  
+
   private void doIndent(final CompositeGeneratorNode parent, final boolean indentImmediately, final boolean indentEmptyLines) {
     this.exts.append(this.exts.append(parent, "// indentImmediately: "), Boolean.valueOf(indentImmediately));
     this.exts.appendNewLine(this.exts.append(this.exts.append(parent, ", indentEmptyLines: "), Boolean.valueOf(indentEmptyLines)));
@@ -342,7 +342,7 @@ public class GeneratorNodeTest {
     this.exts.append(parent, this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
     this.exts.append(this.exts.append(parent, "d"), this.exts.appendNewLine(new IndentNode("  ", indentImmediately, indentEmptyLines)));
   }
-  
+
   private void assertEquals(final String expected, final String actual) {
     final String expectedM = expected.toString().replaceAll(System.lineSeparator(), "\n");
     final String actualM = actual.toString().replaceAll(System.lineSeparator(), "\n");

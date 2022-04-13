@@ -52,22 +52,22 @@ public abstract class AbstractAntlrGrammarGenerator {
   @Inject
   @Extension
   protected XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   protected GrammarAccessExtensions _grammarAccessExtensions;
-  
+
   @Inject
   @Extension
   protected SyntheticTerminalDetector _syntheticTerminalDetector;
-  
+
   @Inject
   private CodeConfig codeConfig;
-  
+
   protected KeywordHelper keywordHelper;
-  
+
   private Grammar originalGrammar;
-  
+
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
     this.keywordHelper = KeywordHelper.getHelper(it);
     this.originalGrammar = it;
@@ -84,13 +84,13 @@ public abstract class AbstractAntlrGrammarGenerator {
       fsa.generateFile(this.getGrammarNaming().getLexerGrammar(it).getGrammarFileName(), this.compileLexer(flattened, options));
     }
   }
-  
+
   protected boolean isCombinedGrammar() {
     return this.getGrammarNaming().isCombinedGrammar(this.originalGrammar);
   }
-  
+
   protected abstract GrammarNaming getGrammarNaming();
-  
+
   protected CharSequence compileParser(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
@@ -136,7 +136,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected CharSequence compileLexer(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
@@ -164,7 +164,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected CharSequence compileParserOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -230,11 +230,11 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected boolean isParserBackTracking(final Grammar it, final AntlrOptions options) {
     return options.isBacktrack();
   }
-  
+
   protected CharSequence compileLexerOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -255,7 +255,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _builder;
   }
-  
+
   protected CharSequence compileTokens(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -289,7 +289,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _builder;
   }
-  
+
   protected CharSequence compileLexerHeader(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -314,7 +314,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected CharSequence compileLexerImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -329,7 +329,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected CharSequence compileParserHeader(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -354,19 +354,19 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected String compileParserMembers(final Grammar it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected String compileRuleCatch(final Grammar it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected CharSequence compileRules(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -393,7 +393,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _builder;
   }
-  
+
   protected CharSequence compileKeywordRules(final Grammar it, final AntlrOptions options) {
     CharSequence _xblockexpression = null;
     {
@@ -483,7 +483,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected CharSequence compileTerminalRules(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -505,15 +505,15 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileRule(final EnumRule it, final Grammar grammar, final AntlrOptions options) {
     return this.compileEBNF(it, options);
   }
-  
+
   protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     return this.compileEBNF(it, options);
   }
-  
+
   protected CharSequence _compileRule(final TerminalRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -590,7 +590,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileRule(final String keyword, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     String _ruleName = this.keywordHelper.getRuleName(keyword);
@@ -602,7 +602,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   protected String toAntlrKeywordRule(final String keyword, final AntlrOptions options) {
     boolean _isIgnoreCase = options.isIgnoreCase();
     if (_isIgnoreCase) {
@@ -613,11 +613,11 @@ public abstract class AbstractAntlrGrammarGenerator {
       return (_plus + "\'");
     }
   }
-  
+
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
     return (this._grammarAccessExtensions.initialHiddenTokens(grammar).contains(this._grammarAccessExtensions.ruleName(it)) && this.isCombinedGrammar());
   }
-  
+
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Rule ");
@@ -650,15 +650,15 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected String compileFinally(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected String ebnf(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -683,7 +683,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String ebnfPredicate(final AbstractElement it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -716,7 +716,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String dataTypeEbnf(final AbstractElement it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -741,7 +741,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String dataTypeEbnfPredicate(final AbstractElement it) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -774,7 +774,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
@@ -783,7 +783,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(" not matched");
     return _builder.toString();
   }
-  
+
   protected String _dataTypeEbnf2(final Alternatives it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -802,7 +802,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _dataTypeEbnf2(final Group it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -815,7 +815,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _dataTypeEbnf2(final UnorderedGroup it, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
@@ -836,15 +836,15 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
     return this.ebnf(it);
   }
-  
+
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     return this._grammarAccessExtensions.ruleName(it.getRule());
   }
-  
+
   protected String _ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ERROR ");
@@ -853,7 +853,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(" not matched");
     return _builder.toString();
   }
-  
+
   protected String _ebnf2(final Alternatives it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -872,7 +872,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _ebnf2(final Group it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -885,7 +885,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _ebnf2(final UnorderedGroup it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
@@ -906,7 +906,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _ebnf2(final Assignment it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     String _assignmentEbnf = this.assignmentEbnf(it.getTerminal(), it, options, supportActions);
@@ -914,11 +914,11 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
     return "";
   }
-  
+
   protected String ebnf(final Keyword it) {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
@@ -931,15 +931,15 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _xifexpression;
   }
-  
+
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
     return this.ebnf(it);
   }
-  
+
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     return this._grammarAccessExtensions.ruleName(it.getRule());
   }
-  
+
   protected String _ebnf2(final EnumLiteralDeclaration it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     boolean _isCombinedGrammar = this.isCombinedGrammar();
@@ -952,11 +952,11 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _xifexpression;
   }
-  
+
   protected String _crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     throw new IllegalStateException(("crossrefEbnf is not supported for " + it));
   }
-  
+
   protected String _crossrefEbnf(final Alternatives it, final CrossReference ref, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -975,7 +975,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _crossrefEbnf(final RuleCall it, final CrossReference ref, final boolean supportActions) {
     String _xblockexpression = null;
     {
@@ -992,11 +992,11 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected String _crossrefEbnf(final Keyword it, final CrossReference ref, final boolean supportActions) {
     return this.ebnf(it);
   }
-  
+
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _switchResult = null;
     boolean _matched = false;
@@ -1021,19 +1021,19 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _switchResult;
   }
-  
+
   protected String _assignmentEbnf(final Group it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     throw new IllegalStateException(("assignmentEbnf is not supported for " + it));
   }
-  
+
   protected String _assignmentEbnf(final Assignment it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     throw new IllegalStateException(("assignmentEbnf is not supported for " + it));
   }
-  
+
   protected String _assignmentEbnf(final Action it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     throw new IllegalStateException(("assignmentEbnf is not supported for " + it));
   }
-  
+
   protected String _assignmentEbnf(final Alternatives it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -1052,7 +1052,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _switchResult = null;
     AbstractRule _rule = it.getRule();
@@ -1079,31 +1079,31 @@ public abstract class AbstractAntlrGrammarGenerator {
     }
     return _switchResult;
   }
-  
+
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     return this.crossrefEbnf(it.getTerminal(), it, supportActions);
   }
-  
+
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     return this.ebnf(it, options, supportActions);
   }
-  
+
   protected boolean _mustBeParenthesized(final AbstractElement it) {
     return (this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated());
   }
-  
+
   protected boolean _mustBeParenthesized(final Group it) {
     return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
-  
+
   protected boolean _mustBeParenthesized(final Assignment it) {
     return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || this.mustBeParenthesized(it.getTerminal()));
   }
-  
+
   protected boolean _mustBeParenthesized(final Alternatives it) {
     return true;
   }
-  
+
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof EnumRule) {
       return _compileRule((EnumRule)it, grammar, options);
@@ -1118,7 +1118,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         Arrays.<Object>asList(it, grammar, options).toString());
     }
   }
-  
+
   protected String dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _dataTypeEbnf2((Alternatives)it, supportActions);
@@ -1137,7 +1137,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         Arrays.<Object>asList(it, supportActions).toString());
     }
   }
-  
+
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);
@@ -1162,7 +1162,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         Arrays.<Object>asList(it, options, supportActions).toString());
     }
   }
-  
+
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
@@ -1177,7 +1177,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         Arrays.<Object>asList(it, ref, supportActions).toString());
     }
   }
-  
+
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportActions);
@@ -1198,7 +1198,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         Arrays.<Object>asList(it, assignment, options, supportActions).toString());
     }
   }
-  
+
   public boolean mustBeParenthesized(final AbstractElement it) {
     if (it instanceof Alternatives) {
       return _mustBeParenthesized((Alternatives)it);

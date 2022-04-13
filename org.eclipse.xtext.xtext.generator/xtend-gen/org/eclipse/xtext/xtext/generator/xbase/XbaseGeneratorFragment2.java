@@ -42,30 +42,30 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateXtendInferrer = true;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean useInferredJvmModel = true;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean jdtTypeHierarchy = true;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean jdtCallHierarchy = true;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean skipExportedPackage = false;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   protected TypeReference getJvmModelInferrer() {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
     String _plus = (_runtimeBasePackage + ".jvmmodel.");
@@ -74,7 +74,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     String _plus_2 = (_plus_1 + "JvmModelInferrer");
     return new TypeReference(_plus_2);
   }
-  
+
   @Override
   public void generate() {
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getGrammar());
@@ -122,7 +122,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     GuiceModuleAccess _webGenModule = this.getLanguage().getWebGenModule();
     _webGenModule.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule"));
   }
-  
+
   protected boolean contributeEditorStub() {
     boolean _xblockexpression = false;
     {
@@ -175,7 +175,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory().addTypeToType(TypeReference.typeRef(IQualifiedNameProvider.class), 
       TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider"));
@@ -231,7 +231,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _runtimeGenModule_1.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule"));
     }
   }
-  
+
   protected void contributeEclipsePluginGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     if (this.useInferredJvmModel) {
@@ -310,7 +310,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       _eclipsePluginGenModule_1.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule"));
     }
   }
-  
+
   protected void doGenerateXtendInferrer() {
     final TypeReference firstRuleType = TypeReference.typeRef(GenModelUtil2.getJavaTypeName(IterableExtensions.<AbstractRule>head(this.getLanguage().getGrammar().getRules()).getType().getClassifier(), this.getLanguage().getGrammar().eResource().getResourceSet()));
     TypeReference _jvmModelInferrer = this.getJvmModelInferrer();
@@ -478,7 +478,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     };
     this.fileAccessFactory.createXtendFile(_jvmModelInferrer, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
@@ -1117,23 +1117,23 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     return _xblockexpression;
   }
-  
+
   public void setGenerateXtendInferrer(final boolean generateXtendInferrer) {
     this.generateXtendInferrer = generateXtendInferrer;
   }
-  
+
   public void setUseInferredJvmModel(final boolean useInferredJvmModel) {
     this.useInferredJvmModel = useInferredJvmModel;
   }
-  
+
   public void setJdtTypeHierarchy(final boolean jdtTypeHierarchy) {
     this.jdtTypeHierarchy = jdtTypeHierarchy;
   }
-  
+
   public void setJdtCallHierarchy(final boolean jdtCallHierarchy) {
     this.jdtCallHierarchy = jdtCallHierarchy;
   }
-  
+
   public void setSkipExportedPackage(final boolean skipExportedPackage) {
     this.skipExportedPackage = skipExportedPackage;
   }

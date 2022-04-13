@@ -36,7 +36,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testNull_02() {
     final Object x = null;
@@ -55,7 +55,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testSimpleString() {
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -67,7 +67,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testSimpleTemplate_01() {
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -83,7 +83,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testWeirdTemplateString() {
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -122,7 +122,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   private CharSequence other() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("foo ");
@@ -131,7 +131,7 @@ public class TemplateNodeTest {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   private String multiLineString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("test ");
@@ -144,7 +144,7 @@ public class TemplateNodeTest {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   @Test
   public void testSeparatorLoop() {
     final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
@@ -169,7 +169,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testSeparatorLoopWithWhitespace() {
     final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
@@ -194,7 +194,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testSeparatorLoopWithWhitespace2() {
     final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
@@ -219,7 +219,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testSeparatorLoopWithWhitespace3() {
     final List<String> strings = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a", "b", "c"));
@@ -245,7 +245,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testIndentedIf() {
     final boolean condition = true;
@@ -268,7 +268,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testIndentedFor() {
     final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("foo", "bar"));
@@ -289,7 +289,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client);
   }
-  
+
   @Test
   public void testIndentedTemplate() {
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -315,7 +315,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client_1);
   }
-  
+
   @Test
   public void testIfNotEmpty() {
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -339,7 +339,7 @@ public class TemplateNodeTest {
     };
     this.assertEquals(_client_1);
   }
-  
+
   protected void assertEquals(final StringConcatenationClient c) {
     final GeneratorNodeExtensions ext = new GeneratorNodeExtensions();
     final GeneratorNodeProcessor processor = new GeneratorNodeProcessor();

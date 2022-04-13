@@ -46,17 +46,17 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     public void generate() {
     }
   }
-  
+
   @Inject
   private ContentAssistGrammarNaming caNaming;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   public TypeReference getPartialContentAssistParserClass(final Grammar g) {
     String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(g);
     String _plus = (_genericIdeBasePackage + ".contentassist.antlr");
@@ -65,7 +65,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     String _plus_2 = (_plus_1 + "ContentAssistParser");
     return new TypeReference(_plus, _plus_2);
   }
-  
+
   @Override
   public void generate() {
     IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();
@@ -125,7 +125,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
       ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function);
     }
   }
-  
+
   private StringConcatenationClient getGenPartialContentAssistParser() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -207,11 +207,11 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     };
     return _client;
   }
-  
+
   private TypeReference getFollowElementClass() {
     return TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement");
   }
-  
+
   private TypeReference getAbstractInternalContentAssistParserClass() {
     return TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser");
   }

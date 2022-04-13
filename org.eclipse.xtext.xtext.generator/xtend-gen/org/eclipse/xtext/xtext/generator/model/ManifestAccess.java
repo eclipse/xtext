@@ -36,29 +36,29 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 @SuppressWarnings("all")
 public class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorComponent {
   private static final Logger LOG = Logger.getLogger(ManifestAccess.class);
-  
+
   private String bundleName;
-  
+
   private String symbolicName;
-  
+
   private String version = "0.0.1.qualifier";
-  
+
   private boolean merge = true;
-  
+
   private final Set<String> exportedPackages = CollectionLiterals.<String>newHashSet();
-  
+
   private final Set<String> requiredBundles = CollectionLiterals.<String>newHashSet();
-  
+
   private final Set<String> importedPackages = CollectionLiterals.<String>newHashSet();
-  
+
   private TypeReference activator;
-  
+
   private String lineDelimiter = Strings.newLine();
-  
+
   public ManifestAccess() {
     this.setPath("MANIFEST.MF");
   }
-  
+
   /**
    * Merge the contents of the given manifest into this one.
    */
@@ -122,7 +122,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     }
     return _xblockexpression;
   }
-  
+
   public String getEffectiveSymbolicName() {
     if ((this.symbolicName == null)) {
       return null;
@@ -133,12 +133,12 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     }
     return this.symbolicName.substring(0, idx);
   }
-  
+
   @Override
   public void setContent(final StringConcatenationClient content) {
     throw new UnsupportedOperationException("cannot directly set \'content\' on a manifest.mf. Use the individual properties instead.");
   }
-  
+
   @Override
   public CharSequence getContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -254,7 +254,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   @Override
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     try {
@@ -277,77 +277,77 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
   }
-  
+
   @Pure
   public String getBundleName() {
     return this.bundleName;
   }
-  
+
   public void setBundleName(final String bundleName) {
     this.bundleName = bundleName;
   }
-  
+
   @Pure
   public String getSymbolicName() {
     return this.symbolicName;
   }
-  
+
   public void setSymbolicName(final String symbolicName) {
     this.symbolicName = symbolicName;
   }
-  
+
   @Pure
   public String getVersion() {
     return this.version;
   }
-  
+
   public void setVersion(final String version) {
     this.version = version;
   }
-  
+
   @Pure
   public boolean isMerge() {
     return this.merge;
   }
-  
+
   public void setMerge(final boolean merge) {
     this.merge = merge;
   }
-  
+
   @Pure
   public Set<String> getExportedPackages() {
     return this.exportedPackages;
   }
-  
+
   @Pure
   public Set<String> getRequiredBundles() {
     return this.requiredBundles;
   }
-  
+
   @Pure
   public Set<String> getImportedPackages() {
     return this.importedPackages;
   }
-  
+
   @Pure
   public TypeReference getActivator() {
     return this.activator;
   }
-  
+
   public void setActivator(final TypeReference activator) {
     this.activator = activator;
   }
-  
+
   @Pure
   public String getLineDelimiter() {
     return this.lineDelimiter;
   }
-  
+
   public void setLineDelimiter(final String lineDelimiter) {
     this.lineDelimiter = lineDelimiter;
   }

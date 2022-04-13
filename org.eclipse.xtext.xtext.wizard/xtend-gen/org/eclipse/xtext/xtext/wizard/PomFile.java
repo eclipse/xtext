@@ -20,17 +20,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class PomFile extends TextFile {
   @Accessors
   private String packaging = "jar";
-  
+
   @Accessors
   private String buildSection = "";
-  
+
   @Accessors
   private String profileSection = "";
-  
+
   public PomFile(final ProjectDescriptor project) {
     super(Outlet.ROOT, "pom.xml", project);
   }
-  
+
   @Override
   public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -236,30 +236,30 @@ public class PomFile extends TextFile {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   @Pure
   public String getPackaging() {
     return this.packaging;
   }
-  
+
   public void setPackaging(final String packaging) {
     this.packaging = packaging;
   }
-  
+
   @Pure
   public String getBuildSection() {
     return this.buildSection;
   }
-  
+
   public void setBuildSection(final String buildSection) {
     this.buildSection = buildSection;
   }
-  
+
   @Pure
   public String getProfileSection() {
     return this.profileSection;
   }
-  
+
   public void setProfileSection(final String profileSection) {
     this.profileSection = profileSection;
   }

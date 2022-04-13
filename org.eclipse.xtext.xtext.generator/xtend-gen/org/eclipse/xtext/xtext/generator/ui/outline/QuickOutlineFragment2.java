@@ -29,7 +29,7 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();

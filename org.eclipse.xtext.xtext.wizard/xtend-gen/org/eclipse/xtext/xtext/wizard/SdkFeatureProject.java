@@ -28,33 +28,33 @@ public class SdkFeatureProject extends ProjectDescriptor {
   public String getNameQualifier() {
     return ".feature";
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return false;
   }
-  
+
   @Override
   public boolean isEclipseFeatureProject() {
     return true;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isEnabled() {
     return ((super.isEnabled() && this.getConfig().getRuntimeProject().isEclipsePluginProject()) || 
       this.getConfig().getP2Project().isEnabled());
   }
-  
+
   @Override
   public Iterable<? extends AbstractFile> getFiles() {
     ArrayList<AbstractFile> _xblockexpression = null;
@@ -68,17 +68,17 @@ public class SdkFeatureProject extends ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<SourceFolderDescriptor> getSourceFolders() {
     return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
-  
+
   @Override
   public Set<String> getBinIncludes() {
     return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("feature.xml"));
   }
-  
+
   /**
    * @since 2.11
    */
@@ -86,7 +86,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
   public Set<String> getBinExcludes() {
     return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
   }
-  
+
   public CharSequence featureXml() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -131,7 +131,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   public CharSequence includedPlugin(final String qualifier) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<plugin");
@@ -157,12 +157,12 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     throw new UnsupportedOperationException("Eclipse features are not yet supported in Gradle");
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -171,7 +171,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public SdkFeatureProject(final WizardConfiguration config) {
     super(config);
   }

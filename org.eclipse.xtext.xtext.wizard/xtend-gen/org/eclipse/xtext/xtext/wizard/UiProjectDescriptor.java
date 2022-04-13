@@ -22,18 +22,18 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class UiProjectDescriptor extends TestedProjectDescriptor {
   private UiTestProjectDescriptor testProject;
-  
+
   public UiProjectDescriptor(final WizardConfiguration config) {
     super(config);
     UiTestProjectDescriptor _uiTestProjectDescriptor = new UiTestProjectDescriptor(this);
     this.testProject = _uiTestProjectDescriptor;
   }
-  
+
   @Override
   public TestProjectDescriptor getTestProject() {
     return this.testProject;
   }
-  
+
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     RuntimeProjectDescriptor _runtimeProject = this.getConfig().getRuntimeProject();
@@ -43,27 +43,27 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
     };
     return IterableExtensions.toSet(IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject)), _function));
   }
-  
+
   @Override
   public String getNameQualifier() {
     return ".ui";
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return true;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
     LinkedHashSet<ExternalDependency> _xblockexpression = null;
@@ -107,14 +107,14 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<String> getImportedPackages() {
     final Set<String> packs = super.getImportedPackages();
     packs.add("org.apache.log4j");
     return packs;
   }
-  
+
   @Override
   public Set<String> getBinIncludes() {
     LinkedHashSet<String> _xblockexpression = null;
@@ -127,7 +127,7 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();

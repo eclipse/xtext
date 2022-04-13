@@ -62,26 +62,26 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private ValidatorNaming _validatorNaming;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   @Accessors
   private boolean generateDeprecationValidation = false;
-  
+
   @Accessors
   private boolean generatePropertyPage = false;
-  
+
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
-  
+
   /**
    * Adds a validator that is to be executed additionally.
    * 
@@ -91,7 +91,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   public void addComposedCheck(final String composedCheckValidator) {
     this.composedChecks.add(composedCheckValidator);
   }
-  
+
   /**
    * @since 2.14
    */
@@ -103,7 +103,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     String _plus_2 = (_plus_1 + "ConfigurableIssueCodesProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   /**
    * @since 2.14
    */
@@ -115,21 +115,21 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     String _plus_2 = (_plus_1 + "ValidatorConfigurationBlock");
     return new TypeReference(_plus_2);
   }
-  
+
   /**
    * @since 2.14
    */
   protected TypeReference getAbstractValidatorConfigurationBlockClass() {
     return new TypeReference("org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock");
   }
-  
+
   /**
    * @since 2.14
    */
   protected TypeReference getXbaseValidationConfigurationBlockClass() {
     return new TypeReference("org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock");
   }
-  
+
   /**
    * @since 2.14
    */
@@ -141,7 +141,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       return new TypeReference(ConfigurableIssueCodesProvider.class);
     }
   }
-  
+
   protected TypeReference getGenValidatorSuperClass(final Grammar grammar) {
     TypeReference _xblockexpression = null;
     {
@@ -156,11 +156,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected TypeReference getDefaultValidatorSuperClass() {
     return new TypeReference(AbstractDeclarativeValidator.class);
   }
-  
+
   /**
    * @since 2.14
    */
@@ -172,7 +172,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     }
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
-  
+
   /**
    * @since 2.14
    */
@@ -183,7 +183,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
     }
   }
-  
+
   @Override
   public void generate() {
     this.contributeRuntimeGuiceBindings();
@@ -215,7 +215,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       this.contributeEclipsePluginExtensions();
     }
   }
-  
+
   protected void generateXtendValidatorStub() {
     TypeReference _validatorClass = this._validatorNaming.getValidatorClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -276,7 +276,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createXtendFile(_validatorClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void generateJavaValidatorStub() {
     TypeReference _validatorClass = this._validatorNaming.getValidatorClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -337,7 +337,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createJavaFile(_validatorClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected GeneratedJavaFileAccess generateGenValidator() {
     TypeReference _xifexpression = null;
     boolean _isGenerateStub = this.isGenerateStub();
@@ -457,7 +457,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     javaFile.setContent(_client);
     return javaFile;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -528,7 +528,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     javaFile.setContent(_client);
     return javaFile;
   }
-  
+
   protected GeneratedJavaFileAccess generateValidationConfigurationBlock() {
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getValidatorConfigurationBlockClass());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -646,7 +646,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     javaFile.setContent(_client);
     return javaFile;
   }
-  
+
   protected StringConcatenationClient generateValidationToDeprecateRules() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -687,14 +687,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     };
     return _client;
   }
-  
+
   protected Iterable<EPackage> getGeneratedPackagesToValidate() {
     final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
       return it.getEPackage();
     };
     return IterableExtensions.<GeneratedMetamodel, EPackage>map(Iterables.<GeneratedMetamodel>filter(this.getGrammar().getMetamodelDeclarations(), GeneratedMetamodel.class), _function);
   }
-  
+
   protected Collection<EPackage> getRegistryPackagesToValidate() {
     final Collection<EPackage> packages = GrammarUtil.allEPackagesToValidate(this.getGrammar());
     final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
@@ -703,7 +703,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     packages.removeAll(IterableExtensions.<EPackage>toList(IterableExtensions.<GeneratedMetamodel, EPackage>map(Iterables.<GeneratedMetamodel>filter(GrammarUtil.allMetamodelDeclarations(this.getGrammar()), GeneratedMetamodel.class), _function)));
     return packages;
   }
-  
+
   protected String getGeneratedEPackageName(final EPackage pack) {
     StringConcatenation _builder = new StringConcatenation();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
@@ -717,7 +717,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     _builder.append("Package");
     return _builder.toString();
   }
-  
+
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
@@ -848,7 +848,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -859,7 +859,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     };
     return IterableExtensions.<AbstractRule>toList(IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function));
   }
-  
+
   /**
    * @since 2.14
    */
@@ -869,21 +869,21 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     };
     return IterableExtensions.<Annotation>exists(rule.getAnnotations(), _function);
   }
-  
+
   @Pure
   public boolean isGenerateDeprecationValidation() {
     return this.generateDeprecationValidation;
   }
-  
+
   public void setGenerateDeprecationValidation(final boolean generateDeprecationValidation) {
     this.generateDeprecationValidation = generateDeprecationValidation;
   }
-  
+
   @Pure
   public boolean isGeneratePropertyPage() {
     return this.generatePropertyPage;
   }
-  
+
   public void setGeneratePropertyPage(final boolean generatePropertyPage) {
     this.generatePropertyPage = generatePropertyPage;
   }

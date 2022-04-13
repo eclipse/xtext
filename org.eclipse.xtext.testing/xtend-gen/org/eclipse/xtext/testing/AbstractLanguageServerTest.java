@@ -137,7 +137,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     public DirectRequestManager(final OperationCanceledManager operationCanceledManager) {
       super(null, operationCanceledManager);
     }
-    
+
     @Override
     public synchronized <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
       final CompletableFuture<V> result = new CompletableFuture<V>();
@@ -161,7 +161,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       }
       return result;
     }
-    
+
     @Override
     public synchronized <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
       final CompletableFuture<V> result = new CompletableFuture<V>();
@@ -183,62 +183,62 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return result;
     }
   }
-  
+
   @Accessors
   public static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
     private String expectedCodeLensItems = "";
-    
+
     private Procedure1<? super List<? extends CodeLens>> assertCodeLenses = null;
-    
+
     @Pure
     public String getExpectedCodeLensItems() {
       return this.expectedCodeLensItems;
     }
-    
+
     public void setExpectedCodeLensItems(final String expectedCodeLensItems) {
       this.expectedCodeLensItems = expectedCodeLensItems;
     }
-    
+
     @Pure
     public Procedure1<? super List<? extends CodeLens>> getAssertCodeLenses() {
       return this.assertCodeLenses;
     }
-    
+
     public void setAssertCodeLenses(final Procedure1<? super List<? extends CodeLens>> assertCodeLenses) {
       this.assertCodeLenses = assertCodeLenses;
     }
   }
-  
+
   @Accessors
   public static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
     private String expectedCodeActions = "";
-    
+
     private Procedure1<? super List<Either<Command, CodeAction>>> assertCodeActions = null;
-    
+
     @Pure
     public String getExpectedCodeActions() {
       return this.expectedCodeActions;
     }
-    
+
     public void setExpectedCodeActions(final String expectedCodeActions) {
       this.expectedCodeActions = expectedCodeActions;
     }
-    
+
     @Pure
     public Procedure1<? super List<Either<Command, CodeAction>>> getAssertCodeActions() {
       return this.assertCodeActions;
     }
-    
+
     public void setAssertCodeActions(final Procedure1<? super List<Either<Command, CodeAction>>> assertCodeActions) {
       this.assertCodeActions = assertCodeActions;
     }
   }
-  
+
   @Accessors
   protected final String fileExtension;
-  
+
   protected static final String TEST_PROJECT_PATH = "/test-data/test-project";
-  
+
   @Before
   @BeforeEach
   public void setup() {
@@ -254,7 +254,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     File _file = new File(_absoluteFile, AbstractLanguageServerTest.TEST_PROJECT_PATH);
     this.root = _file;
   }
-  
+
   @After
   @AfterEach
   public void cleanup() {
@@ -267,14 +267,14 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * @since 2.18
    */
   protected Class<? extends LanguageClient> getLanguageClientClass() {
     return LanguageClient.class;
   }
-  
+
   protected com.google.inject.Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
     final com.google.inject.Module _function = (Binder it) -> {
@@ -282,29 +282,29 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     };
     return Modules2.mixin(_serverModule, _function);
   }
-  
+
   @Inject
   protected IResourceServiceProvider.Registry resourceServerProviderRegistry;
-  
+
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
-  
+
   @Inject
   protected LanguageServerImpl languageServer;
-  
+
   protected List<Pair<String, Object>> notifications = CollectionLiterals.<Pair<String, Object>>newArrayList();
-  
+
   protected File root;
-  
+
   protected LanguageInfo languageInfo;
-  
+
   protected boolean hierarchicalDocumentSymbolSupport = false;
-  
+
   protected Path getTestRootPath() {
     return this.root.toPath().toAbsolutePath().normalize();
   }
-  
+
   protected Path relativize(final String uri) {
     try {
       Path _xblockexpression = null;
@@ -318,15 +318,15 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected InitializeResult initialize() {
     return this.initialize(null);
   }
-  
+
   protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer) {
     return this.initialize(initializer, true);
   }
-  
+
   protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer, final boolean callInitialized) {
     try {
       InitializeParams _initializeParams = new InitializeParams();
@@ -369,11 +369,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void open(final String fileUri, final String model) {
     this.open(fileUri, this.languageInfo.getLanguageName(), model);
   }
-  
+
   protected void open(final String fileUri, final String langaugeId, final String model) {
     DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
     final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
@@ -390,7 +390,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
     this.languageServer.didOpen(_doubleArrow);
   }
-  
+
   protected void didCreateWatchedFiles(final String... fileUris) {
     DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams();
     final Procedure1<DidChangeWatchedFilesParams> _function = (DidChangeWatchedFilesParams it) -> {
@@ -408,7 +408,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     DidChangeWatchedFilesParams _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParams>operator_doubleArrow(_didChangeWatchedFilesParams, _function);
     this.languageServer.didChangeWatchedFiles(_doubleArrow);
   }
-  
+
   protected void close(final String fileUri) {
     DidCloseTextDocumentParams _didCloseTextDocumentParams = new DidCloseTextDocumentParams();
     final Procedure1<DidCloseTextDocumentParams> _function = (DidCloseTextDocumentParams it) -> {
@@ -418,7 +418,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     DidCloseTextDocumentParams _doubleArrow = ObjectExtensions.<DidCloseTextDocumentParams>operator_doubleArrow(_didCloseTextDocumentParams, _function);
     this.languageServer.didClose(_doubleArrow);
   }
-  
+
   public String writeFile(final String path, final CharSequence contents) {
     try {
       final File file = new File(this.root, path);
@@ -432,16 +432,16 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void deleteFile(final String path) {
     new File(this.root, path).delete();
   }
-  
+
   public String getVirtualFile(final String path) {
     final File file = new File(this.root, path);
     return this._uriExtensions.toUriString(file.toURI().normalize());
   }
-  
+
   protected String _toExpectation(final List<?> elements) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -453,21 +453,21 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final String it) {
     return it;
   }
-  
+
   protected String _toExpectation(final Integer it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(it);
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Void it) {
     return "";
   }
-  
+
   protected String _toExpectation(final Either<?, ?> either) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -484,7 +484,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Location it) {
     StringConcatenation _builder = new StringConcatenation();
     Path _relativize = this.relativize(it.getUri());
@@ -494,7 +494,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append(_expectation);
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Range it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
@@ -506,7 +506,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append("]");
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Position it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
@@ -518,7 +518,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append("]");
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final SymbolInformation it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("symbol \"");
@@ -552,7 +552,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   /**
    * @since 2.16
    */
@@ -627,7 +627,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _xblockexpression;
   }
-  
+
   protected String _toExpectation(final CompletionItem it) {
     StringConcatenation _builder = new StringConcatenation();
     String _label = it.getLabel();
@@ -672,7 +672,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final TextEdit it) {
     StringConcatenation _builder = new StringConcatenation();
     String _newText = it.getNewText();
@@ -683,7 +683,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Hover it) {
     StringConcatenation _builder = new StringConcatenation();
     String _expectation = this.toExpectation(it.getRange());
@@ -694,7 +694,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final SignatureHelp it) {
     String _xblockexpression = null;
     {
@@ -733,7 +733,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _xblockexpression;
   }
-  
+
   protected String _toExpectation(final DocumentHighlight it) {
     String _xblockexpression = null;
     {
@@ -766,11 +766,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _xblockexpression;
   }
-  
+
   protected String _toExpectation(final DocumentHighlightKind kind) {
     return kind.toString().substring(0, 1).toUpperCase();
   }
-  
+
   protected String _toExpectation(final Map<Object, Object> it) {
     final StringBuilder sb = new StringBuilder();
     final Consumer<Map.Entry<Object, Object>> _function = (Map.Entry<Object, Object> it_1) -> {
@@ -797,14 +797,14 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     it.entrySet().forEach(_function);
     return sb.toString();
   }
-  
+
   protected String _toExpectation(final CodeLens it) {
     String _title = it.getCommand().getTitle();
     String _plus = (_title + " ");
     String _expectation = this.toExpectation(it.getRange());
     return (_plus + _expectation);
   }
-  
+
   protected String _toExpectation(final FoldingRange it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
@@ -819,7 +819,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append("]");
     return _builder.toString();
   }
-  
+
   protected void testCodeLens(final Procedure1<? super AbstractLanguageServerTest.TestCodeLensConfiguration> configurator) {
     try {
       @Extension
@@ -851,7 +851,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected String _toExpectation(final MarkupContent it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("kind: ");
@@ -864,7 +864,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final Command it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("command : ");
@@ -886,7 +886,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final WorkspaceEdit it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("changes :");
@@ -949,7 +949,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final ResourceOperation it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("kind : ");
@@ -958,7 +958,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final CodeAction it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("title : ");
@@ -992,7 +992,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final TextDocumentEdit e) {
     StringConcatenation _builder = new StringConcatenation();
     String _expectation = this.toExpectation(e.getTextDocument());
@@ -1003,7 +1003,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected String _toExpectation(final VersionedTextDocumentIdentifier v) {
     StringConcatenation _builder = new StringConcatenation();
     String _lastSegment = org.eclipse.emf.common.util.URI.createURI(v.getUri()).lastSegment();
@@ -1014,7 +1014,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append(">");
     return _builder.toString();
   }
-  
+
   protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {
     try {
       @Extension
@@ -1054,7 +1054,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -1098,7 +1098,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected FileInfo initializeContext(final TextDocumentConfiguration configuration) {
     this.initialize(configuration.getInitializer());
     boolean _isEmpty = configuration.getFilesInScope().isEmpty();
@@ -1123,7 +1123,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _model_1 = configuration.getModel();
     return new FileInfo(filePath, _model_1);
   }
-  
+
   protected void testDefinition(final Procedure1<? super DefinitionTestConfiguration> configurator) {
     try {
       @Extension
@@ -1155,7 +1155,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testHover(final Procedure1<? super HoverTestConfiguration> configurator) {
     try {
       @Extension
@@ -1187,7 +1187,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testSignatureHelp(final Procedure1<? super SignatureHelpConfiguration> configurator) {
     try {
       @Extension
@@ -1219,7 +1219,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testDocumentHighlight(final Procedure1<? super DocumentHighlightConfiguration> configurator) {
     try {
       DocumentHighlightConfiguration _documentHighlightConfiguration = new DocumentHighlightConfiguration();
@@ -1253,7 +1253,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolConfiguraiton> configurator) {
     try {
       @Extension
@@ -1287,7 +1287,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguration> configurator) {
     try {
       @Extension
@@ -1310,7 +1310,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testReferences(final Procedure1<? super ReferenceTestConfiguration> configurator) {
     try {
       @Extension
@@ -1345,23 +1345,23 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertEquals(final String expected, final String actual) {
     final String expectedM = expected.replace(System.lineSeparator(), "\n");
     final String actualM = actual.replace(System.lineSeparator(), "\n");
     Assert.assertEquals(expectedM.replace("\t", "    "), actualM.replace("\t", "    "));
   }
-  
+
   public void assertEqualsStricter(final String expected, final String actual) {
     final String expectedM = expected.replace(System.lineSeparator(), "\n");
     final String actualM = actual.replace(System.lineSeparator(), "\n");
     Assert.assertEquals(expectedM, actualM);
   }
-  
+
   protected void testFormatting(final Procedure1<? super FormattingConfiguration> configurator) {
     this.testFormatting(null, configurator);
   }
-  
+
   protected void testFormatting(final Procedure1<? super DocumentFormattingParams> paramsConfigurator, final Procedure1<? super FormattingConfiguration> configurator) {
     try {
       @Extension
@@ -1387,11 +1387,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void testRangeFormatting(final Procedure1<? super RangeFormattingConfiguration> configurator) {
     this.testRangeFormatting(null, configurator);
   }
-  
+
   protected void testRangeFormatting(final Procedure1<? super DocumentRangeFormattingParams> paramsConfigurator, final Procedure1<? super RangeFormattingConfiguration> configurator) {
     try {
       @Extension
@@ -1418,7 +1418,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * @since 2.26
    */
@@ -1442,18 +1442,18 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void notify(final String method, final Object parameter) {
     Pair<String, Object> _mappedTo = Pair.<String, Object>of(method, parameter);
     this.notifications.add(_mappedTo);
   }
-  
+
   @Override
   public CompletableFuture<?> request(final String method, final Object parameter) {
     return CompletableFuture.<Object>completedFuture(null);
   }
-  
+
   protected Map<String, List<Diagnostic>> getDiagnostics() {
     try {
       final Function1<CancelIndicator, HashMap<String, List<Diagnostic>>> _function = (CancelIndicator it) -> {
@@ -1472,7 +1472,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected String toExpectation(final Object it) {
     if (it instanceof Integer) {
       return _toExpectation((Integer)it);
@@ -1531,12 +1531,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public AbstractLanguageServerTest(final String fileExtension) {
     super();
     this.fileExtension = fileExtension;
   }
-  
+
   @Pure
   public String getFileExtension() {
     return this.fileExtension;

@@ -30,11 +30,11 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 public class TaskTagPreferencePageFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   private Grammar grammar;
-  
+
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Override
   public void generate() {
     final GuiceModuleAccess.BindingFactory rtBindings = new GuiceModuleAccess.BindingFactory().addTypeToType(

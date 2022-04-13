@@ -41,17 +41,17 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
   private boolean ignoreCase = false;
-  
+
   protected TypeReference getScopeProviderClass(final Grammar grammar) {
     String _name = grammar.getName();
     boolean _equals = Objects.equal(_name, "org.eclipse.xtext.xbase.Xbase");
@@ -70,7 +70,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     String _plus_2 = (_plus_1 + "ScopeProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getAbstractScopeProviderClass(final Grammar grammar) {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".scoping.");
@@ -80,7 +80,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     String _plus_3 = (_plus_2 + "ScopeProvider");
     return new TypeReference(_plus_3);
   }
-  
+
   protected TypeReference getScopeProviderSuperClass(final Grammar grammar) {
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
     if ((this.isInheritImplementation() && (superGrammar != null))) {
@@ -89,7 +89,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       return this.getDefaultScopeProviderSuperClass();
     }
   }
-  
+
   protected TypeReference getDefaultScopeProviderSuperClass() {
     TypeReference _xifexpression = null;
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
@@ -100,7 +100,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     }
     return _xifexpression;
   }
-  
+
   protected TypeReference getDelegateScopeProvider() {
     TypeReference _xifexpression = null;
     boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
@@ -111,11 +111,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     }
     return _xifexpression;
   }
-  
+
   protected TypeReference getGlobalScopeProvider() {
     return TypeReference.typeRef(DefaultGlobalScopeProvider.class);
   }
-  
+
   @Override
   public void generate() {
     this.contributeRuntimeGuiceBindings();
@@ -145,7 +145,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     }
   }
-  
+
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _xifexpression = null;
@@ -190,7 +190,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     bindingFactory.addConfiguredBinding(_simpleName_1, _client_1);
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
-  
+
   protected void generateGenScopeProvider() {
     TypeReference _xifexpression = null;
     boolean _isGenerateStub = this.isGenerateStub();
@@ -226,7 +226,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
-  
+
   protected void generateJavaScopeProvider() {
     TypeReference _scopeProviderClass = this.getScopeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -264,7 +264,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     };
     this.fileAccessFactory.createJavaFile(_scopeProviderClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   protected void generateXtendScopeProvider() {
     TypeReference _scopeProviderClass = this.getScopeProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -302,12 +302,12 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     };
     this.fileAccessFactory.createXtendFile(_scopeProviderClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
-  
+
   @Pure
   protected boolean isIgnoreCase() {
     return this.ignoreCase;
   }
-  
+
   public void setIgnoreCase(final boolean ignoreCase) {
     this.ignoreCase = ignoreCase;
   }

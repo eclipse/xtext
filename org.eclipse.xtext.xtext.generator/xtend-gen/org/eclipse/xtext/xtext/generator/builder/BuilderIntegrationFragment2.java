@@ -37,7 +37,7 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.builder", "org.eclipse.xtext.ui")));
     }
   }
-  
+
   protected void addRuntimeGuiceBindings() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -72,7 +72,7 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
     String _plus = (_simpleName + "Persisted");
     _addConfiguredBinding.addConfiguredBinding(_plus, statement2).contributeTo(this.getLanguage().getRuntimeGenModule());
   }
-  
+
   protected void addEclipsePluginGuiceBindings() {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

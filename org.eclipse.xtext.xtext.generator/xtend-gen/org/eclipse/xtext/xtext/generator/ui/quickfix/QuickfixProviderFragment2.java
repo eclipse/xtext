@@ -39,14 +39,14 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   @Extension
   private ValidatorNaming _validatorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   protected TypeReference getQuickfixProviderClass(final Grammar g) {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(g);
     String _plus = (_eclipsePluginBasePackage + ".quickfix.");
@@ -55,7 +55,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     String _plus_2 = (_plus_1 + "QuickfixProvider");
     return new TypeReference(_plus_2);
   }
-  
+
   protected TypeReference getQuickfixProviderSuperClass(final Grammar g) {
     TypeReference _xblockexpression = null;
     {
@@ -70,14 +70,14 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * Extra getter facilitates customization by overriding.
    */
   protected TypeReference getDefaultQuickfixProviderSuperClass() {
     return new TypeReference("org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider");
   }
-  
+
   @Override
   public void generate() {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
@@ -131,7 +131,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       }
     }
   }
-  
+
   public void generateGenQuickfixProvider() {
     final TypeReference genClass = this.getQuickfixProviderClass(this.getGrammar());
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
@@ -153,7 +153,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     file.setContent(_client);
     file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
   }
-  
+
   protected void generateXtendQuickfixProvider() {
     TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -209,7 +209,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createXtendFile(_quickfixProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateJavaQuickfixProvider() {
     TypeReference _quickfixProviderClass = this.getQuickfixProviderClass(this.getGrammar());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -268,7 +268,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     };
     this.fileAccessFactory.createJavaFile(_quickfixProviderClass, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected boolean addRegistrationToPluginXml() {
     boolean _xblockexpression = false;
     {

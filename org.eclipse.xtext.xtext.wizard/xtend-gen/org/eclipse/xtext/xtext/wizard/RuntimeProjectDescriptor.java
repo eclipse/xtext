@@ -44,19 +44,19 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
-  
+
   private final RuntimeTestProjectDescriptor testProject;
-  
+
   @Accessors
   private boolean withPluginXml = true;
-  
+
   public RuntimeProjectDescriptor(final WizardConfiguration config) {
     super(config);
     this.setEnabled(true);
     RuntimeTestProjectDescriptor _runtimeTestProjectDescriptor = new RuntimeTestProjectDescriptor(this);
     this.testProject = _runtimeTestProjectDescriptor;
   }
-  
+
   @Override
   public void setEnabled(final boolean enabled) {
     if ((!enabled)) {
@@ -64,38 +64,38 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     super.setEnabled(enabled);
   }
-  
+
   private String nameQualifier = "";
-  
+
   @Override
   public String getNameQualifier() {
     return this.nameQualifier;
   }
-  
+
   public void setNameQualifier(final String nameQualifier) {
     this.nameQualifier = nameQualifier;
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return (Objects.equal(this.getConfig().getPreferredBuildSystem(), BuildSystem.NONE) || this.getConfig().getUiProject().isEnabled());
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public TestProjectDescriptor getTestProject() {
     return this.testProject;
   }
-  
+
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
     LinkedHashSet<ExternalDependency> _xblockexpression = null;
@@ -152,7 +152,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<String> getDevelopmentBundles() {
     final LinkedHashSet<String> result = CollectionLiterals.<String>newLinkedHashSet(
@@ -179,7 +179,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return result;
   }
-  
+
   @Override
   public Set<String> getBinIncludes() {
     LinkedHashSet<String> _xblockexpression = null;
@@ -194,7 +194,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Iterable<? extends AbstractFile> getFiles() {
     final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
@@ -218,15 +218,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return files;
   }
-  
+
   private boolean isPlainMavenBuild() {
     return (this.getConfig().needsMavenBuild() && (!this.isEclipsePluginProject()));
   }
-  
+
   public PlainTextFile getGrammarFile() {
     return this.file(Outlet.MAIN_JAVA, this.getGrammarFilePath(), this.grammar());
   }
-  
+
   public String getGrammarFilePath() {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
@@ -237,7 +237,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(".xtext");
     return _builder.toString();
   }
-  
+
   public CharSequence grammar() {
     CharSequence _xifexpression = null;
     boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
@@ -248,7 +248,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xifexpression;
   }
-  
+
   private CharSequence defaultGrammar() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
@@ -280,7 +280,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   public String getWorkflowFilePath() {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackagePath = this.getConfig().getLanguage().getBasePackagePath();
@@ -291,7 +291,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(".mwe2");
     return _builder.toString();
   }
-  
+
   public CharSequence workflow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("module ");
@@ -574,7 +574,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();
@@ -681,7 +681,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -1527,7 +1527,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public CharSequence jarDescriptor() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<assembly xmlns=\"http://maven.apache.org/ASSEMBLY/2.0.0\" ");
@@ -1587,7 +1587,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   /**
    * @since 2.11
    */
@@ -1595,7 +1595,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   public Set<String> getBinExcludes() {
     return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend", "**/*.mwe2"));
   }
-  
+
   /**
    * @since 2.11
    */
@@ -1610,7 +1610,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(") Language Infrastructure.launch");
     return this.file(Outlet.ROOT, _builder.toString(), this.workflowLaunchConfig());
   }
-  
+
   /**
    * @since 2.11
    */
@@ -1781,14 +1781,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @since 2.11
    */
   private PlainTextFile getLaunchConfigFile() {
     return this.file(Outlet.ROOT, ".launch/Launch Runtime Eclipse.launch", this.launchConfig());
   }
-  
+
   /**
    * @since 2.11
    */
@@ -1870,12 +1870,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Pure
   public boolean isWithPluginXml() {
     return this.withPluginXml;
   }
-  
+
   public void setWithPluginXml(final boolean withPluginXml) {
     this.withPluginXml = withPluginXml;
   }

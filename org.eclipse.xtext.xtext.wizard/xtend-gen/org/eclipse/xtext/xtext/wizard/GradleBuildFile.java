@@ -20,14 +20,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class GradleBuildFile extends TextFile {
   @Accessors
   private String pluginsSection = "";
-  
+
   @Accessors
   private String additionalContent = "";
-  
+
   public GradleBuildFile(final ProjectDescriptor project) {
     super(Outlet.ROOT, "build.gradle", project);
   }
-  
+
   @Override
   public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
@@ -106,7 +106,7 @@ public class GradleBuildFile extends TextFile {
     }
     return _builder.toString();
   }
-  
+
   private Iterable<ExternalDependency.MavenCoordinates> getMavenDependencies() {
     final Function1<ExternalDependency, ExternalDependency.MavenCoordinates> _function = (ExternalDependency it) -> {
       return it.getMaven();
@@ -117,27 +117,27 @@ public class GradleBuildFile extends TextFile {
     };
     return IterableExtensions.<ExternalDependency.MavenCoordinates>filter(IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(this.getProject().getExternalDependencies(), _function), _function_1);
   }
-  
+
   private Iterable<Object> getAllDependencies() {
     Set<? extends ProjectDescriptor> _upstreamProjects = this.getProject().getUpstreamProjects();
     Iterable<ExternalDependency.MavenCoordinates> _mavenDependencies = this.getMavenDependencies();
     return Iterables.<Object>concat(_upstreamProjects, _mavenDependencies);
   }
-  
+
   @Pure
   public String getPluginsSection() {
     return this.pluginsSection;
   }
-  
+
   public void setPluginsSection(final String pluginsSection) {
     this.pluginsSection = pluginsSection;
   }
-  
+
   @Pure
   public String getAdditionalContent() {
     return this.additionalContent;
   }
-  
+
   public void setAdditionalContent(final String additionalContent) {
     this.additionalContent = additionalContent;
   }

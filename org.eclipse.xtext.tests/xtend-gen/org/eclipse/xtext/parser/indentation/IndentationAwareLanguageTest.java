@@ -40,15 +40,15 @@ import org.junit.runner.RunWith;
 public class IndentationAwareLanguageTest {
   @Inject
   private ParseHelper<Tree> parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper validationTestHelper;
-  
+
   @Inject
   @Extension
   private InvariantChecker invariantChecker;
-  
+
   public Tree parse(final CharSequence seq) {
     try {
       return this.parseHelper.parse(seq.toString().replaceAll("\r\n", "\n"));
@@ -56,14 +56,14 @@ public class IndentationAwareLanguageTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEmptyTree() {
     final Tree tree = this.parse("");
     Assert.assertNotNull(tree);
     Assert.assertTrue(tree.getNodes().isEmpty());
   }
-  
+
   @Test
   public void testSingleRootNode() {
     final Tree tree = this.parse("root");
@@ -71,7 +71,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals(1, tree.getNodes().size());
     Assert.assertEquals("root", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
   }
-  
+
   @Test
   public void testTwoRootNodes() {
     StringConcatenation _builder = new StringConcatenation();
@@ -85,7 +85,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
     Assert.assertEquals("second", IterableExtensions.<TreeNode>last(tree.getNodes()).getName());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +102,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals(0, IterableExtensions.<TreeNode>head(tree.getNodes()).getChildren().size());
     Assert.assertEquals("second", IterableExtensions.<TreeNode>last(tree.getNodes()).getName());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -119,7 +119,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertNull(IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getChildList());
     Assert.assertEquals("second", IterableExtensions.<OtherTreeNode>last(tree.getMoreNodes()).getName());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_3() {
     final Tree tree = this.parse("first\n\t");
@@ -128,7 +128,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
     Assert.assertEquals(0, IterableExtensions.<TreeNode>head(tree.getNodes()).getChildren().size());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_4() {
     final Tree tree = this.parse("\"first\"\n\t");
@@ -137,7 +137,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals("first", IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getName());
     Assert.assertNull(IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getChildList());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_5() {
     final Tree tree = this.parse("first\n\t\tabc\n\t");
@@ -146,7 +146,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
     Assert.assertEquals(1, IterableExtensions.<TreeNode>head(tree.getNodes()).getChildren().size());
   }
-  
+
   @Test
   public void testIgnoreEmptyLines_6() {
     final Tree tree = this.parse("\"first\"\n\t\t\"abc\"\n\t");
@@ -156,7 +156,7 @@ public class IndentationAwareLanguageTest {
     Assert.assertNotNull(IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getChildList());
     Assert.assertEquals(1, IterableExtensions.<OtherTreeNode>head(tree.getMoreNodes()).getChildList().getChildren().size());
   }
-  
+
   @Test
   public void testParentChild() {
     StringConcatenation _builder = new StringConcatenation();
@@ -178,7 +178,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testParentChildren() {
     StringConcatenation _builder = new StringConcatenation();
@@ -202,7 +202,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -232,7 +232,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -284,7 +284,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -312,7 +312,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -424,7 +424,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -460,7 +460,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -476,7 +476,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -496,7 +496,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   @Test
   public void testTree_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -536,7 +536,7 @@ public class IndentationAwareLanguageTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.asText(tree));
   }
-  
+
   private Tree parseAndValidate(final CharSequence s) {
     final Tree result = this.parse(s);
     this.validationTestHelper.assertNoIssues(result);
@@ -546,7 +546,7 @@ public class IndentationAwareLanguageTest {
     this.invariantChecker.checkInvariant(node);
     return result;
   }
-  
+
   private String asText(final Tree tree) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -567,7 +567,7 @@ public class IndentationAwareLanguageTest {
     }
     return _builder.toString();
   }
-  
+
   private StringConcatenation asText(final TreeNode treeNode) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = treeNode.getName();
@@ -584,7 +584,7 @@ public class IndentationAwareLanguageTest {
     }
     return _builder;
   }
-  
+
   private StringConcatenation asText(final OtherTreeNode treeNode) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = treeNode.getName();

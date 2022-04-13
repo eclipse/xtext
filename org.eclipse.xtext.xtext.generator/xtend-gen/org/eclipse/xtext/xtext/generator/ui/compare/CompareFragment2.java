@@ -38,7 +38,7 @@ public class CompareFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Override
   public void generate() {
     IBundleProjectConfig _eclipsePlugin = this.getProjectConfig().getEclipsePlugin();

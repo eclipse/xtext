@@ -32,26 +32,26 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ParentProjectDescriptor extends ProjectDescriptor {
   private String nameQualifier = ".parent";
-  
+
   @Override
   public String getNameQualifier() {
     return this.nameQualifier;
   }
-  
+
   public void setNameQualifier(final String nameQualifier) {
     this.nameQualifier = nameQualifier;
   }
-  
+
   @Override
   public boolean isEnabled() {
     return ((this.getConfig().needsGradleBuild() || this.getConfig().needsMavenBuild()) || Objects.equal(this.getConfig().getProjectLayout(), ProjectLayout.HIERARCHICAL));
   }
-  
+
   @Override
   public void setEnabled(final boolean enabled) {
     throw new UnsupportedOperationException("The parent project is automatically enabled depending on the build system");
   }
-  
+
   @Override
   public String getLocation() {
     String _rootLocation = this.getConfig().getRootLocation();
@@ -59,22 +59,22 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     String _name = this.getName();
     return (_plus + _name);
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public Iterable<? extends AbstractFile> getFiles() {
     final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
@@ -100,19 +100,19 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     }
     return files;
   }
-  
+
   public String getJavaVersion() {
     return this.getConfig().getJavaVersion().getQualifier();
   }
-  
+
   public String getTychoVersion() {
     return "2.7.1";
   }
-  
+
   public String getTychoVersionJ8() {
     return "1.7.0";
   }
-  
+
   private CharSequence loadResource(final String resourcePath) {
     try {
       return Resources.toString(this.getClass().getClassLoader().getResource(resourcePath), Charsets.ISO_8859_1);
@@ -120,7 +120,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();
@@ -249,7 +249,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
-  
+
   public CharSequence settingsGradle() {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -276,7 +276,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     }
     return _builder;
   }
-  
+
   public CharSequence sourceLayoutGradle() {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -506,12 +506,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Deprecated
   public CharSequence mavenDeploymentGradle() {
     throw new UnsupportedOperationException("Removed with 2.17");
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -2212,12 +2212,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   @Override
   public Set<SourceFolderDescriptor> getSourceFolders() {
     return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
-  
+
   public ParentProjectDescriptor(final WizardConfiguration config) {
     super(config);
   }

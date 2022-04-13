@@ -28,12 +28,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public abstract class TestProjectDescriptor extends ProjectDescriptor {
   @Accessors
   private final ProjectDescriptor testedProject;
-  
+
   public TestProjectDescriptor(final TestedProjectDescriptor testedProject) {
     super(testedProject.getConfig());
     this.testedProject = testedProject;
   }
-  
+
   @Override
   public Set<SourceFolderDescriptor> getSourceFolders() {
     final Function1<Outlet, SourceFolderDescriptor> _function = (Outlet it) -> {
@@ -43,31 +43,31 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     };
     return IterableExtensions.<SourceFolderDescriptor>toSet(ListExtensions.<Outlet, SourceFolderDescriptor>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function));
   }
-  
+
   public boolean isInlined() {
     return (this.isEnabled() && (!Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN)));
   }
-  
+
   public boolean isSeparate() {
     return (this.isEnabled() && Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN));
   }
-  
+
   @Override
   public String getNameQualifier() {
     String _nameQualifier = this.testedProject.getNameQualifier();
     return (_nameQualifier + ".tests");
   }
-  
+
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     return Collections.<ProjectDescriptor>unmodifiableSet(CollectionLiterals.<ProjectDescriptor>newHashSet(this.testedProject));
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return this.testedProject.isEclipsePluginProject();
   }
-  
+
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
@@ -124,7 +124,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     }
     return deps;
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -363,11 +363,11 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public boolean needsUiHarness() {
     return false;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();
@@ -388,7 +388,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     };
     return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
-  
+
   @Pure
   public ProjectDescriptor getTestedProject() {
     return this.testedProject;

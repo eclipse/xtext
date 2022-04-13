@@ -41,14 +41,14 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Inject
   @Extension
   private IQualifiedNameConverter _iQualifiedNameConverter;
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
@@ -187,7 +187,7 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
       _entries.add(_builder.toString());
     }
   }
-  
+
   protected TypeReference getCodeMiningProviderClass() {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
     String _plus = (_eclipsePluginBasePackage + ".codemining.");
@@ -195,35 +195,35 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     String _plus_1 = (_plus + _simpleName);
     return TypeReference.typeRef(this._iQualifiedNameConverter.toQualifiedName((_plus_1 + "CodeMiningProvider")).toString());
   }
-  
+
   protected TypeReference getCodeMiningProviderSuperClass() {
     return TypeReference.typeRef("org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider");
   }
-  
+
   protected TypeReference getBadLocationException() {
     return TypeReference.typeRef("org.eclipse.jface.text.BadLocationException");
   }
-  
+
   protected TypeReference getCancelIndicator() {
     return TypeReference.typeRef("org.eclipse.xtext.util.CancelIndicator");
   }
-  
+
   protected TypeReference getIAcceptor() {
     return TypeReference.typeRef("org.eclipse.xtext.util.IAcceptor");
   }
-  
+
   protected TypeReference getICodeMining() {
     return TypeReference.typeRef("org.eclipse.jface.text.codemining.ICodeMining");
   }
-  
+
   protected TypeReference getIDocument() {
     return TypeReference.typeRef("org.eclipse.jface.text.IDocument");
   }
-  
+
   protected TypeReference getXtextResource() {
     return TypeReference.typeRef("org.eclipse.xtext.resource.XtextResource");
   }
-  
+
   protected void generateXtendCodeMiningProvider() {
     TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningProviderClass().toString());
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -285,7 +285,7 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     };
     this.fileAccessFactory.createXtendFile(_typeRef, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
-  
+
   protected void generateJavaCodeMiningProvider() {
     TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningProviderClass().toString());
     StringConcatenationClient _client = new StringConcatenationClient() {

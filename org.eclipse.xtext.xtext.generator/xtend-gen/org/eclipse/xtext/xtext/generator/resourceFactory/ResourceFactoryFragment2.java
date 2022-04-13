@@ -35,7 +35,7 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Override
   public void generate() {
     List<StringConcatenationClient> _registrations = this.getLanguage().getRuntimeGenSetup().getRegistrations();

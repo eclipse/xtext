@@ -89,13 +89,13 @@ public class Ecore2XtextGrammarCreator {
     }
     return _xblockexpression;
   }
-  
+
   public <T extends EClassifier> List<T> but(final Iterable<T> classes, final EClassifier it) {
     final List<T> retVal = IterableExtensions.<T>toList(classes);
     retVal.remove(it);
     return retVal;
   }
-  
+
   public CharSequence subClassDispatcherRule(final EClass it) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -117,7 +117,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _builder;
   }
-  
+
   public String subClassAlternatives(final EClass eClazz) {
     String _xblockexpression = null;
     {
@@ -135,7 +135,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _xblockexpression;
   }
-  
+
   public CharSequence idAssignment(final EClass it) {
     CharSequence _xblockexpression = null;
     {
@@ -154,7 +154,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _xblockexpression;
   }
-  
+
   public CharSequence assigment(final EStructuralFeature it) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -216,7 +216,7 @@ public class Ecore2XtextGrammarCreator {
     _builder.newLineIfNotEmpty();
     return _builder;
   }
-  
+
   public CharSequence assignedTerminal(final EStructuralFeature it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -248,7 +248,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _switchResult;
   }
-  
+
   public CharSequence assignmentOperator(final EStructuralFeature it) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -265,7 +265,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _builder;
   }
-  
+
   public CharSequence rules(final EClassifier it) {
     CharSequence _xifexpression = null;
     if (((it != null) && Ecore2XtextExtensions.needsConcreteRule(it))) {
@@ -273,7 +273,7 @@ public class Ecore2XtextGrammarCreator {
     }
     return _xifexpression;
   }
-  
+
   public CharSequence rule(final EClassifier it) {
     CharSequence _switchResult = null;
     boolean _matched = false;

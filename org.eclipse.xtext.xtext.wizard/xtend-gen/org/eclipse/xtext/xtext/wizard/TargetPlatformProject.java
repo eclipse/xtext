@@ -29,32 +29,32 @@ public class TargetPlatformProject extends ProjectDescriptor {
   public String getNameQualifier() {
     return ".target";
   }
-  
+
   @Override
   public boolean isEclipsePluginProject() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfGradleBuild() {
     return false;
   }
-  
+
   @Override
   public boolean isPartOfMavenBuild() {
     return true;
   }
-  
+
   @Override
   public boolean isEnabled() {
     return this.getConfig().needsTychoBuild();
   }
-  
+
   @Override
   public void setEnabled(final boolean enabled) {
     throw new UnsupportedOperationException("The target platform project is activated automatically for Tycho builds");
   }
-  
+
   @Override
   public Iterable<? extends AbstractFile> getFiles() {
     ArrayList<AbstractFile> _xblockexpression = null;
@@ -70,12 +70,12 @@ public class TargetPlatformProject extends ProjectDescriptor {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<SourceFolderDescriptor> getSourceFolders() {
     return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
-  
+
   public CharSequence target() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
@@ -377,12 +377,12 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   public GradleBuildFile buildGradle() {
     throw new UnsupportedOperationException("Eclipse target platforms are not yet supported in Gradle");
   }
-  
+
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
@@ -391,7 +391,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }
-  
+
   public TargetPlatformProject(final WizardConfiguration config) {
     super(config);
   }

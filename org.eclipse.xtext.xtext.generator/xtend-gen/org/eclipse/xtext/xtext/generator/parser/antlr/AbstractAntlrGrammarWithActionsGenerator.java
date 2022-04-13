@@ -46,7 +46,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _switchResult;
   }
-  
+
   protected CharSequence compileEntryInit(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -66,11 +66,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected CharSequence _compileInitHiddenTokens(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -97,11 +97,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileInitUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected CharSequence _compileInitUnorderedGroups(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -131,7 +131,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   @Override
   protected String compileFinally(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
@@ -145,7 +145,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _switchResult;
   }
-  
+
   protected CharSequence compileEntryFinally(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -165,11 +165,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileRestoreHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected CharSequence _compileRestoreHiddenTokens(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -180,11 +180,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   protected CharSequence _compileRestoreUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     return "";
   }
-  
+
   protected CharSequence _compileRestoreUnorderedGroups(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -195,7 +195,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _builder;
   }
-  
+
   @Override
   protected String _dataTypeEbnf2(final Group it, final boolean supportActions) {
     String _xifexpression = null;
@@ -212,7 +212,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _dataTypeEbnf2(final UnorderedGroup it, final boolean supportActions) {
     String _xifexpression = null;
@@ -358,7 +358,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final Group it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -375,7 +375,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final UnorderedGroup it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
@@ -521,14 +521,14 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String __ebnf2 = super._ebnf2(it, options, supportActions);
     String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__ebnf2 + _argumentList);
   }
-  
+
   @Override
   protected String _ebnf2(final Assignment it, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
@@ -542,28 +542,28 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
     String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__dataTypeEbnf2 + _argumentList);
   }
-  
+
   @Override
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
     String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, this.isPassCurrentIntoFragment(), (!supportActions));
     return (_crossrefEbnf + _argumentList);
   }
-  
+
   @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
     String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, this.isPassCurrentIntoFragment(), (!supportActions));
     return (__assignmentEbnf + _argumentList);
   }
-  
+
   @Override
   protected String _assignmentEbnf(final Alternatives it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     StringConcatenation _builder = new StringConcatenation();
@@ -577,43 +577,43 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   protected boolean isPassCurrentIntoFragment() {
     return false;
   }
-  
+
   protected String getCurrentType() {
     return "EObject";
   }
-  
+
   @Override
   protected boolean _mustBeParenthesized(final AbstractElement it) {
     return true;
   }
-  
+
   @Override
   protected boolean _mustBeParenthesized(final Group it) {
     return true;
   }
-  
+
   @Override
   protected boolean _mustBeParenthesized(final Assignment it) {
     return true;
   }
-  
+
   @Override
   protected boolean _mustBeParenthesized(final Alternatives it) {
     return true;
   }
-  
+
   protected boolean _mustBeParenthesized(final Keyword it) {
     return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
-  
+
   protected boolean _mustBeParenthesized(final RuleCall it) {
     return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
-  
+
   protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileInitHiddenTokens((ParserRule)it, options);
@@ -624,7 +624,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, options).toString());
     }
   }
-  
+
   protected CharSequence compileInitUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileInitUnorderedGroups((ParserRule)it, options);
@@ -635,7 +635,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, options).toString());
     }
   }
-  
+
   protected CharSequence compileRestoreHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileRestoreHiddenTokens((ParserRule)it, options);
@@ -646,7 +646,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, options).toString());
     }
   }
-  
+
   protected CharSequence compileRestoreUnorderedGroups(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileRestoreUnorderedGroups((ParserRule)it, options);
@@ -657,7 +657,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, options).toString());
     }
   }
-  
+
   @Override
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
@@ -683,7 +683,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, options, supportActions).toString());
     }
   }
-  
+
   @Override
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
@@ -705,7 +705,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         Arrays.<Object>asList(it, assignment, options, supportActions).toString());
     }
   }
-  
+
   @Override
   public boolean mustBeParenthesized(final AbstractElement it) {
     if (it instanceof Alternatives) {

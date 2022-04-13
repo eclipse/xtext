@@ -41,26 +41,26 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
+
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean useDeprecatedClasses;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean skipXbaseTestingPackage;
-  
+
   private JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
-  
+
   public JUnitFragment() {
     this.setGenerateXtendStub(true);
   }
-  
+
   public void setJunitVersion(final String version) {
     this.junitVersion = JUnitVersion.fromString(version);
   }
-  
+
   protected String getTestingPackage() {
     String _xifexpression = null;
     if (this.useDeprecatedClasses) {
@@ -70,11 +70,11 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     }
     return _xifexpression;
   }
-  
+
   protected String getUiTestingPackage() {
     return "org.eclipse.xtext.ui.testing";
   }
-  
+
   protected String getXbaseTestingPackage() {
     String _xblockexpression = null;
     {
@@ -91,7 +91,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected String getXbaseUiTestingPackage() {
     String _xblockexpression = null;
     {
@@ -102,7 +102,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void generate() {
     ManifestAccess _manifest = this.getProjectConfig().getRuntimeTest().getManifest();
@@ -161,7 +161,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
       this.generateUiInjectorProvider().writeTo(this.getProjectConfig().getEclipsePluginTest().getSrcGen());
     }
   }
-  
+
   protected JavaFileAccess generateExampleRuntimeTest() {
     String _testingPackage = this.getTestingPackage();
     String _plus = (_testingPackage + ".XtextRunner");
@@ -322,7 +322,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     };
     return this.fileAccessFactory.createXtendFile(_exampleRuntimeTest, _client);
   }
-  
+
   protected JavaFileAccess generateJavaExampleRuntimeTest() {
     String _testingPackage = this.getTestingPackage();
     String _plus = (_testingPackage + ".XtextRunner");
@@ -474,14 +474,14 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     };
     return this.fileAccessFactory.createJavaFile(_exampleRuntimeTest, _client);
   }
-  
+
   protected TypeReference exampleRuntimeTest() {
     String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(this.getGrammar());
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_simpleName + "ParsingTest");
     return new TypeReference(_runtimeTestBasePackage, _plus);
   }
-  
+
   protected JavaFileAccess generateInjectorProvider() {
     JavaFileAccess _xblockexpression = null;
     {
@@ -692,20 +692,20 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected TypeReference iInjectorProvider() {
     String _testingPackage = this.getTestingPackage();
     String _plus = (_testingPackage + ".IInjectorProvider");
     return new TypeReference(_plus);
   }
-  
+
   protected TypeReference injectorProvider() {
     String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(this.getGrammar());
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_simpleName + "InjectorProvider");
     return new TypeReference(_runtimeTestBasePackage, _plus);
   }
-  
+
   protected JavaFileAccess generateUiInjectorProvider() {
     JavaFileAccess _xblockexpression = null;
     {
@@ -752,18 +752,18 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     }
     return _xblockexpression;
   }
-  
+
   protected TypeReference uiInjectorProvider() {
     String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(this.getGrammar());
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_simpleName + "UiInjectorProvider");
     return new TypeReference(_eclipsePluginTestBasePackage, _plus);
   }
-  
+
   public void setUseDeprecatedClasses(final boolean useDeprecatedClasses) {
     this.useDeprecatedClasses = useDeprecatedClasses;
   }
-  
+
   public void setSkipXbaseTestingPackage(final boolean skipXbaseTestingPackage) {
     this.skipXbaseTestingPackage = skipXbaseTestingPackage;
   }

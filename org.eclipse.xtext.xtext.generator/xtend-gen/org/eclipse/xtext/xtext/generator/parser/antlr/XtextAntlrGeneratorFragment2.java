@@ -82,47 +82,47 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean debugGrammar;
-  
+
   private final BooleanGeneratorOption combinedGrammar = new BooleanGeneratorOption();
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean removeBacktrackingGuards;
-  
+
   private int lookaheadThreshold;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean partialParsing;
-  
+
   @Inject
   private AntlrGrammarGenerator productionGenerator;
-  
+
   @Inject
   private AntlrContentAssistGrammarGenerator contentAssistGenerator;
-  
+
   @Inject
   private AntlrDebugGrammarGenerator debugGenerator;
-  
+
   @Inject
   private FileAccessFactory fileFactory;
-  
+
   @Inject
   private GrammarNaming productionNaming;
-  
+
   @Inject
   private ContentAssistGrammarNaming contentAssistNaming;
-  
+
   @Inject
   @Extension
   private GrammarAccessExtensions grammarUtil;
-  
+
   @Inject
   @Extension
   private SyntheticTerminalDetector _syntheticTerminalDetector;
-  
+
   public void setCombinedGrammar(final boolean combinedGrammar) {
     this.combinedGrammar.set(combinedGrammar);
   }
-  
+
   protected boolean isCombinedGrammar() {
     boolean _xifexpression = false;
     boolean _isSet = this.combinedGrammar.isSet();
@@ -133,7 +133,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected void doGenerate() {
     Grammar _grammar = this.getGrammar();
@@ -163,18 +163,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     this.addIdeBindingsAndImports();
     this.addUiBindingsAndImports();
   }
-  
+
   protected boolean hasSyntheticTerminalRule() {
     final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
       return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
     };
     return IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), _function);
   }
-  
+
   public void setLookaheadThreshold(final String lookaheadThreshold) {
     this.lookaheadThreshold = Integer.parseInt(lookaheadThreshold);
   }
-  
+
   protected void generateProductionGrammar() {
     @Extension
     final GrammarNaming naming = this.productionNaming;
@@ -187,7 +187,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     this.suppressWarnings(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
     this.normalizeLineDelimiters(fsa, naming.getInternalParserClass(this.getGrammar()), naming.getLexerClass(this.getGrammar()));
   }
-  
+
   protected void generateContentAssistGrammar() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
@@ -203,7 +203,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       this.removeBackTrackingGuards(fsa, naming.getInternalParserClass(this.getGrammar()), this.lookaheadThreshold);
     }
   }
-  
+
   protected void runAntlr(final AntlrGrammar parserGrammar, final AntlrGrammar lexerGrammar, final IXtextGeneratorFileSystemAccess fsa) {
     final String encoding = this.getCodeConfig().getEncoding();
     StringConcatenation _builder = new StringConcatenation();
@@ -247,12 +247,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       this.cleanupParserTokensFile(lexerGrammar, parserGrammar, KeywordHelper.getHelper(this.getGrammar()), fsa);
     }
   }
-  
+
   protected void generateDebugGrammar() {
     final IXtextGeneratorFileSystemAccess fsa = this.getProjectConfig().getRuntime().getSrcGen();
     this.debugGenerator.generate(this.getGrammar(), this.getOptions(), fsa);
   }
-  
+
   public JavaFileAccess generateProductionParser() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
@@ -439,7 +439,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xblockexpression;
   }
-  
+
   public JavaFileAccess generateAntlrTokenFileProvider() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
@@ -487,7 +487,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xblockexpression;
   }
-  
+
   public JavaFileAccess generateProductionTokenSource() {
     JavaFileAccess _xblockexpression = null;
     {
@@ -647,7 +647,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xblockexpression;
   }
-  
+
   public JavaFileAccess generateContentAssistParser() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
@@ -831,7 +831,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     file.setContent(_client);
     return file;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -863,7 +863,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     };
     return _client;
   }
-  
+
   /**
    * @since 2.14
    */
@@ -1052,7 +1052,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xblockexpression;
   }
-  
+
   public JavaFileAccess generateContentAssistTokenSource() {
     JavaFileAccess _xblockexpression = null;
     {
@@ -1224,7 +1224,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
@@ -1238,7 +1238,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       issues.addError("Backtracking lexer and ignorecase cannot be combined for now.");
     }
   }
-  
+
   protected void addRuntimeBindingsAndImports() {
     @Extension
     final GrammarNaming naming = this.productionNaming;
@@ -1303,7 +1303,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     rtBindings.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
-  
+
   protected void addIdeBindingsAndImports() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
@@ -1363,7 +1363,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     ideBindings.contributeTo(this.getLanguage().getIdeGenModule());
   }
-  
+
   protected void addUiBindingsAndImports() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
@@ -1482,15 +1482,15 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     uiBindings.contributeTo(this.getLanguage().getEclipsePluginGenModule());
   }
-  
+
   public void setDebugGrammar(final boolean debugGrammar) {
     this.debugGrammar = debugGrammar;
   }
-  
+
   public void setRemoveBacktrackingGuards(final boolean removeBacktrackingGuards) {
     this.removeBacktrackingGuards = removeBacktrackingGuards;
   }
-  
+
   public void setPartialParsing(final boolean partialParsing) {
     this.partialParsing = partialParsing;
   }
