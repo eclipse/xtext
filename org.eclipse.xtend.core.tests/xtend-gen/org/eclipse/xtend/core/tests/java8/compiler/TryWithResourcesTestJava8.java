@@ -31,11 +31,11 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void test_noIssues() {
     try {
@@ -50,7 +50,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_Error_nullResource() {
     try {
@@ -72,7 +72,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_Error_NotAutoClosable() {
     try {
@@ -85,7 +85,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_normalTryWithoutResource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -134,7 +134,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test2(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_easyResource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -155,7 +155,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test1(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_assumeTypeAutoClosable1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -176,7 +176,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test0(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_assumeTypeAutoClosable2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -204,7 +204,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test0(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_automaticCloseButStillExceptionCatched() {
     StringConcatenation _builder = new StringConcatenation();
@@ -278,7 +278,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_noteSecretVariableNames() {
     StringConcatenation _builder = new StringConcatenation();
@@ -324,7 +324,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test1(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_twoResources() {
     StringConcatenation _builder = new StringConcatenation();
@@ -347,7 +347,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test2(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_twoNestedResources() {
     StringConcatenation _builder = new StringConcatenation();
@@ -368,7 +368,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test2(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_twoNestedResourcesOneDefinedOutside() {
     StringConcatenation _builder = new StringConcatenation();
@@ -394,7 +394,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test2(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_nestedIf1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -450,7 +450,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test_f2(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_nestedIf2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -506,7 +506,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test_f1(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_tryWithLambda() {
     StringConcatenation _builder = new StringConcatenation();
@@ -527,7 +527,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.test0(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_ResourceIOException() {
     StringConcatenation _builder = new StringConcatenation();
@@ -653,42 +653,42 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * Test does not need any imports besides 'Exceptions'
    */
   private void test0(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(this.buildXtendInput(input, false, false), this.buildJavaOutput(expected, false, false, false));
   }
-  
+
   /**
    * Test needs 'StringReader'
    */
   private void test1(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(this.buildXtendInput(input, true, false), this.buildJavaOutput(expected, true, false, false));
   }
-  
+
   /**
    * Test needs 'StringReader' and 'BufferedReader'
    */
   private void test2(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(this.buildXtendInput(input, true, true), this.buildJavaOutput(expected, true, true, false));
   }
-  
+
   /**
    * Test needs 'StringReader' and 'Functions.Function0'
    */
   private void test_f1(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(this.buildXtendInput(input, true, false), this.buildJavaOutput(expected, true, false, true));
   }
-  
+
   /**
    * Test needs 'StringReader', 'BufferedReader' and 'Functions.Function0'
    */
   private void test_f2(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(this.buildXtendInput(input, true, true), this.buildJavaOutput(expected, true, true, true));
   }
-  
+
   private CharSequence buildXtendInput(final CharSequence input, final boolean needsStringReader, final boolean needsBufferedReader) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package sample");
@@ -726,7 +726,7 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     final String end = _builder_1.toString();
     return ((start + input) + end);
   }
-  
+
   private CharSequence buildJavaOutput(final CharSequence expected, final boolean needsStringReader, final boolean needsBufferedReader, final boolean needsFunc0) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package sample;");

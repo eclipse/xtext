@@ -101,7 +101,7 @@ public class ImportManagerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRegularImport() {
     StringConcatenation _builder = new StringConcatenation();

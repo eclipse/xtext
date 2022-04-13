@@ -48,7 +48,7 @@ public class XtendEditorDoubleClickTextSelectionTest extends AbstractEditorDoubl
     _builder_1.append("@param");
     this.assertSelectedTextAfterDoubleClicking(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void selection_in_javadoc_002() {
     StringConcatenation _builder = new StringConcatenation();
@@ -77,7 +77,7 @@ public class XtendEditorDoubleClickTextSelectionTest extends AbstractEditorDoubl
     _builder_1.append("@return");
     this.assertSelectedTextAfterDoubleClicking(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void selection_in_rich_string_001() {
     final String tripleQuotes = "\'\'\'";

@@ -48,19 +48,19 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Inject
   @Accessors
   private IEncodingProvider encodingProvider;
-  
+
   @Inject(optional = true)
   @Accessors
   private IFilePostProcessor postProcessor;
-  
+
   @Inject
   @Accessors
   @Extension
   private IProjectConfigProvider projectConfigProvider;
-  
+
   @Accessors
   private ResourceSet context;
-  
+
   @Override
   public CharSequence getContents(final Path path) {
     try {
@@ -105,7 +105,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
     }
   }
-  
+
   @Override
   public void setContents(final Path path, final CharSequence contents) {
     final URI uri = this.getURI(path);
@@ -138,7 +138,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
     }
   }
-  
+
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     final URI uri = this.getURI(path);
@@ -173,7 +173,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
     }
   }
-  
+
   protected boolean hasContentsChanged(final InputStream newContent, final InputStream oldContent) {
     boolean contentChanged = false;
     try {
@@ -206,7 +206,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return contentChanged;
   }
-  
+
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     boolean _equals = Objects.equal(path, Path.ROOT);
@@ -220,13 +220,13 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return this.getChildren(uri, path);
   }
-  
+
   protected abstract Iterable<? extends Path> getChildren(final URI uri, final Path path);
-  
+
   @Override
   public void mkdir(final Path path) {
   }
-  
+
   @Override
   public InputStream getContentsAsStream(final Path path) {
     final URI uri = this.getURI(path);
@@ -245,7 +245,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
     }
   }
-  
+
   @Override
   public void delete(final Path path) {
     final URI uri = this.getURI(path);
@@ -267,7 +267,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       }
     }
   }
-  
+
   @Override
   public boolean exists(final Path path) {
     boolean _xblockexpression = false;
@@ -280,7 +280,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   protected boolean exists(final URI uri) {
     boolean _xifexpression = false;
     if ((uri == null)) {
@@ -290,21 +290,21 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xifexpression;
   }
-  
+
   @Override
   public String getCharset(final Path path) {
     return this.getCharset(this.getURI(path));
   }
-  
+
   protected String getCharset(final URI uri) {
     return this.encodingProvider.getEncoding(uri);
   }
-  
+
   @Override
   public long getLastModification(final Path path) {
     return (this.getLastModification(this.getURI(path))).longValue();
   }
-  
+
   protected Long getLastModification(final URI uri) {
     Long _xblockexpression = null;
     {
@@ -319,12 +319,12 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isFile(final Path path) {
     return this.isFile(this.getURI(path));
   }
-  
+
   protected boolean isFile(final URI uri) {
     boolean _xblockexpression = false;
     {
@@ -339,7 +339,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isFolder(final Path path) {
     Boolean _xblockexpression = null;
@@ -352,7 +352,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return (_xblockexpression).booleanValue();
   }
-  
+
   protected Boolean isFolder(final URI uri) {
     Boolean _xblockexpression = null;
     {
@@ -367,7 +367,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public java.net.URI toURI(final Path path) {
     java.net.URI _xblockexpression = null;
@@ -381,7 +381,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   /**
    * Converts an EMF URI to a {@code java.net.URI}.
    */
@@ -405,7 +405,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xtrycatchfinallyexpression;
   }
-  
+
   protected URI getURI(final Path path) {
     if (((path == null) || Objects.equal(path, Path.ROOT))) {
       return null;
@@ -434,7 +434,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return uri;
   }
-  
+
   protected Object getAttribute(final URI uri, final String attributeName) {
     Object _xblockexpression = null;
     {
@@ -447,15 +447,15 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   protected URIConverter getURIConverter() {
     return this.context.getURIConverter();
   }
-  
+
   public Path getPath(final Resource res) {
     return this.getPath(res.getURI(), res.getResourceSet());
   }
-  
+
   protected Path getPath(final URI uri, final ResourceSet context) {
     final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(context);
     if ((projectConfig == null)) {
@@ -463,7 +463,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return this.getPath(uri, projectConfig.getPath(), Path.ROOT.append(projectConfig.getName()));
   }
-  
+
   protected Path getPath(final URI absoluteURI, final URI baseURI, final Path basePath) {
     Path _xblockexpression = null;
     {
@@ -498,39 +498,39 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
     return _xblockexpression;
   }
-  
+
   @Pure
   public IEncodingProvider getEncodingProvider() {
     return this.encodingProvider;
   }
-  
+
   public void setEncodingProvider(final IEncodingProvider encodingProvider) {
     this.encodingProvider = encodingProvider;
   }
-  
+
   @Pure
   public IFilePostProcessor getPostProcessor() {
     return this.postProcessor;
   }
-  
+
   public void setPostProcessor(final IFilePostProcessor postProcessor) {
     this.postProcessor = postProcessor;
   }
-  
+
   @Pure
   public IProjectConfigProvider getProjectConfigProvider() {
     return this.projectConfigProvider;
   }
-  
+
   public void setProjectConfigProvider(final IProjectConfigProvider projectConfigProvider) {
     this.projectConfigProvider = projectConfigProvider;
   }
-  
+
   @Pure
   public ResourceSet getContext() {
     return this.context;
   }
-  
+
   public void setContext(final ResourceSet context) {
     this.context = context;
   }

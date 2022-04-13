@@ -34,30 +34,30 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @SuppressWarnings("all")
 public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
-  
+
   @Inject
   @Extension
   private JdtVariableCompletions _jdtVariableCompletions;
-  
+
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Accessors
   private List<AbstractParameterBuilder> parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>emptyList();
-  
+
   @Accessors
   private List<LightweightTypeReference> exceptions = CollectionLiterals.<LightweightTypeReference>emptyList();
-  
+
   @Accessors
   private List<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
-  
+
   @Accessors
   private Procedure1<? super ISourceAppender> bodyGenerator;
-  
+
   @Accessors
   private boolean varArgsFlag;
-  
+
   public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
     ISourceAppender _xblockexpression = null;
     {
@@ -71,11 +71,11 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected String defaultBody() {
     return AbstractExecutableBuilder.DEFAULT_BODY;
   }
-  
+
   @Override
   public void setContext(final EObject ctx) {
     super.setContext(ctx);
@@ -84,7 +84,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     };
     this.parameterBuilders.forEach(_function);
   }
-  
+
   public AbstractParameterBuilder newParameterBuilder() {
     AbstractParameterBuilder _xblockexpression = null;
     {
@@ -99,7 +99,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected ISourceAppender appendParameters(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -137,7 +137,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected ISourceAppender appendThrowsClause(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -162,7 +162,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public String getImage() {
     String _switchResult = null;
@@ -187,55 +187,55 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     }
     return _switchResult;
   }
-  
+
   @Override
   public boolean isValid() {
     return (((IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, ((Function1<AbstractParameterBuilder, Boolean>) (AbstractParameterBuilder it) -> {
       return Boolean.valueOf(it.isValid());
     })) && (!this.exceptions.contains(null))) && (!this.typeParameters.contains(null))) && super.isValid());
   }
-  
+
   @Pure
   public List<AbstractParameterBuilder> getParameterBuilders() {
     return this.parameterBuilders;
   }
-  
+
   public void setParameterBuilders(final List<AbstractParameterBuilder> parameterBuilders) {
     this.parameterBuilders = parameterBuilders;
   }
-  
+
   @Pure
   public List<LightweightTypeReference> getExceptions() {
     return this.exceptions;
   }
-  
+
   public void setExceptions(final List<LightweightTypeReference> exceptions) {
     this.exceptions = exceptions;
   }
-  
+
   @Pure
   public List<JvmTypeParameter> getTypeParameters() {
     return this.typeParameters;
   }
-  
+
   public void setTypeParameters(final List<JvmTypeParameter> typeParameters) {
     this.typeParameters = typeParameters;
   }
-  
+
   @Pure
   public Procedure1<? super ISourceAppender> getBodyGenerator() {
     return this.bodyGenerator;
   }
-  
+
   public void setBodyGenerator(final Procedure1<? super ISourceAppender> bodyGenerator) {
     this.bodyGenerator = bodyGenerator;
   }
-  
+
   @Pure
   public boolean isVarArgsFlag() {
     return this.varArgsFlag;
   }
-  
+
   public void setVarArgsFlag(final boolean varArgsFlag) {
     this.varArgsFlag = varArgsFlag;
   }

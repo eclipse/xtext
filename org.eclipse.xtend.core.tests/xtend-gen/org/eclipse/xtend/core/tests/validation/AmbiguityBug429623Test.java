@@ -40,7 +40,7 @@ public class AmbiguityBug429623Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -65,7 +65,7 @@ public class AmbiguityBug429623Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testAmbiguousMethod_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +102,7 @@ public class AmbiguityBug429623Test extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethod_02() {
     StringConcatenation _builder = new StringConcatenation();

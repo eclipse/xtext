@@ -26,11 +26,11 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private StaticExtensionMethodImporterTestBuilder builder;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper testHelper;
-  
+
   @Before
   public void setupTestClass() {
     try {
@@ -56,7 +56,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSingleStaticMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +102,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testMultiStaticMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -178,7 +178,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Ignore("Failing because of a bug in the import organizer")
   @Test
   public void testSingleExplicitStaticMethod() {
@@ -225,7 +225,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Ignore("Failing because of a bug in the import organizer")
   @Test
   public void testMultiExplicitStaticMethod() {
@@ -302,7 +302,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testMultiMixExplicitStaticMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -378,7 +378,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodsDifferentArgs() {
     StringConcatenation _builder = new StringConcatenation();
@@ -433,7 +433,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodInLambda() {
     StringConcatenation _builder = new StringConcatenation();
@@ -479,7 +479,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodInBrackets() {
     StringConcatenation _builder = new StringConcatenation();
@@ -525,7 +525,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodMultiClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -605,7 +605,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodNested() {
     StringConcatenation _builder = new StringConcatenation();
@@ -666,7 +666,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodInSwith() {
     StringConcatenation _builder = new StringConcatenation();
@@ -730,7 +730,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testStaticMethodInIf() {
     StringConcatenation _builder = new StringConcatenation();
@@ -782,7 +782,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testBadFormat() {
     StringConcatenation _builder = new StringConcatenation();
@@ -852,7 +852,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testInComments() {
     StringConcatenation _builder = new StringConcatenation();
@@ -916,7 +916,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testWithVarParam() {
     StringConcatenation _builder = new StringConcatenation();
@@ -974,7 +974,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testWithMethodCallParam() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1020,7 +1020,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testWithVarAssigment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1078,7 +1078,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testWithExpression() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1124,7 +1124,7 @@ public class StaticExtensionMethodImporterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _create.assertResult(_builder_1.toString());
   }
-  
+
   @Test
   public void testWithComplexExpressions() {
     StringConcatenation _builder = new StringConcatenation();

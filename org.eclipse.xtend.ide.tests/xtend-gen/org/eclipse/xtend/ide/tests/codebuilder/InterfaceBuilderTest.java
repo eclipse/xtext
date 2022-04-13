@@ -23,7 +23,7 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Test
   public void testXtendInterface() {
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(this.getXtendClass());
@@ -39,7 +39,7 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaClass() {
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(this.getJavaClass());

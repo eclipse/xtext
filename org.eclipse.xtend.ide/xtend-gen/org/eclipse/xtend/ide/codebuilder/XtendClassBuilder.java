@@ -25,27 +25,27 @@ public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuil
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
-  
+
   @Override
   public boolean isValid() {
     return ((super.isValid() && (this.getClassName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return appendable.append("class ").append(this.getClassName()).append(" {").newLine().append("}");
   }
-  
+
   @Override
   public int getInsertOffset(final XtextResource resource) {
     return this._insertionOffsets.getNewTypeInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
-  
+
   @Override
   public int getIndentationLevel() {
     return 0;
   }
-  
+
   @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();

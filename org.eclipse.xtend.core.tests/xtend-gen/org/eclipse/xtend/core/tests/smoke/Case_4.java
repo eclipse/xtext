@@ -17,7 +17,7 @@ public class Case_4 {
     _builder.append("foobar");
     return _builder;
   }
-  
+
   public CharSequence richStrings_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("start");
@@ -30,7 +30,7 @@ public class Case_4 {
     _builder.newLine();
     return _builder;
   }
-  
+
   public CharSequence richStrings_03() {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -46,7 +46,7 @@ public class Case_4 {
     }
     return _builder;
   }
-  
+
   public CharSequence richStrings_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("  ");
@@ -63,7 +63,7 @@ public class Case_4 {
     }
     return _builder;
   }
-  
+
   public CharSequence richStrings_05() {
     StringConcatenation _builder = new StringConcatenation();
     {

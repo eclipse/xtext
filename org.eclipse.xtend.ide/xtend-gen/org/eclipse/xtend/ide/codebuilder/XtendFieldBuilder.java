@@ -25,12 +25,12 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
-  
+
   @Override
   public boolean isValid() {
     return (super.isValid() && (this.getFieldName() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
@@ -53,23 +53,23 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public int getInsertOffset(final XtextResource resource) {
     return this._insertionOffsets.getNewFieldInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
-  
+
   @Override
   public int getIndentationLevel() {
     return 1;
   }
-  
+
   @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendTypeDeclaration) _ownerSource);
   }
-  
+
   @Override
   public String getPrimitiveKindRepresentation(final Primitives.Primitive primitiveKind) {
     String _switchResult = null;

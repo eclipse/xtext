@@ -28,7 +28,7 @@ public class Case_7 {
     }
     return _xblockexpression;
   }
-  
+
   public Object bug345452() {
     Object _xblockexpression = null;
     {

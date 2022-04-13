@@ -39,7 +39,7 @@ public class AmbiguityBug427352Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testNoAmbiguityIfUnresolvedParam_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -58,7 +58,7 @@ public class AmbiguityBug427352Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testNoAmbiguityIfUnresolvedParam_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -77,7 +77,7 @@ public class AmbiguityBug427352Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testNoAmbiguityIfUnresolvedParam_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +102,7 @@ public class AmbiguityBug427352Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Override
   public void assertUnambiguous(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);

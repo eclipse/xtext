@@ -27,7 +27,7 @@ public class JavaParameterBuilder extends AbstractParameterBuilder {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isValid() {
     return ((!this.isExtensionFlag()) && super.isValid());

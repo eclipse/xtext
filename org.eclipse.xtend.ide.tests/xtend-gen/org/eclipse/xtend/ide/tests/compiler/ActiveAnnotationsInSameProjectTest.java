@@ -45,10 +45,10 @@ import org.junit.Test;
 public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Rule
   public StopwatchRule rule = new StopwatchRule(true);
-  
+
   @After
   @Override
   public void tearDown() {
@@ -58,7 +58,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testActiveAnnotationInSameProject() {
     try {
@@ -163,7 +163,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testActiveAnnotationInDifferentProject() {
     try {
@@ -270,7 +270,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testActiveAnnotationInSameProjectWithJava() {
     try {
@@ -380,7 +380,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPropertyOfTypeInSameProject() {
     try {
@@ -454,7 +454,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testActiveAnnotationInSameProjectInJar() {
     try {
@@ -481,7 +481,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IFile copyFile(final IJavaProject javaProject, final String srcFile, final String destFile) {
     try {
       final IFile file = javaProject.getProject().getFile(destFile);
@@ -492,7 +492,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertNoErrorsInWorkspace() {
     try {
       final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
@@ -506,7 +506,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertHasErrors(final IFile file, final String msgPart) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

@@ -25,27 +25,27 @@ public class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements I
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
-  
+
   @Override
   public boolean isValid() {
     return ((super.isValid() && (this.getInterfaceName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return appendable.append("interface ").append(this.getInterfaceName()).append(" {").newLine().append("}");
   }
-  
+
   @Override
   public int getInsertOffset(final XtextResource resource) {
     return this._insertionOffsets.getNewTypeInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
-  
+
   @Override
   public int getIndentationLevel() {
     return 0;
   }
-  
+
   @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();

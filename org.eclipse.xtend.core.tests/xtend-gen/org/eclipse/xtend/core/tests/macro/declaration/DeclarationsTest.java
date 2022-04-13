@@ -57,7 +57,7 @@ import org.junit.Test;
 public class DeclarationsTest extends AbstractXtendTestCase {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Test
   public void testAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -91,7 +91,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testAnnotation2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -115,7 +115,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testAnnotation3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465007
    */
@@ -174,7 +174,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testSimpleClassWithField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -202,7 +202,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testNestedClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -229,7 +229,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testRemove() {
     StringConcatenation _builder = new StringConcatenation();
@@ -252,7 +252,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testXtendClassWithMethodFieldAndConstructor() {
     StringConcatenation _builder = new StringConcatenation();
@@ -334,7 +334,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testOverriddenMethodFromSource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -372,7 +372,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testMutableClassDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -435,7 +435,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testMutableInterfaceDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -457,7 +457,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testTypeReferences() {
     StringConcatenation _builder = new StringConcatenation();
@@ -500,7 +500,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testIsAssignable() {
     StringConcatenation _builder = new StringConcatenation();
@@ -545,7 +545,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testSetImplementedInterfaces() {
     StringConcatenation _builder = new StringConcatenation();
@@ -574,7 +574,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testAnnotationReferenceValues() {
     StringConcatenation _builder = new StringConcatenation();
@@ -644,7 +644,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testAnnotationReferenceValues_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -709,12 +709,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   public void checkPrimitive(final TypeReference primitiveType, final String wrapperTypeName) {
     Assert.assertTrue(primitiveType.toString(), primitiveType.isPrimitive());
     Assert.assertEquals(wrapperTypeName, primitiveType.getWrapperIfPrimitive().getType().getQualifiedName());
   }
-  
+
   public XtendFile validFile(final CharSequence code) {
     try {
       return this.file(code.toString(), true);
@@ -722,7 +722,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);

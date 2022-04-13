@@ -38,7 +38,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   @Inject
   @Extension
   private DispatchHelper dispatchHelper;
-  
+
   protected void _build(final XtendFile xtendFile, final IXtendOutlineContext context) {
     this.buildPackageAndImportSection(xtendFile, context);
     final Consumer<XtendTypeDeclaration> _function = (XtendTypeDeclaration it) -> {
@@ -46,17 +46,17 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     };
     xtendFile.getXtendTypes().forEach(_function);
   }
-  
+
   protected void _build(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
     this.buildMembers(xtendType, this._iXtendJvmAssociations.getInferredType(xtendType), context);
   }
-  
+
   protected void buildXtendType(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
     final JvmDeclaredType inferredType = this._iXtendJvmAssociations.getInferredType(xtendType);
     final IXtendOutlineContext xtendTypeContext = this.xtendOutlineNodeBuilder.buildXtendNode(xtendType, context).markAsProcessed(inferredType);
     this.buildMembers(xtendType, inferredType, xtendTypeContext);
   }
-  
+
   protected void buildMembers(final XtendTypeDeclaration xtendType, final JvmDeclaredType inferredType, final IXtendOutlineContext context) {
     if ((inferredType != null)) {
       final IXtendOutlineContext membersContext = context.newContext();
@@ -68,7 +68,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       xtendType.getMembers().forEach(_function);
     }
   }
-  
+
   protected void buildMembers(final XtendTypeDeclaration xtendType, final JvmDeclaredType inferredType, final JvmDeclaredType baseType, @Extension final IXtendOutlineContext context) {
     if ((xtendType != null)) {
       EList<XtendMember> _members = xtendType.getMembers();
@@ -114,7 +114,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       this.buildInheritedMembers(inferredType, context);
     }
   }
-  
+
   protected void buildLocalClasses(final JvmFeature jvmFeature, final IXtendOutlineContext context) {
     boolean _isEmpty = jvmFeature.getLocalClasses().isEmpty();
     boolean _not = (!_isEmpty);
@@ -131,7 +131,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       }
     }
   }
-  
+
   protected void buildDispatchers(final JvmDeclaredType inferredType, final JvmDeclaredType baseType, final IXtendOutlineContext context) {
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       return Boolean.valueOf(this.dispatchHelper.isDispatcherFunction(it));
@@ -154,7 +154,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       }
     }
   }
-  
+
   protected List<JvmOperation> getDispatchCases(final JvmOperation dispatcher, final JvmDeclaredType baseType, final IXtendOutlineContext context) {
     List<JvmOperation> _xifexpression = null;
     boolean _isShowInherited = context.isShowInherited();
@@ -170,7 +170,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     }
     return _xifexpression;
   }
-  
+
   protected boolean isDispatchRelated(final JvmFeature feature) {
     boolean _xifexpression = false;
     if ((feature instanceof JvmOperation)) {
@@ -178,14 +178,14 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     }
     return _xifexpression;
   }
-  
+
   @Override
   protected void buildType(final EObject someType, final IXtendOutlineContext context) {
     if ((someType instanceof XtendTypeDeclaration)) {
       this.buildXtendType(((XtendTypeDeclaration)someType), context);
     }
   }
-  
+
   public void build(final EObject xtendType, final IXtendOutlineContext context) {
     if (xtendType instanceof XtendTypeDeclaration) {
       _build((XtendTypeDeclaration)xtendType, context);

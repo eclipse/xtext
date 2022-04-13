@@ -40,7 +40,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty");
   }
-  
+
   @Flaky
   @Test
   public void test_02() throws Exception {
@@ -64,7 +64,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
-  
+
   @Flaky
   @Test
   public void test_03() throws Exception {
@@ -88,7 +88,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
-  
+
   @Flaky
   @Test
   public void test_04() throws Exception {

@@ -21,7 +21,7 @@ public class HyperLinkingLabelProvider extends XtendLabelProvider {
   public HyperLinkingLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
   }
-  
+
   @Override
   public String getText(final Object element) {
     final String result = super.getText(element);

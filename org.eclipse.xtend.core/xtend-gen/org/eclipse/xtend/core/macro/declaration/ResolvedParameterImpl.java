@@ -19,9 +19,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class ResolvedParameterImpl implements ResolvedParameter {
   private final ParameterDeclaration declaration;
-  
+
   private final TypeReference resolvedType;
-  
+
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
@@ -31,13 +31,13 @@ public class ResolvedParameterImpl implements ResolvedParameter {
     _builder.append(_simpleName);
     return _builder.toString();
   }
-  
+
   public ResolvedParameterImpl(final ParameterDeclaration declaration, final TypeReference resolvedType) {
     super();
     this.declaration = declaration;
     this.resolvedType = resolvedType;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
@@ -46,7 +46,7 @@ public class ResolvedParameterImpl implements ResolvedParameter {
     result = prime * result + ((this.declaration== null) ? 0 : this.declaration.hashCode());
     return prime * result + ((this.resolvedType== null) ? 0 : this.resolvedType.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -69,13 +69,13 @@ public class ResolvedParameterImpl implements ResolvedParameter {
       return false;
     return true;
   }
-  
+
   @Pure
   @Override
   public ParameterDeclaration getDeclaration() {
     return this.declaration;
   }
-  
+
   @Pure
   @Override
   public TypeReference getResolvedType() {

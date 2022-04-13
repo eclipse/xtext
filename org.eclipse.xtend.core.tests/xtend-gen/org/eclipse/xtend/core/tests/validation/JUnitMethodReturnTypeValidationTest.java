@@ -29,11 +29,11 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void test001() {
     StringConcatenation _builder = new StringConcatenation();
@@ -54,7 +54,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test002() {
     StringConcatenation _builder = new StringConcatenation();
@@ -75,7 +75,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test003() {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test004() {
     StringConcatenation _builder = new StringConcatenation();
@@ -117,7 +117,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test005() {
     StringConcatenation _builder = new StringConcatenation();
@@ -135,7 +135,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test006() {
     StringConcatenation _builder = new StringConcatenation();
@@ -159,7 +159,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test007() {
     StringConcatenation _builder = new StringConcatenation();
@@ -177,7 +177,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test008() {
     StringConcatenation _builder = new StringConcatenation();
@@ -201,7 +201,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test009() {
     StringConcatenation _builder = new StringConcatenation();
@@ -219,7 +219,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test010() {
     StringConcatenation _builder = new StringConcatenation();
@@ -243,7 +243,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test011() {
     StringConcatenation _builder = new StringConcatenation();
@@ -261,7 +261,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test012() {
     StringConcatenation _builder = new StringConcatenation();
@@ -285,7 +285,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasNoValidationIssue(_builder);
   }
-  
+
   @Test
   public void test013() {
     StringConcatenation _builder = new StringConcatenation();
@@ -309,7 +309,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method test() must be void but is int.");
   }
-  
+
   @Test
   public void test014() {
     StringConcatenation _builder = new StringConcatenation();
@@ -333,7 +333,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method m() must be void but is int.");
   }
-  
+
   @Test
   public void test015() {
     StringConcatenation _builder = new StringConcatenation();
@@ -357,7 +357,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method test() must be void but is Object.");
   }
-  
+
   @Test
   public void test016() {
     StringConcatenation _builder = new StringConcatenation();
@@ -380,7 +380,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method test() must be void but is Object.");
   }
-  
+
   @Test
   public void test017() {
     StringConcatenation _builder = new StringConcatenation();
@@ -404,7 +404,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method before() must be void but is int.");
   }
-  
+
   @Test
   public void test018() {
     StringConcatenation _builder = new StringConcatenation();
@@ -428,7 +428,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method before() must be void but is int.");
   }
-  
+
   @Test
   public void test019() {
     StringConcatenation _builder = new StringConcatenation();
@@ -452,7 +452,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method before() must be void but is Object.");
   }
-  
+
   @Test
   public void test020() {
     StringConcatenation _builder = new StringConcatenation();
@@ -475,7 +475,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method before() must be void but is Object.");
   }
-  
+
   @Test
   public void test021() {
     StringConcatenation _builder = new StringConcatenation();
@@ -499,7 +499,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method after() must be void but is int.");
   }
-  
+
   @Test
   public void test022() {
     StringConcatenation _builder = new StringConcatenation();
@@ -523,7 +523,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method after() must be void but is int.");
   }
-  
+
   @Test
   public void test023() {
     StringConcatenation _builder = new StringConcatenation();
@@ -547,7 +547,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method after() must be void but is Object.");
   }
-  
+
   @Test
   public void test024() {
     StringConcatenation _builder = new StringConcatenation();
@@ -570,7 +570,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method after() must be void but is Object.");
   }
-  
+
   @Test
   public void test025() {
     StringConcatenation _builder = new StringConcatenation();
@@ -594,7 +594,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method beforeClass() must be void but is int.");
   }
-  
+
   @Test
   public void test026() {
     StringConcatenation _builder = new StringConcatenation();
@@ -618,7 +618,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method beforeClass() must be void but is int.");
   }
-  
+
   @Test
   public void test027() {
     StringConcatenation _builder = new StringConcatenation();
@@ -642,7 +642,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method beforeClass() must be void but is Object.");
   }
-  
+
   @Test
   public void test028() {
     StringConcatenation _builder = new StringConcatenation();
@@ -665,7 +665,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method beforeClass() must be void but is Object.");
   }
-  
+
   @Test
   public void test029() {
     StringConcatenation _builder = new StringConcatenation();
@@ -689,7 +689,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method afterClass() must be void but is int.");
   }
-  
+
   @Test
   public void test030() {
     StringConcatenation _builder = new StringConcatenation();
@@ -713,7 +713,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method afterClass() must be void but is int.");
   }
-  
+
   @Test
   public void test031() {
     StringConcatenation _builder = new StringConcatenation();
@@ -737,7 +737,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method afterClass() must be void but is Object.");
   }
-  
+
   @Test
   public void test032() {
     StringConcatenation _builder = new StringConcatenation();
@@ -760,7 +760,7 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, "JUnit method afterClass() must be void but is Object.");
   }
-  
+
   @Test
   public void test033() {
     StringConcatenation _builder = new StringConcatenation();
@@ -784,19 +784,19 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasOneValidationIssue(_builder, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "The method or field foo is undefined");
   }
-  
+
   private void hasNoValidationIssue(final CharSequence it) {
     this.assertNumberOfValidationIssues(it, 0);
   }
-  
+
   private void hasOneValidationIssue(final CharSequence it, final String message) {
     this.hasOneValidationIssue(it, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message);
   }
-  
+
   private void hasOneValidationIssue(final CharSequence it, final EClass objectType, final String issueCode, final String message) {
     this._validationTestHelper.assertError(this.assertNumberOfValidationIssues(it, 1), objectType, issueCode, message);
   }
-  
+
   private XtendFile assertNumberOfValidationIssues(final CharSequence it, final int expectedNumberOfIssues) {
     try {
       XtendFile _xblockexpression = null;

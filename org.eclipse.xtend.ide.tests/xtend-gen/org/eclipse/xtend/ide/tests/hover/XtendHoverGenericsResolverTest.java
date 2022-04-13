@@ -34,13 +34,13 @@ import org.junit.Test;
 public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private XbaseDeclarativeHoverSignatureProvider signatureProvider;
-  
+
   @Test
   public void testGenerics_1() {
     try {
@@ -79,7 +79,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGenerics_2() {
     try {
@@ -118,11 +118,11 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ResourceSet getResourceSet() {
     return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
-  
+
   @After
   public void cleanup() {
     try {

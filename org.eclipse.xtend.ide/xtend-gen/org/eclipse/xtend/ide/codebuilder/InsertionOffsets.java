@@ -32,7 +32,7 @@ public class InsertionOffsets {
   public int getNewTypeInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     return this.after(ownerType);
   }
-  
+
   public int getNewFieldInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     boolean _isEmpty = ownerType.getMembers().isEmpty();
     if (_isEmpty) {
@@ -49,7 +49,7 @@ public class InsertionOffsets {
       return this.after(lastDefinedField);
     }
   }
-  
+
   public int getNewMethodInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
     if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
@@ -63,7 +63,7 @@ public class InsertionOffsets {
       }
     }
   }
-  
+
   public int getNewConstructorInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(Iterables.<XtendConstructor>filter(ownerType.getMembers(), XtendConstructor.class));
     if ((lastDefinedConstructor == null)) {
@@ -72,11 +72,11 @@ public class InsertionOffsets {
       return this.after(lastDefinedConstructor);
     }
   }
-  
+
   protected int before(final EObject element) {
     return NodeModelUtils.findActualNodeFor(element).getOffset();
   }
-  
+
   protected int after(final EObject element) {
     int _xblockexpression = (int) 0;
     {
@@ -85,7 +85,7 @@ public class InsertionOffsets {
     }
     return _xblockexpression;
   }
-  
+
   protected int inEmpty(final XtendTypeDeclaration ownerType) {
     int _xblockexpression = (int) 0;
     {

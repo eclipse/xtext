@@ -61,7 +61,7 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
       b.assertTextAtCursorPosition("|", "read", "read()", "read()");
     }
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -99,7 +99,7 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "bytes");
   }
-  
+
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

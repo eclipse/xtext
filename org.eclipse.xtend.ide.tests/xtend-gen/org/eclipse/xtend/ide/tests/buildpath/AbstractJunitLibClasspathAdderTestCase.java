@@ -46,28 +46,28 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
   @Inject
   @Extension
   protected WorkbenchTestHelper workbenchHelper;
-  
+
   @Inject
   @Extension
   private XtendLibClasspathAdder xtendLibAdder;
-  
+
   @BeforeClass
   public static void setUp() throws Exception {
     TargetPlatformUtil.setTargetPlatform(AbstractXtendTestCase.class);
   }
-  
+
   @Before
   public void setUpProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
     WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, 
       XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE);
   }
-  
+
   @AfterClass
   public static void tearDownProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   protected void removePluginNature() {
     try {
       final IProject project = this.workbenchHelper.getProject();
@@ -85,7 +85,7 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertClasspath(final String message, final IPath entryPath) {
     try {
       final Function1<IClasspathEntry, Boolean> _function = (IClasspathEntry it) -> {
@@ -97,7 +97,7 @@ public abstract class AbstractJunitLibClasspathAdderTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertRequireBundles(final String[] expectedBundleIds) {
     try {
       try (final InputStream contents = new Function0<InputStream>() {

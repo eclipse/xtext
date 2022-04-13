@@ -89,7 +89,7 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();

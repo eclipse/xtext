@@ -156,7 +156,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     _builder_2.newLine();
     this.testMultiQuickfix(_builder, _builder_1, _builder_2);
   }
-  
+
   @Test
   public void remove_unnecessary_modifiers002() {
     try {
@@ -203,7 +203,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void setUp() {
     try {
@@ -214,12 +214,12 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public String getFileName() {
     return "Foo";
   }
-  
+
   @Override
   public IFile dslFile(final CharSequence content) {
     String _projectName = this.getProjectName();
@@ -227,7 +227,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     String _plus = ("src/unnecessarymodifiers/" + _fileName);
     return super.dslFile(_projectName, _plus, this.getFileExtension(), content);
   }
-  
+
   @Override
   protected IMarker[] getMarkers(final IFile file) {
     IMarker[] _xblockexpression = null;
@@ -237,7 +237,7 @@ public class RemoveUnnecessaryModifiersMultiQuickfixTest extends AbstractMultiQu
     }
     return _xblockexpression;
   }
-  
+
   private void saveAllOpenEditors() {
     final Consumer<IEditorReference> _function = (IEditorReference it) -> {
       IEditorPart _editor = it.getEditor(false);

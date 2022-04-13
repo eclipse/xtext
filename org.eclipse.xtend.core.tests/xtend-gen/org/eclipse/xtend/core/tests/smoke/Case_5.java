@@ -18,11 +18,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class Case_5 {
   @Inject
   private ArrayList<?> myList;
-  
+
   @Inject
   @Extension
   private String s;
-  
+
   public boolean something(final int i) {
     boolean _xblockexpression = false;
     {

@@ -88,7 +88,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_02() {
@@ -158,7 +158,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_03() {
@@ -238,7 +238,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_04() {
@@ -337,7 +337,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_05() {
@@ -442,7 +442,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_06() {
@@ -553,7 +553,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_07() {
@@ -658,7 +658,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_08() {
@@ -763,7 +763,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_09() {
@@ -882,7 +882,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void test_10() {

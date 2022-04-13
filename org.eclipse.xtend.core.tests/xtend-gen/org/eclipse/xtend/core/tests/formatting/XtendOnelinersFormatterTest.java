@@ -32,7 +32,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatEmptyMethod2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -51,7 +51,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatEmptyMethod3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -75,7 +75,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatEmptyMethod4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -99,7 +99,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithJustAComment1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -118,7 +118,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethodWithJustAComment2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -140,7 +140,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Ignore("Another manifestation of Bug 415950")
   @Test
   public void formatMethodWithJustAComment3() {
@@ -168,7 +168,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithJustAComment4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -192,7 +192,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithOneExpression1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -211,7 +211,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethodWithOneExpression2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -233,7 +233,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMethodWithOneExpression3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -260,7 +260,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithOneExpression4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -284,7 +284,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithTryCatchExpression() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -326,7 +326,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithTwoExpressions1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -348,7 +348,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethodWithTwoExpressions2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -373,7 +373,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMethodWithTwoExpressions3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -403,7 +403,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodWithTwoExpressions4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {

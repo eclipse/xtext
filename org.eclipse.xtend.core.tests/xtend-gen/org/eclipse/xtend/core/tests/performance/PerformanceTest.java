@@ -30,7 +30,7 @@ import org.junit.Test;
 public class PerformanceTest extends AbstractXtendTestCase {
   @Inject
   private XtendFileGenerator fileGenerator;
-  
+
   /**
    * Sven 2013-01-24 (old typesystem)
    * -------------------------------------------------------------------------------------------------------------------------
@@ -520,25 +520,25 @@ public class PerformanceTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void doCompileAgain() {
     this.doCompile();
   }
-  
+
   @Test
   public void doCompileTwice() {
     this.doCompile();
     this.doCompile();
   }
-  
+
   @Test
   public void doCompileThreeTimes() {
     this.doCompile();
     this.doCompile();
     this.doCompile();
   }
-  
+
   @Test
   @Ignore
   public void doCompileFiveTimes() {
@@ -548,14 +548,14 @@ public class PerformanceTest extends AbstractXtendTestCase {
     this.doCompile();
     this.doCompile();
   }
-  
+
   @Test
   @Ignore
   public void doCompileTenTimes() {
     this.doCompileFiveTimes();
     this.doCompileFiveTimes();
   }
-  
+
   @Test
   @Ignore
   public void doCompileTwentyTimes() {

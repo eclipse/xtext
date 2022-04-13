@@ -49,21 +49,21 @@ import org.junit.Test;
 public class XtendUIValidationTests extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private ValidationTestHelper helper;
-  
+
   @Inject
   private IPreferenceStoreAccess prefStoreAccess;
-  
+
   @Inject
   private OnChangeEvictingCache cache;
-  
+
   @Override
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
   }
-  
+
   @Test
   public void testWrongPackage() {
     try {
@@ -80,7 +80,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testWrongFile() {
     try {
@@ -95,7 +95,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoWrongFile() {
     try {
@@ -114,7 +114,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenImport() {
     try {
@@ -131,7 +131,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDiscouragedImport() {
     try {
@@ -148,7 +148,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenImportInnerClass() {
     try {
@@ -165,7 +165,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDiscouragedImportInnerClass() {
     try {
@@ -182,7 +182,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testValidImport() {
     try {
@@ -202,7 +202,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenConstructorCall() {
     try {
@@ -226,7 +226,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDiscouragedConstructorCall() {
     try {
@@ -250,7 +250,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDiscouragedConstructorCallInnernClass() {
     try {
@@ -274,7 +274,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenConstructorCallInnerClass() {
     try {
@@ -298,7 +298,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenTypeUsageInnernClass() {
     try {
@@ -318,7 +318,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDiscouragedTypeUsageInnernClass() {
     try {
@@ -338,7 +338,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenTypeUsage() {
     try {
@@ -358,7 +358,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testForbiddenArrayTypeUsage() {
     try {
@@ -378,7 +378,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testParameterizedTypeReference() {
     try {
@@ -403,19 +403,19 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Ignore("Enable on demand")
   public void testPerformance_1() {
     this.testPerformance();
   }
-  
+
   @Test
   @Ignore("Enable on demand")
   public void testPerformance_2() {
     this.testPerformance();
   }
-  
+
   public void testPerformance() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -453,7 +453,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIssueCodeDelegation() {
     try {
@@ -487,7 +487,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConfigurableIssueCode() {
     try {
@@ -530,7 +530,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocRefs_Delegation() throws Exception {
     final IJavaProject javaProject = JavaModelManager.getJavaModelManager().getJavaModel().getJavaProject(this.testHelper.getProject());
@@ -570,7 +570,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, javaSeverity);
     }
   }
-  
+
   public IPersistentPreferenceStore getXtendPreferencesStore() {
     IPreferenceStore _writablePreferenceStore = this.prefStoreAccess.getWritablePreferenceStore(this.testHelper.getProject());
     return ((IPersistentPreferenceStore) _writablePreferenceStore);

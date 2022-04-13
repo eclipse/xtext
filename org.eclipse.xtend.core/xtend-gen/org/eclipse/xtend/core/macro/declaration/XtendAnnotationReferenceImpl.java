@@ -48,7 +48,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return _switchResult;
   }
-  
+
   public JvmType getAnnotationType() {
     JvmType _xblockexpression = null;
     {
@@ -80,7 +80,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Expression getExpression(final String property) {
     final XExpression value = this.findValue(property);
@@ -89,7 +89,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return null;
   }
-  
+
   @Override
   public Object getValue(final String property) {
     final XExpression value = this.findValue(property);
@@ -98,7 +98,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return this.getAnnotationTypeDeclaration().findDeclaredAnnotationTypeElement(property).getDefaultValue();
   }
-  
+
   protected XExpression findValue(final String property) {
     XExpression _xblockexpression = null;
     {
@@ -118,7 +118,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return _xblockexpression;
   }
-  
+
   protected Object translateAnnotationValue(final XExpression value, final String property) {
     final JvmType annotationType = this.getDelegate().getAnnotationType();
     if ((annotationType instanceof JvmAnnotationType)) {
@@ -134,25 +134,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return this.getCompilationUnit().translateAnnotationValue(value, null, false);
   }
-  
+
   @Override
   public AnnotationReference getAnnotationValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference) _value);
   }
-  
+
   @Override
   public AnnotationReference[] getAnnotationArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference[]) _value);
   }
-  
+
   @Override
   public boolean[] getBooleanArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((boolean[]) _value);
   }
-  
+
   @Override
   public boolean getBooleanValue(final String name) {
     Boolean _xblockexpression = null;
@@ -165,13 +165,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).booleanValue();
   }
-  
+
   @Override
   public byte[] getByteArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((byte[]) _value);
   }
-  
+
   @Override
   public byte getByteValue(final String name) {
     Byte _xblockexpression = null;
@@ -184,13 +184,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).byteValue();
   }
-  
+
   @Override
   public char[] getCharArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((char[]) _value);
   }
-  
+
   @Override
   public char getCharValue(final String name) {
     Character _xblockexpression = null;
@@ -212,25 +212,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).charValue();
   }
-  
+
   @Override
   public TypeReference getClassValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference) _value);
   }
-  
+
   @Override
   public TypeReference[] getClassArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference[]) _value);
   }
-  
+
   @Override
   public double[] getDoubleArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((double[]) _value);
   }
-  
+
   @Override
   public double getDoubleValue(final String name) {
     Double _xblockexpression = null;
@@ -282,25 +282,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).doubleValue();
   }
-  
+
   @Override
   public EnumerationValueDeclaration getEnumValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration) _value);
   }
-  
+
   @Override
   public EnumerationValueDeclaration[] getEnumArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration[]) _value);
   }
-  
+
   @Override
   public float[] getFloatArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((float[]) _value);
   }
-  
+
   @Override
   public float getFloatValue(final String name) {
     Float _xblockexpression = null;
@@ -346,13 +346,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).floatValue();
   }
-  
+
   @Override
   public int[] getIntArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((int[]) _value);
   }
-  
+
   @Override
   public int getIntValue(final String name) {
     Integer _xblockexpression = null;
@@ -386,13 +386,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).intValue();
   }
-  
+
   @Override
   public long[] getLongArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((long[]) _value);
   }
-  
+
   @Override
   public long getLongValue(final String name) {
     Long _xblockexpression = null;
@@ -432,13 +432,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).longValue();
   }
-  
+
   @Override
   public short[] getShortArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((short[]) _value);
   }
-  
+
   @Override
   public short getShortValue(final String name) {
     Short _xblockexpression = null;
@@ -460,13 +460,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     return (_xblockexpression).shortValue();
   }
-  
+
   @Override
   public String[] getStringArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((String[]) _value);
   }
-  
+
   @Override
   public String getStringValue(final String name) {
     Object _value = this.getValue(name);

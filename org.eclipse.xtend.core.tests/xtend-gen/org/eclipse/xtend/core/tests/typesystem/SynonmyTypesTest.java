@@ -36,15 +36,15 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   @Extension
   private SynonymTypesProvider _synonymTypesProvider;
-  
+
   public void hasSynonyms(final String type, final String... expectedSynonyms) {
     this.hasSynonyms(Pair.<String, String>of(type, null), expectedSynonyms);
   }
-  
+
   public void hasSynonyms(final Pair<String, String> typeAndTypeParams, final String... expectedSynonyms) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -89,92 +89,92 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInt() {
     this.hasSynonyms("int", "Integer");
     this.hasSynonyms("Integer", "int");
   }
-  
+
   @Test
   public void testShort() {
     this.hasSynonyms("short", "Short");
     this.hasSynonyms("Short", "short");
   }
-  
+
   @Test
   public void testDouble() {
     this.hasSynonyms("double", "Double");
     this.hasSynonyms("Double", "double");
   }
-  
+
   @Test
   public void testBoolean() {
     this.hasSynonyms("boolean", "Boolean");
     this.hasSynonyms("Boolean", "boolean");
   }
-  
+
   @Test
   public void testVoid() {
     this.hasSynonyms("void");
     this.hasSynonyms("Void");
   }
-  
+
   @Test
   public void testListToArray() {
     this.hasSynonyms("char[]", "List<Character>");
     this.hasSynonyms("java.util.List<String>", "String[]");
   }
-  
+
   @Test
   public void testIterableToArray_01() {
     this.hasSynonyms("Iterable<? extends Integer>", "Integer[]", "int[]");
   }
-  
+
   @Test
   public void testArrayListToArray_02() {
     this.hasSynonyms("java.util.ArrayList<? extends Integer>", "Integer[]", "int[]");
   }
-  
+
   @Test
   public void testListWithUpperBound_01() {
     this.hasSynonyms("java.util.List<? super Integer>", "Object[]");
   }
-  
+
   @Test
   public void testListWithTypeParameter_01() {
     this.hasSynonyms(Pair.<String, String>of("java.util.List<T>", "T extends String"), "T[]");
     this.hasSynonyms(Pair.<String, String>of("java.util.List<? extends T>", "T extends String"), "T[]");
   }
-  
+
   @Test
   public void testListWithTypeParameter_02() {
     this.hasSynonyms(Pair.<String, String>of("java.util.List<T>", "T extends Integer"), "T[]", "int[]");
     this.hasSynonyms(Pair.<String, String>of("java.util.List<? extends T>", "T extends Integer"), "T[]", "int[]");
   }
-  
+
   @Test
   public void testArrayWithTypeParameter_01() {
     this.hasSynonyms(Pair.<String, String>of("T[]", "T extends String"), "List<T>");
     this.hasSynonyms(Pair.<String, String>of("T[][]", "T extends String"), "List<T[]>");
   }
-  
+
   @Test
   public void testArrayWithTypeParameter_02() {
     this.hasSynonyms(Pair.<String, String>of("T[]", "T extends Integer"), "List<T>");
     this.hasSynonyms(Pair.<String, String>of("T[][]", "T extends Integer"), "List<T[]>");
   }
-  
+
   @Test
   public void testTypeParameter_01() {
     this.hasSynonyms(Pair.<String, String>of("T", "V, T extends Iterable<V>"), "V[]");
   }
-  
+
   @Test
   public void testTypeParameter_02() {
     this.hasSynonyms(Pair.<String, String>of("T", "T extends Iterable<Integer>"), "Integer[]", "int[]");
   }
-  
+
   @Test
   public void testTypeParameter_03() {
     this.hasSynonyms(Pair.<String, String>of("T", "V extends Integer, T extends Iterable<V>"), "V[]", "int[]");

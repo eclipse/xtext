@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 public class JavaCodeAnalyzerTest {
   @Inject
   private JavaCodeAnalyzer analyzer;
-  
+
   @Test
   public void testSimpleClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -43,7 +43,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertJavaTypeIs(_builder, ASTParser.K_COMPILATION_UNIT);
   }
-  
+
   @Test
   public void testSimpleBodyDeclaration_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -51,7 +51,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertJavaTypeIs(_builder, ASTParser.K_CLASS_BODY_DECLARATIONS);
   }
-  
+
   @Test
   public void testSimpleBodyDeclaratio_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -59,7 +59,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertJavaTypeIs(_builder, ASTParser.K_CLASS_BODY_DECLARATIONS);
   }
-  
+
   @Test
   public void testSimpleSatement_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -67,7 +67,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS);
   }
-  
+
   @Test
   public void testSimpleSatement_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -77,7 +77,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertNodesCount(this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS), 2);
   }
-  
+
   @Test
   public void tesTryCatchSatement_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -91,12 +91,12 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertNodesCount(this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS), 1);
   }
-  
+
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> assertNodesCount(final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> result, final int i) {
     Assert.assertEquals(i, result.getNodes().size());
     return result;
   }
-  
+
   @Test
   public void testSimpleExpression() {
     StringConcatenation _builder = new StringConcatenation();
@@ -104,7 +104,7 @@ public class JavaCodeAnalyzerTest {
     _builder.newLine();
     this.assertJavaTypeIs(_builder, ASTParser.K_EXPRESSION);
   }
-  
+
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> assertJavaTypeIs(final CharSequence sequence, final int type) {
     final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> javaParseResult = this.analyzer.determinateJavaType(sequence.toString());
     Assert.assertEquals(type, javaParseResult.getType());

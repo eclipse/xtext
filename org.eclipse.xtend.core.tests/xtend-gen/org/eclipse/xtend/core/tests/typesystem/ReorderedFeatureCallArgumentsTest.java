@@ -42,10 +42,10 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   private TestableExpressionArgumentFactory factory;
-  
+
   @Test
   public void test_01() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "[], 1");
@@ -72,7 +72,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     Assert.assertTrue(arguments.isProcessed(1));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_02() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "[], 1");
@@ -100,49 +100,49 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     Assert.assertTrue(arguments.isProcessed(2));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_03() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "[], 1");
     this.withIndizes(arguments, 1, 0);
   }
-  
+
   @Test
   public void test_04() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, int j, int k, int l, int m", "[], 1, [], 1, []");
     this.withIndizes(arguments, 1, 3, 0, 2, 4);
   }
-  
+
   @Test
   public void test_05() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, int j, int k", "[], 1, [], 1, [], 1");
     this.withIndizes(arguments, 1, 3, 0, 2, 4, 5);
   }
-  
+
   @Test
   public void test_06() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, int j", "[], 1, [], 1, [], 1");
     this.withIndizes(arguments, 1, 0, 2, 3, 4, 5);
   }
-  
+
   @Test
   public void test_07() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, long j, boolean k, float l, double m", "[], 1, [], 1, []");
     this.withTypes(arguments, "int", "boolean", "String", "long", "float");
   }
-  
+
   @Test
   public void test_08() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, long j, boolean k", "[], 1, [], 1, [], 1");
     this.withTypes(arguments, "int", "boolean", "String", "long", null, null);
   }
-  
+
   @Test
   public void test_09() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, long j", "[], 1, [], 1, [], 1");
     this.withTypes(arguments, "int", "String", "long", null, null, null);
   }
-  
+
   @Test
   public void testBug457779_01() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "[], 1");
@@ -177,7 +177,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
       }
     }
   }
-  
+
   @Test
   public void testBug457779_02() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "[], 1");
@@ -208,7 +208,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
       }
     }
   }
-  
+
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {
     final Consumer<Integer> _function = (Integer it) -> {
       Assert.assertTrue(arguments.hasUnprocessedArguments());
@@ -222,7 +222,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     ((List<Integer>)Conversions.doWrapArray(indexes)).forEach(_function);
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   protected void withTypes(final IFeatureCallArguments arguments, final String... types) {
     final Consumer<String> _function = (String it) -> {
       Assert.assertTrue(arguments.hasUnprocessedArguments());
@@ -236,15 +236,15 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     ((List<String>)Conversions.doWrapArray(types)).forEach(_function);
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   protected IFeatureCallArguments toArgumentsWithoutReceiver(final String signature, final String invocation) {
     return this.toArguments(signature, invocation, false);
   }
-  
+
   protected IFeatureCallArguments toArgumentsWithReceiver(final String signature, final String invocation) {
     return this.toArguments(signature, invocation, true);
   }
-  
+
   protected IFeatureCallArguments toArguments(final String signature, final String invocation, final boolean receiver) {
     try {
       StringConcatenation _builder = new StringConcatenation();

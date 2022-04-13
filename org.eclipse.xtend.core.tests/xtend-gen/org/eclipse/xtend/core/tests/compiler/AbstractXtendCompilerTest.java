@@ -35,28 +35,28 @@ import org.junit.Before;
 public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   protected JvmModelGenerator generator;
-  
+
   @Inject
   protected IGeneratorConfigProvider generatorConfigProvider;
-  
+
   @Inject
   protected IFilePostProcessor postProcessor;
-  
+
   @Inject
   @Extension
   protected CompilationTestHelper compilationTestHelper;
-  
+
   protected boolean useJavaCompiler = false;
-  
+
   @Before
   public void setupCompiler() {
     this.compilationTestHelper.setJavaCompilerClassPath(this.getClass().getClassLoader());
   }
-  
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     this.doAssertCompilesTo(input, expected, this.generatorConfigProvider.get(null), false);
   }
-  
+
   protected XtendFile doAssertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config, final boolean serializeAllTypes) {
     try {
       final XtendFile file = this.file(input.toString(), true);
@@ -71,7 +71,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertFilesCompileTo(final Iterable<XtendFile> xtendFiles, final CharSequence... expected) {
     final GeneratorConfig config = this.generatorConfigProvider.get(null);
     int i = 0;
@@ -83,7 +83,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   private ArrayList<CharSequence> compile(final XtendFile file, final CharSequence input, final GeneratorConfig config) {
     try {
       final ArrayList<CharSequence> results = CollectionLiterals.<CharSequence>newArrayList();

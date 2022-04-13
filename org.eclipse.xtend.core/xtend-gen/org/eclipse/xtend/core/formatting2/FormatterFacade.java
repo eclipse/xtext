@@ -38,17 +38,17 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class FormatterFacade {
   @Inject
   private IResourceFactory resourceFactory;
-  
+
   @Inject
   @FormatterPreferences
   private IPreferenceValuesProvider cfgProvider;
-  
+
   @Inject
   private IFormatter2 formatter;
-  
+
   @Inject
   private Provider<TextRegionAccessBuilder> regionAccessBuilder;
-  
+
   public String format(final String xtendCode) {
     try {
       final XtextResourceSet resourceSet = new XtextResourceSet();

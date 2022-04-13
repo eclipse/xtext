@@ -28,7 +28,7 @@ public class Case_6 {
     };
     return ListExtensions.<EObject, Object>map(packageDecl.eContents(), _function);
   }
-  
+
   protected Object _transform(final EStructuralFeature entity) {
     ArrayList<EObject> _xblockexpression = null;
     {
@@ -37,14 +37,14 @@ public class Case_6 {
     }
     return _xblockexpression;
   }
-  
+
   protected Object _transform(final EClass model) {
     final Function1<ETypeParameter, Object> _function = (ETypeParameter e) -> {
       return this.transform(e);
     };
     return ListExtensions.<ETypeParameter, Object>map(model.getETypeParameters(), _function);
   }
-  
+
   public Object transform(final ENamedElement model) {
     if (model instanceof EClass) {
       return _transform((EClass)model);

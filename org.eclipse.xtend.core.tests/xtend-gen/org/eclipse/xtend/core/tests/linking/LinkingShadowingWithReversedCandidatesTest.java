@@ -27,7 +27,7 @@ public class LinkingShadowingWithReversedCandidatesTest extends LinkingShadowing
   public void testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension() throws Exception {
     super.testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension();
   }
-  
+
   @Ignore("TODO")
   @Test
   @Override

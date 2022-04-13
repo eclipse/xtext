@@ -78,7 +78,7 @@ public class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void closeEditorWithChanges() {
     try {
@@ -136,7 +136,7 @@ public class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void undoEditorChangesAndClose() {
     try {
@@ -197,7 +197,7 @@ public class SeveralEditorsQueuedBuildTest extends AbstractQueuedBuildDataTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void undoEditorChangesAndSave() {
     try {

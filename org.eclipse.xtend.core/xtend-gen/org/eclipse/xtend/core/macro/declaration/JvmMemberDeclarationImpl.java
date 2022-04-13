@@ -38,7 +38,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     }
     return _documentation;
   }
-  
+
   public void setDocComment(final String docComment) {
     this.checkMutable();
     Adapter _adapter = EcoreUtil.getAdapter(this.getDelegate().eAdapters(), DocumentationAdapter.class);
@@ -51,12 +51,12 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     }
     adapter.setDocumentation(docComment);
   }
-  
+
   @Override
   public Visibility getVisibility() {
     return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
-  
+
   public void setVisibility(final Visibility visibility) {
     this.checkMutable();
     T _delegate = this.getDelegate();
@@ -81,12 +81,12 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     }
     _delegate.setVisibility(_switchResult);
   }
-  
+
   @Override
   public TypeDeclaration getDeclaringType() {
     return this.getCompilationUnit().toTypeDeclaration(this.getDelegate().getDeclaringType());
   }
-  
+
   public void setSimpleName(final String name) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -100,17 +100,17 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     T _delegate_1 = this.getDelegate();
     _delegate_1.setSimpleName(name);
   }
-  
+
   @Override
   public Set<Modifier> getModifiers() {
     return Collections.<Modifier>unmodifiableSet(CollectionLiterals.<Modifier>newHashSet());
   }
-  
+
   @Override
   public boolean isDeprecated() {
     return DeprecationUtil.isDeprecatedMember(this.getDelegate());
   }
-  
+
   public void setDeprecated(final boolean deprecated) {
     this.checkMutable();
     if (deprecated) {

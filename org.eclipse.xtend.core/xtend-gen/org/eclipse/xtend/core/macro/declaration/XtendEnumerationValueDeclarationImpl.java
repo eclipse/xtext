@@ -19,7 +19,7 @@ public class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclaration
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public EnumerationTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();

@@ -54,42 +54,42 @@ public class QuickfixTestBuilder {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private IssueResolutionProvider _issueResolutionProvider;
-  
+
   @Inject
   @Extension
   private IResourceValidator _iResourceValidator;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Inject
   private IPreferenceStoreAccess preferenceStoreAccess;
-  
+
   @Inject
   private XbaseBuilderPreferenceAccess xbaseBuilderPreferenceAccess;
-  
+
   private int caretOffset;
-  
+
   private XtextEditor editor;
-  
+
   private List<Issue> issues;
-  
+
   private Set<String> modifiedIssueCodes;
-  
+
   private final String primaryPositionMarker = "<|>";
-  
+
   private final String secondaryPositionMarker = "|";
-  
+
   private IPersistentPreferenceStore getPreferenceStore() {
     IPreferenceStore _writablePreferenceStore = this.preferenceStoreAccess.getWritablePreferenceStore(this._workbenchTestHelper.getProject());
     return ((IPersistentPreferenceStore) _writablePreferenceStore);
   }
-  
+
   public void setSeverity(final String issueCode, final String severity) {
     if ((this.modifiedIssueCodes == null)) {
       this.modifiedIssueCodes = CollectionLiterals.<String>newHashSet();
@@ -97,11 +97,11 @@ public class QuickfixTestBuilder {
     this.modifiedIssueCodes.add(issueCode);
     this.getPreferenceStore().setValue(issueCode, "error");
   }
-  
+
   public void setJavaVersion(final JavaVersion javaVersion) {
     this.xbaseBuilderPreferenceAccess.setJavaVersion(this._workbenchTestHelper.getProject(), javaVersion);
   }
-  
+
   public QuickfixTestBuilder create(final String fileName, final String model) {
     try {
       QuickfixTestBuilder _xblockexpression = null;
@@ -123,7 +123,7 @@ public class QuickfixTestBuilder {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public QuickfixTestBuilder caretOffset(final int offset) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -132,7 +132,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertIssueCodes(final String... issueCodes) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -144,7 +144,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertFeatureCallLinkingIssue() {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -157,7 +157,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertTypeLiteralLinkingIssue() {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -170,7 +170,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertResolutionLabels(final String... resolutionLabels) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -186,7 +186,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertResolutionLabelsSubset(final String... expectedLabels) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -207,7 +207,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertNoResolutionLabels(final String... unExpectedLabels) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -228,7 +228,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertModelAfterQuickfix(final CharSequence expectedModel) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -247,7 +247,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public QuickfixTestBuilder assertModelAfterQuickfix(final String label, final CharSequence expectedModel) {
     QuickfixTestBuilder _xblockexpression = null;
     {
@@ -273,22 +273,22 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected XtextEditor getEditor() {
     return this.editor;
   }
-  
+
   protected Iterable<Issue> getIssuesAtCaret() {
     final Function1<Issue, Boolean> _function = (Issue it) -> {
       return Boolean.valueOf((((it.getOffset()).intValue() <= this.caretOffset) && (((it.getOffset()).intValue() + (it.getLength()).intValue()) >= this.caretOffset)));
     };
     return IterableExtensions.<Issue>filter(this.issues, _function);
   }
-  
+
   protected void assertEqual(final List<String> expected, final Iterable<String> actual) {
     Assert.assertEquals(IterableExtensions.join(IterableExtensions.<String>sort(expected), "\n"), IterableExtensions.join(IterableExtensions.<String>sort(actual), "\n"));
   }
-  
+
   protected String error(final Iterable<String> expected, final Iterable<String> actual) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected ");
@@ -309,7 +309,7 @@ public class QuickfixTestBuilder {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   protected XtextEditor openEditorSafely(final IFile file) throws Exception {
     XtextEditor _xblockexpression = null;
     {
@@ -323,7 +323,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected String getPositionMarker(final String model) {
     int _count = this.count(model, this.primaryPositionMarker);
     boolean _equals = (_count == 1);
@@ -345,7 +345,7 @@ public class QuickfixTestBuilder {
     }
     return null;
   }
-  
+
   protected int count(final String model, final String positionMarker) {
     int _xblockexpression = (int) 0;
     {
@@ -355,7 +355,7 @@ public class QuickfixTestBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public void tearDown() {
     this.editor = null;
     this._workbenchTestHelper.closeAllEditors(false);
@@ -385,7 +385,7 @@ public class QuickfixTestBuilder {
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
     this._syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
   }
-  
+
   public QuickfixTestBuilder removeFile(final String fileName) {
     try {
       QuickfixTestBuilder _xblockexpression = null;

@@ -32,7 +32,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
     super.tearDown();
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @Test
   public void testExcludeNoneAndIncludeAll() {
     try {
@@ -52,7 +52,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExcludeAllXtendFiles() {
     try {
@@ -72,7 +72,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * <p>
    * We ignore inclusion pattern for now.
@@ -101,7 +101,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExcludeAllFooXtendFiles() {
     try {

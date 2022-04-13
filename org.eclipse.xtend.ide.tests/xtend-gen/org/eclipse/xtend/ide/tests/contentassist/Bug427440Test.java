@@ -66,11 +66,11 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     }
     this.assertContains(proposals.next(), "asSubclass()");
   }
-  
+
   public void assertContains(final ICompletionProposal proposal, final String text) {
     Assert.assertEquals(text, this.getProposedText(proposal));
   }
-  
+
   public String getProposedText(final ICompletionProposal completionProposal) {
     String proposedText = completionProposal.getDisplayString();
     if ((completionProposal instanceof ConfigurableCompletionProposal)) {

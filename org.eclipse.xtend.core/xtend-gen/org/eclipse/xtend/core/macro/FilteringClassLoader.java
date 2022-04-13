@@ -21,13 +21,13 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class FilteringClassLoader extends ClassLoader {
   private static final char DOT = '.';
-  
+
   private static final char SLASH = '/';
-  
+
   private final List<String> includes;
-  
+
   private final List<String> resourceIncludes;
-  
+
   public FilteringClassLoader(final ClassLoader parent, final List<String> includes) {
     super(parent);
     final Function1<String, String> _function = (String it) -> {
@@ -42,7 +42,7 @@ public class FilteringClassLoader extends ClassLoader {
     };
     this.resourceIncludes = ImmutableList.<String>copyOf(ListExtensions.<String, String>map(ListExtensions.<String, String>map(includes, _function_1), _function_2));
   }
-  
+
   @Override
   public Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
     try {
@@ -69,7 +69,7 @@ public class FilteringClassLoader extends ClassLoader {
       throw new ClassNotFoundException(name);
     }
   }
-  
+
   @Override
   public URL getResource(final String name) {
     ClassLoader _parent = ClassLoader.getSystemClassLoader().getParent();
@@ -87,7 +87,7 @@ public class FilteringClassLoader extends ClassLoader {
     }
     return null;
   }
-  
+
   private boolean isValidClass(final String name) {
     boolean _xblockexpression = false;
     {
@@ -101,7 +101,7 @@ public class FilteringClassLoader extends ClassLoader {
     }
     return _xblockexpression;
   }
-  
+
   private boolean isValidResource(final String name) {
     boolean _xblockexpression = false;
     {

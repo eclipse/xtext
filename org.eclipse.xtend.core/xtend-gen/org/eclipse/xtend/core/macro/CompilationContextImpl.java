@@ -23,19 +23,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class CompilationContextImpl implements CompilationStrategy.CompilationContext {
   @Extension
   private ReflectExtensions reflectExtensions = new ReflectExtensions();
-  
+
   private ITreeAppendable appendable;
-  
+
   private ImportManager importManager;
-  
+
   private CompilationUnitImpl compilationUnit;
-  
+
   public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit) {
     this.appendable = appendable;
     this.importManager = this.getImportManager(appendable);
     this.compilationUnit = compilationUnit;
   }
-  
+
   public ImportManager getImportManager(final ITreeAppendable appendable) {
     try {
       Object _get = this.reflectExtensions.<Object>get(appendable, "state");
@@ -48,7 +48,7 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public String toJavaCode(final TypeReference typeref) {
     StringBuilderBasedAppendable _xifexpression = null;

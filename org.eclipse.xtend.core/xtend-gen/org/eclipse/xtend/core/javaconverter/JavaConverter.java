@@ -37,9 +37,9 @@ public class JavaConverter {
   @Accessors
   public static class ConversionResult {
     private String xtendCode;
-    
+
     private Iterable<String> problems = CollectionLiterals.<String>newArrayList();
-    
+
     public static JavaConverter.ConversionResult create(final JavaASTFlattener flattener) {
       final JavaConverter.ConversionResult result = new JavaConverter.ConversionResult();
       result.xtendCode = flattener.getResult();
@@ -50,37 +50,37 @@ public class JavaConverter {
       }
       return result;
     }
-    
+
     @Pure
     public String getXtendCode() {
       return this.xtendCode;
     }
-    
+
     public void setXtendCode(final String xtendCode) {
       this.xtendCode = xtendCode;
     }
-    
+
     @Pure
     public Iterable<String> getProblems() {
       return this.problems;
     }
-    
+
     public void setProblems(final Iterable<String> problems) {
       this.problems = problems;
     }
   }
-  
+
   @Inject
   private JavaCodeAnalyzer codeAnalyzer;
-  
+
   @Inject
   private ASTParserFactory astParserFactory;
-  
+
   @Inject
   private Provider<JavaASTFlattener> astFlattenerProvider;
-  
+
   private boolean fallbackConversionStartegy = false;
-  
+
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
     try {
       final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
@@ -90,7 +90,7 @@ public class JavaConverter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
@@ -107,7 +107,7 @@ public class JavaConverter {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
@@ -125,7 +125,7 @@ public class JavaConverter {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @param javaSrc Java class source code as String
    * @param javaImports imports to use
@@ -159,7 +159,7 @@ public class JavaConverter {
     }
     return conversionResult.getXtendCode();
   }
-  
+
   /**
    * @param javaSrc Java class source code as String
    * @param imports imports to use
@@ -168,7 +168,7 @@ public class JavaConverter {
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final Object classPathContext) {
     return this.internalToXtend(null, javaSrc, imports, this.astParserFactory.createJavaParser(classPathContext), false);
   }
-  
+
   /**
    * @param javaSrc Java class source code as String
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
@@ -183,7 +183,7 @@ public class JavaConverter {
     }
     return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false, false);
   }
-  
+
   /**
    * @param javaSrc Java class source code as String
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
@@ -196,7 +196,7 @@ public class JavaConverter {
     final ASTNode root = parser.createAST();
     return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false, conditionalExpressionsAllowed);
   }
-  
+
   /**
    * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
@@ -230,7 +230,7 @@ public class JavaConverter {
     final ASTNode result = parser.createAST();
     return this.executeAstFlattener(preparedJavaSrc, result, parser.getTargetLevel(), false, conditionalExpressionsAllowed);
   }
-  
+
   /**
    * @param  preparedJavaSource used to collect javadoc and comments
    * @param  conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
@@ -248,12 +248,12 @@ public class JavaConverter {
     }
     return JavaConverter.ConversionResult.create(astFlattener);
   }
-  
+
   public JavaConverter useRobustSyntax() {
     this.fallbackConversionStartegy = true;
     return this;
   }
-  
+
   public boolean shouldForceStatementMode(final EObject targetElement) {
     return (((targetElement != null) && 
       (!((targetElement instanceof XAnnotation) || (targetElement instanceof XtendExecutable)))) && 

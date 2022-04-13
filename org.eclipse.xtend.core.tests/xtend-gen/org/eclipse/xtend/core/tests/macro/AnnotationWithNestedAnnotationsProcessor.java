@@ -41,11 +41,11 @@ public class AnnotationWithNestedAnnotationsProcessor implements RegisterGlobals
     };
     IterableExtensions.map(IterableExtensions.filter(decls, _function), _function_1).forEach(_function_2);
   }
-  
+
   public void doRegisterGlobals(final TypeDeclaration decl, @Extension final RegisterGlobalsContext context) {
     AnnotationWithNestedAnnotationsProcessor.readConfig(decl);
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableTypeDeclaration> decls, @Extension final TransformationContext context) {
     final Function1<MutableTypeDeclaration, Boolean> _function = (MutableTypeDeclaration it) -> {
@@ -70,11 +70,11 @@ public class AnnotationWithNestedAnnotationsProcessor implements RegisterGlobals
     };
     IterableExtensions.map(IterableExtensions.filter(decls, _function_2), _function_3).forEach(_function_4);
   }
-  
+
   public void doTransform(@Extension final MutableClassDeclaration clazz, @Extension final TransformationContext context) {
     AnnotationWithNestedAnnotationsProcessor.readConfig(clazz);
   }
-  
+
   public static void readConfig(final TypeDeclaration clazz) {
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       String _qualifiedName = it.getAnnotationTypeDeclaration().getQualifiedName();

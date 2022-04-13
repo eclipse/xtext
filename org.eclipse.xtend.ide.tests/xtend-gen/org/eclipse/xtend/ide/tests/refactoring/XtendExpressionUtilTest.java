@@ -32,16 +32,16 @@ import org.junit.Test;
 public class XtendExpressionUtilTest extends AbstractXtendTestCase {
   @Inject
   private XtendExpressionUtil util;
-  
+
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private ValidationTestHelper validationHelper;
-  
+
   @Inject
   private ILocationInFileProvider locationInFileProvider;
-  
+
   @Test
   public void testSelectionExpression() {
     this.assertExpressionSelected("\'\'\' Prefix «4$$2» Postfix \'\'\'", "42");
@@ -61,7 +61,7 @@ public class XtendExpressionUtilTest extends AbstractXtendTestCase {
     this.assertExpressionSelected("\'\'\' $Prefix $«42» Postfix \'\'\'", "\'\'\' Prefix «");
     this.assertExpressionSelected("\'\'\' Prefix $$«42» Postfix \'\'\'", "\'\'\' Prefix «");
   }
-  
+
   @Test
   public void testSelectionExpression2() {
     this.assertExpressionSelected("\'\'\' Prefix « /* prefix */ 4$$2 /* postfix */ » Postfix \'\'\'", "42");
@@ -81,7 +81,7 @@ public class XtendExpressionUtilTest extends AbstractXtendTestCase {
     this.assertExpressionSelected("\'\'\' $Prefix $« /* prefix */ 42 /* postfix */ » Postfix \'\'\'", "\'\'\' Prefix «");
     this.assertExpressionSelected("\'\'\' Prefix $$« /* prefix */ 42 /* postfix */ » Postfix \'\'\'", "\'\'\' Prefix «");
   }
-  
+
   protected void assertExpressionSelected(final String modelWithSelectionMarkup, final String expectedSelection) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -109,7 +109,7 @@ public class XtendExpressionUtilTest extends AbstractXtendTestCase {
     int _plus = (_offset_1 + _length);
     Assert.assertEquals(expectedSelection, cleanedModel.substring(_offset, _plus));
   }
-  
+
   protected XtendFile parse(final CharSequence string) {
     try {
       XtendFile _xblockexpression = null;

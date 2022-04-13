@@ -31,22 +31,22 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public class JavaEditorExtension {
   private static final Boolean VERBOSE = Boolean.FALSE;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   public ITextEditor reconcile(final String fileName, final String oldText, final String newText) {
     return this.reconcile(this.openJavaEditor(fileName), oldText, newText);
   }
-  
+
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
       return this.changeContent(it, oldText, newText);
     };
     return this.reconcile(editor, _function);
   }
-  
+
   public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
@@ -61,11 +61,11 @@ public class JavaEditorExtension {
     }
     return _xblockexpression;
   }
-  
+
   public ITextEditor save(final ITextEditor editor) {
     return this.save(editor, null);
   }
-  
+
   public ITextEditor save(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
@@ -80,11 +80,11 @@ public class JavaEditorExtension {
     }
     return _xblockexpression;
   }
-  
+
   public ITextEditor close(final ITextEditor editor) {
     return this.close(editor, null);
   }
-  
+
   public ITextEditor close(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
@@ -99,15 +99,15 @@ public class JavaEditorExtension {
     }
     return _xblockexpression;
   }
-  
+
   public String waitForPostReconcileEvent(final Procedure0 producer) {
     return this.waitForElementChangedEvent(ElementChangedEvent.POST_RECONCILE, producer);
   }
-  
+
   public String waitForPostChangeEvent(final Procedure0 producer) {
     return this.waitForElementChangedEvent(ElementChangedEvent.POST_CHANGE, producer);
   }
-  
+
   public String waitForElementChangedEvent(final int eventMask, final Procedure0 producer) {
     String _xblockexpression = null;
     {
@@ -153,7 +153,7 @@ public class JavaEditorExtension {
     }
     return _xblockexpression;
   }
-  
+
   public ITextEditor openJavaEditor(final String fileName) {
     try {
       return this._workbenchTestHelper.openLikeTextEditor(this._workbenchTestHelper.getFile(fileName));
@@ -161,7 +161,7 @@ public class JavaEditorExtension {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ITextEditor changeContent(final ITextEditor editor, final String oldText, final String newText) {
     try {
       ITextEditor _xblockexpression = null;

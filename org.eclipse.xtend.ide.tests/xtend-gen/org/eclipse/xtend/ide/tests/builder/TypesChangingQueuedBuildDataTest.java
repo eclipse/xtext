@@ -27,7 +27,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Bar");
   }
-  
+
   @Test
   public void createPrimaryType2() {
     final Procedure0 _function = () -> {
@@ -44,7 +44,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Bar");
   }
-  
+
   @Test
   public void createPrimaryAndSecondaryType() {
     final Procedure0 _function = () -> {
@@ -58,7 +58,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Foo", "Bar");
   }
-  
+
   @Test
   public void createPrimaryAndSecondaryType2() {
     final Procedure0 _function = () -> {
@@ -81,7 +81,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Foo", "mypackage.Bar");
   }
-  
+
   @Test
   public void createPrimaryAndNestedTypes() {
     final Procedure0 _function = () -> {
@@ -114,7 +114,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Bar$Foo$Foo3", "Bar$Foo", "Bar$Foo2", "Bar");
   }
-  
+
   @Test
   public void createPrimaryAndNestedTypes2() {
     final Procedure0 _function = () -> {
@@ -150,7 +150,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Bar$Foo$Foo3", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar");
   }
-  
+
   @Test
   public void deletePrimaryType() {
     this.create("Bar.java", "public class Bar {}");
@@ -159,7 +159,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Bar");
   }
-  
+
   @Test
   public void deletePrimaryType2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -177,7 +177,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Bar");
   }
-  
+
   @Test
   public void deletePrimaryAndSecondaryType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -192,7 +192,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Bar", "Foo");
   }
-  
+
   @Test
   public void deletePrimaryAndSecondaryType2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -216,7 +216,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Foo");
   }
-  
+
   @Test
   public void deletePrimaryAndNestedTypes() {
     StringConcatenation _builder = new StringConcatenation();
@@ -250,7 +250,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "Bar", "Bar$Foo2", "Bar$Foo", "Bar$Foo$Foo3");
   }
-  
+
   @Test
   public void deletePrimaryAndNestedTypes2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -287,7 +287,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     };
     this.assertThereAreDeltas(_function, "mypackage.Bar", "mypackage.Bar$Foo$Foo3", "mypackage.Bar$Foo2", "mypackage.Bar$Foo");
   }
-  
+
   public String create(final String fileName, final String content) {
     String _xblockexpression = null;
     {
@@ -303,7 +303,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     }
     return _xblockexpression;
   }
-  
+
   public String delete(final String fileName) {
     final Procedure0 _function = () -> {
       try {

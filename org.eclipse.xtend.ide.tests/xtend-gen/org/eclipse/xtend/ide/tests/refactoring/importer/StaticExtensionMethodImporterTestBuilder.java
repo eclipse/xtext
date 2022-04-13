@@ -50,7 +50,7 @@ public class StaticExtensionMethodImporterTestBuilder extends StaticMethodImport
   @Inject
   @Extension
   private StaticExtensionMethodImporter staticExtensionMethodImporter;
-  
+
   @Override
   protected boolean doImportStaticMethod(final IXtextDocument document, final int caretOffset) {
     TextSelection _textSelection = new TextSelection(caretOffset, 1);

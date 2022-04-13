@@ -39,11 +39,11 @@ public class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
   protected void _findImplicitReturns(final AnonymousClass expression, final ImplicitReturnFinder.Acceptor acceptor) {
     acceptor.accept(expression);
   }
-  
+
   protected void _findImplicitReturns(final RichString expression, final ImplicitReturnFinder.Acceptor acceptor) {
     acceptor.accept(expression);
   }
-  
+
   public void findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     if (expression instanceof AnonymousClass) {
       _findImplicitReturns((AnonymousClass)expression, acceptor);

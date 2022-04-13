@@ -58,35 +58,35 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   @Rule
   @Inject
   public TemporaryFolder temporaryFolder;
-  
+
   @Inject
   private CompilationTestHelper compiler;
-  
+
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
-  
+
   @Inject
   private ValidationTestHelper validator;
-  
+
   private final String macroProject = "macroProject";
-  
+
   private final String clientProject = "userProject";
-  
+
   private File workspaceRoot;
-  
+
   @Before
   public void setUp() {
     this.compiler.setJavaCompilerClassPath(ActiveAnnotationsRuntimeTest.class.getClassLoader());
     this.configureFreshWorkspace();
   }
-  
+
   protected void configureFreshWorkspace() {
     this.workspaceRoot = this.createFreshTempDir();
   }
-  
+
   protected File createFreshTempDir() {
     try {
       return this.temporaryFolder.newFolder();
@@ -94,7 +94,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected URI copyToDisk(final String projectName, final Pair<String, String> fileRepresentation) {
     try {
       String _key = fileRepresentation.getKey();
@@ -107,7 +107,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
@@ -126,7 +126,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertIssues(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super List<Issue>> expectations) {
     try {
       final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
@@ -143,7 +143,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public XtextResourceSet compileMacroResourceSet(final Pair<String, String> macroFile, final Pair<String, String> clientFile) {
     final URI macroURI = this.copyToDisk(this.macroProject, macroFile);
     final URI clientURI = this.copyToDisk(this.clientProject, clientFile);
@@ -175,13 +175,13 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     this.compiler.compile(macroResourceSet, _function_2);
     return resourceSet;
   }
-  
+
   @Test
   @Override
   public void testSimpleModification() {
     super.testSimpleModification();
   }
-  
+
   @Test
   public void testBug403563() {
     StringConcatenation _builder = new StringConcatenation();
@@ -236,7 +236,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     };
     this.assertIssues(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testDetectOrphanedElements() {
     StringConcatenation _builder = new StringConcatenation();
@@ -354,7 +354,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testDetectOrphanedElements2() {
     StringConcatenation _builder = new StringConcatenation();

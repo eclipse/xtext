@@ -51,31 +51,31 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   private DocumentRewriter.Factory factory;
-  
+
   @Inject
   @Extension
   private ReplaceConverter _replaceConverter;
-  
+
   @Inject
   @Extension
   private CommonTypeComputationServices services;
-  
+
   @Inject
   @Extension
   private TypesFactory _typesFactory;
-  
+
   @Inject
   private FlexerFactory flexerFactory;
-  
+
   @Inject
   private OutdatedStateManager outdatedStateManager;
-  
+
   @Inject
   private OperationCanceledManager operationCanceledManager;
-  
+
   @Test
   public void testSectionOverlap() {
     StringConcatenation _builder = new StringConcatenation();
@@ -120,7 +120,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testSectionOrderIrrelevant() {
     StringConcatenation _builder = new StringConcatenation();
@@ -165,7 +165,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testInsertText() {
     StringConcatenation _builder = new StringConcatenation();
@@ -208,7 +208,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testInsertExistingType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -246,7 +246,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testInsertTypesImportsSorted() {
     StringConcatenation _builder = new StringConcatenation();
@@ -303,7 +303,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testInsertTypesWithOverlappingImports() {
     StringConcatenation _builder = new StringConcatenation();
@@ -354,7 +354,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testEmptyLinesAround() {
     StringConcatenation _builder = new StringConcatenation();
@@ -394,7 +394,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(_rewrite, _builder_1);
   }
-  
+
   @Test
   public void testWhitespaces() {
     StringConcatenation _builder = new StringConcatenation();
@@ -459,7 +459,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.andExpect(this.rewrite(model, _function), Strings.toUnixLineSeparator(_builder_1));
   }
-  
+
   protected String rewrite(final CharSequence model, final Procedure2<? super DocumentRewriter, ? super XtextResource> test) {
     try {
       String _xblockexpression = null;
@@ -482,11 +482,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void andExpect(final String model, final CharSequence expectation) {
     Assert.assertEquals(expectation.toString(), model);
   }
-  
+
   protected Object assertFails(final DocumentRewriter it, final Procedure1<? super DocumentRewriter> procedure) {
     Object _xtrycatchfinallyexpression = null;
     try {
@@ -501,7 +501,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     }
     return _xtrycatchfinallyexpression;
   }
-  
+
   protected XtextDocument createDocument(final String content) throws Exception {
     XtextDocument _xblockexpression = null;
     {

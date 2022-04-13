@@ -28,11 +28,11 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void test_01() {
     try {
@@ -61,7 +61,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -90,7 +90,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {
@@ -119,7 +119,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_04() {
     try {
@@ -148,7 +148,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_05() {
     try {
@@ -177,7 +177,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_06() {
     try {
@@ -209,7 +209,7 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_07() {
     try {

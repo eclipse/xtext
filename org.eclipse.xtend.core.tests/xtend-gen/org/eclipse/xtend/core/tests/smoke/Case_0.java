@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class Case_0 {
   private final int id;
-  
+
   public String foo(final String a, final String b) {
     String _xblockexpression = null;
     {
@@ -56,27 +56,27 @@ public class Case_0 {
     }
     return _xblockexpression;
   }
-  
+
   public boolean isUpper(final String s) {
     String _upperCase = s.toUpperCase();
     return Objects.equal(_upperCase, s);
   }
-  
+
   public String another(final String x, final String y) {
     return (y + x);
   }
-  
+
   public Case_0(final int id) {
     super();
     this.id = id;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + this.id;
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -91,7 +91,7 @@ public class Case_0 {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -99,7 +99,7 @@ public class Case_0 {
     b.add("id", this.id);
     return b.toString();
   }
-  
+
   @Pure
   public int getId() {
     return this.id;

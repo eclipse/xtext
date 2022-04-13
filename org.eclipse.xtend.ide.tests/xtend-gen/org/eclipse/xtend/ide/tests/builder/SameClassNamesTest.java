@@ -42,16 +42,16 @@ import org.junit.Test;
 public class SameClassNamesTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private Provider<PluginProjectFactory> projectFactoryProvider;
-  
+
   private IProject first;
-  
+
   private IProject second;
-  
+
   private IProject third;
-  
+
   @Before
   public void createProjects() {
     try {
@@ -65,7 +65,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void deleteProjects() {
     try {
@@ -77,7 +77,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoDuplicateNames() {
     try {
@@ -90,7 +90,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateNames_01() {
     try {
@@ -103,7 +103,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateNames_02() {
     try {
@@ -118,7 +118,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateNames_03() {
     try {
@@ -132,7 +132,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateNames_04() {
     try {
@@ -151,7 +151,7 @@ public class SameClassNamesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IProject createPluginProject(final String name, final String... requiredBundles) throws CoreException {
     final PluginProjectFactory projectFactory = this.projectFactoryProvider.get();
     projectFactory.setProjectName(name);

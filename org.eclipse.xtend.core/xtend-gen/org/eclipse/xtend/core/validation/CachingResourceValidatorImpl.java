@@ -52,24 +52,24 @@ import org.eclipse.xtext.xbase.typesystem.computation.DiagnosticOnFirstKeyword;
 public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
   @Inject
   private OnChangeEvictingCache cache;
-  
+
   @Inject
   private AnnotationProcessor annotationProcessor;
-  
+
   @Inject
   private IssueSeveritiesProvider issueSeveritiesProvider;
-  
+
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
-  
+
   @Inject
   @Extension
   private JvmTypeExtensions _jvmTypeExtensions;
-  
+
   @Inject
   private OperationCanceledManager operationCanceledManager;
-  
+
   @Override
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) throws OperationCanceledError {
     final Provider<List<Issue>> _function = () -> {
@@ -78,14 +78,14 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     };
     return this.cache.<List<Issue>>get(mode, resource, _function);
   }
-  
+
   @Override
   protected void collectResourceDiagnostics(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     this.runActiveAnnotationValidation(resource, monitor);
     this.addWarningsForOrphanedJvmElements(resource, monitor, acceptor);
     super.collectResourceDiagnostics(resource, monitor, acceptor);
   }
-  
+
   private void runActiveAnnotationValidation(final Resource resource, final CancelIndicator monitor) {
     final ActiveAnnotationContexts contexts = ActiveAnnotationContexts.find(resource);
     if ((contexts == null)) {
@@ -114,7 +114,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       contexts.after(ActiveAnnotationContexts.AnnotationCallback.VALIDATION);
     }
   }
-  
+
   private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
     final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELEMENT);
@@ -140,7 +140,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       }
     }
   }
-  
+
   private void addWarningForOrphanedJvmElement(final Resource resource, final JvmMember jvmElement, final Severity severity, final IAcceptor<Issue> acceptor) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated ");
@@ -152,7 +152,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       IssueCodes.ORPHAN_ELEMENT, _builder.toString(), _head, 
       null), severity, acceptor);
   }
-  
+
   private String getUiString(final JvmMember member) {
     String _xblockexpression = null;
     {

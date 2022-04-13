@@ -28,7 +28,7 @@ import org.junit.Test;
 public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Before
   @After
   public void cleanUp() {
@@ -38,7 +38,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=400191
    */
@@ -110,7 +110,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug388575() {
     try {
@@ -150,7 +150,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaReferencesXtendWithTypeParam() {
     try {
@@ -181,7 +181,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaSignatureDependsOnXtend() {
     try {
@@ -245,7 +245,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertNoErrorsInWorkspace() {
     try {
       final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

@@ -34,7 +34,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatConstructor02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -58,7 +58,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatConstructor1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -77,7 +77,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatConstructor2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -96,7 +96,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatConstructor3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -115,7 +115,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatConstructor4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -152,7 +152,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatField01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -167,7 +167,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatField02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -185,7 +185,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldInit01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -200,7 +200,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldInit02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -218,7 +218,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldVal() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -233,7 +233,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldVar() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -248,7 +248,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldStatic02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -263,7 +263,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldStaticVal() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -278,7 +278,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldStaticVar() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -293,7 +293,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtension01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -308,7 +308,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtensionInit01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -323,7 +323,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtensionInit02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -341,7 +341,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtensionVal01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -356,7 +356,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtensionVar01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -371,7 +371,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatFieldExtension02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -389,7 +389,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMethod01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -411,7 +411,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMethod02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -438,7 +438,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMethod1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -457,7 +457,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethod2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -476,7 +476,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethod3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -501,7 +501,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethod4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -538,7 +538,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatAbstractMethod1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -551,7 +551,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatAbstractMethod2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -568,7 +568,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatMethodMultiline() {
     StringConcatenation _builder = new StringConcatenation();
@@ -613,7 +613,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMethodAnnotation() {
     StringConcatenation _builder = new StringConcatenation();

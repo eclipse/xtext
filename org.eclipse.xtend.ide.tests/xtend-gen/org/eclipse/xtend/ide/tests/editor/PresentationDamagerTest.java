@@ -34,12 +34,12 @@ import org.junit.runner.RunWith;
 public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
   @Inject
   private FlexerFactory flexerFactory;
-  
+
   @Override
   protected Lexer createLexer() {
     return new InternalXtendLexer();
   }
-  
+
   @Test
   public void testRichString_0() {
     try {
@@ -48,7 +48,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_1() {
     try {
@@ -57,7 +57,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_2() {
     try {
@@ -66,7 +66,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_3() {
     try {
@@ -75,7 +75,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_4() {
     try {
@@ -84,7 +84,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_5() {
     try {
@@ -93,7 +93,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_6() {
     try {
@@ -102,7 +102,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_7() {
     try {
@@ -111,7 +111,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_8() {
     try {
@@ -120,7 +120,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRichString_9() {
     try {
@@ -129,7 +129,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testString_0() {
     try {
@@ -138,7 +138,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testString_1() {
     try {
@@ -147,7 +147,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testString_2() {
     try {
@@ -156,7 +156,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOverlapingMultilineTokens() {
     try {
@@ -165,7 +165,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public Document createDocument(final String before) throws Exception {
     XtextDocument _xblockexpression = null;

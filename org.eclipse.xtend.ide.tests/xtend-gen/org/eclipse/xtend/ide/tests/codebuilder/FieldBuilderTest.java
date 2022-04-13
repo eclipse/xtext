@@ -22,7 +22,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Test
   public void testXtendField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
@@ -33,7 +33,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     };
     this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "Foo foo");
   }
-  
+
   @Test
   public void testPublicXtendField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
@@ -45,7 +45,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     };
     this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "public Foo foo");
   }
-  
+
   @Test
   public void testStaticXtendField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getXtendClass());
@@ -58,7 +58,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     };
     this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "protected static Foo foo");
   }
-  
+
   @Test
   public void testJavaField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());
@@ -69,7 +69,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     };
     this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "Bar bar;");
   }
-  
+
   @Test
   public void testPublicJavaField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());
@@ -81,7 +81,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     };
     this.assertBuilds(ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function), "public Bar bar;");
   }
-  
+
   @Test
   public void testStaticJavaField() {
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(this.getJavaClass());

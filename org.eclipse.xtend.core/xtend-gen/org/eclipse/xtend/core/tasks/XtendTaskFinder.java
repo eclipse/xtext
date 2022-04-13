@@ -26,7 +26,7 @@ public class XtendTaskFinder extends DefaultTaskFinder {
   @Inject
   @Extension
   private XtendGrammarAccess _xtendGrammarAccess;
-  
+
   @Override
   protected boolean canContainTaskTags(final ILeafNode node) {
     boolean result = super.canContainTaskTags(node);
@@ -35,7 +35,7 @@ public class XtendTaskFinder extends DefaultTaskFinder {
     }
     return result;
   }
-  
+
   @Override
   protected String stripText(final ILeafNode node, final String text) {
     String _xblockexpression = null;
@@ -53,7 +53,7 @@ public class XtendTaskFinder extends DefaultTaskFinder {
     }
     return _xblockexpression;
   }
-  
+
   private boolean isRichComment(final ILeafNode node) {
     EObject _grammarElement = node.getGrammarElement();
     if ((_grammarElement instanceof RuleCall)) {

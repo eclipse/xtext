@@ -33,11 +33,11 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private OverrideHelper overrideHelper;
-  
+
   @Inject
   @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
-  
+
   @Test
   public void checkFindOverriddenOperation_01() {
     try {
@@ -111,7 +111,7 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkFindOverriddenOperation_02() {
     try {
@@ -182,7 +182,7 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkFindOverriddenOperation_03() {
     try {
@@ -218,7 +218,7 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkFindOverriddenOperation_04() {
     try {
@@ -257,7 +257,7 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkFindOverriddenOperation_05() {
     try {

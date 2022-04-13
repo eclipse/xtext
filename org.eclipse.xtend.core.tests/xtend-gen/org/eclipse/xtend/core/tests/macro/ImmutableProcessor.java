@@ -184,11 +184,11 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
       }
     }
   }
-  
+
   public boolean getExtendsSomethingWithProperHashCode(final MutableClassDeclaration declaration) {
     return false;
   }
-  
+
   public MutableMethodDeclaration tryAddMethod(final MutableClassDeclaration it, final String name, final Procedure1<? super MutableMethodDeclaration> initializer) {
     MutableMethodDeclaration _elvis = null;
     MutableMethodDeclaration _findDeclaredMethod = it.findDeclaredMethod(name);

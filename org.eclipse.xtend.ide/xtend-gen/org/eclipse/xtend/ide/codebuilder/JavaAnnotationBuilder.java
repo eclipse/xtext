@@ -22,12 +22,12 @@ public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements 
   public boolean isValid() {
     return (super.isValid() && (this.getAnnotationName() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT).append("@interface ").append(this.getAnnotationName()).append(" {").newLine().append("}");
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();

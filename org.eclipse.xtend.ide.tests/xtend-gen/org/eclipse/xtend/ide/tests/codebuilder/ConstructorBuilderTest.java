@@ -28,7 +28,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Test
   public void testXtendConstructor() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getXtendClass());
@@ -50,7 +50,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaConstructor() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getJavaClass());
@@ -73,7 +73,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendParameterNames() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getXtendClass());
@@ -103,7 +103,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaParameterNames() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getJavaClass());
@@ -134,7 +134,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendExceptions() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getXtendClass());
@@ -154,7 +154,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaException() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getJavaClass());
@@ -175,7 +175,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendCustomBody() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getXtendClass());
@@ -196,7 +196,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaCustomBody() {
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(this.getJavaClass());

@@ -81,7 +81,7 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSwitch_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -153,7 +153,7 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIf_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -213,7 +213,7 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testField_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -280,7 +280,7 @@ public class AutocastCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testField_02() {
     StringConcatenation _builder = new StringConcatenation();

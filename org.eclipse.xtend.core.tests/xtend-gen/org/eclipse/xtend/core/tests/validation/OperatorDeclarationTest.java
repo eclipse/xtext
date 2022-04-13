@@ -33,14 +33,14 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   private OperatorMapping operatorMapping;
-  
+
   @Test
   public void testOperatorDeclaration_returnType() {
     try {
@@ -65,7 +65,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperatorDeclaration_genericReturnType() {
     try {
@@ -90,7 +90,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperatorDeclaration_genericReturnTypeWithFunctionType_01() {
     try {
@@ -115,7 +115,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperatorDeclaration_genericReturnTypeWithFunctionType_02() {
     try {
@@ -140,7 +140,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperatorDeclaration_genericReturnTypeWithFunctionType_03() {
     try {
@@ -165,7 +165,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperatorDeclaration_typeParam() {
     try {
@@ -190,7 +190,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNotOperatorDeclaration_instance() {
     try {
@@ -220,7 +220,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNotOperatorDeclaration_instance_error() {
     try {
@@ -244,7 +244,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNotOperatorDeclaration_static() {
     try {
@@ -265,7 +265,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNotOperatorDeclaration_static_error_01() {
     try {
@@ -289,7 +289,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNotOperatorDeclaration_static_error_02() {
     try {
@@ -313,7 +313,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_instance() {
     try {
@@ -343,7 +343,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_instance_error_01() {
     try {
@@ -367,7 +367,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_instance_error_02() {
     try {
@@ -391,7 +391,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_static() {
     try {
@@ -412,7 +412,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_static_error_01() {
     try {
@@ -436,7 +436,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAndOperatorDeclaration_static_error_02() {
     try {
@@ -460,7 +460,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusOperatorDeclaration_instance() {
     try {
@@ -502,7 +502,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusOperatorDeclaration_instance_error() {
     try {
@@ -526,7 +526,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusOperatorDeclaration_static() {
     try {
@@ -553,7 +553,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusOperatorDeclaration_static_error_01() {
     try {
@@ -577,7 +577,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusPlusOperatorDeclaration_static() {
     try {
@@ -598,7 +598,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusPlusOperatorDeclaration_instance() {
     try {
@@ -628,7 +628,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusPlusOperatorDeclaration_static_error_01() {
     try {
@@ -652,7 +652,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPlusPlusOperatorDeclaration_instance_error_01() {
     try {

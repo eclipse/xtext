@@ -33,7 +33,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMemberName_2() {
     try {
@@ -48,7 +48,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMemberName_3() {
     try {
@@ -106,7 +106,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMemberName_4() {
     try {
@@ -124,7 +124,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_operation() {
     try {
@@ -165,7 +165,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_operation_direct() {
     try {
@@ -206,7 +206,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_operation_direct_extension() {
     try {
@@ -250,7 +250,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_operation_extension() {
     try {
@@ -294,7 +294,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_field() {
     try {
@@ -335,7 +335,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_no_constructor() {
     try {
@@ -364,7 +364,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_no_proposal_non_static_operation() {
     try {
@@ -393,7 +393,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_no_proposal_non_static_operation_extension() {
     try {
@@ -422,7 +422,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_field_No_additional_import() {
     try {
@@ -469,7 +469,7 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticFavoriteImports_No_additional_import() {
     try {

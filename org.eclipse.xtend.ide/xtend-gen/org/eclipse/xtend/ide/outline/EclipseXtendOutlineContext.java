@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class EclipseXtendOutlineContext extends DefaultXtendOutlineContext {
   private IOutlineNode parentNode;
-  
+
   public EclipseXtendOutlineContext withParentNode(final IOutlineNode parentNode) {
     EclipseXtendOutlineContext _cloneContext = this.cloneContext();
     final Procedure1<EclipseXtendOutlineContext> _function = (EclipseXtendOutlineContext context) -> {
@@ -30,13 +30,13 @@ public class EclipseXtendOutlineContext extends DefaultXtendOutlineContext {
     };
     return ObjectExtensions.<EclipseXtendOutlineContext>operator_doubleArrow(_cloneContext, _function);
   }
-  
+
   @Override
   protected EclipseXtendOutlineContext cloneContext() {
     EclipseXtendOutlineContext _eclipseXtendOutlineContext = new EclipseXtendOutlineContext();
     return this.cloneContext(_eclipseXtendOutlineContext);
   }
-  
+
   protected EclipseXtendOutlineContext cloneContext(final EclipseXtendOutlineContext clonedContext) {
     EclipseXtendOutlineContext _xblockexpression = null;
     {
@@ -46,12 +46,12 @@ public class EclipseXtendOutlineContext extends DefaultXtendOutlineContext {
     }
     return _xblockexpression;
   }
-  
+
   @Pure
   public IOutlineNode getParentNode() {
     return this.parentNode;
   }
-  
+
   public void setParentNode(final IOutlineNode parentNode) {
     this.parentNode = parentNode;
   }

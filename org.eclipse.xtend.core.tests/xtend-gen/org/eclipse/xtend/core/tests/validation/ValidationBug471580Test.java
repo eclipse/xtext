@@ -28,11 +28,11 @@ public class ValidationBug471580Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void testBug471580() {
     try {

@@ -28,7 +28,7 @@ public class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperatio
   public TypeReference getResolvedReturnType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getResolvedReturnType());
   }
-  
+
   @Override
   public Iterable<? extends ResolvedTypeParameter> getResolvedTypeParameters() {
     ArrayList<ResolvedTypeParameterImpl> _xblockexpression = null;

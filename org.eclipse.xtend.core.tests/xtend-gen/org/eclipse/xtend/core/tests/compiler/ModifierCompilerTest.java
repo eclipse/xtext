@@ -32,7 +32,7 @@ public class ModifierCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStrictfp_onInterface() {
     StringConcatenation _builder = new StringConcatenation();
@@ -49,7 +49,7 @@ public class ModifierCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStrictfp_onMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -75,7 +75,7 @@ public class ModifierCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSynchronizedStrictfp_onMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -101,7 +101,7 @@ public class ModifierCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNativeMethod() {
     StringConcatenation _builder = new StringConcatenation();
@@ -124,7 +124,7 @@ public class ModifierCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransientVolatileField() {
     StringConcatenation _builder = new StringConcatenation();

@@ -139,7 +139,7 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_383430_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -264,7 +264,7 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_383430_03() {
     StringConcatenation _builder = new StringConcatenation();

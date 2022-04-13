@@ -79,7 +79,7 @@ public class CompilerBug492072Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFeatureCallInAssignmentWithoutVariableDeclaration_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -143,7 +143,7 @@ public class CompilerBug492072Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFeatureCallInAssignmentWithVariableDeclarationWhenNullSafe_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -219,7 +219,7 @@ public class CompilerBug492072Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFeatureCallWithoutVariableDeclaration_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -302,7 +302,7 @@ public class CompilerBug492072Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFeatureCallWithVariableDeclarationWhenNullSafe_0() {
     StringConcatenation _builder = new StringConcatenation();

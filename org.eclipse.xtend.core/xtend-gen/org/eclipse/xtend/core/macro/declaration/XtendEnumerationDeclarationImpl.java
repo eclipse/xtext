@@ -26,7 +26,7 @@ public class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<Xt
     };
     return IterableExtensions.findFirst(this.getDeclaredValues(), _function);
   }
-  
+
   @Override
   public Iterable<? extends EnumerationValueDeclaration> getDeclaredValues() {
     return Iterables.<EnumerationValueDeclaration>filter(this.getDeclaredMembers(), EnumerationValueDeclaration.class);

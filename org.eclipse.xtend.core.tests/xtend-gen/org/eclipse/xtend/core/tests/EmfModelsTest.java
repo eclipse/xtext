@@ -43,27 +43,27 @@ import org.junit.Test;
 public class EmfModelsTest {
   @Extension
   private static final Logger LOGGER = Logger.getLogger(EmfModelsTest.class);
-  
+
   @Test
   public void checkXbase() {
     this.check(XbasePackage.eINSTANCE);
   }
-  
+
   @Test
   public void checkXtend() {
     this.check(XtendPackage.eINSTANCE);
   }
-  
+
   @Test
   public void checkTypes() {
     this.check(TypesPackage.eINSTANCE);
   }
-  
+
   @Test
   public void checkXtext() {
     this.check(XtextPackage.eINSTANCE);
   }
-  
+
   public void check(final EPackage ePack) {
     String _name = ePack.getName();
     String _plus = ("Checking EPackage \'" + _name);
@@ -80,7 +80,7 @@ public class EmfModelsTest {
     String _plus_3 = (_plus_2 + "\' passed.");
     EmfModelsTest.LOGGER.info(_plus_3);
   }
-  
+
   public void check(final EClass eClassifier) {
     boolean _isAbstract = eClassifier.isAbstract();
     boolean _not = (!_isAbstract);
@@ -149,7 +149,7 @@ public class EmfModelsTest {
       }
     }
   }
-  
+
   public void dumpFeatures(final EClass eClassifier, final EObject obj) {
     EList<EStructuralFeature> _eAllStructuralFeatures = eClassifier.getEAllStructuralFeatures();
     for (final EStructuralFeature eStructuralFeature : _eAllStructuralFeatures) {
@@ -211,7 +211,7 @@ public class EmfModelsTest {
       }
     }
   }
-  
+
   public Class<?> toJavaClass(final EClassifier eClassifier) {
     Class<?> _instanceClass = eClassifier.getInstanceClass();
     boolean _tripleNotEquals = (_instanceClass != null);
@@ -220,7 +220,7 @@ public class EmfModelsTest {
     }
     return null;
   }
-  
+
   private Object getDefaultValue(final Class<?> clazz) {
     boolean _isPrimitive = clazz.isPrimitive();
     if (_isPrimitive) {
@@ -274,7 +274,7 @@ public class EmfModelsTest {
     }
     return null;
   }
-  
+
   private boolean isCustom(final Method getter) {
     return getter.getDeclaringClass().getName().endsWith("ImplCustom");
   }

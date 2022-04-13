@@ -49,13 +49,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class XAnnotationExtensions {
   @Inject
   private LazyURIEncoder encoder;
-  
+
   @Inject
   private ILinkingService linkingService;
-  
+
   @Inject
   private ConstantExpressionsInterpreter constantExpressionsInterpreter;
-  
+
   public XtendAnnotationTarget getAnnotatedTarget(final XAnnotation annotation) {
     XtendAnnotationTarget _switchResult = null;
     EObject _eContainer = annotation.eContainer();
@@ -135,7 +135,7 @@ public class XAnnotationExtensions {
     }
     return _switchResult;
   }
-  
+
   /**
    * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy
    */
@@ -171,7 +171,7 @@ public class XAnnotationExtensions {
     }
     return false;
   }
-  
+
   public JvmType getProcessorType(final JvmAnnotationType it) {
     final Function1<JvmAnnotationReference, Boolean> _function = (JvmAnnotationReference it_1) -> {
       JvmAnnotationType _annotation = it_1.getAnnotation();
@@ -214,11 +214,11 @@ public class XAnnotationExtensions {
     }
     return null;
   }
-  
+
   public JvmType getProcessorType(final XAnnotation it) {
     return this.getProcessorType(this.tryFindAnnotationType(it));
   }
-  
+
   public JvmAnnotationType tryFindAnnotationType(final XAnnotation it) {
     Object _eGet = it.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
@@ -240,7 +240,7 @@ public class XAnnotationExtensions {
     }
     return null;
   }
-  
+
   protected boolean isActiveAnnotation(final JvmAnnotationType annotationType) {
     EList<JvmAnnotationReference> _annotations = annotationType.getAnnotations();
     for (final JvmAnnotationReference anno : _annotations) {

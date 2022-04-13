@@ -40,23 +40,23 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   private static final String FILE_NAME = "foo/Foo.xtend";
-  
+
   private static final String GENERATE_FILE_NAME = "../xtend-gen/foo/Foo.java";
-  
+
   private static final String GENERATE_TRACK_FILE_NAME = "../xtend-gen/foo/.Foo.java._trace";
-  
+
   private static final String CONTENT_WITHOUT_BODY = "package foo class Foo {}";
-  
+
   private static final String CONTENT_WITH_BODY = "package foo class Foo { def foo() {} }";
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private IPreferenceStoreAccess _iPreferenceStoreAccess;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
@@ -64,13 +64,13 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     this.setCleanDirectory(false);
     this.setCleanupDerived(true);
   }
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
-  
+
   @Test
   public void testTurnOffLocalHistoryKeeping() {
     this.setKeepLocalHistory(false);
@@ -96,7 +96,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile_1, _function_1);
   }
-  
+
   @Test
   public void testTurnOnLocalHistoryKeeping() {
     this.setKeepLocalHistory(true);
@@ -122,7 +122,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile_1, _function_1);
   }
-  
+
   public IFile assertCreateFile(final int expectedLocalHistorySize) {
     try {
       IFile _createFile = this.workbenchTestHelper.createFile(KeepLocalHistoryTest.FILE_NAME, KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
@@ -134,7 +134,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertChangeContentByAnotherContent(final IFile it, final int expectedLocalHistorySize) {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
@@ -154,7 +154,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertChangeContentByTheSameContent(final IFile it, final int expectedLocalHistorySize) {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
@@ -168,7 +168,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertDelete(final IFile it, final int expectedLocalHistorySize) {
     try {
       it.delete(true, null);
@@ -179,7 +179,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertCleanBuild(final int expectedLocalHistorySize) {
     try {
       IResourcesSetupUtil.cleanBuild();
@@ -188,7 +188,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertGeneratedFiles(final int expectedLocalHistorySize) {
     try {
       IResourcesSetupUtil.fullBuild();
@@ -198,11 +198,11 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertFileLocalHistoryEmpty(final String it) {
     this.assertFileLocalHistory(it, 0);
   }
-  
+
   public String assertExist(final String it) {
     String _xblockexpression = null;
     {
@@ -211,7 +211,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     }
     return _xblockexpression;
   }
-  
+
   public void assertFileLocalHistory(final String it, final int expectedLocalHistorySize) {
     try {
       Assert.assertEquals(expectedLocalHistorySize, ((List<IFileState>)Conversions.doWrapArray(this.workbenchTestHelper.getFile(it).getHistory(null))).size());
@@ -219,7 +219,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void setKeepLocalHistory(final boolean keepLocalHistory) {
     try {
       this.setValue(EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY, keepLocalHistory);
@@ -249,23 +249,23 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void setOverride(final boolean override) {
     this.setValue(EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE, override);
   }
-  
+
   public void setCleanupDerived(final boolean cleanupDerived) {
     this.setValue(EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED, cleanupDerived);
   }
-  
+
   public void setCleanDirectory(final boolean cleanDirectory) {
     this.setValue(EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY, cleanDirectory);
   }
-  
+
   public void setValue(final String preferenceName, final boolean value) {
     this._iPreferenceStoreAccess.getWritablePreferenceStore(this.workbenchTestHelper.getProject()).setValue(this.getKey(preferenceName), value);
   }
-  
+
   public String getKey(final String preferenceName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(EclipseOutputConfigurationProvider.OUTPUT_PREFERENCE_TAG);

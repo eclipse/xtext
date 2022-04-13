@@ -50,16 +50,16 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     };
     return ImmutableList.<MemberDeclaration>copyOf(ListExtensions.<JvmMember, MemberDeclaration>map(this.getDelegate().getMembers(), _function));
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getSimpleName();
   }
-  
+
   public String getQualifiedName() {
     return this.getDelegate().getQualifiedName('.');
   }
-  
+
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
       return false;
@@ -68,7 +68,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
-  
+
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     this.checkMutable();
     Preconditions.checkArgument((initializer != null), "initializer cannot be null");
@@ -90,7 +90,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     initializer.apply(mutableConstructorDeclaration_1);
     return mutableConstructorDeclaration_1;
   }
-  
+
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -104,7 +104,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     initializer.apply(mutableFieldDeclaration);
     return mutableFieldDeclaration;
   }
-  
+
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -119,7 +119,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     initializer.apply(mutableMethodDeclaration);
     return mutableMethodDeclaration;
   }
-  
+
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     ConstructorDeclaration _xblockexpression = null;
     {
@@ -136,7 +136,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     }
     return _xblockexpression;
   }
-  
+
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
       String _simpleName = field.getSimpleName();
@@ -144,7 +144,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     };
     return IterableExtensions.findFirst(this.getDeclaredFields(), _function);
   }
-  
+
   public TypeDeclaration findDeclaredType(final String name) {
     final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
       String _simpleName = type.getSimpleName();
@@ -152,7 +152,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     };
     return IterableExtensions.findFirst(this.getDeclaredTypes(), _function);
   }
-  
+
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
@@ -166,44 +166,44 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     }
     return _xblockexpression;
   }
-  
+
   public Iterable<? extends MethodDeclaration> getDeclaredMethods() {
     return Iterables.<MethodDeclaration>filter(this.getDeclaredMembers(), MethodDeclaration.class);
   }
-  
+
   public Iterable<? extends FieldDeclaration> getDeclaredFields() {
     return Iterables.<FieldDeclaration>filter(this.getDeclaredMembers(), FieldDeclaration.class);
   }
-  
+
   public Iterable<? extends ClassDeclaration> getDeclaredClasses() {
     return Iterables.<ClassDeclaration>filter(this.getDeclaredMembers(), ClassDeclaration.class);
   }
-  
+
   public Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
     return Iterables.<ConstructorDeclaration>filter(this.getDeclaredMembers(), ConstructorDeclaration.class);
   }
-  
+
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     return Iterables.<InterfaceDeclaration>filter(this.getDeclaredMembers(), InterfaceDeclaration.class);
   }
-  
+
   public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
     return Iterables.<TypeDeclaration>filter(this.getDeclaredMembers(), TypeDeclaration.class);
   }
-  
+
   public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
     return Iterables.<AnnotationTypeDeclaration>filter(this.getDeclaredMembers(), AnnotationTypeDeclaration.class);
   }
-  
+
   public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
     return Iterables.<EnumerationTypeDeclaration>filter(this.getDeclaredMembers(), EnumerationTypeDeclaration.class);
   }
-  
+
   @Override
   public void setSimpleName(final String name) {
     throw new UnsupportedOperationException("The type cannot be renamed.");
   }
-  
+
   @Override
   public void remove() {
     throw new UnsupportedOperationException("The type cannot be removed.");

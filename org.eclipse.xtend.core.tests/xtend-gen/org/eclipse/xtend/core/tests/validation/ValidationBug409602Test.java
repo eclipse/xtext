@@ -26,10 +26,10 @@ import org.junit.Test;
 public class ValidationBug409602Test extends AbstractXtendTestCase {
   @Inject
   private ValidationTestHelper helper;
-  
+
   @Inject
   private ParseHelper<XtendFile> parser;
-  
+
   @Test
   public void test_01() {
     try {
@@ -62,7 +62,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -95,7 +95,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {
@@ -128,7 +128,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_04() {
     try {
@@ -167,7 +167,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_05() {
     try {
@@ -209,7 +209,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_06() {
     try {
@@ -251,7 +251,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_07() {
     try {
@@ -287,7 +287,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_08() {
     try {
@@ -323,7 +323,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_09() {
     try {
@@ -359,7 +359,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_10() {
     try {
@@ -395,7 +395,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_11() {
     try {
@@ -431,7 +431,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_12() {
     try {
@@ -467,7 +467,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_13() {
     try {
@@ -512,7 +512,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_14() {
     try {
@@ -554,7 +554,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_15() {
     try {
@@ -596,7 +596,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_16() {
     try {
@@ -641,7 +641,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_17() {
     try {
@@ -683,7 +683,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_18() {
     try {
@@ -728,7 +728,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_19() {
     try {
@@ -755,7 +755,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_20() {
     try {
@@ -782,7 +782,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_21() {
     try {
@@ -812,7 +812,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_22() {
     try {
@@ -839,7 +839,7 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_23() {
     try {

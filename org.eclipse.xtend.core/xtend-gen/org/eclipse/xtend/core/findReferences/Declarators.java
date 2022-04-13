@@ -35,18 +35,18 @@ public class Declarators {
   @Data
   public static class DeclaratorsData {
     private final Set<QualifiedName> declaratorNames;
-    
+
     public DeclaratorsData(final Set<QualifiedName> declaratorNames) {
       super();
       this.declaratorNames = declaratorNames;
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
       return 31 * 1 + ((this.declaratorNames== null) ? 0 : this.declaratorNames.hashCode());
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -64,7 +64,7 @@ public class Declarators {
         return false;
       return true;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -72,18 +72,18 @@ public class Declarators {
       b.add("declaratorNames", this.declaratorNames);
       return b.toString();
     }
-    
+
     @Pure
     public Set<QualifiedName> getDeclaratorNames() {
       return this.declaratorNames;
     }
   }
-  
+
   public static final TargetURIs.Key<Declarators.DeclaratorsData> KEY = TargetURIs.Key.<Declarators.DeclaratorsData>from("Xtend", Declarators.DeclaratorsData.class);
-  
+
   @Inject
   private IQualifiedNameConverter nameConverter;
-  
+
   public Declarators.DeclaratorsData getDeclaratorData(final TargetURIs targetURIs, final IReferenceFinder.IResourceAccess resourceAccess) {
     Declarators.DeclaratorsData result = targetURIs.<Declarators.DeclaratorsData>getUserData(Declarators.KEY);
     if ((result != null)) {

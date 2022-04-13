@@ -30,12 +30,12 @@ public class AnnotationWithNestedEnumProcessor extends AbstractClassProcessor {
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, final RegisterGlobalsContext context) {
     context.registerInterface(this.getInterfaceName(annotatedClass));
   }
-  
+
   public String getInterfaceName(final ClassDeclaration annotatedClass) {
     String _qualifiedName = annotatedClass.getQualifiedName();
     return (_qualifiedName + "Interface");
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     final MutableInterfaceDeclaration interfaceType = context.findInterface(this.getInterfaceName(annotatedClass));

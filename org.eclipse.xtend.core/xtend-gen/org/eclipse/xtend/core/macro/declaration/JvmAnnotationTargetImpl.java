@@ -31,7 +31,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     };
     return ImmutableList.<AnnotationReference>copyOf(ListExtensions.<JvmAnnotationReference, AnnotationReference>map(this.getDelegate().getAnnotations(), _function));
   }
-  
+
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
     AnnotationReference _xblockexpression = null;
     {
@@ -57,7 +57,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     }
     return _xblockexpression;
   }
-  
+
   public boolean removeAnnotation(final AnnotationReference annotationReference) {
     this.checkMutable();
     if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
@@ -65,7 +65,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     }
     return false;
   }
-  
+
   public AnnotationReference findAnnotation(final Type annotationType) {
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
       AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();

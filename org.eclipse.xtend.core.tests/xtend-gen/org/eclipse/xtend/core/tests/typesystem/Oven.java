@@ -45,19 +45,19 @@ import org.junit.ComparisonFailure;
 public class Oven extends Assert {
   @Inject
   private IBatchTypeResolver typeResolver;
-  
+
   @Inject
   @Extension
   private ReflectExtensions _reflectExtensions;
-  
+
   @Inject
   @Extension
   private ParseHelper<EObject> _parseHelper;
-  
+
   public void fireproof(final CharSequence input) throws Exception {
     this.fireproof(input.toString());
   }
-  
+
   public void fireproof(final String input) throws Exception {
     try {
       final EObject file = this._parseHelper.parse(input);
@@ -117,7 +117,7 @@ public class Oven extends Assert {
       }
     }
   }
-  
+
   public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
     try {
       final Object internalTypes = this._reflectExtensions.invoke(types, "delegate");
@@ -157,7 +157,7 @@ public class Oven extends Assert {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
     String _simpleName = identifiable.getSimpleName();
     boolean _tripleEquals = (_simpleName == null);

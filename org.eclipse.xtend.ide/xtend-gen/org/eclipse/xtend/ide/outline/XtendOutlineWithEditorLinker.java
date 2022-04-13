@@ -60,7 +60,7 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
       }
     }
   }
-  
+
   protected void findNodesInRange(final IOutlineNode input, final ITextRegion selectedTextRegion, final List<IOutlineNode> nodes) {
     final ITextRegion textRegion = input.getFullTextRegion();
     if (((textRegion == null) || textRegion.contains(selectedTextRegion))) {

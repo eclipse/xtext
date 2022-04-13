@@ -48,15 +48,15 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   protected ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   protected IBatchTypeResolver _iBatchTypeResolver;
-  
+
   @Inject
   @Extension
   protected ValidationTestHelper _validationTestHelper;
-  
+
   protected void assertAmbiguous(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
     final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
@@ -103,14 +103,14 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     final ILinkingCandidate linkingCandidate = _switchResult;
     Assert.assertTrue((linkingCandidate instanceof IAmbiguousLinkingCandidate));
   }
-  
+
   protected void assertUnambiguous(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
     final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
     Assert.assertEquals(errors.toString(), 0, errors.size());
     this._validationTestHelper.assertNoErrors(file);
   }
-  
+
   protected XtendFile getParsedXtendFile(final CharSequence contents) {
     try {
       final XtendFile file = this._parseHelper.parse(contents);

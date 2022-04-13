@@ -26,16 +26,16 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
   public MacroAwareStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner typeReferenceOwner) {
     super(state, typeReferenceOwner);
   }
-  
+
   protected String _getStringRepresentation(final TypeReferenceImpl object) {
     return this._getStringRepresentation(object.getDelegate());
   }
-  
+
   protected String _getStringRepresentation(final JvmTypeDeclarationImpl<?> object) {
     final JvmType type = object.getDelegate();
     return this._getStringRepresentation(type);
   }
-  
+
   protected String getStringRepresentation(final Object object) {
     if (object instanceof JvmTypeDeclarationImpl) {
       return _getStringRepresentation((JvmTypeDeclarationImpl<?>)object);

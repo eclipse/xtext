@@ -25,19 +25,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   @Accessors
   private String fieldName;
-  
+
   @Accessors
   private LightweightTypeReference fieldType;
-  
+
   @Accessors
   private boolean staticFlag;
-  
+
   @Accessors
   private boolean finalFlag;
-  
+
   @Inject
   private Primitives primitives;
-  
+
   @Override
   public String getImage() {
     String _switchResult = null;
@@ -62,7 +62,7 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     }
     return _switchResult;
   }
-  
+
   protected ISourceAppender appendDefaultValueLiteral(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
     ISourceAppender _xblockexpression = null;
     {
@@ -77,41 +77,41 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   public abstract String getPrimitiveKindRepresentation(final Primitives.Primitive primitiveKind);
-  
+
   @Pure
   public String getFieldName() {
     return this.fieldName;
   }
-  
+
   public void setFieldName(final String fieldName) {
     this.fieldName = fieldName;
   }
-  
+
   @Pure
   public LightweightTypeReference getFieldType() {
     return this.fieldType;
   }
-  
+
   public void setFieldType(final LightweightTypeReference fieldType) {
     this.fieldType = fieldType;
   }
-  
+
   @Pure
   public boolean isStaticFlag() {
     return this.staticFlag;
   }
-  
+
   public void setStaticFlag(final boolean staticFlag) {
     this.staticFlag = staticFlag;
   }
-  
+
   @Pure
   public boolean isFinalFlag() {
     return this.finalFlag;
   }
-  
+
   public void setFinalFlag(final boolean finalFlag) {
     this.finalFlag = finalFlag;
   }

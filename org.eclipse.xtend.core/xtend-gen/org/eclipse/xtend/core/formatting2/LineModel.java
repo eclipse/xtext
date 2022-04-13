@@ -22,11 +22,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class LineModel {
   private String leadingText;
-  
+
   private int rootIndentLenght = (-1);
-  
+
   private final List<Line> lines = CollectionLiterals.<Line>newArrayList();
-  
+
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
@@ -39,25 +39,25 @@ public class LineModel {
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
-  
+
   @Pure
   public String getLeadingText() {
     return this.leadingText;
   }
-  
+
   public void setLeadingText(final String leadingText) {
     this.leadingText = leadingText;
   }
-  
+
   @Pure
   public int getRootIndentLenght() {
     return this.rootIndentLenght;
   }
-  
+
   public void setRootIndentLenght(final int rootIndentLenght) {
     this.rootIndentLenght = rootIndentLenght;
   }
-  
+
   @Pure
   public List<Line> getLines() {
     return this.lines;

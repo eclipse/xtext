@@ -40,7 +40,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatMultiMember() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -76,7 +76,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatTypeParam() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -104,7 +104,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatNested() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {

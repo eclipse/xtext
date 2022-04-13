@@ -33,7 +33,7 @@ public class Bug460093Test extends AbstractXtendContentAssistBugTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodOverrides1() {
     try {
@@ -68,7 +68,7 @@ public class Bug460093Test extends AbstractXtendContentAssistBugTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodOverrides2() {
     try {

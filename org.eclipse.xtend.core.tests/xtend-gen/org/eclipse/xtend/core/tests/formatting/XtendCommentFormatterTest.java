@@ -45,7 +45,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLComment1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -72,7 +72,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCommentAfterStatement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -90,7 +90,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCommentBeforeStatement1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,7 +112,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCommentBeforeStatement2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentAfterStatement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -159,7 +159,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCommentInStatement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -177,7 +177,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentInStatement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -204,7 +204,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentBeforeStatement1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -226,7 +226,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentBeforeStatement2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -252,7 +252,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCommentAfterStatement2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -267,7 +267,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLDocCommentInStatement21() {
     StringConcatenation _builder = new StringConcatenation();
@@ -288,7 +288,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLDocCommentInStatement22() {
     StringConcatenation _builder = new StringConcatenation();
@@ -309,7 +309,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatSLCodeCommentInStatement21() {
     StringConcatenation _builder = new StringConcatenation();
@@ -328,7 +328,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentInBlock1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -358,7 +358,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentInBlock2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -391,7 +391,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentInBlock3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -424,7 +424,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentAfterStatement2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -439,7 +439,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentBeforeStatement21() {
     StringConcatenation _builder = new StringConcatenation();
@@ -459,7 +459,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatMLCommentBeforeStatement22() {
     StringConcatenation _builder = new StringConcatenation();
@@ -485,7 +485,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
   @Test
   public void formatSLCommentAtEndOfClass() {
@@ -511,7 +511,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
   @Test
   public void formatSLCommentAtEndOfMethod() {
@@ -536,7 +536,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Ignore("see https://github.com/eclipse/xtext-xtend/issues/77")
   @Test
   public void formatSLCommentAfterCode() {

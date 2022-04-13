@@ -45,28 +45,28 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   @Inject
   @Extension
   private JvmTypeExtensions _jvmTypeExtensions;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   @Inject
   @Extension
   protected IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Accessors(AccessorType.PUBLIC_SETTER)
   @Extension
   protected IXtendOutlineNodeBuilder xtendOutlineNodeBuilder;
-  
+
   protected void _build(final Void modelElement, final IXtendOutlineContext context) {
   }
-  
+
   protected void _build(final EObject modelElement, final IXtendOutlineContext context) {
     final Consumer<EObject> _function = (EObject it) -> {
       this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
     };
     modelElement.eContents().forEach(_function);
   }
-  
+
   protected void buildPackageAndImportSection(final XtendFile xtendFile, final IXtendOutlineContext context) {
     String _package = xtendFile.getPackage();
     boolean _tripleNotEquals = (_package != null);
@@ -77,7 +77,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
       this.xtendOutlineNodeBuilder.buildImportSectionNode(xtendFile, context);
     }
   }
-  
+
   protected void buildInheritedMembers(final JvmDeclaredType inferredType, final IXtendOutlineContext context) {
     ResourceSet _resourceSet = inferredType.eResource().getResourceSet();
     final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, _resourceSet);
@@ -121,7 +121,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
       }
     }
   }
-  
+
   protected boolean skipFeature(final JvmFeature feature) {
     boolean _xifexpression = false;
     if ((feature instanceof JvmConstructor)) {
@@ -129,7 +129,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
     }
     return _xifexpression;
   }
-  
+
   protected void buildJvmType(final JvmDeclaredType typeElement, final IXtendOutlineContext context) {
     final IXtendOutlineContext jvmTypeContext = this.xtendOutlineNodeBuilder.buildXtendNode(typeElement, context);
     boolean _isProcessed = jvmTypeContext.isProcessed(typeElement);
@@ -139,7 +139,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
       this.buildMembers(typeElement, typeElement, jvmTypeContext);
     }
   }
-  
+
   protected void buildMembers(final JvmDeclaredType inferredType, final JvmDeclaredType baseType, @Extension final IXtendOutlineContext context) {
     EList<JvmMember> _members = inferredType.getMembers();
     for (final JvmMember member : _members) {
@@ -180,7 +180,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
       this.buildInheritedMembers(inferredType, context);
     }
   }
-  
+
   protected IXtendOutlineContext buildFeature(final JvmDeclaredType inferredType, final JvmFeature jvmFeature, final EObject semanticFeature, final IXtendOutlineContext context) {
     IXtendOutlineContext _xifexpression = null;
     boolean _isSynthetic = this._jvmTypeExtensions.isSynthetic(jvmFeature);
@@ -190,9 +190,9 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
     }
     return _xifexpression;
   }
-  
+
   protected abstract void buildType(final EObject someType, final IXtendOutlineContext context);
-  
+
   public void build(final EObject modelElement, final IXtendOutlineContext context) {
     if (modelElement != null) {
       _build(modelElement, context);
@@ -205,7 +205,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
         Arrays.<Object>asList(modelElement, context).toString());
     }
   }
-  
+
   public void setXtendOutlineNodeBuilder(final IXtendOutlineNodeBuilder xtendOutlineNodeBuilder) {
     this.xtendOutlineNodeBuilder = xtendOutlineNodeBuilder;
   }

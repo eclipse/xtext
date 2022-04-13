@@ -46,7 +46,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testtestCoreIssue527_02() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
@@ -106,7 +106,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   @Test
   public void testBug402917_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +145,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug402917_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -240,7 +240,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug398718() {
     StringConcatenation _builder = new StringConcatenation();
@@ -331,7 +331,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
   }
-  
+
   @Test
   public void testBug434976() {
     StringConcatenation _builder = new StringConcatenation();
@@ -350,7 +350,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug398625() {
     StringConcatenation _builder = new StringConcatenation();
@@ -376,7 +376,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug398625_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -402,7 +402,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug398625_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -454,7 +454,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug400030() {
     StringConcatenation _builder = new StringConcatenation();
@@ -471,7 +471,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug400025() {
     StringConcatenation _builder = new StringConcatenation();
@@ -484,7 +484,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-  
+
   @Test
   public void testBug400025_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -494,7 +494,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-  
+
   @Test
   public void testBug400025_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -513,7 +513,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-  
+
   @Test
   public void testBug400025_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -526,7 +526,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Ignore("Conflict")
   @Test
   public void testBug400025_3() {
@@ -545,7 +545,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-  
+
   @Test
   public void testBug400024() {
     StringConcatenation _builder = new StringConcatenation();
@@ -574,7 +574,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug400024_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -606,7 +606,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug_xtext_xtend_194() {
     StringConcatenation _builder = new StringConcatenation();
@@ -631,7 +631,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void testBug455582() {
     StringConcatenation _builder = new StringConcatenation();
@@ -650,7 +650,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.append("abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }");
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void bug462628() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
@@ -679,7 +679,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   @Test
   public void bug403823() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
@@ -724,7 +724,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   @Test
   public void bug403823_1() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
@@ -762,7 +762,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   @Test
   public void bug403340() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
@@ -809,7 +809,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   @Test
   public void bug403340_1() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {

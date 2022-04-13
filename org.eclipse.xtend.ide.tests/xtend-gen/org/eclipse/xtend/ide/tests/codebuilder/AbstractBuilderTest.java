@@ -36,32 +36,32 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
   protected static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   @Extension
   private TypeReferences _typeReferences;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   private static JvmDeclaredType xtendClass;
-  
+
   private static JvmDeclaredType javaClass;
-  
+
   @AfterClass
   public static void cleanUpTestData() {
     AbstractBuilderTest.xtendClass = null;
     AbstractBuilderTest.javaClass = null;
   }
-  
+
   protected JvmDeclaredType getXtendClass() {
     try {
       JvmDeclaredType _xblockexpression = null;
@@ -82,7 +82,7 @@ public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected JvmDeclaredType getJavaClass() {
     try {
       JvmDeclaredType _xblockexpression = null;
@@ -105,7 +105,7 @@ public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected LightweightTypeReference createTypeRef(final JvmType type) {
     ParameterizedTypeReference _xblockexpression = null;
     {
@@ -114,7 +114,7 @@ public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
     }
     return _xblockexpression;
   }
-  
+
   protected LightweightTypeReference createTypeRef(final Class<?> clazz, final EObject context) {
     LightweightTypeReference _xblockexpression = null;
     {
@@ -123,7 +123,7 @@ public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
     }
     return _xblockexpression;
   }
-  
+
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {
     Assert.assertTrue(builder.isValid());
     final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();

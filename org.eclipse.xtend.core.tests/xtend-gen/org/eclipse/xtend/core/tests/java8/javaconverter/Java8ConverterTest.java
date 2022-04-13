@@ -47,7 +47,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.append("}");
     Assert.assertEquals(_builder.toString(), this.toXtendClassBodyDeclr(_builder_1));
   }
-  
+
   @Test
   public void testJava7() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -163,7 +163,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder_1.newLine();
     Assert.assertEquals(_builder.toString(), this.toXtendClassBodyDeclr(_builder_1));
   }
-  
+
   @Test
   public void testDefaultMethod() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -186,7 +186,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     final XtendInterface clazz = this.toValidXtendInterface(_builder.toString());
     Assert.assertNotNull(clazz);
   }
-  
+
   @Test
   public void testSimpleLambda() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -225,7 +225,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     final XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
   }
-  
+
   @Test
   public void testSimpleLambda_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

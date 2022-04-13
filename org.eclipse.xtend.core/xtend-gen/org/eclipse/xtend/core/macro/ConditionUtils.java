@@ -34,7 +34,7 @@ public class ConditionUtils {
     _builder_1.append(" cannot be removed");
     Preconditions.checkArgument(_tripleNotEquals, _builder_1);
   }
-  
+
   public static void checkInferredTypeReferences(final String typeName, final TypeReference... types) {
     for (final TypeReference type : types) {
       if (((type != null) && type.isInferred())) {
@@ -46,7 +46,7 @@ public class ConditionUtils {
       }
     }
   }
-  
+
   public static void checkIterable(final Iterable<?> values, final String name) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(name);
@@ -59,7 +59,7 @@ public class ConditionUtils {
       Preconditions.checkArgument((value != null), _builder_1);
     }
   }
-  
+
   public static void checkQualifiedName(final String qualifiedName, final String name) {
     boolean _isValidQualifiedName = ConditionUtils.isValidQualifiedName(qualifiedName);
     StringConcatenation _builder = new StringConcatenation();
@@ -67,7 +67,7 @@ public class ConditionUtils {
     _builder.append(" has to be a valid qualified name");
     Preconditions.checkArgument(_isValidQualifiedName, _builder);
   }
-  
+
   public static void checkJavaIdentifier(final String string, final String name) {
     boolean _isValidJavaIdentifier = ConditionUtils.isValidJavaIdentifier(string);
     StringConcatenation _builder = new StringConcatenation();
@@ -75,12 +75,12 @@ public class ConditionUtils {
     _builder.append(" has to be a valid java identifier");
     Preconditions.checkArgument(_isValidJavaIdentifier, _builder);
   }
-  
+
   public static void checkTypeName(final String typeName, final String valueType) {
     boolean _equals = Objects.equal(typeName, valueType);
     Preconditions.checkArgument(_equals, ConditionUtils.isNotApplicableMessage(valueType, typeName));
   }
-  
+
   public static String isNotApplicableMessage(final String valueType, final String typeName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(valueType);
@@ -88,7 +88,7 @@ public class ConditionUtils {
     _builder.append(typeName);
     return _builder.toString();
   }
-  
+
   public static boolean isValidQualifiedName(final String string) {
     boolean _xblockexpression = false;
     {
@@ -107,7 +107,7 @@ public class ConditionUtils {
     }
     return _xblockexpression;
   }
-  
+
   public static boolean isValidJavaIdentifier(final String string) {
     boolean _xblockexpression = false;
     {

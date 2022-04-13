@@ -27,7 +27,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testIncompatibleParameterType_01() {
     try {
@@ -51,7 +51,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncompatibleParameterType_02() {
     try {
@@ -75,7 +75,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncompatibleReturnType_01() {
     try {
@@ -99,7 +99,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncompatibleReturnType_02() {
     try {
@@ -123,7 +123,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncompatibleReturnType_03() {
     try {
@@ -147,7 +147,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncompatibleReturnType_04() {
     try {
@@ -171,7 +171,7 @@ public class LambdaValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore("TODO")
   @Test
   public void testIncompatibleBounds_01() {

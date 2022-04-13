@@ -34,7 +34,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testCreateSingleGetter() {
     try {
@@ -62,7 +62,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCreateGenericGetter() {
     try {
@@ -91,7 +91,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCreateStaticGetter() {
     try {
@@ -118,7 +118,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCannotOverrideFinalGetter() {
     try {
@@ -145,7 +145,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCannotOverrideWithConflictingReturnType() {
     try {
@@ -172,7 +172,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCanSpecializeReturnType() {
     try {
@@ -199,7 +199,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCreateSingleSetter() {
     try {
@@ -233,7 +233,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCreateGenericSingleSetter() {
     try {
@@ -268,7 +268,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCreateStaticSetter() {
     try {
@@ -301,7 +301,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCannotOverrideFinalSetter() {
     try {
@@ -328,7 +328,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCannotOverrideSetterWithIncompatibleReturnType() {
     try {
@@ -355,7 +355,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoErrorsOnOverloadedSetter() {
     try {
@@ -382,7 +382,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSpecifyingVisiblity() {
     try {
@@ -435,7 +435,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSpecifyingVisiblityNoStaticImport() {
     try {
@@ -486,7 +486,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIntegrationWithData() {
     try {

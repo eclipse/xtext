@@ -25,7 +25,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testDefault() {
     try {
@@ -68,7 +68,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSingleLine() {
     try {
@@ -106,7 +106,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHideFieldNames() {
     try {
@@ -144,7 +144,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testVerbatimValues() {
     try {
@@ -171,7 +171,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSkipNulls() {
     try {
@@ -211,7 +211,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testToStringWithSuperClass() {
     try {
@@ -245,7 +245,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingToString() {
     try {
@@ -283,7 +283,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIntegrationWithData() {
     try {

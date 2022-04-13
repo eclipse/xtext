@@ -26,11 +26,11 @@ public class VisibilityValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void test_01() {
     try {
@@ -44,7 +44,7 @@ public class VisibilityValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {

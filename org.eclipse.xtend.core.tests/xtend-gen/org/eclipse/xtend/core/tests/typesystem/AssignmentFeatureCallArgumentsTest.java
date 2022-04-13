@@ -35,7 +35,7 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Test
   public void test_01() {
     final AssignmentFeatureCallArguments arguments = this.toArguments("", "null");
@@ -49,7 +49,7 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
     singleSlot.markProcessed();
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_02() {
     final AssignmentFeatureCallArguments arguments = this.toArguments("String s", "\"\"");
@@ -64,7 +64,7 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
     singleSlot.markProcessed();
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   protected AssignmentFeatureCallArguments toArguments(final String type, final String expression) {
     try {
       StringConcatenation _builder = new StringConcatenation();

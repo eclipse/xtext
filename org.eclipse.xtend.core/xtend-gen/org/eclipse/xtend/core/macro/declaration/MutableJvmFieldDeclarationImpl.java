@@ -29,7 +29,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public void markAsInitializedBy(final ConstructorDeclaration constructorDeclaration) {
     this.checkMutable();
@@ -57,13 +57,13 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     final JvmConstructor constructor = _switchResult;
     this.getCompilationUnit().getReadAndWriteTracking().markInitialized(this.getDelegate(), constructor);
   }
-  
+
   @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);
   }
-  
+
   @Override
   public void setInitializer(final Expression initializer) {
     this.checkMutable();
@@ -73,52 +73,52 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
       this.getCompilationUnit().getJvmTypesBuilder().setInitializer(this.getDelegate(), ((ExpressionImpl) initializer).getDelegate());
     }
   }
-  
+
   @Override
   public void setInitializer(final CompilationStrategy initializer) {
     this.checkMutable();
     Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     this.getCompilationUnit().setCompilationStrategy(this.getDelegate(), initializer);
   }
-  
+
   @Override
   public void setInitializer(final StringConcatenationClient template) {
     this.checkMutable();
     Preconditions.checkArgument((template != null), "template cannot be null");
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), template);
   }
-  
+
   @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
     this.getDelegate().setFinal(isFinal);
   }
-  
+
   @Override
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
     this.getDelegate().setStatic(isStatic);
   }
-  
+
   @Override
   public void setTransient(final boolean isTransient) {
     this.checkMutable();
     this.getDelegate().setTransient(isTransient);
   }
-  
+
   @Override
   public void setVolatile(final boolean isVolatile) {
     this.checkMutable();
     this.getDelegate().setVolatile(isVolatile);
   }
-  
+
   @Override
   public void setType(final TypeReference type) {
     this.checkMutable();
     Preconditions.checkArgument((type != null), "type cannot be null");
     this.getDelegate().setType(this.getCompilationUnit().toJvmTypeReference(type));
   }
-  
+
   @Override
   public void setConstantValueAsBoolean(final boolean value) {
     this.internalGenericSetConstantValue(Boolean.valueOf(value));
@@ -130,7 +130,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   private void internalGenericSetConstantValue(final Object value) {
     this.checkMutable();
     Preconditions.checkArgument((value != null), "value cannot be null");
@@ -143,7 +143,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     JvmField _delegate_3 = this.getDelegate();
     _delegate_3.setConstantValue(value);
   }
-  
+
   @Override
   public void setConstantValueAsByte(final byte value) {
     this.internalGenericSetConstantValue(Byte.valueOf(value));
@@ -155,7 +155,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsInt(final int value) {
     this.internalGenericSetConstantValue(Integer.valueOf(value));
@@ -167,7 +167,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsShort(final short value) {
     this.internalGenericSetConstantValue(Short.valueOf(value));
@@ -179,7 +179,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsLong(final long value) {
     this.internalGenericSetConstantValue(Long.valueOf(value));
@@ -192,7 +192,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsFloat(final float value) {
     this.internalGenericSetConstantValue(Float.valueOf(value));
@@ -205,7 +205,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsDouble(final double value) {
     this.internalGenericSetConstantValue(Double.valueOf(value));
@@ -218,7 +218,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsChar(final char value) {
     this.internalGenericSetConstantValue(Character.valueOf(value));
@@ -233,7 +233,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     };
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), _client);
   }
-  
+
   @Override
   public void setConstantValueAsString(final String value) {
     this.internalGenericSetConstantValue(value);

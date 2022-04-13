@@ -23,11 +23,11 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("all")
 public class BootClassLoader extends URLClassLoader {
   private final ConcurrentMap<String, Object> locks = Maps.<String, Object>newConcurrentMap();
-  
+
   public BootClassLoader(final URL[] urls) {
     super(urls);
   }
-  
+
   @Override
   protected Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
     Class<?> _xsynchronizedexpression = null;
@@ -52,17 +52,17 @@ public class BootClassLoader extends URLClassLoader {
     }
     return _xsynchronizedexpression;
   }
-  
+
   @Override
   public URL getResource(final String name) {
     return this.findResource(name);
   }
-  
+
   @Override
   public Enumeration<URL> getResources(final String name) throws IOException {
     return this.findResources(name);
   }
-  
+
   private Object getClassLoadingLockJdk5(final String className) {
     final Object newLock = new Object();
     final Object existingLock = this.locks.putIfAbsent(className, newLock);

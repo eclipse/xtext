@@ -32,7 +32,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     String _plus_1 = (_plus + "\' cannot declare any constructors.");
     throw new UnsupportedOperationException(_plus_1);
   }
-  
+
   @Override
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     String _simpleName = this.getSimpleName();
@@ -40,7 +40,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     String _plus_1 = (_plus + "\' cannot declare any fields.");
     throw new UnsupportedOperationException(_plus_1);
   }
-  
+
   @Override
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     String _simpleName = this.getSimpleName();
@@ -48,7 +48,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     String _plus_1 = (_plus + "\' cannot declare any methods.");
     throw new UnsupportedOperationException(_plus_1);
   }
-  
+
   @Override
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     final Function1<AnnotationTypeElementDeclaration, Boolean> _function = (AnnotationTypeElementDeclaration it) -> {
@@ -57,7 +57,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     };
     return IterableExtensions.findFirst(this.getDeclaredAnnotationTypeElements(), _function);
   }
-  
+
   @Override
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {

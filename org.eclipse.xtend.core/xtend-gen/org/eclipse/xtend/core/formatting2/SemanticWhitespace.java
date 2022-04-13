@@ -18,24 +18,24 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class SemanticWhitespace extends Chunk {
   private final int column;
-  
+
   @Override
   public String toString() {
     int _length = this.getText().length();
     return ("S" + Integer.valueOf(_length));
   }
-  
+
   public SemanticWhitespace(final CharSequence text, final int column) {
     super(text);
     this.column = column;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * super.hashCode() + this.column;
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -52,7 +52,7 @@ public class SemanticWhitespace extends Chunk {
       return false;
     return true;
   }
-  
+
   @Pure
   public int getColumn() {
     return this.column;

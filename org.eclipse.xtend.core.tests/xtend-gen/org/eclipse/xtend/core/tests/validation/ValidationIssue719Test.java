@@ -28,11 +28,11 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void namedAndDeclaredAbstract() {
     try {
@@ -46,7 +46,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void namedAndNotDeclaredAbstract() {
     StringConcatenation _builder = new StringConcatenation();
@@ -56,7 +56,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
     _builder.newLine();
     this.warn(_builder);
   }
-  
+
   @Test
   public void namedAndNotDeclaredAbstractPackage() {
     StringConcatenation _builder = new StringConcatenation();
@@ -66,7 +66,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
     _builder.newLine();
     this.warn(_builder);
   }
-  
+
   @Test
   public void namedAndNotDeclaredAbstractFinal() {
     StringConcatenation _builder = new StringConcatenation();
@@ -76,7 +76,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
     _builder.newLine();
     this.warn(_builder);
   }
-  
+
   @Test
   public void namedAndNotDeclaredAbstractAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -88,7 +88,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
     _builder.newLine();
     this.warn(_builder);
   }
-  
+
   @Test
   public void namedAndNotDeclaredAbstractJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -109,7 +109,7 @@ public class ValidationIssue719Test extends AbstractXtendTestCase {
     _builder.newLine();
     this.warn(_builder);
   }
-  
+
   private void warn(final CharSequence input) {
     try {
       this._validationTestHelper.assertWarning(this._parseHelper.parse(input), XtendPackage.Literals.XTEND_CLASS, IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, "not declared abstract");

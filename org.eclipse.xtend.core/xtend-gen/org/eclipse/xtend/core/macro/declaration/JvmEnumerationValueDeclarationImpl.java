@@ -20,7 +20,7 @@ public class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl
   public void setVisibility(final Visibility visibility) {
     throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.");
   }
-  
+
   @Override
   public EnumerationTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();

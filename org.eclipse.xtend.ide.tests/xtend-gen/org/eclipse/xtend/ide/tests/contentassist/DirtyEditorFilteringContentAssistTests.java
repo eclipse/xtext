@@ -40,10 +40,10 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   private SyncUtil syncUtil;
-  
+
   @Before
   public void start() {
     try {
@@ -52,7 +52,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void close() {
     try {
@@ -61,7 +61,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFilteringExtends() {
     try {
@@ -104,7 +104,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFilteringConstructor() {
     try {
@@ -155,7 +155,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ICompletionProposal[] computeCompletionProposals(final XtextEditor editorForCompletion, final XtextEditor dirtyEditor, final int cursorPosition) throws BadLocationException {
     this.syncUtil.waitForReconciler(dirtyEditor);
     final ISourceViewer sourceViewer = editorForCompletion.getInternalSourceViewer();

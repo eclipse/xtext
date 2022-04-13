@@ -37,39 +37,39 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
   @Extension
   private CompilationUnitImpl compilationUnit;
-  
+
   public AnnotationReferenceProviderImpl(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final String annotationTypeName) {
     final Procedure1<AnnotationReferenceBuildContext> _function = (AnnotationReferenceBuildContext it) -> {
     };
     return this.newAnnotationReference(annotationTypeName, _function);
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
     final Procedure1<AnnotationReferenceBuildContext> _function = (AnnotationReferenceBuildContext it) -> {
     };
     return this.newAnnotationReference(annotationTypeDelcaration, _function);
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass) {
     final Procedure1<AnnotationReferenceBuildContext> _function = (AnnotationReferenceBuildContext it) -> {
     };
     return this.newAnnotationReference(annotationClass, _function);
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
     final Procedure1<AnnotationReferenceBuildContext> _function = (AnnotationReferenceBuildContext it) -> {
     };
     return this.newAnnotationReference(annotationReference, _function);
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final String annotationTypeName, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     AnnotationReference _xblockexpression = null;
@@ -96,7 +96,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     Object _xblockexpression = null;
@@ -139,7 +139,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     }
     return ((AnnotationReference)_xblockexpression);
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     AnnotationReference _xblockexpression = null;
@@ -151,7 +151,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     Object _xblockexpression = null;
@@ -197,7 +197,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     }
     return ((AnnotationReference)_xblockexpression);
   }
-  
+
   protected boolean isArrayOfAnnotations(final JvmAnnotationValue annotationValue) {
     final JvmTypeReference returnType = annotationValue.getOperation().getReturnType();
     if ((returnType instanceof JvmGenericArrayTypeReference)) {
@@ -206,7 +206,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     }
     return false;
   }
-  
+
   protected JvmAnnotationReference createJvmAnnotationReference(final JvmType type) {
     JvmAnnotationReference _switchResult = null;
     boolean _matched = false;

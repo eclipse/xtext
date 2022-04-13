@@ -43,15 +43,15 @@ public class XtendIncrementalBuilderPerformanceTest extends AbstractIncrementalB
       return super.internalCreateInjector();
     }
   }
-  
+
   @Inject
   private IResourceServiceProvider.Registry registry;
-  
+
   @Override
   protected IResourceServiceProvider.Registry getLanguages() {
     return this.registry;
   }
-  
+
   public void doTestPerformance(final int max) {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
       final Function1<Integer, URI> _function_1 = (Integer it_1) -> {
@@ -70,7 +70,7 @@ public class XtendIncrementalBuilderPerformanceTest extends AbstractIncrementalB
     _builder.append(" ms");
     InputOutput.<String>println(_builder.toString());
   }
-  
+
   public URI toFile(final int number, final int max) {
     String _xifexpression = null;
     if (((number % 2) == 0)) {
@@ -134,52 +134,52 @@ public class XtendIncrementalBuilderPerformanceTest extends AbstractIncrementalB
     _builder.newLine();
     return this.operator_minus(_plus, _builder.toString());
   }
-  
+
   @Test
   public void testPerf00100() {
     this.doTestPerformance(100);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf00200() {
     this.doTestPerformance(200);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf00400() {
     this.doTestPerformance(400);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf00800() {
     this.doTestPerformance(800);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf01600() {
     this.doTestPerformance(1600);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf03200() {
     this.doTestPerformance(3200);
   }
-  
+
   @Test(timeout = 30000)
   public void testPerf06400() {
     this.doTestPerformance(6400);
   }
-  
+
   @Test(timeout = 60000)
   public void testPerf12800() {
     this.doTestPerformance(12800);
   }
-  
+
   @Test(timeout = 120000)
   public void testPerf25600() {
     this.doTestPerformance(25600);
   }
-  
+
   @Test(timeout = 240000)
   public void testPerf51200() {
     this.doTestPerformance(51200);

@@ -43,7 +43,7 @@ import test.Constants1;
 public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Inject
   private ConstantExpressionsInterpreter interpreter;
-  
+
   @Test
   public void testAnnotationValues() {
     try {
@@ -63,7 +63,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumLiteral_WithStaticImport() {
     try {
@@ -86,7 +86,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNonConstant() {
     try {
@@ -123,7 +123,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConstants_WithStaticImport() {
     try {
@@ -149,7 +149,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConstants_WithStaticImport_01() {
     try {
@@ -180,7 +180,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConstants_RecursionFails() {
     try {
@@ -220,7 +220,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOperators() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("1", "int");
@@ -299,7 +299,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     Pair<String, String> _mappedTo_49 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_48, _mappedTo_49, ">");
   }
-  
+
   @Test
   public void testOperatorsWithExpectation() {
     this.evaluatesTo(Pair.<String, String>of("boolean", "1 + 1"), Integer.valueOf(2));
@@ -316,7 +316,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.evaluatesTo(Pair.<String, String>of("boolean", "1 === 1"), Boolean.valueOf(true));
     this.evaluatesTo(Pair.<String, String>of("boolean", "1 !== 1"), Boolean.valueOf(false));
   }
-  
+
   protected void assertEvaluatesTo(final Object expectation, final Pair<String, String> left, final Pair<String, String> right, final String op) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -365,7 +365,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
@@ -377,13 +377,13 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesTo("#[test.Enum1.YELLOW,test.Enum1.RED]", _function_1);
   }
-  
+
   @Test
   public void testConstantsReference() {
     this.evaluatesTo("test.Constants1.STRING_CONSTANT", Constants1.STRING_CONSTANT);
     this.evaluatesTo("test.Constants1.INT_CONSTANT", Integer.valueOf(Constants1.INT_CONSTANT));
   }
-  
+
   @Test
   public void testBooleanLiteral() {
     this.evaluatesTo("true", Boolean.valueOf(true));
@@ -405,14 +405,14 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.evaluatesTo("42 < 5", Boolean.valueOf(false));
     this.evaluatesTo("42 <= 5", Boolean.valueOf(false));
   }
-  
+
   @Test
   public void testStringLiteral() {
     this.evaluatesTo("\"foo\"", "foo");
     this.evaluatesTo("\"fo\"+\"o\"", "foo");
     this.evaluatesTo("\"fo\"+2", "fo2");
   }
-  
+
   @Test
   public void testStringArrayLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
@@ -424,7 +424,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesTo("#[\"foo\",\"b\"+\"a\"+\"r\"]", _function_1);
   }
-  
+
   @Test
   public void testClassLiteral() {
     final Procedure1<Object> _function = (Object it) -> {
@@ -436,7 +436,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.evaluatesTo("String", assertion);
     this.evaluatesTo("java.lang.String", assertion);
   }
-  
+
   @Test
   public void testClassLiteralArray() {
     final Procedure1<Object> _function = (Object it) -> {
@@ -450,14 +450,14 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.evaluatesTo("#[java.lang.String, java.lang.Class]", assertion);
     this.evaluatesTo("#[typeof(String), Class]", assertion);
   }
-  
+
   @Test
   public void testNumberLiteralWithExpectation() {
     this.evaluatesTo(Pair.<String, String>of("float", "1"), Float.valueOf(1f));
     this.evaluatesTo(Pair.<String, String>of("double", "1"), Double.valueOf(1d));
     this.evaluatesTo(Pair.<String, String>of("long", "1"), Long.valueOf(1l));
   }
-  
+
   @Test
   public void testError() {
     final Procedure1<ConstantExpressionEvaluationException> _function = (ConstantExpressionEvaluationException it) -> {
@@ -473,7 +473,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesWithException("for (x : 1..3) { println(\"foo\") }", _function_3);
   }
-  
+
   protected void evaluatesWithException(final String expression, final Procedure1<? super ConstantExpressionEvaluationException> exceptionAssertions) {
     try {
       final XtendFunction function = this.function((("def void testFoo() { " + expression) + " }"));
@@ -494,24 +494,24 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void evaluatesTo(final String expression, final Object expectation) {
     Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, expectation);
   }
-  
+
   protected void evaluatesTo(final String expression, final Procedure1<? super Object> assertions) {
     Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, assertions);
   }
-  
+
   protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Object expectation) {
     final Procedure1<Object> _function = (Object it) -> {
       Assert.assertEquals(expectation, it);
     };
     this.evaluatesTo(typeAndExpression, _function);
   }
-  
+
   protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Procedure1<? super Object> assertions) {
     try {
       final String type = typeAndExpression.getKey();

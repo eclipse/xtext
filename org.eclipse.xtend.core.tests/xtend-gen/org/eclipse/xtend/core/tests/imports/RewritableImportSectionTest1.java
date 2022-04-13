@@ -46,7 +46,7 @@ public class RewritableImportSectionTest1 extends AbstractRewritableImportSectio
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   protected CharSequence getExpectedModel(final String sectionAsString) {
     StringConcatenation _builder = new StringConcatenation();

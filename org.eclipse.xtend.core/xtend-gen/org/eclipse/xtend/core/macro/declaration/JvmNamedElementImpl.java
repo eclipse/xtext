@@ -15,7 +15,7 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
   public String getSimpleName() {
     return this.getDelegate().getSimpleName();
   }
-  
+
   @Override
   public String toString() {
     String _name = this.getClass().getName();

@@ -29,11 +29,11 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
   protected String _getQualifiedName(final XtendFunction it, final EObject context) {
     return this.toQualifiedName(it);
   }
-  
+
   protected String _getQualifiedName(final XtendFunction it, final Void context) {
     return this.toQualifiedName(it);
   }
-  
+
   protected String toQualifiedName(final XtendFunction it) {
     StringConcatenation _builder = new StringConcatenation();
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
@@ -47,15 +47,15 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     _builder.append(")");
     return _builder.toString();
   }
-  
+
   protected String _getQualifiedName(final XtendConstructor it, final EObject context) {
     return this.toQualifiedName(it);
   }
-  
+
   protected String _getQualifiedName(final XtendConstructor it, final Void context) {
     return this.toQualifiedName(it);
   }
-  
+
   protected String toQualifiedName(final XtendConstructor it) {
     StringConcatenation _builder = new StringConcatenation();
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
@@ -69,7 +69,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     _builder.append(")");
     return _builder.toString();
   }
-  
+
   public String getQualifiedName(final EObject it, final EObject context) {
     if (it instanceof JvmConstructor
          && context instanceof XConstructorCall) {

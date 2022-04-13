@@ -21,17 +21,17 @@ public class SemanticText extends Chunk {
   public String toString() {
     return this.getText().toString();
   }
-  
+
   public SemanticText(final CharSequence text) {
     super(text);
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return super.hashCode();
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {

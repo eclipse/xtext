@@ -45,7 +45,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public TypeReference getExtendedClass() {
     final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
@@ -69,27 +69,27 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return this.getCompilationUnit().toTypeReference(
       IterableExtensions.<JvmTypeReference>findFirst(this.getDelegate().getSuperTypes(), _function));
   }
-  
+
   @Override
   public boolean isAbstract() {
     return this.getDelegate().isAbstract();
   }
-  
+
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
   }
-  
+
   @Override
   public boolean isStatic() {
     return this.getDelegate().isStatic();
   }
-  
+
   @Override
   public boolean isStrictFloatingPoint() {
     return this.getDelegate().isStrictFloatingPoint();
   }
-  
+
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = (JvmTypeParameter it) -> {
@@ -97,7 +97,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     };
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(this.getDelegate().getTypeParameters(), _function);
   }
-  
+
   @Override
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration it) -> {
@@ -106,7 +106,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     };
     return IterableExtensions.<FieldDeclaration>findFirst(Iterables.<FieldDeclaration>filter(this.getDeclaredMembers(), FieldDeclaration.class), _function);
   }
-  
+
   @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;

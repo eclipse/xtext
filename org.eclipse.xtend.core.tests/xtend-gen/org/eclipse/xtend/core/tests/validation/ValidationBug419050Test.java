@@ -26,10 +26,10 @@ import org.junit.Test;
 public class ValidationBug419050Test extends AbstractXtendTestCase {
   @Inject
   private ValidationTestHelper helper;
-  
+
   @Inject
   private ParseHelper<XtendFile> parser;
-  
+
   @Test
   public void test_01() {
     try {
@@ -53,7 +53,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -80,7 +80,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {
@@ -107,7 +107,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_04() {
     try {
@@ -131,7 +131,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_05() {
     try {
@@ -158,7 +158,7 @@ public class ValidationBug419050Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug417371_01() {
     try {

@@ -37,11 +37,11 @@ public class RenameXtendClassBug516096SwtBotTest extends AbstractRefactoringSwtB
     RefactoringTestParameters _doubleArrow = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters, _function);
     return Collections.<Object[]>unmodifiableList(CollectionLiterals.<Object[]>newArrayList(new Object[] { _doubleArrow }));
   }
-  
+
   public RenameXtendClassBug516096SwtBotTest(final RefactoringTestParameters testParams) {
     super(testParams);
   }
-  
+
   @Test
   public void testBug516096() {
     final String projectName = "this is a test";

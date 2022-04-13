@@ -22,12 +22,12 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
   public boolean isValid() {
     return (super.isValid() && (this.getClassName() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT).append("class ").append(this.getClassName()).append(" {").newLine().append("}");
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();

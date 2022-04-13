@@ -33,7 +33,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendClass) _head);
   }
-  
+
   @Override
   protected XtendInterface interfaze(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -43,7 +43,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendInterface) _head);
   }
-  
+
   @Override
   protected XtendEnum enumeration(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -53,7 +53,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendEnum) _head);
   }
-  
+
   @Override
   protected XtendAnnotationType annotationType(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -63,7 +63,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     XtendMember _head = IterableExtensions.<XtendMember>head(this.file(_builder.toString()).getXtendTypes().get(0).getMembers());
     return ((XtendAnnotationType) _head);
   }
-  
+
   @Test
   @Override
   public void testInterfaceFinalAndStatic() {
@@ -78,7 +78,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Override
   public void testEnumFinalAndStatic() {
@@ -93,7 +93,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Override
   public void testAnnotationTypeStaticAndFinal() {

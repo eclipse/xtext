@@ -27,11 +27,11 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void test_noIssues() {
     try {
@@ -48,7 +48,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_Error_nullResource() {
     try {
@@ -69,7 +69,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_Error_NotAutoClosable() {
     try {
@@ -82,7 +82,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_normalTryWithoutResource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -126,7 +126,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(this.buildXtendInput(_builder, true, true, false), this.buildJavaOutput(_builder_1, true, true, false, false));
   }
-  
+
   @Test
   public void test_easyResource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -265,7 +265,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_assumeTypeAutoClosable() {
     StringConcatenation _builder = new StringConcatenation();
@@ -323,7 +323,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(this.buildXtendInput(_builder, false, false, false), this.buildJavaOutput(_builder_1, false, false, false, true));
   }
-  
+
   @Test
   public void test_automaticCloseButStillExceptionCatched() {
     StringConcatenation _builder = new StringConcatenation();
@@ -435,7 +435,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_noteSecretVariableNames() {
     StringConcatenation _builder = new StringConcatenation();
@@ -594,7 +594,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_twoResources() {
     StringConcatenation _builder = new StringConcatenation();
@@ -723,7 +723,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_twoNestedResources() {
     StringConcatenation _builder = new StringConcatenation();
@@ -823,7 +823,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_twoResourcesOneDefinedOutside() {
     StringConcatenation _builder = new StringConcatenation();
@@ -928,7 +928,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_nestedIf1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1089,7 +1089,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   @Test
   public void test_ResourceIOException() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1255,7 +1255,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_tryWithLambda01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1315,7 +1315,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(this.buildXtendInput(_builder, false, false, false), this.buildJavaOutput(_builder_1, false, false, false, true));
   }
-  
+
   @Test
   public void test_tryWithLambda02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1432,7 +1432,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_buildXtendInput, _builder_1);
   }
-  
+
   private CharSequence buildXtendInput(final CharSequence input, final boolean needsStringReader, final boolean needsBufferedReader, final boolean needsLists) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package sample");
@@ -1477,7 +1477,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     return _builder;
   }
-  
+
   private CharSequence buildJavaOutput(final CharSequence expected, final boolean needsStringReader, final boolean needsBufferedReader, final boolean needsFunc0, final boolean needsLists) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package sample;");

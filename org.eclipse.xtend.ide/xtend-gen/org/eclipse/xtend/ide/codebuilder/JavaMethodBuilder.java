@@ -22,7 +22,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
   public boolean isValid() {
     return (super.isValid() && (this.getMethodName() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
@@ -55,7 +55,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();

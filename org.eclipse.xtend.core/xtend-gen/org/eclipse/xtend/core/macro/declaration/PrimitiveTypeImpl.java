@@ -49,12 +49,12 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
     }
     return _switchResult;
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getIdentifier();
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
@@ -64,7 +64,7 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
     final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getSimpleName();

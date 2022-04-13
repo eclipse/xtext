@@ -44,29 +44,29 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Accessors
   private Object ownerSource;
-  
+
   @Accessors
   private JvmDeclaredType owner;
-  
+
   @Accessors
   private JvmVisibility visibility;
-  
+
   @Accessors
   private EObject context;
-  
+
   @Inject
   @Extension
   private IJavaElementFinder _iJavaElementFinder;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   @Override
   public boolean isValid() {
     final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(this.owner);
     return (((((javaElement == null) || (!javaElement.isReadOnly())) && (this.ownerSource != null)) && (this.owner != null)) && (this.context != null));
   }
-  
+
   @Override
   public String getPreview() {
     String _xblockexpression = null;
@@ -77,7 +77,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected ISourceAppender appendVisibility(final ISourceAppender appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
@@ -108,7 +108,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return appendable.append(_switchResult);
   }
-  
+
   protected <T extends EObject> T findByFragment(final XtextResource resource, final T object) {
     final Resource myResource = object.eResource();
     boolean _equals = Objects.equal(myResource, resource);
@@ -120,7 +120,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     final T result = ((T) _eObject);
     return result;
   }
-  
+
   protected ISourceAppender appendType(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
     ISourceAppender _xblockexpression = null;
     {
@@ -133,7 +133,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected ISourceAppender appendTypeParameters(final ISourceAppender appendable, final List<JvmTypeParameter> typeParameters) {
     ISourceAppender _xblockexpression = null;
     {
@@ -178,7 +178,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
     String _switchResult = null;
     boolean _matched = false;
@@ -191,7 +191,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _switchResult;
   }
-  
+
   protected boolean isInterface(final JvmType t) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -204,42 +204,42 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     }
     return _switchResult;
   }
-  
+
   @Pure
   @Override
   public Object getOwnerSource() {
     return this.ownerSource;
   }
-  
+
   public void setOwnerSource(final Object ownerSource) {
     this.ownerSource = ownerSource;
   }
-  
+
   @Pure
   @Override
   public JvmDeclaredType getOwner() {
     return this.owner;
   }
-  
+
   public void setOwner(final JvmDeclaredType owner) {
     this.owner = owner;
   }
-  
+
   @Pure
   @Override
   public JvmVisibility getVisibility() {
     return this.visibility;
   }
-  
+
   public void setVisibility(final JvmVisibility visibility) {
     this.visibility = visibility;
   }
-  
+
   @Pure
   public EObject getContext() {
     return this.context;
   }
-  
+
   public void setContext(final EObject context) {
     this.context = context;
   }

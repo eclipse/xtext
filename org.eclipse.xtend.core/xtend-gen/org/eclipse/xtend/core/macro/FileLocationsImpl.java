@@ -32,14 +32,14 @@ public class FileLocationsImpl implements FileLocations {
   @Inject
   @Accessors
   private IProjectConfigProvider projectInformationProvider;
-  
+
   @Inject
   @Accessors
   private IContextualOutputConfigurationProvider outputConfigurationProvider;
-  
+
   @Accessors
   private Resource context;
-  
+
   protected IProjectConfig getProjectConfig(final Path path) {
     final String firstSegment = path.getSegments().get(0);
     final IProjectConfig projectConfig = this.projectInformationProvider.getProjectConfig(this.context.getResourceSet());
@@ -48,7 +48,7 @@ public class FileLocationsImpl implements FileLocations {
     }
     return projectConfig;
   }
-  
+
   @Override
   public Path getSourceFolder(final Path path) {
     final Function1<Path, Boolean> _function = (Path sourceFolder) -> {
@@ -56,7 +56,7 @@ public class FileLocationsImpl implements FileLocations {
     };
     return IterableExtensions.<Path>findFirst(this.getProjectSourceFolders(path), _function);
   }
-  
+
   @Override
   public Path getTargetFolder(final Path path) {
     Path _xblockexpression = null;
@@ -83,13 +83,13 @@ public class FileLocationsImpl implements FileLocations {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Path getProjectFolder(final Path path) {
     final IProjectConfig config = this.getProjectConfig(path);
     return Path.ROOT.append(config.getName());
   }
-  
+
   @Override
   public Set<Path> getProjectSourceFolders(final Path path) {
     final Function1<ISourceFolder, Path> _function = (ISourceFolder it) -> {
@@ -97,30 +97,30 @@ public class FileLocationsImpl implements FileLocations {
     };
     return IterableExtensions.<Path>toSet(IterableExtensions.map(this.getProjectConfig(path).getSourceFolders(), _function));
   }
-  
+
   @Pure
   public IProjectConfigProvider getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
-  
+
   public void setProjectInformationProvider(final IProjectConfigProvider projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
-  
+
   @Pure
   public IContextualOutputConfigurationProvider getOutputConfigurationProvider() {
     return this.outputConfigurationProvider;
   }
-  
+
   public void setOutputConfigurationProvider(final IContextualOutputConfigurationProvider outputConfigurationProvider) {
     this.outputConfigurationProvider = outputConfigurationProvider;
   }
-  
+
   @Pure
   public Resource getContext() {
     return this.context;
   }
-  
+
   public void setContext(final Resource context) {
     this.context = context;
   }

@@ -56,11 +56,11 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     RefactoringTestParameters _doubleArrow_3 = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters_3, _function_3);
     return Collections.<Object[]>unmodifiableList(CollectionLiterals.<Object[]>newArrayList(new Object[] { _doubleArrow }, new Object[] { _doubleArrow_1 }, new Object[] { _doubleArrow_2 }, new Object[] { _doubleArrow_3 }));
   }
-  
+
   public RenameXtendClassSwtBotTest(final RefactoringTestParameters testParams) {
     super(testParams);
   }
-  
+
   @Test
   public void renameXtendClass() {
     SWTWorkbenchBot _bot = this.getBot();
@@ -88,7 +88,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     this.assertEquals(_builder_3, barEditor.getText());
     this.assertEquals("NewBar.xtend", barEditor.getTitle());
   }
-  
+
   @Test
   public void renameXtendClassReference() {
     SWTWorkbenchBot _bot = this.getBot();
@@ -116,7 +116,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     this.assertEquals(_builder_3, barEditor.getText());
     this.assertEquals("NewBar.xtend", barEditor.getTitle());
   }
-  
+
   @Test
   public void renameXtendClassWithAA() {
     SWTWorkbenchBot _bot = this.getBot();

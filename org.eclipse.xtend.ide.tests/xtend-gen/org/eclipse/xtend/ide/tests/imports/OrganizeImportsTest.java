@@ -37,11 +37,11 @@ import org.junit.Test;
 public class OrganizeImportsTest extends AbstractXtendUITestCase {
   @Inject
   private ImportOrganizer importOrganizer;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @After
   public void close() {
     try {
@@ -50,11 +50,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
     this.assertIsOrganizedTo(model, "Foo", expected);
   }
-  
+
   protected void assertIsOrganizedTo(final CharSequence model, final String fileName, final CharSequence expected) {
     try {
       Assert.assertFalse(expected.toString().contains("$"));
@@ -78,7 +78,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertIsOrganizedWithErrorsTo(final CharSequence model, final CharSequence expected) {
     try {
       Assert.assertFalse(expected.toString().contains("$"));
@@ -102,7 +102,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected XtendFile xtendFileWithError(final String content) throws Exception {
     IFile file = this._workbenchTestHelper.createFile("HasErrors", content);
     Resource resource = this._workbenchTestHelper.getResourceSet().createResource(this._workbenchTestHelper.uri(file));
@@ -116,7 +116,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     XtendFile xtendFile = ((XtendFile) _get);
     return xtendFile;
   }
-  
+
   @Test
   public void testBug470235() {
     StringConcatenation _builder = new StringConcatenation();
@@ -155,7 +155,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedWithErrorsTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedArrayType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -179,7 +179,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedArrayType2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -205,7 +205,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -223,7 +223,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedNestedType_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -241,7 +241,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedNestedType_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -277,7 +277,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedNestedType_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -295,7 +295,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedNestedType_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -331,7 +331,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedNestedType_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -367,7 +367,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedConstructorCall() {
     StringConcatenation _builder = new StringConcatenation();
@@ -391,7 +391,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorCallToEnum() {
     StringConcatenation _builder = new StringConcatenation();
@@ -417,7 +417,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFullyQualifiedConstructorCallToEnum() {
     StringConcatenation _builder = new StringConcatenation();
@@ -441,7 +441,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedConstructorCallToEnum() {
     final String oldValue = PreferenceConstants.getPreferenceStore().getString(PreferenceConstants.TYPEFILTER_ENABLED);
@@ -477,7 +477,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
     }
   }
-  
+
   @Test
   public void testWildcardType_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -498,7 +498,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWildcardType_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -522,7 +522,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWildcardType_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -546,7 +546,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticTypeUsedTwice() {
     StringConcatenation _builder = new StringConcatenation();
@@ -598,7 +598,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDontChangeDanglingFeatureCalls() {
     StringConcatenation _builder = new StringConcatenation();
@@ -631,7 +631,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testKeepRequiredStaticExtensionImport() {
     StringConcatenation _builder = new StringConcatenation();
@@ -690,7 +690,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void testJavaDocReference() {
     StringConcatenation _builder = new StringConcatenation();
@@ -727,7 +727,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void testJavaDocReference2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -782,7 +782,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void implicitImport() {
     StringConcatenation _builder = new StringConcatenation();
@@ -813,7 +813,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void implicitImport_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -849,7 +849,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void testMemberImport_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -896,7 +896,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void testMemberImport_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -941,7 +941,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
-  
+
   @Test
   public void testAnonymousClass_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -990,7 +990,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnonymousClass_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1020,7 +1020,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnonymousClass_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1058,7 +1058,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnonymousClass_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1097,7 +1097,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   /**
    * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
    */
@@ -1161,7 +1161,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   /**
    * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
    */
@@ -1235,7 +1235,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug447227() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1307,7 +1307,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug447227_2() {
     try {
@@ -1356,7 +1356,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Ignore
   public void testBug482371_01() {
@@ -1404,7 +1404,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Ignore
   public void testBug482371_02() {
@@ -1461,7 +1461,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * Tests organization of imports for a field of type List. This will be ambigious, since java.util.List and
    * java.awt.List both match. As a result, nothing is organized.
@@ -1509,7 +1509,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       PreferenceConstants.getPreferenceStore().setValue(PreferenceConstants.TYPEFILTER_ENABLED, oldValue);
     }
   }
-  
+
   /**
    * Tests organization of imports for a field of type List. The JDT Type Filter preference is set to resolve
    * 'List' uniquely to 'java.util.List'.

@@ -45,7 +45,7 @@ public class StaticMethodImporter extends AbstractStaticMethodImporter {
     rewriter.newSection(memberNode.getOffset(), memberNode.getLength());
     rewriter.newSection(dotNode.getOffset(), dotNode.getLength());
   }
-  
+
   /**
    * Attempts to find the next dot (.) or ::
    * 

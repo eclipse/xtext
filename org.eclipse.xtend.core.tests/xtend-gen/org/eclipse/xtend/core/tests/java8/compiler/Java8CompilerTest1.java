@@ -42,7 +42,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample1() {
     try {
@@ -112,7 +112,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample2() {
     try {
@@ -232,7 +232,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample3() {
     try {
@@ -311,7 +311,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample3b() {
     try {
@@ -390,7 +390,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample4() {
     try {
@@ -472,7 +472,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8StreamExample4b() {
     try {
@@ -554,7 +554,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJava8CalculatorExample() {
     try {

@@ -38,18 +38,18 @@ public class Case_9 extends Case_8 {
     }
     return _xifexpression;
   }
-  
+
   protected CharSequence _generateTypeRef(final EObject o) {
     return this.generateTypeRef(o.eContainer());
   }
-  
+
   @Override
   public <T1 extends Object> List<List<T1>> foo(final T1 t) {
     final List<List<T1>> x = super.<T1>foo(t);
     x.toString();
     return null;
   }
-  
+
   public CharSequence generateTypeRef(final EObject c) {
     if (c instanceof ENamedElement) {
       return _generateTypeRef((ENamedElement)c);

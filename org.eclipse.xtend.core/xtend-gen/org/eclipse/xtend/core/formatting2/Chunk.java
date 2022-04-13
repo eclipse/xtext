@@ -19,22 +19,22 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public abstract class Chunk {
   private final CharSequence text;
-  
+
   public int getLength() {
     return this.text.length();
   }
-  
+
   public Chunk(final CharSequence text) {
     super();
     this.text = text;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return 31 * 1 + ((this.text== null) ? 0 : this.text.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -52,7 +52,7 @@ public abstract class Chunk {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -60,7 +60,7 @@ public abstract class Chunk {
     b.add("text", this.text);
     return b.toString();
   }
-  
+
   @Pure
   public CharSequence getText() {
     return this.text;

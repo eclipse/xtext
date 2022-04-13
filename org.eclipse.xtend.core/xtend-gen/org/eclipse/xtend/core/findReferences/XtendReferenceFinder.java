@@ -54,14 +54,14 @@ public class XtendReferenceFinder extends ReferenceFinder {
   @Inject
   @Extension
   private StaticallyImportedMemberProvider _staticallyImportedMemberProvider;
-  
+
   @Inject
   @Extension
   private AnonymousClassUtil _anonymousClassUtil;
-  
+
   @Inject
   private Declarators declarators;
-  
+
   @Override
   public void findReferencesInDescription(final TargetURIs targetURIs, final IResourceDescription resourceDescription, final IReferenceFinder.IResourceAccess resourceAccess, final IReferenceFinder.Acceptor acceptor, final IProgressMonitor monitor) {
     if ((resourceAccess == null)) {
@@ -85,7 +85,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
       resourceAccess.<Object>readOnly(resourceDescription.getURI(), _function_1);
     }
   }
-  
+
   @Override
   protected void findLocalReferencesFromElement(final Predicate<URI> targetURIs, final EObject sourceCandidate, final Resource localResource, final IReferenceFinder.Acceptor acceptor) {
     boolean _matched = false;
@@ -127,7 +127,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
       }
     }
   }
-  
+
   protected void addReferencesToSuper(final AnonymousClass anonymousClass, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     final XConstructorCall constructorCall = anonymousClass.getConstructorCall();
     final JvmGenericType superType = this._anonymousClassUtil.getSuperType(anonymousClass);
@@ -139,14 +139,14 @@ public class XtendReferenceFinder extends ReferenceFinder {
       this.addReferenceIfTarget(superConstructor, targetURISet, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor);
     }
   }
-  
+
   protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     final Consumer<JvmFeature> _function = (JvmFeature it) -> {
       this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
     };
     this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration).forEach(_function);
   }
-  
+
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     final JvmIdentifiableElement feature = sourceCandidate.getFeature();
     if ((feature instanceof JvmMember)) {
@@ -154,7 +154,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
       this.addReferenceIfTarget(type, targetURISet, sourceCandidate, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor);
     }
   }
-  
+
   protected void addReferenceIfTarget(final EObject candidate, final Predicate<URI> targetURISet, final EObject sourceElement, final EReference reference, final IReferenceFinder.Acceptor acceptor) {
     final URI candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate);
     boolean _apply = targetURISet.apply(candidateURI);

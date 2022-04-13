@@ -21,7 +21,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testSimpleVar() {
     StringConcatenation _builder = new StringConcatenation();
@@ -29,7 +29,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testIndentation1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -49,7 +49,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIndentation2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -61,7 +61,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testIndentation3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -74,7 +74,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testIndentation4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -87,7 +87,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testIf1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -122,7 +122,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIf2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -165,7 +165,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIfElse() {
     StringConcatenation _builder = new StringConcatenation();
@@ -210,7 +210,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIfElseIfElse() {
     StringConcatenation _builder = new StringConcatenation();
@@ -265,7 +265,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIfElseIfElseInline() {
     StringConcatenation _builder = new StringConcatenation();
@@ -285,7 +285,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIfNested() {
     StringConcatenation _builder = new StringConcatenation();
@@ -335,7 +335,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedRichStringExpression(_builder, _builder_1);
   }
-  
+
   @Test
   public void testForLoop() {
     StringConcatenation _builder = new StringConcatenation();
@@ -354,7 +354,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testForLoopInline() {
     StringConcatenation _builder = new StringConcatenation();
@@ -367,7 +367,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testForLoopNested() {
     StringConcatenation _builder = new StringConcatenation();
@@ -395,7 +395,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testForLoopParams() {
     StringConcatenation _builder = new StringConcatenation();
@@ -414,7 +414,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
   @Test
   public void testForEmpty() {
@@ -428,7 +428,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testForSyntaxErrors() {
     StringConcatenation _builder = new StringConcatenation();
@@ -441,7 +441,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpressionWithErrors(_builder);
   }
-  
+
   @Test
   public void testIrregularIndentation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -463,7 +463,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void testIrregularIndentation2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -497,7 +497,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   @Ignore("indentation increases every time the formatter runs")
   public void prefixedForLoop() {
@@ -517,7 +517,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void smokeTest() {
     StringConcatenation _builder = new StringConcatenation();
@@ -563,7 +563,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
-  
+
   @Test
   public void bug450458() {
     StringConcatenation _builder = new StringConcatenation();
@@ -604,7 +604,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichString(_builder);
   }
-  
+
   @Test
   public void indentThreeTabsLineInIf() {
     StringConcatenation _builder = new StringConcatenation();
@@ -659,7 +659,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
   }
-  
+
   @Test
   public void indentEmptyLineInIf() {
     StringConcatenation _builder = new StringConcatenation();

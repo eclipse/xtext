@@ -29,7 +29,7 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     };
     return ImmutableList.<AnnotationReference>copyOf(ListExtensions.<XAnnotation, AnnotationReference>map(this.getDelegate().getAnnotations(), _function));
   }
-  
+
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {

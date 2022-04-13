@@ -45,17 +45,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   @Accessors
   private IJvmDeclaredTypeAcceptor acceptor;
-  
+
   @Accessors
   private CompilationUnitImpl compilationUnit;
-  
+
   @Override
   public void registerAnnotationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmAnnotationType newType = TypesFactory.eINSTANCE.createJvmAnnotationType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
-  
+
   @Override
   public void registerClass(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
@@ -65,14 +65,14 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     _superTypes.add(_typeForName);
     this.setNameAndAccept(newType, qualifiedName);
   }
-  
+
   @Override
   public void registerEnumerationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmEnumerationType newType = TypesFactory.eINSTANCE.createJvmEnumerationType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
-  
+
   @Override
   public void registerInterface(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
@@ -80,7 +80,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     newType.setInterface(true);
     this.setNameAndAccept(newType, qualifiedName);
   }
-  
+
   private void setNameAndAccept(final JvmDeclaredType newType, final String qualifiedName) {
     ConditionUtils.checkQualifiedName(qualifiedName, "qualifiedName");
     JvmDeclaredType _findType = this.findType(qualifiedName);
@@ -111,11 +111,11 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     }
     newType.setSimpleName(namespaceAndName.getValue());
   }
-  
+
   private JvmDeclaredType findType(final String string) {
     return this.findRecursively(string, Iterables.<JvmDeclaredType>filter(this.compilationUnit.getXtendFile().eResource().getContents(), JvmDeclaredType.class));
   }
-  
+
   private JvmDeclaredType findRecursively(final String string, final Iterable<? extends JvmDeclaredType> types) {
     for (final JvmDeclaredType type : types) {
       {
@@ -135,7 +135,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     }
     return null;
   }
-  
+
   private Pair<String, String> getNameParts(final String string) {
     final char dot = '.';
     final int index = string.lastIndexOf(dot);
@@ -147,112 +147,112 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
       return Pair.<String, String>of(null, string);
     }
   }
-  
+
   @Delegate
   public FileSystemSupport getFileSystemSupport() {
     return this.compilationUnit.getFileSystemSupport();
   }
-  
+
   @Delegate
   public FileLocations getFileLocations() {
     return this.compilationUnit.getFileLocations();
   }
-  
+
   @Delegate
   public TypeLookupImpl getTypeLookup() {
     return this.compilationUnit.getTypeLookup();
   }
-  
+
   @Pure
   public IJvmDeclaredTypeAcceptor getAcceptor() {
     return this.acceptor;
   }
-  
+
   public void setAcceptor(final IJvmDeclaredTypeAcceptor acceptor) {
     this.acceptor = acceptor;
   }
-  
+
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
     return this.compilationUnit;
   }
-  
+
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }
-  
+
   public boolean exists(final Path path) {
     return this.getFileSystemSupport().exists(path);
   }
-  
+
   public String getCharset(final Path path) {
     return this.getFileSystemSupport().getCharset(path);
   }
-  
+
   public Iterable<? extends Path> getChildren(final Path path) {
     return this.getFileSystemSupport().getChildren(path);
   }
-  
+
   public CharSequence getContents(final Path path) {
     return this.getFileSystemSupport().getContents(path);
   }
-  
+
   public InputStream getContentsAsStream(final Path path) {
     return this.getFileSystemSupport().getContentsAsStream(path);
   }
-  
+
   public long getLastModification(final Path path) {
     return this.getFileSystemSupport().getLastModification(path);
   }
-  
+
   public boolean isFile(final Path path) {
     return this.getFileSystemSupport().isFile(path);
   }
-  
+
   public boolean isFolder(final Path path) {
     return this.getFileSystemSupport().isFolder(path);
   }
-  
+
   public URI toURI(final Path path) {
     return this.getFileSystemSupport().toURI(path);
   }
-  
+
   public Path getProjectFolder(final Path path) {
     return this.getFileLocations().getProjectFolder(path);
   }
-  
+
   public Set<Path> getProjectSourceFolders(final Path path) {
     return this.getFileLocations().getProjectSourceFolders(path);
   }
-  
+
   public Path getSourceFolder(final Path path) {
     return this.getFileLocations().getSourceFolder(path);
   }
-  
+
   public Path getTargetFolder(final Path sourceFolder) {
     return this.getFileLocations().getTargetFolder(sourceFolder);
   }
-  
+
   public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
     return this.getTypeLookup().findSourceAnnotationType(qualifiedName);
   }
-  
+
   public ClassDeclaration findSourceClass(final String qualifiedName) {
     return this.getTypeLookup().findSourceClass(qualifiedName);
   }
-  
+
   public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
     return this.getTypeLookup().findSourceEnumerationType(qualifiedName);
   }
-  
+
   public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
     return this.getTypeLookup().findSourceInterface(qualifiedName);
   }
-  
+
   public Type findUpstreamType(final Class<?> clazz) {
     return this.getTypeLookup().findUpstreamType(clazz);
   }
-  
+
   public Type findUpstreamType(final String typeName) {
     return this.getTypeLookup().findUpstreamType(typeName);
   }

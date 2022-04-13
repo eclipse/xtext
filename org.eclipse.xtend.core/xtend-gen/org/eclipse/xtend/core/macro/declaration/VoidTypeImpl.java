@@ -19,7 +19,7 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
   public String getSimpleName() {
     return "void";
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
@@ -29,7 +29,7 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
     final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getSimpleName();

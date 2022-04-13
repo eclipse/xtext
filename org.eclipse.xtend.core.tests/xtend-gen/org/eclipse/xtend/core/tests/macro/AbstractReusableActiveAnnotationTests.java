@@ -73,16 +73,16 @@ import org.junit.Test;
 public abstract class AbstractReusableActiveAnnotationTests {
   @Inject
   private XtendGenerator generator;
-  
+
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
-  
+
   @Inject
   private ValidationTestHelper validator;
-  
+
   @Inject
   private ILogicalContainerProvider logicalContainerProvider;
-  
+
   @Test
   public void testBug453273() {
     StringConcatenation _builder = new StringConcatenation();
@@ -165,7 +165,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testBug441081() {
     StringConcatenation _builder = new StringConcatenation();
@@ -247,7 +247,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testInferredMethodReturnType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -339,7 +339,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testTracing() {
     StringConcatenation _builder = new StringConcatenation();
@@ -443,7 +443,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testTracing2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -507,7 +507,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testTracing3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -572,7 +572,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testTracing4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -637,7 +637,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testValidationPhase() {
     StringConcatenation _builder = new StringConcatenation();
@@ -724,7 +724,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testValidateLater() {
     StringConcatenation _builder = new StringConcatenation();
@@ -794,7 +794,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testNoMutationInValidationPhase() {
     StringConcatenation _builder = new StringConcatenation();
@@ -886,7 +886,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSetEmptyListAsAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1051,7 +1051,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testInferredTypeReferences() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1168,7 +1168,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationValueSetting_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1513,7 +1513,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationValueSetting_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1596,7 +1596,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationValueSetting_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1788,7 +1788,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationArrayValueGetting_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2005,7 +2005,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationArrayValueGetting_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2222,7 +2222,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Ignore("Setting annotation values of type Expression is not possible")
   @Test
   public void testAnnotationValueSetting_AsExpression() {
@@ -2423,7 +2423,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAccessAndModifyEnumerationValueDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2628,7 +2628,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testModifyTypeParameters() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2776,7 +2776,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testRemoveTypeParameters() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2877,7 +2877,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSetUpperBoundsForMutableTypeParameterDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2981,7 +2981,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testRemoveAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3043,7 +3043,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testChangeJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3106,7 +3106,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMarkAsDeprecated() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3176,7 +3176,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_2.toString());
   }
-  
+
   @Test
   public void testMarkAsDeprecated_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3244,7 +3244,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_2.toString());
   }
-  
+
   @Test
   public void testAddDispatchCase() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3384,7 +3384,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_2.toString());
   }
-  
+
   @Test
   public void testChangeDispatchHierachy() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3648,7 +3648,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_6.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_2.toString(), _builder_3.toString(), _builder_4.toString(), _builder_5.toString(), _builder_6.toString());
   }
-  
+
   @Test
   public void testAddConstructor() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3710,7 +3710,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAddDefaultConstructor() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3772,7 +3772,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAddDefaultConstructorWithTemplate() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3838,7 +3838,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSwapExpressions() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3918,7 +3918,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSwapExpressions_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3986,7 +3986,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSimpleModification() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4051,7 +4051,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testParameterAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4146,7 +4146,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testConstantExpressionEvaluation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4268,7 +4268,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testSetDocumentation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4341,7 +4341,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationDefaultValuesBug463161() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4418,7 +4418,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationDefaultValues_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4541,7 +4541,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAnnotationDefaultValues_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4681,7 +4681,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testAddAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4800,7 +4800,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testCreateTypeFromUsage() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4890,7 +4890,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMarkReadAndInitialized() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tval ctor = annotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tprimarySourceElement = declaringType\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t\tfield.markAsRead\n\t\t\t\t\t\t\tfield.markAsInitializedBy(ctor)\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
@@ -4915,7 +4915,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMarkReadAndInitialized2() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tval ctor = annotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tprimarySourceElement = declaringType\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
@@ -4941,7 +4941,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testPropertyAnnotation() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.«field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.simpleName.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.simpleName, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.«field.simpleName» = «field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.simpleName.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
@@ -4972,7 +4972,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testThrowsAndTypeParam() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5052,7 +5052,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMovingComputedTypes() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5141,7 +5141,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMovingComputedTypes_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5230,7 +5230,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testValidation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5320,7 +5320,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testIntroduceNewTypes() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5393,7 +5393,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testImportFromTypeReference_01() {
@@ -5433,7 +5433,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_1.toString());
   }
-  
+
   @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testImportFromTypeReference_02() {
@@ -5484,7 +5484,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_1.toString());
   }
-  
+
   @Test
   public void testIntroduceNewTypeAndWorkWithIt() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5574,7 +5574,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   private final Pair<String, String> THREE_ANNOTATIONS = new Function0<Pair<String, String>>() {
     @Override
     public Pair<String, String> apply() {
@@ -5657,7 +5657,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       return _mappedTo;
     }
   }.apply();
-  
+
   @Test
   public void testDeterministicExecutionOrder_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5679,7 +5679,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
-  
+
   @Test
   public void testDeterministicExecutionOrder_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5704,9 +5704,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
-  
+
   public abstract void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
-  
+
   public void assertGeneratedCode(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final String... compiledClientFiles) {
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final Function1<String, String> _function_1 = (String it_1) -> {
@@ -5742,7 +5742,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(macroFile, clientFile, _function);
   }
-  
+
   @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testFileSystemSupport_01() {
@@ -5784,7 +5784,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testRemove() {
     StringConcatenation _builder = new StringConcatenation();
@@ -6126,7 +6126,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   @Test
   public void testMoveExpressionToTypeParameterDeclarator() {
     StringConcatenation _builder = new StringConcatenation();
@@ -6299,7 +6299,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   public void assertSameType(final TypeReference first, final TypeReference second) {
     boolean _notEquals = (!Objects.equal(first, second));
     if (_notEquals) {

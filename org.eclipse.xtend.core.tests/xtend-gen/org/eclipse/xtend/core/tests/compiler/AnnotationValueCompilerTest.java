@@ -50,7 +50,7 @@ public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationValues_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -118,7 +118,7 @@ public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationValues_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -183,7 +183,7 @@ public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationValues_constants() {
     StringConcatenation _builder = new StringConcatenation();
@@ -218,7 +218,7 @@ public class AnnotationValueCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationValues_enums() {
     StringConcatenation _builder = new StringConcatenation();

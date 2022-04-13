@@ -39,7 +39,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   @Accessors
   @Inject
   private IWorkspaceRoot workspaceRoot;
-  
+
   @Override
   public Iterable<? extends Path> getChildren(final URI uri, final Path path) {
     final IResource resource = this.findMember(uri);
@@ -62,12 +62,12 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
     return CollectionLiterals.<Path>emptyList();
   }
-  
+
   @Override
   public java.net.URI toURI(final URI uri) {
     return this.toURI(uri, CollectionLiterals.<String>newArrayList());
   }
-  
+
   protected java.net.URI toURI(final URI uri, final List<String> trailingSegments) {
     java.net.URI _xblockexpression = null;
     {
@@ -84,7 +84,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   protected IResource findMember(final URI uri) {
     IResource _xblockexpression = null;
     {
@@ -94,12 +94,12 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Pure
   public IWorkspaceRoot getWorkspaceRoot() {
     return this.workspaceRoot;
   }
-  
+
   public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
     this.workspaceRoot = workspaceRoot;
   }

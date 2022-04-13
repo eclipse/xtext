@@ -44,9 +44,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   private IProject first;
-  
+
   private IProject second;
-  
+
   @Test
   public void testTwoXtendFilesSameProject() {
     try {
@@ -80,7 +80,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTwoXtendFilesDifferentProject() {
     try {
@@ -112,7 +112,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendAndJavaSameProject() {
     try {
@@ -144,7 +144,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendAndJavaDifferentProject() {
     try {
@@ -175,7 +175,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore("Since the name acme.A is considered to be derived, it is filtered from the Java delta")
   @Test
   public void testXtendAndJavaSameProjectXtendFirst() {
@@ -210,11 +210,11 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private static Map<String, String> emptyStringMap() {
     return CollectionLiterals.<String, String>emptyMap();
   }
-  
+
   public Iterable<IMarker> onlyErrors(final Iterable<IMarker> markers) {
     final Function1<IMarker, Boolean> _function = (IMarker it) -> {
       try {
@@ -226,7 +226,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
     };
     return IterableExtensions.<IMarker>filter(markers, _function);
   }
-  
+
   @Before
   @Override
   public void setUp() throws Exception {
@@ -235,14 +235,14 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
     this.second = WorkbenchTestHelper.createPluginProject("second.p384008");
     IResourcesSetupUtil.setReference(this.second, this.first);
   }
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     WorkbenchTestHelper.deleteProject(this.first);
     WorkbenchTestHelper.deleteProject(this.second);
   }
-  
+
   private void runInWorkspace(final IWorkspaceRunnable r) {
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();

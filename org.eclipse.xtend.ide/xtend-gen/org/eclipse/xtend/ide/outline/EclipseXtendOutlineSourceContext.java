@@ -32,10 +32,10 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   private Provider<EclipseXtendOutlineSourceContext> xtendOutlineContextProvider;
-  
+
   @Override
   public IXtendOutlineContext markAsProcessed(final JvmMember member) {
     EclipseXtendOutlineSourceContext _xblockexpression = null;
@@ -46,7 +46,7 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
     }
     return _xblockexpression;
   }
-  
+
   protected void markCreateExtensionJvmFeaturesAsProcessed(final JvmMember member) {
     final EObject function = this._iXtendJvmAssociations.getPrimarySourceElement(member);
     if ((function instanceof XtendFunction)) {
@@ -67,7 +67,7 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
       }
     }
   }
-  
+
   @Override
   protected EclipseXtendOutlineContext cloneContext() {
     return this.cloneContext(this.xtendOutlineContextProvider.get());

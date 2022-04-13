@@ -24,7 +24,7 @@ import org.junit.Test;
 public class JavaIDValueConverterTest extends AbstractXtendTestCase {
   @Inject
   private XtendValueConverterService valueConverterService;
-  
+
   @Test
   public void testSimple() {
     final String s = "abc";
@@ -32,7 +32,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("abc", value);
     Assert.assertEquals(s, this.valueConverterService.toString(value, "ID"));
   }
-  
+
   @Test
   public void testUnicode() {
     final String s = "\\u0050";
@@ -40,7 +40,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("P", value);
     Assert.assertEquals("P", this.valueConverterService.toString(value, "ID"));
   }
-  
+
   @Test
   public void testInvalidUnicode() {
     final String s = "a\\u0060";
@@ -57,7 +57,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testUnclosedUnicode_01() {
     final String s = "a\\u006";
@@ -74,7 +74,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testUnclosedUnicode_02() {
     final String s = "a\\u";
@@ -91,7 +91,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testTrailingBackslash() {
     final String s = "a\\";
@@ -108,7 +108,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testEscaped() {
     final String s = "class";
@@ -116,7 +116,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("^class", value);
     Assert.assertEquals(s, this.valueConverterService.toValue(value, "ID", null));
   }
-  
+
   @Test
   public void testNull() {
     try {
@@ -129,7 +129,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testEmpty() {
     try {
@@ -142,7 +142,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testInvalidChar1() {
     try {
@@ -155,7 +155,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testInvalidChar2() {
     try {
@@ -168,7 +168,7 @@ public class JavaIDValueConverterTest extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   @Test
   public void testInvalidChar3() {
     try {

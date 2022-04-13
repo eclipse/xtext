@@ -27,10 +27,10 @@ import org.junit.Test;
 public class LineNumberMappingTests extends AbstractXtendTestCase {
   @Inject
   private IGenerator generator;
-  
+
   @Inject
   private LineMappingProvider lineMappingProvider;
-  
+
   @Test
   public void testLineMapping_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -57,7 +57,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -81,7 +81,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -111,7 +111,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -135,7 +135,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -177,7 +177,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -207,7 +207,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -240,7 +240,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -282,7 +282,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   @Test
   public void testLineMapping_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -324,7 +324,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertLineNumbers(_builder);
   }
-  
+
   public void assertLineNumbers(final CharSequence xtendCodeWithLineNumbers) {
     final AbstractTraceRegion region = this.getTraceRegion(xtendCodeWithLineNumbers);
     final List<LineMappingProvider.LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);
@@ -376,7 +376,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
       }
     }
   }
-  
+
   public LineMappingProvider.LineMapping findMapping(final List<LineMappingProvider.LineMapping> mappings, final Integer sourceLine) {
     for (final LineMappingProvider.LineMapping m : mappings) {
       if ((m.sourceStartLine == ((sourceLine).intValue() + 1))) {
@@ -385,7 +385,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     }
     return null;
   }
-  
+
   public AbstractTraceRegion getTraceRegion(final CharSequence xtendCode) {
     try {
       final XtendClass clazz = super.clazz(xtendCode.toString());
@@ -398,7 +398,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void print(final AbstractTraceRegion provider, final String code) {
   }
 }

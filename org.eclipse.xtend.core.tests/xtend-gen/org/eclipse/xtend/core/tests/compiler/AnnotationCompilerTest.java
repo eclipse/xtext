@@ -71,7 +71,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithEnumValue_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -166,7 +166,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -200,7 +200,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithoutDefaultStringArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -223,7 +223,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithDefaultEmptyStringArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -246,7 +246,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithDefaultStringArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -269,7 +269,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithDefaultIntArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -292,7 +292,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithDefaultBooleanArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -315,7 +315,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithDefaultLongArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -338,7 +338,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithClassArray() {
     StringConcatenation _builder = new StringConcatenation();
@@ -361,7 +361,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationOnAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -401,7 +401,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compileAnnotationWithFileHeader() {
     StringConcatenation _builder = new StringConcatenation();
@@ -476,7 +476,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationType_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -511,7 +511,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationType_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -552,7 +552,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationType_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -587,7 +587,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithIntArray() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -639,7 +639,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithIntArrayAndComputation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -691,7 +691,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerEnum() {
     StringConcatenation _builder = new StringConcatenation();
@@ -726,7 +726,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInterfaceExtendsAnnotation() {
     StringConcatenation _builder = new StringConcatenation();

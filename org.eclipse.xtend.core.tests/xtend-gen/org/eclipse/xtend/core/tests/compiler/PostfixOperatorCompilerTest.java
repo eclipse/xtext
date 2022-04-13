@@ -70,7 +70,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -131,7 +131,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -195,7 +195,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -250,7 +250,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -311,7 +311,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_6() {
     StringConcatenation _builder = new StringConcatenation();
@@ -375,7 +375,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_7() {
     StringConcatenation _builder = new StringConcatenation();
@@ -430,7 +430,7 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_8() {
     StringConcatenation _builder = new StringConcatenation();

@@ -75,7 +75,7 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
     }
     super.customizeDocumentCommand(d, c);
   }
-  
+
   public String getLineIndentation(final IDocument document, final int offset) throws BadLocationException {
     String _xblockexpression = null;
     {

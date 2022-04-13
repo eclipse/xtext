@@ -30,7 +30,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testBug438347_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -86,7 +86,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug438347_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -142,7 +142,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compileProperty() {
     StringConcatenation _builder = new StringConcatenation();
@@ -205,7 +205,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compileReadonlyPropertyWithoutType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -252,7 +252,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compilePropertyWithoutType() {
     try {
@@ -272,7 +272,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void compilePropertyWithTypeParameter() {
     StringConcatenation _builder = new StringConcatenation();
@@ -329,7 +329,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compilePropertyWithoutTypeButTypeParameter() {
     try {
@@ -349,7 +349,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void compilePropertyWithArrayType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -406,7 +406,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void compileExplicitProperty() {
     StringConcatenation _builder = new StringConcatenation();
@@ -450,7 +450,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExistingGetter() {
     try {
@@ -485,7 +485,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingSetter() {
     try {
@@ -522,7 +522,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticProperty() {
     try {

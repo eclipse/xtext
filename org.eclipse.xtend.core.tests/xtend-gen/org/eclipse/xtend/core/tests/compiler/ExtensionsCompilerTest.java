@@ -72,7 +72,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionImportVsDefaultExtensions_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -142,7 +142,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionImportVsDefaultExtensions_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -208,7 +208,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalVsDefaultExtensions_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -282,7 +282,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalVsDefaultExtensions_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -352,7 +352,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalVsDefaultExtensions_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -428,7 +428,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalVsDefaultExtensions_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -498,7 +498,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionFieldVsDefaultExtensions_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -578,7 +578,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionFieldVsDefaultExtensions_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -654,7 +654,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -787,7 +787,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -835,7 +835,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInheritedExtensionField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -895,7 +895,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInheritedExtensionFieldWithAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -957,7 +957,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testShadowedExtensionField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1012,7 +1012,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloadedExtensionField_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1067,7 +1067,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloadedExtensionField_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1136,7 +1136,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloadedExtensionField_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1205,7 +1205,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloadedExtensionField_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1274,7 +1274,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testPrivateInheritedExtensionField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1343,7 +1343,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionParameterShadowsField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1391,7 +1391,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionParameterWithAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1441,7 +1441,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionLocalShadowsParam() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1500,7 +1500,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionLocal() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1560,7 +1560,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionVarIsLocalInBlock() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1637,7 +1637,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionParamOnLamdba() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1700,7 +1700,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionParamOnForEach() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1757,7 +1757,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionParamOnTryCatch() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1836,7 +1836,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionForArrayOfT_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1975,7 +1975,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2015,7 +2015,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2055,7 +2055,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2095,7 +2095,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2135,7 +2135,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2175,7 +2175,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2215,7 +2215,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2255,7 +2255,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2295,7 +2295,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2342,7 +2342,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2382,7 +2382,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalExtensionForPairStringString_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2428,7 +2428,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStringExtensionInlined_01() {
     StringConcatenation _builder = new StringConcatenation();

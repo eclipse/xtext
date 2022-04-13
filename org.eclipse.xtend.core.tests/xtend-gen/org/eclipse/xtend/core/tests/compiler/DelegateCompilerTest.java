@@ -37,7 +37,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testDelegateField() {
     try {
@@ -78,7 +78,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodWithReturnType() {
     try {
@@ -119,7 +119,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodWithParameters() {
     try {
@@ -160,7 +160,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDelegateMethod() {
     try {
@@ -202,7 +202,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDelegateMethod2() {
     try {
@@ -244,7 +244,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDelegateMethod3() {
     try {
@@ -286,7 +286,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIllegalDelegateSignature() {
     try {
@@ -319,7 +319,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfacesAreImplementedTransitively() {
     try {
@@ -362,7 +362,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateInterfacesAreDetected() {
     try {
@@ -428,7 +428,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIgnoreNonDelegates() {
     try {
@@ -471,7 +471,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIgnoreInterfacesNotDeclaredOnTargetClass() {
     try {
@@ -521,7 +521,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInferredType() {
     try {
@@ -554,7 +554,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testListedInterfaceNotImplemented() {
     try {
@@ -596,7 +596,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExplicitInterfaceListing() {
     try {
@@ -652,7 +652,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoCommonInterfaces() {
     try {
@@ -682,7 +682,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testObjectMethodsAreIgnored() {
     try {
@@ -725,7 +725,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testObjectMethodsAreIgnored2() {
     try {
@@ -796,7 +796,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGenericInterface() {
     try {
@@ -845,7 +845,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGenericInterfaceAndClass() {
     try {
@@ -890,7 +890,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGenericSignatureNotMatching() {
     try {
@@ -923,7 +923,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodAlreadyDefined() {
     try {
@@ -959,7 +959,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void implementingListSmokeTest() {
     try {
@@ -982,7 +982,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void recursiveGenerics() {
     try {
@@ -1010,7 +1010,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticMethodsInInterfaces() {
     try {
@@ -1032,7 +1032,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void genericsWithLowerBound() {
     try {
@@ -1064,7 +1064,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void noStackOverflowOnRecursiveSuperTypes() {
     try {
@@ -1089,7 +1089,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void methodOrder() {
     try {

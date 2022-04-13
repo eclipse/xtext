@@ -27,19 +27,19 @@ public class Case_8 {
   @Inject
   @Extension
   private ParseHelper<EObject> helper;
-  
+
   @Inject
   @Extension
   private IQualifiedNameProvider qualifiedNameProvider;
-  
+
   public EList<Resource.Diagnostic> getErrors(final EObject obj) {
     return obj.eResource().getErrors();
   }
-  
+
   public void resolve(final EObject obj) {
     EcoreUtil.resolveAll(obj.eResource());
   }
-  
+
   public EObject parseAcme(final CharSequence seq) {
     try {
       return IterableExtensions.<EObject>head(this.helper.parse(seq).eContents());
@@ -47,7 +47,7 @@ public class Case_8 {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Inject
   public void explicitName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -56,7 +56,7 @@ public class Case_8 {
     final EObject element = this.parseAcme(_builder);
     Assert.assertEquals("FooBar", this.qualifiedNameProvider.getFullyQualifiedName(element).toString());
   }
-  
+
   public <T1 extends Object> List<List<T1>> foo(final T1 t) {
     return null;
   }

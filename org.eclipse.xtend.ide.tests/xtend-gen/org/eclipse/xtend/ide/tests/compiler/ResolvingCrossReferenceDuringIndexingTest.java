@@ -37,7 +37,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvingJvmParameterizedTypeReference() {
     try {
@@ -138,7 +138,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvingXtendAnnotationReference() {
     try {
@@ -248,7 +248,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvingXFunctionTypeRef() {
     StringConcatenation _builder = new StringConcatenation();
@@ -260,7 +260,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("=>java.util.ArrayList<String>", _builder.toString());
   }
-  
+
   @Test
   public void testResolvingXFunctionTypeRef_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -270,7 +270,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("=>void", _builder.toString());
   }
-  
+
   @Test
   public void testResolvingXFunctionTypeRef_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -282,7 +282,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("(int)=>void", _builder.toString());
   }
-  
+
   @Test
   public void testResolvingXFunctionTypeRef_4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -294,7 +294,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("()=>Integer[]", _builder.toString());
   }
-  
+
   @Test
   public void testResolvingXFunctionTypeRef_5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -306,7 +306,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
     _builder.newLine();
     this.testResolvingXFunctionTypeRef("=>=>java.util.Map<String, Boolean>", _builder.toString());
   }
-  
+
   public void testResolvingXFunctionTypeRef(final String functionType, final String expectations) {
     try {
       final IProject annoProject = WorkbenchTestHelper.createPluginProject("annotation.project", "com.google.inject", 
@@ -449,7 +449,7 @@ public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertNoErrorsInWorkspace() {
     try {
       final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

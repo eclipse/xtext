@@ -52,7 +52,7 @@ public class AmbiguityGH389Test extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testUnambiguousConstructorCall_01() {
     StringConcatenation _builder = new StringConcatenation();

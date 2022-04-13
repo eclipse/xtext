@@ -29,12 +29,12 @@ import org.eclipse.xtext.xbase.validation.UIStrings;
 public class XtendJvmLabelProvider extends XbaseLabelProvider {
   @Inject
   private UIStrings uiStrings;
-  
+
   @Inject
   public XtendJvmLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
   }
-  
+
   @Override
   protected String text(final JvmGenericType element) {
     String _xblockexpression = null;
@@ -61,7 +61,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   protected Object text(final JvmField element) {
     String _simpleName = element.getSimpleName();
@@ -71,7 +71,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
     StyledString _styledString_1 = new StyledString(_plus, StyledString.DECORATIONS_STYLER);
     return _styledString.append(_styledString_1);
   }
-  
+
   protected String text(final JvmEnumerationLiteral element) {
     return element.getSimpleName();
   }

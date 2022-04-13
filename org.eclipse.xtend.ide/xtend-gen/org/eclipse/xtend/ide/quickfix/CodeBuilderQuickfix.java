@@ -55,10 +55,10 @@ import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender;
 public class CodeBuilderQuickfix {
   @Inject
   private IURIEditorOpener editorOpener;
-  
+
   @Inject
   private ReplacingAppendable.Factory appendableFactory;
-  
+
   public void addQuickfix(final ICodeBuilder builder, final String label, final Issue issue, final IssueResolutionAcceptor acceptor) {
     boolean _isValid = builder.isValid();
     if (_isValid) {
@@ -78,7 +78,7 @@ public class CodeBuilderQuickfix {
       acceptor.accept(issue, label, builder.getPreview(), builder.getImage(), modification);
     }
   }
-  
+
   protected String getImage(final ICodeBuilder builder) {
     String _switchResult = null;
     JvmVisibility _visibility = builder.getVisibility();
@@ -102,12 +102,12 @@ public class CodeBuilderQuickfix {
     }
     return _switchResult;
   }
-  
+
   protected boolean isXtendSource(final ICodeBuilder builder) {
     Object _ownerSource = builder.getOwnerSource();
     return (_ownerSource instanceof XtendClass);
   }
-  
+
   protected int getTypeIndentation(final XtextResource resource, final IXtextDocument document, final XtendTypeDeclaration xtendClass) {
     final EObject object = resource.getEObject(EcoreUtil.getURI(xtendClass).fragment());
     if ((object != null)) {
@@ -118,7 +118,7 @@ public class CodeBuilderQuickfix {
     }
     return 0;
   }
-  
+
   protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
     final IModification _function = (IModificationContext it) -> {
       final XtendTypeDeclaration xtendClass = builder.getXtendType();
@@ -155,7 +155,7 @@ public class CodeBuilderQuickfix {
     };
     return _function;
   }
-  
+
   protected IModification getJavaModification(final ICodeBuilder.Java builder) {
     final IModification _function = (IModificationContext it) -> {
       final IType type = builder.getIType();

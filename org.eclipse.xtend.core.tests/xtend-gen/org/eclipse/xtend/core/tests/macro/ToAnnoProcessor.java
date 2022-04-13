@@ -27,7 +27,7 @@ public class ToAnnoProcessor extends AbstractClassProcessor {
     super.doRegisterGlobals(annotatedClass, context);
     context.registerAnnotationType(this.generatedAnnotationName(annotatedClass));
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     super.doTransform(annotatedClass, context);
@@ -49,7 +49,7 @@ public class ToAnnoProcessor extends AbstractClassProcessor {
     };
     annotationType.addAnnotationTypeElement("anno", _function);
   }
-  
+
   public String generatedAnnotationName(final ClassDeclaration decl) {
     String _qualifiedName = decl.getQualifiedName();
     return (_qualifiedName + "Anno");

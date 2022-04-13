@@ -44,97 +44,97 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _findDeclaredMethod = super.findDeclaredMethod(name, parameterTypes);
     return ((MutableMethodDeclaration) _findDeclaredMethod);
   }
-  
+
   @Override
   public MutableFieldDeclaration findDeclaredField(final String name) {
     FieldDeclaration _findDeclaredField = super.findDeclaredField(name);
     return ((MutableFieldDeclaration) _findDeclaredField);
   }
-  
+
   @Override
   public MutableTypeDeclaration findDeclaredType(final String name) {
     TypeDeclaration _findDeclaredType = super.findDeclaredType(name);
     return ((MutableTypeDeclaration) _findDeclaredType);
   }
-  
+
   @Override
   public MutableConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     ConstructorDeclaration _findDeclaredConstructor = super.findDeclaredConstructor(parameterTypes);
     return ((MutableConstructorDeclaration) _findDeclaredConstructor);
   }
-  
+
   @Override
   public Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
     Iterable<? extends MethodDeclaration> _declaredMethods = super.getDeclaredMethods();
     return ((Iterable<? extends MutableMethodDeclaration>) _declaredMethods);
   }
-  
+
   @Override
   public Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
     Iterable<? extends FieldDeclaration> _declaredFields = super.getDeclaredFields();
     return ((Iterable<? extends MutableFieldDeclaration>) _declaredFields);
   }
-  
+
   @Override
   public Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
     Iterable<? extends ClassDeclaration> _declaredClasses = super.getDeclaredClasses();
     return ((Iterable<? extends MutableClassDeclaration>) _declaredClasses);
   }
-  
+
   @Override
   public Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = super.getDeclaredConstructors();
     return ((Iterable<? extends MutableConstructorDeclaration>) _declaredConstructors);
   }
-  
+
   @Override
   public Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends InterfaceDeclaration> _declaredInterfaces = super.getDeclaredInterfaces();
     return ((Iterable<? extends MutableInterfaceDeclaration>) _declaredInterfaces);
   }
-  
+
   @Override
   public Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
     Iterable<? extends AnnotationTypeDeclaration> _declaredAnnotationTypes = super.getDeclaredAnnotationTypes();
     return ((Iterable<? extends MutableAnnotationTypeDeclaration>) _declaredAnnotationTypes);
   }
-  
+
   @Override
   public Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
     Iterable<? extends EnumerationTypeDeclaration> _declaredEnumerationTypes = super.getDeclaredEnumerationTypes();
     return ((Iterable<? extends MutableEnumerationTypeDeclaration>) _declaredEnumerationTypes);
   }
-  
+
   @Override
   public Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
     Iterable<? extends TypeDeclaration> _declaredTypes = super.getDeclaredTypes();
     return ((Iterable<? extends MutableTypeDeclaration>) _declaredTypes);
   }
-  
+
   @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);
   }
-  
+
   @Override
   public Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
     Iterable<? extends MemberDeclaration> _declaredMembers = super.getDeclaredMembers();
     return ((Iterable<? extends MutableMemberDeclaration>) _declaredMembers);
   }
-  
+
   @Override
   public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     Iterable<? extends TypeParameterDeclaration> _typeParameters = super.getTypeParameters();
     return ((Iterable<? extends MutableTypeParameterDeclaration>) _typeParameters);
   }
-  
+
   @Override
   public void setExtendedInterfaces(final Iterable<? extends TypeReference> superinterfaces) {
     this.checkMutable();
@@ -152,13 +152,13 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
       }
     }
   }
-  
+
   @Override
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
     this.checkMutable();
     this.getDelegate().setStrictFloatingPoint(isStrictFloatingPoint);
   }
-  
+
   @Override
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     this.checkMutable();

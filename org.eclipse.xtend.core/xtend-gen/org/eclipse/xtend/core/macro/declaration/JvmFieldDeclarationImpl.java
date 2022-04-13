@@ -19,32 +19,32 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   public Expression getInitializer() {
     return this.getCompilationUnit().toExpression(this.getCompilationUnit().getJvmTypesBuilder().getExpression(this.getDelegate()));
   }
-  
+
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
   }
-  
+
   @Override
   public boolean isStatic() {
     return this.getDelegate().isStatic();
   }
-  
+
   @Override
   public boolean isTransient() {
     return this.getDelegate().isTransient();
   }
-  
+
   @Override
   public boolean isVolatile() {
     return this.getDelegate().isVolatile();
   }
-  
+
   @Override
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getType());
   }
-  
+
   @Override
   public void remove() {
     this.getCompilationUnit().getJvmModelAssociator().removeLogicalChildAssociation(this.getDelegate());

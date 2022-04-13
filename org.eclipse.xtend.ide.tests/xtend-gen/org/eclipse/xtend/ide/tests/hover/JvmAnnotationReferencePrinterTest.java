@@ -38,83 +38,83 @@ public class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
       return (("!" + label) + "!");
     }
   }
-  
+
   @Inject
   private JvmAnnotationReferencePrinterTest.TestingJvmAnnotationValuePrinter printer;
-  
+
   @Test
   public void testPrintedAnnotationValue() {
     this.assertPrinted("@!SuppressWarnings!(\"all\")", "@SuppressWarnings(\"all\")");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_01() {
     this.assertPrinted("@!SuppressWarnings!(\"all\")", "@SuppressWarnings(\'all\')");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_02() {
     this.assertPrinted("@!SuppressWarnings!(42)", "@SuppressWarnings(42)");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_03() {
     this.assertPrinted("@!SuppressWarnings!(true)", "@SuppressWarnings(true)");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_04() {
     this.assertPrinted("@!SuppressWarnings!(false)", "@SuppressWarnings(false)");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_05() {
     this.assertPrinted("@!SuppressWarnings!(#[true, false])", "@SuppressWarnings(#[true,false])");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_06() {
     this.assertPrinted("@!SuppressWarnings!(#[!String!, !Integer!])", "@SuppressWarnings(#[String,Integer])");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_07() {
     this.assertPrinted("@!Retention!(!RetentionPolicy!.!SOURCE!)", "@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE)");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_08() {
     Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.assertPrinted("@!Generated!(!value!=\"foo\", !date!=\"bar\", !comments!=\"baz\")", "@javax.annotation.Generated(value=\"foo\", date=\"bar\", comments=\"baz\")");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_09() {
     Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(#[@!XmlElement!])", "@javax.xml.bind.annotation.XmlElements(#[@javax.xml.bind.annotation.XmlElement()])");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_10() {
     Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(@!XmlElement!)", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement())");
   }
-  
+
   @Test
   public void testPrintedAnnotationValue_11() {
     Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(#[@!XmlElement!(!nillable!=true), @!XmlElement!(!type!=!String![][])])", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement(nillable=true), @javax.xml.bind.annotation.XmlElement(type=typeof(String[][])))");
   }
-  
+
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private IResourceSetProvider resourceSetProvider;
-  
+
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   private void assertPrinted(final String expected, final String xtendCode) {
     try {
       StringConcatenation _builder = new StringConcatenation();

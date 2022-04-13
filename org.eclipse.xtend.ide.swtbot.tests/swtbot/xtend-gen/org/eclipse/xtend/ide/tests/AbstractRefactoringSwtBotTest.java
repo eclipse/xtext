@@ -41,7 +41,7 @@ import org.junit.BeforeClass;
 @SuppressWarnings("all")
 public abstract class AbstractRefactoringSwtBotTest {
   private static SWTWorkbenchBot bot;
-  
+
   @BeforeClass
   public static void initialize() {
     try {
@@ -60,7 +60,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @AfterClass
   public static void terminate() {
     try {
@@ -70,22 +70,22 @@ public abstract class AbstractRefactoringSwtBotTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Inject
   private RefactoringPreferences preferences;
-  
+
   @Inject
   private RenameRefactoringController controller;
-  
+
   protected RefactoringTestParameters testParams;
-  
+
   @Before
   public void setUp() {
     XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND).injectMembers(this);
     AbstractRefactoringSwtBotTest.bot.closeAllEditors();
     SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
   }
-  
+
   @After
   public void tearDown() {
     final Runnable _function = () -> {
@@ -94,16 +94,16 @@ public abstract class AbstractRefactoringSwtBotTest {
     };
     Display.getDefault().syncExec(_function);
   }
-  
+
   public AbstractRefactoringSwtBotTest() {
     RefactoringTestParameters _refactoringTestParameters = new RefactoringTestParameters();
     this.testParams = _refactoringTestParameters;
   }
-  
+
   public AbstractRefactoringSwtBotTest(final RefactoringTestParameters testParams) {
     this.testParams = testParams;
   }
-  
+
   @Inject
   public void initialize(final RefactoringPreferences preferences) {
     this.preferences = preferences;
@@ -113,7 +113,7 @@ public abstract class AbstractRefactoringSwtBotTest {
     };
     Display.getDefault().syncExec(_function);
   }
-  
+
   public void renameInXtendEditor(final SWTBotEclipseEditor xtendEditor, final String newName, final String dialogName) {
     final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(xtendEditor, "Refactor", "Rename Element");
     renameMenuItem.click();
@@ -144,7 +144,7 @@ public abstract class AbstractRefactoringSwtBotTest {
     }
     this.waitForRefactoring(xtendEditor);
   }
-  
+
   public void renameInJavaEditor(final SWTBotEclipseEditor javaEditor, final String newName, final String dialogName) {
     final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(javaEditor, "Refactor", "Rename...");
     renameMenuItem.click();
@@ -174,7 +174,7 @@ public abstract class AbstractRefactoringSwtBotTest {
     }
     this.waitForRefactoring(javaEditor);
   }
-  
+
   public void undo(final SWTBotEclipseEditor editor) {
     editor.setFocus();
     editor.pressShortcut(SWT.MOD1, 'Z');
@@ -184,23 +184,23 @@ public abstract class AbstractRefactoringSwtBotTest {
     WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, true);
     _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
   }
-  
+
   protected void waitForLinkedMode() {
     SWTBot _sWTBot = new SWTBot();
     WaitForLinkedModeCondition _waitForLinkedModeCondition = new WaitForLinkedModeCondition(this.controller);
     _sWTBot.waitUntil(_waitForLinkedModeCondition);
   }
-  
+
   protected void waitForRefactoring(final SWTBotEclipseEditor editor) {
     SWTBot _sWTBot = new SWTBot();
     WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, false);
     _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
   }
-  
+
   protected SWTWorkbenchBot getBot() {
     return AbstractRefactoringSwtBotTest.bot;
   }
-  
+
   protected void assertEquals(final CharSequence expected, final CharSequence value) {
     Assert.assertEquals(Strings.toUnixLineSeparator(expected.toString()), Strings.toUnixLineSeparator(value.toString()));
   }

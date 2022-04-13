@@ -47,7 +47,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -79,7 +79,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -111,7 +111,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +145,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -179,7 +179,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -224,7 +224,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -258,7 +258,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -292,7 +292,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimpleArgument_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -326,7 +326,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransitiveArgument_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -358,7 +358,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransitiveArgument_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -392,7 +392,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransitiveArgument_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -439,7 +439,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransitiveArgument_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -473,7 +473,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTransitiveArgument_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -507,7 +507,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug403706_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -574,7 +574,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug403706_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -644,7 +644,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug434589_01() {
     StringConcatenation _builder = new StringConcatenation();

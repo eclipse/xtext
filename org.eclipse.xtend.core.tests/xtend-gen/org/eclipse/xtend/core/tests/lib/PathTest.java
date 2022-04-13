@@ -30,7 +30,7 @@ public class PathTest {
     Assert.assertEquals(3, p.getSegments().size());
     Assert.assertEquals("/foo/bar/baz.txt", p.toString());
   }
-  
+
   @Test
   public void testPathConstructor() {
     Assert.assertEquals("/foo/bar/baz.txt", new Path("/foo/bar/baz.txt").toString());
@@ -43,7 +43,7 @@ public class PathTest {
     Assert.assertEquals("../..", new Path("../..").toString());
     Assert.assertEquals("../..", new Path("../foo/.././..").toString());
   }
-  
+
   @Test
   public void testPathStartsWith() {
     Path _path = new Path("/foo/bar/baz.txt");
@@ -68,13 +68,13 @@ public class PathTest {
     Path _path_13 = new Path("/foo/bar/baz");
     Assert.assertFalse(_path_12.startsWith(_path_13));
   }
-  
+
   @Test
   public void testPathGetAbsolutePath() {
     Path _path = new Path("/foo");
     Assert.assertEquals(_path, new Path("/foo/bar/baz.txt").getAbsolutePath("../.."));
   }
-  
+
   @Test
   public void testAppend() {
     Path _path = new Path("/foo/bar");
@@ -88,7 +88,7 @@ public class PathTest {
     Path _path_4 = new Path("foo/file.txt");
     Assert.assertEquals(_path_4, new Path("foo/bar").append("../xfoo/../file.txt"));
   }
-  
+
   @Test
   public void testRelativize() {
     Path _path = new Path("foo");
@@ -113,7 +113,7 @@ public class PathTest {
     }
     Assert.assertNull(new Path("/foo").relativize("/bar"));
   }
-  
+
   @Test
   public void testRelativizeBothDirections() {
     final Path base = new Path("/hubba/bubba");

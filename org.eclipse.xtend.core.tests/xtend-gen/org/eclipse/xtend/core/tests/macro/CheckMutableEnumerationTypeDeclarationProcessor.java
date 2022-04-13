@@ -28,7 +28,7 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
   @Override
   public void doRegisterGlobals(final List<? extends EnumerationTypeDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableEnumerationTypeDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableEnumerationTypeDeclaration enumeration : annotatedTargetElements) {
@@ -52,7 +52,7 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
       }
     }
   }
-  
+
   @Override
   public void doGenerateCode(final List<? extends EnumerationTypeDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
   }

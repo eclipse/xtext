@@ -49,14 +49,14 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
       return _builder.toString();
     }
   }.apply();
-  
+
   @Inject
   @Extension
   private FileExtensionProvider _fileExtensionProvider;
-  
+
   @Inject
   private JavaElementDelegateJunitLaunch launcher;
-  
+
   @Before
   public void setup() {
     try {
@@ -65,7 +65,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_class_is_recognized_if_cursor_is_located_before_the_class() {
     StringConcatenation _builder = new StringConcatenation();
@@ -105,7 +105,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLine();
     this.junitTestClassIsRecognized(_builder);
   }
-  
+
   @Test
   public void test_class_is_recognized_if_cursor_is_located_in_the_class() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +145,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLine();
     this.junitTestClassIsRecognized(_builder);
   }
-  
+
   @Test
   public void test_class_is_recognized_if_cursor_is_located_after_the_class() {
     StringConcatenation _builder = new StringConcatenation();
@@ -185,7 +185,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLineIfNotEmpty();
     this.junitTestClassIsRecognized(_builder);
   }
-  
+
   @Test
   public void test_class_is_recognized_if_cursor_is_located_in_comment() {
     StringConcatenation _builder = new StringConcatenation();
@@ -232,7 +232,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLine();
     this.junitTestClassIsRecognized(_builder);
   }
-  
+
   @Test
   public void no_test_class_is_recognized_if_two_classes_are_defined001() {
     StringConcatenation _builder = new StringConcatenation();
@@ -256,7 +256,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLine();
     this.noJunitTestClassIsRecognized(_builder);
   }
-  
+
   @Test
   public void no_test_class_is_recognized_if_two_classes_are_defined002() {
     StringConcatenation _builder = new StringConcatenation();
@@ -280,19 +280,19 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
     _builder.newLine();
     this.noJunitTestClassIsRecognized(_builder);
   }
-  
+
   private void junitTestClassIsRecognized(final CharSequence text) {
     this.junitTestClassIsRecognized(text, "FooTest");
   }
-  
+
   private void noJunitTestClassIsRecognized(final CharSequence text) {
     this.junitTestClassIsRecognized(text, null);
   }
-  
+
   private void junitTestClassIsRecognized(final CharSequence it, final String expected) {
     this.junitTestClassIsRecognized(this.openEditor(this.dslFile(it), this.getCursorPosition(it)), expected);
   }
-  
+
   private IFile dslFile(final CharSequence text) {
     try {
       IFile _xblockexpression = null;
@@ -312,7 +312,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private XtextEditor openEditor(final IFile it, final int cursorPosition) {
     try {
       XtextEditor _xblockexpression = null;
@@ -326,7 +326,7 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void junitTestClassIsRecognized(final XtextEditor xtextEditor, final String expectedJavaElementName) {
     this.launcher.initializeWith(xtextEditor);
     final IJavaElement javaElement = this.launcher.<IJavaElement>getAdapter(IJavaElement.class);
@@ -337,15 +337,15 @@ public class XtendJavaElementDelegateJunitLaunchTest extends AbstractEditorTest 
       Assert.assertEquals(expectedJavaElementName, javaElement.getElementName());
     }
   }
-  
+
   private String getProjectName() {
     return "XtendJavaElementDelegateJunitLaunchTest";
   }
-  
+
   private String getContent(final CharSequence text) {
     return text.toString().replace(this.c, "");
   }
-  
+
   private int getCursorPosition(final CharSequence text) {
     int _xblockexpression = (int) 0;
     {

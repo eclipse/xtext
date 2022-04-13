@@ -61,7 +61,7 @@ public class CheckMutableClassDeclarationProcessor extends AbstractClassProcesso
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The type \'foo.Bar4\' has already been registered.", _function_7);
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     final Procedure0 _function = () -> {

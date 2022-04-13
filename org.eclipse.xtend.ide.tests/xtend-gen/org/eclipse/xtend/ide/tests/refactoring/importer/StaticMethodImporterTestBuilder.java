@@ -56,21 +56,21 @@ import org.junit.Assert;
 public class StaticMethodImporterTestBuilder {
   @Inject
   private SyncUtil syncUtil;
-  
+
   @Inject
   @Extension
   private StaticMethodImporter staticMethodImporter;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   private final String primaryPositionMarker = "<|>";
-  
+
   private final String secondaryPositionMarker = "|";
-  
+
   private String result;
-  
+
   /**
    * Creates an Xtend file with the given content and perform the import static operation on it.
    */
@@ -92,19 +92,19 @@ public class StaticMethodImporterTestBuilder {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected boolean doImportStaticMethod(final IXtextDocument document, final int caretOffset) {
     TextSelection _textSelection = new TextSelection(caretOffset, 1);
     return this.staticMethodImporter.importStaticMethod(document, _textSelection);
   }
-  
+
   /**
    * Asserts that the given string is the same as the refactored document content.
    */
   public void assertResult(final String expected) {
     Assert.assertEquals(expected, this.result);
   }
-  
+
   protected String getPositionMarker(final String content) {
     String _xifexpression = null;
     int _count = this.count(content, this.primaryPositionMarker);
@@ -129,7 +129,7 @@ public class StaticMethodImporterTestBuilder {
     }
     return _xifexpression;
   }
-  
+
   protected int count(final String model, final String positionMarker) {
     int _xblockexpression = (int) 0;
     {

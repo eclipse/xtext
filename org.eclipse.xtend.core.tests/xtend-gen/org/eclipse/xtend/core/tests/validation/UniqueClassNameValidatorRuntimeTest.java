@@ -31,15 +31,15 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   @Extension
   private ResourceHelper resourceHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper validationHelper;
-  
+
   @Test
   public void testSameFile() {
     try {
@@ -57,7 +57,7 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedFile() {
     try {
@@ -83,7 +83,7 @@ public class UniqueClassNameValidatorRuntimeTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTwoFilesSameProject() {
     try {

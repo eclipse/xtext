@@ -46,7 +46,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testFindClass_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -71,7 +71,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testFindUpstreamType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -86,7 +86,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testFindSourceType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -115,10 +115,10 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   public XtendFile validFile(final CharSequence code) {
     try {
       return this.file(code.toString(), true);
@@ -126,7 +126,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);

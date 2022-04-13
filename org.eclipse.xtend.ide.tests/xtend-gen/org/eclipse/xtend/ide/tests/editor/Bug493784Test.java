@@ -38,11 +38,11 @@ import org.junit.Test;
 public class Bug493784Test extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Test
   public void testNoMemoryLeakOnEditing() {
     try {
@@ -82,7 +82,7 @@ public class Bug493784Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private Integer getListenerCount(final XtextEditor editor) {
     final IUnitOfWork<Integer, XtextResource> _function = (XtextResource it) -> {
       final JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(it.getResourceSet());
@@ -94,7 +94,7 @@ public class Bug493784Test extends AbstractXtendUITestCase {
     };
     return editor.getDocument().<Integer>readOnly(_function);
   }
-  
+
   private void pressKey(final XtextEditor editor, final char c) throws Exception {
     final StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
     final Event e = new Event();

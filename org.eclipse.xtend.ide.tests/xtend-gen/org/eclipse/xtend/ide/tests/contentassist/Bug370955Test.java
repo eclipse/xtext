@@ -40,7 +40,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
-  
+
   @Flaky
   @Test
   public void test_02() throws Exception {
@@ -63,7 +63,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
-  
+
   @Flaky
   @Test
   public void test_03() throws Exception {
@@ -89,7 +89,7 @@ public class Bug370955Test extends AbstractXtendContentAssistBugTest {
       "!=", "!==", "+", "->", "<", "<=", "<=>", "==", "===", "=>", ">", ">=", "?:", 
       "toString");
   }
-  
+
   @Flaky
   @Test
   public void test_04() throws Exception {

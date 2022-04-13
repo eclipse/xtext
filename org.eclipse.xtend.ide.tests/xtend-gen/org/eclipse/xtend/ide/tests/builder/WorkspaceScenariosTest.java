@@ -63,11 +63,11 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Inject
   @Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
   private Provider<IResourceDescriptions> persistedResourceDescriptions;
-  
+
   @Test
   public void testJarWithEverything() {
     try {
@@ -85,7 +85,7 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJarWithoutJava() {
     try {
@@ -117,7 +117,7 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIncrementalChangeOnBidirectionalDep() {
     try {
@@ -199,7 +199,7 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected IProject createProjectWithJarDependency(final Function1<? super String, ? extends Boolean> jarFilter) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -256,7 +256,7 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected IClasspathEntry addJarToProject(final IProject project, final byte[] jarData) {
     try {
       IClasspathEntry _xblockexpression = null;
@@ -271,7 +271,7 @@ public class WorkspaceScenariosTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public byte[] createJar(final Iterable<? extends Pair<? extends String, ? extends String>> sourceFiles, final Function1<? super String, ? extends Boolean> filter) {
     try {
       final IProject project = WorkbenchTestHelper.createPluginProject("my.temporary.data.project", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");

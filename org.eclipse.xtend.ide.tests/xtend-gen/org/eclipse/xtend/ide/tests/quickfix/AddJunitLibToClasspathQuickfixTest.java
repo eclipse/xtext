@@ -33,19 +33,19 @@ public class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspat
   @Inject
   @Extension
   private QuickfixTestBuilder builder;
-  
+
   @Before
   @Override
   public void setUpProject() throws Exception {
     this.workbenchHelper.closeAllEditors(false);
     super.setUpProject();
   }
-  
+
   @After
   public void tearDown() {
     this.workbenchHelper.closeAllEditors(false);
   }
-  
+
   @Test
   public void addJUnit4LibToPluginProjectClasspath() {
     StringConcatenation _builder = new StringConcatenation();
@@ -66,7 +66,7 @@ public class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspat
     this.builder.create("FooTest.xtend", content).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC).assertResolutionLabels("Add JUnit 4 lib to classpath").assertModelAfterQuickfix(content.replace("|", ""));
     this.assertRequireBundles(new String[] { Junit4LibClasspathAdder.BUNDLE_ID });
   }
-  
+
   @Test
   public void addJUnit4LibToProjectClasspath() {
     this.removePluginNature();
@@ -90,7 +90,7 @@ public class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspat
       "classpath should contain a JUnit 4 container entry", 
       Junit4LibClasspathAdder.JUNIT4_LIBRARY_PATH);
   }
-  
+
   @Test
   public void addJUnit5LibToPluginProjectClasspath() {
     StringConcatenation _builder = new StringConcatenation();
@@ -111,7 +111,7 @@ public class AddJunitLibToClasspathQuickfixTest extends AbstractJunitLibClasspat
     this.builder.create("FooTest2.xtend", content).assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC).assertResolutionLabels("Add JUnit 5 lib to classpath").assertModelAfterQuickfix(content.replace("|", ""));
     this.assertRequireBundles(Junit5LibClasspathAdder.BUNDLE_IDS);
   }
-  
+
   @Test
   public void addJUnit5LibToProjectClasspath() {
     this.removePluginNature();

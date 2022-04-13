@@ -47,7 +47,7 @@ public class StaticExtensionMethodImporter extends StaticMethodImporter {
   protected boolean useExtension() {
     return true;
   }
-  
+
   @Override
   protected void computeChange(final XMemberFeatureCall call, final DocumentRewriter rewriter) {
     try {
@@ -101,7 +101,7 @@ public class StaticExtensionMethodImporter extends StaticMethodImporter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * Returns true if the expression should be wrapped in ( )
    * in order to accept a static extension call.

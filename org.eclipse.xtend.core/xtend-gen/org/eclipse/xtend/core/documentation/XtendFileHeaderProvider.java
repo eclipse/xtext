@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
-  
+
   @Override
   public List<INode> getFileHeaderNodes(final Resource resource) {
     if ((resource instanceof XtextResource)) {
@@ -69,7 +69,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
     }
     return Collections.<INode>emptyList();
   }
-  
+
   private boolean isTypeComment(final ILeafNode leafNode, final Resource resource) {
     final EObject content = IterableExtensions.<EObject>head(resource.getContents());
     if ((content instanceof XtendFile)) {

@@ -28,7 +28,7 @@ import org.junit.Test;
 public class ExtrasIssue695Test extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Before
   @After
   public void cleanUp() {
@@ -38,7 +38,7 @@ public class ExtrasIssue695Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBatchLinkableResourceStorageWritableNoOrphansWithDataAA() {
     final Runnable _function = () -> {

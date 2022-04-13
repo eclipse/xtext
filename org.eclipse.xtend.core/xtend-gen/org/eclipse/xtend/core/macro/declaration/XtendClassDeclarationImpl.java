@@ -26,32 +26,32 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getImplements(), _function);
   }
-  
+
   @Override
   public TypeReference getExtendedClass() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getExtends());
   }
-  
+
   @Override
   public boolean isAbstract() {
     return this.getDelegate().isAbstract();
   }
-  
+
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
   }
-  
+
   @Override
   public boolean isStatic() {
     return true;
   }
-  
+
   @Override
   public boolean isStrictFloatingPoint() {
     return false;
   }
-  
+
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {

@@ -87,7 +87,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
     };
     annotatedSourceClasses.forEach(_function);
   }
-  
+
   @Override
   public void doRegisterGlobals(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final RegisterGlobalsContext ctx) {
     final Consumer<ClassDeclaration> _function = (ClassDeclaration it) -> {

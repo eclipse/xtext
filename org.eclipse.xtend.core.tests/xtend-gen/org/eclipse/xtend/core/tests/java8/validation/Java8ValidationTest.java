@@ -32,7 +32,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testInheritedDefaultMethod() {
     try {
@@ -56,7 +56,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRedeclaredMethodFromObject() {
     try {
@@ -77,7 +77,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRedeclaredMethodFromCustomClass() {
     try {
@@ -107,7 +107,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods01() {
     try {
@@ -134,7 +134,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods02() {
     try {
@@ -161,7 +161,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods03() {
     try {
@@ -188,7 +188,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods04() {
     try {
@@ -215,7 +215,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods05() {
     try {
@@ -242,7 +242,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods06() {
     try {
@@ -269,7 +269,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods07() {
     try {
@@ -310,7 +310,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods08() {
     try {
@@ -351,7 +351,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods09() {
     try {
@@ -392,7 +392,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods10() {
     try {
@@ -433,7 +433,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConflictingDefaultMethods11() {
     try {
@@ -462,7 +462,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoConflictWithStaticMethods_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -497,7 +497,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     final XtendFile file = this.file(_builder.toString());
     this._validationTestHelper.assertNoErrors(file);
   }
-  
+
   @Test
   public void testNoConflictWithStaticMethods_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -532,7 +532,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     final XtendFile file = this.file(_builder.toString());
     this._validationTestHelper.assertNoErrors(file);
   }
-  
+
   @Test
   public void testNoConflictWithStaticMethods_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -567,7 +567,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     final XtendFile file = this.file(_builder.toString());
     this._validationTestHelper.assertNoErrors(file);
   }
-  
+
   @Test
   public void testNoConflictWithStaticMethods_04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -601,7 +601,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber() cannot hide the instance method getTheNumber() of type IX.");
   }
-  
+
   @Test
   public void testNoConflictWithStaticMethods_05() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -635,7 +635,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
     this._validationTestHelper.assertError(file, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.DUPLICATE_METHOD, 
       "The static method getTheNumber(Number) cannot hide the instance method getTheNumber(Number) of type IX.");
   }
-  
+
   @Test
   public void testMissingImplementation_01() {
     try {
@@ -664,7 +664,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMissingImplementation_02() {
     try {
@@ -691,7 +691,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMissingImplementation_03() {
     try {
@@ -724,7 +724,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvedConflict01() {
     try {
@@ -755,7 +755,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvedConflict02() {
     try {
@@ -788,7 +788,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvedConflict03() {
     try {
@@ -821,7 +821,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvedConflict04() {
     try {
@@ -854,7 +854,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testResolvedConflict05() {
     try {
@@ -886,7 +886,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedConflict01() {
     try {
@@ -914,7 +914,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedConflict02() {
     try {
@@ -942,7 +942,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAbstractMethodCall() {
     try {
@@ -973,7 +973,7 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceSuperCall() {
     try {

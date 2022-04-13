@@ -28,11 +28,11 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void test_1() {
     try {
@@ -62,7 +62,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_2() {
     try {
@@ -92,7 +92,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_3() {
     try {
@@ -119,7 +119,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_4() {
     try {
@@ -151,7 +151,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_5() {
     try {
@@ -183,7 +183,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_6() {
     try {
@@ -215,7 +215,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_7() {
     try {
@@ -242,7 +242,7 @@ public class PostfixOperatorValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_8() {
     try {

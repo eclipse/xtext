@@ -97,7 +97,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
     _builder_2.newLine();
     this.testMultiQuickfix(_builder, _builder_1, _builder_2);
   }
-  
+
   @Test
   public void equals_with_null_in_switch() {
     try {
@@ -144,7 +144,7 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void setUp() {
     try {
@@ -155,12 +155,12 @@ public class EqualsWithNullMultiQuickfixTest extends AbstractMultiQuickfixTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public String getFileName() {
     return "Foo";
   }
-  
+
   @Override
   public IFile dslFile(final CharSequence content) {
     String _projectName = this.getProjectName();

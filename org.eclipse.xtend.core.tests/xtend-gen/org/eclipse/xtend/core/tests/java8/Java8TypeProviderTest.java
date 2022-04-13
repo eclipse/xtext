@@ -37,10 +37,10 @@ import org.junit.runner.RunWith;
 public class Java8TypeProviderTest {
   @Inject
   private IJvmTypeProvider.Factory typeProviderFactory;
-  
+
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Test
   public void testDefaultJavaMethod() {
     final IJvmTypeProvider typeProvider = this.typeProviderFactory.createTypeProvider();
@@ -48,7 +48,7 @@ public class Java8TypeProviderTest {
     final JvmGenericType intf = ((JvmGenericType) _findTypeByName);
     this.doTestMethods(intf);
   }
-  
+
   @Test
   public void testDefaultXtendMethod() {
     try {
@@ -71,7 +71,7 @@ public class Java8TypeProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void doTestMethods(final JvmGenericType intf) {
     final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
       String _simpleName = it.getSimpleName();

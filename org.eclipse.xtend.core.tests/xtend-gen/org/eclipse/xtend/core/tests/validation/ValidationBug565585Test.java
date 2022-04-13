@@ -29,11 +29,11 @@ public class ValidationBug565585Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ResourceHelper resourceHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper validationHelper;
-  
+
   @Test
   public void testNoCrash() {
     try {

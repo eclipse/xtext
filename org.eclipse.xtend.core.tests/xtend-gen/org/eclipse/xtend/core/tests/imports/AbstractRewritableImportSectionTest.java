@@ -36,18 +36,18 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   @Inject
   @Extension
   private RewritableImportSection.Factory _factory;
-  
+
   @Inject
   @Extension
   private TypeReferences _typeReferences;
-  
+
   private XtendFile xtendFile;
-  
+
   private String model;
-  
+
   @Inject
   private IWhitespaceInformationProvider whitespaceInformationProvider;
-  
+
   @Test
   public void testSimpleAdd() {
     final RewritableImportSection section = this.getSection(Set.class);
@@ -59,7 +59,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testSimpleAddAsString() {
     final RewritableImportSection section = this.getSection(Set.class);
@@ -71,7 +71,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testSimpleAddAsString_1() {
     final RewritableImportSection section = this.getSection(Set.class);
@@ -81,7 +81,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testAddNullMemberAsString() {
     final RewritableImportSection section = this.getSection(Set.class);
@@ -104,7 +104,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       }
     }
   }
-  
+
   @Test
   public void testAddNullTypeAsString() {
     final RewritableImportSection section = this.getSection(Set.class);
@@ -127,7 +127,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       }
     }
   }
-  
+
   @Test
   public void testVariousAdd() {
     final RewritableImportSection section = this.getSection();
@@ -143,7 +143,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAdd_2() {
     final RewritableImportSection section = this.getSection();
@@ -157,7 +157,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAdd_3() {
     final RewritableImportSection section = this.getSection();
@@ -171,7 +171,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAddAsString() {
     final RewritableImportSection section = this.getSection();
@@ -188,7 +188,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAddAsString_2() {
     final RewritableImportSection section = this.getSection();
@@ -205,7 +205,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAddAsString_3() {
     final RewritableImportSection section = this.getSection();
@@ -220,7 +220,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testVariousAddAsString_4() {
     final RewritableImportSection section = this.getStaticSection(Collections.class);
@@ -234,7 +234,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAdd() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -245,7 +245,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAdd_2() {
     final RewritableImportSection section = this.getSection();
@@ -256,7 +256,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAdd_3() {
     final RewritableImportSection section = this.getSection();
@@ -267,7 +267,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -278,7 +278,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_2() {
     final RewritableImportSection section = this.getSection();
@@ -289,7 +289,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_3() {
     final RewritableImportSection section = this.getSection();
@@ -300,7 +300,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_4() {
     final RewritableImportSection section = this.getSection(Collections.class);
@@ -313,7 +313,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_5() {
     final RewritableImportSection section = this.getSection(Collections.class);
@@ -328,7 +328,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_6() {
     final RewritableImportSection section = this.getSection(Collections.class);
@@ -341,7 +341,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testDoubleAddAsString_7() {
     final RewritableImportSection section = this.getSection(Collections.class);
@@ -356,7 +356,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testSort() {
     final RewritableImportSection section = this.getSection();
@@ -378,7 +378,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testSimpleRemove() {
     final RewritableImportSection section = this.getSection(List.class, Set.class);
@@ -388,7 +388,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAll() {
     final RewritableImportSection section = this.getSection(List.class, Set.class);
@@ -397,7 +397,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     StringConcatenation _builder = new StringConcatenation();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAdd() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -408,7 +408,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAdd_2() {
     final RewritableImportSection section = this.getSection(List.class, Set.class);
@@ -421,7 +421,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAddRemove() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -431,7 +431,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     StringConcatenation _builder = new StringConcatenation();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAddRemoveAdd() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -444,7 +444,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAdd_3() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -455,7 +455,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRemoveAdd_4() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -468,7 +468,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   @Test
   public void testRenameRefactoringScenario() {
     final RewritableImportSection section = this.getSection(List.class);
@@ -482,7 +482,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
-  
+
   protected RewritableImportSection getImportSection(final CharSequence model) {
     try {
       Resource _eResource = this.file(model.toString()).eResource();
@@ -491,31 +491,31 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected boolean addImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.addImport(this.jvmType(javaClass));
   }
-  
+
   protected boolean removeImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.removeImport(this.jvmType(javaClass));
   }
-  
+
   protected boolean addStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.addStaticImport(this.jvmType(javaClass));
   }
-  
+
   protected boolean removeStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.removeStaticImport(this.jvmType(javaClass), null);
   }
-  
+
   protected boolean addExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.addStaticExtensionImport(this.jvmType(javaClass));
   }
-  
+
   protected boolean removeExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
     return section.removeStaticExtensionImport(this.jvmType(javaClass), null);
   }
-  
+
   protected JvmDeclaredType jvmType(final Class<?> javaClass) {
     JvmDeclaredType _xblockexpression = null;
     {
@@ -525,7 +525,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     }
     return _xblockexpression;
   }
-  
+
   protected RewritableImportSection getSection(final Class<?>... types) {
     try {
       RewritableImportSection _xblockexpression = null;
@@ -540,7 +540,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected RewritableImportSection getStaticSection(final Class<?>... types) {
     try {
       RewritableImportSection _xblockexpression = null;
@@ -555,7 +555,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertEquals(final RewritableImportSection section, final CharSequence sectionAsString) {
     final StringBuilder builder = new StringBuilder(this.model);
     final List<ReplaceRegion> changes = section.rewrite();
@@ -572,7 +572,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     }
     Assert.assertEquals(this.processLinebreaks(this.getExpectedModel(sectionAsString.toString())), this.processLinebreaks(builder));
   }
-  
+
   protected String processLinebreaks(final CharSequence sequence) {
     String _xblockexpression = null;
     {
@@ -588,12 +588,12 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     }
     return _xblockexpression;
   }
-  
+
   protected boolean isIgnoreLinebreaks() {
     return false;
   }
-  
+
   protected abstract CharSequence getModel(final boolean isStatic, final Class<?>[] types);
-  
+
   protected abstract CharSequence getExpectedModel(final String sectionAsString);
 }

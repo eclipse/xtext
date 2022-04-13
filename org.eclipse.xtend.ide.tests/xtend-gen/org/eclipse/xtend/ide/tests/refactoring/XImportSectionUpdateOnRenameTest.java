@@ -61,7 +61,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUnusedType_2() {
@@ -104,7 +104,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedType_3() {
     try {
@@ -153,7 +153,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedType_4() {
     try {
@@ -202,7 +202,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedType_5() {
     try {
@@ -251,7 +251,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedType_6() {
     try {
@@ -300,7 +300,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedField() {
     try {
@@ -343,7 +343,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUnusedField_2() {
     try {
@@ -386,7 +386,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedType() {
     try {
@@ -428,7 +428,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUsedType_2() {
@@ -478,7 +478,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedType_3() {
     try {
@@ -553,7 +553,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedType_4() {
     try {
@@ -628,7 +628,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedType_5() {
     try {
@@ -703,7 +703,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedType_6() {
     try {
@@ -778,7 +778,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUsedType_7() {
@@ -856,7 +856,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUsedType_8() {
@@ -934,7 +934,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUsedType_9() {
@@ -1012,7 +1012,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameUsedType_10() {
@@ -1090,7 +1090,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedField() {
     try {
@@ -1159,7 +1159,7 @@ public class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefacto
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameUsedField_2() {
     try {

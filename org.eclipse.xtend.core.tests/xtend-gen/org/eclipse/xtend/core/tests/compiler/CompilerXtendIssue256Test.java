@@ -81,7 +81,7 @@ public class CompilerXtendIssue256Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIssue256_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -147,7 +147,7 @@ public class CompilerXtendIssue256Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testIssue256_03() {
     StringConcatenation _builder = new StringConcatenation();

@@ -41,7 +41,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_1() {
     try {
@@ -77,7 +77,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_2() {
     try {
@@ -113,7 +113,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_3() {
     try {
@@ -133,7 +133,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_4() {
     try {
@@ -153,7 +153,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_5() {
     try {
@@ -173,7 +173,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_6() {
     try {
@@ -193,7 +193,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_7() {
     try {
@@ -213,7 +213,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkUnnecessaryImportForEnumLiteral_8() {
     try {
@@ -233,7 +233,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_0() {
     try {
@@ -266,7 +266,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_1() {
     try {
@@ -298,7 +298,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_2() {
     try {
@@ -330,7 +330,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_3() {
     try {
@@ -362,7 +362,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_4() {
     try {
@@ -395,7 +395,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_5() {
     try {
@@ -427,7 +427,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_6() {
     try {
@@ -459,7 +459,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_7() {
     try {
@@ -492,7 +492,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_8() {
     try {
@@ -524,7 +524,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithStaticAccess_9() {
     try {
@@ -557,7 +557,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_0() {
     try {
@@ -590,7 +590,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_1() {
     try {
@@ -623,7 +623,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertFeatureCallError(final XtendFile file, final EClass objectType) {
     final Resource resource = file.eResource();
     final List<Issue> allIssues = this._validationTestHelper.validate(resource);
@@ -639,7 +639,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       Assert.fail("No Diagnostic.LINKING_DIAGNOSTIC issue with user data FEATURE_CALL found");
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_2() {
     try {
@@ -671,7 +671,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_3() {
     try {
@@ -703,7 +703,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_4() {
     try {
@@ -736,7 +736,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_5() {
     try {
@@ -768,7 +768,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_6() {
     try {
@@ -800,7 +800,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_7() {
     try {
@@ -833,7 +833,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_8() {
     try {
@@ -865,7 +865,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportWithExtensionAccess_9() {
     try {
@@ -898,7 +898,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void unresolvedImport() {
     try {
@@ -913,7 +913,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void unresolvedImport_2() {
     try {
@@ -928,7 +928,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void unresolvedImport_3() {
     try {
@@ -943,7 +943,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_0() {
     try {
@@ -974,7 +974,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_1() {
     try {
@@ -1006,7 +1006,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_2() {
     try {
@@ -1038,7 +1038,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_3() {
     try {
@@ -1069,7 +1069,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_4() {
     try {
@@ -1101,7 +1101,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_5() {
     try {
@@ -1132,7 +1132,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_6() {
     try {
@@ -1179,7 +1179,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_7() {
     try {
@@ -1221,7 +1221,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_8() {
     try {
@@ -1263,7 +1263,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_9() {
     try {
@@ -1295,7 +1295,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_10() {
     try {
@@ -1326,7 +1326,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithStaticAccess_11() {
     try {
@@ -1357,7 +1357,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_0() {
     try {
@@ -1389,7 +1389,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_1() {
     try {
@@ -1422,7 +1422,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_2() {
     try {
@@ -1453,7 +1453,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_3() {
     try {
@@ -1485,7 +1485,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_4() {
     try {
@@ -1517,7 +1517,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_5() {
     try {
@@ -1549,7 +1549,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_6() {
     try {
@@ -1580,7 +1580,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkDuplicateImportWithExtensionAccess_7() {
     try {
@@ -1611,7 +1611,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkImportsNotMarkedAsUsedWhenTypeUnresolved() {
     try {
@@ -1640,7 +1640,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void checkKnownStaticImportNotMarkedAsUsed() {
     try {

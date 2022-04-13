@@ -167,7 +167,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=410329
    */
@@ -218,7 +218,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testThrowExceptionSingleDispatchCase_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -266,7 +266,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testThrowExceptionSingleDispatchCase_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -311,7 +311,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testThrowException() {
     StringConcatenation _builder = new StringConcatenation();
@@ -429,7 +429,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAllCasesThrowException() {
     StringConcatenation _builder = new StringConcatenation();
@@ -551,7 +551,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImplicitReturn_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -671,7 +671,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImplicitReturn_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -791,7 +791,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSamePrimitiveArgs() {
     StringConcatenation _builder = new StringConcatenation();
@@ -879,7 +879,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=365910
    */
@@ -1020,7 +1020,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=365910
    */
@@ -1136,7 +1136,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testVoidAndObjectDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1200,7 +1200,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testVoidAndStringDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1264,7 +1264,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testVoidAndObjectTwoParametersDoNotGenerateUnusedCode() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1331,7 +1331,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testVoidNotAllCases() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1426,7 +1426,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testVoidAndObjectTwoParametersButDifferentTypesGenerateElse() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1508,7 +1508,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSingleDispatchTwoParameters() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1547,7 +1547,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSingleDispatchTwoParametersOneVoid() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1604,7 +1604,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSingleDispatchTwoParametersTwoVoid() {
     StringConcatenation _builder = new StringConcatenation();

@@ -91,7 +91,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void testBug422864_01() {
@@ -181,7 +181,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void testBug422864_02() {
@@ -290,7 +290,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void testBug422864_03() {
@@ -399,7 +399,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void testBug422864_04() {
@@ -516,7 +516,7 @@ public class CompilerBug422864Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void testBug422864_05() {

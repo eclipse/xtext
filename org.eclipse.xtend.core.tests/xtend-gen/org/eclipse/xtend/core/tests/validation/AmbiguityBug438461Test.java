@@ -36,7 +36,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -57,7 +57,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -78,7 +78,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -99,7 +99,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -120,7 +120,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -162,7 +162,7 @@ public class AmbiguityBug438461Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethod_08() {
     StringConcatenation _builder = new StringConcatenation();

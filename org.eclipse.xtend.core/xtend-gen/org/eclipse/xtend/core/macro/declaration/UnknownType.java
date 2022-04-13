@@ -18,14 +18,14 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class UnknownType implements Type {
   private final CompilationUnit compilationUnit;
-  
+
   private final String qualifiedName;
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     return false;
   }
-  
+
   @Override
   public String getSimpleName() {
     String _xblockexpression = null;
@@ -41,13 +41,13 @@ public class UnknownType implements Type {
     }
     return _xblockexpression;
   }
-  
+
   public UnknownType(final CompilationUnit compilationUnit, final String qualifiedName) {
     super();
     this.compilationUnit = compilationUnit;
     this.qualifiedName = qualifiedName;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
@@ -56,7 +56,7 @@ public class UnknownType implements Type {
     result = prime * result + ((this.compilationUnit== null) ? 0 : this.compilationUnit.hashCode());
     return prime * result + ((this.qualifiedName== null) ? 0 : this.qualifiedName.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -79,7 +79,7 @@ public class UnknownType implements Type {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -88,13 +88,13 @@ public class UnknownType implements Type {
     b.add("qualifiedName", this.qualifiedName);
     return b.toString();
   }
-  
+
   @Pure
   @Override
   public CompilationUnit getCompilationUnit() {
     return this.compilationUnit;
   }
-  
+
   @Pure
   @Override
   public String getQualifiedName() {

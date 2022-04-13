@@ -39,11 +39,11 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     RefactoringTestParameters _doubleArrow = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters, _function);
     return Collections.<Object[]>unmodifiableList(CollectionLiterals.<Object[]>newArrayList(new Object[] { _doubleArrow }));
   }
-  
+
   public RenameJavaClassSwtBotTest(final RefactoringTestParameters testParams) {
     super(testParams);
   }
-  
+
   @Test
   public void renameJavaClass() {
     SWTWorkbenchBot _bot = this.getBot();
@@ -81,7 +81,7 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     Assert.assertFalse(javaEditor.isDirty());
     this.assertEquals("NewJavaClass.java", javaEditor.getTitle());
   }
-  
+
   @Test
   public void renameJavaClassXtendReference() {
     SWTWorkbenchBot _bot = this.getBot();

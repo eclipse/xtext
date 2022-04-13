@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   @Inject
   private IResourceServiceProvider.Registry registry;
-  
+
   @Override
   public void setUp() {
     final JavaSourceLanguageSetup javaSetup = new JavaSourceLanguageSetup();
@@ -44,12 +44,12 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     javaSetup.register(injector, "java");
     super.setUp();
   }
-  
+
   @Override
   public IResourceServiceProvider.Registry getLanguages() {
     return this.registry;
   }
-  
+
   @Test
   public void testSimpleMixedBuild() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -83,7 +83,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(2, this.generated.size());
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/A.java"));
   }
-  
+
   @Test
   public void testSimpleMixedBuild_02() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -126,7 +126,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(2, this.generated.size());
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/A.java"));
   }
-  
+
   @Test
   public void testSimpleMixedBuild_03() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -187,7 +187,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/mypack/Third.java"));
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/mypack/.Third.java._trace"));
   }
-  
+
   @Test
   public void testSimpleMixedBuild04() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -228,7 +228,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(2, this.generated.size());
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/A.java"));
   }
-  
+
   @Test
   public void testSimpleFullBuild() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -260,7 +260,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/.B.java._trace"));
     Assert.assertTrue(this.containsSuffix(this.generated.values(), "xtend-gen/.A.java._trace"));
   }
-  
+
   @Test
   public void testDelete_01() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -313,7 +313,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     this.build(this.newBuildRequest(_function_1));
     Assert.assertTrue(validateCalled.get());
   }
-  
+
   @Test
   public void testIncrementalBuild() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -399,7 +399,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(2, this.deleted.size());
     Assert.assertTrue(this.containsSuffix(this.deleted, "xtend-gen/A.java"));
   }
-  
+
   @Test
   public void testPackageInfo() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -414,7 +414,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     this.build(buildRequest);
     Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
   }
-  
+
   /**
    * tests https://github.com/eclipse/xtext-core/issues/52
    */
@@ -633,7 +633,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     this.build(this.newBuildRequest(_function_1));
     Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
   }
-  
+
   @Test
   public void testGrammarAccessproblem() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -735,7 +735,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
     Assert.assertEquals(2, this.generated.size());
   }
-  
+
   @Test
   public void testInnerClassEnumProblem() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
@@ -789,7 +789,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(this.issues.toString(), this.issues.isEmpty());
     Assert.assertEquals(2, this.generated.size());
   }
-  
+
   @Test
   public void testBug487806() {
     final Procedure1<BuildRequest> _function = (BuildRequest it) -> {

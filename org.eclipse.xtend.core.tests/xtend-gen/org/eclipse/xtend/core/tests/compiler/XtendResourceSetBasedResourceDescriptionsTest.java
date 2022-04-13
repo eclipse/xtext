@@ -33,10 +33,10 @@ import org.junit.Test;
 public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCase {
   @Inject
   private CompilationTestHelper compiler;
-  
+
   @Inject
   private IResourceValidator validator;
-  
+
   @Test
   public void testBidirectionalRef() {
     try {
@@ -59,7 +59,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnloadedBidirectionalRef() {
     try {
@@ -82,7 +82,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnloadedInstallDerivedStateThrowsException() {
     try {

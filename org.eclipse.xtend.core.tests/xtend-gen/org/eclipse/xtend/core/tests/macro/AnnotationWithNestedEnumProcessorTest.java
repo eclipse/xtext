@@ -45,7 +45,7 @@ public class AnnotationWithNestedEnumProcessorTest extends AbstractActiveAnnotat
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }
-  
+
   @Test
   public void testBug487559_02() {
     StringConcatenation _builder = new StringConcatenation();

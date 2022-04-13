@@ -107,7 +107,7 @@ public class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertContains(final ICompletionProposal proposal, final String text) {
     String _displayString = proposal.getDisplayString();
     String _plus = ((text + " in ") + _displayString);

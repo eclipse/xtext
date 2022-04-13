@@ -46,18 +46,18 @@ import org.osgi.framework.Version;
 public class BuildAffectionTest {
   @Inject
   private IBuildLogger logger;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Inject
   private QueuedBuildData queuedBuildData;
-  
+
   private IProject clientProject;
-  
+
   private static boolean wasAutoBuilding;
-  
+
   @BeforeClass
   public static void setUpProject() throws Exception {
     TargetPlatformUtil.setTargetPlatform(BuildAffectionTest.class);
@@ -69,7 +69,7 @@ public class BuildAffectionTest {
     workspace.setDescription(description);
     WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
   }
-  
+
   @AfterClass
   public static void tearDownProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
@@ -78,14 +78,14 @@ public class BuildAffectionTest {
     description.setAutoBuilding(BuildAffectionTest.wasAutoBuilding);
     workspace.setDescription(description);
   }
-  
+
   @Before
   public void setUp() {
     final Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
     injector.injectMembers(this);
     this.queuedBuildData.reset();
   }
-  
+
   @After
   public void tearDown() {
     try {
@@ -98,7 +98,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSingleFile() {
     try {
@@ -122,7 +122,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_noReferences() {
     try {
@@ -155,7 +155,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_noReferences_Java() {
     try {
@@ -182,7 +182,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_commentAdded() {
     try {
@@ -217,7 +217,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_commentAdded_Java() {
     try {
@@ -250,7 +250,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_methodBodyChanged() {
     try {
@@ -293,7 +293,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_methodBodyChanged_Java() {
     try {
@@ -334,7 +334,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_nameAddedAndDeleted() {
     try {
@@ -375,7 +375,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_nameAddedAndDeleted_Java() {
     try {
@@ -408,7 +408,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_fieldAdded() {
     try {
@@ -448,7 +448,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_fieldAdded_Java() {
     try {
@@ -495,7 +495,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_fieldTypeChanged() {
     try {
@@ -540,7 +540,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_fieldTypeChanges_Java() {
     try {
@@ -587,7 +587,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_exportedNameAdded() {
     try {
@@ -624,7 +624,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnaffected_exportedNameAdded_Java() {
     try {
@@ -657,7 +657,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_typeChanged() {
     try {
@@ -692,7 +692,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_typeChanged_Java() {
     try {
@@ -729,7 +729,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_dependentProject() {
     try {
@@ -803,7 +803,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_dependentProject_Java() {
     try {
@@ -877,7 +877,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_dependentProject_Java_WithExpression() {
     try {
@@ -962,7 +962,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_annotationProcessorChanged_singleFile() {
     try {
@@ -1076,7 +1076,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAffected_annotationProcessorChanged_separateFiles() {
     try {
@@ -1187,7 +1187,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertBuildLogs(final CharSequence expected) {
     final StringBuilder logs = new StringBuilder();
     final IBuildLogger _function = (Object it) -> {
@@ -1203,11 +1203,11 @@ public class BuildAffectionTest {
     String _plus_1 = (_plus + _trim);
     Assert.assertTrue(_plus_1, logs.toString().trim().matches(Strings.toUnixLineSeparator(expected.toString()).trim()));
   }
-  
+
   private void autoBuild() {
     IResourcesSetupUtil.waitForBuild();
   }
-  
+
   private void changeContent(final IFile file, final CharSequence sequence) {
     try {
       String _string = sequence.toString();
@@ -1217,7 +1217,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private IFile createClientProjectFile(final String name, final CharSequence content) {
     try {
       IFile _xblockexpression = null;
@@ -1232,7 +1232,7 @@ public class BuildAffectionTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private static boolean isCoreResourceGreaterOrEqual_3_17_0() {
     Version version_3_17_0 = new Version(3, 17, 0);
     Version installed = ResourcesPlugin.getPlugin().getBundle().getVersion();

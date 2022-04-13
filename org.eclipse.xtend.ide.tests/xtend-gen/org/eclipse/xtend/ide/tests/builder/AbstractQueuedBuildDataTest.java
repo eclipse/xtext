@@ -49,23 +49,23 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   @Inject
   @Extension
   protected JavaEditorExtension _javaEditorExtension;
-  
+
   @Inject
   @Extension
   protected WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private IStorage2UriMapper mapper;
-  
+
   @Inject
   protected BuilderDeltaConverter converter;
-  
+
   protected QueuedBuildData queuedBuildData;
-  
+
   protected JdtQueuedBuildData queuedBuildDataContribution;
-  
+
   protected JavaChangeQueueFiller queueFiller;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
@@ -77,7 +77,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     this.queueFiller = _javaChangeQueueFiller;
     JavaCore.addElementChangedListener(this.queueFiller, ElementChangedEvent.POST_CHANGE);
   }
-  
+
   @Override
   public void tearDown() throws Exception {
     JavaCore.removeElementChangedListener(this.queueFiller);
@@ -86,11 +86,11 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     this.testHelper.tearDown();
     super.tearDown();
   }
-  
+
   public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Procedure0 producer, final String... expectedExportedNames) {
     return this.assertThereAreDeltas(this.assertDeltas(producer), expectedExportedNames);
   }
-  
+
   public Collection<? extends IResourceDescription.Delta> assertThereAreDeltas(final Collection<? extends IResourceDescription.Delta> deltas, final String... expectedExportedNames) {
     Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
@@ -131,7 +131,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     }
     return _xblockexpression;
   }
-  
+
   public Collection<? extends IResourceDescription.Delta> assertThereAreNotDeltas(final Procedure0 producer) {
     Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
@@ -140,7 +140,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     }
     return _xblockexpression;
   }
-  
+
   public Collection<? extends IResourceDescription.Delta> assertThereAreNotDeltas(final Collection<? extends IResourceDescription.Delta> deltas) {
     Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
@@ -151,7 +151,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     }
     return _xblockexpression;
   }
-  
+
   public HashSet<String> getExportedNames(final Collection<? extends IResourceDescription.Delta> deltas) {
     final Function1<IResourceDescription.Delta, HashSet<String>> _function = (IResourceDescription.Delta it) -> {
       HashSet<String> _xblockexpression = null;
@@ -200,7 +200,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     };
     return IterableExtensions.<HashSet<String>>reduce(IterableExtensions.map(deltas, _function), _function_1);
   }
-  
+
   public Collection<IResourceDescription.Delta> assertDeltas(final Procedure0 producer) {
     Collection<IResourceDescription.Delta> _xblockexpression = null;
     {
@@ -211,12 +211,12 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     }
     return _xblockexpression;
   }
-  
+
   public void reset() {
     IResourcesSetupUtil.waitForBuild();
     this.queuedBuildData.reset();
   }
-  
+
   public void confirmDeltas() {
     final boolean result = this.tryConfirmDeltas();
     final Collection<UnconfirmedStructuralChangesDelta> deltas = this.queuedBuildDataContribution.getUnconfirmedDeltas();
@@ -226,7 +226,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     _builder.append(_exportedNames);
     Assert.assertTrue(_builder.toString(), result);
   }
-  
+
   public boolean tryConfirmDeltas() {
     boolean _xblockexpression = false;
     {

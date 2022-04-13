@@ -23,7 +23,7 @@ class UnicodeTerminalsGenerator {
   public static void main(final String[] args) {
     InputOutput.<CharSequence>println(UnicodeTerminalsGenerator.generateUnicodeRules());
   }
-  
+
   public static CharSequence generateUnicodeRules() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("terminal fragment IDENTIFIER_START:");
@@ -59,7 +59,7 @@ class UnicodeTerminalsGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   public static StringWriter generateUnicodeRules(final Function1<? super Integer, ? extends Boolean> guard) {
     Character prev = null;
     boolean run = false;

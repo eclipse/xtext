@@ -28,11 +28,11 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     };
     Iterables.<JvmDeclaredType>filter(xtendFile.eResource().getContents(), JvmDeclaredType.class).forEach(_function);
   }
-  
+
   protected void _build(final JvmDeclaredType jvmDeclaredType, final IXtendOutlineContext context) {
     this.buildMembers(jvmDeclaredType, jvmDeclaredType, context);
   }
-  
+
   @Override
   protected void buildType(final EObject someType, final IXtendOutlineContext context) {
     if ((someType instanceof JvmDeclaredType)) {
@@ -46,7 +46,7 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
       }
     }
   }
-  
+
   public void build(final EObject jvmDeclaredType, final IXtendOutlineContext context) {
     if (jvmDeclaredType instanceof JvmDeclaredType) {
       _build((JvmDeclaredType)jvmDeclaredType, context);

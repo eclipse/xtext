@@ -23,7 +23,7 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
   public boolean isValid() {
     return ((super.isValid() && (this.getFieldName() != null)) && (this.getFieldType() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
@@ -46,13 +46,13 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);
   }
-  
+
   @Override
   public String getPrimitiveKindRepresentation(final Primitives.Primitive primitiveKind) {
     String _switchResult = null;

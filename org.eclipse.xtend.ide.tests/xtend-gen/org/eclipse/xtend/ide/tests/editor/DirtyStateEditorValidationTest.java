@@ -48,18 +48,18 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   private static final long VALIDATION_TIMEOUT = 2000L;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Inject
   private IResourceValidator validator;
-  
+
   @After
   @Override
   public void tearDown() {
@@ -69,7 +69,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=414947
    */
@@ -121,7 +121,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug410575() {
     try {
@@ -240,7 +240,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415052
    */
@@ -294,7 +294,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAddedInterfaceMethod() {
     try {
@@ -354,7 +354,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testChangedOverriddenSignature() {
     try {
@@ -420,7 +420,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testValidateOnOpen() {
     try {
@@ -467,7 +467,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertNumberOfErrorAnnotations(final XtextEditor editor, final int expectedNumber) {
     final Function0<Boolean> _function = () -> {
       int _size = this.getErrorAnnotations(editor).size();
@@ -484,7 +484,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
     };
     Assert.assertEquals(IterableExtensions.join(ListExtensions.<Annotation, String>map(errors, _function_1), ", "), expectedNumber, errors.size());
   }
-  
+
   private List<Annotation> getErrorAnnotations(final XtextEditor editor) {
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _type = it.getType();

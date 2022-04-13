@@ -30,53 +30,53 @@ public class CodeBuilderFactory {
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   @Extension
   private IJavaElementFinder _iJavaElementFinder;
-  
+
   @Inject
   private Provider<XtendClassBuilder> xtendClassBuilderProvider;
-  
+
   @Inject
   private Provider<XtendInterfaceBuilder> xtendInterfaceBuilderProvider;
-  
+
   @Inject
   private Provider<XtendAnnotationBuilder> xtendAnnotationBuilderProvider;
-  
+
   @Inject
   private Provider<XtendFieldBuilder> xtendFieldBuilderProvider;
-  
+
   @Inject
   private Provider<XtendConstructorBuilder> xtendConstructorBuilderProvider;
-  
+
   @Inject
   private Provider<XtendMethodBuilder> xtendMethodBuilderProvider;
-  
+
   @Inject
   private Provider<XtendParameterBuilder> xtendParameterBuilderProvider;
-  
+
   @Inject
   private Provider<JavaClassBuilder> javaClassBuilderProvider;
-  
+
   @Inject
   private Provider<JavaInterfaceBuilder> javaInterfaceBuilderProvider;
-  
+
   @Inject
   private Provider<JavaAnnotationBuilder> javaAnnotationBuilderProvider;
-  
+
   @Inject
   private Provider<JavaFieldBuilder> javaFieldBuilderProvider;
-  
+
   @Inject
   private Provider<JavaConstructorBuilder> javaConstructorBuilderProvider;
-  
+
   @Inject
   private Provider<JavaMethodBuilder> javaMethodBuilderProvider;
-  
+
   @Inject
   private Provider<JavaParameterBuilder> javaParameterBuilderProvider;
-  
+
   public AbstractClassBuilder createClassBuilder(final JvmDeclaredType owner) {
     AbstractClassBuilder _xblockexpression = null;
     {
@@ -94,7 +94,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractInterfaceBuilder createInterfaceBuilder(final JvmDeclaredType owner) {
     AbstractInterfaceBuilder _xblockexpression = null;
     {
@@ -112,7 +112,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractAnnotationBuilder createAnnotationBuilder(final JvmDeclaredType owner) {
     AbstractAnnotationBuilder _xblockexpression = null;
     {
@@ -130,7 +130,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractFieldBuilder createFieldBuilder(final JvmDeclaredType owner) {
     AbstractFieldBuilder _xblockexpression = null;
     {
@@ -148,7 +148,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractConstructorBuilder createConstructorBuilder(final JvmDeclaredType owner) {
     AbstractConstructorBuilder _xblockexpression = null;
     {
@@ -166,7 +166,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractMethodBuilder createMethodBuilder(final JvmDeclaredType owner) {
     AbstractMethodBuilder _xblockexpression = null;
     {
@@ -184,7 +184,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public AbstractParameterBuilder createParameterBuilder(final JvmDeclaredType owner) {
     AbstractParameterBuilder _xblockexpression = null;
     {
@@ -202,7 +202,7 @@ public class CodeBuilderFactory {
     }
     return _xblockexpression;
   }
-  
+
   public Object getSource(final JvmDeclaredType element) {
     IType _xblockexpression = null;
     {

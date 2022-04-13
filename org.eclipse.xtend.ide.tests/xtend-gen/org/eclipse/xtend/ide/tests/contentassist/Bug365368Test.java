@@ -21,27 +21,27 @@ public class Bug365368Test extends AbstractXtendContentAssistBugTest {
       "^as", "aa", "bb", "m", 
       "class", "clone", "equals()", "finalize", "hashCode", "identityEquals()", "notify", "notifyAll", "toString", "wait", "wait()", "wait()");
   }
-  
+
   @Test
   public void testEscapedIdentifierEscapeCharPrefix() throws Exception {
     this.newBuilder().append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.^").assertText("^as");
   }
-  
+
   @Test
   public void testEscapedIdentifierFirstCharPrefix() throws Exception {
     this.newBuilder().append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.a").assertText("^as", "aa");
   }
-  
+
   @Test
   public void testEscapedIdentifierFirstCharPrefixApplied() throws Exception {
     this.newBuilder().append("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.a").assertText("^as", "aa").applyProposal("^as").expectContent("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.^as");
   }
-  
+
   @Test
   public void testEscapedIdentifierTwoCharsPrefix() throws Exception {
     this.newBuilder().append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.as").assertText("^as");
   }
-  
+
   @Test
   public void testEscapedIdentifierTwoCharPrefixApplied() throws Exception {
     this.newBuilder().append("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.as").applyProposal().expectContent("class C {\n\t\t\t\tdef void ^as() {}\n\t\t\t\tdef void aa() {}\n\t\t\t\tdef void bb() {}\n\t\t\t\tdef void m() { this.^as");

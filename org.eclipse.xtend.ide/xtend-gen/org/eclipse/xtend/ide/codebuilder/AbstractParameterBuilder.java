@@ -21,19 +21,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   @Accessors
   private String name;
-  
+
   @Accessors
   private LightweightTypeReference type;
-  
+
   @Accessors
   private boolean varArgsFlag;
-  
+
   @Accessors
   private boolean extensionFlag;
-  
+
   @Accessors
   private boolean finalFlag;
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
@@ -48,60 +48,60 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
     }
     return _xblockexpression;
   }
-  
+
   protected abstract ISourceAppender appendModifiers(final ISourceAppender appendable);
-  
+
   @Override
   public boolean isValid() {
     return (((this.type != null) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
   }
-  
+
   @Override
   public String getImage() {
     return "parameter.gif";
   }
-  
+
   @Pure
   public String getName() {
     return this.name;
   }
-  
+
   public void setName(final String name) {
     this.name = name;
   }
-  
+
   @Pure
   public LightweightTypeReference getType() {
     return this.type;
   }
-  
+
   public void setType(final LightweightTypeReference type) {
     this.type = type;
   }
-  
+
   @Pure
   public boolean isVarArgsFlag() {
     return this.varArgsFlag;
   }
-  
+
   public void setVarArgsFlag(final boolean varArgsFlag) {
     this.varArgsFlag = varArgsFlag;
   }
-  
+
   @Pure
   public boolean isExtensionFlag() {
     return this.extensionFlag;
   }
-  
+
   public void setExtensionFlag(final boolean extensionFlag) {
     this.extensionFlag = extensionFlag;
   }
-  
+
   @Pure
   public boolean isFinalFlag() {
     return this.finalFlag;
   }
-  
+
   public void setFinalFlag(final boolean finalFlag) {
     this.finalFlag = finalFlag;
   }

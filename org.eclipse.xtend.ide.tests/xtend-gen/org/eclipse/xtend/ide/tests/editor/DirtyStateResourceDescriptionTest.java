@@ -35,13 +35,13 @@ import org.junit.Test;
 public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
   @Inject
   private IResourceDescription.Manager plainManager;
-  
+
   @Inject
   private DirtyStateResourceDescription.Manager dirtyManager;
-  
+
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
-  
+
   @Test
   public void testTextHash() {
     StringConcatenation _builder = new StringConcatenation();
@@ -56,7 +56,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     boolean _equals = Objects.equal("", textHash);
     Assert.assertFalse(_equals);
   }
-  
+
   @Test
   public void testEmptyContents() {
     StringConcatenation _builder = new StringConcatenation();
@@ -68,7 +68,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     Assert.assertTrue(IterableExtensions.isEmpty(d.getImportedNames()));
     Assert.assertTrue(IterableExtensions.isEmpty(d.getReferenceDescriptions()));
   }
-  
+
   @Test
   public void testTextChange() {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
     Assert.assertTrue(delta.haveEObjectDescriptionsChanged());
   }
-  
+
   @Test
   public void testNoTextChange() {
     StringConcatenation _builder = new StringConcatenation();
@@ -114,7 +114,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     final IResourceDescription.Delta delta = this.dirtyManager.createDelta(d, d1);
     Assert.assertFalse(delta.haveEObjectDescriptionsChanged());
   }
-  
+
   @Test
   public void testAffected() {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
     Assert.assertTrue(this.plainManager.isAffected(delta, bar));
   }
-  
+
   @Test
   public void testAffected1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -168,7 +168,7 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
     Assert.assertTrue(this.plainManager.isAffected(delta, bar));
   }
-  
+
   @Test
   public void testNotAffected() {
     StringConcatenation _builder = new StringConcatenation();
@@ -195,11 +195,11 @@ public class DirtyStateResourceDescriptionTest extends AbstractXtendUITestCase {
     final IResourceDescription.Delta delta = this.plainManager.createDelta(foo, dirtyFoo);
     Assert.assertFalse(this.plainManager.isAffected(delta, bar));
   }
-  
+
   public IResourceDescription getDirtyResourceDescription(final CharSequence model) {
     return this.dirtyManager.getResourceDescription(this.parse("Foo", model));
   }
-  
+
   public XtextResource parse(final String fileName, final CharSequence model) {
     try {
       XtextResource _xblockexpression = null;

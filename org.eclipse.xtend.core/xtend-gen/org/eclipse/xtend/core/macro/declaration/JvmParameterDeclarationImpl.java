@@ -22,7 +22,7 @@ public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmForm
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getParameterType());
   }
-  
+
   @Override
   public ExecutableDeclaration getDeclaringExecutable() {
     EObject _eContainer = this.getDelegate().eContainer();

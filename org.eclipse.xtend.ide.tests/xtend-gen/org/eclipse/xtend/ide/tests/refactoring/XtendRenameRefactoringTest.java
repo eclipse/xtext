@@ -70,7 +70,7 @@ public class XtendRenameRefactoringTest extends AbstractXtendRenameRefactoringTe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore("https://github.com/eclipse/xtext-xtend/issues/164")
   @Test
   public void testRenameXtendMember002() {

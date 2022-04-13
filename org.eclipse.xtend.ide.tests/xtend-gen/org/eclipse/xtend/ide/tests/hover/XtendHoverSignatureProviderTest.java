@@ -52,13 +52,13 @@ import org.junit.Test;
 public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private XtendHoverSignatureProvider signatureProvider;
-  
+
   @Test
   public void testSignatureForXtendClass() {
     try {
@@ -77,7 +77,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendFunction() {
     try {
@@ -106,7 +106,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendParameter() {
     try {
@@ -131,7 +131,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendField() {
     try {
@@ -168,7 +168,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendFieldWithoutTypeDeclaration() {
     try {
@@ -197,7 +197,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForAnonymousClassLocalVarTypeTest() {
     try {
@@ -235,7 +235,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForAnonymousClassLocalVarTypeTest_02() {
     try {
@@ -273,7 +273,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForAnonymousClassLocalVarTypeTest_03() {
     try {
@@ -311,7 +311,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForAnonymousClassFieldTypeTest() {
     try {
@@ -336,7 +336,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForExtensionFieldWithoutName() {
     try {
@@ -365,7 +365,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendFieldWithoutNameOrType() {
     try {
@@ -394,7 +394,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendConstructor() {
     try {
@@ -417,7 +417,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXtendDefaultConstructor() {
     try {
@@ -450,7 +450,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDeclarationOfClazzWithGenrics() {
     try {
@@ -467,7 +467,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureXtendConstructorWithGenerics_01() {
     try {
@@ -500,7 +500,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureConstructorCall_01() {
     try {
@@ -533,7 +533,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureConstructorCall_02() {
     try {
@@ -569,7 +569,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureConstructorCall_03() {
     try {
@@ -602,7 +602,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void testSignatureDelegateConstructorCall_01() {
@@ -639,7 +639,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void testSignatureDelegateConstructorCall_02() {
@@ -676,7 +676,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForForLoopVariable() {
     try {
@@ -716,7 +716,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForForXClosureVariable() {
     try {
@@ -761,7 +761,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSignatureForXVariableDeclaration() {
     try {
@@ -794,7 +794,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug378082() {
     try {
@@ -829,7 +829,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug379019() {
     try {
@@ -865,7 +865,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumDeclaration() {
     try {
@@ -881,7 +881,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumReference() {
     try {
@@ -905,7 +905,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceDeclaration() {
     try {
@@ -921,7 +921,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceReference() {
     try {
@@ -943,7 +943,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationDeclaration() {
     try {
@@ -959,7 +959,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationReference() {
     try {
@@ -980,7 +980,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test381185() {
     try {
@@ -1045,7 +1045,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAutcastExpressions() {
     try {
@@ -1106,7 +1106,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAutcastExpressions_2() {
     try {
@@ -1167,7 +1167,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAutcastExpressions_3() {
     try {
@@ -1224,11 +1224,11 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ResourceSet getResourceSet() {
     return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
-  
+
   @After
   public void cleanup() {
     try {

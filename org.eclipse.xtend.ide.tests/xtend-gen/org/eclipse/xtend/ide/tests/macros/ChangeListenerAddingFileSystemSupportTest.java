@@ -29,74 +29,74 @@ public class ChangeListenerAddingFileSystemSupportTest {
     @Override
     public void delete(final Path path) {
     }
-    
+
     @Override
     public void mkdir(final Path path) {
     }
-    
+
     @Override
     public void setContents(final Path path, final CharSequence contents) {
     }
-    
+
     @Override
     public void setContentsAsStream(final Path path, final InputStream source) {
     }
-    
+
     @Override
     public boolean exists(final Path path) {
       return false;
     }
-    
+
     @Override
     public String getCharset(final Path path) {
       return null;
     }
-    
+
     @Override
     public Iterable<? extends Path> getChildren(final Path path) {
       return null;
     }
-    
+
     @Override
     public CharSequence getContents(final Path path) {
       return null;
     }
-    
+
     @Override
     public InputStream getContentsAsStream(final Path path) {
       return null;
     }
-    
+
     @Override
     public long getLastModification(final Path path) {
       return 0L;
     }
-    
+
     @Override
     public boolean isFile(final Path path) {
       return true;
     }
-    
+
     @Override
     public boolean isFolder(final Path path) {
       return true;
     }
-    
+
     @Override
     public URI toURI(final Path path) {
       return null;
     }
   }
-  
+
   private UIResourceChangeRegistry registry;
-  
+
   private org.eclipse.emf.common.util.URI uri;
-  
+
   @Extension
   private ChangeListenerAddingFileSystemSupport fsa;
-  
+
   private Path path;
-  
+
   @Before
   public void setup() {
     UIResourceChangeRegistry _uIResourceChangeRegistry = new UIResourceChangeRegistry();
@@ -108,7 +108,7 @@ public class ChangeListenerAddingFileSystemSupportTest {
     Path _path = new Path("a");
     this.path = _path;
   }
-  
+
   @After
   public void tearDown() {
     this.registry = null;
@@ -116,64 +116,64 @@ public class ChangeListenerAddingFileSystemSupportTest {
     this.fsa = null;
     this.path = null;
   }
-  
+
   @Test
   public void readFile() {
     this.fsa.getContents(this.path);
     Assert.assertTrue(this.registry.getContentsListeners().containsEntry(this.path.toString(), this.uri));
   }
-  
+
   @Test
   public void readWriteAndReadFile() {
     this.fsa.setContents(this.path, "");
     this.fsa.getContents(this.path);
     Assert.assertTrue(this.registry.getContentsListeners().isEmpty());
   }
-  
+
   @Test
   public void readReadAndWriteFile() {
     this.fsa.getContents(this.path);
     this.fsa.setContents(this.path, "");
     Assert.assertTrue(this.registry.getContentsListeners().isEmpty());
   }
-  
+
   @Test
   public void listChildren() {
     this.fsa.getChildren(this.path);
     Assert.assertTrue(this.registry.getChildrenListeners().containsEntry(this.path.toString(), this.uri));
   }
-  
+
   @Test
   public void exists() {
     this.fsa.exists(this.path);
     Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
-  
+
   @Test
   public void isFile() {
     this.fsa.isFile(this.path);
     Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
-  
+
   @Test
   public void isFolder() {
     this.fsa.isFolder(this.path);
     Assert.assertTrue(this.registry.getExistsListeners().containsEntry(this.path.toString(), this.uri));
   }
-  
+
   @Test
   public void mkDir() {
     this.fsa.mkdir(this.path);
     Assert.assertTrue(this.registry.getChildrenListeners().isEmpty());
   }
-  
+
   @Test
   public void isFolderAndMkDir() {
     this.fsa.isFolder(this.path);
     this.fsa.mkdir(this.path);
     Assert.assertTrue(this.registry.getChildrenListeners().isEmpty());
   }
-  
+
   @Test
   public void discardCreateAndModifyInformation() {
     this.fsa.mkdir(this.path);

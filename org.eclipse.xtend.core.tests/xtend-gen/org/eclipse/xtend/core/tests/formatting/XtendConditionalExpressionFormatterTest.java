@@ -26,7 +26,7 @@ public class XtendConditionalExpressionFormatterTest extends AbstractXtendFormat
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatIfElseCondExpSL2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -37,7 +37,7 @@ public class XtendConditionalExpressionFormatterTest extends AbstractXtendFormat
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatIfElseCondExpSL3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -48,7 +48,7 @@ public class XtendConditionalExpressionFormatterTest extends AbstractXtendFormat
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatIfElseCondExpML() {
     StringConcatenation _builder = new StringConcatenation();

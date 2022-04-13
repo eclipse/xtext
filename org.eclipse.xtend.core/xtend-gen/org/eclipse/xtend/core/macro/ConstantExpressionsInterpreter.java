@@ -100,7 +100,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     public void collect(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
       this.collect(type, CollectionLiterals.<JvmType>newHashSet(), result);
     }
-    
+
     private void collect(final JvmDeclaredType type, final Set<JvmType> seen, final Map<String, JvmIdentifiableElement> result) {
       boolean _add = seen.add(type);
       if (_add) {
@@ -131,29 +131,29 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
     }
   }
-  
+
   @Inject
   private ILogicalContainerProvider containerProvider;
-  
+
   @Inject
   private ProcessorInstanceForJvmTypeProvider classLoaderProvider;
-  
+
   @Inject
   @Extension
   private NumberLiterals numberLiterals;
-  
+
   @Inject
   private IScopeProvider scopeProvider;
-  
+
   @Inject
   private IImportsConfiguration importSectionLocator;
-  
+
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
-  
+
   @Inject
   private IResourceScopeCache cache;
-  
+
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {
     final ClassLoader classLoader = this.classLoaderProvider.getClassLoader(expression);
     final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
@@ -169,7 +169,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     final Object result = this.evaluate(expression, _context);
     return result;
   }
-  
+
   /**
    * looks up the static final fields which are accessible in unqualified form for the given expression.
    * That essentially includes static imports and the fields declared in the containing types
@@ -240,7 +240,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     return _xblockexpression;
   }
-  
+
   protected void collectAllVisibleFields(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
     if ((type == null)) {
       return;
@@ -248,13 +248,13 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     this.collectAllVisibleFields(type.getDeclaringType(), result);
     result.putAll(this.getAllVisibleFields(type));
   }
-  
+
   protected HashMap<String, JvmIdentifiableElement> getAllVisibleFields(final JvmDeclaredType type) {
     final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
     new ConstantExpressionsInterpreter.VisibleFieldsCollector().collect(type, result);
     return result;
   }
-  
+
   protected JvmType findTypeByName(final EObject context, final String qualifiedName) {
     final IScope scope = this.scopeProvider.getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
     final QualifiedName qn = this.qualifiedNameConverter.toQualifiedName(qualifiedName);
@@ -265,7 +265,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     return ((JvmType) _eObjectOrProxy);
   }
-  
+
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
     try {
       Number _xblockexpression = null;
@@ -287,7 +287,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected Object _internalEvaluate(final XListLiteral it, final Context ctx) {
     try {
       JvmTypeReference _switchResult = null;
@@ -370,7 +370,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected boolean isResolveProxies(final EObject ctx) {
     boolean _switchResult = false;
     Resource _eResource = ctx.eResource();
@@ -385,7 +385,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     return _switchResult;
   }
-  
+
   protected Object _internalEvaluate(final XFeatureCall it, final Context ctx) {
     Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, this.isResolveProxies(it));
     final EObject feature = ((EObject) _eGet);
@@ -508,7 +508,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     throw new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
   }
-  
+
   private boolean isEnumExpectationInAnnotationValue(final XFeatureCall it, final JvmType expectedRawType) {
     if (((expectedRawType instanceof JvmEnumerationType) || ((expectedRawType instanceof JvmArrayType) && (((JvmArrayType) expectedRawType).getComponentType() instanceof JvmEnumerationType)))) {
       EObject container = it.eContainer();
@@ -530,7 +530,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     return false;
   }
-  
+
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {
     Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, this.isResolveProxies(it));
     final EObject feature = ((EObject) _eGet);
@@ -615,24 +615,24 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
     }
   }
-  
+
   protected String _getFullName(final XExpression call) {
     String _text = this.toText(call);
     String _plus = ("The expression \'" + _text);
     String _plus_1 = (_plus + "\' cannot be used as a receiver within a constant expression.");
     throw new ConstantExpressionEvaluationException(_plus_1);
   }
-  
+
   protected String _getFullName(final XMemberFeatureCall call) {
     final String prefix = this.getFullName(call.getMemberCallTarget());
     String _concreteSyntaxFeatureName = call.getConcreteSyntaxFeatureName();
     return ((prefix + ".") + _concreteSyntaxFeatureName);
   }
-  
+
   protected String _getFullName(final XFeatureCall call) {
     return call.getConcreteSyntaxFeatureName();
   }
-  
+
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
     if ((field.isSetConstant() || (field.eResource() instanceof TypeResource))) {
       boolean _isConstant = field.isConstant();
@@ -669,7 +669,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
     }
   }
-  
+
   protected Class<?> getJavaType(final JvmType type, final ClassFinder classFinder) throws ClassNotFoundException {
     if ((type instanceof JvmArrayType)) {
       JvmType t = type;
@@ -698,15 +698,15 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
     return classFinder.forName(type.getIdentifier());
   }
-  
+
   protected void resolveType(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
     new TypeLiteralLinkingCandidateResolver(featureCall).resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
   }
-  
+
   protected void resolveFeature(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
     new PendingLinkingCandidateResolver<XAbstractFeatureCall>(featureCall).resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
   }
-  
+
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);
@@ -739,7 +739,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         Arrays.<Object>asList(it, ctx).toString());
     }
   }
-  
+
   public String getFullName(final XExpression call) {
     if (call instanceof XFeatureCall) {
       return _getFullName((XFeatureCall)call);

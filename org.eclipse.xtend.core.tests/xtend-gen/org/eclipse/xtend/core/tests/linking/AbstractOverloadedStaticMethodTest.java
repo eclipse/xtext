@@ -39,10 +39,10 @@ import org.junit.Test;
 public abstract class AbstractOverloadedStaticMethodTest extends AbstractXtendTestCase {
   @Inject
   private OverrideTester overrideTester;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   protected void linksTo(final String invocation, final String method) {
     try {
       final XtendFile file = this.file(this.inMethodBody(invocation), false);
@@ -67,79 +67,79 @@ public abstract class AbstractOverloadedStaticMethodTest extends AbstractXtendTe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected abstract String inMethodBody(final String invocation);
-  
+
   @Test
   public void failWithoutArguments() {
     this.linksTo("fail", "fail()");
   }
-  
+
   @Test
   public void failWithExplicitArgument() {
     this.linksTo("fail(\"\")", "fail(String)");
   }
-  
+
   @Test
   public void failWithImplicitOnScope() {
     this.linksTo("val String it = null fail", "fail()");
   }
-  
+
   @Test
   public void assertEqualsNullAsObjectArray() {
     this.linksTo("assertEquals(null, null)", "assertEquals(Object[], Object[])");
   }
-  
+
   @Test
   public void assertEqualsStringNumberArray() {
     this.linksTo("assertEquals(null as String[], null as Number[])", "assertEquals(Object[], Object[])");
   }
-  
+
   @Test
   public void assertEqualsNullAsObjectArrayWithMessage() {
     this.linksTo("assertEquals(\"\", null, null)", "assertEquals(String, Object[], Object[])");
   }
-  
+
   @Test
   public void assertEqualsNullAsObjectArrayWithNullMessage() {
     this.linksTo("assertEquals(null, null, null)", "assertEquals(String, Object[], Object[])");
   }
-  
+
   @Test
   public void assertEqualsObjectNull() {
     this.linksTo("assertEquals(null as Object, null)", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsNullObject() {
     this.linksTo("assertEquals(null, null as Object)", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithIterables() {
     this.linksTo("assertEquals(null as Iterable<String>, null as Iterable<String>)", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithLists() {
     this.linksTo("assertEquals(null as java.util.List<String>, null as java.util.List<String>)", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithListAndObjectArray() {
     this.linksTo("assertEquals(null as java.util.List<String>, null as Object[])", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithBooleans() {
     this.linksTo("assertEquals(true, true)", "assertEquals(Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithBooleansAndMessage() {
     this.linksTo("assertEquals(\"\", true, true)", "assertEquals(String, Object, Object)");
   }
-  
+
   @Test
   public void assertEqualsWithBooleansAndNullMessage() {
     this.linksTo("assertEquals(null, true, true)", "assertEquals(String, Object, Object)");

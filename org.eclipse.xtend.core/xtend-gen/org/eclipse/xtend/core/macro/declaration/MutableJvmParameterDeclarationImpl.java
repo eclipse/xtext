@@ -21,13 +21,13 @@ public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationI
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public MutableExecutableDeclaration getDeclaringExecutable() {
     ExecutableDeclaration _declaringExecutable = super.getDeclaringExecutable();
     return ((MutableExecutableDeclaration) _declaringExecutable);
   }
-  
+
   @Override
   public void setSimpleName(final String name) {
     this.checkMutable();

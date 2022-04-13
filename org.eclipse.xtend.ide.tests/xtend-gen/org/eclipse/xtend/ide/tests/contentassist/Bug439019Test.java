@@ -49,7 +49,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -80,7 +80,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -111,7 +111,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void test_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -148,7 +148,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void test_05() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -179,7 +179,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -210,7 +210,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -241,7 +241,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -272,7 +272,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -309,7 +309,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_05() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -340,7 +340,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_06() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -371,7 +371,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_07() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -402,7 +402,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_08() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -433,7 +433,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_09() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -470,7 +470,7 @@ public class Bug439019Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("NAME");
   }
-  
+
   @Test
   public void testBug463053_19() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

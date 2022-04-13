@@ -55,33 +55,33 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
   private static final Logger logger = Logger.getLogger(UIResourceChangeRegistry.class);
-  
+
   @Inject
   private QueuedBuildData queue;
-  
+
   @Inject
   private BuildScheduler scheduler;
-  
+
   @Inject
   private AbstractUIPlugin uiPlugin;
-  
+
   private IWorkspace workspace;
-  
+
   @Accessors
   private final HashMultimap<String, URI> existsListeners = HashMultimap.<String, URI>create();
-  
+
   @Accessors
   private final HashMultimap<String, URI> charsetListeners = HashMultimap.<String, URI>create();
-  
+
   @Accessors
   private final HashMultimap<String, URI> childrenListeners = HashMultimap.<String, URI>create();
-  
+
   @Accessors
   private final HashMultimap<String, URI> contentsListeners = HashMultimap.<String, URI>create();
-  
+
   @Accessors
   private final HashMultimap<String, URI> changesNotRelevantListeners = HashMultimap.<String, URI>create();
-  
+
   @Override
   public synchronized void registerExists(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
@@ -90,7 +90,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       this.existsListeners.put(path, uri);
     }
   }
-  
+
   @Override
   public synchronized void registerGetCharset(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
@@ -99,7 +99,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       this.charsetListeners.put(path, uri);
     }
   }
-  
+
   @Override
   public synchronized void registerGetChildren(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
@@ -108,7 +108,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       this.childrenListeners.put(path, uri);
     }
   }
-  
+
   @Override
   public synchronized void registerGetContents(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
@@ -117,7 +117,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       this.contentsListeners.put(path, uri);
     }
   }
-  
+
   @Override
   public synchronized void registerCreateOrModify(final String string, final URI uri) {
     this.existsListeners.remove(string, uri);
@@ -126,12 +126,12 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     this.contentsListeners.remove(string, uri);
     this.changesNotRelevantListeners.put(string, uri);
   }
-  
+
   @Override
   public synchronized void discardCreateOrModifyInformation(final URI uri) {
     this.changesNotRelevantListeners.values().removeAll(Collections.<URI>singleton(uri));
   }
-  
+
   @Override
   public synchronized void resourceChanged(final IResourceChangeEvent event) {
     try {
@@ -140,7 +140,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public boolean visit(final IResourceDelta delta) throws CoreException {
     if (((!this.existsListeners.isEmpty()) && this.hasExistsChanged(delta))) {
@@ -177,15 +177,15 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
     return true;
   }
-  
+
   protected void queueURIs(final Set<URI> interestedFiles) {
     this.queue.queueURIs(interestedFiles);
   }
-  
+
   private boolean hasExistsChanged(final IResourceDelta delta) {
     return ((delta.getKind() == IResourceDelta.ADDED) || (delta.getKind() == IResourceDelta.REMOVED));
   }
-  
+
   private boolean hasChildrenChanged(final IResourceDelta delta) {
     IResource _resource = delta.getResource();
     if ((_resource instanceof IFolder)) {
@@ -199,13 +199,13 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
     return false;
   }
-  
+
   private boolean hasCharsetChanged(final IResourceDelta delta) {
     return ((delta.getKind() == IResourceDelta.CHANGED) && ((delta.getFlags() & IResourceDelta.ENCODING) != 0));
   }
-  
+
   private static int HAS_CONTENTS_CHANGED_FLAGS = (((IResourceDelta.CONTENT | IResourceDelta.ENCODING) | IResourceDelta.REPLACED) | IResourceDelta.LOCAL_CHANGED);
-  
+
   private boolean hasContentsChanged(final IResourceDelta delta) {
     int _kind = delta.getKind();
     boolean _equals = (_kind == IResourceDelta.CHANGED);
@@ -215,7 +215,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       return false;
     }
   }
-  
+
   @Inject
   public void init(final IWorkspace workspace) {
     try {
@@ -227,15 +227,15 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
         public void saving(final ISaveContext context) throws CoreException {
           UIResourceChangeRegistry.this.save();
         }
-        
+
         @Override
         public void doneSaving(final ISaveContext context) {
         }
-        
+
         @Override
         public void prepareToSave(final ISaveContext context) throws CoreException {
         }
-        
+
         @Override
         public void rollback(final ISaveContext context) {
         }
@@ -245,7 +245,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private synchronized void load() {
     try {
       final File location = this.getRegistryStateLocation();
@@ -272,7 +272,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       }
     }
   }
-  
+
   public void readState(final InputStream in) {
     try {
       final DataInputStream reader = new DataInputStream(in);
@@ -292,7 +292,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private synchronized void save() {
     try {
       final File location = this.getRegistryStateLocation();
@@ -312,7 +312,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       }
     }
   }
-  
+
   public void writeState(final OutputStream out) {
     try {
       final DataOutputStream writer = new DataOutputStream(out);
@@ -332,11 +332,11 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private File getRegistryStateLocation() {
     return this.uiPlugin.getStateLocation().append("resource.change.registry").toFile();
   }
-  
+
   private void forgetBuildState() {
     final Function1<IProject, Boolean> _function = (IProject it) -> {
       try {
@@ -348,27 +348,27 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(this.workspace.getRoot().getProjects())), _function);
     this.scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
   }
-  
+
   @Pure
   public HashMultimap<String, URI> getExistsListeners() {
     return this.existsListeners;
   }
-  
+
   @Pure
   public HashMultimap<String, URI> getCharsetListeners() {
     return this.charsetListeners;
   }
-  
+
   @Pure
   public HashMultimap<String, URI> getChildrenListeners() {
     return this.childrenListeners;
   }
-  
+
   @Pure
   public HashMultimap<String, URI> getContentsListeners() {
     return this.contentsListeners;
   }
-  
+
   @Pure
   public HashMultimap<String, URI> getChangesNotRelevantListeners() {
     return this.changesNotRelevantListeners;

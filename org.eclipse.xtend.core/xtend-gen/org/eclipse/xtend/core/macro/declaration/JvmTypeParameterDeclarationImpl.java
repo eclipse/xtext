@@ -25,7 +25,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmMember) _eContainer));
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
@@ -35,7 +35,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getDelegate().getIdentifier();

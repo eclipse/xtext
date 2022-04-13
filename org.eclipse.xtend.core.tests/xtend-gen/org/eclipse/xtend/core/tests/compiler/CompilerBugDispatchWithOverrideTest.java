@@ -107,7 +107,7 @@ public class CompilerBugDispatchWithOverrideTest extends AbstractXtendCompilerTe
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDispatchWithOverrideJava5HasNoAnnotation() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);

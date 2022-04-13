@@ -33,32 +33,32 @@ public interface IXtendOutlineNodeBuilder {
    * Builds a platform specific outline node the given model element.
    */
   IXtendOutlineContext buildEObjectNode(final EObject modelElement, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for the given {@link org.eclipse.xtext.common.types.JvmType jvm type} or its source element.
    */
   IXtendOutlineContext buildXtendNode(final EObject modelElement, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for the given {@link org.eclipse.xtext.common.types.JvmFeature jvm feature} or its source element.
    */
   IXtendOutlineContext buildFeatureNode(final JvmDeclaredType inferredType, final EObject semanticFeature, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for the given {@link org.eclipse.xtext.common.types.JvmFeature dispatcher}.
    */
   IXtendOutlineContext buildDispatcherNode(final JvmDeclaredType baseType, final JvmFeature dispatcher, final List<JvmOperation> dispatchCases, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for a package of the given {@link org.eclipse.xtend.core.xtend.XtendFile Xtend file}.
    */
   IXtendOutlineContext buildPackageNode(final XtendFile xtendFile, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for an import section of the given {@link org.eclipse.xtend.core.xtend.XtendFile Xtend file}.
    */
   IXtendOutlineContext buildImportSectionNode(final XtendFile xtendFile, final IXtendOutlineContext context);
-  
+
   /**
    * Builds a platform specific outline node for the given {@link org.eclipse.xtext.xbase.typesystem.override.IResolvedFeature resolved feature}.
    */

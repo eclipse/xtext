@@ -64,28 +64,28 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
     public void setLocalStorage(final IStorage derivedResource) {
       super.setLocalStorage(derivedResource);
     }
-    
+
     @Override
     public AbsoluteURI resolvePath(final IProject project, final SourceRelativeURI path) {
       return super.resolvePath(project, path);
     }
-    
+
     @Override
     public AbsoluteURI resolvePath(final SourceRelativeURI path) {
       return super.resolvePath(path);
     }
   }
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   @Inject
   private IResourceSetProvider resourceSetProvider;
-  
+
   @Inject
   private IStorage2UriMapper uriMapper;
-  
+
   @Test
   public void testLoadFromStorage() {
     try {
@@ -143,7 +143,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testShouldLoadFromStorage() {
     try {
@@ -183,7 +183,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUpstreamResourcesAreLoadedFromStorage() {
     try {
@@ -230,7 +230,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void doWorkInJob(final Procedure0 work) {
     try {
       final ArrayList<Throwable> throwables = CollectionLiterals.<Throwable>newArrayList();
@@ -272,7 +272,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDecodeURI() {
     try {

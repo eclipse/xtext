@@ -28,11 +28,11 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
   @Inject
   @Extension
   private FlexerFactory _flexerFactory;
-  
+
   @Inject
   @Extension
   private AbstractAntlrTokenToAttributeIdMapper _abstractAntlrTokenToAttributeIdMapper;
-  
+
   @Override
   public void doProvideHighlightingFor(final String body, final IHighlightedPositionAcceptor acceptor) {
     StringReader _stringReader = new StringReader(body);

@@ -29,7 +29,7 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
     String _plus = (_qualifiedName + ".InternalClass");
     context.registerClass(_plus);
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _qualifiedName = annotatedClass.getQualifiedName();
@@ -43,7 +43,7 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
     };
     ObjectExtensions.<MutableClassDeclaration>operator_doubleArrow(_findClass, _function);
   }
-  
+
   @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     final Path tF = context.getTargetFolder(annotatedClass.getCompilationUnit().getFilePath());

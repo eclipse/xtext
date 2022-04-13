@@ -171,7 +171,7 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -429,7 +429,7 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -687,7 +687,7 @@ public class CompilerBug459920Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Ignore("AbstractStringBuilder may not be referenced")
   @Test
   public void test_03() {

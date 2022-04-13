@@ -36,14 +36,14 @@ public class ReconcilerSmokeTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Inject
   private IWorkbench workbench;
-  
+
   @Test
   public void testRegionOverlap() {
     try {

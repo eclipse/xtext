@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase {
   @Extension
   protected XtendCompilerTester _xtendCompilerTester;
-  
+
   @Inject
   public void doInject(final XtendCompilerTester compilerTester) {
     this._xtendCompilerTester = compilerTester;

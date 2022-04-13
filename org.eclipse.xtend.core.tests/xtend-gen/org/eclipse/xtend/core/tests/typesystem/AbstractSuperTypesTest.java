@@ -35,16 +35,16 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   public void assertSuperTypes(final Class<?> type, final String... superTypes) {
     String _canonicalName = type.getCanonicalName();
     this.assertSuperTypes(Pair.<String, String>of(_canonicalName, null), superTypes);
   }
-  
+
   public void assertSuperTypes(final String type, final String... superTypes) {
     this.assertSuperTypes(Pair.<String, String>of(type, null), superTypes);
   }
-  
+
   public void assertSuperTypes(final Pair<String, String> type, final String... superTypes) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -75,77 +75,77 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public abstract Iterable<LightweightTypeReference> collectSuperTypes(final LightweightTypeReference reference);
-  
+
   @Test
   public void testObject() {
     this.assertSuperTypes("Object");
   }
-  
+
   @Test
   public void testSerializable() {
     this.assertSuperTypes(Serializable.class, "Object");
   }
-  
+
   @Test
   public abstract void testString();
-  
+
   @Test
   public void testCollections() {
     this.assertSuperTypes(Collections.class, "Object");
   }
-  
+
   @Test
   public abstract void testRawCollection();
-  
+
   @Test
   public abstract void testStringCollection();
-  
+
   @Test
   public abstract void testStringArray();
-  
+
   @Test
   public abstract void testObjectArray();
-  
+
   @Test
   public abstract void testPrimitiveArray();
-  
+
   @Test
   public abstract void testRawList();
-  
+
   @Test
   public abstract void testStringList();
-  
+
   @Test
   public abstract void testStringArrayArrayList();
-  
+
   @Test
   public abstract void testTypeParameters();
-  
+
   @Test
   public abstract void testTypeParameterArray();
-  
+
   @Test
   public abstract void testDependentTypeParameters();
-  
+
   @Test
   public abstract void testDependentTypeParametersWithBounds();
-  
+
   @Test
   public void testTypeParametersWithoutUpperBound() {
     this.assertSuperTypes(Pair.<String, String>of("T", "T"), "Object");
   }
-  
+
   @Test
   public abstract void testParameterizedInnerTypes_01();
-  
+
   @Test
   public abstract void testParameterizedInnerTypes_02();
-  
+
   @Test
   public abstract void testParameterizedInnerTypes_03();
-  
+
   @Test
   public abstract void testParameterizedInnerTypes_04();
 }

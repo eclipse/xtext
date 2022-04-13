@@ -39,16 +39,16 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private DispatchRenameSupport dispatchRenameSupport;
-  
+
   @Override
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
     super.tearDown();
   }
-  
+
   @Test
   public void testSimple() {
     try {
@@ -70,7 +70,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSubClass() {
     try {
@@ -105,7 +105,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSuperClass() {
     try {
@@ -140,7 +140,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDisconnectedJavaSubClass() {
     try {
@@ -168,7 +168,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaSuperClass() {
     try {
@@ -198,7 +198,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSubClassOverride() {
     try {
@@ -230,7 +230,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSuperClassOverride() {
     try {
@@ -262,7 +262,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSubSubClass_0() {
     try {
@@ -304,7 +304,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSubSubClass_1() {
     try {
@@ -346,7 +346,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSubSubClass_2() {
     try {
@@ -388,7 +388,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaInTheMiddle_0() {
     try {
@@ -430,7 +430,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaInTheMiddle_1() {
     try {
@@ -472,7 +472,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConnectedSubclasses_0() {
     try {
@@ -514,7 +514,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConnectedSubclasses_1() {
     try {
@@ -556,7 +556,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaConnectedSubclasses() {
     try {
@@ -595,7 +595,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnconnectedSubclasses_0() {
     try {
@@ -629,7 +629,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnconnectedSubclasses_1() {
     try {
@@ -663,7 +663,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTreeConnected() {
     try {
@@ -711,7 +711,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTreeConnected_1() {
     try {
@@ -759,7 +759,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTreeConnected_2() {
     try {
@@ -804,7 +804,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public XtendFunction firstMethod(final IFile targetFile) {
     XtendFunction _xblockexpression = null;
     {
@@ -817,7 +817,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     }
     return _xblockexpression;
   }
-  
+
   public void checkDispatchOperations(final IFile targetFile, final String... signatures) {
     IResourcesSetupUtil.waitForBuild();
     final Function1<JvmOperation, String> _function = (JvmOperation it) -> {
@@ -837,7 +837,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     Assert.assertEquals(_plus_3, 
       ((List<String>)Conversions.doWrapArray(signatures)).size(), Iterables.size(dispatchOperations));
   }
-  
+
   public String signature(final JvmOperation it) {
     StringConcatenation _builder = new StringConcatenation();
     String _qualifiedName = it.getQualifiedName();

@@ -23,19 +23,19 @@ import org.eclipse.ui.texteditor.ITextEditor;
 @SuppressWarnings("all")
 public class WaitForRefactoringCondition extends DefaultCondition {
   private SWTBotEclipseEditor editor;
-  
+
   private boolean isRedo;
-  
+
   public WaitForRefactoringCondition(final SWTBotEclipseEditor editor, final boolean isRedo) {
     this.editor = editor;
     this.isRedo = isRedo;
   }
-  
+
   @Override
   public String getFailureMessage() {
     return "Refactoring not performed";
   }
-  
+
   @Override
   public boolean test() throws Exception {
     boolean _xblockexpression = false;
@@ -56,7 +56,7 @@ public class WaitForRefactoringCondition extends DefaultCondition {
     }
     return _xblockexpression;
   }
-  
+
   protected IUndoContext getUndoContext() {
     IUndoContext _xblockexpression = null;
     {

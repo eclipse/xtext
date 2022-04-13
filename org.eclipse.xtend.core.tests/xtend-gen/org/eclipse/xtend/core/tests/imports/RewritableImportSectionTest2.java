@@ -16,7 +16,7 @@ public class RewritableImportSectionTest2 extends AbstractRewritableImportSectio
   protected boolean isIgnoreLinebreaks() {
     return true;
   }
-  
+
   @Override
   protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();
@@ -44,7 +44,7 @@ public class RewritableImportSectionTest2 extends AbstractRewritableImportSectio
     _builder.newLine();
     return _builder;
   }
-  
+
   @Override
   protected CharSequence getExpectedModel(final String sectionAsString) {
     StringConcatenation _builder = new StringConcatenation();

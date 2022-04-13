@@ -36,9 +36,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class Bug462915Test extends AbstractXtendContentAssistBugTest {
   private static final String NO_GUICE_PROJECT_NAME = "Bug462915";
-  
+
   private IProject noGuiceProject;
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
@@ -47,7 +47,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
     }
     super.tearDown();
   }
-  
+
   /**
    * make sure additional proposal infos can be calculated
    */
@@ -82,7 +82,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * make sure inject is not proposed
    */
@@ -106,7 +106,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(Bug462915Test.NO_GUICE_PROJECT_NAME);
@@ -129,7 +129,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
     }
     return javaProject;
   }
-  
+
   protected List<String> getTestProjectRequiredBundles() {
     return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit"));
   }

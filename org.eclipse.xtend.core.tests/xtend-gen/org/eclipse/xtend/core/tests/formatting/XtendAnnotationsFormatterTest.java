@@ -35,11 +35,11 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     return _builder;
   }
-  
+
   protected void assertFormattedAnnotation(final CharSequence expectation, final CharSequence actual) {
     this.assertFormatted(this.toFile(expectation), this.toFile(actual));
   }
-  
+
   @Test
   public void formatClassSingleAnnotationSL() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -59,7 +59,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatClassSingleAnnotationML1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -78,7 +78,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatClassSingleAnnotationML11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -93,7 +93,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatClassSingleAnnotationML2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -115,7 +115,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_function, _builder, _builder_1);
   }
-  
+
   @Test
   public void formatClassTwoAnnotationsSL() {
     StringConcatenation _builder = new StringConcatenation();
@@ -128,7 +128,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatClassTwoAnnotationsML1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +145,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatClassTwoAnnotationsML2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -160,7 +160,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatConstructorTwoAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -178,7 +178,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatConstructorTwoAnnotations2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -196,7 +196,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatConstructorTwoAnnotationsSL1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -219,7 +219,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_function, _builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatConstructorTwoAnnotationsSL2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -233,7 +233,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatConstructorSingleAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -245,7 +245,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_builder.toString());
   }
-  
+
   @Test
   public void formatConstructorParameterTwoAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -258,7 +258,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatConstructorParameterSingleAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -271,7 +271,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatFieldTwoAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -287,7 +287,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatFieldTwoAnnotations2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -299,7 +299,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatFieldSingleAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -313,7 +313,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatFieldSingleAnnotations2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -325,7 +325,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatMethodTwoAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -343,7 +343,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatMethodTwoAnnotations2() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -361,7 +361,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatMethodTwoAnnotations3() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -379,7 +379,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedMember(_function, _builder.toString());
   }
-  
+
   @Test
   public void formatMethodTwoAnnotations4() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -400,7 +400,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_function, _builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatMethodSingleAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -417,7 +417,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatMethodParameterTwoAnnotations1() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -434,7 +434,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_function, _builder.toString(), _builder_1);
   }
-  
+
   @Ignore
   @Test
   public void formatMethodParameterTwoAnnotations2() {
@@ -461,7 +461,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_function, _builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatMethodParameterSingleAnnotations() {
     StringConcatenation _builder = new StringConcatenation();
@@ -474,7 +474,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedMember(_builder.toString(), _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationSingeValue() {
     StringConcatenation _builder = new StringConcatenation();
@@ -485,7 +485,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationListValue3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -496,7 +496,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationListValue4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -507,7 +507,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationListValue5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -518,7 +518,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationAssignedSingeValue() {
     StringConcatenation _builder = new StringConcatenation();
@@ -529,7 +529,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationAssignedListValue_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -540,7 +540,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationMultiAssignments() {
     StringConcatenation _builder = new StringConcatenation();
@@ -551,7 +551,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatAnnotationEnumLiteral() {
     StringConcatenation _builder = new StringConcatenation();
@@ -562,7 +562,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
-  
+
   @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=393349")
   @Test
   public void formatAnnotationStringConcatenation() {

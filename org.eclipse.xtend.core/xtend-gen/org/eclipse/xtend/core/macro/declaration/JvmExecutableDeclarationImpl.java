@@ -38,25 +38,25 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     };
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(this.getDelegate().getTypeParameters(), _function);
   }
-  
+
   public boolean isVarArgs() {
     return this.getDelegate().isVarArgs();
   }
-  
+
   public Iterable<? extends ParameterDeclaration> getParameters() {
     final Function1<JvmFormalParameter, ParameterDeclaration> _function = (JvmFormalParameter it) -> {
       return this.getCompilationUnit().toParameterDeclaration(it);
     };
     return ListExtensions.<JvmFormalParameter, ParameterDeclaration>map(this.getDelegate().getParameters(), _function);
   }
-  
+
   public List<TypeReference> getExceptions() {
     final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
       return this.getCompilationUnit().toTypeReference(it);
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getExceptions(), _function);
   }
-  
+
   public Expression getBody() {
     Expression _xblockexpression = null;
     {
@@ -65,7 +65,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     }
     return _xblockexpression;
   }
-  
+
   public void setBody(final Expression body) {
     this.checkMutable();
     if ((body == null)) {
@@ -74,7 +74,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       this.getCompilationUnit().getJvmTypesBuilder().setBody(this.getDelegate(), ((ExpressionImpl) body).getDelegate());
     }
   }
-  
+
   public void setExceptions(final TypeReference... exceptions) {
     this.checkMutable();
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(exceptions)), "exceptions");
@@ -86,12 +86,12 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       }
     }
   }
-  
+
   public void setVarArgs(final boolean isVarArgs) {
     this.checkMutable();
     this.getDelegate().setVarArgs(isVarArgs);
   }
-  
+
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -111,19 +111,19 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     TypeParameterDeclaration _typeParameterDeclaration = this.getCompilationUnit().toTypeParameterDeclaration(param);
     return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
   }
-  
+
   public void setBody(final CompilationStrategy compilationStrategy) {
     this.checkMutable();
     Preconditions.checkArgument((compilationStrategy != null), "compilationStrategy cannot be null");
     this.getCompilationUnit().setCompilationStrategy(this.getDelegate(), compilationStrategy);
   }
-  
+
   public void setBody(final StringConcatenationClient compilationTemplate) {
     this.checkMutable();
     Preconditions.checkArgument((compilationTemplate != null), "compilationTemplate cannot be null");
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), compilationTemplate);
   }
-  
+
   public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -139,7 +139,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     ParameterDeclaration _parameterDeclaration = this.getCompilationUnit().toParameterDeclaration(param);
     return ((MutableParameterDeclaration) _parameterDeclaration);
   }
-  
+
   @Override
   public void remove() {
     this.getCompilationUnit().getJvmModelAssociator().removeLogicalChildAssociation(this.getDelegate());

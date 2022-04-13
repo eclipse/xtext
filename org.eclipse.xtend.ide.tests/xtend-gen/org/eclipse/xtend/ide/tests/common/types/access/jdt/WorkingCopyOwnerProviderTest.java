@@ -33,12 +33,12 @@ import org.junit.Test;
 public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
   @Inject
   private WorkingCopyOwnerProvider workingCopyOwnerProvider;
-  
+
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   private IProject unrelatedProject;
-  
+
   @After
   public void cleanUp() {
     try {
@@ -48,7 +48,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Before
   @Override
   public void setUp() {
@@ -59,7 +59,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testWorkingCopyOwner_01() {
     try {
@@ -81,7 +81,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testWorkingCopyOwner_02() {
     try {
@@ -107,7 +107,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected WorkingCopyOwner newWorkingCopyOwner() {
     return this.workingCopyOwnerProvider.getWorkingCopyOwner(JavaCore.create(this.workbenchTestHelper.getProject()), this.workbenchTestHelper.getResourceSet());
   }

@@ -35,7 +35,7 @@ public class XtendReferenceUpdater extends XbaseReferenceUpdater {
     }
     super.createReferenceUpdate(referringElement, referringResourceURI, reference, indexInList, newTargetElement, updateAcceptor);
   }
-  
+
   @Override
   protected Iterable<IReferenceDescription> getNotImportTypeReferences(final Iterable<IReferenceDescription> referenceDescriptions) {
     List<IReferenceDescription> _xblockexpression = null;

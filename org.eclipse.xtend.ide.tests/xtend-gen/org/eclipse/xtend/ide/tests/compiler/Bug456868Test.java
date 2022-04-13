@@ -32,19 +32,19 @@ import org.junit.Test;
 public class Bug456868Test extends AbstractXtendUITestCase {
   @Inject
   private XtendLibClasspathAdder libAdder;
-  
+
   @Inject
   private ToggleXtextNatureCommand natureAdder;
-  
+
   private IJavaProject project;
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
     this.project.getProject().delete(true, null);
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=452821
    */

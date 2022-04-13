@@ -46,7 +46,7 @@ public class Bug415030Test extends AbstractXtendContentAssistBugTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodOverrides_2() {
     try {

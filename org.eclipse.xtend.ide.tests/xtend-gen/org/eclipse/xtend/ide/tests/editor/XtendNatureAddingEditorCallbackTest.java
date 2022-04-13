@@ -30,14 +30,14 @@ import org.junit.Test;
 public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @Test
   public void testOpenXtendFileFromBuildPath() {
     try {
@@ -49,7 +49,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenXtendFileFromFilteredBuildPath() {
     try {
@@ -69,7 +69,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenXtendFileFromOutOfBuildPath() {
     try {

@@ -43,13 +43,13 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   private Set<String> knownProjects = CollectionLiterals.<String>newHashSet();
-  
+
   @Inject
   private IResourceSetProvider resourceSetProvider;
-  
+
   @Inject
   private Provider<EclipseFileSystemSupportImpl> fileSystemSupportProvider;
-  
+
   @Before
   @Override
   public void setUp() {
@@ -62,7 +62,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
     fileSystemSupport.setContext(this.resourceSetProvider.get(project));
     this.fs = fileSystemSupport;
   }
-  
+
   @Override
   public IProject createProject(final String name) {
     try {
@@ -83,7 +83,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void tearDown() {
     try {
@@ -101,20 +101,20 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   @Ignore("PlatformResourceURIHandlerImpl does not allow to delete folders")
   @Override
   public void testMakeAndDeleteFolder() {
     super.testMakeAndDeleteFolder();
   }
-  
+
   @Test
   @Override
   public void testMakeAndDeleteFile() {
     super.testMakeAndDeleteFile();
   }
-  
+
   @Test
   public void testGetURIForImportedProject() {
     try {
@@ -142,7 +142,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIssue383() {
     if ((this.fs instanceof AbstractFileSystemSupport)) {

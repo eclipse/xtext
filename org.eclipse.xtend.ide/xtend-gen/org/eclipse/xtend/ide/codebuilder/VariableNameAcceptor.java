@@ -21,19 +21,19 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @SuppressWarnings("all")
 public class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
   private final Set<String> notallowed;
-  
+
   private final Set<String> variableNames = CollectionLiterals.<String>newHashSet();
-  
+
   public VariableNameAcceptor(final Set<String> notallowed) {
     this.notallowed = notallowed;
   }
-  
+
   @Override
   public void accept(final String replaceText, final StyledString label, final Image img) {
     this.variableNames.add(replaceText);
     this.notallowed.add(replaceText);
   }
-  
+
   public String getVariableName() {
     final ArrayList<String> candidates = Lists.<String>newArrayList(this.variableNames);
     final Comparator<String> _function = (String left, String right) -> {

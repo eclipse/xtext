@@ -25,42 +25,42 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
   public boolean isAbstract() {
     return this.getDelegate().isAbstract();
   }
-  
+
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
   }
-  
+
   @Override
   public boolean isStatic() {
     return this.getDelegate().isStatic();
   }
-  
+
   @Override
   public boolean isSynchronized() {
     return this.getDelegate().isSynchronized();
   }
-  
+
   @Override
   public boolean isDefault() {
     return this.getDelegate().isDefault();
   }
-  
+
   @Override
   public boolean isStrictFloatingPoint() {
     return this.getDelegate().isStrictFloatingPoint();
   }
-  
+
   @Override
   public boolean isNative() {
     return this.getDelegate().isNative();
   }
-  
+
   @Override
   public TypeReference getReturnType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getReturnType());
   }
-  
+
   @Override
   public Iterable<? extends MethodDeclaration> getOverriddenOrImplementedMethods() {
     final ResolvedFeatures resolvedFeatures = this.getCompilationUnit().getOverrideHelper().getResolvedFeatures(this.getDelegate().getDeclaringType());

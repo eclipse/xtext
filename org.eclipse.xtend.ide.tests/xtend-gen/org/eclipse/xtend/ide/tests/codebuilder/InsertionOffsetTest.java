@@ -31,15 +31,15 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
-  
+
   @Inject
   @Extension
   private EObjectAtOffsetHelper _eObjectAtOffsetHelper;
-  
+
   @Test
   public void testField_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -64,7 +64,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkFieldInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testField_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -92,7 +92,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkFieldInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testField_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -114,7 +114,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkFieldInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testField_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -127,7 +127,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkFieldInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testMethod_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -158,7 +158,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkMethodInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testMethod_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -180,7 +180,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkMethodInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testMethod_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -193,7 +193,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkMethodInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testConstructor_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -224,7 +224,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkConstructorInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testConstructor_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -243,7 +243,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkConstructorInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testConstructor_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -267,7 +267,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkConstructorInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testConstructor_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -280,7 +280,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkConstructorInsertionOffset(_builder);
   }
-  
+
   @Test
   public void testClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -297,7 +297,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.checkTypeInsertionOffset(_builder);
   }
-  
+
   protected void checkFieldInsertionOffset(final CharSequence model) {
     try {
       final String modelAsString = model.toString();
@@ -313,7 +313,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void checkMethodInsertionOffset(final CharSequence model) {
     try {
       final String modelAsString = model.toString();
@@ -329,7 +329,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void checkConstructorInsertionOffset(final CharSequence model) {
     try {
       final String modelAsString = model.toString();
@@ -345,7 +345,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void checkTypeInsertionOffset(final CharSequence model) {
     try {
       final String modelAsString = model.toString();

@@ -82,7 +82,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_01_b() {
@@ -135,7 +135,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_02() {
@@ -198,7 +198,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_02_b() {
@@ -251,7 +251,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_03() {
@@ -314,7 +314,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_03_b() {
@@ -367,7 +367,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_04() {
@@ -430,7 +430,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_04_b() {
@@ -483,7 +483,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_05() {
@@ -546,7 +546,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_05_b() {
@@ -599,7 +599,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_06() {
@@ -662,7 +662,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_06_b() {
@@ -715,7 +715,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_07() {
@@ -784,7 +784,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_07_b() {
@@ -843,7 +843,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_08() {
@@ -912,7 +912,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_08_b() {
@@ -971,7 +971,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_09() {
@@ -1040,7 +1040,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_09_b() {
@@ -1099,7 +1099,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_10() {
@@ -1174,7 +1174,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_10_b() {
@@ -1239,7 +1239,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_11() {
@@ -1346,7 +1346,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_12() {
@@ -1538,7 +1538,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_13() {
@@ -1730,7 +1730,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_14() {
@@ -1853,7 +1853,7 @@ public class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testBug_427637_15() {

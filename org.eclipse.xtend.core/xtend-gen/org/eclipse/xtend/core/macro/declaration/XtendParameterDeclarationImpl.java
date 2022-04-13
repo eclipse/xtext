@@ -22,12 +22,12 @@ public class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<Xte
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getParameterType());
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public ExecutableDeclaration getDeclaringExecutable() {
     EObject _eContainer = this.getDelegate().eContainer();

@@ -37,7 +37,7 @@ public class XtendAntlrGrammarGeneratorHelper {
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions;
-  
+
   public String compileTokens(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -61,7 +61,7 @@ public class XtendAntlrGrammarGeneratorHelper {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   public LinkedHashSet<String> getTokens(final Grammar it) {
     final LinkedHashSet<String> tokens = CollectionLiterals.<String>newLinkedHashSet();
     List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
@@ -72,7 +72,7 @@ public class XtendAntlrGrammarGeneratorHelper {
     }
     return tokens;
   }
-  
+
   protected void _collectTokens(final Keyword it, final Set<String> tokens) {
     boolean _contains = tokens.contains(it.getValue());
     boolean _not = (!_contains);
@@ -81,18 +81,18 @@ public class XtendAntlrGrammarGeneratorHelper {
       tokens.add(_value);
     }
   }
-  
+
   protected void _collectTokens(final AbstractRule it, final Set<String> tokens) {
     this.collectTokens(it.getAlternatives(), tokens);
   }
-  
+
   protected void _collectTokens(final EObject it, final Set<String> tokens) {
     final Consumer<EObject> _function = (EObject it_1) -> {
       this.collectTokens(it_1, tokens);
     };
     it.eContents().forEach(_function);
   }
-  
+
   public void collectTokens(final EObject it, final Set<String> tokens) {
     if (it instanceof Keyword) {
       _collectTokens((Keyword)it, tokens);

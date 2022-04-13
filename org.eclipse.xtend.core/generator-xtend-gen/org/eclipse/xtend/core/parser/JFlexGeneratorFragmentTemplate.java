@@ -38,7 +38,7 @@ public class JFlexGeneratorFragmentTemplate {
   @Inject
   @Extension
   private GrammarAccessExtensions _grammarAccessExtensions = new GrammarAccessExtensions();
-  
+
   public String toJavaPackage(final String name) {
     String _xblockexpression = null;
     {
@@ -47,7 +47,7 @@ public class JFlexGeneratorFragmentTemplate {
     }
     return _xblockexpression;
   }
-  
+
   public String generateFlexer(final Grammar it, final String parserName, final String macros, final String rules, final CodeConfig c) {
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = c.getFileHeader();
@@ -172,7 +172,7 @@ public class JFlexGeneratorFragmentTemplate {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   public String tokens(final Grammar it) {
     ArrayList<String> allKeywords = CollectionLiterals.<String>newArrayList();
     List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
@@ -194,7 +194,7 @@ public class JFlexGeneratorFragmentTemplate {
     }
     return _builder.toString();
   }
-  
+
   public CharSequence state(final String it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<YYINITIAL> \"");
@@ -206,11 +206,11 @@ public class JFlexGeneratorFragmentTemplate {
     _builder.append("; }");
     return _builder;
   }
-  
+
   protected void _collectTokens(final AbstractRule it, final List<String> known) {
     this.collectTokens(it.getAlternatives(), known);
   }
-  
+
   protected void _collectTokens(final Keyword it, final List<String> known) {
     boolean _and = false;
     boolean _contains = known.contains(it.getValue());
@@ -222,14 +222,14 @@ public class JFlexGeneratorFragmentTemplate {
       _and = _add;
     }
   }
-  
+
   protected void _collectTokens(final EObject it, final List<String> known) {
     EList<EObject> _eContents = it.eContents();
     for (final EObject e : _eContents) {
       this.collectTokens(e, known);
     }
   }
-  
+
   public void collectTokens(final EObject it, final List<String> known) {
     if (it instanceof Keyword) {
       _collectTokens((Keyword)it, known);

@@ -27,11 +27,11 @@ public class UndoTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private OrganizeImportsHandler _organizeImportsHandler;
-  
+
   @Test
   public void testUndo() {
     try {

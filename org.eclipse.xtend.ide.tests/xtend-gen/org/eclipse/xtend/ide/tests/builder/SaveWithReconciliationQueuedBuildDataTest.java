@@ -23,7 +23,7 @@ public class SaveWithReconciliationQueuedBuildDataTest extends AbstractSingleEdi
     };
     return this._javaEditorExtension.save(editor, _function);
   }
-  
+
   @Override
   public ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {

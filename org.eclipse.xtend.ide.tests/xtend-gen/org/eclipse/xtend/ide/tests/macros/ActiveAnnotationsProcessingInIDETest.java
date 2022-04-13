@@ -63,13 +63,13 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Inject
   @Extension
   private IEObjectHoverDocumentationProvider documentationProvider;
-  
+
   @Inject
   private IResourceValidator validator;
-  
+
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Test
   public void testDocumentationProvider() {
     StringConcatenation _builder = new StringConcatenation();
@@ -176,24 +176,24 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
-  
+
   public void assertDocumentation(final CharSequence charSequence, final EObject sourceElement) {
     Assert.assertEquals(charSequence.toString(), this.documentationProvider.getDocumentation(sourceElement));
   }
-  
+
   @Inject
   private XtextResourceSetProvider resourceSetProvider;
-  
+
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Rule
   public StopwatchRule stopwatch = new StopwatchRule(true);
-  
+
   private static IJavaProject macroProject;
-  
+
   private static IJavaProject userProject;
-  
+
   @BeforeClass
   public static void createProjects() {
     try {
@@ -207,7 +207,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @AfterClass
   public static void deleteProjects() {
     try {
@@ -218,7 +218,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void tearDown() throws Exception {
     this.workbenchTestHelper.closeAllEditors(false);
@@ -232,13 +232,13 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       }
     }
   }
-  
+
   private IFile macroFile;
-  
+
   private IFile clientFile;
-  
+
   private String exportedPackage;
-  
+
   @Override
   public void assertProcessing(final Pair<String, String> macroContent, final Pair<String, String> clientContent, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
@@ -264,7 +264,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
       final IFile result = it.getProject().getFile(("src/" + fileName));
@@ -277,7 +277,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void createIfNotExistent(final IContainer container) {
     try {
       boolean _exists = container.exists();

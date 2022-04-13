@@ -22,7 +22,7 @@ public class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jv
   public Iterable<? extends EnumerationValueDeclaration> getDeclaredValues() {
     return Iterables.<EnumerationValueDeclaration>filter(this.getDeclaredMembers(), EnumerationValueDeclaration.class);
   }
-  
+
   @Override
   public EnumerationValueDeclaration findDeclaredValue(final String name) {
     final Function1<EnumerationValueDeclaration, Boolean> _function = (EnumerationValueDeclaration value) -> {

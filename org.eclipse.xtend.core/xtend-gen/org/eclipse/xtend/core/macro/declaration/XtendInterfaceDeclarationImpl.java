@@ -26,7 +26,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getExtends(), _function);
   }
-  
+
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
@@ -34,7 +34,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     };
     return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(this.getDelegate().getTypeParameters(), _function);
   }
-  
+
   @Override
   public boolean isStrictFloatingPoint() {
     return false;

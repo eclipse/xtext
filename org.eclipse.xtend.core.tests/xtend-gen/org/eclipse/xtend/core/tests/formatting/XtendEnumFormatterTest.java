@@ -28,7 +28,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatLiteral01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -43,7 +43,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatLiteral02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -64,7 +64,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatLiteral03() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -88,7 +88,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatBraces_01() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -104,7 +104,7 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatBraces_02() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {

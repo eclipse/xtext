@@ -43,7 +43,7 @@ public class MutableAssert extends Assert {
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_4);
     codeToTest.apply(expectedQualifiedName);
   }
-  
+
   public static void assertValidJavaIdentifier(final String name, final Procedure1<? super String> codeToTest) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(name);
@@ -63,7 +63,7 @@ public class MutableAssert extends Assert {
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_2);
     codeToTest.apply("foo");
   }
-  
+
   public static <T extends Throwable> T assertThrowable(final Class<T> clazz, final String message, final Procedure0 codeToTest) {
     T _xblockexpression = null;
     {
@@ -73,7 +73,7 @@ public class MutableAssert extends Assert {
     }
     return _xblockexpression;
   }
-  
+
   public static <T extends Throwable> T assertThrowable(final Class<T> clazz, final Procedure0 codeToTest) {
     Object _xblockexpression = null;
     {

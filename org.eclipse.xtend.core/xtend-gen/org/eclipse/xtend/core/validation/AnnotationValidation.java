@@ -38,12 +38,12 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class AnnotationValidation extends AbstractDeclarativeValidator {
   @Inject
   private AnnotationValueValidator annotationValueValidator;
-  
+
   @Override
   protected List<EPackage> getEPackages() {
     return CollectionLiterals.<EPackage>newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
   }
-  
+
   @Check
   public void checkAnnotation(final XtendAnnotationType it) {
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(it.getMembers(), XtendField.class);
@@ -72,7 +72,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
       }
     }
   }
-  
+
   public boolean isValidAnnotationValueType(final JvmTypeReference reference) {
     JvmTypeReference _switchResult = null;
     boolean _matched = false;

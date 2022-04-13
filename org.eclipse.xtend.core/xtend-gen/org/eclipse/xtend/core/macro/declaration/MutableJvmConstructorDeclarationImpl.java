@@ -23,19 +23,19 @@ public class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarat
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public Iterable<? extends MutableParameterDeclaration> getParameters() {
     Iterable<? extends ParameterDeclaration> _parameters = super.getParameters();
     return ((Iterable<? extends MutableParameterDeclaration>) _parameters);
   }
-  
+
   @Override
   public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     Iterable<? extends TypeParameterDeclaration> _typeParameters = super.getTypeParameters();
     return ((Iterable<? extends MutableTypeParameterDeclaration>) _typeParameters);
   }
-  
+
   @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();

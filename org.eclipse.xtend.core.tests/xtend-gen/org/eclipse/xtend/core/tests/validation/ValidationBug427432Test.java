@@ -28,11 +28,11 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void finalInstanceField() {
     try {
@@ -70,7 +70,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalInstanceField_2() {
     try {
@@ -119,7 +119,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalInstanceField_3() {
     try {
@@ -167,7 +167,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void notFinalInstanceField() {
     try {
@@ -205,7 +205,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalStaticField() {
     try {
@@ -243,7 +243,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalStaticField_2() {
     try {
@@ -280,7 +280,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void notFinalStaticField() {
     try {
@@ -318,7 +318,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void notFinalStaticField_2() {
     try {
@@ -355,7 +355,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalStaticFieldWithNotConstantInitialization() {
     try {
@@ -404,7 +404,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalStaticFieldWithNotConstantInitialization_2() {
     try {
@@ -441,7 +441,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalStaticFieldWithoutInitialization() {
     try {
@@ -478,7 +478,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalVariable() {
     try {
@@ -515,7 +515,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void finalVariableWithNotConstantInitialization() {
     try {
@@ -562,7 +562,7 @@ public class ValidationBug427432Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void notFinalVariable() {
     try {

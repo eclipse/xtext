@@ -35,7 +35,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void add_abstract_simple() {
     StringConcatenation _builder = new StringConcatenation();
@@ -50,7 +50,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_final_simple() {
     StringConcatenation _builder = new StringConcatenation();
@@ -65,7 +65,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_package() {
     StringConcatenation _builder = new StringConcatenation();
@@ -80,7 +80,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_package_final() {
     StringConcatenation _builder = new StringConcatenation();
@@ -95,7 +95,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_static() {
     StringConcatenation _builder = new StringConcatenation();
@@ -110,7 +110,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_nested_classes_outer() {
     StringConcatenation _builder = new StringConcatenation();
@@ -137,7 +137,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_nested_classes_inner() {
     StringConcatenation _builder = new StringConcatenation();
@@ -164,7 +164,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_nested_classes_outer_static() {
     StringConcatenation _builder = new StringConcatenation();
@@ -191,7 +191,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_annotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -210,7 +210,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   @Test
   public void add_abstract_javadoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -247,7 +247,7 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     this.applyFix(_builder, _builder_1);
   }
-  
+
   private void applyFix(final CharSequence input, final CharSequence result) {
     final String issueCode = IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME;
     final String fixlabel = "Add missing abstract modifier.";

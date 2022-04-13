@@ -28,11 +28,11 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testBug447125() {
     try {
@@ -65,7 +65,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_01() {
     try {
@@ -88,7 +88,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -111,7 +111,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {
@@ -134,7 +134,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_04() {
     try {
@@ -157,7 +157,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_05() {
     try {
@@ -180,7 +180,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_06() {
     try {
@@ -203,7 +203,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_07() {
     try {
@@ -226,7 +226,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_08() {
     try {
@@ -249,7 +249,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_09() {
     try {
@@ -281,7 +281,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_10() {
     try {
@@ -313,7 +313,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug436248_01() {
     try {
@@ -345,7 +345,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInvalidSuper() {
     try {
@@ -374,7 +374,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExtensions_01() {
     try {
@@ -427,7 +427,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExtensions_02() {
     try {
@@ -477,7 +477,7 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExtensions_03() {
     try {

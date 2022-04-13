@@ -26,7 +26,7 @@ public class ValidationBug378818Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper helper;
-  
+
   @Test
   public void testAbstractMethodInvocation_01() {
     try {
@@ -57,7 +57,7 @@ public class ValidationBug378818Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAbstractMethodInvocation_02() {
     try {

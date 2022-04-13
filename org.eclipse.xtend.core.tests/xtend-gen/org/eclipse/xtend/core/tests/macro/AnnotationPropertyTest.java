@@ -70,7 +70,7 @@ public class AnnotationPropertyTest extends AbstractActiveAnnotationTest {
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationProperty_2() {
     StringConcatenation _builder = new StringConcatenation();

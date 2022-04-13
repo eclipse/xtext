@@ -52,7 +52,7 @@ public class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -77,7 +77,7 @@ public class AmbiguousRawFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_02() {
     StringConcatenation _builder = new StringConcatenation();

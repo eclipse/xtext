@@ -129,7 +129,7 @@ public class Bug446364Test extends AbstractActiveAnnotationTest {
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testChangeBody() {
     StringConcatenation _builder = new StringConcatenation();

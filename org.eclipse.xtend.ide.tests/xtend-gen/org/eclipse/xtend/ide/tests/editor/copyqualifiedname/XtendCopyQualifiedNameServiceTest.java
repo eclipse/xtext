@@ -40,14 +40,14 @@ import org.junit.Test;
 public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private ICopyQualifiedNameService copyQualifiedNameService;
-  
+
   @Test
   public void testJvmOperation() {
     try {
@@ -81,7 +81,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_2() {
     try {
@@ -128,7 +128,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_3() {
     try {
@@ -162,7 +162,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_4() {
     try {
@@ -224,7 +224,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_5() {
     try {
@@ -261,7 +261,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_6() {
     try {
@@ -323,7 +323,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_7() {
     try {
@@ -372,7 +372,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmOperation_8() {
     try {
@@ -416,7 +416,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmConstructor() {
     try {
@@ -475,7 +475,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmConstructor_2() {
     try {
@@ -533,7 +533,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmConstructor_3() {
     try {
@@ -591,7 +591,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmConstructor_4() {
     try {
@@ -630,7 +630,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFunction() {
     try {
@@ -654,7 +654,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFunction_2() {
     try {
@@ -686,7 +686,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFunction_3() {
     try {
@@ -724,7 +724,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFunction_4() {
     try {
@@ -762,7 +762,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFunction_5() {
     try {
@@ -786,7 +786,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendConstructor() {
     try {
@@ -819,7 +819,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendConstructor_2() {
     try {
@@ -843,7 +843,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendConstructor_3() {
     try {
@@ -867,25 +867,25 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void _assertCopyQualifiedName(final XAbstractFeatureCall featureCall, final String expectedQualifiedName) {
     Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(featureCall.getFeature(), featureCall));
   }
-  
+
   protected void _assertCopyQualifiedName(final XConstructorCall constructorCall, final String expectedQualifiedName) {
     Assert.assertEquals(expectedQualifiedName, 
       this.copyQualifiedNameService.getQualifiedName(constructorCall.getConstructor(), constructorCall));
   }
-  
+
   protected void _assertCopyQualifiedName(final EObject object, final String expectedQualifiedName) {
     Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(object, null));
     Assert.assertEquals(expectedQualifiedName, this.copyQualifiedNameService.getQualifiedName(object, object.eContainer()));
   }
-  
+
   public ResourceSet getResourceSet() {
     return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
-  
+
   public void assertCopyQualifiedName(final EObject featureCall, final String expectedQualifiedName) {
     if (featureCall instanceof XAbstractFeatureCall) {
       _assertCopyQualifiedName((XAbstractFeatureCall)featureCall, expectedQualifiedName);

@@ -33,7 +33,7 @@ public class FileProcessor extends AbstractClassProcessor {
       annotatedClass.addField(segment, _function);
     }
   }
-  
+
   @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     final Path path = annotatedClass.getCompilationUnit().getFilePath();

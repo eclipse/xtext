@@ -34,13 +34,13 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public MutableTypeParameterDeclarator getTypeParameterDeclarator() {
     TypeParameterDeclarator _typeParameterDeclarator = super.getTypeParameterDeclarator();
     return ((MutableTypeParameterDeclarator) _typeParameterDeclarator);
   }
-  
+
   @Override
   public void setSimpleName(final String name) {
     this.checkMutable();
@@ -48,7 +48,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     JvmTypeParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }
-  
+
   @Override
   public void remove() {
     this.checkMutable();
@@ -69,17 +69,17 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     _builder_1.append(_delegate_1);
     Preconditions.checkState(_tripleEquals, _builder_1);
   }
-  
+
   @Override
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
     throw new UnsupportedOperationException("It is not possible to add an annotation.");
   }
-  
+
   @Override
   public boolean removeAnnotation(final AnnotationReference annotationReference) {
     throw new UnsupportedOperationException("It is not possible to remove an annotation.");
   }
-  
+
   @Override
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
     this.checkMutable();
@@ -95,7 +95,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
       }
     }
   }
-  
+
   protected final void checkMutable() {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.getCompilationUnit().getLastPhase();
     boolean _notEquals = (!Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));

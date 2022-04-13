@@ -34,7 +34,7 @@ import org.junit.Assert;
 public class TypeReferenceAssignabilityTest extends AssignabilityTest {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Override
   public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
@@ -99,18 +99,18 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public boolean testIsAssignable(final CompilationUnitImpl unit, final TypeReference lhs, final TypeReference rhs) {
     Assert.assertTrue(this.doIsAssignable(lhs, lhs));
     Assert.assertTrue(this.doIsAssignable(rhs, rhs));
     final boolean result = this.doIsAssignable(lhs, rhs);
     return result;
   }
-  
+
   public boolean doIsAssignable(final TypeReference lhs, final TypeReference rhs) {
     return lhs.isAssignableFrom(rhs);
   }
-  
+
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);

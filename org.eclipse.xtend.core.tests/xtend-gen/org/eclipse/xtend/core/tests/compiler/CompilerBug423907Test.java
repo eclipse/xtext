@@ -60,7 +60,7 @@ public class CompilerBug423907Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_423907_02() {
     StringConcatenation _builder = new StringConcatenation();

@@ -22,17 +22,17 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
   public Object getDefaultValue() {
     return this.getCompilationUnit().translateAnnotationValue(this.getDelegate().getDefaultValue(), this.getCompilationUnit().getTypeReferences().isArray(this.getDelegate().getReturnType()));
   }
-  
+
   @Override
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getReturnType());
   }
-  
+
   @Override
   public Expression getDefaultValueExpression() {
     return null;
   }
-  
+
   public void setDefaultValueExpression(final Expression body) {
     this.checkMutable();
     if ((body == null)) {
@@ -41,19 +41,19 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
       this.getCompilationUnit().getJvmTypesBuilder().setBody(this.getDelegate(), ((ExpressionImpl) body).getDelegate());
     }
   }
-  
+
   public void setDefaultValueExpression(final CompilationStrategy compilationStrategy) {
     this.checkMutable();
     Preconditions.checkArgument((compilationStrategy != null), "compilationStrategy cannot be null");
     this.getCompilationUnit().setCompilationStrategy(this.getDelegate(), compilationStrategy);
   }
-  
+
   public void setDefaultValueExpression(final StringConcatenationClient compilationTemplate) {
     this.checkMutable();
     Preconditions.checkArgument((compilationTemplate != null), "compilationTemplate cannot be null");
     this.getCompilationUnit().setCompilationTemplate(this.getDelegate(), compilationTemplate);
   }
-  
+
   public void setType(final TypeReference type) {
     this.checkMutable();
     Preconditions.checkArgument((type != null), "returnType cannot be null");

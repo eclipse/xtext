@@ -46,7 +46,7 @@ public class AccessorsAnnotationTest extends AbstractActiveAnnotationTest {
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }
-  
+
   @Test
   public void testProperty2() {
     StringConcatenation _builder = new StringConcatenation();

@@ -27,7 +27,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testClassAllowedModifiers() {
     try {
@@ -62,7 +62,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedClassAllowedModifiers() {
     try {
@@ -94,7 +94,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedClass() {
     try {
@@ -114,7 +114,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceAllowedModifiers() {
     try {
@@ -146,7 +146,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedInterfaceAllowedModifiers() {
     try {
@@ -178,7 +178,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumAllowedModifiers() {
     try {
@@ -210,7 +210,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedEnumAllowedModifiers() {
     try {
@@ -242,7 +242,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationTypeAllowedModifiers() {
     try {
@@ -274,7 +274,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedAnnotationTypeAllowedModifiers() {
     try {
@@ -306,7 +306,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodAllowedModifiers() {
     try {
@@ -350,7 +350,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodInInterfaceAllowedModifiers() {
     StringConcatenation _builder = new StringConcatenation();
@@ -393,7 +393,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_12.append("def override foo() {}");
     this._validationTestHelper.assertWarning(this.memberInInterface(_builder_12.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.UNNECESSARY_MODIFIER);
   }
-  
+
   @Test
   public void testConstructorAllowedModifiers() {
     try {
@@ -431,7 +431,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldAllowedModifiers() {
     try {
@@ -484,7 +484,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldInInterfaceAllowedModifiers() {
     StringConcatenation _builder = new StringConcatenation();
@@ -527,7 +527,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_12.append("synchronized int foo");
     this._validationTestHelper.assertError(this.memberInInterface(_builder_12.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
   }
-  
+
   @Test
   public void testFieldInAnnotationAllowedModifiers() {
     StringConcatenation _builder = new StringConcatenation();
@@ -567,7 +567,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_11.append("synchronized int foo");
     this._validationTestHelper.assertError(this.memberInAnnotation(_builder_11.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
   }
-  
+
   @Test
   public void testDuplicateModifier() {
     try {
@@ -605,7 +605,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicateVisibility() {
     try {
@@ -625,7 +625,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticVsAbstract() {
     try {
@@ -639,7 +639,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFinalVsAbstract() {
     try {
@@ -653,7 +653,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAbstractVsNoBody() {
     try {
@@ -667,7 +667,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNativeVsNoBody() {
     try {
@@ -681,7 +681,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticVsNative() {
     try {
@@ -695,7 +695,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFinalVsNative() {
     try {
@@ -709,7 +709,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFinalVsNoBody() {
     try {
@@ -723,7 +723,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFinalValVsVar() {
     try {
@@ -749,7 +749,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected XtendMember memberInInterface(final String model) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -761,7 +761,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected XtendMember memberInAnnotation(final String model) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -773,7 +773,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private String toNestedType(final CharSequence input) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

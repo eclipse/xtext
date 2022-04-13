@@ -42,17 +42,17 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 @SuppressWarnings("all")
 public class ProblemSupportImpl implements ProblemSupport {
   private CompilationUnitImpl compilationUnit;
-  
+
   private final List<Procedure0> delayedTasks = CollectionLiterals.<Procedure0>newArrayList();
-  
+
   public ProblemSupportImpl(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }
-  
+
   private void checkCanceled() {
     this.compilationUnit.checkCanceled();
   }
-  
+
   private void checkValidationAllowed() {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
     boolean _greaterThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) > 0);
@@ -60,7 +60,7 @@ public class ProblemSupportImpl implements ProblemSupport {
       throw new IllegalStateException("Adding problems is not allowed after the validation phase");
     }
   }
-  
+
   @Override
   public void addError(final Element element, final String message) {
     this.checkCanceled();
@@ -72,7 +72,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, (-1), null);
     _errors.add(_eObjectDiagnosticImpl);
   }
-  
+
   @Override
   public void addWarning(final Element element, final String message) {
     this.checkCanceled();
@@ -84,7 +84,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, (-1), null);
     _warnings.add(_eObjectDiagnosticImpl);
   }
-  
+
   @Override
   public void validateLater(final Procedure0 validationCallback) {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
@@ -95,7 +95,7 @@ public class ProblemSupportImpl implements ProblemSupport {
       validationCallback.apply();
     }
   }
-  
+
   public void validationPhaseStarted() {
     try {
       final Consumer<Procedure0> _function = (Procedure0 it) -> {
@@ -113,7 +113,7 @@ public class ProblemSupportImpl implements ProblemSupport {
       this.delayedTasks.clear();
     }
   }
-  
+
   @Override
   public List<? extends Problem> getProblems(final Element element) {
     this.checkCanceled();
@@ -137,7 +137,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function), _function_1);
     return IterableExtensions.<Problem>toList(result);
   }
-  
+
   public EStructuralFeature getSignificantFeature(final EObject obj) {
     EStructuralFeature _switchResult = null;
     boolean _matched = false;
@@ -171,7 +171,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
     return _switchResult;
   }
-  
+
   private Pair<Resource, EObject> getResourceAndEObject(final Element element) {
     this.checkCanceled();
     boolean _matched = false;
@@ -202,7 +202,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
     throw new IllegalArgumentException("You can only add issues on locally declared elements.");
   }
-  
+
   private Problem.Severity translateSeverity(final Severity severity) {
     Problem.Severity _switchResult = null;
     if (severity != null) {

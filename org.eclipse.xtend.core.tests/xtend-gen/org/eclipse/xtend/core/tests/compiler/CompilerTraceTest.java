@@ -46,17 +46,17 @@ import org.junit.Test;
 public class CompilerTraceTest extends AbstractXtendTestCase {
   @Inject
   private JvmModelGenerator generator;
-  
+
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
-  
+
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   protected IFilePostProcessor postProcessor;
-  
+
   @Test
   public void testClassComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -92,7 +92,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -128,7 +128,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassKeyword() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -164,7 +164,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassWithComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -201,7 +201,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("#");
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Ignore("This one should succeed as soon as the case above is fixed")
   public void testClassWithComment_Ignored() throws Exception {
@@ -237,7 +237,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassTypeParamWithConstraint() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -273,7 +273,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassTypeParamUpperBound() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -309,7 +309,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassTypeParamWithoutConstraint() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -345,7 +345,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -386,7 +386,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -427,7 +427,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -471,7 +471,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldDeclaration() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -512,7 +512,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldDeclarationAndComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -553,7 +553,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -597,7 +597,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -641,7 +641,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodDeclaration() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -685,7 +685,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodDeclarationAndComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -729,7 +729,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodReturnType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -773,7 +773,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameter() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -817,7 +817,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameterName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -861,7 +861,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameterType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -905,7 +905,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameterTypeWithGenerics() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -955,7 +955,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameterFunctionType() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1002,7 +1002,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodParameterFunctionTypeComplete() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1049,7 +1049,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodWithThrowsClause() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1093,7 +1093,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodWithThrowsClauseTwoExceptions() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1140,7 +1140,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1184,7 +1184,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1228,7 +1228,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorDeclaration() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1272,7 +1272,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorDeclarationAndComment() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1316,7 +1316,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDispatchMethodName_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1392,7 +1392,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDispatchMethodName_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1468,7 +1468,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDispatchMethodName_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1544,9 +1544,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.tracesTo(_builder, _builder_1);
   }
-  
+
   private Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
-  
+
   public void tracesTo(final CharSequence xtend, final CharSequence java) {
     try {
       final String xtendWithSpaces = ((" " + xtend) + " ");
@@ -1595,7 +1595,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public AbstractTraceRegion merge(final List<AbstractTraceRegion> regions) {
     boolean _isEmpty = regions.isEmpty();
     boolean _not = (!_isEmpty);

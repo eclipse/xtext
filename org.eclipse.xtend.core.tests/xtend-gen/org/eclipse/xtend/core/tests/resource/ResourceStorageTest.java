@@ -56,7 +56,7 @@ import org.junit.Test;
 public class ResourceStorageTest extends AbstractXtendTestCase {
   @Inject
   private IResourceStorageFacade resourceStorageFacade;
-  
+
   @Test
   public void testWriteAndLoad() {
     try {
@@ -162,7 +162,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test(expected = IOException.class)
   public void testFailedWrite() throws Exception {
     final XtendFile file = this.file("class C{}");
@@ -180,7 +180,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       }
     }.writeResource(((StorageAwareResource) _eResource));
   }
-  
+
   @Test
   public void testConstantValueIsPersisted() {
     try {
@@ -221,7 +221,7 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testConstantValueIsPersisted_01() {
     try {

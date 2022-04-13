@@ -18,25 +18,25 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
   @Accessors
   private String interfaceName;
-  
+
   @Accessors
   private String image = "newint_wiz.gif";
-  
+
   @Pure
   public String getInterfaceName() {
     return this.interfaceName;
   }
-  
+
   public void setInterfaceName(final String interfaceName) {
     this.interfaceName = interfaceName;
   }
-  
+
   @Pure
   @Override
   public String getImage() {
     return this.image;
   }
-  
+
   public void setImage(final String image) {
     this.image = image;
   }

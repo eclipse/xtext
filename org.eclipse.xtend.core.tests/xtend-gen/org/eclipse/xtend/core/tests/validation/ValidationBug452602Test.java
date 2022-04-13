@@ -28,10 +28,10 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper helper;
-  
+
   @Inject
   private ParseHelper<XtendFile> parser;
-  
+
   @Test
   public void test_01() {
     try {
@@ -77,7 +77,7 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -123,7 +123,7 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {

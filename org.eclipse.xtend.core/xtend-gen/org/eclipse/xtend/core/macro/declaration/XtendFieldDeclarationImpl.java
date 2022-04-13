@@ -23,12 +23,12 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
   public Visibility getVisibility() {
     return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public Expression getInitializer() {
     XExpression _initialValue = this.getDelegate().getInitialValue();
@@ -38,32 +38,32 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     }
     return this.getCompilationUnit().toExpression(this.getDelegate().getInitialValue());
   }
-  
+
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
   }
-  
+
   @Override
   public boolean isStatic() {
     return this.getDelegate().isStatic();
   }
-  
+
   @Override
   public boolean isTransient() {
     return false;
   }
-  
+
   @Override
   public boolean isVolatile() {
     return false;
   }
-  
+
   @Override
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getType());
   }
-  
+
   @Override
   public ClassDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();

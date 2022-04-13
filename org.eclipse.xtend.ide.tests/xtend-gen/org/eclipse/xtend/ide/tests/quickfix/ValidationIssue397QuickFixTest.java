@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
 public class ValidationIssue397QuickFixTest extends AbstractQuickfixTest {
   @Inject
   private IPreferenceStoreAccess preferenceStoreAccess;
-  
+
   @Before
   public void setup() {
     try {
@@ -44,145 +44,145 @@ public class ValidationIssue397QuickFixTest extends AbstractQuickfixTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_fixTernExpSimple1() {
     this.applyFix("bool? 1 : 2", 
       "if (bool) 1 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpSimple2() {
     this.applyFix("(bool)? 1 : 2", 
       "if (bool) 1 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpSimple3() {
     this.applyFix("a < b? 1 : 2", 
       "if (a < b) 1 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNoElse() {
     this.applyFix("bool? 1", 
       "if (bool) 1");
   }
-  
+
   @Test
   public void test_fixTernExpNoElse2() {
     this.applyFix("!bool? 1", 
       "if (!bool) 1");
   }
-  
+
   @Test
   public void test_fixTernExpNoElse3() {
     this.applyFix("a < b? 1", 
       "if (a < b) 1");
   }
-  
+
   @Test
   public void test_fixTernExpNestedThen() {
     this.applyFix("bool? if (!bool) 3 else 4 : 2", 
       "if (bool) if (!bool) 3 else 4 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNestedElse() {
     this.applyFix("bool? 1 : if(!bool) 5 else 6", 
       "if (bool) 1 else if(!bool) 5 else 6");
   }
-  
+
   @Test
   public void test_fixTernExpNestedBoth() {
     this.applyFix("bool? if (!bool) 3 else 4 : if(!bool) 5 else 6", 
       "if (bool) if (!bool) 3 else 4 else if(!bool) 5 else 6");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInThen1() {
     this.applyFix("if (bool) (!bool)? 3 : 4 else 2", 
       "if (bool) if (!bool) 3 else 4 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInThen2() {
     this.applyFix("if (bool) a < b? 3 : 4 else 2", 
       "if (bool) if (a < b) 3 else 4 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInThenBrackets1() {
     this.applyFix("if (bool) (bool? 1) else 2", 
       "if (bool) (if (bool) 1) else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInThenBrackets2() {
     this.applyFix("if (bool) (bool? 3 : 4) else 2", 
       "if (bool) (if (bool) 3 else 4) else 2");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInElse() {
     this.applyFix("if (bool) 1 else (!bool)? 5 : 6", 
       "if (bool) 1 else if (!bool) 5 else 6");
   }
-  
+
   @Test
   public void test_fixTernExpNestedInElseBrackets() {
     this.applyFix("if (bool) 1 else ((bool)? 5 : 6)", 
       "if (bool) 1 else (if (bool) 5 else 6)");
   }
-  
+
   @Test
   public void test_fixTernExpNestedDoubleTrouble1() {
     this.applyFix("if (bool) !bool? 5 : 7 else if (bool) 4 else 6", 
       "if (bool) if (!bool) 5 else 7 else if (bool) 4 else 6");
   }
-  
+
   @Test
   public void test_fixTernExpNestedDoubleTrouble2() {
     this.applyFix("bool? !bool? 5 : 7 : (bool)? 4 : 6", 
       "if (bool) if (!bool) 5 else 7 else if (bool) 4 else 6");
   }
-  
+
   @Test
   public void test_fixTernExpNestedDoubleTrouble3() {
     this.applyFix("bool? !bool? if (!bool) 1 else 2 : 3 : (bool)? 5 : 4", 
       "if (bool) if (!bool) if (!bool) 1 else 2 else 3 else if (bool) 5 else 4");
   }
-  
+
   @Test
   public void test_fixTernExpDoubleNestedInThenBrackets() {
     this.applyFix("if (bool) (bool? if (a < b) 8 else 9 : 4) else 2", 
       "if (bool) (if (bool) if (a < b) 8 else 9 else 4) else 2");
   }
-  
+
   @Test
   public void test_fixTernExpSpaces1() {
     this.applyFix("bool  ?         1   :    2", 
       "if (bool) 1 else 2");
   }
-  
+
   @Test
   public void test_fixTernExpSpaces2() {
     this.applyFix("if (bool ) (!bool  )?    3    :   4  else       2", 
       "if (bool ) if (!bool  ) 3 else 4  else       2");
   }
-  
+
   @Test
   public void test_fixTernExpSimpleWithHardEnd() {
     this.applyFix("(a < b)? 4 : 2;System.out.println(\"test\")", 
       "if (a < b) 4 else 2;System.out.println(\"test\")");
   }
-  
+
   @Test
   public void test_fixTernExpNestedWithHardEnd() {
     this.applyFix("if (a < b) 4 else (a > b)           ? 3 : 2;System.out.println(\"test\")", 
       "if (a < b) 4 else if (a > b) 3 else 2;System.out.println(\"test\")");
   }
-  
+
   private void applyFix(final CharSequence input, final CharSequence result) {
     final String issueCode = IssueCodes.TERNARY_EXPRESSION_NOT_ALLOWED;
     final String fixlabel = "Refactor into inline if-expression.";

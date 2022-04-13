@@ -33,7 +33,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
   @Override
   public void doRegisterGlobals(final List<? extends InterfaceDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableInterfaceDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableInterfaceDeclaration annotatedTargetElement : annotatedTargetElements) {
@@ -142,7 +142,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
       }
     }
   }
-  
+
   @Override
   public void doGenerateCode(final List<? extends MutableInterfaceDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
   }

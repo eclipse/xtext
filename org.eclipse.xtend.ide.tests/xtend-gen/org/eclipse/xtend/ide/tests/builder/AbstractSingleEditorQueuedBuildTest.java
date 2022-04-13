@@ -40,7 +40,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addAnnotation() {
     try {
@@ -66,7 +66,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addPrimaryTopLevelType() {
     try {
@@ -85,7 +85,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removePrimaryTopLevelType() {
     try {
@@ -104,7 +104,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renamePrimaryTopLevelType() {
     try {
@@ -123,7 +123,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addPrimaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -139,7 +139,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removePrimaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -155,7 +155,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renamePrimaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -171,7 +171,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addSecondaryTopLevelType() {
     try {
@@ -195,7 +195,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removeSecondaryTopLevelType() {
     try {
@@ -219,7 +219,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameSecondaryTopLevelType() {
     try {
@@ -245,7 +245,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addSecondaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -266,7 +266,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removeSecondaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -287,7 +287,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameSecondaryTopLevelTypeWithinDefaultPackage() {
     try {
@@ -310,7 +310,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addNestedTypes() {
     try {
@@ -346,7 +346,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removeNestedTypes() {
     try {
@@ -384,7 +384,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameNestedTypes() {
     try {
@@ -429,7 +429,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addNestedTypesWithinDefaultPackage() {
     try {
@@ -468,7 +468,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addNestedTypesWithinDefaultPackage2() {
     try {
@@ -501,7 +501,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removeNestedTypesWithinDefaultPackage() {
     try {
@@ -536,7 +536,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameNestedTypesWithinDefaultPackage() {
     try {
@@ -572,7 +572,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changePackageDeclaration() {
     try {
@@ -594,7 +594,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void makeFieldPrivate() {
     try {
@@ -620,7 +620,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void makeFieldPublic() {
     try {
@@ -646,7 +646,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void makePrivateFieldStatic() {
     try {
@@ -672,7 +672,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeImports() {
     try {
@@ -701,7 +701,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeImports2() {
     try {
@@ -730,7 +730,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeImports3() {
     try {
@@ -761,7 +761,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeImports4() {
     try {
@@ -793,7 +793,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeImports5() {
     try {
@@ -832,7 +832,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameLocalVariable() {
     try {
@@ -864,7 +864,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameMethod() {
     try {
@@ -896,7 +896,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRenameMethodWithoutSaving() {
     try {
@@ -943,7 +943,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void changeMethodBody() {
     try {
@@ -975,7 +975,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addPublicMethod() {
     try {
@@ -1005,7 +1005,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removePublicMethod() {
     try {
@@ -1046,7 +1046,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removePrivateMethod() {
     try {
@@ -1072,7 +1072,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void removePublicAndPrivateMethods() {
     try {
@@ -1106,30 +1106,30 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ITextEditor save(final String fileName, final String oldText, final String newText) {
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
       return this._javaEditorExtension.changeContent(it, oldText, newText);
     };
     return this.doSave(this._javaEditorExtension.openJavaEditor(fileName), _function);
   }
-  
+
   public ITextEditor save(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     return this.doSave(this._javaEditorExtension.openJavaEditor(fileName), consumer);
   }
-  
+
   public ITextEditor close(final String fileName, final String oldText, final String newText) {
     final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
       return this._javaEditorExtension.changeContent(it, oldText, newText);
     };
     return this.doClose(this._javaEditorExtension.openJavaEditor(fileName), _function);
   }
-  
+
   public ITextEditor close(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     return this.doClose(this._javaEditorExtension.openJavaEditor(fileName), consumer);
   }
-  
+
   public abstract ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer);
-  
+
   public abstract ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer);
 }

@@ -20,20 +20,20 @@ import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 @SuppressWarnings("all")
 public class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
   public static final BlankLineKey blankLinesAfterPackageDecl = new BlankLineKey("blank.lines.after.packagedecl", Integer.valueOf(1));
-  
+
   public static final BlankLineKey blankLinesBetweenClasses = new BlankLineKey("blank.lines.between.classes", Integer.valueOf(1));
-  
+
   public static final BlankLineKey blankLinesBeforeFirstMember = new BlankLineKey("blank.lines.before.first.member", Integer.valueOf(0));
-  
+
   public static final BlankLineKey blankLinesAfterLastMember = new BlankLineKey("blank.lines.after.last.member", Integer.valueOf(0));
-  
+
   public static final BlankLineKey blankLinesBetweenFields = new BlankLineKey("blank.lines.between.fields", Integer.valueOf(0));
-  
+
   public static final BlankLineKey blankLinesBetweenFieldsAndMethods = new BlankLineKey("blank.lines.between.fields.and.methods", Integer.valueOf(1));
-  
+
   public static final BlankLineKey blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", Integer.valueOf(1));
-  
+
   public static final BlankLineKey blankLinesBetweenEnumLiterals = new BlankLineKey("blank.lines.between.enum.literals", Integer.valueOf(0));
-  
+
   public static final BooleanKey keepOneLineMethods = new BooleanKey("keep.one.line.methods", Boolean.valueOf(true));
 }

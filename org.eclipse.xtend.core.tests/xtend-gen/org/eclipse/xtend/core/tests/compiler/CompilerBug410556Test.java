@@ -53,7 +53,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testConstructorTypeParameter_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -91,7 +91,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -139,7 +139,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -193,7 +193,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -247,7 +247,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -304,7 +304,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -358,7 +358,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -415,7 +415,7 @@ public class CompilerBug410556Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_07() {
     StringConcatenation _builder = new StringConcatenation();

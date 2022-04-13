@@ -30,7 +30,7 @@ import org.junit.Test;
 public class Bug452821Test extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Before
   @After
   public void cleanUp() {
@@ -40,7 +40,7 @@ public class Bug452821Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=452821
    */
@@ -74,7 +74,7 @@ public class Bug452821Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertNoErrors(final IFile file) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

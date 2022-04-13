@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @SuppressWarnings("all")
 public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractDelegator<T> implements ResolvedExecutable {
   private Iterable<? extends ResolvedParameter> resolvedParameters;
-  
+
   @Override
   public Iterable<? extends ResolvedParameter> getResolvedParameters() {
     Iterable<? extends ResolvedParameter> _xblockexpression = null;
@@ -42,7 +42,7 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Iterable<? extends TypeReference> getResolvedExceptionTypes() {
     final Function1<LightweightTypeReference, TypeReference> _function = (LightweightTypeReference it) -> {
@@ -50,23 +50,23 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     };
     return ListExtensions.<LightweightTypeReference, TypeReference>map(this.getDelegate().getResolvedExceptions(), _function);
   }
-  
+
   @Override
   public D getDeclaration() {
     MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(this.getDelegate().getDeclaration());
     return ((D) _memberDeclaration);
   }
-  
+
   @Override
   public String getSimpleSignature() {
     return this.getDelegate().getSimpleSignature();
   }
-  
+
   @Override
   public String toString() {
     return this.getDelegate().toString();
   }
-  
+
   @Override
   public String getResolvedErasureSignature() {
     return this.getDelegate().getResolvedErasureSignature();

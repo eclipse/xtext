@@ -19,10 +19,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
   private TextConsole console;
-  
+
   @Inject(optional = true)
   private IWorkbench workbench;
-  
+
   @Override
   public void matchFound(final PatternMatchEvent event) {
     try {
@@ -38,12 +38,12 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
       }
     }
   }
-  
+
   @Override
   public void connect(final TextConsole console) {
     this.console = console;
   }
-  
+
   @Override
   public void disconnect() {
     this.console = null;

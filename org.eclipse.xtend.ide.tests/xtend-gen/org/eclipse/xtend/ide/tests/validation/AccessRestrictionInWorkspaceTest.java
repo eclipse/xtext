@@ -48,11 +48,11 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private IResourceSetProvider _iResourceSetProvider;
-  
+
   @Test
   public void testForbiddenReferenceInOtherProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { restricted.A a }"));
@@ -60,7 +60,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testForbiddenReferenceInOtherProjectAsMemberFeatureCall() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class Dummy { public var n = restricted.A.name }"));
@@ -68,7 +68,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertError(c, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testForbiddenReferenceInOtherProjectAsFeatureCall() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "import restricted.A; class Dummy { public var n = A.name }"));
@@ -76,7 +76,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertError(c, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testDiscouragedReferenceInOtherProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { discouraged.B b }"));
@@ -84,7 +84,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testForbiddenReferenceInSameProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { restricted.A a }"));
@@ -93,7 +93,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
     this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
   }
-  
+
   @Test
   public void testDiscouragedReferenceInSameProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("firstProject/src/Dummy.xtend", "class D { discouraged.B b }"));
@@ -102,7 +102,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
     this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
   }
-  
+
   @Test
   public void testExportedByOtherProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { allowed.C c }"));
@@ -111,7 +111,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
     this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
   }
-  
+
   @Test
   public void testForbiddenReferenceInReexportedProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { restricted.A a }"));
@@ -119,7 +119,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testDiscouragedReferenceInReexportedProject() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { discouraged.B b }"));
@@ -127,7 +127,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertWarning(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE, "Discouraged access: The type B is not accessible", "on required project firstProject");
   }
-  
+
   @Test
   public void testReexported() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("thirdProject/src/Dummy.xtend", "class D { allowed.C c }"));
@@ -136,7 +136,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     this._validationTestHelper.assertNoError(c, IssueCodes.DISCOURAGED_REFERENCE);
     this._validationTestHelper.assertNoError(c, IssueCodes.FORBIDDEN_REFERENCE);
   }
-  
+
   @Test
   public void testForbiddenReferenceInImplicitLambdaParameter() throws Exception {
     final XtendFile xtendFile = this.parse(IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class D { new () { new discouraged.B().accept[] } }"));
@@ -144,7 +144,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     final XtendClass c = ((XtendClass) _head);
     this._validationTestHelper.assertError(c, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
   }
-  
+
   public XtendFile parse(final IFile file) {
     final ResourceSet resourceSet = this._iResourceSetProvider.get(file.getProject());
     final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -152,7 +152,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     return ((XtendFile) _head);
   }
-  
+
   @Before
   @Override
   public void setUp() throws Exception {
@@ -188,13 +188,13 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     JavaCore.create(WorkbenchTestHelper.createPluginProject("thirdProject", "secondProject"));
     IResourcesSetupUtil.waitForBuild();
   }
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   private IJavaProject configureExportedPackages(final IJavaProject pluginProject) throws Exception {
     final IFile manifestFile = pluginProject.getProject().getFile("META-INF/MANIFEST.MF");
     final InputStream contents = manifestFile.getContents();

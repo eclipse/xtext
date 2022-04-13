@@ -38,7 +38,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testDataClasses_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -262,7 +262,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDataClasses_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -394,7 +394,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDataClasses_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -526,7 +526,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExistingDataConstructor() {
     try {
@@ -561,7 +561,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingGetter() {
     try {
@@ -596,7 +596,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingToString() {
     try {
@@ -631,7 +631,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingEquals() {
     try {
@@ -666,7 +666,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingHashCode() {
     try {
@@ -701,7 +701,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingMethodsNotMatchingExactly() {
     try {
@@ -788,7 +788,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testWithCreateExtension() {
     try {
@@ -816,7 +816,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testThreeDataClassesExtendingEachOther() {
     StringConcatenation _builder = new StringConcatenation();
@@ -979,7 +979,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDataClassWithStaticField() {
     try {
@@ -1017,7 +1017,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBooleanProperties() {
     try {
@@ -1063,7 +1063,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testParametrizedSuperConstructor() {
     try {
@@ -1098,7 +1098,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSuperClassWithTypeParameters() {
     try {
@@ -1122,7 +1122,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassAndSuperClassWithTypeParameters() {
     try {

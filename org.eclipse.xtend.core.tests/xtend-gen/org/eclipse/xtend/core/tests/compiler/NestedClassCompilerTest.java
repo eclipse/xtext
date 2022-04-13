@@ -48,7 +48,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAbstractNestedClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -74,7 +74,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetSuper_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -126,7 +126,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetSuper_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -171,7 +171,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloads() {
     StringConcatenation _builder = new StringConcatenation();
@@ -228,7 +228,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverloadsOuterChosen() {
     StringConcatenation _builder = new StringConcatenation();
@@ -285,7 +285,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDeeplyNested() {
     StringConcatenation _builder = new StringConcatenation();
@@ -430,7 +430,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDeeplyNestedWithDollarSyntax() {
     StringConcatenation _builder = new StringConcatenation();
@@ -578,7 +578,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOuterMemberAccess() {
     StringConcatenation _builder = new StringConcatenation();
@@ -635,7 +635,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSiblingAccess() {
     StringConcatenation _builder = new StringConcatenation();
@@ -704,7 +704,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedInterface() {
     StringConcatenation _builder = new StringConcatenation();
@@ -730,7 +730,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedEnum() {
     StringConcatenation _builder = new StringConcatenation();
@@ -765,7 +765,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -800,7 +800,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBugNotAnEnclosingInstance_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1001,7 +1001,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBugNotAnEnclosingInstance_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1144,7 +1144,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBugNotAnEnclosingInstance_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1296,7 +1296,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBugNotAnEnclosingInstance_04() {
     StringConcatenation _builder = new StringConcatenation();

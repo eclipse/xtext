@@ -33,7 +33,7 @@ public class Bug440951Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("AssertionError");
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _withDirtyState = this.newBuilder().withDirtyState();
@@ -52,7 +52,7 @@ public class Bug440951Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _withDirtyState.append(_builder.toString()).assertProposalAtCursor("MyDirtyThrowable");
   }
-  
+
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

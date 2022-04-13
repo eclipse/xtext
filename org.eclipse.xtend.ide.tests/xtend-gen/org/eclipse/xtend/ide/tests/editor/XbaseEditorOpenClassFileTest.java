@@ -56,9 +56,9 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   private IProject project;
-  
+
   @Before
   @Override
   public void setUp() {
@@ -69,7 +69,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   @Override
   public void tearDown() {
@@ -80,7 +80,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenFileFromSmapJarWithIncludedSource() {
     try {
@@ -100,7 +100,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenFileFromSmapJarWithAttachedSource() {
     try {
@@ -121,7 +121,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenFileFromJarWithAttachedSource() {
     try {
@@ -136,7 +136,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenFileFromJarWithNameConflictingLocalFile() {
     try {
@@ -167,7 +167,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenEditor_NameConflict() {
     try {
@@ -204,7 +204,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenEditor_NameConflict02() {
     try {
@@ -241,7 +241,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenEditor_NameConflict03() {
     try {
@@ -285,7 +285,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenEditor4NestedType_NameConflict() {
     try {
@@ -348,7 +348,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenEditor4NestedType_NoNameConflict() {
     try {
@@ -407,7 +407,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected IClasspathEntry addJarToProject(final IProject project, final byte[] jarData) {
     try {
       IClasspathEntry _xblockexpression = null;
@@ -422,7 +422,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public byte[] createJar(final Pair<? extends String, ? extends String>... sourceFiles) {
     try {
       final IProject project = WorkbenchTestHelper.createPluginProject("my.temporary.data.project", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
@@ -471,7 +471,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertContains(final String substring, final String container) {
     boolean _contains = container.contains(substring);
     boolean _not = (!_contains);
@@ -490,7 +490,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       Assert.fail(_builder.toString());
     }
   }
-  
+
   public IPackageFragmentRoot addJarToClassPath(final IJavaProject jp, final String fileName, final String fileNameOfSource) {
     try {
       IProject _project = jp.getProject();
@@ -522,7 +522,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public String getEditorContents(final IJavaElement javaElement) {
     try {
       final IEditorPart editor = JavaUI.openInEditor(javaElement);
@@ -534,7 +534,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public boolean supportsEditorOverride() {
     try {
       Class<?> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
@@ -554,6 +554,6 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     XbaseEditorOpenClassFileTest.LOG.warn(_plus_1);
     return false;
   }
-  
+
   private static final Logger LOG = Logger.getLogger(XbaseEditorOpenClassFileTest.class);
 }

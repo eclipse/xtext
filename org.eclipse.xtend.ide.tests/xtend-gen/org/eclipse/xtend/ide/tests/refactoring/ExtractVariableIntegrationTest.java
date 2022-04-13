@@ -35,18 +35,18 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Inject
   private Provider<ExtractVariableRefactoring> refactoringProvider;
-  
+
   @Inject
   private ExpressionUtil util;
-  
+
   @After
   public void tiraMiGiu() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
-  
+
   @Test
   public void testValInBlock() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -82,7 +82,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testVarInBlock() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -118,7 +118,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInsertBlock() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -163,7 +163,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testGoUpControlStructure() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -205,7 +205,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testGetterName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -263,7 +263,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testTypeName() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -305,7 +305,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testClosureBody() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -353,7 +353,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testClosure() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -389,7 +389,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testClosure_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -425,7 +425,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testClosure_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -461,7 +461,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testClosure_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -497,7 +497,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testList() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -533,7 +533,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testSet() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -569,7 +569,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testMap() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -605,7 +605,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testArray_0() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -641,7 +641,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testArray_1() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -677,7 +677,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testArray_2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -719,7 +719,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   @Test
   public void testArray_3() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -761,7 +761,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _builder_1, true);
   }
-  
+
   protected void assertAfterExtract(final CharSequence input, final CharSequence expected, final boolean isFinal) {
     try {
       final String inputString = input.toString();

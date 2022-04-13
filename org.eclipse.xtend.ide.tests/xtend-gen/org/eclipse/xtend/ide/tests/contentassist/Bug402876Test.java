@@ -31,7 +31,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R transformation) : Iterable<R> - IterableExtensions");
   }
-  
+
   @Test
   public void testExtensionPrecendence_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -46,7 +46,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R transformation) : Iterable<R> - IterableExtensions");
   }
-  
+
   @Test
   public void testExtensionPrecendence_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -61,7 +61,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R transformation) : List<R> - ListExtensions");
   }
-  
+
   @Test
   public void testExtensionPrecendence_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -79,7 +79,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R f) : void - C");
   }
-  
+
   @Test
   public void testExtensionPrecendence_05() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -97,7 +97,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R transformation) : List<R> - ListExtensions");
   }
-  
+
   @Test
   public void testExtensionPrecendence_06() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -118,7 +118,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R f) : int - C");
   }
-  
+
   @Test
   public void testExtensionPrecendence_07() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -139,7 +139,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R f) : long - C");
   }
-  
+
   @Test
   public void testExtensionPrecendence_08() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -160,7 +160,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R f) : int - C");
   }
-  
+
   @Test
   public void testExtensionPrecendence_09() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -181,7 +181,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("map[]").withDisplayString("map((T)=>R f) : long - C");
   }
-  
+
   @Test
   public void testExtensionParameterNoArguments_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -195,7 +195,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("subSequence()").withDisplayString("subSequence(int beginIndex, int endIndex) : CharSequence - String");
   }
-  
+
   @Test
   public void testExtensionParameter_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -210,7 +210,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("subSequence()").withDisplayString("subSequence(int endIndex) : CharSequence - String");
   }
-  
+
   @Test
   public void testExtensionParameter_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -225,7 +225,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionParameterWithImplicitArgument_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -239,7 +239,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionLocal_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -257,7 +257,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("subSequence()").withDisplayString("subSequence(int endIndex) : CharSequence - String");
   }
-  
+
   @Test
   public void testExtensionLocal_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -275,7 +275,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionLocalWithImplicitArgument_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -292,7 +292,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionLambdaParameter_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -309,7 +309,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionForLoopParameter_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -324,7 +324,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testExtensionCatchParameter_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -342,7 +342,7 @@ public class Bug402876Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposal("charAt").withDisplayString("charAt : char - String.charAt()");
   }
-  
+
   @Test
   public void testInheritedExtensionField_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

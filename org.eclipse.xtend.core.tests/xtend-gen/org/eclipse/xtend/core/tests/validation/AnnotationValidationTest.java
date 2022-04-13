@@ -26,10 +26,10 @@ import org.junit.Test;
 public class AnnotationValidationTest extends AbstractXtendTestCase {
   @Inject
   private ValidationTestHelper helper;
-  
+
   @Inject
   private ParseHelper<XtendFile> parser;
-  
+
   @Test
   public void testAnnotationValueTypeCheck_01() {
     try {
@@ -46,7 +46,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationValueTypeCheck_02() {
     try {
@@ -78,7 +78,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationValueTypeCheck_03() {
     try {

@@ -40,7 +40,7 @@ public class EclipseASTParserFactory extends ASTParserFactory {
     }
     return super.createJavaParser(context);
   }
-  
+
   public void tweakOptions(final ASTParser parser, final IJavaProject project) {
     if ((project != null)) {
       final Map<String, String> options = project.getOptions(true);

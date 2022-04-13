@@ -30,22 +30,22 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private CommonTypeComputationServices services;
-  
+
   @Accessors(AccessorType.PROTECTED_GETTER)
   private ResourceSet contextResourceSet;
-  
+
   @Accessors(AccessorType.PROTECTED_GETTER)
   private ITypeReferenceOwner owner;
-  
+
   @After
   public void tearDown() {
     this.contextResourceSet = null;
   }
-  
+
   public LightweightTypeReference toLightweightTypeReference(final JvmTypeReference reference) {
     return this.owner.toLightweightTypeReference(reference);
   }
-  
+
   @Override
   protected XtendFunction function(final String string) throws Exception {
     final XtendFunction result = super.function(string);
@@ -53,21 +53,21 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
     this.owner = this.createOwner();
     return result;
   }
-  
+
   protected StandardTypeReferenceOwner createOwner() {
     return new StandardTypeReferenceOwner(this.services, this.contextResourceSet);
   }
-  
+
   @Pure
   protected CommonTypeComputationServices getServices() {
     return this.services;
   }
-  
+
   @Pure
   protected ResourceSet getContextResourceSet() {
     return this.contextResourceSet;
   }
-  
+
   @Pure
   protected ITypeReferenceOwner getOwner() {
     return this.owner;

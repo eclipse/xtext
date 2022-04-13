@@ -23,34 +23,34 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class ActiveAnnotationContext {
   private final List<XtendAnnotationTarget> annotatedSourceElements = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
-  
+
   private Object processorInstance;
-  
+
   private CompilationUnitImpl compilationUnit;
-  
+
   public void handleProcessingError(final Resource resource, final Throwable t) {
     this.compilationUnit.handleProcessingError(this.annotatedSourceElements, resource, t);
   }
-  
+
   @Pure
   public List<XtendAnnotationTarget> getAnnotatedSourceElements() {
     return this.annotatedSourceElements;
   }
-  
+
   @Pure
   public Object getProcessorInstance() {
     return this.processorInstance;
   }
-  
+
   public void setProcessorInstance(final Object processorInstance) {
     this.processorInstance = processorInstance;
   }
-  
+
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
     return this.compilationUnit;
   }
-  
+
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }

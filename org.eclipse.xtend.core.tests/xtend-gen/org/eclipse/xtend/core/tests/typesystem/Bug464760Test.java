@@ -40,7 +40,7 @@ import org.junit.runner.RunWith;
 public class Bug464760Test {
   @Inject
   private ResourceHelper resourceHelper;
-  
+
   @Test
   public void testBug464760() {
     try {

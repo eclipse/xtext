@@ -19,109 +19,109 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport {
   private final URI resourceURI;
-  
+
   private final MutableFileSystemSupport delegate;
-  
+
   private final IResourceChangeRegistry resourceChangeRegistry;
-  
+
   @Override
   public void delete(final Path path) {
     this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.delete(path);
   }
-  
+
   @Override
   public void mkdir(final Path path) {
     this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.mkdir(path);
   }
-  
+
   @Override
   public void setContents(final Path path, final CharSequence contents) {
     this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.setContents(path, contents);
   }
-  
+
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
     this.delegate.setContentsAsStream(path, source);
   }
-  
+
   @Override
   public boolean exists(final Path path) {
     this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.exists(path);
   }
-  
+
   private URI getURI() {
     return this.resourceURI;
   }
-  
+
   @Override
   public String getCharset(final Path path) {
     this.resourceChangeRegistry.registerGetCharset(path.toString(), this.getURI());
     return this.delegate.getCharset(path);
   }
-  
+
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     this.resourceChangeRegistry.registerGetChildren(path.toString(), this.getURI());
     return this.delegate.getChildren(path);
   }
-  
+
   @Override
   public CharSequence getContents(final Path path) {
     this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getContents(path);
   }
-  
+
   @Override
   public InputStream getContentsAsStream(final Path path) {
     this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getContentsAsStream(path);
   }
-  
+
   @Override
   public long getLastModification(final Path path) {
     this.resourceChangeRegistry.registerGetContents(path.toString(), this.getURI());
     return this.delegate.getLastModification(path);
   }
-  
+
   @Override
   public boolean isFile(final Path path) {
     this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.isFile(path);
   }
-  
+
   @Override
   public boolean isFolder(final Path path) {
     this.resourceChangeRegistry.registerExists(path.toString(), this.getURI());
     return this.delegate.isFolder(path);
   }
-  
+
   @Override
   public java.net.URI toURI(final Path path) {
     return this.delegate.toURI(path);
   }
-  
+
   public ChangeListenerAddingFileSystemSupport(final URI resourceURI, final MutableFileSystemSupport delegate, final IResourceChangeRegistry resourceChangeRegistry) {
     super();
     this.resourceURI = resourceURI;
     this.delegate = delegate;
     this.resourceChangeRegistry = resourceChangeRegistry;
   }
-  
+
   @Pure
   public URI getResourceURI() {
     return this.resourceURI;
   }
-  
+
   @Pure
   public MutableFileSystemSupport getDelegate() {
     return this.delegate;
   }
-  
+
   @Pure
   public IResourceChangeRegistry getResourceChangeRegistry() {
     return this.resourceChangeRegistry;

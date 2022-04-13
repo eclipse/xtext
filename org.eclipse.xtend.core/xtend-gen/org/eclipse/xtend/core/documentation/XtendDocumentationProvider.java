@@ -37,7 +37,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public List<INode> getDocumentationNodes(final EObject o) {
     List<INode> _xblockexpression = null;
@@ -51,7 +51,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
     }
     return _xblockexpression;
   }
-  
+
   /**
    * The Xtend parser constructs a synthetic nested AST element to hold annotations which should be ignored as a documentation provider
    */

@@ -44,12 +44,12 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=439925
    */
@@ -142,7 +142,7 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassLoaderSeesAllUpstreamProjects_01() {
     try {
@@ -230,9 +230,9 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private XtendLibClasspathAdder xtendLibs = new XtendLibClasspathAdder();
-  
+
   private IJavaProject xtendProject(final String name, final IJavaProject... upstreamProjects) {
     try {
       final IJavaProject result = JavaProjectSetupUtil.createJavaProject(name);
@@ -251,7 +251,7 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassLoaderSeesAllDepsFromReferencedProjects() {
     try {
@@ -334,7 +334,7 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassLoaderDoesNotSeeLocalClasses() {
     try {
@@ -416,7 +416,7 @@ public class JdtBasedProcessorProviderTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
       final IFile result = it.getProject().getFile(("src/" + fileName));

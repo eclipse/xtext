@@ -32,7 +32,7 @@ import org.junit.Test;
 public class TypeUsageCollectorTest extends AbstractXtendTestCase {
   @Inject
   private TypeUsageCollector typeUsageCollector;
-  
+
   private void hasUnresolvedType(final CharSequence xtendFile, final String... typeNames) {
     try {
       final Resource resource = this.file(xtendFile.toString()).eResource();
@@ -41,7 +41,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void hasUnresolvedType(final Resource resource, final String... typeNames) {
     final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
     final Function1<TypeUsage, String> _function = (TypeUsage it) -> {
@@ -50,7 +50,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     final Set<String> usedNames = IterableExtensions.<String>toSet(ListExtensions.<TypeUsage, String>map(typeUsages.getUnresolvedTypeUsages(), _function));
     Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames))), usedNames);
   }
-  
+
   private void hasUnresolvedTypesWithErrors(final CharSequence xtendFile, final String... typeNames) {
     try {
       final Resource resource = this.fileWithErrors(xtendFile.toString()).eResource();
@@ -59,7 +59,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void hasUnresolvedTypeSuffix(final CharSequence xtendFile, final String... suffix) {
     try {
       final Resource resource = this.file(xtendFile.toString()).eResource();
@@ -73,7 +73,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSimpleName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -83,7 +83,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Serializable");
   }
-  
+
   @Test
   public void testNestedType_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -91,7 +91,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -99,7 +99,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,7 +112,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -125,7 +125,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -138,7 +138,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -151,7 +151,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testNestedType_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -164,7 +164,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedType(_builder, "Map");
   }
-  
+
   @Test
   public void testSuffixSimpleName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -174,7 +174,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "");
   }
-  
+
   @Test
   public void testSuffixNestedType_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -182,7 +182,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "$Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -190,7 +190,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, ".Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -203,7 +203,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "::Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -216,7 +216,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "::Entry::A");
   }
-  
+
   @Test
   public void testSuffixNestedType_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -229,7 +229,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, ".Entry.A");
   }
-  
+
   @Test
   public void testSuffixNestedType_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -242,7 +242,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, ".Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -255,7 +255,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "$Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -268,7 +268,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, ".Entry");
   }
-  
+
   @Test
   public void testSuffixNestedType_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -281,7 +281,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "$Entry");
   }
-  
+
   @Test
   public void testBug470235() {
     StringConcatenation _builder = new StringConcatenation();

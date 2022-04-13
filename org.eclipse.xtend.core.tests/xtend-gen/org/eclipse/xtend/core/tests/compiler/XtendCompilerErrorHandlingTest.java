@@ -28,16 +28,16 @@ import org.junit.Test;
 public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   @Inject
   private JvmModelGenerator generator;
-  
+
   @Inject
   private ElementIssueProvider.Factory issueProviderFactory;
-  
+
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
-  
+
   @Inject
   protected IFilePostProcessor postProcessor;
-  
+
   @Test
   public void testUnresolvedSuperclass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -54,7 +54,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testPrivateToplevelClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -71,7 +71,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedInterface() {
     StringConcatenation _builder = new StringConcatenation();
@@ -88,7 +88,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedInterface_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -105,7 +105,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedInterface_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -122,7 +122,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedAnnotation_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -166,7 +166,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * the @SuppressWarnings should be transformed into
    * a synthetic @SuppressWarnings("all") on class declarations.
@@ -191,7 +191,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedFieldType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -214,7 +214,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedReturnType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -249,7 +249,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedParameterType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -278,7 +278,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedException() {
     StringConcatenation _builder = new StringConcatenation();
@@ -307,7 +307,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedException_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -336,7 +336,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedException_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -365,7 +365,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testUnresolvedTypeConstraint() {
     StringConcatenation _builder = new StringConcatenation();
@@ -380,7 +380,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldInitializerTypeError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -403,7 +403,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFieldInitializerLinkError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -426,7 +426,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodBodyTypeError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -464,7 +464,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodBodyLinkError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -502,7 +502,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodOrFieldLinkError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -540,7 +540,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testMethodLinkReceiverError() {
     StringConcatenation _builder = new StringConcatenation();
@@ -578,7 +578,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug462914() {
     StringConcatenation _builder = new StringConcatenation();
@@ -634,7 +634,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug482845() {
     StringConcatenation _builder = new StringConcatenation();
@@ -657,11 +657,11 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, false);
   }
-  
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     this.assertCompilesTo(input, expected, true);
   }
-  
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final boolean shouldBeSyntacticallyValid) {
     try {
       final XtendFile file = this.file(input.toString(), false, shouldBeSyntacticallyValid);

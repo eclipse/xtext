@@ -19,7 +19,7 @@ public class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationVal
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public MutableEnumerationTypeDeclaration getDeclaringType() {
     EnumerationTypeDeclaration _declaringType = super.getDeclaringType();

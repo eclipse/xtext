@@ -15,16 +15,16 @@ import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 @SuppressWarnings("all")
 public class WaitForLinkedModeCondition extends DefaultCondition {
   private RenameRefactoringController controller;
-  
+
   public WaitForLinkedModeCondition(final RenameRefactoringController controller) {
     this.controller = controller;
   }
-  
+
   @Override
   public String getFailureMessage() {
     return "Linked mode not entered";
   }
-  
+
   @Override
   public boolean test() throws Exception {
     RenameLinkedMode _activeLinkedMode = this.controller.getActiveLinkedMode();

@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class XtendTaskTagProvider implements ITaskTagProvider {
   @Inject
   private IPreferenceValuesProvider preferenceValuesProvider;
-  
+
   @Override
   public TaskTags getTaskTags(final Resource resource) {
     TaskTags _xblockexpression = null;

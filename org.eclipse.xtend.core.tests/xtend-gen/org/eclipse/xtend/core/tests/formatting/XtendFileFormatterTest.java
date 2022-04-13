@@ -31,7 +31,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatClass12() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -49,7 +49,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatClass112() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -68,7 +68,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatClass122() {
     final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
@@ -89,7 +89,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_function, _builder);
   }
-  
+
   @Test
   public void formatClass111() {
     StringConcatenation _builder = new StringConcatenation();
@@ -105,7 +105,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.append("package  foo  class  bar  {  }");
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClass2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -118,7 +118,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClass3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -155,7 +155,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClass31() {
     StringConcatenation _builder = new StringConcatenation();
@@ -185,7 +185,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClass4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -261,7 +261,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClasses1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -282,7 +282,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatClasses2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -313,7 +313,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatImports1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -337,7 +337,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatImports2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -373,7 +373,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     this.assertFormatted(_builder, _builder_1);
   }
-  
+
   @Test
   public void formatPreferencesExample() {
     StringConcatenation _builder = new StringConcatenation();
@@ -425,7 +425,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatPreferencesExample_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -477,7 +477,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatAssignment_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -500,7 +500,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void formatAssignment_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -523,7 +523,7 @@ public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-  
+
   @Test
   public void typeReferenceIntegration() {
     StringConcatenation _builder = new StringConcatenation();

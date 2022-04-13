@@ -26,7 +26,7 @@ import org.junit.Test;
 public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
   @Inject
   private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-  
+
   @Test
   public void testComputation() {
     try {
@@ -61,7 +61,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_2() {
     try {
@@ -90,7 +90,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_3() {
     try {
@@ -116,7 +116,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_4() {
     try {
@@ -143,7 +143,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_5() {
     try {
@@ -192,7 +192,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_6() {
     try {
@@ -224,7 +224,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_7() {
     try {
@@ -250,7 +250,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_8() {
     try {
@@ -276,7 +276,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_9() {
     try {

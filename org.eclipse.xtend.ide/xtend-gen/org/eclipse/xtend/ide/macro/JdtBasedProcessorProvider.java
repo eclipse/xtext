@@ -63,7 +63,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       }
     }
   }
-  
+
   @Override
   public ClassLoader getClassLoader(final EObject ctx) {
     ResourceSet _resourceSet = ctx.eResource().getResourceSet();
@@ -103,11 +103,11 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     }
     return classloader;
   }
-  
+
   private Resource getEditorResource(final EObject ctx) {
     return IterableExtensions.<Resource>head(ctx.eResource().getResourceSet().getResources());
   }
-  
+
   /**
    * Construct a Classloader with the classpathentries from the provided and all upstream-projects,
    * except the output folders of the local project.
@@ -131,11 +131,11 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     ClassLoader _parentClassLoader = this.getParentClassLoader();
     return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
   }
-  
+
   protected boolean isOutputFolderIncluded() {
     return false;
   }
-  
+
   protected void collectClasspathURLs(final IJavaProject projectToUse, final LinkedHashSet<URL> result, final boolean includeOutputFolder, final Set<IJavaProject> visited) throws JavaModelException {
     try {
       if (((!projectToUse.getProject().isAccessible()) || (!visited.add(projectToUse)))) {
@@ -217,15 +217,15 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected ClassLoader getParentClassLoader() {
     final ClassLoader bundleClassLoader = TransformationContext.class.getClassLoader();
     return bundleClassLoader;
   }
-  
+
   private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {
     return javaProject.getProject().getWorkspace().getRoot();
   }
-  
+
   private static final Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
 }

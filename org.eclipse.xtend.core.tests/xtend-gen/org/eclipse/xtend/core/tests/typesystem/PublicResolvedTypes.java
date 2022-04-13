@@ -27,22 +27,22 @@ public class PublicResolvedTypes extends RootResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
     super(resolver, CancelIndicator.NullImpl);
   }
-  
+
   @Override
   public UnboundTypeReference createUnboundTypeReference(final XExpression expression, final JvmTypeParameter type) {
     return super.createUnboundTypeReference(expression, type);
   }
-  
+
   @Override
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
     return super.getUnboundTypeReference(handle);
   }
-  
+
   @Override
   public List<LightweightBoundTypeArgument> getHints(final Object handle) {
     return super.getHints(handle);
   }
-  
+
   @Override
   public Map<XExpression, List<TypeData>> basicGetExpressionTypes() {
     return super.basicGetExpressionTypes();

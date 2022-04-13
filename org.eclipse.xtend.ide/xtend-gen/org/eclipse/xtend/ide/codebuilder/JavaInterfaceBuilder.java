@@ -22,12 +22,12 @@ public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements IC
   public boolean isValid() {
     return (super.isValid() && (this.getInterfaceName() != null));
   }
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.DEFAULT).append("interface ").append(this.getInterfaceName()).append(" {").newLine().append("}");
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();

@@ -32,7 +32,7 @@ import org.junit.Test;
 public class Bug473833Test extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Before
   @After
   public void cleanUp() {
@@ -42,7 +42,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedNestedTypes_01() {
     try {
@@ -88,7 +88,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedNestedTypes_java_decl_01() {
     try {
@@ -134,7 +134,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedNestedTypes_02() {
     try {
@@ -186,7 +186,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedNestedTypes_03() {
     try {
@@ -240,7 +240,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritedNestedTypes_withJava() {
     try {
@@ -298,7 +298,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=474238
    */
@@ -349,7 +349,7 @@ public class Bug473833Test extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertNoErrors(final IFile file) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

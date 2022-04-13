@@ -39,17 +39,17 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public String getPackageName() {
     return EcoreUtil2.<XtendFile>getContainerOfType(this.getDelegate(), XtendFile.class).getPackage();
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getQualifiedName(this.getDelegate());
   }
-  
+
   private String getQualifiedName(final XtendTypeDeclaration decl) {
     boolean _isAnonymous = decl.isAnonymous();
     if (_isAnonymous) {
@@ -74,12 +74,12 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     }
     return null;
   }
-  
+
   @Override
   public Visibility getVisibility() {
     return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
-  
+
   @Override
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     final Function1<XtendMember, MemberDeclaration> _function = (XtendMember it) -> {
@@ -87,7 +87,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     };
     return ListExtensions.<XtendMember, MemberDeclaration>map(this.getDelegate().getMembers(), _function);
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
@@ -97,7 +97,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final TypeReference thatTypeRef = this.getCompilationUnit().getTypeReferenceProvider().newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
-  
+
   @Override
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     final Function1<ConstructorDeclaration, Boolean> _function = (ConstructorDeclaration constructor) -> {
@@ -110,7 +110,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     };
     return IterableExtensions.findFirst(this.getDeclaredConstructors(), _function);
   }
-  
+
   @Override
   public FieldDeclaration findDeclaredField(final String name) {
     final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
@@ -119,7 +119,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     };
     return IterableExtensions.findFirst(this.getDeclaredFields(), _function);
   }
-  
+
   @Override
   public TypeDeclaration findDeclaredType(final String name) {
     final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
@@ -128,7 +128,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     };
     return IterableExtensions.findFirst(this.getDeclaredTypes(), _function);
   }
-  
+
   @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
@@ -138,42 +138,42 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     };
     return IterableExtensions.findFirst(this.getDeclaredMethods(), _function);
   }
-  
+
   @Override
   public Iterable<? extends MethodDeclaration> getDeclaredMethods() {
     return Iterables.<MethodDeclaration>filter(this.getDeclaredMembers(), MethodDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends FieldDeclaration> getDeclaredFields() {
     return Iterables.<FieldDeclaration>filter(this.getDeclaredMembers(), FieldDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends ClassDeclaration> getDeclaredClasses() {
     return Iterables.<ClassDeclaration>filter(this.getDeclaredMembers(), ClassDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
     return Iterables.<ConstructorDeclaration>filter(this.getDeclaredMembers(), ConstructorDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     return Iterables.<InterfaceDeclaration>filter(this.getDeclaredMembers(), InterfaceDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
     return Iterables.<AnnotationTypeDeclaration>filter(this.getDeclaredMembers(), AnnotationTypeDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
     return Iterables.<EnumerationTypeDeclaration>filter(this.getDeclaredMembers(), EnumerationTypeDeclaration.class);
   }
-  
+
   @Override
   public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
     return Iterables.<TypeDeclaration>filter(this.getDeclaredMembers(), TypeDeclaration.class);

@@ -22,17 +22,17 @@ public class TemplateWhitespace extends Chunk {
     int _length = this.getText().length();
     return ("T" + Integer.valueOf(_length));
   }
-  
+
   public TemplateWhitespace(final CharSequence text) {
     super(text);
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
     return super.hashCode();
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {

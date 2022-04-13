@@ -43,19 +43,19 @@ import org.junit.Test;
 public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Inject
   private IEObjectHoverDocumentationProvider documentationProvider;
-  
+
   @Inject
   private TestingXbaseHoverProvider hoverProvider;
-  
+
   @Inject
   private IXtendJvmAssociations jvmModelAssociations;
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
    */
@@ -111,7 +111,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
    */
@@ -175,7 +175,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
    */
@@ -239,7 +239,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
    */
@@ -306,7 +306,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSimpleJavaDocWithMixedParameters() {
     try {
@@ -346,11 +346,11 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public XtendFunction getFirstMethod(final XtendFile file) {
     return IteratorExtensions.<XtendFunction>head(Iterators.<XtendFunction>filter(file.eAllContents(), XtendFunction.class));
   }
-  
+
   @Test
   public void testSimpleJavaDocWithSeeAndAuthor() {
     try {
@@ -405,7 +405,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSimpleJavaDocWithMixedExceptions() {
     try {
@@ -447,7 +447,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkWithOutLabel() {
     try {
@@ -491,7 +491,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkWithLabel() {
     try {
@@ -535,7 +535,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithBrokenLink() {
     try {
@@ -579,7 +579,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkToMethodWithoutLabel() {
     try {
@@ -623,7 +623,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkToMethodWithLabel() {
     try {
@@ -667,7 +667,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkToXtendFunction() {
     try {
@@ -719,7 +719,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaDocWithLinkToXtendFunctionOnReference() {
     try {
@@ -778,7 +778,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToMethodHoverUnQualifiedOnType() {
     try {
@@ -810,7 +810,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToMethodHoverQualifiedOnType() {
     try {
@@ -842,7 +842,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToConstructorHoverUnQualifiedOnType() {
     try {
@@ -874,7 +874,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToConstructorHoverQualifiedOnType() {
     try {
@@ -906,7 +906,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToConstructorHoverUnQualifiedOnMethod() {
     try {
@@ -942,7 +942,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testLinkToConstructorHoverQualifiedOnMethod() {
     try {
@@ -978,7 +978,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void bug380551() {
     try {
@@ -1004,7 +1004,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void bug380551_2() {
     try {
@@ -1035,7 +1035,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void bug380551_TestLinkToNativeJavaType() {
     try {
@@ -1060,11 +1060,11 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ResourceSet getResourceSet() {
     return this.getInjector().<IResourceSetProvider>getInstance(IResourceSetProvider.class).get(this.testHelper.getProject());
   }
-  
+
   @After
   public void cleanup() {
     try {

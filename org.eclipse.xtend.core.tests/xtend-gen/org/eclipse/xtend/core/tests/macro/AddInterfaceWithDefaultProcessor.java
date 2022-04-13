@@ -26,7 +26,7 @@ public class AddInterfaceWithDefaultProcessor extends AbstractClassProcessor {
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, final RegisterGlobalsContext context) {
     context.registerInterface("de.test.Test");
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     super.doTransform(annotatedClass, context);

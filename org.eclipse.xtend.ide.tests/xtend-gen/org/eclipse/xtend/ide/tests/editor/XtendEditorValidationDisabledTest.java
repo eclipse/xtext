@@ -31,13 +31,13 @@ import org.junit.Test;
 public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
   @Inject
   private IResourceForEditorInputFactory resourceForEditorInputFactory;
-  
+
   @After
   @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @Test
   public void testIsValidationEnabled() {
     try {
@@ -56,7 +56,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIsValidationDisabled() {
     try {
@@ -75,7 +75,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public boolean isValidationDisabled(final IStorage storage) {
     try {
       final Method method = this.resourceForEditorInputFactory.getClass().getDeclaredMethod("isValidationDisabled", IStorage.class);

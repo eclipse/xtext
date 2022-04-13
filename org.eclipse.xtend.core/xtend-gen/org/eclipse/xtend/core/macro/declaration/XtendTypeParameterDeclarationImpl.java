@@ -32,17 +32,17 @@ public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTy
     };
     return IterableExtensions.<TypeReference>toList(IterableExtensions.<JvmUpperBound, TypeReference>map(Iterables.<JvmUpperBound>filter(this.getDelegate().getConstraints(), JvmUpperBound.class), _function));
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getSimpleName();
   }
-  
+
   @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     TypeParameterDeclarator _xblockexpression = null;
@@ -53,17 +53,17 @@ public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTy
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
-  
+
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {

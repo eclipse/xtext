@@ -21,7 +21,7 @@ public class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
   public void setTypeComputer(final ITypeComputer typeComputer) {
     super.setTypeComputer(typeComputer);
   }
-  
+
   @Override
   public IBatchScopeProvider getBatchScopeProvider() {
     return super.getBatchScopeProvider();

@@ -40,23 +40,23 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   private TestableExpressionArgumentFactory factory;
-  
+
   @Test
   public void test_01() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("", "");
     Assert.assertFalse(arguments.hasUnprocessedArguments());
     Assert.assertEquals(0, arguments.getArgumentCount());
   }
-  
+
   @Test(expected = NoSuchElementException.class)
   public void test_02() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("", "");
     arguments.getNextUnprocessedArgumentSlot();
   }
-  
+
   @Test
   public void test_03() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s", "\"\"");
@@ -71,7 +71,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     singleSlot.markProcessed();
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_04() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "\"\", 1");
@@ -98,20 +98,20 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     Assert.assertTrue(arguments.isProcessed(1));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_05() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("", "");
     Assert.assertFalse(arguments.hasUnprocessedArguments());
     Assert.assertEquals(1, arguments.getArgumentCount());
   }
-  
+
   @Test(expected = NoSuchElementException.class)
   public void test_06() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("", "");
     arguments.getNextUnprocessedArgumentSlot();
   }
-  
+
   @Test
   public void test_08() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "\"\", 1");
@@ -139,7 +139,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     Assert.assertTrue(arguments.isProcessed(2));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_09() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s", "\"\", 1");
@@ -163,7 +163,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     Assert.assertTrue(arguments.isProcessed(1));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_10() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s", "\"\", 1");
@@ -187,32 +187,32 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     Assert.assertTrue(arguments.isProcessed(2));
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_11() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s", "");
     Assert.assertFalse(arguments.hasUnprocessedArguments());
   }
-  
+
   @Test
   public void test_12() {
     this.toArgumentsWithoutReceiver("String s, int i", "\"\", []");
     this.toArgumentsWithReceiver("String s, int i", "\"\", [], []");
   }
-  
+
   @Test
   public void test_13() {
     this.toArgumentsWithoutReceiver("String s, int i", "[]");
     this.toArgumentsWithReceiver("String s, int i", "[], [], []");
   }
-  
+
   @Test
   public void test_14() {
     this.toArgumentsWithoutReceiver("String s, int i", "[]");
     this.toArgumentsWithReceiver("String s, int i", "[], [], 1");
     this.toArgumentsWithReceiver("String s", "[], 1, 1");
   }
-  
+
   @Test
   public void testBug457779_01() {
     final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "\"\", 1");
@@ -247,7 +247,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
       }
     }
   }
-  
+
   @Test
   public void testBug457779_02() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "\"\", 1");
@@ -278,7 +278,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
       }
     }
   }
-  
+
   @Test
   public void testBug457779_03() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "\"\", 1, true");
@@ -313,15 +313,15 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
       }
     }
   }
-  
+
   protected IFeatureCallArguments toArgumentsWithoutReceiver(final String signature, final String invocation) {
     return this.toArguments(signature, invocation, false);
   }
-  
+
   protected IFeatureCallArguments toArgumentsWithReceiver(final String signature, final String invocation) {
     return this.toArguments(signature, invocation, true);
   }
-  
+
   protected IFeatureCallArguments toArguments(final String signature, final String invocation, final boolean receiver) {
     try {
       StringConcatenation _builder = new StringConcatenation();

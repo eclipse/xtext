@@ -32,34 +32,34 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
     };
     return IterableExtensions.<TypeReference>toList(IterableExtensions.<JvmUpperBound, TypeReference>map(Iterables.<JvmUpperBound>filter(this.getDelegate().getConstraints(), JvmUpperBound.class), _function));
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public String getQualifiedName() {
     return this.getDelegate().getIdentifier();
   }
-  
+
   @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     EObject _eContainer = this.getDelegate().eContainer();
     MemberDeclaration _memberDeclaration = this.getCompilationUnit().toMemberDeclaration(((JvmMember) _eContainer));
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
-  
+
   @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
-  
+
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
-  
+
   @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {

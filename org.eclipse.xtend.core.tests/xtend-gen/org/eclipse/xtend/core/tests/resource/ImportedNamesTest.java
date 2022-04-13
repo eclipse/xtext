@@ -28,9 +28,9 @@ import org.junit.Test;
 public class ImportedNamesTest extends AbstractXtendTestCase {
   @Inject
   private IResourceDescription.Manager resourceDescriptionManager;
-  
+
   private final List<String> primitives = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("boolean", "int", "char", "byte", "short", "long", "float", "double", "void"));
-  
+
   @Test
   public void testPrimitivesNotIncluded() {
     try {
@@ -106,7 +106,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExtendedInterfaces() {
     try {
@@ -133,7 +133,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnonymousClass() {
     try {
@@ -165,7 +165,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedTypesIncluded() {
     try {
@@ -193,7 +193,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedTypesIncludedOnUnresolvedFeatures() {
     try {
@@ -221,7 +221,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedTypesIncludedOnUnresolvedFeatures_02() {
     try {

@@ -16,19 +16,19 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 @SuppressWarnings("all")
 public class ResolvedTypeParameterImpl implements ResolvedTypeParameter {
   private TypeParameterDeclaration declaration;
-  
+
   private List<? extends TypeReference> resolvedUpperBounds;
-  
+
   public ResolvedTypeParameterImpl(final TypeParameterDeclaration declaration, final List<? extends TypeReference> resolvedUpperBounds) {
     this.declaration = declaration;
     this.resolvedUpperBounds = resolvedUpperBounds;
   }
-  
+
   @Override
   public TypeParameterDeclaration getDeclaration() {
     return this.declaration;
   }
-  
+
   @Override
   public List<? extends TypeReference> getResolvedUpperBounds() {
     return this.resolvedUpperBounds;

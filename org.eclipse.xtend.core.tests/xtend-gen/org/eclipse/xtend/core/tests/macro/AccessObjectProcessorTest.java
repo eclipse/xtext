@@ -60,7 +60,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }
-  
+
   @Test
   public void testWithPackage() {
     StringConcatenation _builder = new StringConcatenation();

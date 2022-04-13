@@ -28,10 +28,10 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   @Inject
   private XbaseEditorInputRedirector redirector;
-  
+
   @After
   @Override
   public void tearDown() {
@@ -41,7 +41,7 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenDerivedFileFromBin() {
     try {

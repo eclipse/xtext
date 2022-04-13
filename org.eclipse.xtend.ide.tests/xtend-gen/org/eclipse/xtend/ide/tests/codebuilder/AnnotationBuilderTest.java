@@ -23,7 +23,7 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Test
   public void testXtendAnnotation() {
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(this.getXtendClass());
@@ -39,7 +39,7 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaAnnotation() {
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(this.getJavaClass());

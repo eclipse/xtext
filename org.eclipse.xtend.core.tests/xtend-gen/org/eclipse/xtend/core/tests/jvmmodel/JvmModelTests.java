@@ -43,11 +43,11 @@ public class JvmModelTests extends AbstractXtendTestCase {
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Inject
   @Extension
   private IBatchTypeResolver typeResolver;
-  
+
   @Test
   public void testClassImplicitSuperType() {
     try {
@@ -63,7 +63,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceImplicitSuperType() {
     try {
@@ -79,7 +79,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceAbstract() {
     try {
@@ -94,7 +94,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationImplicitSuperType() {
     try {
@@ -110,7 +110,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationAbstract() {
     try {
@@ -125,7 +125,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEmptyListAsAnnotationValueDefault() {
     try {
@@ -149,7 +149,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationDefaultAssociatedWithJvmOperation() {
     try {
@@ -169,7 +169,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumImplicitSuperType() {
     try {
@@ -185,7 +185,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumLiteralIsStatic() {
     try {
@@ -204,7 +204,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumIsFinal() {
     try {
@@ -222,7 +222,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTopLevelEnumIsNotStatic() {
     try {
@@ -240,7 +240,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassInAnnotationIsStatic() {
     try {
@@ -260,7 +260,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumInAnnotationIsStatic() {
     try {
@@ -280,7 +280,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassInInterfaceIsStatic() {
     try {
@@ -300,7 +300,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testTopLevelInterfaceIsNotStatic() {
     try {
@@ -315,7 +315,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumArtificialMethods() {
     try {
@@ -343,7 +343,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnonymousClass_01() {
     try {
@@ -387,7 +387,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnonymousClass_02() {
     try {
@@ -426,7 +426,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnonymousClass_03() {
     try {
@@ -466,7 +466,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNestedClass_01() {
     try {
@@ -535,7 +535,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_01() {
     try {
@@ -553,7 +553,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_02() {
     try {
@@ -571,7 +571,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_03() {
     try {
@@ -596,7 +596,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_04() {
     try {
@@ -621,7 +621,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_05() {
     try {
@@ -644,7 +644,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_06() {
     try {
@@ -669,7 +669,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJvmTypeParameter_07() {
     try {

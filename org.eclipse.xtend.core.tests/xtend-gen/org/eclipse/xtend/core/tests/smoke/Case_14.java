@@ -41,16 +41,16 @@ public class Case_14 extends AbstractXtendTestCase {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
-  
+
   @Inject
   private JvmModelAssociator assoc;
-  
+
   @Inject
   private XtextResourceSet resourceSet;
-  
+
   @Inject
   private DerivedStateAwareResource resource;
-  
+
   @Test
   public void testInference() {
     final Provider<IJvmModelInferrer> _function = () -> {

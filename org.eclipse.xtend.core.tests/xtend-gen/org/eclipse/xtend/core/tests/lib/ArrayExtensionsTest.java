@@ -18,17 +18,17 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsTest {
   private int[] intArray = { 1, 2, 3 };
-  
+
   private boolean[] booleanArray = { true, false };
-  
+
   private long[] longArray = { 1, 2, 3 };
-  
+
   private double[] doubleArray = { 1, 2, 3 };
-  
+
   private String[] stringArray = { "foo", "bar", "baz" };
-  
+
   private char[] charArray = { 'a', 'b', 'c' };
-  
+
   @Test
   public void testClone() {
     Assert.assertNotSame(this.intArray, this.intArray.clone());
@@ -44,7 +44,7 @@ public class ArrayExtensionsTest {
     Assert.assertNotSame(this.charArray, this.charArray.clone());
     Assert.assertArrayEquals(this.charArray, this.charArray.clone());
   }
-  
+
   @Test
   public void testHashCode() {
     Assert.assertEquals(this.objectHashCode(this.intArray), this.intArray.hashCode());
@@ -54,7 +54,7 @@ public class ArrayExtensionsTest {
     Assert.assertEquals(this.objectHashCode(this.stringArray), this.stringArray.hashCode());
     Assert.assertEquals(this.objectHashCode(this.charArray), this.charArray.hashCode());
   }
-  
+
   @Test
   public void testEquals() {
     Assert.assertTrue(this.intArray.equals(this.intArray));
@@ -70,7 +70,7 @@ public class ArrayExtensionsTest {
     Assert.assertFalse(this.stringArray.equals(this.stringArray.clone()));
     Assert.assertFalse(this.charArray.equals(this.charArray.clone()));
   }
-  
+
   public int objectHashCode(final Object x) {
     Assert.assertTrue(x.getClass().isArray());
     return x.hashCode();

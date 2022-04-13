@@ -24,22 +24,22 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
   @Inject
   @Extension
   private InsertionOffsets _insertionOffsets;
-  
+
   @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     return this.appendBody(this.appendThrowsClause(this.appendParameters(this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.PUBLIC).append("new"))), "");
   }
-  
+
   @Override
   public int getInsertOffset(final XtextResource resource) {
     return this._insertionOffsets.getNewConstructorInsertOffset(this.getContext(), this.<XtendTypeDeclaration>findByFragment(resource, this.getXtendType()));
   }
-  
+
   @Override
   public int getIndentationLevel() {
     return 1;
   }
-  
+
   @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();

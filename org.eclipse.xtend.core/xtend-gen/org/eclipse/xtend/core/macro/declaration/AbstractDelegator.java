@@ -15,24 +15,24 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public abstract class AbstractDelegator<T extends Object> {
   @Accessors
   private T delegate;
-  
+
   @Accessors
   private CompilationUnitImpl compilationUnit;
-  
+
   @Pure
   public T getDelegate() {
     return this.delegate;
   }
-  
+
   public void setDelegate(final T delegate) {
     this.delegate = delegate;
   }
-  
+
   @Pure
   public CompilationUnitImpl getCompilationUnit() {
     return this.compilationUnit;
   }
-  
+
   public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }

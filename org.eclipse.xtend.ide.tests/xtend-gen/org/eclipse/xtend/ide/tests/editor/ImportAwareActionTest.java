@@ -29,19 +29,19 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
     public ImportsAwareTestClipboardAction() {
       this(XbaseEditorMessages.getBundleForConstructedKeys(), "", null, ITextOperationTarget.PASTE);
     }
-    
+
     public ImportsAwareTestClipboardAction(final ResourceBundle bundle, final String prefix, final ITextEditor editor, final int operationCode) {
       super(bundle, prefix, editor, operationCode);
     }
-    
+
     @Override
     public boolean shouldAddImports(final IDocument document, final int caretOffset) {
       return super.shouldAddImports(document, caretOffset);
     }
   }
-  
+
   private XtextDocument document;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
@@ -50,13 +50,13 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
     partitioner.connect(this.document);
     this.document.setDocumentPartitioner(partitioner);
   }
-  
+
   @Override
   public void tearDown() throws Exception {
     this.document = null;
     super.tearDown();
   }
-  
+
   @Test
   public void testShouldAddImportsComment() {
     Assert.assertTrue(
@@ -84,7 +84,7 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
       this.wouldAddImport(
         "class Simple {\n\t\t\t\t// sl comment\n\t\t\t\tString s2 = \'d\'\n\t\t\t}\n\t\t\t//sl comment|"));
   }
-  
+
   @Test
   public void testShouldAddImportsString() {
     Assert.assertFalse(
@@ -97,7 +97,7 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
       this.wouldAddImport(
         "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'|\n\t\t\t\tString s3 = \'\'\'«s2» «s2»\'\'\'\n\t\t\t}"));
   }
-  
+
   @Test
   public void testShouldAddImportsRichString() {
     Assert.assertFalse(
@@ -116,7 +116,7 @@ public class ImportAwareActionTest extends AbstractXtendUITestCase {
       this.wouldAddImport(
         "\n\t\t\tclass Simple {\n\t\t\t\tString s2 = \'d\'\n\t\t\t\tString s3 = |\'\'\'«s2» «s2»\'\'\'\n\t\t\t}"));
   }
-  
+
   public boolean wouldAddImport(final String string) {
     boolean _xblockexpression = false;
     {

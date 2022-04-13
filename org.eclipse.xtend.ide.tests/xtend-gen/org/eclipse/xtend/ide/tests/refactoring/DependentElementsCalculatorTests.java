@@ -45,14 +45,14 @@ import org.junit.Test;
 public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
   @Inject
   private IDependentElementsCalculator dependentElementsCalculator;
-  
+
   @Inject
   @Extension
   private IXtendJvmAssociations associations;
-  
+
   @Inject
   private WorkbenchTestHelper testHelper;
-  
+
   @Test
   public void testDependentElements() {
     try {
@@ -90,7 +90,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPolymorphicDispatch() {
     try {

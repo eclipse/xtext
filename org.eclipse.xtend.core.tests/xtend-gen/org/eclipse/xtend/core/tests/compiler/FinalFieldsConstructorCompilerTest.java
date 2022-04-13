@@ -36,7 +36,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testOnClass() {
     try {
@@ -68,7 +68,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOnConstructor() {
     try {
@@ -110,7 +110,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOnGenericClass() {
     try {
@@ -134,7 +134,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicate() {
     try {
@@ -159,7 +159,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDuplicate2() {
     try {
@@ -185,7 +185,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testParameterListValidation() {
     try {
@@ -208,7 +208,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBodyValidation() {
     try {
@@ -237,7 +237,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIntegrationWithData() {
     try {
@@ -271,7 +271,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIntegrationWithData2() {
     try {
@@ -317,7 +317,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testIntegrationWithAccessors() {
     try {
@@ -351,7 +351,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testNoFinalFields() {
     try {

@@ -47,7 +47,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = (JvmTypeParameter it) -> {
@@ -55,12 +55,12 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     };
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(this.getDelegate().getTypeParameters(), _function);
   }
-  
+
   @Override
   public boolean isStrictFloatingPoint() {
     return this.getDelegate().isStrictFloatingPoint();
   }
-  
+
   @Override
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
@@ -77,7 +77,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     initializer.apply(mutableMethodDeclaration);
     return mutableMethodDeclaration;
   }
-  
+
   @Override
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     String _simpleName = this.getSimpleName();

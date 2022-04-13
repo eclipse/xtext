@@ -31,11 +31,11 @@ public class MethodBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Inject
   @Extension
   private TypesFactory _typesFactory;
-  
+
   @Test
   public void testXtendMethod() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -59,7 +59,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaMethod() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -84,7 +84,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testStaticXtendMethod() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -107,7 +107,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testStaticJavaMethod() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -131,7 +131,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendCustomBody() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -153,7 +153,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaCustomBody() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -175,7 +175,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendAbstractBody() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -189,7 +189,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("def void foo()");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaAbstractBody() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -203,7 +203,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("abstract void foo();");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendOverrride() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -222,7 +222,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaOverride() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -244,7 +244,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendExceptions() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -265,7 +265,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaException() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -287,7 +287,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendNamedParameter() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -317,7 +317,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaNamedParameter() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -348,7 +348,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendTypeParameter() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -377,7 +377,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaTypeParameter() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -407,7 +407,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testXtendSynchronized() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());
@@ -428,7 +428,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaSynchronized() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getJavaClass());
@@ -450,7 +450,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testSetContextOnParameters() {
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(this.getXtendClass());

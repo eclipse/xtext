@@ -42,18 +42,18 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Inject
   private Provider<ExtractMethodRefactoring> refactoringProvider;
-  
+
   @Inject
   private ExpressionUtil util;
-  
+
   @After
   public void tiraMiGiu() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
-  
+
   @Test
   public void testSimple() {
     StringConcatenation _builder = new StringConcatenation();
@@ -99,7 +99,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testStatic() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +145,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testParameter() {
     StringConcatenation _builder = new StringConcatenation();
@@ -197,7 +197,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testReturnVariable() {
     StringConcatenation _builder = new StringConcatenation();
@@ -250,7 +250,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testReturnValue() {
     StringConcatenation _builder = new StringConcatenation();
@@ -303,7 +303,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testReturnStatements_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -386,7 +386,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testReturnStatements_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -469,7 +469,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testVoidStatements() {
     StringConcatenation _builder = new StringConcatenation();
@@ -528,7 +528,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testClosure_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -575,7 +575,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testClosure_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -622,7 +622,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testClosure_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -669,7 +669,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testClosure_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -716,7 +716,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testRenameParameter() {
     StringConcatenation _builder = new StringConcatenation();
@@ -766,7 +766,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testSwapParameterNames() {
     StringConcatenation _builder = new StringConcatenation();
@@ -816,7 +816,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTypeParameter_0() {
     StringConcatenation _builder = new StringConcatenation();
@@ -862,7 +862,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTypeParameter_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -926,7 +926,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTypeParameter_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -990,7 +990,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testFailOnMultipleCallins() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1017,7 +1017,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     };
     this.assertExtractForbidden(_builder, _function, "ambiguous");
   }
-  
+
   @Test
   public void testFailOnReturns() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1050,7 +1050,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     };
     this.assertExtractForbidden(_builder, _function, "control flow");
   }
-  
+
   @Test
   public void testFailOnDuplicateMethodName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1072,7 +1072,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     };
     this.assertExtractForbidden(_builder, _function, "already defined");
   }
-  
+
   @Test
   public void testFailOnDuplicateParameterName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1101,7 +1101,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     };
     this.assertExtractForbidden(_builder, _function, "duplicate");
   }
-  
+
   @Test
   public void testBug_404244() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1147,7 +1147,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1202,7 +1202,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1265,7 +1265,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1327,7 +1327,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1389,7 +1389,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1447,7 +1447,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1505,7 +1505,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1563,7 +1563,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1621,7 +1621,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1684,7 +1684,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1747,7 +1747,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1810,7 +1810,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1873,7 +1873,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1935,7 +1935,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_14() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1998,7 +1998,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_15() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2061,7 +2061,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_16() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2124,7 +2124,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_17() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2187,7 +2187,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_18() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2267,7 +2267,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_19() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2368,7 +2368,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_20() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2450,7 +2450,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_21() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2532,7 +2532,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void testTemplateExpression_22() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2614,7 +2614,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void test_Bug_453376() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2672,7 +2672,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void test_Bug_453376_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2718,7 +2718,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void test_Bug_453376_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2764,7 +2764,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void test_Issue_107_a() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2823,7 +2823,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   @Test
   public void test_Issue_107_b() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2882,7 +2882,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
-  
+
   protected void assertAfterExtract(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final CharSequence expected) {
     try {
       final String inputString = input.toString();
@@ -2927,7 +2927,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertExtractForbidden(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final String messageFragment) {
     try {
       final String inputString = input.toString();

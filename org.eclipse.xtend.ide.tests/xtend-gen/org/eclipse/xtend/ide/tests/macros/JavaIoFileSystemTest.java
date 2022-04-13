@@ -40,10 +40,10 @@ import org.junit.Test;
 public class JavaIoFileSystemTest {
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
-  
+
   @Extension
   protected MutableFileSystemSupport fs;
-  
+
   @Before
   public void setUp() {
     try {
@@ -71,14 +71,14 @@ public class JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected Object createProject(final String name) {
     URI _uRI = this.fs.toURI(new Path(name));
     final File file = new File(_uRI);
     file.mkdirs();
     return file;
   }
-  
+
   @Test
   public void testMakeAndDeleteFolder() {
     final Path someFolder = new Path("/foo/bar");
@@ -96,7 +96,7 @@ public class JavaIoFileSystemTest {
     this.fs.delete(someFolder);
     Assert.assertFalse(this.fs.exists(someFolder));
   }
-  
+
   @Test
   public void testMakeAndDeleteFile() {
     final Path path = new Path("/foo/src/my/pack/Foo.txt");
@@ -111,7 +111,7 @@ public class JavaIoFileSystemTest {
     Assert.assertFalse(this.fs.isFile(path));
     Assert.assertFalse(this.fs.isFolder(path));
   }
-  
+
   @Test
   public void testModificationStamp_01() {
     try {
@@ -128,7 +128,7 @@ public class JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testModificationStamp_02() {
     try {
@@ -147,7 +147,7 @@ public class JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGetWorkspaceChildren() {
     final Function1<Path, CharSequence> _function = (Path it) -> {
@@ -155,7 +155,7 @@ public class JavaIoFileSystemTest {
     };
     Assert.assertEquals(IterableExtensions.join(this.fs.getChildren(Path.ROOT), "[", ", ", "]", _function), 1, IterableExtensions.size(this.fs.getChildren(Path.ROOT)));
   }
-  
+
   @Test
   public void testGetProjectChildren() {
     final Path projectFolder = new Path("/foo");
@@ -169,7 +169,7 @@ public class JavaIoFileSystemTest {
     Assert.assertEquals(_plus, expectedChildrenSize, 
       IterableExtensions.size(this.fs.getChildren(projectFolder)));
   }
-  
+
   @Test
   public void testGetFolderChildren() {
     final Path folder = new Path("/foo/bar");
@@ -182,7 +182,7 @@ public class JavaIoFileSystemTest {
     this.fs.setContents(_path, "Hello Foo");
     Assert.assertEquals(2, IterableExtensions.size(this.fs.getChildren(folder)));
   }
-  
+
   @Test
   public void testGetFileChildren() {
     final Path file = new Path("/foo/bar/Foo.text");
@@ -192,7 +192,7 @@ public class JavaIoFileSystemTest {
     Assert.assertTrue(this.fs.exists(file));
     Assert.assertEquals(0, IterableExtensions.size(this.fs.getChildren(file)));
   }
-  
+
   @Test
   public void testGetFileURI() {
     final Path file = new Path("/foo/bar/Foo.text");
@@ -202,7 +202,7 @@ public class JavaIoFileSystemTest {
     Assert.assertTrue(this.fs.exists(file));
     this.assertToURI(file, "Hello Foo");
   }
-  
+
   @Test
   public void testGetFolderURI() {
     final Path path = new Path("/foo/bar");
@@ -213,41 +213,41 @@ public class JavaIoFileSystemTest {
     Assert.assertTrue(this.fs.exists(path));
     Assert.assertNotNull(this.fs.toURI(path));
   }
-  
+
   @Test
   public void testGetProjectURI() {
     final Path path = new Path("/foo");
     Assert.assertTrue(this.fs.exists(path));
     Assert.assertNotNull(this.fs.toURI(path));
   }
-  
+
   @Test
   public void testGetWorkspaceURI() {
     final Path path = Path.ROOT;
     Assert.assertTrue(this.fs.exists(path));
     Assert.assertNull(this.fs.toURI(path));
   }
-  
+
   @Test
   public void testWorkspaceIsFolder() {
     Assert.assertTrue(this.fs.isFolder(Path.ROOT));
   }
-  
+
   @Test
   public void testWorkspaceIsFile() {
     Assert.assertFalse(this.fs.isFile(Path.ROOT));
   }
-  
+
   @Test
   public void testGetWorkspaceLastModification() {
     Assert.assertEquals(0L, this.fs.getLastModification(Path.ROOT));
   }
-  
+
   @Test
   public void testGetWorkspaceCharset() {
     Assert.assertNotNull(this.fs.getCharset(Path.ROOT));
   }
-  
+
   @Test
   public void testGetWorkspaceContent() {
     try {
@@ -260,7 +260,7 @@ public class JavaIoFileSystemTest {
       }
     }
   }
-  
+
   @Test
   public void testGetWorkspaceContentAsSteam() {
     try {
@@ -273,7 +273,7 @@ public class JavaIoFileSystemTest {
       }
     }
   }
-  
+
   @Test
   public void testSetWorkspaceContents() {
     try {
@@ -286,7 +286,7 @@ public class JavaIoFileSystemTest {
       }
     }
   }
-  
+
   @Test
   public void testSetWorkspaceContentsAsStream() {
     try {
@@ -301,14 +301,14 @@ public class JavaIoFileSystemTest {
       }
     }
   }
-  
+
   @Test
   public void testDeleteWorkspace() {
     Assert.assertTrue(this.fs.exists(Path.ROOT));
     this.fs.delete(Path.ROOT);
     Assert.assertTrue(this.fs.exists(Path.ROOT));
   }
-  
+
   protected void assertToURI(final Path file, final String expectedContent) {
     final URI uri = this.fs.toURI(file);
     Assert.assertNotNull(uri);

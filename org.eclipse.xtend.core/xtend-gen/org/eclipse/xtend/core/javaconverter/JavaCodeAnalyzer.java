@@ -31,36 +31,36 @@ public class JavaCodeAnalyzer {
   @Accessors(AccessorType.PUBLIC_GETTER)
   public static final class JavaParseResult<T extends ASTNode> {
     private String javaCode;
-    
+
     private List<T> nodes;
-    
+
     private int type;
-    
+
     public JavaParseResult(final String javaCode, final int type, final List<T> nodes) {
       this.javaCode = javaCode;
       this.type = type;
       this.nodes = nodes;
     }
-    
+
     @Pure
     public String getJavaCode() {
       return this.javaCode;
     }
-    
+
     @Pure
     public List<T> getNodes() {
       return this.nodes;
     }
-    
+
     @Pure
     public int getType() {
       return this.type;
     }
   }
-  
+
   @Inject
   private ASTParserFactory parserFactory;
-  
+
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode) {
     ASTParser parser = this.parserFactory.createDefaultJavaParser(this.parserFactory.minParserApiLevel);
     parser.setSource(javaCode.toCharArray());

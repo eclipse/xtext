@@ -32,9 +32,9 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   private IProject testProject;
-  
+
   @Test
   public void testOpenTargetSourceTwice() {
     try {
@@ -45,7 +45,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenTargetSourceWithOpenedParentSource() {
     try {
@@ -58,7 +58,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Before
   @Override
   public void setUp() throws Exception {
@@ -98,7 +98,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
     IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
     IResourcesSetupUtil.waitForBuild();
   }
-  
+
   @After
   @Override
   public void tearDown() throws Exception {

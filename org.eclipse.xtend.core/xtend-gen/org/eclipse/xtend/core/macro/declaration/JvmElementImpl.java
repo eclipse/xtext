@@ -37,7 +37,7 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
     _builder_1.append(_delegate_1);
     Preconditions.checkState(_tripleEquals, _builder_1);
   }
-  
+
   protected final void checkMutable() {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.getCompilationUnit().getLastPhase();
     boolean _notEquals = (!Objects.equal(_lastPhase, ActiveAnnotationContexts.AnnotationCallback.INFERENCE));

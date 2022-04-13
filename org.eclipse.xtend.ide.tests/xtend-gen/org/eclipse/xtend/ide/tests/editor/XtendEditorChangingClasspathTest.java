@@ -37,18 +37,18 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private XtendLibClasspathAdder _xtendLibClasspathAdder;
-  
+
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Inject
   private IStateChangeEventBroker stateChangeEventBroker;
-  
+
   @Override
   public void tearDown() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
-  
+
   @Test
   public void testAddXtendLib() {
     try {
@@ -61,7 +61,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAddXtendLibWithDirtyEditor() {
     try {
@@ -78,7 +78,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertAddLibsToClasspath(final IJavaProject project) {
     final Procedure0 _function = () -> {
       this._xtendLibClasspathAdder.addLibsToClasspath(project, null);
@@ -86,7 +86,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
     Assert.assertNotNull(
       this.waitForCoarseGrainedEvent(_function));
   }
-  
+
   public IResourceDescription.Event waitForCoarseGrainedEvent(final Procedure0 producer) {
     try {
       IResourceDescription.Event _xblockexpression = null;
@@ -120,7 +120,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IResourceDescription.Event waitForChangeEvent(final Procedure0 producer) {
     try {
       IResourceDescription.Event _xblockexpression = null;
@@ -155,7 +155,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public XtextEditor changeContent(final XtextEditor editor, final String oldText, final String newText) {
     try {
       XtextEditor _xblockexpression = null;

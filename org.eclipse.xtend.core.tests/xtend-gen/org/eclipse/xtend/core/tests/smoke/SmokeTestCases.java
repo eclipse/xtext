@@ -111,7 +111,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_00_b() {
     try {
@@ -207,7 +207,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_01() {
     try {
@@ -267,7 +267,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_02() {
     try {
@@ -315,7 +315,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_03() {
     try {
@@ -412,7 +412,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @IgnoredBySmokeTest("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
   @Test
   public void test_04() {
@@ -422,7 +422,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_05() {
     try {
@@ -497,7 +497,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_06() {
     try {
@@ -560,7 +560,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_07() {
     try {
@@ -611,7 +611,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_08() {
     try {
@@ -724,7 +724,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_09() {
     try {
@@ -814,7 +814,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void test_14() {
     try {

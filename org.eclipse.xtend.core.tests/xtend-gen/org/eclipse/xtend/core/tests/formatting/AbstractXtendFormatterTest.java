@@ -30,11 +30,11 @@ import org.junit.runner.RunWith;
 public abstract class AbstractXtendFormatterTest {
   @Inject
   protected FormatterTestHelper tester;
-  
+
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
   }
-  
+
   private CharSequence toMember(final CharSequence expression) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -49,23 +49,23 @@ public abstract class AbstractXtendFormatterTest {
     _builder.newLine();
     return _builder;
   }
-  
+
   public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, toBeFormatted, toBeFormatted);
   }
-  
+
   public void assertFormattedExpression(final CharSequence toBeFormatted) {
     this.assertFormattedExpression(null, toBeFormatted, toBeFormatted);
   }
-  
+
   public void assertFormattedExpression(final String expectation, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(null, expectation, toBeFormatted);
   }
-  
+
   public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormattedExpression(cfg, expectation, toBeFormatted, false);
   }
-  
+
   public void assertFormattedExpression(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final boolean allowErrors) {
     this.assertFormatted(cfg, 
       expectation.toString().trim().replace("\n", "\n\t\t"), 
@@ -73,35 +73,35 @@ public abstract class AbstractXtendFormatterTest {
       "class bar {\n\tdef baz() {\n\t\t", 
       "\n\t}\n}", allowErrors);
   }
-  
+
   public void assertFormattedMember(final String expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(this.toMember(expectation), this.toMember(toBeFormatted));
   }
-  
+
   public void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(cfg, this.toMember(expectation), this.toMember(toBeFormatted));
   }
-  
+
   public void assertFormattedMember(final Procedure1<? super MapBasedPreferenceValues> cfg, final String expectation) {
     this.assertFormatted(cfg, this.toMember(expectation), this.toMember(expectation));
   }
-  
+
   public void assertFormattedMember(final String expectation) {
     this.assertFormatted(this.toMember(expectation), this.toMember(expectation));
   }
-  
+
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {
     this.assertFormatted(cfg, expectation, expectation);
   }
-  
+
   public void assertFormatted(final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(null, expectation, toBeFormatted);
   }
-  
+
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted) {
     this.assertFormatted(cfg, expectation, toBeFormatted, "", "", false);
   }
-  
+
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
       final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
@@ -123,23 +123,23 @@ public abstract class AbstractXtendFormatterTest {
     };
     this.tester.assertFormatted(_function);
   }
-  
+
   protected String decode(final CharSequence seq) {
     return seq.toString().replace("<<", "«").replace(">>", "»").replace("```", "\'\'\'");
   }
-  
+
   public void assertFormattedRichStringExpression(final CharSequence seq) {
     this.assertFormattedExpression(this.decode(seq));
   }
-  
+
   public void assertFormattedRichString(final CharSequence seq) {
     this.assertFormatted(this.decode(seq));
   }
-  
+
   public void assertFormattedRichStringExpression(final CharSequence expected, final CharSequence actual) {
     this.assertFormattedExpression(this.decode(expected), this.decode(actual));
   }
-  
+
   public void assertFormattedRichStringExpressionWithErrors(final CharSequence actual) {
     this.assertFormattedExpression(null, this.decode(actual), this.decode(actual), true);
   }

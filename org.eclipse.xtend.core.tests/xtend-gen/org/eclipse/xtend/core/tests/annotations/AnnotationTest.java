@@ -48,7 +48,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click(2)");
   }
-  
+
   @Test
   public void testAnnotationValue_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -67,7 +67,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click({ 2 })");
   }
-  
+
   @Test
   public void testAnnotationValue_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -86,7 +86,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click({ 2, 3 })");
   }
-  
+
   @Test
   public void testAnnotationValue_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -105,7 +105,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click(value = 2)");
   }
-  
+
   @Test
   public void testAnnotationValue_4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -124,7 +124,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click(value = { 2 })");
   }
-  
+
   @Test
   public void testAnnotationValue_5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -143,7 +143,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertContains(this.compileToJavaCode(_builder), "@Click(value = { 2, 3 })");
   }
-  
+
   protected void assertContains(final CharSequence code, final String text) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Substring \'");
@@ -153,22 +153,22 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.append("\' ");
     Assert.assertTrue(_builder.toString(), code.toString().contains(text));
   }
-  
+
   @Inject
   private ParseHelper<XtendFile> parseHelper;
-  
+
   @Inject
   private ValidationTestHelper validationHelper;
-  
+
   @Inject
   private IXtendJvmAssociations associations;
-  
+
   @Inject
   private JvmModelGenerator generator;
-  
+
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
-  
+
   protected CharSequence compileToJavaCode(final CharSequence xtendCode) {
     try {
       CharSequence _xblockexpression = null;

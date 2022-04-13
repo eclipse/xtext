@@ -30,7 +30,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       return _builder.toString();
     }
   }.apply();
-  
+
   @Test
   public void testTypeInJavaDoc_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -66,7 +66,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder_1.newLine();
     this.testContentAssistant(_builder, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java.util.Date")), _builder_1.toString());
   }
-  
+
   @Test
   public void testTypeInJavaDoc_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -98,7 +98,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder_1.newLine();
     this.testContentAssistant(_builder, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("StringBuffer")), _builder_1.toString());
   }
-  
+
   @Test
   public void testTypeInJavaDoc_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -117,7 +117,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder.newLine();
     this.testEmptyContentAssistant(_builder);
   }
-  
+
   @Test
   public void testTypeInJavaDoc_4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -149,7 +149,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder_1.newLine();
     this.testContentAssistant(_builder, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("StringBuffer")), _builder_1.toString());
   }
-  
+
   @Test
   public void testTypeInJavaDoc_5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -181,7 +181,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder_1.newLine();
     this.testContentAssistant(_builder, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("StringBuffer")), _builder_1.toString());
   }
-  
+
   @Test
   public void testTypeInJavaDoc_6() {
     StringConcatenation _builder = new StringConcatenation();
@@ -213,15 +213,15 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
     _builder_1.newLine();
     this.testContentAssistant(_builder, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("StringBuffer")), _builder_1.toString());
   }
-  
+
   private void testEmptyContentAssistant(final CharSequence it) {
     this.testContentAssistant(it, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), null, null);
   }
-  
+
   private void testContentAssistant(final CharSequence it, final List<String> expectedProposals, final String expectedContent) {
     this.testContentAssistant(it, expectedProposals, IterableExtensions.<String>head(expectedProposals), expectedContent);
   }
-  
+
   private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) {
     try {
       final int cursorPosition = text.toString().indexOf(this.c);

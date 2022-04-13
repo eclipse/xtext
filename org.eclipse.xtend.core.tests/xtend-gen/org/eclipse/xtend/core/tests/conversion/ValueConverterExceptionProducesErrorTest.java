@@ -42,7 +42,7 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     Assert.assertEquals("String literal is not closed", error.getMessage());
     this.assertLiteral("", resource);
   }
-  
+
   @Test
   public void testUnclosedTerminal_02() throws Exception {
     final Resource resource = this.toResource("class C { def m() \'\'\'abc");
@@ -52,7 +52,7 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     Assert.assertEquals("String literal is not closed", error.getMessage());
     this.assertLiteral("abc", resource);
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=428525
    */
@@ -67,7 +67,7 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     final XStringLiteral literal = IteratorExtensions.<XStringLiteral>head(Iterators.<XStringLiteral>filter(resource.getAllContents(), XStringLiteral.class));
     Assert.assertEquals("u", literal.getValue());
   }
-  
+
   private void assertLiteral(final String expectation, final Resource resource) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final XtendFile file = ((XtendFile) _head);
@@ -80,7 +80,7 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     final RichStringLiteral singleElement = ((RichStringLiteral) _head_2);
     Assert.assertEquals(expectation, singleElement.getValue());
   }
-  
+
   private Resource toResource(final CharSequence input) throws Exception {
     final Resource resource = this.getResourceSet().createResource(URI.createURI("abcdefg.xtend"));
     String _string = input.toString();

@@ -33,10 +33,10 @@ import org.junit.Test;
 public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
   @Inject
   private NonOverridableTypesProvider typesFromHierarchy;
-  
+
   @Inject
   private IXtendJvmAssociations associations;
-  
+
   @Test
   public void testInheritOuter() {
     try {
@@ -72,7 +72,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritMiddle_01() {
     try {
@@ -110,7 +110,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritMiddle_02() {
     try {
@@ -148,7 +148,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritOuterTypeParam() {
     try {
@@ -194,7 +194,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritMiddleParam_01() {
     try {
@@ -243,7 +243,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInheritMiddleParam_02() {
     try {
@@ -292,19 +292,19 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected void assertTypeInScope(final String typeName, final JvmMember context) {
     final JvmIdentifiableElement visibleType = this.typesFromHierarchy.getVisibleType(context, typeName);
     Assert.assertNotNull(visibleType);
     Assert.assertTrue((visibleType instanceof JvmType));
   }
-  
+
   protected void assertTypeParameterInScope(final String typeName, final JvmMember context) {
     final JvmIdentifiableElement visibleType = this.typesFromHierarchy.getVisibleType(context, typeName);
     Assert.assertNotNull(visibleType);
     Assert.assertTrue((visibleType instanceof JvmTypeParameter));
   }
-  
+
   protected void assertNotInScope(final String typeName, final JvmMember context) {
     final JvmIdentifiableElement visibleType = this.typesFromHierarchy.getVisibleType(context, typeName);
     Assert.assertNull(visibleType);

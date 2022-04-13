@@ -58,26 +58,26 @@ import org.junit.Test;
 public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   public static class TestUiResourceChangeRegistry extends UIResourceChangeRegistry {
     public volatile boolean waitForEvent = false;
-    
+
     public List<URI> queuedURIs = CollectionLiterals.<URI>newArrayList();
-    
+
     @Override
     public void queueURIs(final Set<URI> interestedFiles) {
       Iterables.<URI>addAll(this.queuedURIs, interestedFiles);
     }
-    
+
     @Inject
     @Override
     public void init(final IWorkspace workspace) {
       workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
     }
-    
+
     @Override
     public synchronized void resourceChanged(final IResourceChangeEvent event) {
       super.resourceChanged(event);
       this.waitForEvent = false;
     }
-    
+
     public static String toReadableString(final IResourceDelta delta) {
       StringConcatenation _builder = new StringConcatenation();
       IPath _fullPath = delta.getFullPath();
@@ -138,16 +138,16 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       return _builder.toString();
     }
   }
-  
+
   @Inject
   private UIResourceChangeRegistryTest.TestUiResourceChangeRegistry resourceChangeRegistry;
-  
+
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Rule
   public StopwatchRule rule = new StopwatchRule(true);
-  
+
   @After
   @Override
   public void tearDown() {
@@ -157,9 +157,9 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private final URI uri = URI.createURI("synthetic://testing/uri");
-  
+
   @Test
   public void testConcurrentDiscard() throws Exception {
     try {
@@ -200,7 +200,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSerialization() {
     this.resourceChangeRegistry.registerExists("/foo", this.uri);
@@ -226,7 +226,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
     Assert.assertEquals(this.resourceChangeRegistry.getContentsListeners(), copy.getContentsListeners());
     Assert.assertEquals(this.resourceChangeRegistry.getChildrenListeners(), copy.getChildrenListeners());
   }
-  
+
   @Test
   public void testFolderExists() {
     try {
@@ -250,7 +250,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFolderChildren() {
     try {
@@ -272,7 +272,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFolderChildren_AddedChild() {
     try {
@@ -323,7 +323,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFileContents_changed() {
     try {
@@ -376,7 +376,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void modifyWorkspace(final WorkspaceModifyOperation op) {
     try {
       this.resourceChangeRegistry.waitForEvent = true;

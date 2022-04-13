@@ -144,7 +144,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -293,7 +293,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -352,7 +352,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -447,7 +447,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -602,7 +602,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -692,7 +692,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -775,7 +775,7 @@ public class CompilerBug424763Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug_424763_08() {
     StringConcatenation _builder = new StringConcatenation();

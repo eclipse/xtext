@@ -46,19 +46,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @SuppressWarnings("all")
 public class XtendResourceDescription extends DefaultResourceDescription {
   private static final Set<String> primitivesFilter = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
-  
+
   private IBatchTypeResolver typeResolver;
-  
+
   private IQualifiedNameConverter nameConverter;
-  
+
   private Set<QualifiedName> importedNames;
-  
+
   public XtendResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy, final IResourceScopeCache cache, final IBatchTypeResolver typeResolver, final IQualifiedNameConverter nameConverter) {
     super(resource, strategy, cache);
     this.typeResolver = typeResolver;
     this.nameConverter = nameConverter;
   }
-  
+
   @Override
   protected EObjectDescriptionLookUp getLookUp() {
     if ((this.lookup == null)) {
@@ -68,12 +68,12 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     }
     return this.lookup;
   }
-  
+
   @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return Collections.<IReferenceDescription>emptyList();
   }
-  
+
   @Override
   public Iterable<QualifiedName> getImportedNames() {
     if ((this.importedNames != null)) {
@@ -164,7 +164,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     this.importedNames = IterableExtensions.<QualifiedName>toSet(IterableExtensions.<QualifiedName>filter(result, _function));
     return this.importedNames;
   }
-  
+
   public void registerAllTypes(final JvmType type, final Function1<? super String, ? extends Boolean> acceptor) {
     if (((type == null) || type.eIsProxy())) {
       return;
@@ -194,7 +194,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       }
     }
   }
-  
+
   public boolean isLocal(final JvmType type) {
     boolean _switchResult = false;
     boolean _matched = false;

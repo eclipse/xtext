@@ -34,17 +34,17 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     }
     return this.getCompilationUnit().toExpression(this.getDelegate().getExpression());
   }
-  
+
   @Override
   public Visibility getVisibility() {
     return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDeclaringType().getSimpleName();
   }
-  
+
   @Override
   public boolean isVarArgs() {
     final Function1<XtendParameter, Boolean> _function = (XtendParameter it) -> {
@@ -52,7 +52,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     };
     return IterableExtensions.<XtendParameter>exists(this.getDelegate().getParameters(), _function);
   }
-  
+
   @Override
   public Iterable<? extends TypeReference> getExceptions() {
     final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
@@ -60,7 +60,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(this.getDelegate().getExceptions(), _function);
   }
-  
+
   @Override
   public Iterable<? extends ParameterDeclaration> getParameters() {
     final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = (XtendParameter it) -> {
@@ -68,7 +68,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     };
     return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(this.getDelegate().getParameters(), _function);
   }
-  
+
   @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     return CollectionLiterals.<TypeParameterDeclaration>emptyList();

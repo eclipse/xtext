@@ -43,17 +43,17 @@ import org.junit.Test;
 public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   private Set<IResource> cleanUp = CollectionLiterals.<IResource>newHashSet();
-  
+
   public <T extends IResource> T registerForCleanUp(final T t) {
     this.cleanUp.add(t);
     return t;
   }
-  
+
   @Rule
   public StopwatchRule rule = new StopwatchRule(true);
-  
+
   @After
   @Override
   public void tearDown() {
@@ -69,7 +69,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testRemoveReferencedType() {
     try {
@@ -103,7 +103,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAddReferencedType() {
     try {
@@ -137,7 +137,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAddMethod() {
     try {
@@ -189,7 +189,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExtendedClassChanges() {
     try {
@@ -250,7 +250,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=388828
    */
@@ -290,7 +290,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testChangeInAnnotationProcessor() {
     try {
@@ -386,7 +386,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testChangeInResourceReadFromAnnotationProcessor() {
     try {
@@ -499,7 +499,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testChangeJavaClassLookedUpInAnnotationProcessor() {
     try {
@@ -592,7 +592,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public IFile createFile(final IJavaProject jp, final String path, final String contents) {
     try {
       String _string = jp.getProject().getFullPath().toString();
@@ -603,7 +603,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertNoErrorsInWorkspace() {
     try {
       final IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
@@ -617,7 +617,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void assertHasErrors(final IFile file, final String msgPart) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

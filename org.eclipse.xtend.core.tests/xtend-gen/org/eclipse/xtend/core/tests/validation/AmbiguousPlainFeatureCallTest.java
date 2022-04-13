@@ -52,7 +52,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -95,7 +95,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("all match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -136,7 +136,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -165,7 +165,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertAmbiguous(_builder, "m2(Appendable) in D", "m2(CharSequence) in C");
   }
-  
+
   @Test
   public void testAmbiguousMethods_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -202,7 +202,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -239,7 +239,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -276,7 +276,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -313,7 +313,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -350,7 +350,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -387,7 +387,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -426,7 +426,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -465,7 +465,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousMethods_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -504,7 +504,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testUnambiguousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -533,7 +533,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -578,7 +578,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -606,7 +606,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -634,7 +634,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -662,7 +662,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -690,7 +690,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -722,7 +722,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -752,7 +752,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -777,7 +777,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -802,7 +802,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -827,7 +827,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -852,7 +852,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_14() {
     StringConcatenation _builder = new StringConcatenation();
@@ -877,7 +877,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_15() {
     StringConcatenation _builder = new StringConcatenation();
@@ -902,7 +902,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_16() {
     StringConcatenation _builder = new StringConcatenation();
@@ -927,7 +927,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_17() {
     StringConcatenation _builder = new StringConcatenation();
@@ -952,7 +952,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_18() {
     StringConcatenation _builder = new StringConcatenation();
@@ -979,7 +979,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_19() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1006,7 +1006,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_20() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1033,7 +1033,7 @@ public class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousMethods_21() {
     StringConcatenation _builder = new StringConcatenation();

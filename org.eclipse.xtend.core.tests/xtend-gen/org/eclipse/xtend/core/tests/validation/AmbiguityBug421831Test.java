@@ -68,7 +68,7 @@ public class AmbiguityBug421831Test extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testUnambiguousStaticImports_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -108,7 +108,7 @@ public class AmbiguityBug421831Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Ignore("TODO fix me")
   @Test
   public void testUnambiguousStaticImports_02() {
@@ -149,7 +149,7 @@ public class AmbiguityBug421831Test extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Ignore("TODO fix me")
   @Test
   public void testUnambiguousStaticImports_03() {

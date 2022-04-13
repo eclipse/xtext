@@ -42,28 +42,28 @@ public class ProcessorInstanceForJvmTypeProvider {
   @Accessors
   public static class ProcessorClassloaderAdapter extends AdapterImpl {
     private ClassLoader classLoader;
-    
+
     public ProcessorClassloaderAdapter(final ClassLoader classLoader) {
       this.classLoader = classLoader;
     }
-    
+
     @Override
     public boolean isAdapterForType(final Object type) {
       return Objects.equal(type, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
     }
-    
+
     @Override
     public void unsetTarget(final Notifier oldTarget) {
       this.discard();
     }
-    
+
     @Override
     public void setTarget(final Notifier newTarget) {
       if ((newTarget == null)) {
         this.discard();
       }
     }
-    
+
     public ClassLoader discard() {
       ClassLoader _xifexpression = null;
       if ((this.classLoader instanceof Closeable)) {
@@ -87,19 +87,19 @@ public class ProcessorInstanceForJvmTypeProvider {
       }
       return _xifexpression;
     }
-    
+
     @Pure
     public ClassLoader getClassLoader() {
       return this.classLoader;
     }
-    
+
     public void setClassLoader(final ClassLoader classLoader) {
       this.classLoader = classLoader;
     }
   }
-  
+
   private static final Logger logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider.class);
-  
+
   /**
    * @return an instance of the given JvmType
    */
@@ -134,7 +134,7 @@ public class ProcessorInstanceForJvmTypeProvider {
       }
     }
   }
-  
+
   public ClassLoader getClassLoader(final EObject ctx) {
     final ResourceSet resourceSet = ctx.eResource().getResourceSet();
     final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(resourceSet.eAdapters(), ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class));

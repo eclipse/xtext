@@ -54,31 +54,31 @@ public abstract class AbstractStaticMethodImporter {
   @Inject
   @Extension
   protected ExpressionUtil expressionUtil;
-  
+
   @Inject
   @Extension
   protected ReplaceConverter replaceConverter;
-  
+
   @Inject
   @Extension
   protected RefactoredResourceCopier resourceCopier;
-  
+
   @Inject
   protected DocumentRewriter.Factory rewriterFactory;
-  
+
   @Inject
   protected XtendGrammarAccess grammar;
-  
+
   @Inject
   protected ImportOrganizer importOrganizer;
-  
+
   /**
    * Returns whether or not the import should be an extension
    */
   protected boolean useExtension() {
     return false;
   }
-  
+
   /**
    * Computes the changes necessary to use the given call as static. Changes should be added to the rewriter.
    * 
@@ -86,7 +86,7 @@ public abstract class AbstractStaticMethodImporter {
    * @param rewriter the DocumentRewriter that will apply the changes
    */
   protected abstract void computeChange(final XMemberFeatureCall call, final DocumentRewriter rewriter);
-  
+
   /**
    * Computes the changes necessary for all the given calls. Changes should be added to the rewriter.
    * 
@@ -99,7 +99,7 @@ public abstract class AbstractStaticMethodImporter {
     };
     calls.forEach(_function);
   }
-  
+
   /**
    * Imports the selected method in the document as static method is possible.
    * 
@@ -171,7 +171,7 @@ public abstract class AbstractStaticMethodImporter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * Returns the import that should be added for the given call.
    * 

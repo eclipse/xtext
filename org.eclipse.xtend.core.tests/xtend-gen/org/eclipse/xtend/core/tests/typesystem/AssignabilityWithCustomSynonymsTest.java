@@ -18,7 +18,7 @@ public class AssignabilityWithCustomSynonymsTest extends AbstractAssignabilityTe
   public void testBigIntegerIsBigDecimal() {
     this.isAssignableFrom("java.math.BigDecimal", "java.math.BigInteger");
   }
-  
+
   @Test
   public void testIterableBigIntegerIsNotIterableBigDecimal() {
     this.isNotAssignableFrom("Iterable<java.math.BigDecimal>", "Iterable<java.math.BigInteger>");

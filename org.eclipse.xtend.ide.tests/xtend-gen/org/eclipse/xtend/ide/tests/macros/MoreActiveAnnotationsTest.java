@@ -35,7 +35,7 @@ import org.junit.Test;
 public class MoreActiveAnnotationsTest {
   @Rule
   public StopwatchRule stopwatch = new StopwatchRule(true);
-  
+
   @BeforeClass
   public static void createProjects() {
     try {
@@ -44,12 +44,12 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @Test
   public void testBug461761() {
     try {
@@ -118,7 +118,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug461761_01() {
     try {
@@ -210,7 +210,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug461761_02() {
     try {
@@ -327,7 +327,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore("It fails because JDT doesn\'t provide annotation values of annotation.MyClass. For some unknown reason the binding is set to null which makes JDT filtering them out.")
   @Test
   public void testBug461761_03() {
@@ -442,7 +442,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testStaticInitializers() {
     try {
@@ -651,7 +651,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug473689() {
     try {
@@ -697,7 +697,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
       final IFile result = it.getProject().getFile(("src/" + fileName));
@@ -709,7 +709,7 @@ public class MoreActiveAnnotationsTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void createFolder(final IContainer container) {
     try {
       boolean _exists = container.exists();

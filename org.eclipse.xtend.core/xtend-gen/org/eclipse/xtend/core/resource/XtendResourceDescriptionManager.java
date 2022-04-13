@@ -29,28 +29,28 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
   @Inject
   private IBatchTypeResolver typeResolver;
-  
+
   @Inject
   private IQualifiedNameConverter nameConverter;
-  
+
   @Override
   public IResourceDescription createResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     IResourceScopeCache _cache = this.getCache();
     return new XtendResourceDescription(resource, strategy, _cache, this.typeResolver, this.nameConverter);
   }
-  
+
   @Override
   public boolean hasChanges(final IResourceDescription.Delta delta, final IResourceDescription candidate) {
     return (super.hasChanges(delta, candidate) || this.containsActiveAnnotation(candidate));
   }
-  
+
   private boolean containsActiveAnnotation(final IResourceDescription description) {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       return Boolean.valueOf(ArrayExtensions.contains(it.getUserDataKeys(), XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
     };
     return IterableExtensions.<IEObjectDescription>exists(description.getExportedObjects(), _function);
   }
-  
+
   /**
    * When an annotation processor changes, even if it is just its implementation, the downstream classes should be rebuilt. That is why we are interested even in
    * deltas that have no changed EObjectDescriptions

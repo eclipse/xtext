@@ -36,10 +36,10 @@ import org.junit.runner.RunWith;
 public class JunitLibClasspathAdderTest extends AbstractJunitLibClasspathAdderTestCase {
   @Inject
   private Junit4LibClasspathAdder junit4LibAdder;
-  
+
   @Inject
   private Junit5LibClasspathAdder junit5LibAdder;
-  
+
   @Test
   public void addJUnit4LibToPluginProjectClasspath() {
     try {
@@ -55,7 +55,7 @@ public class JunitLibClasspathAdderTest extends AbstractJunitLibClasspathAdderTe
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void addJUnit4LibToProjectClasspath() {
     this.removePluginNature();
@@ -66,7 +66,7 @@ public class JunitLibClasspathAdderTest extends AbstractJunitLibClasspathAdderTe
       "classpath should contain a JUnit 4 container entry", 
       Junit4LibClasspathAdder.JUNIT4_LIBRARY_PATH);
   }
-  
+
   @Test
   public void addJUnit5LibToPluginProjectClasspath() {
     IJavaProject _create = JavaCore.create(this.workbenchHelper.getProject());
@@ -74,7 +74,7 @@ public class JunitLibClasspathAdderTest extends AbstractJunitLibClasspathAdderTe
     this.junit5LibAdder.addLibsToClasspath(_create, _nullProgressMonitor);
     this.assertRequireBundles(Junit5LibClasspathAdder.BUNDLE_IDS);
   }
-  
+
   @Test
   public void addJUnit5LibToProjectClasspath() {
     this.removePluginNature();

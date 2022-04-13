@@ -25,7 +25,7 @@ import org.junit.Test;
 public class LinkingBug421744Test extends AbstractXtendTestCase {
   @Inject
   private ValidationTestHelper testHelper;
-  
+
   @Test
   public void testTheBug() {
     try {

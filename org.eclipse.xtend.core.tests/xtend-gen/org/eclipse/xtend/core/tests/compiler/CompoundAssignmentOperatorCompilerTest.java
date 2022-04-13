@@ -88,7 +88,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -161,7 +161,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -231,7 +231,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_4() {
     StringConcatenation _builder = new StringConcatenation();
@@ -301,7 +301,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_5() {
     StringConcatenation _builder = new StringConcatenation();
@@ -374,7 +374,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_6() {
     StringConcatenation _builder = new StringConcatenation();
@@ -447,7 +447,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_7() {
     StringConcatenation _builder = new StringConcatenation();
@@ -529,7 +529,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_8() {
     StringConcatenation _builder = new StringConcatenation();
@@ -611,7 +611,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_9() {
     StringConcatenation _builder = new StringConcatenation();
@@ -675,7 +675,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -742,7 +742,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -815,7 +815,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -891,7 +891,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -936,7 +936,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_14() {
     StringConcatenation _builder = new StringConcatenation();
@@ -992,7 +992,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_15() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1064,7 +1064,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_16() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1136,7 +1136,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_17() {
     StringConcatenation _builder = new StringConcatenation();

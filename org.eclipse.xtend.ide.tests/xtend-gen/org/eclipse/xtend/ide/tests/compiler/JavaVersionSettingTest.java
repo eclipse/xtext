@@ -39,23 +39,23 @@ import org.junit.Test;
 public class JavaVersionSettingTest extends Assert {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
-  
+
   @Before
   public void setUp() throws Exception {
     XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend").injectMembers(this);
   }
-  
+
   @BeforeClass
   public static void setUpProject() throws Exception {
     TargetPlatformUtil.setTargetPlatform(JavaVersionSettingTest.class);
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @AfterClass
   public static void tearDownProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
-  
+
   @After
   public void tearDown() {
     try {
@@ -64,7 +64,7 @@ public class JavaVersionSettingTest extends Assert {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCompileWithJava5() {
     try {
@@ -99,7 +99,7 @@ public class JavaVersionSettingTest extends Assert {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCompileWithJava6() {
     try {
@@ -134,7 +134,7 @@ public class JavaVersionSettingTest extends Assert {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private String getJavaFileContent(final String fileName, final IProject project) {
     try {
       final IFile javaFile = project.getFile(fileName);
@@ -149,7 +149,7 @@ public class JavaVersionSettingTest extends Assert {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertNoErrors(final IFile file) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);

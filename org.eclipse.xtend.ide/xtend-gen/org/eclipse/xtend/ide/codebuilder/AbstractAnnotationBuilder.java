@@ -18,17 +18,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
   @Accessors
   private String annotationName;
-  
+
   @Override
   public String getImage() {
     return "newannotation_wiz.gif";
   }
-  
+
   @Pure
   public String getAnnotationName() {
     return this.annotationName;
   }
-  
+
   public void setAnnotationName(final String annotationName) {
     this.annotationName = annotationName;
   }

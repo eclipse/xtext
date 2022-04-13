@@ -61,7 +61,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "methodB", "main", "myInstance");
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -104,7 +104,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "main");
   }
-  
+
   @Flaky
   @Test
   public void test_03() throws Exception {
@@ -148,7 +148,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodB", "main()", "myInstance()");
   }
-  
+
   @Test
   public void test_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -191,7 +191,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "main()");
   }
-  
+
   @Flaky
   @Test
   public void test_05() throws Exception {
@@ -235,7 +235,7 @@ public class Bug437678Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("ethod|", "methodA", "main", "myInstance");
   }
-  
+
   @Test
   public void test_06() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

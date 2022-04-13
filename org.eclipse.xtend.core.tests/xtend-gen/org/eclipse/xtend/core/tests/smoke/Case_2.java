@@ -23,7 +23,7 @@ public class Case_2 {
     }
     return _xifexpression;
   }
-  
+
   public String returnInIf(final char c) {
     boolean _notEquals = (!Objects.equal("x", Character.valueOf(c)));
     if (_notEquals) {

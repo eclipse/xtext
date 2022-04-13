@@ -163,22 +163,22 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
-  
+
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.xtendFile.eResource().getURI().lastSegment().toString();
   }
-  
+
   @Override
   public CompilationUnit getCompilationUnit() {
     return this;
   }
-  
+
   @Override
   public String getDocComment() {
     final List<INode> nodes = this.fileHeaderProvider.getFileHeaderNodes(this.xtendFile.eResource());
@@ -189,12 +189,12 @@ public class CompilationUnitImpl implements CompilationUnit {
       return nodes.get(0).getText();
     }
   }
-  
+
   @Override
   public String getPackageName() {
     return this.xtendFile.getPackage();
   }
-  
+
   @Override
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = (XtendTypeDeclaration it) -> {
@@ -202,121 +202,121 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(this.xtendFile.getXtendTypes(), _function);
   }
-  
+
   private volatile boolean canceled = false;
-  
+
   public boolean setCanceled(final boolean canceled) {
     return this.canceled = canceled;
   }
-  
+
   public void checkCanceled() {
     if (this.canceled) {
       throw new CancellationException("compilation was canceled.");
     }
   }
-  
+
   @Inject
   private TypesFactory typesFactory;
-  
+
   @Inject
   private CompilerPhases compilerPhases;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private XtendFile xtendFile;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private ActiveAnnotationContexts.AnnotationCallback lastPhase = ActiveAnnotationContexts.AnnotationCallback.INDEXING;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private TypeReferences typeReferences;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private JvmTypesBuilder jvmTypesBuilder;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IXtendJvmAssociations jvmModelAssociations;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
-  
+
   @Inject
   private ConstantExpressionsInterpreter interpreter;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IFileHeaderProvider fileHeaderProvider;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private JvmTypeExtensions typeExtensions;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private OverrideHelper overrideHelper;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IResourceChangeRegistry resourceChangeRegistry;
-  
+
   @Inject
   private AbstractFileSystemSupport fileSystemSupport;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private FileLocationsImpl fileLocations;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private ReadAndWriteTracking readAndWriteTracking;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IScopeProvider scopeProvider;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private IQualifiedNameProvider qualifiedNameProvider;
-  
+
   @Accessors
   private final ProblemSupportImpl problemSupport = new ProblemSupportImpl(this);
-  
+
   @Accessors
   private final TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this);
-  
+
   @Accessors
   private final AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this);
-  
+
   @Accessors
   private final TypeLookupImpl typeLookup = new TypeLookupImpl(this);
-  
+
   @Accessors
   private final TracabilityImpl tracability = new TracabilityImpl(this);
-  
+
   @Accessors
   private final AssociatorImpl associator = new AssociatorImpl(this);
-  
+
   private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
-  
+
   @Accessors(AccessorType.PUBLIC_GETTER)
   private LightweightTypeReferenceFactory typeRefFactory;
-  
+
   private MutableFileSystemSupport decoratedFileSystemSupport;
-  
+
   public MutableFileSystemSupport getFileSystemSupport() {
     MutableFileSystemSupport _xblockexpression = null;
     {
@@ -334,17 +334,17 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   private ChangeListenerAddingFileSystemSupport createListeningFileSystemSupport() {
     URI _uRI = this.xtendFile.eResource().getURI();
     return new ChangeListenerAddingFileSystemSupport(_uRI, this.fileSystemSupport, this.resourceChangeRegistry);
   }
-  
+
   @Override
   public Path getFilePath() {
     return this.fileSystemSupport.getPath(this.xtendFile.eResource());
   }
-  
+
   public void setXtendFile(final XtendFile xtendFile) {
     this.xtendFile = xtendFile;
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, xtendFile);
@@ -353,7 +353,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.fileSystemSupport.setContext(xtendFile.eResource().getResourceSet());
     this.fileLocations.setContext(xtendFile.eResource());
   }
-  
+
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
     this.lastPhase = phase;
     final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, this.xtendFile);
@@ -370,7 +370,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       this.problemSupport.validationPhaseStarted();
     }
   }
-  
+
   public void after(final ActiveAnnotationContexts.AnnotationCallback phase) {
     boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
     if (_equals) {
@@ -381,11 +381,11 @@ public class CompilationUnitImpl implements CompilationUnit {
       this.resourceChangeRegistry.discardCreateOrModifyInformation(this.xtendFile.eResource().getURI());
     }
   }
-  
+
   public boolean isIndexing() {
     return this.compilerPhases.isIndexing(this.xtendFile);
   }
-  
+
   private <IN extends Object, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
     this.checkCanceled();
     if ((in == null)) {
@@ -400,7 +400,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.identityCache.put(in, result);
     return result;
   }
-  
+
   public Visibility toVisibility(final JvmVisibility delegate) {
     Visibility _switchResult = null;
     if (delegate != null) {
@@ -423,7 +423,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _switchResult;
   }
-  
+
   public ResolvedMethod toResolvedMethod(final IResolvedOperation delegate) {
     final Function1<IResolvedOperation, ResolvedMethodImpl> _function = (IResolvedOperation it) -> {
       ResolvedMethodImpl _resolvedMethodImpl = new ResolvedMethodImpl();
@@ -435,7 +435,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<IResolvedOperation, ResolvedMethodImpl>getOrCreate(delegate, _function);
   }
-  
+
   public ResolvedConstructor toResolvedConstructor(final IResolvedConstructor delegate) {
     final Function1<IResolvedConstructor, ResolvedConstructorImpl> _function = (IResolvedConstructor it) -> {
       ResolvedConstructorImpl _resolvedConstructorImpl = new ResolvedConstructorImpl();
@@ -447,7 +447,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<IResolvedConstructor, ResolvedConstructorImpl>getOrCreate(delegate, _function);
   }
-  
+
   public Type toType(final JvmType delegate) {
     final Function1<JvmType, Type> _function = (JvmType it) -> {
       Type _switchResult = null;
@@ -488,7 +488,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmType, Type>getOrCreate(delegate, _function);
   }
-  
+
   public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
     final Function1<JvmDeclaredType, TypeDeclaration> _function = (JvmDeclaredType it) -> {
       JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
@@ -590,7 +590,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmDeclaredType, TypeDeclaration>getOrCreate(delegate, _function);
   }
-  
+
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
       JvmTypeParameterDeclarationImpl _xifexpression = null;
@@ -614,7 +614,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
-  
+
   public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
     final Function1<JvmFormalParameter, JvmParameterDeclarationImpl> _function = (JvmFormalParameter it) -> {
       JvmParameterDeclarationImpl _xifexpression = null;
@@ -638,7 +638,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmFormalParameter, JvmParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
-  
+
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
     final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {
       MemberDeclaration _switchResult = null;
@@ -767,13 +767,13 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmMember, MemberDeclaration>getOrCreate(delegate, _function);
   }
-  
+
   public boolean isBelongedToCompilationUnit(final EObject element) {
     Resource _eResource = element.eResource();
     Resource _eResource_1 = this.xtendFile.eResource();
     return Objects.equal(_eResource, _eResource_1);
   }
-  
+
   public NamedElement toNamedElement(final JvmIdentifiableElement delegate) {
     final Function1<JvmIdentifiableElement, Declaration> _function = (JvmIdentifiableElement it) -> {
       Declaration _switchResult = null;
@@ -801,7 +801,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmIdentifiableElement, Declaration>getOrCreate(delegate, _function);
   }
-  
+
   public Element toJvmElement(final EObject delegate) {
     final Function1<EObject, Element> _function = (EObject it) -> {
       Element _switchResult = null;
@@ -835,7 +835,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<EObject, Element>getOrCreate(delegate, _function);
   }
-  
+
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
     TypeReference _xblockexpression = null;
     {
@@ -864,11 +864,11 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   public TypeReference toTypeReference(final LightweightTypeReference delegate) {
     return this.toTypeReference(delegate, null);
   }
-  
+
   public TypeReference toTypeReference(final LightweightTypeReference delegate, final JvmTypeReference source) {
     TypeReferenceImpl _xblockexpression = null;
     {
@@ -886,7 +886,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(final XtendTypeDeclaration delegate) {
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = (XtendTypeDeclaration it) -> {
       XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
@@ -937,7 +937,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>getOrCreate(delegate, _function);
   }
-  
+
   public MemberDeclaration toXtendMemberDeclaration(final XtendMember delegate) {
     final Function1<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>> _function = (XtendMember it) -> {
       XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
@@ -1006,7 +1006,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>getOrCreate(delegate, _function);
   }
-  
+
   public XtendParameterDeclarationImpl toXtendParameterDeclaration(final XtendParameter delegate) {
     final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = (XtendParameter it) -> {
       XtendParameterDeclarationImpl _xtendParameterDeclarationImpl = new XtendParameterDeclarationImpl();
@@ -1018,7 +1018,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<XtendParameter, XtendParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
-  
+
   public XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
       XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclarationImpl = new XtendTypeParameterDeclarationImpl();
@@ -1030,7 +1030,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
-  
+
   public Element toXtendElement(final EObject delegate) {
     final Function1<EObject, Element> _function = (EObject it) -> {
       Element _switchResult = null;
@@ -1076,7 +1076,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<EObject, Element>getOrCreate(delegate, _function);
   }
-  
+
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
     this.checkCanceled();
     JvmTypeReference _switchResult = null;
@@ -1093,7 +1093,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _switchResult;
   }
-  
+
   public LightweightTypeReference toLightweightTypeReference(final TypeReference typeRef) {
     this.checkCanceled();
     LightweightTypeReference _switchResult = null;
@@ -1110,7 +1110,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _switchResult;
   }
-  
+
   public Expression toExpression(final XExpression delegate) {
     final Function1<XExpression, ExpressionImpl> _function = (XExpression it) -> {
       ExpressionImpl _expressionImpl = new ExpressionImpl();
@@ -1122,7 +1122,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<XExpression, ExpressionImpl>getOrCreate(delegate, _function);
   }
-  
+
   public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = (ITreeAppendable it) -> {
@@ -1131,16 +1131,16 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     this.jvmTypesBuilder.setBody(executable, _function);
   }
-  
+
   public void setCompilationTemplate(final JvmExecutable executable, final StringConcatenationClient compilationTemplate) {
     this.checkCanceled();
     this.jvmTypesBuilder.setBody(executable, compilationTemplate);
   }
-  
+
   protected CharSequence trimTrailingLinebreak(final CharSequence sequence, final EObject context) {
     return Strings.trimTrailingLineBreak(sequence);
   }
-  
+
   public void setCompilationStrategy(final JvmField field, final CompilationStrategy compilationStrategy) {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = (ITreeAppendable it) -> {
@@ -1149,12 +1149,12 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     this.jvmTypesBuilder.setInitializer(field, _function);
   }
-  
+
   public void setCompilationTemplate(final JvmField field, final StringConcatenationClient compilationTemplate) {
     this.checkCanceled();
     this.jvmTypesBuilder.setInitializer(field, compilationTemplate);
   }
-  
+
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
     final Function1<XAnnotation, XtendAnnotationReferenceImpl> _function = (XAnnotation it) -> {
       XtendAnnotationReferenceImpl _xtendAnnotationReferenceImpl = new XtendAnnotationReferenceImpl();
@@ -1166,7 +1166,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<XAnnotation, XtendAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
-  
+
   public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
     final Function1<JvmAnnotationReference, JvmAnnotationReferenceImpl> _function = (JvmAnnotationReference it) -> {
       JvmAnnotationReferenceImpl _jvmAnnotationReferenceImpl = new JvmAnnotationReferenceImpl();
@@ -1178,7 +1178,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.<JvmAnnotationReference, JvmAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
-  
+
   public Object translateAnnotationValue(final XExpression expression, final JvmTypeReference expectedType, final boolean isArray) {
     Object _xblockexpression = null;
     {
@@ -1187,7 +1187,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
     Pair<List<?>, Class<?>> _switchResult = null;
     boolean _matched = false;
@@ -1314,7 +1314,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       return IterableExtensions.head(result.getKey());
     }
   }
-  
+
   protected Object translateAnnotationValue(final Object value, final JvmTypeReference expectedType, final boolean isArray) {
     Object _xblockexpression = null;
     {
@@ -1328,7 +1328,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   protected Class<?> toArrayComponentType(final JvmTypeReference valueExpectedType) {
     Class<?> _xblockexpression = null;
     {
@@ -1410,7 +1410,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   protected JvmTypeReference findExpectedType(final JvmAnnotationValue value) {
     JvmOperation _operation = value.getOperation();
     boolean _tripleNotEquals = (_operation != null);
@@ -1442,7 +1442,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _switchResult;
   }
-  
+
   private Object toArrayOfType(final Iterable<?> iterable, final Class<?> componentType) {
     Collection<?> _xifexpression = null;
     if ((iterable instanceof Collection<?>)) {
@@ -1504,7 +1504,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _switchResult;
   }
-  
+
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {
     try {
       final Object result = this.interpreter.evaluate(expression, expectedType);
@@ -1521,7 +1521,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     }
   }
-  
+
   protected Object translate(final Object object) {
     if ((object instanceof XAnnotation[])) {
       final AnnotationReference[] result = new AnnotationReference[((Object[])object).length];
@@ -1563,7 +1563,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return object;
   }
-  
+
   protected AnnotationReference translateAnnotation(final XAnnotation annotation) {
     AnnotationReference _xblockexpression = null;
     {
@@ -1600,7 +1600,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   protected Object translateAnnotationValue(final XExpression value, final JvmTypeReference expectedType) {
     Object _xblockexpression = null;
     {
@@ -1626,7 +1626,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xblockexpression;
   }
-  
+
   public void handleProcessingError(final Iterable<? extends EObject> sourceElements, final Resource resource, final Throwable t) {
     if ((t instanceof VirtualMachineError)) {
       throw ((VirtualMachineError)t);
@@ -1660,7 +1660,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     }
   }
-  
+
   protected String getMessageWithStackTrace(final Throwable t) {
     final Function1<Throwable, String> _function = (Throwable it) -> {
       String _xblockexpression = null;
@@ -1682,7 +1682,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     };
     return this.getMessageWithReducedStackTrace(t, _function);
   }
-  
+
   protected String getMessageWithoutStackTrace(final Throwable t) {
     String _xifexpression = null;
     if (((t instanceof IncompatibleClassChangeError) && t.getMessage().contains("org.eclipse.xtend.lib.macro"))) {
@@ -1692,7 +1692,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return _xifexpression;
   }
-  
+
   protected String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable, ? extends String> getMessage) {
     final StackTraceElement[] stackTrace = t.getStackTrace();
     final ArrayList<StackTraceElement> reducedStackTrace = CollectionLiterals.<StackTraceElement>newArrayList();
@@ -1712,121 +1712,121 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     return getMessage.apply(t);
   }
-  
+
   public String getFileHeader() {
     return this.fileHeaderProvider.getFileHeader(this.xtendFile.eResource());
   }
-  
+
   @Pure
   public XtendFile getXtendFile() {
     return this.xtendFile;
   }
-  
+
   @Pure
   public ActiveAnnotationContexts.AnnotationCallback getLastPhase() {
     return this.lastPhase;
   }
-  
+
   @Pure
   public TypeReferences getTypeReferences() {
     return this.typeReferences;
   }
-  
+
   @Pure
   public JvmTypesBuilder getJvmTypesBuilder() {
     return this.jvmTypesBuilder;
   }
-  
+
   @Pure
   public IXtendJvmAssociations getJvmModelAssociations() {
     return this.jvmModelAssociations;
   }
-  
+
   @Pure
   public IJvmModelAssociator getJvmModelAssociator() {
     return this.jvmModelAssociator;
   }
-  
+
   @Pure
   public IEObjectDocumentationProvider getDocumentationProvider() {
     return this.documentationProvider;
   }
-  
+
   @Pure
   public IFileHeaderProvider getFileHeaderProvider() {
     return this.fileHeaderProvider;
   }
-  
+
   @Pure
   public JvmTypeExtensions getTypeExtensions() {
     return this.typeExtensions;
   }
-  
+
   @Pure
   public OverrideHelper getOverrideHelper() {
     return this.overrideHelper;
   }
-  
+
   @Pure
   public IResourceChangeRegistry getResourceChangeRegistry() {
     return this.resourceChangeRegistry;
   }
-  
+
   @Pure
   public FileLocationsImpl getFileLocations() {
     return this.fileLocations;
   }
-  
+
   @Pure
   public ReadAndWriteTracking getReadAndWriteTracking() {
     return this.readAndWriteTracking;
   }
-  
+
   @Pure
   public IScopeProvider getScopeProvider() {
     return this.scopeProvider;
   }
-  
+
   @Pure
   public IQualifiedNameConverter getQualifiedNameConverter() {
     return this.qualifiedNameConverter;
   }
-  
+
   @Pure
   public IQualifiedNameProvider getQualifiedNameProvider() {
     return this.qualifiedNameProvider;
   }
-  
+
   @Pure
   public ProblemSupportImpl getProblemSupport() {
     return this.problemSupport;
   }
-  
+
   @Pure
   public TypeReferenceProvider getTypeReferenceProvider() {
     return this.typeReferenceProvider;
   }
-  
+
   @Pure
   public AnnotationReferenceProvider getAnnotationReferenceProvider() {
     return this.annotationReferenceProvider;
   }
-  
+
   @Pure
   public TypeLookupImpl getTypeLookup() {
     return this.typeLookup;
   }
-  
+
   @Pure
   public TracabilityImpl getTracability() {
     return this.tracability;
   }
-  
+
   @Pure
   public AssociatorImpl getAssociator() {
     return this.associator;
   }
-  
+
   @Pure
   public LightweightTypeReferenceFactory getTypeRefFactory() {
     return this.typeRefFactory;

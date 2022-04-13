@@ -52,21 +52,21 @@ import org.eclipse.xtext.xbase.lib.Pair;
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
   private static final Logger logger = Logger.getLogger(ActiveAnnotationContextProvider.class);
-  
+
   @Inject
   @Extension
   private XAnnotationExtensions _xAnnotationExtensions;
-  
+
   @Inject
   @Extension
   private ProcessorInstanceForJvmTypeProvider _processorInstanceForJvmTypeProvider;
-  
+
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Inject
   private OperationCanceledManager operationCanceledManager;
-  
+
   public ActiveAnnotationContexts computeContext(final XtendFile file) {
     final Stopwatches.StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
     task.start();
@@ -154,7 +154,7 @@ public class ActiveAnnotationContextProvider {
       task.stop();
     }
   }
-  
+
   /**
    * recursively looks for macro annotations on XtendAnnotationTargets
    */
@@ -234,7 +234,7 @@ public class ActiveAnnotationContextProvider {
       }
     }
   }
-  
+
   protected void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     final Function1<XAnnotation, Boolean> _function = (XAnnotation it) -> {
       return Boolean.valueOf(this._xAnnotationExtensions.isProcessed(it));
@@ -253,7 +253,7 @@ public class ActiveAnnotationContextProvider {
       }
     }
   }
-  
+
   private boolean isValid(final XAnnotation annotation, final JvmAnnotationType activeAnnotationDeclaration) {
     return (annotation != null);
   }

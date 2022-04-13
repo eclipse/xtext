@@ -20,7 +20,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
   public String getSimpleName() {
     return this.getDelegate().getName();
   }
-  
+
   @Override
   public Object getDefaultValue() {
     Object _xblockexpression = null;
@@ -34,7 +34,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Expression getDefaultValueExpression() {
     Expression _xblockexpression = null;
@@ -48,7 +48,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public TypeReference getType() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getType());

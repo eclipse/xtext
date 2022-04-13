@@ -41,11 +41,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
   private static final long VALIDATION_TIMEOUT = 10000L;
-  
+
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   @Before
   public void start() {
     try {
@@ -54,7 +54,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void close() {
     try {
@@ -63,7 +63,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=449948
    */
@@ -114,7 +114,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOpenedEditorHasSemanticHighlighting() {
     try {

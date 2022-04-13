@@ -35,11 +35,11 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private IBatchTypeResolver _iBatchTypeResolver;
-  
+
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   @Test
   public void testPlainAnonymous() {
     try {
@@ -64,7 +64,7 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnonymousWithAdditionalMember() {
     try {
@@ -101,7 +101,7 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOverriddenMethodTypeArgumentInference() {
     try {
@@ -133,7 +133,7 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testOverriddenMethodTypeArgumentInference_2() {
     try {

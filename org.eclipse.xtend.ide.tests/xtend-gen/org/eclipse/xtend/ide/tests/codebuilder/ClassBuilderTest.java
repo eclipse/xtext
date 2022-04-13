@@ -23,7 +23,7 @@ public class ClassBuilderTest extends AbstractBuilderTest {
   @Inject
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
-  
+
   @Test
   public void testXtendClass() {
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(this.getXtendClass());
@@ -39,7 +39,7 @@ public class ClassBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
-  
+
   @Test
   public void testJavaClass() {
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(this.getJavaClass());

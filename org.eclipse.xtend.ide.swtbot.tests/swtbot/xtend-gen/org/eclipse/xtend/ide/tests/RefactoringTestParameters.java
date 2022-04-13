@@ -16,13 +16,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class RefactoringTestParameters {
   @Property
   private boolean _useInlineRefactoring = true;
-  
+
   @Property
   private boolean _saveAllBeforeRefactoring = true;
-  
+
   @Property
   private boolean _usePreview = false;
-  
+
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
@@ -56,30 +56,30 @@ public class RefactoringTestParameters {
     _builder.append(")");
     return _builder.toString();
   }
-  
+
   @Pure
   public boolean isUseInlineRefactoring() {
     return this._useInlineRefactoring;
   }
-  
+
   public void setUseInlineRefactoring(final boolean useInlineRefactoring) {
     this._useInlineRefactoring = useInlineRefactoring;
   }
-  
+
   @Pure
   public boolean isSaveAllBeforeRefactoring() {
     return this._saveAllBeforeRefactoring;
   }
-  
+
   public void setSaveAllBeforeRefactoring(final boolean saveAllBeforeRefactoring) {
     this._saveAllBeforeRefactoring = saveAllBeforeRefactoring;
   }
-  
+
   @Pure
   public boolean isUsePreview() {
     return this._usePreview;
   }
-  
+
   public void setUsePreview(final boolean usePreview) {
     this._usePreview = usePreview;
   }

@@ -28,11 +28,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class ImportStaticMethodHandler extends AbstractHandler {
   @Inject
   private SyncUtil syncUtil;
-  
+
   @Inject
   @Extension
   private StaticMethodImporter importer;
-  
+
   @Override
   public Object execute(final ExecutionEvent event) throws ExecutionException {
     try {

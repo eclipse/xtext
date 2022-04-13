@@ -14,12 +14,12 @@ import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 @SuppressWarnings("all")
 public class DelegatingClassloader extends ClassLoader {
   private CompilationTestHelper.Result classFinder;
-  
+
   public DelegatingClassloader(final ClassLoader parent, final CompilationTestHelper.Result classFinder) {
     super(parent);
     this.classFinder = classFinder;
   }
-  
+
   @Override
   protected URL findResource(final String name) {
     final URL result = this.classFinder.getClassLoader().getResource(name);
@@ -32,7 +32,7 @@ public class DelegatingClassloader extends ClassLoader {
     }
     return _elvis;
   }
-  
+
   @Override
   public Class<?> findClass(final String name) throws ClassNotFoundException {
     Class<?> _xblockexpression = null;
@@ -45,7 +45,7 @@ public class DelegatingClassloader extends ClassLoader {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Class<?> loadClass(final String name) throws ClassNotFoundException {
     return super.loadClass(name);

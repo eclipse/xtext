@@ -42,7 +42,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassStatic() {
     try {
@@ -56,7 +56,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassVisibility() {
     try {
@@ -79,7 +79,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceVisibility() {
     try {
@@ -102,7 +102,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumVisibility() {
     try {
@@ -125,7 +125,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testInterfaceFinalAndStatic() {
     try {
@@ -139,7 +139,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumFinalAndStatic() {
     try {
@@ -153,7 +153,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumLiteralDefaults() {
     try {
@@ -168,7 +168,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldInInterfaceDefaults() {
     try {
@@ -183,7 +183,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldInAnnotationDefaults() {
     try {
@@ -198,7 +198,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationTypeStaticAndFinal() {
     try {
@@ -212,7 +212,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testAnnotationTypeVisibility() {
     try {
@@ -235,7 +235,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testXtendFieldVisibility() {
     try {
@@ -258,7 +258,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldExtension() {
     try {
@@ -272,7 +272,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldFinal() {
     try {

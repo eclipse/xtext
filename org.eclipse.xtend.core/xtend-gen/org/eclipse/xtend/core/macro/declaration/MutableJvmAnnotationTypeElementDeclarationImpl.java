@@ -19,7 +19,7 @@ public class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotatio
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();

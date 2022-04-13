@@ -36,7 +36,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void import_statement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -55,7 +55,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void member_type() {
     StringConcatenation _builder = new StringConcatenation();
@@ -82,7 +82,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void multi_line_comment_link() {
     StringConcatenation _builder = new StringConcatenation();
@@ -107,7 +107,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void multi_line_comment_see() {
     StringConcatenation _builder = new StringConcatenation();
@@ -131,7 +131,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link_no_hyperlink_if_the_type_cannot_be_resolved() {
     StringConcatenation _builder = new StringConcatenation();
@@ -153,7 +153,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasNoHyperlink(_builder);
   }
-  
+
   @Test
   public void javadoc_see_no_hyperlink_if_the_type_cannot_be_resolved() {
     StringConcatenation _builder = new StringConcatenation();
@@ -174,7 +174,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasNoHyperlink(_builder);
   }
-  
+
   @Test
   public void javadoc_link01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -202,7 +202,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -227,7 +227,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -252,7 +252,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -280,7 +280,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -311,7 +311,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -340,7 +340,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_link07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -360,7 +360,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -387,7 +387,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -411,7 +411,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -435,7 +435,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -462,7 +462,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -492,7 +492,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -520,7 +520,7 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   @Test
   public void javadoc_see07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -539,15 +539,15 @@ public class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.newLine();
     this.hasHyperlinkToJavaDate(_builder);
   }
-  
+
   private void hasHyperlinkToJavaDate(final CharSequence it) {
     this.hasHyperlinkTo(it, "java.util.Date");
   }
-  
+
   private void hasNoHyperlink(final CharSequence it) {
     this.noHyperlinkIsOffered(this.hyperlinkingOn(this.dslFile(it), this.hyperlinkRegion(it).getOffset()));
   }
-  
+
   private void noHyperlinkIsOffered(final IHyperlink[] hyperlinks) {
     Assert.assertNull(hyperlinks);
   }

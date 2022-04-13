@@ -53,7 +53,7 @@ public class PreviewCode {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   public static String defaultPreviewText() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Movies {");
@@ -90,7 +90,7 @@ public class PreviewCode {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   public static String newLinePreviewText() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test");
@@ -111,7 +111,7 @@ public class PreviewCode {
     _builder.newLine();
     return _builder.toString();
   }
-  
+
   public static String bracesPreviewText() {
     return PreviewCode.defaultPreviewText();
   }

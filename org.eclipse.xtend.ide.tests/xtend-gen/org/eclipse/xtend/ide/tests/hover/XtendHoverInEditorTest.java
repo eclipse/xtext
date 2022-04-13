@@ -42,14 +42,14 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Inject
   private IEObjectHover hoverer;
-  
+
   @After
   @Override
   public void tearDown() {
@@ -59,7 +59,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfReferencedElement() {
     try {
@@ -114,7 +114,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfReferencedElementWithAnnotation() {
     try {
@@ -183,7 +183,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfJavaType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -196,7 +196,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfJavaTypeInJavadocLink() {
     StringConcatenation _builder = new StringConcatenation();
@@ -212,7 +212,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfJavaTypeInJavadocSee() {
     StringConcatenation _builder = new StringConcatenation();
@@ -228,7 +228,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfFQNJavaType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -241,7 +241,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfFQNJavaTypeInJavadocLink() {
     StringConcatenation _builder = new StringConcatenation();
@@ -257,7 +257,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfFQNJavaTypeInJavadocSee() {
     StringConcatenation _builder = new StringConcatenation();
@@ -273,7 +273,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.hasHoverOverObject(_builder);
   }
-  
+
   @Test
   public void testHoverOfXtendType() {
     try {
@@ -302,7 +302,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfXtendTypeInJavadocLink() {
     try {
@@ -334,7 +334,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfXtendTypeInJavadocSee() {
     try {
@@ -366,7 +366,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfFQNXtendType() {
     try {
@@ -398,7 +398,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfFQNXtendTypeInJavadocLink() {
     try {
@@ -433,7 +433,7 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testHoverOfFQNXtendTypeInJavadocSee() {
     try {
@@ -468,27 +468,27 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void hasHoverOverBar(final CharSequence it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Documentation of the Bar class.");
     this.hasHoverOverXtendType(it, "Bar", _builder.toString());
   }
-  
+
   private void hasHoverOverObject(final CharSequence it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Class <code>Object</code> is the root of the class hierarchy.");
     this.hasHoverOverJavaType(it, "Object", _builder.toString());
   }
-  
+
   private void hasHoverOverJavaType(final CharSequence it, final String textUnderHover, final String expectedHoverContent) {
     this.hasHoverOver(it, textUnderHover, JavadocBrowserInformationControlInput.class, expectedHoverContent);
   }
-  
+
   private void hasHoverOverXtendType(final CharSequence it, final String textUnderHover, final String expectedHoverContent) {
     this.hasHoverOver(it, textUnderHover, XbaseInformationControlInput.class, expectedHoverContent);
   }
-  
+
   private void hasHoverOver(final CharSequence it, final String textUnderHover, final Class<? extends BrowserInformationControlInput> expectedPopupType, final String expectedHoverContent) {
     try {
       final IFile fileFoo = this.helper.createFile("Foo.xtend", it.toString());

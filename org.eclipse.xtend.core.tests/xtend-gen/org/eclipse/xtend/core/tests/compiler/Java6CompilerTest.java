@@ -57,7 +57,7 @@ public class Java6CompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverrideClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -99,7 +99,7 @@ public class Java6CompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testOverrideInterface() {
     StringConcatenation _builder = new StringConcatenation();

@@ -54,15 +54,15 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Inject
   @Extension
   private IBatchTypeResolver _iBatchTypeResolver;
-  
+
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   protected void assertSuspicious(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
     final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
@@ -94,7 +94,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);
     Assert.assertTrue((linkingCandidate instanceof ISuspiciouslyOverloadedCandidate));
   }
-  
+
   protected void assertSuspiciousInInnerClass(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
     final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
@@ -128,14 +128,14 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);
     Assert.assertTrue((linkingCandidate instanceof ISuspiciouslyOverloadedCandidate));
   }
-  
+
   protected void assertValid(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
     final EList<Resource.Diagnostic> errors = file.eResource().getErrors();
     Assert.assertEquals(errors.toString(), 0, errors.size());
     this._validationTestHelper.assertNoErrors(file);
   }
-  
+
   private XtendFile getParsedXtendFile(final CharSequence contents) {
     try {
       final XtendFile file = this._parseHelper.parse(contents);
@@ -147,7 +147,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSuspiciousMethods_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -188,7 +188,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder_1.append("m2(CharSequence) in D on parameter \'it\'.");
     this.assertSuspicious(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testSuspiciousMethods_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -229,7 +229,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder_1.append("foo(CharSequence) in B on \'this\'.");
     this.assertSuspicious(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testSuspiciousMethods_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -276,7 +276,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder_1.append("foo(CharSequence) in A on parameter \'it\'.");
     this.assertSuspicious(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testSuspiciousMethods_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -317,7 +317,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder_1.append("m2(Object) in D on parameter \'it\'.");
     this.assertSuspicious(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testSuspiciousMethods_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -357,7 +357,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder_1.append("m(CharSequence) in B.");
     this.assertSuspiciousInInnerClass(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testValidOverloads_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -386,7 +386,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertValid(_builder);
   }
-  
+
   @Test
   public void testValidOverloads_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -422,7 +422,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertValid(_builder);
   }
-  
+
   @Test
   public void testValidOverloads_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -450,7 +450,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertValid(_builder);
   }
-  
+
   @Test
   public void testValidOverloads_04() {
     StringConcatenation _builder = new StringConcatenation();

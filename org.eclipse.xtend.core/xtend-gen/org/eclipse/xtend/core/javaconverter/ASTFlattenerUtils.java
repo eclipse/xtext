@@ -71,7 +71,7 @@ public class ASTFlattenerUtils {
     }
     return false;
   }
-  
+
   public boolean isOverrideMethod(final MethodDeclaration declaration) {
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _string = it.getTypeName().toString();
@@ -88,11 +88,11 @@ public class ASTFlattenerUtils {
     }
     return false;
   }
-  
+
   public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type) {
     return this.findOverride(method, type, false);
   }
-  
+
   public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type, final boolean onlyPrimarylevel) {
     final ITypeBinding superclass = type.getSuperclass();
     IMethodBinding overridden = null;
@@ -112,7 +112,7 @@ public class ASTFlattenerUtils {
     }
     return overridden;
   }
-  
+
   private IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType, final boolean onlyPrimarylevel) {
     final Function1<IMethodBinding, Boolean> _function = (IMethodBinding it) -> {
       return Boolean.valueOf(method.overrides(it));
@@ -130,7 +130,7 @@ public class ASTFlattenerUtils {
       }
     }
   }
-  
+
   public String handleVariableDeclaration(final Iterable<? extends ASTNode> modifier) {
     boolean _isFinal = this.isFinal(Iterables.<Modifier>filter(modifier, Modifier.class));
     if (_isFinal) {
@@ -139,70 +139,70 @@ public class ASTFlattenerUtils {
       return "var";
     }
   }
-  
+
   public boolean isNotSupportedInnerType(final TypeDeclaration it) {
     return (((!it.isInterface()) && ((it.getParent() instanceof TypeDeclaration) || (it.getParent() instanceof Block))) && 
       (!IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(it.modifiers(), Modifier.class), ((Function1<Modifier, Boolean>) (Modifier it_1) -> {
         return Boolean.valueOf(it_1.isStatic());
       }))));
   }
-  
+
   public boolean isNotSupportedInnerType(final TypeDeclarationStatement it) {
     ASTNode _parent = it.getParent();
     return (_parent instanceof Block);
   }
-  
+
   public boolean isFinal(final Iterable<Modifier> modifiers) {
     final Function1<Modifier, Boolean> _function = (Modifier it) -> {
       return Boolean.valueOf(it.isFinal());
     };
     return IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(modifiers, Modifier.class), _function);
   }
-  
+
   public boolean isStatic(final Iterable<IExtendedModifier> modifiers) {
     final Function1<Modifier, Boolean> _function = (Modifier it) -> {
       return Boolean.valueOf(it.isStatic());
     };
     return IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(modifiers, Modifier.class), _function);
   }
-  
+
   public boolean isStaticMemberCall(final MethodInvocation methInv) {
     return this.isStaticBinding(methInv.resolveMethodBinding());
   }
-  
+
   public boolean isStaticMemberCall(final QualifiedName expr) {
     return this.isStaticBinding(expr.resolveBinding());
   }
-  
+
   public boolean isStaticMemberCall(final FieldAccess expr) {
     return this.isStaticBinding(expr.resolveFieldBinding());
   }
-  
+
   private boolean isStaticBinding(final IBinding binding) {
     if ((binding != null)) {
       return Modifier.isStatic(binding.getModifiers());
     }
     return false;
   }
-  
+
   public boolean isPackageVisibility(final Iterable<Modifier> modifier) {
     final Function1<Modifier, Boolean> _function = (Modifier it) -> {
       return Boolean.valueOf(((it.isPublic() || it.isPrivate()) || it.isProtected()));
     };
     return IterableExtensions.isEmpty(IterableExtensions.<Modifier>filter(modifier, _function));
   }
-  
+
   public boolean canHandleAnnotation(final ASTNode node) {
     if ((node instanceof VariableDeclarationStatement)) {
       return false;
     }
     return true;
   }
-  
+
   public boolean shouldConvertName(final SimpleName it) {
     return ((it.getParent() instanceof FieldAccess) || ((it.getParent() instanceof VariableDeclarationFragment) && (it.getParent().getParent() instanceof FieldDeclaration)));
   }
-  
+
   public boolean isLambdaCase(final ClassInstanceCreation creation) {
     final AnonymousClassDeclaration anonymousClazz = creation.getAnonymousClassDeclaration();
     if (((anonymousClazz != null) && (anonymousClazz.bodyDeclarations().size() == 1))) {
@@ -217,15 +217,15 @@ public class ASTFlattenerUtils {
     }
     return false;
   }
-  
+
   public boolean needsReturnValue(final ASTNode node) {
     return ((node.getParent() != null) && ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement)));
   }
-  
+
   public boolean isConstantArrayIndex(final Expression node) {
     return (node instanceof NumberLiteral);
   }
-  
+
   public boolean canConvertToRichText(final InfixExpression node) {
     final FieldDeclaration parentFieldDecl = this.<FieldDeclaration>findParentOfType(node, FieldDeclaration.class);
     if ((parentFieldDecl != null)) {
@@ -243,7 +243,7 @@ public class ASTFlattenerUtils {
       return Boolean.valueOf(this.canTranslate(it));
     })));
   }
-  
+
   public <T extends ASTNode> T findParentOfType(final ASTNode someNode, final Class<T> parentType) {
     ASTNode _parent = someNode.getParent();
     boolean _tripleEquals = (_parent == null);
@@ -258,7 +258,7 @@ public class ASTFlattenerUtils {
       }
     }
   }
-  
+
   private Iterable<StringLiteral> collectCompatibleNodes(final InfixExpression node) {
     final ArrayList<StringLiteral> strings = CollectionLiterals.<StringLiteral>newArrayList();
     InfixExpression.Operator _operator = node.getOperator();
@@ -285,12 +285,12 @@ public class ASTFlattenerUtils {
     Iterables.<StringLiteral>addAll(strings, Iterables.<StringLiteral>filter(node.extendedOperands(), StringLiteral.class));
     return strings;
   }
-  
+
   private boolean canTranslate(final StringLiteral literal) {
     final String value = literal.getEscapedValue();
     return (!((value.contains("«") || value.contains("»")) || value.contains("\'\'\'")));
   }
-  
+
   public Type findDeclaredType(final SimpleName simpleName) {
     ASTNode scope = this.findDeclarationBlocks(simpleName);
     while ((scope != null)) {
@@ -304,7 +304,7 @@ public class ASTFlattenerUtils {
     }
     return null;
   }
-  
+
   private ASTNode findDeclarationBlocks(final ASTNode simpleName) {
     ASTNode block = this.<Block>findParentOfType(simpleName, Block.class);
     if ((block == null)) {
@@ -315,7 +315,7 @@ public class ASTFlattenerUtils {
     }
     return block;
   }
-  
+
   private Type findDeclaredType(final ASTNode scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
     scope.accept(new ASTVisitor() {
@@ -344,12 +344,12 @@ public class ASTFlattenerUtils {
         }
         return false;
       }
-      
+
       @Override
       public boolean preVisit2(final ASTNode node) {
         return matchesFound.isEmpty();
       }
-      
+
       @Override
       public boolean visit(final SingleVariableDeclaration node) {
         boolean _equals = node.getName().getIdentifier().equals(simpleName.getIdentifier());
@@ -361,7 +361,7 @@ public class ASTFlattenerUtils {
     });
     return IterableExtensions.<Type>head(matchesFound);
   }
-  
+
   public Iterable<Expression> findAssignmentsInBlock(final Block scope, final Function1<? super Expression, ? extends Boolean> constraint) {
     final HashSet<Expression> assigments = CollectionLiterals.<Expression>newHashSet();
     if ((scope != null)) {
@@ -374,7 +374,7 @@ public class ASTFlattenerUtils {
           }
           return true;
         }
-        
+
         @Override
         public boolean visit(final PrefixExpression node) {
           Boolean _apply = constraint.apply(node);
@@ -383,7 +383,7 @@ public class ASTFlattenerUtils {
           }
           return true;
         }
-        
+
         @Override
         public boolean visit(final PostfixExpression node) {
           Boolean _apply = constraint.apply(node);
@@ -396,12 +396,12 @@ public class ASTFlattenerUtils {
     }
     return assigments;
   }
-  
+
   public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
     boolean _isEmpty = IterableExtensions.isEmpty(this.findAssignmentsInBlock(scope, fieldDeclFragment));
     return Boolean.valueOf((!_isEmpty));
   }
-  
+
   public Iterable<Expression> findAssignmentsInBlock(final Block scope, final VariableDeclaration varDecl) {
     final Function1<Expression, Boolean> _function = (Expression it) -> {
       Expression name = null;
@@ -433,7 +433,7 @@ public class ASTFlattenerUtils {
     };
     return this.findAssignmentsInBlock(scope, _function);
   }
-  
+
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
     final Function1<Expression, Boolean> _function = (Expression it) -> {
       Expression simpleName = null;
@@ -462,15 +462,15 @@ public class ASTFlattenerUtils {
     boolean _isEmpty = IterableExtensions.isEmpty(this.findAssignmentsInBlock(scope, _function));
     return Boolean.valueOf((!_isEmpty));
   }
-  
+
   protected String _toSimpleName(final SimpleName name) {
     return name.getIdentifier();
   }
-  
+
   protected String _toSimpleName(final QualifiedName name) {
     return name.getName().getIdentifier();
   }
-  
+
   public List<ASTNode> genericChildListProperty(final ASTNode node, final String propertyName) {
     final Function1<ChildListPropertyDescriptor, Boolean> _function = (ChildListPropertyDescriptor it) -> {
       String _id = it.getId();
@@ -483,7 +483,7 @@ public class ASTFlattenerUtils {
     }
     return null;
   }
-  
+
   public boolean needPrimitiveCast(final Type type) {
     if ((type instanceof PrimitiveType)) {
       return ((Objects.equal(((PrimitiveType)type).getPrimitiveTypeCode(), PrimitiveType.CHAR) || Objects.equal(((PrimitiveType)type).getPrimitiveTypeCode(), PrimitiveType.BYTE)) || 
@@ -491,7 +491,7 @@ public class ASTFlattenerUtils {
     }
     return false;
   }
-  
+
   public ASTNode genericChildProperty(final ASTNode node, final String propertyName) {
     final Function1<ChildPropertyDescriptor, Boolean> _function = (ChildPropertyDescriptor it) -> {
       String _id = it.getId();
@@ -504,7 +504,7 @@ public class ASTFlattenerUtils {
     }
     return null;
   }
-  
+
   public String toSimpleName(final Name name) {
     if (name instanceof QualifiedName) {
       return _toSimpleName((QualifiedName)name);

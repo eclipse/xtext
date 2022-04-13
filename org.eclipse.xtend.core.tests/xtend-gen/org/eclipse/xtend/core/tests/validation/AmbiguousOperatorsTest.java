@@ -52,7 +52,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousOperators_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -89,7 +89,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousOperators_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -126,7 +126,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testAmbiguousOperators_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -163,7 +163,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder_1.append("both match.");
     this.assertAmbiguous(_builder, _builder_1.toString());
   }
-  
+
   @Test
   public void testUnambiguousOperators_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -185,7 +185,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousOperators_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -207,7 +207,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousOperators_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -229,7 +229,7 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
-  
+
   @Test
   public void testUnambiguousOperators_04() {
     StringConcatenation _builder = new StringConcatenation();

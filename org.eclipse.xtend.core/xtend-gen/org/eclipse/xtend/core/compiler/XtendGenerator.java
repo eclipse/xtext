@@ -81,37 +81,37 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   private static class StopCollecting extends Exception {
     private static final long serialVersionUID = (-6188090786919774877L);
   }
-  
+
   @Inject
   private IBatchTypeResolver typeResolver;
-  
+
   @Inject
   private OperationCanceledManager operationCanceledManager;
-  
+
   @Inject
   private ElementIssueProvider.Factory issueProviderFactory;
-  
+
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     super.doGenerate(input, fsa);
     this.callMacroProcessors(input);
   }
-  
+
   @Override
   public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.issueProviderFactory.attachData(input);
   }
-  
+
   @Override
   public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.issueProviderFactory.detachData(input);
   }
-  
+
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.doGenerate(input, ((IFileSystemAccess) fsa));
   }
-  
+
   public void callMacroProcessors(final Resource input) {
     final ActiveAnnotationContexts ctxs = ActiveAnnotationContexts.find(input);
     if ((ctxs == null)) {
@@ -152,12 +152,12 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       ctxs.after(ActiveAnnotationContexts.AnnotationCallback.GENERATION);
     }
   }
-  
+
   @Override
   protected ImportingStringConcatenation createImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner owner) {
     return new MacroAwareStringConcatenation(state, owner);
   }
-  
+
   /**
    * Convert a given input string to a Java string.
    * 
@@ -167,7 +167,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   public String doConvertToJavaString(final String input) {
     return Strings.convertToJavaString(input, false);
   }
-  
+
   @Override
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmGenericType it) {
     Iterable<JvmMember> _xifexpression = null;
@@ -182,7 +182,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return _xifexpression;
   }
-  
+
   protected ArrayList<JvmMember> getAddedDeclarations(final JvmGenericType it, final AnonymousClass anonymousClass) {
     final ArrayList<JvmMember> result = CollectionLiterals.<JvmMember>newArrayList();
     final JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
@@ -205,7 +205,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     Iterables.<JvmMember>addAll(result, _filter_1);
     return result;
   }
-  
+
   @Override
   public ITreeAppendable compile(final JvmExecutable executable, final XExpression expression, final JvmTypeReference returnType, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
@@ -215,7 +215,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     String _xblockexpression = null;
@@ -249,7 +249,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return _xblockexpression;
   }
-  
+
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Function1<JvmGenericType, Boolean> _function = (JvmGenericType it) -> {
       boolean _isAnonymous = it.isAnonymous();
@@ -351,7 +351,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     };
     IterableExtensions.<JvmGenericType>filter(feature.getLocalClasses(), _function).forEach(_function_1);
   }
-  
+
   private ITreeAppendable generateJavaConstant(final Object value, final ITreeAppendable appendable) {
     ITreeAppendable _xifexpression = null;
     if ((value instanceof Float)) {
@@ -385,7 +385,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return _xifexpression;
   }
-  
+
   private boolean needSyntheticThisVariable(final AnonymousClass anonymousClass, final JvmDeclaredType localType) {
     final ArrayList<EObject> references = Lists.<EObject>newArrayListWithCapacity(1);
     try {
@@ -429,7 +429,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     boolean _isEmpty = references.isEmpty();
     return (!_isEmpty);
   }
-  
+
   /**
    * Determine whether the given member is visible without considering the class hierarchy.
    */
@@ -456,7 +456,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return false;
   }
-  
+
   @Override
   public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
     ITreeAppendable _xblockexpression = null;
@@ -491,7 +491,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public ITreeAppendable generateMembersInBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xifexpression = null;

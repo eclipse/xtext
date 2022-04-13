@@ -28,11 +28,11 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Inject
   @Extension
   private ParseHelper<XtendFile> _parseHelper;
-  
+
   @Test
   public void whileLoopInvalidReturn_01() {
     try {
@@ -64,7 +64,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void whileLoopInvalidReturn_02() {
     try {
@@ -96,7 +96,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void basicForLoopInvalidReturn_01() {
     try {
@@ -125,7 +125,7 @@ public class ValidationBug371957Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void basicForLoopInvalidReturn_02() {
     try {

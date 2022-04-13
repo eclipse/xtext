@@ -31,11 +31,11 @@ import org.junit.Test;
 public class ImportOrganizerTest extends AbstractXtendTestCase {
   @Inject
   private ImportOrganizer importOrganizer;
-  
+
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
     this.assertIsOrganizedTo(model, expected, true);
   }
-  
+
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected, final boolean validate) {
     try {
       Assert.assertFalse(expected.toString().contains("$"));
@@ -69,7 +69,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEnumerationLiteralInAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -94,7 +94,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testEnumerationLiteralInSwitch() {
     StringConcatenation _builder = new StringConcatenation();
@@ -151,7 +151,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSimple() {
     StringConcatenation _builder = new StringConcatenation();
@@ -171,7 +171,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInstanceOf() {
     StringConcatenation _builder = new StringConcatenation();
@@ -210,7 +210,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackage() {
     StringConcatenation _builder = new StringConcatenation();
@@ -224,7 +224,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackageLeadingWhitespace() {
     StringConcatenation _builder = new StringConcatenation();
@@ -241,7 +241,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultPackageWithJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -271,7 +271,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWithHeader() {
     StringConcatenation _builder = new StringConcatenation();
@@ -306,7 +306,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWithHeaderAndJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -357,7 +357,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -392,7 +392,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -433,7 +433,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -480,7 +480,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -527,7 +527,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testGetOrganizedImportSection_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -584,7 +584,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -614,7 +614,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -663,7 +663,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -699,7 +699,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -742,7 +742,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -781,7 +781,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -814,7 +814,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -844,7 +844,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -893,7 +893,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -929,7 +929,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -972,7 +972,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1011,7 +1011,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClasses_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1044,7 +1044,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1088,7 +1088,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_14() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1117,7 +1117,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_15() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1151,7 +1151,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_16() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1197,7 +1197,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_17() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1248,7 +1248,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testInnerClasses_18() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1300,7 +1300,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728
    */
@@ -1359,7 +1359,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1, false);
   }
-  
+
   @Test
   public void testNameClashSameFileWins_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1392,7 +1392,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashSameFileWins() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1415,7 +1415,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashOrder_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1451,7 +1451,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashOrder_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1487,7 +1487,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashMoreCommon() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1529,7 +1529,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClasses_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1566,7 +1566,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClasses_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1603,7 +1603,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClassesWithPreference_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1640,7 +1640,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNameClashInnerClassesWithPreference_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1677,7 +1677,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticImport_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1718,7 +1718,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticImport_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1759,7 +1759,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImportedOperators_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1797,7 +1797,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImportedOperators_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1835,7 +1835,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImportedOperators_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1873,7 +1873,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImportedOperators_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1911,7 +1911,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalOperator_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1956,7 +1956,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testLocalOperator_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2001,7 +2001,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticLocalOperator_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2050,7 +2050,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticLocalOperator_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2099,7 +2099,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImplicitExtensions() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2135,7 +2135,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticExtensions() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2176,7 +2176,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticExtensionSameClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2223,7 +2223,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testObsoleteStatic() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2263,7 +2263,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testObsoleteStatic_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2309,7 +2309,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testObsoleteStaticExtension() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2349,7 +2349,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2392,7 +2392,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2435,7 +2435,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2478,7 +2478,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2521,7 +2521,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2564,7 +2564,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2607,7 +2607,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_07() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2650,7 +2650,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_08() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2693,7 +2693,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_09() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2736,7 +2736,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_10() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2779,7 +2779,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_11() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2822,7 +2822,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_12() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2865,7 +2865,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2908,7 +2908,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInnerClassImport_14() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2951,7 +2951,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFunctionTypes_afterResolve_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2994,7 +2994,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFunctionTypes_afterResolve_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3037,7 +3037,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testImport_PairOf() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3080,7 +3080,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testArrayType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3123,7 +3123,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAnnotationWithSameName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3149,7 +3149,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testClassWithSameName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3175,7 +3175,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testStaticImport_IterableExtensions() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3218,7 +3218,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testPropertyAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3247,7 +3247,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3278,7 +3278,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3309,7 +3309,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3340,7 +3340,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3371,7 +3371,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_05() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3402,7 +3402,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testNestedAnnotation_06() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3433,7 +3433,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug388933_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3474,7 +3474,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug388933_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3501,7 +3501,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug380637_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3534,7 +3534,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug380637_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3558,7 +3558,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug380637_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3600,7 +3600,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDontOverrideTypeParameter() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3621,7 +3621,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInheritedInnerClass_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3645,7 +3645,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testInheritedInnerClass_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3669,7 +3669,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDontOverrideInheritedInnerClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3693,7 +3693,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testEscapedPackageName() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3711,7 +3711,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJavaDoc() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3741,7 +3741,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testAssignmentToStaticLocalField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3780,7 +3780,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFeatureCallToStaticLocalField() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3819,7 +3819,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionFeatureCallToStaticLocal() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3871,7 +3871,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testExtensionFeatureCallToStaticLocalFieldFromSuper() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3913,7 +3913,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFunctionType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3946,7 +3946,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testFunctionType_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -3982,7 +3982,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWildcard() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4006,7 +4006,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testWildcard_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4032,7 +4032,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testEscapedKeyword_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4049,7 +4049,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testEscapedKeyword_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4069,7 +4069,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testEscapedKeyword_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4096,7 +4096,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTryMultiCatch() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4165,7 +4165,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testTryMultiCatch_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4231,7 +4231,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSwitchMultiType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4310,7 +4310,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSwitchMultiType_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4382,7 +4382,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug409648() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4427,7 +4427,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug409251() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4451,7 +4451,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug409251_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4475,7 +4475,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug475238() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4538,7 +4538,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug475238_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4601,7 +4601,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug475238_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4664,7 +4664,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testBug475238_3() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4727,7 +4727,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_xtext_xtend_issues_536_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -4788,7 +4788,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void test_xtext_xtend_issues_536_2() {
     StringConcatenation _builder = new StringConcatenation();

@@ -29,7 +29,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
   public String getDocComment() {
     return this.getCompilationUnit().getDocumentationProvider().getDocumentation(this.getDelegate());
   }
-  
+
   @Override
   public TypeDeclaration getDeclaringType() {
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
@@ -45,12 +45,12 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     }
     return _switchResult;
   }
-  
+
   @Override
   public Visibility getVisibility() {
     return this.getCompilationUnit().toVisibility(this.getDelegate().getVisibility());
   }
-  
+
   @Override
   public Set<Modifier> getModifiers() {
     final Function1<String, Modifier> _function = (String it) -> {
@@ -58,7 +58,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     };
     return IterableExtensions.<Modifier>toSet(ListExtensions.<String, Modifier>map(this.getDelegate().getModifiers(), _function));
   }
-  
+
   @Override
   public boolean isDeprecated() {
     final Function1<XAnnotation, Boolean> _function = (XAnnotation it) -> {

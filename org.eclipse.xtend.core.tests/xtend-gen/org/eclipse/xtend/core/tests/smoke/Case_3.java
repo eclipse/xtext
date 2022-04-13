@@ -27,7 +27,7 @@ public class Case_3 {
       closure.apply(x);
     }
   }
-  
+
   public void testReturnExpression_07(final Class<?> c) {
     boolean _notEquals = (!Objects.equal(Case_3.class, c));
     if (_notEquals) {
@@ -41,7 +41,7 @@ public class Case_3 {
       }
     }
   }
-  
+
   public int testOverriddenLocalVariable() {
     int _xblockexpression = (int) 0;
     {
@@ -58,7 +58,7 @@ public class Case_3 {
     }
     return _xblockexpression;
   }
-  
+
   public List<Character> testFeatureCall_03() {
     List<Character> _xblockexpression = null;
     {

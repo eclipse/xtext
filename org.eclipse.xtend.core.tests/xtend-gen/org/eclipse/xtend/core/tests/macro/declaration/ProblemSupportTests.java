@@ -29,7 +29,7 @@ import org.junit.Test;
 public class ProblemSupportTests extends AbstractXtendTestCase {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
+
   @Test
   public void testErrorOnSource() {
     StringConcatenation _builder = new StringConcatenation();
@@ -48,7 +48,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   @Test
   public void testErrorOnDerivedElement() {
     StringConcatenation _builder = new StringConcatenation();
@@ -68,7 +68,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
-  
+
   public XtendFile validFile(final CharSequence code) {
     try {
       return this.file(code.toString(), true);
@@ -76,7 +76,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);

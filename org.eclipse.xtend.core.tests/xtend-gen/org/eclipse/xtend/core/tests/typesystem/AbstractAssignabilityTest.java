@@ -34,50 +34,50 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   @Inject
   @Extension
   protected IXtendJvmAssociations _iXtendJvmAssociations;
-  
+
   public void isAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
     this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs, true);
   }
-  
+
   public void isAssignableFrom(final Class<?> lhs, final Class<?> rhs) {
     String _canonicalName = lhs.getCanonicalName();
     this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs.getCanonicalName(), true);
   }
-  
+
   public void isAssignableFrom(final String lhs, final String rhs) {
     this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs, true);
   }
-  
+
   public void isAssignableFromAny(final String lhs) {
     this.isAssignableFrom(Pair.<String, String>of(lhs, null), null, true);
   }
-  
+
   public void isAssignableFrom(final String lhs, final Class<?> rhs) {
     this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs.getCanonicalName(), true);
   }
-  
+
   public void isNotAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
     this.isAssignableFrom(Pair.<String, String>of(_canonicalName, null), rhs, false);
   }
-  
+
   public void isNotAssignableFrom(final String lhs, final String rhs) {
     this.isAssignableFrom(Pair.<String, String>of(lhs, null), rhs, false);
   }
-  
+
   public void isNotAssignableFromAny(final String lhs) {
     this.isAssignableFrom(Pair.<String, String>of(lhs, null), null, false);
   }
-  
+
   public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs) {
     this.isAssignableFrom(lhsAndParams, rhs, true);
   }
-  
+
   public void isNotAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs) {
     this.isAssignableFrom(lhsAndParams, rhs, false);
   }
-  
+
   public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -135,7 +135,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected String fixup(final String type) {
     String _elvis = null;
     String _replace = null;
@@ -169,7 +169,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     }
     return _elvis;
   }
-  
+
   public boolean testIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
     Assert.assertTrue(this.doIsAssignable(lhs, lhs));
     Assert.assertTrue(this.doIsAssignable(lhs, this.toLightweightTypeReference(lhs.toTypeReference())));
@@ -192,7 +192,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     }
     return result;
   }
-  
+
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
     return lhs.isAssignableFrom(rhs);
   }

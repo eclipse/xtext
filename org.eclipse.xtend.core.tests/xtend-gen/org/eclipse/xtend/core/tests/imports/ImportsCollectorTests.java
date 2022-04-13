@@ -33,7 +33,7 @@ import org.junit.Test;
 public class ImportsCollectorTests extends AbstractXtendTestCase {
   @Inject
   private ImportsCollector importsCollector;
-  
+
   @Test
   public void testUnknownType() {
     StringConcatenation _builder = new StringConcatenation();
@@ -43,7 +43,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder);
   }
-  
+
   @Test
   public void testPackageSelected() {
     StringConcatenation _builder = new StringConcatenation();
@@ -57,7 +57,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable");
   }
-  
+
   @Test
   public void testImportSelected() {
     StringConcatenation _builder = new StringConcatenation();
@@ -71,7 +71,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder);
   }
-  
+
   @Test
   public void testSimpleName_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -83,7 +83,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable");
   }
-  
+
   @Test
   public void testSimpleName_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -95,7 +95,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable");
   }
-  
+
   @Test
   public void testSimpleName_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -111,7 +111,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "com.google.common.base.Strings")));
   }
-  
+
   @Test
   public void testJavadoc_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -138,7 +138,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable");
   }
-  
+
   @Test
   public void testJavadoc_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -172,7 +172,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.io.Serializable")));
   }
-  
+
   @Test
   public void testJavadoc_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -206,7 +206,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.List", "javax.sound.sampled.Line")));
   }
-  
+
   @Test
   public void testJavadoc_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -235,7 +235,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder)));
   }
-  
+
   @Test
   public void testSimpleConstructorCall() {
     StringConcatenation _builder = new StringConcatenation();
@@ -250,7 +250,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.lang.Object", "java.util.HashMap");
   }
-  
+
   @Test
   public void testSimpleStaticImport_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -266,7 +266,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertTypeImport(this.assertStaticImport(_builder, "com.google.common.base.Strings.isNullOrEmpty")));
   }
-  
+
   @Test
   public void testWildcardStaticImport() {
     StringConcatenation _builder = new StringConcatenation();
@@ -282,7 +282,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertStaticImport(_builder, "com.google.common.base.Strings.isNullOrEmpty");
   }
-  
+
   @Test
   public void testSimpleExtension() {
     StringConcatenation _builder = new StringConcatenation();
@@ -298,7 +298,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(_builder, "com.google.common.base.Strings.isNullOrEmpty");
   }
-  
+
   @Test
   public void testLibExtension() {
     StringConcatenation _builder = new StringConcatenation();
@@ -311,7 +311,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(_builder, "org.eclipse.xtext.xbase.lib.StringExtensions.isNullOrEmpty");
   }
-  
+
   @Test
   public void testOperatorOverloading() {
     StringConcatenation _builder = new StringConcatenation();
@@ -324,7 +324,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(_builder, "org.eclipse.xtext.xbase.lib.StringExtensions.operator_plus");
   }
-  
+
   @Test
   public void testTypeLiteral() {
     StringConcatenation _builder = new StringConcatenation();
@@ -339,7 +339,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map");
   }
-  
+
   @Test
   public void testNestedType_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -349,7 +349,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map");
   }
-  
+
   @Test
   public void testNestedType_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -359,7 +359,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map.Entry");
   }
-  
+
   @Test
   public void testNestedType_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -369,7 +369,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map");
   }
-  
+
   @Test
   public void testNestedTypeLiteral_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -384,7 +384,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map");
   }
-  
+
   @Test
   public void testNestedTypeLiteral_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -399,7 +399,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map.Entry");
   }
-  
+
   @Test
   public void testNestedTypeLiteral_03() {
     StringConcatenation _builder = new StringConcatenation();
@@ -414,7 +414,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.util.Map");
   }
-  
+
   @Test
   public void testTypeParameter_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -428,7 +428,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable", "java.util.List");
   }
-  
+
   @Test
   public void testTypeParameter_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -445,7 +445,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "java.io.Serializable", "java.util.List");
   }
-  
+
   @Test
   public void testAnnotation_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -466,7 +466,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertTypeImport(_builder, "com.google.common.eventbus.AllowConcurrentEvents");
   }
-  
+
   @Test
   public void testEnum_01() {
     Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
@@ -488,7 +488,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "javax.annotation.Resource"), 
       "javax.annotation.Resource.AuthenticationType.CONTAINER"));
   }
-  
+
   @Test
   public void testAnonymousClass_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -515,7 +515,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.ArrayList")));
   }
-  
+
   @Test
   public void testAnonymousClass_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -548,7 +548,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.util.ArrayList"), "C.foo"));
   }
-  
+
   @Test
   public void testImplicitReciever_01() {
     StringConcatenation _builder = new StringConcatenation();
@@ -570,45 +570,45 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "java.lang.String")));
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final CharSequence xtendFile, final String... typeNames) {
     return this.assertTypeImport(this.collect(xtendFile), typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
       return acceptor.getTypes();
     };
     return this.has(acceptor, _function, typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final CharSequence xtendFile, final String... typeNames) {
     return this.assertExtensionImport(this.collect(xtendFile), typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
       return acceptor.getExtensions();
     };
     return this.has(acceptor, _function, typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final CharSequence xtendFile, final String... typeNames) {
     return this.assertStaticImport(this.collect(xtendFile), typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
       return acceptor.getStaticImport();
     };
     return this.has(acceptor, _function, typeNames);
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor has(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final Function1<? super ImportsAcceptor.DefaultImportsAcceptor, ? extends Set<String>> getter, final String... typeNames) {
     Assert.assertEquals(IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames))), getter.apply(acceptor));
     return acceptor;
   }
-  
+
   private ImportsAcceptor.DefaultImportsAcceptor collect(final CharSequence xtendFile) {
     try {
       String contentAsString = xtendFile.toString();

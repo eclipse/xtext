@@ -36,7 +36,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
   @Rule
   @Inject
   public TemporaryFolder temporaryFolder;
-  
+
   @Test
   public void testPath() {
     try {

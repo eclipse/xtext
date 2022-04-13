@@ -22,7 +22,7 @@ public class JavaConstructorBuilder extends AbstractConstructorBuilder implement
   public ISourceAppender build(final ISourceAppender appendable) {
     return this.appendBody(this.appendThrowsClause(this.appendParameters(this.appendVisibility(appendable, this.getVisibility(), JvmVisibility.PUBLIC).append(this.getOwner().getSimpleName()))), ";");
   }
-  
+
   @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();

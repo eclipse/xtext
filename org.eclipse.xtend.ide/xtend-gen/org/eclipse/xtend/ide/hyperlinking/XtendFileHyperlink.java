@@ -26,13 +26,13 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class XtendFileHyperlink implements IHyperlink {
   private String fileName;
-  
+
   private int lineNumber;
-  
+
   private IWorkbench workbench;
-  
+
   private TextConsole console;
-  
+
   public XtendFileHyperlink(final String fileName, final IWorkbench workbench, final TextConsole console) {
     final int indexOfColon = fileName.indexOf(":");
     if ((indexOfColon != (-1))) {
@@ -44,7 +44,7 @@ public class XtendFileHyperlink implements IHyperlink {
     this.workbench = workbench;
     this.console = console;
   }
-  
+
   @Override
   public void linkActivated() {
     try {
@@ -81,15 +81,15 @@ public class XtendFileHyperlink implements IHyperlink {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Override
   public void linkEntered() {
   }
-  
+
   @Override
   public void linkExited() {
   }
-  
+
   private ILaunch getLaunch() {
     Object _attribute = this.console.getAttribute(IDebugUIConstants.ATTR_CONSOLE_PROCESS);
     final IProcess process = ((IProcess) _attribute);

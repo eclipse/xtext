@@ -51,18 +51,18 @@ public class AnnotationProcessor {
   @Singleton
   public static class CancellationObserver {
     private static final Logger log = Logger.getLogger(AnnotationProcessor.CancellationObserver.class);
-    
+
     @Accessors(AccessorType.PROTECTED_GETTER)
     private ExecutorService pool = this.initPool();
-    
+
     protected ExecutorService initPool() {
       return Executors.newCachedThreadPool();
     }
-    
+
     public void stop() {
       this.pool.shutdown();
     }
-    
+
     public Future<?> monitorUntil(final ActiveAnnotationContext ctx, final CancelIndicator cancelIndicator, final Function0<? extends Boolean> isFinished) {
       Future<?> _xblockexpression = null;
       {
@@ -100,25 +100,25 @@ public class AnnotationProcessor {
       }
       return _xblockexpression;
     }
-    
+
     @Pure
     protected ExecutorService getPool() {
       return this.pool;
     }
   }
-  
+
   @Inject
   private Provider<TransformationContextImpl> modifyContextProvider;
-  
+
   @Inject
   private Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider;
-  
+
   @Inject
   private Provider<ValidationContextImpl> validationContextProvider;
-  
+
   @Inject
   private AnnotationProcessor.CancellationObserver cancellationObserver;
-  
+
   /**
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
    */
@@ -172,7 +172,7 @@ public class AnnotationProcessor {
     }
     return _xblockexpression;
   }
-  
+
   public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
     Object _xblockexpression = null;
     {
@@ -223,7 +223,7 @@ public class AnnotationProcessor {
     }
     return _xblockexpression;
   }
-  
+
   public Object validationPhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
     Object _xblockexpression = null;
     {
@@ -274,7 +274,7 @@ public class AnnotationProcessor {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * runs the given runnable and another thread in parallel, that sets the timeout property on the compilation unit to true
    * when the given amount of milliseconds have passed by.

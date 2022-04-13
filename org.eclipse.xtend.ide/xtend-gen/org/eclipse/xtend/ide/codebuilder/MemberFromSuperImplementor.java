@@ -50,17 +50,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class MemberFromSuperImplementor {
   @Inject
   private IXtendJvmAssociations associations;
-  
+
   @Inject
   private CodeBuilderFactory codeBuilderFactory;
-  
+
   @Inject
   private AnnotationLookup annotationLookup;
-  
+
   @Inject
   @Extension
   private TypesFactory typesFactory;
-  
+
   public void appendOverrideFunction(final XtendTypeDeclaration overrider, final IResolvedOperation overriddenOperation, final ISourceAppender appendable) {
     final JvmDeclaredType inferredType = this.associations.getInferredType(overrider);
     final AbstractMethodBuilder methodBuilder = this.codeBuilderFactory.createMethodBuilder(inferredType);
@@ -137,7 +137,7 @@ public class MemberFromSuperImplementor {
       methodBuilder.build(appendable);
     }
   }
-  
+
   private Procedure1<? super ISourceAppender> getImplementedInterface(final JvmDeclaredType subType, final JvmDeclaredType superInterface) {
     if (((superInterface instanceof JvmGenericType) && ((JvmGenericType) superInterface).isInterface())) {
       final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
@@ -172,11 +172,11 @@ public class MemberFromSuperImplementor {
     }
     return null;
   }
-  
+
   private boolean isInterface(final JvmType type) {
     return ((type instanceof JvmGenericType) && ((JvmGenericType) type).isInterface());
   }
-  
+
   public void appendConstructorFromSuper(final XtendClass overrider, final IResolvedConstructor superConstructor, final ISourceAppender appendable) {
     final JvmGenericType inferredType = this.associations.getInferredType(overrider);
     final AbstractConstructorBuilder constructorBuilder = this.codeBuilderFactory.createConstructorBuilder(inferredType);
@@ -202,7 +202,7 @@ public class MemberFromSuperImplementor {
       constructorBuilder.build(appendable);
     }
   }
-  
+
   protected void initializeExecutableBuilder(final AbstractExecutableBuilder builder, final JvmDeclaredType overrider, final IResolvedExecutable overridden) {
     final JvmExecutable executable = overridden.getDeclaration();
     builder.setContext(overrider);

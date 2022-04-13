@@ -18,25 +18,25 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   @Accessors
   private String className;
-  
+
   @Accessors
   private String image = "newclass_wiz.gif";
-  
+
   @Pure
   public String getClassName() {
     return this.className;
   }
-  
+
   public void setClassName(final String className) {
     this.className = className;
   }
-  
+
   @Pure
   @Override
   public String getImage() {
     return this.image;
   }
-  
+
   public void setImage(final String image) {
     this.image = image;
   }

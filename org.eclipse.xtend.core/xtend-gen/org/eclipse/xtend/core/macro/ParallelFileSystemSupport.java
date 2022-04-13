@@ -22,18 +22,18 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @SuppressWarnings("all")
 public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   private final URI uri;
-  
+
   private final MutableFileSystemSupport delegate;
-  
+
   @Extension
   private final FileSystemAccessQueue queue;
-  
+
   public ParallelFileSystemSupport(final URI uri, final MutableFileSystemSupport delegate, final FileSystemAccessQueue queue) {
     this.uri = uri;
     this.delegate = delegate;
     this.queue = queue;
   }
-  
+
   @Override
   public void delete(final Path path) {
     final Runnable _function = () -> {
@@ -41,7 +41,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     };
     this.queue.sendAsync(this.uri, _function);
   }
-  
+
   @Override
   public void mkdir(final Path path) {
     final Runnable _function = () -> {
@@ -49,7 +49,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     };
     this.queue.sendAsync(this.uri, _function);
   }
-  
+
   @Override
   public void setContents(final Path path, final CharSequence contents) {
     final Runnable _function = () -> {
@@ -57,7 +57,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     };
     this.queue.sendAsync(this.uri, _function);
   }
-  
+
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     final Runnable _function = () -> {
@@ -65,7 +65,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     };
     this.queue.sendAsync(this.uri, _function);
   }
-  
+
   @Override
   public boolean exists(final Path path) {
     boolean _xblockexpression = false;
@@ -75,7 +75,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public String getCharset(final Path path) {
     String _xblockexpression = null;
@@ -85,7 +85,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     Iterable<? extends Path> _xblockexpression = null;
@@ -95,7 +95,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public CharSequence getContents(final Path path) {
     CharSequence _xblockexpression = null;
@@ -105,7 +105,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public InputStream getContentsAsStream(final Path path) {
     InputStream _xblockexpression = null;
@@ -115,7 +115,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public long getLastModification(final Path path) {
     long _xblockexpression = (long) 0;
@@ -125,7 +125,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isFile(final Path path) {
     boolean _xblockexpression = false;
@@ -135,7 +135,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isFolder(final Path path) {
     boolean _xblockexpression = false;
@@ -145,7 +145,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public java.net.URI toURI(final Path path) {
     java.net.URI _xblockexpression = null;

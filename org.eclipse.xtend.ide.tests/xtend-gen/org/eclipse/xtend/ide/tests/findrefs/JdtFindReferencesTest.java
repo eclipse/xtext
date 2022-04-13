@@ -57,18 +57,18 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private JdtReferenceFinder _jdtReferenceFinder;
-  
+
   @Inject
   private IWorkbench workbench;
-  
+
   @Inject
   @Extension
   private JvmModelFindReferenceHandler _jvmModelFindReferenceHandler;
-  
+
   @Before
   @After
   public void cleanup() {
@@ -78,7 +78,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFindClassRef() {
     try {
@@ -164,7 +164,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFindMethodRef() {
     try {
@@ -214,7 +214,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFindFieldRef() {
     try {
@@ -291,7 +291,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFindPropertyRef() {
     try {
@@ -368,7 +368,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDispatchMethodRef() {
     try {
@@ -455,7 +455,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testJavaClassRef() {
     try {
@@ -518,7 +518,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testClassJavaElements() {
     try {
@@ -542,7 +542,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testMethodJavaElements() {
     try {
@@ -572,7 +572,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testFieldJavaElements() {
     try {
@@ -599,7 +599,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testPropertyJavaElements() {
     try {
@@ -634,7 +634,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDispatchMethodJavaElements() {
     try {
@@ -675,7 +675,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public ArrayList<Object> findReferences(final IJavaElement... targets) {
     try {
       ArrayList<Object> _xblockexpression = null;
@@ -727,7 +727,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug387230() {
     try {

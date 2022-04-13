@@ -37,7 +37,7 @@ public class Bug440858Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor(Strings.toPlatformLineSeparator("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t"));
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

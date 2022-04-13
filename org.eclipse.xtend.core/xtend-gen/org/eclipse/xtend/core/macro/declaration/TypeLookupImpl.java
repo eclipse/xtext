@@ -40,11 +40,11 @@ import org.eclipse.xtext.xtype.XtypePackage;
 public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTypeLookup {
   @Extension
   private CompilationUnitImpl compilationUnit;
-  
+
   public TypeLookupImpl(final CompilationUnitImpl compilationUnit) {
     this.compilationUnit = compilationUnit;
   }
-  
+
   @Override
   public MutableAnnotationTypeDeclaration findAnnotationType(final String qualifiedName) {
     final Type type = this.findType(qualifiedName);
@@ -56,7 +56,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _switchResult;
   }
-  
+
   @Override
   public MutableClassDeclaration findClass(final String qualifiedName) {
     final Type type = this.findType(qualifiedName);
@@ -68,7 +68,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _switchResult;
   }
-  
+
   @Override
   public MutableEnumerationTypeDeclaration findEnumerationType(final String qualifiedName) {
     final Type type = this.findType(qualifiedName);
@@ -80,7 +80,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _switchResult;
   }
-  
+
   @Override
   public MutableInterfaceDeclaration findInterface(final String qualifiedName) {
     final Type type = this.findType(qualifiedName);
@@ -92,7 +92,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _switchResult;
   }
-  
+
   private Type findType(final String qualifiedName) {
     final Function1<JvmDeclaredType, String> _function = (JvmDeclaredType type) -> {
       return type.getQualifiedName('.');
@@ -108,7 +108,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _xifexpression;
   }
-  
+
   @Override
   public ClassDeclaration findSourceClass(final String qualifiedName) {
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
@@ -120,7 +120,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return ((ClassDeclaration)_switchResult);
   }
-  
+
   @Override
   public InterfaceDeclaration findSourceInterface(final String qualifiedName) {
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
@@ -132,7 +132,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return ((InterfaceDeclaration)_switchResult);
   }
-  
+
   @Override
   public EnumerationTypeDeclaration findSourceEnumerationType(final String qualifiedName) {
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
@@ -144,7 +144,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return ((EnumerationTypeDeclaration)_switchResult);
   }
-  
+
   @Override
   public AnnotationTypeDeclaration findSourceAnnotationType(final String qualifiedName) {
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
@@ -156,7 +156,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return ((AnnotationTypeDeclaration)_switchResult);
   }
-  
+
   private XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> findSourceType(final String qualifiedName) {
     EObject _head = IterableExtensions.<EObject>head(this.compilationUnit.getXtendFile().eResource().getContents());
     final Function1<XtendTypeDeclaration, String> _function = (XtendTypeDeclaration type) -> {
@@ -173,7 +173,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _xifexpression;
   }
-  
+
   private <T extends Object> T recursiveFindType(final String qualifiedName, final Iterable<? extends T> typeDeclarations, final Function1<? super T, ? extends String> qualifiedNameProvider, final Function1<? super T, ? extends Iterable<? extends T>> subTypeProvider) {
     final char dot = '.';
     for (final T type : typeDeclarations) {
@@ -190,12 +190,12 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return null;
   }
-  
+
   @Override
   public Type findTypeGlobally(final Class<?> clazz) {
     return this.findTypeGlobally(clazz.getCanonicalName());
   }
-  
+
   @Override
   public Type findTypeGlobally(final String typeName) {
     Type _elvis = null;
@@ -211,12 +211,12 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     }
     return _elvis;
   }
-  
+
   @Override
   public Type findUpstreamType(final Class<?> clazz) {
     return this.findUpstreamType(clazz.getCanonicalName());
   }
-  
+
   @Override
   public Type findUpstreamType(final String typeName) {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
@@ -226,7 +226,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     };
     return this.findTypeOnScope(typeName, _function);
   }
-  
+
   private Type findTypeOnScope(final String typeName, final Function1<? super IEObjectDescription, ? extends Boolean> filter) {
     final QualifiedName qualifiedName = this.compilationUnit.getQualifiedNameConverter().toQualifiedName(typeName);
     final IEObjectDescription result = this.compilationUnit.getScopeProvider().getScope(this.compilationUnit.getXtendFile(), XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE).getSingleElement(qualifiedName);

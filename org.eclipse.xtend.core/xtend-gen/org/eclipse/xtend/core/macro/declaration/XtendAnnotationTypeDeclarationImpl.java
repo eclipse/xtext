@@ -29,7 +29,7 @@ public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl
     };
     return IterableExtensions.findFirst(this.getDeclaredAnnotationTypeElements(), _function);
   }
-  
+
   @Override
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     final Function1<XtendMember, MemberDeclaration> _function = (XtendMember it) -> {

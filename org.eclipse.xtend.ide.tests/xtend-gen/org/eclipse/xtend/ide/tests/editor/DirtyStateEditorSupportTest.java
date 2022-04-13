@@ -44,11 +44,11 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   @Inject
   @Extension
   private SyncUtil _syncUtil;
-  
+
   @Before
   public void start() {
     try {
@@ -59,7 +59,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @After
   public void close() {
     try {
@@ -68,7 +68,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testBug464483() {
     try {
@@ -112,7 +112,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testUnloadJvmTypes() {
     try {
@@ -209,13 +209,13 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private static final long VALIDATION_TIMEOUT = 2000L;
-  
+
   private void assertHasErrors(final XtextEditor editor) {
     this.assertHasErrors(editor, null);
   }
-  
+
   private void assertHasErrors(final XtextEditor editor, final String... messages) {
     final Function0<Boolean> _function = () -> {
       int _size = this.getErrorAnnotations(editor).size();
@@ -243,7 +243,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       Assert.assertEquals(expectedErrors, actualErrors);
     }
   }
-  
+
   private void assertHasNoErrors(final XtextEditor editor) {
     final Function0<Boolean> _function = () -> {
       int _size = this.getErrorAnnotations(editor).size();
@@ -263,7 +263,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     boolean _equals = (_size == 0);
     Assert.assertTrue(_join, _equals);
   }
-  
+
   private List<Annotation> getErrorAnnotations(final XtextEditor editor) {
     final Function1<Annotation, Boolean> _function = (Annotation it) -> {
       String _type = it.getType();

@@ -39,10 +39,10 @@ import org.junit.Test;
 public abstract class AbstractOverloadedInstanceMethodTest extends AbstractXtendTestCase {
   @Inject
   private OverrideTester overrideTester;
-  
+
   @Inject
   private CommonTypeComputationServices services;
-  
+
   protected void linksTo(final String invocation, final String method) {
     try {
       final XtendFile file = this.file(this.inMethodBody(invocation), false);
@@ -67,56 +67,56 @@ public abstract class AbstractOverloadedInstanceMethodTest extends AbstractXtend
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected abstract String inMethodBody(final String invocation);
-  
+
   @Test
   public void putWithAllNulls() {
     this.linksTo("put(null, null, null)", "put(MapBasedPreferenceValues, PreferenceKey, Object)");
   }
-  
+
   @Test
   public void assertFormattedWithNull() {
     this.linksTo("assertFormatted(null)", "assertFormatted(CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedWithTemplate() {
     this.linksTo("assertFormatted(\'\'\'\'\'\')", "assertFormatted(CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedWithString() {
     this.linksTo("assertFormatted(\'\')", "assertFormatted(CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedWithLambdaAndNull() {
     this.linksTo("assertFormatted([], null)", "assertFormatted(Procedure1<? super MapBasedPreferenceValues>, CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedWithLambdaAndString() {
     this.linksTo("assertFormatted([], \'\')", "assertFormatted(Procedure1<? super MapBasedPreferenceValues>, CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedWithLambdaAndTemplate() {
     this.linksTo("assertFormatted([], \'\'\'\'\'\')", "assertFormatted(Procedure1<? super MapBasedPreferenceValues>, CharSequence)");
   }
-  
+
   @Test
   public void assertFormattedMemberWithLambdaAndNull() {
     this.linksTo("assertFormattedMember([], null)", 
       "assertFormattedMember(Procedure1<? super MapBasedPreferenceValues>, String)");
   }
-  
+
   @Test
   public void assertFormattedMemberWithLambdaAndString() {
     this.linksTo("assertFormattedMember([], \'\')", 
       "assertFormattedMember(Procedure1<? super MapBasedPreferenceValues>, String)");
   }
-  
+
   @Test
   public void assertFormattedMemberWithLambdaAndTemplate() {
     this.linksTo("assertFormattedMember([], \'\'\'\'\'\')", 

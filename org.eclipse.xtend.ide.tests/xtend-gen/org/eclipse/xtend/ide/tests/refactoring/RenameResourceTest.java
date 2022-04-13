@@ -25,7 +25,7 @@ public class RenameResourceTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testDontRenameClassWithDifferenName() {
     try {
@@ -38,7 +38,7 @@ public class RenameResourceTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGuardMissingFileExtension() {
     try {

@@ -31,32 +31,32 @@ public interface AnnotationWithNestedAnnotations {
   @interface Annotation1 {
     public AnnotationWithNestedAnnotations.Annotation2[] ann2() default {};
   }
-  
+
   @Target(ElementType.TYPE)
   @Active(AnnotationWithNestedAnnotationsProcessor.class)
   @Retention(RetentionPolicy.RUNTIME)
   @interface Annotation2 {
     public AnnotationWithNestedAnnotations.Annotation3[] ann3() default {};
   }
-  
+
   @Target(ElementType.TYPE)
   @Active(AnnotationWithNestedAnnotationsProcessor.class)
   @Retention(RetentionPolicy.RUNTIME)
   @interface Annotation3 {
   }
-  
+
   @ToString
   @Accessors
   class Annotation1Config {
     private final AnnotationWithNestedAnnotations.Annotation2Config[] ann2Configs;
-    
+
     public Annotation1Config(final AnnotationReference ann) {
       final Function1<AnnotationReference, AnnotationWithNestedAnnotations.Annotation2Config> _function = (AnnotationReference it) -> {
         return new AnnotationWithNestedAnnotations.Annotation2Config(it);
       };
       this.ann2Configs = ((AnnotationWithNestedAnnotations.Annotation2Config[])Conversions.unwrapArray(ListExtensions.<AnnotationReference, AnnotationWithNestedAnnotations.Annotation2Config>map(((List<AnnotationReference>)Conversions.doWrapArray(ann.getAnnotationArrayValue("ann2"))), _function), AnnotationWithNestedAnnotations.Annotation2Config.class));
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -64,25 +64,25 @@ public interface AnnotationWithNestedAnnotations {
       b.add("ann2Configs", this.ann2Configs);
       return b.toString();
     }
-    
+
     @Pure
     public AnnotationWithNestedAnnotations.Annotation2Config[] getAnn2Configs() {
       return this.ann2Configs;
     }
   }
-  
+
   @ToString
   @Accessors
   class Annotation2Config {
     private final AnnotationWithNestedAnnotations.Annotation3Config[] ann3Configs;
-    
+
     public Annotation2Config(final AnnotationReference ann) {
       final Function1<AnnotationReference, AnnotationWithNestedAnnotations.Annotation3Config> _function = (AnnotationReference it) -> {
         return new AnnotationWithNestedAnnotations.Annotation3Config(it);
       };
       this.ann3Configs = ((AnnotationWithNestedAnnotations.Annotation3Config[])Conversions.unwrapArray(ListExtensions.<AnnotationReference, AnnotationWithNestedAnnotations.Annotation3Config>map(((List<AnnotationReference>)Conversions.doWrapArray(ann.getAnnotationArrayValue("ann3"))), _function), AnnotationWithNestedAnnotations.Annotation3Config.class));
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -90,19 +90,19 @@ public interface AnnotationWithNestedAnnotations {
       b.add("ann3Configs", this.ann3Configs);
       return b.toString();
     }
-    
+
     @Pure
     public AnnotationWithNestedAnnotations.Annotation3Config[] getAnn3Configs() {
       return this.ann3Configs;
     }
   }
-  
+
   @ToString
   @Accessors
   class Annotation3Config {
     public Annotation3Config(final AnnotationReference ann) {
     }
-    
+
     @Override
     @Pure
     public String toString() {

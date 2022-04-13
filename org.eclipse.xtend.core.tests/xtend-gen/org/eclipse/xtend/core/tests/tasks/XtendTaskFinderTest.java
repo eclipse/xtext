@@ -35,7 +35,7 @@ import org.junit.Test;
 public class XtendTaskFinderTest extends AbstractXtendTestCase {
   @Inject
   private ITaskFinder finder;
-  
+
   @Test
   public void test() {
     try {
@@ -110,7 +110,7 @@ public class XtendTaskFinderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   private void assertContainsTasks(final Resource resource, final List<Task> expectedTasks) {
     final List<Task> actualTasks = this.finder.findTasks(resource);
     Assert.assertEquals(expectedTasks.size(), actualTasks.size());
@@ -120,14 +120,14 @@ public class XtendTaskFinderTest extends AbstractXtendTestCase {
       XtendTaskFinderTest.assertExactMatch(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
     }
   }
-  
+
   public static void assertExactMatch(final Task expected, final Task actual) {
     XtendTaskFinderTest.assertExactMatch(expected.getTag(), actual.getTag());
     Assert.assertEquals(expected.getDescription(), actual.getDescription());
     Assert.assertEquals(expected.getLineNumber(), actual.getLineNumber());
     Assert.assertEquals(expected.getOffset(), actual.getOffset());
   }
-  
+
   public static void assertExactMatch(final TaskTag expected, final TaskTag actual) {
     Assert.assertEquals(expected.getName(), actual.getName());
     Assert.assertEquals(expected.getPriority(), actual.getPriority());

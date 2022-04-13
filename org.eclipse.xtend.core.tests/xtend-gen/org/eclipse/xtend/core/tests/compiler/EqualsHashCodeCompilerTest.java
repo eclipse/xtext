@@ -28,7 +28,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
-  
+
   @Test
   public void testEqualsHashCode() {
     try {
@@ -128,7 +128,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testEqualsWithSuperClass() {
     try {
@@ -180,7 +180,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testSuperClassWithoutEquals() {
     try {
@@ -207,7 +207,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingEquals() {
     try {
@@ -245,7 +245,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testExistingHashCode() {
     try {
@@ -283,7 +283,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testGenericClass() {
     try {
@@ -306,7 +306,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testArray() {
     try {

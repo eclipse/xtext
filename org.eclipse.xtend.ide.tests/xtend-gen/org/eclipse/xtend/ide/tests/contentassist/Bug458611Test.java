@@ -57,7 +57,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
-  
+
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -97,7 +97,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
-  
+
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -138,7 +138,7 @@ public class Bug458611Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _newBuilder.append(_builder.toString()).assertProposalAtCursor("sum");
   }
-  
+
   @Test
   public void test_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

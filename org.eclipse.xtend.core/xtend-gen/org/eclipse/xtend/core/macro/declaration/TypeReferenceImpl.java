@@ -27,17 +27,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> implements TypeReference {
   @Accessors
   private JvmTypeReference source;
-  
+
   @Override
   public String getName() {
     return this.getDelegate().getJavaIdentifier();
   }
-  
+
   @Override
   public String getSimpleName() {
     return this.getDelegate().getSimpleName();
   }
-  
+
   @Override
   public Type getType() {
     Type _switchResult = null;
@@ -59,12 +59,12 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     }
     return _switchResult;
   }
-  
+
   @Override
   public String toString() {
     return this.getDelegate().toString();
   }
-  
+
   @Override
   public List<TypeReference> getActualTypeArguments() {
     final Function1<LightweightTypeReference, TypeReference> _function = (LightweightTypeReference it) -> {
@@ -72,7 +72,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     };
     return ListExtensions.<LightweightTypeReference, TypeReference>map(this.getDelegate().getTypeArguments(), _function);
   }
-  
+
   @Override
   public TypeReference getArrayComponentType() {
     final LightweightTypeReference componentType = this.getDelegate().getComponentType();
@@ -81,12 +81,12 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     }
     return this.getCompilationUnit().toTypeReference(componentType);
   }
-  
+
   @Override
   public TypeReference getLowerBound() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getLowerBoundSubstitute());
   }
-  
+
   @Override
   public TypeReference getPrimitiveIfWrapper() {
     TypeReference _xblockexpression = null;
@@ -100,27 +100,27 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public TypeReference getUpperBound() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getUpperBoundSubstitute());
   }
-  
+
   @Override
   public TypeReference getWrapperIfPrimitive() {
     return this.getCompilationUnit().toTypeReference(this.getDelegate().getWrapperTypeIfPrimitive());
   }
-  
+
   @Override
   public boolean isAnyType() {
     return this.getDelegate().isAny();
   }
-  
+
   @Override
   public boolean isArray() {
     return this.getDelegate().isArray();
   }
-  
+
   @Override
   public boolean isAssignableFrom(final TypeReference typeReference) {
     boolean _xblockexpression = false;
@@ -133,31 +133,31 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public boolean isPrimitive() {
     return this.getDelegate().isPrimitive();
   }
-  
+
   @Override
   public boolean isVoid() {
     return this.getDelegate().isPrimitiveVoid();
   }
-  
+
   @Override
   public boolean isWildCard() {
     return this.getDelegate().isWildcard();
   }
-  
+
   @Override
   public boolean isWrapper() {
     return this.getDelegate().isWrapper();
   }
-  
+
   public LightweightTypeReference getLightweightTypeReference() {
     return this.getDelegate();
   }
-  
+
   @Override
   public Iterable<? extends TypeReference> getDeclaredSuperTypes() {
     final Function1<LightweightTypeReference, TypeReference> _function = (LightweightTypeReference it) -> {
@@ -165,7 +165,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     };
     return ListExtensions.<LightweightTypeReference, TypeReference>map(this.getDelegate().getSuperTypes(), _function);
   }
-  
+
   @Override
   public Iterable<? extends ResolvedMethod> getDeclaredResolvedMethods() {
     final Function1<IResolvedOperation, ResolvedMethod> _function = (IResolvedOperation it) -> {
@@ -173,7 +173,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     };
     return ListExtensions.<IResolvedOperation, ResolvedMethod>map(this.getCompilationUnit().getOverrideHelper().getResolvedFeatures(this.getDelegate()).getDeclaredOperations(), _function);
   }
-  
+
   @Override
   public Iterable<? extends ResolvedConstructor> getDeclaredResolvedConstructors() {
     final Function1<IResolvedConstructor, ResolvedConstructor> _function = (IResolvedConstructor it) -> {
@@ -181,7 +181,7 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     };
     return ListExtensions.<IResolvedConstructor, ResolvedConstructor>map(this.getCompilationUnit().getOverrideHelper().getResolvedFeatures(this.getDelegate()).getDeclaredConstructors(), _function);
   }
-  
+
   @Override
   public Iterable<? extends ResolvedMethod> getAllResolvedMethods() {
     final Function1<IResolvedOperation, ResolvedMethod> _function = (IResolvedOperation it) -> {
@@ -189,12 +189,12 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     };
     return ListExtensions.<IResolvedOperation, ResolvedMethod>map(this.getCompilationUnit().getOverrideHelper().getResolvedFeatures(this.getDelegate()).getAllOperations(), _function);
   }
-  
+
   @Override
   public boolean isInferred() {
     return false;
   }
-  
+
   @Override
   public boolean equals(final Object obj) {
     if ((obj instanceof TypeReferenceImpl)) {
@@ -204,17 +204,17 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     }
     return false;
   }
-  
+
   @Override
   public int hashCode() {
     return this.getDelegate().getIdentifier().hashCode();
   }
-  
+
   @Pure
   public JvmTypeReference getSource() {
     return this.source;
   }
-  
+
   public void setSource(final JvmTypeReference source) {
     this.source = source;
   }

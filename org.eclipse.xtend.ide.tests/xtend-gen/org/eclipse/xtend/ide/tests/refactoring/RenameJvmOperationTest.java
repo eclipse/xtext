@@ -24,12 +24,12 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
   public void renameUnusedMethod() {
     this.renameUnusedMethod(false);
   }
-  
+
   @Test
   public void renameUnusedMethod_2() {
     this.renameUnusedMethod(true);
   }
-  
+
   public void renameUnusedMethod(final boolean extension) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -83,37 +83,37 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameSingleMethod() {
     this.renameSingleMethod(false, false, false);
   }
-  
+
   @Test
   public void renameSingleMethod_2() {
     this.renameSingleMethod(false, true, false);
   }
-  
+
   @Test
   public void renameSingleMethod_3() {
     this.renameSingleMethod(false, true, true);
   }
-  
+
   @Test
   public void renameSingleMethod_4() {
     this.renameSingleMethod(true, false, false);
   }
-  
+
   @Test
   public void renameSingleMethod_5() {
     this.renameSingleMethod(true, true, false);
   }
-  
+
   @Test
   public void renameSingleMethod_6() {
     this.renameSingleMethod(true, true, true);
   }
-  
+
   public void renameSingleMethod(final boolean wildcard, final boolean extension, final boolean extensionAccess) {
     try {
       Assert.assertTrue("extension access is not possible without extension import", (extension || (!extensionAccess)));
@@ -220,37 +220,37 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameOverloadedMethod() {
     this.renameOverloadedMethod(false, false, false);
   }
-  
+
   @Test
   public void renameOverloadedMethod_2() {
     this.renameOverloadedMethod(false, true, false);
   }
-  
+
   @Test
   public void renameOverloadedMethod_3() {
     this.renameOverloadedMethod(false, true, true);
   }
-  
+
   @Test
   public void renameOverloadedMethod_4() {
     this.renameOverloadedMethod(true, false, false);
   }
-  
+
   @Test
   public void renameOverloadedMethod_5() {
     this.renameOverloadedMethod(true, true, false);
   }
-  
+
   @Test
   public void renameOverloadedMethod_6() {
     this.renameOverloadedMethod(true, true, true);
   }
-  
+
   public void renameOverloadedMethod(final boolean wildcard, final boolean extension, final boolean extensionAccess) {
     try {
       Assert.assertTrue("extension access is not possible without extension import", (extension || (!extensionAccess)));
@@ -408,61 +408,61 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport() {
     this.renameToOverloadedImport(false, false, false, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_2() {
     this.renameToOverloadedImport(false, false, true, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_3() {
     this.renameToOverloadedImport(false, false, true, true);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_4() {
     this.renameToOverloadedImport(true, false, false, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_5() {
     this.renameToOverloadedImport(true, false, true, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_6() {
     this.renameToOverloadedImport(true, false, true, true);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_7() {
     this.renameToOverloadedImport(true, true, false, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_8() {
     this.renameToOverloadedImport(true, true, true, false);
   }
-  
+
   @Ignore
   @Test
   public void renameToOverloadedImport_9() {
     this.renameToOverloadedImport(true, true, true, true);
   }
-  
+
   public void renameToOverloadedImport(final boolean extension, final boolean extensionAccess, final boolean extension2, final boolean extensionAccess2) {
     try {
       Assert.assertTrue("extension access is not possible without extension import", (extension || (!extensionAccess)));
@@ -601,54 +601,54 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameFeatureNameConflicts() {
     this.renameFeatureNameConflicts(false, false, false, false);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_2() {
     this.renameFeatureNameConflicts(false, false, true, false);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_3() {
     this.renameFeatureNameConflicts(false, false, true, true);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_4() {
     this.renameFeatureNameConflicts(true, false, false, false);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_5() {
     this.renameFeatureNameConflicts(true, false, true, false);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_6() {
     this.renameFeatureNameConflicts(true, false, true, true);
   }
-  
+
   @Test
   public void renameFeatureNameConflicts_7() {
     this.renameFeatureNameConflicts(true, true, false, false);
   }
-  
+
   @Ignore("Invalid extension access")
   @Test
   public void renameFeatureNameConflicts_8() {
     this.renameFeatureNameConflicts(true, true, true, false);
   }
-  
+
   @Ignore("Invalid extension access")
   @Test
   public void renameFeatureNameConflicts_9() {
     this.renameFeatureNameConflicts(true, true, true, true);
   }
-  
+
   public void renameFeatureNameConflicts(final boolean extension, final boolean extensionAccess, final boolean extension2, final boolean extensionAccess2) {
     try {
       Assert.assertTrue("extension access is not possible without extension import", (extension || (!extensionAccess)));
@@ -819,7 +819,7 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameTypeNameConflict() {
     try {
@@ -935,7 +935,7 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameTypeNameConflict_2() {
     try {
@@ -1044,7 +1044,7 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameTypeNameConflict_3() {
     try {
@@ -1171,7 +1171,7 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameTypeNameConflict_4() {
     try {
@@ -1291,7 +1291,7 @@ public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void renameTypeNameConflict_5() {
     try {

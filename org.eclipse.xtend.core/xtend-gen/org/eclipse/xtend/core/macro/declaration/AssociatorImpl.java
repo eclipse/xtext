@@ -16,11 +16,11 @@ import org.eclipse.xtend.lib.macro.services.Associator;
 @SuppressWarnings("all")
 public class AssociatorImpl implements Associator {
   private CompilationUnitImpl unit;
-  
+
   public AssociatorImpl(final CompilationUnitImpl unit) {
     this.unit = unit;
   }
-  
+
   @Override
   public void setPrimarySourceElement(final MutableElement javaElement, final Element sourceElement) {
     final Element primarySourceElement = this.unit.getTracability().getPrimarySourceElement(sourceElement);

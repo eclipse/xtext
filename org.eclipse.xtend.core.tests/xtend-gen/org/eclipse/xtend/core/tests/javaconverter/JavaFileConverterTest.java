@@ -35,15 +35,15 @@ import org.junit.Test;
 public class JavaFileConverterTest extends AbstractXtendTestCase {
   @Inject
   private Provider<JavaConverter> javaConverter;
-  
+
   private String sourceProject;
-  
+
   private String targetProject;
-  
+
   private int errorsExpected = 0;
-  
+
   private int problemsExpected = 0;
-  
+
   @Before
   public void setUp() {
     this.sourceProject = null;
@@ -51,7 +51,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     this.errorsExpected = 0;
     this.problemsExpected = 0;
   }
-  
+
   @Test
   @Ignore
   public void testConvertFilesInThisProject() throws Exception {
@@ -61,7 +61,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     this.problemsExpected = 22;
     this.runConverter();
   }
-  
+
   @Test
   @Ignore
   public void testConvertFilesInXtextTestsProject() throws Exception {
@@ -71,7 +71,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
     this.problemsExpected = 13404;
     this.runConverter();
   }
-  
+
   public void runConverter() {
     try {
       File _parentFile = new File("").getAbsoluteFile().getParentFile();
@@ -167,7 +167,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public JavaConverter.ConversionResult converToXtend(final String unitName, final String javaCode) {
     try {
       final JavaConverter j2x = this.javaConverter.get();
@@ -190,7 +190,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   public void writeToFile(final File parent, final String fileName, final String content) {
     try {
       final File targetFile = new File(parent, fileName);

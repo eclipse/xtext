@@ -54,7 +54,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testMultiCatch_02() {
@@ -232,7 +232,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchWithMultiType_02() {
@@ -367,7 +367,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchWithMultiType_03() {
@@ -496,7 +496,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8UnaryOperator() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -547,7 +547,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8Comparator() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -614,7 +614,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8Predicate() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -665,7 +665,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8BinaryOperation() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -718,7 +718,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8Consumer() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -771,7 +771,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testJava8BiFunction() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -825,7 +825,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultMethodSuperCall01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -870,7 +870,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultMethodSuperCall02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -922,7 +922,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultMethodSuperCall03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -965,7 +965,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testDefaultMethodSuperCall04() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1010,7 +1010,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void testSelfReference() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
@@ -1104,7 +1104,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testClosureNoArgs() {
@@ -1131,7 +1131,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testClosureTwoArgs() {
@@ -1183,7 +1183,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testVoidMethod_02() throws Exception {
@@ -1231,7 +1231,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testVoidMethod_03() throws Exception {
@@ -1281,7 +1281,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testThrowablesPropagate_01() throws Exception {
@@ -1389,7 +1389,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testThrowablesPropagate_02() throws Exception {
@@ -1476,7 +1476,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchWithBooleanExpression_3() {
@@ -1557,7 +1557,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchOverNull() {
@@ -1664,7 +1664,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchWithConstantExpressions_6() {
@@ -1748,7 +1748,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSwitchWithConstantExpressions_7() {
@@ -1828,7 +1828,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testClosureSneakyThrow() {
@@ -1951,7 +1951,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testClosureSneakyThrow_02() throws Exception {
@@ -2026,7 +2026,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testNestedClosureWithIt() {
@@ -2101,7 +2101,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testNestedClosureSuperCall() {
@@ -2158,7 +2158,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testFindFirstOnIt_01() {
@@ -2208,7 +2208,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testAbstractIterator_03() {
@@ -2320,7 +2320,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testAbstractIterator_04() {
@@ -2435,7 +2435,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testReturnType() {
@@ -2480,7 +2480,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testReturnType_02() {
@@ -2548,7 +2548,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testReturnType_03() {
@@ -2617,7 +2617,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testInnerTypeImports_1() {
@@ -2659,7 +2659,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testRecursiveLambda_01() {
@@ -2716,7 +2716,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testRecursiveLambda_02() {
@@ -2773,7 +2773,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_01() {
@@ -2809,7 +2809,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_02() {
@@ -2839,7 +2839,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_03() {
@@ -2875,7 +2875,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_04() {
@@ -2905,7 +2905,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_05() {
@@ -2941,7 +2941,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_06() {
@@ -2971,7 +2971,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_07() {
@@ -3010,7 +3010,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_08() {
@@ -3040,7 +3040,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_09() {
@@ -3081,7 +3081,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testXFunctionTypeRefAsSuperType_10() {
@@ -3113,7 +3113,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSuperCall_01() {
@@ -3188,7 +3188,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testSuperCall_03() {
@@ -3320,7 +3320,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   /**
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395043
    */
@@ -3370,7 +3370,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testExpectationFromTypeParameter() {
@@ -3479,7 +3479,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   @Override
   public void testJavaKeywordsUsed() {

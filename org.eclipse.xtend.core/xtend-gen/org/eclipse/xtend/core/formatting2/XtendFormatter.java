@@ -86,10 +86,10 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   @Inject
   @Extension
   private XtendGrammarAccess _xtendGrammarAccess;
-  
+
   @Inject
   private RichStringFormatter.Factory richStringFormatterFactory;
-  
+
   protected void _format(final XtendFile xtendFile, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -132,7 +132,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     };
     format.<XtendFile>append(xtendFile, _function_3);
   }
-  
+
   protected void formatAnnotations(final XtendAnnotationTarget target, @Extension final IFormattableDocument document, final Procedure1<? super IHiddenRegionFormatter> configKey) {
     boolean _isEmpty = target.getAnnotations().isEmpty();
     if (_isEmpty) {
@@ -146,7 +146,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
     }
   }
-  
+
   protected void _format(final XtendClass clazz, @Extension final IFormattableDocument format) {
     this.formatAnnotations(clazz, format, XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations);
     this.formatModifiers(clazz, format);
@@ -179,7 +179,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     this.formatBody(clazz, format);
   }
-  
+
   protected ISemanticRegion formatTypeParameters(final XtendMember member, final List<? extends JvmTypeParameter> typeParameters, @Extension final IFormattableDocument format) {
     ISemanticRegion _xifexpression = null;
     boolean _isEmpty = typeParameters.isEmpty();
@@ -212,7 +212,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     return _xifexpression;
   }
-  
+
   protected ISemanticRegion formatBody(final XtendTypeDeclaration type, @Extension final IFormattableDocument format) {
     ISemanticRegion _xblockexpression = null;
     {
@@ -265,7 +265,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     return _xblockexpression;
   }
-  
+
   protected void _format(final XtendInterface interfaze, @Extension final IFormattableDocument format) {
     this.formatAnnotations(interfaze, format, XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations);
     this.formatModifiers(interfaze, format);
@@ -293,7 +293,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     this.formatBody(interfaze, format);
   }
-  
+
   protected void _format(final XtendAnnotationType annotationType, @Extension final IFormattableDocument format) {
     this.formatAnnotations(annotationType, format, XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations);
     this.formatModifiers(annotationType, format);
@@ -303,7 +303,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.append(this.textRegionExtensions.regionFor(annotationType).keyword("annotation"), _function);
     this.formatBody(annotationType, format);
   }
-  
+
   protected void _format(final XtendEnum enumeration, @Extension final IFormattableDocument format) {
     this.formatAnnotations(enumeration, format, XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations);
     this.formatModifiers(enumeration, format);
@@ -349,7 +349,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       format.append(open, _function_2);
     }
   }
-  
+
   protected void _format(final XtendConstructor func, @Extension final IFormattableDocument format) {
     this.formatAnnotations(func, format, XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations);
     this.formatModifiers(func, format);
@@ -388,7 +388,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatCommaSeparatedList(func.getParameters(), open, close, format);
     format.<XExpression>format(func.getExpression());
   }
-  
+
   protected void _format(final XtendFunction func, @Extension final IFormattableDocument format) {
     this.formatAnnotations(func, format, XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations);
     this.formatModifiers(func, format);
@@ -448,7 +448,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.<JvmTypeReference>format(func.getReturnType());
     format.<XExpression>format(func.getExpression());
   }
-  
+
   protected void _format(final XtendField field, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -474,7 +474,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     document.<JvmTypeReference>format(field.getType());
     document.<XExpression>format(field.getInitialValue());
   }
-  
+
   protected void _format(final XtendParameter param, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -488,7 +488,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     };
     format.prepend(nameNode, _function_1);
   }
-  
+
   @Override
   protected void _format(final XVariableDeclaration expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -497,7 +497,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function);
     super._format(expr, format);
   }
-  
+
   @Override
   protected void _format(final XIfExpression expr, @Extension final IFormattableDocument format) {
     boolean _isConditionalExpression = expr.isConditionalExpression();
@@ -559,7 +559,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
     }
   }
-  
+
   @Override
   protected void _format(final JvmFormalParameter expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -568,17 +568,17 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.append(this.textRegionExtensions.regionFor(expr).keyword("extension"), _function);
     super._format(expr, format);
   }
-  
+
   protected void _format(final RichString rs, @Extension final IFormattableDocument format) {
     final RichStringFormatter richStringFormatter = this.richStringFormatterFactory.create(this.getRequest().getTextRegionAccess());
     richStringFormatter.format(rs, format);
   }
-  
+
   protected void _format(final AnonymousClass anonymousClass, @Extension final IFormattableDocument format) {
     this.format(anonymousClass.getConstructorCall(), format);
     this.formatBody(anonymousClass, format);
   }
-  
+
   /**
    * Always put existing modifiers into this fixed order
    */
@@ -591,14 +591,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     };
     this.textRegionExtensions.regionFor(member).ruleCallsTo(this._xtendGrammarAccess.getCommonModifierRule(), this._xtendGrammarAccess.getMethodModifierRule(), this._xtendGrammarAccess.getFieldModifierRule()).forEach(_function);
   }
-  
+
   @Override
   protected boolean isSingleLineBlock(final XBlockExpression expr) {
     return ((((expr.getExpressions().size() <= 1) && (this.getPreferences().<Boolean>getPreference(XtendFormatterPreferenceKeys.keepOneLineMethods)).booleanValue()) && 
       (expr.eContainer() instanceof XtendFunction)) && 
       (!this.textRegionExtensions.nextHiddenRegion(expr).immediatelyPreceding().keyword("}").getPreviousHiddenRegion().isMultiline()));
   }
-  
+
   @Override
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -630,7 +630,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
@@ -659,7 +659,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   @Override
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
@@ -682,7 +682,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     return _xifexpression;
   }
-  
+
   @Override
   public void format(final Object anonymousClass, final IFormattableDocument format) {
     if (anonymousClass instanceof AnonymousClass) {

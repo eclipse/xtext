@@ -25,7 +25,7 @@ public class CheckMutableParameterDeclarationProcessor implements RegisterGlobal
   @Override
   public void doRegisterGlobals(final List<? extends ParameterDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableParameterDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableParameterDeclaration annotatedTargetElement : annotatedTargetElements) {
@@ -35,7 +35,7 @@ public class CheckMutableParameterDeclarationProcessor implements RegisterGlobal
       MutableAssert.assertValidJavaIdentifier("name", _function);
     }
   }
-  
+
   @Override
   public void doGenerateCode(final List<? extends MutableParameterDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
   }

@@ -40,7 +40,7 @@ import org.junit.Test;
 public class PerformanceTest extends AbstractXtendUITestCase {
   @Rule
   public final StopwatchRule rule = new StopwatchRule(true);
-  
+
   @BeforeClass
   public static void createTestProject() {
     try {
@@ -51,7 +51,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @AfterClass
   public static void deleteTestProject() {
     try {
@@ -60,7 +60,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testCleanBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
@@ -69,7 +69,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     Stopwatches.resetAll();
     project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
   }
-  
+
   @Test
   public void testIncrementalBuild() throws Exception {
     this.internalTestIncrementalBuild();
@@ -77,7 +77,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     Stopwatches.resetAll();
     this.internalTestIncrementalBuild();
   }
-  
+
   public void internalTestIncrementalBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
     final IFile file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
@@ -85,7 +85,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     file.appendContents(_stringInputStream, true, true, null);
     PerformanceTestProjectSetup.waitForBuild();
   }
-  
+
   @Test
   public void testBuildOfDownstreamProject() throws Exception {
     final IJavaProject project = PerformanceTestProjectSetup.testProject;
@@ -168,7 +168,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     Stopwatches.resetAll();
     p.build(IncrementalProjectBuilder.FULL_BUILD, null);
   }
-  
+
   @Test
   public void testFullBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
@@ -177,7 +177,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     Stopwatches.resetAll();
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
   }
-  
+
   @Test
   public void testCleanFullBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
@@ -189,7 +189,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
   }
-  
+
   protected static void assertNoErrorsInWorkspace() throws CoreException {
     final IMarker[] markers = PerformanceTestProjectSetup.testProject.getProject().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
     for (final IMarker marker : markers) {

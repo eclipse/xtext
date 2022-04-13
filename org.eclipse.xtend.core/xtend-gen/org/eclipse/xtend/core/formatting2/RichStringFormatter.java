@@ -65,18 +65,18 @@ public class RichStringFormatter {
   public static class Factory {
     @Inject
     private RichStringProcessor richStringProcessor;
-    
+
     public RichStringFormatter create(final ITextRegionAccess regionAccess) {
       ITextRegionExtensions _extensions = regionAccess.getExtensions();
       return new RichStringFormatter(this, _extensions);
     }
   }
-  
+
   private final RichStringFormatter.Factory factory;
-  
+
   @Extension
   private final ITextRegionExtensions _iTextRegionExtensions;
-  
+
   protected void _format(final RichString richString, final IFormattableDocument doc) {
     RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(richString.eContainer(), RichString.class);
     boolean _tripleNotEquals = (_containerOfType != null);
@@ -175,11 +175,11 @@ public class RichStringFormatter {
       }
     }
   }
-  
+
   protected boolean _hasSyntaxError(final IEObjectRegion region) {
     return false;
   }
-  
+
   protected boolean _hasSyntaxError(final NodeEObjectRegion region) {
     final BidiTreeIterator<INode> i = region.getNode().getAsTreeIterable().iterator();
     while (i.hasNext()) {
@@ -191,7 +191,7 @@ public class RichStringFormatter {
     }
     return false;
   }
-  
+
   protected void setNewLines(final IFormattableDocument doc, final int offset, final int length, final int indentationIncrease, final int indentationDecrease, final int newLines) {
     IHiddenRegionFormatting _createHiddenRegionFormatting = doc.getFormatter().createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = (IHiddenRegionFormatting it) -> {
@@ -208,7 +208,7 @@ public class RichStringFormatter {
     final ITextReplacer replacer = _formatter.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
-  
+
   protected void setSpace(final IFormattableDocument doc, final int offset, final int length, final String space) {
     IHiddenRegionFormatting _createHiddenRegionFormatting = doc.getFormatter().createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = (IHiddenRegionFormatting it) -> {
@@ -221,13 +221,13 @@ public class RichStringFormatter {
     final ITextReplacer replacer = _formatter.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
-  
+
   protected void _format(final RichStringLiteral expr, final IFormattableDocument doc) {
   }
-  
+
   protected void _format(final Void expr, final IFormattableDocument doc) {
   }
-  
+
   protected void formatIntoSingleLine(final IFormattableDocument doc, final EObject obj) {
     final Predicate<ITextReplacer> _function = (ITextReplacer it) -> {
       boolean _xblockexpression = false;
@@ -239,14 +239,14 @@ public class RichStringFormatter {
     };
     doc.getFormatter().format(obj, doc.withReplacerFilter(_function));
   }
-  
+
   protected void _suppressLineWraps(final ITextReplacer it) {
   }
-  
+
   protected void _suppressLineWraps(final HiddenRegionReplacer it) {
     this.suppressLineWraps(it.getFormatting());
   }
-  
+
   protected void _suppressLineWraps(final IHiddenRegionFormatting it) {
     String _space = it.getSpace();
     boolean _tripleEquals = (_space == null);
@@ -258,7 +258,7 @@ public class RichStringFormatter {
     it.setNewLinesMax(null);
     it.setAutowrap(null);
   }
-  
+
   protected void _format(final XExpression expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -266,7 +266,7 @@ public class RichStringFormatter {
     doc.<XExpression>surround(expr, _function);
     this.formatIntoSingleLine(doc, expr);
   }
-  
+
   protected void _format(final RichStringIf expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -295,7 +295,7 @@ public class RichStringFormatter {
     };
     doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ENDIF"), _function_4);
   }
-  
+
   protected void _format(final RichStringElseIf expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -310,7 +310,7 @@ public class RichStringFormatter {
     doc.<XExpression>append(expr.getIf(), _function_2);
     this.formatIntoSingleLine(doc, expr.getIf());
   }
-  
+
   protected void _format(final RichStringForLoop expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -353,7 +353,7 @@ public class RichStringFormatter {
     };
     doc.surround(this._iTextRegionExtensions.regionFor(expr).keyword("ENDFOR"), _function_8);
   }
-  
+
   public void format(final EObject richString, final IFormattableDocument doc) {
     if (richString instanceof RichString) {
       _format((RichString)richString, doc);
@@ -381,7 +381,7 @@ public class RichStringFormatter {
         Arrays.<Object>asList(richString, doc).toString());
     }
   }
-  
+
   protected boolean hasSyntaxError(final IEObjectRegion region) {
     if (region instanceof NodeEObjectRegion) {
       return _hasSyntaxError((NodeEObjectRegion)region);
@@ -392,7 +392,7 @@ public class RichStringFormatter {
         Arrays.<Object>asList(region).toString());
     }
   }
-  
+
   protected void suppressLineWraps(final Object it) {
     if (it instanceof HiddenRegionReplacer) {
       _suppressLineWraps((HiddenRegionReplacer)it);
@@ -408,7 +408,7 @@ public class RichStringFormatter {
         Arrays.<Object>asList(it).toString());
     }
   }
-  
+
   public RichStringFormatter(final RichStringFormatter.Factory factory, final ITextRegionExtensions _iTextRegionExtensions) {
     super();
     this.factory = factory;

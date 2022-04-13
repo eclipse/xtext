@@ -26,44 +26,44 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
     this.checkMutable();
     this.getCompilationUnit().getReadAndWriteTracking().markReadAccess(this.getDelegate());
   }
-  
+
   @Override
   public Iterable<? extends MutableParameterDeclaration> getParameters() {
     Iterable<? extends ParameterDeclaration> _parameters = super.getParameters();
     return ((Iterable<? extends MutableParameterDeclaration>) _parameters);
   }
-  
+
   @Override
   public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     Iterable<? extends TypeParameterDeclaration> _typeParameters = super.getTypeParameters();
     return ((Iterable<? extends MutableTypeParameterDeclaration>) _typeParameters);
   }
-  
+
   @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);
   }
-  
+
   @Override
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
     this.checkMutable();
     this.getDelegate().setStrictFloatingPoint(isStrictFloatingPoint);
   }
-  
+
   @Override
   public void setNative(final boolean isNative) {
     this.checkMutable();
     this.getDelegate().setNative(isNative);
   }
-  
+
   @Override
   public void setReturnType(final TypeReference type) {
     this.checkMutable();
     Preconditions.checkArgument((type != null), "returnType cannot be null");
     this.getDelegate().setReturnType(this.getCompilationUnit().toJvmTypeReference(type));
   }
-  
+
   @Override
   public void setAbstract(final boolean isAbstract) {
     this.checkMutable();
@@ -73,13 +73,13 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
       _delegate.setDefault(false);
     }
   }
-  
+
   @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
     this.getDelegate().setFinal(isFinal);
   }
-  
+
   @Override
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
@@ -89,13 +89,13 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
       _delegate.setDefault(false);
     }
   }
-  
+
   @Override
   public void setSynchronized(final boolean isSynchronized) {
     this.checkMutable();
     this.getDelegate().setSynchronized(isSynchronized);
   }
-  
+
   @Override
   public void setDefault(final boolean isDefault) {
     this.checkMutable();

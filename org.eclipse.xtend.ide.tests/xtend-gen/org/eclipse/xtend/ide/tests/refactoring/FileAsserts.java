@@ -23,7 +23,7 @@ public class FileAsserts {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
-  
+
   public IFile assertFileExists(final String fileName) throws Exception {
     IFile _xblockexpression = null;
     {
@@ -34,12 +34,12 @@ public class FileAsserts {
     }
     return _xblockexpression;
   }
-  
+
   public void assertFileDoesntExists(final String fileName) throws Exception {
     final IResource file = this._workbenchTestHelper.getProject().findMember(fileName);
     Assert.assertNull(file);
   }
-  
+
   public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = WorkbenchTestHelper.getContentsAsString(file);

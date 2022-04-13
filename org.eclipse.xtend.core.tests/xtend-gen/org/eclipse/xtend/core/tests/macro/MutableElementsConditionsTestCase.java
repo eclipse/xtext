@@ -102,7 +102,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void checkMutableInterfaceDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -130,7 +130,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void checkMutableMethodDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -172,7 +172,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void checkMutableFieldDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -211,7 +211,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void checkMutableParameterDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
@@ -251,7 +251,7 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     this._xtendCompilerTester.assertCompilesTo(_builder, _builder_1);
   }
-  
+
   @Test
   public void checkMutableEnumerationTypeDeclaration() {
     StringConcatenation _builder = new StringConcatenation();
