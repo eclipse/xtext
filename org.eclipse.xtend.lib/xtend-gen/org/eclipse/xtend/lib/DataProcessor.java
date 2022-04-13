@@ -47,25 +47,25 @@ public class DataProcessor extends AbstractClassProcessor {
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
       final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration it_1) -> {
         return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
-    
+
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
         return Boolean.valueOf(((!it_1.isStatic()) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
-    
+
     public void addDataToString(final MutableClassDeclaration cls) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
@@ -88,7 +88,7 @@ public class DataProcessor extends AbstractClassProcessor {
       cls.addMethod("toString", _function);
     }
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension

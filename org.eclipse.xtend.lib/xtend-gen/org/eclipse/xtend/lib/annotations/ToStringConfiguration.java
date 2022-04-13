@@ -21,43 +21,43 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 @SuppressWarnings("all")
 public class ToStringConfiguration {
   private final boolean skipNulls;
-  
+
   private final boolean singleLine;
-  
+
   private final boolean hideFieldNames;
-  
+
   private final boolean verbatimValues;
-  
+
   public ToStringConfiguration() {
     this(false, false, false, false);
   }
-  
+
   public ToStringConfiguration(final boolean skipNulls, final boolean singleLine, final boolean hideFieldNames, final boolean verbatimValues) {
     this.skipNulls = skipNulls;
     this.singleLine = singleLine;
     this.hideFieldNames = hideFieldNames;
     this.verbatimValues = verbatimValues;
   }
-  
+
   public ToStringConfiguration(final AnnotationReference annotation) {
     this.skipNulls = annotation.getBooleanValue("skipNulls");
     this.singleLine = annotation.getBooleanValue("singleLine");
     this.hideFieldNames = annotation.getBooleanValue("hideFieldNames");
     this.verbatimValues = annotation.getBooleanValue("verbatimValues");
   }
-  
+
   public boolean isSkipNulls() {
     return this.skipNulls;
   }
-  
+
   public boolean isSingleLine() {
     return this.singleLine;
   }
-  
+
   public boolean isHideFieldNames() {
     return this.hideFieldNames;
   }
-  
+
   public boolean isVerbatimValues() {
     return this.verbatimValues;
   }

@@ -19,12 +19,12 @@ import com.google.common.annotations.GwtCompatible;
 @SuppressWarnings("all")
 public enum AccessorsDeprecationPolicy {
   SAME_AS_FIELD,
-  
+
   ONLY_GETTER,
-  
+
   ONLY_SETTER,
-  
+
   ALWAYS,
-  
+
   NEVER;
 }

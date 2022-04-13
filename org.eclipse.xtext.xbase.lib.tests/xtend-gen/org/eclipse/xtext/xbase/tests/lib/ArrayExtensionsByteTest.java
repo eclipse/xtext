@@ -22,18 +22,18 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsByteTest {
   private byte[] data;
-  
+
   private final byte _10 = ((byte) 10);
-  
+
   private final byte _20 = ((byte) 20);
-  
+
   private final byte _30 = ((byte) 30);
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private byte[] createData() {
     final byte[] array = new byte[3];
     array[0] = this._10;
@@ -41,14 +41,14 @@ public class ArrayExtensionsByteTest {
     array[2] = this._30;
     return array;
   }
-  
+
   @Test
   public void testSetGet__byte() {
     Assert.assertEquals(this._10, this.data[0]);
     Assert.assertEquals(this._20, this.data[1]);
     Assert.assertEquals(this._30, this.data[2]);
   }
-  
+
   @Test
   public void testClone__byte() {
     final byte[] clonedData = this.data.clone();
@@ -56,17 +56,17 @@ public class ArrayExtensionsByteTest {
     Assert.assertEquals(this._20, clonedData[1]);
     Assert.assertEquals(this._30, clonedData[2]);
   }
-  
+
   @Test
   public void testLength__byte() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__byte() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__byte() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -80,7 +80,7 @@ public class ArrayExtensionsByteTest {
     final byte[] newData = ObjectExtensions.<byte[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__byte() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, ((byte) 10)));

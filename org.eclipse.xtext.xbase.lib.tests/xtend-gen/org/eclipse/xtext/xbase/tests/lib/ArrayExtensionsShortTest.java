@@ -22,18 +22,18 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsShortTest {
   private short[] data;
-  
+
   private final short _10 = ((short) 10);
-  
+
   private final short _20 = ((short) 20);
-  
+
   private final short _30 = ((short) 30);
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private short[] createData() {
     final short[] array = new short[3];
     array[0] = this._10;
@@ -41,14 +41,14 @@ public class ArrayExtensionsShortTest {
     array[2] = this._30;
     return array;
   }
-  
+
   @Test
   public void testSetGet__short() {
     Assert.assertEquals(this._10, this.data[0]);
     Assert.assertEquals(this._20, this.data[1]);
     Assert.assertEquals(this._30, this.data[2]);
   }
-  
+
   @Test
   public void testClone__short() {
     final short[] clonedData = this.data.clone();
@@ -56,17 +56,17 @@ public class ArrayExtensionsShortTest {
     Assert.assertEquals(this._20, clonedData[1]);
     Assert.assertEquals(this._30, clonedData[2]);
   }
-  
+
   @Test
   public void testLength__short() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__short() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__short() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -80,7 +80,7 @@ public class ArrayExtensionsShortTest {
     final short[] newData = ObjectExtensions.<short[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__short() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, ((short) 10)));

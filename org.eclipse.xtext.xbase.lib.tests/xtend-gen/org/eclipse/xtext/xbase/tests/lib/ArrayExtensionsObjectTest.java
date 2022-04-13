@@ -22,12 +22,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsObjectTest {
   private Object[] data;
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private Object[] createData() {
     final Object[] array = new Object[3];
     array[0] = Integer.valueOf(0);
@@ -35,14 +35,14 @@ public class ArrayExtensionsObjectTest {
     array[2] = null;
     return array;
   }
-  
+
   @Test
   public void testSetGet__Object() {
     Assert.assertSame(Integer.valueOf(0), this.data[0]);
     Assert.assertSame(Integer.valueOf(1), this.data[1]);
     Assert.assertNull(null, this.data[2]);
   }
-  
+
   @Test
   public void testClone__Object() {
     final Object[] clonedData = this.data.clone();
@@ -50,17 +50,17 @@ public class ArrayExtensionsObjectTest {
     Assert.assertSame(Integer.valueOf(1), clonedData[1]);
     Assert.assertNull(null, this.data[2]);
   }
-  
+
   @Test
   public void testLength__Object() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__Object() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__Object() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -74,7 +74,7 @@ public class ArrayExtensionsObjectTest {
     final Object[] newData = ObjectExtensions.<Object[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__Object() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, Integer.valueOf(0)));

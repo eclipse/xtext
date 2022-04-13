@@ -22,12 +22,12 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ArrayExtensionsIntTest {
   private int[] data;
-  
+
   @Before
   public void init() {
     this.data = this.createData();
   }
-  
+
   private int[] createData() {
     final int[] array = new int[3];
     array[0] = 10;
@@ -35,14 +35,14 @@ public class ArrayExtensionsIntTest {
     array[2] = 30;
     return array;
   }
-  
+
   @Test
   public void testSetGet__int() {
     Assert.assertEquals(10, this.data[0]);
     Assert.assertEquals(20, this.data[1]);
     Assert.assertEquals(30, this.data[2]);
   }
-  
+
   @Test
   public void testClone__int() {
     final int[] clonedData = this.data.clone();
@@ -50,17 +50,17 @@ public class ArrayExtensionsIntTest {
     Assert.assertEquals(20, clonedData[1]);
     Assert.assertEquals(30, clonedData[2]);
   }
-  
+
   @Test
   public void testLength__int() {
     Assert.assertEquals(3, this.data.length);
   }
-  
+
   @Test
   public void testHashCode__int() {
     Assert.assertEquals(Objects.hashCode(this.data), this.data.hashCode());
   }
-  
+
   @Test
   public void testEquals__int() {
     Assert.assertTrue(this.data.equals(this.data));
@@ -74,7 +74,7 @@ public class ArrayExtensionsIntTest {
     final int[] newData = ObjectExtensions.<int[]>operator_doubleArrow(_createData, _function);
     Assert.assertFalse(this.data.equals(newData));
   }
-  
+
   @Test
   public void testContains__int() {
     Assert.assertTrue(ArrayExtensions.contains(this.data, 10));

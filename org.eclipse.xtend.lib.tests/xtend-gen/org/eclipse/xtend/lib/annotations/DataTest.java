@@ -19,14 +19,14 @@ public class DataTest {
   @Data
   public static class MyDataClass {
     private final String arg;
-    
+
     private final boolean foo = false;
-    
+
     public MyDataClass(final String arg) {
       super();
       this.arg = arg;
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
@@ -35,7 +35,7 @@ public class DataTest {
       result = prime * result + ((this.arg== null) ? 0 : this.arg.hashCode());
       return prime * result + (this.foo ? 1231 : 1237);
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -55,7 +55,7 @@ public class DataTest {
         return false;
       return true;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -64,18 +64,18 @@ public class DataTest {
       b.add("foo", this.foo);
       return b.toString();
     }
-    
+
     @Pure
     public String getArg() {
       return this.arg;
     }
-    
+
     @Pure
     public boolean isFoo() {
       return this.foo;
     }
   }
-  
+
   @Test
   public void testData() {
     StringConcatenation _builder = new StringConcatenation();
@@ -90,7 +90,7 @@ public class DataTest {
     _builder.append("]");
     Assert.assertEquals(DataTest.toUnix(_builder.toString()), new DataTest.MyDataClass("foo").toString());
   }
-  
+
   public static String toUnix(final String s) {
     StringConcatenation result = new StringConcatenation("\n");
     result.append(s);

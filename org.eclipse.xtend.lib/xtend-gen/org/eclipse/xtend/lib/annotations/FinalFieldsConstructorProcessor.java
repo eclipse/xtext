@@ -57,22 +57,22 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public Iterable<? extends MutableFieldDeclaration> getFinalFields(final MutableTypeDeclaration it) {
       final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
         return Boolean.valueOf(((((!it_1.isStatic()) && (it_1.isFinal() == true)) && (it_1.getInitializer() == null)) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
-    
+
     public boolean needsFinalFieldConstructor(final MutableClassDeclaration it) {
       return ((!this.hasFinalFieldsConstructor(it)) && IterableExtensions.isEmpty(((ClassDeclaration) this.context.getPrimarySourceElement(it)).getDeclaredConstructors()));
     }
-    
+
     public boolean hasFinalFieldsConstructor(final MutableTypeDeclaration cls) {
       boolean _xblockexpression = false;
       {
@@ -88,7 +88,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       }
       return _xblockexpression;
     }
-    
+
     public ArrayList<TypeReference> getFinalFieldsConstructorArgumentTypes(final MutableTypeDeclaration cls) {
       ArrayList<TypeReference> _xblockexpression = null;
       {
@@ -111,7 +111,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       }
       return _xblockexpression;
     }
-    
+
     public String getConstructorAlreadyExistsMessage(final MutableTypeDeclaration it) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Cannot create FinalFieldsConstructor as a constructor with the signature \"new(");
@@ -120,7 +120,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       _builder.append(")\" already exists.");
       return _builder.toString();
     }
-    
+
     public void addFinalFieldsConstructor(final MutableClassDeclaration it) {
       boolean _isEmpty = this.getFinalFieldsConstructorArgumentTypes(it).isEmpty();
       if (_isEmpty) {
@@ -141,9 +141,9 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       };
       it.addConstructor(_function);
     }
-    
+
     private static final Pattern EMPTY_BODY = Pattern.compile("(\\{(\\s*\\})?)?");
-    
+
     public void makeFinalFieldsConstructor(final MutableConstructorDeclaration it) {
       boolean _isEmpty = this.getFinalFieldsConstructorArgumentTypes(it.getDeclaringType()).isEmpty();
       if (_isEmpty) {
@@ -217,7 +217,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       };
       it.setBody(_client);
     }
-    
+
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
       if ((it instanceof ClassDeclaration)) {
         if ((Objects.equal(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || (((ClassDeclaration)it).getExtendedClass() == null))) {
@@ -228,7 +228,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         return null;
       }
     }
-    
+
     private TypeReference orObject(final TypeReference ref) {
       TypeReference _xifexpression = null;
       if ((ref == null)) {
@@ -239,7 +239,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       return _xifexpression;
     }
   }
-  
+
   @Override
   public void doTransform(final List<? extends MutableTypeParameterDeclarator> elements, @Extension final TransformationContext context) {
     final Consumer<MutableTypeParameterDeclarator> _function = (MutableTypeParameterDeclarator it) -> {
@@ -247,7 +247,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     };
     elements.forEach(_function);
   }
-  
+
   protected void _transform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
@@ -263,13 +263,13 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     final FinalFieldsConstructorProcessor.Util util = new FinalFieldsConstructorProcessor.Util(context);
     util.addFinalFieldsConstructor(it);
   }
-  
+
   protected void _transform(final MutableConstructorDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final FinalFieldsConstructorProcessor.Util util = new FinalFieldsConstructorProcessor.Util(context);
     util.makeFinalFieldsConstructor(it);
   }
-  
+
   public void transform(final MutableTypeParameterDeclarator it, final TransformationContext context) {
     if (it instanceof MutableConstructorDeclaration) {
       _transform((MutableConstructorDeclaration)it, context);

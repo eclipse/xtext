@@ -25,35 +25,35 @@ import org.junit.Test;
 public class ToStringHelperTest {
   public static class OtherClass {
     public ToStringHelperTest.OtherClass other;
-    
+
     public String name;
   }
-  
+
   @Accessors
   @ToString
   public static class DataClass {
     public ToStringHelperTest.DataClass other;
-    
+
     public String name;
-    
+
     @Pure
     public ToStringHelperTest.DataClass getOther() {
       return this.other;
     }
-    
+
     public void setOther(final ToStringHelperTest.DataClass other) {
       this.other = other;
     }
-    
+
     @Pure
     public String getName() {
       return this.name;
     }
-    
+
     public void setName(final String name) {
       this.name = name;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -63,26 +63,26 @@ public class ToStringHelperTest {
       return b.toString();
     }
   }
-  
+
   public static class MyEntity {
     private final boolean boolProp = true;
-    
+
     private final int intProp = 42;
-    
+
     private final ArrayList<String> myList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-    
+
     private final ToStringHelperTest.MyEntity friend;
-    
+
     private final RetentionPolicy policy = RetentionPolicy.CLASS;
-    
+
     public MyEntity() {
       this.friend = null;
     }
-    
+
     public MyEntity(final ToStringHelperTest.MyEntity friend) {
       this.friend = friend;
     }
-    
+
     @Override
     public String toString() {
       String _plus = (Boolean.valueOf(this.boolProp) + "\n");
@@ -95,7 +95,7 @@ public class ToStringHelperTest {
       return (_plus_6 + this.policy);
     }
   }
-  
+
   @Test
   public void testToString() {
     final ToStringHelper helper = new ToStringHelper();
@@ -147,7 +147,7 @@ public class ToStringHelperTest {
     Assert.assertEquals(
       ToStringHelperTest.toUnix(_builder.toString()), helper.toString(_myEntity_1));
   }
-  
+
   @Test
   public void testSingleLine() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
@@ -156,14 +156,14 @@ public class ToStringHelperTest {
       "MyEntity [boolProp = true, intProp = 42, myList = ArrayList (\"foo\",\"bar\",\"baz\"), friend = null, policy = CLASS]", 
       helper.toString());
   }
-  
+
   @Test
   public void testHideFieldNames() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
     final ToStringBuilder helper = new ToStringBuilder(_myEntity).singleLine().hideFieldNames().addAllFields();
     Assert.assertEquals("MyEntity [true, 42, ArrayList (\"foo\",\"bar\",\"baz\"), null, CLASS]", helper.toString());
   }
-  
+
   @Test
   public void testSkipNulls() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
@@ -199,7 +199,7 @@ public class ToStringHelperTest {
     Assert.assertEquals(
       ToStringHelperTest.toUnix(_builder.toString()), helper.toString());
   }
-  
+
   @Test
   public void testExplicitFieldListing() {
     ToStringHelperTest.MyEntity _myEntity = new ToStringHelperTest.MyEntity();
@@ -217,7 +217,7 @@ public class ToStringHelperTest {
     Assert.assertEquals(
       ToStringHelperTest.toUnix(_builder.toString()), helper.toString());
   }
-  
+
   @Test
   public void recursionHandling() {
     final ToStringHelper helper = new ToStringHelper();
@@ -239,7 +239,7 @@ public class ToStringHelperTest {
     Assert.assertEquals(
       ToStringHelperTest.toUnix(_builder.toString()), helper.toString(obj));
   }
-  
+
   @Test
   public void recursionHandling_02() {
     final ToStringHelper helper = new ToStringHelper();
@@ -261,7 +261,7 @@ public class ToStringHelperTest {
     Assert.assertEquals(
       ToStringHelperTest.toUnix(_builder.toString()), helper.toString(obj));
   }
-  
+
   public static String toUnix(final String s) {
     StringConcatenation result = new StringConcatenation("\n");
     result.append(s);

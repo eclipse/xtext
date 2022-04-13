@@ -44,11 +44,11 @@ public class DataProcessor extends AbstractClassProcessor {
   public static class Util {
     @Extension
     private TransformationContext context;
-    
+
     public Util(final TransformationContext context) {
       this.context = context;
     }
-    
+
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
         return Boolean.valueOf((((!it_1.isStatic()) && (!it_1.isTransient())) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
@@ -56,7 +56,7 @@ public class DataProcessor extends AbstractClassProcessor {
       return IterableExtensions.filter(it.getDeclaredFields(), _function);
     }
   }
-  
+
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension
