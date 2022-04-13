@@ -29,96 +29,96 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
       return Boolean.valueOf(false);
     }
   };
-  
+
   private final Object rawValue;
-  
+
   private final boolean compileTimeConstant;
-  
+
   public boolean isNotAConstant() {
     return Objects.equal(this.rawValue, EvaluationResult.NOT_A_CONSTANT.rawValue);
   }
-  
+
   @Override
   public Optional<Object> getValue() {
     return Optional.<Object>fromNullable(this.rawValue);
   }
-  
+
   public Object equalValue(final EvaluationResult other) {
     return this.equalValue(this.rawValue, other.rawValue);
   }
-  
+
   private Object _equalValue(final Object myValue, final Object otherValue) {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
-  
+
   private Object _equalValue(final Void myValue, final Object otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final Object myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final Object myValue, final ThisReference otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final ThisReference myValue, final Object otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final ThisReference myValue, final ThisReference otherValue) {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
-  
+
   private Object _equalValue(final Void myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final Object myValue, final List<?> otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final Void myValue, final List<?> otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final Void myValue, final JvmType otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final Void myValue, final Void otherValue) {
     return Boolean.valueOf(true);
   }
-  
+
   private Object _equalValue(final Object myValue, final Void otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final JvmType myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmIdentifiableElement myValue, final Void otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmType otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmIdentifiableElement myValue, final Object otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final List<?> myValue, final Void otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final List<?> myValue, final Object otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final List<?> myValue, final List<?> otherValue) {
     final boolean equalLists = Objects.equal(myValue, otherValue);
     if (equalLists) {
@@ -126,11 +126,11 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     }
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmIdentifiableElement otherValue) {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
-  
+
   private Object _equalValue(final JvmFormalParameter myValue, final JvmFormalParameter otherValue) {
     boolean _equals = Objects.equal(myValue, otherValue);
     if (_equals) {
@@ -138,51 +138,51 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     }
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmIdentifiableElement otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmEnumerationLiteral otherValue) {
     return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
-  
+
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmEnumerationLiteral otherValue) {
     return Boolean.valueOf(Objects.equal(myValue, otherValue));
   }
-  
+
   private Object _equalValue(final JvmType myValue, final Void otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final XTypeLiteral myValue, final XTypeLiteral otherTypeLiteral) {
     return Boolean.valueOf((Objects.equal(myValue.getType(), otherTypeLiteral.getType()) && Objects.equal(myValue.getArrayDimensions(), otherTypeLiteral.getArrayDimensions())));
   }
-  
+
   private Object _equalValue(final JvmType myValue, final XTypeLiteral otherTypeLiteral) {
     return Boolean.valueOf((Objects.equal(myValue, otherTypeLiteral.getType()) && otherTypeLiteral.getArrayDimensions().isEmpty()));
   }
-  
+
   private Object _equalValue(final XTypeLiteral myValue, final JvmType otherType) {
     return Boolean.valueOf((Objects.equal(myValue.getType(), otherType) && myValue.getArrayDimensions().isEmpty()));
   }
-  
+
   private Object _equalValue(final JvmType myValue, final ThisReference otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final ThisReference myValue, final JvmType otherValue) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final XTypeLiteral myValue, final ThisReference otherType) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object _equalValue(final ThisReference myValue, final XTypeLiteral otherType) {
     return Boolean.valueOf(false);
   }
-  
+
   private Object equalValue(final Object myValue, final Object otherValue) {
     if (myValue instanceof JvmEnumerationLiteral
          && otherValue instanceof JvmEnumerationLiteral) {
@@ -281,13 +281,13 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
       return _equalValue(myValue, otherValue);
     }
   }
-  
+
   public EvaluationResult(final Object rawValue, final boolean compileTimeConstant) {
     super();
     this.rawValue = rawValue;
     this.compileTimeConstant = compileTimeConstant;
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
@@ -296,7 +296,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     result = prime * result + ((this.rawValue== null) ? 0 : this.rawValue.hashCode());
     return prime * result + (this.compileTimeConstant ? 1231 : 1237);
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -316,7 +316,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -325,12 +325,12 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     b.add("compileTimeConstant", this.compileTimeConstant);
     return b.toString();
   }
-  
+
   @Pure
   public Object getRawValue() {
     return this.rawValue;
   }
-  
+
   @Pure
   @Override
   public boolean isCompileTimeConstant() {

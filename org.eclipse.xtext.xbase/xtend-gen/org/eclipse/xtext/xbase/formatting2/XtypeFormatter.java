@@ -71,7 +71,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     document.append(this.textRegionExtensions.regionFor(func).keyword("=>"), _function_3);
     document.<JvmTypeReference>format(func.getReturnType());
   }
-  
+
   protected void _format(final JvmParameterizedTypeReference ref, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -99,7 +99,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
       document.prepend(this.textRegionExtensions.regionFor(ref).keyword(">"), _function_1);
     }
   }
-  
+
   protected void _format(final JvmWildcardTypeReference ref, @Extension final IFormattableDocument document) {
     boolean _isEmpty = ref.getConstraints().isEmpty();
     boolean _not = (!_isEmpty);
@@ -114,7 +114,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
       document.<JvmTypeConstraint>format(c);
     }
   }
-  
+
   protected void _format(final JvmTypeParameter ref, @Extension final IFormattableDocument document) {
     EList<JvmTypeConstraint> _constraints = ref.getConstraints();
     for (final JvmTypeConstraint c : _constraints) {
@@ -127,7 +127,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
       }
     }
   }
-  
+
   protected void _format(final XImportSection section, @Extension final IFormattableDocument format) {
     EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
     for (final XImportDeclaration imp : _importDeclarations) {
@@ -143,7 +143,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
       }
     }
   }
-  
+
   protected void _format(final XImportDeclaration imp, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -169,7 +169,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     };
     document.prepend(this.textRegionExtensions.regionFor(imp).keyword(";"), _function_4);
   }
-  
+
   public void format(final Object ref, final IFormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);

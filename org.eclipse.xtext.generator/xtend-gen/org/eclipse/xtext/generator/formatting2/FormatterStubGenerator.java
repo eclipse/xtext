@@ -49,21 +49,21 @@ public class FormatterStubGenerator {
   public static class Service {
     @Inject
     private Naming naming;
-    
+
     public FormatterStubGenerator createGenerator(final Grammar grammar) {
       return new FormatterStubGenerator(this, grammar);
     }
-    
+
     @Pure
     public Naming getNaming() {
       return this.naming;
     }
   }
-  
+
   private final FormatterStubGenerator.Service service;
-  
+
   private final Grammar grammar;
-  
+
   public String getStubSimpleName() {
     StringConcatenation _builder = new StringConcatenation();
     String _simpleName = this.service.naming.toSimpleName(this.grammar.getName());
@@ -71,7 +71,7 @@ public class FormatterStubGenerator {
     _builder.append("Formatter");
     return _builder.toString();
   }
-  
+
   public String getStubPackageName() {
     StringConcatenation _builder = new StringConcatenation();
     String _packageName = this.service.naming.toPackageName(this.grammar.getName());
@@ -79,7 +79,7 @@ public class FormatterStubGenerator {
     _builder.append(".formatting2");
     return _builder.toString();
   }
-  
+
   public String getStubQualifiedName() {
     StringConcatenation _builder = new StringConcatenation();
     String _stubPackageName = this.getStubPackageName();
@@ -89,7 +89,7 @@ public class FormatterStubGenerator {
     _builder.append(_stubSimpleName);
     return _builder.toString();
   }
-  
+
   public String getStubFileName() {
     StringConcatenation _builder = new StringConcatenation();
     String _asPath = this.service.naming.asPath(this.getStubQualifiedName());
@@ -97,7 +97,7 @@ public class FormatterStubGenerator {
     _builder.append(".xtend");
     return _builder.toString();
   }
-  
+
   public String getStubSuperClassName() {
     final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
     if ((superGrammar != null)) {
@@ -106,7 +106,7 @@ public class FormatterStubGenerator {
       return AbstractFormatter2.class.getName();
     }
   }
-  
+
   protected void getLocallyAssignedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref) {
     List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(grammar);
     for (final Assignment assignment : _containedAssignments) {
@@ -136,7 +136,7 @@ public class FormatterStubGenerator {
       }
     }
   }
-  
+
   protected void getInheritedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref, final Set<Grammar> visitedGrammars) {
     visitedGrammars.add(grammar);
     EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
@@ -149,7 +149,7 @@ public class FormatterStubGenerator {
       }
     }
   }
-  
+
   public String generateStubFileContents() {
     ResourceSet _resourceSet = this.grammar.eResource().getResourceSet();
     String _stubPackageName = this.getStubPackageName();
@@ -195,11 +195,11 @@ public class FormatterStubGenerator {
     file.setBody(_builder.toString());
     return file.toString();
   }
-  
+
   protected String toName(final EClass clazz) {
     return clazz.getName().toLowerCase();
   }
-  
+
   protected CharSequence generateFormatMethod(final EClass clazz, @Extension final JavaEMFFile file, final Collection<EReference> containmentRefs, final boolean isOverriding) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -268,7 +268,7 @@ public class FormatterStubGenerator {
     _builder.newLine();
     return _builder;
   }
-  
+
   public FormatterStubGenerator(final FormatterStubGenerator.Service service, final Grammar grammar) {
     super();
     this.service = service;

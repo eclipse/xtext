@@ -28,11 +28,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
   @Inject
   private Grammar grammar;
-  
+
   @Inject
   @Extension
   private Naming naming;
-  
+
   @Override
   public void addToPluginXmlUi(final Xtend2ExecutionContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
@@ -141,7 +141,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
     _builder.newLine();
     ctx.append(_builder);
   }
-  
+
   @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
@@ -153,7 +153,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;

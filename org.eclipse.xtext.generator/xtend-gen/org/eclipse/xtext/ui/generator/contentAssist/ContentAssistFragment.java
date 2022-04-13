@@ -41,16 +41,16 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Inject
   @Extension
   private Naming _naming;
-  
+
   @Inject
   private Grammar grammar;
-  
+
   @Accessors
   private boolean inheritImplementation = true;
-  
+
   @Accessors
   private boolean generateStub = true;
-  
+
   public String getProposalProviderName(final Grammar grammar) {
     String _basePackageUi = this._naming.basePackageUi(grammar);
     String _plus = (_basePackageUi + ".contentassist.");
@@ -58,7 +58,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ProposalProvider");
   }
-  
+
   public String getGenProposalProviderName() {
     String _basePackageUi = this._naming.basePackageUi(this.grammar);
     String _plus = (_basePackageUi + ".contentassist.Abstract");
@@ -66,7 +66,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ProposalProvider");
   }
-  
+
   @Override
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
@@ -83,7 +83,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public String[] getRequiredBundlesUi(final Grammar grammar) {
     List<String> _xifexpression = null;
@@ -94,17 +94,17 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     }
     return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
-  
+
   @Override
   public String[] getImportedPackagesUi(final Grammar grammar) {
     return ((String[])Conversions.unwrapArray(Collections.<String>singleton("org.apache.log4j"), String.class));
   }
-  
+
   @Override
   public String[] getExportedPackagesUi(final Grammar grammar) {
     return ((String[])Conversions.unwrapArray(Collections.<String>singletonList(this._naming.packageName(this.getProposalProviderName(grammar))), String.class));
   }
-  
+
   public String getSuperClassName() {
     String _xblockexpression = null;
     {
@@ -119,7 +119,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     if (this.generateStub) {
@@ -167,23 +167,23 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       this.grammar, 
       Collections.<Object>singletonList(this.getSuperClassName()));
   }
-  
+
   @Pure
   @Override
   public boolean isInheritImplementation() {
     return this.inheritImplementation;
   }
-  
+
   public void setInheritImplementation(final boolean inheritImplementation) {
     this.inheritImplementation = inheritImplementation;
   }
-  
+
   @Pure
   @Override
   public boolean isGenerateStub() {
     return this.generateStub;
   }
-  
+
   public void setGenerateStub(final boolean generateStub) {
     this.generateStub = generateStub;
   }

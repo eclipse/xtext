@@ -121,63 +121,63 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   @Extension
   protected ILogicalContainerProvider _iLogicalContainerProvider;
-  
+
   @Inject
   @Extension
   protected TypeReferences _typeReferences;
-  
+
   @Inject
   @Extension
   protected TreeAppendableUtil _treeAppendableUtil;
-  
+
   @Inject
   @Extension
   protected JvmTypeExtensions _jvmTypeExtensions;
-  
+
   @Inject
   @Extension
   protected LoopExtensions _loopExtensions;
-  
+
   @Inject
   @Extension
   protected ErrorSafeExtensions _errorSafeExtensions;
-  
+
   @Inject
   private CommonTypeComputationServices commonServices;
-  
+
   @Inject
   private XbaseCompiler compiler;
-  
+
   @Inject
   private ILocationInFileProvider locationProvider;
-  
+
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
-  
+
   @Inject
   private IFileHeaderProvider fileHeaderProvider;
-  
+
   @Inject
   private IJvmModelAssociations jvmModelAssociations;
-  
+
   @Inject
   private JavaKeywords keywords;
-  
+
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
-  
+
   @Inject
   private ITraceURIConverter converter;
-  
+
   @Inject
   private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-  
+
   @Inject
   private IScopeProvider scopeProvider;
-  
+
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
-  
+
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
@@ -185,10 +185,10 @@ public class JvmModelGenerator implements IGenerator {
       this.internalDoGenerate(obj, fsa);
     }
   }
-  
+
   protected void _internalDoGenerate(final EObject obj, final IFileSystemAccess fsa) {
   }
-  
+
   protected void _internalDoGenerate(final JvmDeclaredType type, final IFileSystemAccess fsa) {
     boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(type);
     if (_isDisabled) {
@@ -202,11 +202,11 @@ public class JvmModelGenerator implements IGenerator {
       fsa.generateFile(_plus, this.generateType(type, this.generatorConfigProvider.get(type)));
     }
   }
-  
+
   protected ImportManager createImportManager(final JvmDeclaredType type) {
     return new ImportManager(true, type);
   }
-  
+
   public CharSequence generateType(final JvmDeclaredType type, final GeneratorConfig config) {
     final ImportManager importManager = this.createImportManager(type);
     final TreeAppendable bodyAppendable = this.createAppendable(type, importManager, config);
@@ -234,7 +234,7 @@ public class JvmModelGenerator implements IGenerator {
     importAppendable.append(bodyAppendable);
     return importAppendable;
   }
-  
+
   protected ITreeAppendable _generateBody(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -264,7 +264,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public ITreeAppendable generateMembersInBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -283,7 +283,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @since 2.27
    */
@@ -293,7 +293,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     return _function;
   }
-  
+
   /**
    * @deprecated Additional annotations should be created in the JVM model.
    */
@@ -322,7 +322,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected ITreeAppendable _generateBody(final JvmEnumerationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -367,14 +367,14 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public void generateEnumLiteral(final JvmEnumerationLiteral it, final ITreeAppendable appendable, final GeneratorConfig config) {
     appendable.newLine();
     this.generateJavaDoc(it, appendable, config);
     this.generateAnnotations(it.getAnnotations(), appendable, true, config);
     appendable.append(this.makeJavaIdentifier(it.getSimpleName()));
   }
-  
+
   protected ITreeAppendable _generateBody(final JvmAnnotationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -409,7 +409,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public void generateAnnotationMethod(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     appendable.increaseIndentation().newLine();
     appendable.openScope();
@@ -426,7 +426,7 @@ public class JvmModelGenerator implements IGenerator {
     appendable.decreaseIndentation();
     appendable.closeScope();
   }
-  
+
   public void generateDefaultExpression(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
     boolean _tripleNotEquals = (_compilationStrategy != null);
@@ -471,7 +471,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   /**
    * @since 2.16
    */
@@ -491,11 +491,11 @@ public class JvmModelGenerator implements IGenerator {
       throw new IllegalStateException(_plus);
     }
   }
-  
+
   protected ImportingStringConcatenation createImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner owner) {
     return new ImportingStringConcatenation(state, owner);
   }
-  
+
   protected ITreeAppendable _generateModifier(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -524,15 +524,15 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   private boolean isDeclaredWithinInterface(final JvmMember it) {
     return ((it.getDeclaringType() instanceof JvmGenericType) && ((JvmGenericType) it.getDeclaringType()).isInterface());
   }
-  
+
   protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     return this.generateVisibilityModifier(it, appendable);
   }
-  
+
   protected ITreeAppendable _generateModifier(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -558,7 +558,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected ITreeAppendable _generateModifier(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -594,15 +594,15 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
     return result.append(this.javaName(it.getVisibility()));
   }
-  
+
   protected ITreeAppendable _generateModifier(final JvmConstructor it, final ITreeAppendable appendable, final GeneratorConfig config) {
     return this.generateVisibilityModifier(it, appendable);
   }
-  
+
   /**
    * Returns the visibility modifier and a space as suffix if not empty
    */
@@ -632,7 +632,7 @@ public class JvmModelGenerator implements IGenerator {
       return "";
     }
   }
-  
+
   public void generateExtendsClause(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     String _switchResult = null;
     boolean _matched = false;
@@ -711,7 +711,7 @@ public class JvmModelGenerator implements IGenerator {
       this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, superInterfaces, _function_6, _function_7);
     }
   }
-  
+
   protected ITreeAppendable _generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     Class<? extends JvmMember> _class = null;
     if (it!=null) {
@@ -724,7 +724,7 @@ public class JvmModelGenerator implements IGenerator {
     String _plus = ("generateMember not implemented for elements of type " + _name);
     throw new UnsupportedOperationException(_plus);
   }
-  
+
   protected ITreeAppendable _generateMember(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -741,7 +741,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected ITreeAppendable _generateMember(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -759,7 +759,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected ITreeAppendable _generateMember(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -794,7 +794,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected ITreeAppendable _generateMember(final JvmConstructor it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -817,7 +817,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public void generateInitialization(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
     boolean _tripleNotEquals = (_compilationStrategy != null);
@@ -859,7 +859,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   public void generateTypeParameterDeclaration(final JvmTypeParameterDeclarator it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<LoopParams> _function = (LoopParams it_1) -> {
       it_1.setPrefix("<");
@@ -871,13 +871,13 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<JvmTypeParameter>forEach(appendable, it.getTypeParameters(), _function, _function_1);
   }
-  
+
   public void generateTypeParameterDeclaration(final JvmTypeParameter it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final ITreeAppendable tracedAppendable = appendable.trace(it);
     this._treeAppendableUtil.traceSignificant(tracedAppendable, it).append(it.getName());
     this.generateTypeParameterConstraints(it, tracedAppendable, config);
   }
-  
+
   public void generateTypeParameterConstraints(final JvmTypeParameter it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Iterable<JvmUpperBound> upperBounds = Iterables.<JvmUpperBound>filter(it.getConstraints(), JvmUpperBound.class);
     final Procedure1<LoopParams> _function = (LoopParams it_1) -> {
@@ -889,7 +889,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._errorSafeExtensions.<JvmUpperBound>forEachSafely(appendable, upperBounds, _function, _function_1);
   }
-  
+
   public void generateThrowsClause(final JvmExecutable it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final LinkedHashMap<JvmType, JvmTypeReference> toBeGenerated = CollectionLiterals.<JvmType, JvmTypeReference>newLinkedHashMap();
     final Consumer<JvmTypeReference> _function = (JvmTypeReference it_1) -> {
@@ -909,7 +909,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, toBeGenerated.values(), _function_1, _function_2);
   }
-  
+
   public void generateParameters(final JvmExecutable it, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _isEmpty = it.getParameters().isEmpty();
     boolean _not = (!_isEmpty);
@@ -930,7 +930,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   public void generateParameter(final JvmFormalParameter it, final ITreeAppendable appendable, final boolean vararg, final GeneratorConfig config) {
     final ITreeAppendable tracedAppendable = appendable.trace(it);
     this.generateAnnotations(it.getAnnotations(), tracedAppendable, false, config);
@@ -952,11 +952,11 @@ public class JvmModelGenerator implements IGenerator {
     final String name = tracedAppendable.declareVariable(it, this.makeJavaIdentifier(it.getSimpleName()));
     this._treeAppendableUtil.traceSignificant(tracedAppendable, it).append(name);
   }
-  
+
   public boolean hasBody(final JvmExecutable it) {
     return (((this._jvmTypeExtensions.getCompilationTemplate(it) != null) || (this._jvmTypeExtensions.getCompilationStrategy(it) != null)) || (this._iLogicalContainerProvider.getAssociatedExpression(it) != null));
   }
-  
+
   /**
    * Returns the errors that are produced for elements that are directly contained
    * in this feature (e.g. unresolved type proxies) or that are associated with
@@ -973,7 +973,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return errors;
   }
-  
+
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _tripleNotEquals = (_compilationStrategy != null);
@@ -1044,16 +1044,16 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   public ITreeAppendable compile(final JvmExecutable executable, final XExpression expression, final JvmTypeReference returnType, final ITreeAppendable appendable, final GeneratorConfig config) {
     return this.compiler.compile(expression, appendable, returnType, IterableExtensions.<JvmTypeReference>toSet(executable.getExceptions()));
   }
-  
+
   public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType, final GeneratorConfig config) {
     this.reassignSuperType(b, declaredType, config);
     this.reassignThisType(b, declaredType);
   }
-  
+
   private String reassignSuperType(final ITreeAppendable b, final JvmDeclaredType declaredType, final GeneratorConfig config) {
     String _xblockexpression = null;
     {
@@ -1108,7 +1108,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     String _xblockexpression = null;
     {
@@ -1134,14 +1134,14 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * @since 2.16
    */
   public ITreeAppendable generateBodyWithIssues(final JvmExecutable op, final ITreeAppendable appendable, final Iterable<Issue> errors) {
     return this.generateBodyWithIssues(appendable, errors);
   }
-  
+
   public ITreeAppendable generateBodyWithIssues(final ITreeAppendable appendable, final Iterable<Issue> errors) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -1155,7 +1155,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   /**
    * Convert a given input string to a Java string. Non-ascii characters will
    * be replaced by a unicode escape sequence by default.
@@ -1163,14 +1163,14 @@ public class JvmModelGenerator implements IGenerator {
   protected String doConvertToJavaString(final String input) {
     return Strings.convertToJavaString(input, true);
   }
-  
+
   public void generateFileHeader(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final FileHeaderAdapter fileHeaderAdapter = IterableExtensions.<FileHeaderAdapter>head(Iterables.<FileHeaderAdapter>filter(it.eAdapters(), FileHeaderAdapter.class));
     if (((fileHeaderAdapter != null) && (!StringExtensions.isNullOrEmpty(fileHeaderAdapter.getHeaderText())))) {
       this.generateDocumentation(fileHeaderAdapter.getHeaderText(), this.fileHeaderProvider.getFileHeaderNodes(it.eResource()), appendable, config);
     }
   }
-  
+
   public void generateJavaDoc(final EObject it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final DocumentationAdapter adapter = IterableExtensions.<DocumentationAdapter>head(Iterables.<DocumentationAdapter>filter(it.eAdapters(), DocumentationAdapter.class));
     if (((adapter != null) && (!StringExtensions.isNullOrEmpty(adapter.getDocumentation())))) {
@@ -1184,7 +1184,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   public void addJavaDocImports(final EObject it, final ITreeAppendable appendable, final List<INode> documentationNodes) {
     for (final INode node : documentationNodes) {
       List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(node);
@@ -1224,7 +1224,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-  
+
   public ImportManager getImportManager(final ITreeAppendable appendable) {
     try {
       ImportManager _xblockexpression = null;
@@ -1242,7 +1242,7 @@ public class JvmModelGenerator implements IGenerator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -1275,7 +1275,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   public void generateAnnotations(final Iterable<JvmAnnotationReference> annotations, final ITreeAppendable appendable, final boolean withLineBreak, final GeneratorConfig config) {
     final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
       ITreeAppendable _xifexpression = null;
@@ -1296,7 +1296,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, annotations, _function_1, _function_2);
   }
-  
+
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
     appendable.append("@");
     appendable.append(it.getAnnotation());
@@ -1310,7 +1310,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<JvmAnnotationValue>forEach(appendable, it.getExplicitValues(), _function, _function_1);
   }
-  
+
   public void toJava(final JvmAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     JvmOperation _operation = it.getOperation();
     boolean _tripleNotEquals = (_operation != null);
@@ -1332,42 +1332,42 @@ public class JvmModelGenerator implements IGenerator {
     }
     this.toJavaLiteral(it, appendable, config);
   }
-  
+
   protected void _toJavaLiteral(final JvmAnnotationAnnotationValue value, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<JvmAnnotationReference> _function = (JvmAnnotationReference it) -> {
       this.generateAnnotation(it, appendable, config);
     };
     this._loopExtensions.<JvmAnnotationReference>forEachWithShortcut(appendable, value.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmShortAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Short> _function = (Short it_1) -> {
       appendable.append(it_1.toString());
     };
     this._loopExtensions.<Short>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmIntAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Integer> _function = (Integer it_1) -> {
       appendable.append(it_1.toString());
     };
     this._loopExtensions.<Integer>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmLongAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Long> _function = (Long it_1) -> {
       appendable.append(it_1.toString());
     };
     this._loopExtensions.<Long>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmByteAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Byte> _function = (Byte it_1) -> {
       appendable.append(it_1.toString());
     };
     this._loopExtensions.<Byte>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmDoubleAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Double> _function = (Double it_1) -> {
       String _switchResult = null;
@@ -1397,7 +1397,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<Double>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmFloatAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Float> _function = (Float it_1) -> {
       String _switchResult = null;
@@ -1427,7 +1427,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<Float>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmCharAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Character> _function = (Character it_1) -> {
       String _doConvertToJavaString = this.doConvertToJavaString(it_1.toString());
@@ -1437,7 +1437,7 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<Character>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmStringAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<String> _function = (String it_1) -> {
       String _doConvertToJavaString = this.doConvertToJavaString(it_1.toString());
@@ -1447,14 +1447,14 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<String>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmTypeAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<JvmTypeReference> _function = (JvmTypeReference it_1) -> {
       appendable.append(it_1.getType()).append(".class");
     };
     this._loopExtensions.<JvmTypeReference>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmEnumAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<JvmEnumerationLiteral> _function = (JvmEnumerationLiteral it_1) -> {
       appendable.append(it_1.getDeclaringType());
@@ -1463,14 +1463,14 @@ public class JvmModelGenerator implements IGenerator {
     };
     this._loopExtensions.<JvmEnumerationLiteral>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmBooleanAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final Procedure1<Boolean> _function = (Boolean it_1) -> {
       appendable.append(it_1.toString());
     };
     this._loopExtensions.<Boolean>forEachWithShortcut(appendable, it.getValues(), _function);
   }
-  
+
   protected void _toJavaLiteral(final JvmCustomAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _isEmpty = it.getValues().isEmpty();
     if (_isEmpty) {
@@ -1482,12 +1482,12 @@ public class JvmModelGenerator implements IGenerator {
       this._loopExtensions.<XExpression>forEachWithShortcut(appendable, Iterables.<XExpression>filter(it.getValues(), XExpression.class), _function);
     }
   }
-  
+
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {
     abstract class __JvmModelGenerator_1 implements ITraceURIConverter {
       Map<URI, SourceRelativeURI> uriForTraceCache;
     }
-    
+
     final __JvmModelGenerator_1 cachingConverter = new __JvmModelGenerator_1() {
       {
         uriForTraceCache = Maps.<URI, SourceRelativeURI>newHashMap();
@@ -1502,7 +1502,7 @@ public class JvmModelGenerator implements IGenerator {
         }
         return this.uriForTraceCache.get(uri.getURI());
       }
-      
+
       @Override
       public SourceRelativeURI getURIForTrace(final Resource resource) {
         boolean _containsKey = this.uriForTraceCache.containsKey(resource.getURI());
@@ -1519,7 +1519,7 @@ public class JvmModelGenerator implements IGenerator {
     _state.setGeneratorConfig(config);
     return appendable;
   }
-  
+
   public JvmGenericType containerType(final EObject context) {
     JvmGenericType _xifexpression = null;
     if ((context == null)) {
@@ -1535,7 +1535,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xifexpression;
   }
-  
+
   protected String makeJavaIdentifier(final String name) {
     String _xifexpression = null;
     if ((name == null)) {
@@ -1552,7 +1552,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xifexpression;
   }
-  
+
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmEnumerationType type) {
     Iterable<JvmMember> _xblockexpression = null;
     {
@@ -1570,14 +1570,14 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-  
+
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmDeclaredType it) {
     final Function1<JvmMember, Boolean> _function = (JvmMember it_1) -> {
       return Boolean.valueOf((!((it_1 instanceof JvmConstructor) && this._jvmTypeExtensions.isSingleSyntheticDefaultConstructor(((JvmConstructor) it_1)))));
     };
     return IterableExtensions.<JvmMember>filter(it.getMembers(), _function);
   }
-  
+
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmGenericType it) {
     Iterable<JvmMember> _xifexpression = null;
     boolean _isAnonymous = it.isAnonymous();
@@ -1591,11 +1591,11 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xifexpression;
   }
-  
+
   protected Set<EObject> getSourceElements(final EObject jvmElement) {
     return this.jvmModelAssociations.getSourceElements(jvmElement);
   }
-  
+
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if (type instanceof JvmDeclaredType) {
       _internalDoGenerate((JvmDeclaredType)type, fsa);
@@ -1608,7 +1608,7 @@ public class JvmModelGenerator implements IGenerator {
         Arrays.<Object>asList(type, fsa).toString());
     }
   }
-  
+
   public ITreeAppendable generateBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmAnnotationType) {
       return _generateBody((JvmAnnotationType)it, appendable, config);
@@ -1621,7 +1621,7 @@ public class JvmModelGenerator implements IGenerator {
         Arrays.<Object>asList(it, appendable, config).toString());
     }
   }
-  
+
   public ITreeAppendable generateModifier(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmConstructor) {
       return _generateModifier((JvmConstructor)it, appendable, config);
@@ -1638,7 +1638,7 @@ public class JvmModelGenerator implements IGenerator {
         Arrays.<Object>asList(it, appendable, config).toString());
     }
   }
-  
+
   public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable, config);
@@ -1655,7 +1655,7 @@ public class JvmModelGenerator implements IGenerator {
         Arrays.<Object>asList(it, appendable, config).toString());
     }
   }
-  
+
   public void toJavaLiteral(final JvmAnnotationValue value, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (value instanceof JvmAnnotationAnnotationValue) {
       _toJavaLiteral((JvmAnnotationAnnotationValue)value, appendable, config);
@@ -1701,7 +1701,7 @@ public class JvmModelGenerator implements IGenerator {
         Arrays.<Object>asList(value, appendable, config).toString());
     }
   }
-  
+
   public Iterable<JvmMember> getMembersToBeCompiled(final JvmDeclaredType type) {
     if (type instanceof JvmEnumerationType) {
       return _getMembersToBeCompiled((JvmEnumerationType)type);

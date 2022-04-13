@@ -89,7 +89,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append(".");
       throw new RuntimeException(_builder.toString());
     }
-    
+
     @Override
     public void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
       XtextAntlrGeneratorComparisonFragment.copyFile(context.getReferenceGrammar().getAbsoluteFileName(), context.getTestedGrammar().getAbsoluteFileName());
@@ -113,7 +113,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append(".");
       throw new RuntimeException(_builder.toString());
     }
-    
+
     @Override
     public void handleMismatch(final String match, final String matchReference, final AntlrGrammarComparator.ErrorContext context) {
       XtextAntlrGeneratorComparisonFragment.copyFile(context.getReferenceGrammar().getAbsoluteFileName(), context.getTestedGrammar().getAbsoluteFileName());
@@ -137,79 +137,79 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw new RuntimeException(_builder.toString());
     }
   }
-  
+
   protected static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
     private GrammarNaming prodNaming;
-    
+
     private ContentAssistGrammarNaming caNaming;
-    
+
     public AntlrFragmentHelperEx(final Naming oldNaming, final GrammarNaming prodNaming, final ContentAssistGrammarNaming caNaming) {
       super(oldNaming);
       this.prodNaming = prodNaming;
       this.caNaming = caNaming;
     }
-    
+
     @Override
     public String getLexerGrammarFileName(final Grammar g) {
       return this.prodNaming.getLexerGrammar(g).getName();
     }
-    
+
     @Override
     public String getContentAssistLexerGrammarFileName(final Grammar g) {
       return this.caNaming.getLexerGrammar(g).getName();
     }
   }
-  
+
   private static final Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment.class);
-  
+
   private static final String ENCODING = Charsets.ISO_8859_1.name();
-  
+
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Extension
   private GrammarNaming productionNaming;
-  
+
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   private ContentAssistGrammarNaming contentAssistNaming;
-  
+
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   private AntlrGrammarComparator comparator;
-  
+
   @Accessors
   private AntlrOptions options;
-  
+
   @Accessors
   private boolean partialParsing;
-  
+
   @Accessors
   private boolean skipContentAssistGrammarComparison = false;
-  
+
   @Accessors
   private boolean failOnError = true;
-  
+
   @Accessors(AccessorType.PROTECTED_GETTER)
   private List<String> advices = CollectionLiterals.<String>newArrayList();
-  
+
   @Accessors(AccessorType.PROTECTED_GETTER)
   private List<String> extensionAdvices = CollectionLiterals.<String>newArrayList();
-  
+
   public void addRegisterAdvice(final String advice) {
     this.advices.add(advice);
   }
-  
+
   public void addRegisterExtensionAdvice(final String advice) {
     this.extensionAdvices.add(advice);
   }
-  
+
   /**
    * Deactivate the super class' initialization check.
    */
   @Override
   public void checkConfiguration(final Issues issues) {
   }
-  
+
   /**
    * Tweaks the generation of the {@link Generator#SRC_GEN Generator.SRC_GEN},
    * {@link Generator#SRC_GEN_IDE Generator.SRC_GEN_IDE}, and
@@ -226,7 +226,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     }
     return _xifexpression;
   }
-  
+
   @Override
   public void generate() {
     Naming _naming = this.getNaming();
@@ -269,11 +269,11 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw exception;
     }
   }
-  
+
   protected AntlrGrammarComparator.IErrorHandler createErrorHandler() {
     return new XtextAntlrGeneratorComparisonFragment.ErrorHandler();
   }
-  
+
   protected RuntimeException loadAndCompareGrammars(final IFileSystemAccess2 fsa, final String outlet, final AntlrGrammarComparator.IErrorHandler errorHandler) {
     try {
       final StopWatch stopWatch = new StopWatch();
@@ -390,19 +390,19 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * Method hook allowing some grammar processing before comparison.
    */
   protected void postProcessReferenceLexerGrammar(final String absoluteReferenceLexerGrammarFile, final String outlet) {
   }
-  
+
   /**
    * Method hook allowing some grammar processing before comparison.
    */
   protected void postProcessReferenceParserGrammar(final String absoluteReferenceParserGrammarFile, final String outlet) {
   }
-  
+
   protected void performXpandBasedGeneration(final String outlet) {
     final RuleFilter filter = new RuleFilter();
     filter.setDiscardUnreachableRules(this.options.isSkipUnusedRules());
@@ -461,7 +461,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       }
     }
   }
-  
+
   /**
    * offers a singleton temporary folder
    */
@@ -479,12 +479,12 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     _init_getTmpFolder(_result);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, File> _createCache_getTmpFolder = CollectionLiterals.newHashMap();
-  
+
   private void _init_getTmpFolder(final File path) {
   }
-  
+
   protected static void copyFile(final String from, final String to) {
     try {
       File _file = new File(from);
@@ -500,7 +500,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   /**
    * little helper for cleaning up the temporary stuff.
    */
@@ -520,63 +520,63 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Pure
   protected GrammarNaming getProductionNaming() {
     return this.productionNaming;
   }
-  
+
   @Pure
   protected ContentAssistGrammarNaming getContentAssistNaming() {
     return this.contentAssistNaming;
   }
-  
+
   @Pure
   protected AntlrGrammarComparator getComparator() {
     return this.comparator;
   }
-  
+
   @Pure
   public AntlrOptions getOptions() {
     return this.options;
   }
-  
+
   public void setOptions(final AntlrOptions options) {
     this.options = options;
   }
-  
+
   @Pure
   public boolean isPartialParsing() {
     return this.partialParsing;
   }
-  
+
   public void setPartialParsing(final boolean partialParsing) {
     this.partialParsing = partialParsing;
   }
-  
+
   @Pure
   public boolean isSkipContentAssistGrammarComparison() {
     return this.skipContentAssistGrammarComparison;
   }
-  
+
   public void setSkipContentAssistGrammarComparison(final boolean skipContentAssistGrammarComparison) {
     this.skipContentAssistGrammarComparison = skipContentAssistGrammarComparison;
   }
-  
+
   @Pure
   public boolean isFailOnError() {
     return this.failOnError;
   }
-  
+
   public void setFailOnError(final boolean failOnError) {
     this.failOnError = failOnError;
   }
-  
+
   @Pure
   protected List<String> getAdvices() {
     return this.advices;
   }
-  
+
   @Pure
   protected List<String> getExtensionAdvices() {
     return this.extensionAdvices;

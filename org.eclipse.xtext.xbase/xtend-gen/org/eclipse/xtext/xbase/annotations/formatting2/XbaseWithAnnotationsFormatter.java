@@ -103,7 +103,7 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       }
     }
   }
-  
+
   public void format(final Object ann, final IFormattableDocument document) {
     if (ann instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ann, document);

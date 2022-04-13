@@ -32,7 +32,7 @@ public class FormattingDataFactory {
   @Inject
   @Extension
   private HiddenLeafAccess _hiddenLeafAccess;
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xblockexpression = null;
     {
@@ -42,7 +42,7 @@ public class FormattingDataFactory {
     }
     return _xblockexpression;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataInit it) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Integer _elvis = null;
@@ -60,7 +60,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataInit it) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
@@ -75,7 +75,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataInit it) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
@@ -101,7 +101,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataInit it) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
@@ -120,13 +120,13 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     Class<? extends PreferenceKey> _class = key.getClass();
     String _plus = ("Unknown configuration key kind: " + _class);
     throw new RuntimeException(_plus);
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataInit it) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       Iterable<FormattingData> _xblockexpression = null;
@@ -144,7 +144,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Iterable<FormattingData> newWhitespaceData(final HiddenLeafs leafs, final String space, final int increaseIndentationChange, final int decreaseIndentationChange, final boolean trace) {
     ArrayList<FormattingData> _xblockexpression = null;
     {
@@ -187,7 +187,7 @@ public class FormattingDataFactory {
     }
     return _xblockexpression;
   }
-  
+
   protected Iterable<FormattingData> newNewLineData(final HiddenLeafs leafs, final int minNewLines, final int maxNewLines, final int increaseIndentationChange, final int decreaseIndentationChange, final boolean trace) {
     ArrayList<FormattingData> _xblockexpression = null;
     {
@@ -388,7 +388,7 @@ public class FormattingDataFactory {
     }
     return _xblockexpression;
   }
-  
+
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
     if ((node != null)) {
@@ -396,7 +396,7 @@ public class FormattingDataFactory {
     }
     return _xifexpression;
   }
-  
+
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
     if ((node != null)) {
@@ -404,7 +404,7 @@ public class FormattingDataFactory {
     }
     return _xifexpression;
   }
-  
+
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> init) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       ArrayList<FormattingData> _xblockexpression = null;
@@ -444,7 +444,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> before, final Procedure1<? super FormattingDataInit> after) {
     final Function1<FormattableDocument, Iterable<FormattingData>> _function = (FormattableDocument doc) -> {
       ArrayList<FormattingData> _xblockexpression = null;
@@ -484,7 +484,7 @@ public class FormattingDataFactory {
     };
     return _function;
   }
-  
+
   protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     if (key instanceof BlankLineKey) {
       return _newFormattingData(leafs, (BlankLineKey)key, it);

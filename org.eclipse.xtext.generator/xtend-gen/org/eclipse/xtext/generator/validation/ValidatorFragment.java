@@ -46,26 +46,26 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   @Inject
   @Extension
   private Naming _naming;
-  
+
   @Inject
   @Extension
   private ValidatorNaming _validatorNaming;
-  
+
   @Accessors
   private boolean inheritImplementation = true;
-  
+
   @Accessors
   private boolean generateStub = true;
-  
+
   @Inject
   private Grammar grammar;
-  
+
   private final ArrayList<String> composedChecks = CollectionLiterals.<String>newArrayList();
-  
+
   public boolean addComposedCheck(final String composedCheckValidator) {
     return this.composedChecks.add(composedCheckValidator);
   }
-  
+
   @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
@@ -84,7 +84,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     String _asPath = this._naming.asPath(this._validatorNaming.getAbstractValidatorName());
@@ -258,14 +258,14 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       ctx.writeFile(Generator.SRC, _plus_1, _builder_1);
     }
   }
-  
+
   public Iterable<EPackage> getGeneratedPackagesToValidate() {
     final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
       return it.getEPackage();
     };
     return IterableExtensions.<GeneratedMetamodel, EPackage>map(Iterables.<GeneratedMetamodel>filter(this.grammar.getMetamodelDeclarations(), GeneratedMetamodel.class), _function);
   }
-  
+
   protected Collection<EPackage> getRegistryPackagesToValidate() {
     Collection<EPackage> _xblockexpression = null;
     {
@@ -279,12 +279,12 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
     return CollectionLiterals.<String>newArrayList(this._naming.packageName(this._validatorNaming.getValidatorName(grammar)));
   }
-  
+
   @Override
   public void addToPluginXmlUi(final Xtend2ExecutionContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
@@ -378,23 +378,23 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.newLine();
     ctx.append(_builder);
   }
-  
+
   @Pure
   @Override
   public boolean isInheritImplementation() {
     return this.inheritImplementation;
   }
-  
+
   public void setInheritImplementation(final boolean inheritImplementation) {
     this.inheritImplementation = inheritImplementation;
   }
-  
+
   @Pure
   @Override
   public boolean isGenerateStub() {
     return this.generateStub;
   }
-  
+
   public void setGenerateStub(final boolean generateStub) {
     this.generateStub = generateStub;
   }

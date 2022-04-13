@@ -62,18 +62,18 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 public class ConstantConditionsInterpreter {
   @Inject
   private ILogicalContainerProvider logicalContainerProvider;
-  
+
   @Inject
   @Extension
   private NumberLiterals numberLiterals;
-  
+
   @Inject
   private ConstantOperators constantOperators;
-  
+
   @Accessors(AccessorType.NONE)
   @Inject
   private Provider<EvaluationContext> evaluationContextProvider;
-  
+
   public BooleanResult getBooleanConstantOrNull(final XExpression it) {
     try {
       final EvaluationResult evaluationResult = this.doEvaluate(it, this.newEvaluationContext());
@@ -94,11 +94,11 @@ public class ConstantConditionsInterpreter {
       }
     }
   }
-  
+
   public EvaluationContext newEvaluationContext() {
     return this.evaluationContextProvider.get();
   }
-  
+
   protected EvaluationResult doEvaluate(final XExpression expression, final EvaluationContext context) {
     boolean _tryNext = context.tryNext(expression);
     if (_tryNext) {
@@ -111,25 +111,25 @@ public class ConstantConditionsInterpreter {
       return EvaluationResult.NOT_A_CONSTANT;
     }
   }
-  
+
   public IConstantEvaluationResult<Object> evaluate(final XExpression expression, final EvaluationContext context) {
     return this.doEvaluate(expression, context);
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XExpression expression, final EvaluationContext context) {
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalEvaluate(final Void nullValue, final EvaluationContext context) {
     throw new ConstantExpressionEvaluationException("null");
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XNumberLiteral it, final EvaluationContext context) {
     final Number value = this.numberLiterals.numberValue(it, this.numberLiterals.getJavaType(it));
     boolean _isPrimitive = context.getResolvedTypes().getActualType(it).isPrimitive();
     return new EvaluationResult(value, _isPrimitive);
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XAbstractFeatureCall it, final EvaluationContext context) {
     final JvmIdentifiableElement feature = this.getFeature(it, context);
     if (((feature == null) || feature.eIsProxy())) {
@@ -263,7 +263,7 @@ public class ConstantConditionsInterpreter {
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   public JvmIdentifiableElement getFeature(final XAbstractFeatureCall call, final EvaluationContext context) {
     Object _eGet = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
     JvmIdentifiableElement feature = ((JvmIdentifiableElement) _eGet);
@@ -272,7 +272,7 @@ public class ConstantConditionsInterpreter {
     }
     return feature;
   }
-  
+
   public XExpression getAssociatedExpression(final JvmField field) {
     final Resource resource = field.eResource();
     if ((resource instanceof StorageAwareResource)) {
@@ -283,7 +283,7 @@ public class ConstantConditionsInterpreter {
     }
     return this.logicalContainerProvider.getAssociatedExpression(field);
   }
-  
+
   public EvaluationResult evaluateAssociatedExpression(final XExpression it, final EvaluationContext context) {
     EvaluationResult _switchResult = null;
     boolean _matched = false;
@@ -301,11 +301,11 @@ public class ConstantConditionsInterpreter {
     }
     return _switchResult;
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XNullLiteral it, final EvaluationContext context) {
     return new EvaluationResult(null, true);
   }
-  
+
   private boolean isFromXbaseLibrary(final XAbstractFeatureCall it, final EvaluationContext context) {
     boolean _xblockexpression = false;
     {
@@ -332,7 +332,7 @@ public class ConstantConditionsInterpreter {
     }
     return _xblockexpression;
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XUnaryOperation it, final EvaluationContext context) {
     EvaluationResult _xifexpression = null;
     boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it, context);
@@ -383,7 +383,7 @@ public class ConstantConditionsInterpreter {
     }
     return _xifexpression;
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XBinaryOperation it, final EvaluationContext context) {
     if ((this.isFromXbaseLibrary(it, context) && (it.getRightOperand() != null))) {
       final EvaluationResult left = this.doEvaluate(it.getLeftOperand(), context);
@@ -471,91 +471,91 @@ public class ConstantConditionsInterpreter {
       return EvaluationResult.NOT_A_CONSTANT;
     }
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Object left, final Object right, final boolean compileTimeConstant) {
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Boolean left, final Boolean right, final boolean compileTimeConstant) {
     return new EvaluationResult(Boolean.valueOf(((left).booleanValue() && (right).booleanValue())), compileTimeConstant);
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Boolean left, final Object right, final boolean compileTimeConstant) {
     if ((!(left).booleanValue())) {
       return new EvaluationResult(Boolean.FALSE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Boolean left, final Void right, final boolean compileTimeConstant) {
     if ((!(left).booleanValue())) {
       return new EvaluationResult(Boolean.FALSE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Object left, final Boolean right, final boolean compileTimeConstant) {
     if ((!(right).booleanValue())) {
       return new EvaluationResult(Boolean.FALSE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalAnd(final Void left, final Boolean right, final boolean compileTimeConstant) {
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Object left, final Object right, final boolean compileTimeConstant) {
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Boolean left, final Boolean right, final boolean compileTimeConstant) {
     return new EvaluationResult(Boolean.valueOf(((left).booleanValue() || (right).booleanValue())), compileTimeConstant);
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Boolean left, final Object right, final boolean compileTimeConstant) {
     if ((left).booleanValue()) {
       return new EvaluationResult(Boolean.TRUE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Boolean left, final Void right, final boolean compileTimeConstant) {
     if ((left).booleanValue()) {
       return new EvaluationResult(Boolean.TRUE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Object left, final Boolean right, final boolean compileTimeConstant) {
     if ((right).booleanValue()) {
       return new EvaluationResult(Boolean.TRUE, compileTimeConstant);
     }
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalLogicalOr(final Void left, final Boolean right, final boolean compileTimeConstant) {
     return EvaluationResult.NOT_A_CONSTANT;
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XCastedExpression expression, final EvaluationContext context) {
     return this.doEvaluate(expression.getTarget(), context);
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XStringLiteral it, final EvaluationContext context) {
     String _value = it.getValue();
     return new EvaluationResult(_value, true);
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XBooleanLiteral it, final EvaluationContext context) {
     boolean _isIsTrue = it.isIsTrue();
     return new EvaluationResult(Boolean.valueOf(_isIsTrue), true);
   }
-  
+
   protected EvaluationResult _internalEvaluate(final XTypeLiteral it, final EvaluationContext context) {
     return new EvaluationResult(it, false);
   }
-  
+
   public EvaluationResult internalEvaluate(final XExpression it, final EvaluationContext context) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, context);
@@ -584,7 +584,7 @@ public class ConstantConditionsInterpreter {
         Arrays.<Object>asList(it, context).toString());
     }
   }
-  
+
   public EvaluationResult internalLogicalAnd(final Object left, final Object right, final boolean compileTimeConstant) {
     if (left instanceof Boolean
          && right instanceof Boolean) {
@@ -609,7 +609,7 @@ public class ConstantConditionsInterpreter {
         Arrays.<Object>asList(left, right, compileTimeConstant).toString());
     }
   }
-  
+
   public EvaluationResult internalLogicalOr(final Object left, final Object right, final boolean compileTimeConstant) {
     if (left instanceof Boolean
          && right instanceof Boolean) {
@@ -634,17 +634,17 @@ public class ConstantConditionsInterpreter {
         Arrays.<Object>asList(left, right, compileTimeConstant).toString());
     }
   }
-  
+
   @Pure
   protected ILogicalContainerProvider getLogicalContainerProvider() {
     return this.logicalContainerProvider;
   }
-  
+
   @Pure
   protected NumberLiterals getNumberLiterals() {
     return this.numberLiterals;
   }
-  
+
   @Pure
   protected ConstantOperators getConstantOperators() {
     return this.constantOperators;

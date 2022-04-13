@@ -61,12 +61,12 @@ public class PureXbaseFormatter extends XbaseFormatter {
   @Inject
   @Extension
   private PureXbaseGrammarAccess _pureXbaseGrammarAccess;
-  
+
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
     document.<XImportSection>format(model.getImportSection());
     document.<XBlockExpression>format(model.getBlock());
   }
-  
+
   @Override
   protected void _format(final XBlockExpression xBlockExpression, @Extension final IFormattableDocument document) {
     final Consumer<ISemanticRegion> _function = (ISemanticRegion it) -> {
@@ -81,7 +81,7 @@ public class PureXbaseFormatter extends XbaseFormatter {
       document.<XExpression>format(xExpression);
     }
   }
-  
+
   @Override
   public void format(final Object xBlockExpression, final IFormattableDocument document) {
     if (xBlockExpression instanceof JvmTypeParameter) {

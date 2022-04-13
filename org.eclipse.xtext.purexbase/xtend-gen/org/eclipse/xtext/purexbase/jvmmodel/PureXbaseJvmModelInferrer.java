@@ -39,7 +39,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
-  
+
   protected void _infer(final Model m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final XBlockExpression e = m.getBlock();
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
@@ -55,7 +55,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     };
     acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(e, this.name(e.eResource())), _function);
   }
-  
+
   public String name(final Resource res) {
     final String s = res.getURI().lastSegment();
     int _length = s.length();
@@ -63,7 +63,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     int _minus = (_length - _length_1);
     return s.substring(0, _minus);
   }
-  
+
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (m instanceof Model) {
       _infer((Model)m, acceptor, prelinkingPhase);

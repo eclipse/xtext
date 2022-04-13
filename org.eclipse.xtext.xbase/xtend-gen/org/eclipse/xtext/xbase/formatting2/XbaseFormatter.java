@@ -87,7 +87,7 @@ public class XbaseFormatter extends XtypeFormatter {
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Extension
   private XbaseGrammarAccess grammar;
-  
+
   protected void _format(final XCollectionLiteral literal, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -113,7 +113,7 @@ public class XbaseFormatter extends XtypeFormatter {
     final ISemanticRegion close = _elvis_1;
     this.formatCommaSeparatedList(literal.getElements(), open, close, document);
   }
-  
+
   protected void formatCommaSeparatedList(final Collection<? extends EObject> elements, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     if (((close == null) || (open == null))) {
     } else {
@@ -209,7 +209,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void _format(final JvmGenericArrayTypeReference array, @Extension final IFormattableDocument document) {
     List<ISemanticRegion> _ruleCallsTo = this.textRegionExtensions.regionFor(array).ruleCallsTo(this.grammar.getArrayBracketsRule());
     for (final ISemanticRegion region : _ruleCallsTo) {
@@ -218,14 +218,14 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     document.<JvmTypeReference>format(array.getComponentType());
   }
-  
+
   protected void _format(final JvmTypeConstraint constraint, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
     };
     document.<JvmTypeReference>format(document.<JvmTypeReference>prepend(constraint.getTypeReference(), _function));
   }
-  
+
   protected void _format(final XVariableDeclaration expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -246,7 +246,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<JvmTypeReference>format(expr.getType());
     format.<XExpression>format(expr.getRight());
   }
-  
+
   protected void _format(final XAssignment expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -267,14 +267,14 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>format(expr.getAssignable());
     format.<XExpression>format(expr.getValue());
   }
-  
+
   protected void formatFeatureCallParams(final List<XExpression> params, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     final XClosure builder = this.builder(params);
     final Iterable<XExpression> explicitParams = this.explicitParams(params);
     this.formatCommaSeparatedList(IterableExtensions.<XExpression>toList(explicitParams), open, close, format);
     this.formatBuilderWithLeadingGap(builder, format);
   }
-  
+
   protected void formatBuilderWithLeadingGap(final XClosure closure, @Extension final IFormattableDocument format) {
     if ((closure != null)) {
       final int offset = this.textRegionExtensions.previousHiddenRegion(closure).getOffset();
@@ -299,7 +299,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.formatConditionally(offset, length, _function, _function_1);
     }
   }
-  
+
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
     XExpression _last = IterableExtensions.<XExpression>last(params);
@@ -321,7 +321,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     return _xifexpression;
   }
-  
+
   protected Iterable<XExpression> explicitParams(final List<XExpression> params) {
     Iterable<XExpression> _xblockexpression = null;
     {
@@ -338,7 +338,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     return _xblockexpression;
   }
-  
+
   protected void _format(final XConstructorCall expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -377,7 +377,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.prepend(open, _function_3);
     this.formatFeatureCallParams(expr.getArguments(), open, close, format);
   }
-  
+
   protected void formatFeatureCallTypeParameters(final XAbstractFeatureCall expr, @Extension final IFormattableDocument format) {
     boolean _isEmpty = expr.getTypeArguments().isEmpty();
     boolean _not = (!_isEmpty);
@@ -405,7 +405,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.surround(this.textRegionExtensions.regionFor(expr).keyword(">"), _function_1);
     }
   }
-  
+
   protected void _format(final XFeatureCall expr, @Extension final IFormattableDocument format) {
     this.formatFeatureCallTypeParameters(expr, format);
     boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
@@ -423,7 +423,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void _format(final XMemberFeatureCall expr, @Extension final IFormattableDocument format) {
     EObject top = expr;
     IEObjectRegion _regionForEObject = this.textRegionExtensions.regionForEObject(expr);
@@ -496,7 +496,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
     final ISemanticRegion node = this.textRegionExtensions.regionFor(op).feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
     if (((node != null) && (node.getGrammarElement() instanceof RuleCall))) {
@@ -505,7 +505,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     return null;
   }
-  
+
   protected void _format(final XBinaryOperation expr, @Extension final IFormattableDocument format) {
     final AbstractRule precendece = this.binaryOperationPrecedence(expr);
     IEObjectRegion _regionForEObject = this.textRegionExtensions.regionForEObject(expr);
@@ -551,7 +551,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected boolean prependNewLineIfMultiline(final EObject obj) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -576,7 +576,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     return _switchResult;
   }
-  
+
   protected void _format(final XSynchronizedExpression expr, @Extension final IFormattableDocument format) {
     EObject _eContainer = expr.eContainer();
     if ((_eContainer instanceof XVariableDeclaration)) {
@@ -598,7 +598,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>format(expr.getParam());
     this.formatBody(expr.getExpression(), false, format);
   }
-  
+
   protected void _format(final XIfExpression expr, @Extension final IFormattableDocument format) {
     EObject _eContainer = expr.eContainer();
     if ((_eContainer instanceof XVariableDeclaration)) {
@@ -635,7 +635,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void _format(final XForLoopExpression expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -657,7 +657,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>format(format.<XExpression>append(format.<XExpression>prepend(expr.getForExpression(), _function_3), _function_4));
     this.formatBody(expr.getEachExpression(), true, format);
   }
-  
+
   protected void _format(final XBasicForLoopExpression expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -711,7 +711,7 @@ public class XbaseFormatter extends XtypeFormatter {
     expr.getUpdateExpressions().forEach(_function_8);
     this.formatBody(expr.getEachExpression(), true, format);
   }
-  
+
   protected void _format(final XWhileExpression expr, @Extension final IFormattableDocument format) {
     format.append(this.textRegionExtensions.regionFor(expr).keyword("while"), XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -723,7 +723,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>format(format.<XExpression>append(format.<XExpression>prepend(expr.getPredicate(), _function), _function_1));
     this.formatBody(expr.getBody(), true, format);
   }
-  
+
   protected void _format(final XDoWhileExpression expr, @Extension final IFormattableDocument format) {
     format.append(this.textRegionExtensions.regionFor(expr).keyword("while"), XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
@@ -735,7 +735,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>format(format.<XExpression>append(format.<XExpression>prepend(expr.getPredicate(), _function), _function_1));
     this.formatBodyInline(expr.getBody(), true, format);
   }
-  
+
   protected void _format(final XBlockExpression expr, @Extension final IFormattableDocument format) {
     final ISemanticRegion open = this.textRegionExtensions.regionFor(expr).keyword("{");
     final ISemanticRegion close = this.textRegionExtensions.regionFor(expr).keyword("}");
@@ -762,11 +762,11 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected boolean isSingleLineBlock(final XBlockExpression expr) {
     return false;
   }
-  
+
   protected void _format(final XTypeLiteral expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -791,7 +791,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void _format(final XThrowExpression expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -799,7 +799,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>prepend(expr.getExpression(), _function);
     format.<XExpression>format(expr.getExpression());
   }
-  
+
   protected void _format(final XReturnExpression expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -807,7 +807,7 @@ public class XbaseFormatter extends XtypeFormatter {
     format.<XExpression>prepend(expr.getExpression(), _function);
     format.<XExpression>format(expr.getExpression());
   }
-  
+
   protected void _format(final XTryCatchFinallyExpression expr, @Extension final IFormattableDocument format) {
     EObject _eContainer = expr.eContainer();
     if ((_eContainer instanceof XVariableDeclaration)) {
@@ -837,7 +837,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     this.formatBody(expr.getFinallyExpression(), true, format);
   }
-  
+
   protected void _format(final JvmFormalParameter expr, @Extension final IFormattableDocument format) {
     JvmTypeReference _parameterType = expr.getParameterType();
     if (_parameterType!=null) {
@@ -848,7 +848,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     format.<JvmTypeReference>format(expr.getParameterType());
   }
-  
+
   protected void _format(final XExpression expr, @Extension final IFormattableDocument format) {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
@@ -859,7 +859,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void _format(final XSwitchExpression expr, @Extension final IFormattableDocument format) {
     final Function1<XCasePart, Boolean> _function = (XCasePart it) -> {
       XExpression _then = it.getThen();
@@ -1048,7 +1048,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected ISemanticRegion formatClosureParams(final XClosure expr, final ISemanticRegion open, @Extension final IFormattableDocument format, final Procedure1<? super IHiddenRegionFormatter> init) {
     boolean _isExplicitSyntax = expr.isExplicitSyntax();
     if (_isExplicitSyntax) {
@@ -1084,7 +1084,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     return open;
   }
-  
+
   protected void _format(final XClosure expr, @Extension final IFormattableDocument format) {
     ISemanticRegion _elvis = null;
     ISemanticRegion _keyword = this.textRegionExtensions.regionFor(expr).keyword("[");
@@ -1201,7 +1201,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
       return;
@@ -1226,7 +1226,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
       return;
@@ -1254,7 +1254,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   protected void formatBodyParagraph(final XExpression expr, @Extension final IFormattableDocument doc) {
     if ((expr == null)) {
       return;
@@ -1278,7 +1278,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     doc.<XExpression>format(expr);
   }
-  
+
   protected void _format(final XInstanceOfExpression expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -1287,7 +1287,7 @@ public class XbaseFormatter extends XtypeFormatter {
     doc.<XExpression>format(expr.getExpression());
     doc.<JvmTypeReference>format(expr.getType());
   }
-  
+
   protected void _format(final XCastedExpression expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -1296,7 +1296,7 @@ public class XbaseFormatter extends XtypeFormatter {
     doc.<XExpression>format(expr.getTarget());
     doc.<JvmTypeReference>format(expr.getType());
   }
-  
+
   protected void _format(final XPostfixOperation expr, @Extension final IFormattableDocument doc) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
@@ -1304,7 +1304,7 @@ public class XbaseFormatter extends XtypeFormatter {
     doc.prepend(this.textRegionExtensions.regionFor(expr).feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE), _function);
     doc.<XExpression>format(expr.getOperand());
   }
-  
+
   protected void formatExpressionsMultiline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.indent();
@@ -1334,7 +1334,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected void formatExpressionsSingleline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     boolean _isEmpty = expressions.isEmpty();
     if (_isEmpty) {
@@ -1369,11 +1369,11 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     }
   }
-  
+
   protected boolean isMultilineOrInNewLine(final EObject obj) {
     return ((obj != null) && (this.textRegionExtensions.isMultiline(obj) || this.textRegionExtensions.previousHiddenRegion(obj).isMultiline()));
   }
-  
+
   public void format(final Object expr, final IFormattableDocument format) {
     if (expr instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)expr, format);
@@ -1491,7 +1491,7 @@ public class XbaseFormatter extends XtypeFormatter {
         Arrays.<Object>asList(expr, format).toString());
     }
   }
-  
+
   @Pure
   public XbaseGrammarAccess getGrammar() {
     return this.grammar;

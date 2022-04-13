@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 public class DefaultEarlyExitComputer implements IEarlyExitComputer {
   @Inject
   private EarlyExitInterpreter earlyExitInterpreter;
-  
+
   @Override
   public boolean isEarlyExit(final XExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> exitPoints = this.getExitPoints(expression);
@@ -51,11 +51,11 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return false;
   }
-  
+
   protected boolean isNotEmpty(final Collection<IEarlyExitComputer.ExitPoint> exitPoints) {
     return ((exitPoints != null) && (!exitPoints.isEmpty()));
   }
-  
+
   @Override
   public Collection<IEarlyExitComputer.ExitPoint> getExitPoints(final XExpression expression) {
     if ((expression == null)) {
@@ -63,24 +63,24 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return this.exitPoints(expression);
   }
-  
+
   /**
    * @param expression unused in this context but required in dispatch signature
    */
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XExpression expression) {
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XReturnExpression expression) {
     IEarlyExitComputer.ExitPoint _exitPoint = new IEarlyExitComputer.ExitPoint(expression, false);
     return Collections.<IEarlyExitComputer.ExitPoint>singletonList(_exitPoint);
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XThrowExpression expression) {
     IEarlyExitComputer.ExitPoint _exitPoint = new IEarlyExitComputer.ExitPoint(expression, true);
     return Collections.<IEarlyExitComputer.ExitPoint>singletonList(_exitPoint);
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XBlockExpression expression) {
     EList<XExpression> _expressions = expression.getExpressions();
     for (final XExpression child : _expressions) {
@@ -94,7 +94,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XBasicForLoopExpression expression) {
     EList<XExpression> _initExpressions = expression.getInitExpressions();
     for (final XExpression initExpression : _initExpressions) {
@@ -133,7 +133,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XForLoopExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> exitPoints = this.getExitPoints(expression.getForExpression());
     boolean _isNotEmpty = this.isNotEmpty(exitPoints);
@@ -142,7 +142,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XWhileExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> exitPoints = this.getExitPoints(expression.getPredicate());
     boolean _isNotEmpty = this.isNotEmpty(exitPoints);
@@ -161,11 +161,11 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected boolean isBooleanConstant(final XExpression expression, final boolean value) {
     return this.earlyExitInterpreter.isConstant(expression, Boolean.valueOf(value));
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XDoWhileExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> exitPoints = this.getExitPoints(expression.getBody());
     boolean _isNotEmpty = this.isNotEmpty(exitPoints);
@@ -184,11 +184,11 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XVariableDeclaration expression) {
     return this.getExitPoints(expression.getRight());
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XIfExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> ifExitPoints = this.getExitPoints(expression.getIf());
     boolean _isNotEmpty = this.isNotEmpty(ifExitPoints);
@@ -204,7 +204,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XSwitchExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> switchExitPoints = this.getExitPoints(expression.getSwitch());
     boolean _isNotEmpty = this.isNotEmpty(switchExitPoints);
@@ -238,7 +238,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return result;
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XAbstractFeatureCall expression) {
     EList<XExpression> _actualArguments = expression.getActualArguments();
     for (final XExpression argument : _actualArguments) {
@@ -252,7 +252,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XConstructorCall expression) {
     EList<XExpression> _arguments = expression.getArguments();
     for (final XExpression argument : _arguments) {
@@ -266,7 +266,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XTryCatchFinallyExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> tryExitPoints = this.getExitPoints(expression.getExpression());
     boolean _isNotEmpty = this.isNotEmpty(tryExitPoints);
@@ -288,7 +288,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return this.getExitPoints(expression.getFinallyExpression());
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> _exitPoints(final XSynchronizedExpression expression) {
     Collection<IEarlyExitComputer.ExitPoint> paramExitPoints = this.getExitPoints(expression.getParam());
     boolean _isNotEmpty = this.isNotEmpty(paramExitPoints);
@@ -297,7 +297,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     }
     return this.getExitPoints(expression.getExpression());
   }
-  
+
   protected Collection<IEarlyExitComputer.ExitPoint> exitPoints(final XExpression expression) {
     if (expression instanceof XDoWhileExpression) {
       return _exitPoints((XDoWhileExpression)expression);

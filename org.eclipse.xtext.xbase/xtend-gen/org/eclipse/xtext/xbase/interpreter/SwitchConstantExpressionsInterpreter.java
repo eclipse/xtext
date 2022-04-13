@@ -45,26 +45,26 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
   private static class SwitchContext extends Context {
     private boolean validationMode;
-    
+
     public SwitchContext(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String, JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {
       super(expectedType, classFinder, visibleFeatures, alreadyEvaluating);
     }
   }
-  
+
   @Inject
   @Extension
   private ILogicalContainerProvider _iLogicalContainerProvider;
-  
+
   @Inject
   @Extension
   private NumberLiterals numberLiterals;
-  
+
   public Object evaluate(final XExpression it) {
     HashSet<XExpression> _newHashSet = CollectionLiterals.<XExpression>newHashSet();
     Context _context = new Context(null, null, null, _newHashSet);
     return this.evaluate(it, _context);
   }
-  
+
   public Object evaluate(final XExpression it, final boolean validationMode) {
     Object _xblockexpression = null;
     {
@@ -75,11 +75,11 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     }
     return _xblockexpression;
   }
-  
+
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
     return this.numberLiterals.numberValue(it, this.numberLiterals.getJavaType(it));
   }
-  
+
   protected Object _internalEvaluate(final XAbstractFeatureCall it, final Context ctx) {
     JvmIdentifiableElement _feature = it.getFeature();
     final JvmIdentifiableElement feature = _feature;
@@ -141,7 +141,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     String _plus = ("Couldn\'t resolve feature " + _simpleName);
     throw new UnresolvableFeatureException(_plus, it);
   }
-  
+
   public Object evaluateAssociatedExpression(final XExpression it, final Context ctx) {
     Object _switchResult = null;
     boolean _matched = false;
@@ -157,7 +157,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     }
     return _switchResult;
   }
-  
+
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);

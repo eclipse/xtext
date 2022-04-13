@@ -49,7 +49,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 public class ImportsCollector {
   @Inject
   private XbaseGrammarAccess grammarAccess;
-  
+
   /**
    * Collects import declarations in XtextResource for the given range (selectedRegion)
    */
@@ -73,7 +73,7 @@ public class ImportsCollector {
       }
     }
   }
-  
+
   public EObject findActualSemanticObjectFor(final ICompositeNode rootNode, final ITextRegion textRegion) {
     ILeafNode leafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(rootNode, textRegion.getOffset());
     EObject semanticElementOffset = leafNodeAtOffset.getSemanticElement();
@@ -87,18 +87,18 @@ public class ImportsCollector {
     final EObject actualSemanticObj = actualOffsetNode.getSemanticElement();
     return actualSemanticObj;
   }
-  
+
   protected void _visit(final EObject semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
   }
-  
+
   protected void _visit(final JvmTypeReference semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
     this.visit(semanticElement.getType(), originNode, acceptor);
   }
-  
+
   protected void _visit(final XAbstractFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
     this.collectStaticImportsFrom(semanticObj, acceptor);
   }
-  
+
   protected void _visit(final XMemberFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
     if (((semanticObj.getFeature() instanceof JvmType) && semanticObj.isTypeLiteral())) {
       JvmIdentifiableElement _feature = semanticObj.getFeature();
@@ -117,7 +117,7 @@ public class ImportsCollector {
       this.collectStaticImportsFrom(semanticObj, acceptor);
     }
   }
-  
+
   protected void _visit(final XFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
     if (((semanticObj.getFeature() instanceof JvmType) && semanticObj.isTypeLiteral())) {
       JvmIdentifiableElement _feature = semanticObj.getFeature();
@@ -126,7 +126,7 @@ public class ImportsCollector {
       this.collectStaticImportsFrom(semanticObj, acceptor);
     }
   }
-  
+
   protected void _visit(final JvmGenericType jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     boolean _isAnonymous = jvmType.isAnonymous();
     if (_isAnonymous) {
@@ -135,7 +135,7 @@ public class ImportsCollector {
       this._visit(((JvmDeclaredType) jvmType), originNode, acceptor);
     }
   }
-  
+
   protected void _visit(final JvmDeclaredType jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     JvmDeclaredType _declaringType = jvmType.getDeclaringType();
     boolean _tripleEquals = (_declaringType == null);
@@ -150,34 +150,34 @@ public class ImportsCollector {
     }
     this.collectTypeImportFrom(outerType, acceptor);
   }
-  
+
   private JvmDeclaredType findDeclaringTypeBySimpleName(final JvmDeclaredType referencedType, final String outerSegment) {
     if (((referencedType.getDeclaringType() == null) || outerSegment.equals(referencedType.getSimpleName()))) {
       return referencedType;
     }
     return this.findDeclaringTypeBySimpleName(referencedType.getDeclaringType(), outerSegment);
   }
-  
+
   protected void _visit(final XConstructorCall semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
     this.visit(semanticElement.getConstructor().getDeclaringType(), originNode, acceptor);
   }
-  
+
   protected void _visit(final XAnnotation semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
     this.visit(semanticElement.getAnnotationType(), originNode, acceptor);
   }
-  
+
   protected void _visit(final XTypeLiteral semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
     final List<INode> elementNode = NodeModelUtils.findNodesForFeature(semanticElement, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
     this.visit(semanticElement.getType(), IterableExtensions.<INode>head(elementNode), acceptor);
   }
-  
+
   protected void _visit(final Void nullCase, final INode originNode, final ImportsAcceptor acceptor) {
   }
-  
+
   protected void collectTypeImportFrom(final JvmDeclaredType type, final ImportsAcceptor acceptor) {
     acceptor.acceptTypeImport(type);
   }
-  
+
   protected void collectStaticImportsFrom(final XAbstractFeatureCall abstractFeatureCall, final ImportsAcceptor acceptor) {
     boolean _isStatic = abstractFeatureCall.isStatic();
     if (_isStatic) {
@@ -189,7 +189,7 @@ public class ImportsCollector {
       }
     }
   }
-  
+
   protected String getFirstNameSegment(final String text_finalParam_) {
     String text = text_finalParam_;
     int firstDelimiter = text.indexOf(Character.valueOf('.').charValue());
@@ -218,13 +218,13 @@ public class ImportsCollector {
     }
     return text;
   }
-  
+
   @Inject
   private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-  
+
   @Inject
   private IScopeProvider scopeProvider;
-  
+
   private void addJavaDocReferences(final INode documentationNode, final ITextRegion selectedRegion, final ImportsAcceptor acceptor) {
     List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(documentationNode);
     for (final ReplaceRegion docTypeReference : _computeTypeRefRegions) {
@@ -256,7 +256,7 @@ public class ImportsCollector {
       }
     }
   }
-  
+
   public void visit(final EObject jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     if (jvmType instanceof JvmGenericType) {
       _visit((JvmGenericType)jvmType, originNode, acceptor);
