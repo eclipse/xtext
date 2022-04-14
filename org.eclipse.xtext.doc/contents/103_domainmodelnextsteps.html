@@ -50,7 +50,7 @@ public class HasAuthor {
 </code></pre>
   </li>
   <li>
-    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.</p>
+    <p>Now let’s answer the question how we determine the file name of the Java class that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> as a field into the generator.</p>
 
     <pre><code class="language-xtend">  @Inject extension IQualifiedNameProvider
 </code></pre>
