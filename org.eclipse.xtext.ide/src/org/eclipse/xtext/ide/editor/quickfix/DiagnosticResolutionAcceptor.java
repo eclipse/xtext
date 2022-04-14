@@ -3,7 +3,7 @@
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.quickfix;
@@ -21,11 +21,11 @@ import com.google.inject.Inject;
  * @author Heinrich Weichert
  *
  * @since 2.24
- * 
+ *
  */
 public class DiagnosticResolutionAcceptor {
 
-	private List<DiagnosticResolution> issues = new ArrayList<>();
+	private List<DiagnosticResolution> resolutions = new ArrayList<>();
 
 	private DiagnosticModificationContext.Factory modificationContextFactory;
 
@@ -35,12 +35,16 @@ public class DiagnosticResolutionAcceptor {
 	}
 
 	public void accept(String label, IModification<EObject> modification) {
-		issues.add(new DiagnosticResolution(label, modificationContextFactory, modification));
+		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, modification));
+	}
+
+	public void accept(String label, ITextModification modification) {
+		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, modification));
 	}
 
 	public List<DiagnosticResolution> getDiagnosticResolutions(Options options) {
-		issues.forEach(issue -> issue.configure(options));
-		return issues;
+		resolutions.forEach(resolution -> resolution.configure(options));
+		return resolutions;
 	}
 
 }
