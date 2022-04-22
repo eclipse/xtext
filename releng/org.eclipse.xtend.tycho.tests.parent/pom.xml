@@ -83,11 +83,6 @@
 							</requirement>
 							<requirement>
 								<type>eclipse-feature</type>
-								<id>org.eclipse.pde.api.tools.ee.feature</id>
-								<versionRange>1.0.0</versionRange>
-							</requirement>
-							<requirement>
-								<type>eclipse-feature</type>
 								<id>org.eclipse.jdt</id>
 								<versionRange>1.0.0</versionRange>
 							</requirement>
