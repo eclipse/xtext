@@ -14,7 +14,6 @@ MVN_ARGS=(\
   --batch-mode \
   --update-snapshots \
   --fae \
-  -Dmaven.test.failure.ignore=true \
   -Declipse.p2.mirrors=false \
   -Dtycho.disableP2Mirrors=true \
   -DJENKINS_URL=$JENKINS_URL \
