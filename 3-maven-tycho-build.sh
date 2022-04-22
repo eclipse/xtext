@@ -13,7 +13,6 @@ fi
 MVN_ARGS=(\
   --update-snapshots \
   --fae \
-  -Dmaven.test.failure.ignore=true \
   -Declipse.p2.mirrors=false \
   -DJENKINS_URL=$JENKINS_URL \
   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
