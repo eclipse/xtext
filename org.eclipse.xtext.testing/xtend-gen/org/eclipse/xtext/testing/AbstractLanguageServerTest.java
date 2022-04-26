@@ -1254,10 +1254,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
 
-  protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolConfiguraiton> configurator) {
+  protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolConfiguration> configurator) {
     try {
       @Extension
-      final DocumentSymbolConfiguraiton configuration = new DocumentSymbolConfiguraiton();
+      final DocumentSymbolConfiguration configuration = new DocumentSymbolConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final String fileUri = this.initializeContext(configuration).getUri();

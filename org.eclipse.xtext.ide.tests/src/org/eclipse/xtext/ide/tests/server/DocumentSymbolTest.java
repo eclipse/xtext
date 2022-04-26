@@ -8,7 +8,7 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
+import org.eclipse.xtext.testing.DocumentSymbolConfiguration;
 import org.junit.Test;
 
 /**
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class DocumentSymbolTest extends AbstractTestLangLanguageServerTest {
 	@Test
 	public void testDocumentSymbol_01() {
-		testDocumentSymbol((DocumentSymbolConfiguraiton it) -> {
+		testDocumentSymbol((DocumentSymbolConfiguration it) -> {
 			String model =
 					"type Foo {\n" +
 					"	int bar\n" +

@@ -12,7 +12,7 @@ import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.DocumentSymbolCapabilities;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
-import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
+import org.eclipse.xtext.testing.DocumentSymbolConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServ
 
 	@Test
 	public void testDocumentSymbol_01() {
-		testDocumentSymbol((DocumentSymbolConfiguraiton it) -> {
+		testDocumentSymbol((DocumentSymbolConfiguration it) -> {
 			it.setInitializer(HierarchicalDocumentSymbolTest.INITIALIZER);
 			String model =
 					"type Foo {\n" +
