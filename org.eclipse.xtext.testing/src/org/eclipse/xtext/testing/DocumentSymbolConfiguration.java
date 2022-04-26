@@ -15,7 +15,7 @@ import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
-public class DocumentSymbolConfiguraiton extends TextDocumentConfiguration {
+public class DocumentSymbolConfiguration extends TextDocumentConfiguration {
 	private String expectedSymbols = "";
 
 	private Procedure1<? super List<Either<SymbolInformation, DocumentSymbol>>> assertSymbols = null;

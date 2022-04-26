@@ -613,20 +613,20 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		assertEquals(expectedDocumentHighlight, actualDocumentHighlight);
 	}
 
-	protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
-		val extension configuration = new DocumentSymbolConfiguraiton
+	protected def void testDocumentSymbol((DocumentSymbolConfiguration)=>void configurator) {
+		val extension configuration = new DocumentSymbolConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
 
 		val fileUri = initializeContext(configuration).uri
 		val symbolsFuture = languageServer.documentSymbol(new DocumentSymbolParams(new TextDocumentIdentifier(fileUri)))
 		val symbols = symbolsFuture.get
-		if (configuration.assertSymbols !== null) {
-			configuration.assertSymbols.apply(symbols)
+		if (configuration.getAssertSymbols !== null) {
+			configuration.getAssertSymbols.apply(symbols)
 		} else {
 			val unwrappedSymbols = symbols.map[if(hierarchicalDocumentSymbolSupport) getRight else getLeft]
 			val String actualSymbols = unwrappedSymbols.toExpectation
-			assertEquals(expectedSymbols, actualSymbols)
+			assertEquals(getExpectedSymbols, actualSymbols)
 		}
 	}
 
