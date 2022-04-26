@@ -104,11 +104,11 @@ public class XtendCompilerMojoIT {
 		//https://bugs.eclipse.org/bugs/show_bug.cgi?id=409759
 		String outputdir = verifier.getBasedir() + "/relativeoutput-module/";
 
-		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendA.java");
-		verifier.assertFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendC.java");
+		verifier.verifyFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendA.java");
+		verifier.verifyFilePresent(outputdir + "src/main/generated-sources/xtend/test/XtendC.java");
 
-		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendA.java");
-		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendC.java");
+		verifier.verifyFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendA.java");
+		verifier.verifyFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendC.java");
 	}
 	
 	@Test
@@ -185,12 +185,12 @@ public class XtendCompilerMojoIT {
 		String xtendOutputDirFromPrefs = "generated-sources/xtend-from-pref";
 
 		String xtendGenDir = verifier.getBasedir() + "/src/main/" + xtendOutputDirFromPrefs;
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
+		verifier.verifyFilePresent(xtendGenDir + "/test/XtendA.java");
+		verifier.verifyFilePresent(xtendGenDir + "/test/XtendC.java");
 
 		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + xtendOutputDirFromPrefs;
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
+		verifier.verifyFilePresent(xtendTestGenDir + "/tests/XtendA.java");
+		verifier.verifyFilePresent(xtendTestGenDir + "/tests/XtendC.java");
 	}
 
 	@Test
@@ -202,12 +202,12 @@ public class XtendCompilerMojoIT {
 		String pomsOutputDir = "xtend-dir-from-pom";
 
 		String xtendGenDir = verifier.getBasedir() + "/src/main/" + pomsOutputDir;
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
-		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
+		verifier.verifyFilePresent(xtendGenDir + "/test/XtendA.java");
+		verifier.verifyFilePresent(xtendGenDir + "/test/XtendC.java");
 
 		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + pomsOutputDir;
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
-		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
+		verifier.verifyFilePresent(xtendTestGenDir + "/tests/XtendA.java");
+		verifier.verifyFilePresent(xtendTestGenDir + "/tests/XtendC.java");
 	}
 
 	@Test
@@ -224,15 +224,15 @@ public class XtendCompilerMojoIT {
 			verifier.verifyErrorFreeLog();
 			String outputdir = verifier.getBasedir();
 
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendA.java");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendC.java");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendA.java._trace");
-			verifier.assertFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendC.java._trace");
+			verifier.verifyFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendA.java");
+			verifier.verifyFilePresent(outputdir + "/src/main/generated-sources/xtend/test/XtendC.java");
+			verifier.verifyFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendA.java._trace");
+			verifier.verifyFilePresent(outputdir + "/src/main/generated-sources/xtend/test/.XtendC.java._trace");
 
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooClass.java");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooTest.java");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooClass.java._trace");
-			verifier.assertFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooTest.java._trace");
+			verifier.verifyFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooClass.java");
+			verifier.verifyFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/FooTest.java");
+			verifier.verifyFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooClass.java._trace");
+			verifier.verifyFilePresent(outputdir + "/src/test/generated-sources/xtend/foo/.FooTest.java._trace");
 		} finally {
 			link.delete();
 			link2.delete();
@@ -288,8 +288,8 @@ public class XtendCompilerMojoIT {
 		return (!_equals_1);
 	}
 
-	public void assertFileContainsUTF16(Verifier verifier, String file, String contained) {
-		verifier.assertFilePresent(file);
+	public void assertFileContainsUTF16(Verifier verifier, String file, String contained) throws VerificationException {
+		verifier.verifyFilePresent(file);
 		try {
 			String content = FileUtils.fileRead(new File(file), "UTF-16");
 			if (!content.contains(contained)) {
@@ -300,8 +300,8 @@ public class XtendCompilerMojoIT {
 		}
 	}
 	
-	public void assertFileDoesNotContain(Verifier verifier, String file, String contained) {
-		verifier.assertFilePresent(file);
+	public void assertFileDoesNotContain(Verifier verifier, String file, String contained) throws VerificationException {
+		verifier.verifyFilePresent(file);
 		try {
 			String content = FileUtils.fileRead(new File(file), "UTF-8");
 			if (content.contains(contained)) {
