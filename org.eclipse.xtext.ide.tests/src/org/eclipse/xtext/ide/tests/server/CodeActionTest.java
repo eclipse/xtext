@@ -24,12 +24,20 @@ public class CodeActionTest extends AbstractTestLangLanguageServerTest {
 			it.setModel(model);
 			// contains quickfix and edit command
 			String expectedCodeActions =
-					"title : Change element name to first upper\n" +
+					"title : Change element name to first upper using object modification\n" +
 					"kind : quickfix\n" +
 					"command : \n" +
 					"codes : invalidName\n" +
 					"edit : changes :\n" +
 					"    MyModel.testlang : Foo [[0, 5] .. [0, 8]]\n" +
+					"documentChanges : \n" +
+					"title : Change element name to first upper using text replacement\n" +
+					"kind : quickfix\n" +
+					"command : \n" +
+					"codes : invalidName\n" +
+					"edit : changes :\n" +
+					"    MyModel.testlang : type Foo {\n" +
+					"    } [[0, 5] .. [0, 8]]\n" +
 					"documentChanges : \n" +
 					"command : my.textedit.command\n" +
 					"title : Make \'foo\' upper case (Command)\n" +

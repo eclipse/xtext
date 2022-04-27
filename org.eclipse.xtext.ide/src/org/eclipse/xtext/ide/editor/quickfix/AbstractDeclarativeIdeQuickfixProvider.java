@@ -68,19 +68,19 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 				.collect(Collectors.toList());
 	}
 
-	private Iterable<Method> getFixMethods(Diagnostic issue) {
-		if (Strings.isNullOrEmpty(issue.getCode().getLeft())) {
+	private Iterable<Method> getFixMethods(Diagnostic diagnostic) {
+		if (Strings.isNullOrEmpty(diagnostic.getCode().getLeft())) {
 			return Collections.emptyList();
 		}
-		return collectMethods(getClass(), issue.getCode().getLeft());
+		return collectMethods(getClass(), diagnostic.getCode().getLeft());
 	}
 
 	@Override
-	public List<DiagnosticResolution> getResolutions(Options options, Diagnostic issue) {
-		if (issue == null || issue.getCode() == null || issue.getMessage() == null || issue.getSeverity() == null) {
+	public List<DiagnosticResolution> getResolutions(Options options, Diagnostic diagnostic) {
+		if (diagnostic == null || diagnostic.getCode() == null || diagnostic.getMessage() == null || diagnostic.getSeverity() == null) {
 			return Collections.emptyList();
 		}
-		return getResolutions(options, getFixMethods(issue));
+		return getResolutions(options, getFixMethods(diagnostic));
 	}
 
 }

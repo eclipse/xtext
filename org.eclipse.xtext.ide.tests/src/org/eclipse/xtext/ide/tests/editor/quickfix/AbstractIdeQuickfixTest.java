@@ -200,14 +200,14 @@ public abstract class AbstractIdeQuickfixTest {
 
 		options.setCodeActionParams(codeActionParams);
 
-		List<DiagnosticResolution> actualIssueResolutions = IterableExtensions.sortBy(quickFixProvider.getResolutions(options, issue),
-				DiagnosticResolution::getLabel);
-		assertEquals("The number of quickfixes does not match!", expectedSorted.size(),
-				actualIssueResolutions.size());
+		for (QuickfixExpectation expectedIssueResolution: expectedSorted) {
+			List<DiagnosticResolution> actualIssueResolutions = 
+					quickFixProvider.getResolutions(options, issue).stream()
+					.filter(r -> r.getLabel().equals(expectedIssueResolution.getLabel()))
+					.collect(Collectors.toList());
+			assertEquals("More than one quickfix available!", 1, actualIssueResolutions.size());
 
-		for (int i = 0; i < actualIssueResolutions.size(); i++) {
-			DiagnosticResolution actualIssueResolution = actualIssueResolutions.get(i);
-			QuickfixExpectation expectedIssueResolution = expectedSorted.get(i);
+			DiagnosticResolution actualIssueResolution = actualIssueResolutions.get(0);
 
 			assertEquals(expectedIssueResolution.label, actualIssueResolution.getLabel());
 			assertEquals(expectedIssueResolution.description, actualIssueResolution.getLabel());

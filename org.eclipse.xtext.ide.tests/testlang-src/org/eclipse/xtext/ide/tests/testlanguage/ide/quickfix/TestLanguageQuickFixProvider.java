@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix;
 
+import java.util.Collections;
+
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.editor.quickfix.AbstractDeclarativeIdeQuickfixProvider;
 import org.eclipse.xtext.ide.editor.quickfix.DiagnosticResolutionAcceptor;
 import org.eclipse.xtext.ide.editor.quickfix.QuickFix;
@@ -17,12 +20,26 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 public class TestLanguageQuickFixProvider extends AbstractDeclarativeIdeQuickfixProvider {
 
-	@QuickFix(TestLanguageValidator.INVALID_NAME)
-	public void fixLowerCaseName(DiagnosticResolutionAcceptor acceptor) {
-		acceptor.accept("Change element name to first upper", obj -> {
-			final TypeDeclaration element = (TypeDeclaration) obj;
-			element.setName(StringExtensions.toFirstUpper(element.getName()));
-		});
+	public static String EMF_QF_LABEL = "Change element name to first upper using object modification";
+	public static String TEXT_QF_LABEL = "Change element name to first upper using text replacement";
+
+	private String fixedName(TypeDeclaration declaration) {
+		return StringExtensions.toFirstUpper(declaration.getName());
 	}
 
+	@QuickFix(TestLanguageValidator.INVALID_NAME)
+	public void fixLowerCaseName(DiagnosticResolutionAcceptor acceptor) {
+		acceptor.accept(EMF_QF_LABEL, obj -> {
+			TypeDeclaration declaration = (TypeDeclaration) obj;
+			declaration.setName(fixedName(declaration));
+		});
+	}
+	
+	@QuickFix(TestLanguageValidator.INVALID_NAME)
+	public void textFixLowerCaseName(DiagnosticResolutionAcceptor acceptor) {
+		acceptor.accept(TEXT_QF_LABEL,  (diagnostic, obj, document) -> {
+			TextEdit textEdit = new TextEdit(diagnostic.getRange(), "type " + fixedName((TypeDeclaration) obj) + " {\n}");
+			return Collections.singletonList(textEdit);
+		});
+	}
 }

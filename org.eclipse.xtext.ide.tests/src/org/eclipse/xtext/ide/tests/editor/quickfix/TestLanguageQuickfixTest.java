@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.tests.editor.quickfix;
 
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix.TestLanguageQuickFixProvider;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
 import org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator;
 import org.eclipse.xtext.testing.InjectWith;
@@ -24,21 +25,39 @@ import org.junit.runner.RunWith;
 public class TestLanguageQuickfixTest extends AbstractIdeQuickfixTest {
 
 	@Test
-	public void issueProducesTextualChange() {
+	public void issueProducesEMFChange() {
 
 		String actual = "package testLanguage {"
 				+ "\n"
 				+ "\n"
 				+ "type myType {"
-				+ "\n" +
-				"}\n"
+				+ "\n"
+				+ "}\n"
 				+ "}";
 
 		// quickfix replaces first char to Upper
 		// see: org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix.TestLanguageQuickFixProvider.fixLowerCaseName(DiagnosticResolutionAcceptor)
 		String expected = actual.toString().replace("myType", "MyType");
 
-		assertQuickFixOn(actual, expected, "Change element name to first upper", TestLanguageValidator.INVALID_NAME, TestLanguagePackage.Literals.TYPE_DECLARATION);
+		assertQuickFixOn(actual, expected, TestLanguageQuickFixProvider.EMF_QF_LABEL, TestLanguageValidator.INVALID_NAME, TestLanguagePackage.Literals.TYPE_DECLARATION);
+	}
+
+	@Test
+	public void issueProducesTextualChange() {
+
+		String actual = "package testLanguage {"
+				+ "\n"
+				+ "\n"
+				+ "type myType {"
+				+ "\n"
+				+ "}\n"
+				+ "}";
+
+		// quickfix replaces first char to Upper
+		// see: org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix.TestLanguageQuickFixProvider.textFixLowerCaseName(DiagnosticResolutionAcceptor)
+		String expected = actual.toString().replace("myType", "MyType");
+
+		assertQuickFixOn(actual, expected, TestLanguageQuickFixProvider.TEXT_QF_LABEL, TestLanguageValidator.INVALID_NAME, TestLanguagePackage.Literals.TYPE_DECLARATION);
 	}
 
 }

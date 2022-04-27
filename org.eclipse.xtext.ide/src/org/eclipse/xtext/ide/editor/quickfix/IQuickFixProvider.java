@@ -33,10 +33,10 @@ public interface IQuickFixProvider {
 	 *
 	 * @param options
 	 *            Contextual action options
-	 * @param issue
-	 *            EMF diagnostic issue
+	 * @param diagnostic
+	 *            the diagnostic
 	 * @return 0..n resolutions for the given issue
 	 */
-	List<DiagnosticResolution> getResolutions(Options options, Diagnostic issue);
+	List<DiagnosticResolution> getResolutions(Options options, Diagnostic diagnostic);
 
 }

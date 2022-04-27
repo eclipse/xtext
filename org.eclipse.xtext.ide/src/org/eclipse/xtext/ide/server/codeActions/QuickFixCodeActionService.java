@@ -3,14 +3,16 @@
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.codeActions;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -28,12 +30,12 @@ import com.google.common.annotations.Beta;
 
 /**
  * {@link ICodeActionService2} handling quick-fixes annotated with {@link CodeActionKind#QuickFix}.
- * 
+ *
  * @author Heinrich Weichert
- * 
+ *
  * @see AbstractDeclarativeIdeQuickfixProvider
  * @see QuickFix
- * 
+ *
  * @since 2.24
  */
 @Beta
@@ -44,26 +46,29 @@ public class QuickFixCodeActionService implements ICodeActionService2 {
 
 	@Override
 	public List<Either<Command, CodeAction>> getCodeActions(Options options) {
-		List<Either<Command, CodeAction>> result = new ArrayList<>();
-
 		boolean handleQuickfixes = options.getCodeActionParams().getContext().getOnly() == null
 				|| options.getCodeActionParams().getContext().getOnly().isEmpty()
 				|| options.getCodeActionParams().getContext().getOnly().contains(CodeActionKind.QuickFix);
 
-		if (handleQuickfixes) {
-			for (Diagnostic error : options.getCodeActionParams().getContext().getDiagnostics()) {
-				List<DiagnosticResolution> resolutions = quickfixes.getResolutions(options, error);
-				for (DiagnosticResolution resolution : resolutions) {
-					result.add(Either.forRight(createFix(resolution, error)));
-				}
+		if (!handleQuickfixes) {
+			return Collections.emptyList();
+		}
+
+		List<Either<Command, CodeAction>> result = new ArrayList<>();
+		for (Diagnostic diagnostic : options.getCodeActionParams().getContext().getDiagnostics()) {
+			List<DiagnosticResolution> resolutions = quickfixes.getResolutions(options, diagnostic).stream()
+					.sorted(Comparator.nullsLast(Comparator.comparing(DiagnosticResolution::getLabel)))
+					.collect(Collectors.toList());
+			for (DiagnosticResolution resolution : resolutions) {
+				result.add(Either.forRight(createFix(resolution, diagnostic)));
 			}
 		}
 		return result;
 	}
 
-	private CodeAction createFix(DiagnosticResolution resolution, Diagnostic error) {
+	private CodeAction createFix(DiagnosticResolution resolution, Diagnostic diagnostic) {
 		CodeAction codeAction = new CodeAction();
-		codeAction.setDiagnostics(Collections.singletonList(error));
+		codeAction.setDiagnostics(Collections.singletonList(diagnostic));
 		codeAction.setTitle(resolution.getLabel());
 		codeAction.setEdit(resolution.apply());
 		codeAction.setKind(CodeActionKind.QuickFix);
