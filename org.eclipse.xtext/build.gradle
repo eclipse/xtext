@@ -17,7 +17,7 @@ dependencies {
 	optional 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
 	optional 'org.eclipse.xpand:org.eclipse.xtend'
 	optional 'org.eclipse.xpand:org.eclipse.xtend.typesystem.emf'
-	optional 'org.ow2.asm:asm-commons'
+	optional 'org.ow2.asm:asm'
 }
 
 sourceSets.main {

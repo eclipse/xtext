@@ -60,14 +60,6 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm</artifactId>
 						</dependency>
-						<dependency>
-							<groupId>org.ow2.asm</groupId>
-							<artifactId>asm-commons</artifactId>
-						</dependency>
-						<dependency>
-							<groupId>org.ow2.asm</groupId>
-							<artifactId>asm-tree</artifactId>
-						</dependency>
 					</dependencies>
 				«ENDIF»
 				<build>

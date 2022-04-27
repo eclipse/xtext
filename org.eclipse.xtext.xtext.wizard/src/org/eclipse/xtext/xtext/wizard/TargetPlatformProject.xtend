@@ -105,7 +105,6 @@ class TargetPlatformProject extends ProjectDescriptor {
 							<unit id="org.opentest4j" version="1.2.0.v20211018-1956"/>
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
-						<unit id="org.objectweb.asm.tree" version="9.3.0.v20220409-0157"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
 						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
 					</location>
@@ -119,7 +118,6 @@ class TargetPlatformProject extends ProjectDescriptor {
 							<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
-						<unit id="org.objectweb.asm.tree" version="9.3.0.v20220409-0157"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
 						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
 					</location>
