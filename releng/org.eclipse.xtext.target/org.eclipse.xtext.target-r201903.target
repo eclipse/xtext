@@ -90,7 +90,6 @@
 		<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 		<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
 		<unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
-		<unit id="org.apache.commons.cli" version="1.2.0.v201404270220"/>
 		<unit id="org.apiguardian" version="0.0.0"/>
 		<unit id="org.junit.jupiter.api" version="0.0.0"/>
 		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
@@ -100,10 +99,10 @@
 		<unit id="org.junit.platform.commons" version="0.0.0"/>
 		<unit id="org.junit.platform.engine" version="0.0.0"/>
 		<unit id="org.opentest4j" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="9.2.0.v20210813-1119"/>
-		<unit id="org.objectweb.asm.tree" version="9.2.0.v20210813-1119"/>
+		<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
+		<unit id="org.objectweb.asm.tree" version="9.3.0.v20220409-0157"/>
 		<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-		<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-03"/>
+		<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
 	</location>
 </locations>
 </target>

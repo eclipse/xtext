@@ -147,7 +147,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2022-03"/>
+      value="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -863,10 +863,10 @@
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
             name="org.objectweb.asm"
-            versionRange="[9.2.0,9.3.0)"/>
+            versionRange="[9.3.0,9.4.0)"/>
         <requirement
             name="org.objectweb.asm.tree"
-            versionRange="[9.2.0,9.3.0)"/>
+            versionRange="[9.3.0,9.4.0)"/>
         <requirement
             name="io.github.classgraph"
             versionRange="[4.8.138,4.9.0)"/>
