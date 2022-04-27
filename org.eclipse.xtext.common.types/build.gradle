@@ -8,7 +8,7 @@ description = 'JVM type model used by Xbase and other languages.'
 
 dependencies {
 	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	api 'org.ow2.asm:asm-commons'
+	api 'org.ow2.asm:asm'
 	api 'io.github.classgraph:classgraph'
 	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
 	mwe2Implementation 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
