@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix;
 
-import java.util.Collections;
-
-import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.editor.quickfix.AbstractDeclarativeIdeQuickfixProvider;
 import org.eclipse.xtext.ide.editor.quickfix.DiagnosticResolutionAcceptor;
 import org.eclipse.xtext.ide.editor.quickfix.QuickFix;
@@ -37,9 +34,8 @@ public class TestLanguageQuickFixProvider extends AbstractDeclarativeIdeQuickfix
 	
 	@QuickFix(TestLanguageValidator.INVALID_NAME)
 	public void textFixLowerCaseName(DiagnosticResolutionAcceptor acceptor) {
-		acceptor.accept(TEXT_QF_LABEL,  (diagnostic, obj, document) -> {
-			TextEdit textEdit = new TextEdit(diagnostic.getRange(), "type " + fixedName((TypeDeclaration) obj) + " {\n}");
-			return Collections.singletonList(textEdit);
-		});
+		acceptor.accept(TEXT_QF_LABEL,  (diagnostic, obj, document) -> 
+			createTextEdit(diagnostic, "type " + fixedName((TypeDeclaration) obj) + " {\n}")
+		);
 	}
 }

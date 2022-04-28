@@ -35,9 +35,19 @@ public class DiagnosticResolutionAcceptor {
 	}
 
 	public void accept(String label, IModification<EObject> modification) {
+		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, (diagnostic, object) -> modification));
+	}
+
+	/**
+	 * @since 2.27
+	 */
+	public void accept(String label, ISemanticModification modification) {
 		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, modification));
 	}
 
+	/**
+	 * @since 2.27
+	 */
 	public void accept(String label, ITextModification modification) {
 		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, modification));
 	}
