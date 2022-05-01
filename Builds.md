@@ -176,10 +176,7 @@ After everything above has run smoothly, it is finally time for some manual step
    * Run job [update-composite-sites](https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/)
 9. Check availability of artifacts on Maven Central
    * It can take some hours until the artifacts are mirrored to Maven Central. 
-     _Note_: search.maven.org might not show the new release immediately when it is available. Check the availability of the artifacts for example with
-     ```
-    mvn dependency:get -U -DgroupId=org.eclipse.xtext -DartifactId=org.eclipse.xtext -Dversion=<VERSION>
-     ```
+     _Note_: search.maven.org might not show the new release immediately when it is available. Check the availability of the artifacts for example with `mvn dependency:get -U -DgroupId=org.eclipse.xtext -DartifactId=org.eclipse.xtext -Dversion=<VERSION>`
 9. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
