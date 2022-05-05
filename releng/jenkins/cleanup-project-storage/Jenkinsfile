@@ -1,44 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'releng-cleanup-nightly-drops-' + env.BUILD_NUMBER
-      defaultContainer 'jnlp'
-      yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
-    resources:
-      limits:
-        memory: "3.6Gi"
-        cpu: "1.0"
-      requests:
-        memory: "3.6Gi"
-        cpu: "1.0"
-    volumeMounts:
-    - mountPath: /home/jenkins/.ssh
-      name: volume-known-hosts
-    - name: settings-xml
-      mountPath: /home/jenkins/.m2/settings.xml
-      subPath: settings.xml
-      readOnly: true
-    - name: m2-repo
-      mountPath: /home/jenkins/.m2/repository
-  volumes:
-  - name: volume-known-hosts
-    configMap:
-      name: known-hosts
-  - name: settings-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings.xml
-        path: settings.xml
-  - name: m2-repo
-    emptyDir: {}
-    '''
+      inheritFrom 'centos-8'
     }
   }
 
