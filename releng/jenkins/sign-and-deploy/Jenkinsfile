@@ -1,78 +1,9 @@
 pipeline {
   agent {
     kubernetes {
-      label 'sign-and-deploy-' + env.BUILD_NUMBER
-      defaultContainer 'jnlp'
-      yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
-    volumeMounts:
-    - mountPath: /home/jenkins/.ssh
-      name: volume-known-hosts
-    resources:
-      limits:
-        memory: "0.5Gi"
-        cpu: "0.2"
-      requests:
-        memory: "0.5Gi"
-        cpu: "0.2"
-  - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.9
-    tty: true
-    resources:
-      limits:
-        memory: "3.5Gi"
-        cpu: "1.0"
-      requests:
-        memory: "3.5Gi"
-        cpu: "1.0"
-    volumeMounts:
-    - name: settings-xml
-      mountPath: /home/jenkins/.m2/settings.xml
-      subPath: settings.xml
-      readOnly: true
-    - name: toolchains-xml
-      mountPath: /home/jenkins/.m2/toolchains.xml
-      subPath: toolchains.xml
-      readOnly: true
-    - name: settings-security-xml
-      mountPath: /home/jenkins/.m2/settings-security.xml
-      subPath: settings-security.xml
-      readOnly: true
-    - name: m2-repo
-      mountPath: /home/jenkins/.m2/repository
-  volumes:
-  - name: volume-known-hosts
-    configMap:
-      name: known-hosts
-  - name: settings-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings.xml
-        path: settings.xml
-  - name: toolchains-xml
-    configMap:
-      name: m2-dir
-      items:
-      - key: toolchains.xml
-        path: toolchains.xml
-  - name: settings-security-xml
-    secret:
-      secretName: m2-secret-dir
-      items:
-      - key: settings-security.xml
-        path: settings-security.xml
-  - name: m2-repo
-    emptyDir: {}
-    '''
+      inheritFrom 'centos-7'
     }
   }
-
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
     disableConcurrentBuilds()
@@ -104,6 +35,11 @@ spec:
     KEYRING = credentials('secret-subkeys.asc')
     SCRIPTS = "$WORKSPACE/umbrella/releng/jenkins/sign-and-deploy/scripts"
     GITHUB_API_CREDENTIALS_ID = 'github-bot-token'
+    GRADLE_USER_HOME = "$WORKSPACE/.gradle" // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564559
+  }
+
+  tools {
+    jdk "temurin-jdk8-latest"
   }
 
   stages {
@@ -123,36 +59,31 @@ spec:
       }
       steps {
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
-          container ('jnlp') {
-            sh '''
-              # Remove old milestones from update site
-              # Intentionally leave composite*.xml files, as they will be updated at the end.
-              # Intentionally leave p2.index file so that we don't have to recreate it.
-              ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/S*"
-              # Remove old milestones from drop location
-              ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops/*/S*"
-            '''
-          }
+          sh '''
+            # Remove old milestones from update site
+            # Intentionally leave composite*.xml files, as they will be updated at the end.
+            # Intentionally leave p2.index file so that we don't have to recreate it.
+            ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/S*"
+            # Remove old milestones from drop location
+            ssh genie.xtext@projects-storage.eclipse.org "rm -rf /home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops/*/S*"
+          '''
         }
       }
     }
 
     stage('Determine Xtext version') {
       steps {
-        container ('jnlp') {
-          withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
-            dir('publishing') {
-              sh('curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_TO_DEPLOY | jq -r ".content" | base64 -d | grep -Po "version = \\\'\\K([^\\\']*)(?=\\\')" > version.txt')
-              sh("cat version.txt")
-            } // END dir
-          } // END withCredentials
-        } // END container
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+          dir('publishing') {
+            sh('curl -sSL -H "Cookie: logged_in=no" -H "Authorization: token $GITHUB_API_TOKEN" -H "Content-Type: text/plain; charset=utf-8" https://api.github.com/repos/eclipse/xtext-lib/contents/gradle/versions.gradle?ref=$BRANCH_TO_DEPLOY | jq -r ".content" | base64 -d | grep -Po "version = \\\'\\K([^\\\']*)(?=\\\')" > version.txt')
+            sh("cat version.txt")
+          } // END dir
+        } // END withCredentials
       } // END steps
     } // END stage
 
     stage('Sign & Upload to OSSRH') {
       steps {
-        container ('xtext-buildenv') {
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
         dir('publishing') {
         sh ''' 
@@ -174,19 +105,16 @@ spec:
             -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
             -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
             -Posspub.branch=$BRANCH_TO_DEPLOY \
-            -Psigning.secretKeyRingFile=/home/default/.gnupg/secring.gpg \
+            -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
             -Psigning.keyId=D1AE0CFD \
             clean publishMavenXtext publishEclipseXtext
         '''
         } // END dir
-        } // END container
       }
     }
     
     stage('Deploy to Eclipse project storage') {
       steps {
-        // this has to run in the xtext-devenv container, since jnlp container does not have a 'zip' command installed
-        container ('xtext-buildenv') {
         dir('publishing') {
         sh '''
           #
@@ -212,11 +140,8 @@ spec:
           
         '''
         } // END dir
-        } // END container
         
-        // remote commands require the jnlp container
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
-        container ('jnlp') {
         dir('publishing') {
           sh '''
           XTEXT_VERSION=$(cat version.txt)
@@ -274,7 +199,6 @@ spec:
           echo "repository.url=$REPOSITORY_URL" >> build-result/promote.properties
           '''
         } // END dir
-        } // END container
         } // END sshagent
       }
     }
