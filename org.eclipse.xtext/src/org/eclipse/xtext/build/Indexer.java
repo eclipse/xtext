@@ -194,23 +194,22 @@ public class Indexer {
 		}
 		Set<IResourceDescription.Delta> allDeltas = new HashSet<>(deltas);
 		allDeltas.addAll(request.getExternalDeltas());
-		Set<URI> remainingURIs = FluentIterable.from(previousIndex.getAllResourceDescriptions())
-				.transform(IResourceDescription::getURI).copyInto(new HashSet<>());
-		remainingURIs.removeAll(FluentIterable.from(deltas).transform(Delta::getUri).toSet());
-		List<URI> allAffected = FluentIterable.from(remainingURIs).filter(it -> {
-			IResourceServiceProvider resourceServiceProvider = context.getResourceServiceProvider(it);
-			if (resourceServiceProvider != null) {
-				IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
-				IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-				return isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
-			} else {
-				IResourceDescription.Delta delta = getDeltaForDeletedResource(it, previousIndex);
-				if (delta != null) {
-					deltas.add(delta);
-				}
-				return false;
-			}
-		}).toList();
+		Set<URI> deltaSet = FluentIterable.from(deltas).transform(Delta::getUri).toSet();
+		List<URI> allAffected = FluentIterable.from(previousIndex.getAllResourceDescriptions())
+				.transform(IResourceDescription::getURI).filter(it -> !deltaSet.contains(it)).filter(it -> {
+					IResourceServiceProvider resourceServiceProvider = context.getResourceServiceProvider(it);
+					if (resourceServiceProvider != null) {
+						IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
+						IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
+						return isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
+					} else {
+						IResourceDescription.Delta delta = getDeltaForDeletedResource(it, previousIndex);
+						if (delta != null) {
+							deltas.add(delta);
+						}
+						return false;
+					}
+				}).toList();
 		deltas.addAll(getDeltasForChangedResources(allAffected, previousIndex, context));
 		return new Indexer.IndexResult(deltas, newIndex);
 	}
