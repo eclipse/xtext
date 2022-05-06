@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2.Options;
 
 import com.google.common.annotations.Beta;
@@ -83,4 +84,18 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 		return getResolutions(options, getFixMethods(diagnostic));
 	}
 
+	/**
+	 * Creates a singleton list with only one {@link TextEdit} that replaces the region of the diagnostic with the given
+	 * text
+	 * 
+	 * @param diagnostic
+	 *            the {@link Diagnostic}
+	 * @param text
+	 *            the text
+	 * @return a singleton list with only one {@link TextEdit}
+	 * @since 2.27
+	 */
+	protected List<TextEdit> createTextEdit(Diagnostic diagnostic, String text) {
+		return Collections.singletonList(new TextEdit(diagnostic.getRange(), text));
+	}
 }

@@ -37,7 +37,7 @@ public class DiagnosticResolution {
 
 	private String label;
 
-	private IModification<EObject> modification;
+	private ISemanticModification modification;
 
 	private final ITextModification textModification;
 
@@ -46,6 +46,16 @@ public class DiagnosticResolution {
 	private int relevance;
 
 	private Options options;
+
+	@Deprecated//(forRemoval=true,since="2.27")
+	public DiagnosticResolution(String label, Factory modificationContextFactory,  IModification<EObject> modification) {
+		this(label, modificationContextFactory, (diagnostic, object) -> modification, 0);
+	}
+
+	@Deprecated//(forRemoval=true,since="2.27")
+	public DiagnosticResolution(String label, Factory modificationContextFactory,  IModification<EObject> modification, int relevance) {
+		this(label, modificationContextFactory, (diagnostic, object) -> modification, relevance);
+	}
 
 	/**
 	 * @since 2.27
@@ -65,11 +75,17 @@ public class DiagnosticResolution {
 		this.relevance = relevance;
 	}
 
-	public DiagnosticResolution(String label, Factory modificationContextFactory, IModification<EObject> modification) {
+	/**
+	 * @since 2.27
+	 */
+	public DiagnosticResolution(String label, Factory modificationContextFactory, ISemanticModification modification) {
 		this(label, modificationContextFactory, modification, 0);
 	}
 
-	public DiagnosticResolution(String label, Factory modificationContext, IModification<EObject> modification,
+	/**
+	 * @since 2.27
+	 */
+	public DiagnosticResolution(String label, Factory modificationContext, ISemanticModification modification,
 			int relevance) {
 		this.label = label;
 		this.factory = modificationContext;
@@ -101,15 +117,15 @@ public class DiagnosticResolution {
 			EObject obj = helper.resolveContainedElementAt(tmpResource, offset);
 
 			WorkspaceEdit edit = new WorkspaceEdit();
+			Diagnostic diagnostic = params.getContext().getDiagnostics().stream().collect(MoreCollectors.onlyElement());
 			if (modification != null) {
 				DiagnosticModificationContext modificationContext = factory.createModificationContext();
 				ChangeConverter2 changeConverter = modificationContext.getConverterFactory().create(edit, access);
 				IChangeSerializer serializer = modificationContext.getSerializer();
-				serializer.addModification(obj, modification);
+				serializer.addModification(obj, modification.apply(diagnostic, obj));
 				serializer.applyModifications(changeConverter);
 			} else {
 				TextEditAcceptor textEditAcceptor = new TextEditAcceptor(edit, access);
-				Diagnostic diagnostic = params.getContext().getDiagnostics().stream().collect(MoreCollectors.onlyElement());
 				textEditAcceptor.accept(uri.toString(), document, textModification.apply(diagnostic, obj, document));
 			}
 			return edit;
