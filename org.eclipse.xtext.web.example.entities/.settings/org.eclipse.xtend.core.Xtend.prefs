@@ -2,8 +2,6 @@
 generateSuppressWarnings=true
 outlet.DEFAULT_OUTPUT.sourceFolder.generator.directory=build/xtend/mwe2
 BuilderConfiguration.is_project_specific=true
-targetJavaVersion=Java8
-useJavaCompilerCompliance=false
 outlet.DEFAULT_OUTPUT.installDslAsPrimarySource=false
 outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
 outlet.DEFAULT_OUTPUT.sourceFolder.src-gen.directory=xtend-gen
