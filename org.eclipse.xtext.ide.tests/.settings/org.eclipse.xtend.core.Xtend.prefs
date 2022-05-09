@@ -23,5 +23,3 @@ outlet.DEFAULT_OUTPUT.sourceFolder.testlang-src.ignore=
 outlet.DEFAULT_OUTPUT.sourceFolder.xtend-gen.directory=
 outlet.DEFAULT_OUTPUT.sourceFolder.xtend-gen.ignore=
 outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=
-targetJavaVersion=JAVA8
-useJavaCompilerCompliance=false
