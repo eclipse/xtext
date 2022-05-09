@@ -13,6 +13,7 @@ import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -51,7 +52,6 @@ import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ForwardingMap;
@@ -87,19 +87,25 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 
 		public boolean exists() {
-			Map<String, IPackageFragmentRoot> roots = associatedRoots;
-			if (roots.isEmpty()) {
-				return false;
-			}
-			return IterableExtensions.head(roots.values()).exists();
+			IPackageFragmentRoot root = anyPackageFragmentRoot();
+			return root != null && root.exists();
 		}
 
 		public IPath getPath() {
-			Map<String, IPackageFragmentRoot> roots = associatedRoots;
-			if (roots.isEmpty()) {
+			IPackageFragmentRoot root = anyPackageFragmentRoot();
+			if (root == null) {
 				return null;
 			}
-			return IterableExtensions.head(roots.values()).getPath();
+			return root.getPath();
+		}
+		
+		private IPackageFragmentRoot anyPackageFragmentRoot() {
+			synchronized(associatedRoots) {
+				if (associatedRoots.isEmpty()) {
+					return null;
+				}
+				return associatedRoots.values().iterator().next();
+			}
 		}
 
 		public void addRoot(IPackageFragmentRoot root) {
@@ -352,49 +358,60 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/* @NonNull */
 	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
-		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
-		List<PackageFragmentRootData> packageFragmentRootDatas;
+		// Pessimistic copy of the cachedPackageFragmentRootData
+		Collection<PackageFragmentRootData> packageFragmentRootDatas;
 		synchronized(cachedPackageFragmentRootData) {
-			packageFragmentRootDatas = newArrayList(cachedPackageFragmentRootData.values());
+			packageFragmentRootDatas = cachedPackageFragmentRootData.values();
 		}
-		Iterator<PackageFragmentRootData> iterator = packageFragmentRootDatas.iterator();
-		while (iterator.hasNext()) {
-			PackageFragmentRootData data = iterator.next();
-			if (data.exists()) {
-				if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
-					IStorage storage = data.uri2Storage.get(uri);
-					if (storage != null) {
-						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
-							result.add(Tuples.create(storage, root.getJavaProject().getProject()));
-						}
-					}
-				}
-			} else {
-				iterator.remove();
-			}
-		}
-		if (result.isEmpty() && uri.isArchive()) {
+		
+		/* 
+		 * We iterate all known package fragment roots and put them into two buckets if matching:
+		 * - uriPrefix == null || uri startsWith uriPrefix
+		 *   => regularMatch
+		 * 
+		 * - uri.isArchive && archiveURI.isFile || isPlatformResource && uriPrefix is not null && no other matches && 
+		 *   => archiveMatch
+		 */
+		List<Pair<IStorage, IProject>> regularMatches = new ArrayList<Pair<IStorage,IProject>>(1);
+		List<Pair<IStorage, IProject>> archiveMatches = null;
+		IPath archivePath = null;
+		if (uri.isArchive()) {
 			String authority = uri.authority();
-			authority = authority.substring(0, authority.length() - 1);
-			URI archiveURI = URI.createURI(authority);
+			URI archiveURI = URI.createURI(authority.substring(0, authority.length() - 1));
 			if (archiveURI.isFile() || archiveURI.isPlatformResource()) {
-				IPath archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
-				for (PackageFragmentRootData data : packageFragmentRootDatas) {
-					if (data.uriPrefix != null && archivePath.equals(data.getPath())) {
-						// prefixes have an empty last segment.
-						URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
-						URI expectedURI = prefix.appendSegments(uri.segments());
-						IStorage storage = data.uri2Storage.get(expectedURI);
-						if (storage != null) {
-							for (IPackageFragmentRoot root : data.associatedRoots.values()) {
-								result.add(Tuples.create(storage, root.getJavaProject().getProject()));
-							}
+				archivePath = new Path(archiveURI.isPlatformResource()? archiveURI.toPlatformString(true): archiveURI.toFileString());
+				archiveMatches = new ArrayList<Pair<IStorage,IProject>>(1);
+			}
+		}
+		for(PackageFragmentRootData data: packageFragmentRootDatas) {
+			if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
+				IStorage storage = data.uri2Storage.get(uri);
+				if (storage != null && data.exists()) {
+					synchronized(data.associatedRoots) {
+						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+							regularMatches.add(Tuples.create(storage, root.getJavaProject().getProject()));
+							archiveMatches = null;
+						}
+					}
+				}
+			} else if (archiveMatches != null && archivePath != null && data.uriPrefix != null && archivePath.equals(data.getPath())) {
+				// prefixes have an empty last segment.
+				URI prefix = data.uriPrefix.lastSegment().length()==0 ? data.uriPrefix.trimSegments(1) : data.uriPrefix;
+				URI expectedURI = prefix.appendSegments(uri.segments());
+				IStorage storage = data.uri2Storage.get(expectedURI);
+				if (storage != null && data.exists()) {
+					synchronized (data.associatedRoots) {
+						for (IPackageFragmentRoot root : data.associatedRoots.values()) {
+							archiveMatches.add(Tuples.create(storage, root.getJavaProject().getProject()));
 						}
 					}
 				}
 			}
 		}
-		return result;
+		if (archiveMatches != null) {
+			return archiveMatches;
+		}
+		return regularMatches;
 	}
 	
 	/**

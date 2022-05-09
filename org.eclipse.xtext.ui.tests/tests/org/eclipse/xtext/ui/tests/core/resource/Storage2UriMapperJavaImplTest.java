@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.Pair;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -144,6 +145,40 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 			storage2UriMapperJava.syncInitializeCache();
 			System.err.println(sw.elapsed(TimeUnit.MILLISECONDS));
 		}
+	}
+	
+	@Test
+	public void testGetStorages_Performance() throws Exception {
+		AtomicLong createProjectTimeMs = new AtomicLong();
+		
+		int projects = 50; // 200
+		int jarsPerProject = 20;
+		new WorkspaceModifyOperation() {
+			@Override
+			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				Stopwatch sw = Stopwatch.createStarted();		
+				for(int i = 0; i < projects; i++) {
+					IJavaProject p = JavaProjectSetupUtil.createJavaProject("p" + i, false);
+					for(int j = 0; j < jarsPerProject; j++) {
+						JavaProjectSetupUtil.addJarToClasspath(p, createJar(p, "lib" + j), false);
+					}
+				}
+				createProjectTimeMs.set(sw.elapsed(TimeUnit.MILLISECONDS));
+			}
+		}.run(null);
+		
+		URI uri = URI.createPlatformPluginURI("doesntExist/some.file", false);
+		Stopwatch sw = Stopwatch.createStarted();
+		// simulate ToBeBuiltComputer.updateProject -> removeProject
+		for(int k = 0; k < projects * jarsPerProject; k++) {
+			Iterable<Pair<IStorage, IProject>> storages = storage2UriMapperJava.getStorages(uri);
+			for(Pair<IStorage, IProject> p: storages) {
+				assertNotNull(p.getFirst());
+				assertNotNull(p.getSecond());
+			}
+		}
+		long getStoragesTime = sw.elapsed(TimeUnit.MILLISECONDS);
+		assertTrue("Creationg took: " + createProjectTimeMs.get()+ "ms; getStorages took: " + getStoragesTime, getStoragesTime < 150);
 	}
 
 	private IJavaProject newModularProject(String projectName) throws CoreException, JavaModelException, InvocationTargetException, InterruptedException {
@@ -327,8 +362,12 @@ public class Storage2UriMapperJavaImplTest extends Assert {
 		});
 	}
 
-	public IFile createJar(IJavaProject project) throws Exception {
-		IFile file = project.getProject().getFile("foo.jar");
+	public IFile createJar(IJavaProject project) throws CoreException {
+		return createJar(project, "foo");
+	}
+	
+	public IFile createJar(IJavaProject project, String name) throws CoreException {
+		IFile file = project.getProject().getFile(name + ".jar");
 		file.create(JavaProjectSetupUtil.jarInputStream(new JavaProjectSetupUtil.TextFile("foo/bar.indexed", "//empty"),
 				new JavaProjectSetupUtil.TextFile("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nBundle-SymbolicName: hubba.bubba\n")),
 				true, IResourcesSetupUtil.monitor());
