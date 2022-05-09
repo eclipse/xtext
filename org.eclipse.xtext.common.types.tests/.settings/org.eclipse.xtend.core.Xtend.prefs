@@ -29,5 +29,3 @@ outlet.DEFAULT_OUTPUT.sourceFolder.testdata.ignore=true
 outlet.DEFAULT_OUTPUT.sourceFolder.tests.directory=xtend-gen
 outlet.DEFAULT_OUTPUT.sourceFolder.tests.ignore=
 outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
-targetJavaVersion=JAVA5
-useJavaCompilerCompliance=true
