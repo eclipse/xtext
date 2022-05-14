@@ -30,7 +30,7 @@ node {
 task testJs(type: NodeTask) {
 	dependsOn(npmInstall)
 	inputs.dir new File('src/test/js')
-	script = file('node_modules/mocha/bin/mocha')
+	script = file('node_modules/.bin/mocha')
 	args = ['-u', 'tdd', '--reporter', 'dot', 'src/test/js/*.js']
 }
 check.dependsOn(testJs)
