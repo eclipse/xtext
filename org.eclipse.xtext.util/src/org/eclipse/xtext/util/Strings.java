@@ -477,7 +477,7 @@ public class Strings {
 	/**
 	 * Calculates the Levenshtein text edit distance
 	 * 
-	 * copied & adapted (cost = 1) from org.eclipse.jdt.internal.ui.text.spelling.engine.DefaultPhoneticDistanceAlgorithm
+	 * copied &amp; adapted (cost = 1) from org.eclipse.jdt.internal.ui.text.spelling.engine.DefaultPhoneticDistanceAlgorithm
 	 * 
 	 * @param from source string, may not be null
 	 * @param to target string, may not be null
