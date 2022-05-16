@@ -21,5 +21,3 @@ outlet.DEFAULT_OUTPUT.override=true
 outlet.DEFAULT_OUTPUT.sourceFolder.xtend-gen.directory=
 outlet.DEFAULT_OUTPUT.sourceFolder.xtend-gen.ignore=true
 outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
-targetJavaVersion=JAVA5
-useJavaCompilerCompliance=true
