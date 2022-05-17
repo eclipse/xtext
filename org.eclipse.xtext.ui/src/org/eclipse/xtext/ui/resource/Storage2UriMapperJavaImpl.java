@@ -312,7 +312,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * @since 2.4
 	 */
 	protected PackageFragmentRootData initializeData(final IPackageFragmentRoot root) {
-		final PackageFragmentRootData data = new PackageFragmentRootData(computeModificationStamp(root));
+		final PackageFragmentRootData data = createPackageFragmentRootData(root);
 		data.addRoot(root);
 		if (shouldHandle(root)) {
 			try {
@@ -353,6 +353,13 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			}
 		}
 		return data;
+	}
+	
+	/**
+	 * @since 2.27
+	 */
+	protected PackageFragmentRootData createPackageFragmentRootData(final IPackageFragmentRoot root) {
+		return new PackageFragmentRootData(computeModificationStamp(root));
 	}
 	
 	/* @NonNull */
