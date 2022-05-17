@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ide.tests.testlanguage.rename;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.server.rename.RenameService2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -35,8 +36,8 @@ public class TestLanguageRenameService extends RenameService2 {
 					ICompositeNode rootNode = parseResult.getRootNode();
 					if (rootNode != null) {
 						ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-						if (leaf != null && isIdentifier(leaf)) {
-							EObject element = eObjectAtOffsetHelper.resolveElementAt(xtextResource, offset);
+						if (leaf != null) {
+							EObject element = eObjectAtOffsetHelper.getElementWithNameAt(xtextResource, offset);
 							if (element != null) {
 								IQualifiedNameProvider nameProvider = xtextResource.getResourceServiceProvider()
 										.get(IQualifiedNameProvider.class);

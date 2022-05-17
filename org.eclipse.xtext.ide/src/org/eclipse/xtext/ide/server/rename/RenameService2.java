@@ -44,7 +44,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -77,15 +76,12 @@ public class RenameService2 implements IRenameService2 {
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
 	@Inject
-	private TokenUtil tokenUtil;
-
-	@Inject
 	private IValueConverterService valueConverterService;
 
 	@Inject
 	private LinkingHelper linkingHelper;
 
-	private Function<EObject, String> attributeResolver = SimpleAttributeResolver.newResolver(String.class, "name");
+	private Function<EObject, String> attributeResolver = SimpleAttributeResolver.NAME_RESOLVER;
 
 	@Override
 	public WorkspaceEdit rename(IRenameService2.Options options) {
@@ -190,27 +186,7 @@ public class RenameService2 implements IRenameService2 {
 	}
 
 	protected EObject getElementWithIdentifierAt(XtextResource xtextResource, int offset) {
-		if (offset >= 0) {
-			if (xtextResource != null) {
-				IParseResult parseResult = xtextResource.getParseResult();
-				if (parseResult != null) {
-					ICompositeNode rootNode = parseResult.getRootNode();
-					if (rootNode != null) {
-						ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-						if (leaf != null && isIdentifier(leaf)) {
-							return eObjectAtOffsetHelper.resolveElementAt(xtextResource, offset);
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
-
-	protected boolean isIdentifier(ILeafNode leafNode) {
-		return (leafNode.getGrammarElement() instanceof RuleCall
-				|| leafNode.getGrammarElement() instanceof CrossReference)
-				&& !tokenUtil.isWhitespaceOrCommentNode(leafNode);
+		return eObjectAtOffsetHelper.getElementWithNameAt(xtextResource, offset);
 	}
 
 	@Override
@@ -270,7 +246,7 @@ public class RenameService2 implements IRenameService2 {
 					element = getElementWithIdentifierAt(xtextResource, candidateOffset);
 					if (element != null && !element.eIsProxy()) {
 						ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, candidateOffset);
-						if (leaf != null && isIdentifier(leaf)) {
+						if (leaf != null) {
 							String convertedNameValue = getConvertedValue(leaf.getGrammarElement(), leaf);
 							String elementName = getElementName(element);
 							if (!Strings.isEmpty(convertedNameValue) && !Strings.isEmpty(elementName)
@@ -368,10 +344,6 @@ public class RenameService2 implements IRenameService2 {
 
 	protected IResourceServiceProvider.Registry getServiceProviderRegistry() {
 		return serviceProviderRegistry;
-	}
-
-	protected TokenUtil getTokenUtil() {
-		return tokenUtil;
 	}
 
 	protected IValueConverterService getValueConverterService() {
