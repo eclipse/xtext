@@ -116,7 +116,7 @@ The `pom.xml` for the language project contains information about how Maven shou
     <dependency>
       <groupId>org.eclipse.emf</groupId>
       <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-      <version>2.12.1</version>
+      <version>2.13.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
