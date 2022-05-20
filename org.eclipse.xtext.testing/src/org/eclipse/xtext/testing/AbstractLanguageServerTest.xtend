@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -92,6 +92,7 @@ import org.junit.jupiter.api.BeforeEach
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
+import org.eclipse.lsp4j.WorkspaceSymbol
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -305,7 +306,18 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected def dispatch String toExpectation(Position it) '''[«line», «character»]'''
 
+	@Deprecated
 	protected def dispatch String toExpectation(SymbolInformation it) '''
+		symbol "«name»" {
+		    kind: «kind.value»
+		    location: «location.toExpectation»
+		    «IF !containerName.nullOrEmpty»
+		    	container: "«containerName»"
+		    «ENDIF»
+		}
+	'''
+
+	protected def dispatch String toExpectation(WorkspaceSymbol it) '''
 		symbol "«name»" {
 		    kind: «kind.value»
 		    location: «location.toExpectation»
@@ -624,7 +636,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		if (configuration.getAssertSymbols !== null) {
 			configuration.getAssertSymbols.apply(symbols)
 		} else {
-			val unwrappedSymbols = symbols.map[if(hierarchicalDocumentSymbolSupport) getRight else getLeft]
+			val unwrappedSymbols = symbols.map[if (hierarchicalDocumentSymbolSupport) getRight else getLeft]
 			val String actualSymbols = unwrappedSymbols.toExpectation
 			assertEquals(getExpectedSymbols, actualSymbols)
 		}
@@ -637,8 +649,12 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 		initializeContext(configuration)
 		val symbols = languageServer.symbol(new WorkspaceSymbolParams(query)).get
-		if (configuration.assertSymbols !== null) {
-			configuration.assertSymbols.apply(symbols)
+		if (configuration.assertSymbols !== null || configuration.assertWorkspaceSymbols !== null) {
+			if (symbols.isLeft) {
+				configuration.assertSymbols.apply(symbols.getLeft)
+			} else {
+				configuration.assertWorkspaceSymbols.apply(symbols.getRight)
+			}
 		} else {
 			val String actualSymbols = symbols.toExpectation
 			assertEquals(expectedSymbols, actualSymbols)

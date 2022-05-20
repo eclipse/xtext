@@ -14,6 +14,8 @@ import com.google.inject.Singleton;
 import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.WorkspaceSymbol;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -34,7 +36,7 @@ public class WorkspaceSymbolService {
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
 
-	public List<? extends SymbolInformation> getSymbols(
+	public Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>> getSymbols(
 		String query,
 		IResourceAccess resourceAccess,
 		IResourceDescriptions indexData,
@@ -51,7 +53,7 @@ public class WorkspaceSymbolService {
 				}
 			}
 		}
-		return result;
+		return Either.forLeft(result);
 	}
 
 }

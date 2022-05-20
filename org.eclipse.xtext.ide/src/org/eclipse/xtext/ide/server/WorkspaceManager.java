@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -240,7 +240,7 @@ public class WorkspaceManager {
 	 */
 	protected IWorkspaceConfig getWorkspaceConfig() throws ResponseErrorException {
 		if (workspaceConfig == null) {
-			ResponseError error = new ResponseError(ResponseErrorCode.serverNotInitialized,
+			ResponseError error = new ResponseError(ResponseErrorCode.ServerNotInitialized,
 					"Workspace has not been initialized yet.", null);
 			throw new ResponseErrorException(error);
 		}

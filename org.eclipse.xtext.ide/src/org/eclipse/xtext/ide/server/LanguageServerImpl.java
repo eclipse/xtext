@@ -92,6 +92,7 @@ import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.WorkspaceFoldersOptions;
 import org.eclipse.lsp4j.WorkspaceServerCapabilities;
+import org.eclipse.lsp4j.WorkspaceSymbol;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
@@ -684,7 +685,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	}
 
 	@Override
-	public CompletableFuture<List<? extends SymbolInformation>> symbol(WorkspaceSymbolParams params) {
+	public CompletableFuture<Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>>> symbol(WorkspaceSymbolParams params) {
 		return requestManager.runRead((cancelIndicator) -> symbol(params, cancelIndicator));
 	}
 
@@ -692,7 +693,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Compute the symbol information. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected List<? extends SymbolInformation> symbol(WorkspaceSymbolParams params, CancelIndicator cancelIndicator) {
+	protected Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>> symbol(WorkspaceSymbolParams params, CancelIndicator cancelIndicator) {
 		return workspaceSymbolService.getSymbols(params.getQuery(), resourceAccess, workspaceManager.getIndex(),
 				cancelIndicator);
 	}

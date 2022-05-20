@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2021 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -81,6 +81,7 @@ import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceFolder;
+import org.eclipse.lsp4j.WorkspaceSymbol;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
@@ -519,7 +520,42 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return _builder.toString();
   }
 
+  @Deprecated
   protected String _toExpectation(final SymbolInformation it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("symbol \"");
+    String _name = it.getName();
+    _builder.append(_name);
+    _builder.append("\" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("kind: ");
+    int _value = it.getKind().getValue();
+    _builder.append(_value, "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("location: ");
+    String _expectation = this.toExpectation(it.getLocation());
+    _builder.append(_expectation, "    ");
+    _builder.newLineIfNotEmpty();
+    {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it.getContainerName());
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("    ");
+        _builder.append("container: \"");
+        String _containerName = it.getContainerName();
+        _builder.append(_containerName, "    ");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
+  }
+
+  protected String _toExpectation(final WorkspaceSymbol it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("symbol \"");
     String _name = it.getName();
@@ -1297,11 +1333,14 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       this.initializeContext(configuration);
       String _query = configuration.getQuery();
       WorkspaceSymbolParams _workspaceSymbolParams = new WorkspaceSymbolParams(_query);
-      final List<? extends SymbolInformation> symbols = this.languageServer.symbol(_workspaceSymbolParams).get();
-      Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
-      boolean _tripleNotEquals = (_assertSymbols != null);
-      if (_tripleNotEquals) {
-        configuration.getAssertSymbols().apply(symbols);
+      final Either<List<? extends SymbolInformation>, List<? extends WorkspaceSymbol>> symbols = this.languageServer.symbol(_workspaceSymbolParams).get();
+      if (((configuration.getAssertSymbols() != null) || (configuration.getAssertWorkspaceSymbols() != null))) {
+        boolean _isLeft = symbols.isLeft();
+        if (_isLeft) {
+          configuration.getAssertSymbols().apply(symbols.getLeft());
+        } else {
+          configuration.getAssertWorkspaceSymbols().apply(symbols.getRight());
+        }
       } else {
         final String actualSymbols = this.toExpectation(symbols);
         this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
@@ -1524,6 +1563,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((TextEdit)it);
     } else if (it instanceof WorkspaceEdit) {
       return _toExpectation((WorkspaceEdit)it);
+    } else if (it instanceof WorkspaceSymbol) {
+      return _toExpectation((WorkspaceSymbol)it);
     } else if (it instanceof Either) {
       return _toExpectation((Either<?, ?>)it);
     } else {
