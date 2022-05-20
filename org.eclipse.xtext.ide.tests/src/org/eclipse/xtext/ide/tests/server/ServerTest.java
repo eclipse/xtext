@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -140,7 +140,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
 			languageServer.definition(definitionParams).get();
 			Assert.fail("Expected a ResponseErrorException");
 		} catch (ExecutionException exception) {
-			Assert.assertEquals(ResponseErrorCode.serverNotInitialized.getValue(),
+			Assert.assertEquals(ResponseErrorCode.ServerNotInitialized.getValue(),
 					((ResponseErrorException) exception.getCause()).getResponseError().getCode());
 		}
 	}

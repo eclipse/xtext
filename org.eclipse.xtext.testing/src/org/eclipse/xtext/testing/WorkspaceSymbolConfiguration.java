@@ -11,6 +11,7 @@ package org.eclipse.xtext.testing;
 import java.util.List;
 
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.WorkspaceSymbol;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 public class WorkspaceSymbolConfiguration extends TextDocumentConfiguration {
@@ -18,7 +19,9 @@ public class WorkspaceSymbolConfiguration extends TextDocumentConfiguration {
 
 	private String expectedSymbols = "";
 
+	@Deprecated
 	private Procedure1<? super List<? extends SymbolInformation>> assertSymbols = null;
+	private Procedure1<? super List<? extends WorkspaceSymbol>> assertWorkspaceSymbols = null;
 
 	public String getQuery() {
 		return query;
@@ -36,11 +39,27 @@ public class WorkspaceSymbolConfiguration extends TextDocumentConfiguration {
 		this.expectedSymbols = expectedSymbols;
 	}
 
+	@Deprecated
 	public Procedure1<? super List<? extends SymbolInformation>> getAssertSymbols() {
 		return assertSymbols;
 	}
 
+	@Deprecated
 	public void setAssertSymbols(Procedure1<? super List<? extends SymbolInformation>> assertSymbols) {
 		this.assertSymbols = assertSymbols;
+	}
+
+	/**
+	 * @since 2.27.0
+	 */
+	public Procedure1<? super List<? extends WorkspaceSymbol>> getAssertWorkspaceSymbols() {
+		return assertWorkspaceSymbols;
+	}
+
+	/**
+	 * @since 2.27.0
+	 */
+	public void setAssertWorkspaceSymbols(Procedure1<? super List<? extends WorkspaceSymbol>> assertWorkspaceSymbols) {
+		this.assertWorkspaceSymbols = assertWorkspaceSymbols;
 	}
 }
