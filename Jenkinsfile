@@ -11,7 +11,7 @@ pipeline {
   }
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'r202009', 'r202012', 'r202103', 'r202106', 'r202109', 'r202112', 'r202203', 'latest'], description: 'Which Target Platform should be used?')
+    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'photon', 'r201809', 'r201812', 'r201903', 'r201906', 'r201909', 'r201912', 'r202003', 'r202006', 'r202009', 'r202012', 'r202103', 'r202106', 'r202109', 'r202112', 'r202203', 'r202206', 'latest'], description: 'Which Target Platform should be used?')
     // see https://wiki.eclipse.org/Jenkins#JDK
     choice(name: 'JDK_VERSION', description: 'Which JDK should be used?', choices: [
        'temurin-jdk8-latest', 'temurin-jdk11-latest', 'temurin-jdk17-latest'
@@ -173,7 +173,7 @@ def isTriggeredByUpstream() {
 def eclipseVersion() {
   def targetPlatform = selectedTargetPlatform()
   if (targetPlatform == 'latest') {
-    return "4.24"
+    return "4.25"
   } else if (targetPlatform == 'photon') {
     return "4.8"
   } else if (targetPlatform == 'oxygen') {
