@@ -25,12 +25,20 @@
 			dont forget to adapt
 			org.eclipse.xtext.ui.codemining/pom.xml
 			org.eclipse.xtext.ui.testing/pom.xml
+			org.eclipse.xtext.buildship/pom.xml
 		-->
 		<profile>
 			<id>latest</id>
 			<properties>
 				<tycho-version>2.7.3</tycho-version>
 				<target-platform-classifier>org.eclipse.xtext.target-latest</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r202206</id>
+			<properties>
+				<tycho-version>2.7.3</tycho-version>
+				<target-platform-classifier>org.eclipse.xtext.target-r202206</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
