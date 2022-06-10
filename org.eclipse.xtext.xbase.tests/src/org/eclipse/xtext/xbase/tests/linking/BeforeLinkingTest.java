@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -40,8 +40,10 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
 		BatchLinkableResource resource = (BatchLinkableResource) block.eResource();
 		resource.resolveLazyCrossReferences(null);
 		XVariableDeclaration assignment = (XVariableDeclaration) Iterables.getFirst(block.getExpressions(), null);
+		Assert.assertNotNull(assignment);
 		XClosure lambda = (XClosure) assignment.getRight();
 		JvmFormalParameter implicitParameter = Iterables.getFirst(lambda.getImplicitFormalParameters(), null);
+		Assert.assertNotNull(lambda);
 		Assert.assertEquals("String", implicitParameter.getParameterType().getSimpleName());
 		resource.update(0, 0, "");
 		Assert.assertNull(implicitParameter.eResource());
@@ -52,6 +54,7 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) parseHelper.parse("{ val it = \'\' toString }");
 		BatchLinkableResource resource = (BatchLinkableResource) block.eResource();
 		XFeatureCall toString = (XFeatureCall) Iterables.getLast(block.getExpressions(), null);
+		Assert.assertNotNull(toString);
 		XFeatureCall implicitReceiver = (XFeatureCall) toString.getImplicitReceiver();
 		Assert.assertEquals("it", implicitReceiver.getFeature().getSimpleName());
 		resource.update(0, 0, "");
@@ -64,6 +67,7 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) parseHelper.parse("{ val it = newArrayList unmodifiableView }");
 		BatchLinkableResource resource = (BatchLinkableResource) block.eResource();
 		XFeatureCall unmodifiableView = (XFeatureCall) Iterables.getLast(block.getExpressions(), null);
+		Assert.assertNotNull(unmodifiableView);
 		XFeatureCall implicitFirstArgument = (XFeatureCall) unmodifiableView.getImplicitFirstArgument();
 		Assert.assertEquals("it", implicitFirstArgument.getFeature().getSimpleName());
 		resource.update(0, 0, "");

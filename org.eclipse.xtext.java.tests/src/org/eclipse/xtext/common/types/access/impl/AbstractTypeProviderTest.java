@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2373,6 +2373,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation valuesOperation = (JvmOperation) Iterables.getFirst(type.findAllFeaturesByName("valueOf"), null);
+		assertNotNull(valuesOperation);
 		String qualifiedReturnValue = valuesOperation.getReturnType().getQualifiedName();
 		assertEquals(typeName, qualifiedReturnValue);
 	}

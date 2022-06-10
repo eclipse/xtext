@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -99,8 +99,11 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
 		IResolvedOperation operation = toOperation("(null as java.util.List<String>).toArray(null)");
 		List<IResolvedOperation> overridden = operation.getOverriddenAndImplementedMethods();
 		Assert.assertEquals(1, overridden.size());
+		IResolvedOperation firstOverriden = Iterables.getFirst(overridden, null);
+		Assert.assertNotNull(firstOverriden);
 		JvmTypeParameter typeParameter = Iterables
-				.getFirst(Iterables.getFirst(overridden, null).getResolvedTypeParameters(), null);
+				.getFirst(firstOverriden.getResolvedTypeParameters(), null);
+		Assert.assertNotNull(typeParameter);
 		Assert.assertEquals(operation.getDeclaration(), typeParameter.getDeclarator());
 	}
 
@@ -109,11 +112,15 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
 		IResolvedOperation operation = toOperation("(null as java.util.ArrayList<String>).toArray(null)");
 		List<IResolvedOperation> overridden = operation.getOverriddenAndImplementedMethods();
 		Assert.assertEquals(2, overridden.size());
+		IResolvedOperation firstOverriden = Iterables.getFirst(overridden, null);
+		Assert.assertNotNull(firstOverriden);
 		JvmTypeParameter typeParameter = Iterables
-				.getFirst(Iterables.getFirst(overridden, null).getResolvedTypeParameters(), null);
+				.getFirst(firstOverriden.getResolvedTypeParameters(), null);
+		Assert.assertNotNull(typeParameter);
 		Assert.assertEquals(operation.getDeclaration(), typeParameter.getDeclarator());
 		JvmTypeParameter typeParameterOfLast = Iterables
 				.getFirst(Iterables.getLast(overridden).getResolvedTypeParameters(), null);
+		Assert.assertNotNull(typeParameterOfLast);
 		Assert.assertEquals(operation.getDeclaration(), typeParameterOfLast.getDeclarator());
 	}
 
@@ -150,8 +157,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
 		IResolvedOperation operation = toOperation("newHashSet(\"\").iterator");
 		List<IResolvedOperation> candidates = operation.getOverriddenAndImplementedMethods();
 		Assert.assertFalse(Iterables.getFirst(candidates, null).isBottomInContext());
+		IResolvedOperation firstCandidate = Iterables.getFirst(candidates, null);
+		Assert.assertNotNull(firstCandidate);
 		Assert.assertEquals("AbstractCollection<String>",
-				Iterables.getFirst(candidates, null).getAsBottom().getContextType().getSimpleName());
+				firstCandidate.getAsBottom().getContextType().getSimpleName());
 	}
 
 	protected IResolvedOperation has(IResolvedOperation operation, int candidates) {
@@ -289,6 +298,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
 	public void testOverrideMethodResolution_14() throws Exception {
 		IResolvedOperation operation = toOperation("(null as testdata.MethodOverrides4).m10()");
 		JvmOperation candidate = Iterables.getFirst(operation.getOverriddenAndImplementedMethodCandidates(), null);
+		Assert.assertNotNull(candidate);
 		Assert.assertEquals(1, candidate.getTypeParameters().size());
 		Assert.assertEquals(1, operation.getDeclaration().getTypeParameters().size());
 		operation.getDeclaration().getTypeParameters().clear();
@@ -299,6 +309,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
 	public void testOverrideMethodResolution_15() throws Exception {
 		IResolvedOperation operation = toOperation("(null as overrides.ConcreteForCharSequence).method");
 		JvmOperation candidate = Iterables.getFirst(operation.getOverriddenAndImplementedMethodCandidates(), null);
+		Assert.assertNotNull(candidate);
 		Assert.assertEquals(2, candidate.getTypeParameters().size());
 		Assert.assertEquals(2, operation.getDeclaration().getTypeParameters().size());
 		withDetails(candidatesAndOverrides(has(operation, 1), 1), IOverrideCheckResult.OverrideCheckDetails.IMPLEMENTATION);

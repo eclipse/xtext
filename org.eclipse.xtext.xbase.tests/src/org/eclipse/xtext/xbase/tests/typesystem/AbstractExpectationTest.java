@@ -119,6 +119,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false;
 		Assert.assertEquals(1, finalExpectations.size());
 		ITypeExpectation expectation = Iterables.getFirst(finalExpectations, null);
+		Assert.assertNotNull(expectation);
 		Assert.assertTrue(expectation.isNoTypeExpectation());
 		Assert.assertTrue(expectation.isVoidTypeAllowed());
 		Assert.assertNull(expectation.getExpectedType());
@@ -130,6 +131,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false;
 		Assert.assertEquals(1, finalExpectations.size());
 		ITypeExpectation expectation = Iterables.getFirst(finalExpectations, null);
+		Assert.assertNotNull(expectation);
 		Assert.assertFalse(expectation.isNoTypeExpectation());
 		Assert.assertFalse(expectation.isVoidTypeAllowed());
 		Assert.assertNull(expectation.getExpectedType());

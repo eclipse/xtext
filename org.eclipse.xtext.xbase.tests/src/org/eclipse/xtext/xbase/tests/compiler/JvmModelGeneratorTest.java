@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -479,6 +479,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 					}));
 		}));
 		Class<?> compiled = Iterables.getFirst(Arrays.asList(compile(expression.eResource(), outerClass).getDeclaredClasses()), null);
+		Assert.assertNotNull(compiled);
 		Assert.assertEquals("my.outer.Clazz.MyAnnotation", compiled.getCanonicalName());
 		Assert.assertEquals(Integer.valueOf(42), Iterables.getFirst(Arrays.asList(compiled.getDeclaredMethods()), null).getDefaultValue());
 	}
@@ -504,6 +505,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 							}));
 				}));
 		Class<?> compiled = Iterables.getFirst(Arrays.asList(compile(expression.eResource(), outerClass).getDeclaredClasses()), null);
+		Assert.assertNotNull(compiled);
 		Assert.assertNotNull(compiled.getField("WARN"));
 		Assert.assertNotNull(compiled.getField("ERROR"));
 		Assert.assertNotNull(compiled.getField("DEBUG"));

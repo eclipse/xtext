@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -49,9 +49,11 @@ public class Bug480686Test {
 		new InvariantChecker().checkInvariant(res.getParseResult().getRootNode());
 		res.update(0, 0, "newArrayList()");
 		EObject first = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(first);
 		Assert.assertTrue(first.eClass().getName(), first instanceof ContentAssistFragmentTestLanguageRoot);
 		res.update("newArrayList(".length(), 0, "1");
 		EObject second = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(second);
 		Assert.assertTrue(second.eClass().getName(), second instanceof ContentAssistFragmentTestLanguageRoot);
 	}
 
@@ -64,10 +66,12 @@ public class Bug480686Test {
 		res.update(0, 0, "newArrayList()");
 		invariantChecker.checkInvariant(res.getParseResult().getRootNode());
 		EObject first = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(first);
 		Assert.assertTrue(first.eClass().getName(), first instanceof ContentAssistFragmentTestLanguageRoot);
 		res.update("newArrayList(".length(), 0, "1");
 		invariantChecker.checkInvariant(res.getParseResult().getRootNode());
 		EObject second = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(second);
 		Assert.assertTrue(second.eClass().getName(), second instanceof ContentAssistFragmentTestLanguageRoot);
 	}
 
@@ -80,10 +84,12 @@ public class Bug480686Test {
 		res.update(0, 0, "newArrayList()");
 		invariantChecker.checkInvariant(res.getParseResult().getRootNode());
 		EObject first = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(first);
 		Assert.assertTrue(first.eClass().getName(), first instanceof ContentAssistFragmentTestLanguageRoot);
 		res.update("newArrayList(".length(), 0, "1");
 		invariantChecker.checkInvariant(res.getParseResult().getRootNode());
 		EObject second = Iterables.getFirst(res.getContents(), null);
+		Assert.assertNotNull(second);
 		Assert.assertTrue(second.eClass().getName(), second instanceof ContentAssistFragmentTestLanguageRoot);
 	}
 

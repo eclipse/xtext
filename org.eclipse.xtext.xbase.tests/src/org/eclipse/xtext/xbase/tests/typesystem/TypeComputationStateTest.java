@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -28,12 +28,14 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionBasedRootTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -139,7 +141,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		try {
 			assertTrue("state is instanceof ExpressionTypeComputationState", (state instanceof ExpressionTypeComputationState));
-			LightweightTypeReference expectedType = getFirst(state.getExpectations(), null).getExpectedType();
+			ITypeExpectation firstExpectation = getFirst(state.getExpectations(), null);
+			Assert.assertNotNull(firstExpectation);
+			LightweightTypeReference expectedType = firstExpectation.getExpectedType();
 			if (expression instanceof XNullLiteral) {
 				ExpressionTypeComputationState casted = ((ExpressionTypeComputationState) state);
 				ResolvedTypes resolution = reflectExtensions.get(casted, "resolvedTypes");
