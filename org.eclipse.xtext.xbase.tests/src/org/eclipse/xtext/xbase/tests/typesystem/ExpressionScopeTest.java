@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProviderWithScopeTracking;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -114,8 +115,10 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testMemberOnIt_03() throws Exception {
-		XExpression varInit = ((XVariableDeclaration) Iterables
-				.getFirst(((XBlockExpression) expression("{ var (int)=>int it = [] }", false)).getExpressions(), null)).getRight();
+		XVariableDeclaration first = (XVariableDeclaration) Iterables
+				.getFirst(((XBlockExpression) expression("{ var (int)=>int it = [] }", false)).getExpressions(), null);
+		Assert.assertNotNull(first);
+		XExpression varInit = first.getRight();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit,
 				IExpressionScope.Anchor.BEFORE);
 		contains(expressionScope, "it");
@@ -123,8 +126,10 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testMemberOnIt_04() throws Exception {
-		XExpression varInit = ((XVariableDeclaration) Iterables
-				.getFirst(((XBlockExpression) expression("{ var it = [] }", false)).getExpressions(), null)).getRight();
+		XVariableDeclaration first = (XVariableDeclaration) Iterables
+				.getFirst(((XBlockExpression) expression("{ var it = [] }", false)).getExpressions(), null);
+		Assert.assertNotNull(first);
+		XExpression varInit = first.getRight();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit,
 				IExpressionScope.Anchor.BEFORE);
 		containsNot(expressionScope, "it");
@@ -132,8 +137,10 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testMemberOnIt_05() throws Exception {
-		XExpression varInit = ((XVariableDeclaration) Iterables
-				.getFirst(((XBlockExpression) expression("{ var (int)=>int it = null }", false)).getExpressions(), null)).getRight();
+		XVariableDeclaration first = (XVariableDeclaration) Iterables
+				.getFirst(((XBlockExpression) expression("{ var (int)=>int it = null }", false)).getExpressions(), null);
+		Assert.assertNotNull(first);
+		XExpression varInit = first.getRight();
 		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(varInit).getExpressionScope(varInit,
 				IExpressionScope.Anchor.BEFORE);
 		containsNot(expressionScope, "it");

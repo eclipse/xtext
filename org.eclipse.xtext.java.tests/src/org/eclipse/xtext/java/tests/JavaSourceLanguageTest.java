@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -66,12 +67,17 @@ public class JavaSourceLanguageTest {
 		XtextResourceSet rs = this.resourceSet(files);
 		Resource superResource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MySuperClass.java"));
+		EObject root = Iterables.getFirst(superResource.getContents(), null);
+		Assert.assertNotNull(root);
 		JvmDeclaredType nestedType = Iterables.getFirst(
-				((JvmGenericType) Iterables.getFirst(superResource.getContents(), null)).getAllNestedTypes(), null);
+				((JvmGenericType) root).getAllNestedTypes(), null);
 		Resource resource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MySubClass.java"));
 		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(resource.getContents(), null);
-		JvmTypeReference returnType = Iterables.getFirst(clazz.getDeclaredOperations(), null).getReturnType();
+		Assert.assertNotNull(clazz);
+		JvmOperation firstOperation = Iterables.getFirst(clazz.getDeclaredOperations(), null);
+		Assert.assertNotNull(firstOperation);
+		JvmTypeReference returnType = firstOperation.getReturnType();
 		JvmType referenced = returnType.getType();
 		Assert.assertSame(nestedType, referenced);
 	}
@@ -110,7 +116,10 @@ public class JavaSourceLanguageTest {
 		Resource resource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MySubClass.java"));
 		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(resource.getContents(), null);
-		JvmTypeReference referenced = Iterables.getFirst(clazz.getDeclaredOperations(), null).getReturnType();
+		Assert.assertNotNull(clazz);
+		JvmOperation firstOperation = Iterables.getFirst(clazz.getDeclaredOperations(), null);
+		Assert.assertNotNull(firstOperation);
+		JvmTypeReference referenced = firstOperation.getReturnType();
 		Assert.assertNotNull(Iterables.getFirst(((JvmParameterizedTypeReference) referenced).getArguments(), null));
 	}
 
@@ -137,7 +146,9 @@ public class JavaSourceLanguageTest {
 		Resource resource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MyClass.java"));
 		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(resource.getContents(), null);
+		Assert.assertNotNull(clazz);
 		JvmAnnotationReference annotationRef = Iterables.getFirst(clazz.getAnnotations(), null);
+		Assert.assertNotNull(annotationRef);
 		JvmAnnotationValue value = IterableExtensions.findFirst(annotationRef.getValues(),
 				it -> "constantExpression".equals(it.getOperation().getSimpleName()));
 		Assert.assertTrue(Iterables.getFirst(((JvmBooleanAnnotationValue) value).getValues(), null).booleanValue());
@@ -166,6 +177,7 @@ public class JavaSourceLanguageTest {
 		Resource superResource = IterableExtensions.findFirst(rs.getResources(),
 				it -> it.getURI().toString().endsWith("MySuperClass2.java"));
 		JvmGenericType clazz = (JvmGenericType) Iterables.getFirst(superResource.getContents(), null);
+		Assert.assertNotNull(clazz);
 		Assert.assertNotNull(Iterables.getFirst(clazz.getDeclaredOperations(), null));
 	}
 

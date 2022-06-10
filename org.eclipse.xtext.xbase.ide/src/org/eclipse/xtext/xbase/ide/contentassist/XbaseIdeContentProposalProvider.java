@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -277,7 +277,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 			if (!featureNodes.isEmpty()) {
 				INode featureNode = Iterables.getFirst(featureNodes, null);
-				if (featureNode.getTotalOffset() < context.getOffset()
+				if (featureNode != null && featureNode.getTotalOffset() < context.getOffset()
 						&& featureNode.getTotalEndOffset() >= context.getOffset()) {
 					return true;
 				}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -153,14 +153,16 @@ public class ThrownExceptionSwitch extends XbaseSwitch<Boolean> {
 		// Check for each resource which exceptions are thrown
 		for (XVariableDeclaration resource : resources) {
 			LightweightTypeReference autoClosableType = thrownExceptionDelegate.getActualType((JvmIdentifiableElement) resource);
-			JvmOperation closeMethod = findCloseMethod(autoClosableType);
-			// Collect all exceptions
-			if (autoClosableType != null && closeMethod != null) {
-				IResolvedExecutable resolvedCloseMethod = thrownExceptionDelegate.getResolvedFeature(closeMethod, autoClosableType);
-				List<LightweightTypeReference> declaredExceptions = resolvedCloseMethod.getResolvedExceptions();
-				for(LightweightTypeReference exception: declaredExceptions) {
-					thrownExceptionDelegate.accept(exception);
-				}
+			if (autoClosableType != null) {
+				JvmOperation closeMethod = findCloseMethod(autoClosableType);
+				// Collect all exceptions
+				if (closeMethod != null) {
+					IResolvedExecutable resolvedCloseMethod = thrownExceptionDelegate.getResolvedFeature(closeMethod, autoClosableType);
+					List<LightweightTypeReference> declaredExceptions = resolvedCloseMethod.getResolvedExceptions();
+					for(LightweightTypeReference exception: declaredExceptions) {
+						thrownExceptionDelegate.accept(exception);
+					}
+				}	
 			}
 		}
 	}

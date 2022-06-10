@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.eclipse.xtext.builder.standalone;
 
 import static org.junit.Assert.*;
@@ -27,7 +35,7 @@ public class TestEclipseCompiler {
 	private final class ClassFileFilter implements Predicate<URI> {
 		@Override
 		public boolean apply(URI input) {
-			return "class".equals(input.fileExtension());
+			return input != null && "class".equals(input.fileExtension());
 		}
 	}
 

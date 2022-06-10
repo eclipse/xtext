@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -87,9 +87,9 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 
 	@Test
 	public void testWildcard_01() {
-		Assert.assertEquals("java.lang.Object",
-				Iterables.getFirst(((JvmWildcardTypeReference) typeReferenceBuilder.wildcard()).getConstraints(), null).getTypeReference()
-						.getIdentifier());
+		JvmTypeConstraint firstConstraint = Iterables
+				.getFirst(((JvmWildcardTypeReference) typeReferenceBuilder.wildcard()).getConstraints(), null);
+		Assert.assertEquals("java.lang.Object", firstConstraint.getTypeReference().getIdentifier());
 	}
 
 	@Test
@@ -97,8 +97,8 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 		List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) typeReferenceBuilder
 				.wildcardExtends(typeReferenceBuilder.typeRef(CharSequence.class))).getConstraints();
 		Assert.assertEquals(1, constraints.size());
-		Assert.assertEquals("java.lang.CharSequence",
-				Iterables.getFirst(Iterables.filter(constraints, JvmUpperBound.class), null).getTypeReference().getIdentifier());
+		JvmUpperBound upperBound = Iterables.getFirst(Iterables.filter(constraints, JvmUpperBound.class), null);
+		Assert.assertEquals("java.lang.CharSequence", upperBound.getTypeReference().getIdentifier());
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class JvmTypeReferenceBuilderTest extends AbstractJvmModelTest {
 		List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) typeReferenceBuilder
 				.wildcardSuper(typeReferenceBuilder.typeRef(CharSequence.class))).getConstraints();
 		Assert.assertEquals(2, constraints.size());
-		Assert.assertEquals("java.lang.CharSequence",
-				Iterables.getFirst(Iterables.filter(constraints, JvmLowerBound.class), null).getTypeReference().getIdentifier());
+		JvmLowerBound lowerBound = Iterables.getFirst(Iterables.filter(constraints, JvmLowerBound.class), null);
+		Assert.assertEquals("java.lang.CharSequence", lowerBound.getTypeReference().getIdentifier());
 	}
 }

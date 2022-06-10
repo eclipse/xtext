@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -148,7 +150,9 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
 	@Test
 	public void testSwitch01() throws Exception {
 		XSwitchExpression expr = (XSwitchExpression) expression("switch (this) case String: 1 default: 2");
-		hasImplicitReturns(expr, Iterables.getFirst(expr.getCases(), null).getThen(), expr.getDefault());
+		XCasePart firstCase = Iterables.getFirst(expr.getCases(), null);
+		Assert.assertNotNull(firstCase);
+		hasImplicitReturns(expr, firstCase.getThen(), expr.getDefault());
 	}
 
 	@Test
@@ -160,7 +164,9 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
 	@Test
 	public void testTryCatch() throws Exception {
 		XTryCatchFinallyExpression expr = (XTryCatchFinallyExpression) expression("try 1 catch(Exception e) 2");
-		hasImplicitReturns(expr, expr.getExpression(), Iterables.getFirst(expr.getCatchClauses(), null).getExpression());
+		XCatchClause firstCatchClause = Iterables.getFirst(expr.getCatchClauses(), null);
+		Assert.assertNotNull(firstCatchClause);
+		hasImplicitReturns(expr, expr.getExpression(), firstCatchClause.getExpression());
 	}
 
 	@Test

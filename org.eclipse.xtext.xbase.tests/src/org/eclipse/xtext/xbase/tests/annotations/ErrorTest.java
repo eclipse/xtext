@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -35,6 +35,7 @@ public class ErrorTest extends AbstractXbaseWithAnnotationsTest {
 	public void testErrorModel_01() throws Exception {
 		XAnnotation annotation = processWithoutException("estdata.Annotation2(value = 'foo')");
 		XAnnotationElementValuePair singleValuePair = Iterables.getFirst(annotation.getElementValuePairs(), null);
+		Assert.assertNotNull(singleValuePair);
 		Assert.assertNotNull(batchTypeResolver.resolveTypes(annotation).getActualType(singleValuePair.getValue()));
 	}
 

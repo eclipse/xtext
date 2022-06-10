@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -325,9 +325,11 @@ public class TypeUsageCollector {
 					if (type instanceof JvmAnnotationType) {
 						Iterable<JvmFeature> valueCandidates = ((JvmAnnotationType) type).findAllFeaturesByName("value");
 						JvmOperation value = (JvmOperation) Iterables.getFirst(valueCandidates, null);
-						JvmType expectedType = getTypeForAnnotationValue(value);
-						if (literal.getEnumType() == expectedType) {
-							return true;
+						if (value != null) {							
+							JvmType expectedType = getTypeForAnnotationValue(value);
+							if (literal.getEnumType() == expectedType) {
+								return true;
+							}
 						}
 					}
 				} else {
