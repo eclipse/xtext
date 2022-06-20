@@ -67,6 +67,8 @@
 		<unit id="org.eclipse.xtext.common.types.ui.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.logging" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.logging.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.codetemplates.ui" version="0.0.0"/>
