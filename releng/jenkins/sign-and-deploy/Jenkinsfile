@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      inheritFrom 'centos-7'
+      inheritFrom 'centos-8'
     }
   }
   options {
@@ -14,7 +14,7 @@ pipeline {
   triggers {
     cron('50 21 * * *') // nightly at 21:50
   }
-  
+
   parameters {
     choice(name: 'RELEASE_TYPE', choices: ['Integration', 'Beta', 'M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
       '''
@@ -22,14 +22,14 @@ pipeline {
           <ul>
             <li><tt>Integration</tt>: Continuous Build</li>
             <li><tt>GA</tt>: Release Build</li>
-            <li>Any other: Stable/Milestone Build</tt></li>  
+            <li>Any other: Stable/Milestone Build</tt></li>
           </ul>
       ''')
     string      (name: 'BRANCH_TO_DEPLOY', defaultValue: 'master', description: 'From which Git branch should the release be created (master for snapshot deployments)?')
     booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS', defaultValue: true, description: 'Whether to sign jars using the Eclipse web service')
     booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS', defaultValue: false, description: 'Whether to pack jars using pack200 (do not check unless you know what you are doing)')
   }
-  
+
   environment {
     DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
     KEYRING = credentials('secret-subkeys.asc')
@@ -52,7 +52,7 @@ pipeline {
         sh "pwd && ls -la"
       }
     }
-    
+
     stage('Clean up old milestones') {
       when {
         environment name: 'RELEASE_TYPE', value: 'M1'
@@ -86,29 +86,34 @@ pipeline {
       steps {
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
         dir('publishing') {
-        sh ''' 
-          XTEXT_VERSION=$(cat version.txt)
-          echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
-          gpg --batch --import "${KEYRING}"
-          for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
-          do
-            echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
-          done
+        withCredentials([string(credentialsId: 'gpg_passphrase', variable: 'GPG_PASSPHRASE')]) {
+          sh '''
+            XTEXT_VERSION=$(cat version.txt)
+            echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
+            gpg --version
+            gpg --batch --import "${KEYRING}"
 
-          ./gradlew -info \
-            --warning-mode all \
-            --refresh-dependencies \
-            -PJENKINS_URL=$JENKINS_URL \
-            -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
-            -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
-            -Posspub.version=$XTEXT_VERSION \
-            -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
-            -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
-            -Posspub.branch=$BRANCH_TO_DEPLOY \
-            -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
-            -Psigning.keyId=D1AE0CFD \
-            clean publishMavenXtext publishEclipseXtext
-        '''
+            for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
+            do
+              echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
+            done
+
+            ./gradlew -info \
+              --warning-mode all \
+              --refresh-dependencies \
+              -PJENKINS_URL=$JENKINS_URL \
+              -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
+              -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
+              -Posspub.version=$XTEXT_VERSION \
+              -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
+              -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+              -Posspub.branch=$BRANCH_TO_DEPLOY \
+              -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
+              -Psigning.keyId=D1AE0CFD \
+              -Psigning.gnupg.passphrase=$GPG_PASSPHRASE \
+              clean publishMavenXtext publishEclipseXtext
+          '''
+          } // END withCredentials
         } // END dir
       }
     }
