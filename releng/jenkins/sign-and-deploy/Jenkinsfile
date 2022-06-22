@@ -86,37 +86,34 @@ pipeline {
       steps {
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
         dir('publishing') {
-        sh '''
-          XTEXT_VERSION=$(cat version.txt)
-          echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
-          gpg --version
-          gpg --batch --import "${KEYRING}"
-          ls -a /home/jenkins/.gnupg
-          echo "pinentry-mode loopback" >> /home/jenkins/.gnupg/gpg.conf
-          #gpg --export-secret-key D1AE0CFD > ~/.gnupg/secring.gpg
+        withCredentials([string(credentialsId: 'gpg_passphrase', variable: 'GPG_PASSPHRASE')]) {
+          sh '''
+            XTEXT_VERSION=$(cat version.txt)
+            echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
+            gpg --version
+            gpg --batch --import "${KEYRING}"
 
-          for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
-          do
-            echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
-          done
-          ls -a /home/jenkins/.gnupg
+            for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
+            do
+              echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
+            done
 
-          ./gradlew -info \
-            --warning-mode all \
-            --refresh-dependencies \
-            -PJENKINS_URL=$JENKINS_URL \
-            -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
-            -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
-            -Posspub.version=$XTEXT_VERSION \
-            -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
-            -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
-            -Posspub.branch=$BRANCH_TO_DEPLOY \
-            -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
-            -Psigning.keyId=D1AE0CFD \
-            clean publishEclipseXtext
-
-            find build -name "*.jar" -exec gpg2 --local-user D1AE0CFD --detach-sign {} \\;
-        '''
+            ./gradlew -info \
+              --warning-mode all \
+              --refresh-dependencies \
+              -PJENKINS_URL=$JENKINS_URL \
+              -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
+              -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
+              -Posspub.version=$XTEXT_VERSION \
+              -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS \
+              -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+              -Posspub.branch=$BRANCH_TO_DEPLOY \
+              -Psigning.secretKeyRingFile=/home/jenkins/.gnupg/secring.gpg \
+              -Psigning.keyId=D1AE0CFD \
+              -Psigning.gnupg.passphrase=$GPG_PASSPHRASE \
+              clean publishMavenXtext publishEclipseXtext
+          '''
+          } // END withCredentials
         } // END dir
       }
     }
