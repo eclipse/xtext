@@ -69,7 +69,7 @@
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
     <choice
         value="2022-09"
-        label="Eclipse 2022-09 - 4.25"/>        
+        label="Eclipse 2022-09 - 4.25"/>
     <choice
         value="2022-06"
         label="Eclipse 2022-06 - 4.24"/>
@@ -219,6 +219,10 @@
       xsi:type="setup:VariableTask"
       name="p2.license"
       value="https://download.eclipse.org/cbi/updates/license/"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="p2.gef-classic"
+      value="https://download.eclipse.org/tools/gef/classic/releases/3.14.0/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
@@ -1493,7 +1497,7 @@
           <repository
               url="${p2.emf}"/>
           <repository
-              url="${p2.draw2d}"/>
+              url="${p2.gef-classic}"/>
           <repository
               url="https://download.eclipse.org/eclipse/updates/4.25-I-builds"/>
           <repository
