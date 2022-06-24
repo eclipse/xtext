@@ -46,17 +46,20 @@ public class CodeActionService extends QuickFixCodeActionService {
 	private IChangeSerializer serializer;
 
 	@Override
-	public List<Either<Command, CodeAction>> getCodeActions(ICodeActionService2.Options options) {
-		List<Either<Command, CodeAction>> actions = super.getCodeActions(options);
-		for (Diagnostic d : options.getCodeActionParams().getContext().getDiagnostics()) {
-			Object code = d.getCode().get();
-			if (TestLanguageValidator.INVALID_NAME.equals(code)) {
-				actions.add(Either.forLeft(fixInvalidName(d, options)));
-			} else if (TestLanguageValidator.UNSORTED_MEMBERS.equals(code)) {
-				actions.add(Either.forRight(fixUnsortedMembers(d, options)));
-			}
+	protected List<Either<Command, CodeAction>> getCodeActions(Options options, Diagnostic diagnostic) {
+		Object code = diagnostic.getCode().get();
+		List<Either<Command, CodeAction>> codeActions = super.getCodeActions(options, diagnostic);
+		if (TestLanguageValidator.INVALID_NAME.equals(code)) {
+			codeActions.add(Either.forLeft(fixInvalidName(diagnostic, options)));
+		} else if (TestLanguageValidator.UNSORTED_MEMBERS.equals(code)) {
+			codeActions.add(Either.forRight(fixUnsortedMembers(diagnostic, options)));
 		}
-		return actions;
+		return codeActions;
+	}
+
+	@Override
+	protected boolean handlesDiagnostic(Diagnostic diagnostic) {
+		return true;
 	}
 
 	private Command fixInvalidName(Diagnostic d, ICodeActionService2.Options options) {

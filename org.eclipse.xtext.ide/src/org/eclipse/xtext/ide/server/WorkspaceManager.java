@@ -38,6 +38,8 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
@@ -448,16 +450,29 @@ public class WorkspaceManager {
 	 * Find the resource and the document with the given URI and performa a read operation.
 	 */
 	public <T> T doRead(URI uri, Function2<? super Document, ? super XtextResource, ? extends T> work) {
-		URI resourceURI = uri.trimFragment();
-		ProjectManager projectMnr = getProjectManager(resourceURI);
-		if (projectMnr != null) {
-			XtextResource resource = (XtextResource) projectMnr.getResource(resourceURI);
-			Document doc = getDocument(resource);
+		Pair<? super Document, ? super XtextResource> pair = read(uri);
+		if (pair != null) {
+			Document doc = (Document) pair.getFirst();
+			XtextResource resource = (XtextResource) pair.getSecond();
 			return work.apply(doc, resource);
 		}
 		return work.apply(null, null);
 	}
 
+	/**
+	 * Find the resource and the document with the given URI.
+	 */
+	public Pair<? super Document, ? super XtextResource> read(URI uri) {
+		URI resourceURI = uri.trimFragment();
+		ProjectManager projectMnr = getProjectManager(resourceURI);
+		if (projectMnr != null) {
+			XtextResource resource = (XtextResource) projectMnr.getResource(resourceURI);
+			Document doc = getDocument(resource);
+			return Tuples.pair(doc, resource);
+		}
+		return null;
+	}
+	
 	/**
 	 * Find the document for the given resource.
 	 *

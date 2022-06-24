@@ -44,7 +44,6 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
@@ -149,7 +148,7 @@ public abstract class AbstractIdeQuickfixTest {
 		ICodeActionService2.Options options = new ICodeActionService2.Options();
 		options.setCancelIndicator(CancelIndicator.NullImpl);
 		options.setDocument(new Document(Integer.valueOf(0), originalText));
-		options.setResource((XtextResource) target.eResource());
+		options.setResource(target.eResource());
 		options.setLanguageServerAccess(new ILanguageServerAccess() {
 			@Override
 			public void addBuildListener(ILanguageServerAccess.IBuildListener listener) {
@@ -158,9 +157,7 @@ public abstract class AbstractIdeQuickfixTest {
 
 			@Override
 			public <T extends Object> CompletableFuture<T> doRead(String uri, Function<ILanguageServerAccess.Context, T> function) {
-				ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(options.getResource(), options.getDocument(),
-						true, CancelIndicator.NullImpl);
-				return CompletableFuture.completedFuture(function.apply(ctx));
+				return CompletableFuture.completedFuture(doSyncRead(uri, function));
 			}
 
 			@Override
@@ -188,6 +185,13 @@ public abstract class AbstractIdeQuickfixTest {
 				//re-using the existing ResourceSet because it contains the URI protocol mapping for "inmemory" resources.
 				ResourceSet resourceSet = options.getResource().getResourceSet();
 				return resourceSet;
+			}
+
+			@Override
+			public <T> T doSyncRead(String uri, Function<Context, T> function) {
+					ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(options.getResource(), options.getDocument(),
+							true, CancelIndicator.NullImpl);
+					return function.apply(ctx);				
 			}
 		});
 		CodeActionParams codeActionParams = new CodeActionParams();

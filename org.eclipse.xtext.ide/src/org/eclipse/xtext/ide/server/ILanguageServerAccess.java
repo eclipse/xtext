@@ -112,6 +112,13 @@ public interface ILanguageServerAccess {
 	<T extends Object> CompletableFuture<T> doRead(String uri, Function<ILanguageServerAccess.Context, T> function);
 
 	/**
+	 * Provides access to a {@link WorkspaceManager}.
+	 * 
+	 * @since 2.28
+	 */
+	<T extends Object> T doSyncRead(String uri, Function<ILanguageServerAccess.Context, T> function);
+
+	/**
 	 * Provides read access to the Xtext index.
 	 * 
 	 * @since 2.18
