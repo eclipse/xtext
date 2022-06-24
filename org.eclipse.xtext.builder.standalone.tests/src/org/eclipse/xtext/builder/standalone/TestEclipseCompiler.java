@@ -54,6 +54,8 @@ public class TestEclipseCompiler {
 	public void setUp() {
 		compiler = injector.getInstance(IJavaCompiler.class);
 		compiler.getConfiguration().setVerbose(true);
+		compiler.getConfiguration().setSourceLevel("8");
+		compiler.getConfiguration().setTargetLevel("8");
 		outputClassDirectory = new File("target/temp");
 	}
 
