@@ -9,18 +9,14 @@
 package org.eclipse.xtext.build;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
-import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 import com.google.common.collect.FluentIterable;
@@ -40,7 +36,6 @@ public class ClusteringStorageAwareResourceLoader {
 	 */
 	public <T> Iterable<T> executeClustered(Iterable<URI> uris, Function1<? super Resource, ? extends T> operation) {
 		int loadedURIsCount = 0;
-		Set<URI> sourceLevelURIs = new HashSet<>();
 		List<Resource> resources = new ArrayList<>();
 		List<T> result = new ArrayList<>();
 		Iterator<URI> iter = uris.iterator();
@@ -54,16 +49,6 @@ public class ClusteringStorageAwareResourceLoader {
 				loadedURIsCount = 0;
 			}
 			loadedURIsCount++;
-			if (isSource(uri)) {
-				sourceLevelURIs.add(uri);
-				Resource existingResource = resourceSet.getResource(uri, false);
-				if (existingResource instanceof StorageAwareResource) {
-					if (((StorageAwareResource) existingResource).isLoadedFromStorage()) {
-						existingResource.unload();
-					}
-				}
-				SourceLevelURIsAdapter.setSourceLevelUrisWithoutCopy(resourceSet, sourceLevelURIs);
-			}
 			resources.add(resourceSet.getResource(uri, true));
 		}
 		FluentIterable.from(resources).transform(operation::apply).copyInto(result);
@@ -73,14 +58,15 @@ public class ClusteringStorageAwareResourceLoader {
 	/**
 	 * Return true if the given uri must be loaded from source.
 	 */
+	@Deprecated(/*forRemoval = true*/)
 	protected boolean isSource(URI uri) {
 		IResourceServiceProvider provider = context.getResourceServiceProvider(uri);
 		return provider instanceof IResourceServiceProviderExtension
 				&& ((IResourceServiceProviderExtension) provider).isSource(uri);
 	}
-
+	
 	/**
-	 * Remove all resoures from the resource set without delivering notifications.
+	 * Remove all resources from the resource set without delivering notifications.
 	 */
 	protected void clearResourceSet() {
 		XtextResourceSet resourceSet = context.getResourceSet();

@@ -53,7 +53,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
 	 */
 	public static void setSourceLevelUrisWithoutCopy(ResourceSet resourceSet, Set<URI> uris) {
 		SourceLevelURIsAdapter adapter = findOrCreateAdapter(resourceSet);
-		adapter.sourceLevelURIs = uris;
+		adapter.sourceLevelURIs = Collections.unmodifiableSet(uris);
 	}
 
 	public static SourceLevelURIsAdapter findInstalledAdapter(ResourceSet resourceSet) {
@@ -68,7 +68,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
 	private Set<URI> sourceLevelURIs;
 
 	public Set<URI> getSourceLevelURIs() {
-		return Collections.unmodifiableSet(sourceLevelURIs);
+		return sourceLevelURIs;
 	}
 
 	@Override
@@ -77,6 +77,6 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
 	}
 
 	public void setSourceLevelURIs(Set<URI> sourceLevelURIs) {
-		this.sourceLevelURIs = sourceLevelURIs;
+		this.sourceLevelURIs = Collections.unmodifiableSet(sourceLevelURIs);
 	}
 }
