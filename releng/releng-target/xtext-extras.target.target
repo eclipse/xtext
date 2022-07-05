@@ -18,7 +18,7 @@
 			<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
 			<unit id="org.apache.log4j" version="1.2.19.v20220208-1728"/>
 			<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 			<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
