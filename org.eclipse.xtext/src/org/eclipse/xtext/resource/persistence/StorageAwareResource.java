@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -42,6 +42,39 @@ public class StorageAwareResource extends LazyLinkingResource {
 
 	private IResourceDescription resourceDescription = null;
 
+	private static final int STACK_TRACE_LIMIT = 10;
+
+	/**
+	 * Modify the argument StackOverflowError so that it only retains the first and last {@link #STACK_TRACE_LIMIT}
+	 * stack trace elements of {@code ex} if it has more than that.
+	 *
+	 * @param ex
+	 *            the StackOverflowError; may get modified
+	 */
+	@SuppressWarnings("nls")
+	private static void trimStackOverflowErrorStackTrace(final StackOverflowError ex) {
+		int stackTraceLength = ex.getStackTrace().length;
+		if (stackTraceLength > STACK_TRACE_LIMIT * 2 + 1) {
+			StackTraceElement[] stackTraceElements = new StackTraceElement[(STACK_TRACE_LIMIT * 2) + 1];
+			System.arraycopy(ex.getStackTrace(), 0, stackTraceElements, 0, STACK_TRACE_LIMIT);
+			stackTraceElements[STACK_TRACE_LIMIT] = new StackTraceElement("", "\n\t\t\t <Skipped multiple lines> \n",
+					null, -1);
+			System.arraycopy(ex.getStackTrace(), stackTraceLength - STACK_TRACE_LIMIT, stackTraceElements,
+					STACK_TRACE_LIMIT + 1, STACK_TRACE_LIMIT);
+			ex.setStackTrace(stackTraceElements);
+		}
+	}
+	  
+	private void clearAndUnload() {
+		if (contents != null) {
+			contents.clear();
+		}
+		if (eAdapters != null) {
+			eAdapters.clear();
+		}
+		unload();		
+	}
+	
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
 		if (!isLoaded && !isLoading && resourceStorageFacade != null
@@ -52,13 +85,11 @@ public class StorageAwareResource extends LazyLinkingResource {
 				loadFromStorage(in);
 				return;
 			} catch (IOException e) {
-				if (contents != null) {
-					contents.clear();
-				}
-				if (eAdapters != null) {
-					eAdapters.clear();
-				}
-				unload();
+				clearAndUnload();
+			} catch (StackOverflowError e) {
+				trimStackOverflowErrorStackTrace(e);
+				LOG.warn("Failed to load " + uri + " from storage", e); //$NON-NLS-1$//$NON-NLS-2$
+				clearAndUnload();
 			}
 		}
 		super.load(options);
