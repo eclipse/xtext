@@ -95,18 +95,18 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 						«IF config.junitVersion == JUnitVersion.JUNIT_5»
 							<unit id="org.apiguardian" version="1.1.2.v20211018-1956"/>
-							<unit id="org.junit.jupiter.api" version="5.8.1.v20211018-1956"/>
-							<unit id="org.junit.jupiter.engine" version="5.8.1.v20211018-1956"/>
-							<unit id="org.junit.platform.commons" version="1.8.1.v20211018-1956"/>
-							<unit id="org.junit.platform.engine" version="1.8.1.v20211018-1956"/>
-							<unit id="org.junit.platform.launcher" version="1.8.1.v20211018-1956"/>
-							<unit id="org.junit.platform.runner" version="1.8.1.v20211018-1956"/>
-							<unit id="org.junit.platform.suite.commons" version="1.8.1.v20211018-1956"/>
+							<unit id="org.junit.jupiter.api" version="5.8.2.v20220624-2009"/>
+							<unit id="org.junit.jupiter.engine" version="5.8.2.v20220624-2009"/>
+							<unit id="org.junit.platform.commons" version="1.8.2.v20220624-2009"/>
+							<unit id="org.junit.platform.engine" version="1.8.2.v20220624-2009"/>
+							<unit id="org.junit.platform.launcher" version="1.8.2.v20220624-2009"/>
+							<unit id="org.junit.platform.runner" version="1.8.2.v20220624-2009"/>
+							<unit id="org.junit.platform.suite.commons" version="1.8.2.v20220624-2009"/>
 							<unit id="org.opentest4j" version="1.2.0.v20211018-1956"/>
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
 					</location>
 				«ELSE»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -119,7 +119,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
 						<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
 					</location>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
 						<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
