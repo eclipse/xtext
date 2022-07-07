@@ -94,7 +94,7 @@ guava gwt (30.1)
 
 * License: Apache License, 2.0
 
-JUnit (5.8.1)
+JUnit (5.8.2)
 
 * License: EPL-2.0
 
