@@ -150,7 +150,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2022-06"/>
+      value="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
