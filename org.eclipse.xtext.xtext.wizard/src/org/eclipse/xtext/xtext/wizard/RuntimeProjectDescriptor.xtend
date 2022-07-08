@@ -486,7 +486,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«IF isPlainMavenBuild»
 								<plugin>
 									<artifactId>maven-assembly-plugin</artifactId>
-									<version>3.3.0</version>
+									<version>3.4.1</version>
 									<configuration>
 										<descriptors>
 											<descriptor>jar-with-ecore-model.xml</descriptor>
