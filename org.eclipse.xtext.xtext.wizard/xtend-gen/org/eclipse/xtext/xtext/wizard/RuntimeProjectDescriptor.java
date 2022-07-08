@@ -1347,7 +1347,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.3.0</version>");
+              _builder.append("<version>3.4.1</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
