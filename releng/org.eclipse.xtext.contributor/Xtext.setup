@@ -444,8 +444,6 @@
         name="org.eclipse.epp.mpc.feature.group"
         optional="true"/>
     <requirement
-        name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
-    <requirement
         name="org.eclipse.pde.feature.group"/>
     <repository
         url="${p2.xtext}"/>
