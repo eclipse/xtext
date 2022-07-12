@@ -82,7 +82,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 						try {
 							loadLock.acquire();
 							if (!isLoaded) {
-								resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+								resourceDescriptionData = new ResourceDescriptionsData(doLoad());
 								if(storage2UriMapper instanceof IStorage2UriMapperExtension)
 									((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
 								isLoaded = true;
@@ -113,9 +113,16 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 			}
 		}
 	}
-	
+
 	protected void ensureLoaded() {
 		load();
+	}
+
+	/**
+	 * @since 2.28
+	 */
+	protected Iterable<IResourceDescription> doLoad() {
+		return persister.load();
 	}
 
 	protected Set<URI> ensureNotNull(Set<URI> uris) {
