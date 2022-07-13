@@ -82,7 +82,7 @@ public class WorkspaceManager {
 
 	private final Map<String, ResourceDescriptionsData> fullIndex = new HashMap<>();
 
-	private final Map<URI, Document> openDocuments = new HashMap<>();
+	private final Map<URI, Document> openDocuments = createOpenDocuments();
 
 	/**
 	 * Add the listener to this workspace.
@@ -182,6 +182,24 @@ public class WorkspaceManager {
 		return workspaceFolders;
 	}
 	
+	/**
+	 * Creates the open document map and returns it, never {@code null}.
+	 * 
+	 * @since 2.28
+	 */
+	protected Map<URI, Document> createOpenDocuments() {
+		return new HashMap<>();
+	}
+
+	/**
+	 * @return the open document map, never {@code null}.
+	 * 
+	 * @since 2.28
+	 */
+	protected Map<URI, Document> getOpenDocuments() {
+		return openDocuments;
+	}
+
 	/**
 	 * Updates the workspace folders and refreshes the workspace.
 	 * 
