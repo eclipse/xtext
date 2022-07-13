@@ -435,7 +435,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 													<ignore></ignore>
 												</action>
 											</pluginExecution>
-											«IF config.needsTychoBuild»
+											«IF config.needsTychoBuild && !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
 												<pluginExecution>
 													<pluginExecutionFilter>
 														<groupId>

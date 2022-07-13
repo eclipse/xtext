@@ -1397,8 +1397,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginExecution>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_4) {
+        if ((this.getConfig().needsTychoBuild() && (!this.getConfig().getJavaVersion().isAtLeast(JavaVersion.JAVA11)))) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<pluginExecution>");
           _builder.newLine();
@@ -1652,8 +1651,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_5 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_5) {
+        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_4) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
@@ -1807,8 +1806,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</repository>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_6 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_6) {
+        boolean _needsTychoBuild_5 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_5) {
           _builder.append("\t");
           _builder.append("<!-- This must be disabled explicitly, otherwise it is enabled by https://github.com/mojohaus/mojo-parent ");
           _builder.newLine();
@@ -1990,8 +1989,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginRepository>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_7 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_7) {
+        boolean _needsTychoBuild_6 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_6) {
           _builder.append("\t");
           _builder.append("<pluginRepository>");
           _builder.newLine();
