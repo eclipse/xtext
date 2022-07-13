@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
@@ -20,14 +21,21 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.TextRegion;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
 public class EObjectAtOffsetHelper {
+
+	@Inject
+	private TokenUtil tokenUtil;
 
 	/**
 	 * @return the declared or the referenced element next to the offset
@@ -157,4 +165,41 @@ public class EObjectAtOffsetHelper {
 		return null;
 	}
 
+	/**
+	 * Find the leaf node at the given offset that defines a named element or cross-references to such an element. May
+	 * return <code>null</code> if the given offset is not valid or if such an object cannot be found at the given
+	 * offset.
+	 * 
+	 * @param resource
+	 *            the {@link XtextResource} May be <code>null</code>.
+	 * @param offset
+	 *            the offset where the leaf node is to be searched.
+	 * @return the leaf node with an identifier at the given offset or <code>null</code>.
+	 * @since 2.28
+	 */
+	public EObject getElementWithNameAt(XtextResource resource, int offset) {
+		if (offset >= 0 && resource != null) {
+			IParseResult parseResult = resource.getParseResult();
+			if (parseResult != null) {
+				ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
+				if (!tokenUtil.isWhitespaceOrCommentNode(leaf)) {						
+					EObject crossRef = resolveCrossReferencedElementAt(resource, offset);
+					if (crossRef != null) {
+						return crossRef;
+					}
+					EObject definition = resolveElementAt(resource, offset);
+					final EStructuralFeature structuralFeature = SimpleAttributeResolver.NAME_RESOLVER.getAttribute(definition);
+					List<INode> nodesForNameFeature = NodeModelUtils.findNodesForFeature(definition, structuralFeature);
+					for (INode nodeForNameFeature :nodesForNameFeature) {
+						for (INode leafNodeForNameFeature: nodeForNameFeature.getLeafNodes()) {							
+							if (leafNodeForNameFeature.equals(leaf)) {						
+								return definition;
+							}
+						}					
+					}
+				}
+			}
+		}
+		return null;
+	}
 }

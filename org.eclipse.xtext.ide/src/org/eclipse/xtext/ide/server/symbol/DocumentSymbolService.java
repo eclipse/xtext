@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -25,6 +25,9 @@ import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -56,6 +59,10 @@ import com.google.inject.Singleton;
 
 /**
  * @author kosyakov - Initial contribution and API
+ *
+ * Contributors: 
+ *   Rubén Porras Campo (Avaloq Evolution AG) - Do not return definitions for elements without identifiers.
+ *
  * @since 2.11
  */
 @Singleton
@@ -101,10 +108,11 @@ public class DocumentSymbolService implements IDocumentSymbolService {
 
 	public List<? extends Location> getDefinitions(XtextResource resource, int offset,
 			IReferenceFinder.IResourceAccess resourceAccess, CancelIndicator cancelIndicator) {
-		EObject element = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
+		EObject element = eObjectAtOffsetHelper.getElementWithNameAt(resource, offset);
 		if (element == null) {
 			return Collections.emptyList();
 		}
+		
 		List<Location> locations = new ArrayList<>();
 		TargetURIs targetURIs = collectTargetURIs(element);
 		for (URI targetURI : targetURIs) {
