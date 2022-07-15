@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -25,6 +24,7 @@ import org.eclipse.xtext.ide.editor.quickfix.AbstractDeclarativeIdeQuickfixProvi
 import org.eclipse.xtext.ide.editor.quickfix.DiagnosticResolution;
 import org.eclipse.xtext.ide.editor.quickfix.IQuickFixProvider;
 import org.eclipse.xtext.ide.editor.quickfix.QuickFix;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 
 import com.google.common.annotations.Beta;
 
@@ -56,16 +56,37 @@ public class QuickFixCodeActionService implements ICodeActionService2 {
 
 		List<Either<Command, CodeAction>> result = new ArrayList<>();
 		for (Diagnostic diagnostic : options.getCodeActionParams().getContext().getDiagnostics()) {
-			List<DiagnosticResolution> resolutions = quickfixes.getResolutions(options, diagnostic).stream()
-					.sorted(Comparator.nullsLast(Comparator.comparing(DiagnosticResolution::getLabel)))
-					.collect(Collectors.toList());
-			for (DiagnosticResolution resolution : resolutions) {
-				result.add(Either.forRight(createFix(resolution, diagnostic)));
+			if (handlesDiagnostic(diagnostic)) {
+				result.addAll(options.getLanguageServerAccess()
+						.doSyncRead(options.getURI(), (ILanguageServerAccess.Context context) -> {
+							options.setDocument(context.getDocument());
+							options.setResource(context.getResource());
+							return getCodeActions(options, diagnostic);
+						}));
 			}
 		}
 		return result;
 	}
 
+	/**
+	 * @since 2.28
+	 */
+	protected boolean handlesDiagnostic(Diagnostic diagnostic) {
+		return quickfixes.handlesDiagnostic(diagnostic);
+	}
+
+	/**
+	 * @since 2.28
+	 */
+	protected List<Either<Command, CodeAction>> getCodeActions(Options options, Diagnostic diagnostic) {
+		List<Either<Command, CodeAction>> codeActions = new ArrayList<>();
+		quickfixes.getResolutions(options, diagnostic).stream()
+				.sorted(Comparator
+						.nullsLast(Comparator.comparing(DiagnosticResolution::getLabel)))
+				.forEach(r -> codeActions.add(Either.forRight(createFix(r, diagnostic))));
+		return codeActions;
+	}
+	
 	private CodeAction createFix(DiagnosticResolution resolution, Diagnostic diagnostic) {
 		CodeAction codeAction = new CodeAction();
 		codeAction.setDiagnostics(Collections.singletonList(diagnostic));

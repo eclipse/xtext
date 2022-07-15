@@ -1,9 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2020, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.quickfix;
@@ -21,8 +21,11 @@ import com.google.common.annotations.Beta;
  * The textual edit can be composed by calling DiagnosticResolution#apply().
  *
  * @author Heinrich Weichert
- * 
+ *
  * @since 2.24
+ * 
+ * Contributors: 
+ *   Rubén Porras Campo (Avaloq Evolution AG) - Add method to get fix methods.
  */
 @Beta
 public interface IQuickFixProvider {
@@ -39,4 +42,18 @@ public interface IQuickFixProvider {
 	 */
 	List<DiagnosticResolution> getResolutions(Options options, Diagnostic diagnostic);
 
+	
+	/**
+	 *
+	 * If the provider handles (it has code to produce resolutions for) the given diagnostic.
+	 *
+	 * @param diagnostic
+	 *            the diagnostic
+	 * @return true if the provider handles the given diagnostic
+	 * 
+	 * @since 2.28
+	 */
+	default boolean handlesDiagnostic(Diagnostic diagnostic) {
+		return true;
+	}
 }

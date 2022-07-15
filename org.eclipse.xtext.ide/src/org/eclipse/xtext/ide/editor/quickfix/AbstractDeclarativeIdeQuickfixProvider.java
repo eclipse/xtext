@@ -5,7 +5,7 @@ package org.eclipse.xtext.ide.editor.quickfix;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 import java.lang.reflect.Method;
@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Heinrich Weichert
- * 
+ *
  * @since 2.24
  */
 @Beta
@@ -50,9 +50,10 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 		return false;
 	}
 
-	private List<DiagnosticResolution> getResolutions(Options options, Iterable<Method> fixMethods) {
+	@Override
+	public List<DiagnosticResolution> getResolutions(Options options, Diagnostic diagnostic) {
 		DiagnosticResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
-		for (Method fixMethod : fixMethods) {
+		for (Method fixMethod : getFixMethods(diagnostic)) {
 			try {
 				// will throw if this is not a public method, but it should be
 				fixMethod.invoke(this, issueResolutionAcceptor);
@@ -63,25 +64,26 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 		return issueResolutionAcceptor.getDiagnosticResolutions(options);
 	}
 
-	private Iterable<Method> collectMethods(Class<? extends AbstractDeclarativeIdeQuickfixProvider> clazz,
+	private List<Method> collectMethods(Class<? extends AbstractDeclarativeIdeQuickfixProvider> clazz,
 			String issueCode) {
 		return Arrays.stream(clazz.getMethods()).filter(method -> getFixMethodPredicate(method, issueCode))
 				.collect(Collectors.toList());
 	}
 
-	private Iterable<Method> getFixMethods(Diagnostic diagnostic) {
-		if (Strings.isNullOrEmpty(diagnostic.getCode().getLeft())) {
-			return Collections.emptyList();
-		}
-		return collectMethods(getClass(), diagnostic.getCode().getLeft());
+	@Override
+	public boolean handlesDiagnostic(Diagnostic diagnostic) {
+		return !getFixMethods(diagnostic).isEmpty();		
 	}
 
-	@Override
-	public List<DiagnosticResolution> getResolutions(Options options, Diagnostic diagnostic) {
+	public List<Method> getFixMethods(Diagnostic diagnostic) {
 		if (diagnostic == null || diagnostic.getCode() == null || diagnostic.getMessage() == null || diagnostic.getSeverity() == null) {
 			return Collections.emptyList();
 		}
-		return getResolutions(options, getFixMethods(diagnostic));
+		String issueCode = diagnostic.getCode().getLeft();
+		if (Strings.isNullOrEmpty(issueCode)) {
+			return Collections.emptyList();
+		}
+		return collectMethods(getClass(), issueCode);
 	}
 
 	/**
