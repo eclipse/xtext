@@ -12,7 +12,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -35,6 +37,8 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 
 	private static final Logger LOG = Logger.getLogger(AbstractDeclarativeIdeQuickfixProvider.class);
 
+	private Map<String, List<Method>> methods = new ConcurrentHashMap<>();
+	
 	@Inject
 	private Provider<DiagnosticResolutionAcceptor> issueResolutionAcceptorProvider;
 
@@ -83,7 +87,8 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 		if (Strings.isNullOrEmpty(issueCode)) {
 			return Collections.emptyList();
 		}
-		return collectMethods(getClass(), issueCode);
+		
+		return methods.computeIfAbsent(issueCode, c -> this.collectMethods(getClass(), c));		
 	}
 
 	/**
