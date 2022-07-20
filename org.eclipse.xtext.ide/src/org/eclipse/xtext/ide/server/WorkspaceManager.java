@@ -19,6 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.DidChangeTextDocumentParams;
 import org.eclipse.lsp4j.DidChangeWorkspaceFoldersParams;
 import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
@@ -447,7 +448,7 @@ public class WorkspaceManager {
 	}
 
 	/**
-	 * Find the resource and the document with the given URI and performa a read operation.
+	 * Find the resource and the document with the given URI and perform a a read operation.
 	 */
 	public <T> T doRead(URI uri, Function2<? super Document, ? super XtextResource, ? extends T> work) {
 		Pair<? super Document, ? super XtextResource> pair = read(uri);
@@ -466,9 +467,12 @@ public class WorkspaceManager {
 		URI resourceURI = uri.trimFragment();
 		ProjectManager projectMnr = getProjectManager(resourceURI);
 		if (projectMnr != null) {
-			XtextResource resource = (XtextResource) projectMnr.getResource(resourceURI);
-			Document doc = getDocument(resource);
-			return Tuples.pair(doc, resource);
+			Resource resource = projectMnr.getResource(resourceURI);
+			if (resource instanceof XtextResource) {
+				XtextResource xtextResource = (XtextResource) resource; 
+				Document doc = getDocument(xtextResource);
+				return Tuples.pair(doc, xtextResource);
+			}
 		}
 		return null;
 	}
