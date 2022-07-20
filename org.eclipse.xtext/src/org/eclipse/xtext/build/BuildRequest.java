@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -10,7 +10,9 @@ package org.eclipse.xtext.build;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -73,6 +75,8 @@ public class BuildRequest {
 	private List<URI> deletedFiles = new ArrayList<>();
 
 	private List<IResourceDescription.Delta> externalDeltas = new ArrayList<>();
+	
+	private Set<URI> sourceLevelURIs = new HashSet<>();
 
 	/**
 	 * Callback after validation, return <code>false</code> will stop the build.
@@ -195,5 +199,22 @@ public class BuildRequest {
 
 	public void setCancelIndicator(CancelIndicator cancelIndicator) {
 		this.cancelIndicator = cancelIndicator;
+	}
+
+	/**
+	 * @since 2.28
+	 */
+	public Set<URI> getSourceLevelUris() {
+		return sourceLevelURIs;		
+	}
+
+	/**
+	 * Sets a reference to the given set of source level URIs. Subsequent modifications of its content will be
+	 * observable here and on the call-site.
+	 * 
+	 * @since 2.28
+	 */
+	public void setSourceLevelUris(Set<URI> sourceLevelURIs) {
+		this.sourceLevelURIs = sourceLevelURIs ;		
 	}
 }

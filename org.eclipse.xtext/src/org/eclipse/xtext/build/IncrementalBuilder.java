@@ -15,9 +15,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.GeneratorContext;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
@@ -35,12 +39,14 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
+import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -199,9 +205,22 @@ public class IncrementalBuilder {
 		private OperationCanceledManager operationCanceledManager;
 
 		protected void unloadResource(URI uri) {
+			unloadResource(uri, x -> true);
+		}
+
+		/**
+		 * Unload the resource with the given uri if it satisfies the given condition.
+		 * 
+		 * @param uri
+		 *            the URI, must not be {@code null}
+		 * @param condition
+		 *            the condition, must not be {@code null}
+		 * @since 2.28
+		 */
+		protected void unloadResource(URI uri, Predicate<Resource> condition) {
 			XtextResourceSet resourceSet = request.getResourceSet();
 			Resource resource = resourceSet.getResource(uri, false);
-			if (resource != null) {
+			if (resource != null && condition.test(resource)) {
 				resourceSet.getResources().remove(resource);
 				// proxify
 				resource.unload();
@@ -255,9 +274,11 @@ public class IncrementalBuilder {
 					resolvedDeltas.add(delta);
 				}
 			}
-
-			Iterable<IResourceDescription.Delta> deltas = context.executeClustered(FluentIterable
-					.from(result.getResourceDeltas()).filter((it) -> it.getNew() != null).transform(Delta::getUri),
+			List<URI> toBeBuilt = result.getResourceDeltas().stream().filter((it) -> it.getNew() != null)
+					.map(Delta::getUri).collect(Collectors.toList());
+			
+			installSourceLevelURIs(toBeBuilt);
+			Iterable<IResourceDescription.Delta> deltas = context.executeClustered(toBeBuilt,
 					(resource) -> {
 						CancelIndicator cancelIndicator = request.getCancelIndicator();
 						operationCanceledManager.checkCanceled(cancelIndicator);
@@ -336,12 +357,8 @@ public class IncrementalBuilder {
 				return true;
 			});
 			fileSystemAccess.setContext(resource);
-			if (request.isWriteStorageResources() && resource instanceof StorageAwareResource) {
-				IResourceStorageFacade resourceStorageFacade = ((StorageAwareResource) resource)
-						.getResourceStorageFacade();
-				if (resourceStorageFacade != null) {
-					resourceStorageFacade.saveResource((StorageAwareResource) resource, fileSystemAccess);
-				}
+			if (request.isWriteStorageResources()) {
+				storeBinaryResource(resource, fileSystemAccess);
 			}
 			GeneratorContext generatorContext = new GeneratorContext();
 			generatorContext.setCancelIndicator(request.getCancelIndicator());
@@ -354,6 +371,61 @@ public class IncrementalBuilder {
 					request.getAfterDeleteFile().apply(noLongerCreated);
 				} catch (IOException e) {
 					throw new RuntimeIOException(e);
+				}
+			}
+		}
+
+		/**
+		 * @since 2.28
+		 */
+		protected boolean isLoadedFromStorage(Resource resource) {
+			return resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage();
+		}
+
+		/**
+		 * @since 2.28
+		 */
+		protected void installSourceLevelURIs(List<URI> uris) {
+			Set<URI> sourceLevelURIs = request.getSourceLevelUris();
+			ResourceSet resourceSet = request.getResourceSet();
+			for (URI uri : uris) {
+				if (isSource(uri)) {
+					sourceLevelURIs.add(uri);
+					unloadResource(uri, this::isLoadedFromStorage);
+				}
+			}
+			
+			SourceLevelURIsAdapter.setSourceLevelUrisWithoutCopy(resourceSet, sourceLevelURIs);
+		}
+
+		/**
+		 * Return true if the given uri must be loaded from source.
+		 * 
+		 * @since 2.28
+		 */
+		protected boolean isSource(URI uri) {
+			IResourceServiceProvider provider = context.getResourceServiceProvider(uri);
+			return provider instanceof IResourceServiceProviderExtension
+					&& ((IResourceServiceProviderExtension) provider).isSource(uri);
+		}
+		
+		/**
+		 * Stores resource as a binary.
+		 *
+		 * @param resource
+		 *            resource to store, must not be {@code null}
+		 * @param fileSystemAccess
+		 *            the file system access, must not be {@code null}
+		 * 
+		 * @since 2.28
+		 */
+		protected void storeBinaryResource(final Resource resource, IFileSystemAccessExtension3 fileSystemAccess) {
+			if (resource instanceof StorageAwareResource) {
+				IResourceStorageFacade resourceStorageFacade = ((StorageAwareResource) resource)
+						.getResourceStorageFacade();
+				if (resourceStorageFacade != null) {
+					resourceStorageFacade.saveResource((StorageAwareResource) resource, fileSystemAccess);
+					request.getSourceLevelUris().remove(resource.getURI());
 				}
 			}
 		}
