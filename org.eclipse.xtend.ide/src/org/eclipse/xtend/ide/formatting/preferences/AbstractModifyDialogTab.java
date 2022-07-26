@@ -97,4 +97,16 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 				Boolean.FALSE.toString(), Boolean.TRUE.toString() });
 	}
 
+	public void doSetAll(boolean value) {
+		
+	}
+
+	public void resetValues() {
+		
+	}
+
+	public void setDefaults() {
+		
+	}
+
 }
