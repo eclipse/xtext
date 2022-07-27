@@ -88,7 +88,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 				</location>
 				«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-						<unit id="com.google.gson" version="2.8.9.v20220111-1409"/>
+						<unit id="com.google.gson" version="2.9.0.v20220704-0629"/>
 						<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
 						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
@@ -110,7 +110,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					</location>
 				«ELSE»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-						<unit id="com.google.gson" version="2.8.9.v20220111-1409"/>
+						<unit id="com.google.gson" version="2.9.0.v20220704-0629"/>
 						<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
 						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
