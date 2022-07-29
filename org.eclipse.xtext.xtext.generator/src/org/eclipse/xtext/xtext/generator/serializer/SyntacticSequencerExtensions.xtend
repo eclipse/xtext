@@ -24,6 +24,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
+import java.util.LinkedHashMap
 
 class SyntacticSequencerExtensions {
 	
@@ -65,7 +66,7 @@ class SyntacticSequencerExtensions {
 	def List<EqualAmbiguousTransitions> getAllAmbiguousTransitionsBySyntax() {
 		if (ambiguousTransitions !== null)
 			return ambiguousTransitions
-		val Map<AbstractElementAlias, EqualAmbiguousTransitions> result = newHashMap
+		val Map<AbstractElementAlias, EqualAmbiguousTransitions> result =  new LinkedHashMap()
 		for (transition : allAmbiguousTransitions) {
 			for (syntax : transition.ambiguousSyntaxes) {
 				var list = result.get(syntax)

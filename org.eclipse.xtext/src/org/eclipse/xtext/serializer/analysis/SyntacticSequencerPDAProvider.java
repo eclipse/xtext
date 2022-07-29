@@ -11,6 +11,7 @@ package org.eclipse.xtext.serializer.analysis;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -562,7 +563,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), eClass));
 		Set<ISerState> followers = Sets.newLinkedHashSet();
-		collectFollowingAbsorberStates(state, false, Sets.<ISerState> newHashSet(), followers);
+		collectFollowingAbsorberStates(state, false, new LinkedHashSet<>(), followers);
+		
 		for (ISerState follower : followers) {
 			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, eClass);
 			SynTransition transition = createTransition(result, target);

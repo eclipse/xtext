@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.serializer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class NamedSerializationContextProvider {
 
 	public <T extends Object> List<NamedSerializationContexts<T>> getNamedContexts(SerializationContextMap<T> map) {
 		ArrayList<NamedSerializationContexts<T>> result = new ArrayList<>();
-		HashMap<String, Integer> names = new HashMap<>();
+		HashMap<String, Integer> names = new LinkedHashMap<String, Integer>();
 		for (SerializationContextMap.Entry<T> e : map.values()) {
 			for (EClass t : e.getTypes()) {
 				List<ISerializationContext> ctx = e.getContexts(t);

@@ -772,21 +772,21 @@ public class PdaUtil {
 			LinkedList<S> todo = Lists.newLinkedList();
 			todo.add(orig);
 			Set<S> visited = Sets.newHashSet();
-			Set<S> folowers = Sets.newHashSet();
+			Set<S> followers = Sets.newLinkedHashSet();
 			while (!todo.isEmpty()) {
 				S o = todo.pop();
 				if (visited.add(o)) {
 					for (S s : pda.getFollowers(o)) {
 						S f = orig2copy.get(s);
 						if (f != null) {
-							folowers.add(f);
+							followers.add(f);
 						} else {
 							todo.add(s);
 						}
 					}
 				}
 			}
-			fact.setFollowers(result, copy, folowers);
+			fact.setFollowers(result, copy, followers);
 		}
 		return result;
 	}

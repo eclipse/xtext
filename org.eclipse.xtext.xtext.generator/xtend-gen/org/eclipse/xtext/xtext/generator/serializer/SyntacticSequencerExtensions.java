@@ -9,6 +9,7 @@
 package org.eclipse.xtext.xtext.generator.serializer;
 
 import com.google.inject.Inject;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class SyntacticSequencerExtensions {
     if ((this.ambiguousTransitions != null)) {
       return this.ambiguousTransitions;
     }
-    final Map<GrammarAlias.AbstractElementAlias, EqualAmbiguousTransitions> result = CollectionLiterals.<GrammarAlias.AbstractElementAlias, EqualAmbiguousTransitions>newHashMap();
+    final Map<GrammarAlias.AbstractElementAlias, EqualAmbiguousTransitions> result = new LinkedHashMap<GrammarAlias.AbstractElementAlias, EqualAmbiguousTransitions>();
     Set<ISyntacticSequencerPDAProvider.ISynTransition> _allAmbiguousTransitions = this.getAllAmbiguousTransitions();
     for (final ISyntacticSequencerPDAProvider.ISynTransition transition : _allAmbiguousTransitions) {
       List<GrammarAlias.AbstractElementAlias> _ambiguousSyntaxes = transition.getAmbiguousSyntaxes();
