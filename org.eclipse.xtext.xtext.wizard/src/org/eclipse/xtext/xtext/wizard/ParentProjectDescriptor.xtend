@@ -263,22 +263,32 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<goal>plugin-source</goal>
 										</goals>
 									</execution>
+									«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
+										<execution>
+											<id>feature-source</id>
+											<goals>
+												<goal>feature-source</goal>
+											</goals>
+										</execution>
+									«ENDIF»
 								</executions>
 							</plugin>
-							<plugin>
-								<groupId>org.eclipse.tycho.extras</groupId>
-								<artifactId>tycho-source-feature-plugin</artifactId>
-								<version>${tycho-version}</version>
-								<executions>
-									<execution>
-										<id>source-feature</id>
-										<phase>package</phase>
-										<goals>
-											<goal>source-feature</goal>
-										</goals>
-									</execution>
-								</executions>
-							</plugin>
+							«IF !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
+								<plugin>
+									<groupId>org.eclipse.tycho.extras</groupId>
+									<artifactId>tycho-source-feature-plugin</artifactId>
+									<version>${tycho-version}</version>
+									<executions>
+										<execution>
+											<id>source-feature</id>
+											<phase>package</phase>
+											<goals>
+												<goal>source-feature</goal>
+											</goals>
+										</execution>
+									</executions>
+								</plugin>
+							«ENDIF»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>tycho-p2-plugin</artifactId>
