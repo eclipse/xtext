@@ -43,13 +43,13 @@ dependencies {
           `/org.eclipse.xtext.ide.tests/META-INF/MANIFEST.MF` files.
         - Update Oomph releng/org.eclipse.xtext.contributor/Xtext.setup
         */
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.debug:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.generator:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc.debug:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.websocket.jakarta:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j.websocket:0.14.0"
-        api "org.eclipse.lsp4j:org.eclipse.lsp4j:0.14.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.debug:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.generator:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc.debug:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.websocket.jakarta:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j.websocket:0.15.0"
+        api "org.eclipse.lsp4j:org.eclipse.lsp4j:0.15.0"
         api "org.eclipse.platform:org.eclipse.core.commands:3.9.700"
         api "org.eclipse.platform:org.eclipse.core.contenttype:3.7.800"
         api "org.eclipse.platform:org.eclipse.core.expressions:3.7.0"
