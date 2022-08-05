@@ -38,11 +38,15 @@ import org.eclipse.lsp4j.DefinitionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
+import org.eclipse.lsp4j.DidChangeNotebookDocumentParams;
 import org.eclipse.lsp4j.DidChangeTextDocumentParams;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.DidChangeWorkspaceFoldersParams;
+import org.eclipse.lsp4j.DidCloseNotebookDocumentParams;
 import org.eclipse.lsp4j.DidCloseTextDocumentParams;
+import org.eclipse.lsp4j.DidOpenNotebookDocumentParams;
 import org.eclipse.lsp4j.DidOpenTextDocumentParams;
+import org.eclipse.lsp4j.DidSaveNotebookDocumentParams;
 import org.eclipse.lsp4j.DidSaveTextDocumentParams;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentHighlight;
@@ -104,6 +108,7 @@ import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
 import org.eclipse.lsp4j.services.LanguageServer;
+import org.eclipse.lsp4j.services.NotebookDocumentService;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -148,7 +153,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware,
+public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, NotebookDocumentService, LanguageClientAware,
 		Endpoint, JsonRpcMethodProvider, ILanguageServerAccess.IBuildListener {
 
 	private static final Logger LOG = Logger.getLogger(LanguageServerImpl.class);
@@ -376,6 +381,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 	@Override
 	public WorkspaceService getWorkspaceService() {
+		return this;
+	}
+	
+	@Override
+	public NotebookDocumentService getNotebookDocumentService() {
 		return this;
 	}
 
@@ -1234,4 +1244,25 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	public RequestManager getRequestManager() {
 		return requestManager;
 	}
+
+	@Override
+	public void didOpen(DidOpenNotebookDocumentParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub");
+	}
+
+	@Override
+	public void didChange(DidChangeNotebookDocumentParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub");
+	}
+
+	@Override
+	public void didSave(DidSaveNotebookDocumentParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub");
+	}
+
+	@Override
+	public void didClose(DidCloseNotebookDocumentParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub");
+	}
+	
 }
