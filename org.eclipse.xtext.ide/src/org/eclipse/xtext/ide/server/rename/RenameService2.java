@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameDefaultBehavior;
 import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.Range;
@@ -28,6 +29,7 @@ import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
+import org.eclipse.lsp4j.jsonrpc.messages.Either3;
 import org.eclipse.lsp4j.util.Ranges;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
@@ -98,7 +100,7 @@ public class RenameService2 implements IRenameService2 {
 					Resource resource = context.getResource();
 					Document document = context.getDocument();
 					CancelIndicator cancelIndicator = options.getCancelIndicator();
-					Either<Range, PrepareRenameResult> prepareRenameResult = doPrepareRename(resource, document,
+					Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior> prepareRenameResult = doPrepareRename(resource, document,
 							positionParams, cancelIndicator);
 					if (!mayPerformRename(prepareRenameResult, options.getRenameParams())) {
 						return null;
@@ -190,7 +192,7 @@ public class RenameService2 implements IRenameService2 {
 	}
 
 	@Override
-	public Either<Range, PrepareRenameResult> prepareRename(IRenameService2.PrepareRenameOptions options) {
+	public Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior> prepareRename(IRenameService2.PrepareRenameOptions options) {
 		try {
 			String uri = options.getParams().getTextDocument().getUri();
 			boolean shouldPrepareRename = shouldPrepareRename(options.getLanguageServerAccess());
@@ -221,7 +223,7 @@ public class RenameService2 implements IRenameService2 {
 		}
 	}
 
-	protected Either<Range, PrepareRenameResult> doPrepareRename(Resource resource, Document document,
+	protected Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior> doPrepareRename(Resource resource, Document document,
 			PrepareRenameParams params, CancelIndicator cancelIndicator) {
 		String uri = params.getTextDocument().getUri();
 		if (resource instanceof XtextResource) {
@@ -253,7 +255,7 @@ public class RenameService2 implements IRenameService2 {
 									&& Objects.equal(convertedNameValue, elementName)) {
 								Position start = document.getPosition(leaf.getOffset());
 								Position end = document.getPosition(leaf.getEndOffset());
-								return Either.forLeft(new Range(start, end));
+								return Either3.forFirst(new Range(start, end));
 							}
 						}
 					}
@@ -289,10 +291,10 @@ public class RenameService2 implements IRenameService2 {
 	 * If this method returns {@code false}, it is sure, that the rename operation will fail. There is no guarantee that
 	 * it will succeed even if it returns {@code true}.
 	 */
-	protected boolean mayPerformRename(Either<Range, PrepareRenameResult> prepareRenameResult,
+	protected boolean mayPerformRename(Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior> prepareRenameResult,
 			RenameParams renameParams) {
-		return prepareRenameResult != null && prepareRenameResult.getLeft() != null
-				&& Ranges.containsPosition(prepareRenameResult.getLeft(), renameParams.getPosition());
+		return prepareRenameResult != null && prepareRenameResult.getFirst() != null
+				&& Ranges.containsPosition(prepareRenameResult.getFirst(), renameParams.getPosition());
 	}
 
 	/**

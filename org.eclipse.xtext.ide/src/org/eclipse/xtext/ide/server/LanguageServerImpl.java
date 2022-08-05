@@ -67,6 +67,7 @@ import org.eclipse.lsp4j.InitializedParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameDefaultBehavior;
 import org.eclipse.lsp4j.PrepareRenameParams;
 import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
@@ -98,6 +99,7 @@ import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
+import org.eclipse.lsp4j.jsonrpc.messages.Either3;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
@@ -990,7 +992,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * @since 2.18
 	 */
 	@Override
-	public CompletableFuture<Either<Range, PrepareRenameResult>> prepareRename(PrepareRenameParams params) {
+	public CompletableFuture<Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior>> prepareRename(PrepareRenameParams params) {
 		return requestManager.runRead(cancelIndicator -> prepareRename(params, cancelIndicator));
 	}
 
@@ -998,7 +1000,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Prepare the rename operation. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected Either<Range, PrepareRenameResult> prepareRename(PrepareRenameParams params,
+	protected Either3<Range, PrepareRenameResult, PrepareRenameDefaultBehavior> prepareRename(PrepareRenameParams params,
 			CancelIndicator cancelIndicator) {
 		URI uri = getURI(params);
 		IRenameService2 renameService = getService(uri, IRenameService2.class);
