@@ -228,6 +228,14 @@ public class TargetPlatformProject extends ProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
+            _builder.append("<unit id=\"org.junit.jupiter.migrationsupport\" version=\"5.8.2.v20220624-2009\"/>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<unit id=\"org.junit.jupiter.params\" version=\"5.8.2.v20220624-2009\"/>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
             _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.8.2.v20220624-2009\"/>");
             _builder.newLine();
             _builder.append("\t\t");
@@ -245,6 +253,10 @@ public class TargetPlatformProject extends ProjectDescriptor {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("<unit id=\"org.junit.platform.suite.commons\" version=\"1.8.2.v20220624-2009\"/>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("<unit id=\"org.junit.vintage.engine\" version=\"5.8.2.v20220624-2009\"/>");
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t");
