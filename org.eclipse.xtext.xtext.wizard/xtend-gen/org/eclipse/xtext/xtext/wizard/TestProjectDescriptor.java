@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -98,7 +99,13 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       ExternalDependency _externalDependency_1 = new ExternalDependency();
       final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
         ExternalDependency.P2Coordinates _p2 = it.getP2();
-        _p2.setBundleId("org.junit.jupiter.api");
+        LinkedHashSet<String> _newLinkedHashSet = Sets.<String>newLinkedHashSet();
+        final Procedure1<LinkedHashSet<String>> _function_2 = (LinkedHashSet<String> it_1) -> {
+          it_1.add("org.junit.jupiter.api;version=\"[5.1.0,6.0.0)\"");
+          it_1.add("org.junit.jupiter.api.extension;version=\"[5.1.0,6.0.0)\"");
+        };
+        LinkedHashSet<String> _doubleArrow_1 = ObjectExtensions.<LinkedHashSet<String>>operator_doubleArrow(_newLinkedHashSet, _function_2);
+        _p2.setPackages(_doubleArrow_1);
         ExternalDependency.P2Coordinates _p2_1 = it.getP2();
         _p2_1.setVersion("[5.1.0,6.0.0)");
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
