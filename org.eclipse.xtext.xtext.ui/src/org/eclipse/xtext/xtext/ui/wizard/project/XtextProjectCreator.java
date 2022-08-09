@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -27,8 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.jdt.core.IAccessRule;
-import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -41,15 +39,12 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
-import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
-import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
@@ -135,25 +130,6 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
 		}
-		if (requiresJUnitLibContainer(descriptor)) {
-			JUnitVersion junitVersion = descriptor.getConfig().getJunitVersion();
-			factory.addClasspathEntries(JavaCore.newContainerEntry(
-					new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER").append(Integer.toString(junitVersion.getVersion())),
-					new IAccessRule[0], new IClasspathAttribute[] { JavaCore.newClasspathAttribute("test", "true") },
-					false/*not exported*/));
-		}
-	}
-	
-	private boolean requiresJUnitLibContainer (ProjectDescriptor descriptor) {
-		if (descriptor instanceof TestProjectDescriptor) {
-			return true;
-		} else if (descriptor instanceof TestedProjectDescriptor) {
-			TestedProjectDescriptor tpd = (TestedProjectDescriptor) descriptor;
-			if (tpd.getTestProject().isInlined()) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private IProject createFeatureProject(ProjectDescriptor descriptor, SubMonitor monitor) {
