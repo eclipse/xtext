@@ -36,7 +36,6 @@ public class StatemachineGenerator extends AbstractGenerator {
 				Statemachine statemachine = (Statemachine)o;
 				fsa.generateFile("/DEFAULT_ARTIFACT", generateHtml(statemachine));
 				fsa.generateFile("/hidden.txt", "This is an additional generator artifact.");
-				System.out.println(generateHtml(statemachine));
 			}
 		}
 	}
