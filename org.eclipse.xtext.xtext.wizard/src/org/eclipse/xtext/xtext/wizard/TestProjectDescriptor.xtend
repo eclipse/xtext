@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.JUnitVersion
+import com.google.common.collect.Sets
 
 abstract class TestProjectDescriptor extends ProjectDescriptor {
 	@Accessors val ProjectDescriptor testedProject
@@ -59,7 +60,10 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		}
 		if (config.junitVersion == JUnitVersion.JUNIT_5) {
 			deps += new ExternalDependency()=>[
-				p2.bundleId = "org.junit.jupiter.api"
+				p2.packages = Sets.newLinkedHashSet => [
+					it += 'org.junit.jupiter.api;version="[5.1.0,6.0.0)"'
+					it += 'org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"'
+				]
 				p2.version = "[5.1.0,6.0.0)"
 				maven.groupId = "org.junit.jupiter"
 				maven.artifactId = "junit-jupiter-api"
