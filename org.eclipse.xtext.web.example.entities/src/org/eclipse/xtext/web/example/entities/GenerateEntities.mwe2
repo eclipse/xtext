@@ -91,7 +91,7 @@ Workflow {
 
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 {
-				generateXtendStub = true
+				generateXtendStub = false
 			}
 
 			// testing API
@@ -101,7 +101,9 @@ Workflow {
 
 			// Xbase support
 			fragment = types.TypesGeneratorFragment2 {}
-			fragment = xbase.XbaseGeneratorFragment2 {}
+			fragment = xbase.XbaseGeneratorFragment2 {
+				generateXtendInferrer = false
+			}
 			fragment = xbase.XtypeGeneratorFragment2 {}
 
 			// JavaScript-based syntax highlighting
