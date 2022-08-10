@@ -87,7 +87,7 @@ Workflow {
 
 			// generator API
 			fragment = generator.GeneratorFragment2 {
-				generateXtendStub = true
+				generateXtendStub = false
 			}
 
 			// formatter API
