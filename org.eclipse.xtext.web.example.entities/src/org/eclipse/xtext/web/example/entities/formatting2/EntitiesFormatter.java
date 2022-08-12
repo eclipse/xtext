@@ -28,7 +28,7 @@ public class EntitiesFormatter extends XbaseFormatter {
 		document.append(document.prepend(entities, (IHiddenRegionFormatter it) -> {
 			it.setNewLines(0, 0, 1);
 			it.noSpace();
-		}), IHiddenRegionFormatter::newLine);
+		}), this::newLine);
 		format(entities.getImportSection(), document);
 		for (AbstractElement element : entities.getElements()) {
 			format(element, document);
@@ -36,13 +36,11 @@ public class EntitiesFormatter extends XbaseFormatter {
 	}
 
 	protected void _format(PackageDeclaration pkg, @Extension IFormattableDocument document) {
-		ISemanticRegion open = textRegionExtensions.regionFor(pkg).keyword("{");
-		ISemanticRegion close = textRegionExtensions.regionFor(pkg).keyword("}");
-		document.surround(
-				textRegionExtensions.regionFor(pkg).feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME),
-				IHiddenRegionFormatter::oneSpace);
-		document.append(open, IHiddenRegionFormatter::newLine);
-		document.interior(open, close, IHiddenRegionFormatter::indent);
+		ISemanticRegion open = regionFor(pkg).keyword("{");
+		ISemanticRegion close = regionFor(pkg).keyword("}");
+		document.surround(regionFor(pkg).feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME), this::oneSpace);
+		document.append(open, this::newLine);
+		document.interior(open, close, this::indent);
 		for (AbstractElement element : pkg.getElements()) {
 			document.format(element);
 			document.append(element, (IHiddenRegionFormatter it) -> it.setNewLines(1, 1, 2));
@@ -50,15 +48,14 @@ public class EntitiesFormatter extends XbaseFormatter {
 	}
 
 	protected void _format(Entity entity, IFormattableDocument document) {
-		ISemanticRegion open = textRegionExtensions.regionFor(entity).keyword("{");
-		ISemanticRegion close = textRegionExtensions.regionFor(entity).keyword("}");
-		document.surround(
-				textRegionExtensions.regionFor(entity).feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME),
-				IHiddenRegionFormatter::oneSpace);
-		document.surround(entity.getSuperType(), IHiddenRegionFormatter::oneSpace);
-		document.append(open, IHiddenRegionFormatter::newLine);
-		document.interior(open, close, IHiddenRegionFormatter::indent);
-		this.format(entity.getSuperType(), document);
+		ISemanticRegion open = regionFor(entity).keyword("{");
+		ISemanticRegion close = regionFor(entity).keyword("}");
+		document.surround(regionFor(entity).feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME),
+				this::oneSpace);
+		document.surround(entity.getSuperType(), this::oneSpace);
+		document.append(open, this::newLine);
+		document.interior(open, close, this::indent);
+		format(entity.getSuperType(), document);
 		for (Feature feature : entity.getFeatures()) {
 			document.format(feature);
 			document.append(feature, (IHiddenRegionFormatter it) -> it.setNewLines(1, 1, 2));
@@ -66,49 +63,33 @@ public class EntitiesFormatter extends XbaseFormatter {
 	}
 
 	protected void _format(Property property, IFormattableDocument document) {
-		document.surround(textRegionExtensions.regionFor(property).keyword(":"), IHiddenRegionFormatter::noSpace);
+		document.surround(regionFor(property).keyword(":"), this::noSpace);
 		document.format(property.getType());
 	}
 
 	protected void _format(Operation operation, IFormattableDocument document) {
-		document.append(textRegionExtensions.regionFor(operation).keyword("op"), IHiddenRegionFormatter::oneSpace);
-		document.surround(textRegionExtensions.regionFor(operation).keyword("("), IHiddenRegionFormatter::noSpace);
+		document.append(regionFor(operation).keyword("op"), this::oneSpace);
+		document.surround(regionFor(operation).keyword("("), this::noSpace);
 		if (!operation.getParams().isEmpty()) {
-			for (ISemanticRegion comma : textRegionExtensions.regionFor(operation).keywords(",")) {
-				document.append(document.prepend(comma, IHiddenRegionFormatter::noSpace),
-						IHiddenRegionFormatter::oneSpace);
+			for (ISemanticRegion comma : regionFor(operation).keywords(",")) {
+				document.append(document.prepend(comma, this::noSpace), this::oneSpace);
 			}
 			for (JvmFormalParameter params : operation.getParams()) {
 				document.format(params);
 			}
-			document.prepend(textRegionExtensions.regionFor(operation).keyword(")"), IHiddenRegionFormatter::noSpace);
+			document.prepend(regionFor(operation).keyword(")"), this::noSpace);
 		}
 		if (operation.getType() != null) {
-			document.append(textRegionExtensions.regionFor(operation).keyword(")"), IHiddenRegionFormatter::noSpace);
-			document.append(document.prepend(operation.getType(), IHiddenRegionFormatter::noSpace),
-					IHiddenRegionFormatter::oneSpace);
+			document.append(regionFor(operation).keyword(")"), this::noSpace);
+			document.append(document.prepend(operation.getType(), this::noSpace), this::oneSpace);
 			document.format(operation.getType());
 		} else {
-			document.append(textRegionExtensions.regionFor(operation).keyword(")"), IHiddenRegionFormatter::oneSpace);
+			document.append(regionFor(operation).keyword(")"), this::oneSpace);
 		}
 		document.format(operation.getBody());
 	}
 
 	public void format(Object object, IFormattableDocument document) {
-		if (object instanceof Entity) {
-			_format((Entity) object, document);
-			return;
-		} else if (object instanceof Operation) {
-			_format((Operation) object, document);
-			return;
-		} else if (object instanceof PackageDeclaration) {
-			_format((PackageDeclaration) object, document);
-			return;
-		} else if (object instanceof Property) {
-			_format((Property) object, document);
-			return;
-		} else {
-			super.format(object, document);
-		}
+		formatUsingPolymorphicDispatcher(object, document);
 	}
 }
