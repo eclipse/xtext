@@ -31,16 +31,16 @@ public class BinFolderConfigurator extends AbstractProjectConfigurator {
 
 	@Override
 	public void configure(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
-		IProject project = request.getProject();
+		IProject project = XtextProjectConfigurator.getProject(request);
 		if (compileToBin(project)) {
 			IPath projectRoot = project.getFullPath();
 			IPath binPath = projectRoot.append("bin");
 			IPath binTestPath = projectRoot.append("bin-test");
 			IJavaProject javaProject = JavaCore.create(project);
 			javaProject.setOutputLocation(binPath, monitor);
-			
+
 			IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
-			for(int i = 0; i < rawClasspath.length; i++) {
+			for (int i = 0; i < rawClasspath.length; i++) {
 				IClasspathEntry entry = rawClasspath[i];
 				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 					if (isTest(entry)) {
@@ -53,7 +53,7 @@ public class BinFolderConfigurator extends AbstractProjectConfigurator {
 			javaProject.setRawClasspath(rawClasspath, monitor);
 		}
 	}
-	
+
 	/**
 	 * IClasspathEntry.isTest is not avaiable on Oxygen.
 	 */
@@ -91,6 +91,5 @@ public class BinFolderConfigurator extends AbstractProjectConfigurator {
 		IEclipsePreferences instancePreferences = InstanceScope.INSTANCE.getNode(pluginId);
 		return "true".equals(instancePreferences.get(key, "false"));
 	}
-
 
 }
