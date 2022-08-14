@@ -15,9 +15,12 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getK
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Function;
 
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.project.MavenProject;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
@@ -41,12 +44,10 @@ import com.google.common.base.Strings;
 public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 
 	@Override
-	public void configure(ProjectConfigurationRequest request,
-			IProgressMonitor monitor) throws CoreException {
-		addNature(request.getProject(), XtextProjectHelper.NATURE_ID, monitor);
+	public void configure(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
+		addNature(getProject(request), XtextProjectHelper.NATURE_ID, monitor);
 
-		OutputConfiguration config = new XtendOutputConfigurationProvider()
-				.getOutputConfigurations().iterator().next();
+		OutputConfiguration config = new XtendOutputConfigurationProvider().getOutputConfigurations().iterator().next();
 
 		List<MojoExecution> executions = getMojoExecutions(request, monitor);
 		SubMonitor progress = SubMonitor.convert(monitor, executions.size());
@@ -63,7 +64,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 			}
 		}
 
-		writePreferences(config, request.getProject());
+		writePreferences(config, getProject(request));
 	}
 
 	private void writePreferences(OutputConfiguration configuration,
@@ -98,7 +99,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 
 	private void readCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
 			MojoExecution execution, SubMonitor progress) throws CoreException {
-		List<String> roots = request.getMavenProject().getCompileSourceRoots();
+		List<String> roots = getMavenProject(request).getCompileSourceRoots();
 		progress = SubMonitor.convert(progress, roots.size());
 		for (String source : roots) {
 			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
@@ -110,7 +111,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 
 	private void readTestCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
 			MojoExecution execution, SubMonitor progress) throws CoreException {
-		List<String> roots = request.getMavenProject().getTestCompileSourceRoots();
+		List<String> roots = getMavenProject(request).getTestCompileSourceRoots();
 		progress = SubMonitor.convert(progress, roots.size());
 		for (String source : roots) {
 			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
@@ -121,7 +122,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	private String makeProjectRelative(String fileName, ProjectConfigurationRequest request) {
-		File baseDir = request.getMavenProject().getBasedir();
+		File baseDir = getMavenProject(request).getBasedir();
 		File file = new File(fileName);
 		String relativePath;
 		if (file.isAbsolute()) {
@@ -150,10 +151,33 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		config.setInstallDslAsPrimarySource(
 				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution, progress));
 	}
-	
+
 	private <T> T mojoParameterValue(String paramName, Class<T> paramType, ProjectConfigurationRequest request,
 			MojoExecution execution, SubMonitor progress) throws CoreException {
-		return maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
-				progress.split(1));
+		return maven.getMojoParameterValue(getMavenProject(request), execution, paramName, paramType, progress.split(1));
+	}
+
+	static IProject getProject(ProjectConfigurationRequest request) {
+		// DO NOT USE A METHOD REFERENCE!
+		return call(request, r -> r.getMavenProjectFacade(), "mavenProjectFacade").getProject();
+	}
+
+	static MavenProject getMavenProject(ProjectConfigurationRequest request) {
+		// DO NOT USE A METHOD REFERENCE!
+		return call(request, r -> r.getMavenProject(), "mavenProject");
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T, R> R call(T obj, Function<T, R> getter, String newMethodName) {
+		try {
+			return getter.apply(obj);
+		} catch (Error er) {
+			try { // We are probably running with M2E >= 2.0 try the new method name
+				Method method = obj.getClass().getMethod(newMethodName);
+				return (R) method.invoke(obj);
+			} catch (ReflectiveOperationException e) {
+				throw new IllegalStateException(e);
+			}
+		}
 	}
 }
