@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 @InjectWith(XbaseFormatterTestInjectorProvider.class)
 public class XbaseFormatterTest {
 	@Inject
-	private XbaseFormatterTester xbaseFormatterTester;
+	protected XbaseFormatterTester xbaseFormatterTester;
 
 	@Test
 	public void formatGenerics() {

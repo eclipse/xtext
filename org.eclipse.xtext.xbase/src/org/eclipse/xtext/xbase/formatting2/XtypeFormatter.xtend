@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,7 @@ package org.eclipse.xtext.xbase.formatting2;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference
-import org.eclipse.xtext.formatting2.AbstractFormatter2
+import org.eclipse.xtext.formatting2.AbstractJavaFormatter
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.xtype.XFunctionTypeRef
 import org.eclipse.xtext.xtype.XImportDeclaration
@@ -23,7 +23,7 @@ import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 /**
  * @author Moritz Eysholdt - Initial implementation and API
  */
-class XtypeFormatter extends AbstractFormatter2 {
+class XtypeFormatter extends AbstractJavaFormatter {
 
 	def dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
 		func.regionFor.keyword("(").append[noSpace]

@@ -62,11 +62,11 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.append(this.textRegionExtensions.regionFor(ann).keyword("@"), _function);
+    document.append(this.regionFor(ann).keyword("@"), _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.noSpace();
     };
-    document.surround(this.textRegionExtensions.regionFor(ann).keyword("("), _function_1);
+    document.surround(this.regionFor(ann).keyword("("), _function_1);
     XExpression _value = ann.getValue();
     boolean _tripleNotEquals = (_value != null);
     if (_tripleNotEquals) {
@@ -74,7 +74,7 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
-      document.prepend(this.textRegionExtensions.regionFor(ann).keyword(")"), _function_2);
+      document.prepend(this.regionFor(ann).keyword(")"), _function_2);
     } else {
       boolean _isEmpty = ann.getElementValuePairs().isEmpty();
       boolean _not = (!_isEmpty);
@@ -85,7 +85,7 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
             final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
-            document.surround(this.textRegionExtensions.regionFor(pair).keyword("="), _function_3);
+            document.surround(this.regionFor(pair).keyword("="), _function_3);
             document.<XExpression>format(pair.getValue());
             final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
@@ -93,13 +93,13 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
             final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
               it.oneSpace();
             };
-            document.append(document.prepend(this.textRegionExtensions.immediatelyFollowing(pair).keyword(","), _function_4), _function_5);
+            document.append(document.prepend(this.immediatelyFollowing(pair).keyword(","), _function_4), _function_5);
           }
         }
         final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
-        document.prepend(this.textRegionExtensions.regionFor(ann).keyword(")"), _function_3);
+        document.prepend(this.regionFor(ann).keyword(")"), _function_3);
       }
     }
   }
