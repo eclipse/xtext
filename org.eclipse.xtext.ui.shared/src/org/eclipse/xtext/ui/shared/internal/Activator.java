@@ -76,6 +76,8 @@ public class Activator extends Plugin {
 		Module module = new SharedModule(context);
 		if (extensions.length != 0) {
 			int numberOfMixedInModules = 0;
+			StringBuilder sb = new StringBuilder("Multiple contributions to extension point '"+ PLUGIN_ID + ".overridingGuiceModule'."
+					+ " Will use them in unspecified order.");
 			for (IExtension iExtension : extensions) {
 				IConfigurationElement[] elements = iExtension.getConfigurationElements();
 				for (IConfigurationElement e : elements) {
@@ -83,13 +85,14 @@ public class Activator extends Plugin {
 						Module m = (Module) e.createExecutableExtension("class");
 						module = Modules.override(module).with(m);
 						numberOfMixedInModules++;
-						if (numberOfMixedInModules == 2) {
-							log.warn("Multiple overriding guice modules. Will use them in unspecified order.");
-						}
+						sb.append("\n\tcontributor: ").append(e.getContributor().getName());
 					} catch (CoreException e1) {
 						log.error(e1.getMessage(), e1);
 					}
 				}
+			}
+			if (numberOfMixedInModules >= 2) {
+				log.warn(sb.toString());
 			}
 		}
 
