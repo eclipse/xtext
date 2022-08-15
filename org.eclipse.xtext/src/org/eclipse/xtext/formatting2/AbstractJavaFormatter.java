@@ -32,7 +32,7 @@ import com.google.common.annotations.Beta;
  * formatter code.
  * </p>
  * <p>
- * the "_format" methods are called by reflection. The name is important as well as there are exactly two arguments
+ * the "_format" or "format" methods are called by reflection. The name is important as well as there are exactly two arguments
  * whereas the first one is of the element type you like to format and the second one of type
  * {@link IFormattableDocument}. The methods should be protected.
  * </p>
@@ -90,7 +90,7 @@ public abstract class AbstractJavaFormatter extends AbstractFormatter2 {
 	private PolymorphicDispatcher<Void> dispatcher = createPolymorhicDispatcher();
 
 	// Error handler dispatches to default method in case of a missing method in concrete formatter
-	protected class EObjectErrorHandler implements ErrorHandler<Void> {
+	public class EObjectErrorHandler implements ErrorHandler<Void> {
 		@Override
 		public Void handle(Object[] params, Throwable e) {
 			if (e instanceof NoSuchMethodException) {
@@ -106,6 +106,16 @@ public abstract class AbstractJavaFormatter extends AbstractFormatter2 {
 	// reflective method that calls "_format" methods found in the implementing class.
 	@Override
 	public void format(Object child, IFormattableDocument document) {
+		formatUsingPolymorphicDispatcher(child, document);
+	}
+
+	/**
+	 * You can call this method in a Java subclass of an Xtend polymorphic dispatcher based subclass of this class to
+	 * use the reflective behaviour again.
+	 * 
+	 * since 2.28
+	 */
+	protected void formatUsingPolymorphicDispatcher(Object child, IFormattableDocument document) {
 		if (child instanceof XtextResource) {
 			_format((XtextResource) child, document);
 			return;
@@ -125,9 +135,11 @@ public abstract class AbstractJavaFormatter extends AbstractFormatter2 {
 	 */
 	protected PolymorphicDispatcher<Void> createPolymorhicDispatcher() {
 		return new PolymorphicDispatcher<Void>(Collections.singletonList(this),
-				m -> "format".equals(m.getName()) && m.getParameterCount() == 2
-						&& m.getParameterTypes()[0] != Object.class
-						&& m.getParameterTypes()[1] == IFormattableDocument.class,
+				m -> ("format".equals(m.getName()) && m.getParameterCount() == 2
+						&& m.getParameterTypes()[0] != Object.class // do not polymorphic dispatch on the api method itself
+						&& m.getParameterTypes()[1] == IFormattableDocument.class)
+					|| ("_format".equals(m.getName()) && m.getParameterCount() == 2
+						&& m.getParameterTypes()[1] == IFormattableDocument.class),
 				new EObjectErrorHandler());
 	}
 
