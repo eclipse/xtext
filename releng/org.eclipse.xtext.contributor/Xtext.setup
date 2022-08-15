@@ -189,14 +189,6 @@
       value="https://download.eclipse.org/technology/m2e/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
-      name="p2.m2e.connector.jdt"
-      value="https://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="p2.m2e.connector.tycho"
-      value="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
       name="p2.webtools"
       value="https://download.eclipse.org/webtools/repository/oxygen/">
     <description>required by m2e</description>
@@ -456,19 +448,9 @@
     <requirement
         name="org.eclipse.m2e.feature.feature.group"/>
     <requirement
-        name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
-    <requirement
         name="org.eclipse.buildship.feature.group"/>
-    <requirement
-        name="org.eclipse.wst.jsdt.feature.feature.group"/>
-    <requirement
-        name="org.sonatype.tycho.m2e.feature.feature.group"/>
-    <repository
-        url="${p2.m2e.connector.jdt}"/>
     <repository
         url="${p2.buildship}"/>
-    <repository
-        url="${p2.m2e.connector.tycho}"/>
   </setupTask>
   <setupTask
       xsi:type="setup.workingsets:WorkingSetTask"
