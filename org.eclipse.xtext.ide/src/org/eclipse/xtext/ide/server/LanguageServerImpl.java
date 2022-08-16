@@ -516,6 +516,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	protected Diagnostic toDiagnostic(Issue issue) {
 		Diagnostic result = new Diagnostic();
 		result.setCode(issue.getCode());
+		result.setData(issue.getData());
 		result.setMessage(issue.getMessage());
 		result.setSeverity(toDiagnosticSeverity(issue.getSeverity()));
 
