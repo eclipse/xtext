@@ -317,8 +317,25 @@ public class IncrementalBuilder {
 		protected IResourceDescription getSerializableResourceDescription(IResourceDescription description) {
 			return SerializableResourceDescription.createCopy(description);
 		}
-	
-		private IResourceServiceProvider getResourceServiceProvider(Resource resource) {
+
+		/**
+		 * @since 2.28
+		 */
+		protected OperationCanceledManager getOperationCanceledManager() {
+			return operationCanceledManager;
+		}
+
+		/**
+		 * @since 2.28
+		 */
+		protected Indexer getIndexer() {
+			return indexer;
+		}
+
+		/**
+		 * @since 2.28
+		 */
+		protected IResourceServiceProvider getResourceServiceProvider(Resource resource) {
 			if (resource instanceof XtextResource) {
 				return ((XtextResource) resource).getResourceServiceProvider();
 			}
