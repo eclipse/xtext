@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.quickfix;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -47,6 +47,9 @@ public class DiagnosticResolution {
 	private int relevance;
 
 	private Options options;
+
+	private static Logger log = Logger.getLogger(DiagnosticResolution.class);
+
 
 	@Deprecated//(forRemoval=true,since="2.27")
 	public DiagnosticResolution(String label, Factory modificationContextFactory,  IModification<EObject> modification) {
@@ -131,7 +134,8 @@ public class DiagnosticResolution {
 			}
 			return edit;
 		} catch (Exception exc) {
-			throw new WrappedException(exc);
+			log.error("Creation of WorkspaceEdit failed.", exc);
+			return null;
 		}
 	}
 
