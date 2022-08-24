@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,9 +12,12 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,11 +27,25 @@ import com.google.common.collect.Iterables;
 public class IdeContentProposalAcceptor
 		implements IIdeContentProposalAcceptor, Comparator<Pair<Integer, ContentAssistEntry>> {
 
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+
+	protected CancelIndicator cancelIndicator;
+
+
 	protected final Set<Pair<Integer, ContentAssistEntry>> entries = new TreeSet<Pair<Integer, ContentAssistEntry>>(
 			this);
 
+	/**
+	 * @since 2.28
+	 */
+	public void setCancelIndicator(CancelIndicator cancelIndicator) {
+		this.cancelIndicator = cancelIndicator;
+	}
+
 	@Override
 	public void accept(ContentAssistEntry entry, int priority) {
+		operationCanceledManager.checkCanceled(cancelIndicator);
 		if (entry != null) {
 			if (entry.getProposal() == null)
 				throw new IllegalArgumentException("Proposal must not be null.");
