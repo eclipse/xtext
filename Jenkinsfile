@@ -24,7 +24,7 @@ pipeline {
 
   triggers {
     parameterizedCron(env.BRANCH_NAME == 'master' ? '''
-      H H(0-1) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk11-latest;TRIGGER_DOWNSTREAM_BUILD=true
+      H H(0-1) * * * %TARGET_PLATFORM=r202206;JDK_VERSION=temurin-jdk11-latest;TRIGGER_DOWNSTREAM_BUILD=true
       H H(3-4) * * * %TARGET_PLATFORM=latest;JDK_VERSION=temurin-jdk17-latest;TRIGGER_DOWNSTREAM_BUILD=true
       H H(6-7) * * * %TARGET_PLATFORM=oxygen;JDK_VERSION=temurin-jdk8-latest;TRIGGER_DOWNSTREAM_BUILD=true
       ''' : '')
@@ -176,9 +176,12 @@ def selectedTargetPlatform() {
     def isUpstream = isTriggeredByUpstream()
     def javaVersion = javaVersion()
     
-    if (isTriggeredByUpstream() && javaVersion>=11) {
+    if (isTriggeredByUpstream() && javaVersion>=17) {
         println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
         return 'latest'
+    } else if (isTriggeredByUpstream() && javaVersion>=11) {
+        println("Choosing 'r202206' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'r202206'
     } else {
         return tp
     }
