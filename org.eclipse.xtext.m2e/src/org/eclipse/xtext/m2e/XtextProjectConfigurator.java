@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -24,11 +24,11 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.PREF
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getIgnoreSourceFolderKey;
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getKey;
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
+import org.eclipse.m2e.core.project.IMavenProjectFacade;
 
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.function.Function;
 
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.project.MavenProject;
@@ -129,20 +129,19 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	static IProject getProject(ProjectConfigurationRequest request) {
-		// DO NOT USE A METHOD REFERENCE!
-		return call(request, r -> r.getMavenProjectFacade(), "mavenProjectFacade").getProject();
+		return XtextProjectConfigurator.<ProjectConfigurationRequest, IMavenProjectFacade>call(request, "getMavenProjectFacade", "mavenProjectFacade").getProject();
 	}
 
 	static MavenProject getMavenProject(ProjectConfigurationRequest request) {
-		// DO NOT USE A METHOD REFERENCE!
-		return call(request, r -> r.getMavenProject(), "mavenProject");
+		return call(request, "getMavenProject", "mavenProject");
 	}
 
 	@SuppressWarnings("unchecked")
-	private static <T, R> R call(T obj, Function<T, R> getter, String newMethodName) {
+	private static <T, R> R call(T obj, String oldMethodName, String newMethodName) {
 		try {
-			return getter.apply(obj);
-		} catch (Error er) {
+			Method method = obj.getClass().getMethod(oldMethodName);
+			return (R) method.invoke(obj);
+		} catch (ReflectiveOperationException er) {
 			try { // We are probably running with M2E >= 2.0 try the new method name
 				Method method = obj.getClass().getMethod(newMethodName);
 				return (R) method.invoke(obj);
