@@ -50,6 +50,7 @@
 		<profile><id>r202112</id></profile>
 		<profile><id>r202203</id></profile>
 		<profile><id>r202206</id></profile>
+		<profile><id>r202209</id></profile>
 		<profile><id>latest</id></profile>
 	</profiles>
 </project>
