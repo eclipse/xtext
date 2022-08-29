@@ -35,6 +35,13 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>r202209</id>
+			<properties>
+				<tycho-version>2.7.4</tycho-version>
+				<target-platform-classifier>org.eclipse.xtext.target-r202209</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>r202206</id>
 			<properties>
 				<tycho-version>2.7.3</tycho-version>
