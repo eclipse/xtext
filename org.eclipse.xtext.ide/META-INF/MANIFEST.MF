@@ -60,6 +60,7 @@ Export-Package: org.eclipse.xtext.ide;
  org.eclipse.xtext.ide.server.occurrences,
  org.eclipse.xtext.ide.server.rename;x-internal:=true,
  org.eclipse.xtext.ide.server.signatureHelp,
+ org.eclipse.xtext.ide.server.semantictokens,
  org.eclipse.xtext.ide.server.symbol,
  org.eclipse.xtext.ide.util
 Automatic-Module-Name: org.eclipse.xtext.ide
