@@ -67,7 +67,7 @@
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/eclipse/updates/4.25-I-builds"/>
+		<repository location="https://download.eclipse.org/eclipse/updates/4.26-I-builds"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
