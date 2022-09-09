@@ -10,37 +10,24 @@ package org.eclipse.xtext.build;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
-import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -112,66 +99,6 @@ public class Indexer {
 			return b.toString();
 		}
 
-	}
-
-	/**
-	 * A resource description that has no references to the origin resource anymore. Imported names and reference
-	 * descriptions are not available.
-	 */
-	protected static class ResolvedResourceDescription extends AbstractResourceDescription {
-
-		private static final Logger LOG = Logger.getLogger(ResolvedResourceDescription.class);
-
-		private URI uri;
-
-		private ImmutableList<IEObjectDescription> exported;
-
-		public ResolvedResourceDescription(IResourceDescription original) {
-			uri = original.getURI();
-			exported = FluentIterable.from(original.getExportedObjects()).transform(from -> {
-				if (from instanceof SerializableEObjectDescriptionProvider) {
-					return ((SerializableEObjectDescriptionProvider) from).toSerializableEObjectDescription();
-				}
-				if (from.getEObjectOrProxy().eIsProxy()) {
-					return from;
-				}
-				InternalEObject result = (InternalEObject) EcoreUtil.create(from.getEClass());
-				result.eSetProxyURI(from.getEObjectURI());
-				Map<String, String> userData = null;
-				String[] userDataKeys = from.getUserDataKeys();
-				for (String key : userDataKeys) {
-					if (userData == null) {
-						userData = Maps.newHashMapWithExpectedSize(userDataKeys.length);
-					}
-					userData.put(key, from.getUserData(key));
-				}
-				return EObjectDescription.create(from.getName(), result, userData);
-			}).toList();
-		}
-
-		@Override
-		protected List<IEObjectDescription> computeExportedObjects() {
-			return exported;
-		}
-
-		@Override
-		public Iterable<QualifiedName> getImportedNames() {
-			IllegalStateException exception = new IllegalStateException("getImportedNames" + getURI());
-			LOG.error(exception, exception);
-			return Collections.emptyList();
-		}
-
-		@Override
-		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			IllegalStateException exception = new IllegalStateException("getReferenceDescriptions" + getURI());
-			LOG.error(exception, exception);
-			return Collections.emptyList();
-		}
-
-		@Override
-		public URI getURI() {
-			return uri;
-		}
 	}
 
 	@Inject
@@ -274,7 +201,7 @@ public class Indexer {
 	 * @since 2.26
 	 */
 	protected IResourceDescription getResolvedResourceDescription(IResourceDescription description) {
-		return new Indexer.ResolvedResourceDescription(description);
+		return new ResolvedResourceDescription(description);
 	}
 
 	/**

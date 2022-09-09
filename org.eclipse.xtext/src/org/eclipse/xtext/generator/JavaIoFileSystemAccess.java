@@ -96,6 +96,37 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 		this.callBack = callBack;
 	}
 	
+	/**
+	 * Adds the given callback to this FSA. The returned runnable allows to reset it to
+	 * its previous state.
+	 * 
+	 * @since 2.29
+	 */
+	public Runnable withCallBack(IFileCallback callBack) {
+		IFileCallback prev = this.callBack;
+		if (prev == null) {
+			this.callBack = callBack;
+		} else if (callBack == null) {
+			this.callBack = null;
+		} else {
+			this.callBack = new IFileCallback() {
+				
+				@Override
+				public void fileDeleted(File file) {
+					prev.fileDeleted(file);
+					callBack.fileDeleted(file);
+				}
+				
+				@Override
+				public void fileAdded(File file) {
+					prev.fileAdded(file);
+					callBack.fileAdded(file);
+				}
+			};
+		}
+		return ()->this.callBack = prev;
+	}
+	
 	@Override
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) throws RuntimeIOException {
 		File file = getFile(fileName, outputConfigName);
