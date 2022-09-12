@@ -1469,7 +1469,7 @@
           <repository
               url="${p2.antlr-gen}"/>
           <repository
-              url="${p2.m2e}/2.0.1"/>
+              url="${p2.m2e}/2.0.5"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
