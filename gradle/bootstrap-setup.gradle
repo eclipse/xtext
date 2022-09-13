@@ -1,4 +1,4 @@
-apply plugin: "org.gradle.java-base"
+apply plugin: "org.gradle.java-platform"
 /*
 /*
  * Root project configuration that is reused by subprojects to apply the Xtend compiler.
