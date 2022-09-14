@@ -62,11 +62,14 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2022-09"
+      defaultValue="2022-12"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+    <choice
+        value="2022-12"
+        label="Eclipse 2022-12 - 4.26"/>
     <choice
         value="2022-09"
         label="Eclipse 2022-09 - 4.25"/>
@@ -1479,7 +1482,40 @@
           <repository
               url="${p2.gef-classic}"/>
           <repository
-              url="https://download.eclipse.org/eclipse/updates/4.25-I-builds"/>
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
+          <repository
+              url="${p2.license}"/>
+        </repositoryList>
+        <repositoryList
+            name="2022-12">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.m2e}/2.0.5"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.gef-classic}"/>
+          <repository
+              url="https://download.eclipse.org/eclipse/updates/4.26-I-builds"/>
           <repository
               url="${p2.xpand}"/>
           <repository
