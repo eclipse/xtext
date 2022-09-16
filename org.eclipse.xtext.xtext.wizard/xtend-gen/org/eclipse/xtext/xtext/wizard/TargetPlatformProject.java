@@ -192,7 +192,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.gson\" version=\"2.9.0.v20220704-0629\"/>");
+        _builder.append("<unit id=\"com.google.gson\" version=\"2.9.1.v20220915-1632\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -270,11 +270,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.138.v20211212-1642\"/>");
+        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.149.v20220915-0556\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-09\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
@@ -285,7 +285,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.gson\" version=\"2.9.0.v20220704-0629\"/>");
+        _builder.append("<unit id=\"com.google.gson\" version=\"2.9.1.v20220915-1632\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -315,11 +315,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.138.v20211212-1642\"/>");
+        _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.149.v20220915-0556\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-09\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
