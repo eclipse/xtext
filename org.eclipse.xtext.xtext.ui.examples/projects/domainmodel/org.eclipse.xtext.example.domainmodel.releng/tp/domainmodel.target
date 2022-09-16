@@ -23,14 +23,14 @@
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.google.guava" version="30.1.0.v20210127-2300"/>
       <unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
-      <unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
+      <unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
       <unit id="org.apache.commons.cli" version="1.4.0.v20200417-1444"/>
       <unit id="org.apache.commons.io" version="2.8.0.v20210415-0900"/>
       <unit id="org.apache.log4j" version="1.2.19.v20220208-1728"/>
       <unit id="org.apache.log4j.source" version="1.2.19.v20220208-1728"/>
       <unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
       <unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
-      <repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
+      <repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.draw2d.feature.group" version="3.14.0.202206170857"/>
