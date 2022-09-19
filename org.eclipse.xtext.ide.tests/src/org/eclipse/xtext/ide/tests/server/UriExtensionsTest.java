@@ -11,6 +11,8 @@ package org.eclipse.xtext.ide.tests.server;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -115,6 +117,20 @@ public class UriExtensionsTest {
 	public void test_toUri_14() throws Exception {
 		assertEquals(URI.createURI("file:///c:/Users/dietrich/\u0424\u0443%20\u0411\u0430\u0440.mydsl"),
 				uriExtensions.toUri("file:///c%3A/Users/dietrich/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80.mydsl"));
+	}
+
+	@Test
+	public void test_toUri_15() throws Exception {
+		String uri = "something:/path/to/res%20ource";
+		String encodedUri = URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
+		assertEquals(URI.createURI(uri), uriExtensions.toUri(encodedUri));
+	}
+
+	@Test
+	public void test_toUri_16() throws Exception {
+		String uri = "something:/path/to/res#ource";
+		String encodedUri = URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
+		assertEquals(URI.createURI(uri, true, URI.FRAGMENT_NONE), uriExtensions.toUri(encodedUri));
 	}
 
 	@Test

@@ -34,7 +34,7 @@ public class UriExtensions {
 	 */
 	public URI toEmfUri(java.net.URI netUri) {
 		String decoded = toDecodedString(netUri);
-		URI uri = URI.createURI(decoded, false);
+		URI uri = URI.createURI(decoded, true);
 		URI result = withEmptyAuthority(uri);
 		return result;
 	}
