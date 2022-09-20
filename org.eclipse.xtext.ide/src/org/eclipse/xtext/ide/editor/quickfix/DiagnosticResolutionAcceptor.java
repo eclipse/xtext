@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer.IModification;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2.Options;
 
@@ -52,8 +53,8 @@ public class DiagnosticResolutionAcceptor {
 		resolutions.add(new DiagnosticResolution(label, modificationContextFactory, modification));
 	}
 
-	public List<DiagnosticResolution> getDiagnosticResolutions(Options options) {
-		resolutions.forEach(resolution -> resolution.configure(options));
+	public List<DiagnosticResolution> getDiagnosticResolutions(Options options, Diagnostic diagnostic) {
+		resolutions.forEach(resolution -> resolution.configure(options, diagnostic));
 		return resolutions;
 	}
 
