@@ -20,8 +20,6 @@ sourceSets {
 		}
 		if (findProperty('compileXtend') == 'true') {
 			xtendOutputDir = 'xtend-gen'
-		} else {
-			java.srcDir 'xtend-gen'
 		}
 	}
 	configure(isTestProject? main : test) {
