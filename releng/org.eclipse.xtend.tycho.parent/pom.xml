@@ -264,57 +264,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>generate-source-feature</id>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-						<configuration>
-							<excludes>
-								<plugin id="org.eclipse.xtext.xbase.lib" />
-								<plugin id="org.eclipse.xtext.xbase.lib.gwt" />
-								<plugin id="org.eclipse.xtext" />
-								<plugin id="org.eclipse.xtext.xtext.generator" />
-								<plugin id="org.eclipse.xtext.util" />
-								<plugin id="org.eclipse.xtext.logging" />
-								<plugin id="org.eclipse.xtext.common.types" />
-								<plugin id="org.eclipse.xtext.builder" />
-								<plugin id="org.eclipse.xtext.ecore" />
-								<plugin id="org.eclipse.xtext.smap" />
-								<plugin id="org.eclipse.xtext.xtext.wizard" />
-								<plugin id="org.eclipse.xtext.builder.standalone" />
-								<plugin id="org.eclipse.xtext.java" />
-								<plugin id="org.eclipse.xtext.ide" />
-								<plugin id="org.antlr.runtime" />
-								<plugin id="org.apache.log4j" />
-								<plugin id="org.eclipse.xtext.doc" />
-								<plugin id="org.eclipse.xtext.xbase" />
-								<plugin id="org.eclipse.xtext.xbase.ide" />
-								<plugin id="org.eclipse.xtext.purexbase" />
-								<plugin id="org.eclipse.xtend.lib" />
-								<plugin id="org.eclipse.xtend.lib.macro" />
-								<plugin id="org.eclipse.xtend2.lib" />
-								<plugin id="org.eclipse.xtend.examples" />
-								<plugin id="org.eclipse.xtend.doc" />
-								<plugin id="org.eclipse.xtend.lib.gwt" />
-								<feature id="org.eclipse.xtext.runtime" />
-								<feature id="org.eclipse.xtext.xbase.lib" />
-								<feature id="org.eclipse.xtext.xbase" />
-								<feature id="org.eclipse.xtext.ui" />
-								<feature id="org.eclipse.xtext.examples" />
-								<feature id="org.eclipse.xtext.docs" />
-								<feature id="org.eclipse.xtext.xtext.ui" />
-								<feature id="org.eclipse.xtext.gwt" />
-							</excludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.2.0</version>
