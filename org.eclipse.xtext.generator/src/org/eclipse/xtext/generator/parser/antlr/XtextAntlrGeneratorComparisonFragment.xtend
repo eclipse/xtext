@@ -296,7 +296,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		val combined = grammar.isCombinedGrammar		
 		val helper = if (!combined) new AntlrFragmentHelperEx(naming, productionNaming, contentAssistNaming)
 		var String template
-		var Object[] params
+		var List<Object> params
 		
 		// attach the combinedGrammarMarker to the flattened grammar,
 		// it's required for properly executing 'GrammarNaming.getLexerGrammar(Grammar)' as called

@@ -9,6 +9,7 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeMap;
@@ -18,7 +19,6 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -265,16 +265,16 @@ public class FormattableDocument {
 
   protected void reportConflict(final FormattingData data1, final FormattingData data2) {
     final Pair<String, String> text = this.getTextAround(data1);
-    int _size = ((List<StackTraceElement>)Conversions.doWrapArray(this.rootTrace.getStackTrace())).size();
-    final int traceStart = (_size - 1);
-    final StackTraceElement[] fullTrace1 = data1.getTrace().getStackTrace();
-    int _size_1 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace1)).size();
-    int _minus = (_size_1 - traceStart);
-    final String shortTrace1 = IterableExtensions.join(((List<StackTraceElement>)Conversions.doWrapArray(fullTrace1)).subList(0, _minus), "\n");
-    final StackTraceElement[] fullTrace2 = data2.getTrace().getStackTrace();
-    int _size_2 = ((List<StackTraceElement>)Conversions.doWrapArray(fullTrace2)).size();
-    int _minus_1 = (_size_2 - traceStart);
-    final String shortTrace2 = IterableExtensions.join(((List<StackTraceElement>)Conversions.doWrapArray(fullTrace2)).subList(0, _minus_1), "\n");
+    int _length = this.rootTrace.getStackTrace().length;
+    final int traceStart = (_length - 1);
+    final List<StackTraceElement> fullTrace1 = Arrays.<StackTraceElement>asList(data1.getTrace().getStackTrace());
+    int _size = fullTrace1.size();
+    int _minus = (_size - traceStart);
+    final String shortTrace1 = IterableExtensions.join(fullTrace1.subList(0, _minus), "\n");
+    final List<StackTraceElement> fullTrace2 = Arrays.<StackTraceElement>asList(data2.getTrace().getStackTrace());
+    int _size_1 = fullTrace2.size();
+    int _minus_1 = (_size_1 - traceStart);
+    final String shortTrace2 = IterableExtensions.join(fullTrace2.subList(0, _minus_1), "\n");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Conflicting TextEdits during formatting:");
     _builder.newLine();

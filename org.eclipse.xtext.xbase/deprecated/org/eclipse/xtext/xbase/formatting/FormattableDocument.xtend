@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.formatting2.IFormattableDocument
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
+import java.util.Arrays
 
 /**
  * @deprecated use {@link IFormattableDocument}
@@ -117,10 +118,10 @@ class FormattableDocument {
 	
 	def protected void reportConflict(FormattingData data1, FormattingData data2) {
 		val text = getTextAround(data1)
-		val traceStart = rootTrace.stackTrace.size - 1
-		val fullTrace1 = data1.trace.stackTrace
+		val traceStart = rootTrace.stackTrace.length - 1
+		val fullTrace1 = Arrays.asList(data1.trace.stackTrace)
 		val shortTrace1 = fullTrace1.subList(0, fullTrace1.size - traceStart).join("\n") 
-		val fullTrace2 = data2.trace.stackTrace
+		val fullTrace2 = Arrays.asList(data2.trace.stackTrace)
 		val shortTrace2 = fullTrace2.subList(0, fullTrace2.size - traceStart).join("\n")
 		log.error('''
 			Conflicting TextEdits during formatting:

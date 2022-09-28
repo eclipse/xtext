@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -36,7 +37,6 @@ import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper;
 import org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -426,38 +426,36 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     }
     final XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx helper = _xifexpression;
     String template = null;
-    Object[] params = null;
+    List<Object> params = null;
     new CombinedGrammarMarker(combined).attachToEmfObject(flattened);
     if ((Objects.equal(outlet, Generator.SRC_GEN) && (context.getOutput().getOutlet(Generator.SRC_GEN) != null))) {
       if (combined) {
         template = XtextAntlrGeneratorFragment.class.getName();
-        params = new Object[] { this.options };
+        params = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(this.options));
       } else {
         template = AntlrGeneratorFragment.class.getName();
-        params = new Object[] { this.options, helper };
+        params = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(this.options, helper));
       }
       XpandFacade _create = XpandFacade.create(context);
       String _replaceAll = template.replaceAll("\\.", "::");
       String _plus = (_replaceAll + "::generate");
-      final Object[] _converted_params = (Object[])params;
-      _create.evaluate2(_plus, flattened, ((List<Object>)Conversions.doWrapArray(_converted_params)));
+      _create.evaluate2(_plus, flattened, params);
     } else {
       if ((Objects.equal(outlet, Generator.SRC_GEN_IDE) && (context.getOutput().getOutlet(Generator.SRC_GEN_IDE) != null))) {
         if (combined) {
           template = XtextAntlrUiGeneratorFragment.class.getName();
           boolean _hasIde = this.getNaming().hasIde();
-          params = new Object[] { this.options, Boolean.valueOf(this.partialParsing), Boolean.valueOf(_hasIde) };
+          params = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(this.options, Boolean.valueOf(this.partialParsing), Boolean.valueOf(_hasIde)));
         } else {
           template = ContentAssistParserGeneratorFragment.class.getName();
           boolean _booleanValue = Boolean.valueOf(this.partialParsing).booleanValue();
           boolean _booleanValue_1 = Boolean.valueOf(this.getNaming().hasIde()).booleanValue();
-          params = new Object[] { this.options, helper, Boolean.valueOf(_booleanValue), Boolean.valueOf(_booleanValue_1) };
+          params = Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(this.options, helper, Boolean.valueOf(_booleanValue), Boolean.valueOf(_booleanValue_1)));
         }
         XpandFacade _create_1 = XpandFacade.create(context);
         String _replaceAll_1 = template.replaceAll("\\.", "::");
         String _plus_1 = (_replaceAll_1 + "::generate");
-        final Object[] _converted_params_1 = (Object[])params;
-        _create_1.evaluate2(_plus_1, flattened, ((List<Object>)Conversions.doWrapArray(_converted_params_1)));
+        _create_1.evaluate2(_plus_1, flattened, params);
       }
     }
   }
