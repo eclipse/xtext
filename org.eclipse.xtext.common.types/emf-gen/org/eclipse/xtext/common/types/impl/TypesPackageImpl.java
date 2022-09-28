@@ -2674,14 +2674,14 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   source,
 		   new String[]
 		   {
-			   "documentation", "<p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>\n<p>Examples for constraint identifiers are:</p>\n<ul>\n<li>extends java.util.List<java.lang.Map$Entry<java.lang.Object,java.lang.Object>></li>\n<li>super java.lang.Object</li>\n</ul>"
+			   "documentation", "<p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>\n<p>Examples for constraint identifiers are:</p>\n<ul>\n<li>extends java.util.List&lt;java.lang.Map$Entry&lt;java.lang.Object,java.lang.Object&gt;&gt;</li>\n<li>super java.lang.Object</li>\n</ul>"
 		   });
 		addAnnotation
 		  (jvmTypeReferenceEClass.getEOperations().get(1),
 		   source,
 		   new String[]
 		   {
-			   "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>\n<li>java.util.List<? extends java.lang.String>[] for a generic array type</li>\n</ul>"
+			   "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry&lt;java.lang.Object,java.lang.Integer&gt; for a parameterized type</li>\n<li>java.util.List&lt;? extends java.lang.String&gt;[] for a generic array type</li>\n</ul>"
 		   });
 		addAnnotation
 		  (jvmFeatureEClass.getEOperations().get(0),

@@ -43,8 +43,8 @@ public interface JvmTypeReference extends EObject
 	 * <p>Examples for reference identifiers are:</p>
 	 * <ul>
 	 * <li>java.lang.String for a reference to an object type</li>
-	 * <li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>
-	 * <li>java.util.List<? extends java.lang.String>[] for a generic array type</li>
+	 * <li>java.util.Map$Entry&lt;java.lang.Object,java.lang.Integer&gt; for a parameterized type</li>
+	 * <li>java.util.List&lt;? extends java.lang.String&gt;[] for a generic array type</li>
 	 * </ul>
 	 * <!-- end-model-doc -->
 	 * @model kind="operation"

@@ -122,7 +122,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeConstraint" abstract="true">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.&lt;/p>&#xA;&lt;p>Examples for constraint identifiers are:&lt;/p>&#xA;&lt;ul>&#xA;&lt;li>extends java.util.List&lt;java.lang.Map$Entry&lt;java.lang.Object,java.lang.Object>>&lt;/li>&#xA;&lt;li>super java.lang.Object&lt;/li>&#xA;&lt;/ul>"/>
+        <details key="documentation" value="&lt;p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.&lt;/p>&#xA;&lt;p>Examples for constraint identifiers are:&lt;/p>&#xA;&lt;ul>&#xA;&lt;li>extends java.util.List&amp;lt;java.lang.Map$Entry&amp;lt;java.lang.Object,java.lang.Object&amp;gt;&amp;gt;&lt;/li>&#xA;&lt;li>super java.lang.Object&lt;/li>&#xA;&lt;/ul>"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -154,7 +154,7 @@
     <eOperations name="getType" eType="#//JvmType"/>
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>The identifier of a JvmTypeReference is a canonical representation of the referenced type &#xA;including its type arguments.&lt;/p>&#xA;&lt;p>The types fully qualified name is used ('$' is the delimiter for inner types).&lt;/p>&#xA;&lt;p>Examples for reference identifiers are:&lt;/p>&#xA;&lt;ul>&#xA;&lt;li>java.lang.String for a reference to an object type&lt;/li>&#xA;&lt;li>java.util.Map$Entry&lt;java.lang.Object,java.lang.Integer> for a parameterized type&lt;/li>&#xA;&lt;li>java.util.List&lt;? extends java.lang.String>[] for a generic array type&lt;/li>&#xA;&lt;/ul>"/>
+        <details key="documentation" value="&lt;p>The identifier of a JvmTypeReference is a canonical representation of the referenced type &#xA;including its type arguments.&lt;/p>&#xA;&lt;p>The types fully qualified name is used ('$' is the delimiter for inner types).&lt;/p>&#xA;&lt;p>Examples for reference identifiers are:&lt;/p>&#xA;&lt;ul>&#xA;&lt;li>java.lang.String for a reference to an object type&lt;/li>&#xA;&lt;li>java.util.Map$Entry&amp;lt;java.lang.Object,java.lang.Integer&amp;gt; for a parameterized type&lt;/li>&#xA;&lt;li>java.util.List&amp;lt;? extends java.lang.String&amp;gt;[] for a generic array type&lt;/li>&#xA;&lt;/ul>"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

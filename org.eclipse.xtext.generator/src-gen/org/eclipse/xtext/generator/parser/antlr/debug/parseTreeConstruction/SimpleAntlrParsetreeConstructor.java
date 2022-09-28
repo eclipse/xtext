@@ -2748,7 +2748,7 @@ protected class OrExpression_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule AndExpression ****************
  *
  * AndExpression Expression:
- * 	NotExpression ({AndExpression.left=current} '&&' right=NotExpression)*
+ * 	NotExpression ({AndExpression.left=current} '&amp;&amp;' right=NotExpression)*
  *
  **/
 
