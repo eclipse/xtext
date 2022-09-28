@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2022 Ruben Porras-Campo (Ruben.PorrasCampo@avaloq.com) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -8,10 +8,10 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-
 import java.util.List;
 
 import org.eclipse.lsp4j.Diagnostic;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -26,7 +26,8 @@ public class UriExtensionsIntegrationTest extends AbstractTestLangLanguageServer
 		// The # as part of the name is the important part of the test
 		writeFile("MyType#1.testlang", model); 
 		initialize();
-		problems();
+		List<Diagnostic> problems = problems();
+		Assert.assertEquals(1, problems.size());
 	}
 
 	private List<Diagnostic> problems() {

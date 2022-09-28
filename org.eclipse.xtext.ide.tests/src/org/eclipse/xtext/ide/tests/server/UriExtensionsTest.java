@@ -121,18 +121,78 @@ public class UriExtensionsTest {
 
 	@Test
 	public void test_toUri_15() throws Exception {
-		String uri = "something:/path/to/res%20ource";
-		String encodedUri = URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
-		assertEquals(URI.createURI(uri), uriExtensions.toUri(encodedUri));
+		String uri = "something:/path/to/" + URI.encodeSegment("res ource", false);
+		assertEquals(URI.createURI(uri), uriExtensions.toUri(uri));
+	}
+	
+	@Test
+	public void test_toUri_15b() throws Exception {
+		String uri = "file:/path/to/" + URI.encodeSegment("res ource", false);
+		assertEquals(uriExtensions.withEmptyAuthority(URI.createURI(uri)), uriExtensions.toUri(uri));
 	}
 
 	@Test
 	public void test_toUri_16() throws Exception {
-		String uri = "something:/path/to/res#ource";
-		String encodedUri = URLEncoder.encode(uri, StandardCharsets.UTF_8.toString());
-		assertEquals(URI.createURI(uri, true, URI.FRAGMENT_NONE), uriExtensions.toUri(encodedUri));
+		String uri = "something:/path/to/" + URI.encodeSegment("res#ource", false);
+		assertEquals(URI.createURI(uri), uriExtensions.toUri(uri));
 	}
 
+	@Test
+	public void test_toUri_16b() throws Exception {
+		String uri = "file:/path/to/" + URI.encodeSegment("res#ource", false);
+		assertEquals(uriExtensions.withEmptyAuthority(URI.createURI(uri)), uriExtensions.toUri(uri));
+	}
+	
+	@Test
+	public void test_toUri_17() throws Exception {
+		assertEquals(URI.createURI("file:///c:"), uriExtensions.toUri("file:///c%3A"));
+	}
+
+	@Test
+	public void test_toUri_18() throws Exception {
+		assertEquals(URI.createURI("file:///c:/"), uriExtensions.toUri("file:///c%3A/"));
+	}
+
+	@Test
+	public void test_toUri_19() throws Exception {
+		assertEquals(URI.createURI("file:///c:"), uriExtensions.toUri("file:///c:"));
+	}
+
+	@Test
+	public void test_toUri_20() throws Exception {
+		assertEquals(URI.createURI("file:///c:/"), uriExtensions.toUri("file:///c:/"));
+	}
+	
+	@Test
+	public void test_toUri_21() throws Exception {
+		assertEquals(URI.createURI("file:///c:"), uriExtensions.toUri("file:/c:"));
+	}
+
+	@Test
+	public void test_toUri_22() throws Exception {
+		assertEquals(URI.createURI("file:///c:/"), uriExtensions.toUri("file:/c:/"));
+	}
+	
+	@Test
+	public void test_toUri_23() throws Exception {
+		assertEquals(URI.createURI("file:///c:/a/path"), uriExtensions.toUri("file:/c:/a/path"));
+	}
+	
+	@Test
+	public void test_toUri_24() throws Exception {
+		assertEquals(URI.createURI("file://c:"), uriExtensions.toUri("file://c:"));
+	}
+
+	@Test
+	public void test_toUri_25() throws Exception {
+		assertEquals(URI.createURI("file://c:/"), uriExtensions.toUri("file://c:/"));
+	}
+	
+	@Test
+	public void test_toUri_26() throws Exception {
+		assertEquals(URI.createURI("file://c:/a/path"), uriExtensions.toUri("file://c:/a/path"));
+	}
+	
 	@Test
 	public void test_toUriString_01() throws Exception {
 		assertEquals("file:///path/to/resource",

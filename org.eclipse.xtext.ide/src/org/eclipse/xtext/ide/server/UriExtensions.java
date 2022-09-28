@@ -20,16 +20,8 @@ import org.eclipse.emf.common.util.URI;
 @Singleton
 public class UriExtensions extends org.eclipse.xtext.util.UriExtensions {
 
-	@Override
-	public URI toEmfUri(java.net.URI netUri) {
-		String decoded = toDecodedString(netUri);
-		URI uri = URI.createURI(decoded, true, URI.FRAGMENT_NONE);
-		URI result = withEmptyAuthority(uri);
-		return result;
-	}
-	
 	/**
-	 * returns the string representation of the given URI (with empty authority, if absent and has file scheme).
+	 * returns the encoded string representation of the given URI (with empty authority, if absent and has file scheme).
 	 */
 	public String toUriString(URI uri) {
 		return withEmptyAuthority(uri).toString();
