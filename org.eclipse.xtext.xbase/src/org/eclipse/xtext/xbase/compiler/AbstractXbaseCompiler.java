@@ -569,7 +569,13 @@ public abstract class AbstractXbaseCompiler {
 			return ((JvmIdentifiableElement) ex).getSimpleName();
 		}
 		if (ex instanceof XAbstractFeatureCall) {
-			String name = nameProvider.getSimpleName(((XAbstractFeatureCall) ex).getFeature());
+			JvmIdentifiableElement feature = ((XAbstractFeatureCall) ex).getFeature();
+			String name;
+			if (feature == null || feature.eIsProxy()) {
+				name = ex.toString();
+			} else {
+				name = nameProvider.getSimpleName(feature);
+			}
 			if (name == null) {
 				throw new IllegalStateException("name may not be null");
 			}
@@ -590,7 +596,8 @@ public abstract class AbstractXbaseCompiler {
 			return "_"+name;
 		}
 		if (ex instanceof XConstructorCall) {
-			String name = ((XConstructorCall) ex).getConstructor().getSimpleName();
+			JvmConstructor constructor = ((XConstructorCall) ex).getConstructor();
+			String name = constructor != null && !constructor.eIsProxy() ? constructor.getSimpleName() : "instance";
 			return "_"+Strings.toFirstLower(name);
 		}
 		return "_"+Strings.toFirstLower(ex.eClass().getName().toLowerCase());

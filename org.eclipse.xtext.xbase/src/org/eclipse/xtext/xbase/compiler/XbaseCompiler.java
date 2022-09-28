@@ -1136,7 +1136,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous()) {
 			typeAppendable.append(Iterables.getLast(type.getSuperTypes()).getType());
 		} else {
-			typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
+			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(constructorCall);
+			LightweightTypeReference actualType = resolvedTypes.getActualType(constructorCall).getRawTypeReference();
+			typeAppendable.append(actualType);
 		}
 	}
 	

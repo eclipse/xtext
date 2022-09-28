@@ -444,7 +444,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (featureCall instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) featureCall, b))
 				return true;
 			JvmIdentifiableElement feature = featureCall.getFeature();
-			if (feature instanceof JvmField || feature instanceof JvmFormalParameter)
+			if (feature instanceof JvmField || feature instanceof JvmFormalParameter || feature.eIsProxy())
 				return false;
 			if (eContainingFeature == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS
 					|| eContainingFeature == XbasePackage.Literals.XASSIGNMENT__VALUE

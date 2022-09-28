@@ -604,6 +604,27 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
+	@Test public void testNoExceptionWithUnresolveableTypes() throws Exception {
+		assertCompilesTo(
+				// Occurrences of "void" here are inconsistent with the serialized type of the _switchResult.
+				// In practice, the ErrorTreeAppendable will take care of some of these. Most importantly
+				// we don't throw an Exception.
+				"java.util.List<Unresolveable> _switchResult = null;\n"
+				+ "Object _instance = new Object(void.class, /* name is null */);\n"
+				+ "final Object x = _instance;\n"
+				+ "boolean _matched = false;\n"
+				+ "if (x instanceof void) {\n"
+				+ "  _matched=true;\n"
+				+ "  _switchResult = java.util.Arrays.<void>asList(x);\n"
+				+ "}\n"
+				+ "return _switchResult;"
+				, 
+				"switch x : new Unresolveable<Unresolveable>(typeof(Unresolvable), Unresolvable) {" +
+				"  Unresolvable : java.util.Arrays.<Unresolveable>asList(x) " +
+				"}",
+				false);
+	}
+	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=371306
 	 */

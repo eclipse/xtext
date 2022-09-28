@@ -104,7 +104,9 @@ public class SharedAppendableState {
 	public void appendType(final JvmType type, IAcceptor<String> content) {
 		// don't import if a local variable with the same name is on the scope
 		//TODO logic should be moved to ImportManager eventually.
-		if (hasObject(type.getSimpleName())) {
+		if (type == null) {
+			content.accept("/* unresolved type */ Object");
+		} else if (hasObject(type.getSimpleName())) {
 			content.accept(type.getQualifiedName('.'));
 		} else {
 			StringBuilder builder = new StringBuilder();
