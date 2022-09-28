@@ -68,13 +68,13 @@ ASM (9.3)
 
 * License: BSD-3-Clause
 
-classgraph (4.8.138)
+classgraph (4.8.149)
 
 * License: MIT
 * Project: https://github.com/classgraph/classgraph
 * Source: https://github.com/classgraph/classgraph
 
-Google Gson (2.8)
+Google Gson (2.9.x)
 
 * License: Apache License, 2.0
 
