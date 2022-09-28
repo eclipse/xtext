@@ -6,7 +6,7 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.eclipse.xtext.purexbase.test;
+package org.eclipse.xtext.purexbase.tests;
 
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.testing.InjectWith;
@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Ignore;

@@ -6,12 +6,11 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.purexbase.test;
+package org.eclipse.xtext.purexbase.tests;
 
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.xtext.purexbase.pureXbase.Model;
-import org.eclipse.xtext.purexbase.tests.PureXbaseInjectorProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;

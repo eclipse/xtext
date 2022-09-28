@@ -905,13 +905,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					b.append("(");
 				}
 			}
-			if (feature instanceof JvmField) {
+			if (feature== null || feature.eIsProxy() || feature instanceof JvmField) {
 				boolean appendReceiver = appendReceiver(expr, b, isExpressionContext);
 				if (appendReceiver)
 					b.append(".");
 				appendFeatureCall(expr, b);
 			} else {
-				String name = b.getName(expr.getFeature());
+				String name = b.getName(feature);
 				b.append(name);
 			}
 			b.append(" = ");
@@ -940,6 +940,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if(feature != null) {
 			if (b.hasName(feature)) {
 				name = b.getName(feature);
+			} else if (feature.eIsProxy()) {
+				name = getFavoriteVariableName(call);
 			} else {
 				name = featureNameProvider.getSimpleName(feature);
 			}

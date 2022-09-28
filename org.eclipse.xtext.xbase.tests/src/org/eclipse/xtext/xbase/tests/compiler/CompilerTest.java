@@ -610,7 +610,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				// In practice, the ErrorTreeAppendable will take care of some of these. Most importantly
 				// we don't throw an Exception.
 				"java.util.List<Unresolveable> _switchResult = null;\n"
-				+ "Object _instance = new Object(void.class, /* name is null */);\n"
+				+ "Object _instance = new Object(void.class, _Unresolvable);\n"
 				+ "final Object x = _instance;\n"
 				+ "boolean _matched = false;\n"
 				+ "if (x instanceof void) {\n"

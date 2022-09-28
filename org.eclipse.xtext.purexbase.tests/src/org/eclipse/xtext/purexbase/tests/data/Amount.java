@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.purexbase.test.data;
+package org.eclipse.xtext.purexbase.tests.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

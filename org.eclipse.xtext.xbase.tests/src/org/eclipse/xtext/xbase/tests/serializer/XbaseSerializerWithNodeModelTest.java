@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.tests.serializer;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

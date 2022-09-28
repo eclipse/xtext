@@ -6,10 +6,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.purexbase.test;
+package org.eclipse.xtext.purexbase.tests;
 
 import org.eclipse.xtext.purexbase.PureXbaseStandaloneSetup;
-import org.eclipse.xtext.purexbase.tests.PureXbaseInjectorProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.purexbase.test.data;
+package org.eclipse.xtext.purexbase.tests.data;
 
 public class Person {
 	

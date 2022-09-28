@@ -35,10 +35,12 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -569,10 +571,15 @@ public abstract class AbstractXbaseCompiler {
 			return ((JvmIdentifiableElement) ex).getSimpleName();
 		}
 		if (ex instanceof XAbstractFeatureCall) {
-			JvmIdentifiableElement feature = ((XAbstractFeatureCall) ex).getFeature();
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) ex;
+			JvmIdentifiableElement feature = featureCall.getFeature();
 			String name;
 			if (feature == null || feature.eIsProxy()) {
-				name = ex.toString();
+				if (featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation) {
+					name = featureCall.eClass().getName();
+				} else {
+					name = featureCall.getConcreteSyntaxFeatureName();
+				}
 			} else {
 				name = nameProvider.getSimpleName(feature);
 			}
@@ -697,8 +704,9 @@ public abstract class AbstractXbaseCompiler {
 			return b.getName(expr);
 		if (expr instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) expr;
-			if (b.hasName(featureCall.getFeature()))
-				return b.getName(featureCall.getFeature());
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (b.hasName(feature))
+				return b.getName(feature);
 		}
 		return null;
 	}

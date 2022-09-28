@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.purexbase.tests;
 
-import com.google.inject.Inject;
 import java.util.List;
+
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.testing.InjectWith;
@@ -19,6 +19,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
 
 @RunWith(XtextRunner.class)
 @InjectWith(PureXbaseInjectorProvider.class)

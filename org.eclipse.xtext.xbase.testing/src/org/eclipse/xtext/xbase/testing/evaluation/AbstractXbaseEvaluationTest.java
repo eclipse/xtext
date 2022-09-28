@@ -32,8 +32,10 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import testdata.CloseException;
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
+import testdata.TryBodyException;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
@@ -1127,6 +1129,62 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesWithException(NullPointerException.class, "if (false) 'then' else throw new NullPointerException");
 	}
 	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_1() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(20),
+				"{ var number = (false)? new Double('-10') : new Integer('20') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_2() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(10),
+				"{ var number = (true)? new Integer('10') : new Integer('20') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_3() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3),
+				"{ var number = (true)? (true)? new Integer('3') : new Integer('4') : new Integer('5') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_4() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(4),
+				"{ var number = (true)? (!true)? new Integer('3') : new Integer('4') : new Integer('5') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_5() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(5),
+				"{ var number = (!true)? (true)? new Integer('3') : new Integer('4') : new Integer('5') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_6() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(6),
+				"{ var number = (!true)? new Integer('3') : (true)? new Integer('6') : new Integer('7') number.intValue }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTernaryIf_7() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(7),
+				"{ var number = if (true) {(!true)? new Integer('3') : new Integer('7')} else new Integer('5') number.intValue }");
+	}
+	
 	@Test public void testVariableDeclaration_01() throws Exception {
 		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
 	}
@@ -1187,6 +1245,311 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testFeatureCall_04() throws Exception {
 		assertEvaluatesTo(Integer.valueOf("literal".length()), "{ var x = 'literal' x.length }");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithoutResources() throws Exception {
+		assertEvaluatesTo("Test",
+				"try {\n" +
+				"	val a = new java.io.StringReader(\"Test\");" +
+				"	val b = com.google.common.io.CharStreams.toString(a);" +
+				"	return b;" +
+				"} catch (java.io.IOException e) { throw e }");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_easy() throws Exception {
+		assertEvaluatesTo("Test", "try (val a = new java.io.StringReader(\"Test\")) { "
+				+ "com.google.common.io.CharStreams.toString(a) }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_lambda() throws Exception {
+		String result = "[body, close]";
+		assertEvaluatesTo(result,
+				"val myList = newArrayList; try (val someCloseable = [ myList.add('close') ]) { myList.add('body') } myList.toString");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2Resources() throws Exception {
+		assertEvaluatesTo("Test",
+				"try (val sr = new java.io.StringReader(\"Test\");" + " val buffy = new java.io.BufferedReader(sr)) {"
+						+ " return buffy.readLine }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2NestedResources() throws Exception {
+		assertEvaluatesTo("Test", "try (val buffy = new java.io.BufferedReader(new java.io.StringReader(\"Test\"))) {"
+				+ " return buffy.readLine }");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2DiffResources() throws Exception {
+		assertEvaluatesTo("Test",
+				"try (var c = if (true) new java.io.StringReader(\"Test\") else new java.util.Formatter()){\n" + 
+						"	if (c instanceof java.io.StringReader)\n" + 
+						"		com.google.common.io.CharStreams.toString(c as java.io.StringReader)\n" + 
+				"}");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_if1() throws Exception {
+		assertEvaluatesTo("Test1", "try (val a = new java.io.StringReader(if (true) \"Test1\" else \"Test2\")) {"
+				+ " com.google.common.io.CharStreams.toString(a)" + "}");
+	}
+
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_if2() throws Exception {
+		assertEvaluatesTo("Test1",
+				"try (val a = if (true) new java.io.StringReader(\"Test1\") else new java.io.StringReader(\"Test2\")) {"
+						+ " com.google.common.io.CharStreams.toString(a)"
+						+ "} ");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClass() throws Exception {
+		assertEvaluatesTo(true,
+				"try (val c = new testdata.IntrospectableClosable()) {\n" + 
+				"		return c.isOpen"+
+				"}\n");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_isClosed1() throws Exception {
+		assertEvaluatesWithException(IOException.class,
+				"var java.io.StringReader result\n" +
+				"try(var c = new java.io.StringReader(\"Test\"))\n" + 
+				"	result = c\n" +
+				"return result.read");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_isClosed2() throws Exception {
+		assertEvaluatesTo(false,
+				"var testdata.IntrospectableClosable result\n" + 
+				"try(val c = new testdata.IntrospectableClosable())\n" + 
+				"	result = c\n" + 
+				"return result.isOpen");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnConstructor() throws Exception {
+		assertEvaluatesWithException(Exception.class,
+				"try(val c = new testdata.IntrospectableClosableExceptionsConstructor)\n" + 
+				"	return c.isOpen\n");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnClose() throws Exception {
+		assertEvaluatesWithException(CloseException.class,
+				"try(val c = new testdata.IntrospectableClosableExceptionsClose)\n" + 
+				"	return c.isOpen\n");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosable closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var a = new testdata.IntrospectableClosableExceptionsClose;\n" + 
+				"		var b = new testdata.IntrospectableClosable) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosable closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var b = new testdata.IntrospectableClosable;\n" + 
+				"		var a = new testdata.IntrospectableClosableExceptionsClose) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosableExceptionsClose closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var a = new testdata.IntrospectableClosableExceptionsClose;\n" + 
+				"		var b = new testdata.IntrospectableClosableExceptionsClose) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_finally() throws Exception {
+		assertEvaluatesTo("[new, body, finally, close]",
+				"var testdata.ClosableWithList result\n" + 
+				"try (var a = new testdata.ClosableWithList()){\n" + 
+				"	a.add(\"body\")\n" + 
+				"	result = a\n" + 
+				"} finally {\n" + 
+				"	result.add(\"finally\")\n" + 
+				"}\n" + 
+				"return result.printList");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_catch() throws Exception {
+		assertEvaluatesTo("[new, catch, close]",
+				"val java.util.List<String> result = newArrayList\n" + 
+				"try (val a = new testdata.ClosableWithList(result);\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
+				"	result.add(\"body\")\n" + 
+				"} catch (java.lang.InstantiationException e) {\n" + 
+				"	result.add(\"catch\")\n" + 
+				"}\n" + 
+				"return result.toString");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_catchFinally() throws Exception {
+		assertEvaluatesTo("[new, body, catch b, finally, close]",
+				"var testdata.ClosableWithList result\n" + 
+				"try (var a = new testdata.ClosableWithList();\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnAdd()) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	result = a\n" + 
+				"	b.addExc\n" + 
+				"} catch (testdata.TryBodyException e) {\n" + 
+				"	result.add(\"catch b\")\n" + 
+				"} finally {\n" + 
+				"	result.add(\"finally\")\n" + 
+				"}\n" + 
+				"return result.printList");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_ExceptionInBody() throws Exception {
+		assertEvaluatesWithException(TryBodyException.class,
+				"try (var a = new testdata.ClosableWithListExceptionOnAdd()) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	a.addExc\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2Resources_ExceptionInBody() throws Exception {
+		assertEvaluatesWithException(TryBodyException.class,
+				"var testdata.ClosableWithList result\n" + 
+				"try (var a = new testdata.ClosableWithList();\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnAdd()) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	result = a\n" + 
+				"	b.addExc\n" + 
+				"}\n" + 
+				"return result.printList");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2Resources_ExceptionOnClose() throws Exception {
+		assertEvaluatesWithException(CloseException.class,
+				"var testdata.IntrospectableClosable result\n" + 
+				"try (var a = new testdata.IntrospectableClosable; var b = new testdata.IntrospectableClosableExceptionsClose) {\n" + 
+				"	result = a\n" + 
+				"}\n" + 
+				"return result.isOpen");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2ResourcesCatch_01() throws Exception {
+		assertEvaluatesTo("[new, catch, close]", //b.add would invoke NullPointerExcpt, but InstExc came first and is caught
+				"var java.util.List<String> result = newArrayList\n" + 
+				"try (var a = new testdata.ClosableWithList(result);\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	b.add(\"body\")\n" + 
+				"}\n" + 
+				"catch (java.lang.InstantiationException e) {\n" + 
+				"	result.add(\"catch\")\n" + 
+				"}\n" + 
+				"return result.toString");
+	}
+	
+	/**
+	 * @since 2.29
+	 */
+	@Test @Ignore public void testTryWithResources_2ResourcesCatch_02() throws Exception {
+		assertEvaluatesWithException(InstantiationException.class, //b.add would invoke NullPointerExcpt, but InstExc came first and is caught
+				"var java.util.List<String> result\n" + 
+				"try (var a = new testdata.ClosableWithList;\n" + 
+				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
+				"	a.add(\"body\")\n" + 
+				"	b.add(\"body\")\n" + 
+				"}\n");
 	}
 	
 	@Test public void testConstructorCall_00() throws Exception {
@@ -4216,10 +4579,9 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(newHashSet(null, ""), "#{null, ''}");
 	}
 		
-	@SuppressWarnings("unchecked")
 	@Test 
 	public void testSetLiteral_6() throws Exception {
-		assertEvaluatesTo(newHashSet(Pair.of("foo", "bar")), "{ val java.util.Set x = #{'foo' -> 'bar'} x }");
+		assertEvaluatesTo(Collections.singleton(Pair.of("foo", "bar")), "{ val java.util.Set x = #{'foo' -> 'bar'} x }");
 	}
 	
 	@Test 

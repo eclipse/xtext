@@ -6,7 +6,7 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.eclipse.xtext.purexbase.test;
+package org.eclipse.xtext.purexbase.tests;
 
 import java.io.IOException;
 
@@ -103,7 +103,7 @@ public class CompilerTest {
 	@Test
 	public void featureCalls() throws Exception {
 		String source =
-				"import org.eclipse.xtext.purexbase.test.data.Person\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Person\n" +
 				"/*\n" +
 				" * Xbase comes with sugared accessor syntax for getter and setter \n" +
 				" * methods\n" +
@@ -125,7 +125,7 @@ public class CompilerTest {
 				"System::err.println()\n";
 		String expectation =
 				"import java.util.Collections;\n" +
-				"import org.eclipse.xtext.purexbase.test.data.Person;\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Person;\n" +
 				"\n" +
 				"@SuppressWarnings(\"all\")\n" +
 				"public class MyFile {\n" +
@@ -394,7 +394,7 @@ public class CompilerTest {
 	@Test
 	public void operators() throws Exception {
 		String source =
-				"import org.eclipse.xtext.purexbase.test.data.Amount\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Amount\n" +
 				"/*\n" +
 				" * Although the operators in Xbase are syntactically predefined, the \n" +
 				" * semantics are given by a simple operator overloading mechanism.\n" +
@@ -407,7 +407,7 @@ public class CompilerTest {
 				"a + b * 3\n" +
 				"// 13.40 (Amount)\n";
 		String expectation =
-				"import org.eclipse.xtext.purexbase.test.data.Amount;\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Amount;\n" +
 				"\n" +
 				"@SuppressWarnings(\"all\")\n" +
 				"public class MyFile {\n" +
@@ -541,8 +541,8 @@ public class CompilerTest {
 	@Test
 	public void switchExpression() throws Exception {
 		String source =
-				"import org.eclipse.xtext.purexbase.test.data.Circle\n" +
-				"import org.eclipse.xtext.purexbase.test.data.Rectangle\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Circle\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Rectangle\n" +
 				"/*\n" +
 				" * The switch expression is different and much more powerful than the\n" +
 				" * switch statement in Java.\n" +
@@ -581,9 +581,9 @@ public class CompilerTest {
 				"import com.google.common.base.Objects;\n" +
 				"import java.util.ArrayList;\n" +
 				"import java.util.List;\n" +
-				"import org.eclipse.xtext.purexbase.test.data.Circle;\n" +
-				"import org.eclipse.xtext.purexbase.test.data.Rectangle;\n" +
-				"import org.eclipse.xtext.purexbase.test.data.Shape;\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Circle;\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Rectangle;\n" +
+				"import org.eclipse.xtext.purexbase.tests.data.Shape;\n" +
 				"import org.eclipse.xtext.xbase.lib.CollectionLiterals;\n" +
 				"import org.eclipse.xtext.xbase.lib.Functions.Function1;\n" +
 				"import org.eclipse.xtext.xbase.lib.IterableExtensions;\n" +

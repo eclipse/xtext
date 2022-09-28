@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.junit.After;
 import org.junit.Ignore;

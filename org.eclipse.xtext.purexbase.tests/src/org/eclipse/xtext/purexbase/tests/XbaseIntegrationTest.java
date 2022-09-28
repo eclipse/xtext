@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
-package org.eclipse.xtext.purexbase.test;
+package org.eclipse.xtext.purexbase.tests;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,9 +14,9 @@ import java.lang.reflect.Method;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper.Result;
+import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
