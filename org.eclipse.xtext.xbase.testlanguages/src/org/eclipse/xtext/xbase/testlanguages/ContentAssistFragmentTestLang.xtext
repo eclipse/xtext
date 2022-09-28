@@ -5,7 +5,8 @@ generate contentAssistFragmentTestLang "http://www.eclipse.org/xtext/xbase/testl
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 ContentAssistFragmentTestLanguageRoot:
-	expression=XExpression;
+	expression=XExpression
+	entities+=Entity*;
 
 // To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
 // we need to override one of the Xbase's rules
@@ -14,3 +15,7 @@ ContentAssistFragmentTestLanguageRoot:
 XVariableDeclaration returns XVariableDeclaration:
 	{XVariableDeclaration}
 	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
+	
+Entity:
+	'entity' name=QualifiedName ('extends' extends=[Entity|QualifiedName])?
+;

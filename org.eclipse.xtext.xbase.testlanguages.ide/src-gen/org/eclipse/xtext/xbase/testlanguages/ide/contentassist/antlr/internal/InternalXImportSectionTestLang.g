@@ -3139,6 +3139,7 @@ rule__ImportSectionTestLanguageRoot__Group__2
 	}
 :
 	rule__ImportSectionTestLanguageRoot__Group__2__Impl
+	rule__ImportSectionTestLanguageRoot__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3153,6 +3154,32 @@ rule__ImportSectionTestLanguageRoot__Group__2__Impl
 	{ before(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionAssignment_2()); }
 	(rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2)
 	{ after(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionAssignment_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ImportSectionTestLanguageRoot__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__ImportSectionTestLanguageRoot__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ImportSectionTestLanguageRoot__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionAssignment_3()); }
+	(rule__ImportSectionTestLanguageRoot__ExpressionAssignment_3)?
+	{ after(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionAssignment_3()); }
 )
 ;
 finally {
@@ -14813,6 +14840,21 @@ rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2
 		{ before(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionXImportSectionParserRuleCall_2_0()); }
 		ruleXImportSection
 		{ after(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionXImportSectionParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ImportSectionTestLanguageRoot__ExpressionAssignment_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_3_0()); }
+		ruleXExpression
+		{ after(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_3_0()); }
 	)
 ;
 finally {

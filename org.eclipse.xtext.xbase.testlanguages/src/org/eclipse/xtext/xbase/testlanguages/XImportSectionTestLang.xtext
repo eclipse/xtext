@@ -4,5 +4,7 @@ generate xImportSectionTestLang "http://www.eclipse.org/xtext/xbase/testlanguage
 
 ImportSectionTestLanguageRoot:
 	'some' 'token'
-	importSection=XImportSection;
+	importSection=XImportSection
+	expression=XExpression?
+;
 	

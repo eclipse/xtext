@@ -60,7 +60,8 @@ public class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModel
 	 */
 	protected void _infer(ContentAssistFragmentTestLanguageRoot element, IJvmDeclaredTypeAcceptor acceptor,
 			boolean isPreIndexingPhase) {
-		acceptor.accept(jvmTypesBuilder.toClass(element, "my.test.MyClass"), c -> {
+		String simpleName = element.eResource().getURI().trimFileExtension().lastSegment();
+		acceptor.accept(jvmTypesBuilder.toClass(element, "my.test." + simpleName), c -> {
 			c.getMembers().add(jvmTypesBuilder.toMethod(element, "hello", _typeReferenceBuilder.typeRef(Void.class),
 					o -> jvmTypesBuilder.setBody(o, element.getExpression())));
 		});

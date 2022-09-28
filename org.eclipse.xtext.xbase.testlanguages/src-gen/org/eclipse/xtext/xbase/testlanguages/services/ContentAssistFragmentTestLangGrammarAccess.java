@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -31,18 +32,32 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	
 	public class ContentAssistFragmentTestLanguageRootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot");
-		private final Assignment cExpressionAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cExpressionXExpressionParserRuleCall_0 = (RuleCall)cExpressionAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cExpressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cExpressionXExpressionParserRuleCall_0_0 = (RuleCall)cExpressionAssignment_0.eContents().get(0);
+		private final Assignment cEntitiesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEntitiesEntityParserRuleCall_1_0 = (RuleCall)cEntitiesAssignment_1.eContents().get(0);
 		
 		//ContentAssistFragmentTestLanguageRoot:
-		//    expression=XExpression;
+		//    expression=XExpression
+		//    entities+=Entity*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//expression=XExpression
-		public Assignment getExpressionAssignment() { return cExpressionAssignment; }
+		//entities+=Entity*
+		public Group getGroup() { return cGroup; }
+		
+		//expression=XExpression
+		public Assignment getExpressionAssignment_0() { return cExpressionAssignment_0; }
 		
 		//XExpression
-		public RuleCall getExpressionXExpressionParserRuleCall_0() { return cExpressionXExpressionParserRuleCall_0; }
+		public RuleCall getExpressionXExpressionParserRuleCall_0_0() { return cExpressionXExpressionParserRuleCall_0_0; }
+		
+		//entities+=Entity*
+		public Assignment getEntitiesAssignment_1() { return cEntitiesAssignment_1; }
+		
+		//Entity
+		public RuleCall getEntitiesEntityParserRuleCall_1_0() { return cEntitiesEntityParserRuleCall_1_0; }
 	}
 	public class XVariableDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang.XVariableDeclaration");
@@ -133,10 +148,55 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 		//XExpression
 		public RuleCall getRightXExpressionParserRuleCall_3_1_0() { return cRightXExpressionParserRuleCall_3_1_0; }
 	}
+	public class EntityElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang.Entity");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEntityKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cExtendsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cExtendsEntityCrossReference_2_1_0 = (CrossReference)cExtendsAssignment_2_1.eContents().get(0);
+		private final RuleCall cExtendsEntityQualifiedNameParserRuleCall_2_1_0_1 = (RuleCall)cExtendsEntityCrossReference_2_1_0.eContents().get(1);
+		
+		//Entity:
+		//    'entity' name=QualifiedName ('extends' extends=[Entity|QualifiedName])?
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'entity' name=QualifiedName ('extends' extends=[Entity|QualifiedName])?
+		public Group getGroup() { return cGroup; }
+		
+		//'entity'
+		public Keyword getEntityKeyword_0() { return cEntityKeyword_0; }
+		
+		//name=QualifiedName
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
+		
+		//('extends' extends=[Entity|QualifiedName])?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'extends'
+		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
+		
+		//extends=[Entity|QualifiedName]
+		public Assignment getExtendsAssignment_2_1() { return cExtendsAssignment_2_1; }
+		
+		//[Entity|QualifiedName]
+		public CrossReference getExtendsEntityCrossReference_2_1_0() { return cExtendsEntityCrossReference_2_1_0; }
+		
+		//QualifiedName
+		public RuleCall getExtendsEntityQualifiedNameParserRuleCall_2_1_0_1() { return cExtendsEntityQualifiedNameParserRuleCall_2_1_0_1; }
+	}
 	
 	
 	private final ContentAssistFragmentTestLanguageRootElements pContentAssistFragmentTestLanguageRoot;
 	private final XVariableDeclarationElements pXVariableDeclaration;
+	private final EntityElements pEntity;
 	
 	private final Grammar grammar;
 	
@@ -153,6 +213,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 		this.gaXtype = gaXtype;
 		this.pContentAssistFragmentTestLanguageRoot = new ContentAssistFragmentTestLanguageRootElements();
 		this.pXVariableDeclaration = new XVariableDeclarationElements();
+		this.pEntity = new EntityElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -187,7 +248,8 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 
 	
 	//ContentAssistFragmentTestLanguageRoot:
-	//    expression=XExpression;
+	//    expression=XExpression
+	//    entities+=Entity*;
 	public ContentAssistFragmentTestLanguageRootElements getContentAssistFragmentTestLanguageRootAccess() {
 		return pContentAssistFragmentTestLanguageRoot;
 	}
@@ -209,6 +271,17 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractElementF
 	
 	public ParserRule getXVariableDeclarationRule() {
 		return getXVariableDeclarationAccess().getRule();
+	}
+	
+	//Entity:
+	//    'entity' name=QualifiedName ('extends' extends=[Entity|QualifiedName])?
+	//;
+	public EntityElements getEntityAccess() {
+		return pEntity;
+	}
+	
+	public ParserRule getEntityRule() {
+		return getEntityAccess().getRule();
 	}
 	
 	//XExpression returns XExpression :

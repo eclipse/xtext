@@ -4,11 +4,12 @@
     modelDirectory="/org.eclipse.xtext.xbase.testlanguages/src-gen" modelPluginID="org.eclipse.xtext.xbase.testlanguages"
     forceOverwrite="true" modelName="XImportSectionTestLang" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="8.0"
-    copyrightFields="false" runtimeVersion="2.20" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    copyrightFields="false" runtimeVersion="2.20" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="XImportSectionTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
       disposableProviderFactory="true" fileExtensions="ximportsectiontestlang" ecorePackage="XImportSectionTestLang.ecore#/">
     <genClasses ecoreClass="XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot/importSection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot/expression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

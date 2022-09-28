@@ -15,8 +15,7 @@ import org.eclipse.xtext.xbase.testlanguages.jvmmodel.XImportSectionTestLangJvmM
  * Use this class to register components to be used at runtime / without the
  * Equinox extension registry.
  */
-public class XImportSectionTestLangRuntimeModule
-		extends org.eclipse.xtext.xbase.testlanguages.AbstractXImportSectionTestLangRuntimeModule {
+public class XImportSectionTestLangRuntimeModule extends AbstractXImportSectionTestLangRuntimeModule {
 	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
 		return XImportSectionTestLangJvmModelInferrer.class;
 	}

@@ -335,17 +335,11 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	 *     ImportSectionTestLanguageRoot returns ImportSectionTestLanguageRoot
 	 *
 	 * Constraint:
-	 *     importSection=XImportSection
+	 *     (importSection=XImportSection expression=XExpression?)
 	 * </pre>
 	 */
 	protected void sequence_ImportSectionTestLanguageRoot(ISerializationContext context, ImportSectionTestLanguageRoot semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, XImportSectionTestLangPackage.Literals.IMPORT_SECTION_TEST_LANGUAGE_ROOT__IMPORT_SECTION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XImportSectionTestLangPackage.Literals.IMPORT_SECTION_TEST_LANGUAGE_ROOT__IMPORT_SECTION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionXImportSectionParserRuleCall_2_0(), semanticObject.getImportSection());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

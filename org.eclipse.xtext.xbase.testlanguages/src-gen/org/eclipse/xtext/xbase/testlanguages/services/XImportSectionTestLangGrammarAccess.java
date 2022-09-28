@@ -34,14 +34,19 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 		private final Keyword cTokenKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cImportSectionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cImportSectionXImportSectionParserRuleCall_2_0 = (RuleCall)cImportSectionAssignment_2.eContents().get(0);
+		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cExpressionXExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//ImportSectionTestLanguageRoot:
 		//    'some' 'token'
-		//    importSection=XImportSection;
+		//    importSection=XImportSection
+		//    expression=XExpression?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'some' 'token'
 		//importSection=XImportSection
+		//expression=XExpression?
 		public Group getGroup() { return cGroup; }
 		
 		//'some'
@@ -55,6 +60,12 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 		
 		//XImportSection
 		public RuleCall getImportSectionXImportSectionParserRuleCall_2_0() { return cImportSectionXImportSectionParserRuleCall_2_0; }
+		
+		//expression=XExpression?
+		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
+		
+		//XExpression
+		public RuleCall getExpressionXExpressionParserRuleCall_3_0() { return cExpressionXExpressionParserRuleCall_3_0; }
 	}
 	
 	
@@ -109,7 +120,9 @@ public class XImportSectionTestLangGrammarAccess extends AbstractElementFinder.A
 	
 	//ImportSectionTestLanguageRoot:
 	//    'some' 'token'
-	//    importSection=XImportSection;
+	//    importSection=XImportSection
+	//    expression=XExpression?
+	//;
 	public ImportSectionTestLanguageRootElements getImportSectionTestLanguageRootAccess() {
 		return pImportSectionTestLanguageRoot;
 	}

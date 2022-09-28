@@ -23,7 +23,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
-import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
@@ -51,9 +50,10 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
-import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
 import org.eclipse.xtext.xbase.parser.LookAheadPreservingNodeModelBuilder;
+import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
+import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionManager;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
@@ -129,7 +129,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public Class<? extends XtextResource> bindXtextResource() {
 		return BatchLinkableResource.class;
 	}
-
+	
 	@SingletonBinding(eager = true)
 	public Class<? extends JvmTypeReferencesValidator> bindJvmTypeReferencesValidator() {
 		return JvmTypeReferencesValidator.class;
@@ -150,7 +150,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	}
 
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescription$Manager() {
-		return DerivedStateAwareResourceDescriptionManager.class;
+		return XbaseResourceDescriptionManager.class;
 	}
 
 	public Class<? extends IGenerator> bindIGenerator() {
@@ -172,7 +172,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return XbaseResourceDescriptionStrategy.class;
 	}
-
+	
 	public Class<? extends SeverityConverter> bindSeverityConverter() {
 		return XbaseSeverityConverter.class;
 	}

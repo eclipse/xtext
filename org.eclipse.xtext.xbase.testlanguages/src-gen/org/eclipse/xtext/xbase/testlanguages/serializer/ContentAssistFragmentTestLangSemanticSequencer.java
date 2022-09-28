@@ -62,6 +62,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLangPackage;
 import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot;
+import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.Entity;
 import org.eclipse.xtext.xbase.testlanguages.services.ContentAssistFragmentTestLangGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -84,6 +85,9 @@ public class ContentAssistFragmentTestLangSemanticSequencer extends XbaseSemanti
 			switch (semanticObject.eClass().getClassifierID()) {
 			case ContentAssistFragmentTestLangPackage.CONTENT_ASSIST_FRAGMENT_TEST_LANGUAGE_ROOT:
 				sequence_ContentAssistFragmentTestLanguageRoot(context, (ContentAssistFragmentTestLanguageRoot) semanticObject); 
+				return; 
+			case ContentAssistFragmentTestLangPackage.ENTITY:
+				sequence_Entity(context, (Entity) semanticObject); 
 				return; 
 			}
 		else if (epackage == TypesPackage.eINSTANCE)
@@ -335,17 +339,25 @@ public class ContentAssistFragmentTestLangSemanticSequencer extends XbaseSemanti
 	 *     ContentAssistFragmentTestLanguageRoot returns ContentAssistFragmentTestLanguageRoot
 	 *
 	 * Constraint:
-	 *     expression=XExpression
+	 *     (expression=XExpression entities+=Entity*)
 	 * </pre>
 	 */
 	protected void sequence_ContentAssistFragmentTestLanguageRoot(ISerializationContext context, ContentAssistFragmentTestLanguageRoot semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ContentAssistFragmentTestLangPackage.Literals.CONTENT_ASSIST_FRAGMENT_TEST_LANGUAGE_ROOT__EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistFragmentTestLangPackage.Literals.CONTENT_ASSIST_FRAGMENT_TEST_LANGUAGE_ROOT__EXPRESSION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getContentAssistFragmentTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_0(), semanticObject.getExpression());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Entity returns Entity
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName extends=[Entity|QualifiedName]?)
+	 * </pre>
+	 */
+	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

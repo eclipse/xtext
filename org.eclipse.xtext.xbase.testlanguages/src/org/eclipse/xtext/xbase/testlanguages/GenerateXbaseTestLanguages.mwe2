@@ -5,6 +5,8 @@ import org.eclipse.xtext.xtext.generator.*
 
 var rootPath = ".."
 var generateEclipse = true
+var eclipsePath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.testlanguages.ui"
+var uiTestPath = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.ui.tests"
 
 var fileHeader = "/*******************************************************************************
  * Copyright (c) 2011, \${year} itemis AG (http://www.itemis.eu) and others.
@@ -38,12 +40,12 @@ Workflow {
 				
 				eclipsePlugin = {
 					enabled = generateEclipse
-					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.testlanguages.ui"
+					root = eclipsePath
 				}
 				
 				eclipsePluginTest= {
 					enabled = generateEclipse
-					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.xbase.ui.tests"
+					root = uiTestPath
 				}
 				
 				createEclipseMetaData = true

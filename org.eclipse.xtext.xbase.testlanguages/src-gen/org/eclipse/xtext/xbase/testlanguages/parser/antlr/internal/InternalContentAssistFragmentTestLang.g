@@ -82,22 +82,43 @@ ruleContentAssistFragmentTestLanguageRoot returns [EObject current=null]
 }:
 	(
 		(
-			{
-				newCompositeNode(grammarAccess.getContentAssistFragmentTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_0());
-			}
-			lv_expression_0_0=ruleXExpression
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getContentAssistFragmentTestLanguageRootRule());
+			(
+				{
+					newCompositeNode(grammarAccess.getContentAssistFragmentTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_0_0());
 				}
-				set(
-					$current,
-					"expression",
-					lv_expression_0_0,
-					"org.eclipse.xtext.xbase.Xbase.XExpression");
-				afterParserOrEnumRuleCall();
-			}
+				lv_expression_0_0=ruleXExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getContentAssistFragmentTestLanguageRootRule());
+					}
+					set(
+						$current,
+						"expression",
+						lv_expression_0_0,
+						"org.eclipse.xtext.xbase.Xbase.XExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getContentAssistFragmentTestLanguageRootAccess().getEntitiesEntityParserRuleCall_1_0());
+				}
+				lv_entities_1_0=ruleEntity
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getContentAssistFragmentTestLanguageRootRule());
+					}
+					add(
+						$current,
+						"entities",
+						lv_entities_1_0,
+						"org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang.Entity");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
 	)
 ;
 
@@ -242,6 +263,70 @@ ruleXVariableDeclaration returns [EObject current=null]
 							"right",
 							lv_right_7_0,
 							"org.eclipse.xtext.xbase.Xbase.XExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleEntity
+entryRuleEntity returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEntityRule()); }
+	iv_ruleEntity=ruleEntity
+	{ $current=$iv_ruleEntity.current; }
+	EOF;
+
+// Rule Entity
+ruleEntity returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='entity'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEntityAccess().getEntityKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEntityAccess().getNameQualifiedNameParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleQualifiedName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEntityRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.xbase.Xbase.QualifiedName");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_2='extends'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getEntityAccess().getExtendsKeyword_2_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getEntityRule());
+						}
+					}
+					{
+						newCompositeNode(grammarAccess.getEntityAccess().getExtendsEntityCrossReference_2_1_0());
+					}
+					ruleQualifiedName
+					{
 						afterParserOrEnumRuleCall();
 					}
 				)

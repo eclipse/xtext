@@ -81,13 +81,22 @@ public interface XImportSectionTestLangPackage extends EPackage
   int IMPORT_SECTION_TEST_LANGUAGE_ROOT__IMPORT_SECTION = 0;
 
   /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPORT_SECTION_TEST_LANGUAGE_ROOT__EXPRESSION = 1;
+
+  /**
    * The number of structural features of the '<em>Import Section Test Language Root</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT_SECTION_TEST_LANGUAGE_ROOT_FEATURE_COUNT = 1;
+  int IMPORT_SECTION_TEST_LANGUAGE_ROOT_FEATURE_COUNT = 2;
 
 
   /**
@@ -110,6 +119,17 @@ public interface XImportSectionTestLangPackage extends EPackage
    * @generated
    */
   EReference getImportSectionTestLanguageRoot_ImportSection();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getExpression()
+   * @see #getImportSectionTestLanguageRoot()
+   * @generated
+   */
+  EReference getImportSectionTestLanguageRoot_Expression();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -151,6 +171,14 @@ public interface XImportSectionTestLangPackage extends EPackage
      * @generated
      */
     EReference IMPORT_SECTION_TEST_LANGUAGE_ROOT__IMPORT_SECTION = eINSTANCE.getImportSectionTestLanguageRoot_ImportSection();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IMPORT_SECTION_TEST_LANGUAGE_ROOT__EXPRESSION = eINSTANCE.getImportSectionTestLanguageRoot_Expression();
 
   }
 

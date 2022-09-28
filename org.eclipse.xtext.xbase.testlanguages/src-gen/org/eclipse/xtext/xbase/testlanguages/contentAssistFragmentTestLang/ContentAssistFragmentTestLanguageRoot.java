@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.xbase.XExpression;
@@ -22,6 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot#getEntities <em>Entities</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLangPackage#getContentAssistFragmentTestLanguageRoot()
@@ -51,5 +54,17 @@ public interface ContentAssistFragmentTestLanguageRoot extends EObject
    * @generated
    */
   void setExpression(XExpression value);
+
+  /**
+   * Returns the value of the '<em><b>Entities</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.Entity}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Entities</em>' containment reference list.
+   * @see org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLangPackage#getContentAssistFragmentTestLanguageRoot_Entities()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Entity> getEntities();
 
 } // ContentAssistFragmentTestLanguageRoot

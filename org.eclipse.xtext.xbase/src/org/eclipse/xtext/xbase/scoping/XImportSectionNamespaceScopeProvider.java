@@ -78,15 +78,16 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
-		if (context.eResource() == null)
+		Resource resource = context.eResource();
+		if (resource == null)
 			throw new IllegalArgumentException("context must be contained in a resource");
-		IScope globalScope = getGlobalScope(context.eResource(), reference);
+		IScope globalScope = getGlobalScope(resource, reference);
 		return internalGetScope(globalScope, globalScope, context, reference);
 	}
 	
 	@Override
-	protected IScope getGlobalScope(final Resource context, final EReference reference) {
-		IScope globalScope = super.getGlobalScope(context, reference, null);
+	protected IScope getGlobalScope(Resource context, EReference reference) {
+		IScope globalScope = getGlobalScope(context, reference, null);
 		return SelectableBasedScope.createScope(globalScope, getAllDescriptions(context), reference.getEReferenceType(), isIgnoreCase(reference));
 	}
 	

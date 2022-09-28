@@ -71,6 +71,7 @@ public class ContentAssistFragmentTestLangFactoryImpl extends EFactoryImpl imple
     switch (eClass.getClassifierID())
     {
       case ContentAssistFragmentTestLangPackage.CONTENT_ASSIST_FRAGMENT_TEST_LANGUAGE_ROOT: return createContentAssistFragmentTestLanguageRoot();
+      case ContentAssistFragmentTestLangPackage.ENTITY: return createEntity();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -86,6 +87,18 @@ public class ContentAssistFragmentTestLangFactoryImpl extends EFactoryImpl imple
   {
     ContentAssistFragmentTestLanguageRootImpl contentAssistFragmentTestLanguageRoot = new ContentAssistFragmentTestLanguageRootImpl();
     return contentAssistFragmentTestLanguageRoot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Entity createEntity()
+  {
+    EntityImpl entity = new EntityImpl();
+    return entity;
   }
 
   /**

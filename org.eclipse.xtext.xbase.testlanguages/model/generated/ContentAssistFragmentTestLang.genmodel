@@ -10,6 +10,11 @@
       ecorePackage="ContentAssistFragmentTestLang.ecore#/">
     <genClasses ecoreClass="ContentAssistFragmentTestLang.ecore#//ContentAssistFragmentTestLanguageRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistFragmentTestLang.ecore#//ContentAssistFragmentTestLanguageRoot/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContentAssistFragmentTestLang.ecore#//ContentAssistFragmentTestLanguageRoot/entities"/>
+    </genClasses>
+    <genClasses ecoreClass="ContentAssistFragmentTestLang.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContentAssistFragmentTestLang.ecore#//Entity/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContentAssistFragmentTestLang.ecore#//Entity/extends"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

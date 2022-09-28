@@ -96,6 +96,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
     public static final int T__42=42;
     public static final int T__86=86;
     public static final int T__43=43;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -903,10 +904,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:49:7: ( 'instanceof' )
-            // InternalContentAssistFragmentTestLang.g:49:9: 'instanceof'
+            // InternalContentAssistFragmentTestLang.g:49:7: ( 'entity' )
+            // InternalContentAssistFragmentTestLang.g:49:9: 'entity'
             {
-            match("instanceof"); 
+            match("entity"); 
 
 
             }
@@ -924,10 +925,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:50:7: ( 'as' )
-            // InternalContentAssistFragmentTestLang.g:50:9: 'as'
+            // InternalContentAssistFragmentTestLang.g:50:7: ( 'instanceof' )
+            // InternalContentAssistFragmentTestLang.g:50:9: 'instanceof'
             {
-            match("as"); 
+            match("instanceof"); 
 
 
             }
@@ -945,10 +946,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:51:7: ( ',' )
-            // InternalContentAssistFragmentTestLang.g:51:9: ','
+            // InternalContentAssistFragmentTestLang.g:51:7: ( 'as' )
+            // InternalContentAssistFragmentTestLang.g:51:9: 'as'
             {
-            match(','); 
+            match("as"); 
+
 
             }
 
@@ -965,10 +967,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:52:7: ( ')' )
-            // InternalContentAssistFragmentTestLang.g:52:9: ')'
+            // InternalContentAssistFragmentTestLang.g:52:7: ( ',' )
+            // InternalContentAssistFragmentTestLang.g:52:9: ','
             {
-            match(')'); 
+            match(','); 
 
             }
 
@@ -985,10 +987,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:53:7: ( '#' )
-            // InternalContentAssistFragmentTestLang.g:53:9: '#'
+            // InternalContentAssistFragmentTestLang.g:53:7: ( ')' )
+            // InternalContentAssistFragmentTestLang.g:53:9: ')'
             {
-            match('#'); 
+            match(')'); 
 
             }
 
@@ -1005,10 +1007,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:54:7: ( '{' )
-            // InternalContentAssistFragmentTestLang.g:54:9: '{'
+            // InternalContentAssistFragmentTestLang.g:54:7: ( '#' )
+            // InternalContentAssistFragmentTestLang.g:54:9: '#'
             {
-            match('{'); 
+            match('#'); 
 
             }
 
@@ -1025,10 +1027,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:55:7: ( '}' )
-            // InternalContentAssistFragmentTestLang.g:55:9: '}'
+            // InternalContentAssistFragmentTestLang.g:55:7: ( '{' )
+            // InternalContentAssistFragmentTestLang.g:55:9: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -1045,10 +1047,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:56:7: ( '[' )
-            // InternalContentAssistFragmentTestLang.g:56:9: '['
+            // InternalContentAssistFragmentTestLang.g:56:7: ( '}' )
+            // InternalContentAssistFragmentTestLang.g:56:9: '}'
             {
-            match('['); 
+            match('}'); 
 
             }
 
@@ -1065,10 +1067,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:57:7: ( ']' )
-            // InternalContentAssistFragmentTestLang.g:57:9: ']'
+            // InternalContentAssistFragmentTestLang.g:57:7: ( '[' )
+            // InternalContentAssistFragmentTestLang.g:57:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -1085,10 +1087,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:58:7: ( ';' )
-            // InternalContentAssistFragmentTestLang.g:58:9: ';'
+            // InternalContentAssistFragmentTestLang.g:58:7: ( ']' )
+            // InternalContentAssistFragmentTestLang.g:58:9: ']'
             {
-            match(';'); 
+            match(']'); 
 
             }
 
@@ -1105,10 +1107,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:59:7: ( '(' )
-            // InternalContentAssistFragmentTestLang.g:59:9: '('
+            // InternalContentAssistFragmentTestLang.g:59:7: ( ';' )
+            // InternalContentAssistFragmentTestLang.g:59:9: ';'
             {
-            match('('); 
+            match(';'); 
 
             }
 
@@ -1125,11 +1127,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:60:7: ( 'if' )
-            // InternalContentAssistFragmentTestLang.g:60:9: 'if'
+            // InternalContentAssistFragmentTestLang.g:60:7: ( '(' )
+            // InternalContentAssistFragmentTestLang.g:60:9: '('
             {
-            match("if"); 
-
+            match('('); 
 
             }
 
@@ -1146,10 +1147,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:61:7: ( 'else' )
-            // InternalContentAssistFragmentTestLang.g:61:9: 'else'
+            // InternalContentAssistFragmentTestLang.g:61:7: ( 'if' )
+            // InternalContentAssistFragmentTestLang.g:61:9: 'if'
             {
-            match("else"); 
+            match("if"); 
 
 
             }
@@ -1167,10 +1168,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:62:7: ( 'switch' )
-            // InternalContentAssistFragmentTestLang.g:62:9: 'switch'
+            // InternalContentAssistFragmentTestLang.g:62:7: ( 'else' )
+            // InternalContentAssistFragmentTestLang.g:62:9: 'else'
             {
-            match("switch"); 
+            match("else"); 
 
 
             }
@@ -1188,10 +1189,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:63:7: ( ':' )
-            // InternalContentAssistFragmentTestLang.g:63:9: ':'
+            // InternalContentAssistFragmentTestLang.g:63:7: ( 'switch' )
+            // InternalContentAssistFragmentTestLang.g:63:9: 'switch'
             {
-            match(':'); 
+            match("switch"); 
+
 
             }
 
@@ -1208,11 +1210,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:64:7: ( 'default' )
-            // InternalContentAssistFragmentTestLang.g:64:9: 'default'
+            // InternalContentAssistFragmentTestLang.g:64:7: ( ':' )
+            // InternalContentAssistFragmentTestLang.g:64:9: ':'
             {
-            match("default"); 
-
+            match(':'); 
 
             }
 
@@ -1229,10 +1230,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:65:7: ( 'case' )
-            // InternalContentAssistFragmentTestLang.g:65:9: 'case'
+            // InternalContentAssistFragmentTestLang.g:65:7: ( 'default' )
+            // InternalContentAssistFragmentTestLang.g:65:9: 'default'
             {
-            match("case"); 
+            match("default"); 
 
 
             }
@@ -1250,10 +1251,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:66:7: ( 'for' )
-            // InternalContentAssistFragmentTestLang.g:66:9: 'for'
+            // InternalContentAssistFragmentTestLang.g:66:7: ( 'case' )
+            // InternalContentAssistFragmentTestLang.g:66:9: 'case'
             {
-            match("for"); 
+            match("case"); 
 
 
             }
@@ -1271,10 +1272,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:67:7: ( 'while' )
-            // InternalContentAssistFragmentTestLang.g:67:9: 'while'
+            // InternalContentAssistFragmentTestLang.g:67:7: ( 'for' )
+            // InternalContentAssistFragmentTestLang.g:67:9: 'for'
             {
-            match("while"); 
+            match("for"); 
 
 
             }
@@ -1292,10 +1293,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:68:7: ( 'do' )
-            // InternalContentAssistFragmentTestLang.g:68:9: 'do'
+            // InternalContentAssistFragmentTestLang.g:68:7: ( 'while' )
+            // InternalContentAssistFragmentTestLang.g:68:9: 'while'
             {
-            match("do"); 
+            match("while"); 
 
 
             }
@@ -1313,10 +1314,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:69:7: ( 'new' )
-            // InternalContentAssistFragmentTestLang.g:69:9: 'new'
+            // InternalContentAssistFragmentTestLang.g:69:7: ( 'do' )
+            // InternalContentAssistFragmentTestLang.g:69:9: 'do'
             {
-            match("new"); 
+            match("do"); 
 
 
             }
@@ -1334,10 +1335,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:70:7: ( 'null' )
-            // InternalContentAssistFragmentTestLang.g:70:9: 'null'
+            // InternalContentAssistFragmentTestLang.g:70:7: ( 'new' )
+            // InternalContentAssistFragmentTestLang.g:70:9: 'new'
             {
-            match("null"); 
+            match("new"); 
 
 
             }
@@ -1355,10 +1356,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:71:7: ( 'typeof' )
-            // InternalContentAssistFragmentTestLang.g:71:9: 'typeof'
+            // InternalContentAssistFragmentTestLang.g:71:7: ( 'null' )
+            // InternalContentAssistFragmentTestLang.g:71:9: 'null'
             {
-            match("typeof"); 
+            match("null"); 
 
 
             }
@@ -1376,10 +1377,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:72:7: ( 'throw' )
-            // InternalContentAssistFragmentTestLang.g:72:9: 'throw'
+            // InternalContentAssistFragmentTestLang.g:72:7: ( 'typeof' )
+            // InternalContentAssistFragmentTestLang.g:72:9: 'typeof'
             {
-            match("throw"); 
+            match("typeof"); 
 
 
             }
@@ -1397,10 +1398,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:73:7: ( 'return' )
-            // InternalContentAssistFragmentTestLang.g:73:9: 'return'
+            // InternalContentAssistFragmentTestLang.g:73:7: ( 'throw' )
+            // InternalContentAssistFragmentTestLang.g:73:9: 'throw'
             {
-            match("return"); 
+            match("throw"); 
 
 
             }
@@ -1418,10 +1419,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:74:7: ( 'try' )
-            // InternalContentAssistFragmentTestLang.g:74:9: 'try'
+            // InternalContentAssistFragmentTestLang.g:74:7: ( 'return' )
+            // InternalContentAssistFragmentTestLang.g:74:9: 'return'
             {
-            match("try"); 
+            match("return"); 
 
 
             }
@@ -1439,10 +1440,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:75:7: ( 'finally' )
-            // InternalContentAssistFragmentTestLang.g:75:9: 'finally'
+            // InternalContentAssistFragmentTestLang.g:75:7: ( 'try' )
+            // InternalContentAssistFragmentTestLang.g:75:9: 'try'
             {
-            match("finally"); 
+            match("try"); 
 
 
             }
@@ -1460,10 +1461,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:76:7: ( 'synchronized' )
-            // InternalContentAssistFragmentTestLang.g:76:9: 'synchronized'
+            // InternalContentAssistFragmentTestLang.g:76:7: ( 'finally' )
+            // InternalContentAssistFragmentTestLang.g:76:9: 'finally'
             {
-            match("synchronized"); 
+            match("finally"); 
 
 
             }
@@ -1481,10 +1482,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:77:7: ( 'catch' )
-            // InternalContentAssistFragmentTestLang.g:77:9: 'catch'
+            // InternalContentAssistFragmentTestLang.g:77:7: ( 'synchronized' )
+            // InternalContentAssistFragmentTestLang.g:77:9: 'synchronized'
             {
-            match("catch"); 
+            match("synchronized"); 
 
 
             }
@@ -1502,10 +1503,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:78:7: ( '?' )
-            // InternalContentAssistFragmentTestLang.g:78:9: '?'
+            // InternalContentAssistFragmentTestLang.g:78:7: ( 'catch' )
+            // InternalContentAssistFragmentTestLang.g:78:9: 'catch'
             {
-            match('?'); 
+            match("catch"); 
+
 
             }
 
@@ -1522,10 +1524,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:79:7: ( '&' )
-            // InternalContentAssistFragmentTestLang.g:79:9: '&'
+            // InternalContentAssistFragmentTestLang.g:79:7: ( '?' )
+            // InternalContentAssistFragmentTestLang.g:79:9: '?'
             {
-            match('&'); 
+            match('?'); 
 
             }
 
@@ -1542,11 +1544,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:80:7: ( 'var' )
-            // InternalContentAssistFragmentTestLang.g:80:9: 'var'
+            // InternalContentAssistFragmentTestLang.g:80:7: ( '&' )
+            // InternalContentAssistFragmentTestLang.g:80:9: '&'
             {
-            match("var"); 
-
+            match('&'); 
 
             }
 
@@ -1563,10 +1564,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:81:7: ( '::' )
-            // InternalContentAssistFragmentTestLang.g:81:9: '::'
+            // InternalContentAssistFragmentTestLang.g:81:7: ( 'var' )
+            // InternalContentAssistFragmentTestLang.g:81:9: 'var'
             {
-            match("::"); 
+            match("var"); 
 
 
             }
@@ -1584,10 +1585,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:82:7: ( '?.' )
-            // InternalContentAssistFragmentTestLang.g:82:9: '?.'
+            // InternalContentAssistFragmentTestLang.g:82:7: ( '::' )
+            // InternalContentAssistFragmentTestLang.g:82:9: '::'
             {
-            match("?."); 
+            match("::"); 
 
 
             }
@@ -1605,10 +1606,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:83:7: ( '|' )
-            // InternalContentAssistFragmentTestLang.g:83:9: '|'
+            // InternalContentAssistFragmentTestLang.g:83:7: ( '?.' )
+            // InternalContentAssistFragmentTestLang.g:83:9: '?.'
             {
-            match('|'); 
+            match("?."); 
+
 
             }
 
@@ -1625,8 +1627,28 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:84:7: ( 'true' )
-            // InternalContentAssistFragmentTestLang.g:84:9: 'true'
+            // InternalContentAssistFragmentTestLang.g:84:7: ( '|' )
+            // InternalContentAssistFragmentTestLang.g:84:9: '|'
+            {
+            match('|'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__86"
+
+    // $ANTLR start "T__87"
+    public final void mT__87() throws RecognitionException {
+        try {
+            int _type = T__87;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalContentAssistFragmentTestLang.g:85:7: ( 'true' )
+            // InternalContentAssistFragmentTestLang.g:85:9: 'true'
             {
             match("true"); 
 
@@ -1639,17 +1661,17 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__86"
+    // $ANTLR end "T__87"
 
     // $ANTLR start "RULE_HEX"
     public final void mRULE_HEX() throws RecognitionException {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16945:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalContentAssistFragmentTestLang.g:16945:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalContentAssistFragmentTestLang.g:17208:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalContentAssistFragmentTestLang.g:17208:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalContentAssistFragmentTestLang.g:16945:12: ( '0x' | '0X' )
+            // InternalContentAssistFragmentTestLang.g:17208:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1677,7 +1699,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16945:13: '0x'
+                    // InternalContentAssistFragmentTestLang.g:17208:13: '0x'
                     {
                     match("0x"); 
 
@@ -1685,7 +1707,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:16945:18: '0X'
+                    // InternalContentAssistFragmentTestLang.g:17208:18: '0X'
                     {
                     match("0X"); 
 
@@ -1695,7 +1717,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:16945:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalContentAssistFragmentTestLang.g:17208:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1733,7 +1755,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalContentAssistFragmentTestLang.g:16945:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalContentAssistFragmentTestLang.g:17208:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1742,10 +1764,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16945:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalContentAssistFragmentTestLang.g:17208:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalContentAssistFragmentTestLang.g:16945:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalContentAssistFragmentTestLang.g:17208:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1763,7 +1785,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:16945:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalContentAssistFragmentTestLang.g:17208:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1787,7 +1809,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalContentAssistFragmentTestLang.g:16945:84: ( 'l' | 'L' )
+                            // InternalContentAssistFragmentTestLang.g:17208:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1826,11 +1848,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16947:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalContentAssistFragmentTestLang.g:16947:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalContentAssistFragmentTestLang.g:17210:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalContentAssistFragmentTestLang.g:17210:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalContentAssistFragmentTestLang.g:16947:21: ( '0' .. '9' | '_' )*
+            // InternalContentAssistFragmentTestLang.g:17210:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1879,11 +1901,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16949:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalContentAssistFragmentTestLang.g:16949:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalContentAssistFragmentTestLang.g:17212:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalContentAssistFragmentTestLang.g:17212:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalContentAssistFragmentTestLang.g:16949:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalContentAssistFragmentTestLang.g:17212:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1892,7 +1914,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16949:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalContentAssistFragmentTestLang.g:17212:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1903,7 +1925,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalContentAssistFragmentTestLang.g:16949:36: ( '+' | '-' )?
+                    // InternalContentAssistFragmentTestLang.g:17212:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1936,7 +1958,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
             }
 
-            // InternalContentAssistFragmentTestLang.g:16949:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalContentAssistFragmentTestLang.g:17212:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1948,7 +1970,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16949:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalContentAssistFragmentTestLang.g:17212:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1972,7 +1994,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:16949:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalContentAssistFragmentTestLang.g:17212:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2005,10 +2027,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16951:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalContentAssistFragmentTestLang.g:16951:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalContentAssistFragmentTestLang.g:17214:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalContentAssistFragmentTestLang.g:17214:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalContentAssistFragmentTestLang.g:16951:11: ( '^' )?
+            // InternalContentAssistFragmentTestLang.g:17214:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2017,7 +2039,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16951:11: '^'
+                    // InternalContentAssistFragmentTestLang.g:17214:11: '^'
                     {
                     match('^'); 
 
@@ -2035,7 +2057,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalContentAssistFragmentTestLang.g:16951:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalContentAssistFragmentTestLang.g:17214:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2084,10 +2106,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16953:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalContentAssistFragmentTestLang.g:16953:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalContentAssistFragmentTestLang.g:17216:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalContentAssistFragmentTestLang.g:17216:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalContentAssistFragmentTestLang.g:16953:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalContentAssistFragmentTestLang.g:17216:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2105,10 +2127,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16953:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalContentAssistFragmentTestLang.g:17216:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalContentAssistFragmentTestLang.g:16953:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:17216:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2124,7 +2146,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:16953:21: '\\\\' .
+                    	    // InternalContentAssistFragmentTestLang.g:17216:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2132,7 +2154,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContentAssistFragmentTestLang.g:16953:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalContentAssistFragmentTestLang.g:17216:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2152,7 +2174,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalContentAssistFragmentTestLang.g:16953:44: ( '\"' )?
+                    // InternalContentAssistFragmentTestLang.g:17216:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2161,7 +2183,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:16953:44: '\"'
+                            // InternalContentAssistFragmentTestLang.g:17216:44: '\"'
                             {
                             match('\"'); 
 
@@ -2174,10 +2196,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContentAssistFragmentTestLang.g:16953:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalContentAssistFragmentTestLang.g:17216:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalContentAssistFragmentTestLang.g:16953:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalContentAssistFragmentTestLang.g:17216:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2193,7 +2215,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalContentAssistFragmentTestLang.g:16953:55: '\\\\' .
+                    	    // InternalContentAssistFragmentTestLang.g:17216:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2201,7 +2223,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContentAssistFragmentTestLang.g:16953:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalContentAssistFragmentTestLang.g:17216:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2221,7 +2243,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalContentAssistFragmentTestLang.g:16953:79: ( '\\'' )?
+                    // InternalContentAssistFragmentTestLang.g:17216:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2230,7 +2252,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:16953:79: '\\''
+                            // InternalContentAssistFragmentTestLang.g:17216:79: '\\''
                             {
                             match('\''); 
 
@@ -2261,12 +2283,12 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16955:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalContentAssistFragmentTestLang.g:16955:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalContentAssistFragmentTestLang.g:17218:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalContentAssistFragmentTestLang.g:17218:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalContentAssistFragmentTestLang.g:16955:24: ( options {greedy=false; } : . )*
+            // InternalContentAssistFragmentTestLang.g:17218:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2291,7 +2313,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:16955:52: .
+            	    // InternalContentAssistFragmentTestLang.g:17218:52: .
             	    {
             	    matchAny(); 
 
@@ -2321,12 +2343,12 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16957:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalContentAssistFragmentTestLang.g:16957:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalContentAssistFragmentTestLang.g:17220:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalContentAssistFragmentTestLang.g:17220:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalContentAssistFragmentTestLang.g:16957:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalContentAssistFragmentTestLang.g:17220:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2339,7 +2361,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalContentAssistFragmentTestLang.g:16957:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalContentAssistFragmentTestLang.g:17220:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2359,7 +2381,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalContentAssistFragmentTestLang.g:16957:40: ( ( '\\r' )? '\\n' )?
+            // InternalContentAssistFragmentTestLang.g:17220:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2368,9 +2390,9 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalContentAssistFragmentTestLang.g:16957:41: ( '\\r' )? '\\n'
+                    // InternalContentAssistFragmentTestLang.g:17220:41: ( '\\r' )? '\\n'
                     {
-                    // InternalContentAssistFragmentTestLang.g:16957:41: ( '\\r' )?
+                    // InternalContentAssistFragmentTestLang.g:17220:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2379,7 +2401,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalContentAssistFragmentTestLang.g:16957:41: '\\r'
+                            // InternalContentAssistFragmentTestLang.g:17220:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2411,10 +2433,10 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16959:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalContentAssistFragmentTestLang.g:16959:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContentAssistFragmentTestLang.g:17222:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalContentAssistFragmentTestLang.g:17222:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalContentAssistFragmentTestLang.g:16959:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContentAssistFragmentTestLang.g:17222:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2468,8 +2490,8 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContentAssistFragmentTestLang.g:16961:16: ( . )
-            // InternalContentAssistFragmentTestLang.g:16961:18: .
+            // InternalContentAssistFragmentTestLang.g:17224:16: ( . )
+            // InternalContentAssistFragmentTestLang.g:17224:18: .
             {
             matchAny(); 
 
@@ -2484,8 +2506,8 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalContentAssistFragmentTestLang.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt21=83;
+        // InternalContentAssistFragmentTestLang.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt21=84;
         alt21 = dfa21.predict(input);
         switch (alt21) {
             case 1 :
@@ -3007,63 +3029,70 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
                 }
                 break;
             case 75 :
-                // InternalContentAssistFragmentTestLang.g:1:454: RULE_HEX
+                // InternalContentAssistFragmentTestLang.g:1:454: T__87
+                {
+                mT__87(); 
+
+                }
+                break;
+            case 76 :
+                // InternalContentAssistFragmentTestLang.g:1:460: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
-            case 76 :
-                // InternalContentAssistFragmentTestLang.g:1:463: RULE_INT
+            case 77 :
+                // InternalContentAssistFragmentTestLang.g:1:469: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 77 :
-                // InternalContentAssistFragmentTestLang.g:1:472: RULE_DECIMAL
+            case 78 :
+                // InternalContentAssistFragmentTestLang.g:1:478: RULE_DECIMAL
                 {
                 mRULE_DECIMAL(); 
 
                 }
                 break;
-            case 78 :
-                // InternalContentAssistFragmentTestLang.g:1:485: RULE_ID
+            case 79 :
+                // InternalContentAssistFragmentTestLang.g:1:491: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 79 :
-                // InternalContentAssistFragmentTestLang.g:1:493: RULE_STRING
+            case 80 :
+                // InternalContentAssistFragmentTestLang.g:1:499: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 80 :
-                // InternalContentAssistFragmentTestLang.g:1:505: RULE_ML_COMMENT
+            case 81 :
+                // InternalContentAssistFragmentTestLang.g:1:511: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 81 :
-                // InternalContentAssistFragmentTestLang.g:1:521: RULE_SL_COMMENT
+            case 82 :
+                // InternalContentAssistFragmentTestLang.g:1:527: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 82 :
-                // InternalContentAssistFragmentTestLang.g:1:537: RULE_WS
+            case 83 :
+                // InternalContentAssistFragmentTestLang.g:1:543: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 83 :
-                // InternalContentAssistFragmentTestLang.g:1:545: RULE_ANY_OTHER
+            case 84 :
+                // InternalContentAssistFragmentTestLang.g:1:551: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -3077,17 +3106,17 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
 
     protected DFA21 dfa21 = new DFA21(this);
     static final String DFA21_eotS =
-        "\1\uffff\1\56\1\60\1\62\1\64\1\67\1\73\1\76\1\102\1\104\1\106\1\110\1\112\1\114\1\117\5\64\11\uffff\1\147\6\64\2\164\1\53\5\uffff\1\171\6\uffff\1\64\21\uffff\1\175\5\uffff\1\177\4\uffff\10\64\1\u0088\3\64\1\u008c\13\uffff\1\64\1\u008e\10\64\1\uffff\1\164\6\uffff\1\u0099\1\u009a\4\uffff\10\64\1\uffff\1\64\1\u00a4\1\64\1\uffff\1\64\1\uffff\3\64\1\u00aa\3\64\1\u00ae\2\64\2\uffff\1\64\1\u00b2\7\64\1\uffff\2\64\1\u00bc\2\64\1\uffff\1\u00bf\2\64\1\uffff\1\u00c2\2\64\1\uffff\1\64\1\u00c7\4\64\1\u00cc\2\64\1\uffff\1\u00cf\1\u00d0\1\uffff\1\64\1\u00d2\1\uffff\3\64\1\u00d6\1\uffff\1\u00d7\1\64\1\u00d9\1\64\1\uffff\2\64\2\uffff\1\u00dd\1\uffff\1\u00de\1\u00df\1\64\2\uffff\1\64\1\uffff\1\64\1\u00e3\1\u00e4\3\uffff\3\64\2\uffff\1\u00e8\2\64\1\uffff\1\64\1\u00ec\1\64\1\uffff\1\u00ee\1\uffff";
+        "\1\uffff\1\56\1\60\1\62\1\64\1\67\1\73\1\76\1\102\1\104\1\106\1\110\1\112\1\114\1\117\5\64\11\uffff\1\150\6\64\2\165\1\53\5\uffff\1\172\6\uffff\1\64\21\uffff\1\176\5\uffff\1\u0080\4\uffff\11\64\1\u008a\3\64\1\u008e\13\uffff\1\64\1\u0090\10\64\1\uffff\1\165\6\uffff\1\u009b\1\u009c\4\uffff\11\64\1\uffff\1\64\1\u00a7\1\64\1\uffff\1\64\1\uffff\3\64\1\u00ad\3\64\1\u00b1\2\64\2\uffff\2\64\1\u00b6\7\64\1\uffff\2\64\1\u00c0\2\64\1\uffff\1\u00c3\2\64\1\uffff\1\u00c6\3\64\1\uffff\1\64\1\u00cc\4\64\1\u00d1\2\64\1\uffff\1\u00d4\1\u00d5\1\uffff\1\64\1\u00d7\1\uffff\3\64\1\u00db\1\u00dc\1\uffff\1\u00dd\1\64\1\u00df\1\64\1\uffff\2\64\2\uffff\1\u00e3\1\uffff\1\u00e4\1\u00e5\1\64\3\uffff\1\64\1\uffff\1\64\1\u00e9\1\u00ea\3\uffff\3\64\2\uffff\1\u00ee\2\64\1\uffff\1\64\1\u00f2\1\64\1\uffff\1\u00f4\1\uffff";
     static final String DFA21_eofS =
-        "\u00ef\uffff";
+        "\u00f5\uffff";
     static final String DFA21_minS =
-        "\1\0\1\75\1\174\1\46\1\141\1\53\1\55\2\52\3\75\1\76\2\56\1\154\1\164\1\146\1\141\1\163\11\uffff\1\72\1\145\1\141\1\150\1\145\1\150\1\145\2\60\1\44\5\uffff\1\75\6\uffff\1\154\21\uffff\1\75\5\uffff\1\74\4\uffff\1\164\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\44\1\154\1\162\1\156\1\44\13\uffff\1\146\1\44\1\163\1\151\1\167\1\154\1\160\1\162\1\165\1\164\1\uffff\1\60\6\uffff\2\44\4\uffff\2\145\1\164\1\145\1\164\1\143\1\157\1\164\1\uffff\1\163\1\44\1\141\1\uffff\1\141\1\uffff\1\145\1\143\1\154\1\44\1\154\1\145\1\157\1\44\1\145\1\165\2\uffff\1\156\1\44\1\151\1\162\1\143\1\150\1\162\1\141\1\145\1\uffff\1\154\1\165\1\44\1\150\1\145\1\uffff\1\44\1\157\1\167\1\uffff\1\44\1\162\1\144\1\uffff\1\143\1\44\1\150\1\162\1\164\1\156\1\44\2\154\1\uffff\2\44\1\uffff\1\146\1\44\1\uffff\1\156\1\163\1\151\1\44\1\uffff\1\44\1\157\1\44\1\143\1\uffff\1\171\1\164\2\uffff\1\44\1\uffff\2\44\1\157\2\uffff\1\156\1\uffff\1\145\2\44\3\uffff\1\156\1\151\1\157\2\uffff\1\44\1\172\1\146\1\uffff\1\145\1\44\1\144\1\uffff\1\44\1\uffff";
+        "\1\0\1\75\1\174\1\46\1\141\1\53\1\55\2\52\3\75\1\76\2\56\1\154\1\164\1\146\1\141\1\163\11\uffff\1\72\1\145\1\141\1\150\1\145\1\150\1\145\2\60\1\44\5\uffff\1\75\6\uffff\1\154\21\uffff\1\75\5\uffff\1\74\4\uffff\2\164\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\44\1\154\1\162\1\156\1\44\13\uffff\1\146\1\44\1\163\1\151\1\167\1\154\1\160\1\162\1\165\1\164\1\uffff\1\60\6\uffff\2\44\4\uffff\1\145\1\151\1\145\1\164\1\145\1\164\1\143\1\157\1\164\1\uffff\1\163\1\44\1\141\1\uffff\1\141\1\uffff\1\145\1\143\1\154\1\44\1\154\1\145\1\157\1\44\1\145\1\165\2\uffff\1\156\1\164\1\44\1\151\1\162\1\143\1\150\1\162\1\141\1\145\1\uffff\1\154\1\165\1\44\1\150\1\145\1\uffff\1\44\1\157\1\167\1\uffff\1\44\1\162\1\144\1\171\1\uffff\1\143\1\44\1\150\1\162\1\164\1\156\1\44\2\154\1\uffff\2\44\1\uffff\1\146\1\44\1\uffff\1\156\1\163\1\151\2\44\1\uffff\1\44\1\157\1\44\1\143\1\uffff\1\171\1\164\2\uffff\1\44\1\uffff\2\44\1\157\3\uffff\1\156\1\uffff\1\145\2\44\3\uffff\1\156\1\151\1\157\2\uffff\1\44\1\172\1\146\1\uffff\1\145\1\44\1\144\1\uffff\1\44\1\uffff";
     static final String DFA21_maxS =
-        "\1\uffff\1\76\1\174\1\46\1\141\1\75\1\76\5\75\1\76\1\56\1\72\1\170\1\171\1\156\1\157\1\163\11\uffff\1\72\1\157\1\141\1\150\1\165\1\171\1\145\1\170\1\154\1\172\5\uffff\1\75\6\uffff\1\162\21\uffff\1\75\5\uffff\1\74\4\uffff\1\164\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\172\1\154\1\162\1\156\1\172\13\uffff\1\146\1\172\1\164\1\151\1\167\1\154\1\160\1\162\1\171\1\164\1\uffff\1\154\6\uffff\2\172\4\uffff\2\145\1\164\1\145\1\164\1\143\1\157\1\164\1\uffff\1\163\1\172\1\141\1\uffff\1\141\1\uffff\1\145\1\143\1\154\1\172\1\154\1\145\1\157\1\172\1\145\1\165\2\uffff\1\156\1\172\1\151\1\162\1\143\1\150\1\162\1\141\1\145\1\uffff\1\154\1\165\1\172\1\150\1\145\1\uffff\1\172\1\157\1\167\1\uffff\1\172\1\162\1\163\1\uffff\1\143\1\172\1\150\1\162\1\164\1\156\1\172\2\154\1\uffff\2\172\1\uffff\1\146\1\172\1\uffff\1\156\1\163\1\151\1\172\1\uffff\1\172\1\157\1\172\1\143\1\uffff\1\171\1\164\2\uffff\1\172\1\uffff\2\172\1\157\2\uffff\1\156\1\uffff\1\145\2\172\3\uffff\1\156\1\151\1\157\2\uffff\2\172\1\146\1\uffff\1\145\1\172\1\144\1\uffff\1\172\1\uffff";
+        "\1\uffff\1\76\1\174\1\46\1\141\1\75\1\76\5\75\1\76\1\56\1\72\1\170\1\171\1\156\1\157\1\163\11\uffff\1\72\1\157\1\141\1\150\1\165\1\171\1\145\1\170\1\154\1\172\5\uffff\1\75\6\uffff\1\162\21\uffff\1\75\5\uffff\1\74\4\uffff\2\164\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\172\1\154\1\162\1\156\1\172\13\uffff\1\146\1\172\1\164\1\151\1\167\1\154\1\160\1\162\1\171\1\164\1\uffff\1\154\6\uffff\2\172\4\uffff\1\145\1\151\1\145\1\164\1\145\1\164\1\143\1\157\1\164\1\uffff\1\163\1\172\1\141\1\uffff\1\141\1\uffff\1\145\1\143\1\154\1\172\1\154\1\145\1\157\1\172\1\145\1\165\2\uffff\1\156\1\164\1\172\1\151\1\162\1\143\1\150\1\162\1\141\1\145\1\uffff\1\154\1\165\1\172\1\150\1\145\1\uffff\1\172\1\157\1\167\1\uffff\1\172\1\162\1\163\1\171\1\uffff\1\143\1\172\1\150\1\162\1\164\1\156\1\172\2\154\1\uffff\2\172\1\uffff\1\146\1\172\1\uffff\1\156\1\163\1\151\2\172\1\uffff\1\172\1\157\1\172\1\143\1\uffff\1\171\1\164\2\uffff\1\172\1\uffff\2\172\1\157\3\uffff\1\156\1\uffff\1\145\2\172\3\uffff\1\156\1\151\1\157\2\uffff\2\172\1\146\1\uffff\1\145\1\172\1\144\1\uffff\1\172\1\uffff";
     static final String DFA21_acceptS =
-        "\24\uffff\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\12\uffff\1\116\2\117\1\122\1\123\1\uffff\1\24\1\1\1\2\1\111\1\3\1\105\1\uffff\1\116\1\5\1\36\1\27\1\6\1\21\1\37\1\30\1\7\1\32\1\31\1\10\1\120\1\121\1\33\1\11\1\34\1\uffff\1\35\1\16\1\17\1\25\1\20\1\uffff\1\40\1\26\1\110\1\104\15\uffff\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\1\107\1\65\12\uffff\1\113\1\uffff\1\114\1\115\1\117\1\122\1\14\1\12\2\uffff\1\15\1\13\1\22\1\23\10\uffff\1\62\3\uffff\1\50\1\uffff\1\72\12\uffff\1\4\1\106\11\uffff\1\70\5\uffff\1\73\3\uffff\1\100\3\uffff\1\63\11\uffff\1\67\2\uffff\1\74\2\uffff\1\112\4\uffff\1\45\4\uffff\1\46\2\uffff\1\103\1\71\1\uffff\1\76\3\uffff\1\42\1\64\1\uffff\1\43\3\uffff\1\75\1\77\1\41\3\uffff\1\101\1\66\3\uffff\1\44\3\uffff\1\47\1\uffff\1\102";
+        "\24\uffff\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\1\62\12\uffff\1\117\2\120\1\123\1\124\1\uffff\1\24\1\1\1\2\1\112\1\3\1\106\1\uffff\1\117\1\5\1\36\1\27\1\6\1\21\1\37\1\30\1\7\1\32\1\31\1\10\1\121\1\122\1\33\1\11\1\34\1\uffff\1\35\1\16\1\17\1\25\1\20\1\uffff\1\40\1\26\1\111\1\105\16\uffff\1\52\1\53\1\54\1\55\1\56\1\57\1\60\1\61\1\62\1\110\1\66\12\uffff\1\114\1\uffff\1\115\1\116\1\120\1\123\1\14\1\12\2\uffff\1\15\1\13\1\22\1\23\11\uffff\1\63\3\uffff\1\51\1\uffff\1\73\12\uffff\1\4\1\107\12\uffff\1\71\5\uffff\1\74\3\uffff\1\101\4\uffff\1\64\11\uffff\1\70\2\uffff\1\75\2\uffff\1\113\5\uffff\1\45\4\uffff\1\46\2\uffff\1\104\1\72\1\uffff\1\77\3\uffff\1\47\1\42\1\65\1\uffff\1\43\3\uffff\1\76\1\100\1\41\3\uffff\1\102\1\67\3\uffff\1\44\3\uffff\1\50\1\uffff\1\103";
     static final String DFA21_specialS =
-        "\1\0\u00ee\uffff}>";
+        "\1\0\u00f4\uffff}>";
     static final String[] DFA21_transitionS = {
             "\11\53\2\52\2\53\1\52\22\53\1\52\1\12\1\50\1\26\1\47\1\11\1\3\1\51\1\34\1\25\1\7\1\5\1\24\1\6\1\15\1\10\1\44\11\45\1\35\1\33\1\14\1\1\1\13\1\16\1\53\32\47\1\31\1\53\1\32\1\46\1\47\1\53\1\23\1\47\1\37\1\36\1\17\1\22\2\47\1\21\4\47\1\41\3\47\1\43\1\20\1\42\1\47\1\4\1\40\3\47\1\27\1\2\1\30\uff82\53",
             "\1\54\1\55",
@@ -3104,11 +3133,11 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             "\1\111",
             "\1\113",
             "\1\116\13\uffff\1\115",
-            "\1\121\13\uffff\1\120",
-            "\1\122\1\123\1\uffff\1\124\1\uffff\1\125",
-            "\1\130\6\uffff\1\126\1\127",
-            "\1\131\7\uffff\1\133\5\uffff\1\132",
-            "\1\134",
+            "\1\122\1\uffff\1\121\11\uffff\1\120",
+            "\1\123\1\124\1\uffff\1\125\1\uffff\1\126",
+            "\1\131\6\uffff\1\127\1\130",
+            "\1\132\7\uffff\1\134\5\uffff\1\133",
+            "\1\135",
             "",
             "",
             "",
@@ -3118,36 +3147,29 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             "",
             "",
             "",
-            "\1\146",
-            "\1\150\11\uffff\1\151",
-            "\1\152",
+            "\1\147",
+            "\1\151\11\uffff\1\152",
             "\1\153",
-            "\1\154\17\uffff\1\155",
-            "\1\157\11\uffff\1\160\6\uffff\1\156",
-            "\1\161",
-            "\12\163\10\uffff\1\165\1\uffff\3\165\5\uffff\1\165\13\uffff\1\162\6\uffff\1\163\2\uffff\1\165\1\uffff\3\165\5\uffff\1\165\13\uffff\1\162",
-            "\12\163\10\uffff\1\165\1\uffff\3\165\5\uffff\1\165\22\uffff\1\163\2\uffff\1\165\1\uffff\3\165\5\uffff\1\165",
+            "\1\154",
+            "\1\155\17\uffff\1\156",
+            "\1\160\11\uffff\1\161\6\uffff\1\157",
+            "\1\162",
+            "\12\164\10\uffff\1\166\1\uffff\3\166\5\uffff\1\166\13\uffff\1\163\6\uffff\1\164\2\uffff\1\166\1\uffff\3\166\5\uffff\1\166\13\uffff\1\163",
+            "\12\164\10\uffff\1\166\1\uffff\3\166\5\uffff\1\166\22\uffff\1\164\2\uffff\1\166\1\uffff\3\166\5\uffff\1\166",
             "\1\64\34\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "",
             "",
             "",
             "",
             "",
-            "\1\170",
+            "\1\171",
             "",
             "",
             "",
             "",
             "",
             "",
-            "\1\172\5\uffff\1\173",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "\1\173\5\uffff\1\174",
             "",
             "",
             "",
@@ -3158,18 +3180,24 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             "",
             "",
             "",
-            "\1\174",
             "",
             "",
             "",
             "",
             "",
-            "\1\176",
+            "",
+            "",
+            "\1\175",
             "",
             "",
             "",
             "",
-            "\1\u0080",
+            "",
+            "\1\177",
+            "",
+            "",
+            "",
+            "",
             "\1\u0081",
             "\1\u0082",
             "\1\u0083",
@@ -3177,34 +3205,36 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             "\1\u0085",
             "\1\u0086",
             "\1\u0087",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u0088",
             "\1\u0089",
-            "\1\u008a",
-            "\1\u008b",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "\1\u008b",
+            "\1\u008c",
             "\1\u008d",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\u008f\1\u0090",
-            "\1\u0091",
-            "\1\u0092",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\u008f",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u0091\1\u0092",
             "\1\u0093",
             "\1\u0094",
             "\1\u0095",
-            "\1\u0097\3\uffff\1\u0096",
-            "\1\u0098",
+            "\1\u0096",
+            "\1\u0097",
+            "\1\u0099\3\uffff\1\u0098",
+            "\1\u009a",
             "",
-            "\12\163\10\uffff\1\165\1\uffff\3\165\5\uffff\1\165\22\uffff\1\163\2\uffff\1\165\1\uffff\3\165\5\uffff\1\165",
+            "\12\164\10\uffff\1\166\1\uffff\3\166\5\uffff\1\166\22\uffff\1\164\2\uffff\1\166\1\uffff\3\166\5\uffff\1\166",
             "",
             "",
             "",
@@ -3217,114 +3247,119 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             "",
             "",
             "",
-            "\1\u009b",
-            "\1\u009c",
             "\1\u009d",
             "\1\u009e",
             "\1\u009f",
             "\1\u00a0",
             "\1\u00a1",
             "\1\u00a2",
-            "",
             "\1\u00a3",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00a4",
             "\1\u00a5",
             "",
             "\1\u00a6",
-            "",
-            "\1\u00a7",
-            "\1\u00a8",
-            "\1\u00a9",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00a8",
+            "",
+            "\1\u00a9",
+            "",
+            "\1\u00aa",
             "\1\u00ab",
             "\1\u00ac",
-            "\1\u00ad",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00ae",
             "\1\u00af",
             "\1\u00b0",
-            "",
-            "",
-            "\1\u00b1",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00b2",
             "\1\u00b3",
+            "",
+            "",
             "\1\u00b4",
             "\1\u00b5",
-            "\1\u00b6",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "\1\u00b7",
             "\1\u00b8",
             "\1\u00b9",
-            "",
             "\1\u00ba",
             "\1\u00bb",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00bc",
             "\1\u00bd",
+            "",
             "\1\u00be",
-            "",
+            "\1\u00bf",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\u00c0",
             "\1\u00c1",
+            "\1\u00c2",
             "",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\u00c3",
-            "\1\u00c4\16\uffff\1\u00c5",
+            "\1\u00c4",
+            "\1\u00c5",
             "",
-            "\1\u00c6",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\u00c8",
-            "\1\u00c9",
+            "\1\u00c7",
+            "\1\u00c8\16\uffff\1\u00c9",
             "\1\u00ca",
+            "",
             "\1\u00cb",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "\1\u00cd",
             "\1\u00ce",
-            "",
+            "\1\u00cf",
+            "\1\u00d0",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "",
-            "\1\u00d1",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "",
+            "\1\u00d2",
             "\1\u00d3",
-            "\1\u00d4",
-            "\1\u00d5",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "",
+            "\1\u00d6",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "",
             "\1\u00d8",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00d9",
             "\1\u00da",
-            "",
-            "\1\u00db",
-            "\1\u00dc",
-            "",
-            "",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00de",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "\1\u00e0",
             "",
-            "",
             "\1\u00e1",
-            "",
             "\1\u00e2",
+            "",
+            "",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "",
-            "",
-            "",
-            "\1\u00e5",
             "\1\u00e6",
+            "",
+            "",
+            "",
             "\1\u00e7",
             "",
-            "",
+            "\1\u00e8",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
-            "\1\u00e9",
-            "\1\u00ea",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "",
+            "",
             "",
             "\1\u00eb",
-            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00ec",
             "\1\u00ed",
+            "",
+            "",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00ef",
+            "\1\u00f0",
+            "",
+            "\1\u00f1",
+            "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
+            "\1\u00f3",
             "",
             "\1\64\13\uffff\12\64\7\uffff\32\64\4\uffff\1\64\1\uffff\32\64",
             ""
@@ -3360,7 +3395,7 @@ public class InternalContentAssistFragmentTestLangLexer extends Lexer {
             this.transition = DFA21_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

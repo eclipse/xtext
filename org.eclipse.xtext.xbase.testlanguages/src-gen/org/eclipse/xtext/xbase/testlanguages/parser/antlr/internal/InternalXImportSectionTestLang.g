@@ -108,6 +108,25 @@ ruleImportSectionTestLanguageRoot returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_3_0());
+				}
+				lv_expression_3_0=ruleXExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getImportSectionTestLanguageRootRule());
+					}
+					set(
+						$current,
+						"expression",
+						lv_expression_3_0,
+						"org.eclipse.xtext.xbase.Xbase.XExpression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 

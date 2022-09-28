@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 import org.eclipse.xtext.xtype.XImportSection;
 
 /**
@@ -22,6 +24,7 @@ import org.eclipse.xtext.xtype.XImportSection;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getImportSection <em>Import Section</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage#getImportSectionTestLanguageRoot()
@@ -51,5 +54,27 @@ public interface ImportSectionTestLanguageRoot extends EObject
    * @generated
    */
   void setImportSection(XImportSection value);
+
+  /**
+   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Expression</em>' containment reference.
+   * @see #setExpression(XExpression)
+   * @see org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage#getImportSectionTestLanguageRoot_Expression()
+   * @model containment="true"
+   * @generated
+   */
+  XExpression getExpression();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getExpression <em>Expression</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Expression</em>' containment reference.
+   * @see #getExpression()
+   * @generated
+   */
+  void setExpression(XExpression value);
 
 } // ImportSectionTestLanguageRoot

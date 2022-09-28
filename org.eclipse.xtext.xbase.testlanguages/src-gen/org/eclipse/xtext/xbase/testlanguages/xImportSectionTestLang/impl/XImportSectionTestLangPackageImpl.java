@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import org.eclipse.xtext.xbase.XbasePackage;
+
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangFactory;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage;
@@ -87,6 +89,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
     isInited = true;
 
     // Initialize simple dependencies
+    XbasePackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
     TypesPackage.eINSTANCE.eClass();
 
@@ -132,6 +135,17 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
    * @generated
    */
   @Override
+  public EReference getImportSectionTestLanguageRoot_Expression()
+  {
+    return (EReference)importSectionTestLanguageRootEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public XImportSectionTestLangFactory getXImportSectionTestLangFactory()
   {
     return (XImportSectionTestLangFactory)getEFactoryInstance();
@@ -159,6 +173,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
     // Create classes and their features
     importSectionTestLanguageRootEClass = createEClass(IMPORT_SECTION_TEST_LANGUAGE_ROOT);
     createEReference(importSectionTestLanguageRootEClass, IMPORT_SECTION_TEST_LANGUAGE_ROOT__IMPORT_SECTION);
+    createEReference(importSectionTestLanguageRootEClass, IMPORT_SECTION_TEST_LANGUAGE_ROOT__EXPRESSION);
   }
 
   /**
@@ -187,6 +202,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
 
     // Obtain other dependent packages
     XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
+    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
 
@@ -197,6 +213,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
     // Initialize classes and features; add operations and parameters
     initEClass(importSectionTestLanguageRootEClass, ImportSectionTestLanguageRoot.class, "ImportSectionTestLanguageRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImportSectionTestLanguageRoot_ImportSection(), theXtypePackage.getXImportSection(), null, "importSection", null, 0, 1, ImportSectionTestLanguageRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getImportSectionTestLanguageRoot_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, ImportSectionTestLanguageRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

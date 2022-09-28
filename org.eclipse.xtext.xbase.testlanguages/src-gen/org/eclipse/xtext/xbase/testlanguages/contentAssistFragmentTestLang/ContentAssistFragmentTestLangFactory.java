@@ -38,6 +38,15 @@ public interface ContentAssistFragmentTestLangFactory extends EFactory
   ContentAssistFragmentTestLanguageRoot createContentAssistFragmentTestLanguageRoot();
 
   /**
+   * Returns a new object of class '<em>Entity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity</em>'.
+   * @generated
+   */
+  Entity createEntity();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

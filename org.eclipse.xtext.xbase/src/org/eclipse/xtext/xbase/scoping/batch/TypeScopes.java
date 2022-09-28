@@ -38,7 +38,7 @@ public class TypeScopes extends DelegatingScopes {
 	 * @param resolvedTypes the currently known resolved types
 	 */
 	public IScope createTypeScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		final IScope delegateScope = getDelegate().getScope(context, reference);
+		final IScope delegateScope = getScope(context, reference);
 		return new NestedTypesScope(delegateScope, session);
 	}
 
@@ -57,7 +57,7 @@ public class TypeScopes extends DelegatingScopes {
 			}
 			return IScope.NULLSCOPE;
 		} else {
-			final IScope delegateScope = getDelegate().getScope(context, reference);
+			final IScope delegateScope = getScope(context, reference);
 			return delegateScope;
 		}
 	}

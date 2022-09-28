@@ -1690,10 +1690,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6432:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // InternalXImportSectionTestLang.g:6432:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalXImportSectionTestLang.g:6451:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalXImportSectionTestLang.g:6451:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // InternalXImportSectionTestLang.g:6432:12: ( '0x' | '0X' )
+            // InternalXImportSectionTestLang.g:6451:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1721,7 +1721,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6432:13: '0x'
+                    // InternalXImportSectionTestLang.g:6451:13: '0x'
                     {
                     match("0x"); 
 
@@ -1729,7 +1729,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalXImportSectionTestLang.g:6432:18: '0X'
+                    // InternalXImportSectionTestLang.g:6451:18: '0X'
                     {
                     match("0X"); 
 
@@ -1739,7 +1739,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
             }
 
-            // InternalXImportSectionTestLang.g:6432:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalXImportSectionTestLang.g:6451:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1777,7 +1777,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // InternalXImportSectionTestLang.g:6432:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalXImportSectionTestLang.g:6451:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1786,10 +1786,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6432:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalXImportSectionTestLang.g:6451:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // InternalXImportSectionTestLang.g:6432:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalXImportSectionTestLang.g:6451:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1807,7 +1807,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // InternalXImportSectionTestLang.g:6432:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalXImportSectionTestLang.g:6451:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1831,7 +1831,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // InternalXImportSectionTestLang.g:6432:84: ( 'l' | 'L' )
+                            // InternalXImportSectionTestLang.g:6451:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1870,11 +1870,11 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6434:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // InternalXImportSectionTestLang.g:6434:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalXImportSectionTestLang.g:6453:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalXImportSectionTestLang.g:6453:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // InternalXImportSectionTestLang.g:6434:21: ( '0' .. '9' | '_' )*
+            // InternalXImportSectionTestLang.g:6453:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1923,11 +1923,11 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6436:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // InternalXImportSectionTestLang.g:6436:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalXImportSectionTestLang.g:6455:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalXImportSectionTestLang.g:6455:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // InternalXImportSectionTestLang.g:6436:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalXImportSectionTestLang.g:6455:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1936,7 +1936,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6436:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalXImportSectionTestLang.g:6455:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1947,7 +1947,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalXImportSectionTestLang.g:6436:36: ( '+' | '-' )?
+                    // InternalXImportSectionTestLang.g:6455:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1980,7 +1980,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
             }
 
-            // InternalXImportSectionTestLang.g:6436:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalXImportSectionTestLang.g:6455:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1992,7 +1992,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6436:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalXImportSectionTestLang.g:6455:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2016,7 +2016,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalXImportSectionTestLang.g:6436:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalXImportSectionTestLang.g:6455:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2049,10 +2049,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6438:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // InternalXImportSectionTestLang.g:6438:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalXImportSectionTestLang.g:6457:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalXImportSectionTestLang.g:6457:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // InternalXImportSectionTestLang.g:6438:11: ( '^' )?
+            // InternalXImportSectionTestLang.g:6457:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2061,7 +2061,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6438:11: '^'
+                    // InternalXImportSectionTestLang.g:6457:11: '^'
                     {
                     match('^'); 
 
@@ -2079,7 +2079,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalXImportSectionTestLang.g:6438:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalXImportSectionTestLang.g:6457:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2128,10 +2128,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6440:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // InternalXImportSectionTestLang.g:6440:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalXImportSectionTestLang.g:6459:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalXImportSectionTestLang.g:6459:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // InternalXImportSectionTestLang.g:6440:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalXImportSectionTestLang.g:6459:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2149,10 +2149,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6440:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalXImportSectionTestLang.g:6459:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // InternalXImportSectionTestLang.g:6440:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalXImportSectionTestLang.g:6459:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2168,7 +2168,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // InternalXImportSectionTestLang.g:6440:21: '\\\\' .
+                    	    // InternalXImportSectionTestLang.g:6459:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2176,7 +2176,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalXImportSectionTestLang.g:6440:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalXImportSectionTestLang.g:6459:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2196,7 +2196,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalXImportSectionTestLang.g:6440:44: ( '\"' )?
+                    // InternalXImportSectionTestLang.g:6459:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2205,7 +2205,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalXImportSectionTestLang.g:6440:44: '\"'
+                            // InternalXImportSectionTestLang.g:6459:44: '\"'
                             {
                             match('\"'); 
 
@@ -2218,10 +2218,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalXImportSectionTestLang.g:6440:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalXImportSectionTestLang.g:6459:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // InternalXImportSectionTestLang.g:6440:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalXImportSectionTestLang.g:6459:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2237,7 +2237,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalXImportSectionTestLang.g:6440:55: '\\\\' .
+                    	    // InternalXImportSectionTestLang.g:6459:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2245,7 +2245,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalXImportSectionTestLang.g:6440:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalXImportSectionTestLang.g:6459:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2265,7 +2265,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalXImportSectionTestLang.g:6440:79: ( '\\'' )?
+                    // InternalXImportSectionTestLang.g:6459:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2274,7 +2274,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalXImportSectionTestLang.g:6440:79: '\\''
+                            // InternalXImportSectionTestLang.g:6459:79: '\\''
                             {
                             match('\''); 
 
@@ -2305,12 +2305,12 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6442:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalXImportSectionTestLang.g:6442:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalXImportSectionTestLang.g:6461:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalXImportSectionTestLang.g:6461:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalXImportSectionTestLang.g:6442:24: ( options {greedy=false; } : . )*
+            // InternalXImportSectionTestLang.g:6461:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2335,7 +2335,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalXImportSectionTestLang.g:6442:52: .
+            	    // InternalXImportSectionTestLang.g:6461:52: .
             	    {
             	    matchAny(); 
 
@@ -2365,12 +2365,12 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6444:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalXImportSectionTestLang.g:6444:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalXImportSectionTestLang.g:6463:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalXImportSectionTestLang.g:6463:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalXImportSectionTestLang.g:6444:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalXImportSectionTestLang.g:6463:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2383,7 +2383,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalXImportSectionTestLang.g:6444:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalXImportSectionTestLang.g:6463:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2403,7 +2403,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalXImportSectionTestLang.g:6444:40: ( ( '\\r' )? '\\n' )?
+            // InternalXImportSectionTestLang.g:6463:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2412,9 +2412,9 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalXImportSectionTestLang.g:6444:41: ( '\\r' )? '\\n'
+                    // InternalXImportSectionTestLang.g:6463:41: ( '\\r' )? '\\n'
                     {
-                    // InternalXImportSectionTestLang.g:6444:41: ( '\\r' )?
+                    // InternalXImportSectionTestLang.g:6463:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2423,7 +2423,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // InternalXImportSectionTestLang.g:6444:41: '\\r'
+                            // InternalXImportSectionTestLang.g:6463:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2455,10 +2455,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6446:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalXImportSectionTestLang.g:6446:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalXImportSectionTestLang.g:6465:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalXImportSectionTestLang.g:6465:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalXImportSectionTestLang.g:6446:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalXImportSectionTestLang.g:6465:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2512,8 +2512,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalXImportSectionTestLang.g:6448:16: ( . )
-            // InternalXImportSectionTestLang.g:6448:18: .
+            // InternalXImportSectionTestLang.g:6467:16: ( . )
+            // InternalXImportSectionTestLang.g:6467:18: .
             {
             matchAny(); 
 

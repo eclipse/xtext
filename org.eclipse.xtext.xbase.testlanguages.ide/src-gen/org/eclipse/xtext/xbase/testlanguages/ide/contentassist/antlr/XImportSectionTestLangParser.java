@@ -256,6 +256,7 @@ public class XImportSectionTestLangParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXImportDeclarationAccess().getGroup_1_0(), "rule__XImportDeclaration__Group_1_0__0");
 			builder.put(grammarAccess.getQualifiedNameInStaticImportAccess().getGroup(), "rule__QualifiedNameInStaticImport__Group__0");
 			builder.put(grammarAccess.getImportSectionTestLanguageRootAccess().getImportSectionAssignment_2(), "rule__ImportSectionTestLanguageRoot__ImportSectionAssignment_2");
+			builder.put(grammarAccess.getImportSectionTestLanguageRootAccess().getExpressionAssignment_3(), "rule__ImportSectionTestLanguageRoot__ExpressionAssignment_3");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 			builder.put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 			builder.put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");
