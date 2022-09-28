@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
-import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
@@ -49,7 +48,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
 public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
@@ -154,13 +152,13 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 		assertEquals(9, resource.getContents().size());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateMirror_01() {
 		URI uri = URI.createURI("java:/Objects/java.util.Map");
 		IMirror mirror = getTypeProvider().createMirror(uri);
 		assertNotNull(mirror);
-		assertTrue(mirror instanceof ClassMirror);
-		assertEquals("java.util.Map", ((ClassMirror) mirror).getMirroredClass().getName());
+		assertEquals("java.util.Map", ((org.eclipse.xtext.common.types.access.impl.ClassMirror) mirror).getMirroredClass().getName());
 	}
 
 	@Test
@@ -427,6 +425,7 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	@Test
 	public void testDeprecatedBit_01() {
