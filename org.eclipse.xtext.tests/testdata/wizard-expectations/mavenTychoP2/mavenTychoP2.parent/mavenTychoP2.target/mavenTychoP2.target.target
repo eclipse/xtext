@@ -20,14 +20,14 @@
 			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<unit id="com.google.gson" version="2.9.0.v20220704-0629"/>
+			<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
 			<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
 			<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 			<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 			<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 			<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
-			<unit id="io.github.classgraph" version="4.8.138.v20211212-1642"/>
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
+			<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
 		</location>
 	</locations>
 </target>
