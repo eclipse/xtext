@@ -153,7 +153,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
+      value="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -856,7 +856,7 @@
             versionRange="[9.3.0,9.4.0)"/>
         <requirement
             name="io.github.classgraph"
-            versionRange="[4.8.138,4.9.0)"/>
+            versionRange="[4.8.149,4.9.0)"/>
         <requirement
             name="org.eclipse.egit.feature.group"/>
         <requirement
