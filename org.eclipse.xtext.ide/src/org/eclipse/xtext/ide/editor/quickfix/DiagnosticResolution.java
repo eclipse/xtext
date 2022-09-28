@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtext.ide.editor.quickfix.DiagnosticModificationContext.Factory;
@@ -25,9 +24,8 @@ import org.eclipse.xtext.ide.server.TextEditAcceptor;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2.Options;
 import org.eclipse.xtext.ide.server.rename.ChangeConverter2;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
-
-import com.google.common.collect.MoreCollectors;
 
 /**
  * @author Heinrich Weichert
@@ -46,7 +44,13 @@ public class DiagnosticResolution {
 
 	private int relevance;
 
-	private Options options;
+	private URI uri;
+	
+	private Document document;
+	
+	private ILanguageServerAccess access;
+
+	private Diagnostic diagnostic;
 
 	private static Logger log = Logger.getLogger(DiagnosticResolution.class);
 
@@ -106,22 +110,24 @@ public class DiagnosticResolution {
 		return label;
 	}
 
+	private EObject getContextObject() {
+		ResourceSet resourceSet = access.newLiveScopeResourceSet(uri);
+		XtextResource tmpResource = (XtextResource) resourceSet.getResource(uri, true);
+		EObjectAtOffsetHelper eObjectAtOffsetHelper = tmpResource.getResourceServiceProvider().get(EObjectAtOffsetHelper.class);
+		if (eObjectAtOffsetHelper == null) {
+			return null;
+		}
+		int offset = document.getOffSet(diagnostic.getRange().getStart());
+		return eObjectAtOffsetHelper.resolveContainedElementAt(tmpResource, offset);		
+	}
+
 	public WorkspaceEdit apply() {
 		try {
-			Resource resource = options.getResource();
-			URI uri = resource.getURI();
-
-			CodeActionParams params = options.getCodeActionParams();
-			Document document = options.getDocument();
-			int offset = document.getOffSet(params.getRange().getStart());
-			EObjectAtOffsetHelper helper = new EObjectAtOffsetHelper();
-			ILanguageServerAccess access = options.getLanguageServerAccess();
-			ResourceSet resourceSet = access.newLiveScopeResourceSet(uri);
-			XtextResource tmpResource = (XtextResource) resourceSet.getResource(uri, true);
-			EObject obj = helper.resolveContainedElementAt(tmpResource, offset);
-
+			EObject obj = getContextObject();
+			if (obj == null) {
+				return null;
+			}
 			WorkspaceEdit edit = new WorkspaceEdit();
-			Diagnostic diagnostic = params.getContext().getDiagnostics().stream().collect(MoreCollectors.onlyElement());
 			if (modification != null) {
 				DiagnosticModificationContext modificationContext = factory.createModificationContext();
 				ChangeConverter2 changeConverter = modificationContext.getConverterFactory().create(edit, access);
@@ -139,7 +145,10 @@ public class DiagnosticResolution {
 		}
 	}
 
-	void configure(Options options) {
-		this.options = options;
+	void configure(Options options, Diagnostic diagnostic) {
+		this.uri = options.getResource().getURI();
+		this.document = options.getDocument();
+		this.access = options.getLanguageServerAccess();
+		this.diagnostic = diagnostic;
 	}
 }

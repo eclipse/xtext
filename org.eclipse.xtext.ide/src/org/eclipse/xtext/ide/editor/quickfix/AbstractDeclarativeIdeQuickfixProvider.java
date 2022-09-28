@@ -65,7 +65,7 @@ public class AbstractDeclarativeIdeQuickfixProvider implements IQuickFixProvider
 				LOG.error("Error executing fix method", e);
 			}
 		}
-		return issueResolutionAcceptor.getDiagnosticResolutions(options);
+		return issueResolutionAcceptor.getDiagnosticResolutions(options, diagnostic);
 	}
 
 	private List<Method> collectMethods(Class<? extends AbstractDeclarativeIdeQuickfixProvider> clazz,
