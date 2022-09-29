@@ -124,7 +124,7 @@ To initiate a release build start the build job [release-prepare-branches](https
 After everything above has run smoothly, it is finally time for some manual steps again. We will try to integrate some of them into the automated release pipeline from time to time.
 
 1. Check that everything was promoted correctly:
-   * [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
+   * [Xtext Downloads Page](https://download.eclipse.org/modeling/tmf/xtext/downloads/drops) should list the new release
    * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
    * For milestone builds: [Xtext Milestones Update Site](https://download.eclipse.org/modeling/tmf/xtext/updates/milestones)should list the new milestone
    * For release builds: [Xtext Release Update Site](https://download.eclipse.org/modeling/tmf/xtext/updates/releases)should list the new release
@@ -212,7 +212,7 @@ Finally, when `xtext-umbrella` was build successfully, all release artifacts wer
 
 1. Sign all artifacts with Eclipse Signing Service (for p2 artifacts) and with GPG (for Maven artifacts)
 2. Upload all artifacts to [OSSRH](https://oss.sonatype.org/)
-3. Deploy the p2 repository to the [Xtext Downloads](https://www.eclipse.org/modeling/tmf/downloads/) location on the project storage
+3. Deploy the p2 repository to the [Xtext Downloads](https://download.eclipse.org/modeling/tmf/xtext/downloads/drops) location on the project storage
 4. Unzip the repository to its location on the p2 update site location (directory below the composite site location)
 5. Update the p2 composite site descriptors
 6. Trigger an update of the SimRel repository contribution with the [release-simrel-update job](https://ci.eclipse.org/xtext/job/releng/job/release-simrel-update/)
