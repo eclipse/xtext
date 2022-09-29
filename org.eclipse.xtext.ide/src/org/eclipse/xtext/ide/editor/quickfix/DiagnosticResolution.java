@@ -23,7 +23,6 @@ import org.eclipse.xtext.ide.server.TextEditAcceptor;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2.Options;
 import org.eclipse.xtext.ide.server.rename.ChangeConverter2;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
