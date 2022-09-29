@@ -11,8 +11,6 @@ package org.eclipse.xtext.ide.tests.server;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
