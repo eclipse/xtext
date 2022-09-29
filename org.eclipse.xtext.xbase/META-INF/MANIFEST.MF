@@ -174,7 +174,6 @@ Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xtype,
  org.eclipse.xtext.xtype.impl;x-friends:="org.eclipse.xtend.core",
  org.eclipse.xtext.xtype.util;x-friends:="org.eclipse.xtend.core"
-Import-Package: javax.annotation,
- org.apache.log4j;version="1.2.19"
+Import-Package: org.apache.log4j;version="1.2.19"
 Automatic-Module-Name: org.eclipse.xtext.xbase
 Eclipse-SourceReferences: eclipseSourceReferences
