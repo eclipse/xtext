@@ -174,9 +174,8 @@ public class StandaloneBuilderTest {
 		testBuilder.setTempDir(TMP_DIR);
 		testBuilder.setDebugLog(true);
 		assertTrue("Builder launch returned false", testBuilder.launch());
-		File compiledClazz = getFile("tmp/classes/JavaClass.class");
+		File compiledClazz = getFile("tmp/stub-classes/JavaClass.class");
 		assertTrue("java compilation failed", compiledClazz.exists());
-
 	}
 
 	@Test
@@ -224,10 +223,6 @@ public class StandaloneBuilderTest {
 		return initBuilder(config, "src", "src2");
 	}
 
-	/**
-	 * @param srcDirs
-	 *            source dirs from {@value #PROJECT_DIR}
-	 */
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config, String... srcDirs) {
 		List<String> patthes = new ArrayList<String>();
 		for (String srcDir : srcDirs) {

@@ -1,0 +1,6 @@
+{
+	val cls = new my.test.First()
+	val s = String.valueOf(cls)
+	s.length
+	return null
+}

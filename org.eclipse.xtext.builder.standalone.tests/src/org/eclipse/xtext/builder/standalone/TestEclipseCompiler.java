@@ -8,10 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -39,10 +40,10 @@ public class TestEclipseCompiler {
 		}
 	}
 
-	private static final String SRC_TEST_RESOURCES = "test-data/ec-test";
-	private static final String DOES_NOT_EXISTS = "src/test/resources/test";
-	private IJavaCompiler compiler;
-	private File outputClassDirectory;
+	static final String SRC_TEST_RESOURCES = "test-data/ec-test";
+	static final String DOES_NOT_EXISTS = "src/test/resources/test";
+	IJavaCompiler compiler;
+	File outputClassDirectory;
 	private static Injector injector;
 
 	@BeforeClass
@@ -51,7 +52,7 @@ public class TestEclipseCompiler {
 	}
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		compiler = injector.getInstance(IJavaCompiler.class);
 		compiler.getConfiguration().setVerbose(true);
 		compiler.getConfiguration().setSourceLevel("8");
@@ -60,13 +61,16 @@ public class TestEclipseCompiler {
 	}
 
 	@After
-	public void tearDown() throws FileNotFoundException {
-		if (outputClassDirectory != null && outputClassDirectory.exists()) {
-			assertTrue("Unable to delete test directory: " + outputClassDirectory.getAbsolutePath(),
-					Files.sweepFolder(outputClassDirectory));
-		}
+	public void tearDown() throws IOException {
+		tearDown(outputClassDirectory);
 	}
 
+	void tearDown(File directory) throws IOException {
+		if (directory != null && directory.exists()) {
+			assertTrue("Unable to delete test directory: " + directory.getAbsolutePath(), Files.sweepFolder(directory));
+		}
+	}
+	
 	@Test
 	public void testEmptySrcDirs() {
 		List<String> sourceRoots = new ArrayList<String>();
@@ -80,6 +84,8 @@ public class TestEclipseCompiler {
 		sourceRoots.add(SRC_TEST_RESOURCES + "/test-class");
 		sourceRoots.add(DOES_NOT_EXISTS);
 		assertEquals(CompilationResult.SUCCEEDED, compiler.compile(sourceRoots, new File("target/temp")));
+		Collection<URI> resolvePathes = collectOutputFiles();
+		assertEquals("Should have found 4 class files, but was: " + resolvePathes, 4, resolvePathes.size());
 	}
 
 	@Test
@@ -96,10 +102,10 @@ public class TestEclipseCompiler {
 		sourceRoots.add(SRC_TEST_RESOURCES + "/test-class2");
 		assertEquals(CompilationResult.SUCCEEDED, compiler.compile(sourceRoots, new File("target/temp")));
 		Collection<URI> resolvePathes = collectOutputFiles();
-		assertEquals("Should found 2 class files, but was: " + resolvePathes, 2, resolvePathes.size());
+		assertEquals("Should have found 5 class files, but was: " + resolvePathes, 5, resolvePathes.size());
 	}
 
-	private Collection<URI> collectOutputFiles() {
+	Collection<URI> collectOutputFiles() {
 		return new PathTraverser().resolvePathes(Lists.newArrayList(outputClassDirectory.getAbsolutePath()),
 				new ClassFileFilter()).values();
 	}

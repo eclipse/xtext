@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 public class TestableStandaloneBuilder extends StandaloneBuilder {
 	private int validateCalled = 0;
 	private int generateCalled = 0;
+	private int generateResources = 0;
 	private boolean mockGeneration = false;
 
 	@Override
@@ -37,15 +38,23 @@ public class TestableStandaloneBuilder extends StandaloneBuilder {
 			super.generate(sourceResources);
 		}
 		generateCalled++;
+		generateResources += sourceResources.size();
 	}
 
 	public void setMockGeneration(boolean mockGeneration) {
 		this.mockGeneration = mockGeneration;
 	}
+	
+	@Override
+	public boolean launch() {
+		resetCallStatistic();
+		return super.launch();
+	}
 
 	public void resetCallStatistic() {
 		validateCalled = 0;
 		generateCalled = 0;
+		generateResources = 0;
 	}
 
 	public int getValidateCalled() {
@@ -54,6 +63,10 @@ public class TestableStandaloneBuilder extends StandaloneBuilder {
 
 	public int getGenerateCalled() {
 		return generateCalled;
+	}
+	
+	public int getGenerateResources() {
+		return generateResources;
 	}
 
 }

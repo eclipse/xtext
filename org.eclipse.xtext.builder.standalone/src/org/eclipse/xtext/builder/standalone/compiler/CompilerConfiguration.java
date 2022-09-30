@@ -8,6 +8,10 @@
  */
 package org.eclipse.xtext.builder.standalone.compiler;
 
+import java.io.File;
+
+import org.eclipse.xtext.resource.IResourceDescription;
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
@@ -21,7 +25,11 @@ public class CompilerConfiguration {
 	private boolean skipAnnotationProcessing;
 
 	private boolean preserveInformationAboutFormalParameters;
-
+	
+	private File compilerStateDirectory;
+	
+	private IResourceDescription.Event.Listener eventListener;
+	
 	public String getSourceLevel() {
 		return sourceLevel;
 	}
@@ -61,4 +69,23 @@ public class CompilerConfiguration {
 	public void setPreserveInformationAboutFormalParameters(boolean preserveInformationAboutFormalParameters) {
 		this.preserveInformationAboutFormalParameters = preserveInformationAboutFormalParameters;
 	}
+	
+	public File getCompilerStateDirectory() {
+		return compilerStateDirectory;
+	}
+	
+	public IResourceDescription.Event.Listener getEventListener() {
+		return eventListener;
+	}
+	
+	public void enableIncrementalCompilation(File compilerStateDirectory, IResourceDescription.Event.Listener eventListener) {
+		this.compilerStateDirectory = compilerStateDirectory;
+		this.eventListener = eventListener;
+	}
+	
+	public void disableIncrementalCompilation() {
+		this.compilerStateDirectory = null;
+		this.eventListener = null;
+	}
+	
 }

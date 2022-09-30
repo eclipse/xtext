@@ -1,0 +1,6 @@
+{
+	val toon = new com.acme.BugsBunny()
+	val s = String.valueOf(toon.get)
+	s.length
+	return null
+}

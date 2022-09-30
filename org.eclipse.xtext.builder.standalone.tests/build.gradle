@@ -4,6 +4,7 @@ dependencies {
 	api project(':org.eclipse.xtext.builder.standalone')
 	api project(':org.eclipse.xtext.ecore')
 	api "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	api project(':org.eclipse.xtext.xbase.testlanguages')
 	api 'junit:junit'
 }
 

@@ -30,10 +30,12 @@ public interface IIssueHandler {
 		private static final Logger LOG = Logger.getLogger(DefaultIssueHandler.class);
 
 		/**
+		 * Handle the issues and return true if there are no errors.
+		 * 
 		 * @param issues
 		 *            Validation issues to handle
-		 * @return <code>true</code> if an {@link Issue} with
-		 *         {@link Severity#ERROR} was found, <code>false</code>
+		 * @return <code>false</code> if an {@link Issue} with
+		 *         {@link Severity#ERROR} was found, <code>true</code>
 		 *         otherwise
 		 */
 		@Override

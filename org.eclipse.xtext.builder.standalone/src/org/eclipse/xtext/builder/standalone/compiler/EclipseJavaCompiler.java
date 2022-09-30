@@ -14,17 +14,21 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
+import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.eclipse.xtext.builder.standalone.incremental.ClasspathInfos;
 import org.eclipse.xtext.mwe.PathTraverser;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -35,13 +39,17 @@ import com.google.inject.Inject;
  */
 public class EclipseJavaCompiler implements IJavaCompiler {
 
+	private static final Logger LOG = Logger.getLogger(EclipseJavaCompiler.class);
+	
 	@Inject
 	private CompilerConfiguration configuration;
+	@Inject
+	private ClasspathInfos classpathInfos;
+	
 	private Iterable<String> classPath;
 
 	private Writer errorWriter;
 	private Writer outputWriter;
-	private static final Logger LOG = Logger.getLogger(EclipseJavaCompiler.class);
 
 	@Override
 	public CompilationResult compile(Iterable<String> sourceRoots, File outputClassDirectory) {
@@ -60,12 +68,13 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 			commandLine.add("-parameters");
 		}
 		if (classPath != null) {
-			Iterable<String> validClasspath = IterableExtensions.filter(classPath, new EmptyOrMissingFilter());
-			if (validClasspath.iterator().hasNext()) {
-				commandLine.add("-cp \"" + concat(File.pathSeparator, Lists.newArrayList(validClasspath)) + "\"");
+			List<String> validClasspath = new ArrayList<String>();
+			Iterables.addAll(validClasspath, IterableExtensions.filter(classPath, new EmptyOrMissingFilter()));
+			if (!validClasspath.isEmpty()) {
+				commandLine.add("-cp \"" + concat(File.pathSeparator, validClasspath) + "\"");
 			}
 		}
-		commandLine.add("-d \"" + outputClassDirectory.toString() + "\"");
+		commandLine.add("-d \"" + outputClassDirectory.getAbsolutePath() + "\"");
 		commandLine.add("-source " + configuration.getSourceLevel());
 		commandLine.add("-target " + configuration.getTargetLevel());
 		commandLine.add("-proceedOnError");
@@ -74,9 +83,27 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		}
 		String cmdLine = concat(" ", commandLine);
 		debugLog("invoke batch compiler with '" + cmdLine + "'");
-		boolean result = BatchCompiler.compile(cmdLine, new PrintWriter(getOutputWriter()), new PrintWriter(
-				getErrorWriter()), null);
+		boolean result = compile(cmdLine);
 		return result ? CompilationResult.SUCCEEDED : CompilationResult.FAILED;
+	}
+
+	private boolean compile(String cmdLine) {
+		String[] tokenizedCommandLine = Main.tokenize(cmdLine);
+
+		return newCompiler().compile(tokenizedCommandLine);
+	}
+
+	@SuppressWarnings("resource")
+	private Main newCompiler() {
+		File stateDirectory = getConfiguration().getCompilerStateDirectory();
+		IResourceDescription.Event.Listener eventListener = getConfiguration().getEventListener();
+		if (stateDirectory == null && eventListener == null) {
+			return new Main(new PrintWriter(getOutputWriter()), new PrintWriter(getErrorWriter()),
+					false /* systemExit */, null /* options */, null);
+		} else {
+			LOG.info("Perform incremental compilation");
+			return new InternalIncrementalCompiler(getOutputWriter(), getErrorWriter(), stateDirectory, eventListener, classpathInfos);
+		}
 	}
 
 	public Writer getOutputWriter() {
@@ -150,7 +177,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		});
 		return uris.values().size() > 0;
 	}
-	
+
 	/**
 	 * @author Dennis Huebner - Initial contribution and API
 	 */
@@ -166,13 +193,12 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 			return useEntry;
 		}
 
-
 	}
 
 	private void debugLog(final String message) {
-		if(LOG.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			LOG.debug(message);
-		} else if(configuration.isVerbose()) {
+		} else if (configuration.isVerbose()) {
 			LOG.info(message);
 		}
 	}

@@ -28,7 +28,11 @@ public class MyGenerator implements IGenerator {
 					((IFileSystemAccess2) fsa).readTextFile(fileName);
 				}
 			}
-			fsa.generateFile(fileName, "object " + ele.getName());
+			String content = "object " + ele.getName();
+			if (ele.getReferences() != null) {
+				content = content + " -> " + ele.getReferences().getName();
+			}
+			fsa.generateFile(fileName, content);
 		}
 	}
 }

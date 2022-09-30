@@ -1,0 +1,4 @@
+namespace Namespace {
+	object SecondObjectA
+	object SecondObjectB references Namespace.SecondObjectA
+}

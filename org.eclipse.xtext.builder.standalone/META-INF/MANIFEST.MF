@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.29.0",
  org.eclipse.xtext,
  org.eclipse.xtext.common.types,
  org.eclipse.xtend.lib,
- org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional
+ org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional,
+ org.eclipse.emf.ecore
 Export-Package: org.eclipse.xtext.builder.standalone;x-friends:="org.eclipse.xtext.builder.standalone.tests,
   org.eclipse.xtext.builder.tests",
  org.eclipse.xtext.builder.standalone.compiler;x-friends:="org.eclipse.xtext.builder.standalone.tests,
