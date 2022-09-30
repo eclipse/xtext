@@ -268,17 +268,17 @@ public class StandaloneBuilder {
 
 						// TODO adjust to handle validations that need an up-to-date index
 						hasValidationErrors = validate(resource) || hasValidationErrors;
-						if (failOnValidationError && hasValidationErrors) {
-							if (incremental) {
-								// since we didn't generate anything yet, we don't want to persist the builder state
-								builderState.processIssues(issueHandler);
-							}
-							return false;
-						}
 						clusterIndex++;
 						if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
 							canContinue = false;
 						}
+					}
+					if (failOnValidationError && hasValidationErrors) {
+						if (incremental) {
+							// since we didn't generate anything yet, we don't want to persist the builder state
+							builderState.processIssues(issueHandler);
+						}
+						return false;
 					}
 					generate(resources);
 					if (!canContinue) {
