@@ -12,6 +12,9 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.IResourceDescription
 import org.junit.Test
+import org.junit.Assert
+import java.util.Arrays
+import java.util.Comparator
 
 class ImportedNamesTest extends AbstractXtendTestCase {
 	@Inject
@@ -126,4 +129,46 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass$StaticMiddleClass$Unknown'.toLowerCase]);
 	}
 	
+	@Test
+	def void testExhaustiveList() {
+		val file = file('''
+			package my.pack
+			
+			import java.util.Map;
+			import java.util.AbstractMap.*;
+			
+			class C {
+				val list = new java.util.ArrayList<Map.Entry>
+				val entry = new SimpleEntry(null, null)
+				val int i = 0
+			}
+		''', true)
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		Assert.assertEquals(Arrays.asList(
+				"java.io.serializable",
+				"java.lang.cloneable",
+				"java.lang.iterable",
+				"java.lang.java$util$arraylist",
+				"java.lang.object",
+				"java.util.abstractcollection",
+				"java.util.abstractlist",
+				"java.util.abstractmap",
+				"java.util.abstractmap.java$util$arraylist",
+				"java.util.abstractmap.simpleentry",
+				"java.util.abstractmap$java$util$arraylist",
+				"java.util.abstractmap$simpleentry",
+				"java.util.arraylist",
+				"java.util.collection",
+				"java.util.list",
+				"java.util.map",
+				"java.util.map$entry",
+				"java.util.randomaccess",
+				"java.util$abstractmap$java$util$arraylist",
+				"java$util$abstractmap$java$util$arraylist",
+				"my.pack.c",
+				"my.pack.java$util$arraylist",
+				"org.eclipse.xtext.xbase.lib.java$util$arraylist").join("\n"),
+				importedNames.toList.sortWith(Comparator.naturalOrder).join("\n"));
+	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -36,21 +36,7 @@ class RecordingTypeScope extends AbstractTypeScope {
 	public IEObjectDescription getSingleElement(QualifiedName name, boolean binary) {
 		importedNames.add(name.toLowerCase());
 		IEObjectDescription element = typeScope.getSingleElement(name, binary);
-		if (element == null) {
-			ClassNameVariants nameVariants = new ClassNameVariants(name.toString());
-			while (nameVariants.hasNext()) {
-				String nextVariant = nameVariants.next();
-				importedNames.add(getQualifiedNameConverter().toQualifiedName(nextVariant).toLowerCase());
-			}
-		}
-		return element;
-	}
-
-	@Override
-	public IEObjectDescription getSingleElement(QualifiedName name) {
-		importedNames.add(name.toLowerCase());
-		IEObjectDescription element = typeScope.getSingleElement(name);
-		if (element == null) {
+		if (element == null && !binary) {
 			ClassNameVariants nameVariants = new ClassNameVariants(name.toString());
 			while (nameVariants.hasNext()) {
 				String nextVariant = nameVariants.next();

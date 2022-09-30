@@ -10,7 +10,9 @@ package org.eclipse.xtend.core.tests.resource;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -245,6 +247,65 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
         return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
       Assert.assertTrue(("" + importedNames), IterableExtensions.<QualifiedName>exists(importedNames, _function));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testExhaustiveList() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package my.pack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.Map;");
+      _builder.newLine();
+      _builder.append("import java.util.AbstractMap.*;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val list = new java.util.ArrayList<Map.Entry>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val entry = new SimpleEntry(null, null)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val int i = 0");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.file(_builder.toString(), true);
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(file.eResource());
+      final Iterable<QualifiedName> importedNames = description.getImportedNames();
+      Assert.assertEquals(
+        IterableExtensions.join(Arrays.<String>asList(
+          "java.io.serializable", 
+          "java.lang.cloneable", 
+          "java.lang.iterable", 
+          "java.lang.java$util$arraylist", 
+          "java.lang.object", 
+          "java.util.abstractcollection", 
+          "java.util.abstractlist", 
+          "java.util.abstractmap", 
+          "java.util.abstractmap.java$util$arraylist", 
+          "java.util.abstractmap.simpleentry", 
+          "java.util.abstractmap$java$util$arraylist", 
+          "java.util.abstractmap$simpleentry", 
+          "java.util.arraylist", 
+          "java.util.collection", 
+          "java.util.list", 
+          "java.util.map", 
+          "java.util.map$entry", 
+          "java.util.randomaccess", 
+          "java.util$abstractmap$java$util$arraylist", 
+          "java$util$abstractmap$java$util$arraylist", 
+          "my.pack.c", 
+          "my.pack.java$util$arraylist", 
+          "org.eclipse.xtext.xbase.lib.java$util$arraylist"), "\n"), 
+        IterableExtensions.join(IterableExtensions.<QualifiedName>sortWith(IterableExtensions.<QualifiedName>toList(importedNames), Comparator.<QualifiedName>naturalOrder()), "\n"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

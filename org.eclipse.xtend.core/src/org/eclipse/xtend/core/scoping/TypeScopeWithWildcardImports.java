@@ -28,17 +28,20 @@ public class TypeScopeWithWildcardImports extends AbstractScope {
 	private final ImportNormalizer[][] imports;
 	private final RecordingTypeScope typeScope;
 	private final AbstractScope parent;
+	private final boolean binaryName;
 
-	public TypeScopeWithWildcardImports(ImportNormalizer[][] imports, RecordingTypeScope typeScope) {
+	public TypeScopeWithWildcardImports(ImportNormalizer[][] imports, RecordingTypeScope typeScope, boolean binaryName) {
 		this.imports = imports;
 		this.typeScope = typeScope;
 		this.parent = null;
+		this.binaryName = binaryName;
 	}
 	
-	public TypeScopeWithWildcardImports(List<ImportNormalizer> imports, RecordingTypeScope typeScope, AbstractScope parent) {
+	public TypeScopeWithWildcardImports(List<ImportNormalizer> imports, RecordingTypeScope typeScope, AbstractScope parent, boolean binaryName) {
 		this.imports = new ImportNormalizer[][] { imports.toArray(new ImportNormalizer[imports.size()]) };
 		this.typeScope = typeScope;
 		this.parent = parent;
+		this.binaryName = binaryName;
 	}
 	
 	@Override
@@ -50,7 +53,7 @@ public class TypeScopeWithWildcardImports extends AbstractScope {
 				ImportNormalizer normalizer = chunk[j];
 				QualifiedName resolvedName = normalizer.resolve(name);
 				if (resolvedName != null) {
-					IEObjectDescription candidate = typeScope.getSingleElement(resolvedName, true);
+					IEObjectDescription candidate = typeScope.getSingleElement(resolvedName, binaryName);
 					if (candidate != null) {
 						if (result == null) {
 							result = candidate;

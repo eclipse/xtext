@@ -13,7 +13,6 @@ import com.google.inject.Singleton;
 import java.util.Collection;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -22,11 +21,12 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionManager;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 @Singleton
 @SuppressWarnings("all")
-public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
+public class XtendResourceDescriptionManager extends XbaseResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
   @Inject
   private IBatchTypeResolver typeResolver;
 

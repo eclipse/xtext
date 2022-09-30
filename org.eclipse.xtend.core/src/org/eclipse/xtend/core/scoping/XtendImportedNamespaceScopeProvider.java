@@ -310,7 +310,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 			AbstractScope parent, RecordingTypeScope typeScope) {
 		AbstractScope result = parent;
 		if (wildcardImports != null) {
-			result = new TypeScopeWithWildcardImports(wildcardImports, typeScope, result);
+			result = new TypeScopeWithWildcardImports(wildcardImports, typeScope, result, false);
 		}
 		if (concreteImports != null) {
 			if (importedNames != null)
@@ -347,7 +347,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				}
 			};
 		}
-		return new TypeScopeWithWildcardImports(implicitImports, typeScope);
+		return new TypeScopeWithWildcardImports(implicitImports, typeScope, true);
 	}
 
 	@Override
