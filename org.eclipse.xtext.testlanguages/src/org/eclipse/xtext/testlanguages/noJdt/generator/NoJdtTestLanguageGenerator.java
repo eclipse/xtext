@@ -8,17 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages.noJdt.generator;
 
-import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * Generates code from your model files on save.
@@ -27,18 +31,27 @@ import com.google.common.collect.Iterators;
  */
 public class NoJdtTestLanguageGenerator extends AbstractGenerator {
 
+	@Inject private IEObjectDocumentationProvider documentationProvider;
+	
 	@Override
 	public void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		Iterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);
-		Iterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {
-
+		Iterable<Greeting> filtered = ()->Iterators.filter(resource.getAllContents(), Greeting.class);
+		List<String> names = Lists.newArrayList(Iterables.transform(filtered, new Function<Greeting, String>() {
 			@Override
 			public String apply(Greeting greeting) {
 				return greeting.getName();
 			}
-		});
+		}));
 		String fileName = resource.getURI().lastSegment();
 		if(fileName == null) fileName = "greetings";
-		fsa.generateFile(fileName+".txt", "People to greet: " + IteratorExtensions.join(names, ", "));
+		String prefix = "";
+		Greeting firstGreeting = Iterables.getFirst(filtered, null);
+		if (firstGreeting != null) {
+			String documentation = documentationProvider.getDocumentation(firstGreeting);
+			if (documentation != null && documentation.contains("@Timestamp")) {
+				prefix = "@" + System.currentTimeMillis() + Strings.newLine();
+			}
+		}
+		fsa.generateFile(fileName+".txt", prefix + "People to greet: " + String.join(", ", names));
 	}
 }
