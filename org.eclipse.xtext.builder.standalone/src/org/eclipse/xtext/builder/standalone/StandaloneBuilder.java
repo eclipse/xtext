@@ -694,6 +694,7 @@ public class StandaloneBuilder {
 					"Resource " + uri + " is not contained in any of the known source folders " + sourceDirs + ".");
 		}
 		URI projectBaseURI = UriUtil.createFolderURI(new File(baseDir));
+		fsa.setCurrentSource(null);
 		for (OutputConfiguration output : fsa.getOutputConfigurations().values()) {
 			for (String sourceFolder : output.getSourceFolders()) {
 				URI sourceFolderURI = URI.createURI((sourceFolder + "/"));
