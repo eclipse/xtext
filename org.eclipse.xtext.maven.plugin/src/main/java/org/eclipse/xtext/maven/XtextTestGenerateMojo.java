@@ -49,6 +49,10 @@ public class XtextTestGenerateMojo extends AbstractXtextGeneratorMojo {
 		}
 	}
 	
+	protected String tmpDirSuffix() {
+		return "-test";
+	}
+	
 	/**
 	 * Project test source roots. List of folders, where the test source models are
 	 * located.<br>

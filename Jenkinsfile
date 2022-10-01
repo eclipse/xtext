@@ -46,7 +46,6 @@ pipeline {
             --update-snapshots \
             -fae \
             -PuseJenkinsSnapshots \
-            -DJENKINS_URL=$JENKINS_URL \
             -Dmaven.test.failure.ignore=true \
             -Dmaven.repo.local=${WORKSPACE}/.m2/repository \
             -DJENKINS_URL=$JENKINS_URL \

@@ -126,8 +126,15 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	 * compile source roots needed by maven-compiler
 	 */
 	@Parameter(defaultValue = "true")
-	boolean addOutputDirectoriesToCompileSourceRoots = Boolean.TRUE;
+	private Boolean addOutputDirectoriesToCompileSourceRoots = Boolean.TRUE;
 
+	/**
+	 * Track dependencies between model files and perform incremental builds when re-running
+	 * the build after some files were touched.
+	 */
+	@Parameter(defaultValue = "false")
+	private Boolean incrementalXtextBuild = Boolean.FALSE;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -164,6 +171,7 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		builder.setDebugLog(getLog().isDebugEnabled());
+		builder.setIncrementalBuild(incrementalXtextBuild);
 		if (clusteringConfig != null)
 			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
 		configureCompiler(builder.getCompiler());
@@ -198,11 +206,15 @@ public abstract class AbstractXtextGeneratorMojo extends AbstractXtextMojo {
 	}
 
 	private File createTempDir() {
-		File tmpDir = new File(tmpClassDirectory);
+		File tmpDir = new File(tmpClassDirectory + tmpDirSuffix());
 		if (!tmpDir.mkdirs() && !tmpDir.exists()) {
 			throw new IllegalArgumentException("Couldn't create directory '" + tmpClassDirectory + "'.");
 		}
 		return tmpDir;
+	}
+
+	protected String tmpDirSuffix() {
+		return "";
 	}
 
 	protected Predicate<String> emptyStringFilter() {

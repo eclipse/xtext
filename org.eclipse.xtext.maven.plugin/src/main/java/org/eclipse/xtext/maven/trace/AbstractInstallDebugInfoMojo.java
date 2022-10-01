@@ -51,11 +51,11 @@ import com.google.inject.Injector;
 public abstract class AbstractInstallDebugInfoMojo extends AbstractXtextMojo {
 
 	@Inject
-	Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
+	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
 	@Inject
-	Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
+	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
 	@Inject
-	TraceRegionSerializer traceRegionSerializer;
+	private TraceRegionSerializer traceRegionSerializer;
 	@Inject
 	private ClassFileDebugSourceExtractor debugSourceExtractor;
 
