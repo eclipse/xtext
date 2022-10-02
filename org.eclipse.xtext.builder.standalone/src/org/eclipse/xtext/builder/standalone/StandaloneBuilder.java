@@ -124,7 +124,7 @@ public class StandaloneBuilder {
 
 	private Iterable<String> sourceDirs;
 
-	private Iterable<String> javaSourceDirs = new ArrayList<>();
+	private Iterable<String> javaSourceDirs;
 
 	private Iterable<String> classPathEntries;
 
@@ -246,8 +246,8 @@ public class StandaloneBuilder {
 			// Validate and generate
 			ResourceDescriptionsData index = builderState.index;
 			boolean hasValidationErrors = false;
+			LOG.info("Validate and generate.");
 			while (!changedSourceFiles.isEmpty() || !allDeltas.isEmpty()) {
-				LOG.info("Validate and generate.");
 				installSourceLevelURIs(resourceSet, changedSourceFiles);
 				Iterator<URI> sourceResourceIterator = changedSourceFiles.iterator();
 				while (sourceResourceIterator.hasNext()) {
@@ -608,8 +608,13 @@ public class StandaloneBuilder {
 		compiler.setClassPath(classPathEntries);
 		LOG.info("Compiling stubs located in " + stubsDir.getAbsolutePath());
 		// TODO Don't compile regular output directories in this step
-		Set<String> sourcesToCompile = uniqueEntries(
-				Iterables.concat(javaSourceDirs, sourceDirs, Lists.newArrayList(stubsDir.getAbsolutePath())));
+		List<String> nonUniqueSources = Lists.newArrayList(stubsDir.getAbsolutePath());
+		if (javaSourceDirs != null) {
+			Iterables.addAll(nonUniqueSources, javaSourceDirs);
+		} else {
+			Iterables.addAll(nonUniqueSources, sourceDirs);
+		}
+		Set<String> sourcesToCompile = uniqueEntries(nonUniqueSources);
 		for (String outputDir : outputDirectories()) {
 			sourcesToCompile.remove(new File(outputDir).getAbsolutePath());
 		}
