@@ -29,8 +29,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /**
- * A resource description that has no references to the origin resource anymore. Imported names and reference
+ * A resource description that has no references to the origin resource anymore (thus it is "resolved"). Imported names and reference
  * descriptions are not available.
+ * 
+ * @since 2.29
  */
 public class ResolvedResourceDescription extends AbstractResourceDescription {
 
@@ -70,15 +72,15 @@ public class ResolvedResourceDescription extends AbstractResourceDescription {
 
 	@Override
 	public Iterable<QualifiedName> getImportedNames() {
-		IllegalStateException exception = new IllegalStateException("getImportedNames" + getURI());
-		LOG.error(exception, exception);
+		IllegalStateException exception = new IllegalStateException("getImportedNames: " + getURI());
+		LOG.error(exception.getMessage(), exception);
 		return Collections.emptyList();
 	}
 
 	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		IllegalStateException exception = new IllegalStateException("getReferenceDescriptions" + getURI());
-		LOG.error(exception, exception);
+		IllegalStateException exception = new IllegalStateException("getReferenceDescriptions: " + getURI());
+		LOG.error(exception.getMessage(), exception);
 		return Collections.emptyList();
 	}
 
