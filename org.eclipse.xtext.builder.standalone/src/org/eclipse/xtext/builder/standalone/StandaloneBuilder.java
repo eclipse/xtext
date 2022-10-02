@@ -61,8 +61,10 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
@@ -492,35 +494,70 @@ public class StandaloneBuilder {
 		// TODO consider loading resources in parallel
 		compilerPhases.setIndexing(resourceSet, true);
 		try {
-			Iterator<URI> allResourceIterator = Iterables.concat(sourceResourceURIs, libraryResourceURIs).iterator();
 			List<IResourceDescription.Delta> deltas = new ArrayList<>();
-			ResourceDescriptionsData index = builderState.index;
-			while (allResourceIterator.hasNext()) {
-				int clusterIndex = 0;
-				boolean canContinue = true;
-				while (allResourceIterator.hasNext() && canContinue) {
-					URI uri = allResourceIterator.next();
-					Resource resource = resourceSet.getResource(uri, true);
-					IResourceDescription oldDescription = index.getResourceDescription(uri);
-					Manager resourceDescriptionManager = resourceDescriptionManager(resource);
-					IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-					IResourceDescription newDescription = new ResolvedResourceDescription(description);
-					index.addDescription(uri, newDescription);
-					deltas.add(resourceDescriptionManager.createDelta(oldDescription, newDescription));
-					clusterIndex++;
-					if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
-						canContinue = false;
-					}
-				}
-				if (!canContinue) {
-					clearResourceSet(resourceSet);
-				}
-			}
-			installIndex(resourceSet, index);
+			indexResources(resourceSet, strategy, sourceResourceURIs, false, deltas);
+			indexResources(resourceSet, strategy, libraryResourceURIs, true, deltas);
+			installIndex(resourceSet, builderState.index);
 			return new ResourceDescriptionChangeEvent(deltas);
 		} finally {
 			compilerPhases.setIndexing(resourceSet, false);
 		}
+	}
+
+	private void indexResources(XtextResourceSet resourceSet, IResourceClusteringPolicy strategy,
+			Collection<URI> resourceUris, boolean library, List<IResourceDescription.Delta> deltas) {
+		Iterator<URI> resourceUriIterator = resourceUris.iterator();
+		while (resourceUriIterator.hasNext()) {
+			int clusterIndex = 0;
+			boolean canContinue = true;
+			while (resourceUriIterator.hasNext() && canContinue) {
+				URI uri = resourceUriIterator.next();
+				Resource resource = resourceSet.getResource(uri, true);
+				IResourceDescription oldDescription = builderState.index.getResourceDescription(uri);
+				Manager resourceDescriptionManager = resourceDescriptionManager(resource);
+				IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
+				IResourceDescription newDescription = new IndexResolvedResourceDescription(description, library);
+				builderState.index.addDescription(uri, newDescription);
+				deltas.add(resourceDescriptionManager.createDelta(oldDescription, newDescription));
+				clusterIndex++;
+				if (!strategy.continueProcessing(resourceSet, null, clusterIndex)) {
+					canContinue = false;
+				}
+			}
+			if (!canContinue) {
+				clearResourceSet(resourceSet);
+			}
+		}
+	}
+	
+	static class IndexResolvedResourceDescription extends ResolvedResourceDescription {
+
+		/**
+		 * Library resources don't log exceptions when imported names ore references are requested.
+		 */
+		private final boolean libraryResource;
+
+		public IndexResolvedResourceDescription(IResourceDescription copyMe, boolean libraryResource) {
+			super(copyMe);
+			this.libraryResource = libraryResource;
+		}
+		
+		@Override
+		public Iterable<QualifiedName> getImportedNames() {
+			if (libraryResource) {
+				return Collections.emptyList();
+			}
+			return super.getImportedNames();
+		}
+		
+		@Override
+		public Iterable<IReferenceDescription> getReferenceDescriptions() {
+			if (libraryResource) {
+				return Collections.emptyList();
+			}
+			return super.getReferenceDescriptions();
+		}
+		
 	}
 
 	protected IResourceClusteringPolicy getClusteringPolicy() {
