@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.folding;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,9 @@ public class FoldingRangeService {
 
 	public List<FoldingRange> createFoldingRanges(Document document, XtextResource resource,
 			CancelIndicator cancelIndicator) {
+		if (resource == null || document == null) {
+			return Collections.emptyList();
+		}
 		return foldingRangeProvider.getFoldingRanges(resource, cancelIndicator).stream()
 				.map(range -> toFoldingRange(document, range)).filter(range -> isValidRange(range))
 				.collect(Collectors.toList());
