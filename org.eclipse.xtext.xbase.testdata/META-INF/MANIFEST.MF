@@ -4,7 +4,7 @@ Bundle-Name: Xbase Test Data
 Bundle-Vendor: Eclipse Xtext
 Bundle-SymbolicName: org.eclipse.xtext.xbase.testdata;singleton:=true
 Bundle-Version: 2.29.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
