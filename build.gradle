@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-  id 'org.ajoberstar.grgit' version '4.1.1'
+  id 'org.ajoberstar.grgit' version '5.0.0'
 }
 
 apply from: "${rootDir}/gradle/versions.gradle"
@@ -41,7 +41,6 @@ subprojects {
 			apply plugin: 'org.xtext.xtend'
 		}
 		apply plugin: 'eclipse'
-		
 		
 		apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 		apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
