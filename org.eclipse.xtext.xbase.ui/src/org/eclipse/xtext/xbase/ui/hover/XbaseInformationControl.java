@@ -258,9 +258,9 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		else
 			styles = new String[] { "overflow:scroll;" }; //$NON-NLS-1$
 
-		StringBuffer buffer = new StringBuffer(content);
-		HTMLPrinter.insertStyles(buffer, styles);
-		content = buffer.toString();
+		StringBuilder builder = new StringBuilder(content);
+		HTMLPrinter.insertStyles(builder, styles);
+		content = builder.toString();
 
 		/*
 		 * XXX: Should add some JavaScript here that shows something like

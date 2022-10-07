@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ui.testing
 Bundle-Version: 2.29.0.qualifier
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport,
  com.google.guava;bundle-version="[30.1.0,31.0.0)",
  com.google.inject;bundle-version="5.0.1";visibility:=reexport,

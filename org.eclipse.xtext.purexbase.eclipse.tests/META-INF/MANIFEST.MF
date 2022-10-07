@@ -28,7 +28,7 @@ Import-Package: org.apache.commons.logging,
  org.junit.runner.notification;version="4.12.0",
  org.junit.runners;version="4.12.0",
  org.junit.runners.model;version="4.12.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.purexbase.test;x-internal:=true,
  org.eclipse.xtext.purexbase.ui.tests;x-internal=true
 Automatic-Module-Name: org.eclipse.xtext.purexbase.eclipse.tests
