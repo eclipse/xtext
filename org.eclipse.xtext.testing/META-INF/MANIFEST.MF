@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.testing;singleton:=true
 Bundle-Version: 2.29.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.testing,
  org.eclipse.xtext.testing.builder,
  org.eclipse.xtext.testing.extensions,

@@ -76,16 +76,6 @@ public class WizardConfigurationTest {
 		assertTrue(config.getP2Project().pom().getContent().contains("eclipse-repository"));
 		assertTrue(config.getParentProject().pom().getContent().contains("tycho"));
 	}
-
-	@Test
-	public void p2ProjectsEnablesSourceGenerationWithTychoWhenMavenBuiltIsEnabled() {
-		config.getUiProject().setEnabled(true);
-		config.getP2Project().setEnabled(true);
-		config.setPreferredBuildSystem(BuildSystem.MAVEN);
-		assertTrue(config.needsTychoBuild());
-		assertTrue(config.getParentProject().pom().getContent().contains("tycho-source-plugin"));
-		assertTrue(config.getParentProject().pom().getContent().contains("tycho-source-feature-plugin"));
-	}
 	
 	@Test
 	public void p2ProjectsEnablesSourceGenerationWithTychoWhenMavenBuiltIsEnabledJ11() {
@@ -363,15 +353,15 @@ public class WizardConfigurationTest {
 	}
 
 	@Test
-	public void allBuildSystemsUseJava8() {
+	public void allBuildSystemsUseJava11() {
 		String parentPom = config.getParentProject().pom().getContent();
-		assertTrue(parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>"));
-		assertTrue(parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>"));
+		assertTrue(parentPom.contains("<maven.compiler.source>11</maven.compiler.source>"));
+		assertTrue(parentPom.contains("<maven.compiler.target>11</maven.compiler.target>"));
 		String parentGradle = config.getParentProject().buildGradle().getContent();
-		assertTrue(parentGradle.contains("sourceCompatibility = \'1.8\'"));
-		assertTrue(parentGradle.contains("targetCompatibility = \'1.8\'"));
+		assertTrue(parentGradle.contains("sourceCompatibility = \'11\'"));
+		assertTrue(parentGradle.contains("targetCompatibility = \'11\'"));
 		for (String it : Lists.transform(allJavaProjects(), (ProjectDescriptor it) -> it.manifest())) {
-			assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"));
+			assertTrue(it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-11"));
 		}
 		;
 	}
