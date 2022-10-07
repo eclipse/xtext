@@ -1774,7 +1774,14 @@ class JavaASTFlattener extends ASTVisitor {
 			appendToBuffer("default ")
 		} else {
 			appendToBuffer("case ")
-			node.getExpression().accept(this)
+			if (ASTParserFactory.asJLS(targetApiLevel) >= 14) {
+				// TODO make this more sophisticated, hande more expressions that 0 etc
+				val expression = node.expressions().get(0) as Expression
+				expression.accept(this)
+			} else {
+				node.getExpression().accept(this)
+			}
+			
 		}
 		return false
 	}

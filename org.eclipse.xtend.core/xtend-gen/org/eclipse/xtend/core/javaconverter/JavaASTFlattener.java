@@ -2422,7 +2422,15 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer("default ");
     } else {
       this.appendToBuffer("case ");
-      node.getExpression().accept(this);
+      int _asJLS = ASTParserFactory.asJLS(this.targetApiLevel);
+      boolean _greaterEqualsThan = (_asJLS >= 14);
+      if (_greaterEqualsThan) {
+        Object _get = node.expressions().get(0);
+        final Expression expression = ((Expression) _get);
+        expression.accept(this);
+      } else {
+        node.getExpression().accept(this);
+      }
     }
     return false;
   }

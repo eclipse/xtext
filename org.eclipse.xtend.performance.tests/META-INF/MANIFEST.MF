@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Benchmarks
 Bundle-SymbolicName: org.eclipse.xtend.performance.tests
 Bundle-Version: 2.29.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: Eclipse Xtext
 Bundle-ClassPath: .
 Require-Bundle: com.google.inject;bundle-version="5.0.1",

@@ -4,10 +4,10 @@ if [ -z "$JENKINS_URL" ]; then
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
 
-# Use TARGET_PLATFORM from environment and 'oxygen' as default.
+# Use TARGET_PLATFORM from environment and 'r202203' as default.
 # Overridable by 'tp' command-line arg
 if [ -z "$TARGET_PLATFORM" ]; then
-  TARGET_PLATFORM=oxygen
+  TARGET_PLATFORM=r202203
 fi
 
 MVN_ARGS=(\
@@ -30,7 +30,7 @@ while [ "$1" != "" ]; do
       echo -e "\t-h --help"
       echo -e "\t--no-tests Skip test execution"
       echo -e "\t--local-repository=<PATH> Use local Maven repository"
-      echo -e "\t--tp=$TARGET_PLATFORM (valid values: oxygen,photon,r201809,r201812,latest)"
+      echo -e "\t--tp=$TARGET_PLATFORM (valid values: r202203,r202206,...,latest)"
       echo ""
       exit
       ;;
