@@ -830,13 +830,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			assertEquals(Arrays.toString(TestEnum.class.getDeclaredMethods()), 2, methodCount);
 			int constructorCount = TestEnum.class.getDeclaredConstructors().length;
 			// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
-			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 2, constructorCount);
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 1, constructorCount);
 			int fieldCount = TestEnum.class.getDeclaredFields().length;
 			// FirstValue, SecondValue, string, ENUM$VALUES
 			assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
 			// ENUM$VALUES is synthetic
 			// TestEnum(String, String, EnumType) is synthetic
-			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2,
+			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 1,
 					type.getMembers().size());
 		} catch (AssertionError e) {
 			String typeName = TestEnum.class.getName();
@@ -849,14 +849,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			assertEquals(Arrays.toString(TestEnum.class.getDeclaredMethods()), 3, methodCount);
 			int constructorCount = TestEnum.class.getDeclaredConstructors().length;
 			// TestEnum(String, int, String), TestEnum(String, int, String, EnumType)
-			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 2, constructorCount);
+			assertEquals(Arrays.toString(TestEnum.class.getDeclaredConstructors()), 1, constructorCount);
 			int fieldCount = TestEnum.class.getDeclaredFields().length;
 			// FirstValue, SecondValue, string, ENUM$VALUES
 			assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
 			// ENUM$VALUES is synthetic
 			// TestEnum(String, String, EnumType) is synthetic
 			// TestEnum$values is synthetic
-			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 3,
+			assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 2,
 					type.getMembers().size());
 		}
 	}

@@ -4,7 +4,7 @@ Bundle-Name: Xtext Common Types Plugin Tests
 Bundle-SymbolicName: org.eclipse.xtext.common.types.tests;singleton:=true
 Bundle-Version: 2.29.0.qualifier
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.testing,
  org.eclipse.xtext.util,
  org.eclipse.xtext.common.types,

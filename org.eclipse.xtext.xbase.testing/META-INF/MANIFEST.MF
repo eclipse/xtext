@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.xbase.testing;singleton:=true
 Bundle-Version: 2.29.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.13.102";visibility:=reexport,
