@@ -9,8 +9,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>	
-		<tycho-version>1.7.0</tycho-version>
-		<root-dir>${basedir}/..</root-dir>
+		<tycho-version>2.7.5</tycho-version>
+		<root-dir>${maven.multiModuleProjectDirectory}/..</root-dir>
 	</properties>
 
 	<repositories>
