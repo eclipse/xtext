@@ -160,7 +160,7 @@ public class ASTParserFactory {
           _switchResult = 11;
           break;
         case "17":
-          _switchResult = 11;
+          _switchResult = 17;
           break;
         default:
           _switchResult = 3;
