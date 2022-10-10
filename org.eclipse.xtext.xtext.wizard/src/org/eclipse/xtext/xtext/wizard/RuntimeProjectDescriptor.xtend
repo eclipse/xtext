@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.JUnitVersion
-import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 
@@ -364,28 +363,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							</configuration>
 							«IF config.needsTychoBuild»
 								<dependencies>
-									«IF !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-										<dependency>
-											<groupId>org.eclipse.emf</groupId>
-											<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-											<version>${mwe2Version}</version>
-										</dependency>
-										<dependency>
-											<groupId>org.eclipse.xtext</groupId>
-											<artifactId>org.eclipse.xtext.common.types</artifactId>
-											<version>${xtextVersion}</version>
-										</dependency>
-										<dependency>
-											<groupId>org.eclipse.xtext</groupId>
-											<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-											<version>${xtextVersion}</version>
-										</dependency>
-										<dependency>
-											<groupId>org.eclipse.xtext</groupId>
-											<artifactId>org.eclipse.xtext.xbase</artifactId>
-											<version>${xtextVersion}</version>
-										</dependency>
-									«ENDIF»
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
 										<artifactId>xtext-antlr-generator</artifactId>

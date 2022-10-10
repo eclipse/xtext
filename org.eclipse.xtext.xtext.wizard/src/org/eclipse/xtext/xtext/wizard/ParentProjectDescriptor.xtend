@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.wizard
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -73,10 +72,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		'2.7.5'
 	}
 
-	def String getTychoVersionJ8() {
-		'1.7.0'
-	}
-
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
@@ -102,6 +97,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							maven {
 								url 'https://oss.sonatype.org/content/repositories/snapshots'
 							}
+«««							«FOR x : #['lib','core','extras','maven','xtend','web']»
+«««								maven {
+«««									url 'https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/'
+«««								}
+«««							«ENDFOR»
 						«ENDIF»
 					}
 
@@ -218,7 +218,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»«tychoVersion»«ELSE»«tychoVersionJ8»«ENDIF»</tycho-version>
+						<tycho-version>«tychoVersion»</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
@@ -263,32 +263,14 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<goal>plugin-source</goal>
 										</goals>
 									</execution>
-									«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-										<execution>
-											<id>feature-source</id>
-											<goals>
-												<goal>feature-source</goal>
-											</goals>
-										</execution>
-									«ENDIF»
+									<execution>
+										<id>feature-source</id>
+										<goals>
+											<goal>feature-source</goal>
+										</goals>
+									</execution>
 								</executions>
 							</plugin>
-							«IF !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-								<plugin>
-									<groupId>org.eclipse.tycho.extras</groupId>
-									<artifactId>tycho-source-feature-plugin</artifactId>
-									<version>${tycho-version}</version>
-									<executions>
-										<execution>
-											<id>source-feature</id>
-											<phase>package</phase>
-											<goals>
-												<goal>source-feature</goal>
-											</goals>
-										</execution>
-									</executions>
-								</plugin>
-							«ENDIF»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>tycho-p2-plugin</artifactId>
@@ -445,69 +427,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 													<ignore></ignore>
 												</action>
 											</pluginExecution>
-											«IF config.needsTychoBuild && !config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-												<pluginExecution>
-													<pluginExecutionFilter>
-														<groupId>
-															org.eclipse.tycho
-														</groupId>
-														<artifactId>
-															tycho-compiler-plugin
-														</artifactId>
-														<versionRange>
-															[0.23.1,)
-														</versionRange>
-														<goals>
-															<goal>compile</goal>
-															<goal>testCompile</goal>
-														</goals>
-													</pluginExecutionFilter>
-													<action>
-														<ignore></ignore>
-													</action>
-												</pluginExecution>
-												<pluginExecution>
-													<pluginExecutionFilter>
-														<groupId>
-															org.eclipse.tycho
-														</groupId>
-														<artifactId>
-															tycho-packaging-plugin
-														</artifactId>
-														<versionRange>
-															[0.23.1,)
-														</versionRange>
-														<goals>
-															<goal>build-qualifier</goal>
-															<goal>build-qualifier-aggregator</goal>
-															<goal>validate-id</goal>
-															<goal>validate-version</goal>
-														</goals>
-													</pluginExecutionFilter>
-													<action>
-														<ignore></ignore>
-													</action>
-												</pluginExecution>
-												<pluginExecution>
-													<pluginExecutionFilter>
-														<groupId>
-															org.eclipse.tycho
-														</groupId>
-														<artifactId>
-															target-platform-configuration
-														</artifactId>
-														<versionRange>
-															[2.4.0,)
-														</versionRange>
-														<goals>
-															<goal>target-platform</goal>
-														</goals>
-													</pluginExecutionFilter>
-													<action>
-														<ignore></ignore>
-													</action>
-												</pluginExecution>
-											«ENDIF»
 										</pluginExecutions>
 									</lifecycleMappingMetadata>
 								</configuration>
@@ -596,6 +515,18 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<enabled>true</enabled>
 							</snapshots>
 						</repository>
+«««						«FOR x : #['lib','core','extras','maven','xtend','web']»
+«««							<repository>
+«««								<id>xtext-«x»</id>
+«««								<url>https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+«««								<releases>
+«««									<enabled>false</enabled>
+«««								</releases>
+«««								<snapshots>
+«««									<enabled>true</enabled>
+«««								</snapshots>
+«««							</repository>
+«««						«ENDFOR»
 					«ENDIF»
 				</repositories>
 				<pluginRepositories>
@@ -645,6 +576,18 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<enabled>true</enabled>
 							</snapshots>
 						</pluginRepository>
+«««						«FOR x : #['lib','core','extras','maven','xtend','web']»
+«««							<pluginRepository>
+«««								<id>xtext-«x»-p</id>
+«««								<url>https://ci.eclipse.org/xtext/job/xtext-«x»/job/<branch>/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+«««								<releases>
+«««									<enabled>false</enabled>
+«««								</releases>
+«««								<snapshots>
+«««									<enabled>true</enabled>
+«««								</snapshots>
+«««							</pluginRepository>
+«««						«ENDFOR»
 					«ENDIF»
 					«IF config.needsTychoBuild && tychoVersion.endsWith("-SNAPSHOT")»
 						<pluginRepository>

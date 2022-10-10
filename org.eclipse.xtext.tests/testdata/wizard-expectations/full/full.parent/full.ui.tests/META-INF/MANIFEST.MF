@@ -11,5 +11,5 @@ Require-Bundle: full.ui,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.junit
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: full.ui.tests
