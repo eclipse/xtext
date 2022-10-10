@@ -65,6 +65,7 @@
 					<!-- This does not work currently, as we can see by the missing lambda 
 						in generated code for GreetingsHelper.compileAllGreetings(). It does work, 
 						however, for xtend-maven-plugin. (see https://github.com/eclipse/xtext-maven/issues/11) -->
+						<!-- TODO JAVA11 -->
 					<javaSourceVersion>1.8</javaSourceVersion>
 					<projectMappings>
 						<projectMapping>
