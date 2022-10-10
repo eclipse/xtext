@@ -4,7 +4,7 @@ Bundle-Name: Syntax Diagram View Tests
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.graph.tests
 Bundle-Version: 2.29.0.qualifier
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext.testing,
  com.google.inject;bundle-version="5.0.1",

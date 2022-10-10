@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2021 itemis AG (http://www.itemis.eu) and others
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -22,7 +22,6 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_eeInfo_0;
 	public static String WizardNewXtextProjectCreationPage_eeInfo_1;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageExtensions;
-	public static String WizardNewXtextProjectCreationPage_MessageAtLeastJava8;
 	public static String WizardNewXtextProjectCreationPage_MessageAtLeastJava11;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage;

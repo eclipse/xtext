@@ -49,6 +49,13 @@ public class JavaVersionExtendedTest {
 			System.err.println("ooops");
 			// ok
 		}
+		try {
+			long value = ClassFileConstants.class.getField("JDK17").getLong(null);
+			assertEquals(value, JavaVersion.JAVA17.toJdtClassFileConstant());
+		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
+			System.err.println("ooops");
+			// ok
+		}
 	}
 
 }

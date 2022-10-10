@@ -230,12 +230,9 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		}
 		JavaVersion javaVersion = JavaVersion.fromBree(breeCombo.getText());
 		if (javaVersion != null) {
-			if (!javaVersion.isAtLeast(JavaVersion.JAVA8)) {
-				setErrorMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava8);
+			if (!javaVersion.isAtLeast(JavaVersion.JAVA11)) {
+				setErrorMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava11);
 				return false;
-			} else if (!javaVersion.isAtLeast(JavaVersion.JAVA11)) {
-				setMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava11, IStatus.WARNING);
-				return true;
 			}
 		}
 		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
