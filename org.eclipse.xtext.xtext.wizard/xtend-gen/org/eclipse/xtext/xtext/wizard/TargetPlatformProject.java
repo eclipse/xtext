@@ -266,7 +266,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         }
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.3.0.v20220409-0157\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.4.0.v20221013-0857\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -311,7 +311,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         }
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.3.0.v20220409-0157\"/>");
+        _builder.append("<unit id=\"org.objectweb.asm\" version=\"9.4.0.v20221013-0857\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
