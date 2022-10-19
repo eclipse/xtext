@@ -47,8 +47,12 @@ spec:
           sshagent(['git.eclipse.org-bot-ssh']) { // 
             sh '''
               rm -rf deploy-xtext-git-repo
-              rm -rf deploy-xtend-git-repo
               git clone -b master ssh://genie.xtext@git.eclipse.org:29418/www.eclipse.org/Xtext deploy-xtext-git-repo
+            '''
+          }
+          sshagent(['git.eclipse.org-bot-ssh']) { // 
+            sh '''
+              rm -rf deploy-xtend-git-repo
               git clone -b master ssh://genie.xtext@git.eclipse.org:29418/www.eclipse.org/xtend deploy-xtend-git-repo
             '''
           }
