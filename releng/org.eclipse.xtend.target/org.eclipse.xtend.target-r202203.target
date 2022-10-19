@@ -123,7 +123,7 @@
 		<unit id="org.junit.platform.commons" version="0.0.0"/>
 		<unit id="org.junit.platform.engine" version="0.0.0"/>
 		<unit id="org.opentest4j" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="9.3.0.v20220409-0157"/>
+		<unit id="org.objectweb.asm" version="9.4.0.v20221013-0857"/>
 		<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 		<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
 	</location>
