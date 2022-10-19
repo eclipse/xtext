@@ -84,7 +84,7 @@ dependencies {
         api "org.junit.platform:junit-platform-runner:1.8.2"
         api "org.junit.platform:junit-platform-suite-api:1.8.2"
         api "org.opentest4j:opentest4j:1.2.0"
-        api "org.ow2.asm:asm:9.3"
+        api "org.ow2.asm:asm:9.4"
     }
 }
 
