@@ -1,5 +1,5 @@
 plugins {
-     id "org.wisepersist.gwt" version "1.1.19"
+     id "org.docstr.gwt" version "1.1.22"
 }
 
 group = 'org.eclipse.xtend'
