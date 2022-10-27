@@ -44,10 +44,10 @@ spec:
   stages {
     stage ('Checkout') {
       steps {
-          sshagent(['git.eclipse.org-bot-ssh']) { // 
+          sshagent(['github-bot-ssh']) { // 
             sh '''
               rm -rf deploy-xtext-git-repo
-              git clone -b master ssh://genie.xtext@git.eclipse.org:29418/www.eclipse.org/Xtext deploy-xtext-git-repo
+              git clone -b master git@github.com:eclipse/xtext-website-publish.git deploy-xtext-git-repo
             '''
           }
           sshagent(['git.eclipse.org-bot-ssh']) { // 
@@ -105,7 +105,7 @@ spec:
       steps {
         echo 'Deploying....'
         dir ('deploy-xtext-git-repo') {
-          sshagent(['git.eclipse.org-bot-ssh']) { // 
+          sshagent(['github-bot-ssh']) { // 
             sh '''
               git push origin master
             '''
