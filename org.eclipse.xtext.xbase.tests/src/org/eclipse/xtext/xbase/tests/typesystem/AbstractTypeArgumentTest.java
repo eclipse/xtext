@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -399,18 +399,8 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testOverloadedOperators_20() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			done(
-					and(
-							bindTypeArgumentsTo(
-									"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
-									"AbstractStringBuilder & Serializable & Comparable<?>"),
-							"Serializable & Comparable<?> & CharSequence"));
-		} else {
-			done(and(bindTypeArgumentsTo(
-					"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
-					"AbstractStringBuilder & Serializable"), "Serializable & CharSequence"));
-		}
+		done(and(bindTypeArgumentsTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
+				"AbstractStringBuilder & Serializable & Comparable<?>"), "Serializable & Comparable<?> & CharSequence"));
 	}
 
 	@Test

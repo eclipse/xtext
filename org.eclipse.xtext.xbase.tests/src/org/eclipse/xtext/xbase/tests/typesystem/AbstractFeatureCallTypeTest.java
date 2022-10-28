@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -1068,19 +1068,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
 
 	@Test
 	public void testBug_406425_01() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesFeatureCallsTo(
-				"(null as StringBuilder) => [\n" +
-				"	newArrayList(it, new Long(0))\n" +
-				"]", "StringBuilder",
-					"ArrayList<Comparable<?> & Serializable>", "StringBuilder");
-		} else {
-			resolvesFeatureCallsTo(
-				"(null as StringBuilder) => [\n" +
-				"	newArrayList(it, new Long(0))\n" +
-				"]", "StringBuilder",
-					"ArrayList<Serializable>", "StringBuilder");
-		}
+		resolvesFeatureCallsTo(
+			"(null as StringBuilder) => [\n" +
+			"	newArrayList(it, new Long(0))\n" +
+			"]", "StringBuilder",
+				"ArrayList<Comparable<?> & Serializable>", "StringBuilder");
 	}
 
 	@Test
