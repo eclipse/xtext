@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -33,38 +33,29 @@ public class XtendInstallDebugInfoMojoIT {
 
 		// please note that here we have source information for both Java and Xtend
 		String xpt = 
-				"// test {\n" + 
-				"  package test; // XtendA$1.class\n" + 
-				"  class XtendA$1 {\n" + 
-				"    void <init>() { // XtendA.java:13\n" + 
-				"      // XtendA.java:13 -> XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"    }\n" + 
-				"    void apply() { // XtendA.java:15\n" + 
-				"      // XtendA.java:15 -> XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"      void it;\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"  \n" + 
-				"  package test; // XtendA.class\n" + 
-				"  class XtendA {\n" + 
-				"    void <init>() { // XtendA.java:11\n" + 
-				"      // XtendA.java:12 -> XtendA.xtend:5\n" + 
-				"      // XtendA.java:13:18 -> XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"      void _function;\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"  \n" + 
-				"  package test; // XtendA2.class\n" + 
-				"  class XtendA2 {\n" + 
-				"    void <init>() { // XtendA2.java:7\n" + 
-				"      // XtendA2.java:8 -> XtendA.xtend:12\n" + 
-				"      void this;\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"}";
+				  "// test {\n" 
+				+ "  package test; // XtendA.class\n"
+				+ "  class XtendA {\n"
+				+ "    void <init>() { // XtendA.java:11\n"
+				+ "      // XtendA.java:12 -> XtendA.xtend:5\n"
+				+ "      // XtendA.java:13:16 -> XtendA.xtend:6\n"
+				+ "      void this;\n"
+				+ "      void _function;\n"
+				+ "    }\n"
+				+ "    void lambda$new$0() { // XtendA.java:14\n"
+				+ "      // XtendA.java:14 -> XtendA.xtend:6\n"
+				+ "      void it;\n"
+				+ "    }\n"
+				+ "  }\n"
+				+ "  \n"
+				+ "  package test; // XtendA2.class\n"
+				+ "  class XtendA2 {\n"
+				+ "    void <init>() { // XtendA2.java:7\n"
+				+ "      // XtendA2.java:8 -> XtendA.xtend:12\n"
+				+ "      void this;\n"
+				+ "    }\n"
+				+ "  }\n"
+				+ "}";
 		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
 	}
 
