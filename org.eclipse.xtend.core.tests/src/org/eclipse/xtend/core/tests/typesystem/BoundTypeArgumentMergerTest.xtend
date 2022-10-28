@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -441,27 +441,15 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 
 	@Test def void testMergeMultiType_01() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
-		} else {
-			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
-		}
+		merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
 	}
 
 	@Test def void testMergeMultiType_02() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
-		} else {
-			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
-		}
+		mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
 	}
 	
 	@Test def void testMergeMultiType_03() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & Comparable<?> & CharSequence', INVARIANT)
-		} else {
-			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & CharSequence', INVARIANT)
-		}
+		merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & Comparable<?> & CharSequence', INVARIANT)
 	}
 	
 	@Test def void testMergeMultiType_04() {

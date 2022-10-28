@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,6 @@ package org.eclipse.xtend.core.tests.compiler;
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.junit.Test;
 
@@ -269,17 +268,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    {
-      boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
-      boolean _not = (!_isJava11OrLater);
-      if (_not) {
-        _builder_1.append("import javax.annotation.Generated;");
-        _builder_1.newLine();
-        _builder_1.newLine();
-        _builder_1.append("@Generated(\"org.eclipse.xtend.core.compiler.XtendGenerator\")");
-        _builder_1.newLine();
-      }
-    }
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -305,17 +293,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    {
-      boolean _isJava11OrLater = JavaRuntimeVersion.isJava11OrLater();
-      boolean _not = (!_isJava11OrLater);
-      if (_not) {
-        _builder_1.append("import javax.annotation.Generated;");
-        _builder_1.newLine();
-        _builder_1.newLine();
-        _builder_1.append("@Generated(value = \"org.eclipse.xtend.core.compiler.XtendGenerator\", comments = \"Source: Bar.xtend\")");
-        _builder_1.newLine();
-      }
-    }
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -26,7 +26,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -40,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -728,39 +726,6 @@ public class TestBatchCompiler {
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
     Assert.assertTrue(this.batchCompiler.compile());
     Assert.assertFalse(this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@SuppressWarnings"));
-  }
-
-  @Test
-  public void testGeneratedAnnotation() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.batchCompiler.setGenerateGeneratedAnnotation(true);
-    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    Assert.assertTrue(this.batchCompiler.compile());
-    Assert.assertTrue(this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java")).contains("@Generated"));
-  }
-
-  @Test
-  public void testGeneratedAnnotationComment() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.batchCompiler.setGenerateGeneratedAnnotation(true);
-    this.batchCompiler.setGeneratedAnnotationComment("FooComment");
-    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
-    Assert.assertTrue(generated.contains("@Generated"));
-    Assert.assertTrue(generated.contains("FooComment"));
-  }
-
-  @Test
-  public void testGeneratedAnnotationDate1() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.batchCompiler.setGenerateGeneratedAnnotation(true);
-    this.batchCompiler.setIncludeDateInGeneratedAnnotation(true);
-    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    Assert.assertTrue(this.batchCompiler.compile());
-    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
-    Assert.assertTrue(generated.contains("@Generated"));
-    Assert.assertTrue(generated.contains("date ="));
   }
 
   @Test

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -21,10 +21,8 @@ import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.logging.LoggingTester
 import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest
-import org.eclipse.xtext.util.JavaRuntimeVersion
 import org.junit.After
 import org.junit.AfterClass
-import org.junit.Assume
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -496,38 +494,6 @@ class TestBatchCompiler {
 		assertFalse((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@SuppressWarnings"))
 	}
 	
-	@Test
-	def void testGeneratedAnnotation() {
-		Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
-		batchCompiler.generateGeneratedAnnotation = true
-		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
-		assertTrue(batchCompiler.compile)
-		assertTrue((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@Generated"))
-	}
-	
-	@Test
-	def void testGeneratedAnnotationComment() {
-		Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
-		batchCompiler.generateGeneratedAnnotation = true
-		batchCompiler.generatedAnnotationComment = "FooComment"
-		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
-		assertTrue(batchCompiler.compile)
-		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
-		assertTrue(generated.contains("@Generated"))
-		assertTrue(generated.contains("FooComment"))
-	}
-	
-	@Test
-	def void testGeneratedAnnotationDate1() {
-		Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
-		batchCompiler.generateGeneratedAnnotation = true
-		batchCompiler.includeDateInGeneratedAnnotation = true
-		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
-		assertTrue(batchCompiler.compile)
-		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
-		assertTrue(generated.contains("@Generated"))
-		assertTrue(generated.contains("date ="))
-	}
 	
 	@Test
 	def void testJavaVersion5() {
