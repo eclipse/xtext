@@ -12,10 +12,10 @@
 
 <p>Xtext supports the generation of language servers that comply to the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol (LSP)</a>.</p>
 
-<h2 id="getting-started">Getting Started</h2>
+<h2 id="getting-started-eclipse">Getting Started in Eclipse</h2>
 
-<p><strong>Step 1:</strong> Create a new Xtext Project with language server support.<br />
-<img src="images/LSP_1_Xtext_Wizard.png" alt="Xtext project wizard" /></p>
+<p><strong>Step 1:</strong> Create a new Xtext Project with language server support and Maven as the preferred build system.<br />
+<img src="images/LSP_01_XtextWizardMaven.png" alt="Xtext project wizard" /></p>
 
 <p><strong>Step 2:</strong> Implement the Domainmodel language following the <a href="https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html">Xtext - 15 Minutes Tutorial</a>.</p>
 
@@ -24,15 +24,15 @@
 <ol>
   <li>
     <p>Configure a content type to the <code>*.dmodel</code> files:<br />
-<img src="images/LSP_2_DomainmodelContentType.png" alt="Domainmodel Content Type" /></p>
+<img src="images/LSP_02_DomainmodelContentType.png" alt="Domainmodel Content Type" /></p>
   </li>
   <li>
     <p>Create a launch configuration that starts the Domainmodel language server:<br />
-<img src="images/LSP_3_DomainmodelLanguageServerLauncher.png" alt="Domainmodel Language Server Launcher" /></p>
+<img src="images/LSP_03_DomainmodelLanguageServerLauncher.png" alt="Domainmodel Language Server Launcher" /></p>
   </li>
   <li>
     <p>Assign the Domainmodel content type to the Domainmodel language server launcher:<br />
-<img src="images/LSP_4_DomainmodelLanguageServer.png" alt="Domainmodel Language Server" /></p>
+<img src="images/LSP_04_DomainmodelLanguageServer.png" alt="Domainmodel Language Server" /></p>
   </li>
   <li>LSP does not support syntax highlighting (usually it is done on the client side). The following <a href="https://projects.eclipse.org/projects/technology.tm4e">TextMate</a> json file adds syntax highlighting support for the keywords, single-line and multi-line comments of the Domainmodel language:
     <pre><code class="language-json">{
@@ -81,10 +81,42 @@
 </code></pre>
   </li>
   <li>Open a <code>*.dmodel</code> file with the Generic Editor and explore the supported language features like syntax highlighting, content assist, validation, displaying code lenses, quickfixes, formatting, … :<br />
-<img src="images/LSP_5_DomainmodelLanguageFeatures.png" alt="Domainmodel Language Features" /></li>
+<img src="images/LSP_05_DomainmodelLanguageFeatures.png" alt="Domainmodel Language Features" /></li>
 </ol>
 
-<p><strong>Step 4:</strong>  Feel free to implement further LSP clients to the Domainmodel language server based on Atom, Eclipse Che, Eclipse Theia, IntelliJ IDEA, Monaco Editor, VS Code, … The currenly supported LSP clients are available in the <code>LSP clients</code> section of <a href="https://langserver.org/">https://langserver.org/</a>.</p>
+<h2 id="getting-started-intellij">Getting Started in IntelliJ IDEA</h2>
+
+<p><strong>Step 1:</strong> Create a new Xtext Project with language server support and Gradle as the preferred build system.<br />
+<img src="images/LSP_06_XtextWizardGradle.png" alt="Xtext project wizard" /></p>
+
+<p><strong>Step 2:</strong> Implement the Domainmodel language following the <a href="https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html">Xtext - 15 Minutes Tutorial</a>.</p>
+
+<p><strong>Step 3:</strong> Try out the Domainmodel language server in IntelliJ IDEA based on the <a href="https://github.com/gtache/intellij-lsp">gtache LSP plugin</a>.</p>
+
+<ol>
+  <li>Generate the Language Server jar file using the <code>gradle clean build</code> command. After the gradle build has been completed successfully, the generated jar file is located in the build folder of the ide project:
+    <pre><code>org.example.domainmodel.ide\build\libs\org.example.domainmodel.ide-1.0.0-SNAPSHOT-ls.jar
+</code></pre>
+  </li>
+  <li>
+    <p>Start IntelliJ IDEA and install the LSP plugin via <code>File - Settings... - Plugins - search for 'IntelliJ LSP Support'</code>:<br />
+ <img src="images/LSP_07_IntelliJLSPPlugin.png" alt="IntelliJ LSP Plugin" /></p>
+  </li>
+  <li>
+    <p>Assign the Domainmodel language server to the <code>*.dmodel</code> extension via <code>File - Settings... - Languages and Frameworks - Language Server Protocol - Server Definitions</code>:<br />
+<img src="images/LSP_08_IntelliJLanguageServerDefinition.png" alt="IntelliJ Language Server Definition" /></p>
+  </li>
+  <li>
+    <p>While opening a Domainmodel file for the first time, the <code>*.dmodel</code> file pattern should be configured to be treated as text files and auto-detect the file type by content:<br />
+ <img src="images/LSP_09_IntelliJFileTypeConfiguration.png" alt="IntelliJ File Type Configuration.png" /></p>
+  </li>
+  <li>After that, whenever a <code>*.dmodel</code> file is opened in IntelliJ IDEA, the Domainmodel Language Server is activated (indicated by the green circle at the bottom right) and provides the supported language features (e.g. code completion) to the user:<br />
+ <img src="images/LSP_10_IntelliJCodeCompletion.png" alt="IntelliJ Code Completion" /></li>
+</ol>
+
+<h2 id="further-lsp-clients">Further LSP Clients</h2>
+
+<p>Feel free to implement further LSP clients to the Domainmodel language server based on Atom, Eclipse Che, Eclipse Theia, Monaco Editor, VS Code, … The currenly supported LSP clients are available in the <code>LSP clients</code> section of <a href="https://langserver.org/">https://langserver.org/</a>.</p>
 
 <h2 id="language-features">Language Features</h2>
 
