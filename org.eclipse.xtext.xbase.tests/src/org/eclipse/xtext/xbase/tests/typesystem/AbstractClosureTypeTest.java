@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -2791,48 +2791,26 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 
 	@Test
 	public void testClosureWithReturnExpression_01() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			withEquivalents(resolvesClosuresTo("[ | if (true) return '' else return new StringBuilder ]",
-					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
-		} else {
-			withEquivalents(
-					resolvesClosuresTo("[ | if (true) return '' else return new StringBuilder ]", "()=>Serializable & CharSequence"),
-					"Function0<Serializable & CharSequence>");
-		}
+		withEquivalents(resolvesClosuresTo("[ | if (true) return '' else return new StringBuilder ]",
+				"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 	}
 
 	@Test
 	public void testClosureWithReturnExpression_02() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			withEquivalents(resolvesClosuresTo("[ | if (true) '' else return new StringBuilder ]",
-					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
-		} else {
-			withEquivalents(resolvesClosuresTo("[ | if (true) '' else return new StringBuilder ]", "()=>Serializable & CharSequence"),
-					"Function0<Serializable & CharSequence>");
-		}
+		withEquivalents(resolvesClosuresTo("[ | if (true) '' else return new StringBuilder ]",
+			"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 	}
 
 	@Test
 	public void testClosureWithReturnExpression_03() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			withEquivalents(resolvesClosuresTo("[ | if (true) return '' else new StringBuilder ]",
-					"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
-		} else {
-			withEquivalents(resolvesClosuresTo("[ | if (true) return '' else new StringBuilder ]", "()=>Serializable & CharSequence"),
-					"Function0<Serializable & CharSequence>");
-		}
+		withEquivalents(resolvesClosuresTo("[ | if (true) return '' else new StringBuilder ]",
+				"()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
 	}
 
 	@Test
 	public void testClosureWithReturnExpression_04() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			withEquivalents(
-					resolvesClosuresTo("[ | if (true) '' else new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"),
-					"Function0<Serializable & Comparable<?> & CharSequence>");
-		} else {
-			withEquivalents(resolvesClosuresTo("[ | if (true) '' else new StringBuilder ]", "()=>Serializable & CharSequence"),
-					"Function0<Serializable & CharSequence>");
-		}
+		withEquivalents(resolvesClosuresTo("[ | if (true) '' else new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"),
+				"Function0<Serializable & Comparable<?> & CharSequence>");
 	}
 
 	@Test

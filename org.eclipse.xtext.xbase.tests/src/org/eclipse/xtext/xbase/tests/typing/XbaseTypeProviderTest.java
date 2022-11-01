@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -103,11 +103,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testIfExpression_02() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable & java.lang.Comparable<? extends java.lang.Object>", "if (true) new StringBuilder() else new StringBuffer()");
-		} else {
-			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
-		}
+		assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable & java.lang.Comparable<? extends java.lang.Object>", "if (true) new StringBuilder() else new StringBuffer()");
 	}
 
 	@Test public void testSwitchExpression() throws Exception {
@@ -136,11 +132,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 //		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			assertEquals("java.io.Serializable & java.lang.Comparable<? extends java.lang.Object> & java.lang.CharSequence", toString(getType(expression)));
-		} else{
-			assertEquals("java.io.Serializable & java.lang.CharSequence", toString(getType(expression)));
-		}
+		assertEquals("java.io.Serializable & java.lang.Comparable<? extends java.lang.Object> & java.lang.CharSequence", toString(getType(expression)));
 	}
 	
 	@Test public void testTypeGuardedCase_1() throws Exception {

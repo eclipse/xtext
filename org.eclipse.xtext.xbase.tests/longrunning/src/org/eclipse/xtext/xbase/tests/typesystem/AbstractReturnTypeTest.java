@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -72,11 +72,7 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
 	@Test
 	@Override
 	public void testIfExpression_04() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("if (true) return '' else new StringBuilder", "Serializable & Comparable<?> & CharSequence");
-		} else {
-			resolvesTo("if (true) return '' else new StringBuilder", "Serializable & CharSequence");
-		}
+		resolvesTo("if (true) return '' else new StringBuilder", "Serializable & Comparable<?> & CharSequence");
 	}
 
 	@Test

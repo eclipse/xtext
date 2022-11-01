@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -815,13 +815,8 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testOverloadedOperators_20() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
-					"Iterable<Serializable & Comparable<?> & CharSequence>");
-		} else {
-			resolvesTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
-					"Iterable<Serializable & CharSequence>");
-		}
+		resolvesTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)",
+				"Iterable<Serializable & Comparable<?> & CharSequence>");
 	}
 
 	@Test
@@ -1704,11 +1699,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_02() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("if (true) new StringBuilder() else new StringBuffer()", "AbstractStringBuilder & Serializable & Comparable<?>");
-		} else {
-			resolvesTo("if (true) new StringBuilder() else new StringBuffer()", "AbstractStringBuilder & Serializable");
-		}
+		resolvesTo("if (true) new StringBuilder() else new StringBuffer()", "AbstractStringBuilder & Serializable & Comparable<?>");
 	}
 
 	@Test
@@ -1746,17 +1737,10 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_09() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			this.isFunctionAndEquivalentTo(
-					resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]",
-							"(Object)=>AbstractStringBuilder & Serializable & Comparable<?>"),
-					"Function1<Object, ? extends AbstractStringBuilder & Serializable & Comparable<?>>");
-		} else {
-			this.isFunctionAndEquivalentTo(
-					resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]",
-							"(Object)=>AbstractStringBuilder & Serializable"),
-					"Function1<Object, ? extends AbstractStringBuilder & Serializable>");
-		}
+		this.isFunctionAndEquivalentTo(
+				resolvesTo("if (true) [new StringBuilder()] else [new StringBuffer()]",
+						"(Object)=>AbstractStringBuilder & Serializable & Comparable<?>"),
+				"Function1<Object, ? extends AbstractStringBuilder & Serializable & Comparable<?>>");
 	}
 
 	@Test
@@ -1766,12 +1750,8 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_11() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')",
-					"AbstractStringBuilder & Serializable & Comparable<?>");
-		} else {
-			resolvesTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')", "AbstractStringBuilder & Serializable");
-		}
+		resolvesTo("(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')",
+				"AbstractStringBuilder & Serializable & Comparable<?>");
 	}
 
 	@Test
@@ -1781,13 +1761,8 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testIfExpression_13() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("if (true) <StringBuffer>newArrayList else <String>newHashSet",
-					"AbstractCollection<? extends Serializable & Comparable<?> & CharSequence> & Serializable & Cloneable");
-		} else {
-			resolvesTo("if (true) <StringBuffer>newArrayList else <String>newHashSet",
-					"AbstractCollection<? extends Serializable & CharSequence> & Serializable & Cloneable");
-		}
+		resolvesTo("if (true) <StringBuffer>newArrayList else <String>newHashSet",
+				"AbstractCollection<? extends Serializable & Comparable<?> & CharSequence> & Serializable & Cloneable");
 	}
 
 	@Test
@@ -2048,11 +2023,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTypeGuardedCase_0() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
-		} else {
-			resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & CharSequence");
-		}
+		resolvesTo("switch s: new Object() { String: s StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
 	}
 
 	@Test
@@ -2074,11 +2045,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
 
 	@Test
 	public void testTypeGuardedCase_3() throws Exception {
-		if (JavaRuntimeVersion.isJava11OrLater()) {
-			resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
-		} else {
-			resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & CharSequence");
-		}
+		resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & Comparable<?> & CharSequence");
 	}
 
 	@Test
