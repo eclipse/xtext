@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -19,12 +19,10 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.ui.hover.JvmAnnotationReferencePrinter;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -80,30 +78,6 @@ public class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
   @Test
   public void testPrintedAnnotationValue_07() {
     this.assertPrinted("@!Retention!(!RetentionPolicy!.!SOURCE!)", "@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE)");
-  }
-
-  @Test
-  public void testPrintedAnnotationValue_08() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.assertPrinted("@!Generated!(!value!=\"foo\", !date!=\"bar\", !comments!=\"baz\")", "@javax.annotation.Generated(value=\"foo\", date=\"bar\", comments=\"baz\")");
-  }
-
-  @Test
-  public void testPrintedAnnotationValue_09() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.assertPrinted("@!XmlElements!(#[@!XmlElement!])", "@javax.xml.bind.annotation.XmlElements(#[@javax.xml.bind.annotation.XmlElement()])");
-  }
-
-  @Test
-  public void testPrintedAnnotationValue_10() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.assertPrinted("@!XmlElements!(@!XmlElement!)", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement())");
-  }
-
-  @Test
-  public void testPrintedAnnotationValue_11() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-    this.assertPrinted("@!XmlElements!(#[@!XmlElement!(!nillable!=true), @!XmlElement!(!type!=!String![][])])", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement(nillable=true), @javax.xml.bind.annotation.XmlElement(type=typeof(String[][])))");
   }
 
   @Inject

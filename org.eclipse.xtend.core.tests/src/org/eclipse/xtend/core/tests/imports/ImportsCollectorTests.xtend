@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -16,8 +16,6 @@ import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor.DefaultImportsAcceptor
 import org.eclipse.xtext.xbase.imports.ImportsCollector
 import org.junit.Test
-import org.junit.Assume
-import org.eclipse.xtext.util.JavaRuntimeVersion
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -307,16 +305,15 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 
 	@Test
 	def void testEnum_01() {
-		Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
 		'''
-			import javax.annotation.Resource
-			import static javax.annotation.Resource.AuthenticationType.*
+			import testdata.ClassWithEnum
+			import static testdata.ClassWithEnum.MyEnum.*
 			class C {
-				|val en =  CONTAINER
-				var en2 = Resource.AuthenticationType.APPLICATION|
+				|val en =  A
+				var en2 = ClassWithEnum.MyEnum.B|
 			}
-		'''.assertTypeImport('javax.annotation.Resource').assertStaticImport(
-			'javax.annotation.Resource.AuthenticationType.CONTAINER').assertExtensionImport
+		'''.assertTypeImport('testdata.ClassWithEnum').assertStaticImport(
+			'testdata.ClassWithEnum.MyEnum.A').assertExtensionImport
 	}
 
 	@Test

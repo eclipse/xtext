@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -21,13 +20,9 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -36,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -49,12 +43,6 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
 
   @Inject
   private IEObjectHoverDocumentationProvider documentationProvider;
-
-  @Inject
-  private TestingXbaseHoverProvider hoverProvider;
-
-  @Inject
-  private IXtendJvmAssociations jvmModelAssociations;
 
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
@@ -1031,31 +1019,6 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@<a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/2\">A</a><br>");
       Assert.assertEquals(_builder_1.toString(), docu);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-
-  @Test
-  public void bug380551_TestLinkToNativeJavaType() {
-    try {
-      Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package testpackage");
-      _builder.newLine();
-      _builder.append("import javax.annotation.Resource");
-      _builder.newLine();
-      _builder.append("@Resource");
-      _builder.newLine();
-      _builder.append("class Foo {");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
-      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
-      JvmGenericType _inferredType = this.jvmModelAssociations.getInferredType(clazz);
-      final JvmAnnotationTarget target = ((JvmAnnotationTarget) _inferredType);
-      Assert.assertNotNull(this.hoverProvider.getHoverInfo(IterableExtensions.<JvmAnnotationReference>head(target.getAnnotations()).getAnnotation()));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

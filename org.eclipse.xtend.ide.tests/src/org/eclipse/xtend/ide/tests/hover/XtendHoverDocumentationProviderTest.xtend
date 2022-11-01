@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -11,7 +11,6 @@ package org.eclipse.xtend.ide.tests.hover
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.text.Region
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
@@ -25,9 +24,6 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.common.types.JvmAnnotationTarget
-import org.junit.Assume
-import org.eclipse.xtext.util.JavaRuntimeVersion
 
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
@@ -39,12 +35,6 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	IEObjectHoverDocumentationProvider documentationProvider
-	
-	@Inject
-	TestingXbaseHoverProvider hoverProvider
-	
-	@Inject
-	IXtendJvmAssociations jvmModelAssociations
 	
 	/**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
@@ -534,27 +524,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
         val docu = documentationProvider.getDocumentation(func.parameters.head.parameterType.type)
         assertEquals('''@<a href="eclipse-xtext-doc:__synthetic0.xtend%23/2">A</a><br>'''.toString, docu)
     }
-    // This test makes sure that a Java URI to a native Java type in JavaDoc can be resolved
-    // Normally the invocation would be done through org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider.addLinkListener(...).new ILinkHandler() {...}.handleInlineXtextdocLink(URI)
-    // The necessary change was in org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider.isValidationDisabled(EObject)
-    @Test
-    def bug380551_TestLinkToNativeJavaType(){
-    	Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater)
-        val xtendFile = parseHelper.parse('''
-        package testpackage
-        import javax.annotation.Resource
-        @Resource
-        class Foo {
-        }
-        ''',resourceSet)
-        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
-        val target = jvmModelAssociations.getInferredType(clazz) as JvmAnnotationTarget
-      	assertNotNull(hoverProvider.getHoverInfo(target.annotations.head.annotation))
-    }
     
-   
-	
-	
 	def getResourceSet(){
 		getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project)
 	}

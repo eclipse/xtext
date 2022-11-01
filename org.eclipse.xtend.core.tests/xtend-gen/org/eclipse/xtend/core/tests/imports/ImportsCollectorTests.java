@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.JavaRuntimeVersion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor;
 import org.eclipse.xtext.xbase.imports.ImportsCollector;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -469,24 +467,23 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
 
   @Test
   public void testEnum_01() {
-    Assume.assumeFalse(JavaRuntimeVersion.isJava11OrLater());
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import javax.annotation.Resource");
+    _builder.append("import testdata.ClassWithEnum");
     _builder.newLine();
-    _builder.append("import static javax.annotation.Resource.AuthenticationType.*");
+    _builder.append("import static testdata.ClassWithEnum.MyEnum.*");
     _builder.newLine();
     _builder.append("class C {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("|val en =  CONTAINER");
+    _builder.append("|val en =  A");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("var en2 = Resource.AuthenticationType.APPLICATION|");
+    _builder.append("var en2 = ClassWithEnum.MyEnum.B|");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "javax.annotation.Resource"), 
-      "javax.annotation.Resource.AuthenticationType.CONTAINER"));
+    this.assertExtensionImport(this.assertStaticImport(this.assertTypeImport(_builder, "testdata.ClassWithEnum"), 
+      "testdata.ClassWithEnum.MyEnum.A"));
   }
 
   @Test

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2021 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -92,11 +92,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_01() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			"Serializable & Comparable<?> & CharSequence".isSuperTypeOf("String", "StringBuilder")
-		} else {
-			"Serializable & CharSequence".isSuperTypeOf("String", "StringBuilder")
-		}
+		"Serializable & Comparable<?> & CharSequence".isSuperTypeOf("String", "StringBuilder")
 	}
 	
 	@Test
@@ -126,11 +122,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_07() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			"Comparable<?> & Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
-		} else {
-			"Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
-		}
+		"Comparable<?> & Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
 	}
 	
 	@Test
@@ -168,11 +160,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_13() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			"AbstractStringBuilder & Serializable & Comparable<?>".isSuperTypeOf("StringBuilder", "StringBuffer")
-		} else {
-			"AbstractStringBuilder & Serializable".isSuperTypeOf("StringBuilder", "StringBuffer")
-		}
+		"AbstractStringBuilder & Serializable & Comparable<?>".isSuperTypeOf("StringBuilder", "StringBuffer")
 	}
 	
 	@Test
@@ -231,11 +219,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_24() {
-		if (JavaRuntimeVersion.isJava11OrLater) {
-			"Collection<? extends AbstractStringBuilder & Serializable & Comparable<?>>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
-		} else {
-			"Collection<? extends AbstractStringBuilder & Serializable>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
-		}
+		"Collection<? extends AbstractStringBuilder & Serializable & Comparable<?>>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
 	}
 	
 	@Test
