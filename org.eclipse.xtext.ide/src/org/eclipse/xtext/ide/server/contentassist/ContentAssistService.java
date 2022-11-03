@@ -69,15 +69,16 @@ public class ContentAssistService {
 			CancelIndicator cancelIndicator) {
 		try {
 			CompletionList result = new CompletionList();
-			result.setIsIncomplete(true);
 			IdeContentProposalAcceptor acceptor = proposalAcceptorProvider.get();
 			acceptor.setCancelIndicator(cancelIndicator);
-			int caretOffset = document.getOffSet(params.getPosition());
 			Position caretPosition = params.getPosition();
+			int caretOffset = document.getOffSet(caretPosition);
 			TextRegion position = new TextRegion(caretOffset, 0);
 			try {
 				createProposals(document.getContents(), position, caretOffset, resource, acceptor);
+				result.setIsIncomplete(!acceptor.couldAcceptAllProposals());
 			} catch (Throwable t) {
+				result.setIsIncomplete(true);
 				if (!operationCanceledManager.isOperationCanceledException(t)) {
 					throw t;
 				}
