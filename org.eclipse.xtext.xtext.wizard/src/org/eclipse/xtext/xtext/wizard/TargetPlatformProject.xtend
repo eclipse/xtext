@@ -95,16 +95,16 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 						«IF config.junitVersion == JUnitVersion.JUNIT_5»
 							<unit id="org.apiguardian" version="1.1.2.v20211018-1956"/>
-							<unit id="org.junit.jupiter.api" version="5.8.2.v20220624-2009"/>
-							<unit id="org.junit.jupiter.engine" version="5.8.2.v20220624-2009"/>
-							<unit id="org.junit.jupiter.migrationsupport" version="5.8.2.v20220624-2009"/>
-							<unit id="org.junit.jupiter.params" version="5.8.2.v20220624-2009"/>
-							<unit id="org.junit.platform.commons" version="1.8.2.v20220624-2009"/>
-							<unit id="org.junit.platform.engine" version="1.8.2.v20220624-2009"/>
-							<unit id="org.junit.platform.launcher" version="1.8.2.v20220624-2009"/>
-							<unit id="org.junit.platform.runner" version="1.8.2.v20220624-2009"/>
-							<unit id="org.junit.platform.suite.commons" version="1.8.2.v20220624-2009"/>
-							<unit id="org.junit.vintage.engine" version="5.8.2.v20220624-2009"/>
+							<unit id="org.junit.jupiter.api" version="5.9.1.v20221103-2317"/>
+							<unit id="org.junit.jupiter.engine" version="5.9.1.v20221103-2317"/>
+							<unit id="org.junit.jupiter.migrationsupport" version="5.9.1.v20221103-2317"/>
+							<unit id="org.junit.jupiter.params" version="5.9.1.v20221103-2317"/>
+							<unit id="org.junit.platform.commons" version="1.9.1.v20221103-2317"/>
+							<unit id="org.junit.platform.engine" version="1.9.1.v20221103-2317"/>
+							<unit id="org.junit.platform.launcher" version="1.9.1.v20221103-2317"/>
+							<unit id="org.junit.platform.runner" version="1.9.1.v20221103-2317"/>
+							<unit id="org.junit.platform.suite.commons" version="1.9.1.v20221103-2317"/>
+							<unit id="org.junit.vintage.engine" version="5.9.1.v20221103-2317"/>
 							<unit id="org.opentest4j" version="1.2.0.v20211018-1956"/>
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
