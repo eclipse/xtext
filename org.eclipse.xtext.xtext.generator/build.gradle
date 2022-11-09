@@ -3,6 +3,9 @@ description = 'Generator for infrastructure of Xtext languages (supersedes org.e
 
 dependencies {
 	api project(':org.eclipse.xtext')
+	api 'org.eclipse.emf:org.eclipse.emf.ecore'
+	api 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
+	api 'org.eclipse.emf:org.eclipse.emf.common'
 	api 'org.eclipse.emf:org.eclipse.emf.codegen'
 	api 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
 	api 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
