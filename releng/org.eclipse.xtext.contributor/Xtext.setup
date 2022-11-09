@@ -1018,6 +1018,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.builder.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.builder/.classpath"
         encoding="UTF-8">
       <modification
@@ -1038,6 +1039,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.builder.tests.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.builder.tests/.classpath"
         encoding="UTF-8">
       <modification
@@ -1049,6 +1051,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.ui.testing.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.ui.testing/.classpath"
         encoding="UTF-8">
       <modification
@@ -1060,6 +1063,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.junit4.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.junit4/.classpath"
         encoding="UTF-8">
       <modification
@@ -1071,6 +1075,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.xbase.junit.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.xbase.junit/.classpath"
         encoding="UTF-8">
       <modification
@@ -1082,6 +1087,7 @@
     <setupTask
         xsi:type="setup:TextModifyTask"
         id="xtext.xbase.ui.testing.classpath"
+        excludedTriggers="BOOTSTRAP"
         url="platform:/resource/org.eclipse.xtext.xbase.ui.testing/.classpath"
         encoding="UTF-8">
       <modification
