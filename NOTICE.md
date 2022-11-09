@@ -86,7 +86,7 @@ Google Guice / Inject Core API (5.0.1)
 
 * License: Apache License, 2.0
 
-Gradle Wrapper (7.3)
+Gradle Wrapper (7.4)
 
 * License: Apache License, 2.0
 
@@ -94,7 +94,7 @@ guava gwt (30.1)
 
 * License: Apache License, 2.0
 
-JUnit (5.8.2)
+JUnit (5.9.1)
 
 * License: EPL-2.0
 
