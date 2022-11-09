@@ -47,6 +47,8 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 
 When you run your freshly installed Eclipse IDE for the first time it will clone the relevant repositories and automatically set up your workspace with a number of projects.
 
+NOTE: when the above process has finished and you still have error markers on most of the projects in the workspace, chances are that the generated files `.settings/org.eclipse.buildship.core.prefs` have errors of the shape "Invalid Gradle project configuration file". In such a case, right click on the project `/gradle-composite` (which should be in the working set "Root Projects") and select "Gradle" => "Refresh Gradle Project".
+
 ## Contribute via Fork
 You need a [GitHub](https://github.com/join) and an [Eclipse](https://accounts.eclipse.org/user/register) account for which you signed the [Eclipse Contributor Agreement](https://accounts.eclipse.org/user/login?destination=user/eca).
 
