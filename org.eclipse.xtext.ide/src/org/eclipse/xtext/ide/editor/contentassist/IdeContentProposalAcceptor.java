@@ -30,7 +30,7 @@ public class IdeContentProposalAcceptor
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
 
-	private boolean couldAcceptAllProposals = true;
+	private boolean didAcceptAllProposals = true;
 	
 	protected CancelIndicator cancelIndicator;
 
@@ -57,12 +57,12 @@ public class IdeContentProposalAcceptor
 
 	@Override
 	public boolean canAcceptMoreProposals() {
-		return couldAcceptAllProposals = entries.size() < 100;
+		return didAcceptAllProposals = entries.size() < 100;
 	}
 
 	@Override
 	public boolean didAcceptAllProposals() {
-		return couldAcceptAllProposals;
+		return didAcceptAllProposals;
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public class ContentAssistService {
 			TextRegion position = new TextRegion(caretOffset, 0);
 			try {
 				createProposals(document.getContents(), position, caretOffset, resource, acceptor);
-				result.setIsIncomplete(!acceptor.couldAcceptAllProposals());
+				result.setIsIncomplete(!acceptor.didAcceptAllProposals());
 			} catch (Throwable t) {
 				result.setIsIncomplete(true);
 				if (!operationCanceledManager.isOperationCanceledException(t)) {
