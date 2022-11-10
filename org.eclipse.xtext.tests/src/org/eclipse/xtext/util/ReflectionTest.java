@@ -18,23 +18,17 @@ import org.junit.Test;
  */
 public class ReflectionTest extends Assert {
 	
-	private static class MyClass {
-		@SuppressWarnings("unused")
-		private String getString() {
-			return "string";
-		}
-	}
-	
 	@Test public void testGetMethodGivesCopy() throws Exception {
 		Class<MyClass> clazz = MyClass.class;
+		MyClass instance = new MyClass();
 		Method declaredMethod = clazz.getDeclaredMethod("getString");
 		assertNotNull("declaredMethod", declaredMethod);
-		assertFalse("isAccessible", declaredMethod.isAccessible());
+		assertFalse("isAccessible", declaredMethod.canAccess(instance));
 		declaredMethod.setAccessible(true);
-		assertTrue("isAccessible", declaredMethod.isAccessible());
+		assertTrue("isAccessible", declaredMethod.canAccess(instance));
 		Method secondMethod = clazz.getDeclaredMethod("getString");
 		assertNotSame(declaredMethod, secondMethod);
-		assertFalse("isAccessible", secondMethod.isAccessible());
+		assertFalse("isAccessible", secondMethod.canAccess(instance));
 	}
 
 }
