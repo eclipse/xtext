@@ -183,7 +183,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	private ILanguageServerShutdownAndExitHandler shutdownAndExitHandler;
 
 	@Inject
-    private SemanticTokensService semanticTokensService;
+	private SemanticTokensService semanticTokensService;
 	
 	private WorkspaceManager workspaceManager;
 
@@ -249,7 +249,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Configure the server capabilities for this instance.
 	 *
 	 * @param params
-	 *            the initialization parametrs
+	 *            the initialization parameters
 	 * @return the server capabilities
 	 * @since 2.20
 	 */

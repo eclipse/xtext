@@ -25,10 +25,12 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.util.PositionReader;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 
 /**
@@ -36,6 +38,7 @@ import com.google.inject.Inject;
  * 
  * @since 2.29
  */
+@Beta
 public class SemanticTokensService {
 	@Inject
 	private IResourceServiceProvider.Registry languagesRegistry;
@@ -43,7 +46,7 @@ public class SemanticTokensService {
 	private final  List<String> tokenTypes = new ArrayList<>();
 	private final List<String> tokenModifiers = new ArrayList<>();
 
-	SemanticTokensService() {
+	protected SemanticTokensService() {
 		addTokenTypes();
 		addTokenModifiers();
 	}
