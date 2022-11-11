@@ -148,8 +148,8 @@
 		<unit id="org.apache.log4j.source" version="1.2.19.v20220208-1728"/>
 		<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 		<unit id="org.antlr.runtime.source" version="3.2.0.v20220404-1927"/>
-		<unit id="org.junit" version="4.13.2.v20211018-1956"/>
-		<unit id="org.junit.source" version="4.13.2.v20211018-1956"/>
+		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.junit.source" version="0.0.0"/>
 		<unit id="org.junit.jupiter.api" version="0.0.0"/>
 		<unit id="org.junit.jupiter.api.source" version="0.0.0"/>
 		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
