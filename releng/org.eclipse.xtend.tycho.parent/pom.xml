@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>2.7.4</tycho-version>
+		<tycho-version>2.7.5</tycho-version>
 		<!-- version of the "bootstrap" plugin; used to compile xtend sources in xtend -->
 		<xtend-maven-plugin-version>2.29.0.M2</xtend-maven-plugin-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
@@ -26,21 +26,18 @@
 		<profile>
 			<id>latest</id>
 			<properties>
-				<tycho-version>2.7.5</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-latest</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
 			<id>r202209</id>
 			<properties>
-				<tycho-version>2.7.4</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202209</target-platform-classifier>
 			</properties>
 		</profile>
 		<profile>
 			<id>r202206</id>
 			<properties>
-				<tycho-version>2.7.3</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202206</target-platform-classifier>
 			</properties>
 		</profile>
@@ -50,7 +47,6 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<tycho-version>2.6.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202203</target-platform-classifier>
 			</properties>
 		</profile>
