@@ -18,13 +18,16 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult;
+import org.eclipse.xtext.builder.standalone.incremental.ClasspathInfos;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
@@ -112,6 +115,85 @@ public class TestIncrementalEclipseCompiler extends TestEclipseCompiler implemen
 		assertEquals(CompilationResult.SUCCEEDED, compiler.compile(sourceRoots, outputClassDirectory));
 		assertEvent(e->{
 			assertTrue(event.getDeltas().isEmpty());
+		});
+	}
+	
+	/*
+	 * A test that simulates the typical src/main/java and src/test/java setup where src/test/java depends on the classes
+	 * compiled from src/main/java 
+	 */
+	@Test
+	public void testIncrementalCompilationBinaryDependencies() throws IOException {
+		File mainState = new File(outputStateDirectory, "main");
+		File testState = new File(outputStateDirectory, "test");
+		
+		List<String> mainSources = Collections.singletonList(SRC_TEST_RESOURCES + "/test-class");
+		List<String> testSources = new ArrayList<>();
+		testSources.add(SRC_TEST_RESOURCES + "/test-class3");
+		testSources.add(additionalSourceDirectory.getAbsolutePath());
+		
+		File mainOutput = new File(outputClassDirectory, "main");
+		File testOutput = new File(outputClassDirectory, "test");
+
+		IJavaCompiler mainCompiler = newCompiler();
+		mainCompiler.getConfiguration().enableIncrementalCompilation(mainState, this);
+		IJavaCompiler testCompiler = newCompiler();
+		testCompiler.getConfiguration().enableIncrementalCompilation(testState, this);
+		testCompiler.setClassPath(Collections.singleton(mainOutput.getAbsolutePath()));
+		
+		assertEquals(CompilationResult.SUCCEEDED, mainCompiler.compile(mainSources, mainOutput));
+		assertEvent(e->{
+			assertEquals(3, event.getDeltas().size());
+		});
+		
+		assertEquals(CompilationResult.SUCCEEDED, testCompiler.compile(testSources, testOutput));
+		assertEvent(e->{
+			assertEquals(1, event.getDeltas().size());
+			assertEquals(ImmutableSet.of("com.acme.Tweety"), topLevelTypeNames(event));
+		});
+		
+		ClasspathInfos classpathInfos = injector.getInstance(ClasspathInfos.class);
+		classpathInfos.clear();
+		assertTrue(new File(mainOutput, "com/acme/BugsBunny$Carrot.class").delete());
+		assertEquals(CompilationResult.SUCCEEDED, testCompiler.compile(testSources, testOutput));
+		assertEvent(e->{
+			assertEquals(1, event.getDeltas().size());
+			assertEquals(ImmutableSet.of("com.acme.BugsBunny"), topLevelTypeNames(event));
+		});
+
+		assertTrue(new File(mainOutput, "com/acme/BugsBunny.class").delete());
+		classpathInfos.clear();
+		
+		assertEquals(CompilationResult.SUCCEEDED, testCompiler.compile(testSources, testOutput));
+		assertEvent(e->{
+			assertEquals(1, event.getDeltas().size());
+			assertEquals(ImmutableSet.of("com.acme.BugsBunny"), topLevelTypeNames(event));
+		});
+		
+		File yosemiteSameFile = new File(additionalSourceDirectory, "com/acme/YosemiteSame.java");
+		Files.createDirectories(yosemiteSameFile.getParentFile().toPath());
+		Files.write(yosemiteSameFile.toPath(), Arrays.asList(
+				"package com.acme;",
+				"public class YosemiteSame extends LoonyToon { void interactWith(BugsBunny bugs) {} }"));
+		
+		assertEquals(CompilationResult.FAILED, testCompiler.compile(testSources, testOutput));
+		assertEvent(e->{
+			assertEquals(1, event.getDeltas().size());
+			assertEquals(ImmutableSet.of("com.acme.YosemiteSame"), topLevelTypeNames(event));
+		});
+		
+		assertEquals(CompilationResult.SUCCEEDED, mainCompiler.compile(mainSources, mainOutput));
+		assertEvent(e->{
+			assertEquals(0, event.getDeltas().size());
+		});
+		Collection<URI> outputFiles = collectOutputFiles(mainOutput);
+		assertEquals(4, outputFiles.size());
+		
+		classpathInfos.clear();
+		assertEquals(CompilationResult.SUCCEEDED, testCompiler.compile(testSources, testOutput));
+		assertEvent(e->{
+			assertEquals(2, event.getDeltas().size());
+			assertEquals(ImmutableSet.of("com.acme.BugsBunny", "com.acme.YosemiteSame"), topLevelTypeNames(event));
 		});
 	}
 	

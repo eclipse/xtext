@@ -44,7 +44,7 @@ public class TestEclipseCompiler {
 	static final String DOES_NOT_EXISTS = "src/test/resources/test";
 	IJavaCompiler compiler;
 	File outputClassDirectory;
-	private static Injector injector;
+	static Injector injector;
 
 	@BeforeClass
 	public static void setUpOnce() {
@@ -53,11 +53,16 @@ public class TestEclipseCompiler {
 
 	@Before
 	public void setUp() throws IOException {
-		compiler = injector.getInstance(IJavaCompiler.class);
-		compiler.getConfiguration().setVerbose(true);
-		compiler.getConfiguration().setSourceLevel("8");
-		compiler.getConfiguration().setTargetLevel("8");
+		compiler = newCompiler();
 		outputClassDirectory = new File("target/temp");
+	}
+	
+	protected IJavaCompiler newCompiler() {
+		IJavaCompiler result = injector.getInstance(IJavaCompiler.class);
+		result.getConfiguration().setVerbose(true);
+		result.getConfiguration().setSourceLevel("8");
+		result.getConfiguration().setTargetLevel("8");
+		return result;
 	}
 
 	@After
@@ -106,7 +111,11 @@ public class TestEclipseCompiler {
 	}
 
 	Collection<URI> collectOutputFiles() {
-		return new PathTraverser().resolvePathes(Lists.newArrayList(outputClassDirectory.getAbsolutePath()),
+		return collectOutputFiles(outputClassDirectory);
+	}
+
+	protected Collection<URI> collectOutputFiles(File dir) {
+		return new PathTraverser().resolvePathes(Lists.newArrayList(dir.getAbsolutePath()),
 				new ClassFileFilter()).values();
 	}
 

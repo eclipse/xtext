@@ -51,7 +51,7 @@ public class StandaloneBuilderFileCallback implements IFileCallback {
 		if (!generatedFiles.isEmpty()) {
 			inputToGenFiles.put(resourceURI, generatedFiles.toArray(new IPath[0]));
 			for(IPath generatedFile: generatedFiles) {
-				BinaryFileHashing.processFile(generatedFile.toFile(), genFiles);
+				BinaryFileHashing.processFile(generatedFile.toFile(), genFiles::put);
 				genFileToInput.put(generatedFile, resourceURI);
 			}
 		}

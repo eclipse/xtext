@@ -15,6 +15,7 @@ import java.io.Writer;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,8 +38,10 @@ import org.eclipse.jdt.internal.compiler.batch.FileSystem.Classpath;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.eclipse.jdt.internal.compiler.util.SuffixConstants;
 import org.eclipse.jdt.internal.core.builder.ReferenceCollection;
-import org.eclipse.xtext.builder.standalone.incremental.ClasspathInfos;
 import org.eclipse.xtext.builder.standalone.incremental.BinaryFileHashing;
+import org.eclipse.xtext.builder.standalone.incremental.ClasspathEntryHash;
+import org.eclipse.xtext.builder.standalone.incremental.ClasspathEntryHashVisitor;
+import org.eclipse.xtext.builder.standalone.incremental.ClasspathInfos;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
@@ -61,11 +64,13 @@ class InternalIncrementalCompiler extends Main {
 	private final Map<IPath, CompilationUnit> remainingCompilationUnits;
 	private final IResourceDescription.Event.Listener eventListener;
 	private final ClasspathInfos classpathInfos;
-	
+
 	private boolean fullBuild = false;
 	private CompilationUnit[] toCompile;
 	private SerializedCompilerState serializedCompileResult;
-	private HashCode classpathHash;
+	private HashCode classpathArchiveHash;
+	private Map<IPath, HashCode> classpathClassHashes;
+	private List<IResourceDescription.Delta> deltas;
 
 	private Set<String> qualifiedNames;
 	private Set<String> simpleNames;
@@ -73,12 +78,8 @@ class InternalIncrementalCompiler extends Main {
 
 	private Stopwatch rootStopwatch;
 
-	InternalIncrementalCompiler(
-			Writer outputWriter, 
-			Writer errorWriter, 
-			File stateDirectory,
-			IResourceDescription.Event.Listener eventListener,
-			ClasspathInfos classpathInfos) {
+	InternalIncrementalCompiler(Writer outputWriter, Writer errorWriter, File stateDirectory,
+			IResourceDescription.Event.Listener eventListener, ClasspathInfos classpathInfos) {
 		super(new PrintWriter(outputWriter), new PrintWriter(errorWriter),
 				false /* systemExit */, null /* options */, null);
 		this.stateDirectory = stateDirectory;
@@ -91,8 +92,8 @@ class InternalIncrementalCompiler extends Main {
 	}
 
 	/*
-	 * Return the compilation units that are supposed to be considered for
-	 * the next round of compilation.
+	 * Return the compilation units that are supposed to be considered for the
+	 * next round of compilation.
 	 */
 	@Override
 	public CompilationUnit[] getCompilationUnits() {
@@ -109,8 +110,8 @@ class InternalIncrementalCompiler extends Main {
 	}
 
 	/*
-	 * Ensure the output directory is also on the CP for incremental
-	 * compilation such that we can find previously compiled class files.
+	 * Ensure the output directory is also on the CP for incremental compilation
+	 * such that we can find previously compiled class files.
 	 */
 	@Override
 	protected ArrayList<Classpath> handleClasspath(ArrayList<String> classpaths, String customEncoding) {
@@ -118,24 +119,34 @@ class InternalIncrementalCompiler extends Main {
 		ArrayList<Classpath> result = super.handleClasspath(classpaths, customEncoding);
 		IPath destinationPath = new Path(this.destinationPath);
 		boolean found = false;
-		List<ForkJoinTask<byte[]>> hashCodes = new ArrayList<>();
+		List<ForkJoinTask<ClasspathEntryHash>> classpathEntryHashes = new ArrayList<>();
 		for (Classpath cp : result) {
 			IPath path = new Path(cp.getPath());
 			if (destinationPath.equals(path)) {
 				found = true;
 			} else {
-				hashCodes.add(ForkJoinPool.commonPool().submit(()->classpathInfos.hashClassesOrJar(path)));
+				classpathEntryHashes.add(ForkJoinPool.commonPool().submit(() -> classpathInfos.hashClassesOrJar(path)));
 			}
 		}
-		Hasher hasher = newHasher();
-		for(ForkJoinTask<byte[]> hashCode: hashCodes) {
+		classpathClassHashes = new HashMap<>();
+		Hasher archiveHasher = newHasher();
+		ClasspathEntryHashVisitor visitor = new ClasspathEntryHashVisitor() {
+			public void visitArchive(HashCode archiveHash) {
+				archiveHasher.putBytes(archiveHash.asBytes());
+			}
+			public void visitClassFile(IPath fqn, HashCode classHash) {
+				classpathClassHashes.put(fqn, classHash);
+			}
+		};
+		for (ForkJoinTask<ClasspathEntryHash> classpathEntryHash : classpathEntryHashes) {
 			try {
-				hasher.putBytes(hashCode.get(30, TimeUnit.SECONDS));
+				classpathEntryHash.get(60, TimeUnit.SECONDS).accept(visitor);
 			} catch (InterruptedException | ExecutionException | TimeoutException e) {
-				hasher.putBoolean(false);
+				archiveHasher.putBoolean(false);
 			}
 		}
-		classpathHash = hasher.hash();
+		classpathArchiveHash = archiveHasher.hash();
+		
 		LOG.trace("Processed first stage classpath in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms.");
 		if (found) {
 			return result;
@@ -143,10 +154,10 @@ class InternalIncrementalCompiler extends Main {
 		File destinationFile = destinationPath.toFile();
 		try {
 			java.nio.file.Files.createDirectories(destinationFile.toPath());
-			FileSystem.Classpath outputDir = FileSystem.getClasspath(destinationFile.getAbsolutePath(),
-					customEncoding, null, this.options, this.releaseVersion);
+			FileSystem.Classpath outputDir = FileSystem.getClasspath(destinationFile.getAbsolutePath(), customEncoding,
+					null, this.options, this.releaseVersion);
 			result.add(0, outputDir);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			// ignore
 		}
 		return result;
@@ -199,20 +210,20 @@ class InternalIncrementalCompiler extends Main {
 	}
 
 	private CompilationUnit[] diff(CompilationUnit[] allCompilationUnits) {
-		HashCode hashedClassPath = processClasspaths();
 		Map<IPath, HashCode> inputFiles = processInputFiles(allCompilationUnits);
 		try {
-			if (hashedClassPath.equals(serializedCompileResult.hashedClasspath)) {
-				LOG.info("ClassPath is equal to previous round. Attempt to reuse up-to-date compile results.");
-
+			if (classpathArchiveHash.equals(serializedCompileResult.classpathArchiveHash)) {
+				LOG.info("Archives on the classpath are equal to previous round. Attempt to reuse up-to-date compile results.");
+				
 				List<CompilationUnit> result = new ArrayList<CompilationUnit>();
-				List<String> changedTypes = new ArrayList<String>();
+				List<String> changedTypes = fineGrainedClasspathDiff();
+				
+				
 				/*
-				 * Find all files amongst the previously compiled files that
-				 * are now absent or did change and remove the cached
-				 * artifacts of all files that have been detected as
-				 * changed. If the filename is still known, add its
-				 * compilation unit to the queued units.
+				 * Find all files amongst the previously compiled files that are
+				 * now absent or did change and remove the cached artifacts of
+				 * all files that have been detected as changed. If the filename
+				 * is still known, add its compilation unit to the queued units.
 				 */
 				serializedCompileResult.inputFiles.forEach((filename, prevHashCode) -> {
 					HashCode hashCode = inputFiles.get(filename);
@@ -230,9 +241,9 @@ class InternalIncrementalCompiler extends Main {
 					}
 				});
 				/*
-				 * Scan the remaining output directory for class files that
-				 * do no longer match the expected content and schedule
-				 * their input files as changes
+				 * Scan the remaining output directory for class files that do
+				 * no longer match the expected content and schedule their input
+				 * files as changes
 				 */
 				Map<IPath, HashCode> outputDirectoryContent = processOutputDirectories();
 				outputDirectoryContent.forEach((outputFile, currentHashCode) -> {
@@ -256,8 +267,8 @@ class InternalIncrementalCompiler extends Main {
 					return false;
 				});
 				/*
-				 * Check that the class files for the unchanged input files
-				 * are still present. If not, treat them as affected
+				 * Check that the class files for the unchanged input files are
+				 * still present. If not, treat them as affected
 				 */
 				serializedCompileResult.inputFiles.forEach((filename, prevHashCode) -> {
 					HashCode hashCode = inputFiles.get(filename);
@@ -294,8 +305,49 @@ class InternalIncrementalCompiler extends Main {
 		} finally {
 			serializedCompileResult.inputFiles.clear();
 			serializedCompileResult.inputFiles.putAll(inputFiles);
-			serializedCompileResult.hashedClasspath = hashedClassPath;
+			serializedCompileResult.classpathArchiveHash = classpathArchiveHash;
+			serializedCompileResult.classpathClassHashes = classpathClassHashes;
 		}
+	}
+
+	private List<String> fineGrainedClasspathDiff() {
+		deltas = new ArrayList<>();
+		
+		Stopwatch sw = Stopwatch.createStarted();
+		List<String> result = new ArrayList<String>();
+		MapDifference<IPath, HashCode> fineGrainedClasspathDiff = Maps.difference(classpathClassHashes, serializedCompileResult.classpathClassHashes);
+		
+		fineGrainedClasspathDiff.entriesOnlyOnLeft().keySet().forEach(fqn->result.add(fqn.toString()));
+		fineGrainedClasspathDiff.entriesOnlyOnRight().keySet().forEach(fqn->result.add(fqn.toString()));
+		fineGrainedClasspathDiff.entriesDiffering().keySet().forEach(fqn->result.add(fqn.toString()));
+		if (result.size() > 0) {
+			collectDeltas(indexClassFiles(serializedCompileResult.classpathClassHashes), indexClassFiles(classpathClassHashes));
+		}
+		LOG.trace("Compared class files on class-path in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms");
+		return result;
+	}
+
+	private void collectDeltas(Map<URI, ClassFileResourceDescription> oldDescriptions,
+			Map<URI, ClassFileResourceDescription> newDescriptions) {
+		MapDifference<URI,ClassFileResourceDescription> difference = Maps.difference(oldDescriptions, newDescriptions);
+		for (ClassFileResourceDescription removed : difference.entriesOnlyOnLeft().values()) {
+			deltas.add(new DefaultResourceDescriptionDelta(removed, null));
+		}
+		for (ClassFileResourceDescription added : difference.entriesOnlyOnRight().values()) {
+			deltas.add(new DefaultResourceDescriptionDelta(null, added));
+		}
+		for (ValueDifference<ClassFileResourceDescription> diff : difference.entriesDiffering().values()) {
+			deltas.add(new DefaultResourceDescriptionDelta(diff.leftValue(), diff.rightValue()));
+		}
+	}
+	
+	private Map<URI, ClassFileResourceDescription> indexClassFiles(Map<IPath, HashCode> fqnToHash) {
+		if (fqnToHash.size() > 0) {
+			Map<URI, ClassFileResourceDescription> result = new HashMap<>();
+			SerializedCompilerState.collectResourceDescriptions(fqnToHash.keySet(), fqn->fqn.toString().replace('/', '.'), fqnToHash::get, result);
+			return result;
+		}
+		return Collections.emptyMap();
 	}
 
 	private void logCount(int count, String zeroMessage) {
@@ -358,26 +410,6 @@ class InternalIncrementalCompiler extends Main {
 				file.delete();
 			}
 		});
-	}
-
-	private HashCode processClasspaths() {
-		Stopwatch sw = Stopwatch.createStarted();
-		Classpath[] classpaths = checkedClasspaths;
-		Hasher hasher = newHasher();
-		hasher.putBytes(classpathHash.asBytes());
-		IPath destinationPath = new Path(this.destinationPath);
-		for (Classpath cp : classpaths) {
-			IPath path = new Path(cp.getPath());
-			if (!destinationPath.equals(path)) {
-				File file = path.toFile();
-				if (file.isFile()) {
-					hasher.putLong(file.length());
-				}
-			}
-		}
-		HashCode result = hasher.hash();
-		LOG.trace("Processed second stage classpath in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms. Hash: " + result.toString());
-		return result;
 	}
 
 	private Map<IPath, HashCode> processInputFiles(CompilationUnit[] allCompilationUnits) {
@@ -519,21 +551,12 @@ class InternalIncrementalCompiler extends Main {
 			if (fullBuild) {
 				eventListener.descriptionsChanged(new CoarseGrainedChangeEvent());
 			} else {
+				if (deltas == null) {
+					deltas = new ArrayList<>();
+				}
 				Stopwatch sw = Stopwatch.createStarted();
-				Map<URI, ClassFileResourceDescription> newIndex = serializedCompileResult.resourceDescriptions();
-				MapDifference<URI, ClassFileResourceDescription> difference = Maps.difference(originalIndex,
-						newIndex);
-				List<IResourceDescription.Delta> deltas = new ArrayList<>();
-				for (ClassFileResourceDescription removed : difference.entriesOnlyOnLeft().values()) {
-					deltas.add(new DefaultResourceDescriptionDelta(removed, null));
-				}
-				for (ClassFileResourceDescription added : difference.entriesOnlyOnRight().values()) {
-					deltas.add(new DefaultResourceDescriptionDelta(null, added));
-				}
-				for (ValueDifference<ClassFileResourceDescription> diff : difference.entriesDiffering().values()) {
-					deltas.add(new DefaultResourceDescriptionDelta(diff.leftValue(), diff.rightValue()));
-				}
-				LOG.trace("Compared Xtext index for Java files in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms");
+				collectDeltas(originalIndex, serializedCompileResult.resourceDescriptions());
+				LOG.trace("Compared Xtext index for compiled Java files in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms");
 				eventListener.descriptionsChanged(new ResourceDescriptionChangeEvent(deltas));
 			}
 		}

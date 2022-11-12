@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -45,7 +47,12 @@ class SerializedCompilerState {
 	// Intentionally use the same logger as the EclipseJavaCompiler
 	private static final Logger LOG = Logger.getLogger(EclipseJavaCompiler.class);
 
-	private static final int SERIALIZATION_VERSION = 1;
+	/*
+	 * Version history:
+	 * 1 - initial
+	 * 2 - fine grained class-path hashes 
+	 */
+	private static final int SERIALIZATION_VERSION = 2;
 
 	private static final int HASH_CODE = 0;
 	private static final int PATH = 1;
@@ -54,7 +61,9 @@ class SerializedCompilerState {
 
 	long duration;
 
-	HashCode hashedClasspath;
+	HashCode classpathArchiveHash;
+	Map<IPath, HashCode> classpathClassHashes = new HashMap<>();
+	
 	/**
 	 * The input java files. The map-key is the absolute path for the source
 	 * file.
@@ -79,41 +88,51 @@ class SerializedCompilerState {
 		try {
 			Map<URI, ClassFileResourceDescription> result = new HashMap<>();
 			for (IPath[] outputFiles : inputToOutputFiles.values()) {
-				if (outputFiles != null && outputFiles.length > 0) {
-					List<IPath> sorted = new ArrayList<IPath>(Arrays.asList(outputFiles));
-					Collections.sort(sorted, Comparator.comparing(p -> p.removeFileExtension().toString()));
-					// At this point we do have something along these lines:
-					// [
-					// Abc.class,
-					// Abc$Nested.class,
-					// Secondary.class,
-					// Third.class,
-					// Third$Nested.class
-					// ]
-					// We walk the list from left to right, starting new
-					// resource descriptions as soon as "head" + "$" is not
-					// a prefix of "next"
-					ClassFileResourceDescription currentDescription = null;
-					String currentType = "";
-					int i = 0;
-					do {
-						IPath outputFile = sorted.get(i);
-						String typeName = outputToTypeName.get(outputFile).replace('/', '.');
-						if (currentType.equals("") || !typeName.startsWith(currentType + "$")) {
-							currentType = typeName;
-							currentDescription = new ClassFileResourceDescription(
-									ClassURIHelper.OBJECTS_URI.appendSegment(typeName), new HashSet<>());
-							result.put(currentDescription.uri, currentDescription);
-						}
-						currentDescription.descriptions.add(new ClassFileEObjectDescription(
-								currentDescription.uri.appendFragment(typeName), this.outputFiles.get(outputFile)));
-						i++;
-					} while (i < sorted.size());
+				if (outputFiles != null) {
+					collectResourceDescriptions(
+							Arrays.asList(outputFiles),
+							p -> outputToTypeName.get(p).replace('/', '.'),
+							p -> this.outputFiles.get(p),
+							result);
 				}
 			}
 			return result;
 		} finally {
 			LOG.trace("Created Xtext index for Java class files in " + sw.elapsed(TimeUnit.MILLISECONDS) + "ms.");
+		}
+	}
+	
+	static void collectResourceDescriptions(Collection<IPath> paths, Function<IPath, String> toTypeName, Function<IPath, HashCode> toHashCode, Map<URI, ClassFileResourceDescription> result) {
+		if (paths.size() > 0) {
+			List<IPath> sorted = new ArrayList<IPath>(paths);
+			Collections.sort(sorted, Comparator.comparing(p -> p.removeFileExtension().toString()));
+			// At this point we do have something along these lines:
+			// [
+			// Abc.class,
+			// Abc$Nested.class,
+			// Secondary.class,
+			// Third.class,
+			// Third$Nested.class
+			// ]
+			// We walk the list from left to right, starting new
+			// resource descriptions as soon as "head" + "$" is not
+			// a prefix of "next"
+			ClassFileResourceDescription currentDescription = null;
+			String currentType = "";
+			int i = 0;
+			do {
+				IPath outputFile = sorted.get(i);
+				String typeName = toTypeName.apply(outputFile);;
+				if (currentType.equals("") || !typeName.startsWith(currentType + "$")) {
+					currentType = typeName;
+					currentDescription = new ClassFileResourceDescription(
+							ClassURIHelper.OBJECTS_URI.appendSegment(typeName), new HashSet<>());
+					result.put(currentDescription.uri, currentDescription);
+				}
+				currentDescription.descriptions.add(new ClassFileEObjectDescription(
+						currentDescription.uri.appendFragment(typeName), toHashCode.apply(outputFile)));
+				i++;
+			} while (i < sorted.size());
 		}
 	}
 
@@ -135,18 +154,19 @@ class SerializedCompilerState {
 				}
 			}
 		} else {
-			result.hashedClasspath = HashCode.fromInt(0);
+			result.classpathArchiveHash = HashCode.fromInt(0);
 		}
 		return result;
 	}
 
 	private void read(ExtendedEObjectInputStream in) throws IOException {
 		if (in.readCompressedInt() != SERIALIZATION_VERSION) {
-			hashedClasspath = HashCode.fromInt(0);
+			classpathArchiveHash = HashCode.fromInt(0);
 			return;
 		}
-		hashedClasspath = in.readHashCode();
+		classpathArchiveHash = in.readHashCode();
 		
+		readFiles(in, classpathClassHashes, HASH_CODE, HashCode.class);
 		readFiles(in, inputFiles, HASH_CODE, HashCode.class);
 		readFiles(in, outputFiles, HASH_CODE, HashCode.class);
 		readFiles(in, outputToInputFile, PATH, IPath.class);
@@ -220,8 +240,9 @@ class SerializedCompilerState {
 
 			ExtendedEObjectOutputStream out = new ExtendedEObjectOutputStream(countingOut, 128);
 			out.writeCompressedInt(SERIALIZATION_VERSION);
-			out.writeHashCode(hashedClasspath);
+			out.writeHashCode(classpathArchiveHash);
 
+			writeFiles(out, classpathClassHashes, HASH_CODE);
 			writeFiles(out, inputFiles, HASH_CODE);
 			writeFiles(out, outputFiles, HASH_CODE);
 			writeFiles(out, outputToInputFile, PATH);
@@ -292,7 +313,7 @@ class SerializedCompilerState {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(hashedClasspath, inputFiles, Maps.transformValues(inputToOutputFiles, Arrays::asList),
+		return Objects.hash(classpathArchiveHash, classpathClassHashes, inputFiles, Maps.transformValues(inputToOutputFiles, Arrays::asList),
 				outputFiles, outputToInputFile, outputToTypeName, referenceInformation);
 	}
 
@@ -305,7 +326,7 @@ class SerializedCompilerState {
 		if (getClass() != obj.getClass())
 			return false;
 		SerializedCompilerState other = (SerializedCompilerState) obj;
-		return Objects.equals(hashedClasspath, other.hashedClasspath) && Objects.equals(inputFiles, other.inputFiles)
+		return Objects.equals(classpathArchiveHash, other.classpathArchiveHash) && Objects.equals(inputFiles, other.inputFiles)
 				&& Objects.equals(Maps.transformValues(inputToOutputFiles, Arrays::asList),
 						Maps.transformValues(other.inputToOutputFiles, Arrays::asList))
 				&& Objects.equals(outputFiles, other.outputFiles)

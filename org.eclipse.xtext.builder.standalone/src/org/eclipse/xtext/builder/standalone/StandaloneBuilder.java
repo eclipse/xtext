@@ -51,6 +51,7 @@ import org.eclipse.xtext.builder.standalone.compiler.CompilerConfiguration;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.incremental.BinaryFileHashing;
 import org.eclipse.xtext.builder.standalone.incremental.ClasspathInfos;
+import org.eclipse.xtext.builder.standalone.incremental.CoarseGrainedEntryHash;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -444,7 +445,10 @@ public class StandaloneBuilder {
 		for (String classpathEntry : filteredClasspath) {
 			IPath path = new Path(classpathEntry);
 			if ("jar".equalsIgnoreCase(path.getFileExtension())) {
-				hashCodes.add(ForkJoinPool.commonPool().submit(() -> classpathInfos.hashClassesOrJar(path)));
+				hashCodes.add(ForkJoinPool.commonPool().submit(() -> {
+					CoarseGrainedEntryHash archiveEntryHash = (CoarseGrainedEntryHash) classpathInfos.hashClassesOrJar(path);
+					return archiveEntryHash.asBytes();
+				}));
 			} else {
 				hashCodes.add(ForkJoinPool.commonPool().submit(() -> hashDslFiles(path, nameFilter)));
 			}
@@ -459,7 +463,7 @@ public class StandaloneBuilder {
 		}
 		return hasher.hash();
 	}
-
+	
 	private byte[] hashDslFiles(IPath path, NameBasedFilter nameFilter) {
 		Hasher hasher = BinaryFileHashing.hashFunction().newHasher();
 		try (OutputStream hasherAsStream = Funnels.asOutputStream(hasher)) {
