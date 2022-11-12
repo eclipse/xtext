@@ -274,7 +274,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
@@ -319,7 +319,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
