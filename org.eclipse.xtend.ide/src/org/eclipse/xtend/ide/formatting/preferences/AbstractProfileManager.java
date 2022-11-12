@@ -211,6 +211,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	 * @see #PROFILE_CREATED_EVENT
 	 * @see #SETTINGS_CHANGED_EVENT
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void notifyObservers(int message) {
 		setChanged();

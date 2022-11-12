@@ -88,7 +88,7 @@ public class RichStringFormatter {
       return;
     }
     ITextRegionAccess _textRegionAccess = this._iTextRegionExtensions.getTextRegionAccess();
-    final RichStringToLineModel impl = new RichStringToLineModel(_textRegionAccess, richString);
+    final RichStringToLineModel impl = new RichStringToLineModel(_textRegionAccess);
     DefaultIndentationHandler _defaultIndentationHandler = new DefaultIndentationHandler();
     this.factory.richStringProcessor.process(richString, impl, _defaultIndentationHandler);
     impl.finish();

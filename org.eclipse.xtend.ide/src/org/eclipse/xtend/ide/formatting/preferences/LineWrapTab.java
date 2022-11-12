@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings({"restriction", "deprecation"})
 public class LineWrapTab extends AbstractModifyDialogTab {
 	private Map<String, String> fPreviewPreferences;
 	private static final String DEFAULT_PREVIEW_LINE_WRAP = "40";

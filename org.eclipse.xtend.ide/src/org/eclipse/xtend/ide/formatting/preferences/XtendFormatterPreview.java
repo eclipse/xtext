@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@SuppressWarnings("restriction")
+@SuppressWarnings({ "restriction", "deprecation" })
 public class XtendFormatterPreview implements Observer {
 
 	@Inject
@@ -96,7 +96,6 @@ public class XtendFormatterPreview implements Observer {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void doUpdate(final Map<String, String> map) {
 		checkEditorHandleIsSet();
 		final MapBasedPreferenceValues values = new MapBasedPreferenceValues(map);

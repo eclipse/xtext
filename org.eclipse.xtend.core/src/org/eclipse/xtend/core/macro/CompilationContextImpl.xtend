@@ -20,12 +20,10 @@ class CompilationContextImpl implements CompilationStrategy.CompilationContext {
 
 	extension ReflectExtensions reflectExtensions = new ReflectExtensions
 
-	ITreeAppendable appendable
 	ImportManager importManager
 	CompilationUnitImpl compilationUnit
 
 	new(ITreeAppendable appendable, CompilationUnitImpl compilationUnit) {
-		this.appendable = appendable
 		this.importManager = getImportManager(appendable)
 		this.compilationUnit = compilationUnit
 	}

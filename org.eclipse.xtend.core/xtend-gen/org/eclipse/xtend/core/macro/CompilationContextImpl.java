@@ -24,14 +24,11 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
   @Extension
   private ReflectExtensions reflectExtensions = new ReflectExtensions();
 
-  private ITreeAppendable appendable;
-
   private ImportManager importManager;
 
   private CompilationUnitImpl compilationUnit;
 
   public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit) {
-    this.appendable = appendable;
     this.importManager = this.getImportManager(appendable);
     this.compilationUnit = compilationUnit;
   }

@@ -181,6 +181,7 @@ public class RichStringAwareSourceViewer extends XtextSourceViewer {
 				String text= d.get(line.getOffset(), line.getLength());
 
 				int index= -1;
+				@SuppressWarnings("deprecation")
 				int[] found= TextUtilities.indexOf(prefixes, text, 0);
 				if (found[0] != -1) {
 					if (ignoreWhitespace) {

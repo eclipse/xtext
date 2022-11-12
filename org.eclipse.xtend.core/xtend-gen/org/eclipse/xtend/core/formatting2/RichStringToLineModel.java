@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 import java.util.List;
 import java.util.Stack;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
-import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -33,8 +32,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
-  private final RichString string;
-
   private final String document;
 
   private final ITextRegionAccess nodeModelAccess;
@@ -58,9 +55,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
 
   private int lastLiteralEndOffset;
 
-  public RichStringToLineModel(final ITextRegionAccess nodeModelAccess, final RichString string) {
+  public RichStringToLineModel(final ITextRegionAccess nodeModelAccess) {
     this.nodeModelAccess = nodeModelAccess;
-    this.string = string;
     this.document = nodeModelAccess.regionForDocument().getText();
   }
 

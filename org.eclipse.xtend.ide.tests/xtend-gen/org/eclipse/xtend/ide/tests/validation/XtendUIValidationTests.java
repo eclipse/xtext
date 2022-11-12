@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -457,7 +456,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   @Test
   public void testIssueCodeDelegation() {
     try {
-      final IJavaProject javaProject = JavaModelManager.getJavaModelManager().getJavaModel().getJavaProject(this.testHelper.getProject());
+      final IJavaProject javaProject = JavaCore.create(this.testHelper.getProject());
       final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, true);
       try {
         boolean _notEquals = (!Objects.equal(javaSeverity, "error"));
@@ -533,7 +532,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
 
   @Test
   public void testJavaDocRefs_Delegation() throws Exception {
-    final IJavaProject javaProject = JavaModelManager.getJavaModelManager().getJavaModel().getJavaProject(this.testHelper.getProject());
+    final IJavaProject javaProject = JavaCore.create(this.testHelper.getProject());
     final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, true);
     try {
       boolean _notEquals = (!Objects.equal(javaSeverity, "ignore"));

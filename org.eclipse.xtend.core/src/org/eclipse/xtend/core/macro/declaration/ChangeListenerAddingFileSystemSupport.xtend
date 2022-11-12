@@ -26,6 +26,7 @@ class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport 
 		delegate.delete(path)
 	}
 
+	@Deprecated
 	override mkdir(Path path) {
 		resourceChangeRegistry.registerCreateOrModify(path.toString, URI)
 		delegate.mkdir(path)

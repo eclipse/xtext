@@ -64,6 +64,7 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 		return formatterModifyDialogFactory.create(shell, profile, profileManager, profileStore, newProfile, "", ""); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void configurePreview(Composite composite, int numColumns, ProfileManager profileManager) {
 		createLabel(composite, Messages.FormatterConfigurationBlock_XtendCodePreview, numColumns);

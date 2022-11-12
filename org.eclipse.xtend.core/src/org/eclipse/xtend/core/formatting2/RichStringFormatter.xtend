@@ -69,7 +69,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin
 			return;
 		if (richString.regionForEObject.hasSyntaxError)
 			return;
-		val impl = new RichStringToLineModel(textRegionAccess, richString)
+		val impl = new RichStringToLineModel(textRegionAccess)
 		factory.richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
 		impl.finish()
 
@@ -224,7 +224,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin
  * @author Moritz Eysholdt - Initial implementation and API
  */
 class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
-	val RichString string
 	val String document
 	val ITextRegionAccess nodeModelAccess
 	@Accessors val LineModel model = new LineModel
@@ -237,9 +236,8 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	boolean _outdentThisLine = false
 	int lastLiteralEndOffset
 
-	new(ITextRegionAccess nodeModelAccess, RichString string) {
+	new(ITextRegionAccess nodeModelAccess) {
 		this.nodeModelAccess = nodeModelAccess
-		this.string = string
 		this.document = nodeModelAccess.regionForDocument.text
 	}
 

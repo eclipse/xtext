@@ -42,6 +42,7 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue.sendAsync(this.uri, _function);
   }
 
+  @Deprecated
   @Override
   public void mkdir(final Path path) {
     final Runnable _function = () -> {

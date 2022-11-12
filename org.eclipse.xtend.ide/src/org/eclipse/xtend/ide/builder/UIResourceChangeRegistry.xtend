@@ -32,7 +32,6 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.ui.plugin.AbstractUIPlugin
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.builder.impl.BuildScheduler
 import org.eclipse.xtext.builder.impl.IBuildFlag
 import org.eclipse.xtext.builder.impl.QueuedBuildData
 import org.eclipse.xtext.ui.XtextProjectHelper
@@ -42,13 +41,15 @@ import java.io.InputStream
 import java.io.BufferedOutputStream
 import java.io.BufferedInputStream
 import java.util.Collections
+import org.eclipse.xtext.builder.impl.BuilderStateDiscarder
+import java.util.HashMap
 
 @Singleton
 class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
 	static val logger = Logger.getLogger(UIResourceChangeRegistry) 
 	
 	@Inject QueuedBuildData queue
-	@Inject BuildScheduler scheduler
+	@Inject BuilderStateDiscarder builderStateDiscarder
 	@Inject AbstractUIPlugin uiPlugin
 	
 	IWorkspace workspace
@@ -240,7 +241,9 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 		val projects = workspace.root.projects.filter[
 			accessible && hasNature(XtextProjectHelper.NATURE_ID) && hasNature(JavaCore.NATURE_ID)
 		]
-		scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY)
+		val buildFlags = new HashMap()
+		IBuildFlag.FORGET_BUILD_STATE_ONLY.addToMap(buildFlags)
+		builderStateDiscarder.forgetLastBuildState(projects, buildFlags)
 	}
 	
 }

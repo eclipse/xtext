@@ -55,13 +55,6 @@
 				</and>
 			</activeWhen>
 		</handler>
-		<handler
-			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.javaconverter.PasteJavaCodeHandler"
-			commandId="org.eclipse.xtend.ide.pasteJavaCode">
-			<activeWhen>
-				<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
-			</activeWhen>
-		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
 		<definition id="org.eclipse.xtend.core.Xtend.Editor.opened">
@@ -204,11 +197,6 @@
 			description="Copy the qualified name for the selected element"
 			name="Copy Qualified Name">
 		</command>
-		<command
-			categoryId="org.eclipse.ui.category.textEditor"
-			id="org.eclipse.xtend.ide.pasteJavaCode"
-			name="Paste Java Code">
-		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<!-- copy qualified name -->
@@ -238,28 +226,6 @@
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
 					</and>
-				</visibleWhen>
-			</command>
-		</menuContribution>
-		<menuContribution locationURI="popup:#TextEditorContext?after=paste">
-			<command commandId="org.eclipse.xtend.ide.pasteJavaCode"
-				style="push" tooltip="Paste Java Code">
-				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened" />
-				</visibleWhen>
-			</command>
-		</menuContribution>
-		<menuContribution
-				locationURI="menu:edit?after=paste">
-			<command
-				commandId="org.eclipse.xtend.ide.pasteJavaCode"
-				style="push"
-				tooltip="Paste Java Code">
-				<visibleWhen
-					checkEnabled="false">
-					<reference
-						definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
-					</reference>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -670,10 +636,6 @@
 			description="%JUnitApplicationShortcut.description.debug"
 			categoryId="org.eclipse.debug.ui.category.run"
 			id="org.eclipse.xtend.ide.launching.junitPdeShortcut.debug">
-		</command>
-		<command
-			id="org.eclipse.xtend.ide.convertJavaCode"
-			name="Convert to Xtend">
 		</command>
 	</extension>
 	<extension
@@ -1315,12 +1277,6 @@
 			contextId="org.eclipse.xtext.ui.XtextEditorScope"
 			platform="gtk"/>
 		<key
-			commandId="org.eclipse.xtend.ide.pasteJavaCode"
-			contextId="org.eclipse.xtend.ide.XtendEditorScope"
-			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-			sequence="M1+M2+V">
-		</key>
-		<key
 			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
 			contextId="org.eclipse.xtend.ide.XtendEditorScope"
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
@@ -1492,10 +1448,6 @@
 			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.MultiOrganizeImportsHandler"
 			commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports">
 		</handler>
-		<handler
-			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.javaconverter.ConvertJavaCodeHandler"
-			commandId="org.eclipse.xtend.ide.convertJavaCode">
-		</handler>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
@@ -1517,57 +1469,6 @@
 					</visibleWhen>
 				</command>
 			</menu>
-		</menuContribution>
-		<menuContribution
-			allPopups="true"
-			locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=org.eclipse.jdt.ui.refactoring.menu">
-			<command
-				commandId="org.eclipse.xtend.ide.convertJavaCode"
-				label="Convert to Xtend"
-				style="push">
-				<visibleWhen
-					checkEnabled="false">
-						<with variable="selection">
-							<iterate
-								ifEmpty="false"
-								operator="or">
-								<or>
-									<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
-									<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
-									<adapt type="org.eclipse.jdt.core.ICompilationUnit"/>
-								</or>
-							</iterate>
-						</with>
-				</visibleWhen>
-			</command>
-		</menuContribution>
-		<menuContribution
-			allPopups="false"
-			locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=org.eclipse.jdt.ui.refactoring.menu">
-			<command
-				commandId="org.eclipse.xtend.ide.convertJavaCode"
-				label="Convert to Xtend"
-				style="push">
-				<visibleWhen checkEnabled="false">
-					<with variable="selection">
-						<iterate
-							ifEmpty="false"
-							operator="or">
-							<or>
-								<adapt
-									type="org.eclipse.jdt.core.IPackageFragment">
-								</adapt>
-								<adapt
-									type="org.eclipse.jdt.core.IPackageFragmentRoot">
-								</adapt>
-								<adapt
-									type="org.eclipse.jdt.core.ICompilationUnit">
-								</adapt>
-							</or>
-						</iterate>
-					</with>
-				</visibleWhen>
-			</command>
 		</menuContribution>
 		<menuContribution
 			locationURI="menu:navigate?after=open.ext4">

@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.internal.core.JavaModelManager
 import org.eclipse.jface.preference.IPersistentPreferenceStore
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendClass
@@ -275,7 +274,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testIssueCodeDelegation() {
-		val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
+		val javaProject = JavaCore::create(testHelper.project)
 		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, true)
 		try {
 			if (javaSeverity != "error") {
@@ -330,7 +329,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	
 	@Test
     def testJavaDocRefs_Delegation() throws Exception {
-		val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
+		val javaProject = JavaCore::create(testHelper.project)
 		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, true)
 		try {
 			if (javaSeverity != "ignore") {

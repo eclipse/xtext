@@ -14,8 +14,8 @@ import org.eclipse.jdt.core.IJavaElement
 import org.eclipse.jdt.core.IMethod
 import org.eclipse.jdt.core.IType
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.internal.ui.search.SearchUtil
 import org.eclipse.search.ui.ISearchQuery
+import org.eclipse.search.ui.NewSearchUI
 import org.eclipse.search.ui.SearchResultEvent
 import org.eclipse.search.ui.text.AbstractTextSearchResult
 import org.eclipse.search.ui.text.MatchEvent
@@ -330,7 +330,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				 	matches.forEach[elements.remove(element)]
 			}
 		]
-		SearchUtil::runQueryInForeground(workbench.activeWorkbenchWindow, query)
+		NewSearchUI::runQueryInForeground(workbench.activeWorkbenchWindow, query)
 		assertTrue(events.head instanceof RemoveAllEvent)
 		for(event: events.tail)
 			assertTrue(event instanceof MatchEvent)

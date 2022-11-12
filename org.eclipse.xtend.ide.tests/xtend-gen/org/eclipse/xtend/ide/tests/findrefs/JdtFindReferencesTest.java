@@ -19,10 +19,10 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.ui.search.SearchUtil;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.ISearchResultListener;
+import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.search.ui.text.AbstractTextSearchResult;
 import org.eclipse.search.ui.text.Match;
@@ -713,7 +713,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
         searchResult.addListener(_function);
-        SearchUtil.runQueryInForeground(this.workbench.getActiveWorkbenchWindow(), query);
+        NewSearchUI.runQueryInForeground(this.workbench.getActiveWorkbenchWindow(), query);
         SearchResultEvent _head = IterableExtensions.<SearchResultEvent>head(events);
         Assert.assertTrue((_head instanceof RemoveAllEvent));
         Iterable<SearchResultEvent> _tail = IterableExtensions.<SearchResultEvent>tail(events);

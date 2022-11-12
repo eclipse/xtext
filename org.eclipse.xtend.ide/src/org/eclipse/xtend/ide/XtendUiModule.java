@@ -15,7 +15,6 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
@@ -67,7 +66,6 @@ import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.HyperLinkingLabelProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
-import org.eclipse.xtend.ide.javaconverter.EclipseASTParserFactory;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.launching.XtendJavaElementDelegateJunitLaunch;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
@@ -129,7 +127,6 @@ import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.findrefs.DelegatingReferenceFinder;
@@ -461,8 +458,9 @@ public class XtendUiModule extends AbstractXtendUiModule {
 		return EclipseFileSystemSupportImpl.class;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
+	public Class<? extends org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return XtendCopyQualifiedNameService.class;
 	}
 
@@ -566,10 +564,6 @@ public class XtendUiModule extends AbstractXtendUiModule {
 	@Override
 	public Class<? extends XtextTemplateContextType> bindXtextTemplateContextType() {
 		return XtendTemplateContextType.class;
-	}
-
-	public Class<? extends ASTParserFactory> bindASTParserFactory() {
-		return EclipseASTParserFactory.class;
 	}
 
 	public Class<? extends SyntaxColoringPreferencePage> bindSyntaxColoringPreferencePage() {

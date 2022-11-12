@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -40,7 +41,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.builder.impl.BuildScheduler;
+import org.eclipse.xtext.builder.impl.BuilderStateDiscarder;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -60,7 +61,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   private QueuedBuildData queue;
 
   @Inject
-  private BuildScheduler scheduler;
+  private BuilderStateDiscarder builderStateDiscarder;
 
   @Inject
   private AbstractUIPlugin uiPlugin;
@@ -337,16 +338,22 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     return this.uiPlugin.getStateLocation().append("resource.change.registry").toFile();
   }
 
-  private void forgetBuildState() {
-    final Function1<IProject, Boolean> _function = (IProject it) -> {
-      try {
-        return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    };
-    final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(this.workspace.getRoot().getProjects())), _function);
-    this.scheduler.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
+  private boolean forgetBuildState() {
+    boolean _xblockexpression = false;
+    {
+      final Function1<IProject, Boolean> _function = (IProject it) -> {
+        try {
+          return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      };
+      final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(this.workspace.getRoot().getProjects())), _function);
+      final HashMap<String, String> buildFlags = new HashMap<String, String>();
+      IBuildFlag.FORGET_BUILD_STATE_ONLY.addToMap(buildFlags);
+      _xblockexpression = this.builderStateDiscarder.forgetLastBuildState(projects, buildFlags);
+    }
+    return _xblockexpression;
   }
 
   @Pure

@@ -38,6 +38,7 @@ class ParallelFileSystemSupport implements MutableFileSystemSupport {
 		]
 	}
 	
+	@Deprecated
 	override mkdir(Path path) {
 		sendAsync(uri) [
 			delegate.mkdir(path)

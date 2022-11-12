@@ -30,6 +30,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     this.delegate.delete(path);
   }
 
+  @Deprecated
   @Override
   public void mkdir(final Path path) {
     this.resourceChangeRegistry.registerCreateOrModify(path.toString(), this.getURI());
