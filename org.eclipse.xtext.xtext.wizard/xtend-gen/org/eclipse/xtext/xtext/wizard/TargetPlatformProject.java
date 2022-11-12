@@ -196,7 +196,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20210324-2015\"/>");
+        _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20221112-0806\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -274,7 +274,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
@@ -289,7 +289,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20210324-2015\"/>");
+        _builder.append("<unit id=\"com.google.inject\" version=\"5.0.1.v20221112-0806\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -319,7 +319,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2022-12\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository\"/>");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("</location>");
