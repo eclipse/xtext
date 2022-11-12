@@ -89,7 +89,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 				«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 						<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
-						<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
+						<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
 						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 						<unit id="org.junit" version="4.13.2.v20211018-1956"/>
@@ -109,12 +109,12 @@ class TargetPlatformProject extends ProjectDescriptor {
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
 						<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository"/>
 					</location>
 				«ELSE»
 					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 						<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
-						<unit id="com.google.inject" version="5.0.1.v20210324-2015"/>
+						<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
 						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
 						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
 						«IF config.junitVersion == JUnitVersion.JUNIT_4»
@@ -122,7 +122,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 						«ENDIF»
 						<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
 						<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
+						<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository"/>
 					</location>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
 						<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
