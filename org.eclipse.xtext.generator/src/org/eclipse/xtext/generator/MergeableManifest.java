@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @author Jan Koehnlein - Initial contribution and API
  * @deprecated use {@link org.eclipse.xtext.util.MergeableManifest} instead
  */
-@Deprecated//(forRemoval=true)
+@Deprecated(forRemoval=true)
 public class MergeableManifest extends org.eclipse.xtext.util.MergeableManifest {
 
 	public MergeableManifest(InputStream in) throws IOException {

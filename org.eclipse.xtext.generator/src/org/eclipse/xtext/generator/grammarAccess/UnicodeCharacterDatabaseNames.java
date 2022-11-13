@@ -12,9 +12,9 @@ package org.eclipse.xtext.generator.grammarAccess;
  * @author Moritz Eysholdt
  * @author Sven Efftinge
  * 
- * @deprecated will be removed with Xtext 2.23
+ * @deprecated will be removed with Xtext 2.30
  */
-@Deprecated//(forRemoval=true)
+@Deprecated(forRemoval=true)
 public class UnicodeCharacterDatabaseNames {
 
 	/**
