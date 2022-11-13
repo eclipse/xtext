@@ -159,7 +159,9 @@ public class XtendBatchCompiler {
 	protected String classPath;
 	/**
 	 * @since 2.7
+	 * @deprecated useless with Java 9 +
 	 */
+	@Deprecated(since = "2.30", forRemoval = true)
 	protected String bootClassPath;
 	protected boolean useCurrentClassLoaderAsParent;
 	protected String outputPath;
@@ -265,7 +267,9 @@ public class XtendBatchCompiler {
 	 * This option is only supported on JDK 8 and older and will be ignored when source level is 9 or newer.
 	 * @since 2.7
 	 * @see <a href="https://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html">Java 9 Release Notes</a>
+	 * @deprecated useless with Java 9 +
 	 */
+	@Deprecated(since = "2.30", forRemoval = true)
 	public void setBootClassPath(String bootClassPath) {
 		JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
 		if (version.isAtLeast(JavaVersion.JAVA9)) {
@@ -900,7 +904,9 @@ public class XtendBatchCompiler {
 
 	/**
 	 * @since 2.7
+	 * @deprecated useless with Java 9 +
 	 */
+	@Deprecated(since = "2.30", forRemoval = true)
 	protected List<String> getBootClassPathEntries() {
 		return getDirectories(bootClassPath);
 	}

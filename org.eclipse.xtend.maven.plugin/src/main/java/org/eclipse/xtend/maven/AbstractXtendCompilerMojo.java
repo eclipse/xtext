@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -25,15 +24,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.toolchain.Toolchain;
-import org.apache.maven.toolchain.ToolchainManager;
-import org.apache.maven.toolchain.java.DefaultJavaToolChain;
-import org.codehaus.plexus.util.DirectoryScanner;
-import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -55,13 +47,10 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	/**
 	 * Create Java Source Code that is compatible to this Java version.
 	 * 
-	 * Supported values: 1.5, 1.6, 1.7, 1.8, 9, 10, 11, 12, 13 and so forth
+	 * Supported values: 11, 17 and so forth
 	 */
 	@Parameter(property="maven.compiler.source", defaultValue="11")
 	private String javaSourceVersion;
-
-	@Component
-	private ToolchainManager toolchainManager;
 
 	/**
 	 * The current build session instance. This is used for toolchain manager API calls.
@@ -156,7 +145,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		compiler.setDeleteTempDirectory(false);
 		log.debug("Set classpath: " + classPath);
 		compiler.setClassPath(classPath);
-		String bootClassPath = getBootClassPath();
+		String bootClassPath = ""; // bootClasspath is not supported on Java 9 and later
 		log.debug("Set bootClasspath: " + bootClassPath);
 		compiler.setBootClassPath(bootClassPath);
 		log.debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
@@ -173,70 +162,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			String dir = concat(File.pathSeparator, newArrayList(filtered));
 			throw new MojoExecutionException("Error compiling xtend sources in '" + dir + "'.");
 		}
-	}
-
-	private String getBootClassPath() {
-		Toolchain toolchain = toolchainManager.getToolchainFromBuildContext("jdk", session);
-		if (toolchain instanceof DefaultJavaToolChain) {
-			DefaultJavaToolChain javaToolChain = (DefaultJavaToolChain) toolchain;
-			getLog().info("Using toolchain " + javaToolChain);
-
-			if (javaSourceVersion != null) {
-				JavaVersion version = JavaVersion.fromQualifier(javaSourceVersion);
-				if (version.isAtLeast(JavaVersion.JAVA9)) {
-					return ""; // bootclasspath only supported on Java8 and older
-				}
-			}
-
-			String[] includes = { "jre/lib/*", "jre/lib/ext/*", "jre/lib/endorsed/*" };
-			String[] excludes = new String[0];
-			Xpp3Dom config = (Xpp3Dom) javaToolChain.getModel().getConfiguration();
-			if (config != null) {
-				Xpp3Dom bootClassPath = config.getChild("bootClassPath");
-				if (bootClassPath != null) {
-					Xpp3Dom includeParent = bootClassPath.getChild("includes");
-					if (includeParent != null) {
-						includes = getValues(includeParent.getChildren("include"));
-					}
-					Xpp3Dom excludeParent = bootClassPath.getChild("excludes");
-					if (excludeParent != null) {
-						excludes = getValues(excludeParent.getChildren("exclude"));
-					}
-				}
-			}
-
-			return scanBootclasspath(javaToolChain.getJavaHome(), includes, excludes);
-		}
-		return "";
-	}
-
-	private String scanBootclasspath(String javaHome, String[] includes, String[] excludes) {
-		getLog().debug(
-				"Scanning bootClassPath:\n" + "\tjavaHome = " + javaHome + "\n" + "\tincludes = "
-						+ Arrays.toString(includes) + "\n" + "\texcludes = " + Arrays.toString(excludes));
-		DirectoryScanner scanner = new DirectoryScanner();
-		scanner.setBasedir(new File(javaHome));
-		scanner.setIncludes(includes);
-		scanner.setExcludes(excludes);
-		scanner.scan();
-
-		StringBuilder bootClassPath = new StringBuilder();
-		String[] includedFiles = scanner.getIncludedFiles();
-		for (int i = 0; i < includedFiles.length; i++) {
-			if (i > 0) {
-				bootClassPath.append(File.pathSeparator);
-			}
-			bootClassPath.append(new File(javaHome, includedFiles[i]).getAbsolutePath());
-		}
-		return bootClassPath.toString();
-	}
-
-	private String[] getValues(Xpp3Dom[] children) {
-		String[] values = new String[children.length];
-		for (int i = 0; i < values.length; i++) {
-			values[i] = children[i].getValue();
-		}
-		return values;
 	}
 
 	protected abstract String getTempDirectory();
