@@ -222,6 +222,7 @@
 				&lt;/outputConfigurations&gt;
 			&lt;/language&gt;
 		&lt;/languages&gt;
+		&lt;incrementalXtextBuild&gt;true&lt;/incrementalXtextBuild&gt; &lt;!-- default value: false --&gt;
 	&lt;/configuration&gt;
 	&lt;dependencies&gt;
 		&lt;dependency&gt;
@@ -233,7 +234,7 @@
 &lt;/plugin&gt;
 </code></pre>
 
-<p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.</p>
+<p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences. The xtext-maven-plugin can work incrementally avoiding the need for an invocation of the <code>clean</code> target before running the code generator. Incremental builds are disabled by default for backwards compatibility reasons. It is safe to enable for all languages that use the regular code generation API for Xtext and do not write into a single file from multiple source files.</p>
 
 <p>If your language uses an <code>IJvmModelInferrer</code> (for example by using Xbase), the plug-in can create trace files for debugging purposes,<br />
 by using the specialized maven goals <code>install-debug-info</code> and <code>test-install-debug-info</code>.</p>
