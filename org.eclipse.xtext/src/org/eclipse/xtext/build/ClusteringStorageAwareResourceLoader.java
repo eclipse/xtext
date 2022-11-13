@@ -58,7 +58,7 @@ public class ClusteringStorageAwareResourceLoader {
 	/**
 	 * Return true if the given uri must be loaded from source.
 	 */
-	@Deprecated(/*forRemoval = true*/)
+	@Deprecated(forRemoval = true)
 	protected boolean isSource(URI uri) {
 		IResourceServiceProvider provider = context.getResourceServiceProvider(uri);
 		return provider instanceof IResourceServiceProviderExtension
