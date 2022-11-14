@@ -53,12 +53,12 @@ public class DiagnosticResolution {
 	private static Logger log = Logger.getLogger(DiagnosticResolution.class);
 
 
-	@Deprecated//(forRemoval=true,since="2.27")
+	@Deprecated(forRemoval=true,since="2.27")
 	public DiagnosticResolution(String label, Factory modificationContextFactory,  IModification<EObject> modification) {
 		this(label, modificationContextFactory, (diagnostic, object) -> modification, 0);
 	}
 
-	@Deprecated//(forRemoval=true,since="2.27")
+	@Deprecated(forRemoval=true,since="2.27")
 	public DiagnosticResolution(String label, Factory modificationContextFactory,  IModification<EObject> modification, int relevance) {
 		this(label, modificationContextFactory, (diagnostic, object) -> modification, relevance);
 	}
