@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -74,22 +75,31 @@ public class EcoreQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 	}
 
 	protected String name(EPackage ePackage) {
-		return ePackage.getName();
+		return defaultName(ePackage);
 	}
 
 	protected String name(EClassifier eClassifier) {
-		return eClassifier.getName();
+		return defaultName(eClassifier);
 	}
 
 	protected String name(EStructuralFeature eStructuralFeature) {
-		return eStructuralFeature.getName();
+		return defaultName(eStructuralFeature);
 	}
 
 	protected String name(EEnumLiteral enumLiteral) {
-		return enumLiteral.getName();
+		return defaultName(enumLiteral);
 	}
 
 	protected String name(EOperation eOperation) {
-		return eOperation.getName();
+		return defaultName(eOperation);
+	}
+
+	/**
+	 * Default implementation: simply returns {@link ENamedElement#getName()}.
+	 * 
+	 * @since 2.30
+	 */
+	protected String defaultName(ENamedElement element) {
+		return element.getName();
 	}
 }
