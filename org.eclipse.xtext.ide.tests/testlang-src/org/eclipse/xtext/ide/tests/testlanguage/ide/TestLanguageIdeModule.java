@@ -11,6 +11,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.quickfix.IQuickFixProvider;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.ide.quickfix.TestLanguageQuickFi
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService;
 import org.eclipse.xtext.ide.tests.testlanguage.rename.TestLanguageRenameService;
+import org.eclipse.xtext.ide.tests.testlanguage.syntaxcoloring.SemanticHighlightingCalculator;
 
 /**
  * Use this class to register ide components.
@@ -62,5 +64,14 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
 	@Override
 	public Class<? extends IRenameService2> bindIRenameService2() {
 		return TestLanguageRenameService.class;
+	}
+
+	/**
+	 * Binds a semantic highlighting calculator.
+	 *
+	 * @return the semantic highlighting calculator>
+	 */
+	public final Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SemanticHighlightingCalculator.class;
 	}
 }

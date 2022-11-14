@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtext.testing;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Binder;
@@ -69,6 +70,8 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.ResourceOperation;
+import org.eclipse.lsp4j.SemanticTokens;
+import org.eclipse.lsp4j.SemanticTokensParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.SignatureInformation;
@@ -125,12 +128,13 @@ import org.junit.jupiter.api.BeforeEach;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ *         Rubén Porras Campo - Semantic Tokens Full
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public abstract class AbstractLanguageServerTest implements Endpoint {
   /**
-   * A request manager that will run the given read and write actions in the same thread immediatly, sequentially.
+   * A request manager that will run the given read and write actions in the same thread immediately, sequentially.
    */
   @Singleton
   public static class DirectRequestManager extends RequestManager {
@@ -1049,6 +1053,29 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append(_version);
     _builder.append(">");
     return _builder.toString();
+  }
+
+  @Beta
+  protected void testSemanticTokensFull(final Procedure1<? super SemanticTokensFullConfiguration> configurator) {
+    try {
+      @Extension
+      final SemanticTokensFullConfiguration configuration = new SemanticTokensFullConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final String filePath = this.initializeContext(configuration).getUri();
+      SemanticTokensParams _semanticTokensParams = new SemanticTokensParams();
+      final Procedure1<SemanticTokensParams> _function = (SemanticTokensParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
+        it.setTextDocument(_textDocumentIdentifier);
+      };
+      SemanticTokensParams _doubleArrow = ObjectExtensions.<SemanticTokensParams>operator_doubleArrow(_semanticTokensParams, _function);
+      final CompletableFuture<SemanticTokens> result = this.languageServer.semanticTokensFull(_doubleArrow);
+      String _expectedText = configuration.getExpectedText();
+      String _plus = (_expectedText + "\n");
+      this.assertEquals(_plus, this.toExpectation(result.get().getData()));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 
   protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {

@@ -93,9 +93,13 @@ import org.junit.jupiter.api.BeforeEach
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
 import org.eclipse.lsp4j.WorkspaceSymbol
+import org.eclipse.lsp4j.SemanticTokensParams
+import com.google.common.annotations.Beta
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ *         Rubén Porras Campo - Semantic Tokens Full
+ 
  */
 @FinalFieldsConstructor
 abstract class AbstractLanguageServerTest implements Endpoint {
@@ -138,7 +142,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 	
 	/**
-	 * A request manager that will run the given read and write actions in the same thread immediatly, sequentially.
+	 * A request manager that will run the given read and write actions in the same thread immediately, sequentially.
 	 */
 	@Singleton
 	static class DirectRequestManager extends RequestManager {
@@ -488,6 +492,19 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		String expectedCodeActions = ''
 
 		(List<Either<Command, CodeAction>>)=>void assertCodeActions= null
+	}
+
+	@Beta
+	protected def void testSemanticTokensFull((SemanticTokensFullConfiguration)=>void configurator) {
+		val extension configuration = new SemanticTokensFullConfiguration
+		configuration.filePath = 'MyModel.' + fileExtension
+		configurator.apply(configuration)
+		val filePath = initializeContext(configuration).uri
+		val result = languageServer.semanticTokensFull(new SemanticTokensParams => [
+			textDocument = new TextDocumentIdentifier(filePath)
+		])
+
+		assertEquals(configuration.expectedText + "\n", result.get.data.toExpectation)
 	}
 
 	protected def void testCodeAction((TestCodeActionConfiguration)=>void configurator) {

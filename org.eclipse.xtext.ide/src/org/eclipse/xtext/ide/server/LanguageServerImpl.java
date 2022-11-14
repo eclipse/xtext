@@ -144,7 +144,7 @@ import org.eclipse.xtext.util.BufferedCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Pair;
-
+import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -1285,6 +1285,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		return getRequestManager().runRead((cancelIndicator) -> semanticTokensFull(params, cancelIndicator));
 	}
 
+	@Beta
 	protected SemanticTokens semanticTokensFull(final SemanticTokensParams params,
 			final CancelIndicator cancelIndicator) {
 		URI uri = getURI(params.getTextDocument());

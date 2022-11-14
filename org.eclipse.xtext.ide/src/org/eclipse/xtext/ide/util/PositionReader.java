@@ -18,6 +18,8 @@ import com.google.common.annotations.Beta;
 
 /**
  * A reader that can return a {@link Position} on the current input string.
+ *
+ * @author Rubén Porras Campo - Initial Contribution and API
  */
 @Beta
 public class PositionReader extends LineNumberReader {

@@ -36,6 +36,8 @@ import com.google.inject.Inject;
 /**
  * A service for Semantic Tokens.
  * 
+ * @author Rubén Porras Campo - Initial contribution and API
+ * 
  * @since 2.29
  */
 @Beta
@@ -161,5 +163,3 @@ public class SemanticTokensService {
 		return null;
 	}
 }
-
-/* Copyright (c) Avaloq Evolution AG */
