@@ -47,6 +47,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
+				<tycho-version>2.6.0</tycho-version>
 				<target-platform-classifier>org.eclipse.xtend.target-r202203</target-platform-classifier>
 			</properties>
 		</profile>
