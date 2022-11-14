@@ -80,6 +80,11 @@ import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.RenameCapabilities;
 import org.eclipse.lsp4j.RenameOptions;
 import org.eclipse.lsp4j.RenameParams;
+import org.eclipse.lsp4j.SemanticTokens;
+import org.eclipse.lsp4j.SemanticTokensLegend;
+import org.eclipse.lsp4j.SemanticTokensParams;
+import org.eclipse.lsp4j.SemanticTokensRangeParams;
+import org.eclipse.lsp4j.SemanticTokensWithRegistrationOptions;
 import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
@@ -127,6 +132,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.rename.IRenameService2;
+import org.eclipse.xtext.ide.server.semantictokens.SemanticTokensService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
@@ -138,7 +144,7 @@ import org.eclipse.xtext.util.BufferedCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Pair;
-
+import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -176,6 +182,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	@Inject
 	private ILanguageServerShutdownAndExitHandler shutdownAndExitHandler;
 
+	@Inject
+	private SemanticTokensService semanticTokensService;
+	
 	private WorkspaceManager workspaceManager;
 
 	private InitializeParams initializeParams;
@@ -240,7 +249,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Configure the server capabilities for this instance.
 	 *
 	 * @param params
-	 *            the initialization parametrs
+	 *            the initialization parameters
 	 * @return the server capabilities
 	 * @since 2.20
 	 */
@@ -263,6 +272,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 
 		serverCapabilities.setSignatureHelpProvider(new SignatureHelpOptions(ImmutableList.of("(", ",")));
 		serverCapabilities.setTextDocumentSync(TextDocumentSyncKind.Incremental);
+		SemanticTokensLegend legend = new SemanticTokensLegend(semanticTokensService.getTokenTypes(), semanticTokensService.getTokenModifiers());
+		SemanticTokensWithRegistrationOptions semanticTokensWithRegistrationOptions = new SemanticTokensWithRegistrationOptions(legend);
+		semanticTokensWithRegistrationOptions.setFull(true);
+		semanticTokensWithRegistrationOptions.setRange(false);		
+		serverCapabilities.setSemanticTokensProvider(semanticTokensWithRegistrationOptions);
 		CompletionOptions completionOptions = new CompletionOptions();
 		completionOptions.setResolveProvider(false);
 		completionOptions.setTriggerCharacters(ImmutableList.of("."));
@@ -1265,5 +1279,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	public void didClose(DidCloseNotebookDocumentParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub");
 	}
-	
+
+	@Override
+	public CompletableFuture<SemanticTokens> semanticTokensFull(final SemanticTokensParams params) {
+		return getRequestManager().runRead((cancelIndicator) -> semanticTokensFull(params, cancelIndicator));
+	}
+
+	@Beta
+	protected SemanticTokens semanticTokensFull(final SemanticTokensParams params,
+			final CancelIndicator cancelIndicator) {
+		URI uri = getURI(params.getTextDocument());
+		return getWorkspaceManager().doRead(uri,
+				(doc, res) -> semanticTokensService.semanticTokensFull(doc, res, params, cancelIndicator));
+	}
 }
