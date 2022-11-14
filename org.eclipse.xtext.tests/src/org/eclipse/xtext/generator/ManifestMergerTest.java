@@ -33,7 +33,7 @@ import org.junit.runners.model.Statement;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings("removal")
 public class ManifestMergerTest extends Assert {
 	private static final String NL = Strings.newLine();
 
