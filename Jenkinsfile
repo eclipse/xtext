@@ -175,8 +175,8 @@ def selectedTargetPlatform() {
         println("Choosing 'latest' target since this build was triggered by upstream with Java ${javaVersion}")
         return 'latest'
     } else if (isTriggeredByUpstream() && javaVersion>=11) {
-        println("Choosing 'r202206' target since this build was triggered by upstream with Java ${javaVersion}")
-        return 'r202206'
+        println("Choosing 'r202203' target since this build was triggered by upstream with Java ${javaVersion}")
+        return 'r202203'
     } else {
         return tp
     }
