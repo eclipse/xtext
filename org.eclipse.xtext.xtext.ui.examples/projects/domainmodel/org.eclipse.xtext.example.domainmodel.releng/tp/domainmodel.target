@@ -31,7 +31,7 @@
       <unit id="org.apache.log4j.source" version="1.2.19.v20220208-1728"/>
       <unit id="org.aopalliance" version="1.0.0.v20220404-1927"/>
       <unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
-      <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/I20221112145035/repository"/>
+      <repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.draw2d.feature.group" version="3.14.0.202206170857"/>
