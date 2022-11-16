@@ -504,7 +504,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			textDocument = new TextDocumentIdentifier(filePath)
 		])
 
-		assertEquals(configuration.expectedText + "\n", result.get.data.toExpectation)
+		Assert.assertArrayEquals(configuration.expected.toArray, result.get.data.toArray)
 	}
 
 	protected def void testCodeAction((TestCodeActionConfiguration)=>void configurator) {

@@ -38,7 +38,7 @@ public class SemanticTokensTest extends AbstractTestLangLanguageServerTest {
 		expectedTokens.add(ImmutableList.of(3,0,4,1,0));
 		expectedTokens.add(ImmutableList.of(0,9,7,1,0));
 		
-		it.setExpectedText(expectedTokens.stream().flatMap(List::stream).map(i -> i.toString()).collect(Collectors.joining("\n")));
+		it.setExpected(expectedTokens.stream().flatMap(List::stream).collect(Collectors.toList()));
 		});
 	}
 }

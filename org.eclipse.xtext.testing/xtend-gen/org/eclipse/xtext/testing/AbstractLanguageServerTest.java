@@ -1070,9 +1070,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       };
       SemanticTokensParams _doubleArrow = ObjectExtensions.<SemanticTokensParams>operator_doubleArrow(_semanticTokensParams, _function);
       final CompletableFuture<SemanticTokens> result = this.languageServer.semanticTokensFull(_doubleArrow);
-      String _expectedText = configuration.getExpectedText();
-      String _plus = (_expectedText + "\n");
-      this.assertEquals(_plus, this.toExpectation(result.get().getData()));
+      Assert.assertArrayEquals(configuration.getExpected().toArray(), result.get().getData().toArray());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
