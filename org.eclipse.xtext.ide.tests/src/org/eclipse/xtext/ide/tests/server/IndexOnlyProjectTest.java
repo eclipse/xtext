@@ -49,18 +49,18 @@ public class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
 						String uri = null;
 						if (workspaceFolder != null) {
 							uri = workspaceFolder.getUri();
-						}
-						if (uri != null) {
-							FileProjectConfig project = new FileProjectConfig(
-									getUriExtensions().toUri(workspaceFolder.getUri()),
-									getUniqueProjectName(workspaceFolder.getName(), existingNames)) {
-								@Override
-								public boolean isIndexOnly() {
-									return true;
-								}
-							};
-							project.addSourceFolder(".");
-							workspaceConfig.addProject(project);
+							if (uri != null) {
+								FileProjectConfig project = new FileProjectConfig(
+										getUriExtensions().toUri(uri),
+										getUniqueProjectName(workspaceFolder.getName(), existingNames)) {
+									@Override
+									public boolean isIndexOnly() {
+										return true;
+									}
+								};
+								project.addSourceFolder(".");
+								workspaceConfig.addProject(project);
+							}
 						}
 					}
 				});

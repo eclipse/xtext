@@ -8,6 +8,8 @@
  */
 package org.eclipse.xtext.testing;
 
+import java.util.List;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -15,13 +17,13 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public class SemanticTokensFullConfiguration extends TextDocumentConfiguration {
-	private String expectedText = "";
+	private List<Integer> expected = null;
 
-	public String getExpectedText() {
-		return expectedText;
+	public List<Integer> getExpected() {
+		return expected;
 	}
 
-	public void setExpectedText(String expectedText) {
-		this.expectedText = expectedText;
+	public void setExpected(List<Integer> expected) {
+		this.expected = expected;
 	}
 }
