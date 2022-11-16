@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2016 Dakshinamurthy Karra, itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 Dakshinamurthy Karra, itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -211,7 +211,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		if (languageNameField.getText().length() == 0)
 			return false;
 
-		status = JavaConventions.validateJavaTypeName(languageNameField.getText(), JavaCore.VERSION_1_5, JavaCore.VERSION_1_5);
+		status = JavaConventions.validateJavaTypeName(languageNameField.getText(), JavaCore.VERSION_11, JavaCore.VERSION_11, null);
 		if (!status.isOK()) {
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageName + status.getMessage());
 			return false;

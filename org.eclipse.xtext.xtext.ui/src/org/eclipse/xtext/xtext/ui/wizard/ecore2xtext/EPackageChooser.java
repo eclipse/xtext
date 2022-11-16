@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -155,9 +155,10 @@ public class EPackageChooser {
 	}
 
 	public List<EPackageInfo> open() {
-		final Iterable<IResource> resourcesContainingGenModels = findResourcesContainingGenModels();
-		ListSelectionDialog listSelectionDialog = new ListSelectionDialog(shell, resourcesContainingGenModels,
-				new ContentProvider(), new LabelProvider(), Messages.EPackageChooser_ChooseGenModel);
+		Iterable<IResource> resourcesContainingGenModels = findResourcesContainingGenModels();
+		ListSelectionDialog listSelectionDialog = ListSelectionDialog.of(resourcesContainingGenModels)
+				.contentProvider(new ContentProvider()).labelProvider(new LabelProvider()).message(Messages.EPackageChooser_ChooseGenModel)
+				.create(shell);
 		int result = listSelectionDialog.open();
 		if (result == Window.OK) {
 			List<EPackageInfo> ePackageInfos = Lists.newArrayList();
