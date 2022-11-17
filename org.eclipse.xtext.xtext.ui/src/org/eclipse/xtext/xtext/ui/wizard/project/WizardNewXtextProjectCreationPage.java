@@ -142,7 +142,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			availableBrees.add(ee.getId());
 		}
 		for (JavaVersion supportedVersion : JavaVersion.values()) {
-			if (supportedVersion.isAtLeast(JavaVersion.JAVA6)) {
+			if (supportedVersion.isAtLeast(JavaVersion.JAVA11)) {
 				String bree = supportedVersion.getBree();
 				if (availableBrees.contains(bree))
 					brees.add(bree);
