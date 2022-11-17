@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JUnitVersion
-import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class TargetPlatformProject extends ProjectDescriptor {
@@ -61,12 +60,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-					«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-						<repository location="https://download.eclipse.org/releases/2022-12"/>
-					«ELSE»
-						<!-- newer Eclipse versions need Java 11 to run the Maven Tycho build -->
-						<repository location="https://download.eclipse.org/releases/2020-06"/>
-					«ENDIF»
+					<repository location="https://download.eclipse.org/releases/2022-12"/>
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
@@ -86,58 +80,30 @@ class TargetPlatformProject extends ProjectDescriptor {
 						<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
 					«ENDIF»
 				</location>
-				«IF config.javaVersion.isAtLeast(JavaVersion.JAVA11)»
-					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-						<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
-						<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
-						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
-						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
-						<unit id="org.junit" version="4.13.2.v20211018-1956"/>
-						«IF config.junitVersion == JUnitVersion.JUNIT_5»
-							<unit id="org.apiguardian" version="1.1.2.v20211018-1956"/>
-							<unit id="org.junit.jupiter.api" version="5.9.1.v20221103-2317"/>
-							<unit id="org.junit.jupiter.engine" version="5.9.1.v20221103-2317"/>
-							<unit id="org.junit.jupiter.migrationsupport" version="5.9.1.v20221103-2317"/>
-							<unit id="org.junit.jupiter.params" version="5.9.1.v20221103-2317"/>
-							<unit id="org.junit.platform.commons" version="1.9.1.v20221103-2317"/>
-							<unit id="org.junit.platform.engine" version="1.9.1.v20221103-2317"/>
-							<unit id="org.junit.platform.launcher" version="1.9.1.v20221103-2317"/>
-							<unit id="org.junit.platform.runner" version="1.9.1.v20221103-2317"/>
-							<unit id="org.junit.platform.suite.commons" version="1.9.1.v20221103-2317"/>
-							<unit id="org.junit.vintage.engine" version="5.9.1.v20221103-2317"/>
-							<unit id="org.opentest4j" version="1.2.0.v20211018-1956"/>
-						«ENDIF»
-						<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
-						<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
-					</location>
-				«ELSE»
-					<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-						<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
-						<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
-						<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
-						<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
-						«IF config.junitVersion == JUnitVersion.JUNIT_4»
-							<unit id="org.junit" version="4.13.2.v20211018-1956"/>
-						«ENDIF»
-						<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
-						<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
-						<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
-					</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="com.google.gson" version="2.9.1.v20220915-1632"/>
+					<unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
+					<unit id="javax.inject" version="1.0.0.v20220405-0441"/>
+					<unit id="org.antlr.runtime" version="3.2.0.v20220404-1927"/>
+					<unit id="org.junit" version="4.13.2.v20211018-1956"/>
 					«IF config.junitVersion == JUnitVersion.JUNIT_5»
-						<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-							<unit id="org.junit" version="4.12.0.v201504281640"/>
-							<unit id="org.junit.jupiter.api" version="5.7.1.v20210222-1948"/>
-							<unit id="org.junit.jupiter.engine" version="5.7.1.v20210222-1948"/>
-							<unit id="org.junit.platform.commons" version="1.7.1.v20210222-1948"/>
-							<unit id="org.junit.platform.engine" version="1.7.1.v20210222-1948"/>
-							<unit id="org.junit.platform.launcher" version="1.7.1.v20210222-1948"/>
-							<unit id="org.junit.platform.runner" version="1.7.1.v20210222-1948"/>
-							<unit id="org.opentest4j" version="1.2.0.v20190826-0900"/>
-							<repository location="https://download.eclipse.org/tools/orbit/downloads/2021-09"/>
-						</location>
+						<unit id="org.apiguardian" version="1.1.2.v20211018-1956"/>
+						<unit id="org.junit.jupiter.api" version="5.9.1.v20221103-2317"/>
+						<unit id="org.junit.jupiter.engine" version="5.9.1.v20221103-2317"/>
+						<unit id="org.junit.jupiter.migrationsupport" version="5.9.1.v20221103-2317"/>
+						<unit id="org.junit.jupiter.params" version="5.9.1.v20221103-2317"/>
+						<unit id="org.junit.platform.commons" version="1.9.1.v20221103-2317"/>
+						<unit id="org.junit.platform.engine" version="1.9.1.v20221103-2317"/>
+						<unit id="org.junit.platform.launcher" version="1.9.1.v20221103-2317"/>
+						<unit id="org.junit.platform.runner" version="1.9.1.v20221103-2317"/>
+						<unit id="org.junit.platform.suite.commons" version="1.9.1.v20221103-2317"/>
+						<unit id="org.junit.vintage.engine" version="5.9.1.v20221103-2317"/>
+						<unit id="org.opentest4j" version="1.2.0.v20211018-1956"/>
 					«ENDIF»
-				«ENDIF»
+					<unit id="org.objectweb.asm" version="9.4.0.v20221107-1714"/>
+					<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
+					<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-12"/>
+				</location>
 			</locations>
 		</target>
 	'''

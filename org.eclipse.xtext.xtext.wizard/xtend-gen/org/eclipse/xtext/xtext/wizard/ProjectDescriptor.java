@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -290,6 +290,7 @@ public abstract class ProjectDescriptor {
     return null;
   }
 
+  @Deprecated(since = "2.30", forRemoval = true)
   protected boolean isAtLeastJava9() {
     return this.config.getJavaVersion().isAtLeast(JavaVersion.JAVA9);
   }
