@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  * 
  * @deprecated this class is not used anymore and will be removed in a future release
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 @ImplementedBy(IEditorHighlightingConfigurationProvider.DefaultImpl.class)
 public interface IEditorHighlightingConfigurationProvider {
 	@Deprecated

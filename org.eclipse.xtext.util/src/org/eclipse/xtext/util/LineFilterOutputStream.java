@@ -18,7 +18,7 @@ import java.io.OutputStream;
  * 
  * @deprecated this class is obsolete and will be removed in a future release of Xtext.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class LineFilterOutputStream extends FilterOutputStream {
 
 	private final byte[] pattern;
