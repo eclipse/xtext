@@ -8,8 +8,9 @@ dependencies {
 	api 'org.eclipse.platform:org.eclipse.equinox.common'
 	// remove me, once the following is fixed : https://bugs.eclipse.org/bugs/show_bug.cgi?id=510504
 	api 'org.eclipse.platform:org.eclipse.osgi'
-	api 'org.eclipse.emf:org.eclipse.emf.common'
+	api 'org.eclipse.emf:org.eclipse.emf.ecore'
 	api 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
+	api 'org.eclipse.emf:org.eclipse.emf.common'
 	api 'com.google.inject:guice'
 	api 'org.antlr:antlr-runtime'
 	optional 'org.eclipse.platform:org.eclipse.core.runtime'
