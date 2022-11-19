@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -478,7 +479,7 @@ public class JavaProjectSetupUtil {
 
 	public static File createExternalJar(InputStream data, String nameWithoutJarSuffix) throws IOException,
 			FileNotFoundException {
-		File tempFile = File.createTempFile(nameWithoutJarSuffix, ".jar");
+		File tempFile = Files.createTempFile(nameWithoutJarSuffix, ".jar").toFile();
 		tempFile.createNewFile();
 		tempFile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(tempFile);
