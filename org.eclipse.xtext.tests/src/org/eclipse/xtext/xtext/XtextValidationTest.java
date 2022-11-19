@@ -88,7 +88,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
-			File tempFile = File.createTempFile("XtextValidationTest", ".ecore");
+			File tempFile = java.nio.file.Files.createTempFile("XtextValidationTest", ".ecore").toFile();
 			tempFile.deleteOnExit();
 			Files.asCharSink(tempFile, StandardCharsets.UTF_8).write("<?xml version='1.0' encoding='UTF-8'?>" +
 					"<ecore:EPackage xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI'"+
