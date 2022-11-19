@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -108,7 +109,7 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 	}
 
 	private boolean download(final File jarFile) throws IOException {
-		final File tempFile = File.createTempFile("JFlex", "zip");
+		final File tempFile = Files.createTempFile("JFlex", "zip").toFile();
 		tempFile.deleteOnExit();
 		if (askBeforeDownload) {
 			boolean ok = false;
