@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.web.test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,7 +100,7 @@ public abstract class AbstractXbaseWebTest {
 
 	protected File createFile(String content) {
 		try {
-			File file = File.createTempFile("test", ".entities");
+			File file = Files.createTempFile("test", ".entities").toFile();
 			resourceBaseProvider.testFiles.put(file.getName(), URI.createFileURI(file.getAbsolutePath()));
 			FileWriter writer = new FileWriter(file);
 			writer.write(content);

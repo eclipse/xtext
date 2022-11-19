@@ -11,6 +11,7 @@ package org.eclipse.xtext.web.server.test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,7 +120,7 @@ public abstract class AbstractWebServerTest {
 
 	protected File createFile(String content) {
 		try {
-			File file = File.createTempFile("test", ".statemachine");
+			File file = Files.createTempFile("test", ".statemachine").toFile();
 			resourceBaseProvider.testFiles.put(file.getName(), URI.createFileURI(file.getAbsolutePath()));
 			FileWriter writer = new FileWriter(file);
 			writer.write(content);
