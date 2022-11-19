@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class LineFilterOutputStreamTest extends Assert {
 
 	private ByteArrayOutputStream result;
