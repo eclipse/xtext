@@ -116,7 +116,7 @@ The `pom.xml` for the language project contains information about how Maven shou
     <dependency>
       <groupId>org.eclipse.emf</groupId>
       <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-      <version>2.13.0</version>
+      <version>2.14.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
@@ -225,6 +225,7 @@ Now that we can build our language we need to be able to integrate our language 
 				</outputConfigurations>
 			</language>
 		</languages>
+		<incrementalXtextBuild>true</incrementalXtextBuild> <!-- default value: false -->
 	</configuration>
 	<dependencies>
 		<dependency>
@@ -236,7 +237,7 @@ Now that we can build our language we need to be able to integrate our language 
 </plugin>
 ```
 
-You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.
+You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences. The xtext-maven-plugin can work incrementally avoiding the need for an invocation of the `clean` target before running the code generator. Incremental builds are disabled by default for backwards compatibility reasons. It is safe to enable for all languages that use the regular code generation API for Xtext and do not write into a single file from multiple source files.
 
 If your language uses an `IJvmModelInferrer` (for example by using Xbase), the plug-in can create trace files for debugging purposes,
 by using the specialized maven goals `install-debug-info` and `test-install-debug-info`.
@@ -306,7 +307,8 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 
 | Xtext         | EMF           | MWE2/MWE    | Xpand       | Eclipse     | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
-| [2.28.0]({{page.upsite.xtext}}releases/2.28.0/)           | [2.31.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.31) (2.20.0)     | [2.13.0]({{page.upsite.mwe}}releases/2.13.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.24.0]({{page.upsite.eclipse}}releases/2022-09) (4.7.3) | [2022-09]({{page.upsite.eclipse}}releases/2022-09)|
+| [2.29.0]({{page.upsite.xtext}}releases/2.29.0/)           | [2.32.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.32) (2.20.0)     | [2.14.0]({{page.upsite.mwe}}releases/2.14.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.26.0]({{page.upsite.eclipse}}releases/2022-12) (4.23) | [2022-12]({{page.upsite.eclipse}}releases/2022-12)|
+| [2.28.0]({{page.upsite.xtext}}releases/2.28.0/)           | [2.31.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.31) (2.20.0)     | [2.13.0]({{page.upsite.mwe}}releases/2.13.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.25.0]({{page.upsite.eclipse}}releases/2022-09) (4.7.3) | [2022-09]({{page.upsite.eclipse}}releases/2022-09)|
 | [2.27.0]({{page.upsite.xtext}}releases/2.27.0/)           | [2.30.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.30) (2.20.0)     | [2.13.0]({{page.upsite.mwe}}releases/2.13.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.24.0]({{page.upsite.eclipse}}releases/2022-06) (4.7.3) | [2022-06]({{page.upsite.eclipse}}releases/2022-06)|
 | [2.26.0]({{page.upsite.xtext}}releases/2.26.0/)           | [2.29.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.29) (2.20.0)     | [2.12.2]({{page.upsite.mwe}}releases/2.12.2/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.23.0]({{page.upsite.eclipse}}releases/2022-03) (4.7.3) | [2022-03]({{page.upsite.eclipse}}releases/2022-03)|
 | [2.25.0]({{page.upsite.xtext}}releases/2.25.0/)           | [2.25.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.25) (2.20.0)     | [2.12.1]({{page.upsite.mwe}}releases/2.12.1/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.19.0]({{page.upsite.eclipse}}releases/2021-03) (4.7.3) | [2021-03]({{page.upsite.eclipse}}releases/2021-03)|
@@ -330,7 +332,7 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 | [2.8.3]({{page.upsite.xtext}}releases/2.8.3/), [2.8.2]({{page.upsite.xtext}}releases/2.8.2/), [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) | [2.11.0]({{page.upsite.emf}}2.11/core/R201506010402/) (2.10.2)  	 | [2.8.0]({{page.upsite.mwe}}releases/2.8.0/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars R]({{page.upsite.eclipse}}releases/mars/201506241002/)|
 | [2.7.3]({{page.upsite.xtext}}releases/maintenance/R201411190455/) | [2.10.2]({{page.upsite.emf}}2.10.x/core/S201501230452/) (2.10) | [2.7.0]({{page.upsite.mwe}}releases/R201409021051/mwe2lang/) [1.3.4]({{page.upsite.mwe}}releases/R201409021027/mwe) (2.7.0/1.2)  | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4) | [4.4.2]({{page.upsite.eclipse}}eclipse/updates/4.4/R-4.4.2-201502041700) (3.6) |[Luna SR2]({{page.upsite.eclipse}}releases/luna/201502271000/)|
 
-The following is an example target platform definition for Xtext 2.28.0 and Eclipse 4.25 alias 2022-09.
+The following is an example target platform definition for Xtext 2.29.0 and Eclipse 4.26 alias 2022-12.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -339,7 +341,7 @@ The following is an example target platform definition for Xtext 2.28.0 and Ecli
 <locations>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.28.0/"/>
+    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.29.0/"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
@@ -348,7 +350,7 @@ The following is an example target platform definition for Xtext 2.28.0 and Ecli
     <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/releases/2022-09/"/>
+    <repository location="http://download.eclipse.org/releases/2022-12/"/>
   </location>
 </locations>
 </target>
