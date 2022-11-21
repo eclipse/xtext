@@ -41,7 +41,7 @@ public class ReflectExtensions {
 		Preconditions.checkNotNull(fieldName,"fieldName");
 		Class<? extends Object> clazz = receiver.getClass();
 		Field f = getDeclaredField(clazz, fieldName);
-		if (!f.isAccessible())
+		if (!f.canAccess(receiver))
 			f.setAccessible(true);
 		f.set(receiver, value);
 	}
@@ -66,7 +66,7 @@ public class ReflectExtensions {
 		
 		Class<? extends Object> clazz = receiver.getClass();
 		Field f = getDeclaredField(clazz, fieldName);
-		if (!f.isAccessible())
+		if (!f.canAccess(receiver))
 			f.setAccessible(true);
 		return (T) f.get(receiver);
 	}
@@ -119,7 +119,7 @@ public class ReflectExtensions {
 			}
 		} while(compatible == null && (clazz = clazz.getSuperclass()) != null);
 		if (compatible != null) {
-			if (!compatible.isAccessible())
+			if (!compatible.canAccess(receiver))
 				compatible.setAccessible(true);
 			return compatible.invoke(receiver, arguments);
 		}
