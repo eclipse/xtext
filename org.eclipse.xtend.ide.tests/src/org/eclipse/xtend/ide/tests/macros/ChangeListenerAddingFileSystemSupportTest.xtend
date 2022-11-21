@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -92,20 +92,20 @@ class ChangeListenerAddingFileSystemSupportTest {
 		assertTrue(registry.existsListeners.containsEntry(path.toString, uri))
 	}
 	
-	@Test
+	@Test @Deprecated
 	def void mkDir() {
 		fsa.mkdir(path)
 		assertTrue(registry.childrenListeners.empty)
 	}
 	
-	@Test
+	@Test @Deprecated
 	def void isFolderAndMkDir() {
 		fsa.isFolder(path)
 		fsa.mkdir(path)
 		assertTrue(registry.childrenListeners.empty)
 	}
 	
-	@Test
+	@Test @Deprecated
 	def void discardCreateAndModifyInformation() {
 		fsa.mkdir(path)
 		fsa.mkdir(new Path('b'))
