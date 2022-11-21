@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -177,7 +178,14 @@ public abstract class GraphvizDotBuilder {
 
 	public void draw(Object obj, String cmd) throws IOException {
 		log.info("Running '" + cmd + "' in '" + new File(".").getCanonicalPath() + "'");
-		Process p = Runtime.getRuntime().exec(cmd);
+		StringTokenizer st = new StringTokenizer(cmd);
+		String[] cmdarray = new String[st.countTokens()];
+		int i = 0;
+		while (st.hasMoreTokens()) {
+			cmdarray[i] = st.nextToken();
+			i++;
+		 }
+		Process p = Runtime.getRuntime().exec(cmdarray);
 		PrintStream ps = new PrintStream(p.getOutputStream());
 		BufferedInputStream in = new BufferedInputStream(p.getInputStream());
 		BufferedInputStream err = new BufferedInputStream(p.getErrorStream());
