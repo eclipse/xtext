@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -229,17 +229,8 @@ public class InMemoryJavaCompiler {
 	 * (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
 	 */
 	private void setSourceLevel(long jdkVersion) {
-		try {
-			compilerOptions.sourceLevel = jdkVersion;
-			try {
-				// these fields have been introduced in JDT 3.7
-				CompilerOptions.class.getField("originalSourceLevel").setLong(compilerOptions, jdkVersion);
-			} catch (NoSuchFieldException e) {
-				// ignore
-			}
-		} catch (IllegalAccessException e) {
-			throw Exceptions.sneakyThrow(e);
-		}
+		compilerOptions.sourceLevel = jdkVersion;
+		compilerOptions.originalSourceLevel = jdkVersion;
 	}
 
 	/**
@@ -247,17 +238,8 @@ public class InMemoryJavaCompiler {
 	 * (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
 	 */
 	private void setComplianceLevel(long jdkVersion) {
-		try {
-			compilerOptions.complianceLevel = jdkVersion;
-			try {
-				// these fields have been introduced in JDT 3.7
-				CompilerOptions.class.getField("originalComplianceLevel").setLong(compilerOptions, jdkVersion);
-			} catch (NoSuchFieldException e) {
-				// ignore
-			}
-		} catch (IllegalAccessException e) {
-			throw Exceptions.sneakyThrow(e);
-		}
+		compilerOptions.complianceLevel = jdkVersion;
+		compilerOptions.originalComplianceLevel = jdkVersion;
 	}
 
 	public Result compile(JavaSource... sources) {
