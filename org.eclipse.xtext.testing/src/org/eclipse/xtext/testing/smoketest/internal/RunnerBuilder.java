@@ -73,7 +73,7 @@ public class RunnerBuilder extends org.junit.runners.model.RunnerBuilder {
 		private final Scenario[] scenarios;
 		
 		public Delegate(ProcessedBy processor, Scenario[] scenarios) {
-			super(true);
+			super();
 			this.processor = processor;
 			this.scenarios = scenarios;
 		}
