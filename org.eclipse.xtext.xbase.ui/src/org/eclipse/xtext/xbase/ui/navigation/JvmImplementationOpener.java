@@ -35,6 +35,7 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.NodeFinder;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SuperMethodInvocation;
+import org.eclipse.jdt.core.manipulation.SharedASTProviderCore;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchMatch;
@@ -48,7 +49,6 @@ import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.text.JavaElementProvider;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jdt.ui.JavaUI;
-import org.eclipse.jdt.ui.SharedASTProvider;
 import org.eclipse.jdt.ui.text.IJavaPartitions;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -84,7 +84,7 @@ public class JvmImplementationOpener {
 	public void openImplementations(final IJavaElement element, ITextViewer textviewer, IRegion region){
 		if (element instanceof IMethod) {
 			ITypeRoot typeRoot = ((IMethod) element).getTypeRoot();
-			CompilationUnit ast = SharedASTProvider.getAST(typeRoot, SharedASTProvider.WAIT_YES, null);
+			CompilationUnit ast = SharedASTProviderCore.getAST(typeRoot, SharedASTProviderCore.WAIT_YES, null);
 			if (ast == null) {
 				openQuickHierarchy(textviewer,element,region);
 				return;

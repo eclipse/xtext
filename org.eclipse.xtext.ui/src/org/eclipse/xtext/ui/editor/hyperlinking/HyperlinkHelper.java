@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -119,7 +120,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	/**
 	 * @deprecated use {@link EObjectAtOffsetHelper#getCrossReferenceNode(XtextResource, org.eclipse.xtext.util.ITextRegion)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected INode getParentNodeWithCrossReference(INode startNode) {
 		if(startNode == null)
 			return null;
@@ -138,7 +139,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		final URI normalized = uri.isPlatformResource() ? uri : uriConverter.normalize(uri);
 
 		XtextHyperlink result = hyperlinkProvider.get();
-		result.setHyperlinkRegion(region);
+		result.setHyperlinkRegion((IRegion)region);
 		result.setURI(normalized);
 		result.setHyperlinkText(hyperlinkText);
 		acceptor.accept(result);
