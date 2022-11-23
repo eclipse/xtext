@@ -18,7 +18,7 @@ import org.junit.runners.model.Statement;
 /**
  * @author Sebastian Zarnekow
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class FlakyFailsFourTimes {
 	@Rule 
 	public Flaky.Rule rule = new Flaky.Rule();

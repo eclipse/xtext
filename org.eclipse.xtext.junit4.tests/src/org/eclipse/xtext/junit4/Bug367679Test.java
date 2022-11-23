@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(XtextInjectorProvider.class)
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true)
 public class Bug367679Test {
 	
 	@Test 

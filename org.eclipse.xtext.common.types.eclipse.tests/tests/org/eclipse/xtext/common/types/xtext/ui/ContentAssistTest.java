@@ -15,10 +15,9 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,7 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public class ContentAssistTest extends AbstractXtextTests implements ResourceLoadHelper {
+public class ContentAssistTest extends AbstractXtextTests {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
 		MockJavaProjectProvider.setUp();

@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.junit4.internal.StopwatchRule;
+import org.eclipse.xtext.common.types.util.StopwatchRule;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
