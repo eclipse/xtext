@@ -30,6 +30,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>r202212</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtend.target-r202212</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>r202209</id>
 			<properties>
 				<target-platform-classifier>org.eclipse.xtend.target-r202209</target-platform-classifier>
