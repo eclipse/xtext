@@ -11,6 +11,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.ui.JavaElementLabels;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -42,7 +43,7 @@ public class JdtHyperlinkFactory {
 			return;
 		String label = JavaElementLabels.getElementLabel(javaElement, JavaElementLabels.ALL_DEFAULT);
 		JdtHyperlink result = jdtHyperlinkProvider.get();
-		result.setHyperlinkRegion(region);
+		result.setHyperlinkRegion((IRegion)region);
 		result.setHyperlinkText(label);
 		result.setJavaElement(javaElement);
 		acceptor.accept(result);

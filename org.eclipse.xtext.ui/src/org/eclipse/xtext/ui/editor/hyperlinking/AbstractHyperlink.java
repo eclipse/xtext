@@ -48,13 +48,17 @@ public abstract class AbstractHyperlink implements IHyperlink {
 	 * since 2.18
 	 */
 	public void setHyperlinkRegion(IRegion hyperlinkRegion) {
-		this.hyperlinkRegion = hyperlinkRegion;
+		if (hyperlinkRegion instanceof Region) {
+			setHyperlinkRegion((Region)hyperlinkRegion);
+		} else {
+			this.hyperlinkRegion = hyperlinkRegion;
+		}
 	}
 
 	/**
 	 * @deprecated use {@link #setHyperlinkRegion(IRegion)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setHyperlinkRegion(Region hyperlinkRegion) {
 		this.hyperlinkRegion = hyperlinkRegion;
 	}
