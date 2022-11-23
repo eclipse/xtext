@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.testing.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestFactory;

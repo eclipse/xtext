@@ -16,7 +16,7 @@ import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.testing.AbstractXtextTests;
+import org.eclipse.xtext.common.types.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.BeforeClass;

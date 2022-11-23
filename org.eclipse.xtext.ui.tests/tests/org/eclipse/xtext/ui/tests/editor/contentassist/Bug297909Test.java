@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.testing.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;

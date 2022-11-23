@@ -20,7 +20,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.ui.testing.AbstractXtextTests;
+import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;

@@ -34,7 +34,6 @@ Require-Bundle: org.eclipse.xtext.util,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.ui.workbench;resolution:=optional,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.testing
 Export-Package: org.eclipse.xtext.common.types.access,
  org.eclipse.xtext.common.types.access.impl,

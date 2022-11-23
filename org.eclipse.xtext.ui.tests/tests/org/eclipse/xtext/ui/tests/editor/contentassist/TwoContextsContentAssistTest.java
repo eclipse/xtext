@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.testing.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
