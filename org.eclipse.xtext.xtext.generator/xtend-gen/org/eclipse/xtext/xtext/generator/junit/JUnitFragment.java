@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -46,10 +46,11 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
   private FileAccessFactory fileAccessFactory;
 
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean useDeprecatedClasses;
+  @Deprecated(forRemoval = true, since = "2.30")
+  private boolean useDeprecatedClasses = false;
 
   @Accessors(AccessorType.PUBLIC_SETTER)
-  private boolean skipXbaseTestingPackage;
+  private boolean skipXbaseTestingPackage = false;
 
   private JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
 
@@ -93,14 +94,13 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
   }
 
   protected String getXbaseUiTestingPackage() {
-    String _xblockexpression = null;
-    {
-      if (this.skipXbaseTestingPackage) {
-        return "";
-      }
-      _xblockexpression = "org.eclipse.xtext.xbase.junit";
+    if (this.skipXbaseTestingPackage) {
+      return "";
     }
-    return _xblockexpression;
+    if (this.useDeprecatedClasses) {
+      return "org.eclipse.xtext.xbase.junit";
+    }
+    return "org.eclipse.xtext.xbase.ui.testing";
   }
 
   @Override
@@ -760,6 +760,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     return new TypeReference(_eclipsePluginTestBasePackage, _plus);
   }
 
+  @Deprecated
   public void setUseDeprecatedClasses(final boolean useDeprecatedClasses) {
     this.useDeprecatedClasses = useDeprecatedClasses;
   }
