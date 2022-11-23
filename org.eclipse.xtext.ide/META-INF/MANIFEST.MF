@@ -29,6 +29,7 @@ Export-Package: org.eclipse.xtext.ide;
  org.eclipse.xtext.ide.editor.folding,
  org.eclipse.xtext.ide.editor.hierarchy;
   x-friends:="org.eclipse.xtext.junit4,
+   org.eclipse.xtext.ui.testing,
    org.eclipse.xtext.xtext.ui,
    org.eclipse.xtext.xtext.ui.tests,
    org.eclipse.xtext.example.arithmetics.ui,
