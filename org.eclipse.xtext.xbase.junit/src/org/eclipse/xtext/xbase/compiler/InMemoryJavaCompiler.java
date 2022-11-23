@@ -44,7 +44,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  * @deprecated Use org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler instead
  */
 @SuppressWarnings("restriction")
-@Deprecated
+@Deprecated(forRemoval = true)
 public class InMemoryJavaCompiler {
 	private static class ClassLoaderBasedNameEnvironment implements INameEnvironment {
 		private final ClassLoader classLoader;

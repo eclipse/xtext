@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -59,7 +59,7 @@ import com.google.inject.Inject;
  * @since 2.10
  * @deprecated Use org.eclipse.xtext.ui.testing.AbstractOutlineTest instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractOutlineTest extends AbstractEditorTest {
 
 	protected static int TAB_INDENT = 2;

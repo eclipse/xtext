@@ -6,8 +6,9 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.eclipse.xtext.junit4.ide;
+package org.eclipse.xtext.ui.testing;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -24,11 +25,11 @@ import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -39,9 +40,9 @@ import org.junit.Assert;
 
 /**
  * @author kosyakov - Initial contribution and API
- * @since 2.10
+ * @since 2.30
  */
-@Deprecated(forRemoval = true, since = "2.30")
+@Beta
 public abstract class AbstractHierarchyBuilderTest {
 	protected static class HierarchyBuilderTestConfiguration {
 		private Function1<? super ResourceSet, ? extends IHierarchyBuilder> hierarchyBuilderProvider;
