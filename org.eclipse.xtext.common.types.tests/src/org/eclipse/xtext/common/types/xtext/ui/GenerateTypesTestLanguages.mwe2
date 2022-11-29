@@ -63,7 +63,6 @@ Workflow {
     		
 			fragment = @CommonTestLanguagesFragments {}
 			fragment = junit.JUnitFragment {
-				useDeprecatedClasses = false
 				generateStub = false
 			}
 		}
