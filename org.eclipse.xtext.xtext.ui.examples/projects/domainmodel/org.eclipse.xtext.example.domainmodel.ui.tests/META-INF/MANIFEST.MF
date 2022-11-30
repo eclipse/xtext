@@ -11,11 +11,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.13.0",
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.ui,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.ui.testing,
- org.eclipse.xtext.xbase.junit,
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.ui.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.xtext.example.domainmodel.ui.tests;x-internal=true
 Import-Package: org.hamcrest.core,
