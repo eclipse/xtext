@@ -16,9 +16,9 @@ import java.net.URL;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
-import org.eclipse.jface.text.templates.persistence.TemplatePersistenceData;
-import org.eclipse.jface.text.templates.persistence.TemplateReaderWriter;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
+import org.eclipse.text.templates.TemplatePersistenceData;
+import org.eclipse.text.templates.TemplateReaderWriter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.Constants;
 

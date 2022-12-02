@@ -10,14 +10,14 @@ package org.eclipse.xtext.ui.codetemplates.ui.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
-import org.eclipse.jface.text.templates.persistence.TemplatePersistenceData;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.text.templates.ContextTypeRegistry;
+import org.eclipse.text.templates.TemplatePersistenceData;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
@@ -46,7 +46,7 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 	
 	@Inject
 	public AdvancedTemplatesPreferencePage(IPreferenceStore preferenceStore,
-			ContextTypeRegistry registry, TemplateStore templateStore) {
+			org.eclipse.jface.text.templates.ContextTypeRegistry registry, TemplateStore templateStore) {
 		super(preferenceStore, registry, templateStore);
 	}
 	
@@ -66,7 +66,7 @@ public class AdvancedTemplatesPreferencePage extends XtextTemplatePreferencePage
 			TemplatePersistenceData data= (TemplatePersistenceData) selection.getFirstElement();
 			Template template= data.getTemplate();
 			String name = template.getName();
-			TemplateContextType contextType = getContextTypeRegistry().getContextType(template.getContextTypeId());
+			TemplateContextType contextType = ((ContextTypeRegistry)getContextTypeRegistry()).getContextType(template.getContextTypeId());
 			if (contextType != null) {
 				String prefix = 
 						"templates for " + grammarAccess.getGrammar().getName() +

@@ -11,11 +11,11 @@ package org.eclipse.xtext.ui.codetemplates.ui.validation;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.jface.text.templates.TemplateException;
 import org.eclipse.jface.text.templates.TemplateTranslator;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
+import org.eclipse.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
