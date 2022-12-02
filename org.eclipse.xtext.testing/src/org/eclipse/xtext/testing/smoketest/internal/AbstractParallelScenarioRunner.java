@@ -171,7 +171,7 @@ public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRun
 	
 	private static class ParallelRunnerScheduler implements RunnerScheduler {
 		private final List<Future<?>> futures;
-        private ExecutorService executor = Executors.newFixedThreadPool(Integer.getInteger("org.eclipse.xtext.junit4.parallel.threads", 4));
+        private ExecutorService executor = Executors.newFixedThreadPool(Integer.getInteger("org.eclipse.xtext.testing.parallel.threads", 4));
 
         public ParallelRunnerScheduler() {
             futures = Collections.synchronizedList(new ArrayList<Future<?>>());
