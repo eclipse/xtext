@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true, since = "2.30")
 public class AllScenariosRunner extends ParentRunner<Runner> {
 
 	private final List<Runner> runners;

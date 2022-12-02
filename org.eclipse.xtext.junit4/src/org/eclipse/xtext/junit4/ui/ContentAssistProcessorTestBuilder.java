@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -61,7 +61,7 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow
  * @deprecated Use org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;

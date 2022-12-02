@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug348427TestLanguageGrammarAccess;

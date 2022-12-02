@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2022 TypeFox GmbH (http://www.typefox.io) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -41,7 +41,7 @@ import org.junit.Assert;
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true, since = "2.30")
 public abstract class AbstractHierarchyBuilderTest {
 	protected static class HierarchyBuilderTestConfiguration {
 		private Function1<? super ResourceSet, ? extends IHierarchyBuilder> hierarchyBuilderProvider;

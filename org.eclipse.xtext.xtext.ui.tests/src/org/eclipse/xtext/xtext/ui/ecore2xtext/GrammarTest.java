@@ -23,7 +23,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.xtext.ui.AbstractXtextTests;
 import org.junit.Test;
 
 /**

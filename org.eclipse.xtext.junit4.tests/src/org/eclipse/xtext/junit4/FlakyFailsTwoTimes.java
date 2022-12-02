@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class FlakyFailsTwoTimes {
 	@Rule 
 	public Flaky.Rule rule = new Flaky.Rule();

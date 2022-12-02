@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -30,7 +30,7 @@ import org.eclipse.xtext.validation.CompositeEValidator;
  * @author Arne Deutsch - Support for annotation validators
  * @deprecated Use org.eclipse.xtext.testing.GlobalRegistries instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class GlobalRegistries {
 	
 	public static class GlobalStateMemento {

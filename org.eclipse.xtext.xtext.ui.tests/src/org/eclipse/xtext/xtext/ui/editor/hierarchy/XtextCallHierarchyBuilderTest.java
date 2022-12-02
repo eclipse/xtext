@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
-import org.eclipse.xtext.junit4.ide.AbstractHierarchyBuilderTest;
+import org.eclipse.xtext.ui.testing.AbstractHierarchyBuilderTest;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyBuilder;

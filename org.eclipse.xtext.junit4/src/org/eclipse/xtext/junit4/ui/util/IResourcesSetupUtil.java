@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -44,7 +44,7 @@ import com.google.common.io.ByteStreams;
 /**
  * @deprecated Use org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil instead
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class IResourcesSetupUtil {
 
 	public static IWorkspaceRoot root() {

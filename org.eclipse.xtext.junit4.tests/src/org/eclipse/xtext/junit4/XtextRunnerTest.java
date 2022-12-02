@@ -27,7 +27,7 @@ import com.google.inject.Module;
  */
 @InjectWith(XtextRunnerTest.MyInjectorProvider.class)
 @RunWith(XtextRunner.class)
-@SuppressWarnings("deprecation")
+@Deprecated(forRemoval = true)
 public class XtextRunnerTest {
 
 	private static boolean injectorCreated = false;
