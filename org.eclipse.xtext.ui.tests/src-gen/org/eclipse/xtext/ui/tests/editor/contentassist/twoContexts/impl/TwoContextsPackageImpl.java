@@ -61,7 +61,6 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
   {
     super(eNS_URI, TwoContextsFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

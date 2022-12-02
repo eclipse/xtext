@@ -77,7 +77,6 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
   {
     super(eNS_URI, BracketmatchingFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

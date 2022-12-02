@@ -61,7 +61,6 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
   {
     super(eNS_URI, QuickfixCrossrefFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

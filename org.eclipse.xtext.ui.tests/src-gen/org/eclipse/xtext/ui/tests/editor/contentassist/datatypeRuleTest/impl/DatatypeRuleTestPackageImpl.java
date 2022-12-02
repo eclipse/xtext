@@ -93,7 +93,6 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
   {
     super(eNS_URI, DatatypeRuleTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

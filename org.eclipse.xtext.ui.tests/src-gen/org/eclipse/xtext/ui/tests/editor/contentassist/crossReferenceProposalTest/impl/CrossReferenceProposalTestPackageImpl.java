@@ -60,7 +60,6 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
   {
     super(eNS_URI, CrossReferenceProposalTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

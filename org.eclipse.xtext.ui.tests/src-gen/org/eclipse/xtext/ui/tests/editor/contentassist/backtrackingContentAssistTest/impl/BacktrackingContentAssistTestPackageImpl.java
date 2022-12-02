@@ -525,7 +525,6 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
   {
     super(eNS_URI, BacktrackingContentAssistTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

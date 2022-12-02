@@ -61,7 +61,6 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
   {
     super(eNS_URI, FoldingFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -52,7 +52,6 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
   {
     super(eNS_URI, KeywordsUiTestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

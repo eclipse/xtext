@@ -85,7 +85,6 @@ public class Gh341TestLanguagePackageImpl extends EPackageImpl implements Gh341T
   {
     super(eNS_URI, Gh341TestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

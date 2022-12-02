@@ -108,7 +108,6 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
   {
     super(eNS_URI, DomainModelTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -69,7 +69,6 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
   {
     super(eNS_URI, LookAheadContentAssistTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

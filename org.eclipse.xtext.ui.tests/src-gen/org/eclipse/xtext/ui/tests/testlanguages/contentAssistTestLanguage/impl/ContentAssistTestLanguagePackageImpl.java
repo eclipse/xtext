@@ -85,7 +85,6 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
   {
     super(eNS_URI, ContentAssistTestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

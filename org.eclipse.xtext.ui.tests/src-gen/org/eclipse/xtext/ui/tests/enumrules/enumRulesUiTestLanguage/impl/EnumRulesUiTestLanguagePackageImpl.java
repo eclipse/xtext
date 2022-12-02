@@ -63,7 +63,6 @@ public class EnumRulesUiTestLanguagePackageImpl extends EPackageImpl implements 
   {
     super(eNS_URI, EnumRulesUiTestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

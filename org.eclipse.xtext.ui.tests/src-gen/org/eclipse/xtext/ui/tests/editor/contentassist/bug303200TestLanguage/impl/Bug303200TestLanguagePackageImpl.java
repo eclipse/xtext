@@ -173,7 +173,6 @@ public class Bug303200TestLanguagePackageImpl extends EPackageImpl implements Bu
   {
     super(eNS_URI, Bug303200TestLanguageFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

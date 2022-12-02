@@ -61,7 +61,6 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
   {
     super(eNS_URI, EncodingTestFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
