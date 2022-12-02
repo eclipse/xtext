@@ -1,4 +1,4 @@
-arguments=
+arguments=-PuseJenkinsSnapshots\=true
 auto.sync=false
 build.scans.enabled=false
 connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
@@ -9,7 +9,7 @@ gradle.user.home=
 java.home=
 jvm.arguments=
 offline.mode=false
-override.workspace.settings=false
+override.workspace.settings=true
 project.path=\:
 show.console.view=false
 show.executions.view=false
