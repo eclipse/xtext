@@ -12,7 +12,6 @@
 		<root-dir>${basedir}/..</root-dir>
 		<maven.version>3.6.0</maven.version>
 		<tycho-version>2.7.5</tycho-version>
-		<emf.version>2.20.0</emf.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>

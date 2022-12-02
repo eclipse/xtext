@@ -7,7 +7,7 @@
 	editPluginID="sample.emf.edit", 
 	forceOverwrite="true", 
 	resource="XMI",
-	complianceLevel="7.0"
+	complianceLevel="11.0"
 )
 package axcore
 

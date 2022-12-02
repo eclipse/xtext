@@ -15,22 +15,22 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<xtext-version>2.30.0-SNAPSHOT</xtext-version>
 		<tycho-version>2.7.5</tycho-version>
-		<eclipse-text-version>3.6.100</eclipse-text-version>
-		<core-resources-version>3.12.0</core-resources-version>
-		<core-runtime-version>3.13.0</core-runtime-version>
-		<emf-common-version>2.17.0</emf-common-version>
-		<emf-ecore-version>2.20.0</emf-ecore-version>
-		<emf-edit-version>2.16.0</emf-edit-version>
-		<emf-version>2.20.0</emf-version>
+		<eclipse-text-version>3.12.200</eclipse-text-version>
+		<core-resources-version>3.18.0</core-resources-version>
+		<core-runtime-version>3.26.0</core-runtime-version>
+		<emf-common-version>2.24.0</emf-common-version>
+		<emf-ecore-version>2.26.0</emf-ecore-version>
+		<emf-edit-version>2.17.0</emf-edit-version>
+		<emf-version>2.26.0</emf-version>
 		<emf-xmi-version>2.16.0</emf-xmi-version>
-		<emf-codegen-version>2.19.0</emf-codegen-version>
-		<emf-codegen-ecore-version>2.20.0</emf-codegen-ecore-version>
-		<ecore-xcore-version>1.12.0</ecore-xcore-version>
-		<ecore-xcore-lib-version>1.4.0</ecore-xcore-lib-version>
-		<ecore-xtext-version>1.4.0</ecore-xtext-version>
-		<jdt-core-version>3.23.0</jdt-core-version>
-		<jdt-compiler-apt-version>1.3.1100</jdt-compiler-apt-version>
-		<osgi-osgi-version>6.0.0</osgi-osgi-version>
+		<emf-codegen-version>2.22.0</emf-codegen-version>
+		<emf-codegen-ecore-version>2.29.0</emf-codegen-ecore-version>
+		<ecore-xcore-version>1.20.0</ecore-xcore-version>
+		<ecore-xcore-lib-version>1.6.0</ecore-xcore-lib-version>
+		<ecore-xtext-version>1.6.0</ecore-xtext-version>
+		<jdt-core-version>3.31.0</jdt-core-version>
+		<jdt-compiler-apt-version>1.4.200</jdt-compiler-apt-version>
+		<platform-osgi-version>3.18.100</platform-osgi-version>
 	</properties>
 
 	<dependencyManagement>
