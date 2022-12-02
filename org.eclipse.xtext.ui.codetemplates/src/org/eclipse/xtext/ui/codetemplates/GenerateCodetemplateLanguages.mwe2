@@ -83,6 +83,7 @@ Workflow {
 			
 			junitSupport = {
 				generateStub = false
+				skipXbaseTestingPackage = true
 			}
 			
 			renameRefactoring = {
@@ -136,6 +137,7 @@ Workflow {
 			
 			junitSupport = {
 				generateStub = false
+				skipXbaseTestingPackage = true
 			}
 		}
 	}
