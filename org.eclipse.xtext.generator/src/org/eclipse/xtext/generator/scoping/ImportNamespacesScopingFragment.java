@@ -16,7 +16,7 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 
 	@Override

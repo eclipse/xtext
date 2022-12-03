@@ -19,7 +19,7 @@ import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class SyntheticTerminalAwareFragmentHelper extends AntlrFragmentHelper {
 
 	private SyntheticTerminalDetector detector;

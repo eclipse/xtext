@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FormatterStubGenerator {

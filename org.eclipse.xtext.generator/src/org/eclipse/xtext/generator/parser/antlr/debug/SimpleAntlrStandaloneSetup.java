@@ -12,7 +12,7 @@ package org.eclipse.xtext.generator.parser.antlr.debug;
  * Initialization support for running Xtext languages
  * without equinox extension registry
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class SimpleAntlrStandaloneSetup extends SimpleAntlrStandaloneSetupGenerated{
 
 	public static void doSetup() {

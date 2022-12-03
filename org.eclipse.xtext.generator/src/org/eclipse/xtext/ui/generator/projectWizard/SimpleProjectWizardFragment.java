@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Knut Wannheden
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private static final Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);
@@ -107,7 +107,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	/**
 	 * @deprecated use {@link #getFileExtension(Grammar)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public String getModelFileExtension(Grammar g) {
 		return getFileExtension(g);
 	}
@@ -140,7 +140,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	/**
 	 * @deprecated use {@link #setFileExtension(String)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setModelFileExtension(String modelFileExtension) {
 		setFileExtension(modelFileExtension);
 	}

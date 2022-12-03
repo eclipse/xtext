@@ -29,7 +29,7 @@ import com.google.inject.Injector;
 /**
  * @since 2.9
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Generator2AdapterSetup {
 	private LanguageConfig languageConfig;
 

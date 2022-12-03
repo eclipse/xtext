@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 @SuppressWarnings("all")
 public class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
   @Inject

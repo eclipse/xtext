@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(LoggingGeneratorFragment.class);

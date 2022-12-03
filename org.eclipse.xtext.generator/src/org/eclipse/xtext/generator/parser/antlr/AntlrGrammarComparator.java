@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
  * @author Christian Schneider - Initial contribution and API
  * @noreference
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AntlrGrammarComparator {
 	public interface IErrorHandler {
 		void handleInvalidGeneratedGrammarFile(ErrorContext context);

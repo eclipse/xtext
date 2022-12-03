@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.Strings;
  * corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Naming {
 
 	public final static String GLOBAL_VAR_NAME = "__Naming__";
@@ -148,7 +148,7 @@ public class Naming {
 	/**
 	 * @deprecated use {@link #activatorName()} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public String activator() {
 		return uiBasePackage+ ".Activator";
 	}

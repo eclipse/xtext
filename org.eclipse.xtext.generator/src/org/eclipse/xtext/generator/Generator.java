@@ -68,7 +68,7 @@ import com.google.common.collect.Maps;
  * @author Michael Clay
  * @deprecated Use {@link org.eclipse.xtext.xtext.generator.XtextGenerator} instead.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Generator extends AbstractWorkflowComponent2 {
 	private final static class EmptyPluginXmlVeto implements VetoStrategy {
 		static Pattern PLUGIN_ELEMENT = Pattern.compile("<plugin>(.*?)</plugin>", Pattern.DOTALL);

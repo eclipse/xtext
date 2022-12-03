@@ -39,7 +39,7 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class GeneratorFragment extends AbstractGeneratorFragment implements IStubGenerating {
 	
 	private boolean generateStub = true;
@@ -62,7 +62,7 @@ public class GeneratorFragment extends AbstractGeneratorFragment implements IStu
 	/**
 	 * @deprecated use {@link #setGenerateStub(boolean)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setGeneratorStub(boolean isGenerateStub) {
 		setGenerateStub(isGenerateStub);
 	}		

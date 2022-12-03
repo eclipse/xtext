@@ -38,7 +38,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment {
 
 	@Override
@@ -105,7 +105,7 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	/**
 	 * @deprecated use {@link #prettyPrint(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void prettyPrint(String absoluteGrammarFileName) {
 		prettyPrint(absoluteGrammarFileName, Charset.defaultCharset());
 	}

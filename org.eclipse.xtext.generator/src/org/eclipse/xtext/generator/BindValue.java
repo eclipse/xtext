@@ -9,7 +9,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class BindValue {
 	private String expression;
 	private String typeName;

@@ -28,7 +28,7 @@ import org.eclipse.xtext.util.Strings;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class FormatterFragment extends AbstractStubGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {

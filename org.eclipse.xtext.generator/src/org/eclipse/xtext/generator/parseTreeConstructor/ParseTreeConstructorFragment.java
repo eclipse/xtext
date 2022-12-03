@@ -35,7 +35,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
  * 
  * @deprecated use org.eclipse.xtext.generator.serializer.SerializerFragment instead.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(ParseTreeConstructorFragment.class);

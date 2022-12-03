@@ -15,7 +15,7 @@ package org.eclipse.xtext.generator;
  * @author Miro Spoenemann - Initial contribution and API
  * @since 2.8
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public interface IClassAnnotation {
 	
 	/**

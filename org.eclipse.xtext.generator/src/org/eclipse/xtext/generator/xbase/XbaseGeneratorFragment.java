@@ -46,7 +46,7 @@ import com.google.common.collect.Lists;
  * @author Holger Schill
  * @since 2.9
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment implements IGeneratorFragmentExtension4 {
 	
 	private boolean generateXtendInferrer = true;

@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Formatter2Fragment extends Xtend2GeneratorFragment {
 	private FormatterStubGenerator stubGenerator;
 

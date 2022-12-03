@@ -21,7 +21,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  * @since 2.4
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ValidatorNaming {
 	@Inject
 	private Grammar grammar;

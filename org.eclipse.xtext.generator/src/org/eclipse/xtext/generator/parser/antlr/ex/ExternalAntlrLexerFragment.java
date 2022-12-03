@@ -40,7 +40,7 @@ import com.google.common.io.Files;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private String lexerGrammar;
@@ -181,7 +181,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	/**
 	 * @deprecated use {@link #suppressWarningsImpl(String, Charset)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void suppressWarningsImpl(String javaFile) {
 		suppressWarningsImpl(javaFile, Charset.defaultCharset());
 	}

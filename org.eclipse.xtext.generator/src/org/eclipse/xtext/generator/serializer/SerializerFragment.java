@@ -38,7 +38,7 @@ import com.google.inject.name.Names;
 /**
  * @author Moritz Eyshold - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class SerializerFragment extends Xtend2GeneratorFragment
 		implements IStubGenerating, IStubGenerating.XtendOption {
 	@Inject

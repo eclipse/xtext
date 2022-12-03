@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.8
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public interface IGeneratorFragmentExtension4 {
 
 	/**

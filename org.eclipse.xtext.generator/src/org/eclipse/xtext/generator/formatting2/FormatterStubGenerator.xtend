@@ -30,7 +30,7 @@ import java.util.Set
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 @FinalFieldsConstructor class FormatterStubGenerator {
 	@Accessors(PUBLIC_GETTER) static class Service {
 		@Inject Naming naming

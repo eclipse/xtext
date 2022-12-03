@@ -18,7 +18,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3 {
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
@@ -59,10 +59,10 @@ public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFr
 	
 	/**
 	 * @since 2.6
-	 * @deprecated
+	 * @Deprecated(forRemoval = true)
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {}
 
 	@Override

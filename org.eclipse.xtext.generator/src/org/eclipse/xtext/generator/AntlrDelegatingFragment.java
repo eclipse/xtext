@@ -22,7 +22,7 @@ import org.eclipse.xtext.Grammar;
  *
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";

@@ -24,7 +24,7 @@ import com.google.inject.Guice;
  * @author kosyakov - Initial contribution and API
  * @since 2.8
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
 	protected com.google.inject.Module createModule(Grammar grammar) {
 		return new com.google.inject.Module() {

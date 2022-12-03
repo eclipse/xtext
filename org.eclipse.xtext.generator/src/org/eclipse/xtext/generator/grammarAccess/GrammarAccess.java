@@ -25,7 +25,7 @@ import com.google.inject.Inject;
  * 
  * @author Moritz Eysholdt
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class GrammarAccess {
 	@Inject
 	private Naming naming;

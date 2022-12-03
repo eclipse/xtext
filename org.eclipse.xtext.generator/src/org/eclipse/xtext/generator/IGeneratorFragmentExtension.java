@@ -15,7 +15,7 @@ import org.eclipse.xtext.Grammar;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public interface IGeneratorFragmentExtension {
 
 	/**
@@ -25,7 +25,7 @@ public interface IGeneratorFragmentExtension {
 	 * @param ctx - the execution context to use (the plugin.xml file is already opened)
 	 * @deprecated We do not generate plugin.xml files for test bundles
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx);
 
 	/**

@@ -46,7 +46,7 @@ import com.google.common.collect.Sets;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public final class PackratParserGenUtil {
 
 	/**

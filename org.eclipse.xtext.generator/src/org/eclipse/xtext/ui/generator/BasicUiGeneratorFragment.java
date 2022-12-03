@@ -12,7 +12,7 @@ package org.eclipse.xtext.ui.generator;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class BasicUiGeneratorFragment extends DefaultGeneratorFragment {
 	private String fileExtensions;
 

@@ -43,12 +43,12 @@ import com.google.common.collect.Lists;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @deprecated Use the {@link EMFGeneratorFragment} instead. It writes the EPackage to the model folder.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(EcoreGeneratorFragment.class);
 	
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	private String referencedGenModels;
 	
 	public static class ToPlatformResourceDeresolvingURIHandler extends EMFGeneratorFragment.ToPlatformResourceDeresolvingURIHandler {
@@ -75,7 +75,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 	
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public String getReferencedGenModels() {
 		return referencedGenModels;
 	}
@@ -91,7 +91,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 	/**
 	 * Use {@link GenModelAccess#getGenPackage(EPackage, ResourceSet)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
 		List<GenPackage> result = Lists.newArrayList();
 		if (getReferencedGenModels() != null) {
@@ -116,7 +116,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 	/**
 	 * use {@link StandaloneSetup#addRegisterGenModelFile(String)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setReferencedGenModels(String referencedGenModel) {
 		if ("".equals(referencedGenModel))
 			return;
@@ -128,7 +128,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 	/**
 	 * @since 2.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void registerReferencedGenModels() {
 		try {
 			if (getReferencedGenModels() != null && getReferencedGenModels().length() > 0) {
@@ -152,9 +152,9 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 	 * use {@link StandaloneSetup#addRegisterGenModelFile(String)}
 	 * 
 	 * @param uris
-	 * @deprecated
+	 * @Deprecated(forRemoval = true)
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setGenModels(String uris) {
 		log.warn("The property 'genModels' is deprecated. Please use 'referencedGenModels' instead.");
 		setReferencedGenModels(uris);

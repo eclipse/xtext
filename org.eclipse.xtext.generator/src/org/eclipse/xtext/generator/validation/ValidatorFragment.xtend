@@ -33,7 +33,7 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
  * @author Jan Koehnlein
  * @since 2.4
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
 
 	@Inject extension Naming

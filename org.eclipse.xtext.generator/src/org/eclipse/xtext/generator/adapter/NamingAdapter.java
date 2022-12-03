@@ -13,7 +13,7 @@ import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 class NamingAdapter extends XtextGeneratorNaming {
 	private Naming naming;
 

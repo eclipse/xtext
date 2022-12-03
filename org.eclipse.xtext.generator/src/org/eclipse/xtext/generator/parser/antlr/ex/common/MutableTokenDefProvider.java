@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MutableTokenDefProvider extends org.eclipse.xtext.xtext.generator.parser.antlr.MutableTokenDefProvider {
 
 	/**
@@ -26,7 +26,7 @@ public class MutableTokenDefProvider extends org.eclipse.xtext.xtext.generator.p
 	/**
 	 * @deprecated use {@link #MutableTokenDefProvider(KeywordHelper, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public MutableTokenDefProvider() {
 		this(null, Charset.defaultCharset());
 	}

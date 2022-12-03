@@ -21,7 +21,7 @@ import java.nio.charset.Charset;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AntlrToolFacade {
 
 	private final static Logger log = Logger.getLogger(AntlrToolFacade.class);
@@ -176,7 +176,7 @@ public class AntlrToolFacade {
 	/**
 	 * @deprecated use runWithEncodingAndParams(grammar, encoding, args) instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void runWithParams(String grammarFullPath, String... furtherArgs) {
 		ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 		try {
