@@ -42,7 +42,7 @@ import org.eclipse.xtext.util.Strings;
  * 
  * @deprecated This class depends on Xpand/Xtend(1) which is dead as a mouse. So don't use this post processor. Switch to a manually maintained metamodel instead.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor {
 
 	private static final Logger logger = Logger.getLogger(XtendXtext2EcorePostProcessor.class);
