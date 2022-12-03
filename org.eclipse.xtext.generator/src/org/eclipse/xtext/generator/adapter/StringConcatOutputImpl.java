@@ -14,7 +14,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 /**
  * @since 2.9
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class StringConcatOutputImpl extends OutputImpl {
 	public static final String STRING_OUTLET = "StringConcatOutputImpl.StringOutlet";
 

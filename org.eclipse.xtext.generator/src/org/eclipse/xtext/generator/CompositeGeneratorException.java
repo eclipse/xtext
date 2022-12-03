@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.6
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CompositeGeneratorException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

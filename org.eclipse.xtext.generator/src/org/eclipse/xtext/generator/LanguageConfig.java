@@ -55,7 +55,7 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @deprecated Use {@link org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage} instead.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class LanguageConfig extends CompositeGeneratorFragment {
 
 	private final class ToStringFunction implements Function<IGeneratorFragment, String> {

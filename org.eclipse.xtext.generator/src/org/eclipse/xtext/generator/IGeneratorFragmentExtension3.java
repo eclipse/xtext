@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @since 2.8
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public interface IGeneratorFragmentExtension3 {
 	
 	/**

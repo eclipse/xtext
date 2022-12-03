@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Junit4Fragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
 	
@@ -43,15 +43,15 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 		this.useDeprecatedClasses = useDeprecatedClasses;
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	private boolean genContentAssistTest;
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public boolean isGenContentAssistTest() {
 		return genContentAssistTest;
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setGenContentAssistTest(boolean genUiTest) {
 		this.genContentAssistTest = genUiTest;
 	}

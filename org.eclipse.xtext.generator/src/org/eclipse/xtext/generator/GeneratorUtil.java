@@ -18,7 +18,7 @@ import java.util.HashSet;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.Files;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class GeneratorUtil {
 
 	private static Logger log = Logger.getLogger(GeneratorUtil.class);

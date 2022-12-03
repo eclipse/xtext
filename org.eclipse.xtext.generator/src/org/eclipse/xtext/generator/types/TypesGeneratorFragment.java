@@ -21,7 +21,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class TypesGeneratorFragment extends DefaultGeneratorFragment implements IGeneratorFragmentExtension4 {
 	
 	static {

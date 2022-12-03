@@ -346,10 +346,10 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
+   * @Deprecated(forRemoval = true)
    * @generated
    */
-  @Deprecated
+  @Deprecated(forRemoval = true)
   public static SimpleAntlrPackage getPackage()
   {
     return SimpleAntlrPackage.eINSTANCE;

@@ -12,7 +12,7 @@ package org.eclipse.xtext.generator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class BindFactory {
 	private String contributedBy;
 

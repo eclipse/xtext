@@ -43,7 +43,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
@@ -165,7 +165,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #splitLexerClassFile(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void splitLexerClassFile(String filename) throws IOException {
 		splitLexerClassFile(filename, Charset.defaultCharset());
 	}
@@ -183,7 +183,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #splitParserClassFile(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void splitParserClassFile(String filename) throws IOException {
 		splitParserClassFile(filename, Charset.defaultCharset());
 	}
@@ -217,7 +217,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #simplifyUnorderedGroupPredicatesIfRequired(Grammar, String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName) {
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName, Charset.defaultCharset());
 	}
@@ -243,7 +243,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #simplifyUnorderedGroupPredicates(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void simplifyUnorderedGroupPredicates(String javaFile) throws IOException {
 		simplifyUnorderedGroupPredicates(javaFile, Charset.defaultCharset());
 	}
@@ -272,7 +272,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #suppressWarnings(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void suppressWarnings(String grammarFileName) {
 		suppressWarnings(grammarFileName, Charset.defaultCharset());
 	}
@@ -280,7 +280,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #suppressWarnings(String, String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void suppressWarnings(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName) {
 		suppressWarnings(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
 	}
@@ -389,7 +389,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #splitParserAndLexerIfEnabled(String, String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
 			String absoluteParserGrammarFileName) {
 		splitParserAndLexerIfEnabled(absoluteLexerGrammarFileName, absoluteParserGrammarFileName, Charset.defaultCharset());
@@ -398,7 +398,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	/**
 	 * @deprecated use {@link #splitParserAndLexerIfEnabled(String, Charset)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void splitParserAndLexerIfEnabled(String absoluteGrammarFileName) {
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName, absoluteGrammarFileName, Charset.defaultCharset());
 	}

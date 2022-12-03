@@ -33,7 +33,7 @@ import org.eclipse.xtext.generator.ecore.EMFGeneratorFragment;
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.0
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class GenModelAccess {
 
 	public static GenClass getGenClass(EClass cls, ResourceSet resourceSet) {
@@ -103,7 +103,7 @@ public class GenModelAccess {
 	/**
 	 * @since 2.1
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (genModelURI == null) {

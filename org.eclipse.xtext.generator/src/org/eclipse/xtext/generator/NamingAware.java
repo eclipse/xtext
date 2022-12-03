@@ -11,7 +11,7 @@ package org.eclipse.xtext.generator;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public interface NamingAware {
 	void registerNaming(Naming n);
 }

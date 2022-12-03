@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  *
  * @author Jan Koehnlein
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorFragment {
 
 	@Override
@@ -81,7 +81,7 @@ public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorF
 	 * @param inherit
 	 * @deprecated use {@link #setInheritImplementation(boolean)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setInherit(boolean inherit) {
 		this.setInheritImplementation(inherit);
 	}
@@ -89,7 +89,7 @@ public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorF
 	/**
 	 * @deprecated use {@link #isInheritImplementation()} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public boolean isInherit() {
 		return isInheritImplementation();
 	}

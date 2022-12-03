@@ -103,7 +103,7 @@ import com.google.common.io.CharStreams;
  * 
  * @since 2.4
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(EMFGeneratorFragment.class);
@@ -967,7 +967,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 * @deprecated Save mappings are no longer supported. The EcoreGeneratorFragment will use the 
 	 * uri that is given in the referenced genmodel or create a platform resource uri for new files. 
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void addSaveMapping(Mapping mapping) {
 		log.warn("Save mappings are no longer supported. The EcoreGeneratorFragment will use the " +
 				"uri that is given in the referenced genmodel or create a platform resource uri for new files.");

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.debug.validation;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class SimpleAntlrJavaValidator extends AbstractSimpleAntlrJavaValidator {
 
 //	@Check

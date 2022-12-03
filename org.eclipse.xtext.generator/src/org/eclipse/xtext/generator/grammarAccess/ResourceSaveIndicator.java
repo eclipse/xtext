@@ -13,7 +13,7 @@ import org.eclipse.xtext.util.Wrapper;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ResourceSaveIndicator extends Wrapper<Boolean> {
 
 	public ResourceSaveIndicator() {

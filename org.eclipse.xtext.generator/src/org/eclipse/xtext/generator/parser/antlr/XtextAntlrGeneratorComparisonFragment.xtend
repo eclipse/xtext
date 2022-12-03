@@ -47,7 +47,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  * 
  * @deprecated This class should be no longer used. We are confident in the new ANTLR generator.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 	static val Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment)
 	static val ENCODING = Charsets.ISO_8859_1.name

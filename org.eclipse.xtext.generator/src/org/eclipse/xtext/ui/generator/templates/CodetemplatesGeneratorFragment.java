@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableList;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.0
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean suppressRestriction = false;

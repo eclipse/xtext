@@ -28,7 +28,7 @@ import org.eclipse.xtext.generator.Naming;
  * @author Knut Wannheden - Initial contribution and API
  * @author Heiko Behrens
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class QuickfixProviderFragment extends AbstractStubGeneratorFragment implements IInheriting {
 
 	private boolean isInheritImplementation = true;

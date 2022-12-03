@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ParseTreeConstructorUtil {
 
 	public static TreeConstState getTreeConstState(AbstractElement e) {

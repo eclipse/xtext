@@ -20,7 +20,7 @@ import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Ecore2XtextValueConverterServiceFragment extends DefaultGeneratorFragment {
 
 	@Override

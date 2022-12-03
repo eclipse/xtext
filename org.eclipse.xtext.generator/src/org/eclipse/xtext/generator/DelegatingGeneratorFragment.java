@@ -19,7 +19,7 @@ import org.eclipse.xtext.Grammar;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DelegatingGeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private IGeneratorFragment delegate;

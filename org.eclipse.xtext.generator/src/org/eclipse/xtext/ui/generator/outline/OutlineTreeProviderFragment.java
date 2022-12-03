@@ -28,7 +28,7 @@ import org.eclipse.xtext.generator.Naming;
  *
  * @author Jan Koehnlein
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class OutlineTreeProviderFragment extends AbstractStubGeneratorFragment {
 
 	@Override

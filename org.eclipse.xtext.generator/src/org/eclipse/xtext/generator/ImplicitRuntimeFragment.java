@@ -12,7 +12,7 @@ package org.eclipse.xtext.generator;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ImplicitRuntimeFragment extends DefaultGeneratorFragment {
 
 	@Override

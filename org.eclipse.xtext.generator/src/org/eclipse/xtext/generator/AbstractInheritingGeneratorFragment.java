@@ -16,7 +16,7 @@ import org.eclipse.xtext.Grammar;
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragment implements IInheriting {
 
 	private boolean isInheritImplementation = true;
@@ -31,7 +31,7 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 		this.isInheritImplementation = isInheritImplementation;
 	}
 	
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public String getSuperClassName(String superClassName, String defaultName) {
 		if (isInheritImplementation && isClassExists(superClassName))
 			return superClassName;
@@ -39,7 +39,7 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 			return defaultName;
 	}
 
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected boolean isClassExists(String className) {
 		try {
 			Class.forName(className);

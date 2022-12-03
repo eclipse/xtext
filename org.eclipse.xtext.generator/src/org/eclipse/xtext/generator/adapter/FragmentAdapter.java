@@ -60,7 +60,7 @@ import com.google.inject.Inject;
  * @deprecated please rewrite your fragment with the new generator
  * infrastructure.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class FragmentAdapter extends AbstractXtextGeneratorFragment {
 	@Inject
 	private CodeConfig codeConfig;

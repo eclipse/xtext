@@ -19,7 +19,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
 
 	@Inject Grammar grammar

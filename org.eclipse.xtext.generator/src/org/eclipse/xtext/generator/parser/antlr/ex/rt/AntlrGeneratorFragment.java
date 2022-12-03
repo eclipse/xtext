@@ -51,7 +51,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 
 	@Override
@@ -104,7 +104,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	/**
 	 * @deprecated use {@link #createLexerTokensProvider(String, KeywordHelper, Charset)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected MutableTokenDefProvider createLexerTokensProvider(final String lexerBaseFileName) {
 		return createLexerTokensProvider(lexerBaseFileName, null, Charset.defaultCharset());
 	}
@@ -131,7 +131,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	/**
 	 * @deprecated use {@link #cleanupLexerTokensFile(String, KeywordHelper, String)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void cleanupLexerTokensFile(String lexerBaseFileName) {
 		if (getOptions().isBacktrackLexer()) {
 			MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName, null, Charset.defaultCharset());

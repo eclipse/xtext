@@ -42,7 +42,7 @@ import com.google.common.collect.ImmutableList;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragment {
 	
 	private boolean removeBacktrackingGuards = false;
@@ -83,7 +83,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	 * @since 2.4
 	 * @deprecated use {@link #removeBacktrackingGuardsIfEnabled(String, Charset)} instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	protected void removeBacktrackingGuardsIfEnabled(String absoluteGrammarFileName) {
 		removeBacktrackingGuardsIfEnabled(absoluteGrammarFileName, Charset.defaultCharset());
 	}

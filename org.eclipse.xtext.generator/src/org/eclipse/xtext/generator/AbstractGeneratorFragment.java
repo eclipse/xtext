@@ -28,7 +28,7 @@ import com.google.common.io.Files;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private Naming naming;
@@ -63,10 +63,10 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 
 	/**
 	 * @since 2.3
-	 * @deprecated
+	 * @Deprecated(forRemoval = true)
 	 */
 	@Override
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlTests", grammar, getParameters(grammar));
 	}

@@ -31,7 +31,7 @@ import org.eclipse.xtext.util.XtextSwitch;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 
 	private final ICharSequenceWithOffset input;

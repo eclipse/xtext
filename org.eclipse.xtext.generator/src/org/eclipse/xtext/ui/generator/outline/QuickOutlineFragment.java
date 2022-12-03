@@ -14,7 +14,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class QuickOutlineFragment extends AbstractGeneratorFragment {
 
 	@Override
