@@ -47,7 +47,7 @@ import com.google.common.collect.Lists;
  * @deprecated This class depends on Xpand/Xtend(1) which is dead as a mouse. So don't use this post processor. Switch to a manually maintained metamodel instead.
  */
 @SuppressWarnings("restriction")
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcorePostProcessor implements
 		IResourceChangeListener {
 

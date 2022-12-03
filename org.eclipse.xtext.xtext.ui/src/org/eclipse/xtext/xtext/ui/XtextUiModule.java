@@ -27,8 +27,8 @@ import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
-import org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
+import org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
@@ -140,6 +140,7 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	}
 
 	@SuppressWarnings("deprecation")
+	@Deprecated(forRemoval = true)
 	public void configureIXtext2EcorePostProcessor(Binder binder) {
 		try {
 			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
