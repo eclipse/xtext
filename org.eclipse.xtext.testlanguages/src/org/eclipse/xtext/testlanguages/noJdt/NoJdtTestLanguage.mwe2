@@ -14,7 +14,7 @@ XtextGeneratorLanguage {
 
 	// generates Java API for the generated EPackages
 	fragment = ecore.EMFGeneratorFragment2 auto-inject {
-		emfRuntimeVersion = "2.20"
+		emfRuntimeVersion = "2.29"
 	}
 
 	// serializer 2.0

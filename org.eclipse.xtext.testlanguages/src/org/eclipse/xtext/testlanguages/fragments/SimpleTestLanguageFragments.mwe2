@@ -7,7 +7,7 @@ var backtrack = false
 var memoize = false
 var classSplitting = true
 
-var jdkLevel = "JDK80"
+var jdkLevel = "JDK110"
 
 var parser = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
   	options = auto-inject {
@@ -24,7 +24,7 @@ XtextGeneratorLanguage {
 
 	// generates Java API for the generated EPackages 
 	fragment = ecore.EMFGeneratorFragment2 auto-inject {
-		emfRuntimeVersion = "2.20"
+		emfRuntimeVersion = "2.29"
 	}
 
 	// a custom ResourceFactory for use with EMF 
