@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2022 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -141,12 +141,12 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean longFileNames = false;
 
-	/* Default to 2.20 if available, otherwise #get will return null */
-	private GenRuntimeVersion emfRuntimeVerison = GenRuntimeVersion.get(GenRuntimeVersion.EMF220_VALUE);
+	/* Default to 2.29 if available, otherwise #get will return null */
+	private GenRuntimeVersion emfRuntimeVerison = GenRuntimeVersion.get(GenRuntimeVersion.EMF229_VALUE);
 	
 	private boolean suppressLoadInitialization = false;
 	
-	private GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL;
+	private GenJDKLevel jdkLevel = GenJDKLevel.JDK110_LITERAL;
 	
 	private boolean bindEPackageAndEFactory = false;
 	
@@ -824,7 +824,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Sets the target EMF runtime version to generate for to the specified value.
-	 * Default is 2.20
+	 * Default is 2.29
 	 * 
 	 * @param emfRuntimeVersion the EMF runtime version.
 	 * @since 2.3
@@ -1012,8 +1012,10 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 *   <li>"JDK60"</li>
 	 *   <li>"JDK70"</li>
 	 *   <li>"JDK80"</li>
+	 *   <li>"JDK110"</li>
+	 *   <li>"JDK170"</li>
 	 * </ul>
-	 * The default level is "JDK80".
+	 * The default level is "JDK110".
 	 * 
 	 * @since 2.8
 	 */
